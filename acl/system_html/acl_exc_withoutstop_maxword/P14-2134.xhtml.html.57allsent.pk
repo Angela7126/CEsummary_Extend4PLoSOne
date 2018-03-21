@@ -1,0 +1,34 @@
+(lp0
+VIn all experiments, the contextual variable is the observed US state (including DC), so that u'\u005cud835' u'\u005cudc9e'
+p1
+aVA joint model has three a priori advantages over independent models i) sharing data across variable values encourages representations across those values to be similar; e.g.,, while city may be closer to Boston in Massachusetts and Chicago in Illinois, in both places it still generally connotes a municipality ; (ii) such sharing can mitigate data sparseness for less-witnessed areas; and (iii) with a joint model, all representations are guaranteed to be in the same vector space and can therefore be compared to each other; with individual models (each with different initializations), word vectors across different states may not be directly compared
+p2
+aVAs a quantitative measure of our model u'\u005cu2019' s performance, we consider the task of judging semantic similarity among words whose meanings are likely to evoke strong geographical correlations
+p3
+aVIn the absence of a sizable number of linguistically interesting terms (like wicked ) that are known to be geographically variable, we consider the proxy of estimating the named entities evoked by specific terms in different geographical regions
+p4
+aVTable 2 likewise presents the terms with the highest cosine similarity to city in both California and New York; while the terms most evoked by city in California include regional locations like Chinatown, Los Angeles u'\u005cu2019' South Bay and San Francisco u'\u005cu2019' s East Bay, in New York the most similar terms include hamptons , upstate and borough (New York City u'\u005cu2019' s term of administrative division
+p5
+aVAs noted above, geographic terms like city provide one such example in Massachusetts we expect the term city to be more strongly connected to grounded named entities like Boston than to other US cities
+p6
+aVIn bringing in extra-linguistic information to learn word representations, our work falls into the general domain of multimodal learning; while other work has used visual information to improve distributed representations [] , this work generally exploits information about the object being described (e.g.,, strawberry and a picture of a strawberry); in contrast, we use information about the speaker to learn representations that vary according to contextual variables from the speaker u'\u005cu2019' s perspective
+p7
+aVNote that this is not the same as simply asking which sports team is most frequently (or most characteristically) mentioned in a given area; by measuring the distance to a target word ( football ), we are attempting to estimate the varying strengths of association between concepts in different regions
+p8
+aVThe model we introduce is grounded in the distributional hypothesis [] , that two words are similar by appearing in the same kinds of contexts (where u'\u005cu201c' context u'\u005cu201d' itself can be variously defined as the bag or sequence of tokens around a target word, either by linear distance or dependency path
+p9
+aVOne desideratum that remains, however, is how the meaning of these terms is shaped by geographical influences u'\u005cu2013' while wicked is used throughout the United States to mean bad or evil ( u'\u005cu201c' he is a wicked man u'\u005cu201d' ), in New England it is used as an adverbial intensifier ( u'\u005cu201c' my boy u'\u005cu2019' s wicked smart u'\u005cu201d'
+p10
+aVThe final prediction over the output vocabulary is then found by passing this resulting vector through the softmax function u'\u005cud835' u'\u005cudc90' = softmax u'\u005cu2062' ( X u'\u005cu2062' u'\u005cud835' u'\u005cudc89' ) , giving a vector in the
+p11
+aVGiven the empirical success of vector-space representations in capturing semantic properties and their success at a variety of NLP tasks [] , we use a simple, but state-of-the-art neural architecture [] to learn low-dimensional real-valued representations of words
+p12
+aVThe rise of social media, however, with its large volume of text paired with information about its author and social context, reminds us that each word is uttered by a particular person at a particular place and time
+p13
+aVWe can invoke the distributional hypothesis for many instances of regional variation by observing that such variants often appear in similar contexts
+p14
+aVThe vast textual resources used in NLP u'\u005cu2013' newswire, web text, parliamentary proceedings u'\u005cu2013' can encourage a view of language as a disembodied phenomenon
+p15
+aVHere, all three variants can often be seen in an immediately pre-adjectival position (as is common with intensifying adverbs
+p16
+a.

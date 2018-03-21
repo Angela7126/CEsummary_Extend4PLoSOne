@@ -1,0 +1,64 @@
+(lp0
+VOur method distinguishes paired punctuations from other punctuations
+p1
+aVSuch properties are used as additional features to guide the parser to construct the dependency graph
+p2
+aVMoreover, experimental results showed that parsing accuracy of content words drops on sentences which contain higher ratios of punctuations
+p3
+aVNote that this negative effect on parsing accuracy might be overlooked since most previous work evaluates parsing accuracy without taking punctuations into account
+p4
+aVConsequently, punctuations are not as consistently annotated in treebanks as words, making it harder to parse punctuations
+p5
+aVIn such cases, we simply remove these punctuations since the existence of paired punctuations already indicates that there should be a boundary
+p6
+aVThe result indicates that by removing punctuations, we lose some information that is important for dependency parsing
+p7
+aVThe fact that parsers achieve low accuracies on punctuations is to some degree expected, because the head of a punctuation mark is linguistically less well-defined
+p8
+aVSince long sentences are inherently more difficult to parse, to make a fair comparison, we further divide the development set according to sentence lengths as shown in the first row 4 4 1694 out of 1700 sentences on the development set with length no larger than 60 tokens
+p9
+aVThe fact that most previous work evaluates parsing accuracies without taking punctuations into account is also largely due to this reason
+p10
+aVWe can see that although all the parsers achieve above 90 u'\u005cu2062' % UAS on words, the UAS on punctuations are mostly below 85 u'\u005cu2062' %
+p11
+aVFirst, the lexical heads of punctuations are not as well defined as those of words
+p12
+aVThe result is that more than 31 u'\u005cu2062' % of the parameter updates are caused due to punctuations, though punctuations account for only 11.6 u'\u005cu2062' % of the total tokens in the training set
+p13
+aVIn this experiment, we first remove all punctuations from the original data and then modify the dependency arcs accordingly in order to maintain word-word dependencies in the original data
+p14
+aVOne reason for this result is that projective dependency parsers satisfy the u'\u005cu201c' no crossing links u'\u005cu201d' constraint, and errors in punctuations may prevent correct word-word dependencies from being created (see section 2
+p15
+aVWe use the Wall Street Journal portion of the Penn Treebank with the standard splits sections 02-21 are used as the training set; section 22 and section 23 are used as the development and test set, respectively
+p16
+aVFor example, the distance features in line 5 of Table 3 is used to capture the pattern that if a word w with comma property is the left modifier of a noun or a verb, the distance between w and its lexical head is often larger than 1
+p17
+aVAs for learning, we calculate the percentage of parameter updates that are caused by associating punctuations with incorrect heads during training of the easy-first parser 3 3 For the greedy easy-first parser, whether a parameter update is caused by punctuation error can be determined with no ambiguity
+p18
+aVBy inspecting the parser outputs, we found that error propagation caused by assigning incorrect head to punctuations is one of the main reason that leads to this result
+p19
+aVOur method is able to capture that the root, w h , of the sub-tree within the paired-punctuation, such as u'\u005cu201c' Mechanisms u'\u005cu201d' in Figure 1, generally serves as a modifier of the words outside, while the baseline parser occasionally make w h as the head of the sentence
+p20
+aVTo utilize such boundary information, we further classify paired punctuations into two categories those that serve as the beginning of the boundary, whose POS tags are either -LRB- or u'\u005cu201c' , denoted by Bpunc ; and those that serve as the end of the boundary, denoted by Epunc
+p21
+aVHowever, we do not assign a Paired property to Buccaneers since its ( flag is still on
+p22
+aVThe only special case is that if w h already contains a Bpunc property, then our method simply ignores the non-paired property since we maintain the boundary information with the highest priority
+p23
+aVHowever, the exact type of errors that are corrected by using non-paired punctuations is more difficult to summarize
+p24
+aVThis is as expected, since beam search also has the effect of reducing error propagation [ 15 ] , thereby alleviating the errors caused by punctuations
+p25
+aVIn the example, when Congrees u'\u005cu2019' s is identified as a modifier of Buccaneers, the u'\u005cu201d' flag of Buccaneers is turned off
+p26
+aVAlthough the improvement becomes smaller as the beam width grows larger, we still achieved 93.06 u'\u005cu2062' % UAS with a beam of width 64, which is the best result for transition-based parsers reported so far
+p27
+aVTake the sentence shown in Figure 1 (a) for example, the word Mechanisms is a modifier of entitled according to the gold reference
+p28
+aVAs we increase the beam width, the improvement of our method over the baseline becomes smaller
+p29
+aVHowever, if the quotation mark, u'\u005cu201c' , is incorrectly recognized as a modifier of was , due to the u'\u005cu201c' no crossing links u'\u005cu201d' constraint, the arc between Mechanisms and entitled can never be created
+p30
+aVPenn2Malt is used to convert bracketed structures into dependencies
+p31
+a.

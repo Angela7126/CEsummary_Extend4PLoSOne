@@ -1,0 +1,409 @@
+(lp0
+VFurthermore, much recent work has focused on the challenge of joint sentence extraction and compression, also known as compressive summarization [ 34 , 2 , 1 , 30 , 41 ] , in which questions of efficiency are paramount due to the larger problems involved; however, these approaches largely restrict compression to pruning parse trees, thereby imposing a dependency on parser performance
+p1
+aVMultiple approaches to generate good approximate solutions for joint multi-structure compression, based on Lagrangian relaxation to enforce equality between the sequential and syntactic inference subproblems
+p2
+aVIn this work, we develop approximate inference strategies to the joint approach of Thadani and McKeown ( 2013 ) which trade the optimality guarantees of exact ILP for faster inference by separately solving the n-gram and dependency subproblems and using Lagrange multipliers to enforce consistency between their solutions
+p3
+aVIn order to produce a solution to this subproblem, we use an LP relaxation of the relevant portion of the ILP from Thadani and McKeown ( 2013 ) by omitting integer constraints over the token and dependency variables in u'\u005cud835' u'\u005cudc31' and u'\u005cud835' u'\u005cudc33' respectively
+p4
+aVFollowing this, з 2.3 discusses a dynamic program to find maximum weight bigram subsequences from the input sentence, while з 2.4 covers LP relaxation-based approaches for approximating solutions to the problem of finding a maximum-weight subtree in a graph of potential output dependencies
+p5
+aVEven though compression is typically formulated as a token deletion task, it is evident that dropping tokens independently from an input sentence will likely not result in fluent and meaningful compressive text
+p6
+aVIn addition, we can recover approximate solutions to this problem by using the Chu-Liu Edmonds algorithm for recovering maximum spanning trees [ 4 , 14 ] over the relatively sparse subgraph defined by a solution to the relaxed LP
+p7
+aVFollowing an assumption often used in compression systems, the compressed output in this corpus is constructed by dropping tokens from the input sentence without any paraphrasing or reordering
+p8
+aVFinding the u'\u005cud835' u'\u005cudc32' and u'\u005cud835' u'\u005cudc33' that maximize this Lagrangian above yields a dual objective, and the dual problem corresponding to the primal objective specified in ( 2 ) is therefore the minimization of this objective over the Lagrange multipliers u'\u005cud835' u'\u005cudf40'
+p9
+aVTokens in well-formed sentences participate in a number of syntactic and semantic relationships with other tokens, so one might expect that accounting for heterogenous structural relationships between tokens will improve the coherence of the output sentence
+p10
+aVAs discussed in з 2.4 , a maximum spanning tree is recovered from the output of the LP and greedily pruned in order to generate a valid integral solution while observing the imposed compression rate
+p11
+aVIn the LP relaxation, x i and z i u'\u005cu2062' j are redefined as real-valued variables in [ 0 , 1 ] , potentially resulting in fractional values for dependency and token indicators
+p12
+aVFollowing evaluations in machine translation as well as previous work in sentence compression [ 47 , 7 , 34 , 39 , 45 ] , we evaluate system performance using F 1 metrics over n-grams and dependency edges produced by parsing system output with RASP [ 3 ] and the Stanford parser
+p13
+aVAn approximate inference approach based on an LP relaxation of ILP-Dep
+p14
+aVComparing the two approximation strategies shows a clear performance advantage for DP+LP over DP+LP u'\u005cu2192' MST the latter approach entails slower inference due to the overhead of running the Chu-Liu Edmonds algorithm at every dual update, and furthermore, the error introduced by approximating an integral solution results in a significant decrease in dependency recall
+p15
+aVIn contrast, DP+LP directly optimizes the dual problem by using the relaxed dependency solution to update Lagrange multipliers and achieves the best performance on parse-based F 1 outside of the slower ILP approaches
+p16
+aVCompression has also been used as a tool for document summarization [ 12 , 49 , 6 , 34 , 2 , 48 , 1 , 37 , 30 , 41 ] , with recent work formulating the summarization task as joint sentence extraction and compression and often employing ILP or Lagrangian relaxation
+p17
+aVThe addition of this constraint to the relaxed LP reduces the rate of integral solutions drastically u'\u005cu2014' from 89% to approximately 33% u'\u005cu2014' but it serves to ensure that the resulting token configuration u'\u005cud835' u'\u005cudc31' ~ has at least as many non-zero elements as R , i.e.,, there are at least as many tokens activated in the LP solution as are required in a valid solution
+p18
+aVFirst, tokens in the solution must only be active if they have a single active incoming dependency edge
+p19
+aVThe multi-structure inference problem described in the previous section seems in many ways to be a natural fit to such an approach since output scores factor over different types of structure that comprise the output compression
+p20
+aVWe therefore consider methods to recover approximate solutions for the subproblem of finding the maximum weighted subtree in a graph, common among which is the use of a linear programming relaxation
+p21
+aVThe bigram subproblem is guaranteed to return a well-formed integral solution which obeys the imposed compression rate, so we are assured of a source of valid u'\u005cu2014' if non-optimal u'\u005cu2014' solutions in line 13 of Algorithm 2.2
+p22
+aVOtherwise, if the algorithm starts oscillating between a few primal solutions, the underlying LP must have a non-integral solution in which case approximation heuristics can be employed
+p23
+aVThis approach requires O u'\u005cu2062' ( n 2 u'\u005cu2062' R ) time in order to identify the highest scoring sequence u'\u005cud835' u'\u005cudc32' and corresponding token configuration u'\u005cud835' u'\u005cudf36' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc32' )
+p24
+aVThe features used in this work are largely based on the features from Thadani and McKeown ( 2013 )
+p25
+aVAs a result, the commodity flow network is able to establish connectivity but cannot enforce a tree structure, for instance, directed acyclic structures are possible and token indicators x i may be partially be assigned to the solution structure
+p26
+aVu'\u005cu03a6' dep contains features for the probability of a dependency edge under a smoothed dependency grammar constructed from the Penn Treebank and various conjunctions of the following features a) whether the edge appears as a dependency or ancestral relation in the input parse (b) the directionality of the dependency (c) the label of the edge (d) the POS tags of the tokens incident to the edge and (e) the labels of their surrounding chunks and whether the edge remains within the chunk
+p27
+aVIn addition, they serve to establish connectivity for the dependency structure u'\u005cud835' u'\u005cudc33' since commodity can only originate in one location u'\u005cu2014' at the pseudo-token root which has no incoming commodity variables
+p28
+aVSince the commodity flow constraints in ( 9 ) u'\u005cu2013' ( 11 ) ensure a connected u'\u005cud835' u'\u005cudc33' ~ , it is therefore possible to recover a maximum-weight spanning tree from G u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33' ~ ) using the Chu-Liu Edmonds algorithm [ 4 , 14 ]
+p29
+aVMaximum spanning tree algorithms, commonly used in non-projective dependency parsing [ 35 ] , are not easily adaptable to this task since the maximum-weight subtree is not necessarily a part of the maximum spanning tree
+p30
+aVMost approaches to sentence compression are supervised [ 25 , 42 , 46 , 36 , 47 , 18 , 40 , 9 , 17 , 19 , 38 , 15 ] following the release of datasets such as the Ziff-Davis corpus [ 24 ] and the Edinburgh compression corpora [ 5 , 7 ] , although unsupervised approaches u'\u005cu2014' largely based on ILPs u'\u005cu2014' have also received consideration [ 6 , 7 , 16 ]
+p31
+aVThe resulting spanning tree is a useful integral approximation of u'\u005cud835' u'\u005cudc33' ~ but, as mentioned previously, may contain more nodes than R due to fractional values in u'\u005cud835' u'\u005cudc31' ~ ; we therefore repeatedly prune leaves with the lowest incoming edge weight in the current tree until exactly R nodes remain
+p32
+aVwhere R is the required number of output tokens and the scoring function is defined as
+p33
+aVDual decomposition [ 26 ] and Lagrangian relaxation in general are often used for solving joint inference problems which are decomposable into individual subproblems linked by equality constraints [ 27 , 44 , 43 , 13 , 32 , 11 , 1 ]
+p34
+aVGold dependency parses were approximated by running the Stanford dependency parser 7 7 http://nlp.stanford.edu/software/ over reference compressions
+p35
+aVThe variation in RASP F 1 % with input size indicates the viability of a hybrid approach which could balance accuracy and speed by using ILP-Joint for smaller problems and DP+LP for larger ones
+p36
+aVIn addition, we define bigram indicator variables y i u'\u005cu2062' j u'\u005cu2208' { 0 , 1 } to represent whether a particular order-preserving bigram 2 2 Although Thadani and McKeown ( 2013 ) is not restricted to bigrams or order-preserving n-grams, we limit our discussion to this scenario as it also fits the assumptions of McDonald ( 2006 ) and the datasets of Clarke and Lapata ( 2006 u'\u005cu27e8' t i , t j u'\u005cu27e9' from S is present as a contiguous bigram in C as well as dependency indicator variables z i u'\u005cu2062' j u'\u005cu2208' { 0 , 1 } corresponding to whether the dependency arc t i u'\u005cu2192' t j is present in the dependency parse of C
+p37
+aVIn order to recover meaningful compressions by optimizing ( 2 ), the inference step must ensure
+p38
+aVWe identify this phenomenon by counting repeated solutions and, if they exceed some threshold l max with at least one repeated solution from either subproblem, we terminate the update procedure for Lagrange multipliers and instead attempt to identify a good solution from the repeating ones by scoring them under ( 2
+p39
+aVThe compression task has received increasing attention in recent years, in part due to the availability of datasets such as the Ziff-Davis corpus [ 24 ] and the Edinburgh compression corpora [ 5 ] , from which the following example is drawn
+p40
+aVWe can now rewrite the objective in ( 2 ) while enforcing the constraint that the words contained in the sequence u'\u005cud835' u'\u005cudc32' are the same as the words contained in the tree u'\u005cud835' u'\u005cudc33' , i.e.,, u'\u005cud835' u'\u005cudf36' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc32' ) = u'\u005cud835' u'\u005cudf37' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33' ) , by introducing a vector of Lagrange multipliers u'\u005cud835' u'\u005cudf40' u'\u005cu2208' u'\u005cu211d' n
+p41
+aVThe learning rate schedule for the Lagrangian relaxation approaches was set as u'\u005cu0397' i u'\u005cu225c' u'\u005cu03a4' / ( u'\u005cu03a4' + i ) , 10 10 u'\u005cu03a4' was set to 100 for aggressive subgradient updates while the hyperparameter u'\u005cu03a8' was tuned using the development split of each corpus
+p42
+aVTurning to the joint approaches, the strong performance of ILP-Joint is expected; less so is the relatively high but yet practically reasonable runtime that it requires
+p43
+aVEven if ILP-based approaches perform reasonably at the scale of single-sentence compression problems, the exponential worst-case complexity of general-purpose ILPs will inevitably pose challenges when scaling up to (a) handle larger inputs, (b) use higher-order structural fragments, or (c) incorporate additional models
+p44
+aVIn each iteration i , the algorithm solves for u'\u005cud835' u'\u005cudc32' ( i ) and u'\u005cud835' u'\u005cudc33' ( i ) under u'\u005cud835' u'\u005cudf40' ( i ) , then generates u'\u005cud835' u'\u005cudf40' ( i + 1 ) to penalize inconsistencies between u'\u005cud835' u'\u005cudf36' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc32' ( i ) ) and u'\u005cud835' u'\u005cudf37' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33' ( i )
+p45
+aVWe focus in this work on a sentence-level compression system to approximate the ILP-based inference of Thadani and McKeown ( 2013 ) which does not restrict compressions to follow input parses but permits the generation of novel dependency relations in output compressions
+p46
+aVso as to solve f u'\u005cu2062' ( u'\u005cud835' u'\u005cudc32' , u'\u005cud835' u'\u005cudf40' , u'\u005cu03a8' , u'\u005cud835' u'\u005cudf3d' ) from ( 4
+p47
+aVThis can now be solved with the iterative subgradient algorithm illustrated in Algorithm 2.2
+p48
+aVThe viability of this approximation strategy is due to the following
+p49
+aVAn approximate joint inference approach based on Lagrangian relaxation that uses DP for the maximum weight subsequence problem and LP u'\u005cu2192' MST for the maximum weight subtree problem
+p50
+aVз 2.1 provies an overview of the joint sequential and syntactic objective for compression from Thadani and McKeown ( 2013 ) while з 2.2 discusses the use of Lagrange multipliers to enforce consistency between the different structures considered
+p51
+aVIn order to do this, we first include an additional constraint in the relaxed LP which restrict the number of tokens in the output to a specific number of tokens R that is given by an input compression rate
+p52
+aVThis linear program (LP) appears empirically tight for compression problems and our experiments indicate that simply using the non-integral solutions of this LP in Lagrangian relaxation can empirically lead to reasonable compressions
+p53
+aVAnother Lagrangian relaxation approach that pairs DP with the non-integral solutions from an LP relaxation of the maximum weight subtree problem (cf.аз 2.4
+p54
+aVOverfitting was avoided by averaging parameters and monitoring performance against a held-out development set during training
+p55
+aVOur proposed approximation strategies are evaluated using automated metrics in order to address the question under what conditions should a real-world sentence compression system implementation consider exact inference with an ILP or approximate inference
+p56
+aVHowever, scoring solutions produced by the dynamic program from з 2.3 also requires the score over a corresponding parse tree; this can be recovered by constructing a dependency subgraph containing across only the tokens that are active in u'\u005cud835' u'\u005cudf36' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc32' ) and retrieving the maximum spanning tree for that subgraph using the Chu-Liu Edmonds algorithm
+p57
+aVFinally, з 2.5 discusses the features and model training approach used in our experimental results which are presented in з 3
+p58
+aVLinear constraints are introduced to produce dependency structures that are close to the optimal dependency trees
+p59
+aVThe Chu-Liu Edmonds algorithm is also employed for another purpose when the underlying LP for the joint inference problem is not tight u'\u005cu2014' a frequent occurrence in our compression experiments u'\u005cu2014' Algorithm 2.2 will not converge on a single primal solution and will instead oscillate between solutions that are close to the dual optimum
+p60
+aVThe resulting tree is assumed to be a reasonable approximation of the optimal integral solution to this LP
+p61
+aVFollowing a recent analysis of compression evaluations [ 39 ] which revealed a strong correlation between system compression rate and human judgments of compression quality, we constrained all systems to produce compressed output at a specific rate u'\u005cu2014' determined by the the gold compressions available for each instance u'\u005cu2014' to ensure that the reported differences between the systems under study are meaningful
+p62
+aVA number of diverse approaches have been proposed for deletion-based sentence compression, including techniques that assemble the output text under an n-gram factorization over the input text [ 36 , 7 ] or an arc factorization over input dependency parses [ 16 , 17 , 15 ]
+p63
+aVSentence compression is a text-to-text generation task in which an input sentence must be transformed into a shorter output sentence which accurately reflects the meaning in the input and also remains grammatically well-formed
+p64
+aVA version of the joint ILP of Thadani and McKeown ( 2013 ) without n-gram variables and corresponding features
+p65
+aVIn order to avoid cycles in the dependency tree, we include additional variables to establish single-commodity flow [ 31 ] between all pairs of tokens
+p66
+aV3 3 This work follows Thadani and McKeown ( 2013 ) in recovering non-projective trees for inference
+p67
+aVHowever, in order to enforce these properties on the output dependency structure, this acyclic, connected commodity structure must constrain the activation of the z variables
+p68
+aVFigure 3 shows the effect of input sentence length on inference time and performance for ILP-Joint and DP+LP over the NW test corpus
+p69
+aVThe relaxed LP is empirically fairly tight, yielding integral solutions 89% of the time on the compression datasets described in з 3
+p70
+aVHowever, recovering projective trees is tractable when a total ordering of output tokens is assumed
+p71
+aVWe report results over the following systems grouped into three categories of models tokens + n-grams, tokens + dependencies, and joint models
+p72
+aVWe also consider another strategy that attempts to approximate a valid integral solution to the dependency subproblem
+p73
+aVThe inference task involves recovering the highest scoring compression C * under a particular set of model parameters u'\u005cud835' u'\u005cudc30'
+p74
+aVFigure 2 illustrates how these commodity flow variables constrain the output of the ILP to be a tree
+p75
+aVThese requirements naturally rule out simple approximate inference formulations such as search-based approaches for the joint objective
+p76
+aVAll models were trained using variants of the ILP-based inference approach of Thadani and McKeown ( 2013
+p77
+aVAn ILP-based inference solution is demonstrated in Thadani and McKeown ( 2013 ) that makes use of linear constraints over the boolean variables x i , y i u'\u005cu2062' j and z i u'\u005cu2062' j to guarantee consistency, as well as auxiliary real-valued variables and constraints representing the flow of commodities [ 31 ] in order to establish structure in u'\u005cud835' u'\u005cudc32' and u'\u005cud835' u'\u005cudc33'
+p78
+aVApproximating dependency-based inference with LP u'\u005cu2192' MST yields similar performance for a further halving of runtime; however, the performance of this approach is notably worse
+p79
+aVWe ran compression experiments over the newswire (NW) and broadcast news transcription (BN) corpora compiled by Clarke and Lapata ( 2008 ) which contain gold compressions produced by human annotators using only word deletion
+p80
+aVExact solutions are guaranteed when the algorithm converges on a consistent primal solution, although this convergence itself is not guaranteed and depends on the tightness of the underlying LP relaxation
+p81
+aVJoint methods have also been proposed that invoke integer linear programming (ILP) formulations to simultaneously consider multiple structural inference problems u'\u005cu2014' both over n-grams and input dependencies [ 34 ] or n-grams and all possible dependencies [ 45 ]
+p82
+aVFor an input sentence S comprised of n tokens including duplicates, we denote the set of tokens in S by T u'\u005cu225c' { t i
+p83
+aVWe propose two alternative solutions to address this issue in the context of the joint inference strategy
+p84
+aVu'\u005cu03a6' bgr contains features for POS patterns in a bigram, the labels of dependency edges incident to it, its likelihood under a Gigaword language model (LM) and an indicator for whether it is present in the input sentence
+p85
+aVHowever, it is well-established that the utility of ILP for optimal inference in structured problems is often outweighed by the worst-case performance of ILP solvers on large problems without unique integral solutions
+p86
+aVHowever, while the former problem can be solved efficiently using the dynamic programming approach of McDonald ( 2006 ) , there are no efficient algorithms to recover maximum weighted non-projective subtrees in a general directed graph
+p87
+aVThe full ILP from Thadani and McKeown ( 2013 ) , which provides an upper bound on the performance of the proposed approximation strategies
+p88
+aVIn the following section, we propose an alternative formulation that exploits the modularity of this joint objective
+p89
+aVMonolingual compression also faces many obstacles common to decoding in machine translation, and a number of approaches which have been proposed to combine phrasal and syntactic models [ 21 , 43 ] inter alia offer directions for future research into compression problems
+p90
+aVThe score for a given compression C can now be defined to factor over its tokens, n-grams and dependencies as follows
+p91
+aVAlthough the runtime of this algorithm is cubic in the size of the input graph, it is fairly speedy when applied on relatively sparse graphs such as the solutions to the LP described above
+p92
+aVThis approach permits sub-problems to be solved separately using problem-specific efficient algorithms, while consistency over the structures produced is enforced through Lagrange multipliers via iterative optimization
+p93
+aVHowever, the effect of these constraints is diminished when solving an LP relaxation of the above problem
+p94
+aVFurthermore, approximate solutions can often be adequate for real-world generation systems, particularly in the presence of linguistically-motivated constraints such as those described by Clarke and Lapata ( 2008 ) , or domain-specific pruning strategies such as the use of sentence templates to constrain the output
+p95
+aVThe primary advantage of this technique is the ability to leverage the underlying structure of the problems in inference rather than relying on a generic ILP formulation while still often producing exact solutions
+p96
+aVAlthough the maximum spanning tree for a given token configuration can be recovered efficiently, Figure 1 illustrates that the maximum-scoring subtree is not necessarily found within it
+p97
+aVA reimplementation of the unsupervised ILP of Clarke and Lapata ( 2008 ) which infers order-preserving trigram variables parameterized with log-likelihood under an LM and a significance score for token variables inspired by Hori and Furui ( 2004 ) , as well as various linguistically-motivated constraints to encourage fluency in output compressions
+p98
+aVThe objective for this LP is given by
+p99
+aVSentence compression is one of the better-studied text-to-text generation problems and has been observed to play a significant role in human summarization [ 23 , 22 ]
+p100
+aVWe were surprised by the strong performance of the dependency-based inference techniques, which yielded results that approached the joint model in both n-gram and parse-based measures
+p101
+aVThe rest of this section is organized as follows
+p102
+aVLP u'\u005cu2192' MST
+p103
+aVTables 1 and 2 summarize the results from our compression experiments on the BN and NW corpora respectively
+p104
+aVu'\u005cu03a6' tok contains features for part-of-speech (POS) tag sequences of length up to 3 around the token, features for the dependency label of the token conjoined with its POS, lexical features for verb stems and non-word symbols and morphological features that identify capitalized sequences, negations and words in parentheses
+p105
+aVThis poses a challenge in implementing u'\u005cud835' u'\u005cudf37' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33' ) which is needed to recover a token configuration from the solution of this subproblem
+p106
+aVFor simplicity, however, we describe the ILP version rather than the relaxed LP in order to motivate the constraints with their intended purpose rather than their effect in the relaxed problem
+p107
+aV11 11 We were surprised to observe that performance improved significantly when u'\u005cu03a8' was set closer to 1, thereby emphasizing token features in the dependency subproblem
+p108
+aVIt is straightforward to recover and score a bigram configuration u'\u005cud835' u'\u005cudc32' from a token configuration u'\u005cud835' u'\u005cudf37' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33'
+p109
+aVThe timing results reveal that the approximation strategy is consistently faster than the ILP solver
+p110
+aVThe structural configurations u'\u005cud835' u'\u005cudc32' and u'\u005cud835' u'\u005cudc33' are non-degenerate , i.e, the bigram configuration u'\u005cud835' u'\u005cudc32' represents an acyclic path while the dependency configuration u'\u005cud835' u'\u005cudc33' forms a tree
+p111
+aVThe latter requires a dynamic programming table Q u'\u005cu2062' [ i ] u'\u005cu2062' [ r ] which represents the best score for a compression of length r ending at token i
+p112
+aVThe exact ILP-Dep approach halves the runtime of ILP-Joint to produce compressions that have similar (although statistically distinguishable) scores
+p113
+aVAn empirically-useful technique for approximating the maximum-weight subtree in a weighted graph using LP-relaxed inference
+p114
+aVThe datasets were filtered to eliminate instances with less than 2 and more than 110 tokens for parser compatibility and divided into training/development/test sections following the splits from Clarke and Lapata ( 2008 ) , yielding 953/63/603 instances for the NW corpus and 880/78/404 for the BN corpus
+p115
+aVIn 1967 Chapman, who had cultivated a conventional image, stunned a party by coming out as a homosexual
+p116
+aVThe maximum-weight non-projective subtree problem over general graphs is not as easily solved
+p117
+aVConsider once more the optimization problem characterized by ( 2 ) The two structural problems that need to be solved in this formulation are the extraction of a maximum-weight acyclic subsequence of bigrams u'\u005cud835' u'\u005cudc32' from the lattice of all order-preserving bigrams from S and the recovery of a maximum-weight directed subtree u'\u005cud835' u'\u005cudc33'
+p118
+aVMcDonald ( 2006 ) provides a Viterbi-like dynamic programming algorithm to recover the highest-scoring sequence of order-preserving bigrams from a lattice, either in unconstrained form or with a specific length constraint
+p119
+aVThese constraints ensure that cyclic structures are not possible in the non-relaxed ILP
+p120
+aVThe following sections discuss our approach to these problems
+p121
+aVThe problem of recovering a maximum-weight subtree in a graph has been shown to be NP-hard even with uniform edge weights [ 29 ]
+p122
+aVLet C represent a compression of S and let x i u'\u005cu2208' { 0 , 1 } denote an indicator variable whose value corresponds to whether token t i u'\u005cu2208' T is present in the compressed sentence C
+p123
+aVThese u'\u005cu0393' i u'\u005cu2062' j variables carry non-negative real values which must be consumed by active tokens that they are incident to
+p124
+aVIn addition, to avoid producing multiple disconnected subtrees, only one dependency is permitted to attach to the root pseudo-token
+p125
+aVThis results in the following Lagrangian
+p126
+aVLet u'\u005cud835' u'\u005cudf36' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc32' ) u'\u005cu2208' { 0 , 1 } n denote the incidence vector of tokens contained in the n-gram sequence u'\u005cud835' u'\u005cudc32' and u'\u005cud835' u'\u005cudf37' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33' ) u'\u005cu2208' { 0 , 1 } n denote the incidence vector of words contained in the dependency tree u'\u005cud835' u'\u005cudc33'
+p127
+aVWe then construct a subgraph G u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33' ~ ) consisting of all dependency edges that were assigned non-zero values in the solution, assigning to each edge a score equal to the score of that edge in the LP as well as the score of its dependent word, i.e.,, each z i u'\u005cu2062' j in G u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33' ~ ) is assigned a score of u'\u005cu0398' dep u'\u005cu2062' ( u'\u005cu27e8' t i , t j u'\u005cu27e9' ) - u'\u005cu039b' j + ( 1 - u'\u005cu03a8' ) u'\u005cu22c5' u'\u005cu0398' tok u'\u005cu2062' ( t j
+p128
+aVThe contributions of this work include
+p129
+aVThis will be addressed in future work
+p130
+aVwhere the vector of token scores is redefined as
+p131
+aVThe first is to simply use the relaxed token configuration identified by the LP in Algorithm 2.2 , i.e.,, to set u'\u005cud835' u'\u005cudf37' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33' ~ ) = x ~ where u'\u005cud835' u'\u005cudc31' ~ and u'\u005cud835' u'\u005cudc33' ~ represent the real-valued counterparts of the incidence vectors u'\u005cud835' u'\u005cudc31' and u'\u005cud835' u'\u005cudc33'
+p132
+aVAn analysis of the tradeoffs incurred by joint approaches with regard to runtime as well as performance under automated measures
+p133
+aVwhere u'\u005cu0398' tok , u'\u005cu0398' bgr and u'\u005cu0398' dep are feature-based scoring functions for tokens, bigrams and dependencies respectively
+p134
+aV9 9 For consistent comparisons with the other systems, our reimplementation does not include the k -best inference strategy presented in McDonald ( 2006 ) for learning with MIRA
+p135
+aVFor the experiments in the following section, we trained models using a variant of the structured perceptron [ 10 ] which incorporates minibatches [ 50 ] for easy parallelization and faster convergence
+p136
+aVwhere the incidence vector u'\u005cud835' u'\u005cudc31' u'\u005cu225c' u'\u005cu27e8' x i u'\u005cu27e9' t i u'\u005cu2208' T represents an entire token configuration over T , with u'\u005cud835' u'\u005cudc32' and u'\u005cud835' u'\u005cudc33' defined analogously to represent configurations of bigrams and dependencies u'\u005cud835' u'\u005cudf3d' v u'\u005cu225c' u'\u005cu27e8' u'\u005cu0398' v u'\u005cu2062' ( u'\u005cu22c5' ) u'\u005cu27e9' denotes a corresponding vector of scores for each variable type v under the current model parameters
+p137
+aV13 13 Similar results were observed for the BN test corpus
+p138
+aV2009 ) in using LP-relaxed inference during learning, assuming algorithmic separability [ 28 ] for these problems
+p139
+aVWe note, however, that these ILPs are solved using a highly-optimized commercial-grade solver that can utilize all CPU cores 12 12 16 cores in our experimental environment while our approximation approaches are implemented as single-processed Python code without significant effort toward optimization
+p140
+aV4 4 Heuristic approaches [ 26 , 44 ] , tightening [ 43 ] or branch and bound [ 11 ] can still be used to retrieve optimal solutions, but we did not explore these strategies here
+p141
+aV1 1 This is referred to as extractive compression by Cohn and Lapata ( 2008 ) Galanis and Androutsopoulos ( 2010 ) following the terminology used in document summarization
+p142
+aV5 5 A detailed description of the Chu-Liu Edmonds algorithm for MSTs is available in McDonald et al
+p143
+aVWhen u'\u005cud835' u'\u005cudf36' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc32' ( i ) ) = u'\u005cud835' u'\u005cudf37' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33' ( i ) ) , the resulting primal solution is exact, i.e.,, u'\u005cud835' u'\u005cudc32' ( i ) and u'\u005cud835' u'\u005cudc33' ( i ) represent the optimal structures under ( 2
+p144
+aVThe configurations u'\u005cud835' u'\u005cudc31' , u'\u005cud835' u'\u005cudc32' and u'\u005cud835' u'\u005cudc33' are consistent with each other, i.e.,, all configurations cover the same tokens
+p145
+aVIn addition, the token configuration u'\u005cud835' u'\u005cudc31' can be rewritten in the form of a weighted combination of u'\u005cud835' u'\u005cudf36' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc32' ) and u'\u005cud835' u'\u005cudf37' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33' ) to ensure its consistency with u'\u005cud835' u'\u005cudc32' and u'\u005cud835' u'\u005cudc33'
+p146
+aVDP+LP has a lower rate of empirical convergence (15% on BN and 4% on NW) when compared to DP+LP u'\u005cu2192' MST (19% on BN and 6% on NW
+p147
+aVIn contrast, DP is an order of magnitude faster than all other approaches studied here although it is not competitive under parse-based measures such as RASP F % 1 which is known to correlate with human judgments of grammaticality [ 5 ]
+p148
+aVThe bigram-based dynamic program of McDonald ( 2006 ) described in з 2.3
+p149
+aVroot
+p150
+aVStarting with the n-gram approaches, the performance of 3-LM leads us to observe that the gains of supervised learning far outweigh the utility of higher-order n-gram factorization, which is also responsible for a significant increase in wall-clock time
+p151
+aVwhere C max is an arbitrary upper bound on the value of u'\u005cu0393' i u'\u005cu2062' j variables
+p152
+aVThe application of this Lagrangian relaxation strategy is contingent upon the existence of algorithms to solve the maximization subproblems for f u'\u005cu2062' ( u'\u005cud835' u'\u005cudc32' , u'\u005cud835' u'\u005cudf40' , u'\u005cu03a8' , u'\u005cud835' u'\u005cudf3d' ) and g u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33' , u'\u005cud835' u'\u005cudf40' , u'\u005cu03a8' , u'\u005cud835' u'\u005cudf3d'
+p153
+aVThe final values chosen were u'\u005cu03a8' BN = 0.9 and u'\u005cu03a8' NW = 0.8
+p154
+aV[t] Subgradient-based joint inference {algorithmic} [1] \u005cStatex Input scores u'\u005cud835' u'\u005cudf3d' , ratio u'\u005cu03a8' , repetition limit l max , iteration limit i max , learning rate schedule u'\u005cud835' u'\u005cudf3c' \u005cStatex Output token configuration u'\u005cud835' u'\u005cudc31' \u005cStatex \u005cState u'\u005cud835' u'\u005cudf40' ( 0 ) u'\u005cu2190' u'\u005cu27e8' 0 u'\u005cu27e9' n \u005cState M u'\u005cu2190' u'\u005cu2205' , M repeats u'\u005cu2190' u'\u005cu2205' \u005cFor iteration i i max \u005cState u'\u005cud835' u'\u005cudc32' ^ u'\u005cu2190' arg u'\u005cu2062' max u'\u005cud835' u'\u005cudc32' u'\u005cu2061' f u'\u005cu2062' ( u'\u005cud835' u'\u005cudc32' , u'\u005cud835' u'\u005cudf40' , u'\u005cu03a8' , u'\u005cud835' u'\u005cudf3d' ) \u005cState u'\u005cud835' u'\u005cudc33' ^ u'\u005cu2190' arg u'\u005cu2062' max u'\u005cud835' u'\u005cudc33' u'\u005cu2061' g u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33' , u'\u005cud835' u'\u005cudf40' , u'\u005cu03a8' , u'\u005cud835' u'\u005cudf3d' ) \u005cIf u'\u005cud835' u'\u005cudf36' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc32' ^ ) = u'\u005cud835' u'\u005cudf37' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33' ^ ) \u005cReturn u'\u005cud835' u'\u005cudf36' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc32' ^ ) \u005cEndIf \u005cIf u'\u005cud835' u'\u005cudf36' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc32' ^ ) u'\u005cu2208' M \u005cState M repeats u'\u005cu2190' M repeats u'\u005cu222a' { u'\u005cud835' u'\u005cudf36' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc32' ^ ) } \u005cEndIf \u005cIf u'\u005cud835' u'\u005cudf37' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33' ^ ) u'\u005cu2208' M \u005cState M repeats u'\u005cu2190' M repeats u'\u005cu222a' { u'\u005cud835' u'\u005cudf37' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33' ^ ) } \u005cEndIf \u005cState if
+p155
+aVThis work was supported by the Intelligence Advanced Research Projects Activity (IARPA) via Department of Interior National Business Center (DoI/NBC) contract number D11PC20153
+p156
+aVCompressed
+p157
+aVAll ILPs and LPs were solved using Gurobi, 8 8 http://www.gurobi.com a high-performance commercial-grade solver
+p158
+aVDP+LP u'\u005cu2192' MST
+p159
+aVDP
+p160
+aV6 6 We used a minibatch size of 4 in all experiments
+p161
+aVConvergence rates also vary for these two techniques
+p162
+aVFord
+p163
+aVnight
+p164
+aVProduction
+p165
+aVclosed
+p166
+aVin order to solve g u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33' , u'\u005cud835' u'\u005cudf40' , u'\u005cu03a8' , u'\u005cud835' u'\u005cudf3d' ) from ( 4
+p167
+aVThe table can be populated using the following recurrence
+p168
+aVWe followed Martins et al
+p169
+aVWe begin with some notation
+p170
+aVSpecifically, each u'\u005cu0398' v u'\u005cu2062' ( u'\u005cu22c5' ) u'\u005cu2261' u'\u005cud835' u'\u005cudc30' v u'\u005cu22a4' u'\u005cu2062' u'\u005cu03a6' v u'\u005cu2062' ( u'\u005cu22c5' ) where u'\u005cu03a6' v u'\u005cu2062' ( u'\u005cu22c5' ) is a feature map for a given variable type v u'\u005cu2208' { tok, bgr, dep } and u'\u005cud835' u'\u005cudc30' v is the corresponding vector of learned parameters
+p171
+aVIn 1967 Chapman, who had cultivated a conventional image with his ubiquitous tweed jacket and pipe, by his own later admission stunned a party attended by his friends and future Python colleagues by coming out as a homosexual
+p172
+aVOriginal
+p173
+aVM repeats u'\u005cu2265' l max then break \u005cState M u'\u005cu2190' M u'\u005cu222a' { u'\u005cud835' u'\u005cudf36' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc32' ^ ) , u'\u005cud835' u'\u005cudf37' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33' ^ ) } \u005cState u'\u005cud835' u'\u005cudf40' ( i + 1 ) u'\u005cu2190' u'\u005cud835' u'\u005cudf40' ( i ) - u'\u005cu0397' i u'\u005cu2062' ( u'\u005cud835' u'\u005cudf36' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc32' ^ ) - u'\u005cud835' u'\u005cudf37' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33' ^ ) ) \u005cEndFor \u005cReturn arg u'\u005cu2062' max u'\u005cud835' u'\u005cudc31' u'\u005cu2208' u'\u005cud835' u'\u005cudc0c' repeats u'\u005cu2061' s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31'
+p174
+aV14 14 The views and conclusions contained herein are those of the authors and should not be interpreted as necessarily representing the official policies or endorsements, either expressed or implied, of IARPA, DoI/NBC, or the U.S
+p175
+aVGovernment
+p176
+aVGovernment is authorized to reproduce and distribute reprints for Governmental purposes notwithstanding any copyright annotation thereon
+p177
+aVThe author is grateful to Alexander Rush for helpful discussions and to the anonymous reviewers for their comments
+p178
+aVD
+p179
+aVThe U.S
+p180
+aVu'\u005cu2001' 2
+p181
+aVu'\u005cu0393' 3 , 1 = 1
+p182
+aV5
+p183
+aS''
+p184
+aVlast
+p185
+aVat
+p186
+aV2005
+p187
+aVdown
+p188
+aVwas
+p189
+aV1 u'\u005cu2264' i u'\u005cu2264' n }
+p190
+aV3-LM
+p191
+aVu'\u005cu0393' 3 , 9 = 1
+p192
+aV1
+p193
+aVILP-Dep
+p194
+aV2
+p195
+aVDP+LP
+p196
+aVA
+p197
+aVB
+p198
+aV10
+p199
+aVILP-Joint
+p200
+aVC
+p201
+aV3
+p202
+aV-20
+p203
+ag193
+a.

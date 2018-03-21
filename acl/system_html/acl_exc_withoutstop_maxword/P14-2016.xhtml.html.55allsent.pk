@@ -1,0 +1,82 @@
+(lp0
+Vagainst a synthetic dataset, whereby we injected bilingual dictionaries into a collection of web documents, and evaluated the ability of the method to return multilingual dictionaries for individual languages; in this, we naively assume that all web documents in the background collection are not multilingual dictionaries, and as such, the results are potentially an underestimate of the true retrieval effectiveness
+p1
+aVThe results in Table 4 are based on manual evaluation of all documents returned for the first 50 queries, and determination of whether they were multilingual dictionaries containing the indicated languages
+p2
+aVAs there are no bilingual dictionaries in Freedict for Chinese and Japanese, the training of Score values is based on the Wikipedia documents only
+p3
+aVFor a given language, we are thus evaluating the ability of our method to retrieve multilingual dictionaries containing that language (and other indeterminate languages
+p4
+aVLooking next to the open web, we present in Table 4 results based on querying the Google search API with the 1000 longest queries for English paired with each of the other 7 target languages
+p5
+aVThe comparably low result for English is potentially affected by its prevalence both in the bilingual dictionaries in training (restricting the effective vocabulary size due to our L l filtering), and in the document collection
+p6
+aVTo train our method, we use 52 bilingual Freedict [ 6 ] dictionaries and Wikipedia 1 1 Based on 2009 dumps documents for each of our target languages
+p7
+aVNote that the first evaluation with the synthetic dataset is based on monolingual dictionary retrieval effectiveness because we have very few (and often no) multilingual dictionaries for a given pairing of our target languages
+p8
+aVAs our baseline, we simply query for the language name and the term dictionary in the local language (e.g., English dictionary , for English) in the given language
+p9
+aVDespite this, the results for our method are lower than those over the synthetic dataset, we suspect largely as a result of the style of queries we issue being so far removed from standard Google query patterns
+p10
+aVBased on the assumption that querying a (pre-indexed) document collection is relatively simple, we generate a range of queries of decreasing length and increasing likelihood of term co-occurrence in standard documents, and query until a non-empty set of results is returned
+p11
+aVSuch methods could potentially identify parallel word lists from which to construct a bilingual dictionary, although more realistically, bilingual dictionaries exist as single documents and are not well suited to this style of analysis
+p12
+aVFor a given combination of languages (e.g., English and Swaheli), queries are then formed simply by combining monolingual queries for the component languages
+p13
+aVFirst, we present results over the synthetic dataset in Table 3
+p14
+aVFinally, document genre classification is relevant in that it is theoretically possible to develop a document categorisation method which classifies documents as multilingual dictionaries or not, with the obvious downside that it would need to be applied exhaustively to all documents on the web
+p15
+aVHere, multi-label document classification methods have been adapted to identify what mix of languages is present in a given document, which could be used as a pre-filter to locate documents containing a given mixture of languages, although there is, of course, no guarantee that a multilingual document is a dictionary
+p16
+aVThe only assumption on the method is that we have access to a selection of dictionaries D (mono- or multilingual) and a corpus of conventional (non-dictionary) documents C , and knowledge of the language(s) contained in each dictionary and document
+p17
+aVFor both the synthetic dataset and open web experiments, we evaluate our method based on mean average precision (MAP), that is the mean of the average precision scores for each query which returns a non-empty result set
+p18
+aVOur method is based on a query formulation approach, and querying against a pre-existing index of a document collection (e.g., the web) via an information retrieval system
+p19
+aVWe perform query construction for each language based on frequent item set mining, using the Apriori algorithm [ 1 ]
+p20
+aVMethods have also been proposed to automatically construct bilingual dictionaries or thesauri, e.g., based on crosslingual glossing in predictable patterns such as a technical term being immediately proceeded by that term in a lingua franca source language such as English [ 16 , 24 ]
+p21
+aVAlternatively, comparable or parallel corpora can be used to extract bilingual dictionaries based on crosslingual distributional similarity [ 14 , 7 ]
+p22
+aVFor instance, a well-developed, mature multilingual dictionary may contain over 100,000 multilingual lexical records, while a specialised 5-way multilingual domain dictionary may contain as few as 100 multilingual lexical records
+p23
+aVThe synthetic dataset was constructed using a subset of ClueWeb09 [ 4 ] as the background web document collection
+p24
+aVIn all experiments in this paper, we assume that we have access to at least one multilingual dictionary containing each of our target languages, but in absence of such a dictionary, sdict u'\u005cu2062' ( w i , l ) could be set to 1 for all words w i , l in the language
+p25
+aVParallel corpus construction is the task of automatically detecting document sets that contain the same content in different languages, commonly based on a combination of site-structural and content-based features [ 3 , 19 ]
+p26
+aVIn line with our second criterion, we want to select words which have a higher likelihood of occurrence in a multilingual dictionary involving that language
+p27
+aVThe first intuition underlying our approach is that certain words are a priori more u'\u005cu201c' language-discriminating u'\u005cu201d' than others, and should be preferred in query construction (e.g., sushi occurs as a [transliterated] word in a wide variety of languages, whereas anti-discriminatory is found predominantly in English documents
+p28
+aVWhile all of these lines of research are relevant to this work, as far as we are aware, there has not been work which has proposed a direct method for identifying pre-existing multilingual dictionaries in document collections
+p29
+aVThe result of this term weighing is a ranked list of words for each language
+p30
+aVThe second intuition is that the lexical coverage of dictionaries varies considerably, especially with multilingual lexicons, which are often compiled by a single developer or small community of developers, with little systematicity in what is including or not included in the dictionary
+p31
+aVThe third intuition is that certain word combinations are more selective of multilingual dictionaries than others, i.e., if certain words are found together (e.g., cruiser , gospel and noodle ), the containing document is highly likely to be a dictionary of some description rather than a u'\u005cu201c' conventional u'\u005cu201d' document
+p32
+aVThe original ClueWeb09 dataset consists of around 1 billion web pages in ten languages that were collected in January and February 2009
+p33
+aVBelow, we describe our methodology for query construction based on these elements in greater detail
+p34
+aVA variety of document genre methods have been proposed, generally based on a mixture of structural and content-based features [ 12 , 5 , 25 ]
+p35
+aVAs such, if we are to follow a query construction approach to lexicon discovery, we need to be able to predict the likelihood of a given word w i being included in an arbitrarily-selected dictionary D l incorporating language l (i.e., P ( w i
+p36
+aVNote that the actual calculation of this co-occurrence can be performed efficiently, as a) for a given iteration of Apriori, it only needs to be performed between the new word that we are adding to the query ( u'\u005cu201c' item set u'\u005cu201d' in the terminology of Apriori) and each of the other words in a non-zero support itemset from the previous iteration of the algorithm (which are guaranteed to not co-occur with each other); and (b) the determination of whether two terms collocate can be performed efficiently using an inverted index of Wikipedia for that language
+p37
+aVAs such, we prefer search terms w i with a higher value for max l P ( l w i ) , where l is the language of interest
+p38
+aVWhile the precision of these methods is generally relatively high, the recall is often very low, as there is a strong bias towards novel technical terms being glossed but more conventional terms not
+p39
+aVThis research was supported by funding from the Group of Eight and the Australian Research Council
+p40
+a.

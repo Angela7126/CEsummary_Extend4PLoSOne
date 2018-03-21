@@ -1,0 +1,515 @@
+(lp0
+VTo incorporate features into the neural network, Mansur et al
+p1
+aVMansur et al
+p2
+aVMansur et al
+p3
+aVIn Mansur et al
+p4
+aV[ 15 ] , the bigram embeddings are pre-trained on unlabeled data with character embeddings, which significantly improves the model performance
+p5
+aVZheng et al
+p6
+aVZheng et al
+p7
+aVA very common feature in Chinese word segmentation is the character bigram feature
+p8
+aV[ 15 ] proposed the feature-based neural network where each context feature is represented as feature embeddings
+p9
+aVMikolov et al
+p10
+aVMikolov et al
+p11
+aV[ 35 ] followed the model proposed by Collobert et al
+p12
+aVIn our model, the bigram features are extracted in the window context and then the corresponding bigram embeddings are concatenated with character embeddings in Layer 1 and fed into Layer 2
+p13
+aVCompared with Mansur et al
+p14
+aVWe propose a Max-Margin Tensor Neural Network for Chinese word segmentation without feature engineering
+p15
+aVIn order to address this problem, we propose a new model called Max-Margin Tensor Neural Network ( MMTNN ) that explicitly models the interactions between tags and context characters by exploiting tag embeddings and tensor-based transformation
+p16
+aV[ 15 ] used the model proposed by Bengio et al
+p17
+aVCollobert et al
+p18
+aV[ 1 ] which learns the embeddings based on neural language model
+p19
+aVFollowing Mansur et al
+p20
+aVExperiment results show that our model outperforms other neural network models
+p21
+aVPrevious work found that the performance can be improved by pre-training the character embeddings on large unlabeled data and using the obtained embeddings to initialize the character lookup table instead of random initialization [ 15 , 35 ]
+p22
+aVThe test results on the benchmark dataset show that our model outperforms previous neural network models
+p23
+aVGiven the long time for pre-training bigram embeddings, we only pre-train the character embeddings and the bigram embeddings are initialized as the average of character embeddings of c k and c k + 1
+p24
+aVFirst, the discrete feature vector is replaced with dense character embeddings
+p25
+aVThe idea of feature embeddings is similar to that of character embeddings described in section 2.1
+p26
+aVTo explain why distributed representation captures more information than discrete features, we show in Table 4 the effect of character embeddings which are obtained from the lookup table of MMTNN after training
+p27
+aV[ 6 ] and Zheng et al
+p28
+aVSince Zheng et al
+p29
+aVThe input feature to the CRF model is simply the context characters (unigram feature) without any additional feature engineering
+p30
+aVWe also compare our model with the CRF model [ 13 ] , which is a widely used log-linear model for Chinese word segmentation
+p31
+aVZhang et al
+p32
+aVSimilar to character embeddings, given a fixed-sized tag set T , the tag embeddings for tags are stored in a tag embedding matrix L u'\u005cu2208' u'\u005cu211d' d ◊
+p33
+aVGiven the sentence-level score, Zheng et al
+p34
+aVRecently, researchers have tended to explore new approaches for word segmentation which circumvent the feature engineering by automatically learning features with neural network models [ 15 , 35 ]
+p35
+aVLike Collobert et al
+p36
+aVFigure 2 shows the new Lookup Table layer with tag embeddings
+p37
+aVAnother important result in Table 3 is that our neural network models perform much better than CRF-based model when only unigram features are used
+p38
+aVTherefore, we integrate additional simple character bigram features into our model and the result shows that our model can achieve a competitive performance that other systems hardly achieve unless they use more complex task-specific features
+p39
+aVBy introducing tensor factorization into the neural network model for sequence labeling tasks, the model training and inference are speeded up and overfitting is prevented
+p40
+aVThe multiplicative operations between tag embeddings and character embeddings can somehow be seen as u'\u005cu201c' feature combination u'\u005cu201d' , which are hand-designed in feature-based models
+p41
+aVIn conventional neural network models, however, the input embeddings only implicitly interact through the non-linear function which can hardly model the complexity of the interactions
+p42
+aVThe results are listed in the first three rows of Table 5, which shows that our model achieved higher F-score than the previous neural network models
+p43
+aVCompared with previous works that use a large number of handcrafted features, our model can achieve a competitive performance with minimal feature engineering
+p44
+aVWe further compare our model with previous neural network models on both PKU and MSRA datasets
+p45
+aVIt is a competitive result given that our model only use simple bigram features while other models use more complex features
+p46
+aVOur model learns the information automatically and encodes them in tensor parameters and embeddings
+p47
+aVTo better model the tag-tag interaction given the context characters, distributed representation for tags instead of traditional discrete symbolic representation is used in our model
+p48
+aVThe concatenation operation in Layer 1 then concatenates the character embeddings and tag embedding together into a long vector a
+p49
+aVFormally, in the Chinese word segmentation task, we have a character dictionary D of size
+p50
+aVMoreover, the transition score in equation (4) is not necessary in our model, because, by incorporating tag embedding into the neural network, the effect of tag-tag interaction and tag-character interaction are covered uniformly in one same model
+p51
+aVWe evaluate the performance of Chinese word segmentation on the PKU and MSRA benchmark datasets in the second International Chinese Word Segmentation Bakeoff [ 9 ] which are commonly used for evaluation of Chinese word segmentation
+p52
+aV[ 35 ] applied the architecture of Collobert et al
+p53
+aVThey are commonly used by previous state-of-the-art models and neural network models
+p54
+aVCompared with CRF, there are two differences in neural network models
+p55
+aVAssuming we are at the i -th character of a sentence, besides the character embeddings, the tag embeddings of the previous tags are also considered 1 1 We also tried the architecture in which the tag embedding of current tag is also considered, but this did not bring much improvement and runs slower
+p56
+aVFor example, Sun et al
+p57
+aVFollowing Socher et al
+p58
+aVMoreover, the simple non-linear transformation in equation (2) is also poor to model the complex interactional effects in Chinese word segmentation
+p59
+aVTable 6 lists the segmentation performances of our model as well as previous state-of-the-art systems
+p60
+aVDespite tensor-based transformation being effective for capturing the interactions, introducing tensor-based transformation into neural network models to solve sequence labeling task is time prohibitive since the tensor product operation drastically slows down the model
+p61
+aVThe Lookup Table layer can be seen as a simple projection layer where the character embedding for each context character is achieved by table lookup operation according to their indices
+p62
+aVFor example, Socher et al
+p63
+aVWe use the PKU and MSRA data provided by the second International Chinese Word Segmentation Bakeoff [ 9 ] to test our model
+p64
+aVMost previous systems address this task by using linear statistical models with carefully designed features such as bigram features, punctuation information [ 14 ] and statistical information [ 24 ]
+p65
+aVIn Chinese word segmentation, the most prevalent tag set T is BMES tag set, which uses 4 tags to carry word boundary information
+p66
+aVSince vector a is the concatenation of character embeddings and the tag embedding, equation (7) can be written in the following form
+p67
+aVTo model the tag dependency, previous neural network models [ 6 , 35 ] introduce a transition score A i u'\u005cu2062' j for jumping from tag i u'\u005cu2208' T to tag j u'\u005cu2208' T
+p68
+aVFor example, Chang et al
+p69
+aVTherefore, compared with discrete feature representations, distributed representation can capture the syntactic and semantic similarity between characters
+p70
+aVRecently, neural network models have been increasingly focused on for their ability to minimize the effort in feature engineering
+p71
+aVTensor-based transformation was also used in other neural network models for its ability to capture multiple interactions in data
+p72
+aVOur study is consistent with this line of research, however, our model explicitly models the interactions between tags and context characters and accordingly captures more semantic information
+p73
+aVThe character embeddings extracted by the Lookup Table layer are then concatenated into a single vector a u'\u005cu2208' u'\u005cu211d' H 1 , where H 1 = w u'\u005cu22c5' d is the size of Layer 1
+p74
+aVFormally, we assume the extracted features form a feature dictionary D f
+p75
+aVT where d is the dimensionality of the vector space (same with character embeddings
+p76
+aVThey constructed a neural network that outputs high scores for windows that occur in the corpus and low scores for windows where one character is replaced by a random one
+p77
+aVAs we can see, in each tensor slice i , the embeddings are explicitly related in a bilinear form which captures the interactions between characters and tags
+p78
+aVIn previous neural network models, however, hardly can such interactional effects be fully captured relying only on the simple transition score and the single non-linear transformation (See section 2
+p79
+aVHowever, the ability of these models is restricted by the design of features and the number of features could be so large that the result models are too large for practical use and prone to overfit on training corpus
+p80
+aVWe pre-train the embeddings on the Chinese Giga-word corpus [ 10 ]
+p81
+aV[ 15 ] , we wonder how well our model can perform with minimal feature engineering
+p82
+aVThe character embeddings are then stacked into a embedding matrix M u'\u005cu2208' u'\u005cu211d' d ◊
+p83
+aV[ 16 ] proposed a faster skip-gram model word2vec 5 5 https://code.google.com/p/word2vec/‚Äé which tries to maximize classification of a word based on another word in the same sentence
+p84
+aVThe tag embeddings start from a random initialization and can be automatically trained by back-propagation
+p85
+aVOur model still outperforms other models after pre-training
+p86
+aVwhere the tag sequence is found and scored by the Tensor Neural Network via the function s in equation (6
+p87
+aVAs we can see, by using Tag embedding, the F-score is improved by +0.6% and OOV recall is improved by +1.0%, which shows that tag embeddings succeed in modeling the tag-tag interaction and tag-character interaction
+p88
+aVThe loss is proportional to the number of characters with an incorrect tag in the proposed tag sequence, which increases the more incorrect the proposed tag sequence is
+p89
+aVSection 2 describes the details of conventional neural network architecture
+p90
+aV[ 6 ] to Chinese word segmentation and POS tagging and proposed a perceptron-style algorithm to speed up the training process with negligible loss in performance
+p91
+aVTo capture more interactions, researchers have designed a large number of features based on linguistic intuition and statistical information
+p92
+aVAn advantage of the tensor is that it can explicitly model multiple interactions in data
+p93
+aVFurther improvement could be obtained if the bigram embeddings are also pre-trained
+p94
+aVThe idea of distributed representation for symbolic data is one of the most important reasons why the neural network works
+p95
+aVMoreover, we propose a tensor factorization approach that effectively improves the model efficiency and prevents from overfitting
+p96
+aVIn each column, we list the top 5 characters that are nearest (measured by Euclidean distance) to the corresponding character in the first row according to their embeddings
+p97
+aVFollowing their idea, we try to find out how well our model can perform with minimal feature engineering
+p98
+aV[ 15 ] modeled Chinese word segmentation as a series of classification task at each position of the sentence in which the tag score is transformed into probability using softmax function
+p99
+aVWe will analyze in more detail about the effect of character embeddings in Section 4
+p100
+aVTherefore, word segmentation is a preliminary and important pre-process for Chinese language processing
+p101
+aVThe final hyperparameters of our model are set as in Table 2
+p102
+aVThere are several ways to learn the embeddings on unlabeled data
+p103
+aVIn Chinese word segmentation, a proper modeling of the tag-tag interaction, tag-character interaction and character-character interaction is very important
+p104
+aVWhen bigram features are added, the F-score of our model improves from 94.0% to 95.2% on PKU dataset and from 94.9% to 97.2% on MSRA dataset
+p105
+aVIn this way, the tag representation can be directly incorporated in the neural network so that the tag-tag interaction and tag-character interaction can be explicitly modeled in deeper layers (See Section 3.2
+p106
+aVMoreover, the additional tensor could bring millions of parameters to the model which makes the model suffer from the risk of overfitting
+p107
+aVWorkable as previous neural network models seem, a limitation of them to be pointed out is that the tag-tag interaction, tag-character interaction and character-character interaction are not well modeled
+p108
+aVSince feature engineering is not the main focus of this paper, we did not experiment with more features
+p109
+aVIn conventional feature-based linear (log-linear) models, these interactions are explicitly modeled as features
+p110
+aVFor a fast tag inference, only the previous tag t i - 1 is used in our model even though a longer history of tags can be considered
+p111
+aVMost previous systems address this problem by treating this task as a sequence labeling problem where each character is assigned a tag indicating its position in the word
+p112
+aVIn linear models, these kinds of interactions are usually modeled as features
+p113
+aVHowever, given the small size of their tensor matrix, they do not have the problem of high time cost and overfitting problem as we faced in modeling a sequence labeling task like Chinese word segmentation
+p114
+aVAs we can see, characters in the first column are all Chinese number characters and characters in the second column and the third column are all Chinese family names and Chinese punctuations respectively
+p115
+aVIn fact, CRF can be regarded as a special neural network without non-linear function [ 30 ]
+p116
+aVThese systems are effective because researchers can incorporate a large body of handcrafted features into the models
+p117
+aVThen each feature f u'\u005cu2208' D f is represented by a d -dimensional vector which is called feature embedding
+p118
+aVModel performance is further boosted after using tensor-based transformation
+p119
+aVSection 3 describes the details of our model
+p120
+aVWe first perform a close test 3 3 No other material or knowledge except the training data is allowed on the PKU dataset to show the effect of different model configurations
+p121
+aVThe most popular approach treats word segmentation as a sequence labeling problem which was first proposed in Xue [ 31 ]
+p122
+aVAs shown in Table 5 (last three rows), both the F-score and OOV recall of our model boost by using pre-training
+p123
+aVThe window approach assumes that the tag of a character largely depends on its neighboring characters
+p124
+aVWe propose a new tensor factorization approach that models each tensor slice as the product of two low-rank matrices
+p125
+aVThe simple tag-tag transition neglects the impact of context characters and thus limits the ability to capture flexible interactions between tags and context characters
+p126
+aVThe dimensionality of character (tag) embedding is set to 25 which achieved the best performance and faster than 50- or 100-dimensional ones
+p127
+aVDespite Chinese word segmentation being a specific case, our approach can be easily generalized to other sequence labeling tasks
+p128
+aVChinese word segmentation has been studied with considerable efforts in the NLP community
+p129
+aVAlthough we focus on the question that how far we can go without using feature engineering in this paper, the study of deep learning for NLP tasks is still a new area in which it is currently challenging to surpass the state-of-the-art without additional features
+p130
+aVAlthough we focus on the question that how far we can go without using feature engineering in this paper, the study of deep learning for NLP tasks is still a new area in which it is currently challenging to surpass the state-of-the-art without additional features
+p131
+aV[ 32 ] uses eight types of features such as Mutual Information and Accessor Variety and they extract dynamic statistical features from both an in-domain corpus and an out-of-domain corpus using co-training
+p132
+aVIn this paper, we use word2vec because preliminary experiments did not show differences between performances of these models but word2vec is much faster to train
+p133
+aVAs shown in Figure 1, at position c i , 1 u'\u005cu2264' i u'\u005cu2264' n , the context characters are fed into the Lookup Table layer
+p134
+aVWang and Manning [ 30 ] conduct an empirical study on the effect of non-linearity and the results suggest that non-linear models are highly effective only when distributed representation is used
+p135
+aVUnless otherwise specified, the character dictionary is extracted from the training set and unknown characters are mapped to a special symbol that is not used elsewhere
+p136
+aVDespite sharing commonalities mentioned above, previous work models the segmentation task differently and therefore uses different training and inference procedure
+p137
+aVWe use an open source toolkit CRF++ 4 4 http://crfpp.googlecode.com/svn/trunk/doc/index.html?source=navbar to train the CRF model
+p138
+aVWe use the Max-Margin criterion to train our model
+p139
+aVDetails of the data are listed in Table 1
+p140
+aVAs a result, the model can still perform well even if some words do not appear in the training cases
+p141
+aVObviously, it is a local model which cannot capture the dependency between tags and does not support to infer the tag sequence globally
+p142
+aVWe found that 50 is a good trade-off between speed and model performance
+p143
+aVFormally, at the i -th character of a sentence c [ 1 n ] , the bigram features are c k c k + 1 ( i - 3 k i + 2
+p144
+aVTable 3 summarizes the test results
+p145
+aVCombining the tensor product with linear transformation, the tensor-based transformation in Layer 2 is defined as
+p146
+aVFor a input sentence c [ 1 n ] with a tag sequence t [ 1 n ] , a sentence-level score is then given by the sum of transition and network scores
+p147
+aVWorkable as these methods seem, one of the limitations of them is that the tag-tag interaction and the neural network are modeled seperately
+p148
+aVT is the score vector for each possible tag
+p149
+aV[ 35 ] did not report the results on the these datasets, we re-implemented their model and tested it on the test data
+p150
+aVFor model selection, we use the first 90 u'\u005cu2062' % sentences in the training data for training and the rest 10 u'\u005cu2062' % sentences as development data
+p151
+aVFor a character c u'\u005cu2208' D that has an associated index k , the corresponding character embedding E u'\u005cu2062' m u'\u005cu2062' b u'\u005cu2062' e u'\u005cu2062' d u'\u005cu2062' ( c ) u'\u005cu2208' u'\u005cu211d' d is retrieved by the Lookup Table layer as shown in Figure 1
+p152
+aVThe F-score is improved by +0.6% while OOV recall is improved by +3.2%, which denotes that tensor-based transformation captures more interactional information than simple non-linear transformation
+p153
+aV[ 15 ] , their model is a global one where the training and inference is performed at sentence-level
+p154
+aVThe model is then trained in MLE-style which maximizes the log-likelihood of the tagged data
+p155
+aVOur tensor factorization is related to these work but uses a different tensor factorization approach
+p156
+aVIt uses B, M, E and S to denote the Beginning, the Middle, the End of a word and a Single character forming a word respectively
+p157
+aVThe first row lists three characters we are interested in
+p158
+aVAll the neural networks are trained using the Max-Margin approach described in Section 3.4
+p159
+aV[ 25 ] uses additional word-based features
+p160
+aV[ 35 ] , our model is also trained at sentence-level and carries out inference globally
+p161
+aVSecond, the non-linear transformation is used to discover higher level representation
+p162
+aVAs a result, tensor-based model have been widely used in a variety of tasks [ 20 , 12 , 23 ]
+p163
+aV[ 35 ] proposed a perceptron-style training algorithm inspired by the work of Collins [ 5 ]
+p164
+aVTo remedy this, we propose a tensor factorization approach that factorizes each tensor slice as the product of two low-rank matrices
+p165
+aVAs long as r is small enough, the factorized tensor operation would be much faster than the un-factorized one and the number of free parameters would also be much smaller, which prevent the model from overfitting
+p166
+aVH 2 ] u'\u005cu2208' u'\u005cu211d' H 2 ◊ H 1 ◊ H 1 to directly model the interactions, where H 2 is the size of Layer 2 and H 1 = ( w + 1 ) u'\u005cu22c5' d is the size of concatenated vector a in Layer 1 as shown in Figure 2
+p167
+aVEach character c u'\u005cu2208' D is represented as a real-valued vector (character embedding) E u'\u005cu2062' m u'\u005cu2062' b u'\u005cu2062' e u'\u005cu2062' d u'\u005cu2062' ( c ) u'\u005cu2208' u'\u005cu211d' d where d is the dimensionality of the vector space
+p168
+aVNot only does this approach improve the efficiency of our model but also it avoids the risk of overfitting
+p169
+aVBy minimizing this object, the score of the correct tag sequence y i is increased and score of the highest scoring incorrect tag sequence y ^ is decreased
+p170
+aVVarious tensor factorization (decomposition) methods have been proposed recently for tensor-based dimension reduction [ 4 , 29 , 2 ]
+p171
+aVExperiment results are reported in Section 4
+p172
+aVIntuitively, we can interpret each slice of the tensor as capturing a specific type of tag-character interaction and character-character interaction
+p173
+aV[ 2 ] proposed the Multi-Relational Latent Semantic Analysis
+p174
+aVGiven the advantage of tensors, we apply a tensor-based transformation to the input vector
+p175
+aVThe performance is not boosted and the training time increases drastically when the number of factors is larger than 10
+p176
+aVWe also validated on the number of factors for tensor factorization
+p177
+aVWe use this tag set in our method
+p178
+aVwhere f u'\u005cu0398' ( t i c [ i - 2 i + 2 ] , t i - 1 ) is the score output for tag t i at the i -th character by the network with parameters u'\u005cu0398'
+p179
+aVGiven an input sentence c [ 1 n ] , a window of size w slides over the sentence from character c 1 to c n
+p180
+aVIn fact, equation (2) used in previous work is a special case of equation (8) when V is set to 0
+p181
+aVWe hypothesize that larger factor size results in too many parameters to train and hence perform worse
+p182
+aVFor a given training instance ( x i , y i ) , we search for the tag sequence with the highest score
+p183
+aVFor evaluation, we use the standard bake-off scoring program to calculate precision, recall, F1-score and out-of-vocabulary (OOV) word recall
+p184
+aVTake phrase u'\u005cu201c' ÊâìÁØÆÁêÉ(play basketball) u'\u005cu201d' as an example, assuming we are labeling character C 0 = u'\u005cu201c' ÁØÆ u'\u005cu201d' , possible features could be
+p185
+aVwhere f u'\u005cu0398' ( t i c [ i - 2 i + 2 ] ) indicates the score output for tag t i at the i -th character by the network with parameters u'\u005cu0398' = ( M , A , W 1 , b 1 , W 2 , b 2
+p186
+aVThe embedding matrix M is initialized with small random numbers and trained by back-propagation
+p187
+aVThe output of a tensor product is a vector z u'\u005cu2208' u'\u005cu211d' H 2 where each dimension z i is the result of the bilinear form defined by each tensor slice V [ i ] u'\u005cu2208' u'\u005cu211d' H 1 ◊ H 1
+p188
+aV[ 23 ] exploited tensor-based function in the task of Sentiment Analysis to capture more semantic information from constituents
+p189
+aVThe most common tagging approach is the window approach
+p190
+aVSimilar to LSA, a low rank approximation of the tensor is derived using a tensor decomposition approch
+p191
+aVwhere y ^ m u'\u005cu2062' a u'\u005cu2062' x is the tag sequence with the highest score in equation (13
+p192
+aVFigure 4 illustrates the operation in each slice of the factorized tensor
+p193
+aVGenerally, the number of hidden units has a limited impact on the performance as long as it is large enough
+p194
+aVGiven a set of tags T of size
+p195
+aVThe object of Max-Margin training is that the highest scoring tag sequence is the correct one y * = y i and its score will be larger up to a margin to other possible tag sequences y ^ u'\u005cu2208' Y u'\u005cu2062' ( x i )
+p196
+aVThen a is fed into the next layer which performs linear transformation followed by an element-wise activation function g such as tanh , which is used in our experiments
+p197
+aVWe use Y u'\u005cu2062' ( x i ) to denote the set of all possible tag sequences for a given sentence x i and the correct tag sequence for x i is y i
+p198
+aVSection 5 reviews the related work
+p199
+aVThat u'\u005cu2019' s why we propose to decrease computational cost and avoid overfitting with tensor factorization
+p200
+aVThen the tag embedding E u'\u005cu2062' m u'\u005cu2062' b u'\u005cu2062' e u'\u005cu2062' d u'\u005cu2062' ( t ) u'\u005cu2208' u'\u005cu211d' d for tag t u'\u005cu2208' T with index k can be retrieved by the lookup operation
+p201
+aVUnlike English and other western languages, Chinese do not delimit words by white-space
+p202
+aVIntuitively, the Max-Margin criterion provides an alternative to probabilistic, likelihood-based estimation methods by concentrating directly on the robustness of the decision boundary of a model [ 27 ]
+p203
+aVT a similar linear transformation is performed except that no non-linear function is followed
+p204
+aVSubstituting equation (9) into equation (8), we get the factorized tensor function
+p205
+aVFormally, we use a 3-way tensor V [ 1
+p206
+aV[ 6 ] developed the SENNA system that approaches or surpasses the state-of-the-art systems on a variety of sequence labeling tasks for English
+p207
+aVThe parameters of our model are u'\u005cu0398' = { W 1 , b 1 , W 2 , b 2 , M , L , P [ 1
+p208
+aVWe first define a structured margin loss u'\u005cu25b3' ( y i , y ^ ) for predicting a tag sequence y ^ for a given correct tag sequence y i
+p209
+aVThe characters exceeding the sentence boundaries are mapped to one of two special symbols, namely u'\u005cu201c' start u'\u005cu201d' and u'\u005cu201c' end u'\u005cu201d' symbols
+p210
+aV[ 17 ] show that pre-trained embeddings can capture interesting semantic and syntactic information such as k u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' g - m u'\u005cu2062' a u'\u005cu2062' n + w u'\u005cu2062' o u'\u005cu2062' m u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2248' q u'\u005cu2062' u u'\u005cu2062' e u'\u005cu2062' e u'\u005cu2062' n on English data
+p211
+aVThe tensor-based transformation is H 1 times slower
+p212
+aVH 2 is a hyper-parameter which is the number of hidden units in Layer 2
+p213
+aVFigure 3 gives an example of the tensor-based transformation 2 2 The bias term is omitted in Figure 3 for simplicity
+p214
+aVThe minibatch size is set to 20
+p215
+aVWithout considering matrix optimization algorithms, the complexity of the non-linear transformation in equation (2) is O u'\u005cu2062' ( H 1 u'\u005cu2062' H 2 ) while the tensor operation complexity in equation (8) is O u'\u005cu2062' ( H 1 2 u'\u005cu2062' H 2
+p216
+aVWe set w = 5 in all experiments
+p217
+aVwhere E j [ p ] is the j -th element of the p -th embedding in Lookup Table layer and V ( p , q , j , k ) [ i ] is the corresponding coefficient for E j [ p ] and E k [ q ] in V [ i ]
+p218
+aVIt was proposed by Hinton [ 11 ] and has been a research hot spot for more than twenty years [ 1 , 6 , 21 , 16 ]
+p219
+aVThe conclusions are given in Section 6
+p220
+aVA tensor is a geometric object that describes relations between vectors, scalars, and other tensors
+p221
+aVThis leads to the regularized objective function for m training examples
+p222
+aV◊ 1 is a binary vector which is zero in all positions except at k -th index
+p223
+aVD is a binary vector which is zero in all positions except at k -th index
+p224
+aVFormally, each tensor slice V [ i ] u'\u005cu2208' u'\u005cu211d' H 1 ◊ H 1 is factorized into two low rank matrix P [ i ] u'\u005cu2208' u'\u005cu211d' H 1 ◊ r and Q [ i ] u'\u005cu2208' u'\u005cu211d' r ◊ H 1
+p225
+aVThen the output z i for each tensor slice i is the dot-product of f 1 and f 2
+p226
+aVThe complexity of the tensor operation is now O u'\u005cu2062' ( r u'\u005cu2062' H 1 u'\u005cu2062' H 2
+p227
+aVFirst, vector a is projected into two r -dimension vectors f 1 and f 2
+p228
+aVwhere r u'\u005cu226a' H 1 is the number of factors
+p229
+aVNow equation (4) can be rewritten as follows
+p230
+aVThe remaining part of this paper is organized as follows
+p231
+aVThe main contributions of our work are as follows
+p232
+aVThe subgradient of equation (13) is
+p233
+aVwhere n is the length of sentence x i and u'\u005cu039a' is a discount parameter
+p234
+aVIt can be represented as a multi-dimensional array of numerical values
+p235
+aVThe objective function is not differentiable due to the hinge loss
+p236
+aVSimilar ideas were also used for collaborative filtering [ 20 ] and object recognition [ 18 ]
+p237
+aVwhere u'\u005cu0391' is the initial learning rate and g u'\u005cu03a4' u'\u005cu2208' u'\u005cu211d' u'\u005cu0398' i is the subgradient at time step u'\u005cu03a4' for parameter u'\u005cu0398' i
+p238
+aVWe use a generalization of gradient descent called subgradient method [ 19 ] which computes a gradient-like direction
+p239
+aVThe parameter update for the i -th parameter u'\u005cu0398' t , i at time step t is as follows
+p240
+aVThis work is supported by National Natural Science Foundation of China under Grant No
+p241
+aV[ 22 ] , we use the diagonal variant of AdaGrad [ 8 ] with minibatchs to minimize the objective
+p242
+aV61273318 and National Key Basic Research Program of China 2014CB340504
+p243
+aVT
+p244
+aVwhere W 2 u'\u005cu2208' u'\u005cu211d'
+p245
+aVwhere W 1 u'\u005cu2208' u'\u005cu211d' H 2 ◊ H 1 , b 1 u'\u005cu2208' u'\u005cu211d' H 2 ◊ 1 , h u'\u005cu2208' u'\u005cu211d' H 2
+p246
+aVwhere W 1 u'\u005cu2208' u'\u005cu211d' H 2 ◊ H 1 , b 1 u'\u005cu2208' u'\u005cu211d' H 2 ◊ 1 , h u'\u005cu2208' u'\u005cu211d' H 2
+p247
+aV[ 7 ]
+p248
+aVHere e k u'\u005cu2208' u'\u005cu211d'
+p249
+aVD
+p250
+ag250
+aVH 2 ] , Q [ 1
+p251
+aVH 2 ] }
+p252
+ag244
+aV◊ 1 f ( t c [ i - 2 i + 2 ] ) u'\u005cu2208' u'\u005cu211d'
+p253
+aVwhere e k u'\u005cu2208' u'\u005cu211d'
+p254
+aV◊ H 2 , b 2 u'\u005cu2208' u'\u005cu211d'
+p255
+ag244
+a.

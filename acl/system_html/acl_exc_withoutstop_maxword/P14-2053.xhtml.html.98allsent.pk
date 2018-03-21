@@ -1,0 +1,304 @@
+(lp0
+VFrom each system, 100 questions were randomly selected, making sure that the LPN W questions did not include questions generated from domain-specific templates such as
+p1
+aVThe file has 93 sentences and our system generated 184 questions; the LPN W system generated roughly 4 times as many questions
+p2
+aVThe Heilman and Smith system, as they describe it, takes an over-generate and rank approach
+p3
+aVSince current state-of-the-art systems do not deal well with relative and possessive pronouns, this will continue to be a limitation of natural language generation systems for the time being
+p4
+aVSome patterns look for modals and so can handle future tense
+p5
+aVNot having coreference resolution leads to vague questions, some of which can be filtered as discussed previously
+p6
+aVThis task utilized a file (Biology the body) with 56 source sentences from which our system generated 102 questions
+p7
+aVWe compared our system to the H S and LPN W systems because they produce questions that are the most similar to ours, and for the same purpose reading comprehension reinforcement
+p8
+aVInterestingly, our system again achieved a 44% reduction in the error rate when averaging over all metrics, just as it did in the Heilman and Smith comparison
+p9
+aVSince our focus is on expository text, system patterns deal primarily with the present and simple past tenses
+p10
+aVWe were also interested to know if first predicates make better questions than later ones
+p11
+aVAnnotators were given instructions to read a paragraph, then the questions based on that paragraph
+p12
+aVThe purpose of this evaluation was to determine if any patterns consistently produce poor questions
+p13
+aVThe patterns are designed to match only the arguments used as part of the question or the answer, in order to prevent over generation of questions
+p14
+aVAdditionally, patterns indicate the semantic arguments that provide the answer to the question, required fields, and filter condition fields
+p15
+aVCare must be taken not to generate questions based on one predicate in the catenative construction
+p16
+aVThese approaches can potentially ask deeper questions due to their focus on semantics
+p17
+aVAs these patterns are matched, they will be rejected as candidates for generation for a particular sentence if the required arguments are absent or if filter conditions are present
+p18
+aVQuestion 3 is from the source sentence u'\u005cu2019' s 3rd predicate-argument set because this matched the pattern requirements
+p19
+aVThe system inserted the correct forms of release and do , and ignored the phrase As this occurs since it is not part of the semantic argument
+p20
+aVThe vast majority of systems generate questions by selecting one sentence at a time, extracting portions of the source sentence, then applying transformation rules or patterns in order to construct a question
+p21
+aVTextbooks were chosen rather than hand-crafted source material so that a more realistic assessment of performance could be achieved
+p22
+aVNegation detection is a complicated task because negation can occur at the word, phrase or clause level, and because there are subtle shades of negation between definite positive and negative polarities (Blanco and Moldovan, 2011
+p23
+aVPlant roots and bacterial decay use carbon dioxide in the process of respiration, the word use was classified as NN, leaving no predicate and no semantic role labels in this sentence
+p24
+aVThis pattern takes the copular be as it appears in the source text
+p25
+aVPatterns specify whether verbs should be included in their lexical form or as they appear in the source text
+p26
+aVLight verbs pose complications in NLG because they are highly idiosyncratic and subject to syntactic variability (Sag et al., 2002
+p27
+aVAs the universe expanded, it became less dense and began to cool
+p28
+aVFirst, the source text is divided into sentences which are processed by SENNA 1 1 http://ml.nec-labs.com/senna/ software, described in (Collobert et al., 2011
+p29
+aVThe most common use of the verb as it appears in the sentence is with the verb be , as in
+p30
+aVThe lungs take in air
+p31
+aVThe catenative construction also potentially adds complexity (Huddleston and Pullum, 2005), as shown in this example
+p32
+aVGeneration patterns specify the text, verb forms and semantic arguments from the source sentence to form the question
+p33
+aV1) evaluation of our generated questions, (2) comparison of our generated questions with those from Heilman and Smith u'\u005cu2019' s question generator, and (3) comparison of our generated questions with those from Lindberg, Popowich, Nesbit and Winne
+p34
+aV2013), which used semantic role labeling to identify patterns in the source text from which questions can be generated
+p35
+aVThen questions are generated and stored by question type in a question hash table
+p36
+aVTable 2 provides examples of generated questions
+p37
+aVSource sentence
+p38
+aVSource sentence
+p39
+aVSource sentence
+p40
+aVBonds) which had 59 sentences, from which the system generated 142 questions
+p41
+aVFor example, this sentence could also match patterns to generate questions such as
+p42
+aVFor a comparison with the Lindberg, Popowich, Nesbit and Winne system we used a file (Earth science weather fronts) that seemed most similar to the text files for which their system was designed
+p43
+aVThe pattern that generated Question 1 requires argument A1 (underlined in Table 2) and a causation ArgM (italicized
+p44
+aVBased on this sample of questions there is no significant difference in linguistic scores for questions generated at various predicate positions
+p45
+aVThe ability to generate questions from any predicate-argument set means that sentence simplification is not required as a preprocessing step, and that the sentence can match multiple patterns
+p46
+aVThis paper focuses on evaluating generated questions primarily in terms of their linguistic quality, as did Heilman and Smith (2010a
+p47
+aVHowever, the task here is to explore the linguistic quality of generated questions
+p48
+aVQuestion
+p49
+aVQuestion
+p50
+aVQuestion
+p51
+aVThis work most closely parallels our own with a few exceptions our system only asks questions that can be answered from the source text, our approach is domain-independent, and the patterns also identify the answer to the question
+p52
+aVThe pattern that generated Question 2 requires A0, A1 and a verb whose lexical form is mean (V=mean in Table 1
+p53
+aVThe questions again were presented with accompanying paragraphs of the source text
+p54
+aVSome question generation systems simplify complex sentences in initial stages of their system
+p55
+aVA recent approach from Heilman and Smith (2009, 2010) uses syntactic parsing and transformation rules to generate questions
+p56
+aVHeilman and Smith chose to filter out questions with personal pronouns, possessive pronouns and noun phrases composed simply of determiners such as those
+p57
+aVFor each predicate and its associated semantic arguments, a matcher function is called which will return a list of patterns that match the source sentence u'\u005cu2019' s predicate-argument structure
+p58
+aVQuestions from the two systems were randomly intermingled
+p59
+aVThe ArgM (underlined) becomes part of the question, while the rest of the source sentence forms the answer
+p60
+aVThis pattern also requires that ArgM contain nouns (AxNN from Table 1), which helps filter vague questions
+p61
+aVThe system at the time of this evaluation had 42 patterns
+p62
+aVFor example, a filter for personal pronouns will prevent a question being generated with an argument that starts with a personal pronoun
+p63
+aVThe average score by predicate position is shown in Table 3
+p64
+aVSENNA produces separate semantic role labels for each predicate in the sentence
+p65
+aVCommon English verbs that can be light verbs include give, have, make, take
+p66
+aVSENNA provides the tokenizing, pos tagging, syntactic constituency parsing and semantic role labeling used in the system
+p67
+aVIn order to generate questions, passages were selected from science textbooks downloaded from www.ck12.org
+p68
+aVThe comparison results are shown in Table 5
+p69
+aVTable 1 shows selected required and filter fields, Section 3.3 gives examples of their use
+p70
+aVApproaches to automatic question generation from text span nearly four decades
+p71
+aVCoreference resolution, which could help avoid vague question generation, is discussed in Section 5
+p72
+aVLindberg et al used the emPronoun system from Charniak and Elsner, which only handles personal pronouns
+p73
+aVSyntactic, sentence-level approaches outnumber other approaches as seen in the Question Generation Shared Task Evaluation Challenge 2010 (Boyer and Piwek, 2010) which received only one paragraph-level, semantic entry
+p74
+aVIn this pattern, A1 (italicized) forms the answer and A0 (underlined) becomes part of the question along with the appropriate form of do
+p75
+aVThis pattern supplies the word indicate instead of the source text u'\u005cu2019' s mean which broadens the question context
+p76
+aVIn a related work (Mazidi and Nielsen, 2014) we evaluated the quality of the questions and answers from a pedagogical perspective, and our approach outperformed comparable systems in both linguistic and pedagogical evaluations
+p77
+aVExperiments with existing coreference software performed well only for personal pronouns, which occur infrequently in most expository text
+p78
+aVArgawal, Shah and Mannem (2011) continue the paragraph-level approach using discourse cues to find appropriate text segments upon which to construct questions at a deeper conceptual level
+p79
+aVThe aim of this work is to automatically generate questions for such pedagogical purposes
+p80
+aVThe uniqueness of their work lies in their use of discourse cues to extract semantic content for question generation
+p81
+aVWe only took questions that scored a 2.0 or better with their ranking system, 4 4 In our experiments, their rankings ranged from very small negative numbers to 3.0 which resulted in less than 27% of their top questions
+p82
+aVTwo annotators evaluated each set of questions using Likert-scale ratings from 1 to 5, where 5 is the best rating, for grammaticality, clarity, and naturalness
+p83
+aVHowever, further work on filters is needed to avoid questions such as
+p84
+aVHowever, most patterns use the lexical form of the main verb along with the appropriate form of the auxiliary do (do, does, did), for the subject-auxiliary inversion required in forming interrogatives
+p85
+aVThe answer is the text from the A2 argument
+p86
+aVIn all, 84 of their questions were evaluated
+p87
+aVThe Heilman and Smith system is available online; 3 3 http://www.ark.cs.cmu.edu/mheilman/questions/ Lindberg graciously shared his code with us
+p88
+aVCurrently, our system does not use any type of coreference resolution
+p89
+aVAs seen in Table 4, our results represent a 44% reduction in the error rate relative to Heilman and Smith on the average rating over all metrics, and as high as 61% reduction in the error rate on grammaticality judgments
+p90
+aVThey generate questions of types why , when , give an example , and yes/no
+p91
+aVA well-known early work is Wolfe u'\u005cu2019' s AUTOQUEST (Wolfe, 1976), a syntactic pattern matching system
+p92
+aVLight verbs can either carry semantic meaning ( take your passport) or can be bleached of semantic content when combined with other words as in make a decision, have a drink, take a walk
+p93
+aVThe phrases Summarize the influence of and on the environment are part of a domain-specific template
+p94
+aVThe system consists of a straightforward pipeline
+p95
+aVThe average linguistics score per pattern in this evaluation was 5.0 to 4.18
+p96
+aVIt means that the universe is expanding , we do not want to generate a vague question such as
+p97
+aVThis evaluation was conducted with one file (Chemistry
+p98
+aVHere we briefly describe three challenges negation detection, coreference resolution, and verb forms
+p99
+aVThe system was created using SENNA and Python
+p100
+aVIn our approach this is unnecessary, and simplifying could miss many valid questions
+p101
+aVIn contrast to the above systems, other approaches have an intermediate step of transforming input into some sort of semantic representation
+p102
+aVEither form will include subsequent particles such as
+p103
+aVThe pattern also filters out sentences with A0 or A2
+p104
+aVSummarize the influence of the maximum amount on the environment
+p105
+aVA novel question generator by Curto et al
+p106
+aVImporting NLTK within Python provides a simple interface to WordNet from which we determine the lexical form of verbs
+p107
+aV2012) leverages lexico-syntactic patterns gleaned from the web with seed question-answer pairs
+p108
+aVWe are also hindered at times by the performance of the part of speech tagging and parsing software
+p109
+aVWe present results on three linguistic evaluations
+p110
+aVAnnotators gave 1 - 5 scores for each category of grammaticality, clarity and naturalness
+p111
+aVNatural language generation faces many linguistic challenges
+p112
+aVThe error reduction calculation is shown below
+p113
+aVNote that the Rating column gives the average of the grammaticality, clarity and naturalness scores
+p114
+aVThe most common error observed was confusion between the noun and verb roles of a word
+p115
+aVThe annotators are university students who are science majors and native speakers of English
+p116
+aVWe have left for future work the task of identifying other negative indicators, which occasionally does lead to poor question/answer quality as in the following
+p117
+aVAnother recent approach is Lindberg et al
+p118
+aVThe passages average around 60 sentences each, and represent chapter sections
+p119
+aVQuestion 4 requires A1 and an ArgM that includes the discourse cue if
+p120
+aVHandling these constructions as well as other multi-word expressions may require both rule-based and statistical approaches
+p121
+aVFor the experiments in this paper, we selected three passages from the subjects of biology, chemistry, and earth science, filtering out references to equations and figures
+p122
+aVExamples of this intermediate step can be found in Yao and Zhang (2010) which uses Minimal Recursive Semantics, and in Olney et al
+p123
+aVSENNA uses the 2005 PropBank coding scheme and we followed the documentation in (Babko-Malaya, 2005) for the patterns
+p124
+aVStudies of student learning show that answering questions increases depth of student learning, facilitates transfer learning, and improves students u'\u005cu2019' retention of material (McDaniel et al., 2007; Carpenter, 2012; Roediger and Pyc, 2012
+p125
+aVThe average inter-annotator agreement, allowing a difference of one between the annotators u'\u005cu2019' ratings was 88% and Pearson u'\u005cu2019' s r=0.47 was statistically significant (p 0.001), suggesting a high correlation and agreement between annotators
+p126
+aVWhat are positively charged particles called or Describe the nucleus
+p127
+aVFor our purposes we focused on negation as identified by the NEG label in SENNA which identified not in verb phrases
+p128
+aVThe most commonly used semantic roles are A0, A1 and A2, as well as the ArgM modifiers
+p129
+aVThe two annotator ratings were averaged for all the evaluations reported here
+p130
+aVAnswer that humans come from monkeys
+p131
+aVThe negation in the word incorrectly is not identified
+p132
+aVThe average grade level is approximately grade 10 as indicated by the on-line readability scorer read-able.com
+p133
+aV2 2 Within PropBank, the precise roles of A0 - A6 vary by predicate
+p134
+aVWhat were fused into helium nuclei
+p135
+aVIn Darwin u'\u005cu2019' s time and today, many people incorrectly believe that evolution means humans come from monkeys
+p136
+aVSENNA provided all the necessary processing of the data, quickly, accurately and in one run
+p137
+aV2012) which uses concept maps
+p138
+aVIf you continue to move atoms closer and closer together, eventually the two nuclei will begin to repel each other
+p139
+aVAir cools when it comes into contact with a cold surface or when it rises
+p140
+aVNote that r u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' g * is the maximum rating of 5.0
+p141
+aVDiscuss what the two nuclei will repel
+p142
+aVA1, A2, V=call
+p143
+aVWhat does evolution mean
+p144
+aVWhat happens when it comes into contact with a cold surface or when it rises
+p145
+aVDept of Ed., Grant R305A120808 to UNT
+p146
+aVThis research was supported by the Institute of Education Sciences, U.S
+p147
+aVThe opinions expressed are those of the authors
+p148
+aVWhat does it mean
+p149
+aVFrom
+p150
+aVFor example in
+p151
+a.

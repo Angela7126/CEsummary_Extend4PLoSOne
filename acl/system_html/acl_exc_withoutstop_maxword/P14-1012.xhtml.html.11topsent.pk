@@ -1,0 +1,20 @@
+(lp0
+VThese new features are appended as extra features to the phrase table for the translation decoder
+p1
+aVFor our semi-supervised DAE feature learning task, we use the unsupervised pre-trained DBN to initialize DAE u'\u005cu2019' s parameters and use the input original phrase features as the u'\u005cu201c' teacher u'\u005cu201d' for semi-supervised back-propagation
+p2
+aVNext, we adapt and extend some original phrase features as the input features for DAE feature learning
+p3
+aVUsing the 4 original phrase features in the phrase table as the input features, they pre-trained the DBN by contrastive divergence [ Hinton2002 ] , and generated new unsupervised DBN features using forward computation
+p4
+aVMoreover, although we have introduced another four types of phrase features ( X 2 , X 3 , X 4 and X 5 ), the only 16 features in X are a bottleneck for learning large hidden layers feature representation, because it has limited information, the performance of the high-dimensional DAE features which are directly learned from single DAE is not very satisfactory
+p5
+aVSecond, it only uses the unsupervised layer-wise pre-training of DBN built with stacked sets of Restricted Boltzmann Machines (RBM) [ Hinton2002 ] , does not have a training objective, so its performance relies on the empirical parameters
+p6
+aVTo learn high-dimensional feature representation and to further improve the performance, we introduce a natural horizontal composition for DAEs that can be used to create large hidden layer representations simply by horizontally combining two (or more) DAEs [ Baldi2012 ] , as shown in Figure 3
+p7
+aVCompared with the unsupervised DBN features, our semi-supervised DAE features are more effective and stable
+p8
+aVIn summary, except for the
+p9
+a.

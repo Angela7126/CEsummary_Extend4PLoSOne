@@ -1,0 +1,514 @@
+(lp0
+VWe then develop a logistic regression classifier based on the patterns to recognize hypernym u'\u005cu2013' hyponym relations
+p1
+aVSeveral other works relied heavily on lexical patterns, which would suffer from deficiency because such patterns can only cover a small proportion of complex linguistic circumstances [ 10 , 23 ]
+p2
+aVThe reason is that the inference based on the relations identified automatically may lead to error propagation
+p3
+aVWe measure the inter-annotator agreement using the kappa coefficient [ 22 ]
+p4
+aVThe combination strategy is to simply merge all positive results from the two methods together, and then to infer new relations based on the transitivity of hypernym u'\u005cu2013' hyponym relations
+p5
+aVSince hypernym u'\u005cu2013' hyponym relations and its reverse (hyponym u'\u005cu2013' hypernym) have one-to-one correspondence, their performances are equal
+p6
+aVFollowing the method for discovering patterns automatically [ 23 ] , McNamee et al
+p7
+aV2009 ) propose a method based on patterns to find hypernyms on arbitrary noun phrases
+p8
+aVSeveral other methods are based on lexical patterns
+p9
+aVFurthermore, we propose a piecewise linear projection method based on relation clustering to better model hypernym u'\u005cu2013' hyponym relations (Section 3.3.2
+p10
+aV2006 ) provides a global optimization scheme for extending WordNet, which is different from the above-mentioned pairwise relationships identification methods
+p11
+aVLexico-syntactic patterns are extracted from the Baidubaike corpus by using the seeds
+p12
+aVThe result shows that only a small part of the hypernyms can be extracted based on these patterns because only a few hypernym relations are expressed in these fixed patterns, and many are expressed in highly flexible manners
+p13
+aVWe observe that the same property also applies to some hypernym u'\u005cu2013' hyponym relations
+p14
+aVA hierarchy can then be built based on these pairwise relations
+p15
+aVIn this section, we compare the proposed method with previous methods, including manually-built hierarchy extension, pairwise relation extraction based on patterns, word distributions, and web mining (Section 2
+p16
+aVHowever, the projection method cannot guarantee that theoretically, because the projections are learned from pairwise hypernym u'\u005cu2013' hyponym relations without the whole hierarchy structure
+p17
+aVTherefore, a broader range of resources is needed to supplement the manually built resources
+p18
+aVAs our experiments show, pattern-based methods suffer from low recall because of the low coverage of patterns
+p19
+aVHowever, the low quality of the sentences in the search results negatively influence the precision of hypernym extraction
+p20
+aV2007 ) , and Sang ( 2007 ) consider web data as a large corpus and use search engines to identify hypernyms based on the lexical patterns of Hearst ( 1992
+p21
+aVTherefore, many researchers have attempted to automatically extract semantic relations or to construct taxonomies
+p22
+aVIn this paper, we improve on their work by learning multiple linear projections in the embedding space, to model hypernym u'\u005cu2013' hyponym relationships within different clusters
+p23
+aVAs shown in Figure 6 , the performance of clustering is better than non-clustering (when the cluster number is 1), thus providing evidences that learning piecewise projections based on clustering is reasonable
+p24
+aVWe first evaluate the effect of different number of clusters based on the development data
+p25
+aV2010 ) design a directional distributional measure to infer hypernym u'\u005cu2013' hyponym relations based on the standard IR Average Precision evaluation measure
+p26
+aVSome have established concept hierarchies based on manually-built semantic resources such as WordNet [ 16 ]
+p27
+aVThe same training data for projections learning from CilinE (Section 3.3.3 ) is used as seed hypernym u'\u005cu2013' hyponym pairs
+p28
+aVA uniform linear projection may still be under-representative for fitting all of the hypernym u'\u005cu2013' hyponym word pairs, because the relations are rather diverse, as shown in Figure 2
+p29
+aVOur previous method based on web mining [ 8 ] works well for hypernym extraction of entity names, but it is unsuitable for semantic hierarchy construction which involves many words with broad semantics
+p30
+aVWe have made similar obsevation that about a half of hypernym u'\u005cu2013' hyponym relations are absent in a Chinese semantic thesaurus
+p31
+aVBesides, the final hierarchy should be a DAG as discussed in Section 3.1
+p32
+aVGenerally speaking, these pattern-based methods often suffer from low recall or precision because of the coverage or the quality of the patterns
+p33
+aVTherefore, the proposed method is complementary to the manually-built hierarchy extension method [ 27 ]
+p34
+aVBut this is not the focus of this paper
+p35
+aVHypernym-hyponym word pair ( x , y ) is classified into the direct category, only if there doesn u'\u005cu2019' t exist another word z in the training data, which is a hypernym of x and a hyponym of y
+p36
+aVIntuitively, we assume that all words can be projected to their hypernyms based on a uniform transition matrix
+p37
+aVHowever, these semantic resources are limited in its scope and domain, and their manual construction is knowledge intensive and time consuming
+p38
+aVTherefore, the pairs with the same hyponym but different hypernyms are expected to be clustered into separate groups
+p39
+aV3 3 www.ltp-cloud.com/download/ CilinE is organized as a hierarchy of five levels, in which the words are linked by hypernym u'\u005cu2013' hyponym relations (right panel, Figure 3
+p40
+aVBesides, distributional similarity methods [ 11 , 12 ] are based on the assumption that a term can only be used in contexts where its hypernyms can be used and that a term might be used in any contexts where its hyponyms are used
+p41
+aVThis paper proposes a novel approach for semantic hierarchy construction based on word embeddings
+p42
+aVWe use precision, recall, and F-score as our metrics to evaluate the performances of the methods
+p43
+aVIn the WordNet hierarchy, senses are organized according to the u'\u005cu201c' is-a u'\u005cu201d' relations
+p44
+aVM E u'\u005cu2062' m u'\u005cu2062' b is the proposed method based on word embeddings
+p45
+aVThese two models can be trained very efficiently on a large-scale corpus because of their low time complexity
+p46
+aVAs a preliminary experiment, we compute the embedding offsets between some randomly sampled hypernym u'\u005cu2013' hyponym word pairs and measure their similarities
+p47
+aVFor distributional similarity computing, each word is represented as a semantic vector composed of the pointwise mutual information (PMI) with its contexts
+p48
+aV2013b ) further observe that the semantic relationship of words can be induced by performing simple algebraic operations with word vectors
+p49
+aVThe distributional methods assume that the contexts of hypernyms are broader than the ones of their hyponyms
+p50
+aVTherefore, we employ the Skip-gram model for estimating word embeddings in this study
+p51
+aVHere, u'\u005cu201c' canine u'\u005cu201d' is called a hypernym of u'\u005cu201c' dog u'\u005cu201d' Conversely, u'\u005cu201c' dog u'\u005cu201d' is a hyponym of u'\u005cu201c' canine u'\u005cu201d' As key sources of knowledge, semantic thesauri and ontologies can support many natural language processing applications
+p52
+aVTherefore, we extract words in the second, third and fifth levels to constitute hypernym u'\u005cu2013' hyponym pairs (left panel, Figure 3
+p53
+aVThe hierarchies are represented as relations of pairwise words
+p54
+aVAdditionally, their experiment results have shown that the Skip-gram model performs best in identifying semantic relationship among words
+p55
+aVNote that mapping one hyponym to multiple hypernyms with the same projection ( u'\u005cu03a6' u'\u005cu2062' x is unique) is difficult
+p56
+aVTheir representations are so close to each other in the embedding space that we have not find projections suitable for these pairs
+p57
+aVEach word in CilinE has one or more sense codes (some words are polysemous) that indicate its position in the hierarchy
+p58
+aVLooking at the well-known example v ( king ) - v ( queen ) u'\u005cu2248' v ( man ) - v ( woman ) , it indicates that the embedding offsets indeed represent the shared semantic relation between the two word pairs
+p59
+aVThe fourth level only has sense codes without real words
+p60
+aVM P u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' r u'\u005cu2062' n refers to the pattern-based method of Hearst ( 1992
+p61
+aVThat is, given a word x and its hypernym y , there exists a matrix u'\u005cu03a6' so that y = u'\u005cu03a6' u'\u005cu2062' x
+p62
+aVFigure 8 shows that our method loses the relation u'\u005cu201c' 乌头属 ( Aconitum ) u'\u005cu201d' u'\u005cu2192' u'\u005cud835' u'\u005cudc3b' u'\u005cu201c' 毛茛科 ( Ranunculaceae u'\u005cu201d' It is because they are very semantically similar (their cosine similarity is 0.9038
+p63
+aVThe senses of words in the first level, such as u'\u005cu201c' 物 ( object ) u'\u005cu201d' and u'\u005cu201c' 时间 ( time ), u'\u005cu201d' are very general
+p64
+aVHence the relations dragonfly u'\u005cu2192' u'\u005cud835' u'\u005cudc3b' insect and dragonfly u'\u005cu2192' u'\u005cud835' u'\u005cudc3b' animal should fall into different clusters
+p65
+aVTable 3 shows that this method achieves a high precision but also a low recall, mainly because of the limited scope of Wikipedia
+p66
+aVFor simplicity, we use the same symbols as the words to represent the embedding vectors
+p67
+aVActually, we can get different precisions and recalls by adjusting the threshold u'\u005cu0394' (Equation 3
+p68
+aVSo if some conflicts occur, that is, a relation circle exists, we remove or reverse the weakest path heuristically (Figure 5
+p69
+aVIn this work, we learn word embeddings from a Chinese encyclopedia corpus named Baidubaike 4 4 Baidubaike ( baike.baidu.com ) is one of the largest Chinese encyclopedias containing more than 7.05 million entries as of September, 2013 which contains about 30 million sentences (about 780 million words
+p70
+aVFigure 3 shows that the word u'\u005cu201c' dragonfly u'\u005cu201d' in the fifth level has two hypernyms u'\u005cu201c' insect u'\u005cu201d' in the third level and u'\u005cu201c' animal u'\u005cu201d' in the second level
+p71
+aVThe Chinese segmentation is provided by the open-source Chinese language processing platform LTP 5 5 www.ltp-cloud.com/demo/ [ 3 ]
+p72
+aVThe Skip-gram model adopts log-linear classifiers to predict context words given the current word u'\u005cud835' u'\u005cudc30' u'\u005cu2062' ( t ) as input
+p73
+aVThen, log-linear classifiers are employed, taking the embedding as input and predict u'\u005cud835' u'\u005cudc30' u'\u005cu2062' ( t ) u'\u005cu2019' s context words within a certain range, e.g., k words in the left and k words in the right
+p74
+aVActually, x , y and z are unambiguous as the hypernyms of a certain entity
+p75
+aVCombining M E u'\u005cu2062' m u'\u005cu2062' b with M W u'\u005cu2062' i u'\u005cu2062' k u'\u005cu2062' i + C u'\u005cu2062' i u'\u005cu2062' l u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' E achieves a 7% F-score improvement over the best baseline M W u'\u005cu2062' i u'\u005cu2062' k u'\u005cu2062' i + C u'\u005cu2062' i u'\u005cu2062' l u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' E
+p76
+aVFirst, u'\u005cud835' u'\u005cudc30' u'\u005cu2062' ( t ) is projected to its embedding
+p77
+aVu'\u005cu2200' x , y , z u'\u005cu2208' L x u'\u005cu2192' u'\u005cud835' u'\u005cudc3b' z u'\u005cu2227' z u'\u005cu2192' u'\u005cud835' u'\u005cudc3b' y ) u'\u005cu21d2' x u'\u005cu2192' u'\u005cud835' u'\u005cudc3b' y
+p78
+aVTherefore, G should be a directed acyclic graph (DAG
+p79
+aVOur method based on word embeddings can discover more hypernym u'\u005cu2013' hyponym relations than the previous methods can
+p80
+aVThey use manually or automatically constructed lexical patterns to mine hypernym u'\u005cu2013' hyponym relations from text corpora
+p81
+aVWe extract hypernym u'\u005cu2013' hyponym relations in the Baidubaike corpus, which is also used to train word embeddings (Section 4.1
+p82
+aVWe obtain 15,247 word pairs of hypernym u'\u005cu2013' hyponym relations (9,288 for direct relations and 5,959 for indirect relations
+p83
+aV2005 ) propose to automatically extract large numbers of lexico-syntactic patterns and subsequently detect hypernym relations from a large newswire corpus
+p84
+aVIn this paper, we aim to identify hypernym u'\u005cu2013' hyponym relations using word embeddings, which have been shown to preserve good properties for capturing semantic relationship between words
+p85
+aVTheir method relies on accurate syntactic parsers, and the quality of the automatically extracted patterns is difficult to guarantee
+p86
+aVAll pairwise hypernym u'\u005cu2013' hyponym relation identification methods would suffer from this problem actually
+p87
+aVThis method relies on an accurate syntactic parser, and the quality of the automatically extracted patterns is difficult to guarantee
+p88
+aVThen we elaborate on our proposed method composed of three major steps, namely, word embedding training, projection learning, and hypernym u'\u005cu2013' hyponym relation identification
+p89
+aVThat is, all word pairs ( x , y ) in the training data are first clustered into several groups, where word pairs in each group are expected to exhibit similar hypernym u'\u005cu2013' hyponym relations
+p90
+aVIf a circle has more than two nodes, we reverse the weakest path to form an indirect hypernym u'\u005cu2013' hyponym relation
+p91
+aVThe final data set contains 655 unique hypernyms and 1,391 hypernym u'\u005cu2013' hyponym relations among them
+p92
+aVHowever, there usually also exists hypernym u'\u005cu2013' hyponym relations among these hypernyms
+p93
+aVFigure 2 shows that the relations are adequately distributed in the clusters, which implies that hypernym u'\u005cu2013' hyponym relations indeed can be decomposed into more fine-grained relations
+p94
+aVUpon obtaining the clusters of training data and the corresponding projections, we can identify whether two words have a hypernym u'\u005cu2013' hyponym relation
+p95
+aVWe are greatly interested in the practical performance of the proposed method on the hypernym u'\u005cu2013' hyponym relations outside of CilinE
+p96
+aVTo address this challenge, we propose to learn the hypernym u'\u005cu2013' hyponym relations using projection matrices
+p97
+aVSubsequently, we identify whether an unknown word pair is a hypernym u'\u005cu2013' hyponym relation using the projections (Section 3.4
+p98
+aVWe represent the hierarchy as a directed graph G , in which the nodes denote the words, and the edges denote the hypernym u'\u005cu2013' hyponym relations
+p99
+aVIn this case, we use the transitivity of hypernym u'\u005cu2013' hyponym relations
+p100
+aVTo better model the various kinds of hypernym u'\u005cu2013' hyponym relations, we apply the idea of piecewise linear regression [ 20 ] in this study
+p101
+aVObtaining a consistent exact u'\u005cu03a6' for the projection of all hypernym u'\u005cu2013' hyponym pairs is difficult
+p102
+aVTo verify this hypothesis, we compute the embedding offsets over all hypernym u'\u005cu2013' hyponym word pairs in our training data and visualize them
+p103
+aVMoreover, combining our method with the manually-built hierarchy extension method proposed by Suchanek et al
+p104
+aVWe use u'\u005cu2192' u'\u005cud835' u'\u005cudc3b' to represent a hypernym u'\u005cu2013' hyponym relation in this paper
+p105
+aVHowever, we further observe that hypernym u'\u005cu2013' hyponym relations are more complicated than a single offset can represent
+p106
+aVTo learn the projection matrices, we extract training data from a Chinese semantic thesaurus, Tongyi Cilin (Extended) (CilinE for short) which contains 100,093 words [ 3 ]
+p107
+aVWe use the Chinese Hearst-style patterns (Table 4 ) proposed by Fu et al
+p108
+aVThey use a support vector machine classifier to identify the correct hypernyms from the candidates that match the patterns
+p109
+aV1 1 In this study, we focus on Chinese semantic hierarchy construction
+p110
+aVTo address this challenge, we propose a more sophisticated and general method u'\u005cu2014' learning a linear projection which maps words to their hypernyms (Section 3.3.1
+p111
+aVWe compute a score for each word pair and apply a threshold to identify whether it is a hypernym u'\u005cu2013' hyponym relation
+p112
+aVIt is an interesting problem how to construct a globally optimal semantic hierarchy conforming to the form of a DAG
+p113
+aVWord embeddings have been empirically shown to preserve linguistic regularities, such as the semantic relationship between words [ 15 ]
+p114
+aVWe observe that a similar property also applies to the hypernym u'\u005cu2013' hyponym relationship (Section 3.3 ), which is the main inspiration of the present study
+p115
+aVThe pioneer work by Hearst ( 1992 ) has found out that linking two noun phrases (NPs) via certain lexical constructions often implies hypernym relations
+p116
+aVGiven a list of hypernyms of an entity, our goal is to construct a semantic hierarchy on it (Figure 1
+p117
+aVSome previous works extend and refine manually-built semantic hierarchies by using other resources (e.g.,, Wikipedia) [ 27 ]
+p118
+aVBy contrast, our method can discover more hypernym u'\u005cu2013' hyponym relations with some loss of precision, thereby achieving a more than 29% F-score improvement
+p119
+aVOur previous work [ 8 ] applies a web mining method to discover the hypernyms of Chinese entities from multiple sources
+p120
+aVAs main components of ontologies, semantic hierarchies have been studied by many researchers
+p121
+aVHowever, the coverage is limited by the scope of the resources
+p122
+aV2) The vector offsets distribute in clusters well, and the word pairs which are close indeed represent similar relations, as shown in Figure 2
+p123
+aV2013 ) propose a distant supervision method to extract hypernyms for entities from multiple sources
+p124
+aVSemantic hierarchies are natural ways to organize knowledge
+p125
+aVThen, we employ the Skip-gram method (Section 3.2 ) to train word embeddings
+p126
+aVSome fine-grained relations exist in Wikipedia, but the coverage is limited
+p127
+aVTable 3 shows that the proposed method achieves a better recall and F-score than all of the previous methods do
+p128
+aVWe then ask two annotators to manually label the semantic hierarchies of the correct hypernyms
+p129
+aVThis method mines hypernyms of a given word w from multiple sources and returns a ranked list of the hypernyms
+p130
+aV2008 ) apply the same method to extract hypernyms of entities in order to improve the performance of a question answering system
+p131
+aV2013b ) observe that word embeddings preserve interesting linguistic regularities, capturing a considerable amount of syntactic/semantic relations
+p132
+aVWord embeddings, also known as distributed word representations, typically represent words with dense, low-dimensional and real-valued vectors
+p133
+aV2013a ) propose two log-linear models, namely the Skip-gram and CBOW model, to efficiently induce word embeddings
+p134
+aVThe training data for projection learning is collected from CilinE (Section 3.3.3
+p135
+aVTable 5 shows the performances of the best baseline method and our method on the out-of-CilinE data
+p136
+aVThe first two examples imply that a word can also be mapped to its hypernym by utilizing word embedding offsets
+p137
+aVGenerally speaking, the proposed method greatly improves the recall but damages the precision
+p138
+aVIf a circle has only two nodes, we remove the weakest path
+p139
+aVThey are the main components of ontologies or semantic thesauri [ 16 , 27 ]
+p140
+aVwhere N is the number of ( x , y ) word pairs in the training data
+p141
+aVHowever, broader semantics may not always infer broader contexts
+p142
+aVFor instance, u'\u005cu201c' 植物 ( plant ) u'\u005cu201d' and u'\u005cu201c' 毛茛科 ( Ranunculaceae ) u'\u005cu201d' are both hypernyms of the entity u'\u005cu201c' 乌头 ( aconit ), u'\u005cu201d' and u'\u005cu201c' 植物 ( plant ) u'\u005cu201d' is also a hypernym of u'\u005cu201c' 毛茛科 ( Ranunculaceae u'\u005cu201d' Given a list of hypernyms of an entity, our goal in the present work is to construct a semantic hierarchy of these hypernyms (right panel, Figure 1
+p143
+aV1) Mikolov u'\u005cu2019' s work has shown that the vector offsets imply a certain level of semantic relationship
+p144
+aVWe vary the numbers of the clusters both for the direct and indirect training word pairs
+p145
+aVWhen we combine the methods together, we get the correct hierarchy
+p146
+aVSuch hierarchies have good structures and high accuracy, but their coverage is limited to fine-grained concepts (e.g.,, u'\u005cu201c' Ranunculaceae u'\u005cu201d' is not included in WordNet
+p147
+aVHypernym-hyponym relations are asymmetric and transitive when words are unambiguous
+p148
+aV2013 ) show that the method works well when w is an entity, but not when w is a word with a common semantic concept
+p149
+aVLenci and Benotto ( 2012 ) propose another measure focusing on the contexts that hypernyms do not share with their hyponyms
+p150
+aVFor example, NP 1 is a hypernym of NP 2 in the lexical pattern u'\u005cu201c' such NP 1 as NP 2 u'\u005cu201d' Snow et al
+p151
+aVEach word is represented as a feature vector in which each dimension is the PMI value of the word and its context words
+p152
+aVIn our test data, about 62% word pairs are outside of CilinE
+p153
+aVMoreover, all of these methods do not use the word semantics effectively
+p154
+aVFinally we obtain the embedding vectors of 0.56 million words
+p155
+aVMikolov et al
+p156
+aVMikolov et al
+p157
+aVIn the same corpus, we apply the method M S u'\u005cu2062' n u'\u005cu2062' o u'\u005cu2062' w originally proposed by Snow et al
+p158
+aVThe experimental results show that our method achieves an F-score of 73.74% which significantly outperforms the previous state-of-the-art methods
+p159
+aVHowever, the coverage is still limited by the scope of Wikipedia
+p160
+aVFor evaluation, we collect the hypernyms for 418 entities, which are selected randomly from Baidubaike, following Fu et al
+p161
+aVRitter et al
+p162
+aVIn the construction of the famous ontology YAGO, Suchanek et al
+p163
+aVMoreover, the relations about animals are spatially close, but separate from the relations about people u'\u005cu2019' s occupations
+p164
+aVTheir work indicates that word embeddings preserve some interesting linguistic regularities, which might provide support for many applications
+p165
+aVThe output of their model is a list of hypernyms for a given enity (left panel, Figure 1
+p166
+aVHowever, their basic assumption that a hyponym can only be used in contexts where its hypernyms can be used and that a hypernym might be used in all of the contexts where its hyponyms are used may not always rational
+p167
+aVThese applications mainly utilize the representing power of word embeddings to alleviate the problem of data sparsity
+p168
+aVThe error statistics show that when the cosine similarities of word pairs are greater than 0.8, the recall is only 9.5%
+p169
+aV2010 ) and Lenci and Benotto ( 2012 ) , other researchers also propose directional distributional similarity methods [ 30 , 9 , 2 , 28 , 4 ]
+p170
+aVVarious models for learning word embeddings have been proposed, including neural net language models [ 1 , 17 , 15 ] and spectral models [ 6 ]
+p171
+aVTo the best of our knowledge, we are the first to apply word embeddings to this task
+p172
+aVFor evaluation, we manually annotate a dataset containing 418 Chinese entities and their hypernym hierarchies, which is the first dataset for this task as far as we know
+p173
+aVFu et al
+p174
+aVSnow et al
+p175
+aVThe kappa value is 0.96, which indicates a good strength of agreement
+p176
+aVWe select the hypernyms with scores over a threshold of each word in the test set for evaluation
+p177
+aVHowever, the offset from u'\u005cu201c' carpenter u'\u005cu201d' to u'\u005cu201c' laborer u'\u005cu201d' is distant from the one from u'\u005cu201c' gold fish u'\u005cu201d' to u'\u005cu201c' fish , u'\u005cu201d' indicating that hypernym u'\u005cu2013' hyponym relations should be more complicated than a single vector offset can represent
+p178
+aVThe results presented in Fu et al
+p179
+aVThis method assumes that frequent co-occurrence of a noun or noun phrase n in multiple sources with w indicate possibility of n being a hypernym of w
+p180
+aVKotlerman et al
+p181
+aV2013 ) , in which w represents a word, and h represents one of its hypernyms
+p182
+aVNote that, the combined method achieves a 4.43% recall improvement over M E u'\u005cu2062' m u'\u005cu2062' b , but the precision is almost unchanged
+p183
+aVResults are shown in Table 3
+p184
+aVWe say a word pair is outside of CilinE, as long as there is one word in the pair not existing in CilinE
+p185
+aVMore recently, Mikolov et al
+p186
+aV2013a ) and Mikolov et al
+p187
+aVHere, L denotes the list of hypernyms x , y and z denote the hypernyms in L
+p188
+aVA major challenge for this task is the automatic discovery of hypernym-hyponym relations
+p189
+aVWe assume that the hypernyms of an entity co-occur with it frequently
+p190
+aVM F u'\u005cu2062' u refers to our previous web mining method [ 8 ]
+p191
+aVEach word pair ( x , y ) is represented with their vector offsets y - x for clustering
+p192
+aVThe proposed method can be easily adapted to other languages
+p193
+aVIn our implementation, we apply this constraint by simply dividing the training data into two categories, namely, direct and indirect
+p194
+aVWe finally set the numbers of the clusters of direct and indirect to 20 and 5, respectively, where the best performances are achieved on the development data
+p195
+aVThis is a typical linear regression problem
+p196
+aVThe results are shown in Table 1
+p197
+aVThe main reason may be that there are relatively more introductory pages about entities than about common words in the Web
+p198
+aVBesides Kotlerman et al
+p199
+aVIn our experiment, we use the category taxonomy of Chinese Wikipedia 6 6 dumps.wikimedia.org/zhwiki/20131205/ to extend CilinE
+p200
+aVSpecifically, the input space is first segmented into several regions
+p201
+aVFor example, u'\u005cu201c' dog u'\u005cu201d' and u'\u005cu201c' canine u'\u005cu201d' are connected by a directed edge
+p202
+aVGiven two words x and y , we find cluster C k whose center is closest to the offset y - x , and obtain the corresponding projection u'\u005cu03a6' k
+p203
+aVM W u'\u005cu2062' i u'\u005cu2062' k u'\u005cu2062' i + C u'\u005cu2062' i u'\u005cu2062' l u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' E refers to the manually-built hierarchy extension method of Suchanek et al
+p204
+aV2008 ) link the categories in Wikipedia onto WordNet
+p205
+aVWord embeddings have been successfully applied in many applications, such as in sentiment analysis [ 26 ] , paraphrase detection [ 25 ] , chunking, and named entity recognition [ 29 , 5 ]
+p206
+aVFor example, for terms u'\u005cu201c' Obama u'\u005cu2019' and u'\u005cu201c' American people u'\u005cu201d' , it is hard to say whose contexts are broader
+p207
+aVInstead, we can learn an approximate u'\u005cu03a6' using Equation 1 on the training data, which minimizes the mean-squared error
+p208
+aVThe method exploiting the taxonomy in Wikipedia, M W u'\u005cu2062' i u'\u005cu2062' k u'\u005cu2062' i + C u'\u005cu2062' i u'\u005cu2062' l u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' E , achieves the highest precision but has a low recall
+p209
+aVWe randomly split the labeled data into 1/5 for development and 4/5 for testing (Table 2
+p210
+aVThen, data in these two categories are clustered separately
+p211
+aVIn addition to the works mentioned in Section 2 , we introduce another set of related studies in this section
+p212
+aVFor y to be considered a hypernym of x , one of the two conditions below must hold
+p213
+aVSome cases are shown in Figure 8
+p214
+aVOne possible solution may be adding more data of this kind to the training set
+p215
+aVEvans ( 2004 ) , Ortega-Mendoza et al
+p216
+aVWe re-implement two previous distributional methods M b u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' A u'\u005cu2062' p u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' c [ 11 ] and M i u'\u005cu2062' n u'\u005cu2062' v u'\u005cu2062' C u'\u005cu2062' L [ 12 ] in the Baidubaike corpus
+p217
+aVwhere N k is the amount of word pairs in the k t u'\u005cu2062' h cluster C k
+p218
+aVAfter maximizing the log-likelihood over the entire dataset using stochastic gradient descent (SGD), the embeddings are learned
+p219
+aVThen we learn a separate projection for each cluster, respectively (Equation 2
+p220
+aVBut for class names (e.g.,, singers in Hong Kong, tropical fruits) with wider range of meanings, this assumption may fail
+p221
+aVFor simplicity, we only report the performance of the former in the experiments
+p222
+aVIn this section, we first define the task formally
+p223
+aVWe can see that there is only one general relation u'\u005cu201c' 植物 ( plant ) u'\u005cu201d' u'\u005cu2192' u'\u005cud835' u'\u005cudc3b' u'\u005cu201c' 生物 ( organism ) u'\u005cu201d' existing in CilinE
+p224
+aVThe projection u'\u005cu03a6' k puts u'\u005cu03a6' k u'\u005cu2062' x close enough to y (Figure 4
+p225
+aVWe use SGD for optimization
+p226
+aVFor example, the relation x u'\u005cu2192' u'\u005cud835' u'\u005cudc3b' y is incorrectly identified by M E u'\u005cu2062' m u'\u005cu2062' b
+p227
+aVFor example, v ( king ) - v ( queen ) u'\u005cu2248' v ( man ) - v ( woman ) , where v u'\u005cu2062' ( w ) is the embedding of the word w
+p228
+aVIt works well for named entities
+p229
+aVThe combination of these two methods achieves a further 4.5% F-score improvement over M E u'\u005cu2062' m u'\u005cu2062' b + C u'\u005cu2062' i u'\u005cu2062' l u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' E
+p230
+aVOtherwise, ( x , y ) is classified into the indirect category
+p231
+aVWe analyze error cases after experiments
+p232
+aVThere exists another word z satisfying x u'\u005cu2192' u'\u005cud835' u'\u005cudc3b' z and z u'\u005cu2192' u'\u005cud835' u'\u005cudc3b' y
+p233
+aVWe use the k -means algorithm for clustering, where k is tuned on a development dataset
+p234
+aVThe only difference is that our predictions are multi-dimensional vectors instead of scalar values
+p235
+aVWhen the relation y u'\u005cu2192' u'\u005cud835' u'\u005cudc3b' z from M C u'\u005cu2062' i u'\u005cu2062' l u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' E is added, it will cause a new incorrect relation x u'\u005cu2192' u'\u005cud835' u'\u005cudc3b' z
+p236
+aVWhen they achieve the same precision, the recall of M E u'\u005cu2062' m u'\u005cu2062' b + C u'\u005cu2062' i u'\u005cu2062' l u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' E is higher
+p237
+aVThis kind of error accounted for about 10.9% among all the errors in our test set
+p238
+aVIt can significantly ( p 0.01 ) improve the F-score over the state-of-the-art method M W u'\u005cu2062' i u'\u005cu2062' k u'\u005cu2062' i + C u'\u005cu2062' i u'\u005cu2062' l u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' E
+p239
+aVFigure 7 shows that M E u'\u005cu2062' m u'\u005cu2062' b + C u'\u005cu2062' i u'\u005cu2062' l u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' E achieves a higher precision than M W u'\u005cu2062' i u'\u005cu2062' k u'\u005cu2062' i + C u'\u005cu2062' i u'\u005cu2062' l u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' E when their recalls are the same
+p240
+aVThis work was supported by National Natural Science Foundation of China (NSFC) via grant 61133012, 61273321 and the National 863 Leading Technology Research Project via grant 2012AA011102
+p241
+aVWe also thank Xinwei Geng and Hongbo Cai for their help in the experiments
+p242
+aVThe F-score is further improved from 73.74% to 76.29%
+p243
+aV2008 ) can further improve F-score to 80.29%
+p244
+aVFormally, the euclidean distance between u'\u005cu03a6' k u'\u005cu2062' x and y d u'\u005cu2062' ( u'\u005cu03a6' k u'\u005cu2062' x , y ) must be less than a threshold u'\u005cu0394'
+p245
+aVu'\u005cu2200' x , y u'\u005cu2208' L x u'\u005cu2192' u'\u005cud835' u'\u005cudc3b' y u'\u005cu21d2' � ( y u'\u005cu2192' u'\u005cud835' u'\u005cudc3b' x
+p246
+aVM E u'\u005cu2062' m u'\u005cu2062' b and M C u'\u005cu2062' i u'\u005cu2062' l u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' E can also be combined
+p247
+aVHowever, it is not always rational
+p248
+aV2 2 Principal Component Analysis (PCA) is applied for dimensionality reduction
+p249
+aV2005
+p250
+aVCondition 2
+p251
+aV2013
+p252
+aVCondition 1
+p253
+aV2008
+p254
+aVThe reasons are twofold
+p255
+aVSpecial thanks to Shiqi Zhao, Zhenghua Li, Wei Song and the anonymous reviewers for insightful comments and suggestions
+p256
+a.

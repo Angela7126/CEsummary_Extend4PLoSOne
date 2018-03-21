@@ -1,0 +1,585 @@
+(lp0
+VFollowing this intuition, we propose to model the distribution over the latent bracketing states and words for each tag sequence u'\u005cud835' u'\u005cudc99' as a latent tree graphical model, which encodes conditional independences among the words given the latent states
+p1
+aVAs we describe below, given the tree structure, the additive tree metric property allows us to compute u'\u005cu201c' backwards u'\u005cu201d' the distances among the latent variables as a function of the distances among the observed variables
+p2
+aVUnlike in phylogenetics and graphical models, where a single latent tree is constructed for all the data, in our case, each part of speech sequence is associated with its own parse tree
+p3
+aVIn particular we leverage the concept of additive tree metrics [ Buneman1971 , Buneman1974 ] in phylogenetics and machine learning that can create a special distance metric among the observed variables as a function of the underlying spectral dependencies [ Choi et al.2011 , Song et al.2011 , Anandkumar et al.2011 , Ishteva et al.2012 ]
+p4
+aVTherefore, the procedure to find a bracketing for a given POS tag u'\u005cud835' u'\u005cudc99' is to first estimate the distance matrix sub-block u'\u005cud835' u'\u005cudc6b' ^ W u'\u005cu2062' W from raw text data (see § 3.4 ), and then solve the optimization problem arg u'\u005cu2062' min u u'\u005cu2208' u'\u005cud835' u'\u005cudcb0' u'\u005cu2061' c ^ u'\u005cu2062' ( u ) using a variant of the Eisner-Satta algorithm where c ^ u'\u005cu2062' ( u ) is identical to c u'\u005cu2062' ( u ) in Eq
+p5
+aVMoreover, we show that it is desirable to learn the u'\u005cu201c' minimal u'\u005cu201d' latent tree based on the tree metric ( u'\u005cu201c' minimum evolution u'\u005cu201d' in phylogenetics
+p6
+aVIntuitively, however, latent tree models encode low rank dependencies among the observed variables permitting the development of u'\u005cu201c' spectral u'\u005cu201d' methods that can lead to provably correct solutions
+p7
+aVThus, the sample complexity of our approach depends on the dimensionality of the latent and observed states ( m and p ), the underlying singular values of the cross-covariance matrices ( u'\u005cu03a3' u'\u005cu2217' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) ) and the difference in the cost of the true tree compared to the cost of the incorrect trees ( u'\u005cu25b3' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' )
+p8
+aVDecide on u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) u'\u005cu2208' u'\u005cud835' u'\u005cudcb0' , the undirected latent tree that u'\u005cud835' u'\u005cudc99' maps to
+p9
+aVOur main theoretical guarantee is that Algorithm 1 will recover the correct tree u u'\u005cu2208' u'\u005cud835' u'\u005cudcb0' with high probability, if the given top bracket is correct and if we obtain enough examples ( u'\u005cud835' u'\u005cudc98' ( i ) , u'\u005cud835' u'\u005cudc99' ( i ) ) from the model in §2
+p10
+aV[ M ] × [ M ] u'\u005cu2192' u'\u005cu211d' is an additive tree metric [ Erdõs et al.1999 ] for the undirected tree u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' ) if it is a distance metric, 2 2 This means that it satisfies d u'\u005cu2062' ( i , j ) = 0 if and only if i = j , the triangle inequality and is also symmetric and furthermore, u'\u005cu2200' i , j u'\u005cu2208' [ M ] the following relation holds
+p11
+aVAdditive tree metrics can be leveraged by u'\u005cu201c' meta-algorithms u'\u005cu201d' such as neighbor-joining [ Saitou and Nei1987 ] and recursive grouping [ Choi et al.2011 ] to provide consistent learning algorithms for latent trees
+p12
+aVWe can then proceed by learning how to map a POS sequence u'\u005cud835' u'\u005cudc99' to a tree t u'\u005cu2208' u'\u005cud835' u'\u005cudcaf' (through u u'\u005cu2208' u'\u005cud835' u'\u005cudcb0' ) by focusing only on examples in u'\u005cud835' u'\u005cudc9f' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' )
+p13
+aVDefine u ^ as the estimated tree for tag sequence u'\u005cud835' u'\u005cudc31' and u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' ) as the correct tree
+p14
+aVGenerating a bracketing via an undirected tree enables us to build on existing methods for structure learning of latent-tree graphical models [ Choi et al.2011 , Anandkumar et al.2011 ]
+p15
+aVInstead of computing this block by computing the empirical covariance matrix for positions ( j , k ) in the data u'\u005cud835' u'\u005cudc9f' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) , the algorithm uses all of the pairs ( j u'\u005cu2032' , k u'\u005cu2032' ) from all of N training examples
+p16
+aVHowever, if the underlying tree structure is known, then Definition 1 can be leveraged to compute u'\u005cud835' u'\u005cudc6b' Z u'\u005cu2062' Z and u'\u005cud835' u'\u005cudc6b' Z u'\u005cu2062' W as we show below
+p17
+aVThis undirected tree is converted into a directed tree by applying h dir
+p18
+aVIf all the variables were observed, then the Chow-Liu algorithm [ Chow and Liu1968 ] could be used to find the most likely tree structure u u'\u005cu2208' u'\u005cud835' u'\u005cudcb0'
+p19
+aVGiven the fact that the distance between a pair of nodes is a function of the random variables they represent (according to the true model), only u'\u005cud835' u'\u005cudc6b' W u'\u005cu2062' W can be empirically estimated from data
+p20
+aVWe associate each sentence with an undirected latent tree graphical model, which is a tree consisting of both observed variables (corresponding to the words in the sentence) and an additional set of latent variables that are unobserved in the data
+p21
+aVHowever, due to the presence of latent variables, structure learning of latent trees is substantially more complicated than in observed models
+p22
+aVFurthermore, Assumption 1 makes it explicit that regardless of the size of p , the relationships among the variables in the latent tree are restricted to be of rank m , and are thus low rank since p m
+p23
+aVWe therefore restrict the data used with CCM to sentences of length u'\u005cu2264' u'\u005cu2113' , where u'\u005cu2113' is the maximal sentence length being evaluated
+p24
+aVThis is because the computation of the other sub-blocks of the distance matrix only depend on the partitions of the nodes shown in Figure 3 into A , B , G , and H , and not on the entire tree structure
+p25
+aVThis means our decoder first identifies (given a POS sequence) an undirected tree, and then orients it by applying h dir on the resulting tree (see below
+p26
+aVMost existing solutions treat the problem of unsupervised parsing by assuming a generative process over parse trees e.g., probabilistic context free grammars [ Jelinek et al.1992 ] , and the constituent context model [ Klein and Manning2002 ]
+p27
+aVThe orientation of the tree is determined by a direction mapping h dir u'\u005cu2062' ( u ) , which is fixed during learning and decoding
+p28
+aVFor our method, test set results can be obtained by using Algorithm 3.3 (except the distances are computed using the training data
+p29
+aVThus, for all results, we use universal tags for our method and the original POS tags for CCM
+p30
+aVIf w i and z i were discrete, represented as binary vectors, the above assumption would correspond to requiring all conditional probability tables in the latent tree to have rank m
+p31
+aVIt marks the edge e i , j that splits the tree according to the top bracket as the u'\u005cu201c' root edge u'\u005cu201d' (marked in red in Figure 1 (center
+p32
+aVThus, strong experimental results are often achieved by initialization techniques [ Klein and Manning2002 , Gimpel and Smith2012 ] , incremental dataset use [ Spitkovsky et al.2010a ] and other specialized techniques to avoid local optima such as count transforms [ Spitkovsky et al.2013 ]
+p33
+aVIt has been shown [ Rzhetsky and Nei1993 ] that for any additive tree metric, u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) can be recovered by solving arg u'\u005cu2062' min u u'\u005cu2208' u'\u005cud835' u'\u005cudcb0' u'\u005cu2061' c u'\u005cu2062' ( u ) for c u'\u005cu2062' ( u )
+p34
+aVwhere path u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' ) u'\u005cu2062' ( i , j ) is the set of all the edges in the (undirected) path from i to j in the tree u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' )
+p35
+aVIf Assumption 1 holds then, d spectral is an additive tree metric (Definition 1
+p36
+aVThe local syntactic context acts as an u'\u005cu201c' anchor, u'\u005cu201d' which enhances or replaces a word index in a sentence with local syntactic context
+p37
+aVAs we discussed in § 3.1 all elements of the distance matrix are functions of observable quantities if the underlying tree u is known
+p38
+aVIf no verb exists, return ( [ 0 , 1 ] , [ 1 , u'\u005cu2113' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) ] )
+p39
+aVNN, CC, and BC indicate the performance of our method for neural embeddings, CCA embeddings, and Brown clustering respectively, using the heuristic for h dir described in § 4.1
+p40
+aVWe could thus conclude that w 2 and w 3 should be closer in the parse tree than w 1 and w 2 , giving us the correct structure
+p41
+aVFirst an undirected u u'\u005cu2208' u'\u005cud835' u'\u005cudcb0' is generated (only as a function of the POS tags), and then u is mapped to a bracketing using a direction mapping h dir
+p42
+aVWe also tried letting CCM choose different hyperparameters for different sentence lengths based on dev-set likelihood, but this gave worse results than holding them fixed
+p43
+aVThe resulting t is a binary bracketing parse tree
+p44
+aVIf the true distance metric is known, with respect to the true distribution that generates the words in a sentence, then u can be fully recovered by optimizing the cost function c u'\u005cu2062' ( u
+p45
+aVHowever, for German and Chinese note that the u'\u005cu201c' BC-O u'\u005cu201d' performs substantially better, suggesting that if we had a better top bracket heuristic our performance would increase
+p46
+aVWe now address the data sparsity problem, in particular that u'\u005cud835' u'\u005cudc9f' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) can be very small, and therefore estimating d for each POS sequence separately can be problematic
+p47
+aVAs one can see, for some restarts, CCM obtains accuracies lower than 30 u'\u005cu2062' % due to local optima
+p48
+aVFor example, as we see in § 3.2 we will define the distance d u'\u005cu2062' ( i , j ) to be a function of the covariance matrix u'\u005cud835' u'\u005cudd3c' [ v i v j u'\u005cu22a4' u ( u'\u005cud835' u'\u005cudc99' ) , u'\u005cu0398' ( u'\u005cud835' u'\u005cudc99' ) ]
+p49
+aVThus if v i and v j are both observed variables, the distance can be directly computed from the data
+p50
+aVFor CCM, we found that if the full dataset (all sentence lengths) is used in training, then performance degrades when evaluating on sentences of length u'\u005cu2264' 10
+p51
+aVLearning then reduces to finding a set of parameters that are estimated by identifying a local maximum of an objective function such as the likelihood [ Klein and Manning2002 ] or a variant of it [ Smith and Eisner2005 , Cohen and Smith2009 , Headden et al.2009 , Spitkovsky et al.2010b , Gillenwater et al.2010 , Golland et al.2012 ]
+p52
+aVIt then creates t from u by directing the tree outward from e i , j as shown in Figure 1 (center
+p53
+aVThe word embeddings are used during the learning process, but the final decoder that the learning algorithm outputs maps a POS tag sequence u'\u005cud835' u'\u005cudc99' to a parse tree
+p54
+aVThe results in Table 1 indicate that the vanilla setting is the best for CCM
+p55
+aVWe therefore use the full data for our method for all lengths
+p56
+aVOnce the empirical estimates for the covariance matrices are obtained, a variant of the Eisner-Satta algorithm is used, as mentioned in § 3.3
+p57
+aV§3.1 and §3.2 largely describe existing background on additive tree metrics and latent tree structure learning, while §3.3 and §3.4 discuss novel aspects that are unique to our problem
+p58
+aVOur method does not suffer from local optima and thus does not require careful initialization
+p59
+aVThis leads to a severe data sparsity problem even for moderately long sentences
+p60
+aVThen, latent states are generated for each bracket, and finally, the latent states at the yield of the bracketing parse tree generate the words of the sentence (in the form of embeddings
+p61
+aVWe didn u'\u005cu2019' t have neural embeddings for German and Chinese (which worked best for English) and thus only used Brown cluster embeddings
+p62
+aVFrom here, we use d to denote d spectral , since that is the metric we use for our learning algorithm
+p63
+aVWe then showed that we can define a distance metric between nodes in the undirected tree, such that minimizing it leads to a recovery of u
+p64
+aVThe model assumes a factorization according to a latent-variable tree
+p65
+aVUnfortunately, finding the global maximum for these objective functions is usually intractable [ Cohen and Smith2012 ] which often leads to severe local optima problems (but see Gormley and Eisner, 2013
+p66
+aVwhere u'\u005cu039d' u'\u005cud835' u'\u005cudc99' u'\u005cu2062' ( u'\u005cu0393' ) , defined in the supplementary, is a function of the underlying distribution over the tag sequences u'\u005cud835' u'\u005cudc99' and the kernel bandwidth u'\u005cu0393'
+p67
+aVThis does not happen with our algorithm, which manages to leverage lexical information whenever more data is available
+p68
+aVFigure 4 shows a histogram of the performance level for sentences of length u'\u005cu2264' 10 for different random initializers
+p69
+aVOur approach is not directly comparable to Seginer u'\u005cu2019' s because he uses punctuation, while we use POS tags
+p70
+aVCognitively, it is more plausible to assume that children obtain only terminal strings of parse trees and not the actual parse trees
+p71
+aVAs indicated in the above section, we restrict the set of undirected trees to be those such that after applying h dir the resulting t is projective i.e., there are no crossing brackets
+p72
+aVHowever, if we restrict u to be in u'\u005cud835' u'\u005cudcb0' , as we do in the above, then maximizing c ^ u'\u005cu2062' ( u ) over u'\u005cud835' u'\u005cudcb0' can be solved using the bilexical parsing algorithm from Eisner and Satta1999
+p73
+aVThe latent variables can incorporate various linguistic properties, such as head information, valence of dependency being generated, and so on
+p74
+aVNote that the metric d we use in defining c u'\u005cu2062' ( u ) is based on the expectations from the true distribution
+p75
+aVIt then follows that the other elements of the distance matrix can be computed based on Definition 1
+p76
+aVFor CCM, we also experimented with the original parts of speech, universal tags (CCM-U), the cross-product of the original parts of speech with the Brown clusters (CCM-OB), and the cross-product of the universal tags with the Brown clusters (CCM-UB
+p77
+aVIn practice, the true distribution is unknown, and therefore we use an approximation for the distance metric d ^
+p78
+aVIn addition, since u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) is assumed to be known from context, we denote d u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) u'\u005cu2062' ( i , j ) just by d u'\u005cu2062' ( i , j )
+p79
+aVThis information is expected to be learned automatically from data
+p80
+aVLet u'\u005cu03a3' u'\u005cu2217' u'\u005cu2062' ( x ) := min j , k u'\u005cu2208' u'\u005cu2113' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) u'\u005cu2061' min u'\u005cu2061' ( u'\u005cu03a3' u'\u005cud835' u'\u005cudc99' u'\u005cu2062' ( j , k ) ( m ) )
+p81
+aVThis means the unsupervised setting is a better model for studying language acquisition
+p82
+aVEmpirically, one can obtain a more robust empirical estimate d ^ u'\u005cu2062' ( i , j ) by averaging over all valid choices of a u'\u005cu2217' , b u'\u005cu2217' in Eq
+p83
+aVAs mentioned earlier, each w i can be an arbitrary feature vector
+p84
+aVDenote u'\u005cu03a3' u'\u005cud835' u'\u005cudc99' u'\u005cu2062' ( j , k ) ( r ) as the r t u'\u005cu2062' h singular value of u'\u005cud835' u'\u005cudeba' u'\u005cud835' u'\u005cudc99' u'\u005cu2062' ( j , k
+p85
+aVThen using path additivity (Definition 1 ), it can be shown that for any a u'\u005cu2217' u'\u005cu2208' A u'\u005cu2217' , b u'\u005cu2217' u'\u005cu2208' B u'\u005cu2217' it holds that
+p86
+aVOur learning algorithm focuses on recovering the undirected tree based for the generative model that was described above
+p87
+aVThis undirected latent tree is then directed via a direction mapping to give the final constituent parse
+p88
+aVOur algorithm requires the top bracket in order to direct the latent tree
+p89
+aVOur generative model deterministically maps a POS sequence to a bracketing via an undirected latent-variable tree
+p90
+aVThe OSCCA embeddings behaved better, so we only report its results
+p91
+aVWe provide theoretical guarantees on the recovery of the correct underlying latent tree and characterize the associated sample complexity under our technique
+p92
+aVDefine u'\u005cud835' u'\u005cudcb0' to be the set of undirected latent trees where all internal nodes have degree exactly 3 (i.e., they correspond to binary bracketing), and in addition h dir u'\u005cu2062' ( u ) for any u u'\u005cu2208' u'\u005cud835' u'\u005cudcb0' is projective (explained in the h dir section
+p93
+aVGenerate a tuple u'\u005cud835' u'\u005cudc97' = ( w 1 , u'\u005cu2026' , w u'\u005cu2113' , z 1 , u'\u005cu2026' , z H ) where w i u'\u005cu2208' u'\u005cu211d' p , z j u'\u005cu2208' u'\u005cu211d' m according to Eq
+p94
+aVIn this section, we detail the learning setting and a conditional tree model we learn the structure for
+p95
+aVIn our learning algorithm, we assume that examples of the form ( u'\u005cud835' u'\u005cudc98' ( i ) , u'\u005cud835' u'\u005cudc99' ( i ) ) for i u'\u005cu2208' [ N ] = { 1 , u'\u005cu2026' , N } are given, and the goal is to predict a bracketing parse tree for each of these examples
+p96
+aVFrom the engineering perspective, training data for unsupervised parsing exists in abundance (i.e., sentences and part-of-speech tags), and is much cheaper than the syntactically annotated data required for supervised training
+p97
+aVThe Chow-Liu algorithm essentially computes the distances among all pairs of variables (the negative of the mutual information) and then finds the minimum cost tree
+p98
+aVwhere u'\u005cu03a0' u'\u005cud835' u'\u005cudc99' u'\u005cu2062' ( u'\u005cu22c5' ) returns the parent node index of the argument in the latent tree corresponding to tag sequence u'\u005cud835' u'\u005cudc99'
+p99
+aVWhat is needed is a u'\u005cu201c' special u'\u005cu201d' distance function that allows us to reverse engineer the distances among the latent variables given the distances among the observed variables
+p100
+aVThe learning algorithm for finding the latent structure from a set of examples ( u'\u005cud835' u'\u005cudc98' ( i ) , u'\u005cud835' u'\u005cudc99' ( i ) ) , i u'\u005cu2208' [ N ]
+p101
+aVThe POS tags are generated from some distribution, followed by a deterministic generation of the bracketing parse tree
+p102
+aVFurthermore, let v u'\u005cu2208' u'\u005cud835' u'\u005cudcb1' refer to a node in the undirected tree (either observed or latent
+p103
+aVOn the other hand, recently proposed spectral methods approach the problem via restriction of the PCFG model [ Hsu et al.2012 ] or matrix completion [ Bailly et al.2013 ]
+p104
+aVMore specifically, we approach unsupervised constituent parsing from the perspective of structure learning as opposed to parameter learning
+p105
+aV3 3 This data sparsity problem is quite severe u'\u005cu2013' for example, the Penn treebank [ Marcus et al.1993 ] has a total number of 43,498 sentences, with 42,246 unique POS tag sequences, averaging u'\u005cud835' u'\u005cudc9f' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' to be 1.04
+p106
+aVLet u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) be the true undirected tree of sentence u'\u005cud835' u'\u005cudc99' and assume the nodes u'\u005cud835' u'\u005cudcb1' to be indexed by [ M ] = { 1 , u'\u005cu2026' , M } such that M u'\u005cud835' u'\u005cudcb1'
+p107
+aVHowever, only the word-word sub-block u'\u005cud835' u'\u005cudc6b' W u'\u005cu2062' W can be directly estimated from the data without knowledge of the tree structure
+p108
+aVWhile ideally we would want to use the word information in decoding as well, much of the syntax of a sentence is determined by the POS tags, and relatively high level of accuracy can be achieved by learning, for example, a supervised parser from POS tag sequences
+p109
+aVInstead we propose a method that is provably consistent and returns a tree that can be mapped to a bracketing using h dir
+p110
+aVMore formally, an anchor is a function G that maps a word index j and a sequence of POS tags u'\u005cud835' u'\u005cudc99' to a local context G u'\u005cu2062' ( j , u'\u005cud835' u'\u005cudc99'
+p111
+aVIt averages the empirical covariance matrices from these contexts using a kernel weight, which gives a similarity measure for the position ( j , k ) in u'\u005cud835' u'\u005cudc99' ( i ) and ( j u'\u005cu2032' , k u'\u005cu2032' ) in another example u'\u005cud835' u'\u005cudc99' ( i u'\u005cu2032' u'\u005cu0393' is the kernel u'\u005cu201c' bandwidth u'\u005cu201d' , a user-specified parameter that controls how inclusive the kernel will be with respect to examples in u'\u005cud835' u'\u005cudc9f' (see § 4.1 for a concrete example
+p112
+aVFor English, more sophisticated word embeddings are easily obtainable, and we experiment with neural word embeddings Turian et al.2010 of length 50
+p113
+aVThus, while Seginer u'\u005cu2019' s method performs better on English, our approach performs 2-3 points better on German, and both methods give similar performance on Chinese
+p114
+aVHowever, the choice of verb ( w 1 ) is mostly independent of the determiner
+p115
+aVThis distance metric can be computed based only on the text, without needing to identify the latent information (§ 3.2
+p116
+aVJust like our decoder, our model assumes that the bracketing of a given sentence is a function of its POS tags
+p117
+aVThis is the key idea behind additive tree metrics that are the basis of our approach
+p118
+aVFor English, while CCM behaves better for short sentences ( u'\u005cu2113' u'\u005cu2264' 10 ), our algorithm is more robust with longer sentences
+p119
+aVWe find that the neural embeddings modestly outperform the CCA and Brown cluster embeddings
+p120
+aVDirectly attempting to maximize the likelihood unfortunately results in an intractable optimization problem and greedy heuristics are often employed [ Harmeling and Williams2011 ]
+p121
+aVSimilar assumptions are made with spectral parameter learning methods e.g., Hsu et al.2009 , Bailly et al.2009 , Parikh et al.2011 , and Cohen et al.2012
+p122
+aVAs implied by the above definition of h dir , selecting which edge is the root can be interpreted as determining the top bracket of the constituent parse
+p123
+aVTo give some motivation to our solution, consider estimating the covariance matrix u'\u005cud835' u'\u005cudeba' u'\u005cud835' u'\u005cudc99' u'\u005cu2062' ( 1 , 2 ) for the tag sequence u'\u005cud835' u'\u005cudc99' = ( u'\u005cud835' u'\u005cude73' u'\u005cud835' u'\u005cude83' u'\u005cud835' u'\u005cudff7' , u'\u005cud835' u'\u005cude7d' u'\u005cud835' u'\u005cude7d' u'\u005cud835' u'\u005cudff8' , u'\u005cud835' u'\u005cude85' u'\u005cud835' u'\u005cude71' u'\u005cud835' u'\u005cude73' u'\u005cud835' u'\u005cudff9' , u'\u005cud835' u'\u005cude73' u'\u005cud835' u'\u005cude83' u'\u005cud835' u'\u005cudffa' , u'\u005cud835' u'\u005cude7d' u'\u005cud835' u'\u005cude7d' u'\u005cud835' u'\u005cudffb' u'\u005cud835' u'\u005cudc9f' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) may be insufficient for an accurate empirical estimate
+p124
+aVThese novel perspectives offer strong theoretical guarantees but are not designed to achieve competitive empirical results
+p125
+aVWhile this criterion is in general NP-hard [ Desper and Gascuel2005 ] , for projective trees we find that a bilexical parsing algorithm can be used to find an exact solution efficiently [ Eisner and Satta1999 ]
+p126
+aVIn our framework, parsing reduces to finding the best latent structure for a given sentence
+p127
+aVOur algorithm performs favorably to Klein and Manning u'\u005cu2019' s (2002) constituent-context model (CCM), without the need for careful initialization
+p128
+aVFor both methods we chose the best parameters for sentences of length u'\u005cu2113' u'\u005cu2264' 10 on the English Penn Treebank (training) and used this set for all other experiments
+p129
+aVWe first defined a generative model that describes how a sentence, its sequence of POS tags, and its bracketing is generated (§ 2.3
+p130
+aVThe first step in the algorithm is to estimate the covariance matrix block u'\u005cud835' u'\u005cudeba' ^ u'\u005cud835' u'\u005cudc99' ( i ) u'\u005cu2062' ( j , k ) for each training example u'\u005cud835' u'\u005cudc99' ( i ) and each pair of preterminal positions ( j , k ) in u'\u005cud835' u'\u005cudc99' ( i
+p131
+aVRecall that our training data contains word phrases that have the tag sequence u'\u005cud835' u'\u005cudc99' e.g., u'\u005cud835' u'\u005cudc98' ( 1 ) = ( u'\u005cud835' u'\u005cude91' u'\u005cud835' u'\u005cude92' u'\u005cud835' u'\u005cude9d' , u'\u005cud835' u'\u005cude9d' u'\u005cud835' u'\u005cude91' u'\u005cud835' u'\u005cude8e' , u'\u005cud835' u'\u005cude8b' u'\u005cud835' u'\u005cude8a' u'\u005cud835' u'\u005cude95' u'\u005cud835' u'\u005cude95' ) , u'\u005cud835' u'\u005cudc98' ( 2 ) = ( u'\u005cud835' u'\u005cude8a' u'\u005cud835' u'\u005cude9d' u'\u005cud835' u'\u005cude8e' , u'\u005cud835' u'\u005cude8a' u'\u005cud835' u'\u005cude97' , u'\u005cud835' u'\u005cude8a' u'\u005cud835' u'\u005cude99' u'\u005cud835' u'\u005cude99' u'\u005cud835' u'\u005cude95' u'\u005cud835' u'\u005cude8e' )
+p132
+aVIn particular, it becomes challenging to compute the distances among pairs of latent variables
+p133
+aVHowever, the fact that the z i are latent variables makes this strategy substantially more complicated
+p134
+aVMoreover, the metrics we construct are such that they are tree additive , defined below
+p135
+aVWe assume the existence of a distance function that allows us to compute distances between pairs of nodes
+p136
+aVFor all languages we use Brown clustering [ Brown et al.1992 ] to construct a log u'\u005cu2061' ( C ) + C feature vector where the first log u'\u005cu2061' ( C ) elements indicate which mergable cluster the word belongs to, and the last C elements indicate the cluster identity
+p137
+aV1 1 At this point, u'\u005cu03a0' refers to an arbitrary direction of the undirected tree u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99'
+p138
+aVIn addition, we also analyze CCM u'\u005cu2019' s sensitivity to initialization, and compare our results to Seginer u'\u005cu2019' s algorithm [ Seginer2007 ]
+p139
+aVFor English, the disparity between NN-O (oracle top bracket) and NN (heuristic top bracket) is rather low suggesting that our top bracket heuristic is rather effective
+p140
+aVThe results for German are similar, except CCM breaks down earlier at sentences of u'\u005cu2113' u'\u005cu2264' 30
+p141
+aVTwo candidate constituent parse structures are shown in Figure 2 and the correct one is boxed in green (the other in red
+p142
+aVThe observation that the covariance matrices depend on local syntactic context is the main driving force behind our solution
+p143
+aV6 NP-hard [ Desper and Gascuel2005 ] if u is allowed to be an arbitrary undirected tree
+p144
+aVLet u'\u005cud835' u'\u005cudcb1' := { w 1 , u'\u005cu2026' , w u'\u005cu2113' , z 1 , u'\u005cu2026' , z H } , with w i representing the word embeddings, and z i representing the latent states of the bracketings
+p145
+aVAlthough u'\u005cud835' u'\u005cudc99' and u'\u005cud835' u'\u005cudc99' u'\u005cu2032' are not identical, it is likely that u'\u005cud835' u'\u005cudeba' u'\u005cud835' u'\u005cudc99' u'\u005cu2032' u'\u005cu2062' ( 2 , 3 ) is similar to u'\u005cud835' u'\u005cudeba' u'\u005cud835' u'\u005cudc99' u'\u005cu2062' ( 1 , 2 ) because the determiner and the noun appear in similar syntactic context u'\u005cud835' u'\u005cudeba' u'\u005cud835' u'\u005cudc99' u'\u005cu2032' u'\u005cu2062' ( 5 , 7 ) also may be somewhat similar, but u'\u005cud835' u'\u005cudeba' u'\u005cud835' u'\u005cudc99' u'\u005cu2032' u'\u005cu2062' ( 2 , 7 ) should not be very similar to u'\u005cud835' u'\u005cudeba' u'\u005cud835' u'\u005cudc99' u'\u005cu2062' ( 1 , 2 ) because the noun and the determiner appear in a different syntactic context
+p146
+aVLet A denote the set of nodes that are closer to a than i and similarly let B denote the set of nodes that are closer to b than i
+p147
+aVFor German and Chinese we use the Negra treebank and the Chinese treebank respectively and the first 80% of the sentences are used for training and the last 20% for testing
+p148
+aVSolutions to the problem of grammar induction have been long sought after since the early days of computational linguistics and are interesting both from cognitive and engineering perspectives
+p149
+aVAssume without loss of generality that j is the leaf and i is an internal latent node
+p150
+aVInformally, the latent state z corresponding to the ( w 2 , w 3 ) bracket would store information about the plurality of z , the key to the dependence between w 2 and w 3
+p151
+aVThe vector is an embedding of the word in some space, chosen from a fixed dictionary that maps word types to u'\u005cu211d' p
+p152
+aVThe EM algorithm with the CCM requires very careful initialization, which is described in Klein and Manning2002
+p153
+aVWe also experimented with the original POS tags and the universal POS tags of Petrov et al.2011
+p154
+aVTo get an intuition about the algorithm, consider a partition of the set of examples u'\u005cud835' u'\u005cudc9f' into u'\u005cud835' u'\u005cudc9f' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) = { ( u'\u005cud835' u'\u005cudc98' ( i ) , u'\u005cud835' u'\u005cudc99' ( i ) ) u'\u005cu2208' u'\u005cud835' u'\u005cudc9f' u'\u005cud835' u'\u005cudc99' ( i ) = u'\u005cud835' u'\u005cudc99' } , i.e., each section in the partition has an identical sequence of part of speech tags
+p155
+aVEmpirically we evaluate our method on data in English, German and Chinese
+p156
+aVOur method requires two parameters, the latent dimension m and the bandwidth u'\u005cu0393'
+p157
+aVAssume for this section u'\u005cud835' u'\u005cudc9f' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' is large (we address the data sparsity issue in § 3.4
+p158
+aVThe full learning algorithm is given in Figure 3.3
+p159
+aVIt first chooses a top bracket ( [ 1 , R - 1 ] , [ R , u'\u005cu2113' ] ) where R is the mid-point of the bracket and u'\u005cu2113' is the length of the sentence
+p160
+aVThen, the covariance matrices u'\u005cud835' u'\u005cudeba' u'\u005cud835' u'\u005cudc99' are estimated using kernel smoothing [ Hastie et al.2009 ] , where the smoother tests similarity between the different anchors G u'\u005cu2062' ( j , u'\u005cud835' u'\u005cudc99' )
+p161
+aVThis is especially noticeable for length u'\u005cu2264' 40 , where CCM breaks down and our algorithm is more stable
+p162
+aVIntuitively, the words in the above phrases exhibit dependencies that can reveal the parse structure
+p163
+aVNote that the right-hand side only depends on distances between observed random variables
+p164
+aVWe primarily compare our method to the constituent-context model (CCM) of Klein and Manning2002
+p165
+aVNote that CCM performs very poorly, obtaining only around 20 u'\u005cu2062' % accuracy even for sentences of u'\u005cu2113' u'\u005cu2264' 20
+p166
+aVIf, on the other hand, random initialization is used, the variance of the performance of the CCM varies greatly
+p167
+aVThe latent states are represented by vectors z u'\u005cu2208' u'\u005cu211d' m where m p
+p168
+aVIn § 4.1 , we discuss an effective heuristic to find the top bracket without supervision
+p169
+aVFor Chinese, our method substantially outperforms CCM for all lengths
+p170
+aVNote that the kernel is not binary, as opposed to the theoretical kernel in the supplementary material
+p171
+aVWe believe that our approach substitutes the need for fine-grained POS tags with the lexical information
+p172
+aVOur goal is to recover t u'\u005cu2208' u'\u005cud835' u'\u005cudcaf' for tag sequence u'\u005cud835' u'\u005cudc99' using the data u'\u005cud835' u'\u005cudc9f' = [ ( u'\u005cud835' u'\u005cudc98' ( i ) , u'\u005cud835' u'\u005cudc99' ( i ) ) ] i = 1 N
+p173
+aVWe first show how to compute d u'\u005cu2062' ( i , j ) for all i , j such that i and j are adjacent to each other in u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) , based only on observed nodes
+p174
+aVwhere u'\u005cu2130' u is the set of pairs of nodes which are adjacent to each other in u and d u'\u005cu2062' ( i , j ) is computed using Eq
+p175
+aVNote that the matrices u'\u005cud835' u'\u005cudc68' and u'\u005cud835' u'\u005cudc6a' are a direct function of u'\u005cu0398' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) , but we do not specify a model family for u'\u005cu0398' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99'
+p176
+aVFind u ^ ( i ) = arg u'\u005cu2062' min u u'\u005cu2208' u'\u005cud835' u'\u005cudcb0' u'\u005cu2061' c ^ u'\u005cu2062' ( u ) , and for the i th example, return the structure h dir u'\u005cu2062' ( u ^ ( i ) )
+p177
+aVFor each i u'\u005cu2208' [ N ] , j , k u'\u005cu2208' u'\u005cu2113' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ( i ) ) there is a (uncentered) covariance matrix u'\u005cud835' u'\u005cudeba' ^ u'\u005cud835' u'\u005cudc99' ( i ) u'\u005cu2062' ( j , k ) u'\u005cu2208' u'\u005cu211d' p × p , and a distance d ^ spectral u'\u005cu2062' ( j , k )
+p178
+aVNote that the learning algorithm is such that it ensures that u'\u005cud835' u'\u005cudeba' ^ u'\u005cud835' u'\u005cudc99' ( i ) u'\u005cu2062' ( j , k ) = u'\u005cud835' u'\u005cudeba' ^ u'\u005cud835' u'\u005cudc99' ( i u'\u005cu2032' ) u'\u005cu2062' ( j u'\u005cu2032' , k u'\u005cu2032' ) if G u'\u005cu2062' ( j , u'\u005cud835' u'\u005cudc99' ( i ) ) = G u'\u005cu2062' ( j u'\u005cu2032' , u'\u005cud835' u'\u005cudc99' ( i u'\u005cu2032' ) ) and G u'\u005cu2062' ( k , u'\u005cud835' u'\u005cudc99' ( i ) ) = G u'\u005cu2062' ( k u'\u005cu2032' , u'\u005cud835' u'\u005cudc99' ( i u'\u005cu2032' ) )
+p179
+aVOur experiments show that using a non-zero value different than 1 that is a function of the distance between j and k compared to the distance between j u'\u005cu2032' and k u'\u005cu2032' does better in practice
+p180
+aVThis subtlety makes solving the minimization problem in Eq
+p181
+aVwhere u'\u005cu039b' m u'\u005cu2062' ( u'\u005cud835' u'\u005cudc68' ) denotes the product of the top m singular values of u'\u005cud835' u'\u005cudc68' and u'\u005cud835' u'\u005cudeba' u'\u005cud835' u'\u005cudc99' ( i , j ) := u'\u005cud835' u'\u005cudd3c' [ v i v j u'\u005cu22a4' u'\u005cud835' u'\u005cudc99' ] , i.e., the uncentered cross-covariance matrix
+p182
+aVThis resulted in m = 7 , u'\u005cu0393' = 0.4 for our method and 2 , 8 for CCM u'\u005cu2019' s extra constituent/distituent counts respectively
+p183
+aVTo handle this issue, we present a strategy that is inspired by ideas from kernel smoothing in the statistics community [ Zhou et al.2010 , Kolar et al.2010b , Kolar et al.2010a ]
+p184
+aVTo leverage this low rank structure, we propose using the following additive metric, a normalized variant of that in Anandkumar et al.2011
+p185
+aVIf there exists a comma/semicolon/colon at index i that has at least a verb before i and both a noun followed by a verb after i , then return ( [ 0 , i - 1 ] , [ i , u'\u005cu2113' u'\u005cu2062' ( x ) ] ) as the top bracket
+p186
+aVCCM also has two parameters, the number of extra constituent/distituent counts used for smoothing
+p187
+aVFor English we use the Penn treebank [ Marcus et al.1993 ] , with sections 2 u'\u005cu2013' 21 for training and section 23 for final testing
+p188
+aVIn addition, let u'\u005cud835' u'\u005cudc99' = ( x 1 , u'\u005cu2026' , x u'\u005cu2113' ) be the associated vector of part-of-speech (POS) tags (i.e., x i is the POS tag of w i
+p189
+aVThis allows principled sharing of samples from different but similar underlying distributions
+p190
+aVCCM is used with the initializer proposed in Klein and Manning2002
+p191
+aVUsing Seginer u'\u005cu2019' s parser we were able to get results on the training sets
+p192
+aVIn order to estimate d from data, we need to estimate the covariance matrices u'\u005cud835' u'\u005cudeba' u'\u005cud835' u'\u005cudc99' u'\u005cu2062' ( i , j ) (for i , j u'\u005cu2208' { 1 , u'\u005cu2026' , u'\u005cu2113' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) } ) from Eq
+p193
+aVThe complete generative model that we follow is then
+p194
+aVNote that the u'\u005cu201c' root u'\u005cu201d' edge e z 1 , z 2 partitions the leaves into precisely this bracketing
+p195
+aV4 4 We make brief use of punctuation for our top bracket heuristic detailed below before removing it
+p196
+aVHere, we found out that our method does better with the universal part of speech tags
+p197
+aVNN-O, CC-O, and BC-O indicate that the oracle (i.e., true top bracket) was used for h dir
+p198
+aVWe also compare our method to the algorithm of Seginer2007
+p199
+aVLet A denote the set of nodes closer to a than i , and analogously for B , G , and H
+p200
+aVSet of examples ( u'\u005cud835' u'\u005cudc98' ( i ) , u'\u005cud835' u'\u005cudc99' ( i ) ) for i u'\u005cu2208' [ N ] , a kernel K u'\u005cu0393' ( j , k , j u'\u005cu2032' , k u'\u005cu2032' u'\u005cud835' u'\u005cudc99' , u'\u005cud835' u'\u005cudc99' u'\u005cu2032' ) , an integer m
+p201
+aVThen, according to our base model it holds that
+p202
+aVWe also explored two types of CCA embeddings
+p203
+aVData structures
+p204
+aVHowever, in practice the distance metric must be estimated from data, as discussed below
+p205
+aVThe kernel is non-zero if and only if the tags at position j and k in u'\u005cud835' u'\u005cudc99' are identical to the ones in position j u'\u005cu2032' and k u'\u005cu2032' in u'\u005cud835' u'\u005cudc99' u'\u005cu2032' , and if the direction between j and k is identical to the one between j u'\u005cu2032' and k u'\u005cu2032'
+p206
+aVSet t u'\u005cu2208' u'\u005cud835' u'\u005cudcaf' by computing t = h dir u'\u005cu2062' ( u )
+p207
+aVIn practice, we employ the following heuristic to find the bracket using the following three steps
+p208
+aVLet C j u'\u005cu2032' , k u'\u005cu2032' i u'\u005cu2032' = w j u'\u005cu2032' ( i u'\u005cu2032' ) u'\u005cu2062' ( w k u'\u005cu2032' ( i u'\u005cu2032' ) ) u'\u005cu22a4' , k j , k , j u'\u005cu2032' , k u'\u005cu2032' , i , i u'\u005cu2032' = K u'\u005cu0393' ( j , k , j u'\u005cu2032' , k u'\u005cu2032' u'\u005cud835' u'\u005cudc99' ( i ) , u'\u005cud835' u'\u005cudc99' ( i u'\u005cu2032' ) ) and u'\u005cu2113' i u'\u005cu2032' = u'\u005cu2113' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ( i u'\u005cu2032' ) ) , and estimate each p × p covariance matrix as
+p209
+aVLet u'\u005cud835' u'\u005cudc98' = ( w 1 , u'\u005cu2026' , w u'\u005cu2113' ) be a vector of words corresponding to a sentence of length u'\u005cu2113'
+p210
+aVIn constructing our distance metric, we begin with the following assumption on the distribution in Eq
+p211
+aVAs before, one solution would be local search heuristics
+p212
+aVAll punctuation from the data is removed
+p213
+aVFor example, in Figure 1 , the top bracket is ( [ 1 , 2 ] , [ 3 , 5 ] ) = ( [ u'\u005cud835' u'\u005cude73' u'\u005cud835' u'\u005cude83' , u'\u005cud835' u'\u005cude7d' u'\u005cud835' u'\u005cude7d' ] , [ u'\u005cud835' u'\u005cude85' u'\u005cud835' u'\u005cude71' u'\u005cud835' u'\u005cude73' , u'\u005cud835' u'\u005cude73' u'\u005cud835' u'\u005cude83' , u'\u005cud835' u'\u005cude7d' u'\u005cud835' u'\u005cude7d' ]
+p214
+aVThese approaches, while empirically promising, generally lack theoretical justification
+p215
+aVTable 2 summarizes our results
+p216
+aVDefine u'\u005cud835' u'\u005cudc6b' to be the M × M distance matrix among the M variables, i.e., D i u'\u005cu2062' j = d u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) u'\u005cu2062' ( i , j
+p217
+aVTo show how to compute distances between adjacent nodes, consider the two cases
+p218
+aVAssumption 1 allows for the w i to be high dimensional features, as long as the expectation requirement above is satisfied
+p219
+aVGenerate a tag sequence u'\u005cud835' u'\u005cudc99' = ( x 1 , u'\u005cu2026' , x u'\u005cu2113'
+p220
+aVIn addition, let u'\u005cud835' u'\u005cudcaf' be the set of binary bracketings
+p221
+aVThe determiner ( w 2 ) and the direct object ( w 3 ) are correlated in that the choice of determiner depends on the plurality of w 3
+p222
+aVThe constants lurking in the O -notation and the full proof are in the supplementary
+p223
+aVIn the following sections, we describe the key steps to our method
+p224
+aVCompute d ^ spectral u'\u005cu2062' ( j , k ) u'\u005cu2062' u'\u005cu2200' j , k u'\u005cu2208' u'\u005cu2113' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ( i ) ) using Eq
+p225
+aVPick the rightmost comma/semicolon/colon if multiple satisfy the criterion
+p226
+aVAll the w i are assumed to be leaves while all the z i are internal (i.e., non-leaf) nodes
+p227
+aVThe parameters u'\u005cu0398' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) control the conditional probability tables
+p228
+aVWe report results on three different languages
+p229
+aVWe can then show that this metric is additive
+p230
+aVFor intuition, consider the simple tag sequence u'\u005cud835' u'\u005cudc99' = ( u'\u005cud835' u'\u005cude85' u'\u005cud835' u'\u005cude71' u'\u005cud835' u'\u005cude73' , u'\u005cud835' u'\u005cude73' u'\u005cud835' u'\u005cude83' , u'\u005cud835' u'\u005cude7d' u'\u005cud835' u'\u005cude7d'
+p231
+aVOtherwise find the first non-participle verb (say at index j ) and return ( [ 0 , j - 1 ] , [ j , u'\u005cu2113' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) ] )
+p232
+aVThe mapping h dir works in three steps
+p233
+aVAlgorithm
+p234
+aVBoth i and j are internal nodes
+p235
+aVSet u'\u005cu0398' u'\u005cu2208' u'\u005cu0398' by computing u'\u005cu0398' = u'\u005cu0398' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' )
+p236
+aVWe give the theorem statement below
+p237
+aVAlso assume that u'\u005cud835' u'\u005cudd3c' [ z i z i u'\u005cu22a4' u'\u005cud835' u'\u005cudc31' ] has rank m u'\u005cu2200' i u'\u005cu2208' [ H ]
+p238
+aVIn this paper, we suggest a different approach, to provide a first step to bridging this theory-experiment gap
+p239
+aVIt would then be reasonable to assume that w 2 and w 3 are independent given z
+p240
+aVThe parameter space is denoted u'\u005cu0398'
+p241
+aV3 and all valid choices of a u'\u005cu2217' , b u'\u005cu2217' , g u'\u005cu2217' , h u'\u005cu2217' in Eq
+p242
+aV1) ( i , j ) is a leaf edge; (2) ( i , j ) is an internal edge
+p243
+aVA proof is in the supplementary for completeness
+p244
+aVAssume that
+p245
+aV1 (analogous to the assumptions made in Anandkumar et al., 2011
+p246
+aVFor our experiments, we use the kernel
+p247
+aVHowever, consider another sequence u'\u005cud835' u'\u005cudc99' u'\u005cu2032' = ( u'\u005cud835' u'\u005cude81' u'\u005cud835' u'\u005cude71' u'\u005cud835' u'\u005cudff7' , u'\u005cud835' u'\u005cude73' u'\u005cud835' u'\u005cude83' u'\u005cud835' u'\u005cudff8' , u'\u005cud835' u'\u005cude7d' u'\u005cud835' u'\u005cude7d' u'\u005cud835' u'\u005cudff9' , u'\u005cud835' u'\u005cude85' u'\u005cud835' u'\u005cude71' u'\u005cud835' u'\u005cude73' u'\u005cud835' u'\u005cudffa' , u'\u005cud835' u'\u005cude73' u'\u005cud835' u'\u005cude83' u'\u005cud835' u'\u005cudffb' , u'\u005cud835' u'\u005cude70' u'\u005cud835' u'\u005cude73' u'\u005cud835' u'\u005cude79' u'\u005cud835' u'\u005cudffc' , u'\u005cud835' u'\u005cude7d' u'\u005cud835' u'\u005cude7d' u'\u005cud835' u'\u005cudffd'
+p248
+aVCovariance estimation) u'\u005cu2200' i u'\u005cu2208' [ N ] , j , k u'\u005cu2208' u'\u005cu2113' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ( i )
+p249
+aVEach w i is represented by a vector in u'\u005cu211d' p for p u'\u005cu2208' u'\u005cu2115'
+p250
+aVThe only restriction is in the form of the above assumption
+p251
+aVOn Chinese
+p252
+aVEnglish, German, and Chinese
+p253
+aVLet A u'\u005cu2217' and B u'\u005cu2217' denote all the leaves (word nodes) in A and B respectively
+p254
+aVWe do not commit to a certain parametric family, but see more about the assumptions we make about u'\u005cu0398' in § 3.2
+p255
+aVCCM, on the other hand, is fully unlexicalized
+p256
+aVThen for any a u'\u005cu2217' u'\u005cu2208' A u'\u005cu2217' , b u'\u005cu2217' u'\u005cu2208' B u'\u005cu2217' , g u'\u005cu2217' u'\u005cu2208' G u'\u005cu2217' , and h u'\u005cu2217' u'\u005cu2208' H u'\u005cu2217' it can be shown that
+p257
+aVSee Figure 1 (left) for an example
+p258
+aVA function d u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31'
+p259
+aVwhere u'\u005cu0393' denotes the user-specified bandwidth, and u'\u005cu039a' ( j , k , j u'\u005cu2032' , k u'\u005cu2032' u'\u005cud835' u'\u005cudc99' , u'\u005cud835' u'\u005cudc99' u'\u005cu2032' ) j - k
+p260
+aVLet A u'\u005cu2217' , B u'\u005cu2217' , G u'\u005cu2217' , and H u'\u005cu2217' refer to the leaves in A , B , G , and H respectively
+p261
+aVOn German
+p262
+aV3 and Eq
+p263
+aVOn English
+p264
+aVwhere u'\u005cud835' u'\u005cudc02' ( w i u'\u005cu03a0' u'\u005cud835' u'\u005cudc31' ( w i ) , u'\u005cud835' u'\u005cudc31' ) u'\u005cu2208' u'\u005cu211d' p × m has rank m
+p265
+aVwhere u'\u005cud835' u'\u005cudc00' ( z i u'\u005cu03a0' u'\u005cud835' u'\u005cudc31' ( z i ) , u'\u005cud835' u'\u005cudc31' ) u'\u005cu2208' u'\u005cu211d' m × m has rank m
+p266
+aVThen with probability 1 - u'\u005cu0394' , u ^ = u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' )
+p267
+aVOSCCA and TSCCA, given in Dhillon et al.2012
+p268
+aVtest
+p269
+aV4 [ Desper and Gascuel2005 ]
+p270
+aV- j u'\u005cu2032' - k u'\u005cu2032' j - k
+p271
+aV6 , with d replaced with d ^
+p272
+aV75.2 u'\u005cu2062' % ( u'\u005cu2113' u'\u005cu2264' 10 ), 64.2 u'\u005cu2062' % ( u'\u005cu2113' u'\u005cu2264' 20 ), 56.7 u'\u005cu2062' % ( u'\u005cu2113' u'\u005cu2264' 40
+p273
+aV57.8 u'\u005cu2062' % ( u'\u005cu2113' u'\u005cu2264' 10 ), 45.0 u'\u005cu2062' % ( u'\u005cu2113' u'\u005cu2264' 20 ), and 39.9 u'\u005cu2062' % ( u'\u005cu2113' u'\u005cu2264' 40
+p274
+aV4
+p275
+aV[t!] Inputs
+p276
+aVIn this case, i has exactly two other neighbors a u'\u005cu2208' [ M ] and b u'\u005cu2208' [ M ] , and similarly, j has exactly other two neighbors g u'\u005cu2208' [ M ] and h u'\u005cu2208' [ M ]
+p277
+aVUncover structure) u'\u005cu2200' i u'\u005cu2208' [ N ]
+p278
+aV+ j u'\u005cu2032' - k u'\u005cu2032' if u'\u005cud835' u'\u005cudc99' u'\u005cu2062' ( j ) = u'\u005cud835' u'\u005cudc99' u'\u005cu2062' ( j u'\u005cu2032' ) and u'\u005cud835' u'\u005cudc99' u'\u005cu2062' ( k u'\u005cu2032' ) = u'\u005cud835' u'\u005cudc99' u'\u005cu2062' ( k ) , and sign u'\u005cu2062' ( j - k ) = sign u'\u005cu2062' ( j u'\u005cu2032' - k u'\u005cu2032' ) (and u'\u005cu221e' otherwise
+p279
+aVSummary
+p280
+aVIf z is the root, then u'\u005cu03a0' u'\u005cud835' u'\u005cudc99' u'\u005cu2062' ( z ) = u'\u005cu2205'
+p281
+aVThen i must have exactly two other neighbors a u'\u005cu2208' [ M ] and b u'\u005cu2208' [ M ]
+p282
+aV5
+p283
+aVLet u'\u005cud835' u'\u005cudc6b' W u'\u005cu2062' W , u'\u005cud835' u'\u005cudc6b' Z u'\u005cu2062' W (equal to u'\u005cud835' u'\u005cudc6b' W u'\u005cu2062' Z u'\u005cu22a4' ), and u'\u005cud835' u'\u005cudc6b' Z u'\u005cu2062' Z indicate the word-word, latent-word and latent-latent sub-blocks of u'\u005cud835' u'\u005cudc6b' respectively
+p284
+aVH + u'\u005cu2113'
+p285
+aV5 5 We used the implementation available at http://tinyurl.com/lhwk5n6
+p286
+aVThe anchor we use is G u'\u005cu2062' ( j , u'\u005cud835' u'\u005cudc99' ) = ( j , x j
+p287
+aVLet
+p288
+aVtrain
+p289
+aV1
+p290
+ag283
+aV56.6 u'\u005cu2062' % ( u'\u005cu2113' u'\u005cu2264' 10 ), 45.1 u'\u005cu2062' % ( u'\u005cu2113' u'\u005cu2264' 20 ), and 38.9 u'\u005cu2062' % ( u'\u005cu2113' u'\u005cu2264' 40
+p291
+a.

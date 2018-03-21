@@ -1,0 +1,108 @@
+(lp0
+VFinally, we investigate the robustness of the proposed semiparametric Gaussian copula regression model by varying the amount of features in the covariate space
+p1
+aVTo do this, we formulate the problem as a text regression task, and use a Gaussian copula with probability integral transform to model the uniform marginals and their dependencies
+p2
+aVBoth linear and non-linear SVM models do not have any advantages over the proposed approach
+p3
+aVWe use the Statistical Toolbox u'\u005cu2019' s linear regression implementation in Matlab, and LibSVM [ 6 ] for training and testing the SVM models
+p4
+aVIn NLP, many of the probabilistic text models work in the discrete space [ 9 , 2 ] , but our model is different since the text features are sparse, we first perform kernel density estimates to smooth out the zeroing items, and then calculate the empirical cumulative distribution function (CDF) of the random variables
+p5
+aVBy applying the Probability Integral Transform to raw features in the copula model, we essentially avoid comparing apples and oranges in the feature space, which is a common problem in bag-of-features models in NLP
+p6
+aVNote that since the kernel density estimation in the proposed copula model is nonparametric, and we only need to learn the u'\u005cu03a3' in the Gaussian copula, there is no hyperparameters that need to be tuned
+p7
+aVLast but not least, by using a parametric copula, in our case, the Gaussian copula, we reduce the computational cost from fully nonparametric methods, and explicitly model the correlations among the covariate and the dependent variable
+p8
+aVOn one hand, copula models [ 31 ] seek to explicitly model the dependency of random variables by separating the marginals and their correlations
+p9
+aVTherefore, by modeling the correlations among marginal CDFs, the copula model has gained the insights on the dependency structures of the random variables, and thus, the performance of the regression task is boosted
+p10
+aVComparing to second-best approaches, all improvements obtained by the copula model are statistically significant
+p11
+aVThe problem is that text features are sparse, so we need to perform nonparametric kernel density estimation to smooth out the distribution of each variable
+p12
+aVUsing the same dataset, Tsai and Wang [ 41 ] reformulate the regression problem as a text ranking problem
+p13
+aVThe idea behind copula theory is that the cumulative distribution function (CDF) of a random vector can be represented in the form of uniform marginal cumulative distribution functions, and a copula that connects these marginal CDFs, which describes the correlations among the input random variables
+p14
+aVOn the post-2009 dataset that concerns economic growth and recovery, the boundaries among all methods are very clear
+p15
+aV[ 45 ] have proposed the use of frame-level semantic features to understand financial news, but they treat the stock movement prediction problem as a binary classification task
+p16
+aVNow that we have obtained the marginals, and then the joint distribution can be constructed by applying the copula function that models the stochastic dependencies among marginal CDFs
+p17
+aVOne advantage we see from the copula model is that it does not require any assumptions on the marginal distributions
+p18
+aVGiven a piece of earnings call transcript, we investigate a semiparametric approach for automatic prediction of future financial risk 1 1 In this work, the risk is defined as the measured volatility of stock prices from the week following the earnings call teleconference
+p19
+aVBy doing this, we are essentially performing probability integral transform u'\u005cu2014' an important statistical technique that moves beyond the count-based bag-of-words feature space to marginal cumulative density functions space
+p20
+aVAgain, the reason why we perform approximated inference is that exact inference in the high-dimensional Gaussian copula density is non-trivial, and might not have analytical solutions, but approximate inference using maximum density sampling from the Gaussian copula significantly relaxes the complexity of inference
+p21
+aVIn contrast, by considering the semiparametric case, we not only obtain some expressiveness from the nonparametric models, but also reduce the complexity of the task we are only interested in the finite-dimensional components u'\u005cu03a3' in the Gaussian copula with O u'\u005cu2062' ( n u'\u005cu2062' log u'\u005cu2061' n ) complexity, which is not as computationally difficult as the completely nonparametric cases
+p22
+aVAlso, by modeling the marginals and their correlations seperately, our approach is cleaner, easy-to-understand, and allows us to have more flexibility to model the uncertainty of data
+p23
+aVOur pilot experiment also aligns with our hypothesis when not performing the kernel density estimation part for smoothing out the marginal distributions, the performances dropped significantly when sparser features are included
+p24
+aVFor example, when bag-of-word-unigrams are present in the feature space, it is easier if one does not explicitly model the stochastic dependencies among the words, even though doing so might hurt the predictive power, while the variance from the correlations among the random variables is not explained
+p25
+aVTherefore, the computational complexity of MLE for the proposed model is O u'\u005cu2062' ( n u'\u005cu2062' log u'\u005cu2061' n )
+p26
+aVThis is not surprising at all, because as max-margin models, soft-margin SVM only needs a handful of examples that come with nonvanishing coefficients (support vectors) to find a reasonable margin
+p27
+aVBy varying the number of dimensions of the covariates and the size of the training data, we show that the improvements over the baselines are robust across different parameter settings on three datasets
+p28
+aVComparing to the Gaussian kernel and other kernels, the Box kernel is simple, and computationally inexpensive
+p29
+aVIn the statistics literature, copula is widely known as a family of distribution function
+p30
+aVTherefore, the copula does not have requirements on the marginal distributions, and any arbitrary marginals can be combined and their dependency structure can be modeled using the copula
+p31
+aVUsing the stock prices, we can use the equations above to calculate the measured stock volatility after the earnings call, which is the standard measure of risks in finance, and the dependent variable y of our predictive task
+p32
+aVBroadly speaking, our work is also aligned to recent studies that make use of social media data to predict the stock market [ 3 , 47 ]
+p33
+aVThis is of crucial importance to modeling text data instead of using the classic bag-of-words representation that uses raw counts, we are now working with uniform marginal CDFs, which helps coping with the overfitting issue due to noise and data sparsity
+p34
+aVHowever, in order to have a valid multivariate distribution function regardless of n -dimensional covariates, not every function can be used as a copula function
+p35
+aVSpearman u'\u005cu2019' s correlation [ 20 ] and Kendall u'\u005cu2019' s tau [ 23 ] have been widely used in many regression problems in NLP [ 1 , 46 , 42 , 41 ] , and here we use them to measure the quality of predicted values u'\u005cud835' u'\u005cudc32' ^ by comparing to the vector of ground truth u'\u005cud835' u'\u005cudc32'
+p36
+aVFrom an information-theoretic point of view [ 38 ] , various problems in text analytics can be formulated as estimating the probability mass/density functions of tokens in text
+p37
+aVNote that the above step is also known as probability integral transform [ 11 ] , which allows us to convert any given continuous distribution to random variables having a uniform distribution
+p38
+aVThen, if the marginal functions are continuous, there exists a unique copula C , such that
+p39
+aVFurthermore, if the distributions are continuous, the multivariate dependency structure and the marginals might be separated, and the copula can be considered independent of the marginals [ 21 , 32 ]
+p40
+aVThe central idea behind copula, therefore, can be summarize by the Sklar u'\u005cu2019' s theorem and the corollary
+p41
+aVWhat are the advantages of copula-based models, and what makes it perform so well
+p42
+aVSee details in Section 5
+p43
+aVTherefore, coping with the tradeoff between expressiveness and overfitting, seems to be rather important in statistical approaches that capture stochastic dependency
+p44
+aVChristensen [ 8 ] shows that sorting and balanced binary trees can be used to calculate the correlation coefficients with complexity of O u'\u005cu2062' ( n u'\u005cu2062' log u'\u005cu2061' n
+p45
+aVThis is extremely practical, because in many natural language processing tasks, we often have to deal with features that are extracted from many different domains and signals
+p46
+aVHere, K u'\u005cu2062' ( u'\u005cu22c5' ) is the kernel function, where in our case, we use the Box kernel 2 2 It is also known as the original Parzen windows [ 33 ]
+p47
+aVThe parameter h is the bandwidth for smoothing 3 3 In our implementation, we use the default h of the Box kernel in the ksdensity function in Matlab
+p48
+aVOn the other hand, once such assumptions are removed, another problem arises u'\u005cu2014' they might be prone to errors, and suffer from the overfitting issue
+p49
+aVHowever, this might not be practical at all in image processing, the u'\u005cu201c' cloud u'\u005cu201d' pixel of a pixel showing the blue sky of a picture are more likelihood to co-occur in the same picture; in natural language processing, the word u'\u005cu201c' mythical u'\u005cu201d' is more likely to co-occur with the word u'\u005cu201c' unicorn u'\u005cu201d' , rather than the word u'\u005cu201c' popcorn u'\u005cu201d'
+p50
+aVThis is rather restricted, because the possible shapes from a K - 1 simplex of Dirichlet is always limited in some sense
+p51
+aVwhere u'\u005cud835' u'\u005cudc08' u'\u005cu2062' { u'\u005cu22c5' } is the indicator function, and u'\u005cu039d' indicates the current value that we are evaluating
+p52
+aVF x 1 ( x 1 ) , u'\u005cu2026' , F x n ( x n ) ) , one needs to solve the mean response u'\u005cud835' u'\u005cudc04' ^ ( F y ( y
+p53
+a.

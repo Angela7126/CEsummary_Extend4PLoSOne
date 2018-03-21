@@ -1,0 +1,201 @@
+(lp0
+VThe model we introduce is grounded in the distributional hypothesis [] , that two words are similar by appearing in the same kinds of contexts (where u'\u005cu201c' context u'\u005cu201d' itself can be variously defined as the bag or sequence of tokens around a target word, either by linear distance or dependency path
+p1
+aVIn the absence of a sizable number of linguistically interesting terms (like wicked ) that are known to be geographically variable, we consider the proxy of estimating the named entities evoked by specific terms in different geographical regions
+p2
+aVA joint model has three a priori advantages over independent models i) sharing data across variable values encourages representations across those values to be similar; e.g.,, while city may be closer to Boston in Massachusetts and Chicago in Illinois, in both places it still generally connotes a municipality ; (ii) such sharing can mitigate data sparseness for less-witnessed areas; and (iii) with a joint model, all representations are guaranteed to be in the same vector space and can therefore be compared to each other; with individual models (each with different initializations), word vectors across different states may not be directly compared
+p3
+aVTable 2 likewise presents the terms with the highest cosine similarity to city in both California and New York; while the terms most evoked by city in California include regional locations like Chinatown, Los Angeles u'\u005cu2019' South Bay and San Francisco u'\u005cu2019' s East Bay, in New York the most similar terms include hamptons , upstate and borough (New York City u'\u005cu2019' s term of administrative division
+p4
+aVAs a quantitative measure of our model u'\u005cu2019' s performance, we consider the task of judging semantic similarity among words whose meanings are likely to evoke strong geographical correlations
+p5
+aVIn all experiments, the contextual variable is the observed US state (including DC), so that u'\u005cud835' u'\u005cudc9e'
+p6
+aVAs noted above, geographic terms like city provide one such example in Massachusetts we expect the term city to be more strongly connected to grounded named entities like Boston than to other US cities
+p7
+aVNote that this is not the same as simply asking which sports team is most frequently (or most characteristically) mentioned in a given area; by measuring the distance to a target word ( football ), we are attempting to estimate the varying strengths of association between concepts in different regions
+p8
+aVIn bringing in extra-linguistic information to learn word representations, our work falls into the general domain of multimodal learning; while other work has used visual information to improve distributed representations [] , this work generally exploits information about the object being described (e.g.,, strawberry and a picture of a strawberry); in contrast, we use information about the speaker to learn representations that vary according to contextual variables from the speaker u'\u005cu2019' s perspective
+p9
+aVThe rise of social media, however, with its large volume of text paired with information about its author and social context, reminds us that each word is uttered by a particular person at a particular place and time
+p10
+aVGiven the empirical success of vector-space representations in capturing semantic properties and their success at a variety of NLP tasks [] , we use a simple, but state-of-the-art neural architecture [] to learn low-dimensional real-valued representations of words
+p11
+aVWe can invoke the distributional hypothesis for many instances of regional variation by observing that such variants often appear in similar contexts
+p12
+aVOne desideratum that remains, however, is how the meaning of these terms is shaped by geographical influences u'\u005cu2013' while wicked is used throughout the United States to mean bad or evil ( u'\u005cu201c' he is a wicked man u'\u005cu201d' ), in New England it is used as an adverbial intensifier ( u'\u005cu201c' my boy u'\u005cu2019' s wicked smart u'\u005cu201d'
+p13
+aVHere, all three variants can often be seen in an immediately pre-adjectival position (as is common with intensifying adverbs
+p14
+aVThe vast textual resources used in NLP u'\u005cu2013' newswire, web text, parliamentary proceedings u'\u005cu2013' can encourage a view of language as a disembodied phenomenon
+p15
+aVstate
+p16
+aVThe final prediction over the output vocabulary is then found by passing this resulting vector through the softmax function u'\u005cud835' u'\u005cudc90' = softmax u'\u005cu2062' ( X u'\u005cu2062' u'\u005cud835' u'\u005cudc89' ) , giving a vector in the
+p17
+aVFor comparison, we also partition the data among all 51 states, and train a single model for each state using only data from that state
+p18
+aVWhile the two models that include geographical information naturally outperform the model that does not, the Joint model generally far outperforms the Individual models trained on state-specific subsets of the data
+p19
+aVcity
+p20
+aVThis model defines a joint parameterization over all variable values in the data, where information from data originating in California, for instance, can influence the representations learned for Wisconsin; a naive alternative would be to simply train individual models on each variable value (a u'\u005cu201c' California u'\u005cu201d' model using data only from California, etc
+p21
+aV1 1 This result is robust to the choice of distance metric; an evaluation measuring the Euclidean distance between vectors shows the Joint model to outperform the Individual and u'\u005cu2013' Geo models across all seven categories
+p22
+aVWe evaluate our model by confirming its face validity in a qualitative analysis and estimating its accuracy at the quantitative task of judging geographically-informed semantic similarity
+p23
+aVA model that can exploit all of the information in the data, learning core vector-space representations for all words along with deviations for each contextual variable, is able to learn more geographically-informed representations for this task than strict geographical models alone
+p24
+aVWe also train a single model on all of the training data, but ignore any state metadata
+p25
+aVWhile football may everywhere evoke similar sports like baseball or soccer or more specific football-related terms like touchdown or field goal , we expect that particular sports teams will be evoked more strongly by the word football in their particular geographical region in Wisconsin, football should evoke packers , while in Pennsylvania, football evokes steelers
+p26
+aVTo illustrate how the model described above can learn geographically-informed semantic representations of words, table 1 displays the terms with the highest cosine similarity to wicked in Kansas and Massachusetts after running our joint model on the full 1.1 billion words of Twitter data; while wicked in Kansas is close to other evaluative terms like evil and pure and religious terms like gods and spirit , in Massachusetts it is most similar to other intensifiers like super , ridiculously and insanely
+p27
+aVfootball
+p28
+aVThe overall similarity for the city category of each model is the average of 51 such tests (one for each city
+p29
+aVThe full model described in section 2 , in which we learn a global representation for each word along with deviations from that common representation for each state
+p30
+aVFor each category, we measure similarity as the average cosine similarity between the vector for the target word for that category (e.g.,, city ) and the corresponding vector for each state-specific answer (e.g.,, chicago for IL; boston for MA
+p31
+aVAs a preprocessing step, we identify a set of target multiword expressions in this corpus as the maximal sequence of adjectives + nouns with the highest pointwise mutual information; in all experiments described below, we define the vocabulary V as the most frequent 100,000 terms (either unigrams or multiword expressions) in the total data, and set the dimensionality of the embedding k = 100
+p32
+aVThis data only includes tweets that have been geolocated to state-level granularity in the United States using high-precision pattern matching on the user-specified location field (e.g.,, u'\u005cu201c' new york ny u'\u005cu201d' u'\u005cu2192' NY, u'\u005cu201c' chicago u'\u005cu201d' u'\u005cu2192' IL, etc
+p33
+aVIndividual
+p34
+aVIn this case the distance u'\u005cu0394' between two terms is their overall distance within the entire United States
+p35
+aVJoint
+p36
+aVEach of these questions asks the following what words are evoked for a given target word (like football
+p37
+aVIn this model, there is no sharing among states; California has the most data with 11,604,637 tweets; Wyoming has the least with 47,503 tweets
+p38
+aVFor each state, we measure the distance between the word city and the state u'\u005cu2019' s most populous city; e.g.,, u'\u005cu0394' AZ u'\u005cu2062' ( u'\u005cud835' u'\u005cudc50' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc66' , u'\u005cud835' u'\u005cudc5d' u'\u005cu210e' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc5b' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc65' )
+p39
+aVWe use 1.1 billion tokens from 93 million geolocated tweets gathered between September 1, 2011 and August 30, 2013 (approximately 127,000 tweets per day evenly sampled over those two years
+p40
+aVpark
+p41
+aVThis information enables learning models of word meaning that are sensitive to such factors, allowing us to distinguish, for example, between the usage of wicked in Massachusetts from the usage of that word elsewhere, and letting us better associate geographically grounded named entities (e.g, Boston ) with their hypernyms ( city ) in their respective regions
+p42
+aVAs one concrete example of these differences between individual data points, the cosine similarity between city and seattle in the u'\u005cu2013' Geo model is 0.728 ( seattle is ranked as the 188th most similar term to city overall); in the Individual model using only tweets from Washington state, u'\u005cu0394' W u'\u005cu2062' A u'\u005cu2062' ( c u'\u005cu2062' i u'\u005cu2062' t u'\u005cu2062' y , s u'\u005cu2062' e u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' t u'\u005cu2062' l u'\u005cu2062' e ) = 0.780 (rank #32); and in the Joint model, using information from the entire United States with deviations for Washington, u'\u005cu0394' W u'\u005cu2062' A u'\u005cu2062' ( c u'\u005cu2062' i u'\u005cu2062' t u'\u005cu2062' y , s u'\u005cu2062' e u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' t u'\u005cu2062' l u'\u005cu2062' e ) = 0.858 (rank #6
+p43
+aVbaseball
+p44
+aVWe consider seven categories for which we can reasonably expect the connotations of each term to vary by geography; in each case, we calculate the distance between two terms x and y using representations learned for a given state ( u'\u005cu0394' u'\u005cud835' u'\u005cudc60' u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc52' u'\u005cu2062' ( x , y )
+p45
+aVhockey
+p46
+aVbasketball
+p47
+aVFigure 2 present the results of the full evaluation, including 95% confidence intervals for each mean
+p48
+aVThis model corresponds to an extension of the u'\u005cu201c' skip-gram u'\u005cu201d' language model [] (hereafter SGLM
+p49
+aVThe coupling of text with demographic information has enabled computational modeling of linguistic variation, including uncovering words and topics that are characteristic of geographical regions [] , learning correlations between words and socioeconomic variables [] ; and charting how new terms spread geographically []
+p50
+aVIn this paper, we introduce a method that extends vector-space lexical semantic models to learn representations of geographically situated language
+p51
+aVFor each state, the distance between the word state and the state u'\u005cu2019' s name; e.g.,, u'\u005cu0394' WI u'\u005cu2062' ( u'\u005cud835' u'\u005cudc60' u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc52' , u'\u005cud835' u'\u005cudc64' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc60' u'\u005cud835' u'\u005cudc50' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc5b' u'\u005cud835' u'\u005cudc60' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc5b' )
+p52
+aVLet us define a set of contextual variables u'\u005cud835' u'\u005cudc9e' ; in the experiments that follow, u'\u005cud835' u'\u005cudc9e' is comprised solely of geographical state u'\u005cud835' u'\u005cudc9e' u'\u005cud835' u'\u005cudc60' u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc52' = { AK , AL , u'\u005cu2026' , WY } ) but could in principle include any number of features, such as calendar month, day of week, or other demographic variables of the speaker
+p53
+aVRather than using a single embedding matrix W that contains low-dimensional representations for every word in the vocabulary, we define a global embedding matrix W u'\u005cud835' u'\u005cudc5a' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc5b' u'\u005cu2208' u'\u005cu211d'
+p54
+aVTo predict the value of the context word y (again, a one-hot vector of dimensionality
+p55
+aVu'\u005cu2013' Geo
+p56
+aVWe compare three different models
+p57
+aVThe graphical form of this model is illustrated in figure 1
+p58
+aVVector-space models of lexical semantics have been a popular and effective approach to learning representations of word meaning [, inter alia ]
+p59
+aV51 ; the vector space representation of word u'\u005cud835' u'\u005cudc98' in state s is u'\u005cud835' u'\u005cudc98' u'\u005cu22a4' u'\u005cu2062' W u'\u005cud835' u'\u005cudc5a' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc5b' + u'\u005cud835' u'\u005cudc98' u'\u005cu22a4' u'\u005cu2062' W s
+p60
+aVFor all NHL teams from a US state, the distance between the word hockey and the team name; e.g.,, u'\u005cu0394' PA u'\u005cu2062' ( u'\u005cu210e' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc50' u'\u005cud835' u'\u005cudc58' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc66' , u'\u005cud835' u'\u005cudc5d' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc5b' u'\u005cud835' u'\u005cudc54' u'\u005cud835' u'\u005cudc62' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc5b' u'\u005cud835' u'\u005cudc60' )
+p61
+aVA matrix multiply u'\u005cud835' u'\u005cudc89' = u'\u005cud835' u'\u005cudc98' u'\u005cu22a4' W , u'\u005cu2208' u'\u005cu211d' k serves to index the particular embedding for word u'\u005cud835' u'\u005cudc98' , which constitutes the model u'\u005cu2019' s hidden layer
+p62
+aVFor all US national parks, the distance between the word park and the park name; e.g.,, u'\u005cu0394' AK u'\u005cu2062' ( u'\u005cud835' u'\u005cudc5d' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc5f' u'\u005cud835' u'\u005cudc58' , u'\u005cud835' u'\u005cudc51' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc5b' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc59' u'\u005cud835' u'\u005cudc56' )
+p63
+aVFor all NBA teams from a US state, the distance between the word basketball and the team name; e.g.,, u'\u005cu0394' FL u'\u005cu2062' ( u'\u005cud835' u'\u005cudc4f' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc60' u'\u005cud835' u'\u005cudc58' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc4f' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc59' u'\u005cud835' u'\u005cudc59' , u'\u005cu210e' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc61' )
+p64
+aV× k , which capture the effect that each variable value has on each word in the vocabulary
+p65
+aVFor a vocabulary V , each input word s i is represented as a one-hot vector u'\u005cud835' u'\u005cudc98' i of length
+p66
+aV× k , which encodes the real-valued embeddings for each word in the vocabulary
+p67
+aVFor all NFL teams, the distance between the word football and the team name; e.g.,, u'\u005cu0394' IL u'\u005cu2062' ( u'\u005cud835' u'\u005cudc53' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc4f' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc59' u'\u005cud835' u'\u005cudc59' , u'\u005cud835' u'\u005cudc4f' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc5f' u'\u005cud835' u'\u005cudc60' )
+p68
+aVBackpropagation using (input x , output y ) word tuples learns the values of W (the embeddings) and X (the output parameter matrix) that maximize the likelihood of y (i.e.,, the context words) conditioned on x (i.e.,, the s i u'\u005cu2019' s
+p69
+aVGiven an input sentence u'\u005cud835' u'\u005cudc94' and a context window of size t , each word s i is conditioned on in turn to predict the identities of all of the tokens within t words around it
+p70
+aVThe first is the representation matrix W u'\u005cu2208' u'\u005cu211d'
+p71
+aVLet u'\u005cud835' u'\u005cudc9e' denote the sum of the cardinalities of all variables in u'\u005cud835' u'\u005cudc9e' (i.e.,, 51 states, including the District of Columbia
+p72
+aVWhile the word wicked has a common low-dimensional representation in W u'\u005cud835' u'\u005cudc5a' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc5b' , u'\u005cud835' u'\u005cudc64' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc50' u'\u005cud835' u'\u005cudc58' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc51' that is invoked for every instance of its use (regardless of the place), the corresponding vector W MA , u'\u005cud835' u'\u005cudc64' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc50' u'\u005cud835' u'\u005cudc58' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc51' indicates how that common representation should shift in k -dimensional space when used in Massachusetts
+p73
+aVV this hidden representation u'\u005cud835' u'\u005cudc89' is then multiplied by a second parameter matrix X u'\u005cu2208' u'\u005cu211d'
+p74
+aVUnlike classic multimodal systems that incorporate multiple active modalities (such as gesture) from a user [] , our primary input is textual data, supplemented with metadata about the author and the moment of authorship
+p75
+aVIn leveraging grounded social media to uncover linguistic variation, what we want to learn is how a word u'\u005cu2019' s meaning is shaped by its geography
+p76
+aVFor all MLB teams from a US state, the distance between the word baseball and the team name; e.g.,, u'\u005cu0394' IL u'\u005cu2062' ( u'\u005cud835' u'\u005cudc4f' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc60' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc4f' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc59' u'\u005cud835' u'\u005cudc59' , u'\u005cud835' u'\u005cudc50' u'\u005cud835' u'\u005cudc62' u'\u005cud835' u'\u005cudc4f' u'\u005cud835' u'\u005cudc60' ) , u'\u005cu0394' IL u'\u005cu2062' ( u'\u005cud835' u'\u005cudc4f' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc60' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc4f' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc59' u'\u005cud835' u'\u005cudc59' , u'\u005cud835' u'\u005cudc64' u'\u005cu210e' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc52' u'\u005cu2062' u'\u005cud835' u'\u005cudc60' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc65' )
+p77
+aVThe additional W embeddings we add lead to an increase in the number of total parameters by a factor of u'\u005cud835' u'\u005cudc9e'
+p78
+aVmy boy u'\u005cu2019' s wicked smart
+p79
+aV-dimensional unit simplex
+p80
+aVThese models can tell us that hella was (at one time) used most often by a particular demographic group in northern California, echoing earlier linguistic studies [] , and that wicked is used most often in New England [] ; and they have practical applications, facilitating tasks like text-based geolocation []
+p81
+aVThe SGLM has two sets of parameters
+p82
+aVDuring backpropagation, the errors propagated are the difference between u'\u005cud835' u'\u005cudc90' (a probability distribution with k outcomes) and the true (one-hot) output y
+p83
+aVGiven an input word u'\u005cud835' u'\u005cudc98' and set of active variable values u'\u005cud835' u'\u005cudc9c' (e.g.,, u'\u005cud835' u'\u005cudc9c' = { u'\u005cud835' u'\u005cudc60' u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc52' = MA } ), we calculate the hidden layer u'\u005cud835' u'\u005cudc89' as the sum of these independent embeddings u'\u005cud835' u'\u005cudc89' = u'\u005cud835' u'\u005cudc98' u'\u005cu22a4' u'\u005cu2062' W u'\u005cud835' u'\u005cudc5a' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc5b' + u'\u005cu2211' a u'\u005cu2208' u'\u005cud835' u'\u005cudc9c' u'\u005cud835' u'\u005cudc98' u'\u005cu22a4' u'\u005cu2062' W a
+p84
+aV[] , we speed up computation using the hierarchical softmax [] on the output matrix X
+p85
+aVTo control for the extra degrees of freedom this entails, we add squared u'\u005cu2113' 2 regularization to all parameters, using stochastic gradient descent for backpropagation with minibatch updates for the regularization term
+p86
+aVBackpropagation functions as in standard SGLM, with gradient updates for each training example { x , y } touching not only W u'\u005cud835' u'\u005cudc5a' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc5b' (as in SGLM), but all active W u'\u005cud835' u'\u005cudc9c' as well
+p87
+aVmy boy u'\u005cu2019' s hella smart
+p88
+aVmy boy u'\u005cu2019' s very smart
+p89
+aV× k and an additional u'\u005cud835' u'\u005cudc9e' such matrices (each again of size
+p90
+aVAs in Mikolov et al
+p91
+aVIn short language is situated
+p92
+aVThis work was made possible through the use of computing resources made available by the Open Cloud Consortium, Yahoo and the Pittsburgh Supercomputing Center
+p93
+aVThe research reported in this article was supported by US NSF grants IIS-1251131 and CAREER IIS-1054319, and by an ARCS scholarship to D.B
+p94
+aVV
+p95
+ag95
+ag95
+aV× k
+p96
+ag95
+ag95
+ag95
+aVFor example
+p97
+a.

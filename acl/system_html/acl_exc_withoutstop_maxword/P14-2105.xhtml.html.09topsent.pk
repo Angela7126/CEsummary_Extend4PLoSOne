@@ -1,0 +1,18 @@
+(lp0
+VThe CNNSM first uses a convolutional layer to project each word within a context window to a local contextual feature vector, so that semantically similar word- n -grams are projected to vectors that are close to each other in the contextual feature space
+p1
+aVGiven the letter-trigram based word representation, we represent a word- n -gram by concatenating the letter-trigram vectors of each word, e.g.,, for the t -th word- n -gram at the word- n -gram layer, we have
+p2
+aVThe output of the convolutional layer is a sequence of local contextual feature vectors, one for each word (within a contextual window
+p3
+aVIn Figure 2 , the word hashing matrix W f denotes the transformation from a word to its letter-trigram count vector, which requires no learning
+p4
+aVIn our model, we leverage the word hashing technique proposed in [ 8 ] where we first represent a word by a letter-trigram count vector
+p5
+aVConsider the t -th word- n -gram, the convolution matrix projects its letter-trigram representation vector l t to a contextual feature vector h t
+p6
+aVThe global feature vector can be then fed to feed-forward neural network layers to extract non-linear semantic features
+p7
+aVIt captures the word- n
+p8
+a.

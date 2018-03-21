@@ -1,0 +1,76 @@
+(lp0
+VFor each emotion category, we evaluates it as a binary classification problem
+p1
+aVOur approach is a weakly supervised approach since only some seeds emotion sentiment words are needed to lanch the process of lexicon construction
+p2
+aVIn the evaluation of emotion lexicons, the binary classification is performed in a very simple way
+p3
+aVUsually, a high quality emotion lexicon play a significant role when apply the unsupervised approaches for fine-grained emotion classification
+p4
+aVLastly, previous emotion lexicons are mostly annotated based on many manually constructed resources (e.g.,, emotion lexicon, parsers, etc
+p5
+aVHence, the topics consequently group semantically related words into a same emotion category
+p6
+aVWe descrige with the model description, a Gibbs sampling algorithm to infer the model parameters, and finally how to generate a emotion lexicon based on the model output
+p7
+aVThus far, most lexicon construction approaches focus on constructing general-purpose emotion lexicons [ 11 , 7 , 16 , 4 ]
+p8
+aVThe proposed EaLDA model extends the standard Latent Dirichlet Allocation (LDA) [ 3 ] model by employing a small set of seeds to guide the model generating topics
+p9
+aVOur approach relates most closely to the method proposed by Xie and Li ( 2012 ) for the construction of lexicon annotated for polarity based on LDA model
+p10
+aVHowever, since a specific word can carry various emotions in different domains, a general-purpose emotion lexicon is less accurate and less informative than a domain-specific lexicon [ 1 ]
+p11
+aVThese domain-specific words are mostly not included in any other existing general-purpose emotion lexicons
+p12
+aVThe experimental results show that our algorithm can successfully construct a fine-grained domain-specific emotion lexicon for this corpus that is able to understand the connotation of the words that may not be obvious without the context
+p13
+aVSince there is no metric explicitly measuring the quality of an emotion lexicon, we demonstrate the performance of our algorithm in two ways
+p14
+aVThus, the word is considered neutral and not included in the emotion dictionary
+p15
+aVIf u'\u005cu03a6' i , w ( e ) is the largest, then the word w is added to the emotion dictionary for the i th emotion
+p16
+aVThe second kind of approaches is based on an idea that emotion words co-occurring with each others are likely to convey the same polarity
+p17
+aVAs mentioned, we use a few domain-independent seed words as prior information for our model
+p18
+aVThe emotion (or non-emotion) topic is sampled according to a multinomial distribution Mult u'\u005cu2062' ( u'\u005cu0398' ( e ) ) (or Mult u'\u005cu2062' ( u'\u005cu0398' ( n ) )
+p19
+aVWhat we reported here are based on our judgments what are appropriate and what are not for each emotion topic
+p20
+aVThe lexicon is thus able to best meet the user u'\u005cu2019' s specific needs
+p21
+aVThe first kind of approaches is based on thesaurus that utilizes synonyms or glosses to d etermine the sentiment orientation of a word
+p22
+aVFor each word in the document, we decide whether its topic is an emotion topic or a non-emotion topic by flipping a coin with head-tail probability ( p ( e ) , p ( n ) ) , where ( p ( e ) , p ( n ) ) u'\u005cu223c' Dir u'\u005cu2062' ( u'\u005cu0391'
+p23
+aVDue to the popularity of opinion-rich resources (e.g.,, online review sites, forums, blogs and the microblogging websites), automatic extraction of opinions, emotions and sentiments in text is of great significance to obtain useful information for social and security studies
+p24
+aVIn practical applications, asking users to provide some seeds is easy as they usually have a good knowledge what are important in their domains
+p25
+aVVarious opinion mining applications have been proposed by different researchers, such as question answering, opinion mining, sentiment summarization, etc
+p26
+aVAssuming hyperparameters u'\u005cu0391' , u'\u005cu0391' ( e ) , u'\u005cu0391' ( n ) , and u'\u005cu0392' ( e ) , u'\u005cu0392' ( n ) , we develop a collapsed Gibbs sampling algorithm to estimate the latent variables in the EaLDA model
+p27
+aVAs the fine-grained annotated data are expensive to get, the unsupervised approaches are preferred and more used in reality
+p28
+aVUsing the definition of the EaLDA model and the Bayes Rule, we find that the joint density of these random variables are equal to
+p29
+aVAs an alternative representation, the graphical model of the the generative process is shown by Figure 1
+p30
+aVUsing the above equations, we can sample the topic z for each word iteratively and estimate all latent random variables
+p31
+aVThe vector u'\u005cu0392' ( e ) is constructed from the seed dictionary using u'\u005cu0393' = ( 0.25 , 0.95 )
+p32
+aVFinally, Snowball stemmer 2 2 http://snowball.tartarus.org/ is applied so as to reduce the vocabulary size and settle the issue of data spareness
+p33
+aVOtherwise, 1 K u'\u005cu2062' u'\u005cu2211' i = 1 K u'\u005cu03a6' i , w ( n ) is the largest among the M + 1 values, which suggests that the word w is more probably drawn from a non-emotion topic
+p34
+aVdraw w u'\u005cu223c' Mult u'\u005cu2062' ( u'\u005cu03a6' z ( n ) ( n ) ) , emit word w
+p35
+aVThen, by examining the property of Dirichlet distribution, we can compute expectations on the right hand side of equation ( 2 ) and equation ( 3 ) by
+p36
+aVAccording to equation ( 1 ), we see that { p ( e ) , p ( n ) } , { u'\u005cu0398' i ( e ) , u'\u005cu0398' j ( n ) } , { u'\u005cu03a6' i , w ( e ) } and { u'\u005cu03a6' j , w ( n ) } are mutually independent sets of random variables
+p37
+a.

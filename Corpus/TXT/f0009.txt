@@ -1,0 +1,442 @@
+Basic operations, completeness and dynamicity of cyber physical socio semantic link network CPSocio-SLN
+
+Knowledge Grid Research Group, Key Lab of Intelligent Information Processing, Institute of Computing Technology, Chinese Academy of Sciences, 100190 Beijing, People's Republic of China
+
+Southwest University, People's Republic of China
+
+Hai Zhuge, Bei Xu
+
+ABSTRACT
+
+Cyber Physical Socio Semantic Link network (CPSocio-SLN) is a model and method for self-organizing cyber physical socio resources in Cyber Physical Society (CP-Society). This paper views CPSocio-SLN as an evolution process through a series of operations, and investigates its basic operations, completeness, and dynamicity. A strategy for efﬁciently storing and managing CPSocio-SLN based on the basic operation set is proposed to support efﬁcient query and maintenance. An approach is suggested for simplifying CPSocio-SLN reasoning by estimating the importance of reasoning at multiple levels. The study of the dynamicity can help understand its basic characteristics. 
+
+KEYWORDS: cyber physical society; cyber physical socio; cyber physical systems; semantic link network; evolution; dynamicity
+
+1. INTRODUCTION
+
+1.1 Motivation
+
+Things in the world are related, but humans only know very limited relations in physical space and society. The Cyber Physical Socio Semantic Link Network (CPSocio-SLN) is to link things in a meaningful way and enable humans and agents to know more relations and its evolution through relational reasoning and operations in Cyber Physical Society (CP-Society) [1–5]. It is a general method to study various self-organized relational networks in and through cyber space, physical space, mental space and society.
+
+A CPSocio-SLN uses semantic links to connect nodes and carry out reasoning according to rules. A node can be resources in physical space, society, cyber space (e.g. text and image) and mental space (e.g. thought) [5]. The static semantics of semantic link is determined by Attributes, Relations, Class and Rules (ARCR). The static semantics of semantic node is determined by Attribute, Relation, Class, Neighbors and Instances (ARCNI) [5]. Behaviors of nodes and interaction between nodes will inﬂuence the semantics of a semantic link network [3, 4].
+
+Different from previous studies on various types of links, a distinguished characteristic of CPSocio-SLN is that it keeps evolving from the beginning due to its reasoning ability. When we add a new semantic link to the network, more semantic links will emerge because of inﬂuence and relational reasoning [6]. This dynamic nature brings many interesting research issues.
+
+This paper studies the basic operations that can be used to compose any operation on CPSocio- SLN and their completeness. We regard CPSocio-SLN as an evolution process through a series of operations. The issues and characteristics about CPSocio-SLN structure and operations will be discussed.
+
+1.2 Related work
+
+The ideal of the CP-Society was early described from ecosystem point of view in [1]: ‘An Eco-Grid is an open worldwide interconnection environment reﬂecting the characteristics of natural ecological environments. Its versatile resources and social roles coexist harmoniously yet evolve, provide appropriate on-demand services to one another, are transformed from one form to another, and communicate in terms of information, knowledge, and service ﬂows through social and economic value chains. It maintains a reasonable rate of expansion of useful resources and assimilates waste resources in light of overall environment capacity.' The importance of harmonious development of the nature, society, environment and cyber world pointed out that networks pervade nature, society and virtual worlds, giving structure and function to a variety of resources and behaviors, and that the future interconnection environment will be a large-scale human–machine environment that unites three worlds: physical world, virtual world and mental world [7]. The term CP-Society was used for the ﬁrst time to emphasize the importance of cyber space, physical space and society in the future interconnection environment in [5]. The Cyber Physical Socio Ecology was proposed in [8].
+
+Hyperlink networks and various labeled networks were extensively studied in hypertext, web and semantic web areas [9–11]. The Semantic Web is to create machine understandable semantics on the web [12]. Semantic Web is mainly based on ontology mechanisms and markup languages such as XML (www.w3.org/XML) and RDF [13]. XML describes the structure of Web resources to make cross-platform information exchange. RDF (www.w3.org/RDF) describes the universal resources and their relationships based on the triple (object, attribute, value). Based on RDF and XML, OWL (www.w3.org/2004/OWL/) uses ontology to describe the semantics of resources and uses roles to describe their relationships [14]. Operators were proposed for RDF to manipulate data [15]. Radio-frequency identiﬁcation (RFID) was incorporated into product, animal or person for the purpose of identiﬁcation and tracking using radio waves. RFID was a basic element to realize the Web of Things and Internet of Things.
+
+Ontology explicitly speciﬁes the concepts of a domain [16]. A set of ontology-change operations was introduced in [17]. The effects of changes and ontology evolution were discussed. The evolution of ontology is based on the basic atomic changes, and basic additions to or deletions from an RDF graph, which can be aggregated to compound changes [16]. A simple model of network growth had more than 5 million people and 10 million friendship links, annotated with metadata capturing the time of every event in life was discussed in [18]. Some basic relationships characterizing community evolution were addressed in [19].
+
+The initial motivation of the semantic link network SLN was to extend the hyperlink networks by enriching links and inclusion of rules and rule reasoning [2, 3, 6, 20–23]. Semantic Link Network Builder and Intelligent Semantic Browser are tools for SLN designers and users to build and browse SLN [24]. The approach to query routing in a peer-to-peer semantic link network and semantic link-based top-k join queries in P2P were proposed in [6, 24]. SLN can reﬂect social network and emerge semantic community [3]. SLN is regarded as an important component of the Knowledge Grid [22].
+
+Previous semantic net, semantic web, hyperlink, and semantic link are too static to represent dynamic relations in nature, minds, and society. Hence, SLN was extended to Socio-Natural Thought SLN for semantic networking in CP-Society [5]. The distinguished characteristics and philosophy were introduced.
+
+Some important questions should be answered: What are the characteristics of the CP-Society? What are its basic operations? How it evolves?
+
+1.3 Notations and deﬁnitions
+
+We ﬁrst introduce some basic notions:
+
+Reversion semantic link. If there is a semantic link α from r1 to r2, then there is a reverse semantic link of α from r2 to r1, denoted as Reverse (α) or αR.
+
+Figure 1 demonstrates a simple relational reasoning. Semantic link β could be derived from semantic link α and semantic link θ according to some rules, e.g. paternity relation can be derived from brother relation and paternity relation. The new semantic link μ could be further derived from β and λ. Rules are given by human users, and take the following form: S = {e1 × e2 -> e3, e3 × e4 -> e5, e6 -> e7 ... }, where ei (i = 1, 2, ..., 7) represents semantic links. If there are two semantic links sharing a common node and satisfying a reasoning rule, then a relational reasoning can be conducted, e.g. d1 -e1-> d2, d2 -e2-> d3 => d1 -e3-> d3 according to the ﬁrst rule in S, and one semantic link can imply the other link, i.e. d1 -e6-> d2 => d1 -e7-> d2 according to the third rule in S.
+
+Semantic closure. A closure of a CPSocio-SLN S is a semantic link network S+ such that all semantic links in S are also in S+, and any semantic link that can be derived from reasoning on S+ is also in S+.
+
+Minimum semantic cover. A CPSocio-SLN M is the minimum semantic cover of another CPSocio-SLN S, if it satisﬁes the following conditions: (1) M+ = S+ and (2) no semantic link sl exists in M such that (M−sl)+ = M+ holds.
+
+2. CHARACTERISTICS OF MINIMUM SEMANTIC COVER AND CONFORMATION SEQUENCE
+
+Theorem 1
+
+The minimum semantic cover of CPSocio-SLN is not unique.
+
+The theorem can be proved through instances. Figure 2 is a CPSocio-SLN with the following rules e7 × e1 -> e8, e8 × e2 -> e9, e9 × e3 -> e10, e10 × e4 -> e11, e11 × e5 -> e12, and e12 × e6 -> e7. It has the following six minimum semantic covers: {{e1, e2, e3, e4, e5, e6} U {e7}}, {{e1, e2, e3, e4, e5, e6} U {e8}}, {{e1, e2, e3, e4, e5, e6} U {e9}}, {{e1, e2, e3, e4, e5, e6} U {e10}}, {{e1, e2, e3, e4, e5, e6} U {e11}}, and {{e1, e2, e3, e4, e5, e6} U {e12}}; hence the minimum semantic cover for a CPSocio-SLN is not unique. Note that the semantic links in the minimum semantic cover may also be derived out by other semantic links in CPSocio-SLN.
+
+The minimum semantic cover of CPSocio-SLN is not unique, but the importance of different minimum semantic covers is different. Hence, we can select the most important one and regard it as the representative. Usually, the earlier formed one should take the priority as the representative.
+
+Conformation sequence is a sequence of operations on nodes and semantic links when building a CPSocio-SLN. No matter how the structure of the CPSocio-SLN is, it is built by operations gradually.
+
+Take the link set {e7, e8, e9, e10, e11, e12} shown in Figure 2 for example. The ﬁrst link added to the CPSocio-SLN (the conformation sequence can give this information) should be in the important minimum semantic cover. Adding e7, the CPSocio-SLN obtains semantic links {e8, e9, e10, e11, e12}. Hence, e7 should be in the important minimum semantic cover.
+
+An important minimum semantic cover for a CPSocio-SLN is unique. Hereafter, the minimum semantic cover refers to the important minimum semantic cover. Actually, Figure 2 implies a reasoning circulation.
+
+Deﬁnition 1
+
+Assume that a semantic link e does not exist in CPSocio-SLN M. Change M to M' by adding e to M, and calculate the semantic closure. If e can be also derived out through reasoning initiated by e, there must be a reasoning circulation in M' and e is in the reasoning circulation.
+
+Assume a semantic link set in a CPSocio-SLN. If adding any semantic link to the set will lead to the same effect, the link set is called equivalent link set. Figure 2 shows that {e7, e8, e9, e10, e11, e12} is an equivalent link set.
+
+We can detect whether there is a reasoning circulation after addition operation. A reasoning circulation can also be found by checking the log of CPSocio-SLN system.
+
+We can see that the cause of Theorem 1 is the existence of the equivalent semantic link set, because adding any link to this set leads to the same effect. ‘A CPSocio-SLN has equivalent link set' and ‘The minimum semantic cover for one CPSocio-SLN is not unique' are sufﬁcient and necessary condition to each other.
+
+CPSocio-SLN should handle the reasoning process if it has found a reasoning circulation.
+
+3. BASIC OPERATIONS AND CHARACTERISTICS OF CPSocio-SLN
+
+3.1 Basic operations of CPSocio-SLN
+
+A basic operation set satisﬁes the following conditions:
+
+(1) Expression ability. Operations in the set can transform one CPSocio-SLN to any CPSocio- SLN.
+
+(2) Orthogonality. In this operation set, there is no such operation that can be represented by other operations.
+
+The ﬁrst condition means that the set is for all operations and the second condition means that the number of operations in the set is the smallest.
+
+Deﬁnition 2
+
+Let e and a be semantic links in CPSocio-SLN G, and Gmin be the minimum semantic cover of G. Given a CPSocio-SLN G1 = Gmin−{e, a}, if the closure of G1 does not include a and the closure of G1 U {e} include a, we say that e determines a (or a is determined by e). All semantic links determined by e is called a determining set of e.
+
+A semantic link can be represented as (n1, n2, α, G), where n1 and n2 are nodes and α is a semantic link in CPSocio-SLN G. The following are the basic operation set:
+
+(1) Adding a new resource node n, AddNode (n, G).
+
+(2) Deleting a semantic link α between two nodes n1 and n2, DelLink (n1, n2, α, G). Semantic links determined by α should also be deleted. In this operation, if n1 and n2 are not given, the operation should delete all semantic links with semantic relation α.
+
+(3) Deleting an isolated node n, DelNode (n, G). If the node to be deleted is conjoint to other nodes, we should ﬁrst use DelLink to delete the semantic links between them. (Semantic links are classiﬁed into inter-attribute semantic link and inter-resource semantic link. The term isolated here means that there is no inter-resource semantic link among resources.)
+
+(4) Adding a semantic link a between two nodes n1 and n2, AddLink (n1, n2, a, G). If n1 and n2 do not exist, AddNode should be used to add n1 and n2 ﬁrst.
+
+(5) Adding a new rule, AddRule(RuleID, P -> S). RuleID is the identity of the rule, P and S are, respectively, the predecessor (in the form of e1 × e2 × e3 × ··· × en) and the successor of the rule.
+
+(6) Deleting a rule, DelRule (RuleID). Delete a reasoning rule according to RuleID.
+
+Theorem 2
+
+The above operation set is complete.
+
+First, the operation set's expression ability can transform any CPSocio-SLN into another. If there are some differences between two CPSocio-SLNs, the difference must be from three parts: resources, semantic links, and rules. There is a series of corresponding basic operations to transform one into the other. The basic operations (1) and (3) are for transforming resources. The basic operations (2) and (4) are for transforming semantic links. The basic operations (5) and (6) are for transforming rules.
+
+Second, any pair of operations in the set is orthogonal, since no one can be represented by the other in this operation set.
+
+The following algorithm is for calculating the semantic closure of a given CPSocio-SLN:
+
+Algorithm GetClosure
+
+Input: a CPSocio-SLN
+
+Output: the semantic closure of the input CPSocio-SLN
+
+(1) Initialize a semantic link queue Q. Check all semantic links in CPSocio-SLN, ﬁnd semantic links that can be derived out from existing links, and then add these new links to the CPSocio-SLN and Q.
+
+(2) Get the ﬁrst element of Q. Find new links that can be derived out by this element, and then add them to the CPSocio-SLN and Q.
+
+(3) If Q is not empty, go to step 2, else the algorithm ends.
+
+3.2 Characteristics of the basic operation set
+
+Based on the determination relation among semantic links, the following theorem can be reached.
+
+Theorem 3
+
+Semantic links are only determined by the semantic links in the minimum semantic cover.
+
+Proof
+
+Let α and e be two semantic links in CPSocio-SLN G, a is determined by e, and G1 = G−{e, a}. If e is not in the minimum semantic cover, then G1 is equal to G1 U {e}. According to Deﬁnition 2, it is impossible that G1 does not include a and G1 U {e} includes a. Hence, e does not determine a. Since the semantic link a is anyone, there is no semantic link determined by e. The conclusion is inconsistent with the assumption. Hence, the theorem holds.
+
+Characteristic 1
+
+If the semantic link to be deleted is not in the minimum semantic cover, the CPSocio-SLN equals to the original CPSocio-SLN after operating DelLink on it.
+
+Characteristic 2
+
+If the semantic link to be added is in the closure of the CPSocio-SLN, the CPSocio-SLN equals to the original CPSocio-SLN after operating AddLink on it.
+
+Characteristic 3
+
+Deleting a semantic link between two semantic nodes and then adding it between the same pair of nodes, this CPSocio-SLN is unchanged.
+
+However, if we change the order of operations, the result will be different.
+
+Characteristic 4
+
+Adding a semantic link between two nodes and then deleting it, the minimum semantic cover of the CPSocio-SLN may be changed.
+
+Take Figure 3 for example, e3 is added, if there is a rule e3 × e1 -> e2, e2 should not be in the minimum semantic cover. Hence, e2 should be removed from the minimum semantic cover. Based on the basic operation 3, if we delete e3, e2 should be deleted too. Compared with the original minimum semantic cover, the CPSocio-SLN has been changed because of missing e2.
+
+Characteristic 5 can be easily obtained from characteristic 4.
+
+Characteristic 5
+
+Adding a semantic link between two nodes and then deleting it between the same pair of nodes, the CPSocio-SLN may be changed.
+
+Hence, after adding (deleting) a semantic link, we cannot simply use the deleting (adding) operation to recover the CPSocio-SLN.
+
+Characteristic 6
+
+If a semantic link h in the minimum semantic cover can be derived out by j × k -> h, and the determining set of h does not include j or k, h should not be in the minimum semantic cover.
+
+As shown in Figure 4, if there is a rule m × d -> a, a is in the minimum semantic cover. But a should not be deleted from the minimum semantic cover, otherwise a cannot be reasoned out. Figure 4 shows the semantic link m that can reason out a can be reasoned out by a, because a's determining set includes m. If we delete a, then the semantic links that are determined by a will not be reasoned out.
+
+Characteristic 7
+
+Two semantic links' determining set may have intersection.
+
+This characteristic implies that its determining set should not be deleted after deleting a semantic link, because there may be another determining set that has intersection with it.
+
+Except these basic operations, we should provide some complex operations for convenience. These complex operations, such as union, disjoin, etc., can all be implemented by the basic operations.
+
+3.3 Inter-attribute semantic link and inter-resource semantic link
+
+For a given set of resources, there are two essential types of semantic links: the semantic links between attributes of resources and the semantic links between resources. The former is called inter-attribute semantic link (e.g. older or younger links between attributes age of two nodes). The latter is called inter-resource semantic link (e.g. friend relation). Figure 5 shows the inter-attribute semantic links and inter-resource semantic links. Inter-resource semantic links may change from time to time, but inter-attribute semantic links are relatively stable as long as the nodes are stable. The change of inter-resource semantic link helps humans deepen the recognition of resources.
+
+Is there any relationship between the two types of semantic links?
+
+Inter-resource semantic links cannot be derived from attributes. For example, we can clearly
+ﬁnd out a semantic link older or younger between attributes of two persons, but semantic links, such as friend and enemy, cannot be derived out from attributes.
+
+Characteristic 8
+
+Attributes can only determine inter-attribute semantic links.
+
+Users can set rules for attributes on how to automatically ﬁnd inter-attribute semantic links.
+
+Characteristic 9
+
+Deleting or adding inter-attribute semantic links does not change inter-resource semantic links.
+
+Inter-attribute semantic links can reason with inter-resource semantic links to obtain new inter-resource semantic links. Inter-resource semantic links may inﬂuence humans' understanding on attributes of resources. The inﬂuences form an iterative and self-adaptive process to approach the semantics of CPSocio-SLN. For example, semantic link consanguinity implies that the predecessor and successor of this link must have attribute life-form. Hence, the inter-resource semantic link can help resources ﬁnd the attributes they do not know before.
+
+The minimum semantic cover and closure are on inter-resource semantic links. The evolution of semantic link network is based on inter-resource semantic links. Figure 6 shows the relationship among resources, inter-attribute semantic links, and inter-resource semantic links. It explains the intrinsic relationships between discovery of semantic link and semantic link evolution.
+
+4. MAINTENANCE AND QUERY
+
+4.1 Strategy for storing in cyber space
+
+The execution of operations is related to the storage of CPSocio-SLN. Hence, the structure of storage inﬂuences the way of operations. The following are the two basic storage strategies:
+
+(1) Save the closure of CPSocio-SLN. This strategy leads to high efﬁciency in query, but the cost of maintenance is also high. Since the minimum semantic cover is not saved, many operations must calculate this cover ﬁrst , which usually costs much time.
+
+(2) Save the minimum semantic cover of CPSocio-SLN. This strategy leads to high efﬁciency in maintenance, but the cost of query is high. If we want to know a relation between two nodes, the reasoning cost is high. Sometimes, the closure of CPSocio-SLN must be reasoned out.
+
+The third efﬁcient storage strategy is to save both the semantic closure and the minimum semantic cover of CPSocio-SLN so that we can operate on the minimum semantic cover and can query on the closure. But, the minimum semantic cover and the closure must keep consistent after operations.
+
+The following are the advantages of the third storage strategy:
+
+(1) The semantic links to be queried must have been reasoned out. As the closure of CPSocio- SLN is stored, we can ﬁnd these links efﬁciently.
+
+(2) Easy to maintain. Operations can directly be applied to the minimum semantic cover of CPSocio-SLN.
+
+(3) Update operations can be put to background; hence, CPSocio-SLN can quickly answer query and execute operations.
+
+4.2 Minimum spanning graph set
+
+Deﬁnition 3
+
+The spanning graph of a semantic link α is a subgraph of the minimum semantic cover such that this subgraph's closure includes α.
+
+Deﬁnition 4
+
+The minimum spanning graph of a semantic link m is a subgraph of the minimum semantic cover such that this subgraph's closure includes m, and there is no proper subgraph of this subgraph, its closure also has m.
+
+A semantic link may have several minimum spanning graphs, and these minimum spanning graphs may have intersection.
+
+Deﬁnition 5
+
+A semantic link may have several minimum spanning graphs. A semantic link's minimum spanning graph set is a graph set of these minimum spanning graphs.
+
+As shown in Figure 7, e1, e2, e3, e4, e5, e10, and e11 are the semantic links in the minimum semantic cover, other semantic links are derived. The reasoning process is as follows: e2 × e5 -> e6, e1 × e6 -> e7, e3 × e4 -> e8, e7 × e8 -> e9, and e10 × e11 -> e9. Hence, the minimum spanning graph set of e1, e2, e3, e4, e5, e10 and e11 is {{e1}}, {{e2}}, {{e3}}, {{e4}}, {{e5}}, {{e10}}, {{e11}} and the minimum spanning graph set of e6, e7, e8 and e9 is {{e2, e5}}, {{e1, e2, e5}}, {{e3, e4}}, {{e1, e2, e5, e3, e4},{e10, e11}}. Link e9 has two minimum spanning graphs.
+
+Characteristic 10
+
+Let G be the minimum spanning graph of semantic link e. If any semantic link in G has been deleted, G cannot reason out e any more.
+
+Proof
+
+If G still can reason out e after deleting semantic link a in the minimum spanning graph, the graph G-{the deleted link} is also a spanning graph of e and a proper subgraph of G. Hence, G is not the minimum spanning graph of e. It is inconsistent with the deﬁnition of the minimum spanning
+(cid:2) graph.
+
+Every link has a minimum spanning graph set. If a link is in the minimum spanning graph set, we add its rank by one. After checking all links' minimum spanning graph set, we can get a link set, links in this set have the same rank and links that are not in the set have a smaller rank. Hence, the links in the set are the most important. They form the core and represent the meaning of the CPSocio-SLN.
+
+Obviously, only the inter-resource semantic links have the minimum spanning graph set. The inter-attribute semantic links are generated by resources' attributes; hence, they do not have the minimum spanning graph set.
+
+4.3 Maintenance operations for the basic operations
+
+Characteristic 4 shows that adding semantic links may change the minimum semantic cover. We need to maintain the closure, and modify the minimum semantic cover. After operations on the minimum semantic cover, the process of maintenance operations is as follows:
+
+(1) Carrying out reasoning and analysis on CPSocio-SLN according to the operations on the minimum semantic cover, maintaining the closure of CPSocio-SLN, and recording the place that needs to be modiﬁed in the minimum semantic cover.
+
+(2) Modifying the places in the minimum semantic cover and re-maintaining the semantic closure.
+
+Based on the basic operations, there are six kinds of maintenance operations. Since Characteristic
+4 must be considered, these update operations must adjust the minimum semantic cover if needed.
+
+(1) Maintenance for adding a semantic link AddLink The update operation needs to ﬁnd all semantic links that can be derived out from this new link, instead of visiting the entire CPSocio-SLN graph. We use the possibility reasoning set of semantic link a to represent the semantic links that can reason with a. The semantic links that are not in this set never reason with a. For every semantic link, for example a, the semantic links set Ereasoning (a) = {e e and a are adjacent}. The following algorithm solves this problem: Add a semantic link e = (n1, n2, α) and calculate the semantic closure of the new CPSocio-SLN.
+
+Algorithm OriginalAddLink:
+
+Input: Closure of original CPSocio-SLN and e (the new semantic link that has already been added to the minimum semantic cover).
+
+Output: Closure of new CPSocio-SLN, which includes original CPSocio-SLN and e.
+
+(1) Add e to CPSocio-SLN's closure.
+
+(2) Find new links which should be added to CPSocio-SLN because of adding link e, and then add these new links to CPSocio-SLN.
+
+(3) Go to (2) until there is no change on CPSocio-SLN.
+
+(4) Modify CPSocio-SLN's minimum semantic cover to satisfy the deﬁnition of the minimum semantic cover (Characteristic 4).
+
+(5) Algorithm ends.
+
+(2) Maintenance for deleting a semantic link DelLink
+
+To delete a semantic link means the deletion of the link and its determining set. The minimum spanning graph brings advantages to deleting a semantic link. Assuming semantic link e has n minimum spanning graphs, the minimum spanning graph set is Ce = {G1, G2 ... Gn}. The semantic link set of this CPSocio-SLN's minimum semantic cover is E = {e1, e2 ... em}. Hence, all the semantic links in Gi (i = 1, 2, . .. , n) are in E. If users delete a semantic link ek in E, should e be deleted?
+
+We ﬁrst calculate the graph set Cek = {Gi Gi includes ek , Gi ∈ Ce}, then update the minimum spanning set of e : Ce = Ce−Cek. If Ce is empty, e should be deleted after deleting ek since e cannot be reasoned out by any part of the CPSocio-SLN.
+
+Hence, we should ﬁnd a way to obtain the minimum spanning graph of every semantic link. Every CPSocio-SLN has a conformation sequence. That means every CPSocio-SLN can be obtained by adding nodes and semantic links orderly. Hence, what we need to do is updating the minimum spanning graph set of every link when we add a new link to CPSocio-SLN graph. Based on Characteristic 4, adding a new link may change the other links' minimum spanning graph sets. We should also calculate the new link's minimum spanning graph set.
+
+If a CPSocio-SLN only has one semantic link, this link's minimum spanning graph set only has one minimum spanning graph which is this semantic link itself. For a complex CPSocio-SLN, when the minimum spanning graph set of every semantic link has been obtained, if we add a new semantic link e = (n1, n2, α), we use the following algorithm to update all of the minimum spanning graph sets.
+
+Algorithm NewAddLink
+
+Input: The closure of original CPSocio-SLN, the minimum spanning graph set of every semantic link in original CPSocio-SLN, and new link e which has already been added to the minimum semantic cover.
+
+Output: The closure of the new CPSocio-SLN that includes original CPSocio-SLN and e, the updated minimum spanning graph set of every semantic link.
+
+(1) Add e to CPSocio-SLN's closure.
+
+(2) Find new links which should be added to CPSocio-SLN because of adding link, and then add these new links to CPSocio-SLN.
+
+(3) Calculate the new links' minimum spanning graph set, update every link's minimum spanning graph set and record these links that should not be in the minimum semantic cover
+(Characteristic 4).
+
+(4) Go to step 2 until there is no change on CPSocio-SLN.
+
+(5) Remove these links which should not be in the minimum semantic cover, and change the corresponding links' minimum spanning graph set.
+
+(6) End.
+
+Through analyzing the minimum spanning graph, we can obtain the algorithm of updating based on deleting a semantic link.
+
+Algorithm DeleteLinkUpdate
+
+Input: Original CPSocio-SLN's closure, original minimum spanning graph set of every link, and the link we want to delete ek.
+
+Output: New CPSocio-SLN's closure (It does not include ek and the links derived from ek), and the new minimum spanning graph set of every link.
+
+(1) Delete ek from the CPSocio-SLN's closure.
+
+(2) Update the minimum spanning graph sets of all links. If a link's minimum spanning graph set has a minimum spanning graph that includes ek, then delete this minimum spanning graph.
+
+(3) Check all links; if a semantic link's minimum spanning graph set is empty, delete this link from CPSocio-SLN.
+
+(4) After checking all links, the algorithm terminates.
+
+(3) Maintenance for adding or deleting a node
+
+The following are maintenance operations for adding a node AddNode:
+
+(1) Add the same node to both of the semantic closure and the minimum semantic cover.
+
+(2) The approach to discover attribute-based link will be used to ﬁnd out all inter-attribute semantic links between the new node and other nodes.
+
+(3) Call Algorithm NewAddLink to redo the reasoning process to update the new closure.
+
+If nodes in the minimum semantic cover are isolated, they are also isolated in closure, and vice versa. Hence, the maintenance operation of operation deleting a node DeleteNode is as follows:
+
+(1) Delete the same node in both the semantic closure of CPSocio-SLN and the minimum semantic cover.
+
+(2) Delete the inter-attribute semantic links connected to the node.
+
+(3) Do the same operation as step 3 in the maintenance operation of AddNode.
+
+(4) Maintenance for adding or deleting a rule AddRules The maintenance operation of adding or deleting a rule is to update the CPSocio-SLN according to new rule set by using step 3 in maintenance of the AddNode operation.
+
+4.4 Complexity of algorithms
+
+The time complexity of DelLink is O(E2). After deleting a semantic link e, the algorithm must check all of the other links if they have a minimum spanning graph that includes e; hence the time complexity of deleting a semantic link is O(E2). After adding a semantic link e, the algorithm will add all implied links. Hence, the time complexity of adding a semantic link AddLink is O(E2 × Σ^{k−1}_{i = 1} ni), ni denotes the number of new links generated at step i. The time complexity of AddNode, DelNode, AddRule, and DelRule is the same as AddLink because they all use the Algorithm NewAddLink.
+
+The space complexity of DelNode and AddNode is O(1). To store a minimum spanning graph set for every link needs O(E2) space, other space cost is small; hence, the space complexity of DelLink and AddLink is O(E2). The space complexity of AddNode, DelNode, AddRule and DelRule is the same as AddLink because they all use Algorithm NewAddLink.
+
+5. AN EXAMPLE ON BASIC OPERATIONS
+
+Take Figure 7 as an example. We use basic operations to add or delete semantic links and nodes. e1, e2, e3, e4, e5, e10, and e11 are semantic links in the minimum semantic cover, other links are reasoned out by other links in the minimum semantic cover.
+
+The following is the reasoning process: e2 × e5 -> e6, e1 × e6 -> e7, e3 × e4 -> e8, e7 × e8 -> e9, and e10 × e11 -> e9.
+
+As introduced, the minimum generating graph set of e1, e2, e3, e4, e5, e10, e11 is {{e1}}, {{e2}}, {{e3}}, {{e4}}, {{e5}}, {{e10}}, {{e11}} and e6, e7, e8, e9 is {{e2, e5}}, {{e1, e2, e5}}, {{e3, e4}}, {{e1, e2, e5, e3, e4},{e10, e11}}. Now, we add a semantic link e12 as shown in Figure 8.
+ 
+
+Semantic link e12 can bring the following reasoning: e12 × e5 -> e4^{R}, e12 × e3^{R} -> e13, and e13 × e9 -> e14. Hence, e4 should not be in the minimum semantic cover.
+
+The minimum generating graph set of e1, e2, e3, e5, e10, e11, and e12 is {{e1}}, {{e2}}, {{e3}},
+{{e5}}, {{e10}}, {{e11}}, {{e12}} and e4, e6, e7, e8, e9, e13, e14 is {{e5, e12}}, {{e2, e5}}, {{e1, e2, e5}},
+{{e3, e5, e12}}, {{e1, e2, e5, e3, e12},{e10, e11}}, {{e12, e3}}, {{e1, e2, e5, e3, e12},{e12, e3, e10, e11}}.
+
+If we delete e5 based on the mentioned rules, e4, e5, e6, e7, and e8 should also be deleted, but e9 and e14 will not be deleted. Their number of minimum generating graphs will be less by one. The result is as shown in Figure 9.
+
+The minimum generating graph set of e1, e2, e3, e10, e11, and e12 is {{e1}}, {{e2}}, {{e3}}, {{e10}},
+{{e11}}, {{e12}}, and that of e9, e13, e14 is {{e10, e11}}, {{e12, e3}}, {{e12, e3, e10, e11}}.
+
+6. SUMMARY
+
+Understanding various relational networks and their evolution is important for developing future CP-Society. CPSocio-SLN emphasizes relations, relation evolution, relational reasoning, and operation inﬂuence. We view CPSocio-SLN as an evolution process through operations, and investigate its basic operations, completeness, and dynamicity. The conformation sequence reﬂects its evolution process. To merge two CPSocio-SLNs, their conformation sequences should be merged ﬁrst, and then calculate the minimum semantic cover and the minimum spanning graph of every semantic link based on the merged conformation sequence.
+
+CPSocio-SLN should know its minimum semantic cover. If there is a reasoning circulation, then a semantic link in the equivalent link set can be randomly selected and added to the minimum semantic cover. The CPSocio-SLN system can simulate the process of conformation—adding links to the minimum semantic cover orderly and calculating the minimum spanning graph. The conformation information helps to know the evolution characteristics and rules.
+
+The minimum semantic cover and the minimum spanning graph indicate the semantics of CPSocio-SLN as the minimum spanning graph can indicate the most important semantic links in the minimum semantic cover. Since a CPSocio-SLN could be very large, the strategy for efﬁciently storing and managing CPSocio-SLN based on the basic operation set is proposed to support efﬁcient query and maintenance.
+
+This research is a part of CPSocio-SLN theory, which will play an important role in establishing and analyzing the CP-Society.
+
+REFERENCES
+
+[1] Zhuge H, Shi X. Toward the eco-grid: A harmoniously evolved interconnection environment. Communications of the ACM 2004; 47(9):78–83.
+
+[2] Zhuge H. Knowledge Grid. World Scientiﬁc: Singapore, 2004.
+
+[3] Zhuge H. Communities and emerging semantics in semantic link network: Discovery and learning. IEEE Transactions on Knowledge and Data Engineering 2009; 21(6):785–799.
+
+[4] Zhuge H. Interactive semantics. Artiﬁcial Intelligence 2010; 174:190–204.
+
+[5] Zhuge H. Socio-natural thought semantic link network: A method of semantic networking in the cyber physical society. The 24th International Conference on Advanced Information Networking and Applications (IEEE AINA2010), Perth, Australia, April 2010; 19–26.
+
+[6] Zhuge H, Li X. Peer-to-peer in metric space and semantic space. IEEE Transactions on Knowledge and Data Engineering 2007; 19(6):759–771.
+
+[7] Zhuge H. The future interconnection environment. IEEE Computer 2005; 38(4):27–33.
+
+[8] Shi X, Zhuge H. Cyber physical socio ecology. Concurrency and Computation: Practice and Experience, DOI: 10.1002/cpe.1625.
+
+[9] Berners-Lee T, Cailliau R. The world wide web. Communications of the ACM 1994; 37(8):76–82.
+
+[10] Conklin J. Hypertext: An introduction and survey. Computer 1987; 20(9):17–41.
+
+[11] Collins AM, Quillian MR. Retrieval time from semantic memory. Journal of Verbal Learning and Verbal Behavior
+1969; 8(2):240–248.
+
+[12] Berners-Lee, Hendler J, Lassila O. The semantic web. Scientiﬁc American 2001; 284:34–43.
+
+[13] Klein M. XML, RDF, and relatives. IEEE Internet Computing 2001; 5(2):26–28.
+
+[14] Bechhofer S, Harmelen FV, Hendler J, Horrocks I, McGuinness DL, Patel-Schneider PF, Stein LA. OWL Web ontology language, reference, 2004. Available at: www.w3.org/TR/owl-ref/.
+
+[15] Frasincar F, Houben G-J, Vdovjak R, Barna P. RAL, an algebra for querying RDF. World Wide Web: Internet and Web Information Systems 2004; 7:83–109.
+
+[16] Auer S, Herre H. A versioning and evolution framework for RDF knowledge bases. Proceedings of Ershow Memorial Conference, Novosibirsk, Akademgorodok, Russia, 27–30 June 2006.
+
+[17] Noy NF, Klein M. Ontology evolution: Not the same as schema evolution. Knowledge and Information Systems
+2004; 6:428–440.
+
+[18] Kumar R, Novak J, Tomkins A. Structure and evolution of online social networks. Proceedings of the 12th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, Philadelphia, PA, U.S.A., 20–23 August 2006.
+
+[19] Palla G, Barabási A-L, Vicsek T. Quantifying social group evolution. Nature 2007; 446:664–667.
+
+[20] Zhuge H, Zheng L, Zhang N, Li X. An automatic semantic relationships discovery approach. WWW, New York, NY, U.S.A., 2004; 278–279.
+
+[21] Zhuge H, Sun Y. Schema theory for semantic link network. Future Generation Computer Systems 2010;
+26(3):408–420.
+
+[22] Zhuge H. Autonomous semantic link networking model for the knowledge grid. Concurrency and Computation: Practice and Experience 2007; 7(19):1065–1085.
+
+[23] Xu B, Zhuge H. The basic operation set of semantic link network and its completeness. The Fourth International Conference on Semantics, Knowledge and Grid (SKG2009), Zhuhai, China, October 2009; 232–239.
+
+[24] Zhuge H, Jia R, Liu J. Semantic link network builder and intelligent semantic browser. Concurrency and Computation: Practice and Experience 2004; 16(14):1453–1476.

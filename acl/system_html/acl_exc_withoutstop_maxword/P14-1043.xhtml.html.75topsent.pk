@@ -1,0 +1,22 @@
+(lp0
+VTo construct parse forest on unlabeled data, we employ three supervised parsers based on different paradigms, including our baseline graph-based dependency parser, a transition-based dependency parser [] , and a generative constituent parser []
+p1
+aVBoth work employs two parsers to process the unlabeled data, and only select as extra training data sentences on which the 1-best parse trees of the two parsers are identical
+p2
+aVDifferent from traditional self/co/tri-training which only use 1-best parse trees on unlabeled data, our approach adopts ambiguous labelings, represented by parse forest, as gold-standard for unlabeled sentences
+p3
+aVTraining with the combined labeled and unlabeled data, the objective is to maximize the mixed likelihood
+p4
+aV16K for Chinese), it is likely that the unlabeled data may overwhelm the labeled data during SGD training
+p5
+aVUsing three supervised parsers, we have many options to construct parse forest on unlabeled data
+p6
+aVFinally, using a conditional random field (CRF) based probabilistic parser, we train a better model by maximizing mixed likelihood of labeled data and auto-parsed unlabeled data with ambiguous labelings
+p7
+aVFinally, with sufficient unlabeled data, it is possible that the parser can learn to resolve such uncertainty by biasing to more reasonable parse trees
+p8
+aVWe divide the unlabeled data into three sets according to the divergence of the 1-best outputs of Berkeley Parser and ZPar
+p9
+aVExperiments show that the constituent parser is very helpful since it produces more divergent structures for our semi-supervised parser than discriminative dependency parsers
+p10
+a.

@@ -1,0 +1,264 @@
+(lp0
+VPrevious work on neural word embeddings take the contexts of a word to be its linear context u'\u005cu2013' words that precede and follow the target word, typically in a window of k tokens to each side
+p1
+aVWe modified word2vec to support arbitrary contexts, and to output the context embeddings in addition to the word embeddings
+p2
+aVIn this work, we generalize the SkipGram model, and move from linear bag-of-words contexts to arbitrary word contexts
+p3
+aVThis dataset contains pairs of similar words that reflect either relatedness (topical similarity) or similarity (functional similarity) relations
+p4
+aVIntuitively, words that appear in similar contexts should have similar embeddings, though we have not yet found a formal proof that SkipGram does indeed maximize the dot product of similar words
+p5
+aVWe thus expect the syntactic contexts to yield more focused embeddings, capturing more functional and less topical similarity
+p6
+aVTo demonstrate, we list the 5 most activated contexts for our example words with Deps embeddings in Table 2
+p7
+aVIn the SkipGram embedding algorithm, the contexts of a word w are the words surrounding it in the text
+p8
+aVWe generalize SkipGram by replacing the bag-of-words contexts with arbitrary contexts
+p9
+aVHowever, other target words show clear differences between embeddings
+p10
+aVA very common paradigm for acquiring such representations is based on the distributional hypothesis of Harris [ 16 ] , stating that words in similar contexts have similar meanings
+p11
+aVOur first evaluation is qualitative we manually inspect the 5 most similar words (by cosine similarity) to a given set of target words (Table 1
+p12
+aVSyntactic contexts capture different information than bag-of-word contexts, as we demonstrate using the sentence u'\u005cu201c' Australian scientist discovers star with telescope u'\u005cu201d'
+p13
+aVIf we keep the context embeddings, we can query the model for the contexts that are most activated by (have the highest dot product with) a given target word
+p14
+aVWe thus seek a representation that captures semantic and syntactic similarities between words
+p15
+aVIn particular, the bag-of-words nature of the contexts in the u'\u005cu201c' original u'\u005cu201d' SkipGram model yield broad topical similarities , while the dependency-based contexts yield more functional similarities of a cohyponym nature
+p16
+aVUsing a window of size k around the target word w , 2 u'\u005cu2062' k contexts are produced the k words before and the k words after w
+p17
+aVIn Hogwarts - the school of magic from the fictional Harry Potter series - it is evident that BoW contexts reflect the domain aspect, whereas Deps yield a list of famous schools, capturing the semantic type of the target word
+p18
+aVIn this paper we experiment with dependency-based syntactic contexts
+p19
+aVNote that a context window of size 2 may miss some important contexts ( telescope is not a context of discovers ), while including some accidental ones ( Australian is a context discovers
+p20
+aVIn Section 5 we show that the SkipGram model does allow for some introspection by querying it for contexts that are u'\u005cu201c' activated by u'\u005cu201d' a target word
+p21
+aVThis is the case for many target words
+p22
+aVThe pairs are ranked according to cosine similarities between the embedded words
+p23
+aVThey capture relations to words that are far apart and thus u'\u005cu201c' out-of-reach u'\u005cu201d' with small window bag-of-words (e.g., the instrument of discover is telescope/prep_with ), and also filter out u'\u005cu201c' coincidental u'\u005cu201d' contexts which are within the window but not directly related to the target word (e.g., Australian is not used as the context for discovers
+p24
+aVThe first target word, Batman , results in similar sets across the different setups
+p25
+aVThis resulted in a vocabulary of about 175,000 words, with over 900,000 distinct syntactic contexts
+p26
+aVAn alternative to the bag-of-words approach is to derive contexts based on the syntactic relations the word participates in
+p27
+aVIn our example, the contexts of discovers are Australian , scientist , star , with
+p28
+aVThe software defaults to prune rare words based on their frequency, and has an option for sub-sampling the frequent words
+p29
+aVThe results show a similar trend (Figure 2 b
+p30
+aVNeural word embeddings are often considered opaque and uninterpretable, unlike sparse vector space representations in which each dimension corresponds to a particular known context, or LDA models where dimensions correspond to latent topics
+p31
+aVWord embeddings are easy to work with because they enable efficient computation of word similarities through low-dimensional matrix operations
+p32
+aVThis allows us to peek into the learned representation and explore the contexts that are found by the learning process to be most discriminative of particular words (or groups of words
+p33
+aVSince word2vec removes the subsampled words from the corpus before creating the window contexts, this option effectively increases the window size, resulting in greater topicality
+p34
+aVOptimizing this objective makes observed word-context pairs have similar embeddings, while scattering unobserved pairs
+p35
+aVFor bag-of-words contexts we used the original word2vec implementation, and for syntactic contexts, we used our modified version
+p36
+aVThe different kinds of contexts produce noticeably different embeddings, and induce different word similarities
+p37
+aVWord representation is central to natural language processing
+p38
+aVA window size of 5 is commonly used to capture broad topical content, whereas smaller windows contain more focused information about the target word
+p39
+aVThe context vocabulary C is thus identical to the word vocabulary W
+p40
+aVMore specifically, the negative-sampling objective assumes a dataset D of observed ( w , c ) pairs of words w and the contexts c , which appeared in a large body of text
+p41
+aVWe use the embeddings in a retrieval/ranking setup, where the task is to rank the similar pairs in the dataset above the related ones
+p42
+aVThe next two examples demonstrate that similarities induced from Deps share a syntactic function (adjectives and gerunds), while similarities based on BoW are more diverse
+p43
+aVThese representations, referred to as u'\u005cu201c' neural embeddings u'\u005cu201d' or u'\u005cu201c' word embeddings u'\u005cu201d' , have been shown to perform well across a variety of tasks [ 29 , 9 , 26 , 2 ]
+p44
+aVBoW5 (bag-of-words contexts with k = 5 ), BoW2 (same, with k = 2 ) and Deps (dependency-based syntactic contexts
+p45
+aVThese pruning and sub-sampling happen before the context extraction, leading to a dynamic window size
+p46
+aVLoosely speaking, we seek parameter values (that is, vector representations for both words and contexts) such that the dot product v w u'\u005cu22c5' v c associated with u'\u005cu201c' good u'\u005cu201d' word-context pairs is maximized
+p47
+aVBased on the distributional hypothesis, many methods of deriving word representations were explored in the NLP community
+p48
+aVOn one end of the spectrum, words are grouped into clusters based on their contexts [ 5 , 32 ]
+p49
+aVWe report results for 300 dimension embeddings, though similar trends were also observed with 600 dimensions
+p50
+aVIn particular, we found that Deps perform dramatically worse than BoW contexts on analogy tasks as in [ 22 , 17 ]
+p51
+aVFinally, we observe that while both BoW5 and BoW2 yield topical similarities, the larger window size result in more topicality, as expected
+p52
+aVTurney [ 31 ] described this distinction as domain similarity versus functional similarity
+p53
+aV4 4 Some word pairs are judged to exhibit both types of similarity, and were ignored in this experiment
+p54
+aVThe presence of many conjunction contexts, such as superman/conj for batman and singing/conj for dancing , may explain the functional similarity observed in Section 4 ; conjunctions in natural language tend to enforce their conjuncts to share the same semantic types and inflections
+p55
+aVMoreover, the contexts are unmarked, resulting in discovers being a context of both stars and scientist , which may result in stars and scientists ending up as neighbours in the embedded space
+p56
+aVThis is the context used by word2vec and many other neural embeddings
+p57
+aVSpecifically, following work in sparse vector-space models [ 18 , 24 , 3 ] , we experiment with syntactic contexts that are derived from automatically produced dependency parse-trees
+p58
+aVOn the other end, words are represented as a very high dimensional but sparse vectors in which each entry is a measure of the association between the word and a particular context (see [ 30 , 3 ] for a comprehensive survey
+p59
+aVIn addition, the window size is not fixed to k but is sampled uniformly in the range [ 1 , k ] for each word
+p60
+aVWe repeated the experiment with a different dataset [ 7 ] that was used by Turney [ 31 ] to distinguish between domain and functional similarities
+p61
+aVWhen reversing the task such that the goal is to rank the related terms above the similar ones, the results are reversed, as expected (not shown
+p62
+aVBy doing so, we can see what the model learned to be a good discriminative context for the word
+p63
+aV1 1 code.google.com/p/word2vec/ Not only does it produce useful word representations, but it is also very efficient to train, works in an online fashion, and scales well to huge copora (billions of words) as well as very large word and context vocabularies
+p64
+aVThe list contains more mathematicians without u'\u005cu201c' ing u'\u005cu201d' further down and many other nouns as well; BoW find words that associate with w , while Deps find words that behave like w
+p65
+aVAlthough we cannot assign a meaning to any particular dimension, we can indeed get a glimpse at the kind of information being captured by the model, by examining which contexts are u'\u005cu201c' activated u'\u005cu201d' by a target word
+p66
+aVIn addition, the contexts are typed, indicating, for example, that stars are objects of discovery and scientist s are subjects
+p67
+aVThe default approach of representing words as discrete and distinct symbols is insufficient for many tasks, and suffers from poor generalization
+p68
+aVIn the skip-gram model, each word w u'\u005cu2208' W is associated with a vector v w u'\u005cu2208' R d and similarly each context c u'\u005cu2208' C is represented as a vector v c u'\u005cu2208' R d , where W is the words vocabulary, C is the contexts vocabulary, and d is the embedding dimensionality
+p69
+aVHowever, this restriction is not required by the model; contexts need not correspond to words, and the number of context-types can be substantially larger than the number of word-types
+p70
+aVIn this section we summarize the model and training objective following the derivation presented by Goldberg and Levy [ 13 ] , and highlight the ease of incorporating arbitrary contexts in the model
+p71
+aVAll tokens were converted to lowercase, and words and contexts that appeared less than 100 times were filtered
+p72
+aVWe also tried using the subsampling option [ 21 ] with BoW contexts (not shown
+p73
+aVWe supplement the examples in Table 1 with quantitative evaluation to show that the qualitative differences pointed out in the previous section are indeed widespread
+p74
+aVAn example of the dependency context extraction is given in Figure 1
+p75
+aVAll embeddings were trained on English Wikipedia
+p76
+aVHowever, other types of contexts can be explored too
+p77
+aVMost recently, it has been proposed to represent words as dense vectors that are derived by various training methods inspired from neural-network language modeling [ 4 , 10 , 23 , 20 , 21 ]
+p78
+aVInterestingly, the most discriminative syntactic contexts in these cases are not associated with subjects or objects of verbs (or their inverse), but rather with conjunctions, appositions, noun-compounds and adjectivial modifiers
+p79
+aVFor k = 2 , the contexts of the target word w are w - 2 , w - 1 , w + 1 , w + 2
+p80
+aVThe graph in Figure 2 a shows this is indeed the case
+p81
+aVWe experiment with 3 training conditions
+p82
+aVFor example, the symbolic representation of the words u'\u005cu201c' pizza u'\u005cu201d' and u'\u005cu201c' hamburger u'\u005cu201d' are completely unrelated even if we know that the word u'\u005cu201c' pizza u'\u005cu201d' is a good argument for the verb u'\u005cu201c' eat u'\u005cu201d' , we cannot infer that u'\u005cu201c' hamburger u'\u005cu201d' is also a good argument
+p83
+aVThe neural word-embeddings are considered opaque, in the sense that it is hard to assign meanings to the dimensions of the induced representation
+p84
+aVWe seek to maximize the log-probability of the observed pairs belonging to the data, leading to the objective
+p85
+aVWe then draw a recall-precision curve that describes the embedding u'\u005cu2019' s affinity towards one subset ( u'\u005cu201c' similarity u'\u005cu201d' ) over another ( u'\u005cu201c' relatedness u'\u005cu201d'
+p86
+aVOur departure point is the skip-gram neural embedding model introduced in [ 19 ] trained using the negative-sampling procedure presented in [ 21 ]
+p87
+aVThe negative-sampling parameter (how many negative contexts to sample for every correct one) was 15
+p88
+aVNotice that syntactic dependencies are both more inclusive and more focused than bag-of-words
+p89
+aVAmong the state-of-the-art word-embedding methods is the skip-gram with negative sampling model ( SkipGram ), introduced by Mikolov et al
+p90
+aVThe Florida example presents an ontological difference; bag-of-words contexts generate meronyms (counties or cities within Florida), while dependency-based contexts provide cohyponyms (other US states
+p91
+aV5 5 Additional experiments (not presented in this paper) reinforce our conclusion
+p92
+aVRelations that include a preposition are u'\u005cu201c' collapsed u'\u005cu201d' prior to context extraction, by directly connecting the head and the object of the preposition, and subsuming the preposition itself into the dependency label
+p93
+aVThis observation holds for Turing 3 3 Deps generated a list of scientists whose name ends with u'\u005cu201c' ing u'\u005cu201d'
+p94
+aVIn the future, we hope that insights from such model introspection will allow us to develop better contexts, by focusing on conjunctions and prepositions for example, or by trying to figure out why the subject and object relations are absent and finding ways of increasing their contributions
+p95
+aVRecall that the learning procedure is attempting to maximize the dot product v c u'\u005cu22c5' v w for good ( w , c ) pairs and minimize it for bad ones
+p96
+aV[theme=simple] {deptext} [column sep=0.2cm] Australian scientist discovers star telescope \u005cdepedge 21amod \u005cdepedge 32nsubj \u005cdepedge 34dobj \u005cdepedge [edge style=thick]35prep_with
+p97
+aVWe expect Deps u'\u005cu2019' s curve to be higher than BoW2 u'\u005cu2019' s curve, which in turn is expected to be higher than BoW5 u'\u005cu2019' s
+p98
+aVAdditionally, the collapsed preposition relation is very useful (e.g., for capturing the school aspect of hogwarts
+p99
+aVFor Deps , the corpus was tagged with parts-of-speech using the Stanford tagger [ 28 ] and parsed into labeled Stanford dependencies [ 11 ] using an implementation of the parser described in [ 14 ]
+p100
+aVIn order to prevent the trivial solution, the objective is extended with ( w , c ) pairs for which p ( D = 1 w , c ) must be low, i.e., pairs which are not in the data, by generating the set D u'\u005cu2032' of random ( w , c ) pairs (assuming they are all incorrect), yielding the negative-sampling training objective
+p101
+aVThis effect is demonstrated using both qualitative and quantitative analysis (Section 4
+p102
+aVStill, the embedding does a remarkable job and retrieves scientists, despite the noisy POS
+p103
+aV[theme=simple] {deptext} [column sep=0.2cm] Australian scientist discovers star with telescope \u005cdepedge 21amod \u005cdepedge 32nsubj \u005cdepedge 34dobj \u005cdepedge [edge style=dashed]35prep \u005cdepedge [edge style=dashed]56pobj
+p104
+aVTo that end, we use the WordSim353 dataset [ 12 , 1 ]
+p105
+aVWhile this is true to a large extent, we observe that SkipGram does allow a non-trivial amount of introspection
+p106
+aVIn some works, the dimensionality of the sparse word-context vectors is reduced, using techniques such as SVD [ 6 ] or LDA [ 25 , 27 , 8 ]
+p107
+aVThe entries in the vectors are latent, and treated as parameters to be learned
+p108
+aVwhere v w and v c (each a d -dimensional vector) are the model parameters to be learned
+p109
+aVAfter parsing each sentence, we derive word contexts as follows for a target word w with modifiers m 1 , u'\u005cu2026' , m k and a head h , we consider the contexts ( m 1 , l u'\u005cu2062' b u'\u005cu2062' l 1 ) , u'\u005cu2026' , ( m k , l u'\u005cu2062' b u'\u005cu2062' l k ) , ( h , l u'\u005cu2062' b u'\u005cu2062' l h - 1 ) , where l u'\u005cu2062' b u'\u005cu2062' l is the type of the dependency relation between the head and the modifier (e.g., nsubj , dobj , prep_with , amod ) and l u'\u005cu2062' b u'\u005cu2062' l - 1 is used to mark the inverse-relation
+p110
+aV2 2 word2vec u'\u005cu2019' s implementation is slightly more complicated
+p111
+aVThis is facilitated by recent advances in parsing technology [ 14 , 15 ] that allow parsing to syntactic dependencies with very high speed and near state-of-the-art accuracy
+p112
+aVTo the best of our knowledge, this is the first work to suggest such an analysis of discriminatively-trained word-embedding models
+p113
+aVThis is may be a result of occasional POS-tagging errors
+p114
+aV[ 21 ] and implemented in the word2vec software
+p115
+aVThe objective is trained in an online fashion using stochastic-gradient updates over the corpus D u'\u005cu222a' D u'\u005cu2032'
+p116
+aVWe observed the same behavior with other geographical locations, particularly with countries (though not all of them
+p117
+aVThe distribution is modeled as
+p118
+aVDid this pair come from the data
+p119
+aVThe negative samples D u'\u005cu2032' can be constructed in various ways
+p120
+aVThis objective admits a trivial solution in which p ( D = 1 w , c ) = 1 for every pair ( w , c
+p121
+aVThis can be easily achieved by setting v c = v w and v c u'\u005cu22c5' v w = K for all c , w , where K is large enough number
+p122
+aVWe follow the method proposed by Mikolov et al for each ( w , c ) u'\u005cu2208' D we construct n samples ( w , c 1 ) , u'\u005cu2026' , ( w , c n ) , where n is a hyperparameter and each c j is drawn according to its unigram distribution raised to the 3 / 4 power
+p123
+aVConsider a word-context pair ( w , c
+p124
+aVWe denote by p ( D = 1 w , c ) the probability that ( w , c ) came from the data, and by p ( D = 0 w , c ) = 1 - p ( D = 1 w , c ) the probability that ( w , c ) did not
+p125
+aVwhich can be rewritten as
+p126
+aVarg u'\u005cu2062' max v w , v c u'\u005cu2061' u'\u005cu2211' ( w , c ) u'\u005cu2208' D log u'\u005cu2061' 1 1 + e - v c u'\u005cu22c5' v w
+p127
+aVarg u'\u005cu2062' max v w , v c u'\u005cu2061' ( u'\u005cu2211' ( w , c ) u'\u005cu2208' D log u'\u005cu2061' u'\u005cu03a3' u'\u005cu2062' ( v c u'\u005cu22c5' v w ) + u'\u005cu2211' ( w , c ) u'\u005cu2208' D u'\u005cu2032' log u'\u005cu2061' u'\u005cu03a3' u'\u005cu2062' ( - v c u'\u005cu22c5' v w )
+p128
+aVarg max v w , v c ( u'\u005cu220f' ( w , c ) u'\u005cu2208' D p ( D = 1 c , w ) u'\u005cu220f' ( w , c ) u'\u005cu2208' D u'\u005cu2032' p ( D = 0 c , w )
+p129
+aVwhere u'\u005cu03a3' u'\u005cu2062' ( x ) = 1 / ( 1 + e x
+p130
+aVp ( D = 1 w , c ) = 1 1 + e - v w u'\u005cu22c5' v c
+p131
+a.

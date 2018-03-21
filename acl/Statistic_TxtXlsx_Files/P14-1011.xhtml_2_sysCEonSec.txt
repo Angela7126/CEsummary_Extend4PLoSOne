@@ -1,0 +1,472 @@
+Current File: P14-1011.xhtml_2 P14-1011.xhtml
+
+Section 0:  Abstract
+	SentNum: 5
+	CENum: 0
+	SentCovered: 0
+	Covered_Rate: 0.0000%
+
+Section 1:  1 Introduction
+	SentNum: 41
+	CENum: 15
+	SentCovered: 18
+	Covered_Rate: 43.9024%
+
+Section 2:  2 Related Work
+	SentNum: 21
+	CENum: 5
+	SentCovered: 6
+	Covered_Rate: 28.5714%
+
+Section 3:  3 Bilingually-constrained Recursive Auto-encoders
+	SentNum: 106
+	CENum: 22
+	SentCovered: 25
+	Covered_Rate: 23.5849%
+
+Section 4:  4 Experiments
+	SentNum: 62
+	CENum: 14
+	SentCovered: 18
+	Covered_Rate: 29.0323%
+
+Section 5:  5 Discussions
+	SentNum: 9
+	CENum: 2
+	SentCovered: 3
+	Covered_Rate: 33.3333%
+
+Section 6:  6 Conclusions and Future Work
+	SentNum: 10
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 10.0000%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-1011.xhtml_2's CE cases
+
+Section 0:  Abstract has 0 CE cases
+Section 1:  1 Introduction has 15 CE cases
+	CASE: 1
+	Stag: 5 
+		Pattern: 0 [['due', 'to']]---- [[], ['&NP@C@', '(,)', '&R']]
+		sentTXT: Due to the powerful capacity of feature learning and representation, Deep (multi-layer) Neural Networks (DNN) have achieved a great success in speech and image processing [ 13 , 15 , 6 ]. 
+		Cause: [(0, 2), (0, 9)]
+		Effect: [(0, 11), (0, 35)]
+
+	CASE: 2
+	Stag: 7 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: Most of these works attempt to improve some components in SMT based on word embedding , which converts a word into a dense, low dimensional, real-valued vector representation [ 2 , 3 , 5 , 20 ]. 
+		Cause: [(0, 13), (0, 14)]
+		Effect: [(0, 16), (0, 38)]
+
+	CASE: 3
+	Stag: 8 9 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: However, in the conventional (phrase-based) SMT, phrases are the basic translation units. The models using word embeddings as the direct inputs to DNN cannot make full use of the whole syntactic and semantic information of the phrasal translation rules. 
+		Cause: [(1, 6), (1, 27)]
+		Effect: [(0, 2), (1, 4)]
+
+	CASE: 4
+	Stag: 9 10 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: The models using word embeddings as the direct inputs to DNN cannot make full use of the whole syntactic and semantic information of the phrasal translation rules. Therefore, in order to successfully apply DNN to model the whole translation process, such as modelling the decoding process, learning compact vector representations for the basic phrasal translation units is the essential and fundamental work. 
+		Cause: [(0, 0), (0, 27)]
+		Effect: [(1, 2), (1, 37)]
+
+	CASE: 5
+	Stag: 22 23 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: Obviously, these methods of learning phrase embeddings either focus on some aspects of the phrase (e.g., reordering pattern), or impose strong assumptions (e.g., bag-of-words or indivisible n -gram. Therefore, these phrase embeddings are not suitable to fully represent the phrasal translation units in SMT due to the lack of semantic meanings of the phrase. 
+		Cause: [(0, 0), (0, 35)]
+		Effect: [(1, 2), (1, 26)]
+
+	CASE: 6
+	Stag: 24 
+		Pattern: 45 [['so', 'that']]---- [['&C'], ['&R']]
+		sentTXT: Instead, we focus on learning phrase embeddings from the view of semantic meaning, so that our phrase embedding can fully represent the phrase and best fit the phrase-based SMT. 
+		Cause: [(0, 0), (0, 14)]
+		Effect: [(0, 17), (0, 30)]
+
+	CASE: 7
+	Stag: 25 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Assuming the phrase is a meaningful composition of its internal words, we propose Bilingually-constrained Recursive Auto-encoders (BRAE) to learn semantic phrase embeddings. 
+		Cause: [(0, 0), (0, 10)]
+		Effect: [(0, 12), (0, 24)]
+
+	CASE: 8
+	Stag: 26 27 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: The core idea behind is that a phrase and its correct translation should share the same semantic meaning. Thus, they can supervise each other to learn their semantic phrase embeddings. 
+		Cause: [(0, 0), (0, 17)]
+		Effect: [(1, 1), (1, 12)]
+
+	CASE: 9
+	Stag: 29 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: In our method, the standard recursive auto-encoder (RAE) pre-trains the phrase embedding with an unsupervised algorithm by minimizing the reconstruction error [ 22 ] , while the bilingually-constrained model learns to fine-tune the phrase embedding by minimizing the semantic distance between translation equivalents and maximizing the semantic distance between non-translation pairs. 
+		Cause: [(0, 20), (0, 24)]
+		Effect: [(0, 25), (0, 52)]
+
+	CASE: 10
+	Stag: 29 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: In our method, the standard recursive auto-encoder (RAE) pre-trains the phrase embedding with an unsupervised algorithm by minimizing the reconstruction error [ 22 ] , while the bilingually-constrained model learns to fine-tune the phrase embedding by minimizing the semantic distance between translation equivalents and maximizing the semantic distance between non-translation pairs. 
+		Cause: [(0, 14), (0, 20)]
+		Effect: [(0, 4), (0, 12)]
+
+	CASE: 11
+	Stag: 33 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: If we learn the embedding of the Chinese phrase correctly, we can regard it as the gold representation for the English phrase and use it to guide the process of learning English phrase embedding. 
+		Cause: [(0, 16), (0, 34)]
+		Effect: [(0, 0), (0, 14)]
+
+	CASE: 12
+	Stag: 33 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: If we learn the embedding of the Chinese phrase correctly, we can regard it as the gold representation for the English phrase and use it to guide the process of learning English phrase embedding. 
+		Cause: [(0, 1), (0, 9)]
+		Effect: [(0, 11), (0, 14)]
+
+	CASE: 13
+	Stag: 35 
+		Pattern: 5 [['so'], ['as', 'to']]---- [['&C', '(,)'], ['(&adj/&adv@C@)'], ['&R']]
+		sentTXT: This procedure can be performed with an co-training style algorithm so as to minimize the semantic distance between the translation equivalents 1 1 For simplicity, we do not show non-translation pairs here. 
+		Cause: [(0, 0), (0, 9)]
+		Effect: [(0, 13), (0, 32)]
+
+	CASE: 14
+	Stag: 38 39 
+		Pattern: 2 [['accordingly']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: With the learned model, we can accurately measure the semantic similarity between a source phrase and a translation candidate. Accordingly, we evaluate the BRAE model on two end-to-end SMT tasks (phrase table pruning and decoding with phrasal semantic similarities) which need to check whether a translation candidate and the source phrase are in the same meaning. 
+		Cause: [(0, 0), (0, 19)]
+		Effect: [(1, 2), (1, 39)]
+
+	CASE: 15
+	Stag: 41 42 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In decoding with phrasal semantic similarities, we apply the semantic similarities of the phrase pairs as new features during decoding to guide translation candidate selection. The experiments show that up to 72% of the phrase table can be discarded without significant decrease on the translation quality, and in decoding with phrasal semantic similarities up to 1.7 BLEU score improvement over the state-of-the-art baseline can be achieved. 
+		Cause: [(0, 17), (1, 41)]
+		Effect: [(0, 0), (0, 15)]
+
+Section 2:  2 Related Work has 5 CE cases
+	CASE: 1
+	Stag: 52 
+		Pattern: 45 [['so', 'that']]---- [['&C'], ['&R']]
+		sentTXT: Instead, our bilingually-constrained recursive auto-encoders not only learn the composition mechanism of generating phrases from words, but also fine tune the word embeddings during the model training stage, so that we can induce the full information of the phrases and internal words. 
+		Cause: [(0, 0), (0, 30)]
+		Effect: [(0, 33), (0, 44)]
+
+	CASE: 2
+	Stag: 56 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: However, this kind of phrase embedding is hard to capture full semantics since the context of a phrase is limited. 
+		Cause: [(0, 14), (0, 20)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 3
+	Stag: 57 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: Furthermore, this method can only account for a very small part of phrases, since most of the phrases are compositional. 
+		Cause: [(0, 16), (0, 21)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 4
+	Stag: 59 60 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The third method views any phrase as the meaningful composition of its internal words. The recursive auto-encoder is typically adopted to learn the way of composition [ 22 , 23 , 21 , 24 , 16 ]. 
+		Cause: [(0, 7), (1, 21)]
+		Effect: [(0, 0), (0, 5)]
+
+	CASE: 5
+	Stag: 62 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: And then, they fine-tune the RAE according to the label of the phrase, such as the syntactic category in parsing (Socher et al., 2013a), the polarity in sentiment analysis [ 23 , 24 ] , and the reordering pattern in SMT [ 16 ]. 
+		Cause: [(0, 9), (0, 49)]
+		Effect: [(0, 0), (0, 6)]
+
+Section 3:  3 Bilingually-constrained Recursive Auto-encoders has 22 CE cases
+	CASE: 1
+	Stag: 70 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Second, even though we have no correct semantic phrase representation as the gold label, the phrases sharing the same meaning provide an indirect but feasible way. 
+		Cause: [(0, 12), (0, 27)]
+		Effect: [(0, 4), (0, 10)]
+
+	CASE: 2
+	Stag: 81 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Assuming we are given a phrase w 1 u'\u2062' w 2 u'\u2062' u'\u22ef' u'\u2062' w m , it is first projected into a list of vectors ( x 1 , x 2 , u'\u22ef' , x m ) using Eq. 
+		Cause: [(0, 0), (0, 31)]
+		Effect: [(0, 33), (0, 59)]
+
+	CASE: 3
+	Stag: 90 91 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In order to apply this auto-encoder to each pair of children, the representation of the parent p should have the same dimensionality as the c i u'\u2019' s. To assess how well the parent u'\u2019' s vector represents its children, the standard auto-encoder reconstructs the children in a reconstruction layer. 
+		Cause: [(0, 24), (1, 25)]
+		Effect: [(0, 0), (0, 22)]
+
+	CASE: 4
+	Stag: 95 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: 2 again to compute y 2 by setting the children to be [ c 1 ; c 2 ] = [ y 1 ; x 3 ]. 
+		Cause: [(0, 7), (0, 12)]
+		Effect: [(0, 13), (0, 21)]
+
+	CASE: 5
+	Stag: 102 
+		Pattern: 45 [['so', 'that']]---- [['&C'], ['&R']]
+		sentTXT: Several researchers extend the original RAEs to a semi-supervised setting so that the induced phrase embedding can predict a target label, such as polarity in sentiment analysis [ 23 ] , syntactic category in parsing [ 21 ] and phrase reordering pattern in SMT [ 16 ]. 
+		Cause: [(0, 0), (0, 9)]
+		Effect: [(0, 12), (0, 47)]
+
+	CASE: 6
+	Stag: 107 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: By optimizing the above objective, the phrases in the vector embedding space will be grouped according to the labels. 
+		Cause: [(0, 18), (0, 19)]
+		Effect: [(0, 0), (0, 15)]
+
+	CASE: 7
+	Stag: 108 109 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: We know from the semi-supervised phrase embedding that the learned vector representation can be well adapted to the given label. Therefore, we can imagine that learning semantic phrase embedding is reasonable if we are given gold vector representations of the phrases. 
+		Cause: [(0, 0), (0, 19)]
+		Effect: [(1, 2), (1, 21)]
+
+	CASE: 8
+	Stag: 111 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: Fortunately, we know the fact that the two phrases should share the same semantic representation if they express the same meaning. 
+		Cause: [(0, 17), (0, 21)]
+		Effect: [(0, 0), (0, 15)]
+
+	CASE: 9
+	Stag: 112 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: We can make inference from this fact that if a model can learn the same embedding for any phrase pair sharing the same meaning, the learned embedding must encode the semantics of the phrases and the corresponding model is our desire. 
+		Cause: [(0, 9), (0, 23)]
+		Effect: [(0, 25), (0, 41)]
+
+	CASE: 10
+	Stag: 112 113 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We can make inference from this fact that if a model can learn the same embedding for any phrase pair sharing the same meaning, the learned embedding must encode the semantics of the phrases and the corresponding model is our desire. As translation equivalents share the same semantic meaning, we employ high-quality phrase translation pairs as training corpus in this work. 
+		Cause: [(1, 1), (1, 20)]
+		Effect: [(0, 0), (0, 41)]
+
+	CASE: 11
+	Stag: 113 114 
+		Pattern: 2 [['accordingly']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: As translation equivalents share the same semantic meaning, we employ high-quality phrase translation pairs as training corpus in this work. Accordingly, we propose the Bilingually-constrained Recursive Auto-encoders (BRAE), whose basic goal is to minimize the semantic distance between the phrases and their translations. 
+		Cause: [(0, 0), (0, 20)]
+		Effect: [(1, 2), (1, 26)]
+
+	CASE: 12
+	Stag: 120 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since word embeddings for two languages are learned separately and locate in different vector space, we do not enforce the phrase embeddings in two languages to be in the same semantic vector space. 
+		Cause: [(0, 1), (0, 13)]
+		Effect: [(0, 16), (0, 32)]
+
+	CASE: 13
+	Stag: 121 122 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: We suppose there is a transformation between the two semantic embedding spaces. Thus, the semantic distance is bidirectional the distance between p t and the transformation of p s , and that between p s and the transformation of p t. 
+		Cause: [(0, 0), (0, 11)]
+		Effect: [(1, 1), (1, 29)]
+
+	CASE: 14
+	Stag: 122 123 
+		Pattern: 3 [['as', 'a'], ['result']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(&ADJ)'], ['(,)', '&R']]
+		sentTXT: Thus, the semantic distance is bidirectional the distance between p t and the transformation of p s , and that between p s and the transformation of p t. As a result, the overall semantic error becomes. 
+		Cause: [(0, 0), (0, 29)]
+		Effect: [(1, 4), (1, 8)]
+
+	CASE: 15
+	Stag: 131 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: However, the current model cannot guarantee this since the above semantic error E s u'\u2062' e u'\u2062' m ( s t , u'\u0398' ) only accounts for positive ones. 
+		Cause: [(0, 10), (0, 30)]
+		Effect: [(0, 32), (0, 42)]
+
+	CASE: 16
+	Stag: 131 132 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: However, the current model cannot guarantee this since the above semantic error E s u'\u2062' e u'\u2062' m ( s t , u'\u0398' ) only accounts for positive ones. We thus enhance the semantic error with both positive and negative examples, and the corresponding max-semantic-margin error becomes. 
+		Cause: [(0, 1), (1, 0)]
+		Effect: [(1, 2), (1, 18)]
+
+	CASE: 17
+	Stag: 134 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Using the above error function, we need to construct a negative example for each positive example. 
+		Cause: [(0, 0), (0, 4)]
+		Effect: [(0, 6), (0, 16)]
+
+	CASE: 18
+	Stag: 135 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: Suppose we are given a positive example ( s , t ) , the correct translation t can be converted into a bad translation t u'\u2032' by replacing the words in t with randomly chosen target language words. 
+		Cause: [(0, 31), (0, 41)]
+		Effect: [(0, 0), (0, 29)]
+
+	CASE: 19
+	Stag: 147 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Assuming the target phrase representation p t is available, the optimization of the source-side parameters is similar to that of semi-supervised RAE. 
+		Cause: [(0, 0), (0, 8)]
+		Effect: [(0, 10), (0, 22)]
+
+	CASE: 20
+	Stag: 150 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: In parameter initialization, u'\u0398' r u'\u2062' e u'\u2062' c and u'\u0398' s u'\u2062' e u'\u2062' m for the source language is randomly set according to a normal distribution. 
+		Cause: [(0, 50), (0, 52)]
+		Effect: [(0, 0), (0, 47)]
+
+	CASE: 21
+	Stag: 154 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: We prefer to the second one since this kind of word embedding has already encoded some semantics of the words. 
+		Cause: [(0, 7), (0, 19)]
+		Effect: [(0, 0), (0, 5)]
+
+	CASE: 22
+	Stag: 172 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: Termination Check if the joint error reaches a local minima or the iterations reach the pre-defined number (25 is used in our experiments), we terminate the training procedure, otherwise we set p s = p s u'\u2032' , p t = p t u'\u2032' , and go to step 2. 
+		Cause: [(0, 3), (0, 24)]
+		Effect: [(0, 26), (0, 61)]
+
+Section 4:  4 Experiments has 14 CE cases
+	CASE: 1
+	Stag: 186 187 
+		Pattern: 2 [['accordingly']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: The SMT evaluation is conducted on Chinese-to-English translation. Accordingly, our BRAE model is trained on Chinese and English. 
+		Cause: [(0, 0), (0, 7)]
+		Effect: [(1, 2), (1, 10)]
+
+	CASE: 2
+	Stag: 191 192 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The NIST MT03 is used as the development data. NIST MT04-06 and MT08 (news data) are used as the test data. 
+		Cause: [(0, 6), (1, 12)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 3
+	Stag: 192 193 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: NIST MT04-06 and MT08 (news data) are used as the test data. Case-insensitive BLEU is employed as the evaluation metric. 
+		Cause: [(0, 11), (1, 6)]
+		Effect: [(0, 0), (0, 9)]
+
+	CASE: 4
+	Stag: 201 
+		Pattern: 0 [['based', 'on']]---- [['&V-ing/&NP@R@', '(&Clause@R@)', '&BE', '(&ADV)'], ['&NP@C@', '(&Clause@C@)']]
+		sentTXT: These algorithms are based on corpus statistics including co-occurrence statistics, phrase pair usage and composition information. 
+		Cause: [(0, 5), (0, 16)]
+		Effect: [(0, 0), (0, 1)]
+
+	CASE: 5
+	Stag: 208 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: In experiments, we discard the phrase pair whose similarity in two directions are smaller than a threshold 3 3 To avoid the situation that all the translation candidates for a source phrase are pruned, we always keep the first 10 best according to the semantic similarity. 
+		Cause: [(0, 45), (0, 47)]
+		Effect: [(0, 0), (0, 42)]
+
+	CASE: 6
+	Stag: 213 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: When the two algorithms using a similar portion of the phrase table 4 4 In the future, we will compare the performance by enforcing the two algorithms to use the same portion of phrase table (35% in BRAE and 36% in Significance), the BRAE-based algorithm outperforms the Significance algorithm on all the test sets except for MT04. 
+		Cause: [(0, 24), (0, 35)]
+		Effect: [(0, 36), (0, 62)]
+
+	CASE: 7
+	Stag: 215 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: Furthermore, our model is much more intuitive because it is directly based on the semantic similarity. 
+		Cause: [(0, 9), (0, 16)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 8
+	Stag: 215 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: Furthermore, our model is much more intuitive because it is directly based on the semantic similarity. 
+		Cause: [(0, 5), (0, 7)]
+		Effect: [(0, 0), (0, 2)]
+
+	CASE: 9
+	Stag: 216 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Besides using the semantic similarities to prune the phrase table, we also employ them as two informative features like the phrase translation probability to guide translation hypotheses selection during decoding. 
+		Cause: [(0, 16), (0, 30)]
+		Effect: [(0, 0), (0, 14)]
+
+	CASE: 10
+	Stag: 218 219 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The phrase translation probability is based on co-occurrence statistics and the lexical weights consider the phrase as bag-of-words. In contrast, our BRAE model focuses on compositional semantics from words to phrases. 
+		Cause: [(0, 17), (1, 12)]
+		Effect: [(0, 0), (0, 15)]
+
+	CASE: 11
+	Stag: 219 220 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: In contrast, our BRAE model focuses on compositional semantics from words to phrases. Therefore, the semantic similarities computed using our BRAE model are complementary to the existing four translation probabilities. 
+		Cause: [(0, 0), (0, 13)]
+		Effect: [(1, 2), (1, 17)]
+
+	CASE: 12
+	Stag: 222 223 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In order to investigate the influence of the dimensionality of the embedding space, we have tried three different settings n = 50 , 100 , 200. As shown in Table 2, no matter what n is, the BRAE model can significantly improve the translation quality in the overall test data. 
+		Cause: [(1, 1), (1, 25)]
+		Effect: [(0, 0), (0, 26)]
+
+	CASE: 13
+	Stag: 233 234 
+		Pattern: 0 [[['imply', 'implies', 'implied', 'indicate', 'indicates', 'indicated']]]---- [['&C', '(,/./;/--)', '&this', '(&adj)', '(&N)', '(&CAN/have/has/had)', '(&ADV)'], ['(that)', '&R@Complete@']]
+		sentTXT: In contrast, our BRAE model learns the semantic meaning for each phrase no matter whether it is short or relatively long. This indicates that the proposed BRAE model is effective at learning semantic phrase embeddings. 
+		Cause: [(0, 0), (0, 21)]
+		Effect: [(1, 3), (1, 13)]
+
+	CASE: 14
+	Stag: 234 235 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: This indicates that the proposed BRAE model is effective at learning semantic phrase embeddings. As the semantic phrase embedding can fully represent the phrase, we can go a step further in the phrase-based SMT and feed the semantic phrase embeddings to DNN in order to model the whole translation process (e.g., derivation structure prediction. 
+		Cause: [(1, 1), (1, 42)]
+		Effect: [(0, 0), (0, 13)]
+
+Section 5:  5 Discussions has 2 CE cases
+	CASE: 1
+	Stag: 237 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: Besides SMT, the semantic phrase embeddings can be used in other cross-lingual tasks, such as cross-lingual question answering, since the semantic similarity between phrases in different languages can be calculated accurately. 
+		Cause: [(0, 22), (0, 33)]
+		Effect: [(0, 0), (0, 19)]
+
+	CASE: 2
+	Stag: 239 240 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: In fact, the phrases having the same meaning are translation equivalents in different languages, but are paraphrases in one language. Therefore, our model can be easily adapted to learn semantic phrase embeddings using paraphrases. 
+		Cause: [(0, 0), (0, 21)]
+		Effect: [(1, 2), (1, 14)]
+
+Section 6:  6 Conclusions and Future Work has 1 CE cases
+	CASE: 1
+	Stag: 250 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: 1) we will try to model the decoding process with DNN based on our semantic embeddings of the basic translation units. 
+		Cause: [(0, 14), (0, 21)]
+		Effect: [(0, 4), (0, 11)]
+
+#-------------------------------------------------
+

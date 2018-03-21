@@ -1,0 +1,20 @@
+(lp0
+VTherefore, we use the embeddings from a trained joint model to pre-train an RCM model
+p1
+aVThe cbow and RCM objectives use separate data for learning
+p2
+aVWhile word2vec and joint are trained as language models, RCM is not
+p3
+aVThe resulting trained model is then used to initialize the RCM model
+p4
+aVTherefore, in order to make fair comparison, for every set of trained embeddings, we fix them as input embedding for word2vec, then learn the remaining input embeddings (words not in the relations) and all the output embeddings using cbow
+p5
+aVWe trained 200-dimensional embeddings and used output embeddings for measuring similarity
+p6
+aVWhile RCM learns embeddings suited to specific tasks based on knowledge resources, cbow learns embeddings for words not included in the resource but appear in a corpus
+p7
+aVBased on our initial experiments, RCM uses the output embeddings of cbow
+p8
+aVFor each
+p9
+a.

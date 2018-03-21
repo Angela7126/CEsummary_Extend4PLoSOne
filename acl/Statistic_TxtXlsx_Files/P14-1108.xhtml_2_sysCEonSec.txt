@@ -1,0 +1,416 @@
+Current File: P14-1108.xhtml_2 P14-1108.xhtml
+
+Section 0:  Abstract
+	SentNum: 7
+	CENum: 3
+	SentCovered: 3
+	Covered_Rate: 42.8571%
+
+Section 1:  1 Introduction motivation
+	SentNum: 33
+	CENum: 11
+	SentCovered: 15
+	Covered_Rate: 45.4545%
+
+Section 2:  2 Related Work
+	SentNum: 36
+	CENum: 9
+	SentCovered: 10
+	Covered_Rate: 27.7778%
+
+Section 3:  3 Generalized Language Models
+	SentNum: 24
+	CENum: 3
+	SentCovered: 5
+	Covered_Rate: 20.8333%
+
+Section 4:  4 Experimental Setup and Data Sets
+	SentNum: 41
+	CENum: 10
+	SentCovered: 13
+	Covered_Rate: 31.7073%
+
+Section 5:  5 Results
+	SentNum: 29
+	CENum: 4
+	SentCovered: 6
+	Covered_Rate: 20.6897%
+
+Section 6:  6 Discussion
+	SentNum: 15
+	CENum: 4
+	SentCovered: 5
+	Covered_Rate: 33.3333%
+
+Section 7:  7 Conclusion and Future Work
+	SentNum: 18
+	CENum: 3
+	SentCovered: 5
+	Covered_Rate: 27.7778%
+
+Section 8:  Acknowledgements
+	SentNum: 2
+	CENum: 0
+	SentCovered: 0
+	Covered_Rate: 0.0000%
+
+Section 9:  Appendix A Discount Values and Weights in Modified Kneser Ney
+	SentNum: 6
+	CENum: 1
+	SentCovered: 2
+	Covered_Rate: 33.3333%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-1108.xhtml_2's CE cases
+
+Section 0:  Abstract has 3 CE cases
+	CASE: 1
+	Stag: 0 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: We introduce a novel approach for building language models based on a systematic, recursive exploration of skip n -gram models which are interpolated using modified Kneser-Ney smoothing. 
+		Cause: [(0, 6), (0, 18)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 2
+	Stag: 1 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Our approach generalizes language models as it contains the classical interpolation with lower order models as a special case. 
+		Cause: [(0, 6), (0, 18)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 3
+	Stag: 3 
+		Pattern: 0 [[['lead', 'leads', 'led'], 'to']]---- [['&V-ing/&NP@C@', '(&CAN/have/has/had)'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: In an extensive empirical experiment over English text corpora we demonstrate that our generalized language models lead to a substantial reduction of perplexity between 3.1 u'\u2062' % and 12.7 u'\u2062' % in comparison to traditional language models using modified Kneser-Ney smoothing. 
+		Cause: [(0, 12), (0, 15)]
+		Effect: [(0, 18), (0, 48)]
+
+Section 1:  1 Introduction motivation has 11 CE cases
+	CASE: 1
+	Stag: 7 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: Language Models are a probabilistic approach for predicting the occurrence of a sequence of words. 
+		Cause: [(0, 7), (0, 14)]
+		Effect: [(0, 0), (0, 5)]
+
+	CASE: 2
+	Stag: 10 11 
+		Pattern: 1 [['because', 'of']]---- [['&C', '(,/;/./--)', '(&ADV)'], ['(&THIS)', '&NP', '&R']]
+		sentTXT: The probability P u'\u2062' ( w 1 l ) of this sequence can be broken down into a product of conditional probabilities. Because of combinatorial explosion and data sparsity, it is very difficult to reliably estimate the probabilities that are conditioned on a longer subsequence. 
+		Cause: [(0, 0), (0, 25)]
+		Effect: [(1, 7), (1, 23)]
+
+	CASE: 3
+	Stag: 11 12 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: Because of combinatorial explosion and data sparsity, it is very difficult to reliably estimate the probabilities that are conditioned on a longer subsequence. Therefore, by making a Markov assumption the true probability of a word sequence is only approximated by restricting conditional probabilities to depend only on a local context w i - n + 1 i - 1 of n - 1 preceding words rather than the full sequence w 1 i - 1. 
+		Cause: [(0, 0), (0, 23)]
+		Effect: [(1, 2), (1, 52)]
+
+	CASE: 4
+	Stag: 19 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: The motivation for using lower order models is that shorter contexts may be observed more often and, thus, suffer less from data sparsity. 
+		Cause: [(0, 0), (0, 16)]
+		Effect: [(0, 19), (0, 24)]
+
+	CASE: 5
+	Stag: 20 
+		Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: However, a single rare word towards the end of the local context will always cause the context to be observed rarely in the training data and hence will lead to an unreliable estimation. 
+		Cause: [(0, 0), (0, 25)]
+		Effect: [(0, 28), (0, 33)]
+
+	CASE: 6
+	Stag: 20 21 
+		Pattern: 1 [['because', 'of']]---- [['&C', '(,/;/./--)', '(&ADV)'], ['(&THIS)', '&NP', '&R']]
+		sentTXT: However, a single rare word towards the end of the local context will always cause the context to be observed rarely in the training data and hence will lead to an unreliable estimation. Because of Zipfian word distributions, most words occur very rarely and hence their true probability of occurrence may be estimated only very poorly. 
+		Cause: [(0, 0), (0, 33)]
+		Effect: [(1, 5), (1, 23)]
+
+	CASE: 7
+	Stag: 22 23 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: One word that appears at the end of a local context w i - n + 1 i - 1 and for which only a poor approximation exists may adversely affect the conditional probabilities in language models of all lengths u'\u2014' leading to severe errors even for smoothed language models. Thus, the idea motivating our approach is to involve several lower order models which systematically leave out one position in the context (one may think of replacing the affected word in the context with a wildcard) instead of shortening the sequence only by one word at the beginning. 
+		Cause: [(0, 0), (0, 53)]
+		Effect: [(1, 1), (1, 50)]
+
+	CASE: 8
+	Stag: 25 26 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Among other techniques, skip n -grams have also been considered as an approach to overcome problems of data sparsity []. However, to best of our knowledge, language models making use of skip n -grams models have never been investigated to their full extent and over different levels of lower order models. 
+		Cause: [(0, 13), (1, 17)]
+		Effect: [(0, 7), (0, 11)]
+
+	CASE: 9
+	Stag: 27 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Our approach differs as we consider all possible combinations of gaps in a local context and interpolate the higher order model with all possible lower order models derived from adding gaps in all different ways. 
+		Cause: [(0, 4), (0, 34)]
+		Effect: [(0, 0), (0, 2)]
+
+	CASE: 10
+	Stag: 29 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: We provide a framework for using modified Kneser-Ney smoothing in combination with a systematic exploration of lower order models based on skip n -grams. 
+		Cause: [(0, 5), (0, 24)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 11
+	Stag: 30 31 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We show how our novel approach can indeed easily be interpreted as a generalized version of the current state-of-the-art language models. We present a large scale empirical analysis of our generalized language models on eight data sets spanning four different languages, namely, a wikipedia-based text corpus and the JRC-Acquis corpus of legislative texts. 
+		Cause: [(0, 12), (1, 32)]
+		Effect: [(0, 0), (0, 10)]
+
+Section 2:  2 Related Work has 9 CE cases
+	CASE: 1
+	Stag: 49 
+		Pattern: 5 [['so'], ['as', 'to']]---- [['&C', '(,)'], ['(&adj/&adv@C@)'], ['&R']]
+		sentTXT: We will review modified Kneser-Ney smoothing in Section 2.1 in more detail as we reuse some ideas to define our generalized language model. 
+		Cause: [(0, 0), (0, 14)]
+		Effect: [(0, 18), (0, 22)]
+
+	CASE: 2
+	Stag: 49 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We will review modified Kneser-Ney smoothing in Section 2.1 in more detail as we reuse some ideas to define our generalized language model. 
+		Cause: [(0, 13), (0, 14)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 3
+	Stag: 53 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: Introducing the possibility of gaps between the words in an n -gram allows for capturing word relations beyond the level of n consecutive words without an exponential increase in the parameter space. 
+		Cause: [(0, 15), (0, 22)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 4
+	Stag: 54 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: However, with their restriction on a subsequence of words, skip n -grams are also used as a technique to overcome data sparsity []. 
+		Cause: [(0, 19), (0, 26)]
+		Effect: [(0, 0), (0, 17)]
+
+	CASE: 5
+	Stag: 64 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: The conclusion was that using skip n -grams is often more effective for increasing the number of observations than increasing the corpus size. 
+		Cause: [(0, 14), (0, 18)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 6
+	Stag: 66 67 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We briefly recall modified Kneser-Ney Smoothing as presented in []. Modified Kneser-Ney implements smoothing by interpolating between higher and lower order n -gram language models. 
+		Cause: [(0, 7), (1, 12)]
+		Effect: [(0, 0), (0, 5)]
+
+	CASE: 7
+	Stag: 67 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: Modified Kneser-Ney implements smoothing by interpolating between higher and lower order n -gram language models. 
+		Cause: [(0, 5), (0, 15)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 8
+	Stag: 69 70 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: where c u'\u2062' ( w i - n + 1 i ) provides the frequency count that sequence w i - n + 1 i occurs in training data, D is a discount value (which depends on the frequency of the sequence) and u'\u0393' h u'\u2062' i u'\u2062' g u'\u2062' h depends on D and is the interpolation factor to mix in the lower order distribution 1 1 The factors u'\u0393' and D are quite technical and lengthy. As they do not play a significant role for understanding our novel approach we refer to Appendix A for details. 
+		Cause: [(1, 1), (1, 19)]
+		Effect: [(0, 3), (0, 104)]
+
+	CASE: 9
+	Stag: 73 74 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: where the continuation counts are defined as N 1 + ( u'\u2219' w i - n + 1 i ). { w i - n c ( w i - n i ) 0 } i.e., the number of different words which precede the sequence w i - n + 1 i. 
+		Cause: [(0, 7), (1, 16)]
+		Effect: [(0, 1), (0, 5)]
+
+Section 3:  3 Generalized Language Models has 3 CE cases
+	CASE: 1
+	Stag: 82 83 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: In particular the equation u'\u2202' 1 u'\u2061' w i - n + 1 i = w i - n + 2 i holds where the right hand side is the subsequence of w i - n + 1 i omitting the first word. We can thus formulate the interpolation step of modified Kneser-Ney smoothing using our notation as P ^ MKN ( w i w i - n + 2 i - 1 ) = P ^ MKN ( w i u'\u2202' 1 w i - n + 1 i - 1 ). 
+		Cause: [(0, 1), (1, 1)]
+		Effect: [(1, 3), (1, 53)]
+
+	CASE: 2
+	Stag: 83 84 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: We can thus formulate the interpolation step of modified Kneser-Ney smoothing using our notation as P ^ MKN ( w i w i - n + 2 i - 1 ) = P ^ MKN ( w i u'\u2202' 1 w i - n + 1 i - 1 ). Thus, our skip n -grams correspond to n -grams of which we only use k words, after having applied the skip operators u'\u2202' i 1 u'\u2061' u'\u2026' u'\u2062' u'\u2202' i n - k. 
+		Cause: [(0, 0), (0, 53)]
+		Effect: [(1, 1), (1, 56)]
+
+	CASE: 3
+	Stag: 97 98 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Regarding the continuation counts we define. As lowest order model we use u'\u2014' just as done for traditional modified Kneser-Ney [] u'\u2014' a unigram model interpolated with a uniform distribution for unseen words. 
+		Cause: [(1, 1), (1, 24)]
+		Effect: [(0, 1), (0, 5)]
+
+Section 4:  4 Experimental Setup and Data Sets has 10 CE cases
+	CASE: 1
+	Stag: 105 106 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The data sets cover different domains and languages. As languages we considered English ( en ), German ( de ), French ( fr ), and Italian ( it. 
+		Cause: [(1, 1), (1, 18)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 2
+	Stag: 106 107 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: As languages we considered English ( en ), German ( de ), French ( fr ), and Italian ( it. As general domain data set we used the full collection of articles from Wikipedia ( wiki ) in the corresponding languages. 
+		Cause: [(1, 1), (1, 20)]
+		Effect: [(0, 0), (0, 22)]
+
+	CASE: 3
+	Stag: 112 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: We filtered the word tokens by removing all character sequences which did not contain any letter, digit or common punctuation marks. 
+		Cause: [(0, 6), (0, 21)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 4
+	Stag: 122 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We learnt the generalized language models on the same split of the training corpus as the standard language model using modified Kneser-Ney smoothing and we also used the same set of test sequences for a direct comparison. 
+		Cause: [(0, 15), (0, 36)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 5
+	Stag: 124 125 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: 2 2 http://west.uni-koblenz.de/Research 3 3 https://github.com/renepickhardt/generalized-language-modeling-toolkit 4 4 http://glm.rene-pickhardt.de We compared the probabilities of our language model implementation (which is a subset of the generalized language model) using KN as well as MKN smoothing with the Kyoto Language Model Toolkit 5 5 http://www.phontron.com/kylm/. Since we got the same results for small n and small data sets we believe that our implementation is correct. 
+		Cause: [(1, 1), (1, 19)]
+		Effect: [(0, 0), (0, 44)]
+
+	CASE: 6
+	Stag: 127 128 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: The wikipedia corpus consists of 1.7 bn words. Thus, the 80 u'\u2062' % split for training consists of 1.3 bn words. 
+		Cause: [(0, 0), (0, 7)]
+		Effect: [(1, 1), (1, 17)]
+
+	CASE: 7
+	Stag: 129 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: We have iteratively created smaller training sets by decreasing the split factor by an order of magnitude. 
+		Cause: [(0, 8), (0, 16)]
+		Effect: [(0, 0), (0, 6)]
+
+	CASE: 8
+	Stag: 129 130 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: We have iteratively created smaller training sets by decreasing the split factor by an order of magnitude. So we created 8 u'\u2062' % / 92 u'\u2062' % and 0.8 u'\u2062' % / 99.2 u'\u2062' % split, and so on. 
+		Cause: [(0, 0), (0, 16)]
+		Effect: [(1, 1), (1, 38)]
+
+	CASE: 9
+	Stag: 131 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We have stopped at the 0.008 u'\u2062' % / 99.992 u'\u2062' % split as the training data set in this case consisted of less words than our 100k test sequences which we still randomly sampled from the test data of each split. 
+		Cause: [(0, 22), (0, 49)]
+		Effect: [(0, 0), (0, 20)]
+
+	CASE: 10
+	Stag: 140 
+		Pattern: 0 [[['indicate', 'indicates', 'indicated', 'realize', 'realizes', 'realized', 'ensure', 'ensures', 'ensured', 'imply', 'implies', 'implied']]]---- [['&NP@C@', '(&Clause@C@)'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: Lower perplexity values indicate better results. 
+		Cause: [(0, 0), (0, 2)]
+		Effect: [(0, 4), (0, 5)]
+
+Section 5:  5 Results has 4 CE cases
+	CASE: 1
+	Stag: 145 146 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In this table we also present the relative reduction of perplexity in comparison to the baseline. As we can see, the GLM clearly outperforms the baseline for all model lengths and data sets. 
+		Cause: [(1, 1), (1, 16)]
+		Effect: [(0, 0), (0, 15)]
+
+	CASE: 2
+	Stag: 150 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We also note that GLMs seem to work better on broad domain text rather than special purpose text as the reduction on the wiki corpora is constantly higher than the reduction of perplexity on the JRC corpora. 
+		Cause: [(0, 19), (0, 36)]
+		Effect: [(0, 0), (0, 17)]
+
+	CASE: 3
+	Stag: 154 155 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We see that the GLM performs particularly well on small training data. As the size of the training data set becomes smaller (even smaller than the evaluation data), the GLM achieves a reduction of perplexity of up to 25.7 u'\u2062' % compared to language models with modified Kneser-Ney smoothing on the same data set. 
+		Cause: [(1, 1), (1, 48)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 4
+	Stag: 167 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: It also confirms that our motivation to produce lower order n -grams by omitting not only the first word of the local context but systematically all words has been fruitful. 
+		Cause: [(0, 14), (0, 27)]
+		Effect: [(0, 28), (0, 30)]
+
+Section 6:  6 Discussion has 4 CE cases
+	CASE: 1
+	Stag: 173 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: This feature of the GLM is of particular value, as data sparsity becomes a more and more immanent problem for higher values of n. 
+		Cause: [(0, 11), (0, 24)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 2
+	Stag: 178 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: Beyond the general improvements there is an additional path for benefitting from generalized language models. 
+		Cause: [(0, 10), (0, 14)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 3
+	Stag: 178 179 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Beyond the general improvements there is an additional path for benefitting from generalized language models. As it is possible to better leverage the information in smaller and sparse data sets, we can build smaller models of competitive performance. 
+		Cause: [(1, 1), (1, 23)]
+		Effect: [(0, 0), (0, 14)]
+
+	CASE: 4
+	Stag: 183 184 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: This GLM model has a size of 9.5 GB and contains only 427 Mio entries. So, using a far smaller set of training data we can build a smaller model which still demonstrates a competitive performance. 
+		Cause: [(0, 0), (0, 14)]
+		Effect: [(1, 2), (1, 21)]
+
+Section 7:  7 Conclusion and Future Work has 3 CE cases
+	CASE: 1
+	Stag: 185 186 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We have introduced a novel generalized language model as the systematic combination of skip n -grams and modified Kneser-Ney smoothing. The main strength of our approach is the combination of a simple and elegant idea with an an empirically convincing result. 
+		Cause: [(0, 9), (1, 19)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 2
+	Stag: 187 188 
+		Pattern: 9 [['consequently']]---- [['&C', '(,/;/./--)'], ['(,)', '&R']]
+		sentTXT: Mathematically one can see that the GLM includes the standard language model with modified Kneser-Ney smoothing as a sub model and is consequently a real generalization. In an empirical evaluation, we have demonstrated that for higher orders the GLM outperforms MKN for all test cases. 
+		Cause: [(0, 0), (0, 21)]
+		Effect: [(0, 23), (1, 18)]
+
+	CASE: 3
+	Stag: 195 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: The value of the weights would have to be chosen according to the probability or counts of the respective skip n -grams. 
+		Cause: [(0, 12), (0, 22)]
+		Effect: [(0, 0), (0, 9)]
+
+Section 8:  Acknowledgements has 0 CE cases
+Section 9:  Appendix A Discount Values and Weights in Modified Kneser Ney has 1 CE cases
+	CASE: 1
+	Stag: 205 206 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The discount value D u'\u2062' ( c ) used in formula ( 2.1 ) is defined as []. The discounting values D 1 , D 2 , and D 3 + are defined as []. 
+		Cause: [(0, 21), (1, 16)]
+		Effect: [(0, 0), (0, 19)]
+
+#-------------------------------------------------
+

@@ -1,0 +1,32 @@
+(lp0
+VIf a word undergoes sense change, this can be detected by comparing the sense clusters obtained from two different time periods by the algorithm outlined above
+p1
+aVIf a word undergoes a sense change, this can be detected by comparing its senses obtained from two different time periods
+p2
+aVAn element of the table shows the number of candidate words obtained by comparing the corresponding source and target time periods
+p3
+aVWe did this evaluation for the candidate birth, join and split sense clusters obtained by comparing 1909-1953 time period with respect to 2002-2005
+p4
+aVWe, therefore, utilize the basic hypothesis of unsupervised sense induction to induce the sense clusters over various time periods and then compare these clusters to detect sense change
+p5
+aVColumns correspond to the candidate words, words obtained in the cluster of each candidate word (we will use the term u'\u005cu2018' birth cluster u'\u005cu2019' for these words, henceforth), which indicated a new sense, the results of manual evaluation as well as the possible sense this birth cluster denotes
+p6
+aVFor a candidate word flagged as birth, we first find out the set of all WordNet synset ids for its CW clusters in the source time period (1909-1953 in this case
+p7
+aVSince we can not expect a perfect split, birth etc., we used certain threshold values to detect if a candidate word is undergoing sense change via one of these four cases
+p8
+aVDuring evaluation, we considered the clusters obtained using the 1909-1953 time-slice as our reference and attempted to track sense change by comparing these with the clusters obtained for 2002-2005
+p9
+aVTable 3 shows the evaluation results for a few candidate words, flagged due to birth
+p10
+aVFor the join case, we find WordNet synset ids s 1 and s 2 for the clusters obtained in the source time period and s n u'\u005cu2062' e u'\u005cu2062' w for the join cluster in the target time period
+p11
+aVWe next describe our algorithm for detecting sense change from these sets of sense clusters
+p12
+aVSince we aim to detect this change automatically, we require distributional representations corresponding to word senses for different time periods
+p13
+aVWe append an additional row and column to capture the fraction of words, which did not show up in any of the sense clusters in another time interval
+p14
+aVSince it was difficult to go through all the candidate sense changes for all the comparisons manually, we decided to randomly select some candidate words,
+p15
+a.

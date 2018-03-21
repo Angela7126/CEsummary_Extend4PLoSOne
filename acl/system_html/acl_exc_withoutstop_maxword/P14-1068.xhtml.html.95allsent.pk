@@ -1,0 +1,442 @@
+(lp0
+VAs baselines, we also report the performance of a model based solely on textual attributes (which we obtain from Strudel), visual attributes (obtained from our classifiers), and their concatenation (see row Attributes in Table 2 , and columns T, V, and T+V, respectively
+p1
+aVAs our input consists of natural language attributes, the model would infer textual attributes given visual attributes and vice versa
+p2
+aVAs an indicator to how well automatically extracted attributes can approach the performance of clean human generated attributes, we also report results of a distributional model induced from McRae et al u'\u005cu2019' s ( ) norms (see the row labeled McRae in the table
+p3
+aVThe automatically obtained textual and visual attribute vectors serve as input to SVD, kCCA, and our stacked autoencoder (SAE
+p4
+aVThe third row in the table presents three variants of our model trained on textual and visual attributes only (T and V, respectively) and on both modalities jointly (T+V
+p5
+aVWe show results for three models, using all attributes except those classified as visual (T), only visual attributes (V), and all available attributes (V+T
+p6
+aVTable 3 shows examples of word pairs with highest semantic and visual similarity according to the SAE model
+p7
+aVEach noun is represented as a vector with dimensions corresponding to attributes elicited by participants of the norming study
+p8
+aVWe report correlation coefficients of model predictions against similarity ratings
+p9
+aVWe also observe that simply concatenating textual and visual attributes (Attributes, T+V) performs competitively with SVD and better than kCCA
+p10
+aVAs shown in Figure 1 , our model takes as input two (real-valued) vectors representing the visual and textual modalities
+p11
+aVVector components are set to the (normalized) frequency with which participants generated the corresponding attribute
+p12
+aVDrawing inspiration from the successful application of attribute classifiers in object recognition, show that automatically predicted visual attributes act as substitutes for feature norms without any critical information loss
+p13
+aVTextual attributes were extracted by running Strudel () on a 2009 dump of the English Wikipedia
+p14
+aVIt is interesting to note that the unimodal SAEs are in most cases better than the raw textual or visual attributes
+p15
+aV9 9 Classification of attributes into categories is provided by in their dataset
+p16
+aVUnlike most previous work, our model is defined at a finer level of granularity u'\u005cu2014' it computes meaning representations for individual words and is unique in its use of attributes as a means of representing the textual and visual modalities
+p17
+aVThese models learn the meaning of words based on textual and perceptual input
+p18
+aVThis is for a good reason, as most abstract words do not have discernible attributes, or at least attributes that participants would agree upon
+p19
+aVFirstly, attributes provide a natural way of expressing salient properties of word meaning as demonstrated in norming studies (e.g.,, ) where humans often employ attributes when asked to describe a concept
+p20
+aVFor semantic similarity, the mean correlation was 0.76 (Min = 0.34, Max = 0.97, StD = 0.11) and for visual similarity 0.63 (Min = 0.19, Max = 0.90, SD = 0.14
+p21
+aVUnlike previous efforts such as the widely used WordSim353 collection () , our dataset contains ratings for visual and textual similarity, thus allowing to study the two modalities (and their contribution to meaning representation) together and in isolation
+p22
+aVWe use the visual vectors of the training and development set for training the autoencoders, and the vectors for the test set for evaluation
+p23
+aVFor example, by setting the corruption parameter v for the textual modality to one and u'\u005cu0394' r to zero, a standard object classification model for images can be trained
+p24
+aVThe first one is based on kernelized canonical correlation (kCCA, ) with a linear kernel which was the best performing model in
+p25
+aVSetting v close to one for either modality enables the model to infer the other (missing) modality
+p26
+aVMore recently, topic models which combine both feature norms and visual words have also been introduced
+p27
+aVThis suggests that both modalities contribute complementary information and that the SAE model is able to extract a shared representation which improves generalization performance across tasks by learning them jointly
+p28
+aVThese results indicate that the participants found the task relatively straightforward and produced similarity ratings with a reasonable level of consistency
+p29
+aVSeveral other models have been extensions of Latent Dirichlet Allocation () where topic distributions are learned from words and other perceptual units use visual words which they extract from a corpus of multimodal documents (i.e.,, BBC news articles and their associated images), whereas others () use feature norms obtained in longitudinal elicitation studies (see for an example) as an approximation of the visual environment
+p30
+aVSecondly, from a modeling perspective, attributes allow for easier integration of different modalities, since these are rendered in the same medium, namely, language
+p31
+aVIn this work, we introduce a model, illustrated in Figure 1 , which learns grounded meaning representations by mapping words and images into a common embedding space
+p32
+aVWe report results with the 640-dimensional embeddings as they performed best
+p33
+aVRegarding the visual autoencoder, we derive a new ( u'\u005cu2018' denoised u'\u005cu2019' ) target vector to be reconstructed for each input vector u'\u005cud835' u'\u005cudc31' ( u'\u005cud835' u'\u005cudc22' ) , and treat u'\u005cud835' u'\u005cudc31' ( u'\u005cud835' u'\u005cudc22' ) itself as corrupted input
+p34
+aVIn this section we present our experimental setup for assessing the performance of our model
+p35
+aVWe performed a large-scale evaluation on a new dataset consisting of human similarity judgments for 7,576 word pairs
+p36
+aVWe thus created a new dataset consisting exclusively of nouns which we hope will be useful for the development and evaluation of grounded semantic space models
+p37
+aVThis indicates that higher level embeddings may be beneficial to NLP tasks in general, not only to those requiring multimodal information
+p38
+aVIn general, these models specify mechanisms for constructing semantic representations from text corpora based on the distributional hypothesis words that appear in similar linguistic contexts are likely to have related meanings
+p39
+aVThese models still represent words as vectors resulting from the combination of representations with different statistical properties that do not necessarily have a natural correspondence (e.g.,, text and images
+p40
+aVWe measured inter-subject agreement as the average pairwise correlation coefficient (Spearman u'\u005cu2019' s u'\u005cu03a1' ) between the ratings of all annotators for each task
+p41
+aVThe unimodal autoencoder is thus trained to denoise a given input
+p42
+aVWe also transformed the dataset into hard categorizations by assigning each noun to its most typical category as extrapolated from human typicality ratings (for details see
+p43
+aVThe norms were elicited by asking participants to list properties (e.g.,, barks , an_animal , has_legs ) describing the nouns they were presented with
+p44
+aVWe opted for this specific measure as it achieves high correlation with human ratings and has a high coverage on our nouns
+p45
+aVFirstly, most of these approaches aim to learn a shared representation between modalities so as to infer some missing modality from others (e.g.,, to infer text from images and vice versa); in contrast, we aim to learn an optimal representation for each modality and their optimal combination
+p46
+aVThese were established by presenting participants with a cue word (e.g.,, canary ) and asking them to name an associate word in response (e.g.,, bird, sing, yellow
+p47
+aVAlthough several relevant datasets exist, such as the widely used WordSim353 () or the more recent Rel-122 norms () , they contain many abstract words, (e.g.,, love u'\u005cu2013' sex or arrest u'\u005cu2013' detention ) which are not covered in
+p48
+aVAutoencoders are a means to learn representations of some input by retaining useful features in the encoding phase which help to reconstruct the input, whilst discarding useless or noisy ones
+p49
+aVDespite differences in formulation, most existing models conceptualize the problem of meaning representation as one of learning from multiple views corresponding to different modalities
+p50
+aVWe therefore apply masking noise to one modality with a masking factor v (see Section 3.1 ), so that the corrupted modality optimally has to rely on the other modality in order to reconstruct its missing input features
+p51
+aVSome performance gains could be expected if parameter optimization took place separately for each task
+p52
+aVWe also encourage the autoencoder to detect dependencies between the two modalities while learning the mapping to the bimodal hidden layer
+p53
+aVThe use of stacked autoencoders to extract a shared lexical meaning representation is new to our knowledge, although, as we explain below related to a large body of work on deep learning
+p54
+aVStrudel is a fully automatic method for extracting weighted word-attribute pairs (e.g.,, bat u'\u005cu2013' species:n , bat u'\u005cu2013' bite:v ) from a lemmatized and POS-tagged corpus
+p55
+aVWe evaluated the clusters produced by CW using the F-score measure introduced in the SemEval 2007 task () ; it is the harmonic mean of precision and recall defined as the number of correct members of a cluster divided by the number of items in the cluster and the number of items in the gold-standard class, respectively
+p56
+aVWe follow in arguing that an attribute-centric representation is expedient for several reasons
+p57
+aVThe overall objective to be minimized is therefore the weighted sum of the reconstruction error L r and the classification error L c
+p58
+aVThen, we join these two SAEs by feeding their respective second coding simultaneously to another autoencoder, whose hidden layer thus yields the fused meaning representation
+p59
+aVThe underlying idea is that the learned latent representation is good if the autoencoder is capable of reconstructing the actual input from its corruption
+p60
+aVThis indicates that the attribute-based representation is a powerful predictor on its own
+p61
+aVFor that purpose, the autoencoders are pre-trained layer by layer, with the current layer being fed the latent representation of the previous autoencoder as input
+p62
+aVFor both modalities, we use the hyperbolic tangent function as activation function for encoder f u'\u005cu0398' and decoder g u'\u005cu0398' u'\u005cu2032' and an entropic loss function for L
+p63
+aVSeveral (denoising) autoencoders can be used as building blocks to form a deep neural network
+p64
+aVThe weights of each autoencoder are tied, i.e.,, u'\u005cud835' u'\u005cudc16' u'\u005cu2032' = u'\u005cud835' u'\u005cudc16' T
+p65
+aVUsing this unsupervised pre-training procedure, initial parameters are found which approximate a good solution
+p66
+aVThe similarity data was post-processed so as to identify and remove outliers
+p67
+aV7 7 We thank Elia Bruni for providing us with their data
+p68
+aVVector dimensions correspond to textual and visual attributes, respectively
+p69
+aVThe vector dimensions correspond to textual and visual attributes, examples of which are shown in Figure 2
+p70
+aVIn this task, simple concatenation of visual and textual attributes does not yield improved performance over the individual modalities (see row Attributes in Table 4
+p71
+aVTo learn meaning representations of single words from textual and visual input, we employ stacked (denoising) autoencoders (SAEs
+p72
+aVTable 2 presents our results on the word similarity task
+p73
+aVOur model uses stacked autoencoders () to induce semantic representations integrating visual and textual information
+p74
+aVRecall that participants were asked to provide ratings on two dimensions, namely semantic and visual similarity
+p75
+aVAnd the visual SAE correlates better with visual similarity judgments ( u'\u005cu03a1' = 0.60) compared to the textual SAE ( u'\u005cu03a1' = 0.52
+p76
+aVWe furthermore report results obtained with Bruni et al u'\u005cu2019' s ( ) bimodal distributional model, which employs SVD to integrate co-occurrence-based textual representations with visual representations constructed from low-level image features
+p77
+aVInterestingly, the bimodal SAE is better than the unimodal variants on both types of similarity judgments, semantic and visual
+p78
+aVOur model learns higher-level meaning representations for single words from textual and visual input in a joint fashion
+p79
+aVOur model learns multimodal representations from attributes which are automatically inferred from text and images
+p80
+aVThe bimodal autoencoder (SAE, T+V) outperforms all other bimodal models on both similarity tasks
+p81
+aVThroughout our experiments we compare a bimodal stacked autoencoder against unimodal autoencoders based solely on textual and visual input (left- and right-hand sides in Figure 1 , respectively
+p82
+aVThe visual and textual modalities on which our model is trained are decoupled in that they are not derived from the same corpus (we would expect co-occurring images and text to correlate to some extent) but unified in their representation by natural language attributes
+p83
+aVWe would expect the textual modality to be more dominant when modeling semantic similarity and conversely the perceptual modality to be stronger with respect to visual similarity
+p84
+aVIt yields a correlation coefficient of u'\u005cu03a1' = 0.70 on semantic similarity and u'\u005cu03a1' = 0.64 on visual similarity
+p85
+aVSpecifically, we used an updated version of their dataset to train SVM-based attribute classifiers that predict visual attributes for images
+p86
+aVThe textual SAE correlates better with semantic similarity judgments ( u'\u005cu03a1' = 0.65) than its visual equivalent ( u'\u005cu03a1' = 0.60
+p87
+aVTable 5 shows examples of clusters produced by Chinese Whispers when using vector representations provided by the SAE model
+p88
+aVWe first evaluated how well our model predicts word similarity ratings
+p89
+aVFor comparison, Patwardhan and Pedersen u'\u005cu2019' s ( ) measure achieved a coefficient of 0.56 on the dataset for semantic similarity and 0.48 for visual similarity
+p90
+aVAll these models run on the same datasets/items and are given input identical to our model, namely attribute-based textual and visual representations
+p91
+aVIn the first task, model estimates of word similarity (e.g.,, gem u'\u005cu2013' jewel are similar but glass u'\u005cu2013' magician are not) are compared against elicited similarity ratings
+p92
+aVIn their model, the textual modality is represented by the 30K-dimensional vectors extracted from UKWaC and WaCkypedia
+p93
+aVThe latter is approximated by feature norms elicited from humans () , visual information extracted automatically from images, () or a combination of both
+p94
+aVThe bimodal autoencoder is fed with the concatenated final hidden codings of the visual and textual modalities as input and maps these inputs to a joint hidden layer u'\u005cud835' u'\u005cudc32' u'\u005cu02d8' with B units
+p95
+aVThe best autoencoder on the word association task obtained a correlation coefficient of 0.33
+p96
+aVOn both tasks, our model outperforms baselines and related models
+p97
+aVThe target vector is derived as follows each object o in our data is represented by multiple images, and each image is in turn represented by a visual attribute vector u'\u005cud835' u'\u005cudc31' ( u'\u005cud835' u'\u005cudc22'
+p98
+aVThe dataset contains a classification, produced by human participants, of McRae et al u'\u005cu2019' s ( ) nouns into (possibly multiple) semantic categories (40 in total
+p99
+aVThirdly, attributes are well-suited to describing visual phenomena (e.g.,, objects, scenes, actions
+p100
+aVIn sum, our experiments show that the bimodal SAE model delivers superior performance across the board when compared against competitive baselines and related models
+p101
+aVThe dataset is a taxonomy of 636 visual attributes (e.g.,, has_wings , made_of_wood ) and nearly 700K images from ImageNet () describing more than 500 of McRae et al u'\u005cu2019' s ( ) nouns
+p102
+aVThe 500 textual and 100 visual hidden units were fed to a bimodal autoencoder containing 500 latent units, and masking noise was applied to the textual modality with v = 0.2
+p103
+aVWe give details on the tasks and datasets used for evaluation, we explain how the textual and visual inputs were constructed, how the SAE model was trained, and describe the approaches used for comparison with our own work
+p104
+aVThis resulted in 7,576 word pairs for which we obtained similarity ratings using Amazon Mechanical Turk (AMT
+p105
+aVAnalogously to the textual representations, visual vectors were scaled to the [ - 1 , 1 ] range
+p106
+aVWe only considered attributes assigned to at least two nouns in the dataset, obtaining a 414 dimensional vector for each noun
+p107
+aVParticipants were asked to rate a pair on two dimensions, visual and semantic similarity using a Likert scale of 1 (highly dissimilar) to 5 (highly similar
+p108
+aVWe only retained the ten highest scored attributes for each target word
+p109
+aVSpecifically, we concatenate the textual and visual vectors and project them onto a lower dimensional latent space using SVD
+p110
+aVThe SAE outperforms both kCCA and SVD by a large margin delivering clustering performance similar to the McRae et al u'\u005cu2019' s ( ) norms
+p111
+aVWe employ denoising autoencoders (DAEs) for pre-training the textual modality
+p112
+aVIn the categorization setting, Chinese Whispers (CW) produces a hard clustering over a weighted graph whose nodes correspond to words and edges to cosine similarity scores between vectors representing their meaning
+p113
+aVFinally, we also compare to the word embeddings obtained using Mikolov et al u'\u005cu2019' s ( ) recurrent neural network based language model
+p114
+aVWe evaluate the embeddings it produces on two tasks, namely word similarity and categorization
+p115
+aVWe used the model described above and the meaning representations obtained from the output of the bimodal latent layer for all the evaluation tasks detailed below
+p116
+aVWe learn meaning representations for the nouns contained in McRae et al u'\u005cu2019' s ( ) feature norms
+p117
+aVOur results on the categorization task are given in Table 4
+p118
+aVIn contrast, all bimodal models (SVD, kCCA, and SAE) are better than their unimodal equivalents and RNN-640
+p119
+aVThis returned a total of 2,362 dimensions for the textual vectors
+p120
+aVThis model has the following architecture the textual autoencoder (see Figure 1 , left-hand side) consists of 700 hidden units which are then mapped to the second hidden layer with 500 units (the corruption parameter was set to v = 0.1 ); the visual autoencoder (see Figure 1 , right-hand side) has 170 and 100 hidden units, in the first and second layer, respectively
+p121
+aVExamples of the stimuli and mean ratings are shown in Table 1
+p122
+aVWe follow Silberer et al u'\u005cu2019' s ( ) partition of the dataset into training, validation, and test set and acquire visual vectors for each of the sets
+p123
+aVA model akin to Latent Semantic Analysis () is proposed in who concatenate two independently constructed textual and visual spaces and subsequently project them onto a lower-dimensional space using Singular Value Decomposition
+p124
+aVOur work employs deep learning (a.k.a deep networks) to project linguistic and visual information onto a unified representation that fuses the two modalities together
+p125
+aVVector spaces have been also popular in cognitive science figuring prominently in simulations of human behavior involving semantic priming, deep dyslexia, text comprehension, synonym selection, and similarity judgments (see
+p126
+aVGrounded semantic spaces are essentially distributional models augmented with perceptual information
+p127
+aVModel parameters were optimized on a subset of the word association norms collected by
+p128
+aVIn our experiments (see Section 5 ), we correlate model-based cosine similarities with mean similarity ratings (again using Spearman u'\u005cu2019' s u'\u005cu03a1'
+p129
+aVThe correlation between the average ratings of the AMT annotators and the Miller and Charles (1991) dataset was u'\u005cu03a1' = 0.91
+p130
+aVAfter outlier removal, we further examined how well the participants agreed in their similarity judgments
+p131
+aVThis performance is superior to the results reported in (their correlation coefficients range from 0.16 to 0.28
+p132
+aVAn autoencoder is an unsupervised neural network which is trained to reconstruct a given input from its latent representation
+p133
+aVThe literature describes several successful approaches to multimodal learning using different variants of deep networks () and data sources including text, images, audio, and video
+p134
+aVInterestingly, both () and () which do not make use of attributes are out-performed by all other attribute-based systems (see columns T and T+V in Table 2
+p135
+aVSubsequently, the original input layer and hidden representations of all the autoencoders are stacked and all network parameters are fine-tuned with backpropagation
+p136
+aVWe evaluated model output against a gold standard set of categories created by
+p137
+aVBoth input modalities are vector-based representations of words, or, more precisely, the objects they refer to (e.g.,, canary , trolley
+p138
+aVTo obtain visual vectors, we followed the methodology put forward in
+p139
+aVFigure 1 illustrates the model
+p140
+aVThe visual modality is represented by bag-of-visual-words histograms built on the basis of clustered SIFT features
+p141
+aVNext, for each word we randomly selected 30 pairs under the assumption that they are representative of the full variation of semantic similarity
+p142
+aVWe also assess whether the learnt representations are appropriate for categorization, i.e.,, grouping a set of objects into meaningful semantic categories (e.g.,, peach and apple are members of fruit , whereas chair and table are furniture
+p143
+aVDuring training we used correlation analysis (Spearman u'\u005cu2019' s u'\u005cu03a1' ) to monitor the degree of linear relationship between model cue-associate (cosine) similarities and human probabilities
+p144
+aVWe finally build a stacked bimodal autoencoder (SAE) with all pre-trained layers and fine-tune them with respect to a semi-supervised criterion
+p145
+aVAgain, we use tied weights for the bimodal autoencoder
+p146
+aVThe target vector is the sum of u'\u005cud835' u'\u005cudc31' ( u'\u005cud835' u'\u005cudc22' ) and the centroid u'\u005cud835' u'\u005cudc31' ( u'\u005cud835' u'\u005cudc23' ) of the remaining attribute vectors representing object o
+p147
+aVExamples include imposing a bottleneck to produce an under-complete representation of the input, using sparse representations, or denoising
+p148
+aVThey allow to generalize to new instances for which there are no training examples available and to transcend category and task boundaries whilst offering a generic description of visual data ()
+p149
+aVWe rebuilt their model on the ESP image dataset () using Bruni et al u'\u005cu2019' s ( ) publicly available system
+p150
+aVTwo control pairs from were included in each task to potentially help identify and eliminate data from participants who assigned random scores
+p151
+aV4 4 435 word pairs constitute the overlap between Nelson et al u'\u005cu2019' s norms ( ) and McRae et al u'\u005cu2019' s ( ) nouns
+p152
+aVFinally, u'\u005cud835' u'\u005cudc2d' ^ ( u'\u005cud835' u'\u005cudc22' ) is the object label vector predicted by the softmax layer for input vector u'\u005cud835' u'\u005cudc31' ( u'\u005cud835' u'\u005cudc22' ) , and u'\u005cud835' u'\u005cudc2d' ( u'\u005cud835' u'\u005cudc22' ) is the correct object label, represented as a O -dimensional one-hot vector 1 1 In a one-hot vector, the element corresponding to the object label is one and the others are zero
+p153
+aVA large body of work has focused on projecting words and images into a common space using a variety of deep learning methods ranging from deep and restricted Boltzman machines () , to autoencoders () , and recursive neural networks
+p154
+aVWe normalize both unimodal input codings to unit length
+p155
+aVWeights are log-likelihood ratio scores expressing how strongly an attribute and a word are associated
+p156
+aVRecent years have seen a surge of interest in single word vector spaces () and their successful use in many natural language applications
+p157
+aVEach task consisted of 32 pairs covering examples of weak to very strong semantic relatedness
+p158
+aVThat is, we unfold the stacked autoencoder and furthermore add a softmax output layer on top of the bimodal layer u'\u005cud835' u'\u005cudc32' u'\u005cu02d8' that outputs predictions u'\u005cud835' u'\u005cudc2d' ^ with respect to the inputs u'\u005cu2019' object labels (e.g.,, boat
+p159
+aVThat is, we use indirect supervision in the form of object classification in addition to the objective of reconstructing the attribute-centric input representation
+p160
+aVCW is a non-parametric model, it induces the number of clusters (i.e.,, categories) from the data as well as which nouns belong to these clusters
+p161
+aVSecondly, our problem setting is different from the former studies, which usually deal with classification tasks and fine-tune the deep neural networks using training data with explicit class labels; in contrast we fine-tune our autoencoders using a semi-supervised criterion
+p162
+aVWord meaning, however, is also tied to the physical world
+p163
+aVTo account for this, new types of perceptually grounded distributional models have emerged
+p164
+aVThe elicitation study comprised overall 255 tasks, each task was completed by five volunteers
+p165
+aVWe first train SAEs with two hidden layers (codings) for each modality separately
+p166
+aVAlthough our model is conceptually similar to these studies (especially those applying stacked autoencoders), it differs considerably from them in at least two aspects
+p167
+aVWe considered an outlier to be any individual whose mean pairwise correlation fell outside two standard deviations from the mean correlation
+p168
+aVFurthermore, the semi-supervised setting affords flexibility, allowing to adapt the architecture to specific tasks
+p169
+aVInitially, we created all possible pairings over McRae et al u'\u005cu2019' s ( ) nouns and computed their semantic relatedness using u'\u005cu2019' s WordNet-based measure
+p170
+aVWe explain how these representations are obtained in more detail in Section 4.1
+p171
+aVThe task of categorization (i.e.,, grouping objects into meaningful categories) is a classic problem in the field of cognitive science, central to perception, learning, and the use of language
+p172
+aVWe also compare our model against two approaches that differ in their fusion mechanisms
+p173
+aVSimilar methods have been employed to combine other modalities such as speech and video () or images
+p174
+aVWe first briefly review autoencoders in Section 3.1 with emphasis on aspects relevant to our model which we then describe in Section 3.2
+p175
+aVThe weighting parameters for the joint training objective of the stacked autoencoder were set to u'\u005cu0394' r = 0.8 and u'\u005cu0394' c = 1 (see Equation ( 4
+p176
+aVThe training criterion with denoising autoencoders is the reconstruction of clean input u'\u005cud835' u'\u005cudc31' ( u'\u005cud835' u'\u005cudc22' ) given a corrupted version u'\u005cud835' u'\u005cudc31' ~ ( u'\u005cud835' u'\u005cudc22' )
+p177
+aVThe presented model has connections to several lines of work in NLP, computer vision research, and more generally multimodal learning
+p178
+aVExamples include information retrieval () , search query expansions () , document classification () , and question answering
+p179
+aVWords are grounded in the external environment and relate to sensorimotor experience
+p180
+aVThe latter contains a classification of 82 nouns into 10 categories
+p181
+aVHuman agreement on the former task is 0.76 and 0.63 on the latter
+p182
+aVFor each cue, the norms provide a set of associates and the frequencies with which they were named
+p183
+aVThe goal of deep learning is to learn multiple levels of representations through a hierarchy of network architectures, where higher-level representations are expected to help define higher-level concepts
+p184
+aVAnother approach is to unfold the stacked autoencoders and fine-tune them with respect to the minimization of the global reconstruction error
+p185
+aVThe additional supervised criterion drives the learning towards a representation capable of discriminating between different objects
+p186
+aVIn our experiments, we initialized Chinese Whispers with different graphs resulting from different vector-based representations of the nouns
+p187
+aVFinally, we stack all layers and unfold them in order to fine-tune the SAE
+p188
+aVTo this end, different strategies have been employed to guide parameter learning and constrain the hidden representation
+p189
+aVThe reconstruction error for an input u'\u005cud835' u'\u005cudc31' ( u'\u005cud835' u'\u005cudc22' ) with loss function L then is
+p190
+aVThe dataset contains a very large number of cue-associate pairs (63,619 in total) some of which luckily are covered in
+p191
+aVCW can optionally apply a minimum weight threshold which we optimized using the categorization dataset from
+p192
+aVThis is borne out in our unimodal SAEs
+p193
+aVThese nouns were excluded from the gold standard () in our final evaluation
+p194
+aVAlternatively, a semi-supervised criterion can be used () through combination of the unsupervised training criterion (global reconstruction) with a supervised criterion (prediction of some target given the latent representation
+p195
+aVTo further optimize the parameters of the network, a supervised criterion can be imposed on top of the last hidden layer such as the minimization of a prediction error on a supervised task
+p196
+aVTo obtain a clustering of nouns, we used Chinese Whispers () , a randomized graph-clustering algorithm
+p197
+aVHowever, we wanted to avoid overfitting, and show that our parameters are robust across tasks and datasets
+p198
+aVThese were pre-trained on Broadcast news data (400M words) using the word2vec tool
+p199
+aVThe training objective is the determination of parameters u'\u005cu0398' ^ = { u'\u005cud835' u'\u005cudc16' , u'\u005cud835' u'\u005cudc1b' } and u'\u005cu0398' ^ u'\u005cu2032' = { u'\u005cud835' u'\u005cudc16' u'\u005cu2032' , u'\u005cud835' u'\u005cudc1b' u'\u005cu2032' } that minimize the average reconstruction error over a set of input vectors { u'\u005cud835' u'\u005cudc31' ( u'\u005cud835' u'\u005cudfcf' ) , u'\u005cu2026' , u'\u005cud835' u'\u005cudc31' ( u'\u005cud835' u'\u005cudc27' ) }
+p200
+aVOne possible corruption process is masking noise , where the corrupted version u'\u005cud835' u'\u005cudc31' ~ ( u'\u005cud835' u'\u005cudc22' ) results from randomly setting a fraction v of u'\u005cud835' u'\u005cudc31' ( u'\u005cud835' u'\u005cudc22' ) to 0
+p201
+aVIt consists of an encoder f u'\u005cu0398' which maps an input vector u'\u005cud835' u'\u005cudc31' ( u'\u005cud835' u'\u005cudc22' ) to a latent representation u'\u005cud835' u'\u005cudc32' ( u'\u005cud835' u'\u005cudc22' ) = f u'\u005cu0398' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' ( u'\u005cud835' u'\u005cudc22' ) ) = s u'\u005cu2062' ( u'\u005cud835' u'\u005cudc16' u'\u005cud835' u'\u005cudc31' ( u'\u005cud835' u'\u005cudc22' ) + u'\u005cud835' u'\u005cudc1b' ) , with s being a non-linear activation function, such as a sigmoid function
+p202
+aVThe second one emulates Bruni et al u'\u005cu2019' s ( ) fusion mechanism
+p203
+aVThe classifiers perform reasonably well with an interpolated average precision of 0.52
+p204
+aV11.5% of the annotations were detected as outliers and removed
+p205
+aVAssociation scores were scaled to the [ - 1 , 1 ] range
+p206
+aV6 6 The dataset can be downloaded from http://homepages.inf.ed.ac.uk/s0897549/data/
+p207
+aVWe review related work in these areas below
+p208
+aVwhere L is a loss function, such as cross-entropy
+p209
+aVThese are 541 concrete animate and inanimate objects (e.g.,, animals, clothing, vehicles, utensils, fruits, and vegetables
+p210
+aV2 2 The corpus is downloadable from http://wacky.sslmit.unibo.it/doku.php?id=corpora
+p211
+aVwith weights u'\u005cud835' u'\u005cudc16' ( u'\u005cud835' u'\u005cudfd4' ) u'\u005cu2208' u'\u005cu211d' O × B , u'\u005cud835' u'\u005cudc1b' ( u'\u005cud835' u'\u005cudfd4' ) u'\u005cu2208' u'\u005cu211d' O × 1 , where O is the number of unique object labels
+p212
+aVParameters u'\u005cu0398' and u'\u005cu0398' u'\u005cu2032' can be optimized by gradient descent methods
+p213
+aVA decoder g u'\u005cu0398' u'\u005cu2032' then aims to reconstruct input u'\u005cud835' u'\u005cudc31' ( u'\u005cud835' u'\u005cudc22' ) from u'\u005cud835' u'\u005cudc32' ( u'\u005cud835' u'\u005cudc22' ) , i.e.,, u'\u005cud835' u'\u005cudc31' ^ ( u'\u005cud835' u'\u005cudc22' ) = g u'\u005cu0398' u'\u005cu2032' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc32' ( u'\u005cud835' u'\u005cudc22' ) ) = s u'\u005cu2062' ( u'\u005cud835' u'\u005cudc16' u'\u005cu2032' u'\u005cu2062' u'\u005cud835' u'\u005cudc32' ( u'\u005cud835' u'\u005cudc22' ) + u'\u005cud835' u'\u005cudc1b' u'\u005cu2032'
+p214
+aVwhere u'\u005cu0394' r and u'\u005cu0394' c are weighting parameters that give different importance to the partial objectives, L c and L r are entropic loss functions, and R is a regularization term with R = u'\u005cu2211' j = 1 5 2 u'\u005cu2062' u'\u005cud835' u'\u005cudc16' ( u'\u005cud835' u'\u005cudc23'
+p215
+aV2 + u'\u005cud835' u'\u005cudc16' ( u'\u005cud835' u'\u005cudfd4'
+p216
+aV3 3 http://w3.usf.edu/Freeassociation
+p217
+aV8 8 Available from http://www.rnnlm.org/
+p218
+aV5 5 Available from http://homepages.inf.ed.ac.uk/mlap/index.php?page=resources
+p219
+aV2
+p220
+a.

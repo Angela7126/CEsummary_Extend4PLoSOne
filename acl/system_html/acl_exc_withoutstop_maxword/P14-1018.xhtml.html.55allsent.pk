@@ -1,0 +1,102 @@
+(lp0
+VFor each such user we collect recent tweets and randomly sample their immediate k = 10 neighbors from follower, friend, user mention, reply, retweet and hashtag social circles
+p1
+aVSharing restrictions and rate limits on Twitter data collection only allowed us to recreate a semblance of ZLR data 6 6 This inability to perfectly replicate prior work based on Twitter is a recognized problem throughout the community of computational social science, arising from the data policies of Twitter itself, it is not specific to this work u'\u005cu2013' 193 Democratic and 178 Republican users with 1K tweets per user, and 20 neighbors of four types including follower, friends, user mention and retweet with 200 tweets per neighbor for each user of interest
+p2
+aV[ 7 ] rely on identifying strong partisan clusters of Democratic and Republican users in a Twitter network based on retweet and user mention degree of connectivity, and then combine this clustering information with the follower and friend neighborhood size features
+p3
+aVFinally, similarly to the results for the user model given in Figure 3 , increasing the number of tweets per neighbor from 5 to 200 leads to a significant gain in performance for all neighborhood types
+p4
+aVOther methods characterize Twitter users by applying limited amounts of network structure information in addition to lexical features
+p5
+aVWe show that three of six social circles u'\u005cu2013' friend, retweet and user-mention yield better accuracy compared to the user model for all graphs when t u'\u005cu2265' 250
+p6
+aVIn addition, we propose streaming models for personal analytics that dynamically update user labels based on their stream of communications which has been addressed previously by Van Durme ( 2012b
+p7
+aVHowever, most Twitter users are less prolific than those examined in these works, and thus do not produce the thousands of tweets required to obtain their levels of accuracy e.g.,, the median number of tweets produced by a random Twitter user per day is 10
+p8
+aVBaseline User Model As input we are given a set of vertices representing users of interest v i u'\u005cu2208' V along with feature vectors f u'\u005cu2192' u'\u005cu2062' ( v i ) derived from content authored by the user of interest
+p9
+aV[ 30 ] suggest a hierarchical Bayesian model which takes advantage of user name morphology for predicting user gender and ethnicity
+p10
+aVThe existing batch models for predicting latent user attributes rely on thousands of tweets per author [ 31 , 7 , 27 , 5 , 42 , 21 ]
+p11
+aVSimilar to our work, they assume that users from a particular class tend to reply and retweet messages of the users from the same class
+p12
+aVNext we propose to extend the baseline model by taking advantage of language in user social circles as describe below
+p13
+aVThus, for effectively classifying a given user v i it is better to take 200 tweets each from 10 neighbors rather than 2,000 tweets from the user
+p14
+aVUnsupervised Batch Approaches Bergsma et al
+p15
+aVThe proposed baseline model follows the same trends as the existing state-of-the-art approaches for user attribute classification in social media as described in Section 8
+p16
+aVSuch extreme divergences in the amount of time required for classification across all graphs should be of strong interest to researchers concerned with latent attribute prediction tasks because Twitter users produce messages with extremely different frequencies
+p17
+aVThese results follow naturally from the underlying feature representation having more tweets per user leads to a lower variance estimate of a target multinomial distribution
+p18
+aVOur results demonstrate that even small changes to the neighborhood size n lead to better performance which does not support the claims by Zamal et al
+p19
+aVThe model dynamically updates posterior probability estimates p ( a ( v i ) = R t k ) for a given user v i as an additional evidence t k is acquired, as defined in a general form below for any latent attribute a u'\u005cu2062' ( v i ) u'\u005cu2208' A given the tweets T of user v i
+p20
+aVWe demonstrate that increasing the size of the neighborhood leads to better performance across six neighborhood types
+p21
+aVFollowing the streaming nature of social media, we see the scarce available resource as the number of requests allowed per day to the Twitter API
+p22
+aVWe rely on straightforward Bayesian rule update to our batch models in order to simulate a real-time streaming prediction scenario as a first step beyond the existing models as shown in Figure 2
+p23
+aVEach edge e i u'\u005cu2062' j u'\u005cu2208' E represents a connection between v i and v j , e i u'\u005cu2062' j = ( v i , v j ) and defines different social circles between Twitter users e.g.,, follower ( f ) , friend ( b ) , user mention ( m ) , hashtag ( h ) , reply ( y ) and retweet ( w
+p24
+aVFigure 3 demonstrates that more tweets during prediction time lead to higher accuracy by showing that more users with 100 tweets are correctly classified e.g.,, filled green markers in the right upper quadrant are true Republicans and in the left lower quadrant are true Democrats
+p25
+aV[ 15 ] propose a bilinear user-centric model for predicting voting intentions in the UK and Australia from social media data
+p26
+aVWe collectively refer to D and R as our u'\u005cu201c' users of interest u'\u005cu201d' for which we aim to predict political preference
+p27
+aVOur goal is to classify users of interest using evidence (e.g.,, communications) from their local neighborhood u'\u005cu2211' n f u'\u005cu2192' t u'\u005cu2062' [ N r u'\u005cu2062' ( v i ) ] u'\u005cu2261' f u'\u005cu2192' u'\u005cu2062' ( N r ) as Democratic or Republican
+p28
+aVWe prefer binary to normalized count-based features to overcome sparsity issues caused by making predictions on each tweet individually
+p29
+aVFor example, to predict user political preference, we start with a prior P u'\u005cu2062' ( R ) = 0.5 , and sequentially update the posterior p ( R u'\u005cu2223' T ) by accumulating evidence from the likelihood p ( t k
+p30
+aVAs a result, less active users in G g u'\u005cu2062' e u'\u005cu2062' o just need more than 250 tweets to converge to a true 0 or 1 class
+p31
+aVOur goal is assign to a category each user of interest v i based on f u'\u005cu2192' u'\u005cu2062' ( v i
+p32
+aVThe average probability estimates p u'\u005cu039c' ( R u'\u005cu2223' T ) are reported for every 5 tweets in a stream T = ( t 1 , u'\u005cu2026' u'\u005cu2062' t k ) as u'\u005cu2211' P n ( R u'\u005cu2223' t k ) n , where n is the total number of users with the same attribute R or D
+p33
+aVThe corresponding log-linear model is defined as
+p34
+aVWe labeled users as Democratic if they exclusively follow both Democratic candidates 4 4 As of Oct 12, 2012, the number of followers for Obama, Biden, Romney and Ryan were 2m, 168k, 1.3m and 267k u'\u005cu2013' BarackObama and JoeBiden but do not follow both Republican candidates u'\u005cu2013' MittRomney and RepPaulRyan and vice versa
+p35
+aVFor instance, 85.3% of all Twitter users post less than one update per day as reported at http://www.sysomos.com/insidetwitter/
+p36
+aVThese findings further confirm that differences in performance are caused by various biases present in the data due to distinct sampling and annotation approaches
+p37
+aVFollowing Filippova ( 2012 ) we refer to N r u'\u005cu2062' ( v i ) as v i u'\u005cu2019' s social circle, otherwise known as a neighborhood
+p38
+aV11 11 For brevity we omit reporting results for bigram and trigram features, since unigrams showed superior performance
+p39
+aVOther works explore political blogs to predict what content will get the most comments [ 41 ] or analyze communications from Capitol Hill 12 12 http://www.tweetcongress.org to predict campaign contributors based on this content [ 40 ]
+p40
+aVThus, their communications are scare even if we could get all of them without rate limiting from Twitter API
+p41
+aVWe denote a set of vertices adjacent to v i by social circle type r as N r u'\u005cu2062' ( v i ) which is equivalent to { v j u'\u005cu2223' e i u'\u005cu2062' j u'\u005cu2208' u'\u005cu03a6' r u'\u005cu2062' ( E ) }
+p42
+aVThe more robustly this distribution is estimated (based on having more tweets) the more confident we should be in the classifier output
+p43
+aVAdditionally, using social media for mining political opinions [ 23 , 19 ] or understanding socio-political trends and voting outcomes [ 36 , 12 , 15 ] is becoming a common practice
+p44
+aVIt means that users in G c u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' d are more politically vocal compared to users in G Z u'\u005cu2062' L u'\u005cu2062' R and G g u'\u005cu2062' e u'\u005cu2062' o
+p45
+aVThe amount of time needed can be evaluated for different accuracy levels e.g.,, 0.75 and 0.95
+p46
+aVResources like Twitter 1 1 http://www.demographicspro.com/ or Facebook 2 2 http://www.wolframalpha.com/facebook/ become extremely valuable for studying the underlying properties of such informal communications because of its volume, dynamic nature, and diverse population [ 18 , 33 ]
+p47
+aVWe denote a set of edges of a given type as u'\u005cu03a6' r u'\u005cu2062' ( E ) for r u'\u005cu2208' { f , b , h , m , w , y }
+p48
+aVWe represent p u'\u005cu039c' ( R u'\u005cu2223' T ) as a box and whisker plot with the median, lower and upper quantiles to show the variance; the length of whiskers indicate lower and upper extreme values
+p49
+aVThus, with 75% accuracy we classify
+p50
+a.

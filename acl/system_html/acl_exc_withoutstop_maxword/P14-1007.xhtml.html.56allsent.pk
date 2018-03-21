@@ -1,0 +1,164 @@
+(lp0
+VScopal information in MRS analyses delivered by the ERG fixes the scope of operators u'\u005cu2014' such as negation, modals, scopal adverbs (including subordinating conjunctions like while ), and clause-embedding verbs (e.g., believe ) u'\u005cu2014' based on their position in the constituent structure, while leaving the scope of quantifiers (e.g., a or every , but also other determiners) free
+p1
+aVThus, the MRS crawling operations u'\u005cu2018' paint u'\u005cu2019' a subset of the MRS graph as in-scope for a given negation cue
+p2
+aVOur MRS crawling algorithm was defined by looking at the annotated data rather than the annotation guidelines for the Shared Task [ 7 ]
+p3
+aVThe negation cue for a negated nominal argument will appear as a quantifier EP in the MRS, triggering line 3 of our algorithm
+p4
+aVOur system, on the other hand, models the annotation guidelines more closely in the definition of the MRS crawling rules, and has more elaborated rules for handling semantically empty words
+p5
+aVBy disallowing the addition of EPs to the scope if they share the label of the negation cue but are not one of its arguments, we block the head noun u'\u005cu2019' s EP (and any EPs only reachable from it) in cases of relative clauses where the head verb inside the relative clause is negated
+p6
+aVOur crawling rules operate on semantic representations, but the annotations are with reference to the surface string
+p7
+aVSince in this case, the negation cue will not be a quantifier in the MRS, there will be no functor crawling to the verb u'\u005cu2019' s EP
+p8
+aVThus, we also tested fall-back configurations which use scope predictions based on MRS in some cases, and scope predictions from the system of \u005cciteA Rea:Vel:Ovr:12 in others
+p9
+aVBecause our crawling algorithm so closely models the guidelines, this puts our system in an interesting position to provide feedback to the Shared Task organizers
+p10
+aVFor the purposes of the present task, we take a negation cue as our entry point into the MRS graph (as our initial active EP), and then move through the graph according to the following simple operations to add EPs to the active set
+p11
+aVSince the Shared Task gold standard annotations included such arguably semantically vacuous (see \u005cciteNP [p.107]Bender:13) words in the scope, further heuristics are needed to repair the string-based annotations coming from the DRS-based system
+p12
+aV\u005cciteA Bas:Bos:Eva:12 describe some amount of tailoring of the Boxer lexicon to include more of the Shared Task scope cues among those that produce the negation operator in the DRSs, but otherwise the system appears to directly take the notion of scope of negation from the DRS and project it out to the string, with one caveat
+p13
+aVWe combine our system with the outputs from the best-performing 2012 submission, the system of \u005cciteA Rea:Vel:Ovr:12, firstly by relying on the latter for system negation cue detection, 4 4 \u005cciteA Rea:Vel:Ovr:12 predicted cues using a closed vocabulary assumption with a supervised classifier to disambiguate instances of cues and secondly as a fall-back in system combination as described in § 3.4 below
+p14
+aVOur algorithm states that for this type of cue (a quantifier) the first step is functor crawling (see § 3.3 below), which brings \u005cspred _know_v_1 into the scope
+p15
+aVIf an EP shares its label with the negation cue, or is a quantifier whose restriction ( \u005csrl RSTR) is \u005csqeq equated with the label of the negation cue, it cannot be in-scope unless its \u005csrl ARG0 is an argument of the negation cue, or the \u005csrl ARG0 of the negation cue is one of its own arguments
+p16
+aVHowever, the string-based annotations also include words which the ERG treats as semantically vacuous
+p17
+aVThe guidelines state that negated attributive adjectives have scope over the entire NP (including the determiner) (ibid., p.20) and analogously negated adverbs have scope over the entire clause (ibid., p.21
+p18
+aVThus, the deep parsing front-end system to our MRS Crawler has not been adapted to the task or its text type; it is applied in an u'\u005cu2018' off the shelf u'\u005cu2019' setting
+p19
+aVFurthermore, the guidelines treat relative clauses as subordinate clauses and thus negation inside a relative clause is treated as bound to that clause only, and includes neither the head noun of the relative clause nor any of its other dependents in its scope
+p20
+aVSince these structures are analogous in the semantic representations, the same operations that handle negated verbs also handle negated predicative adjectives correctly
+p21
+aVFor negated verbs, the guidelines state that u'\u005cu2018' u'\u005cu2018' If the negated verb is the main verb in the sentence, the entire sentence is in scope u'\u005cu2019' u'\u005cu2019' [ 7 , 17]
+p22
+aVThe ERG treats all subordinating conjunctions as two-place predicates taking two scopal arguments
+p23
+aVHowever, from the perspective of MRS, a negated relative clause is indistinguishable from any other negated modifier of a noun
+p24
+aVIn contrast to subjects and objects, negation of a clausal argument is not treated as negation of the verb (ibid., p.18
+p25
+aVOur system implements these findings through a notion of functor-argument u'\u005cu2018' crawling u'\u005cu2019' , using as our starting point the underspecified logical-form meaning representations provided by a general-purpose deep parser
+p26
+aVWe proceed with argument crawling and label crawling , which pick up \u005cspred _the_q \u005cslnkc 03 and \u005cspred _german_n_1 as the \u005csrl ARG1
+p27
+aVThus in order to match the gold annotations, we define a set of heuristics for when to count vacuous words as in scope
+p28
+aVFor negated modifiers, the situation is somewhat more complex, and this is a case where our crawling algorithm, developed on the basis of the annotated data, does not align directly with the guidelines as given
+p29
+aVWe used the grammar together with one of its pre-packaged conditional Maximum Entropy models for parse ranking, trained on a combination of encyclopedia articles and tourism brochures
+p30
+aVThe main points of difference are in the robustness of the system and in the degree of tailoring of both the rules for determining scope on the logical form level and the rules for handling semantically vacuous elements
+p31
+aVTo shed more light on specific strengths and weaknesses of our approach, we performed a manual error analysis of scope predictions by Crawler, starting from gold cues so as to focus in-depth analysis on properties specific to scope resolution over MRSs
+p32
+aVBoth approaches attempted to handle discontinuous instances by applying two heuristics to the predicted scope a) removing preceding conjuncts from the scope when the cue is in a conjoined phrase and (b) removing sentential adverbs from the scope
+p33
+aVHowever, the annotations are not consistent, especially with respect to the treatment of negated adjectives while the head noun and determiner (if present) are typically annotated as in scope, other co-modifiers, especially long, post-nominal modifiers (including relative clauses) are not necessarily included
+p34
+aV\u005cSTATE Activate EPs reached by functor crawling if they are modal verbs, or one of the following subordinating conjunctions reached by ARG1 whether , when , because , to , with , although , unless , until , or as
+p35
+aVThis is possible because we take advantage of the high degree of normalization that the ERG accomplishes in mapping to the MRS representation
+p36
+aVAs is usually the case with exercises in formalization, our crawling algorithm generalizes beyond what is given explicitly in the annotation guidelines
+p37
+aVThus, as with clausal complements of clause-embedding verbs, the embedding subordinating conjunction and any other arguments it might have are inaccessible, since functor crawling is restricted to a handful of specific configurations
+p38
+aVA semantically empty word is determined to be in-scope if there is an in-scope syntax tree node in the right position relative to it, as governed by a short list of templates organized by the type of the semantically empty word (particles, complementizers, non-referential pronouns, relative pronouns, and auxiliary verbs
+p39
+aVSince we do not attempt to perform cue detection, we report performance using gold cues and also using the system cues predicted by \u005cciteA Rea:Vel:Ovr:12
+p40
+aVAs an example, the rule for auxiliary verbs like have in our example ( 3.2 ) is that they are in scope when their verb phrase complement is in scope
+p41
+aVAccordingly, we need projection rules to map from the u'\u005cu2018' painted u'\u005cu2019' MRS to the string
+p42
+aVThe arguments of one EP are linked to the arguments of others either directly (sharing the same variable as their value), or indirectly (through so-called u'\u005cu2018' handle constraints u'\u005cu2019' , where \u005csqeq in Fig
+p43
+aVFor example, all arguments that are treated as semantically nominal (including PP arguments where the preposition is semantically null) are treated in the same way as subjects and objects; similarly, all arguments which are semantically clausal (including certain PP arguments) are handled the same way as clausal complements
+p44
+aVAs with the logical-forms representations we use, the DRS logical forms do not include function words as predicates in the semantics
+p45
+aVIn addition, as noted above, there are a handful of negation cues we do not yet handle
+p46
+aVThis treatment of relative clauses (as well as the inconsistencies in other forms of co-modification) is the reason for the exception noted at line 7 of Fig
+p47
+aVFurther, as the \u005csrl ARG2 of \u005cspred _know_v_1, we reach \u005cspred thing and through recursive invocation we activate \u005cspred _of_p and, in yet another level of recursion, \u005cspred _the_q \u005cslnkc 5760 and \u005cspred _matter_n_of
+p48
+aVIn this work, we have treated the ERG as an off-the-shelf system, but coverage could certainly be straightforwardly improved by adding analyses for phenomena particular to turn-of-the-20th-century British English
+p49
+aVAt this point, crawling has no more links to follow
+p50
+aVHowever, the analysis engine does not always provide the desired analysis, largely because of idiosyncrasies of the genre (e.g., vocatives appearing mid-sentence) that are either not handled by the grammar or not well modeled in the parse selection component
+p51
+aVNonetheless, our algorithm can be seen as a first pass formalization of the guidelines
+p52
+aVIn ( 1 ), there are no semantically empty words in-scope, so we illustrate these heuristics with another example
+p53
+aVFor example, the main rule for relative pronouns is that they are in-scope when they fill a gap in an in-scope constituent; which fills a gap in the constituent have overlooked , but since have is the (syntactic) lexical head of that constituent, the verb phrase is not considered in-scope the first time the rules are tried
+p54
+aVIn this section, we briefly sketch how our algorithm corresponds to different aspects of the guidelines
+p55
+aV2 2 Resolving negation scope is a more difficult sub-problem at least in part because (unlike cue and event identification) it is concerned with much larger, non-local and often discontinuous parts of each utterance
+p56
+aVThey investigated two approaches for scope resolution, both of which were based on syntactic constituents
+p57
+aVThe Oracle results are interesting because they show that there is much more to be gained in combining our semantics-based system with the \u005cciteA Rea:Vel:Ovr:12 syntactically-focused system
+p58
+aVThis leads us to \u005cspred _no_q as our entry point into the graph
+p59
+aVWhere \u005cciteA Mor:Dae:12 characterize negation as an u'\u005cu2018' u'\u005cu2018' extra-propositional aspect of meaning u'\u005cu2019' u'\u005cu2019' (p.1563), we in fact see it as a core piece of compositionally constructed logical-form representations
+p60
+aVHaving been unable to find a generalization capturing when comodifiers are annotated as in scope, we stuck with this approximation
+p61
+aVSince overlooked is marked as in-scope by the crawler, the semantically empty have becomes in-scope as well
+p62
+aVThis first type of genuine crawling failure often relates to cues expressed as affixation ( 4.3 ), as well as to rare usages of cue expressions that predominantly occur with different categories, e.g., neither as a generalized quantifier ( 4.3
+p63
+aVOwing to its immediate utility in the curation of scholarly results, the analysis of negation and so-called hedges in bio-medical research literature has been the focus of several workshops, as well as the Shared Task at the 2011 Conference on Computational Language Learning (CoNLL
+p64
+aVBeing rule-based, our system does not require any training data per se
+p65
+aVThis intuition is confirmed by \u005cciteA Rea:Vel:Ovr:12, who report results for each sub-problem using gold-standard inputs; in this setup, scope resolution showed by far the lowest performance levels
+p66
+aVHere, we could anticipate improvements by training the parse ranker on in-domain data or otherwise adapting it to this task
+p67
+aVAnother 33% of our false scope predictions are Crawler-external, viz. owing to erroneous input MRSs due to imperfect disambiguation by the parser or other inadequacies in the parser output
+p68
+aVFinally, we note that even carefully worked out annotation guidelines such as these are never followed perfectly consistently by the human annotators who apply them
+p69
+aVThe training set contains 848 negated sentences, the development set 144, and the evaluation set 235
+p70
+aVSecondly they trained an SVM ranker over candidate constituents, generated by following the path from a cue to the root of the tree and describing each candidate in terms of syntactic properties along the path and various surface features
+p71
+aVAs there can be multiple usages of negation in one sentence, this corresponds to 984, 173, and 264 instances, respectively
+p72
+aVAutomated analysis of such aspects of meaning is important for natural language processing tasks which need to consider the truth value of statements, such as for example text mining [ 9 ] or sentiment analysis [ 5 ]
+p73
+aVAs illustrated in these examples, this is correct some but not all of the time
+p74
+aV\u005cciteauthor Bas:Bos:Eva:12 resort to counting any words between in-scope tokens which are not themselves cues as in-scope
+p75
+aVSince full-scope recall depends on token-level precision, the Crawler does better across the board at the full-scope level
+p76
+aVThis simple heuristic raises their F 1 for full scopes from 20.1 to 53.3 on system-predicted cues
+p77
+aV{exe} \u005cex Please arrange your thoughts and let me know, in their due sequence, exactly what those events are { which have sent you out } u'\u005cu27e8' un u'\u005cu27e9' { brushed } and unkempt, with dress boots and waistcoat buttoned awry, in search of advice and assistance
+p78
+aVIt also blocks co-modifiers like great , own , and the phrases headed by ready and about in ( 3.3 ) u'\u005cu2013' ( 3.3
+p79
+aVThis work grew out of a discussion with colleagues of the Language Technology Group at the University of Oslo, notably Elisabeth Lien and Jan Tore Lønning, to whom we are indebted for stimulating cooperation
+p80
+aV\u005cex You saw yourself { how } u'\u005cu27e8' neither u'\u005cu27e9' { of the inspectors dreamed of questioning his statement } , extraordinary as it was
+p81
+a.

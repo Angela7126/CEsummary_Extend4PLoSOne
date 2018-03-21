@@ -1,0 +1,136 @@
+(lp0
+VTo fix the negative impact on query aspects, we could leverage the findings in the previous study [ 28 ] and regularize the weighting strategy based on the length of query aspects to favor documents covering more query aspects
+p1
+aVTo further improve the performance, Limsopatham et al proposed a task-specific representation, i.e.,, using only four types of concepts (symptom, diagnostic test, diagnosis and treatment) in the concept-based representation and a query expansion method based on the relationships among the medical concepts [ 12 , 13 ]
+p2
+aVIn a way, the constraint aims to counteract the arbitrary statistics inflation caused by MetaMap results and balance the weight among concepts based on the importance of the associated query aspects
+p3
+aVIn particular, our preliminary results show that turning on the disambiguation functionality provided by MetaMap (i.e.,, returning only the most likely concept for each query) could lead to worse retrieval performance than using all the candidate mappings
+p4
+aVWith the increasing use of electronic health records, it becomes urgent to leverage this rich information resource about patients u'\u005cu2019' health conditions to transform research in health and medicine
+p5
+aVUnder such a situation, traditional retrieval functions would likely work well and generate satisfying retrieval performance since the relations among concepts are independent which is consistent with the assumptions made in traditional IR [ 18 ]
+p6
+aVTo fix the negative impact on the concept IDF values, we propose to regularize the weighting based on the importance of the query aspect
+p7
+aVIn particular, MetaMap [ 3 ] can take a text string as the input, segment it into phrases, and then map each phrase to multiple UMLS CUIs with confidence scores
+p8
+aVOne of our contributions is to present a general methodology that can be used to adjust existing IR techniques based on the inaccurate NLP results
+p9
+aVHowever, when converting the text to concepts representation using MetaMap, the occurrences of the concepts are determined by not only the original term occurrences, a good indicator of relevance, but also the number of mapped concepts, which is determined by MetaMap and has nothing to do with the relevance status
+p10
+aVSpecifically, by applying the axiomatic approaches [ 7 ] , we analyze the retrieval functions with concept-based representation and find that they may violate some reasonable retrieval constraints
+p11
+aVSince the task is to retrieve relevant visits, we merged all the records from a visit to form a single document for the visit, which leads to 17,198 documents in the collection
+p12
+aVAs an example, when developing a cohort for a clinical trial, researchers need to identify patients matching a set of clinical criteria based on their medical records during their hospital visits [ 22 , 8 ]
+p13
+aVThe basic idea is to represent both queries and documents as u'\u005cu201c' bags of concepts u'\u005cu201d' , where the concepts are identified based on the information from the knowledge bases
+p14
+aVThe multiple concepts generated from the same aspect are related, which is inconsistent with the independence assumption made in the existing retrieval functions [ 18 ]
+p15
+aVIn particular, MetaMap is used to map terms from queries and documents (e.g.,, medical records) to the semantic concepts from biomedical knowledge bases such as UMLS
+p16
+aVIntuitively, to better solve this domain-specific retrieval problem, we need to understand the requirements specified in a query and identify the documents satisfying these requirements based on their semantic meanings
+p17
+aVSince the goal is to retrieve medical records of patients that satisfying requirements specified in a query, the relevance of medical records should be modeled based on how well they match all the requirements (i.e.,, aspects) specified in the queries
+p18
+aVHowever, due to the inherent ambiguity of natural languages, the results of NLP tools are not perfect
+p19
+aVWe then propose two concept-based weighting regularization methods so that the regularized retrieval functions would satisfy the retrieval constraints and achieve better retrieval performance
+p20
+aVThis method has been shown to be more effective than traditional term-based representation in the medical record retrieval because of its ability to handle the ambiguity in the medical terminology
+p21
+aVExisting studies computed the relevance scores at either visit-level, where all the medical records of a visit are merged into a visit document [ 5 , 15 ] , or record-level, where we can first compute the relevance score of individual records and then aggregate their scores as the relevance score of a visit [ 15 , 30 , 12 ]
+p22
+aVBy merging the concepts together, we are aiming to purify the concepts and make the similar concepts centralized so that the assumption that all the concepts are independent would hold
+p23
+aVAs a result, directly applying existing weighting strategies might lead to non-optimal retrieval performance
+p24
+aVIt is trivial to prove that, with such changes, existing retrieval functions would satisfy the above constraint since the constraint implies TFC2 constraint defined in the previous study [ 6 ]
+p25
+aVHowever, this method also suffers the limitation that its effectiveness depends on the accuracy of the concept mapping results
+p26
+aVThe one-to-many mapping results generated by MetaMap could arbitrarily inflate the weights of some query aspects
+p27
+aVIt is clear that the right plot (i.e.,, selecting the concept with the maximum IDF as the representative concept) is the best choice since the changes make the points less scattered
+p28
+aVThis regularization function aims to penalize the weight of concept e based on its variants as well as the concepts from other aspects
+p29
+aVOne limitation of this representation is that relevance scores are computed based on the matching of terms rather than the meanings
+p30
+aVIt is clear that existing retrieval functions would violate this constraint since they ignore the relations among concepts
+p31
+aVThese queries were developed by domain experts based on the u'\u005cu201c' inclusion criteria u'\u005cu201d' of a clinical study [ 25 , 24 ]
+p32
+aVFollowing the evaluation methodology used in the medical record track, we use MAP@1000 as the primary measure for Med11 and also report bpref
+p33
+aVWith the unified concept weighting regularization, the revised function based on F2-EXP function, i.e.,, Unified , is shown as follows
+p34
+aVIn the Unified method, we chose the concept with the maximum IDF as the representative concept among all the variants
+p35
+aVWe now discuss how to address the first challenge, i.e how to regularize the weighting strategy so that we can take into consideration the fact that concepts associated with the same query aspect are not independent
+p36
+aVTraditional retrieval models are based on u'\u005cu201c' bag of terms u'\u005cu201d' representation
+p37
+aVWe now conduct experiments on Med11 to compare its performance with those of using average IDF and minimum IDF ones as the representative concept
+p38
+aVAs shown in Equation ( 3 ), the Balanced method regularizes the weights through two components
+p39
+aVThe arbitrary inflation could impact the importance of the query aspects
+p40
+aVSince each visit can be associated with multiple medical records, the relevance of a visit is related to the relevance of individual associated medical records
+p41
+aVTable 6 summarizes the results, and shows that using the maximum IDF value performs better than the other choices
+p42
+aVAs a result, the system may fail to retrieve the relevant documents that do not contain any query terms
+p43
+aVHowever, none of the previous work has studied how to regularize the weight of concepts based on their relations
+p44
+aVSince documents are often much longer, we can first segment them into sentences, get the mapping results for each sentence, and then merge them together to generate the concept-based representation for the documents
+p45
+aVWithin the concept-based representation, the query can then be represented as a bag of all the generated CUIs in the MetaMap results
+p46
+aVNote that our proposed concept-weighting strategies can also be easily applied to record-level relevance modeling
+p47
+aVFor example, as shown in Figure 1 , query aspect u'\u005cu201c' children u'\u005cu201d' is mapped to 2 concepts while u'\u005cu201c' dental caries u'\u005cu201d' is mapped to 3 concepts
+p48
+aVAlthough existing retrieval functions can be directly applied to concept-based representation, they may lead to non-optimal performance
+p49
+aVIt is not surprising to see that Balanced method is more effective than Unified since the former satisfies both of the proposed retrieval constraints while the latter satisfies only one
+p50
+aVMoreover, our performance might be further improved if we apply the result filtering methods used by many TREC participants [ 11 ]
+p51
+aVThus, we use the one-to-many mapping results generated by MetaMap, in which each aspect can be mapped to multiple concepts
+p52
+aVAs a result, the occurrences of concepts might not be a very accurate indicator of importance of the corresponding query aspect
+p53
+aVIn fact, this can also be confirmed by experimental results as reported in Table 5
+p54
+aVS u'\u005cu2062' ( Q , D ) is the relevance score of D with respect to Q e i denotes a concept, and u'\u005cud835' u'\u005cudc9c' u'\u005cu2062' ( e ) denotes the query aspect associated with e , i.e.,, a set of concepts that are mapped to the same phrases as e by using MetaMap i u'\u005cu2062' ( e ) is the normalized confidence score of the mapping for concept e generated by MetaMap c u'\u005cu2062' ( e , D ) denotes the occurrences of concept e in document D , d u'\u005cu2062' f u'\u005cu2062' ( e ) denotes the number of documents containing e
+p55
+aVDifferent measures were chosen for these two sets mainly because different pooling strategies were used to create the judgment pools [ 24 ]
+p56
+aVIn particular, given a patient u'\u005cu2019' s visit, all the medical records generated from this visit are merged as a document
+p57
+aVSince each concept mapping is associated with a confidence score, we can incorporate them into the regularization function as follows
+p58
+aVFor example, as shown in Figure 1 , u'\u005cu201c' dental caries u'\u005cu201d' is mapped to three concepts
+p59
+aVNote that T , C and T u'\u005cu2062' S indicate improvement over Term-BL, Concept-BL and TSConcept-BL is statistically significant at 0.05 level based on Wilcoxon signed-rank test, respectively
+p60
+aVThus, we use the concept with the maximum IDF value as the representative concept of all the variants
+p61
+aVNote that I u'\u005cu2062' m u'\u005cu2062' p A u'\u005cu2062' ( u'\u005cud835' u'\u005cudc9c' u'\u005cu2062' ( e ) ) is the importance of a query aspect and can be estimated based on the terms from the query aspect
+p62
+aVIn this paper, we focus on the visit-level relevance because of its simplicity
+p63
+aVFor example, as shown in Figure 1 , one aspect is mapped to two concepts while the other is mapped to three
+p64
+aVWe call a concept is a variant of another one if both of them are associated with the same aspect
+p65
+aVFor Med12 , we take infNDCG@100 as the primary measure and also report infAP@100
+p66
+aVwhere c u'\u005cu2062' ( e , D ) is the original occurrence of concept e in document D , E u'\u005cu2062' C u'\u005cu2062' ( e ) denotes a set of all the variants of e including itself (i.e.,, all the concepts with the same preferred name as e ), and R u'\u005cu2062' e u'\u005cu2062' p u'\u005cu2062' ( E u'\u005cu2062' C u'\u005cu2062' ( e ) ) denotes the representative concept from E u'\u005cu2062' C u'\u005cu2062' ( e )
+p67
+a.

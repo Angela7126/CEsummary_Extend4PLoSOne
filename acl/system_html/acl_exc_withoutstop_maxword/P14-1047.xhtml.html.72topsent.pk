@@ -1,0 +1,24 @@
+(lp0
+V1) we propose concurrent learning using multi-agent RL as a way to deal with some of the issues of current approaches to dialogue policy learning (i.e.,, the need for SUs and corpora), which may also potentially prove useful for learning via live interaction with human users; (2) we show that concurrent learning can address changes in user behavior over time, and requires multi-agent RL techniques and variable exploration rates; (3) to our knowledge this is the first time that PHC and PHC-WoLF are used for learning dialogue policies; (4) for the first time, the above techniques are applied to a negotiation domain; and (5) this is the first study that compares Q-learning, PHC, and PHC-WoLF in such a variety of situations (varying a large number of parameters
+p1
+aVAs we will see in section 5 , even though the number of states for each agent is not large, it takes many iterations and high exploration rates for convergence due to the fact that both agents are learning at the same time and the assumption of interacting with a stationary environment no longer holds
+p2
+aVGenerally the assumption that users do not significantly change their behavior over time holds for simple information providing tasks (e.g.,, reserving a flight
+p3
+aVIn either case, one can build a user simulation model that is the average of different user behaviors or learn a policy from a corpus that contains a variety of interaction patterns, and thus safely assume that single-agent RL techniques will work
+p4
+aVImagine a situation where a negotiator is so uncooperative and arrogant that the other negotiators decide to completely change their negotiation strategy in order to punish her
+p5
+aVTherefore, unlike single-agent RL, multi-agent RL can handle changes in user behavior or in the behavior of other agents participating in the interaction, and thus potentially lead to more realistic dialogue policies in complex dialogue scenarios
+p6
+aVWe vary the scenario complexity (i.e.,, the quantity of resources to be shared and consequently the state space size), the number of training episodes, the learning rate, and the exploration rate
+p7
+aV2009 ) performed a theoretical study on how Partially Observable Markov Decision Processes (POMDPs) can be applied to negotiation domains
+p8
+aVThus below we focus only on research that is directly related to our work, specifically research on concurrent learning of the policies of multiple agents, and the application of RL to negotiation domains
+p9
+aVThey applied Inverse Reinforcement Learning (IRL) [ 1 ] to a corpus in order to learn the reward functions of both the system and the SU
+p10
+aVShould the SU resemble real user behavior as closely as possible, or should it exhibit some degree of randomness to explore a variety of
+p11
+a.

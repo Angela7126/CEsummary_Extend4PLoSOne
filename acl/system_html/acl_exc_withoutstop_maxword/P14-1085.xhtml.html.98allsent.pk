@@ -1,0 +1,548 @@
+(lp0
+VWe discuss our experiments in Section 5 , related work in Section 6 , and conclusions in Section 7
+p1
+aVUsers navigate the hierarchical summary from parent sentence to child summary, so if the parent sentence bears no relation to the child summary, the user will be understandably confused
+p2
+aVA user can navigate within the hierarchical summary by clicking on an element of a parent summary to view the associated child summary
+p3
+aVThe hierarchical summary follows the hierarchical structure of the clustering
+p4
+aVA hierarchical summary that is only salient and nonredundant may still not be suitable if the sentences within a cluster summary are disconnected or if the parent sentence for a summary does not relate to the child summary
+p5
+aVNote that there is no good translation of ROUGE for hierarchical summarization
+p6
+aVSince most of the sentence contributions depend on the path from the root to the sentence, we build our partial summary by incrementally adding a sentence top-down in the hierarchy and from first sentence to last within a cluster summary
+p7
+aVThus, we simply use the traditional ROUGE metric, which will not capture any of the hierarchical format
+p8
+aVSince computing the best child summary is also intractable we approximate a solution by a local search algorithm over the child cluster
+p9
+aVHaving defined the task, we now describe the methodology behind our implementation, Summa
+p10
+aVOther research identifies the hierarchical structure of the documents and generates a summary that prioritizes more general information according to the structure [ 22 , 5 ] , or gains coverage by drawing sentences from different parts of the hierarchy [ 34 , 31 ]
+p11
+aVThus, a hierarchical summary must also have intra-cluster coherence and parent-to-child coherence
+p12
+aVIn hierarchical summarization, however, a cluster summary may span hundreds of documents and a wide range of information
+p13
+aVOptimizing this objective function is NP-hard, so we approximate a solution by using beam search over the space of partial hierarchical summaries
+p14
+aVSecond, each user directs his or her own experience, so a user interested in one aspect need only explore that section of the data without having to view or understand the entire summary
+p15
+aVWhile the flat summaries were disjointed, they were good at including salient information, with the most salient tending to be near the start of the summary
+p16
+aVUnfortunately, neither agglomerative nor divisive clustering is suitable, since both assume a binary split at each node [ 2 ]
+p17
+aVHowever, we do not fix the child summary at this time u'\u005cu2013' we simply use it to estimate P u'\u005cu2062' C u'\u005cu2062' o u'\u005cu2062' h when using that sentence
+p18
+aVLastly, we require that sentences are drawn from the cluster that they represent and that the number of sentences in the summary corresponding to each non-leaf cluster c is equivalent to the number of child clusters of c
+p19
+aVThe hierarchical clustering serves as input to the second step u'\u005cu2013' summarizing given the hierarchy
+p20
+aVFor example, suppose the parent sentence is, u'\u005cu201c' A Swissair plane Wednesday night crashed off Nova Scotia, Canada u'\u005cu201d' A very good child sentence is, u'\u005cu201c' The airline confirmed that all passengers died u'\u005cu201d' However, based on their surface features, the sentence, u'\u005cu201c' A plane made an unscheduled landing after a Swissair plane crashed off the coast of Canada, u'\u005cu201d' appears to be a better choice
+p21
+aVFor this reason, we may consider a summary acceptable even if it has limited positive evidence of coherence in the ADG, as long as there is no negative evidence in the form of negative edges
+p22
+aVNotice the contribution from a sentence depends on individual salience, coherence ( C u'\u005cu2062' C u'\u005cu2062' o u'\u005cu2062' h ) based on sentences visible on the user path down the hierarchy to this sentence, and coherence ( P u'\u005cu2062' C u'\u005cu2062' o u'\u005cu2062' h ) based on its parent sentence and its child summary
+p23
+aVThus, descriptions from both Summa and flat MDS generally covered the most salient information
+p24
+aVA hierarchical clustering is a tree in which if a cluster g p is the parent of cluster g c , then each sentence in g c is also in g p
+p25
+aVHaving estimated salience, redundancy, and two forms of coherence, we can now put this information together into a single objective function that measures the quality of a candidate hierarchical summary
+p26
+aVSince Summa was judged to be so much superior to flat MDS systems in Section 5.1 , it is surprising that users descriptions from flat MDS were preferred nearly as often as those from Summa
+p27
+aVFirst, the information presented at the start is small and grows only as the user directs it, so as not to overwhelm the user
+p28
+aVMoreover, the number of sentences in a flat summary is exactly equal to the number of child clusters of the node, since the user will click a sentence to get to the child summary
+p29
+aVThe problem of hierarchical summarization as described in Section 2 has all of the requirements of MDS, and additional complexities of inducing a hierarchical structure, processing an order of magnitude bigger input, generating a much larger output, and enforcing coherence between parent and child summaries
+p30
+aVBecause we are interested in temporal hierarchical summarization, we hierarchically cluster all the sentences in the input documents by time
+p31
+aVWe simplify the problem by decomposing it into two steps hierarchical clustering and summarizing over the clustering (see Figure 2 for an example
+p32
+aVWhile ROUGE serves as a rough measure of coverage, we were interested in gathering more fine-grained information on the informativeness of each system
+p33
+aVWe measure salience of a summary ( S u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' ( X ) ) as the sum of the saliences of individual sentences ( u'\u005cu2211' i S u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' ( x i )
+p34
+aVWhile the facts of the sentences made sense together, the summaries sometimes did not read as if they were written by a human, but as a series of disparate sentences
+p35
+aVThis score will essentially serve as a rough measure of coverage of the entire summary to the Wikipedia article
+p36
+aVEach node in the ADG is a sentence from the dataset
+p37
+aVIn latter cases, the hierarchical summaries provided little advantage over the timelines because it was more difficult to arrange the sentences hierarchically
+p38
+aVEvaluating how much a user learned is inherently difficult, more so when the goal is to allow the user the freedom to explore information based on individual interest
+p39
+aVAt each level, we cluster the sentences by the method described above and choose the number of clusters k according to the gap statistic [ 30 ]
+p40
+aVWe then describe our methodology to implement the Summa hierarchical summarization system hierarchical clustering in Section 3 and creating summaries based on that clustering in Section 4
+p41
+aVWe treat redundancy and budget as hard constraints and coherence and salience as soft constraints
+p42
+aVUsing the same setup as in the previous experiment, for each topic, five AMT workers spent three minutes reading through a timeline or summary and were then asked to write a description of what they had learned
+p43
+aVFor example, the reaction sentence, u'\u005cu201c' President Clinton vowed to track down the perpetrators behind the bombs that exploded outside the embassies in Tanzania and Kenya on Friday, u'\u005cu201d' would have a higher score than the action sentence, u'\u005cu201c' Bombs exploded outside the embassies in Tanzania and Kenya on Friday u'\u005cu201d' This problem occurs because the first sentence has a higher ROUGE score (it covers more important words than the second sentence
+p44
+aVThe scores for each of the systems are as follows
+p45
+aVAre hierarchical summaries more effective than other methods for learning about complex events
+p46
+aV5 5 We excluded one topic (the handover of the Lockerbie bombing suspects) because the corresponding Wikipedia article had insufficient information
+p47
+aVIn this experiment, we assess the salience of the information captured by the different systems, and the ability of Summa to organize the information so that more important information is placed at higher levels
+p48
+aVIf no timestamp is given, we use the article date
+p49
+aVSalience is the value of each sentence to the topic from which the documents are drawn
+p50
+aVWe first automatically assessed informativeness by calculating the ROUGE-1 scores of the output of each of the systems
+p51
+aVFor this reason, instead of asking a set of predefined questions, we assess the knowledge gain by following the methodology of [ 26 ] u'\u005cu2013' asking users to write a paragraph summarizing the information learned
+p52
+aVWe use SUTime [ 6 ] to normalize temporal references, and we parse the sentences with the Stanford parser [ 13 ] and use a set of simple heuristics to determine if the timestamps in the sentence refer to the root verb
+p53
+aVFor example, given the topic, u'\u005cu201c' 1998 embassy bombings, u'\u005cu201d' the first summary (Figure 1 ) might mention that the US retaliated by striking Afghanistan and Sudan
+p54
+aVThe tradeoff parameters u'\u005cu0392' and u'\u005cu0393' were set based on a development set
+p55
+aVWe thus choose clusters C = { c 1 , u'\u005cu2026' , c k } as follows
+p56
+aVWe rely on the approximate discourse graph (ADG) that was proposed in [ 8 ] as the basis for measuring coherence
+p57
+aVBecause reading 300 articles per topic is impractical, we asked AMT workers to read a Wikipedia article on the same topic and then identify the three most important events and the five most important secondary events
+p58
+aVA negative edge indicates an unfulfilled discourse cue or co-reference mention
+p59
+aVWe selected topics which were between five and fifteen years old so that evaluators would have relatively less pre-existing knowledge about the topic
+p60
+aVHowever, when there is little differentiation in news coverage, we prefer clusters evenly spaced across time
+p61
+aVSince we wish to partition along the temporal dimension, our problem reduces to identifying the best dates at which to split a cluster into subclusters
+p62
+aVWhile recognizing primary events is relatively simple because they are repeated frequently, identification of important secondary events often requires external knowledge
+p63
+aVIn this first implementation, we have opted for temporal organization, since this is generally the most appropriate for news events
+p64
+aVWhile timelines can be useful for understanding events, they do not generalize to other domains
+p65
+aVWe identify these dates by looking for bursts of activity
+p66
+aV[ 9 ] proposed a probabilistic technique for extracting a diverse set of threads from a given collection
+p67
+aVThe results of this experiment are as follows
+p68
+aVStandard checks such as approval rating, location filtering, etc were used for removing spam
+p69
+aVIntuitively, each cluster summary in the hierarchical summary should convey the most salient information in that cluster
+p70
+aVWe estimate parent to child coherence as the coherence between a parent sentence and each sentence in its child summary as
+p71
+aVThe parent sentence must have positive evidence of coherence with the sentences in its child summary
+p72
+aVAfter the sentences are clustered, we have a structure for the hierarchical summary that dictates the number of summaries and the number of sentences in each summary
+p73
+aVEach node in the hierarchy has an associated flat summary, which summarizes the sentences in that cluster
+p74
+aVA child summary adds more detail to the information in its parent summary unit
+p75
+aVInput to a hierarchical summarization system is a set of related documents D and a budget b for each summary within the hierarchy (in bytes, words, or sentences
+p76
+aVFurthermore, the hierarchical summary should not include redundant sentences
+p77
+aVWe found that for the top level of the summary, the parent sentence generally represented the most important event in the cluster and the child summary usually expressed details or reactions of the event
+p78
+aVFurthermore, the summary should not contain redundant information and each cluster summary should honor the given budget, i.e.,, maximum summary length b
+p79
+aVEach non-leaf summary is associated with a set of child summaries where each gives details of an element (e.g., sentence) in the parent summary
+p80
+aVWe require two types of coherence coherence between the parent and child summaries and coherence within each summary X i
+p81
+aVThe parent sentence occasionally expressed a less important fact that the child summary did not then expand on or, more commonly, the child summary was not focused enough
+p82
+aVSumma hierarchically clusters the sentences by time, and then summarizes the clusters using an objective function that optimizes salience and coherence
+p83
+aVThe top of the hierarchy is a summary X 1 representing all of D , and each summary X i consists of summary units x i , j ( e.g., the j th sentence of summary i ) that point to a child summary, except at the leaf nodes of the hierarchy
+p84
+aVIn this paper, we describe Summa , the first hierarchical summarization system for multi-document summarization
+p85
+aVIn the next section, we formalize hierarchical summarization
+p86
+aVSumma
+p87
+aVWe define several metrics in Section 4 for a well-constructed hierarchical summary
+p88
+aVWe also have the set of sentences from which each summary is drawn
+p89
+aVSumma or flat MDS vs
+p90
+aVWe present a user study which demonstrates the value of hierarchical summarization over timelines and flat multi-document summaries in learning about a complex topic
+p91
+aVFirst, summarizing sentences are rare, making good choices for parent sentences difficult to find
+p92
+aVFor the gold standard comparison summary, we use the Wikipedia articles for the topics
+p93
+aVA hierarchical summary H of a document collection D is a set of summaries X organized into a hierarchy
+p94
+aVWe present Summa , the first hierarchical summarization system, which operates on news corpora and summarizes over an order of magnitude more documents than traditional MDS systems, producing summaries an order of magnitude larger
+p95
+aVUsers overwhelmingly preferred hierarchical summaries to flat summaries (92%) and learned just as much
+p96
+aVThe event recall shows the percentage of events mentioned at that level or above in the hierarchical summary
+p97
+aVThe output is the hierarchical summary H , which we define formally as follows
+p98
+aVOne of the authors then manually identified the presence of these events in the hierarchical summaries, the timelines and the flat MDS summaries
+p99
+aVHow coherent is the hierarchical structure in the summaries
+p100
+aVWe next tested the hierarchical coherence
+p101
+aVEach summary should maximize coverage of salient information; it should minimize redundancy ; and it should have intra-cluster coherence as well as parent-to-child coherence
+p102
+aVBefore clustering, we timestamp all sentences
+p103
+aVWe compared Summa against two baseline systems which represent the main NLP methods for large-scale summarization an algorithm for creating timelines over sentences [ 7 ] , 3 3 Unfortunately, we were unable to obtain more recent timeline systems from authors of the systems and a state-of-the-art flat MDS system [ 19 ]
+p104
+aVWe present a novel MDS paradigm, hierarchical summarization , which operates on large document collections, creating summaries that organize the information coherently
+p105
+aVThe child summary may include sub-events or background and reactions to the event or topic in the parent
+p106
+aVThis organizes the information into manageable, semantically-related sections and induces a hierarchical structure over the input
+p107
+aVDo users prefer hierarchical summaries for topic exploration
+p108
+aVROUGE Evaluation
+p109
+aVWe also evaluated at what level in the hierarchy the events were identified for the hierarchical summaries
+p110
+aVWorkers were not allowed to see the timeline or summary while writing
+p111
+aVHierarchical summarization has two important strengths in the context of large-scale summarization
+p112
+aVIntuitively, the objective function should balance salience and coherence
+p113
+aVWe conducted an Amazon Mechanical Turk (AMT) evaluation where AMT workers compared the output of Summa to that of timelines and flat summaries
+p114
+aVSome focused on creating a hierarchical summary of a single document [ 3 , 21 ] , relying on the structure inherent in single documents
+p115
+aVEach evaluator was presented with a corresponding Wikipedia article and descriptions from a pair of users (timeline vs
+p116
+aVWe then asked other AMT workers to read and compare the descriptions written by the first set of workers
+p117
+aVTo account for P u'\u005cu2062' C u'\u005cu2062' o u'\u005cu2062' h , we estimate the contribution of the sentence by jointly identifying its best child summary
+p118
+aVIn preliminary experiments, we noticed that many sentences that were reaction sentences were given a higher salience than action sentences
+p119
+aVTraditionally, MDS systems have focused on three to six sentence summaries covering 10-15 documents
+p120
+aVThese are coreference mentions or discourse cues where none of the sentences read before (either in an ancestor summary or in the current summary) contain an antecedent
+p121
+aVWe design a recursive clustering algorithm that automatically chooses the appropriate number of clusters at each split
+p122
+aVThis method finds those sentences more salient that mention nouns or verbs that occur frequently in the cluster
+p123
+aVWe introduce and formalize the novel task of hierarchical summarization
+p124
+aVWe propose a new task for large-scale summarization called hierarchical summarization
+p125
+aVFor quality control, we asked workers to complete a qualification task first, in which they were required to write a short summary of a news article
+p126
+aVMDS systems do not scale to data sets ten times larger and proportionately longer summaries they either cannot run on large input or produce a disorganized summary that is difficult to understand
+p127
+aVTraditional approaches to large-scale summarization have included flat summaries and timelines
+p128
+aVHierarchical summarization has the following novel characteristics
+p129
+aVOne of the authors graded how much each non-leaf sentence in a summary was coherent with its child summary on a scale of one to five, with one being incoherent and five being perfectly coherent
+p130
+aVDescriptions written by workers using Summa were preferred over twice as often as those from timelines
+p131
+aVOur experiments are designed to evaluate how effective hierarchical summarization is in summarizing a large, complex topic and how well this helps users learn about the topic
+p132
+aVUsers preferred the hierarchical summaries three times more often than timelines and over ten times more often than flat summaries
+p133
+aVThe workers were asked which user appeared to have learned more and why
+p134
+aVOverall, our algorithm is a two level nested search algorithm u'\u005cu2013' beam search in the outer loop to search through the space of partial summaries and local search (hill climbing with random restarts) in the inner loop to pick the best sentence to add to the existing partial summary
+p135
+aVBelow we describe related work on traditional MDS, structured summaries, timelines, discovering threads of documents and the uses of hierarchies in generating summaries
+p136
+aVHowever, when the number of clusters is too large for the given summary budget, the sentences will have to be too short, and when the number of clusters is too small, we will not use enough of the budget
+p137
+aVIdeally, the maximum depth of the clustering would be a function of the number of sentences in each cluster, but in our implementation, we set the maximum depth to three, which works well for the size of the datasets we use (300 articles
+p138
+aVFor each pair of descriptions, four workers evaluated the pair
+p139
+aVFollowing previous research in MDS, we computed individual saliences using a linear regression classifier trained on ROUGE scores over the DUC u'\u005cu2019' 03 dataset [ 18 , 8 ]
+p140
+aVThe user can click on this information to learn more about these attacks
+p141
+aVAfter acquiring the timestamps, we must hierarchically cluster the sentences into sets that make sense to summarize together
+p142
+aVPrevious work has used AMT workers for summary evaluations and has shown high correlations with expert ratings [ 8 ]
+p143
+aVFrom this evaluation, one can gather that the systems have similar coverage of the Wikipedia articles
+p144
+aVWe perform hierarchical clustering top-down, at each point solving for Equation 1 u'\u005cu0391' was set using a grid-search over a development set
+p145
+aVHow informative are the hierarchical summaries compared to the other methods
+p146
+aVIn this way, the system can present large amounts of information without overwhelming the user, and the user can tailor the output to their interests
+p147
+aVParent-to-Child Coherence
+p148
+aVIntra-cluster Coherence
+p149
+aVIn traditional MDS, the documents are usually quite focused, allowing for highly focused summaries
+p150
+aVThe summary is hierarchically organized along one or more organizational principles such as time, location, entities, or events
+p151
+aVThe parent-to-child links provide a means for a user to navigate, drilling down for more details on topics of interest
+p152
+aVThe descriptions were randomly ordered to remove bias
+p153
+aVGiven a maximum and minimum number of clusters, we must determine the appropriate number of clusters
+p154
+aVExisting methods for multi-document summarization (MDS) are designed to produce short summaries of 10-15 documents
+p155
+aVThere are two primary shortcomings to these approaches first, they require the user to sort through large amounts of potentially overwhelming information, and second, the output is static u'\u005cu2013' users with different interests will see the same information
+p156
+aVThe number of clusters at each split should be what is most natural for the input data
+p157
+aVOur measure of intra-cluster coherence minimizes the number of missing references
+p158
+aVThe second problem relates to the difficulty in identifying whether two sentences are on the same topic
+p159
+aVFor example, the following is a reasonable summary for events spanning two weeks s 1 Bombs exploded at two US embassies s 2 US missiles struck in Afghanistan and Sudan
+p160
+aVThe features include shared noun counts, sentence length, TF*IDF cosine similarity, timestamp difference, and features drawn from information extraction such as number of shared tuples in Open IE [ 20 ]
+p161
+aV[ 32 ] used inter-date and intra-date sentence dependencies, and Chieu and Lee [ 7 ] used sentence similarity
+p162
+aVWe identify redundant sentences using a linear regression classifier trained on a manually labeled subset of the DUC u'\u005cu2019' 03 sentences
+p163
+aVSumma output was judged superior more than three times as often as timelines, and users learned more in twice as many cases
+p164
+aVTo adjust for this problem, we use only words identified in the main clause (heuristically identified via the parse tree) to compute our salience scores
+p165
+aVSpecifically, for each level, the algorithm will cluster repeatedly with k varying from the minimum to the maximum
+p166
+aVSection 5.1
+p167
+aVWe performed an additional manual evaluation that assesses the recall of important events for each system
+p168
+aVThis research operates on the document level, while ours operates on the sentence level
+p169
+aVWhen we examined the reasons given by the users, we found that the people who preferred the hierarchical summaries liked that they gave a big picture overview and were then allowed to drill down deeper
+p170
+aVThe difference in recall between Summa and Timeline was significant in both cases, and the difference between Summa and Flat-MDS was not
+p171
+aVEven though there is scope for improvement, we find these coherence scores encouraging for a first algorithm for the task
+p172
+aVWe asked the workers to choose which format they preferred and to explain why
+p173
+aVIn general, the flat summaries were quite redundant, which contributed to the slightly lower event recall
+p174
+aVSection 5.2
+p175
+aVSection 5.4
+p176
+aVSection 5.3
+p177
+aVAn edge from sentence s i to s j with positive weight indicates that s j may follow s i in a coherent summary, e.g., continued mention of an event or entity, or coreference link between s i and s j
+p178
+aVThe lower coherence scores were often the result of too few lexical connections or lack of a theme or story
+p179
+aVSummarization and Hierarchies
+p180
+aVIn future work we intend to design a system that dynamically selects the best organizing principle for each level of the hierarchy
+p181
+aVIn our first experiment, we simply wished to evaluate which system users most prefer
+p182
+aVWe collected five descriptions for each topic-system combination
+p183
+aVwhere x c p is the parent sentence for cluster c and w G + u'\u005cu2062' ( x c p , x c , i ) is the sum of the positive edge weights from x c p to x c , i in the ADG G
+p184
+aVI am used to these timelines and they feel comfortable u'\u005cu201d' Users complained that the flat summaries were disjointed, confusing, and very frustrating to read
+p185
+aVWe cannot know a priori the number of clusters for a given topic
+p186
+aVWhile we aim to summarize collections of information, this track seeks to identify relationships between documents
+p187
+aVAdditionally, long timelines can be overwhelming, short timelines have low information content, and there is no method for personalized exploration
+p188
+aV[ 33 ] balanced coherence and diversity to create timelines, Yan et al
+p189
+aVWe paired up workers such that one worker would see output from Summa for the first topic and a competing system for the second and the other worker would see the reverse
+p190
+aVFive workers were hired to view each topic-system pair
+p191
+aVwhere C is a clustering, B u'\u005cu2062' ( C ) is the burstiness of the set of clusters, E u'\u005cu2062' ( C ) is the evenness of the clusters, and u'\u005cu0391' is the tradeoff parameter
+p192
+aVSee Figure 2 for an illustration of this correspondence
+p193
+aVThese methods assume a common structure for all topics in a category, and do not allow for more than two levels in the structure
+p194
+aVThe figure shows a correspondence between these events and news spikes
+p195
+aVWe first identified which events were most important in a news story
+p196
+aV[ 8 ] presented an algorithm for coherent MDS, but it does not scale to larger output
+p197
+aVEach system was given the same budget (over 10 times the traditional MDS budget, which is 665 bytes
+p198
+aVWe looked more closely at those cases where the participants either preferred the timelines or were indifferent and found that this preference was most common when the topic was not dominated by a few major events, but was instead a series of similarly important events
+p199
+aVSome also explained that it was easier to remember information when presented with the overview first
+p200
+aVLin and Bilmes [ 19 ] proposed a state-of-the-art system that uses submodularity in sentence selection to accomplish these goals
+p201
+aVWe aggregated responses from ten workers per topic and chose the three most common primary and five most common secondary events
+p202
+aVRecent papers in timeline generation have emphasized the relationship with summarization
+p203
+aVb u'\u005cu2062' u u'\u005cu2062' r u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2062' ( c ) is the difference in the number of sentences published the day before the first date in c and the average number of sentences published on the first and second date of c
+p204
+aVFor example, Figure 3 shows the number of articles per day related to the 1998 embassy bombings published in the New York Times (identified using a key word search
+p205
+aVFor each topic, we used the 300 documents that best matched a key word search
+p206
+aVThe explosion in the number of documents on the Web necessitates automated approaches that organize and summarize large document collections on a complex topic
+p207
+aVMost extractive summarization research aims to maximize coverage while reducing redundancy (e.g., [ 4 , 24 , 23 ]
+p208
+aVwhere s u'\u005cu2062' i u'\u005cu2062' z u'\u005cu2062' e u'\u005cu2062' ( c ) is the number of dates in cluster c
+p209
+aVShahaf and Guestrin [ 27 ] formalized the characteristics of a good chain of articles and proposed an algorithm to connect two specified articles
+p210
+aVWe hired Amazon Mechanical Turk (AMT) workers and assigned two topics to each worker
+p211
+aVStructured Summaries
+p212
+aVWe used the coherence scale from DUC u'\u005cu2019' 04
+p213
+aVWe set the maximum number of clusters k m u'\u005cu2062' a u'\u005cu2062' x and minimum number of clusters k m u'\u005cu2062' i u'\u005cu2062' n to be a function of the budget b and the average sentence length in the cluster s a u'\u005cu2062' v u'\u005cu2062' g , such that k m u'\u005cu2062' a u'\u005cu2062' x u'\u005cu22c5' s a u'\u005cu2062' v u'\u005cu2062' g u'\u005cu2264' b and k m u'\u005cu2062' i u'\u005cu2062' n u'\u005cu22c5' s a u'\u005cu2062' v u'\u005cu2062' g u'\u005cu2265' b / 2
+p214
+aVA related track of research investigates discovering threads of documents
+p215
+aVTypical responses included, u'\u005cu201c' Could gather and absorb the information at my own pace, u'\u005cu201d' and, u'\u005cu201c' Easier to follow and understand u'\u005cu201d' When users preferred the timelines, they usually remarked that it was more familiar, i.e., u'\u005cu201c' I liked the familiarity of the format
+p216
+aVIt mimics how someone with a general interest in a complex topic would learn about it from an expert u'\u005cu2013' first, the expert would provide an overview, and then more specific information about various aspects
+p217
+aVIdeal splits for this example would occur just before each spike in coverage
+p218
+aV[ 26 ] extended work on coherent threads to finding coherent maps of documents, where a map is set of intersecting threads representing how the threads interact and relate
+p219
+aV81% of the primary events are present in the first or second level, and 76% of the secondary events are mentioned by the third level
+p220
+aV4 4 [ 8 ] is a state-of-the-art coherent MDS system, but does not scale to 300 documents
+p221
+aV1 1 In the DUC evaluations, summaries have a budget of 665 bytes and cover 10 documents
+p222
+aVA system may select different organization for different portions of the hierarchy, for example, organizing first by location or prominent entity and then by date for the next level
+p223
+aVOthers have emphasized identifying important dates, primarily by bursts of news [ 28 , 1 , 11 , 12 ]
+p224
+aVWe evaluated the questions on ten news topics, representing a range of tasks
+p225
+aVManual Evaluation
+p226
+aVWe chose topics containing a set of related events that unfolded over several months and were prominent enough to be reported in at least 300 articles
+p227
+aVThe algorithm will return the k that maximizes the gap statistic
+p228
+aVFor example, in the kidnapping and beheading of Daniel Pearl there were two or three obviously major events, whereas in the Kargil War there were many smaller important events
+p229
+aVThere are several possible organizing principles for the hierarchy u'\u005cu2013' by date, by entities, by locations, or by events
+p230
+aVTimeline Generation
+p231
+aVThe timelines, on the other hand, were both incoherent and at the same time reported less important facts
+p232
+aVA few papers have examined the relationship between summarization and hierarchies
+p233
+aVWe use a beam of size ten in our implementation
+p234
+aVRather, they rely on pre-existing, labeled paragraphs (for example, a paragraph titled, u'\u005cu201c' Symptoms of Meningitis u'\u005cu201d'
+p235
+aVThese approaches attempt to identify major aspects of a topic, but do not compile content to describe those aspects
+p236
+aVSome research has explored generating structured summaries
+p237
+aVAspects are identified either by a training corpus of articles in the same domain [ 25 ] , by an entity-aspect LDA model [ 17 ] , or by Wikipedia templates of related topics [ 35 ]
+p238
+aVwhere d is a date indexed over time, such that d j is a day before d j + 1 , and d i is the first date in c p u'\u005cu2062' u u'\u005cu2062' b u'\u005cu2062' ( d i ) is the number of sentences published on d i
+p239
+aVGore, (3) the Tulip Revolution, (4) Daniel Pearl u'\u005cu2019' s kidnapping, (5) the Lockerbie bombing handover of suspects, (6) the Kargil War, (7) NATO u'\u005cu2019' s bombing of Yugoslavia in 1999, (8) Pinochet u'\u005cu2019' s arrest in London, (9) the 2005 London bombings, and (10) the crash and investigation of SwissAir Flight 111
+p240
+aVNews tends to be bursty u'\u005cu2013' many articles on a topic appear at once and then taper out [ 14 ]
+p241
+aVThe evenness of the split is measured by
+p242
+aVwhere W k is the score for the clusters computed with Equation 1 , and E n u'\u005cu2217' is the expectation under a sample of size n from a reference distribution
+p243
+aVThe results are as follows
+p244
+aV2 2 http://knowitall.cs.washington.edu/summa/ It operates on a corpus of related news articles
+p245
+aVBelow we show event recall (the percentage of the events that were mentioned
+p246
+aV6 6 http://duc.nist.gov/duc2004/quality.questions.txt
+p247
+aVOthers investigated creating hierarchies of words or phrases to organize documents [ 15 , 16 , 29 , 10 ]
+p248
+aVWe also manually removed spam from our results
+p249
+aVThis result stems from two problems in our algorithm
+p250
+aVOur evaluation addresses the following questions
+p251
+aVThere were two main events u'\u005cu2013' on the 7th, the embassies were bombed and on the 20th, the US retaliated through missile strikes
+p252
+aVWe optimize
+p253
+aVOur main contributions are as follows
+p254
+aVFor the second level, the problems were more basic
+p255
+aVThis paper is also supported in part by the Intelligence Advanced Research Projects Activity (IARPA) via AFRL contract number FA8650-10-C-7058
+p256
+aVDocument Threads
+p257
+aVWe drew our articles from the Gigaword corpus, which contains articles from the New York Times and other major newspapers
+p258
+aVSome organizing principles will fit the data in a document collection better than others
+p259
+aVYan et al
+p260
+aV1) Pope John Paul II u'\u005cu2019' s death and the 2005 Papal Conclave, (2) Bush v
+p261
+aVShahaf et al
+p262
+aVThe views and conclusions contained herein are those of the authors and should not be interpreted as necessarily representing the official policies or endorsements, either expressed or implied, of IARPA, AFRL, or the U.S
+p263
+aVGillenwater et al
+p264
+aVFaculty Research and Engagement Award
+p265
+aVChristensen et al
+p266
+aVThis research was supported in part by ARO contract W911NF-13-1-0246, DARPA Air Force Research Laboratory (AFRL) contract FA8750-13-2-0019, UW-IITD subcontract RP02815, and the Yahoo
+p267
+aVNone of the differences are significant
+p268
+aVWe thank Hui Lin and Jeff Bilmes for providing us with their code
+p269
+aVWe thank Amitabha Bagchi, Niranjan Balasubramanian, Danish Contractor, Oren Etzioni, Tony Fader, Carlos Guestrin, Prachi Jain, Lucy Vanderwende, Luke Zettlemoyer, and the anonymous reviewers for their helpful suggestions and feedback
+p270
+aVGovernment
+p271
+aVGovernment is authorized to reproduce and distribute reprints for Governmental purposes notwithstanding any copyright annotation thereon
+p272
+aVThe U.S
+p273
+a.

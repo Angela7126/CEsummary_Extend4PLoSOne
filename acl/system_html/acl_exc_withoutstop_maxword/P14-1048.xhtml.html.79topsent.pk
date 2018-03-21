@@ -1,0 +1,18 @@
+(lp0
+VFirst, with a greedy bottom-up strategy, we develop a discourse parser with a time complexity linear in the total number of sentences in the document
+p1
+aVBecause the structure model is the first component in our pipeline of local models, its accuracy is crucial
+p2
+aVFor each sentence S k with m k EDUs, the overall time complexity to perform intra-sentential parsing is O u'\u005cu2062' ( m k 2
+p3
+aVTherefore, our model incorporates the strengths of both HILDA and Joty et al u'\u005cu2019' s model, i.e.,, the efficiency of a greedy parsing algorithm, and the ability to incorporate sequential information with CRFs
+p4
+aVAfter an intra- or multi-sentential discourse tree is fully built, we perform a post-editing to consider possible modifications to the current tree, by considering useful information from the discourse constituents on upper levels, which is unavailable in the bottom-up tree-building process
+p5
+aVEach sentence S i , after being segmented into EDUs (not shown in the figure), goes through an intra-sentential bottom-up tree-building model M i u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' a , to form a sentence-level discourse tree T S i , with the EDUs as leaf nodes
+p6
+aVIt is possible to optimize Joty et al u'\u005cu2019' s CKY-like parsing by replacing their CRF-based computation for upper-level constituents with some local computation based on the probabilities of lower-level constituents
+p7
+aVFirst, as shown in Table 2 , the average number of sentences in a document is
+p8
+a.

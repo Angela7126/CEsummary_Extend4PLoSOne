@@ -1,0 +1,200 @@
+(lp0
+VTwo terms in the Hypothesis, predicate and argument , are marked, where a predicate-argument relationship between them is explicit in the Hypothesis syntactic structure
+p1
+aVGiven a Text Hypothesis pair, we locate a predicate-argument relationship in the Hypothesis, where both the predicate and the argument appear also in the Text, while the relationship between them is not expressed in its syntactic structure
+p2
+aVThe task is to recognize whether the predicate-argument relationship, as expressed in the Hypothesis, holds implicitly also in the Text
+p3
+aVAn RTE problem instance is composed of two text fragments, termed Text and Hypothesis , as input
+p4
+aVThe input includes a Text and a Hypothesis
+p5
+aVTwo terms in the Text, candidate-predicate and candidate-argument , aligned to the Hypothesis predicate and argument, are marked as well
+p6
+aVMore concretely, in textual inference the candidate predicate and argument are typically identified, as they are aligned by the RTE system to a predicate and an argument of the Hypothesis
+p7
+aVThe results, presented in Table 4 , first demonstrate the full potential of the implied relationship recognition task to improve textual entailment recognition (Human annotation vs
+p8
+aVFor our problem, consider a positive Text Hypothesis pair, where the Text is example ( 1 ) above and the Hypothesis is ii
+p9
+aVThis section describes a semi-automatic method for extracting candidate instances of implied predicate-argument relationship from an RTE dataset
+p10
+aVWhile they are not connected syntactically, each of them often has an explicit relationships with other terms in the text, that might support the sought (implied) relationship between a and p
+p11
+aVThis paper addresses a typical sub-task in textual inference scenarios, of recognizing implied predicate-argument relationships which are not expressed explicitly through syntactic structure
+p12
+aVThe task is to recognize whether a human reading the Text would infer that the Hypothesis is most likely true [ 3 ]
+p13
+aVLet p and a be the candidate predicate and the argument in the text
+p14
+aVExplicit result is statistically significant with p 0.01
+p15
+aVConsequently, we define the task of recognizing implied predicate-argument relationships, with illustrating examples in Table 1 , as follows
+p16
+aVOn the contrary, our statistical features follow the intuition that explicit predicate-argument relationships in the discourse provide plausible indication that an implied relationship holds as well
+p17
+aVComparing to the implied SRL task, our task may better fit the needs of textual inference
+p18
+aVThus, the only remaining challenge is to verify that the sought relationship is implied in the text
+p19
+aVFor example, example 1 in Table 1 includes the explicit relationship u'\u005cu201c' derailment of train u'\u005cu201d' , which might indicate the implied relationship u'\u005cu201c' crash of train u'\u005cu201d'
+p20
+aVOn the other hand, the results obtained for our task, which does fit textual inference scenarios, are promising, and encourage utilizing algorithms for this task in actual inference systems
+p21
+aVExplicit result is not statistically significant ( p u'\u005cu2243' 0.1
+p22
+aVThis paper targets such types of implied relationships in textual inference scenarios
+p23
+aVExample instances, constructed by this process, are shown in Table 1
+p24
+aVMore concretely, a is often an explicit argument of another predicate p u'\u005cu2032'
+p25
+aVThen, a human reader annotates each instance as u'\u005cu201c' Yes u'\u005cu201d' u'\u005cu2013' meaning that the implied relationship indeed holds in the Text, or u'\u005cu201c' No u'\u005cu201d' otherwise
+p26
+aVThis task extends Semantic Role Labeling to cases in which a core argument of a predicate is missing in the syntactic structure but a filler for the corresponding semantic role appears elsewhere and can be inferred from discourse
+p27
+aVThis dataset is significantly larger than prior datasets for the implied SRL task
+p28
+aVThis extraction process directly follows our task formalization
+p29
+aVAn additional experiment tests the contribution of recognizing implied predicate-argument relationships for overall RTE, specifically on the RTE-6 dataset
+p30
+aVParticularly, we investigate the setting of Recognizing Textual Entailment (RTE) as a typical scenario of textual inference
+p31
+aVSimilarly, the Co-occurring argument feature captures cases where p has another explicit argument, a u'\u005cu2032'
+p32
+aVThe high results show that this task is feasible, and its solutions can be adopted as a component in textual inference systems
+p33
+aVA related task, described in the next section, deals with such implied predicate-argument relationships as an extension to Semantic Role Labeling
+p34
+aVIn this work we used lemma-level lexical matching, as well as nominalization matching, to align the Text predicates and arguments to the Hypothesis
+p35
+aVWhile the results reported so far on that annotation task were relatively low, we suggest that the task itself may be more complicated than what is actually required in textual inference scenarios
+p36
+aVExplicit only
+p37
+aVThe Co-occurring predicate feature estimates the probability that a document would contain a as an argument of p , given that a appears elsewhere in that document as an argument of p u'\u005cu2032' , based on explicit predicate-argument relationships in a large corpus
+p38
+aVHowever, no predicate-argument relationship between them is expressed syntactically
+p39
+aVWe ran three configurations for the second feature, where in the first only syntactically expressed relationships are used, in the second all the implied relationships, as detected by a human annotator, are added, and in the third only the implied relationships detected by our algorithm are added
+p40
+aVWe tested our method in a cross-validation setting, and obtained high result as shown in the first row of Table 3
+p41
+aVOn the other hand, in some cases the candidate argument is not a DNI, but is still required in textual inference
+p42
+aVThis process is performed automatically, based on syntactic parsing (see below
+p43
+aVAnother case is when an implied predicate-argument relationship holds even though the corresponding role is already filled by another argument, hence not an NI
+p44
+aVThe SemEval task, termed henceforth as Implied SRL , involves three major sub-tasks
+p45
+aVThe most notable work targeting implied predicate-argument relationships is the 2010 SemEval task of Linking Events and Their Participants in Discourse [ 15 ]
+p46
+aVStatistical features in prior works mostly capture general properties of the predicate and the argument, like selectional preferences, lexical similarities, etc
+p47
+aVCo-occurring predicate and Co-occurring argument
+p48
+aVBy applying this method on the RTE-6 dataset [ 1 ] , we constructed a dataset of 4022 instances, where 2271 (56%) are annotated as positive instances, and 1751 as negative ones
+p49
+aVWhile the object of u'\u005cu201c' threatened u'\u005cu201d' is filled (in the Text) by u'\u005cu201c' southeastern United States u'\u005cu201d' , a human reader also infers the u'\u005cu201c' threatened-New Orleans u'\u005cu201d' relationship
+p50
+aVWhile the delta in the F1 score is small in absolute terms, such magnitudes are typical in RTE for most resources and tools (see [ 1 ]
+p51
+aVSince our task and dataset are novel, there is no direct baseline with which we can compare this result
+p52
+aVTo identify explicit predicate-argument relationships we utilized dependency parsing by the Easy-First parser [ 7 ]
+p53
+aVTo address this task, we provide a large and freely available annotated dataset, and propose methods for coping with it
+p54
+aVFirst, some relatively complex steps of the implied SRL task are avoided in our setting, while on the other hand it covers more relevant cases
+p55
+aVAccordingly, the feature quantifies the probability that a document including the relationship p - a u'\u005cu2032' would also include the relationship p - a
+p56
+aVNote that all these results are higher than the median result in the RTE-6 challenge (36.14%
+p57
+aVOne third of this potential improvement is achieved by our algorithm 1 1 Following the relatively modest size of the RTE dataset, the Algorithm vs
+p58
+aVThe positive contribution of each feature category is shown in ablation tests
+p59
+aVHowever, textual inference deals with non-core arguments as well (see example 1 in Table 1
+p60
+aVWe defined 15 features, summarized in Table 2 , which capture local and discourse phenomena
+p61
+aVHowever, the Human annotation vs
+p62
+aVSuch cases might follow a meronymy relation between the filler ( u'\u005cu201c' southeastern United States u'\u005cu201d' ) and the candidate argument ( u'\u005cu201c' New Orleans u'\u005cu201d' ), or certain types of discourse (co-)references (e.g.,, example 1 in Table 1 ), or some other linguistic phenomena
+p63
+aVLater works that followed the SemEval challenge include [ 17 ] and [ 14 ] , which proposed automatic dataset generation methods and features which capture discourse phenomena
+p64
+aVThis comparison shows that the contribution of our new features (3%) is meaningful, which is also statistically significant with p 0.01 using Bootstrap Resampling test [ 11 ]
+p65
+aVFirst, for each predicate, the unfilled roles, termed Null Instantiations (NI) , should be detected
+p66
+aVFor the scope of this experiment we developed a simple RTE system, which uses the F1 optimized logistic regression classifier of Jansche ( 2005 ) with two features lexical coverage and predicate-argument relationships coverage
+p67
+aVNominalization matching (e.g.,, example 1 of Table 1 ) was performed with Nomlex [ 13 ]
+p68
+aVWe defined two features
+p69
+aVWe suggest, however, that the same challenge, as well as the solutions proposed in our work, are applicable, with proper adaptations, to other textual-inference scenarios, like Question Answering , and Information Extraction (see Section 6
+p70
+aVSome features were proposed in prior works, and are marked by G C [ 6 ] or S F [ 17 ]
+p71
+aVEither way, they are crucial for textual inference, while not being NIs
+p72
+aVOur best results were obtained with the Random Forests learning algorithm [ 2 ]
+p73
+aVAs a reference point we mention the majority class proportion, and also report a configuration in which only features adopted from prior works (G C and S F) are utilized
+p74
+aVWe note that more advanced matching, e.g.,, by utilizing knowledge resources (like WordNet), can be performed as well
+p75
+aVSecond, each NI should be classified as Definite NI (DNI) , meaning that the role filler must exist in the discourse, or Indefinite NI otherwise
+p76
+aVTo calculate inter-annotator agreement, the first author also annotated 185 randomly-selected instances
+p77
+aVThe dataset is freely available at www.cs.biu.ac.il/~nlp/resources/downloads/implied-relationships
+p78
+aVAnother work is the probabilistic model of Laparra and Rigau ( 2012 ) , which is trained by properties captured not only from implicit arguments but also from explicit ones, resulting in 19% F1-score
+p79
+aVTheir highest result was 12% F1-score
+p80
+aVConsider example 1 of Table 1
+p81
+aVThe first two features are described in the next subsection, while the others are explained in the table itself
+p82
+aVWe have reached high agreement score of 0.80 Kappa
+p83
+aVFor example, in the following sentence the semantic role goal is unfilled iii
+p84
+aVThese features do not depend on manually built resources, and hence are portable to resource-poor languages
+p85
+aVOne type of such cases are non-core arguments, which cannot be Definite NIs
+p86
+aVThird, the DNI fillers should be found (DNI linking
+p87
+aVAnother notable work is [ 6 ] , which was limited to ten carefully selected nominal predicates
+p88
+aVThis is exemplified in example 1 of Table 1 , where p = u'\u005cu201c' renew u'\u005cu201d' , a = u'\u005cu201c' Patriot Act u'\u005cu201d' and a u'\u005cu2032' = u'\u005cu201c' law u'\u005cu201d'
+p89
+aVTherefore, the sub-tasks of identifying and classifying DNIs can be avoided
+p90
+aVMore details about these features can be found in the first author u'\u005cu2019' s Ph.D thesis at www.cs.biu.ac.il/~nlp/publications/theses/
+p91
+aVHence p = u'\u005cu201c' crash u'\u005cu201d' , a = u'\u005cu201c' train u'\u005cu201d' and p u'\u005cu2032' = u'\u005cu201c' derailment u'\u005cu201d'
+p92
+aVIn our experiments we collected the statistics from Reuters corpus RCV1 ( trec.nist.gov/data/reuters/reuters.html ), which contains more than 806,000 documents
+p93
+aVThe crucial role Vioxx plays in Merck u'\u005cu2019' s portfolio was apparent last week when Merck u'\u005cu2019' s shares plunged 27 percent to 33 dollars after the withdrawal announcement
+p94
+aVThis work was partially supported by the EC-funded project EXCITEMENT (FP7ICT-287923
+p95
+aVHe arrived ( 0 Goal ) at 8pm
+p96
+aVMerck withdrew Vioxx
+p97
+aS''
+p98
+aVConsider the following example i
+p99
+a.

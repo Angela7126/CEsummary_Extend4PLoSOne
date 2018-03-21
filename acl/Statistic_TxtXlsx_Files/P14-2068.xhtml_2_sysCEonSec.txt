@@ -1,0 +1,241 @@
+Current File: P14-2068.xhtml_2 P14-2068.xhtml
+
+Section 0:  Abstract
+	SentNum: 6
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 16.6667%
+
+Section 1:  1 Introduction
+	SentNum: 14
+	CENum: 3
+	SentCovered: 5
+	Covered_Rate: 35.7143%
+
+Section 2:  2 Text data
+	SentNum: 24
+	CENum: 5
+	SentCovered: 6
+	Covered_Rate: 25.0000%
+
+Section 3:  3 Annotation
+	SentNum: 13
+	CENum: 3
+	SentCovered: 3
+	Covered_Rate: 23.0769%
+
+Section 4:  4 Modeling factuality judgments
+	SentNum: 40
+	CENum: 11
+	SentCovered: 12
+	Covered_Rate: 30.0000%
+
+Section 5:  5 Related work
+	SentNum: 13
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 7.6923%
+
+Section 6:  6 Conclusion
+	SentNum: 7
+	CENum: 2
+	SentCovered: 2
+	Covered_Rate: 28.5714%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-2068.xhtml_2's CE cases
+
+Section 0:  Abstract has 1 CE cases
+	CASE: 1
+	Stag: 1 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: Predicates such as thinks , claims , and admits offer a range of options for framing quoted content according to the author u'\u2019' s own perceptions of its credibility. 
+		Cause: [(0, 20), (0, 25)]
+		Effect: [(0, 0), (0, 17)]
+
+Section 1:  1 Introduction has 3 CE cases
+	CASE: 1
+	Stag: 6 7 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Contemporary journalism is increasingly conducted through social media services like Twitter [ 9 , 6 ]. As events unfold, journalists and political commentators use quotes u'\u2014' often indirect u'\u2014' to convey potentially uncertain information and claims from their sources and informants, e.g. 
+		Cause: [(1, 1), (1, 35)]
+		Effect: [(0, 0), (0, 15)]
+
+	CASE: 2
+	Stag: 11 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Detecting and reasoning about the certainty of propositional content has been identified as a key task for information extraction, and is now supported by the FactBank corpus of annotations for newstext [ 14 ]. 
+		Cause: [(0, 13), (0, 33)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 3
+	Stag: 16 17 
+		Pattern: 0 [[['enable', 'enables', 'enabled']]]---- [['&C', '(,/./;/--)', '&this', '(&adj)', '(&N)', '(&CAN/have/has/had)', '(&ADV)'], ['&NP@R@', '&TODO@R@']]
+		sentTXT: This dataset was annotated by Mechanical Turk workers who gave ratings for the factuality of the scoped claims in each Twitter message. This enables us to build a predictive model of the factuality annotations, with the goal of determining the full set of relevant factors, including the predicate, the source, the journalist, and the content of the claim itself. 
+		Cause: [(0, 0), (0, 21)]
+		Effect: [(1, 2), (1, 40)]
+
+Section 2:  2 Text data has 5 CE cases
+	CASE: 1
+	Stag: 24 25 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Our interest in this text is specifically in quoted content u'\u2014' including u'\u201c' indirect u'\u201d' quotes, which may include paraphrased quotations, as in the examples in Figure 1. While labeled datasets for such quotes have been created [ 12 , 13 ] , these are not freely available at present. 
+		Cause: [(0, 36), (1, 20)]
+		Effect: [(0, 0), (0, 33)]
+
+	CASE: 2
+	Stag: 26 27 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: In any case, the relevance of these datasets to Twitter text is currently unproven. Therefore, rather than train a supervised model to detect quotations, we apply a simple dependency-based heuristic. 
+		Cause: [(0, 0), (0, 14)]
+		Effect: [(1, 2), (1, 17)]
+
+	CASE: 3
+	Stag: 37 
+		Pattern: 0 [['according', 'to'], [',']]---- [[], ['&NP@C@'], ['&R']]
+		sentTXT: We use a combination of regular expressions and dependency rules to capture expressions of the type u'\u201c' claim , according to source u'\u201d' Specifically, the PCOMP path from according is searched for the pattern according to *. 
+		Cause: [(0, 25), (0, 31)]
+		Effect: [(0, 33), (0, 45)]
+
+	CASE: 4
+	Stag: 37 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: We use a combination of regular expressions and dependency rules to capture expressions of the type u'\u201c' claim , according to source u'\u201d' Specifically, the PCOMP path from according is searched for the pattern according to *. 
+		Cause: [(0, 12), (0, 12)]
+		Effect: [(0, 0), (0, 9)]
+
+	CASE: 5
+	Stag: 42 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: This heuristic pipeline may miss many relevant tweets, but since the overall volume is high, we prioritize precision. 
+		Cause: [(0, 11), (0, 15)]
+		Effect: [(0, 17), (0, 19)]
+
+Section 3:  3 Annotation has 3 CE cases
+	CASE: 1
+	Stag: 49 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: To ensure quality control we required the Turkers to have at least 85% hit approval rating and to reside in the United States, because the Twitter messages in our dataset were related to American politics. 
+		Cause: [(0, 26), (0, 36)]
+		Effect: [(0, 0), (0, 23)]
+
+	CASE: 2
+	Stag: 51 
+		Pattern: 0 [['based', 'on']]---- [['&V-ing/&NP@R@', '(&Clause@R@)', '&BE', '(&ADV)'], ['&NP@C@', '(&Clause@C@)']]
+		sentTXT: The ratings were based on a 5-point Likert scale ranging from u'\u201c' [-2] Certainly False u'\u201d' to u'\u201c' [2] Certainly True u'\u201d' and allowing for u'\u201c' [0] Uncertain u'\u201d'. 
+		Cause: [(0, 5), (0, 58)]
+		Effect: [(0, 0), (0, 1)]
+
+	CASE: 3
+	Stag: 52 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: We also allowed for u'\u201c' Not Applicable u'\u201d' option to capture ratings where the Turkers did not have sufficient knowledge about the statement or if the statement was not really a claim. 
+		Cause: [(0, 33), (0, 39)]
+		Effect: [(0, 0), (0, 31)]
+
+Section 4:  4 Modeling factuality judgments has 11 CE cases
+	CASE: 1
+	Stag: 57 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Having obtained a corpus of factuality ratings, we now model the factors that drive these ratings. 
+		Cause: [(0, 0), (0, 6)]
+		Effect: [(0, 8), (0, 16)]
+
+	CASE: 2
+	Stag: 65 66 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: These features are used as predictors in a series of linear ridge regressions, where the dependent variable is the mean certainty rating. We throw out tweets that were rated as u'\u201c' not applicable u'\u201d' by a majority of raters, but otherwise ignore u'\u201c' not applicable u'\u201d' ratings of the remaining tweets. 
+		Cause: [(0, 5), (1, 40)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 3
+	Stag: 66 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We throw out tweets that were rated as u'\u201c' not applicable u'\u201d' by a majority of raters, but otherwise ignore u'\u201c' not applicable u'\u201d' ratings of the remaining tweets. 
+		Cause: [(0, 8), (0, 40)]
+		Effect: [(0, 0), (0, 6)]
+
+	CASE: 4
+	Stag: 82 83 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We performed another set of linear regressions, again using the mean certainty rating as the dependent variable. In this case, there was no training/test split, so confidence intervals on the resulting parameters are computed using the analytic closed form. 
+		Cause: [(0, 15), (1, 22)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 5
+	Stag: 83 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: In this case, there was no training/test split, so confidence intervals on the resulting parameters are computed using the analytic closed form. 
+		Cause: [(0, 0), (0, 8)]
+		Effect: [(0, 11), (0, 23)]
+
+	CASE: 6
+	Stag: 86 87 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The cues that give the highest factuality coefficients are learn and admit , which are labeled as predicates of knowledge. These cues carry a substantial amount of framing, as they purport to describe the private mental state of the source. 
+		Cause: [(0, 17), (1, 8)]
+		Effect: [(0, 0), (0, 15)]
+
+	CASE: 7
+	Stag: 87 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: These cues carry a substantial amount of framing, as they purport to describe the private mental state of the source. 
+		Cause: [(0, 10), (0, 20)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 8
+	Stag: 88 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: The word admit often applies to statements that are perceived as damaging to the source, such as Bill Gates admits Control-Alt-Delete was a mistake ; since there can be no self-interest behind such statements, they may be perceived as more likely to be true. 
+		Cause: [(0, 27), (0, 34)]
+		Effect: [(0, 36), (0, 45)]
+
+	CASE: 9
+	Stag: 90 91 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The words suggest , think , and believe also purport to describe the private mental state of the source, but their framing function is the opposite of the predicates of knowledge they imply that it is important to mark the claim as the source u'\u2019' s belief, and not a widely-accepted fact. For example, Mubarak clearly believes he has the military leadership u'\u2019' s support. 
+		Cause: [(0, 43), (1, 16)]
+		Effect: [(0, 12), (0, 41)]
+
+	CASE: 10
+	Stag: 94 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: Both according and report are often used in conjunction with impersonal and institutional sources, e.g.,, Cuccinelli trails McAuliffe by 24 points , according to a new poll. 
+		Cause: [(0, 27), (0, 29)]
+		Effect: [(0, 0), (0, 23)]
+
+	CASE: 11
+	Stag: 96 
+		Pattern: 0 [[['indicate', 'indicates', 'indicated', 'realize', 'realizes', 'realized', 'ensure', 'ensures', 'ensured', 'imply', 'implies', 'implied']]]---- [['&NP@C@', '(&Clause@C@)'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: In this case, the fact that the predicate indicates a report is not enough to determine the framing different sorts of reports carry radically different perceptions of factuality. 
+		Cause: [(0, 4), (0, 8)]
+		Effect: [(0, 10), (0, 28)]
+
+Section 5:  5 Related work has 1 CE cases
+	CASE: 1
+	Stag: 108 
+		Pattern: 0 [[['lead', 'leads', 'led'], 'to']]---- [['&V-ing/&NP@C@', '(&CAN/have/has/had)'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: The search for reliable signals of information credibility in social media has led to the construction of automatic classifiers to identify credible tweets [ 2 ]. 
+		Cause: [(0, 0), (0, 10)]
+		Effect: [(0, 14), (0, 25)]
+
+Section 6:  6 Conclusion has 2 CE cases
+	CASE: 1
+	Stag: 111 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: This result is obtained from real tweets written by journalists; a natural counterpart study would be to experimentally manipulate this framing to see if the same perceptions apply. 
+		Cause: [(0, 25), (0, 28)]
+		Effect: [(0, 11), (0, 23)]
+
+	CASE: 2
+	Stag: 112 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Another future direction would be to test whether the deployment of cue words as framing devices reflects the ideology of the journalist. 
+		Cause: [(0, 14), (0, 21)]
+		Effect: [(0, 0), (0, 12)]
+
+#-------------------------------------------------
+

@@ -1,0 +1,18 @@
+(lp0
+VWe treat NULL as a normal target word, and if a source word aligns to multiple target words, it is treated as a single concatenated token
+p1
+aVIf t i is unaligned, we inherit its affiliation from the closest aligned word, with preference given to the right
+p2
+aVFor aligned target words, the normal affiliation heuristic can be used, since the word alignment is available within the rule
+p3
+aVHowever, note that there are only 3 possible positions for each target word, and 11 for each source word
+p4
+aVIf t is on the left edge of the arc, we say it is affiliated with s i
+p5
+aVTherefore, for every word in the vocabulary, and for each position, we can pre-compute the dot product between the word embedding and the first hidden layer
+p6
+aVFor unaligned words, the normal heuristic can also be used, except when the word is on the edge of a rule, because then the target neighbor words are not necessarily known
+p7
+aVThus, the total cost increase of using the NNJM+NNLTM features
+p8
+a.

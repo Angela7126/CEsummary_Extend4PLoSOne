@@ -1,0 +1,20 @@
+(lp0
+VFinally, Figure 3 shows the speed of inference, labeled precision and labeled recall of annotating hedge constituents on the test set as a function of the maximum span parameter L , versus the baseline parser
+p1
+aVA unique property of hedge constituents compared to constituents in the original parse trees is that they are sequentially connected to the top-most node
+p2
+aVIt is possible to parse with a standardly induced PCFG using this sort of hedge constrained parsing that only considers a subset of the chart cells, and speedups are achieved, however this is clearly non-optimal, since the model is ill-suited to combining hedges into flat structures at the root of the tree
+p3
+aVWe use hedge segmentation as a finite-state pre-processing step for hedge context-free parsing
+p4
+aVFigure 2 plots the percentage of constituents from the original WSJ Penn treebank (sections 2-21) retained in the transformed version, as we vary the maximum span length parameter L
+p5
+aVAs stated earlier, our brute-force baseline approach is to parse the sentence using a full context-free grammar (CFG) and then hedge-transform the result
+p6
+aVOur task is to learn which words can begin ( B ) a hedge constituent
+p7
+aVIf we apply this transform to an entire treebank, we can use the transformed trees to induce a PCFG for parsing
+p8
+aVThe final two rows show performance with automatic segmentation, using a model that includes either unlabeled or labeled segmentation tags, as described
+p9
+a.

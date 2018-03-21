@@ -1,0 +1,118 @@
+(lp0
+VHowever, negative features u'\u005cu2014' features that are not observed in any tree u'\u005cu2014' are still powerful indicators of (un)grammaticality if we have never seen a PRN that starts with u'\u005cu201c' has, u'\u005cu201d' or a span that begins with a quotation mark and ends with a close bracket, then we would like the model to be able to place negative weights on these features
+p1
+aVIn this work, we instead try to minimize the structural complexity of the grammar by moving as much context as possible onto local surface features
+p2
+aVSubsequent lines in Table 1 indicate additional surface feature templates computed over the span, which are then conjoined with the rule identity as shown in Figure 1 to give additional features
+p3
+aVOur base model has no surface features formally, on each anchored rule r we have only an indicator of the (unanchored) rule identity, rule u'\u005cu2062' ( r
+p4
+aVAdding these simple features (first word, last word, and lengths) as span features of the X-bar grammar already gives us a substantial improvement over our baseline system, improving the parser u'\u005cu2019' s performance from 73.0 F1 to 85.0 F1 (see Table 1
+p5
+aVAs illustrated in Figure 1 , the actual features of the model are obtained by conjoining surface properties with various abstractions of the rule identity
+p6
+aVOur parser can be easily adapted to this task by replacing the X-bar grammar over treebank symbols with a grammar over the sentiment values to encode the output variables and then adding n-gram indicators to our feature set to capture the bulk of the lexical effects
+p7
+aVAs a thought experiment, consider a parser with no grammar, which functions by independently classifying each span ( i , j ) of a sentence as an NP, VP, and so on, or null if that span is a non-constituent
+p8
+aVFigure 3 shows an example of one instance of this feature template impact is a noun that is more likely to take a PP than other nouns, and so we expect this feature to have high weight and encourage the attachment; this feature proves generally useful in resolving such cases of right-attachments to noun phrases, since the last word of the noun phrase is often the head
+p9
+aVTherefore, we fire features that (separately) look at the words immediately preceding and immediately following the span
+p10
+aVTherefore, we augment our existing model with standard sentiment analysis features that look at unigrams and bigrams in the span [ 31 ]
+p11
+aVThe grammar rule 2 u'\u005cu2192' 4 1 already encodes the notion of the sentiment of the right child being dominant, so when this is conjoined with our span feature on the first word ( While ), we end up with a feature that captures this effect
+p12
+aVThe task is to predict the root sentiment label of each parse tree; however, because the data is annotated with sentiment at each span of each parse tree, we can also evaluate how well our model does at these intermediate computations
+p13
+aVWe start with a simple X-bar grammar whose only symbols are NP, NP-bar, VP, and so on
+p14
+aVBecause these u'\u005cu201c' positive u'\u005cu201d' features correspond to observed constituents, they are far less numerous than the set of all possible features extracted from all spans
+p15
+aVWe evaluated our model on the fine-grained sentiment analysis task presented in Socher et al
+p16
+aVBecause constituents in the treebank can be quite long, we bin our length features into 8 buckets, of lengths 1, 2, 3, 4, 5, 10, 20, and u'\u005cu2265' 21 words
+p17
+aVOur span features appear to work well on both head-initial and head-final languages (see Basque and Korean in the table), and the fact that our parser performs well on such morphologically-rich languages as Hungarian indicates that our suffix model is sufficient to capture most of the morphological effects relevant to parsing
+p18
+aVAn anchored rule r is the conjunction of an unanchored grammar rule rule u'\u005cu2062' ( r ) and the start, stop, and split indexes where that rule is anchored, which we refer to as span u'\u005cu2062' ( r
+p19
+aVBecause heads of constituents are often at the beginning or the end of a span, these feature templates can (noisily) capture monolexical properties of heads without having to incur the inferential cost of lexicalized annotations
+p20
+aVWe start with some of the most obvious properties available to us, namely, the identity of the first and last words of a span
+p21
+aVFollowing their experimental conditions, we filter the test set so that it only contains trees with non-neutral sentiment labels at the root
+p22
+aVWe therefore begin with a minimal grammar and iteratively augment it with rich input features that do not enrich the context-free backbone
+p23
+aVNote that many of these features have been used before [ 28 , 10 , 23 ] ; our goal here is not to amass as many feature templates as possible, but rather to examine the extent to which a simple set of features can replace a complicated state space
+p24
+aVWe exploit this by adding an additional feature template similar to our span shape feature from Section 4.4 which uses the (deterministic) tag for each word as its descriptor
+p25
+aVThe u'\u005cu201c' Replaced u'\u005cu201d' system modifies the Berkeley parser by replacing rare words with morphological descriptors of those words computed using language-specific modules, which have been hand-crafted for individual languages or are trained with additional annotation layers in the treebanks that we do not exploit
+p26
+aVAs an example, consider disambiguating the POS tag of the word read in Figure 2
+p27
+aVOf course, there is no reason why we should confine ourselves to just the words within the span words outside the span also provide a rich source of context
+p28
+aVBecause the X-bar grammar is so minimal, this grammar does not parse very accurately, scoring just 73 F1 on the standard English Penn Treebank task
+p29
+aVThese closely related languages use templatic morphology, for which suffixing is not appropriate; however, using additional surface features based on the output of a morphological analyzer did not lead to increased performance
+p30
+aVBecause the lexicon is especially sensitive to morphological effects, we also fire features on all prefixes and suffixes of the current word up to length 5, regardless of frequency
+p31
+aVBy annotating grammar nonterminals with their headwords, the idea is to better model phenomena that depend heavily on the semantics of the words involved, such as coordination and PP attachment
+p32
+aVWe try to capture some of this same intuition by introducing a feature on the length of a span
+p33
+aVWe say that an indicator is a surface property if it can be extracted without reference to the parse tree
+p34
+aVTheir approach changed the multiplicative penalty of annotation into an additive penalty, but even so their individual grammar projections are much larger than the base X-bar grammar
+p35
+aVAs another example, coordination can be represented by an indicator of the conjunction, which comes immediately after the split point
+p36
+aVBecause this feature indicates capitalization, it can also capture properties of NP internal structure relevant to named entities, and its sensitivity to capitalization and punctuation makes it useful for recognizing appositive constructions
+p37
+aVThe surface features are somewhat more involved, and so we introduce them incrementally
+p38
+aVFinally, because the system is, at its core, a classifier of spans, it can be used equally well for tasks that do not normally use parsing algorithms
+p39
+aVThus, we use a simple feature hashing scheme where positive features are indexed individually, while negative features are bucketed together
+p40
+aVFor example, the first word in a constituent is a surface property, as is the word directly preceding the constituent
+p41
+aV2013 ) demonstrates that sentiment analysis, which is usually approached as a flat classification task, can be viewed as tree-structured
+p42
+aVFigure 5 shows an example that requires some analysis of sentence structure to correctly understand
+p43
+aVWe examine the position that grammars should not propagate any information that is available from surface strings, since a discriminative parser can access that information directly
+p44
+aVSyntax is often driven by heads of constituents, which tend to be located at the beginning or the end, whereas sentiment is more likely to depend on modifiers such as adjectives, which are typically present in the middle of spans
+p45
+aVHowever, even when language-specific unknown word handling is added to the parser, our model still outperforms the Berkeley parser overall, showing that our model generalizes even better across languages than a parser for which this is touted as a strength [ 22 ]
+p46
+aVA VP is most frequently preceded by a subject NP, whose rightmost word is often its head
+p47
+aVAn independent classification approach is actually very viable for part-of-speech tagging [ 29 ] , but is problematic for parsing u'\u005cu2013' if nothing else, parsing comes with a structural requirement that the output be a well-formed, nested tree
+p48
+aVMuch of the last few decades of parsing research has therefore focused on propagating contextual information from the leaves of the tree to internal nodes
+p49
+aVBy contrast, we investigate the extent to which we need a grammar at all
+p50
+aVThe underlying reason that such propagation is even needed is that PCFG parsers score trees based on local configurations only, and any information that is not threaded through the tree becomes inaccessible to the scoring function
+p51
+aVNaïve context-free grammars, such as those embodied by standard treebank annotations, do not parse well because their symbols have too little context to constrain their syntactic behavior
+p52
+aVThese non-local approaches can actually go even further in enriching the grammar u'\u005cu2019' s structural complexity by coupling larger domains in various ways, though their non-locality generally complicates inference
+p53
+aVIf it begins with punctuation, we indicate the punctuation mark explicitly
+p54
+aVFor example, Socher et al
+p55
+aVHall and Klein ( 2012 ) attempted to reduce this state space by factoring these annotations into individual components
+p56
+aVThere have been non-local approaches as well, such as tree-substitution parsers [ 2 , 26 ] , neural net parsers [ 13 ] , and rerankers [ 6 , 4 , 14 ]
+p57
+aVFor instance, VPs embedded in NPs tend to be short, usually as embedded gerund phrases
+p58
+a.

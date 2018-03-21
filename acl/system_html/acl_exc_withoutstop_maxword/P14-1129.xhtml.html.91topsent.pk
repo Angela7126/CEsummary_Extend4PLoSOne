@@ -1,0 +1,18 @@
+(lp0
+VWe treat NULL as a normal target word, and if a source word aligns to multiple target words, it is treated as a single concatenated token
+p1
+aVOne issue with the S2T NNJM is that the probability is computed over every target word, so it does not explicitly model NULL-aligned source words
+p2
+aVThe decoding cost is based on a measurement of u'\u005cu223c' 1200 unique NNJM lookups per source word for our Arabic-English system
+p3
+aVTherefore, for every word in the vocabulary, and for each position, we can pre-compute the dot product between the word embedding and the first hidden layer
+p4
+aVFor aligned target words, the normal affiliation heuristic can be used, since the word alignment is available within the rule
+p5
+aVThus, the total cost increase of using the NNJM+NNLTM features in decoding is only u'\u005cu223c' 0.01 seconds per source word
+p6
+aVFor the sake of a fair comparison, these all use one hidden layer
+p7
+aVIt is easy and computationally inexpensive to use this model in decoding, since only one neural network computation must
+p8
+a.

@@ -1,0 +1,14 @@
+(lp0
+VFor aligned target words, the normal affiliation heuristic can be used, since the word alignment is available within the rule
+p1
+aVWe treat NULL as a normal target word, and if a source word aligns to multiple target words, it is treated as a single concatenated token
+p2
+aVIf t i is unaligned, we inherit its affiliation from the closest aligned word, with preference given to the right
+p3
+aVFor unaligned words, the normal heuristic can also be used, except when the word is on the edge of a rule, because then the target neighbor words are not necessarily known
+p4
+aVTo do this, we first say that each target word t i is affiliated with exactly one source word at index a i u'\u005cud835' u'\u005cudcae' i is then the m -word source window centered at a i
+p5
+aVSpecifically, if unaligned target word t is on the right edge of an arc that covers source span [ s i , s j ] , we simply say that t is affiliated with source word
+p6
+a.

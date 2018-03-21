@@ -1,0 +1,648 @@
+************************************************************
+P14-1044.xhtml_2_CE.txt: Cause-Effect links
+************************************************************
+
+CASE: 0
+Stag: 9 
+	Pattern: 0 [['owing', 'to'], [',']]---- [[], ['&C'], ['&R']]
+	sentTXT: Owing to its ability to bring together features like multilinguality and increasing coverage , over the past few years resource alignment has proven beneficial to a wide spectrum of tasks , such as Semantic Parsing -LSB- 33 -RSB- , Semantic Role Labeling -LSB- 28 -RSB- , and Word Sense Disambiguation -LSB- 25 -RSB-
+	Cause: its ability to bring together features like multilinguality and increasing coverage
+	Effect: over the past few years resource alignment has proven beneficial to a wide spectrum of tasks , such as Semantic Parsing -LSB- 33 -RSB- , Semantic Role Labeling -LSB- 28 -RSB- , and Word Sense Disambiguation -LSB- 25 -RSB-
+
+CASE: 1
+Stag: 10 
+	Pattern: 1 [['because', 'of']]---- [['&C', '(,/;/./--)', '(&ADV)'], ['(&THIS)', '&NP', '&R']]
+	sentTXT: Nevertheless , when it comes to aligning textual definitions in different resources , the lexical approach -LSB- 32 , 5 , 11 -RSB- falls short because of the potential use of totally different wordings to define the same concept
+	Cause: Nevertheless , when it comes to aligning textual definitions in different resources , the lexical approach -LSB- 32 , 5 , 11 -RSB- falls short
+	Effect: to define the same concept
+
+CASE: 2
+Stag: 14 
+	Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: However , not all lexical resources provide explicit semantic relations between concepts and , hence , machine-readable dictionaries like Wiktionary have first to be transformed into semantic graphs before such graph-based approaches can be applied to them
+	Cause: However , not all lexical resources provide explicit semantic relations between concepts and
+	Effect: machine-readable dictionaries like Wiktionary have first to be transformed into semantic graphs before such graph-based approaches can be applied to them
+
+CASE: 3
+Stag: 16 
+	Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: However , this alignment method still involves tuning of parameters which are highly dependent on the characteristics of the generated graphs and , hence , requires hand-crafted sense alignments for the specific pair of resources to be aligned , a task which has to be replicated every time the resources are updated
+	Cause: However , this alignment method still involves tuning of parameters which are highly dependent on the characteristics of the generated graphs and
+	Effect: requires hand-crafted sense alignments for the specific pair of resources to be aligned , a task which has to be replicated every time the resources are updated
+
+CASE: 4
+Stag: 21 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Therefore , we assume that a lexical resource L can be represented as an undirected graph G = -LRB- V , E -RRB- where V is the set of nodes , i.e. , , the concepts defined in the resource , and E is the set of undirected edges , i.e. , , semantic relations between concepts
+	Cause: an undirected graph G = -LRB- V , E -RRB- where V is the set of nodes , i.e. , , the concepts defined in the resource , and E is the set of undirected edges , i.e. ,
+	Effect: Therefore , we assume that a lexical resource L can be represented
+
+CASE: 5
+Stag: 23 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: For instance , WordNet can be readily represented as an undirected graph G whose nodes are synsets and edges are modeled after the relations between synsets defined in WordNet -LRB- e.g. , , hypernymy , meronymy , etc. -RRB- , and u ' \ u2112 ' G is the mapping between each synset node and the set of synonyms which express the concept
+	Cause: an undirected graph G whose nodes are synsets and edges are modeled after the relations between synsets defined in WordNet -LRB- e.g. , , hypernymy , meronymy , etc.
+	Effect: For instance , WordNet can be readily represented
+
+CASE: 6
+Stag: 24 
+	Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: However , other resources such as Wiktionary do not provide semantic relations between concepts and , therefore , have first to be transformed into semantic networks before they can be aligned using our alignment algorithm
+	Cause: However , other resources such as Wiktionary do not provide semantic relations between concepts and
+	Effect: have first to be transformed into semantic networks before they can be aligned using our alignment algorithm
+
+CASE: 7
+Stag: 26 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: Given a pair of lexical resources L 1 and L 2 , we align each concept in L 1 by mapping it to its corresponding concept -LRB- s -RRB- in the target lexicon L 2
+	Cause: mapping it to its corresponding concept -LRB- s -RRB- in the target lexicon L 2
+	Effect: Given a pair of lexical resources L 1 and L 2 , we align each concept in L 1
+
+CASE: 8
+Stag: 28 29 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: The algorithm iterates over all concepts c 1 u ' \ u2208 ' V 1 and , for each of them , obtains the set of concepts C u ' \ u2282 ' V 2 , which can be considered as alignment candidates for c 1 -LRB- line 2 For a concept c 1 , alignment candidates in G 2 usually consist of every concept c 2 u ' \ u2208 ' V 2 that shares at least one lexicalization with c 1 in the same part of speech tag , i.e. , , u ' \ u2112 ' G 1 u ' \ u2062 ' -LRB- c 1 -RRB- u ' \ u2229 ' u ' \ u2112 ' G 2 u ' \ u2062 ' -LRB- c 2 -RRB- u ' \ u2260 ' u ' \ u2205 ' -LSB- 31 , 20 -RSB-
+	Cause: alignment candidates for c 1 -LRB- line 2 For a concept c 1 , alignment candidates in G 2 usually consist of every concept c 2 u ' \ u2208 ' V 2 that shares at least one lexicalization with c 1 in the same part of speech tag , i.e. , , u ' \ u2112 ' G 1 u ' \ u2062 ' -LRB- c 1 -RRB- u ' \ u2229 ' u ' \ u2112 ' G 2 u ' \ u2062 ' -LRB- c 2 -RRB- u ' \ u2260 ' u ' \ u2205 ' -LSB- 31 ,
+	Effect: ' \ u2208 ' V 1 and , for each of them , obtains the set of concepts C u ' \ u2282 ' V 2 , which can be considered
+
+CASE: 9
+Stag: 34 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: In the following , we present our novel approach for measuring the similarity of concept pairs
+	Cause: measuring the similarity of concept pairs
+	Effect: In the following , we present our novel approach
+
+CASE: 10
+Stag: 35 
+	Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+	sentTXT: -LSB- t ! -RSB- Lexical Resource Aligner -LCB- algorithmic -RCB- -LSB- 1 -RSB- \ REQUIRE graphs H = -LRB- V H , E H -RRB- , G 1 = -LRB- V 1 , E 1 -RRB- and G 2 = -LRB- V 2 , E 2 -RRB- , the similarity threshold u ' \ u0398 ' , and the combination parameter u ' \ u0392 ' \ ENSURE A , the set of all aligned concept pairs
+	Cause: -LSB- t ! -RSB- Lexical Resource Aligner -LCB- algorithmic -RCB-
+	Effect: -LSB- 1 -RSB- \ REQUIRE graphs H = -LRB- V H , E H -RRB- , G 1 = -LRB- V 1 , E 1 -RRB- and G 2 = -LRB- V 2 , E 2 -RRB- , the similarity threshold u ' \ u0398 ' ,
+
+CASE: 11
+Stag: 39 40 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Figure 1 illustrates the procedure underlying our cross-resource concept similarity measurement technique As can be seen , the approach consists of two main components definitional similarity and structural similarity
+	Cause: can be seen , the approach consists of two main components definitional similarity and structural similarity
+	Effect: Figure 1 illustrates the procedure underlying our cross-resource concept similarity measurement technique
+
+CASE: 12
+Stag: 41 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Each of these components gets , as its input , a pair of concepts belonging to two different semantic networks and produces a similarity score
+	Cause: its input , a pair of concepts belonging to two different semantic networks and produces a similarity
+	Effect: Each of these components gets
+
+CASE: 13
+Stag: 43 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: The definitional similarity component computes the similarity of two concepts in terms of the similarity of their definitions , a method that has also been used in previous work for aligning lexical resources -LSB- 27 , 12 -RSB-
+	Cause: aligning lexical resources -LSB- 27 , 12 -RSB-
+	Effect: The definitional similarity component computes the similarity of two concepts in terms of the similarity of their definitions , a method that has also been used in previous work
+
+CASE: 14
+Stag: 44 45 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: In spite of its simplicity , the mere calculation of the similarity of concept definitions provides a strong baseline , especially for cases where the definitional texts for a pair of concepts to be aligned are lexically similar , yet distinguishable from the other definitions However , as mentioned in the introduction , definition similarity-based techniques fail at identifying the correct alignments in cases where different wordings are used or definitions are not of high quality
+	Cause: mentioned in the introduction , definition similarity-based techniques fail at identifying the correct alignments in cases where different wordings are used or definitions are not of high quality
+	Effect: spite of its simplicity , the mere calculation of the similarity of concept definitions provides a strong baseline , especially for cases where the definitional texts for a pair of concepts to be aligned are lexically similar , yet distinguishable from the other definitions However
+
+CASE: 15
+Stag: 46 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: The structural similarity component , instead , is a novel graph-based similarity measurement technique which calculates the similarity between a pair of concepts across the semantic networks of the two resources by leveraging the semantic structure of those networks
+	Cause: leveraging the semantic structure of those networks
+	Effect: The structural similarity component , instead , is a novel graph-based similarity measurement technique which calculates the similarity between a pair of concepts across the semantic networks of the two resources
+
+CASE: 16
+Stag: 47 
+	Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+	sentTXT: This component goes beyond the surface realization of concepts , thus providing a deeper measure of concept similarity
+	Cause: This component goes beyond the surface realization of concepts
+	Effect: providing a deeper measure of concept similarity
+
+CASE: 17
+Stag: 50 51 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: The aim of this stage is to model a given concept or set of concepts through a vectorial semantic representation , which we refer to as the semantic signature of the input We utilized Personalized PageRank -LSB- 10 , ppr -RSB- , a random walk graph algorithm , for calculating semantic signatures
+	Cause: the semantic signature of the input We utilized Personalized PageRank -LSB- 10 , ppr
+	Effect: The aim of this stage is to model a given concept or set of concepts through a vectorial semantic representation , which we refer to
+
+CASE: 18
+Stag: 51 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: We utilized Personalized PageRank -LSB- 10 , ppr -RSB- , a random walk graph algorithm , for calculating semantic signatures
+	Cause: calculating semantic signatures
+	Effect: We utilized Personalized PageRank -LSB- 10 , ppr -RSB- , a random walk graph algorithm ,
+
+CASE: 19
+Stag: 53 
+	Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+	sentTXT: When applied to a semantic graph by initializing the random walks from a set of concepts -LRB- nodes -RRB- , ppr yields a vector in which each concept is associated with a weight denoting its semantic relevance to the initial concepts
+	Cause: initializing the random walks from a set of concepts -LRB- nodes -RRB-
+	Effect: , ppr yields a vector in which each concept is associated with a weight denoting its semantic relevance to the initial concepts
+
+CASE: 20
+Stag: 54 55 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Formally , we first represent a semantic network consisting of N concepts as a row-stochastic transition matrix u ' \ ud835 ' u ' \ udc0c ' u ' \ u2208 ' u ' \ u211d ' N N The cell -LRB- i , j -RRB- in the matrix denotes the probability of moving from a concept i to j in the graph
+	Cause: a row-stochastic transition matrix u ' \ ud835 ' u ' \ udc0c ' u ' \ u2208 ' u ' \ u211d ' N N The cell -LRB- i , j -RRB- in the matrix denotes the probability of moving from a concept i to j in the graph
+	Effect: Formally , we first represent a semantic network consisting of N concepts
+
+CASE: 21
+Stag: 61 
+	Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+	sentTXT: In this component the personalization vector u ' \ ud835 ' u ' \ udc2f ' i is set by uniformly distributing the probability mass over the nodes corresponding to the senses of all the content words in the extended definition of d i according to the sense inventory of a semantic network H
+	Cause: the sense inventory of a semantic network H
+	Effect: In this component the personalization vector u ' \ ud835 ' u ' \ udc2f ' i is set by uniformly distributing the probability mass over the nodes corresponding to the senses of all the content words in the extended definition of d i
+
+CASE: 22
+Stag: 62 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: We use the same semantic graph H for computing the semantic signatures of both definitions
+	Cause: computing the semantic signatures of both definitions
+	Effect: We use the same semantic graph H
+
+CASE: 23
+Stag: 64 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: For this purpose we used the WordNet -LSB- 7 -RSB- graph which was further enriched by connecting each concept to all the concepts appearing in its disambiguated gloss
+	Cause: connecting each concept to all the concepts appearing in its disambiguated gloss
+	Effect: For this purpose we used the WordNet -LSB- 7 -RSB- graph which was further enriched
+
+CASE: 24
+Stag: 66 
+	Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: In the structural similarity component -LRB- Figure 1 -LRB- b -RRB- , bottom -RRB- , the semantic signature for each concept c i is computed by running the ppr algorithm on its corresponding graph G i , hence a different u ' \ ud835 ' u ' \ udc0c ' i is built for each of the two concepts
+	Cause: In the structural similarity component -LRB- Figure 1 -LRB- b -RRB- , bottom -RRB- , the semantic signature for each concept c i is computed by running the ppr algorithm on its corresponding graph G i
+	Effect: a different u ' \ ud835 ' u ' \ udc0c ' i is built for each of the two concepts
+
+CASE: 25
+Stag: 66 67 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: In the structural similarity component -LRB- Figure 1 -LRB- b -RRB- , bottom -RRB- , the semantic signature for each concept c i is computed by running the ppr algorithm on its corresponding graph G i , hence a different u ' \ ud835 ' u ' \ udc0c ' i is built for each of the two concepts As mentioned earlier , semantic signatures are vectors with dimension equal to the number of nodes in the semantic graph
+	Cause: mentioned earlier , semantic signatures are vectors with dimension equal to the number of nodes in the semantic graph
+	Effect: In the structural similarity component -LRB- Figure 1 -LRB- b -RRB- , bottom -RRB- , the semantic signature for each concept c i is computed by running the ppr algorithm on its corresponding graph G i , hence a different u ' \ ud835 ' u ' \ udc0c ' i is built for each of the two concepts
+
+CASE: 26
+Stag: 68 
+	Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+	sentTXT: Since the structural similarity signatures u ' \ ud835 ' u ' \ udcae ' u ' \ ud835 ' u ' \ udc2f ' 1 and u ' \ ud835 ' u ' \ udcae ' u ' \ ud835 ' u ' \ udc2f ' 2 are calculated on different graphs and thus have different dimensions , we need to make them comparable by unifying them
+	Cause: Since the structural similarity signatures u ' \ ud835 ' u ' \ udcae ' u ' \ ud835 ' u ' \ udc2f ' 1 and u ' \ ud835 ' u ' \ udcae ' u ' \ ud835 ' u ' \ udc2f ' 2 are calculated on different graphs
+	Effect: have different dimensions , we need to make them comparable by unifying them
+
+CASE: 27
+Stag: 68 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: have different dimensions , we need to make them comparable by unifying them
+	Cause: unifying them
+	Effect: have different dimensions , we need to make them comparable
+
+CASE: 28
+Stag: 68 69 
+	Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: Since the structural similarity signatures u ' \ ud835 ' u ' \ udcae ' u ' \ ud835 ' u ' \ udc2f ' 1 and u ' \ ud835 ' u ' \ udcae ' u ' \ ud835 ' u ' \ udc2f ' 2 are calculated on different graphs and thus have different dimensions , we need to make them comparable by unifying them We therefore propose an approach -LRB- part -LRB- c -RRB- of Figure 1 -RRB- that finds a common ground between the two signatures to this end we consider all the concepts associated with monosemous words in the two signatures as landmarks and restrict the two signatures exclusively to those common concepts
+	Cause: the structural similarity signatures u ' \ ud835 ' u ' \ udcae ' u ' \ ud835 ' u ' \ udc2f ' 1 and u ' \ ud835 ' u ' \ udcae ' u ' \ ud835 ' u ' \ udc2f ' 2 are calculated on different graphs and thus have different dimensions , we need to make them comparable by unifying them We
+	Effect: propose an approach -LRB- part -LRB- c -RRB- of Figure 1 -RRB- that finds a common ground between the two signatures to this end we consider all the concepts associated with monosemous words in the two signatures as landmarks and restrict the two signatures exclusively to those common concepts
+
+CASE: 29
+Stag: 69 70 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We therefore propose an approach -LRB- part -LRB- c -RRB- of Figure 1 -RRB- that finds a common ground between the two signatures to this end we consider all the concepts associated with monosemous words in the two signatures as landmarks and restrict the two signatures exclusively to those common concepts Leveraging monosemous words as bridges between two signatures is a particularly reliable technique as typically a significant portion of all words in a lexicon are monosemous
+	Cause: bridges between two signatures is a particularly reliable technique as typically a significant portion of all words in a lexicon are monosemous
+	Effect: all the concepts associated with monosemous words in the two signatures as landmarks and restrict the two signatures exclusively to those common concepts Leveraging monosemous words
+
+CASE: 30
+Stag: 73 
+	Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+	sentTXT: Then , given two signatures u ' \ ud835 ' u ' \ udcae ' u ' \ ud835 ' u ' \ udc2f ' 1 and u ' \ ud835 ' u ' \ udcae ' u ' \ ud835 ' u ' \ udc2f ' 2 , computed on the respective graphs G 1 and G 2 , we first obtain the set u ' \ u2133 ' of words that are monosemous according to both semantic networks , i.e. , , u ' \ u2133 ' = -LCB- w u ' \ u2110 ' G 1 u ' \ u2062 ' -LRB- w
+	Cause: both semantic networks , i.e. ,
+	Effect: Then , given two signatures u ' \ ud835 ' u ' \ udcae ' u ' \ ud835 ' u ' \ udc2f ' 1 and u ' \ ud835 ' u ' \ udcae ' u ' \ ud835 ' u ' \ udc2f ' 2 , computed on the respective graphs G 1 and G 2 , we first obtain the set u ' \ u2133 ' of words that are monosemous
+
+CASE: 31
+Stag: 76 77 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We then transform each of the two signatures u ' \ ud835 ' u ' \ udcae ' u ' \ ud835 ' u ' \ udc2f ' i into a new sub-signature u ' \ ud835 ' u ' \ udcae ' u ' \ ud835 ' u ' \ udc2f ' i u ' \ u2032 ' whose dimension is u ' \ u2133 ' the k t u ' \ u2062 ' h component of u ' \ ud835 ' u ' \ udcae ' u ' \ ud835 ' u ' \ udc2f ' i u ' \ u2032 ' corresponds to the weight in u ' \ ud835 ' u ' \ udcae ' u ' \ ud835 ' u ' \ udc2f ' i of the only concept of w k in u ' \ u2110 ' G i u ' \ u2062 ' -LRB- w k As an example , assume we are given two semantic signatures computed for two concepts in WordNet and Wiktionary
+	Cause: an example , assume we are given two semantic signatures computed for two concepts in WordNet and Wiktionary
+	Effect: dimension is u ' \ u2133 ' the k t u ' \ u2062 ' h component of u ' \ ud835 ' u ' \ udcae ' u ' \ ud835 ' u ' \ udc2f ' i u ' \ u2032 ' corresponds to the weight in u ' \ ud835 ' u ' \ udcae ' u ' \ ud835 ' u ' \ udc2f ' i of the only concept of w k in u ' \ u2110 ' G i u ' \ u2062 ' -LRB- w k
+
+CASE: 32
+Stag: 78 
+	Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+	sentTXT: Also , consider the noun tradeoff which is monosemous according to both these resources
+	Cause: both these resources
+	Effect: Also , consider the noun tradeoff which is monosemous
+
+CASE: 33
+Stag: 80 
+	Pattern: 0 [['as', 'a', ['result', 'consequence'], 'of'], [',']]---- [[], ['&NP@C@'], ['&R']]
+	sentTXT: As a result of the unification process , we obtain a pair of equally-sized semantic signatures with comparable components
+	Cause: the unification process
+	Effect: we obtain a pair of equally-sized semantic signatures with comparable components
+
+CASE: 34
+Stag: 81 
+	Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+	sentTXT: Having at hand the semantic signatures for the two input concepts , we proceed to comparing them -LRB- part -LRB- d -RRB- in Figure 1
+	Cause: Having at hand the semantic signatures for the two input concepts
+	Effect: we proceed to comparing them -LRB- part -LRB- d -RRB- in Figure 1
+
+CASE: 35
+Stag: 90 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: In Section 2 , we presented our approach for aligning lexical resources
+	Cause: aligning lexical resources
+	Effect: In Section 2 , we presented our approach
+
+CASE: 36
+Stag: 92 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: In order to address this issue and hence generalize our alignment approach to any given lexical resource , we propose a method for transforming a given machine-readable dictionary into a semantic network , a process we refer to as ontologization
+	Cause: transforming a given machine-readable dictionary into a semantic network , a process we refer to as ontologization
+	Effect: In order to address this issue and hence generalize our alignment approach to any given lexical resource , we propose a method
+
+CASE: 37
+Stag: 92 
+	Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: In order to address this issue and hence generalize our alignment approach to any given lexical resource , we propose a method
+	Cause: In order to address this issue
+	Effect: generalize our alignment approach to any given lexical resource , we propose a method
+
+CASE: 38
+Stag: 93 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Our ontologization algorithm takes as input a lexicon L and outputs a semantic graph G = -LRB- V , E -RRB- where , as already defined in Section 2 , V is the set of concepts in L and E is the set of semantic relations between these concepts
+	Cause: input a lexicon L and outputs a semantic graph G = -LRB- V , E -RRB- where ,
+	Effect: ontologization algorithm takes
+
+CASE: 39
+Stag: 96 
+	Pattern: 0 [['due', 'to']]---- [['&R'], ['&NP@C@']]
+	sentTXT: Both words in these relations , however , should be disambiguated according to the given lexicon -LSB- 29 -RSB- , making the task particularly prone to mistakes due to the high number of possible sense pairings
+	Cause: the high number of possible sense pairings
+	Effect: Both words in these relations , however , should be disambiguated according to the given lexicon -LSB- 29 -RSB- , making the task particularly prone to mistakes
+
+CASE: 40
+Stag: 96 
+	Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+	sentTXT: Both words in these relations , however , should be disambiguated according to the given lexicon -LSB- 29 -RSB- , making the task particularly prone to mistakes
+	Cause: the given lexicon
+	Effect: Both words in these relations , however , should be disambiguated
+
+CASE: 41
+Stag: 97 98 
+	Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: Here , we take an alternative approach which requires disambiguation on the target side only , hence reducing the size of the search space significantly We first create the empty undirected graph G L = -LRB- V , E -RRB- such that V is the set of concepts in L and E = u ' \ u2205 '
+	Cause: Here , we take an alternative approach which requires disambiguation on the target side only
+	Effect: reducing the size of the search space significantly We first create the empty undirected graph G L = -LRB- V , E -RRB- such that V is the set of concepts in L and E = u ' \ u2205 '
+
+CASE: 42
+Stag: 99 
+	Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+	sentTXT: For each source concept c u ' \ u2208 ' V we create a bag of content words W = -LCB- w 1 , u ' \ u2026 ' , w n -RCB- which includes all the content words in its definition d and , if available , additional related words obtained from lexicon relations -LRB- e.g. , , synonyms in Wiktionary
+	Cause: available , additional related words obtained from lexicon relations -LRB- e.g. , , synonyms in Wiktionary
+	Effect: each source concept c u ' \ u2208 ' V we create a bag of content words W = -LCB- w 1 , u ' \ u2026 ' , w n -RCB- which includes all the content words in its definition d and ,
+
+CASE: 43
+Stag: 100 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: The problem is then cast as a disambiguation task whose goal is to identify the intended sense of each word w i u ' \ u2208 ' W according to the sense inventory of L if w i is monosemous , i.e
+	Cause: a disambiguation task whose goal is to identify the intended sense of each word w i u ' \ u2208 ' W according to the sense inventory of L if w i is monosemous ,
+	Effect: The problem is then cast
+
+CASE: 44
+Stag: 100 
+	Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+	sentTXT: a disambiguation task whose goal is to identify the intended sense of each word w i u ' \ u2208 ' W according to the sense inventory of L if w i is monosemous ,
+	Cause: w i is monosemous ,
+	Effect: goal is to identify the intended sense of each word w i u ' \ u2208 ' W according to the sense inventory of L
+
+CASE: 45
+Stag: 100 
+	Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+	sentTXT: goal is to identify the intended sense of each word w i u ' \ u2208 ' W according to the sense inventory of L
+	Cause: the sense inventory of L
+	Effect: goal is to identify the intended sense of each word w i u ' \ u2208 ' W
+
+CASE: 46
+Stag: 103 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: In this latter case , we choose the most appropriate concept c i u ' \ u2208 ' u ' \ u2110 ' G L u ' \ u2062 ' -LRB- w i -RRB- by finding the maximal similarity between the definition of c and the definitions of each sense of w i
+	Cause: finding the maximal similarity between the definition of c and the definitions of each sense of w i
+	Effect: In this latter case , we choose the most appropriate concept c i u ' \ u2208 ' u ' \ u2110 ' G L u ' \ u2062 ' -LRB- w i -RRB-
+
+CASE: 47
+Stag: 105 106 
+	Pattern: 4 [['result'], ['is']]---- [['&C', '(,/./;/--)', '&ONE', '(&adj)'], ['(of &THIS (&NP))'], ['&NP@R@', '(&Clause@R@)']]
+	sentTXT: Having found the intended sense c ^ w i of w i , we add the edge -LCB- c , c ^ w i -RCB- to E As a result of this procedure , we obtain a semantic graph representation G for the lexicon L
+	Cause: Having found the intended sense c ^ w i of w i , we add the edge -LCB- c , c ^ w i -RCB- to E As
+	Effect: procedure , we obtain a semantic graph representation G for the lexicon L
+
+CASE: 48
+Stag: 106 107 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: As a result of this procedure , we obtain a semantic graph representation G for the lexicon L As an example , consider the 4 t u ' \ u2062 ' h sense of the noun cone in Wiktionary -LRB- i.e. , , cone 4 n -RRB- which is defined as u ' \ u201c ' The fruit of a conifer u ' \ u201d '
+	Cause: an example , consider the 4 t u ' \ u2062 ' h sense of the noun cone in Wiktionary -LRB- i.e. , , cone 4 n -RRB- which
+	Effect: As a result of this procedure , we obtain a semantic graph representation G for the lexicon L
+
+CASE: 49
+Stag: 109 
+	Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: The latter word is monosemous in Wiktionary , hence we directly connect cone 4 n to the only sense of conifer n
+	Cause: The latter word is monosemous in Wiktionary
+	Effect: we directly connect cone 4 n to the only sense of conifer n
+
+CASE: 50
+Stag: 110 111 
+	Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: The noun fruit , however , has 5 senses in Wiktionary We therefore measure the similarity between the definition of cone 4 n and all the 5 definitions of fruit and introduce a link from cone 4 n to the sense of fruit which yields the maximal similarity value -LRB- defined as u ' \ u201c ' -LRB- botany -RRB- The seed-bearing part of a plant u ' \ u2026 ' u ' \ u201d '
+	Cause: noun fruit , however , has 5 senses in Wiktionary We
+	Effect: measure the similarity between the definition of cone 4 n and all the 5 definitions of fruit and introduce a link from cone 4 n to the sense of fruit which yields the maximal similarity value -LRB- defined as u ' \ u201c ' -LRB- botany -RRB- The seed-bearing part of a plant u ' \ u2026 ' u ' \ u201d '
+
+CASE: 51
+Stag: 119 120 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We also report results for accuracy which , in addition to true positives , takes into account true negatives , i.e. , , pairs which are correctly judged as unaligned Here , we describe how the four semantic graphs for our four lexical resources -LRB- i.e. , , wn , wp , wt , ow -RRB- were constructed
+	Cause: unaligned Here , we describe how the four semantic graphs for our four lexical resources -LRB- i.e. , , wn , wp , wt , ow -RRB- were
+	Effect: We also report results for accuracy which , in addition to true positives , takes into account true negatives , i.e. , , pairs which are correctly judged
+
+CASE: 52
+Stag: 120 121 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Here , we describe how the four semantic graphs for our four lexical resources -LRB- i.e. , , wn , wp , wt , ow -RRB- were constructed As mentioned in Section 2.1.1 , we build the wn graph by including all the synsets and semantic relations defined in WordNet -LRB- e.g. , , hypernymy and meronymy -RRB- and further populate the relation set by connecting a synset to all the other synsets that appear in its disambiguated gloss
+	Cause: mentioned in Section 2.1.1 , we build the wn graph by including all the synsets and semantic relations defined in WordNet -LRB- e.g. , , hypernymy and meronymy -RRB- and further populate the relation set by connecting a synset to all the other synsets that appear in its disambiguated gloss
+	Effect: Here , we describe how the four semantic graphs for our four lexical resources -LRB- i.e. , , wn , wp , wt , ow -RRB- were constructed
+
+CASE: 53
+Stag: 124 
+	Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: The other two resources , i.e. , , wt and ow , do not provide a reliable network of semantic relations , therefore we used our ontologization approach to construct their corresponding semantic graphs
+	Cause: The other two resources , i.e. , , wt and ow , do not provide a reliable network of semantic relations
+	Effect: we used our ontologization approach to construct their corresponding semantic graphs
+
+CASE: 54
+Stag: 126 
+	Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+	sentTXT: For ontologizing wt and ow , the bag of content words W is given by the content words in sense definitions and , if available , additional related words obtained from lexicon relations -LRB- see Section 3
+	Cause: available , additional related words obtained from lexicon relations -LRB- see Section
+	Effect: W is given by the content words in sense definitions and ,
+
+CASE: 55
+Stag: 127 
+	Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: In wt , both of these are in word surface form and hence had to be disambiguated
+	Cause: In wt , both of these are in word surface form
+	Effect: had to be disambiguated
+
+CASE: 56
+Stag: 128 
+	Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: For ow , however , the encoded relations , though relatively small in number , are already disambiguated and , therefore , the ontologization was just performed on the definition u ' \ u2019 ' s content words
+	Cause: For ow , however , the encoded relations , though relatively small in number , are already disambiguated and
+	Effect: the ontologization was just performed on the definition u ' \ u2019 ' s content words
+
+CASE: 57
+Stag: 131 132 
+	Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: The edges obtained from unambiguous entries are essentially sense disambiguated on both sides whereas those obtained from ambiguous terms are a result of our similarity-based disambiguation Hence , given that a large portion of edges came from ambiguous words -LRB- see Table 1 -RRB- , we carried out an experiment to evaluate the accuracy of our disambiguation method
+	Cause: The edges obtained from unambiguous entries are essentially sense disambiguated on both sides whereas those obtained from ambiguous terms are a result of our similarity-based disambiguation
+	Effect: given that a large portion of edges came from ambiguous words -LRB- see Table 1 -RRB- , we carried out an experiment to evaluate the accuracy of our disambiguation method
+
+CASE: 58
+Stag: 133 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: To this end , we took as our benchmark the dataset provided by Meyer and Gurevych -LRB- 2010 -RRB- for evaluating relation disambiguation in wt
+	Cause: our benchmark the dataset provided by Meyer and
+	Effect: To this end , we took
+
+CASE: 59
+Stag: 135 
+	Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+	sentTXT: We compared our similarity-based disambiguation approach against the state of the art on this dataset , i.e. , , the wktwsd system , which is a wt relation disambiguation algorithm based on a series of rules -LSB- 22 -RSB-
+	Cause: a series of rules -LSB- 22 -RSB-
+	Effect: We compared our similarity-based disambiguation approach against the state of the art on this dataset , i.e. , , the wktwsd system , which is a wt relation disambiguation algorithm
+
+CASE: 60
+Stag: 137 138 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: The u ' \ u201c ' Human u ' \ u201d ' row corresponds to the inter-rater F1 and accuracy scores , i.e. , , the upperbound performance on this dataset , as calculated by Meyer and Gurevych -LRB- 2010 As can be seen , our method proves to be very accurate , surpassing the performance of the wktwsd system in terms of precision , F1 , and accuracy
+	Cause: can be seen , our method proves to be very accurate , surpassing the performance of the wktwsd system in terms of precision , F1 , and accuracy
+	Effect: The u ' \ u201c ' Human u ' \ u201d ' row corresponds to the inter-rater F1 and accuracy scores , i.e. , , the upperbound performance on this dataset , as calculated by Meyer and Gurevych -LRB- 2010
+
+CASE: 61
+Stag: 139 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: This is particularly interesting as the wktwsd system uses a rule-based technique specific to relation disambiguation in wt , whereas our method is resource independent and can be applied to arbitrary words in the definition of any concept
+	Cause: the wktwsd system uses a rule-based technique specific to relation disambiguation in wt , whereas our method is resource independent and can be applied to arbitrary words in the definition of any concept
+	Effect: This is particularly interesting
+
+CASE: 62
+Stag: 143 144 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Our approach , however , thanks to the connections obtained through ambiguous words , can provide graphs with significantly higher coverage As an example , for wt , Matuschek and Gurevych -LRB- 2013 -RRB- generated a graph where around 30 % of the nodes were in isolation , whereas this number drops to around 5 % in our corresponding graph
+	Cause: an example , for wt , Matuschek and Gurevych -LRB- 2013 -RRB- generated a graph where around 30 % of the nodes were in isolation , whereas this number drops to around 5 % in our corresponding graph
+	Effect: Our approach , however , thanks to the connections obtained through ambiguous words , can provide graphs with significantly higher coverage
+
+CASE: 63
+Stag: 146 147 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Now that all the four resources are transformed into semantic graphs , we move to our alignment experiments As our benchmark we tested on the gold standard datasets used in Matuschek and Gurevych -LRB- 2013 -RRB- for three alignment tasks
+	Cause: our benchmark we tested on the gold standard datasets used in Matuschek and Gurevych -LRB- 2013 -RRB- for
+	Effect: all the four resources are transformed into semantic graphs , we move to our alignment experiments
+
+CASE: 64
+Stag: 149 150 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: However , the dataset for wn - ow was originally built for the German language and , hence , was missing many English ow concepts that could be considered as candidate target alignments We therefore fixed the dataset for the English language and reproduced the performance of previous work on the new dataset
+	Cause: candidate target alignments We therefore fixed the dataset for the English language and reproduced the performance of previous work on the new
+	Effect: However , the dataset for wn - ow was originally built for the German language and , hence , was missing many English ow concepts that could be considered
+
+CASE: 65
+Stag: 149 150 
+	Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: However , the dataset for wn - ow was originally built for the German language and , hence , was missing many English ow concepts that could be considered as candidate target alignments We therefore fixed the dataset for the English language and reproduced the performance of previous work on the new dataset
+	Cause: , the dataset for wn - ow was originally built for the German language and , hence , was missing many English ow concepts that could be considered as candidate target alignments We
+	Effect: fixed the dataset for the English language and reproduced the performance of previous work on the new dataset
+
+CASE: 66
+Stag: 154 
+	Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: Unsupervised , where the two parameters are set to their middle values -LRB- i.e. , , 0.5 -RRB- , hence , no tuning is performed for either of the parameters
+	Cause: , where the two parameters are set to their middle values -LRB- i.e. , , 0.5 -RRB-
+	Effect: no tuning is performed for either of the parameters
+
+CASE: 67
+Stag: 155 
+	Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+	sentTXT: In this case , both the definitional and structural similarity scores are treated as equally important and two concepts are aligned if their overall similarity exceeds the middle point of the similarity scale
+	Cause: their overall similarity exceeds the middle point of the similarity scale
+	Effect: In this case , both the definitional and structural similarity scores are treated as equally important and two concepts are aligned
+
+CASE: 68
+Stag: 161 
+	Pattern: 4 [['result'], ['is']]---- [['&C', '(,/./;/--)', '&ONE', '(&adj)'], ['(of &THIS (&NP))'], ['&NP@R@', '(&Clause@R@)']]
+	sentTXT: We also show the results for this system as sb + dwsa in the table
+	Cause: We also show
+	Effect: system as sb + dwsa in the table
+
+CASE: 69
+Stag: 166 
+	Pattern: 4 [['result'], ['is']]---- [['&C', '(,/./;/--)', '&ONE', '(&adj)'], ['(of &THIS (&NP))'], ['&NP@R@', '(&Clause@R@)']]
+	sentTXT: We show the results for this setting in the bottom part of the table -LRB- last three lines
+	Cause: We show
+	Effect: setting in the bottom part of the table -LRB- last three lines
+
+CASE: 70
+Stag: 167 
+	Pattern: 0 [[['lead', 'leads', 'led'], 'to']]---- [['&V-ing/&NP@C@', '(&CAN/have/has/had)'], ['&NP@R@', '(&Clause@R@)']]
+	sentTXT: The main feature worth remarking upon is the consistency in the results across different resource pairs the unsupervised system gains the best recall among the three configurations -LRB- with the improvement over sb + dwsa being always statistically significant 4 4 All significance tests are done using z-test at p 0.05 whereas tuning , both on a subset or through cross-validation , consistently leads to the best performance in terms of F1 and accuracy -LRB- with the latter being statistically significant with respect to sb + dwsa on wn - wp and wn - wt
+	Cause: tuning , both on a subset or through cross-validation , consistently
+	Effect: the best performance in terms of F1 and accuracy -LRB- with the latter being statistically significant with respect to sb + dwsa on wn - wp and wn - wt
+
+CASE: 71
+Stag: 168 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Moreover , the unsupervised system proves to be very robust inasmuch as it provides competitive results on all the three datasets , while it surpasses the performance of sb + dwsa on wn - wt
+	Cause: it provides competitive results on all the three datasets , while it surpasses the performance of sb + dwsa on wn - wt
+	Effect: Moreover , the unsupervised system proves to be very robust inasmuch
+
+CASE: 72
+Stag: 169 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: This is particularly interesting as the latter system involves tuning of several parameters , whereas SemAlign , in its unsupervised configuration , does not need any training data nor does it involve any tuning
+	Cause: the latter system involves tuning of several parameters , whereas SemAlign , in its unsupervised configuration , does not need any training data nor does it involve any tuning
+	Effect: This is particularly interesting
+
+CASE: 73
+Stag: 171 
+	Pattern: 0 [[['indicate', 'indicates', 'indicated', 'realize', 'realizes', 'realized', 'ensure', 'ensures', 'ensured', 'imply', 'implies', 'implied']]]---- [['&NP@C@', '(&Clause@C@)'], ['&NP@R@', '(&Clause@R@)']]
+	sentTXT: The consistency in the performance of SemAlign in its different configurations and across different resource pairs indicates its robustness and shows that our system can be utilized effectively for aligning any pair of lexical resources , irrespective of their structure or availability of training data
+	Cause: The consistency in the performance of SemAlign in its different configurations and across different resource pairs
+	Effect: its robustness and shows that our system can be utilized effectively for aligning any pair of lexical resources , irrespective of their structure or availability of training data
+
+CASE: 74
+Stag: 171 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: its robustness and shows that our system can be utilized effectively for aligning any pair of lexical resources , irrespective of their structure or availability of training data
+	Cause: aligning any pair of lexical resources , irrespective of their structure or availability of training data
+	Effect: its robustness and shows that our system can be utilized effectively
+
+CASE: 75
+Stag: 178 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: To gain more insight into the effectiveness of our structural similarity measure in comparison to the Dijkstra-WSA method , we carried out an experiment where our alignment system used only the structural similarity component , a variant of our system we refer to as SemAlign s u ' \ u2062 ' t u ' \ u2062 ' r
+	Cause: SemAlign s u ' \ u2062 ' t u ' \ u2062 ' r
+	Effect: To gain more insight into the effectiveness of our structural similarity measure in comparison to the Dijkstra-WSA method , we carried out an experiment where our alignment system used only the structural similarity component , a variant of our system we refer to
+
+CASE: 76
+Stag: 180 181 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We show in Table 4 the performance of the two systems on our three datasets As can be seen in the table , SemAlign s u ' \ u2062 ' t u ' \ u2062 ' r consistently improves over Dijkstra-WSA according to recall , F1 and accuracy with all the differences in recall and accuracy being statistically significant -LRB- p 0.05
+	Cause: can be seen in the table , SemAlign s u ' \ u2062 ' t u ' \ u2062 ' r consistently improves over Dijkstra-WSA according to recall , F1 and accuracy with all the differences in recall and accuracy being statistically significant -LRB- p 0.05
+	Effect: We show in Table 4 the performance of the two systems on our three datasets
+
+CASE: 77
+Stag: 183 
+	Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+	sentTXT: In addition , as we mentioned earlier , for wn - wp we used the same graph as that of Dijkstra-WSA , since both wn and wp provide a full-fledged semantic network and thus neither needed to be ontologized
+	Cause: In addition , as we mentioned earlier , for wn - wp we used the same graph as that of Dijkstra-WSA , since both wn and wp provide a full-fledged semantic network
+	Effect: neither needed to be ontologized
+
+CASE: 78
+Stag: 183 
+	Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+	sentTXT: In addition , as we mentioned earlier , for wn - wp we used the same graph as that of Dijkstra-WSA , since both wn and wp provide a full-fledged semantic network
+	Cause: both wn and wp provide a full-fledged semantic network
+	Effect: In addition , as we mentioned earlier , for wn - wp we used the same graph as that of Dijkstra-WSA
+
+CASE: 79
+Stag: 183 184 
+	Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: In addition , as we mentioned earlier , for wn - wp we used the same graph as that of Dijkstra-WSA , since both wn and wp provide a full-fledged semantic network and thus neither needed to be ontologized Therefore , the considerable performance improvement over Dijkstra-WSA on this resource pair shows the effectiveness of our novel concept similarity measure independently of the underlying semantic network
+	Cause: In addition , as we mentioned earlier , for wn - wp we used the same graph as that of Dijkstra-WSA , since both wn and wp provide a full-fledged semantic network and thus neither needed to be ontologized
+	Effect: the considerable performance improvement over Dijkstra-WSA on this resource pair shows the effectiveness of our novel concept similarity measure independently of the underlying semantic network
+
+CASE: 80
+Stag: 185 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Having lexical resources represented as semantic networks is highly beneficial
+	Cause: semantic networks is highly beneficial
+	Effect: lexical resources represented
+
+CASE: 81
+Stag: 186 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: A good example is WordNet , which has been exploited as a semantic network in dozens of NLP tasks -LSB- 7 -RSB-
+	Cause: a semantic network in dozens of NLP tasks -LSB- 7 -RSB-
+	Effect: A good example is WordNet , which has been exploited
+
+CASE: 82
+Stag: 187 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: A recent prominent case is Wikipedia -LSB- 18 , 13 -RSB- which , thanks to its inter-article hyperlink structure , provides a rich backbone for structuring additional information -LSB- 2 , 34 , 23 , 8 -RSB-
+	Cause: structuring additional information
+	Effect: A recent prominent case is Wikipedia -LSB- 18 , 13 -RSB- which , thanks to its inter-article hyperlink structure , provides a rich backbone
+
+CASE: 83
+Stag: 191 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: Meyer and Gurevych -LRB- 2012a -RRB- and Matuschek and Gurevych -LRB- 2013 -RRB- provided approaches for building graph representations of Wiktionary and OmegaWiki
+	Cause: building graph representations of Wiktionary and OmegaWiki
+	Effect: Meyer and Gurevych -LRB- 2012a -RRB- and Matuschek and Gurevych -LRB- 2013 -RRB- provided approaches
+
+CASE: 84
+Stag: 193 194 
+	Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: Our approach , in contrast , aims at transforming a lexical resource into a full-fledged semantic network , hence providing a denser graph with most of its nodes connected Aligning lexical resources has been a very active field of research in the last decade
+	Cause: Our approach , in contrast , aims at transforming a lexical resource into a full-fledged semantic network
+	Effect: providing a denser graph with most of its nodes connected Aligning lexical resources has been a very active field of research in the last decade
+
+CASE: 85
+Stag: 195 196 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: One of the main objectives in this area has been to enrich existing ontologies by means of complementary information from other resources As a matter of fact , most efforts have been concentrated on aligning the de facto community standard sense inventory , i.e. , WordNet , to other resources
+	Cause: a matter of fact , most efforts have been concentrated on aligning the de facto community standard sense inventory , i.e. , WordNet , to other resources
+	Effect: One of the main objectives in this area has been to enrich existing ontologies by means of complementary information from other resources
+
+CASE: 86
+Stag: 199 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: Last year Matuschek and Gurevych -LRB- 2013 -RRB- proposed Dijkstra-WSA , a graph-based approach relying on shortest paths between two concepts when the two corresponding resources graphs were combined by leveraging monosemous linking
+	Cause: leveraging monosemous linking
+	Effect: Last year Matuschek and Gurevych -LRB- 2013 -RRB- proposed Dijkstra-WSA , a graph-based approach relying on shortest paths between two concepts when the two corresponding resources graphs were combined
+
+CASE: 87
+Stag: 204 205 
+	Pattern: 0 [[['lead', 'leads', 'led'], 'to']]---- [['&C', '(,/./;/--)', '&this', '(&adj)', '(&N)', '(&CAN/have/has/had)', '(&ADV)'], ['&NP@R@']]
+	sentTXT: Instead of measuring the similarity of two concepts on the basis of their distance in the combined graph , our approach models each concept through a rich vectorial representation we refer to as semantic signature and compares the two concepts in terms of the similarity of their semantic signatures This rich representation leads to our approach having a good degree of robustness such that it can achieve competitive results even in the absence of training data
+	Cause: Instead of measuring the similarity of two concepts on the basis of their distance in the combined graph , our approach models each concept through a rich vectorial representation we refer to as semantic signature and compares the two concepts in terms of the similarity of their semantic signatures
+	Effect: our approach
+
+CASE: 88
+Stag: 206 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: This enables our system to be applied effectively for aligning new pairs of resources for which no training data is available , with state-of-the-art performance
+	Cause: aligning new pairs of resources for which no training data is available , with state-of-the-art performance
+	Effect: This enables our system to be applied effectively
+
+CASE: 89
+Stag: 207 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: This paper presents a unified approach for aligning lexical resources
+	Cause: aligning lexical resources
+	Effect: This paper presents a unified approach
+
+CASE: 90
+Stag: 211 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: We also show that our approach is robust across its different configurations , even when the training data is absent , enabling it to be used effectively for aligning new pairs of lexical resources for which no resource-specific training data is available
+	Cause: aligning new pairs of lexical resources for which no resource-specific training data is available
+	Effect: We also show that our approach is robust across its different configurations , even when the training data is absent , enabling it to be used effectively
+
+CASE: 91
+Stag: 214 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: We would like to thank Michael Matuschek for providing us with Wikipedia graphs and alignment datasets
+	Cause: providing us with Wikipedia graphs and alignment datasets
+	Effect: We would like to thank Michael Matuschek
+

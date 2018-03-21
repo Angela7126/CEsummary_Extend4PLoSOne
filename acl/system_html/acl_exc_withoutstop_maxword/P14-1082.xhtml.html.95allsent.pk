@@ -1,0 +1,446 @@
+(lp0
+VIn other words, for each word type or phrase type that occurs as a fragment in the training set, and which does not map to just a single translation, a classifier is trained
+p1
+aVWords or phrases that always map to a single translation are stored in a simple mapping table, as a classifier would have no added value in such cases
+p2
+aVPer classifier expert, the best scoring configuration was selected, referred to as the auto configuration in Table 2
+p3
+aVNumerous classifiers are trained and each is an expert in translating a single word or phrase
+p4
+aVThe word accuracy for the entire set is then computed by taking the sum of the word accuracies per sentence pair, divided by the total number of sentence pairs
+p5
+aVThird, we observe that adding the language model to our classifier leads to another significant gain (configuration l1r1 + LM in the results in Table 2
+p6
+aVThis measure may be too strict, so we add a more flexible word accuracy measure which takes into account partial matches at the word level
+p7
+aVThe language model is a trigram-based back-off language model with Kneser-Ney smoothing, computed using SRILM [] and trained on the same training data as the translation model
+p8
+aVAutomatic configuration selection was done by performing leave-one-out testing (for small number of instances) or 10-fold-cross validation (for larger number of instances, n u'\u005cu2265' 20 ) on the training data per classifier expert
+p9
+aVIn order to draw accurate conclusions, experiments on a single data set and language pair are not sufficient
+p10
+aVThe auto configuration improves results over the uniformly applied feature selection
+p11
+aVWe first measure absolute accuracy by simply counting all output fragments that exactly match the reference fragments, as a fraction of the total amount of fragments
+p12
+aVAmong the classifier experts are only words and phrases that are ambiguous and may thus map to multiple translations
+p13
+aVWe therefore conducted a number of experiments with other language pairs, and present the abridged results in Table 6
+p14
+aVA second baseline was constructed by weighing the probabilities from the translation table directly with the L2 language model described earlier
+p15
+aVThis ensures complete independence of training and test data
+p16
+aVWhen presented with test data, in which the L1 fragment is explicitly marked, we first check whether there is ambiguity for this L1 fragment and if a direct translation is available in our simple mapping table
+p17
+aVThe fact that a phrase-translation table needs to be constructed for the test data is also the reason that the parallel corpus split from which the test data is derived has to be large enough, ensuring better quality
+p18
+aVIf not, we check for the presence of a classifier expert for the offered L1 fragment; only then we can proceed by extracting the desired number of L2 local context words to the immediate left and right of this fragment and adding those to the feature vector
+p19
+aVThis number is much larger than the 200 , 000 we mentioned before because single sentence pairs may be reused multiple times with different marked fragments
+p20
+aVThis implies that such words and phrases must have occurred at least twice in the corpus, though this threshold is made configurable and could have been set higher to limit the number of classifiers
+p21
+aVThe choice for this algorithm is motivated by the fact that it handles multiple classes with ease, but first and foremost because it has been successfully employed for word sense disambiguation in other studies [] , in particular in cross-lingual word sense disambiguation, a task closely resembling our current task []
+p22
+aVPreparing the data to build training and test data for our intended translation assistance system is not trivial, as the type of interactive translation assistant we aim to develop does not exist yet
+p23
+aVThe baseline selects the most probable L1 fragment per L2 fragment according to the phrase-translation table
+p24
+aVHowever, if we enable the language model as we do in the auto + LM configuration we do not notice an improvement over l1r1 + LM , surprisingly
+p25
+aVIn all of the aforementioned experiments, the system produced a single solution for each of the fragments, the one it deemed best, or no solution at all if it could not find any
+p26
+aVThe main research question in this research is how to disambiguate an L1 word or phrase to its L2 translation based on an L2 context, and whether such cross-lingual contextual approaches provide added value compared to baseline models that are not context informed or compared to standard language models
+p27
+aVWe see that the language model baseline for English u'\u005cu2192' French shows the same substantial improvement over the baseline as our English u'\u005cu2192' Spanish results
+p28
+aVThis is due to the nature of the unsupervised method with which the phrase-translation table is constructed
+p29
+aVThis metric thus effectively prunes weaker alternative translations in the phrase-translation table from being considered if there is a much stronger candidate
+p30
+aVNo additional external data was brought in, to keep the comparison fair
+p31
+aVAs expected, the LM baseline substantially outperforms the context-insensitive MLF baseline
+p32
+aVIt invokes GIZA++ [] to establish statistical word alignments based on the IBM Models and subsequently extracts phrases using the grow-diag-final algorithm []
+p33
+aVA context size of one prevails in the vast majority of cases, which is not surprising considering the good results we have already seen with this configuration
+p34
+aVThis baseline, henceforth referred to as the u'\u005cu2019' most likely fragment u'\u005cu2019' baseline (MLF) is analogous to the u'\u005cu2019' most frequent sense u'\u005cu2019' -baseline common in evaluating WSD systems
+p35
+aVIn all of our experiments recall is high (well above 90 u'\u005cu2062' % ), mostly because train and test data lie in the same domain and have been generated in the same fashion, lower recall is expected with more real-world data
+p36
+aVStep 4 is effectively a filter two thresholds can be configured to discard weak alignments, i.e., those with low probabilities, from the phrase-translation table so that only strong couplings make it into the generated set
+p37
+aVWe do so by normalising the class probability from the classifier ( s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e T u'\u005cu2062' ( H ) ), which is our translation model, and the language model ( s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e l u'\u005cu2062' m u'\u005cu2062' ( H ) ), in such a way that the highest classifier score for the alternatives under consideration is always 1.0 , and the highest language model score of the sentence is always 1.0
+p38
+aVConclusions with regard to context width may have to be tempered somewhat, as the performance of the l1r1 configuration was found to not be significantly better than that of the l2r2 configuration
+p39
+aVNevertheless, it has to be noted that even with u'\u005cu039b' 1 and u'\u005cu039b' 2 , the test set will include a certain amount of errors
+p40
+aVIf so, we are done quickly and need not rely on context information
+p41
+aVThe same holds for the Chinese u'\u005cu2192' English experiment
+p42
+aVThis intuitively makes sense; a context of one may seem to be better than any other when uniformly applied to all classifier experts, but it may well be that certain classifiers benefit from different feature selections
+p43
+aVA second parameter u'\u005cu039b' 2 further limits the considered phrase pairs ( f s , f t ) to have the product of their conditional probabilities not not deviate more than a fraction u'\u005cu039b' 2 from the joint probability for the strongest possible pairing for f s , the source fragment f s u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' o u'\u005cu2062' n u'\u005cu2062' g u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2062' _ u'\u005cu2062' t in Figure 1 corresponds to the best scoring translation for a given source fragment f s
+p44
+aVOur full system, including the scripts for data preparation, training, and evaluation, is implemented in Python and freely available as open-source from http://github.com/proycon/colibrita/
+p45
+aVIf output o is a subset of reference r then a score of o r is assigned for that sentence pair
+p46
+aVOutput a pair ( s u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e t u'\u005cu2032' , s u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e t ) where s u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e t u'\u005cu2032' is a copy of t but with fragment f t substituted by f s , i.e., the introduction of an L1 word or phrase in an L2 sentence
+p47
+aVThe experiments however showed that inclusion of such keywords did not make any noticeable impact on any of the results, so we restrict ourselves to mentioning this negative result
+p48
+aVIn earlier work , we reported a decrease in performance due to overfitting when this is done, so we do not expect it to make a positive impact
+p49
+aVWhilst other thresholds may possibly produce cleaner sets, this is hard to evaluate as finding optimal values causes a prohibitive increase in complexity of the search space, and again this is not necessary to test our hypothesis
+p50
+aVThe classifiers use the IB1 algorithm [] as implemented in TiMBL []
+p51
+aVInput (L1=French,L2=English u'\u005cu201c' I rentre à la maison because I am tired u'\u005cu201d' Desired output u'\u005cu201c' I return home because I am tired u'\u005cu201d'
+p52
+aVThis shall be further discussed in Section 6.1
+p53
+aVThe parameter u'\u005cu039b' 1 adds a constraint based on the product of the two conditional probabilities ( P ( f t f s ) u'\u005cu22c5' P ( f s f t ) ) , and sets a threshold that has to be surpassed
+p54
+aVWe therefore proceed with this line of investigation as well
+p55
+aVAn ideal test corpus would consist of L2 sentences with L1 fallback as crafted by L2 language learners with an L1 background
+p56
+aVIf instead, r is a subset of o , then a score of r o will be assigned
+p57
+aVVersion tag v0.2.1 is representative for the version used in this research
+p58
+aV1 1 http://ilk.uvt.nl/timbl IB1 implements k -nearest neighbour classification
+p59
+aVThe error rate metrics show improvement as well
+p60
+aVHowever, such corpora do not exist as yet
+p61
+aVWe therefore attach low importance to this deviation in BLEU here
+p62
+aVSeveral automated metrics exist for the evaluation of L2 system output against the L2 reference output in the test set
+p63
+aVThe classifier maps the L1 word or phrase in its L2 context to its L2 translation
+p64
+aVFor our purposes however, the test set suffices to test our hypothesis
+p65
+aVGenerating test data using the same phrase-translation table as the training data would introduce a bias
+p66
+aVFrom this training set of sentence pairs over 100 , 000 classifier experts are derived
+p67
+aVThe idea of local phrase selection with a discriminative machine learning classifier using additional local (source-language) context was introduced in parallel to Stroppa et al
+p68
+aVNote that the training set and test set are constructed on their own respective and independently generated phrase-translation tables
+p69
+aVSecond, our classifier approach attains a substantially higher accuracy than the LM baseline
+p70
+aVThe eleven largest classifiers are shown in Table 1 , along with the number of training instances per classifier
+p71
+aVLikewise, Table 4 exemplifies small fragments from the l1r1 configuration compared to the same configuration enriched with a language model
+p72
+aVThough the classifier generally works best in the l1r1 configuration, i.e., with context size one, the trigram-based language model allows further left-context information to be incorporated that influences the weights of the classifier output, successfully forcing the system to select alternatives
+p73
+aVThe auto configuration does not uniformly apply the same feature vector setup to all classifier experts but instead seeks to find the optimal setup per classifier expert
+p74
+aVThe final test set is created by randomly sampling the desired number of test instances
+p75
+aVWhereas machine translation generally concerns the translation of whole sentences or texts from one language to the other, this study focusses on the translation of native language (henceforth L1) words and phrases, i.e., smaller fragments, in a foreign language (L2) context
+p76
+aVIt has also been used in machine translation studies in which local source context is used to classify source phrases into target phrases, rather than looking them up in a phrase table []
+p77
+aVA context-insensitive yet informed baseline was constructed to assess the impact of L2 context information in translating L1 fragments
+p78
+aVTable 2 shows the results for English to Spanish in more detail and adds a comparison with the two baseline systems
+p79
+aVNevertheless, we hope to show that our automated way of test set generation is sufficient to test the feasibility of our core hypothesis that L1 fragments can be translated to L2 using L2 context information
+p80
+aVThe actual Europarl training set we generate for English (L1) to Spanish (L2), i.e., English fallback in a Spanish context, consists of 5 , 608 , 015 sentence pairs
+p81
+aVThe final test sets are a randomly sampled 5 , 000 sentence pairs from the 200 , 000 -sentence test split for each language pair
+p82
+aVThe feature vector for the classifiers represents a local context of neighbouring words, and optionally also global context keywords in a binary-valued bag-of-words configuration
+p83
+aVIn the current study we simply left both weights set to one, thereby assigning equal importance to translation model and language model
+p84
+aVThe classifier will return a probability distribution of the most likely translations given the context and we can replace the L1 fragment with the highest scoring L2 translation and present it back to the user
+p85
+aVThe result, independent for each set, will be a phrase-translation table ( T ) that maps phrases in L1 to L2
+p86
+aVWe need to generate training and test data that realistically emulates the task
+p87
+aVGiven these phrase-translation tables, we can now extract both training data and test data using the algorithm in Figure 1
+p88
+aVMLF baseline
+p89
+aVMLF baseline
+p90
+aVMLF baseline
+p91
+aVMLF baseline
+p92
+aVAlternative evaluation metrics could allow the system to output multiple alternatives
+p93
+aVAnother discrepancy is found in the BLEU scores of the English u'\u005cu2192' Chinese experiments, where we measure an unexpected drop in BLEU score under baseline
+p94
+aVIt adds a LM component to the MLF baseline
+p95
+aVWe also compute a recall metric that measures the number of fragments that the system provided a translation for as a fraction of the total number of fragments in the input, regardless of whether the fragment is translated correctly or not
+p96
+aVHowever, for English u'\u005cu2192' Dutch and English u'\u005cu2192' Chinese we find that the LM baseline actually performs slightly worse than baseline
+p97
+aVFor any given hypothesis H , results from the L1 to L2 classifier are combined with results from the L2 language model
+p98
+aVThe same significance level was found when comparing l1r1 + LM against l1r1 , auto + LM against auto , as well as the LM baseline against the MLF baseline
+p99
+aVIt has been argued that classifier experts in a word sense disambiguation ensemble should be individually optimised []
+p100
+aVThis LM baseline allows the comparison of classification through L1 fragments in an L2 context, with a more traditional L2 context modelling (i.e., target language modelling) which is also customary in MT decoders
+p101
+aVOne is the basis for the training set, and the other is the basis for the test set
+p102
+aVIn addition to these, the system u'\u005cu2019' s output can be compared against the L2 reference translation(s) using established Machine Translation evaluation metrics
+p103
+aVThis combination of a classifier with context size one and trigram-based language model proves to be most effective and reaches the best results so far
+p104
+aVThe local context consists of an X number of L2 words to the left of the L1 fragment, and Y words to the right
+p105
+aVWe observe in this data that the language model often has the added power to choose a correct translation that is not the first prediction of the classifier, but one of the weaker alternatives that nevertheless fits better
+p106
+aVWe also implement a statistical language model as an optional component of our classifier-based system and also as a baseline to compare our system to
+p107
+aVTable 5 lists what context sizes have been chosen in the automatic feature selection
+p108
+aVNevertheless, in all these cases, the positive effect of including a Language Model to our classifier-based system again shows
+p109
+aVIt appears that the classifier approach and the L2 language model are able to complement each other
+p110
+aVThere are some noticeable discrepancies for some experiments in Table 6 when compared to our earlier results in Table 2
+p111
+aVWe develop a classifier-based system composed of so-called u'\u005cu201c' classifier experts u'\u005cu201d'
+p112
+aVThe data for our experiments were drawn from the Europarl parallel corpus [] from which we extracted two sets of 200 , 000 sentence pairs each for several language pairs
+p113
+aVIn Table 3 we present some illustrative examples from the English u'\u005cu2192' Spanish Europarl data
+p114
+aVThe first experiment, of which the results are shown in Figure 2 , sets a fixed and symmetric local context size across all classifiers, and tests three context widths
+p115
+aVWe experimented with several asymmetric configurations and found that taking two words to the left and one to the right yields even better results than symmetric configurations for this data set
+p116
+aVThe latter study on cross-lingual WSD finds a positive impact when conducting feature selection per classifier
+p117
+aVCurrently, language learners need to refer to a bilingual dictionary when in doubt about a translation of a word or phrase
+p118
+aVWe suspect the lack of impact here can be explained by the trigram-based Language Model having less added value when the (left) context size of the classifier is two or three; they are now less complementary
+p119
+aVThe various lXrY configurations use the same feature vector setup for all classifier experts
+p120
+aVFrom each of the splits ( S ), a phrase-translation table is constructed automatically in an unsupervised fashion
+p121
+aVThese were used to form the training and test sets
+p122
+aVIn our discourse, the source language ( s ) corresponds to L1, the fallback language used for by the end-user for inserting fragments, whilst the target language ( t ) is L2
+p123
+aVThis is done using the scripts provided by the Statistical Machine Translation system Moses []
+p124
+aVusing phrase-translation table T and parallel corpus split S
+p125
+aVIn this research we test the feasibility of the foundation of this idea.The following examples serve to illustrate the idea and demonstrate what output the proposed translation assistance system would ideally produce
+p126
+aVThe parts in bold correspond to respectively the inserted fragment and the system translation
+p127
+aVA perfect match will result in a score of 1 whereas a complete lack of overlap will be scored 0
+p128
+aVWe show the difference between the most-likely-fragment baseline and our system
+p129
+aVComputing this baseline is done in the same fashion as previously illustrated in Equation 1 , where s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e T then represents the normalised p ( t s ) score from the phrase-translation table rather than the class probability from the classifier
+p130
+aVFor the classifier-based system, we tested various different feature vector configurations
+p131
+aVWe report on BLEU, NIST, METEOR, and word error rate metrics WER and PER
+p132
+aVl1r1 + LM
+p133
+aVl1r1 + LM
+p134
+aVThe remaining 246 , 380 unambiguous mappings are stored in a separate mapping table
+p135
+aVIf desired, the search can be parametrised with variables u'\u005cu039b' 3 and u'\u005cu039b' 4 , representing the weights we want to attach to the classifier-based translation model and the language model, respectively
+p136
+aVWe used the method of extraction by and encoded all keywords in a binary bag of words model
+p137
+aVThe BLEU scores, not included in the figure but shown in Table 2 , show a similar trend
+p138
+aVAlso, we note that in all cases our system performs better than the two baselines
+p139
+aVThe full table would reveal a Zipfian distribution
+p140
+aVThis result is in line with the positive effect of adding the LM to the l1r1
+p141
+aVYet, this problem arises in a context, not in isolation; the learner may have already translated successfully a part of the text into L2 leading up to the problematic word or phrase
+p142
+aVHere X indicates the left context size and Y the right context size
+p143
+aVIn addition to local context features, we also experimented with global context features
+p144
+aVThe system may skip fragments for which it can find no solution at all
+p145
+aVAutomatic feature selection auto was found to perform statistically better than l1r1 , but only at p 0.05
+p146
+aVThe keywords are selected to be indicative for a specific translation
+p147
+aVLet us first zoom in to convey a sense of scale on a specific language pair
+p148
+aVWe have not conducted experiments with language models of other orders
+p149
+aVThese are a set of L2 contextual keywords for each L1 word/phrase and its L2 translation occurring in the same sentence, not necessarily in the immediate neighbourhood of the L1 word/phrase
+p150
+aVHere we observe that a context width of one yields the best results
+p151
+aVAlthough there is a morpho-syntactic component in this research, our scope is more constrained; its focus is on the faithful preservation of meaning from L1 to L2, akin to the role of the translation model in Statistical Machine Translation (SMT
+p152
+aVHaque et al
+p153
+aVThe second reason for omitting this is more practical in nature; to do this in combination with feature selection would add substantial search complexity, making experiments far more time consuming, even prohibitively so
+p154
+aVDictionaries are not the best source to look up context; they may contain example usages, but remain biased towards single words or short expressions
+p155
+aVThe bottom lines in Table 2 represent results when all right-context is omitted, emulating a real-time prediction when no right context is available yet
+p156
+aVHowever, all other scores do show the expected improvement
+p157
+aVThe cross-lingual context in our research question may at first seem artificial, but its design explicitly aims at applications related to computer-aided language learning [] and computer-aided translation []
+p158
+aVIn this study we did not yet conduct optimisation of the classifier parameters
+p159
+aVThis has a substantial negative impact on results
+p160
+aV[] for an overview of more recent methods
+p161
+aVThe reason for such a large test split shall become apparent soon
+p162
+aVIn our experiments, we choose fixed values for these parameters, by manual inspection and judgement of the output
+p163
+aVThe u'\u005cu039b' 1 parameter was set to 0.01 and u'\u005cu039b' 2 to 0.8
+p164
+aVFor each phrase-pair ( f s , f t ) this phrase-translation table holds the computed translation probabilities P ( f s f t ) and P ( f t f s )
+p165
+aVThese scores should generally be much better than the typical MT system performances as only local changes are made to otherwise u'\u005cu201c' perfect u'\u005cu201d' L2 sentences
+p166
+aVAll input data for the experiments in this section are publicly available 2 2 Download and unpack http://lst.science.ru.nl/~proycon/colibrita-acl2014-data.zip
+p167
+aVOmission of a solution by definition causes a decrease in recall
+p168
+aVWe used the IB1 algorithm with k = 1 and the default values of the TiMBL implementation
+p169
+aVStatistical significance on the BLEU scores was tested using pairwise bootstrap sampling []
+p170
+aVThe output of the algorithm in Figure 1 is a modified set of sentence pairs ( s u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e t u'\u005cu2032' , s u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e t ) , in which the same sentence pair may be used multiple times with different L1 substitutions for different fragments
+p171
+aVNo further linguistic processing such as part-of-speech tagging or lemmatisation takes place in our experiments; adding this remains open for future research
+p172
+aVThis trend holds for all the MT metrics
+p173
+aV[] by Carpuat and Wu [] and Giménez and Márquez [] ; cf
+p174
+aVDespite the major efforts and improvements, automatic translation does not yet rival human-level quality
+p175
+aVVarious configurations were tested
+p176
+aVWe start with a parallel corpus that is tokenised for both L1 and L2
+p177
+aVWe compared the outcomes of several key configurations
+p178
+aVThe parallel corpus is randomly sampled into two large and equally-sized parts
+p179
+aVTake s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e T u'\u005cu2062' ( H ) and s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e l u'\u005cu2062' m u'\u005cu2062' ( H ) to be log probabilities, the search for the best (most probable) translation hypothesis H ^ can then be expressed as
+p180
+aVWe concede that our current way of testing is a mere approximation of the real-world scenario
+p181
+aVWe first tested l1r1 against both baselines; both differences are significant at p 0.01 for both
+p182
+aVInput (L1=English,L2=Spanish u'\u005cu201c' Hoy vamos a the swimming pool u'\u005cu201d' Desired output u'\u005cu201c' Hoy vamos a la piscina u'\u005cu201d'
+p183
+aVHowever, l1r1 performs significantly better than l3r3 at p 0.01 , and l2r2 performs significantly better than l3r3 at p 0.01
+p184
+aVInput (L1-English, L2=German u'\u005cu201c' Das wetter ist wirklich abominable u'\u005cu201d' Desired output u'\u005cu201c' Das wetter ist wirklich ekelhaft u'\u005cu201d'
+p185
+aVInput (L1=Dutch, L2=English u'\u005cu201c' Workers are facing a massive aanval op their employment and social rights u'\u005cu201d' Desired output u'\u005cu201c' Workers are facing a massive attack on their employment and social rights u'\u005cu201d'
+p186
+aVfor each aligned sentence pair ( s u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e s u'\u005cu2208' S s , s u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e t u'\u005cu2208' S t ) in the parallel corpus split ( S s , S t
+p187
+aVAll significance tests were performed with 5 , 000 iterations
+p188
+aVfor each fragment ( f s u'\u005cu2208' s u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e s , f t u'\u005cu2208' s u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e t ) where ( f s , f t ) u'\u005cu2208' T
+p189
+aVInput
+p190
+aVInput
+p191
+aVInput
+p192
+aVInput
+p193
+aVInput
+p194
+aVInput
+p195
+aVPero el enfoque actual de la Comisión no puede conducir a una buena política ya que es tributario del funcionamiento del mercado y de las normas establecidas por la OMC , el FMI y el Banco Mundial , normas que siguen siendo desfavorables para los países en desarrollo
+p196
+aVPero el enfoque actual de la Comisión no puede conducir a una buena política ya que es tributario del funcionamiento del mercado y de las normas establecidas por la OMC , el FMI y el Banco Mundial , normas que siguen siendo desfavorables para los los países en desarrollo
+p197
+aVPero el enfoque actual de la Comisión no puede conducir a una buena política ya que es tributario del funcionamiento del mercado y de las normas establecidas por la OMC , el FMI y el Banco Mundial , normas que siguen siendo desfavorables para los developing countries
+p198
+aVSin ese tipo de protección la gente no aprovechará la oportunidad de vivir , viajar y trabajar donde les parezca en la Unión Europea
+p199
+aVSin ese tipo de protección la gente no aprovechará la oportunidad to vivir , viajar y trabajar donde les parezca en la Unión Europea
+p200
+aVSin ese tipo de protección la gente no aprovechará la oportunidad para vivir , viajar y trabajar donde les parezca en la Unión Europea
+p201
+aVMientras no haya prueba en contrario , la financiación de partidos políticos Europea sólo se justifica , incluso después del tratado de Niza , desde el momento en que concurra a la expresión del sufragio universal , que es la única definición aceptable de un partido político
+p202
+aVMientras no haya prueba en contrario , la financiación de partidos políticos European sólo se justifica , incluso después del tratado de Niza , desde el momento en que concurra a la expresión del sufragio universal , que es la única definición aceptable de un partido político
+p203
+aVMientras no haya prueba en contrario , la financiación de partidos políticos europeos sólo se justifica , incluso después del tratado de Niza , desde el momento en que concurra a la expresión del sufragio universal , que es la única definición aceptable de un partido político
+p204
+aVVexing issues are morphology, word-order change and long-distance dependencies
+p205
+aVLa Comisión también está acometiendo medidas en el ámbito social y educativo con vistas a mejorar la situación de los niños
+p206
+aVEsta Directiva es nuestra oportunidad a marcar una verdadera diferencia , reduciendo la trágica pérdida de vidas en nuestras carreteras
+p207
+aVEsta Directiva es nuestra oportunidad to marcar una verdadera diferencia , reduciendo la trágica pérdida de vidas en nuestras carreteras
+p208
+aVEsta Directiva es nuestra oportunidad para marcar una verdadera diferencia , reduciendo la trágica pérdida de vidas en nuestras carreteras
+p209
+aVLa Comisión también está acometiendo medidas en el ámbito social y educational con vistas a mejorar la situación de los niños
+p210
+aVLa Comisión también está acometiendo medidas en el ámbito social y educativas con vistas a mejorar la situación de los niños
+p211
+aVEs la pasado vez que me dirijo a esta Cámara
+p212
+aVEs la última vez que me dirijo a esta Cámara
+p213
+aVEs la last vez que me dirijo a esta Cámara
+p214
+aVThe proposed application allows code switching and produces context-sensitive suggestions as writing progresses
+p215
+aVl1r1
+p216
+aVl1r1
+p217
+aVl1r1
+p218
+aVif P ( f s f t ) u'\u005cu22c5' P ( f t f s ) u'\u005cu2265' u'\u005cu039b' 1 and P ( f s f t ) u'\u005cu22c5' P ( f t f s ) u'\u005cu2265' u'\u005cu039b' 2 u'\u005cu22c5' P ( f s f s u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' o u'\u005cu2062' n u'\u005cu2062' g u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2062' _ u'\u005cu2062' t ) u'\u005cu22c5' P ( f s u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' o u'\u005cu2062' n u'\u005cu2062' g u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2062' _ u'\u005cu2062' t f s )
+p219
+aVl1r1
+p220
+aVl1r1
+p221
+aVl1r1
+p222
+a.

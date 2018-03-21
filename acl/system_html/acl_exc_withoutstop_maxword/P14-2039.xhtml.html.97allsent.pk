@@ -1,0 +1,216 @@
+(lp0
+VSecond, the fixed window alignment algorithm requires longer chunks ( u'\u005cu2265' 10 seconds) to obtain reasonable accuracy, and thus introduces unsatisfactory latency
+p1
+aVOur approach is based on weighted A * search for approximately solving the MSA problem []
+p2
+aVAs the chunk size parameter increases, the performance of sliding window systems with different values of keep-length parameter converges
+p3
+aVThe fact that the various instances of a single word in each transcription may fall on either side of a chunk boundary leads to errors where a word is either duplicated in the final output for more than one chunk, or omitted entirely
+p4
+aVAfter all, if the timestamps corresponded precisely to the original time at which each word was spoken, the entire alignment problem would be trivial
+p5
+aVThis is because the chunk boundaries are defined with respect to the timestamps associated with each word in the captions, but the timestamps can vary greatly between words that should in fact be aligned
+p6
+aVThe chunk size directly determines the latency of the system to the end user, as alignment cannot begin until an entire chunk is captured
+p7
+aVWe use a single point in the aligned output as the starting point for the next chunk, and determine the corresponding starting position within each original transcription
+p8
+aVIn order to address the problems described above, we explore a technique based on a sliding alignment window, shown in Algorithm 3
+p9
+aVThis problem also causes errors in ordering among the words remaining within one chunk, because there is less information available to constrain the ordering relations between transcriptions
+p10
+aVThe materials in the output alignment that follow this point is thrown away, and replaced with the output produced by aligning the next chunk starting from this point (line 8
+p11
+aVFurthermore, we can see that for smaller values of the chunk size parameter, increasing the keep-length makes the system less accurate
+p12
+aVNext, we show the trade-off between computation speed and accuracy in Figure 3, as we fix the heuristic weight and vary the chunk size over the range [5, 10, 15, 20, 30] seconds
+p13
+aVTherefore, at larger chunk sizes, for which there are smaller number of boundaries, the keep-length parameter has lower impact
+p14
+aVThe A * search algorithm treats each node position n = [ n 1 , u'\u005cu2026' , n K ] as a search state, and estimates the cost function g u'\u005cu2062' ( n ) and the heuristic function h u'\u005cu2062' ( n ) for each state
+p15
+aVLarger chunks are more accurately aligned but require computation time that grows as N K in the chunk size N in the worst case
+p16
+aVFor the caption alignment task, we treat each individual word as a symbol in our alphabet u'\u005cu03a3'
+p17
+aVThe substitution cost for two words is estimated based on the edit distance between two words
+p18
+aVIf the beam size is set to b seconds, then any state that aligns two words having more than b seconds time lag is ignored
+p19
+aVFurthermore, smaller weights allow faster alignment, but provide lower accuracy
+p20
+aVThe special gap symbol u'\u005cu2018' - u'\u005cu2019' represents a missing word and does not belong to u'\u005cu03a3'
+p21
+aVThe accuracy of the ASR systems can be improved using the u'\u005cu2018' re-speaking u'\u005cu2019' technique, which requires a person that the ASR has been trained on to repeat the words said by a speaker as he hears them
+p22
+aVWe ignore the alignment columns where the majority vote is below a certain threshold t v (typically t v = 2 ), and thus filter out spurious errors and spelling mistakes
+p23
+aVTherefore, the j t u'\u005cu2062' h column of A indicates an alignment state for the j t u'\u005cu2062' h position, where the state can have one of the 2 K - 1 possible combinations
+p24
+aVIf a i u'\u005cu2062' l and a j u'\u005cu2062' l are identical, the substitution cost is zero
+p25
+aVEvery column of A must have at least one non-gap symbol
+p26
+aVLet A = ( a i u'\u005cu2062' j ) be a K × N f matrix, where a i u'\u005cu2062' j u'\u005cu2208' u'\u005cu03a3' u'\u005cu222a' { - } , and the i t u'\u005cu2062' h row has exactly ( N f - N i ) gaps and is identical to S i if we ignore the gaps
+p27
+aV[] divided sequences into chunks of a fixed time duration, and applied the A * alignment algorithm to each chunk independently
+p28
+aV[] divided the sequences into chunks of a fixed time duration, and applied the A * alignment algorithm to each chunk independently
+p29
+aVWe set the heuristic weight parameter ( w ) to 3 and the chunk size parameter ( c ) to 5 seconds for all the three sliding window systems and the fixed window system
+p30
+aVThe fixed window based alignment has two key limitations
+p31
+aVThe problem of minimizing the SOP cost function for K sequences is equivalent to estimating the shortest path between a single source node and a single sink node in a K -dimensional mesh graph, where each node corresponds to a distinct position in the K sequences
+p32
+aVThe problem of aligning and combining multiple transcripts can be mapped to the well-studied Multiple Sequence Alignment (MSA) problem []
+p33
+aVThe heuristic function represents the approximate minimum cost of aligning the suffixes of the K sequences, starting after the current position n
+p34
+aVThe cost function g u'\u005cu2062' ( n ) represents the exact minimum SOP cost to align the K sequences from the beginning to the current position
+p35
+aVWe start with alignment with a fixed chunk size
+p36
+aVFirst, aligning disjoint chunks independently tends to introduce a large number of errors at the boundary of each chunk
+p37
+aV[] addressed this alignment problem using off-the-shelf multiple sequence alignment tools, as well as an algorithm based on incrementally building a precedence graph over output words
+p38
+aVThe other systems are the graph-based algorithm of [] , the MUSCLE algorithm of [] , and the most accurate fixed alignment window algorithm of []
+p39
+aVWe are interested in investigating how the three key parameters of the algorithm, i.e.,, the chunk size ( c ), the heuristic weight ( w ) and the keep-length ( k ), affect the system latency, the search speed, and the alignment accuracy
+p40
+aVTo further speed up the search, a beam constraint is applied on the search space using the timestamps of each individual input words
+p41
+aVWe also compare the performance of our algorithm with that of the most accurate fixed alignment window algorithm []
+p42
+aVImproved results for the alignment problem were shown using weighted A * search by Naim et al
+p43
+aVWe observe that the sliding window approach dominates the fixed window approach across a wide range of chunk sizes
+p44
+aVOur goal is to find the optimum alignment matrix A O u'\u005cu2062' P u'\u005cu2062' T that minimizes the sum of pairs (SOP) cost function
+p45
+aVAfter the alignment, the captions are combined via majority voting at each position of the alignment matrix
+p46
+aVOut of the systems in Figure 2, the first three systems consist of sliding alignment window algorithm with different values of keep-length parameter
+p47
+aVThe sliding alignment window with keep-length 0.5 achieves 0.5679 average accuracy in terms of (1-WER), providing a 18.09% improvement with respect to the most accurate fixed alignment window (average accuracy 0.4857
+p48
+aVAfter aligning the first chunk, we use the information derived from the alignment to determine where the next chunk should begin within each transcription
+p49
+aVTo show the trade-off between latency and accuracy, we fix the heuristic weight ( w = 3 ) and plot the accuracy as a function of chunk size in Figure 3
+p50
+aVTo speed the search for the best alignment, Naim et al
+p51
+aVThe chunks were concatenated to produce the final output sequence, as shown in Algorithm 2
+p52
+aVIn this paper, we introduce a novel sliding window technique which avoids the errors produced by previous systems at the boundaries of the chunks used for alignment
+p53
+aVAlthough this method speeds the search for the best alignment, it introduces a significant number of errors to the output of the system due to inconsistency at the boundaries of the chunks
+p54
+aVThe search continues until the goal node is extracted from Q
+p55
+aVThe weighted A * search uses a priority queue Q to store the search states n
+p56
+aVSliding alignment window produces better results and outperforms the other algorithms even for large values of the keep-length parameter
+p57
+aV{algorithm} [t] MSA-A * Algorithm {algorithmic} [1] \u005cREQUIRE K input sequences u'\u005cud835' u'\u005cudcae' = { S 1 , u'\u005cu2026' , S K } having length N 1 , u'\u005cu2026' , N K , heuristic weight w , beam size b
+p58
+aVFurthermore, the chunk size, the heuristic weight, and the keep-length help us to trade-off speed versus accuracy
+p59
+aVThe exact solution to the SOP optimization problem is NP-Complete [] , but many methods solve it approximately
+p60
+aVThe performance in terms of WER for sliding and fixed alignment windows is presented in Figure 2
+p61
+aVThe detailed procedure is shown in Algorithm 2
+p62
+aVAlthough weighted A * significantly speeds the search for the best alignment, it is still too slow for very long sequences
+p63
+aVwhere L ( n u'\u005cu2192' t ) denotes the lower bound on the cost of the shortest path from n to destination t , A p * is the optimal pairwise alignment, and u'\u005cu03a3' i n is the suffix of node n in the i -th sequence
+p64
+aVHowever, aligning these individual words in the correct sequential order remains a challenging problem
+p65
+aVThe process continues iteratively, allowing us to avoid using the erroneous output alignments in the neighborhood of the arbitrary endpoints for each chunk
+p66
+aVAt each step of the A * search algorithm, the node with the smallest evaluation function, f u'\u005cu2062' ( n ) = g u'\u005cu2062' ( n ) + w u'\u005cu2062' h p u'\u005cu2062' a u'\u005cu2062' i u'\u005cu2062' r u'\u005cu2062' ( n ) (where w u'\u005cu2265' 1 ), is extracted from the priority queue Q and expanded by one edge
+p67
+aVThis approach has been shown to dramatically outperform ASR in terms of both accuracy and Word Error Rate (WER) []
+p68
+aVWe measure the accuracy in terms of Word Error Rate (WER) with respect to a reference transcription
+p69
+aVFor each input word, a timestamp is recorded, indicating when the word is typed by a worker
+p70
+aV[t] Fixed Window Algorithm {algorithmic} [1] \u005cREQUIRE K input sequences u'\u005cud835' u'\u005cudcae' = { S 1 , u'\u005cu2026' , S K } having length N 1 , u'\u005cu2026' , N K , window parameter c u'\u005cu2062' h u'\u005cu2062' u u'\u005cu2062' n u'\u005cu2062' k u'\u005cu2062' _ u'\u005cu2062' l u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' g u'\u005cu2062' t u'\u005cu2062' h
+p71
+aVwhere c u'\u005cu2062' ( A i u'\u005cu2062' j ) is the cost of the pairwise alignment between S i and S j according to A
+p72
+aVThe source node is [ 0 , u'\u005cu2026' , 0 ] and the sink node is [ N 1 , u'\u005cu2026' , N K ]
+p73
+aVAutomatic speech recognition (ASR) systems [] , on the other hand, attempts to provide a cheap and fully automated solution to this problem
+p74
+aVThis technique produces dramatically fewer errors for the same amount of computation time
+p75
+aVStudies performed in the classroom setting show that the latency between when a word was said and when it is displayed must be under five seconds to maintain consistency between the captions being read and other visual cues []
+p76
+aVThe most common approach to real-time captioning is to recruit a trained stenographer with a special purpose phonetic keyboard, who transcribes the speech to text with less than five seconds of latency
+p77
+aV[] reported 36.6% accuracy using the Dragon Naturally Speaking ASR system (version 11.5 for Windows
+p78
+aVThe commonly used heuristic function is h p u'\u005cu2062' a u'\u005cu2062' i u'\u005cu2062' r u'\u005cu2062' ( n )
+p79
+aVWe repeat this experiment for different values of keep-length
+p80
+aVFurthermore, recall of individual words irrespective of their order approached and even exceeded that of a trained expert stenographer with seven workers contributing, suggesting that the information is present to meet the performance of a stenographer []
+p81
+aV{algorithm} [t] Sliding Window Algorithm {algorithmic} [1] \u005cREQUIRE K input sequences u'\u005cud835' u'\u005cudcae' = { S 1 , u'\u005cu2026' , S K } having length N 1 , u'\u005cu2026' , N K , window parameters c u'\u005cu2062' h u'\u005cu2062' u u'\u005cu2062' n u'\u005cu2062' k u'\u005cu2062' _ u'\u005cu2062' l u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' g u'\u005cu2062' t u'\u005cu2062' h and k u'\u005cu2062' e u'\u005cu2062' e u'\u005cu2062' p u'\u005cu2062' _ u'\u005cu2062' l u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' g u'\u005cu2062' t u'\u005cu2062' h
+p82
+aVoutput an N × K matrix of integers indicating the index into each input sequence of each position in the output sequence \u005cSTATE g u'\u005cu2062' ( s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' t ) u'\u005cu2190' 0 , f u'\u005cu2062' ( s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' t ) u'\u005cu2190' w × h u'\u005cu2062' ( s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' t
+p83
+aVThis single point is determined by a tunable parameter k u'\u005cu2062' e u'\u005cu2062' e u'\u005cu2062' p u'\u005cu2062' _ u'\u005cu2062' l u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' g u'\u005cu2062' t u'\u005cu2062' h (line 10 of Algorithm 3
+p84
+aVThe total number of nodes in the lattice is ( N 1 + 1 ) × ( N 2 + 1 ) × u'\u005cu22ef' × ( N K + 1 ) , and each node has 2 K - 1 possible successors and predecessors
+p85
+aV\u005cSTATE Q u'\u005cu2190' { s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' t } \u005cWHILE Q u'\u005cu2260' u'\u005cu2205' \u005cSTATE n u'\u005cu2190' EXTRACT-MIN( Q ) \u005cFORALL s u'\u005cu2208' { 0 , 1 } K - { 0 K } \u005cSTATE n i u'\u005cu2190' n + s \u005cIF n i = g u'\u005cu2062' o u'\u005cu2062' a u'\u005cu2062' l \u005cSTATE Return the alignment matrix for the reconstructed path from s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' t to n i \u005cELSIF n i u'\u005cu2209' B u'\u005cu2062' e u'\u005cu2062' a u'\u005cu2062' m u'\u005cu2062' ( b ) \u005cSTATE continue; \u005cELSE \u005cSTATE g u'\u005cu2062' ( n i ) u'\u005cu2190' g u'\u005cu2062' ( n ) + c u'\u005cu2062' ( n , n i ) \u005cSTATE f u'\u005cu2062' ( n i ) u'\u005cu2190' g u'\u005cu2062' ( n i ) + w × h u'\u005cu2062' ( n i ) \u005cSTATE INSERT-ITEM( Q , n i , f ( n i ) ) \u005cENDIF \u005cENDFOR \u005cENDWHILE
+p86
+aVFor this reason, Naim et al
+p87
+aVLet S 1 , u'\u005cu2026' , S K , K u'\u005cu2265' 2 , be the K sequences over an alphabet u'\u005cu03a3' , and having length N 1 , u'\u005cu2026' , N K
+p88
+aVThe partial inputs are combined to produce a final transcript (see Figure 1
+p89
+aVIn this approach, multiple non-expert human workers transcribe an audio stream containing speech in real-time
+p90
+aVLasecki et al
+p91
+aVAn alternative approach is to combine the efforts of multiple non-expert captionists (anyone who can type), instead of relying on trained workers []
+p92
+aVOn the same dataset, Lasecki et al
+p93
+aVHowever, the accuracy of ASR quickly plummets to below 30% when used on an untrained speaker u'\u005cu2019' s voice, in a new environment, or in the absence of a high quality microphone []
+p94
+aVSimultaneously hearing and speaking, however, is not straightforward, and requires some training
+p95
+aVEach audio clip is transcribed by 10 non-expert human workers in real time
+p96
+aVFormally, c u'\u005cu2062' ( A i u'\u005cu2062' j ) = u'\u005cu2211' l = 1 N f sub u'\u005cu2062' ( a i u'\u005cu2062' l , a j u'\u005cu2062' l ) , where sub u'\u005cu2062' ( a i u'\u005cu2062' l , a j u'\u005cu2062' l ) denotes the cost of substituting a j u'\u005cu2062' l for a i u'\u005cu2062' l
+p97
+aVWe evaluate our system on a dataset of four 5-minute long audio clips of lectures in electrical engineering and chemistry lectures taken from MIT OpenCourseWare
+p98
+aVWorkers type as much as they can of the input, and, while no one worker u'\u005cu2019' s transcript is complete, the portions captured by various workers tend to overlap
+p99
+aVUnfortunately, professional captionists are quite expensive ($150 per hour), must be recruited in blocks of an hour or more, and are difficult to schedule on short notice
+p100
+aVReal-time captioning provides deaf or hard of hearing people access to speech in mainstream classrooms, at public events, and on live television
+p101
+aV\u005cSTATE s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' t u'\u005cu2062' _ u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' m u'\u005cu2062' e u'\u005cu2190' 0 \u005cWHILE g u'\u005cu2062' o u'\u005cu2062' a u'\u005cu2062' l u'\u005cu227a' [ N 1 , u'\u005cu2026' , N K ] \u005cFORALL i \u005cSTATE s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' t u'\u005cu2062' [ i ] u'\u005cu2190' c u'\u005cu2062' l u'\u005cu2062' o u'\u005cu2062' s u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2062' _ u'\u005cu2062' w u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' d u'\u005cu2062' ( i , s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' t u'\u005cu2062' _ u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' m u'\u005cu2062' e ) \u005cENDFOR \u005cSTATE e u'\u005cu2062' n u'\u005cu2062' d u'\u005cu2062' _ u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' m u'\u005cu2062' e u'\u005cu2190' s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' t u'\u005cu2062' _ u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' m u'\u005cu2062' e + c u'\u005cu2062' h u'\u005cu2062' u u'\u005cu2062' n u'\u005cu2062' k u'\u005cu2062' _ u'\u005cu2062' l u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' g u'\u005cu2062' t u'\u005cu2062' h \u005cFORALL i \u005cSTATE g u'\u005cu2062' o u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' [ i ] u'\u005cu2190' c u'\u005cu2062' l u'\u005cu2062' o u'\u005cu2062' s u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2062' _ u'\u005cu2062' w u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' d u'\u005cu2062' ( i , e u'\u005cu2062' n u'\u005cu2062' d u'\u005cu2062' _ u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' m u'\u005cu2062' e ) - 1 \u005cENDFOR \u005cSTATE a u'\u005cu2062' l u'\u005cu2062' i u'\u005cu2062' g u'\u005cu2062' n u'\u005cu2062' m u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' x u'\u005cu2190' MSA-A ( s t a r t , g o a l ) * \u005cSTATE concatenate a u'\u005cu2062' l u'\u005cu2062' i u'\u005cu2062' g u'\u005cu2062' n u'\u005cu2062' m u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' x onto end of f u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' m u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' x \u005cSTATE s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' t u'\u005cu2062' _ u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' m u'\u005cu2062' e u'\u005cu2190' e u'\u005cu2062' n u'\u005cu2062' d u'\u005cu2062' _ u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' m u'\u005cu2062' e \u005cENDWHILE \u005cSTATE Return f u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' m u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' x
+p102
+aV\u005cSTATE s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' t u'\u005cu2190' 0 K , g u'\u005cu2062' o u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2190' 0 K \u005cWHILE g u'\u005cu2062' o u'\u005cu2062' a u'\u005cu2062' l u'\u005cu227a' [ N 1 , u'\u005cu2026' , N K ] \u005cSTATE e u'\u005cu2062' n u'\u005cu2062' d u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' m u'\u005cu2062' e u'\u005cu2190' c u'\u005cu2062' h u'\u005cu2062' u u'\u005cu2062' n u'\u005cu2062' k u'\u005cu2062' _ u'\u005cu2062' l u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' g u'\u005cu2062' t u'\u005cu2062' h + max i u'\u005cu2061' t u'\u005cu2062' i u'\u005cu2062' m u'\u005cu2062' e u'\u005cu2062' ( s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' t u'\u005cu2062' [ i ] ) \u005cFORALL i \u005cSTATE g u'\u005cu2062' o u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' [ i ] u'\u005cu2190' c u'\u005cu2062' l u'\u005cu2062' o u'\u005cu2062' s u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2062' _ u'\u005cu2062' w u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' d u'\u005cu2062' ( i , e u'\u005cu2062' n u'\u005cu2062' d u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' m u'\u005cu2062' e ) \u005cENDFOR \u005cSTATE a u'\u005cu2062' l u'\u005cu2062' i u'\u005cu2062' g u'\u005cu2062' n u'\u005cu2062' m u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' x u'\u005cu2190' MSA-A ( s t a r t , g o a l ) * \u005cSTATE concatenate first k u'\u005cu2062' e u'\u005cu2062' e u'\u005cu2062' p u'\u005cu2062' _ u'\u005cu2062' l u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' g u'\u005cu2062' t u'\u005cu2062' h columns of a u'\u005cu2062' l u'\u005cu2062' i u'\u005cu2062' g u'\u005cu2062' n u'\u005cu2062' m u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' x onto end of f u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' m u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' x \u005cFORALL i \u005cSTATE s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' t u'\u005cu2062' [ i ] u'\u005cu2190' a u'\u005cu2062' l u'\u005cu2062' i u'\u005cu2062' g u'\u005cu2062' n u'\u005cu2062' m u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' x u'\u005cu2062' [ k u'\u005cu2062' e u'\u005cu2062' e u'\u005cu2062' p u'\u005cu2062' _ u'\u005cu2062' l u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' g u'\u005cu2062' t u'\u005cu2062' h ] u'\u005cu2062' [ i ] \u005cENDFOR \u005cENDWHILE \u005cSTATE Return f u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' m u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' x
+p103
+aVinput s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' t u'\u005cu2208' u'\u005cu2115' K , g u'\u005cu2062' o u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2208' u'\u005cu2115' k
+p104
+aVThe same dataset used by [] and []
+p105
+aV1) keep-length = 0.5; (2) keep-length = 0.67; and (3) keep-length = 0.85
+p106
+aV[]
+p107
+a.

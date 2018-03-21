@@ -1,0 +1,70 @@
+(lp0
+VLinLearn denotes model combination by overloading the vector representation of queries u'\u005cud835' u'\u005cudc2a' and documents u'\u005cud835' u'\u005cudc1d' in the VW linear learner by incorporating arbitrary ranking models as dense features
+p1
+aVFor example, in patent prior art search, patents granted at any patent office worldwide are considered relevant if they constitute prior art with respect to the invention claimed in the query patent
+p2
+aVSince patent applicants and lawyers are required to list relevant prior work explicitly in the patent application, patent citations can be used to automatically extract large amounts of relevance judgments across languages [ 12 ]
+p3
+aVSince Wikipedia articles vary greatly in length, we restricted EN documents to the first 200 words after extracting the link graph to reduce the number of features for BM and VW models
+p4
+aVIn addition to dense domain-knowledge features, we incorporate arbitrary ranking models as dense features whose value is the score of the ranking model
+p5
+aVWe do not report combination results including the sparse BM model since they were consistently lower than the ones with the sparse VW model
+p6
+aVOptimization for these additional models including domain knowledge features was done by overloading the vector representation of queries u'\u005cud835' u'\u005cudc2a' and documents u'\u005cud835' u'\u005cudc1d' in the VW linear learner
+p7
+aVSince for Wikipedia data, the DE and EN vocabularies were both large (6.7M and 6M), we used the same filtering and preprocessing as for the patent data before applying CFH with F =40k and k =5 on both sides
+p8
+aVSince authors are encouraged to avoid orphan articles and to cite their sources, Wikipedia has a rich linking structure between related articles, which can be exploited to create relevance links between articles across languages [ 2 ]
+p9
+aVEN patents are regarded as relevant with level (3) to a JP query patent, if they are in a family relationship (e.g.,, same invention), cited by the patent examiner (2), or cited by the applicant (1
+p10
+aVThis approach is advantageous if large amounts of in-domain sentence-parallel data are available to train SMT systems, but relevance rankings to train retrieval models are not
+p11
+aVAs we do not have access to address data, we omit geolocation features and instead add features that evaluate similarity w.r.t patent classes extracted from IPC codes
+p12
+aVThe intersection between target set T n and the source category set S reflects the category level similarity between query and document, which we calculate as a mutual containment score s n = 1 2 u'\u005cu2062'
+p13
+aVDomain knowledge features for patents were inspired by Guo and Gomes ( 2009 a feature fires if two patents share similar aspects, e.g., a common inventor
+p14
+aVSince typically the first sentence of any Wikipedia article is such a well-formed definition, this allows us to extract a large set of one sentence queries from Wikipedia articles
+p15
+aVIn difference to grid search for Borda , optimal weights for the linear combination of incorporated ranking models can be learned automatically
+p16
+aV2013 ) advocate the use of dense features encoding domain knowledge on inventors, assignees, location and date, together with dense similarity scores based on bag-of-word representations of patents
+p17
+aVIn both cases, as standalone systems, DT and PSQ are very close and far better than any ranking approach, irrespective of the objective function or the choice of sparse or dense features
+p18
+aVFurthermore, we show that our approach can be seen as supervised model combination that allows to combine SMT-based and ranking-based approaches for further substantial improvements
+p19
+aVBorda voting gives the best result under MAP which is probably due to the adjustment of the interpolation parameter for MAP on the development set
+p20
+aVUnder NDCG and PRES, LinLearn achieves the best results, showing the advantage of automatically learning combination weights that leads to stable results across various metrics
+p21
+aVThe advantage of this technique is an implicit query expansion effect due to the use of probability distributions over term translations [ 27 ]
+p22
+aVTraining data was sampled from the dev set and processed with VW
+p23
+aVTo reduce the EN vocabulary to a comparable size, we applied similar preprocessing and CFH with F =30k and k =5
+p24
+aVWe will refer to DT and PSQ as SMT-based models that translate a query, and then perform monolingual retrieval using BM25
+p25
+aVThis is due to the already high scores of the combined models, but also to the combination of yet other types of orthogonal information
+p26
+aVThe best result is achieved by combining DT and PSQ with DK and VW
+p27
+aVWe conjecture that the gains are due to orthogonal information contributed by domain-knowledge, ranking-based word associations, and translation-based information
+p28
+aV2012 ) brought SMT back into this paradigm by projecting terms from n -best translations from synchronous context-free grammars
+p29
+aVTranslation is agnostic of the retrieval task
+p30
+aVMemory usage was reduced using the same hashing technique as for boosting
+p31
+aVAs can be seen from inspecting the two blocks of results, one for patents, one for Wikipedia, we find the same system rankings on both datasets
+p32
+aVWe present two methods for optimizing W in the following
+p33
+aVThe information need may be paraphrased as a high-level definition of the topic
+p34
+a.

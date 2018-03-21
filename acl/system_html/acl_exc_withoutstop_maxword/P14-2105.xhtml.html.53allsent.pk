@@ -1,0 +1,90 @@
+(lp0
+V2013 ) , we train two semantic similarity models one links a mention from the question to an entity in the KB and the other maps a relation pattern to a relation
+p1
+aVWe train two CNN semantic models from sets of pattern u'\u005cu2013' relation and mention u'\u005cu2013' entity pairs, respectively
+p2
+aVThe answer to the question can thus be derived by finding the relation u'\u005cu2013' entity triple r u'\u005cu2062' ( e 1 , e 2 ) in the KB and returning the entity not mentioned in the question
+p3
+aVA single-relation question is defined as a question composed of an entity mention and a binary relation description, where the answer to this question would be an entity that has the relation with the given entity
+p4
+aVGiven a pattern and a relation, we compute their relevance score by measuring the cosine similarity between their semantic vectors
+p5
+aVAn example of a single-relation question is u'\u005cu201c' When were DVD players invented u'\u005cu201d' The entity is dvd-player and the relation is be-invent-in
+p6
+aVBy using a general semantic similarity model to match patterns and relations, as well as mentions and entities, our system outperforms the existing rule learning system, Paralex [ 7 ] , with higher precision at all the recall points when answering the questions in the same test set
+p7
+aVThe semantic relevance score between a pattern Q and a relation R is defined as the cosine score of their semantic vectors y Q and y R
+p8
+aVThe corresponding relation of this pattern was thus the relation used in the original database query, along with the variable argument position (i.e.,, 1 or 2, indicating whether the answer entity was the first or second argument of the relation
+p9
+aVFor relation patterns, we first scanned the original training corpus to see if there was an exact surface form match of the entity (e.g.,, dvd-player would map to u'\u005cu201c' DVD player u'\u005cu201d' in the question
+p10
+aVWe assumed such questions are answerable by issuing a single-relation query that consists of the relation and an argument entity, against a knowledge base†(KB
+p11
+aVIf the mapping of the relation and entity in the question can be correctly resolved, then the answer can be derived by a simple table lookup, assuming that the fact exists in the KB
+p12
+aVThe CNNSM first uses a convolutional layer to project each word within a context window to a local contextual feature vector, so that semantically similar word- n -grams are projected to vectors that are close to each other in the contextual feature space
+p13
+aVAs shown in Figure 2 , we have y = t u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' h u'\u005cu2062' ‚ u'\u005cu2062' Å u'\u005cu2062' ° u'\u005cu2062' ( W s u'\u005cu22c5' v ) , where v is the global feature vector after max pooling, W s is the semantic projection matrix, and y is the vector representation of the input query (or document) in latent semantic space
+p14
+aVIn this paper, we focus on using a knowledge base to answer single-relation questions
+p15
+aVTo determine the probabilities of such mappings, we propose using a semantic similarity model based on convolutional neural networks, which is the technical focus in this paper
+p16
+aVOne more non-linear transformation layer is further applied on top of the global feature vector v to extract the high-level semantic representation, denoted by y
+p17
+aVTo train our two CNN semantic models, we derived two parallel corpora based on the Paralex training data
+p18
+aVWe adapt the work of [ 8 , 15 ] for measuring the semantic distance between a question and relational triples in the KB as the core component of our semantic parsing approach
+p19
+aVIf an exact match was found, then the pattern would be derived by replacing the mention in the question with the special symbol
+p20
+aVAs we can observe from the figure, the precision of our CNNSM p u'\u005cu2062' m system is consistently higher than Paralex across all recall regions
+p21
+aVFurther, since the overall meaning of a sentence is often determined by a few key words in the sentence, CNNSM uses a max pooling layer to extract the most salient local features to form a fixed-length global feature vector
+p22
+aVGiven the letter-trigram based word representation, we represent a word- n -gram by concatenating the letter-trigram vectors of each word, e.g.,, for the t -th word- n -gram at the word- n -gram layer, we have
+p23
+aVConsider the t -th word- n -gram, the convolution matrix projects its letter-trigram representation vector l t to a contextual feature vector h t
+p24
+aVBecause our systems might find triples that were not returned by the Paralex systems, we labeled these new question u'\u005cu2013' triple pairs ourselves
+p25
+aVThe posterior probability of the positive relation given the pattern is computed based on the cosine scores using softmax
+p26
+aVReferring to the max-pooling layer of Figure 2 , we have
+p27
+aVThe probability of the rule in†( 1 ) is 1 since we assume the input is a single-relation question
+p28
+aVBy applying simple seed templates to the KB and by leveraging community-authored paraphrases of questions from WikiAnswers, they successfully demonstrated a high-quality lexicon of pattern-matching rules can be learned for this restricted form of semantic parsing
+p29
+aVAn early example of this research is the semantic parser for answering geography-related questions, learned using inductive logic programming [ 18 ]
+p30
+aVAs shown in Figure 2 , h t is computed by
+p31
+aVHowever, due to the large number of paraphrases of the same question, identifying the mapping accurately remains a difficult problem
+p32
+aVFollowing [ 8 ] , for every pattern, the corresponding relation is treated as a positive example and 100 randomly selected other relations are used as negative examples
+p33
+aVSince the trade-off between precision and recall can be adjusted by varying the threshold, it is more informative to compare systems on the precision u'\u005cu2013' recall curves, which are shown in Figure 3
+p34
+aVBy limiting the systems to output only answer triples with scores higher than a predefined threshold, we could control the trade-off between recall and precision and thus plot the precision u'\u005cu2013' recall curve
+p35
+aVSince many words do not have significant influence on the semantics of the sentence, we want to retain in the global feature vector only the salient features from a few key words
+p36
+aVThis is understandable since the system does not match mentions with entities of different surface forms (e.g.,, u'\u005cu201c' Robert Hooke u'\u005cu201d' to u'\u005cu201c' Hooke u'\u005cu201d'
+p37
+aVFor this purpose, we use a max operation, also known as max pooling, to force the network to retain only the most useful local features produced by the convolutional layers
+p38
+aVTuning the thresholds using a validation set would be needed if there is a metric (e.g.,, F 1 ) that specifically needs to be optimized
+p39
+aVWord hashing not only makes the learning more scalable by controlling the size of the vocabulary, but also can effectively handle the OOV issues, sometimes due to spelling mistakes
+p40
+aVModel training is done by maximizing the log-posteriori using stochastic gradient descent
+p41
+aV4 , was used as the final score of the triple for ranking the answers
+p42
+aVThe answer can thus be described as the following lambda expression
+p43
+aVData were tokenized by replacing hyphens with blank spaces
+p44
+a.

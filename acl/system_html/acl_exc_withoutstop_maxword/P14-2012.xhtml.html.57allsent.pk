@@ -1,0 +1,76 @@
+(lp0
+VWe apply the same feature set as Sun et al
+p1
+aVHowever, in domain cts, the improvement that word embeddings provide for word clusters is modest
+p2
+aVWe consider two types of word representations and use them as additional features in our DA system, namely Brown word clustering [ Brown et al.1992 ] and word embeddings [ Bengio et al.2001 ]
+p3
+aVAfter that, we evaluate the effectiveness of these lexical feature groups for word embedding augmentation individually and incrementally according to the rank of importance
+p4
+aVFor Brown word clusters, we directly apply the clustering trained by Plank and Moschitti [ Plank and Moschitti2013 ] to facilitate system comparison later
+p5
+aVIn DA terms, since the vocabularies of the source and target domains are usually different, word representations would mitigate the lexical sparsity by providing general features of words that are shared across domains, hence bridge the gap between domains
+p6
+aV[ Sun et al.2011 ] but remove the entity and mention type information 2 2 We have the same observation as Plank and Moschitti [ Plank and Moschitti2013 ] that when the gold-standard labels are used, the impact of word representations is limited since the gold-standard information seems to dominate
+p7
+aVWe evaluate word cluster and embedding (denoted by ED) features by adding them individually as well as simultaneously into the baseline feature set
+p8
+aV[ Sun et al.2011 ] , we first group lexical features into 4 groups and rank their importance based on linguistic intuition and illustrations of the contributions of different lexical features from various feature-based RE systems
+p9
+aVFollowing Plank and Moschitti [ Plank and Moschitti2013 ] , we assume that we only have labeled data in a single source domain but no labeled as well as unlabeled target data
+p10
+aVRow 4 shows that word embedding itself is also very useful for domain adaptation in RE since it improves the baseline system for all the target domains
+p11
+aVThis issue becomes more serious in our setting of single-system DA where we have a single source domain with multiple dissimilar target domains and an automatic system able to recognize entity and mention types very well in different domains may not be available
+p12
+aVTherefore, following the settings of Plank and Moschitti [ Plank and Moschitti2013 ] , we will only assume entity boundaries and not rely on the gold standard information in the experiments
+p13
+aVUnfortunately, these methods require unlabeled target domain data which are unavailable in our single-system setting of DA
+p14
+aVExploiting the shared interest in generalization performance with traditional machine learning, in domain adaptation for RE, we would prefer the relation extractor that fits the source domain data, but also circumvents the overfitting problem over this source domain 1 1 domain overfitting [ Jiang and Zhai2007b ] so that it could generalize well on new domains
+p15
+aVHowever, these methods assume some labeled data in target domains and are thus not applicable in our setting of unsupervised DA
+p16
+aVWe follow the standard practices on ACE [ Plank and Moschitti2013 ] and use news (the union of bn and nw) as the source domain and bc , cts and wl as our target domains
+p17
+aVHowever, none of these works evaluate word embeddings for domain adaptation of RE which is our main focus in this paper
+p18
+aVWe use the ACE 2005 corpus for DA experiments (as in Plank and Moschitti [ Plank and Moschitti2013 ]
+p19
+aVAs the real-valued features are able to capture latent yet useful properties of words, the augmentation of lexical terms with these features is desirable to provide a more general representation, potentially helping relation extractors perform more robustly across domains
+p20
+aVWhile word clusters can be recognized as an one-hot vector representation over a small vocabulary, word embeddings are dense, low-dimensional, and real-valued vectors (distributed representations
+p21
+aVAbove all, we move one step further by evaluating the effectiveness of word embeddings on domain adaptation for RE which is very different from the principal topic of sequence labeling in the previous research
+p22
+aVHowever, whenever the gold labels are not available or inaccurate, the word representations would be useful for improving adaptability performance
+p23
+aVFor word clusters, we experiment with two possibilities i) only using a single prefix length of 10 (as Plank and Moschitti [ Plank and Moschitti2013 ] did) (denoted by WC10) and (ii) applying multiple prefix lengths of 4, 6, 8, 10 together with the full string (denoted by WC
+p24
+aVOur relation extraction system is hierarchical [ Bunescu and Mooney2005b , Sun et al.2011 ] and apply maximum entropy (MaxEnt) in the MALLET 3 3 http://mallet.cs.umass.edu/ toolkit as the machine learning tool
+p25
+aV+ It is unclear if this approach can encode real-valued features of words (such as word embeddings [ Mnih and Hinton2007 , Collobert and Weston2008 ] ) effectively
+p26
+aVThis is because the RCV1 corpus used to induce the word embeddings [ Turian et al.2010 ] does not cover spoken language words in cts very well
+p27
+aVWe take half of bc as the only target development set, and use the remaining data and domains for testing purposes (as they are small already
+p28
+aV[ Blitzer et al.2006 ] propose structural correspondence learning (SCL) while Huang and Yates [ Huang and Yates2010 ] attempt to learn a multi-dimensional feature representation
+p29
+aVFinally, due to this setting, the best way to set up the regularization parameter is to impose the same regularization parameter on every feature rather than a skewed regularization [ Jiang and Zhai2007b ]
+p30
+aVIn this work, we propose to avoid these limitations by applying a feature-based approach for RE which allows us to integrate various word features of generalization into a single system more naturally and effectively
+p31
+aVIntroducing embeddings to words of mentions alone has mild impact while it is generally a bad idea to augment chunk heads and words in the contexts
+p32
+aVIt involves 6 relation types and 6 domains broadcast news (bn), newswire (nw), broadcast conversation (bc), telephone conversation (cts), weblogs (wl) and usenet (un
+p33
+aVIn traditional machine learning where the challenge is to utilize the training data to make predictions on unseen data points (generated from the same distribution as the training data), the classifier with a good generalization performance is the one that not only fits the training data, but also avoids ovefitting over it
+p34
+aV[ Socher et al.2012 ] and Khashabi [ Khashabi2013 ] use pre-trained word embeddings as input for Matrix-Vector Recursive Neural Networks (MV-RNN) to learn compositional structures for RE
+p35
+aVEventually, regularization methods can be considered naturally as a simple yet general technique to cope with DA problems
+p36
+aVRecent research in this area, whether feature-based [ Kambhatla2004 , Boschee et al.2005 , Zhou et al.2005 , Grishman et al.2005 , Jiang and Zhai2007a , Chan and Roth2010 , Sun et al.2011 ] or kernel-based [ Zelenko et al.2003 , Bunescu and Mooney2005a , Bunescu and Mooney2005b , Zhang et al.2006 , Qian et al.2008 , Nguyen et al.2009 ] , attempts to improve the RE performance by enriching the feature sets from multiple sentence analyses and knowledge resources
+p37
+a.

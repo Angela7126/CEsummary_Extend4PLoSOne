@@ -1,0 +1,86 @@
+(lp0
+VBy examining sentiment compositions of negators and arguments, we model the quantitative behavior of negators in changing sentiment
+p1
+aVData As described earlier, the Stanford Sentiment Treebank [] has manually annotated, real-valued sentiment values for all phrases in parse trees
+p2
+aVThat is, the model parameters are only based on the sentiment value of the arguments
+p3
+aVA recursive neural tensor network (RNTN) is a specific form of feed-forward neural network based on syntactic (phrasal-structure) parse tree to conduct compositional sentiment analysis
+p4
+aVNote that the two neural network based models incorporate the syntax and semantics by representing each node with a vector
+p5
+aVThis corpus provides us with the data to further understand the quantitative behavior of negators, as the effect of negators can now be studied with arguments of rich syntactic and semantic variety
+p6
+aVThis shifting model is based on negators and the polarity of the text they modify constants can be different for each negator-polarity pair
+p7
+aVThe table shows that the basic reversing and shifting heuristics do capture negators u'\u005cu2019' behavior to some degree, as their MAE scores are higher than that of the baseline
+p8
+aVPolarity-based shifting As will be shown in our experiments, negators can have different shifting power when modifying a positive or a negative phrase
+p9
+aVThe original RNTN and the PSTN predict 5-class sentiment for each negated phrase; we map the output to real-valued scores based on the scale that used to map real-valued sentiment scores to sentiment categories
+p10
+aVIn this paper, we call a model based on such assumptions a non-lexicalized model
+p11
+aVThe errors made by model 6 is bumpy, as the model considers no semantics and hence its errors are not dependent on the depths
+p12
+aVWe regard the negators u'\u005cu2019' behavior as an underlying function embedded in annotated data; we aim to model this function from different aspects
+p13
+aVFor example, if a phrase very good modified by a negator not appears in the training and test data, the system can simply memorize the sentiment score of not very good in training and use this score at testing
+p14
+aVFollowing the idea of , we regard the sentiment of p 1 as a prior sentiment as it has not been affected by the specific context (negators), so we denote our method as prior sentiment-enriched tensor network (PSTN
+p15
+aVNegators appearing at deeper levels of the tree tend to have more complicated syntax and semantics
+p16
+aVAs we have discussed above, we will use the human annotated sentiment for the arguments, same as in the models discussed in Section 3
+p17
+aVSuch models work in a bottom-up fashion over the parse tree of a sentence to infer the sentiment label of the sentence as a composition of the sentiment expressed by its constituting parts
+p18
+aVEarly work on automatic sentiment analysis includes the widely cited work of [] , among others
+p19
+aVIn this paper, we refer to a negation word as the negator (e.g.,, isn u'\u005cu2019' t ), a text span being modified by and composed with a negator as the argument (e.g.,, very good ), and entire phrase (e.g.,, isn u'\u005cu2019' t very good ) as the negated phrase
+p20
+aVSince then, there has been an explosion of research addressing various aspects of the problem, including detecting subjectivity, rating and classifying sentiment, labeling sentiment-related semantic roles (e.g.,, target of sentiment), and visualizing sentiment (see surveys by and
+p21
+aVHowever, in our current study, we focus on exploring the behavior of negators
+p22
+aVThe more recent work of [] proposed models based on recursive neural networks that do not rely on any heuristic rules
+p23
+aVAlternatively, if the modeling has to be done in groups, one should consider clustering valence shifters by their shifting abilities in training or external data
+p24
+aVThis could suggest that additional external knowledge, e.g.,, that from human-built resources or automatically learned from other data (e.g.,, as in [] ), including sentiment that cannot be inferred from its constituent expressions, might be incorporated to benefit the current neural-network-based models as prior knowledge
+p25
+aVTo this end, we make use of the sentiment class information of p 1 , noted as p 1 s u'\u005cu2062' e u'\u005cu2062' n
+p26
+aVFor example, in the work of [] , a feature not_good will be created if the word good is encountered within a predefined range after a negator
+p27
+aVSpecifically, we first compute the prediction errors in all tree nodes bottom-up
+p28
+aVAs shown in Equation 6 , for the node vector p 1 u'\u005cu2208' u'\u005cu211d' d × 1 , we employ a matrix, namely W s u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2208' u'\u005cu211d' d × ( d + m ) and a tensor, V s u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2208' u'\u005cu211d' ( d + m ) × ( d + m ) × d , aiming at explicitly capturing the interplays between the sentiment class of p 1 , denoted as p 1 s u'\u005cu2062' e u'\u005cu2062' n ( u'\u005cu2208' u'\u005cu211d' m × 1 ), and the negator a
+p29
+aVDuring the derivative computation, the two errors will be summed up as the complement incoming error for the node
+p30
+aVWith the new matrix and tensor, we then have u'\u005cu0398' = ( V , V s u'\u005cu2062' e u'\u005cu2062' n , W , W s u'\u005cu2062' e u'\u005cu2062' n , W l u'\u005cu2062' a u'\u005cu2062' b u'\u005cu2062' e u'\u005cu2062' l , L ) as the PSTN model u'\u005cu2019' s parameters
+p31
+aVwhere s i g n is the standard sign function which determines if the constant C should be added to or deducted from s u'\u005cu2062' ( w n the constant is added to a negative s u'\u005cu2062' ( w u'\u005cu2192' ) but deducted from a positive one
+p32
+aVHere, L denotes the vector representations of the word dictionary
+p33
+aVNow, let u'\u005cu2019' s form the equations for computing the error for the two children of the p 2 node
+p34
+aVTo minimize E u'\u005cu2062' ( u'\u005cu0398' ) , the gradient of the objective function with respect to each of the parameters in u'\u005cu0398' is calculated efficiently via backpropagation through structure, as proposed by
+p35
+aVWe denote the complete incoming error and the softmax error vector for node i as u'\u005cu0394' i , c u'\u005cu2062' o u'\u005cu2062' m u'\u005cu2208' u'\u005cu211d' d × 1 and u'\u005cu0394' i , s u'\u005cu2208' u'\u005cu211d' d × 1 , respectively
+p36
+aVFor example, if y i = [ 0.5 u'\u005cu2004' 0.5 u'\u005cu2004' 0 u'\u005cu2004' 0 u'\u005cu2004' 0 ] , meaning this phrase has a 0.5 probability to be in the first category (strong negative) and 0.5 for the second category (weak negative), the resulting p i r u'\u005cu2062' e u'\u005cu2062' a u'\u005cu2062' l will be 0.2 (0.5*0.1+0.5*0.3
+p37
+aVAs a result, the vector of p 2 is calculated as follows
+p38
+aVThe depth here is defined as the longest distance between the root of a negator-phrase pair u'\u005cu27e8' w n , w u'\u005cu2192' u'\u005cu27e9' and their descendant leafs
+p39
+aVWe denote the error passing down as u'\u005cu0394' p 2 , d u'\u005cu2062' o u'\u005cu2062' w u'\u005cu2062' n , where the left child and the right child of p 2 take the 1 s u'\u005cu2062' t and 2 n u'\u005cu2062' d half of the error u'\u005cu0394' p 2 , d u'\u005cu2062' o u'\u005cu2062' w u'\u005cu2062' n , namely u'\u005cu0394' p 2 , d u'\u005cu2062' o u'\u005cu2062' w u'\u005cu2062' n [ 1 d ] and u'\u005cu0394' p 2 , d u'\u005cu2062' o u'\u005cu2062' w u'\u005cu2062' n [ d + 1
+p40
+aVThus, we explore the use of two different constants for these two situations, i.e.,, f u'\u005cu2062' ( s u'\u005cu2062' ( w u'\u005cu2192' ) ) = s u'\u005cu2062' ( w u'\u005cu2192' ) - s u'\u005cu2062' i u'\u005cu2062' g u'\u005cu2062' n u'\u005cu2062' ( s u'\u005cu2062' ( w u'\u005cu2192' ) ) * C u'\u005cu2062' ( s u'\u005cu2062' i u'\u005cu2062' g u'\u005cu2062' n u'\u005cu2062' ( s u'\u005cu2062' ( w u'\u005cu2192' ) )
+p41
+aVFor example, not alive has the same meaning as dead , however, not tall does not always mean short
+p42
+a.

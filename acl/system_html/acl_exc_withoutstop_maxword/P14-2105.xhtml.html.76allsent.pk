@@ -1,0 +1,254 @@
+(lp0
+VBy using a general semantic similarity model to match patterns and relations, as well as mentions and entities, our system outperforms the existing rule learning system, Paralex [ 7 ] , with higher precision at all the recall points when answering the questions in the same test set
+p1
+aV2013 ) , we train two semantic similarity models one links a mention from the question to an entity in the KB and the other maps a relation pattern to a relation
+p2
+aVThe answer to the question can thus be derived by finding the relation u'\u005cu2013' entity triple r u'\u005cu2062' ( e 1 , e 2 ) in the KB and returning the entity not mentioned in the question
+p3
+aVWe train two CNN semantic models from sets of pattern u'\u005cu2013' relation and mention u'\u005cu2013' entity pairs, respectively
+p4
+aVTo train our two CNN semantic models, we derived two parallel corpora based on the Paralex training data
+p5
+aVA single-relation question is defined as a question composed of an entity mention and a binary relation description, where the answer to this question would be an entity that has the relation with the given entity
+p6
+aVIf an exact match was found, then the pattern would be derived by replacing the mention in the question with the special symbol
+p7
+aVFor relation patterns, we first scanned the original training corpus to see if there was an exact surface form match of the entity (e.g.,, dvd-player would map to u'\u005cu201c' DVD player u'\u005cu201d' in the question
+p8
+aVGiven a pattern and a relation, we compute their relevance score by measuring the cosine similarity between their semantic vectors
+p9
+aVThe semantic relevance score between a pattern Q and a relation R is defined as the cosine score of their semantic vectors y Q and y R
+p10
+aVAn example of a single-relation question is u'\u005cu201c' When were DVD players invented u'\u005cu201d' The entity is dvd-player and the relation is be-invent-in
+p11
+aVAs we can observe from the figure, the precision of our CNNSM p u'\u005cu2062' m system is consistently higher than Paralex across all recall regions
+p12
+aVWe adapt the work of [ 8 , 15 ] for measuring the semantic distance between a question and relational triples in the KB as the core component of our semantic parsing approach
+p13
+aVTo determine the probabilities of such mappings, we propose using a semantic similarity model based on convolutional neural networks, which is the technical focus in this paper
+p14
+aVBy limiting the systems to output only answer triples with scores higher than a predefined threshold, we could control the trade-off between recall and precision and thus plot the precision u'\u005cu2013' recall curve
+p15
+aVBecause our systems might find triples that were not returned by the Paralex systems, we labeled these new question u'\u005cu2013' triple pairs ourselves
+p16
+aVIf the mapping of the relation and entity in the question can be correctly resolved, then the answer can be derived by a simple table lookup, assuming that the fact exists in the KB
+p17
+aVThe corresponding relation of this pattern was thus the relation used in the original database query, along with the variable argument position (i.e.,, 1 or 2, indicating whether the answer entity was the first or second argument of the relation
+p18
+aVFurther, since the overall meaning of a sentence is often determined by a few key words in the sentence, CNNSM uses a max pooling layer to extract the most salient local features to form a fixed-length global feature vector
+p19
+aVWe assumed such questions are answerable by issuing a single-relation query that consists of the relation and an argument entity, against a knowledge base†(KB
+p20
+aVSince the trade-off between precision and recall can be adjusted by varying the threshold, it is more informative to compare systems on the precision u'\u005cu2013' recall curves, which are shown in Figure 3
+p21
+aVIn this paper, we focus on using a knowledge base to answer single-relation questions
+p22
+aVThe CNNSM first uses a convolutional layer to project each word within a context window to a local contextual feature vector, so that semantically similar word- n -grams are projected to vectors that are close to each other in the contextual feature space
+p23
+aVThe posterior probability of the positive relation given the pattern is computed based on the cosine scores using softmax
+p24
+aVThis is understandable since the system does not match mentions with entities of different surface forms (e.g.,, u'\u005cu201c' Robert Hooke u'\u005cu201d' to u'\u005cu201c' Hooke u'\u005cu201d'
+p25
+aVIn this section, we briefly introduce the dataset, describe the system training and evaluation processes and, finally, present our experimental results
+p26
+aVHowever, due to the large number of paraphrases of the same question, identifying the mapping accurately remains a difficult problem
+p27
+aV4 , was used as the final score of the triple for ranking the answers
+p28
+aVOne more non-linear transformation layer is further applied on top of the global feature vector v to extract the high-level semantic representation, denoted by y
+p29
+aVBy applying simple seed templates to the KB and by leveraging community-authored paraphrases of questions from WikiAnswers, they successfully demonstrated a high-quality lexicon of pattern-matching rules can be learned for this restricted form of semantic parsing
+p30
+aVAs shown in Figure 2 , we have y = t u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' h u'\u005cu2062' ‚ u'\u005cu2062' Å u'\u005cu2062' ° u'\u005cu2062' ( W s u'\u005cu22c5' v ) , where v is the global feature vector after max pooling, W s is the semantic projection matrix, and y is the vector representation of the input query (or document) in latent semantic space
+p31
+aVData were tokenized by replacing hyphens with blank spaces
+p32
+aVGiven the letter-trigram based word representation, we represent a word- n -gram by concatenating the letter-trigram vectors of each word, e.g.,, for the t -th word- n -gram at the word- n -gram layer, we have
+p33
+aVCNNSM p u'\u005cu2062' m is the full system and consists of two semantic similarity models for pattern u'\u005cu2013' relation and mention u'\u005cu2013' entity
+p34
+aVIn order to provide a fair comparison to previous work, we experimented with our approach using the Paralax dataset [ 7 ] , which consists of paraphrases of questions mined from WikiAnswers and answer triples from ReVerb
+p35
+aVFollowing [ 8 ] , for every pattern, the corresponding relation is treated as a positive example and 100 randomly selected other relations are used as negative examples
+p36
+aVThe probability of the rule in†( 1 ) is 1 since we assume the input is a single-relation question
+p37
+aVConsider the t -th word- n -gram, the convolution matrix projects its letter-trigram representation vector l t to a contextual feature vector h t
+p38
+aVSince many words do not have significant influence on the semantics of the sentence, we want to retain in the global feature vector only the salient features from a few key words
+p39
+aVReferring to the max-pooling layer of Figure 2 , we have
+p40
+aVTuning the thresholds using a validation set would be needed if there is a metric (e.g.,, F 1 ) that specifically needs to be optimized
+p41
+aVAs shown in Figure 2 , h t is computed by
+p42
+aVFor each selected relation, the system then checked all triples in the KB that had this relation and computed the similarity score between the mention and corresponding argument entity
+p43
+aVAn early example of this research is the semantic parser for answering geography-related questions, learned using inductive logic programming [ 18 ]
+p44
+aVFor this purpose, we use a max operation, also known as max pooling, to force the network to retain only the most useful local features produced by the convolutional layers
+p45
+aVThe top answer triple was used to compute the precision and recall of the system when reporting the system performance
+p46
+aVWhen training the CNNSM for the pattern u'\u005cu2013' relation similarity measure, we randomly split the 1.2 million pairs of patterns and relations into two sets the training set of 1.19 million pairs, and the validation set of 12 thousand pairs for hyper-parameter tuning
+p47
+aVThe answer can thus be described as the following lambda expression
+p48
+aVWord hashing not only makes the learning more scalable by controlling the size of the vocabulary, but also can effectively handle the OOV issues, sometimes due to spelling mistakes
+p49
+aVOur approach in this work can be viewed as a simple semantic parser tailored to single-relation questions, powered by advanced semantic similarity models to handle the paraphrase issue
+p50
+aVModel training is done by maximizing the log-posteriori using stochastic gradient descent
+p51
+aVThe mapping between the pattern and the relation in the KB, as well as the mapping between the mention and the entity are determined by corresponding semantic similarity models
+p52
+aVThe entity mention is a subsequence of consecutive words in the question, where the relation pattern is the question where the mention is substituted by a special symbol
+p53
+aVThe other model, CNNSM p , only measures the similarity between the patterns and relations, and maps a mention to an entity when they have the same surface form
+p54
+aVFinally, Sec
+p55
+aVAt the core of our approach is a novel semantic similarity model using convolutional neural networks
+p56
+aVWe used the same test questions in the Paralex dataset to evaluate whether our system could find the answers from the ReVerb database
+p57
+aVFollowing [ 4 , 15 ] , we develop a new convolutional neural network (CNN) based semantic model (CNNSM) for semantic parsing
+p58
+aV4 details our semantic models and Sec
+p59
+aVWe then computed the similarity scores between the pattern and all relations in the KB and retained 150 top-scoring relation candidates
+p60
+aVGiven a question, we first separate it into two disjoint parts the entity mention and the relation pattern
+p61
+aVThe Paralex training data consists of approximately 1.8 million pairs of questions and single-relation database queries, such as u'\u005cu201c' When were DVD players invented u'\u005cu201d' , paired with be-invent-in(dvd-player
+p62
+aVThe product of the probabilities of these two models, which are derived from the cosine similarity scores using softmax as described in Sec
+p63
+aVSec
+p64
+aVWe then applied these patterns to all the 1.8 million training questions, which helped discover 160 thousand new mentions that did not have the exact surface form matches to the entities
+p65
+aVIn this paper, we propose a semantic parsing framework tailored to single-relation questions
+p66
+aVTable 1 shows the performance in F 1 , precision, recall and mean average precision of our systems and Paralex
+p67
+aVLeveraging the question paraphrase data mined from the WikiAnswers corpus by Fader et al
+p68
+aV2013 ) proposed the Paralex system, which targets answering single-relation questions using an automatically created knowledge base, ReVerb [ 6 ]
+p69
+aVIn the end, we derived about 1.2 million pairs of patterns and relations
+p70
+aVThe performance of this approach depends mainly on whether the relation pattern and entity mention can be resolved correctly (e.g.,, ( 1 ), ( 1
+p71
+aVThe CNNSM m system also performs similarly to CNNSM p u'\u005cu2062' m in the high precision regime, but is inferior when recall is higher
+p72
+aVThe setting for the mention u'\u005cu2013' entity model is similar
+p73
+aVGiven a question, the system first enumerated all possible decompositions of the mentions and patterns, as described earlier
+p74
+aVSemantic parsing of questions, which maps natural language questions to database queries, is a critical component for KB-supported QA
+p75
+aVA similar setting was used for the CNNSM for the mention u'\u005cu2013' entity model, which was trained on 160 thousand mention-entity pairs
+p76
+aVThe highest achievable F 1 score of our system is 0.61, versus 0.54 of Paralex
+p77
+aVFor evaluation, the authors further sampled 698 questions that belong to 37 clusters and hand labeled the answer triples returned by their systems
+p78
+aVThat is to say that the problem of mapping from a question to a particular relation and entity in the KB is non-trivial
+p79
+aVWe first survey related work in Sec
+p80
+aV5 shows the experimental results
+p81
+aVThe other line of work related to our approach is continuous representations for semantic similarity, which has a long history and is still an active research topic
+p82
+aVFive hundred neurons were used in the convolutional layer, the max-pooling layer and the final semantic layer, respectively
+p83
+aVThere were 15 thousand unique letter-trigrams observed in the training set (used for word hashing
+p84
+aV2 , followed by the problem definition and the high-level description of our approach in Sec
+p85
+aVSingle-relation questions are perhaps the easiest form of questions that can directly be answered by a knowledge base
+p86
+aVThe global feature vector can be then fed to feed-forward neural network layers to extract non-linear semantic features
+p87
+aVThe output of the convolutional layer is a sequence of local contextual feature vectors, one for each word (within a contextual window
+p88
+aVIn what follows, we describe each layer of the CNNSM in detail, using the annotation illustrated in Figure 2
+p89
+aVIn this paper, we focus on answering single-relation factual questions, which are the most common type of question observed in various community QA sites [ 7 ] , as well as in search query logs
+p90
+aVIn the experiment, we used a context window (i.e.,, the receptive field) of three words in the convolutional neural networks
+p91
+aVThe architecture of the CNNSM is illustrated in Figure 2
+p92
+aVA knowledge base in this work can be simply viewed as a collection of binary relation instances in the form of r u'\u005cu2062' ( e 1 , e 2 ) , where r is the relation and e 1 and e 2 are the first and second entity arguments
+p93
+aVWe used a learning rate of 0.002 and the training converged after 150 iterations
+p94
+aVOpen-domain question answering†(QA) is an important and yet challenging problem that remains largely unsolved
+p95
+aVIn information retrieval, TF-IDF vectors [ 13 ] , latent semantic analysis [ 5 ] and topic models [ 2 ] take the bag-of-words approach, which captures well the contextual information for documents, but is often too coarse-grained to be effective for sentences
+p96
+aVThe high-level approach can be viewed as a very simple context-free grammar, which is shown in Figure 1
+p97
+aVIn a separate line of research, deep learning based techniques have been proposed for semantic understanding [ 11 , 8 , 15 , 12 , 17 ]
+p98
+aVWhile single-relation questions are easier to handle than questions with more complex and multiple relations, such as u'\u005cu201c' When was the child of the former Secretary of State in Obama u'\u005cu2019' s administration born u'\u005cu201d' , single-relation questions are still far from completely solved
+p99
+aVEven in this restricted domain there are a large number of paraphrases of the same question
+p100
+aVIn Figure 2 , the word hashing matrix W f denotes the transformation from a word to its letter-trigram count vector, which requires no learning
+p101
+aVFor the exact decomposition of the question†(e.g.,, ( 2 ), ( 3 )), we simply enumerate all combinations and assign equal probabilities to them
+p102
+aV6 concludes the paper
+p103
+aVWe provide two variations here
+p104
+aVIn our model, we leverage the word hashing technique proposed in [ 8 ] where we first represent a word by a letter-trigram count vector
+p105
+aVK is the dimensionality of the max pooling layer, which is the same as the dimensionality of the local contextual feature vectors { h t }
+p106
+aVVery recently, researchers have started developing semantic parsers for large, general-domain knowledge bases like Freebase and DBpedia [ 3 , 1 , 9 ]
+p107
+aVThe rest of the paper is structured as follows
+p108
+aVNotice that the highest F 1 values of them are 0.61 and 0.56 , compared to 0.54 of Paralex
+p109
+aVThe convolution operation can be viewed as sliding window based feature extraction
+p110
+aVIn contrast, Fader et al
+p111
+aVDespite significant progress, the problem remains challenging
+p112
+aVIt captures the word- n -gram contextual features
+p113
+aVThen, the word is represented as a count vector of letter-trigrams
+p114
+aVMost methods have not yet been scaled to large KBs that can support general open-domain QA
+p115
+aVwhere W c is the feature transformation matrix, as known as the convolution matrix, which are shared among all word n -grams
+p116
+aVExample questions of this type include u'\u005cu201c' Who is the CEO of Tesla u'\u005cu201d' and u'\u005cu201c' Who founded Paypal u'\u005cu201d'
+p117
+aVwhere f t is the letter-trigram representation of the t -th word, and n = 2 u'\u005cu2062' d + 1 is the size of the contextual window
+p118
+aVFor example, given a word†(e.g.,,†cat), after adding word boundary symbols†(e.g.,,†#cat#), the word is segmented into a sequence of letter- n -grams†(e.g.,, letter-trigrams
+p119
+aVResearch in this line originally used small, domain-specific databases, such as GeoQuery [ 16 , 10 ]
+p120
+aVwhere v u'\u005cu2062' ( i ) is the i -th element of the max pooling layer v , h t u'\u005cu2062' ( i ) is the i -th element of the t -th local feature vector h t
+p121
+aVwhere u'\u005cu0393' is a scaling factor set to 5
+p122
+aVMore detail can be found in [ 14 ]
+p123
+aVFor example, the letter-trigram representation of u'\u005cu201c' cat u'\u005cu201d' is
+p124
+aV#-c-a, c-a-t, a-t-#
+p125
+aV3
+p126
+a.

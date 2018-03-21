@@ -1,0 +1,347 @@
+(lp0
+VThese systems combine (i) a score based on the background ( KL back , TS or SR ) with (ii) the score based on the input only ( KL inp
+p1
+aVIn this work, we present a Bayesian model for assessing the novelty of a sentence taken from a summarization input with respect to a background corpus of documents
+p2
+aVCentral to this approach is the use of a likelihood ratio test to compute topic words , words that have significantly higher probability in the input compared to the background corpus, and are hence descriptive of the input u'\u005cu2019' s topic
+p3
+aVWe use the method to do two types of summarization tasks a) generic news summarization which uses a large random collection of news articles as the background, and b) update summarization where the background is a smaller but specific set of news documents on the same topic as the input set
+p4
+aVFor example, to combine TS sum and KL inp for each sentence, we compute its scores based on the two methods
+p5
+aVWords with - 2 u'\u005cu2062' log u'\u005cu2061' u'\u005cu039b' 10 are considered topic words u'\u005cu2019' s system gives a weight of 1 to the topic words and scores sentences using the number of topic words normalized by sentence length
+p6
+aVIn this work, we compare our system to topic word based ones since the latter is also a general method to find surprising new words in a set of input documents but is not a bayesian approach
+p7
+aVu'\u005cud835' u'\u005cudc13' u'\u005cud835' u'\u005cudc12' u'\u005cud835' u'\u005cudc2c' u'\u005cud835' u'\u005cudc2e' u'\u005cud835' u'\u005cudc26' , u'\u005cud835' u'\u005cudc13' u'\u005cud835' u'\u005cudc12' u'\u005cud835' u'\u005cudc1a' u'\u005cud835' u'\u005cudc2f' u'\u005cud835' u'\u005cudc20' use topic words computed as described in Section 2 and utilizing the same background corpus for the generic and update tasks as the surprise-based methods
+p8
+aVSurprise is computed based on the changes in probabilities of all of these hypotheses upon seeing the summarization input ii) The computation of topic words is local, it assumes a binomial distribution and the occurrence of a word is independent of others
+p9
+aVWe follow a greedy approach to optimize the summary surprise by choosing the most surprising sentence, the next most surprising and so on
+p10
+aVIn this generic task, some of the best reported results were obtained by a system [] which computed importance scores for words in the input by examining if the word occurs with significantly higher probability in the input compared to a large background collection of news articles
+p11
+aV1 1 An alternative algorithm could directly compute the surprise of a sentence by incorporating the words from the sentence into the posterior
+p12
+aVTo reduce redundancy, once a sentence is added, the topic words contained in it are removed from the topic word list before the next sentence selection
+p13
+aVSo new words in an input are added to the background corpus with a count of 1 and the counts of existing words in the background are incremented by 1 before computing the prior parameters
+p14
+aVP u'\u005cu2062' ( H ) gives a prior probability to each hypothesis based on the information in the background corpus
+p15
+aVIn practice for both tasks, a new summarization input can have words unseen in the background
+p16
+aVThen we normalize the two sets of scores for candidate sentences using z-scores and compute the best sentence as arg u'\u005cu2062' max s i ( TS sum u'\u005cu2062' ( s i ) - KL inp u'\u005cu2062' ( s i )
+p17
+aVNow consider a new observation I (a text, sentence, or paragraph from the summarization input ) and the word counts in I given by ( c 1 , c 2 , u'\u005cu2026' , c V
+p18
+aVThe surprise S u'\u005cu2062' ( D , u'\u005cud835' u'\u005cudc07' ) created by D on hypothesis space H is defined as the difference between the prior and posterior distributions over the hypotheses, and is computed using KL divergence
+p19
+aVFor the generic task, we use a critical value of 10 (0.001 significance level) for the u'\u005cu03a7' 2 distribution during topic word computation
+p20
+aVRather the method creates a summary by optimizing for high similarity of the summary with the input word distribution
+p21
+aVFor illustration, assume that a user u'\u005cu2019' s background knowledge comprises of multiple hypotheses about the current state of the world and a probability distribution over these hypotheses indicates his degree of belief in each hypothesis
+p22
+aVFirst, consider generic summarization and the systems which use the background corpus only (those above the horizontal line
+p23
+aVV are the concentration parameters of the Dirichlet distribution (and will be set using the background corpus as explained in Section 4.2
+p24
+aVHowever, we found this specific method to not work well probably because the few and unrepeated content words from a sentence did not change the posterior much
+p25
+aVIn future, we plan to use latent topic models to assign a topic to a sentence so that the counts of all the sentence u'\u005cu2019' s words can be aggregated into one dimension
+p26
+aVIn some cases, surprise can be computed analytically, in particular when the prior distribution is conjugate to the form of the hypothesis, and so the posterior has the same functional form as the prior
+p27
+aVNumerically, SR sum has the highest ROUGE-1 score and TS sum tops according to ROUGE-2
+p28
+aVSo for a resulting - 2 u'\u005cu2062' log u'\u005cu2061' u'\u005cu039b' value, we can use the u'\u005cu03a7' 2 table to find the significance level with which the null hypothesis H 1 can be rejected
+p29
+aVEven for generic summarization, some of the best results were obtained by by using a large random corpus of news articles as the background while summarizing a new article, an idea first proposed by
+p30
+aVH 2 t is a topic word, hence p ( t
+p31
+aVAt the same time, we aim to avoid redundancy, i.e., selecting sentences with similar content
+p32
+aVOur model is based on the idea of Bayesian Surprise []
+p33
+aVWe refer to the surprise-based summaries as u'\u005cud835' u'\u005cudc12' u'\u005cud835' u'\u005cudc11' u'\u005cud835' u'\u005cudc2c' u'\u005cud835' u'\u005cudc2e' u'\u005cud835' u'\u005cudc26' and u'\u005cud835' u'\u005cudc12' u'\u005cud835' u'\u005cudc11' u'\u005cud835' u'\u005cudc1a' u'\u005cud835' u'\u005cudc2f' u'\u005cud835' u'\u005cudc20' depending on the type of composition function (Section 4.1
+p34
+aVA convenient aspect of this approach is that - 2 u'\u005cu2062' log u'\u005cu2061' u'\u005cu039b' is asymptotically u'\u005cu03a7' 2 distributed
+p35
+aVFor example, one hypothesis may be that the political situation in Ukraine is peaceful , another where it is not
+p36
+aVSentence score
+p37
+aVWord score
+p38
+aVWord scores are aggregated to obtain a score for each sentence
+p39
+aVIn contrast, word surprise although computed for each word type separately, quantifies the surprise when incorporating the new counts of this word into the background multinomials
+p40
+aVInput + background
+p41
+aVWe first compute a surprise value for each word type in the summarization input
+p42
+aVNote that since KL-divergence is not symmetric, we could also compute KL ( P ( H ) , P ( H
+p43
+aVThe composition functions to obtain sentence scores from word scores can impact content selection performance []
+p44
+aVIn fact, the surprise methods have numerically higher ROUGE-1 scores compared to input similarity ( KL inp ) in contrast to generic summarization
+p45
+aVA single hypothesis about the background takes the form of a multinomial distribution over word unigrams
+p46
+aVHere we describe the input sets and background corpus used for the two summarization tasks and define the prior distribution for each
+p47
+aVSystems were given a list of documents ranked according to relevance to a query
+p48
+aVSentence selection
+p49
+aVAfter a sentence is selected for the summary, the surprise for words from this sentence are set to zero
+p50
+aVThe TS sum system selects sentences with greater counts of topic words and TS avg computes the number of topic words normalized by sentence length
+p51
+aVFor example, a value of 10 corresponds to a significance level of 0.001 and is standardly used as the cutoff
+p52
+aVUpdate summarization
+p53
+aVGeneric summarization
+p54
+aVWe compare against three types of systems, (i) those which similarly to surprise, use a background corpus to identify important sentences, (ii) a system that uses information from the input set only and no background, and (iii) systems that combine scores from the input and background
+p55
+aVThe count of each word in the background is calculated and used as the u'\u005cu0391' parameters of the prior Dirichlet distribution P u'\u005cu2062' ( H ) (eqn
+p56
+aVThen we define the prior distribution P u'\u005cu2062' ( H ) for each of our two tasks, generic and update summarization
+p57
+aVThe KL back baseline performs significantly worse than topic words and surprise summaries
+p58
+aVIn our case, P u'\u005cu2062' ( H ) is a Dirichlet distribution, the conjugate prior for multinomials
+p59
+aVBelow we propose a general algorithm for summarization using surprise computation
+p60
+aVIn update summarization, the surprise-based methods have an advantage over the topic word ones
+p61
+aVComputing topic words
+p62
+aVDetails about computing KL divergence between two dirichlet distributions can be found in and
+p63
+aVWe use a list of 571 stop words from the SMART IR system [] and the remaining content word vocabulary has 59,497 word types
+p64
+aVWe recompute the surprise for the remaining sentences using step 2 and the selection process continues until the summary length limit is reached
+p65
+aVHere a user u'\u005cu2019' s prior knowledge is approximated by a background corpus and we show how to identify sentences from the input set which are most surprising with respect to this background
+p66
+aVAt the same time, adding either TS or SR scores to KL inp almost always leads to better results with KL inp + TS avg giving the best score
+p67
+aVThe surprise due to observing I , S u'\u005cu2062' ( I , u'\u005cud835' u'\u005cudc07' ) is the KL divergence between the two dirichlet distributions
+p68
+aVWe experiment with sum and average value of the word scores
+p69
+aVBut Bayesian surprise is robust on the small background corpus and does not need any tuning for cutoff values depending on the size of the background set
+p70
+aVWe consider the hypothesis space H as the set of all the hypotheses encoding background knowledge
+p71
+aVIn the update task however, the background corpus A is smaller and for most inputs, no words exceeded this cutoff
+p72
+aVThe prior parameters are the counts of words in A for that input (using the same stoplist
+p73
+aVSuppose that word type w i appears c i times in the summarization input I
+p74
+aVThis result is not surprising for generic summarization where all the topical content is present in the input and the background is a non-focused random collection
+p75
+aVWhen combined with KL inp , the surprise methods provide improved results, significantly better in terms of ROUGE-1 scores
+p76
+aVApriori assume the user favors the hypothesis about a peaceful Ukraine, i.e., the hypothesis has higher probability in the prior distribution
+p77
+aVThe score for w i is the surprise computed as KL divergence between P ( H u'\u005cud835' u'\u005cudc30' u'\u005cud835' u'\u005cudc22' ) and the prior P u'\u005cu2062' ( H ) (eqn
+p78
+aVFor update summarization of news, methods range from textual entailment techniques [] to find facts in the input which are not entailed by the background, to Bayesian topic models [] which aim to learn and use topics discussed only in background, those only in the update input and those that overlap across the two sets
+p79
+aVTable 1 shows the scores for generic summaries and 2 for the update task
+p80
+aVIn this work, we exemplify how Bayesian surprise can be used to do content selection for text summarization
+p81
+aVThe first line here shows that a system optimizing only for input similarity, KL inp , by itself has higher scores (though not significant) than those using background information only
+p82
+aVWe find that our method performs competitively with a previous log-likelihood ratio approach which identifies words with significantly higher probability in the input compared to the background
+p83
+aVThe key differences between our Bayesian approach and a method such as topic words are i) The Bayesian approach keeps multiple hypotheses about the background rather than a single one
+p84
+aVThe TS methods do not lead to any improvement, and KL inp + TS avg is significantly worse than KL inp only
+p85
+aVThe Bayesian approach is more advantageous in the update task, where the background corpus is smaller in size
+p86
+aVBayesian surprise is the difference between the prior and posterior distributions over the hypotheses which quantifies the extent to which the new data (the news report) has changed a user u'\u005cu2019' s prior beliefs about the world
+p87
+aVStep 1
+p88
+aVStep 2
+p89
+aVThe posterior probability of a single hypothesis H can be computed as
+p90
+aVA single unigram probability distribution B is created from the background using maximum likelihood
+p91
+aVIn the update summarization task, a system is given two sets of news documents on the same topic; the second contains articles published later in time
+p92
+aVOther specialized summarization tasks explicitly require the use of background information
+p93
+aVThe background corpus is a collection of 5000 randomly selected articles from the English Gigaword corpus
+p94
+aVA word t is not a topic word and occurs with equal probability in I and B , i.e., p ( t
+p95
+aVThe summary length limit is 100 words in both tasks
+p96
+aVThe goal is to select a subset of sentences with high surprise values
+p97
+aVSuppose that the vocabulary size of the background corpus is V and we label the word types as ( w 1 , w 2 , u'\u005cu2026' w V
+p98
+aVWe briefly explain the topic words based approach below
+p99
+aVSee for the surprise computation for different families of probability distributions
+p100
+aVThen the posterior over H is the dirichlet
+p101
+aVThe summary is created by greedily adding sentences which maximize KL divergence between B and the current summary
+p102
+aVAs per the Wilcoxon test, TS sum , SR sum and SR avg scores are statistically indistinguishable at 95% confidence level
+p103
+aVSuppose the input unigram distribution is I and the current summary is S , the method chooses the sentence s l = arg min s i KL ( { S u'\u005cu222a' s i }
+p104
+aVFirst we present the formal definition of Bayesian surprise given by without reference to the summarization task
+p105
+aVStep 3
+p106
+aVLet us call the input set I and the background B
+p107
+aVThe limitation of the TS approach arises from the paucity of topic words that exceed the significance cutoff applied on the log-likelihood ratio
+p108
+aVNote that these models do not perform on par with summarization systems that use multiple indicators of content importance, involve supervised training and which perform sentence compression
+p109
+aVSystems below the horizontal line in Table 1 use an objective which combines both similarity with the input and difference from the background
+p110
+aVThe next step chooses the sentence s l = arg max s i KL ( { S u'\u005cu222a' s i }
+p111
+aVFor example, in the simplest setting of multi-document summarization of news, systems are asked to summarize an input set of topically-related news documents to reflect its central content
+p112
+aVLet H be the space of all hypotheses representing the background knowledge of a user
+p113
+aVSuppose the set of sentences currently chosen in the summary is S
+p114
+aVSR avg is significantly better than TS avg for both ROUGE-1 and ROUGE-2 scores and better than TS sum according to ROUGE-1
+p115
+aVUnderstandably in automatic summarization as well, it is useful to keep a background set of documents to represent general facts and their frequency in the domain
+p116
+aVFor example, upon viewing news reports about riots in the country, a user would update his beliefs and the posterior distribution of the user u'\u005cu2019' s knowledge would have a higher probability for a riotous Ukraine
+p117
+aVGiven new data, the evidence can be incorporated using Bayes Rule to compute the posterior distribution over the hypotheses
+p118
+aVThere were 44 inputs and 4 manual update summaries are provided for each
+p119
+aVThe number of topic words is still small (ranging from 1 to 30) for different inputs
+p120
+aVWe report the ROUGE-1 and ROUGE-2 recall scores (average over the inputs) for each system
+p121
+aVAll summaries were truncated to 100 words, stemming was performed and stop words were not removed, as is standard in TAC evaluations
+p122
+aVWe lower the significance level to the generally accepted value of 0.05 and take words scoring above this as topic words
+p123
+aVFor evaluation, we compare each summary to the four manual summaries using ROUGE []
+p124
+aVD ) ) as the surprise value
+p125
+aVThe vocabulary of these A sets is smaller, ranging from 400 to 3000 words for the different inputs
+p126
+aVThen the probability of a word t appearing k times in a dataset of N tokens is the binomial probability
+p127
+aVEach input is also provided with 4 manually written summaries created by NIST assessors
+p128
+aVThe goal is to find sentences in each document which are relevant to the query, and at the same time is new information given the content of documents higher in the relevance list
+p129
+aVFor example, one multinomial may have higher word probabilities for u'\u005cu2018' Ukraine u'\u005cu2019' and u'\u005cu2018' peaceful u'\u005cu2019' and another multinomial has higher probabilities for u'\u005cu2018' Ukraine u'\u005cu2019' and u'\u005cu2018' riots u'\u005cu2019'
+p130
+aVBoth A and B are on same topic but documents in B were published at a later time than A (background
+p131
+aVWhen people create summaries, they use their knowledge about the world to decide what content in an input document is informative to include in a summary
+p132
+aVWe use data from the DUC 2 2 http://www-nlpir.nist.gov/projects/duc/index.html and TAC 3 3 http://www.nist.gov/tac/ summarization evaluation workshops conducted by NIST
+p133
+aVFor each system, the peer systems with significantly better scores (p-value 0.05 ) are indicated within parentheses
+p134
+aVWe use these manual summaries for evaluation
+p135
+aVWe use the Wilcoxon signed-rank test to check for significant differences in mean scores
+p136
+aVAn input has two sets of documents, A and B, each containing 10 documents
+p137
+aVu'\u005cud835' u'\u005cudc0a' u'\u005cud835' u'\u005cudc0b' u'\u005cud835' u'\u005cudc1b' u'\u005cud835' u'\u005cudc1a' u'\u005cud835' u'\u005cudc1c' u'\u005cud835' u'\u005cudc24' represents a simple baseline for surprise computation from a background corpus
+p138
+aVA greedy selection procedure is used
+p139
+aVRedundancy control is done similarly to the TS only systems
+p140
+aVSince { S u'\u005cu222a' s i } is used to compute divergence, redundancy is implicitly controlled in this approach
+p141
+aVThe word in each position i is assumed to be generated by a Bernoulli trial which succeeds when the generated word w i = t and fails when w i is not t
+p142
+aVThere were 50 inputs, each contains around 10 documents on a common topic
+p143
+aVThe log-likelihood ratio test compares two hypotheses
+p144
+aVSuch a KL objective was used in competitive systems in the past []
+p145
+aVThe TREC novelty tasks [] tested the ability of systems to find novel information in an IR setting
+p146
+aVThe system should summarize the important updates from the second set assuming a user has already read the first set of articles
+p147
+aVSuppose that the probability of success is p
+p148
+aVp , p 1 and p 2 are estimated by maximum likelihood p = c t / N where c t is the number of times word t appears in the total set of tokens comprising { B , I } p 1 = c t I / N I and p 2 = c t B / N B are the probabilities of t estimated only from the input and only from the background respectively
+p149
+aVThe user has a probability P u'\u005cu2062' ( H ) associated with each hypothesis H u'\u005cu2208' H
+p150
+aVImportant facts in a new text are those which deviate from previous knowledge on the topic
+p151
+aVWe obtain the posterior distribution after seeing all instances of this word ( u'\u005cud835' u'\u005cudc30' u'\u005cud835' u'\u005cudc22' ) as P ( H u'\u005cud835' u'\u005cudc30' u'\u005cud835' u'\u005cudc22' ) = D u'\u005cu2062' i u'\u005cu2062' r u'\u005cu2062' ( u'\u005cu0391' 1 , u'\u005cu0391' 2 , u'\u005cu2026' u'\u005cu2062' u'\u005cu0391' i + c i , u'\u005cu2026' u'\u005cu2062' u'\u005cu0391' V
+p152
+aVWe use multidocument inputs from DUC 2004
+p153
+aVA set of documents D containing N tokens is viewed as a sequence of words w 1 w 2 u'\u005cu2026' w N
+p154
+aVThis task uses data from TAC 2009
+p155
+aVComputing new information is useful in many applications
+p156
+aVThe likelihood ratio compares the likelihood of the data D = { B , I } under the two hypotheses
+p157
+aVRather our goal in this work is to demonstrate a simple and intuitive unsupervised model
+p158
+aVu'\u005cud835' u'\u005cudc0a' u'\u005cud835' u'\u005cudc0b' u'\u005cud835' u'\u005cudc22' u'\u005cud835' u'\u005cudc27' u'\u005cud835' u'\u005cudc29' represents the system that does not use background information
+p159
+aVLet D be a new observation
+p160
+aVI ) at each iteration
+p161
+aV/thesis
+p162
+aVThe author was supported by a Newton International Fellowship (NF120479) from the Royal Society and the British Academy
+p163
+aVThen
+p164
+aV6
+p165
+aVB ) = p 2 and p 1 p 2
+p166
+aVI ) = p 1 and p ( t
+p167
+aVB ) = p
+p168
+aVI ) = p ( t
+p169
+aVH 1
+p170
+ag165
+aVB )
+p171
+aVwhere u'\u005cu0391' 1
+p172
+a.

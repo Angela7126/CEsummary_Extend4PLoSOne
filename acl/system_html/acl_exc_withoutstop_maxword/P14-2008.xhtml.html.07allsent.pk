@@ -1,0 +1,252 @@
+(lp0
+VThere are two corpora available that contain citation function annotation, the DFKI Citation Corpus [ 13 ] and the IMS Citation Corpus [ 19 ]
+p1
+aVThe final CITD corpus comprises this balanced corpus of 358 labeled citation sentences plus another 22,093 unlabeled citation sentences
+p2
+aVBy concentrating on citation polarity we are able to compare our classification to previous citation polarity work
+p3
+aVWe follow much of the recent work on citation classification and concentrate on citation polarity
+p4
+aVPrevious work in citation polarity classification focuses on finding new citation features to improve classification, borrowing a few from text classification in general (e.g.,, n -grams), and perhaps others from sentiment analysis problems (e.g.,, the polarity lexicon from Wilson et al
+p5
+aVOn the other hand, because there is a limited amount of annotated citation data available, by leveraging large amounts of annotated polarity data we could potentially even improve citation classification
+p6
+aVOur approach achieves similar macro- F 1 on only the citation sentence, but using a different corpus we have shown that you can improve citation polarity classification by leveraging large amounts of annotated data from other domains and using a simple set of features
+p7
+aVWe are interested in domain adaptation for citation classification and therefore need a target dataset of citations and a non-citation source dataset
+p8
+aVThe DFKI Citation Corpus 2 2 https://aclbib.opendfki.de/repos/trunk/citation_classification_dataset/ has been used for classifying citation function [ 13 ] , but the dataset also includes polarity annotation
+p9
+aVThe dataset has 1768 citation sentences with polarity annotation
+p10
+aVWe treat citation polarity classification as a sentiment analysis domain adaptation task and therefore must be careful not to define features that are too domain specific
+p11
+aVThe second citation corpus, the IMS Citation Corpus 3 3 http://www.ims.uni-stuttgart.de/~jochimcs/citation-classification/ contains 2008 annotated citations
+p12
+aVUsing a larger training set, along with mSDA, which makes use of the unlabeled data, leads to the best results for citation classification
+p13
+aVEarly citation classification focused more on citation motivation [ 16 ] , while later classification considered more the citation function [ 9 ]
+p14
+aVThese experiments should help answer two questions does a larger amount of training data, even if out of domain, improve citation classification; and how well do the different product domains generalize to citations (i.e.,, which domains are most similar to citations
+p15
+aVPrevious work in citation classification has largely focused on identifying new features for improving classification accuracy
+p16
+aVDue to the infrequent use of negative citations, a substantial annotation effort (annotating over 5 times more data) would be necessary to reach 1000 negative citation instances, which is the number of negative instances in a single domain in the multi-domain corpus described below
+p17
+aVIn Figure 1 we compare citation classification with mSDA to the SVM baseline
+p18
+aVOne distinction that has been more consistently annotated across recent citation classification studies is between positive and negative citations [ 3 , 2 , 1 ]
+p19
+aVThe results in Section 4.1 are for semi-supervised domain adaptation the case where we have some large annotated corpus (Amazon product reviews) and a large unannotated corpus (citations
+p20
+aVIn our second set of experiments, we follow the domain adaptation approaches described in [ 12 ] and train on product review and citation data before testing on citations
+p21
+aVWe omit the citations labeled neutral from the DFKI corpus because the IMS corpus does not contain neutral annotation nor does the MDSD
+p22
+aVThe IMS corpus can have multiple labeled citations per sentence there are 122 sentences containing the 172 negative citations from Table 1
+p23
+aV2006b ) introduced automatic citation function classification, with classes that could be grouped as positive, negative, and neutral
+p24
+aVOur initial results show that using mSDA for domain adaptation to citations actually outperforms in-domain classification
+p25
+aVWe combine the DFKI and IMS corpora into the CITD corpus
+p26
+aV2013 ) also looks at both citation function and citation polarity
+p27
+aVWe can see that using a larger dataset, even if out of domain, does improve citation classification
+p28
+aVIn contrast to previous work using MDSD, a lot of the work in domain adaptation also leverages a small amount of labeled target data
+p29
+aVFor this reason, in line with previous work using MDSD, we balance the labeled portion of the CITD corpus
+p30
+aVBecause each of the citation corpora is of modest size we combine them to form one citation dataset, which we will refer to as CITD
+p31
+aVBoth corpora have only about 2000 instances; unfortunately, there are no larger corpora available with citation annotation and this task would benefit from more annotated data
+p32
+aVJochim and Schütze ( 2012 ) use annotation labels from Moravcsik and Murugesan ( 1975 ) where positive instances are labeled confirmative , negative instances are labeled negational , and there is no neutral class
+p33
+aVFor classification we use marginalized stacked denoising autoencoders (mSDA) from Chen et al
+p34
+aVWe train on each of the domains from the MDSD u'\u005cu2013' books, dvd, electronics, and kitchen u'\u005cu2013' and test on the citation data
+p35
+aVIn our experiments, we restrict our features to unigrams and bigrams from the product review or citation context (i.e.,, the sentence containing the citation
+p36
+aV1836 are labeled positive and 172 are labeled negative
+p37
+aVWe use the version of the MDSD that includes positive and negative labels for product reviews taken from Amazon.com in the following domains books, dvd, electronics, and kitchen
+p38
+aVThe classifiers and implementation of features varies between these studies, but the problem remains that there seems to be no clear set of features for citation polarity classification
+p39
+aVThe two citation corpora comprising CITD both come from the ACL Anthology [ 5 ] the IMS corpus uses the ACL proceedings from 2004 and the DFKI corpus uses parts of the proceedings from 2007 and 2008
+p40
+aVThe black horizontal line indicates the F 1 score for in-domain citation classification, which sometimes represents the goal for domain adaptation
+p41
+aVTherefore, it is not surprising that training on books performs well on citations, and intuitively, among the domains in the Amazon dataset, a book review is most similar to a scientific citation
+p42
+aVFor each domain there are 1000 positive reviews and 1000 negative reviews that comprise the u'\u005cu201c' labeled u'\u005cu201d' data, and then roughly 4000 more reviews in the u'\u005cu201c' unlabeled u'\u005cu201d' 5 5 It is usually treated as unlabeled data even though it actually contains positive and negative labels, which have been used, e.g.,, in [ 8 ] data
+p43
+aVThis is done by taking 179 unique negative sentences in the DFKI and IMS corpora and randomly selecting an equal number of positive sentences
+p44
+aVFor books, dvd, and electronics, even the SVM baseline improves on in-domain classification mSDA does better than the baseline for all domains except dvd
+p45
+aVSince mSDA also makes use of large amounts of unlabeled data, we extend our CITD corpus with citations from the proceedings of the remaining years of the ACL, 1979 u'\u005cu2013' 2003, 2005 u'\u005cu2013' 2006, and 2009
+p46
+aVAthar ( 2011 ) followed this and was the first to specifically target polarity classification on scientific citations
+p47
+aVWe split the labeled data 80/20 following Blitzer et al
+p48
+aVSince mSDA achieved state-of-the-art performance in Amazon product domain adaptation, we are hopeful it will also be effective when switching to a more distant domain like scientific citations
+p49
+aVIt is the case in many sentiment analysis corpora that only positive and negative instances are included, e.g.,, [ 23 ]
+p50
+aVThe lack of consensus on the most useful citation polarity features coupled with the recent success of deep learning neural networks [ 10 ] further motivate our choice to limit our features to the n -grams available in the product review or citation context and not rely on external resources or tools for additional features
+p51
+aVAlthough they are not quite as high as other published results for citation polarity [ 1 ] 7 7 Their work included a CRF model to identify the citation context that gave them an increase of 9.2 percent F 1 over a single sentence citation context
+p52
+aVChen et al
+p53
+aVChen et al
+p54
+aVOf course the risk in approaching the problem as domain adaptation is that the domains are so different that the representation of a positive instance of a movie or product review, for example, will not coincide with that of a positive scientific citation
+p55
+aVThis choice also allows us to access the wealth of existing data containing polarity annotation and then frame the task as a domain adaptation problem
+p56
+aV2012 ) , which has been successful in classifying the polarity of Amazon product reviews across product domains
+p57
+aVThere have been a number of other successful attempts at fully supervised domain adaptation, where it is assumed that some small amount of data is annotated in the target domain [ 7 , 12 , 18 ]
+p58
+aVTheir feature analysis indicates that lexicons for negation, speculation, and polarity were most important for improving polarity classification
+p59
+aVTable 1 shows the distribution of polarity labels in the corpora we use for our experiments
+p60
+aVWe are only interested in citations as the target domain
+p61
+aV190 are labeled as positive , 57 as negative , and the vast majority, 1521, are left neutral
+p62
+aVWe have included the line for citations to see the results training only on the target data ( F 1 = 51.9 ) and to see the improvement when using all of the unlabeled data with mSDA ( F 1 = 54.9
+p63
+aVIn domain adaptation we would expect the domains most similar to the target to lead to the highest results
+p64
+aVIn this paper we examine one of these approaches, marginalized stacked denoising autoencoders (mSDA) from Chen et al
+p65
+aVHowever, we do still want features that somehow capture the inherent positivity or negativity of our labeled instances, i.e.,, citations or Amazon product reviews
+p66
+aVEach pair of vertical bars represents training on a domain from MDSD (e.g.,, books) and testing on CITD
+p67
+aVMore specifically related to our work, deep learning neural networks have been successfully employed for sentiment analysis [ 28 ] and for sentiment domain adaptation [ 17 ]
+p68
+aV2012 ) train on all u'\u005cu201c' labeled u'\u005cu201d' data and test on the u'\u005cu201c' unlabeled u'\u005cu201d' data
+p69
+aVAccording to this measure, citations are most similar to the books domain
+p70
+aVAthar ( 2011 ) on the other hand reported significant improvement using dependency relation features and found that the same list of polar words slightly hurt classification accuracy
+p71
+aVThere are a number of non-citation corpora available that contain polarity annotation
+p72
+aVRecent studies using automatic classification have continued this tradition of introducing a new classification scheme with each new investigation into the use of citations [ 22 , 29 , 13 , 1 ]
+p73
+aVOur initial experiments simply extend those of Chen et al
+p74
+aVA big contribution of this work is that they also train a CRF sequence tagger to find the citation context, which significantly improves results over using only the citing sentence
+p75
+aVFor these experiments we use the Multi-Domain Sentiment Dataset 4 4 http://www.cs.jhu.edu/~mdredze/datasets/sentiment/ (henceforth MDSD), introduced by Blitzer et al
+p76
+aVThe dark gray bar indicates the F 1 scores for the SVM baseline using the 30,000 features and the lighter gray bar shows the mSDA results
+p77
+aVThis makes the good mSDA results for electronics a bit more surprising
+p78
+aVThe result of this is faster run times and currently state-of-the-art performance on MDSD, which makes it a good choice for our domain adaptation task
+p79
+aVThis follows previous studies in domain adaptation [ 6 , 17 ]
+p80
+aVThe citation corpora presented above are both unbalanced and both have a highly skewed distribution
+p81
+aVDaumé u'\u005cu2019' s source-only baseline corresponds to the u'\u005cu201c' Baseline u'\u005cu201d' column for domains books, dvd, electronics, and kitchen; while his target-only baseline can be seen for citations in the last row of the u'\u005cu201c' Baseline u'\u005cu201d' column in Table 2
+p82
+aV2012 ) (and others who have used MDSD) by adding another domain, citations
+p83
+aVTeufel et al
+p84
+aVThe combination led to mixed results adding mSDA to the supervised approaches tended to improve F 1 over those approaches but results never exceeded the top mSDA numbers in Table 2
+p85
+aVTo see how mSDA compares to supervised domain adaptation we take the various approaches presented by Daumé III ( 2007
+p86
+aVThey relied in part on a manually compiled list of cue phrases that cannot easily be transferred to other classification schemes or other scientific domains
+p87
+aVThere has been no consensus on what aspects or functions of a citation should be annotated and how
+p88
+aVBriefly, u'\u005cu201c' All u'\u005cu201d' trains on source and target data; u'\u005cu201c' Weight u'\u005cu201d' is the same as u'\u005cu201c' All u'\u005cu201d' except that instances may be weighted differently based on their domain (weights are chosen on a development set); u'\u005cu201c' Pred u'\u005cu201d' trains on the source data, makes predictions on the target data, and then trains on the target data with the predictions; u'\u005cu201c' LinInt u'\u005cu201d' linearly interpolates predictions using the source-only and target-only models (the interpolation parameter is chosen on a development set); u'\u005cu201c' Augment u'\u005cu201d' uses a larger feature set with source-specific and target-specific copies of features; see [ 12 ] for further details
+p89
+aVIn our experiments, training on source-only outperforms target-only, with the exception of the kitchen domain
+p90
+aV2013 ) and Jochim and Schütze ( 2012 ) find the list of polar words from Wilson et al
+p91
+aVThe semi-supervised mSDA performs quite well with respect to the fully supervised approaches, obtaining the best results for books and electronics, which are also the highest scores overall
+p92
+aVAbu-Jbara et al
+p93
+aVThe MDSD on the other hand is evenly balanced and an effort was even made to keep the data treated as u'\u005cu201c' unlabeled u'\u005cu201d' rather balanced
+p94
+aVWe expect that by identifying and labeling the function of citations we can improve the effectiveness of these applications
+p95
+aVLike Dai et al
+p96
+aVThe popularity of this distinction likely owes to the prominence of sentiment analysis in NLP [ 20 ]
+p97
+aVHe found that dependency tuples contributed the most significant improvement in results
+p98
+aV1 1 Dong and Schäfer ( 2011 ) also annotate polarity, which can be found in their dataset (described later), but this is not discussed in their paper
+p99
+aV2012 ) achieve state-of-the-art results on MDSD by testing the 5000 and 30,000 most frequent unigram and bigram features
+p100
+aVA significant amount of effort goes into engineering new features, in particular for identifying cue phrases, e.g.,, [ 30 , 13 ]
+p101
+aV2007 ) , we measure the Kullback-Leibler divergence between the source and target domains u'\u005cu2019' distributions
+p102
+aVFor example, Abu-Jbara et al
+p103
+aV2012 ) 6 6 We use their MATLAB implementation available at http://www.cse.wustl.edu/~mchen/code/mSDA.tar plus a linear SVM mSDA takes the concept of denoising u'\u005cu2013' introducing noise to make the autoencoder more robust u'\u005cu2013' from Vincent et al
+p104
+aVReviews were preprocessed so that for each review you find a list of unigrams and bigrams with their frequency within the review
+p105
+aVmSDA and fully supervised approaches can also be straightforwardly combined
+p106
+aV2005 ) to be useful, and neither study lists dependency relations as significant features
+p107
+aVWe would like to do as little feature engineering as possible to ensure that the features we use are meaningful across domains
+p108
+aVCurrently a popular approach for accomplishing this is to use deep learning neural networks [ 4 ] , which have been shown to perform well on a variety of NLP tasks using only bag-of-word features [ 10 ]
+p109
+aVWeight and Pred have the highest F 1 scores for dvd and kitchen respectively
+p110
+aVUnigrams from a stop list of 55 stop words are removed, but stop words in bigrams remain
+p111
+aVThe results of this comparison can be seen in Table 2
+p112
+aVCitations have been categorized and studied for a half-century [ 15 ] to better understand when and how citations are used, and to record and measure how information is exchanged (e.g.,, networks of co-cited papers or authors [ 26 ]
+p113
+aVHowever, there seems to be little consensus on which features help most for this task
+p114
+aVWhen this was not the case in his experiments, i.e.,, for the treebank chunking task, both Weight and Pred were among the best approaches
+p115
+aVThe mSDA implementation comes with LIBSVM, which we replace with LIBLINEAR [ 14 ] for faster run times with no decrease in accuracy
+p116
+aVDaumé III ( 2007 ) noted that the u'\u005cu201c' Augment u'\u005cu201d' algorithm performed best when the target-only results were better than the source-only results
+p117
+aVLIBLINEAR, with default settings, also serves as our baseline
+p118
+aV2007 ) (cf
+p119
+aVThese results are very promising
+p120
+aVWe do not present those results here due to space constraints
+p121
+aVRecently, the value of this information has been shown in practical applications such as information retrieval (IR) [ 25 ] , summarization [ 24 ] , and even identifying scientific breakthroughs [ 27 ]
+p122
+aV2008 ) , but does the optimization in closed form, thereby avoiding iterating over the input vector to stochastically introduce noise
+p123
+aV2007
+p124
+aV2005 )
+p125
+a.

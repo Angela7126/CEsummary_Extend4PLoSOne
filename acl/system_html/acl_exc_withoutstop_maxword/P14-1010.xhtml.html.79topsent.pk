@@ -1,0 +1,20 @@
+(lp0
+VWork on target language morphological segmentation for SMT can be divided into three subproblems segmentation, desegmentation and integration
+p1
+aVThis can be accomplished by composing the lattice with a desegmenting transducer that consumes morphemes and outputs desegmented words
+p2
+aVThe chains found by this search are desegmented and then added to the output lattice as edges
+p3
+aVIn summary, we are given a segmented lattice, which encodes the decoder u'\u005cu2019' s translation space as an acceptor over morphemes
+p4
+aVThe second indicates that the source words contained a single discontiguity, as in a word-by-word translation of the u'\u005cu201c' with his blue car u'\u005cu201d' example from Section 2.2
+p5
+aVWe approach this problem by augmenting an SMT system built over target segments with features that reflect the desegmented target words
+p6
+aVThis is sometimes referred to as a word graph [ 32 ] , although in our case the segmented phrase table also produces tokens that correspond to morphemes
+p7
+aVWe compose this acceptor with a desegmenting transducer, and then with an unsegmented LM acceptor, producing a fully annotated, desegmented lattice
+p8
+aVThe one-best approach can be extended easily by desegmenting n -best lists of segmented decoder
+p9
+a.

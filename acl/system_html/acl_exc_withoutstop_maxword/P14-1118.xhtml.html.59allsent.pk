@@ -1,0 +1,148 @@
+(lp0
+VOne of the challenging aspects of sentiment analysis of YouTube data is that the comments may express the sentiment not only towards the product shown in the video, but also the video itself, i.e.,, users may post positive comments to the video while being generally negative about the product and vice versa
+p1
+aVWhen using AUTO as a source domain, STRUCT model provides additional 1-3% of absolute improvement, except for the sentiment task
+p2
+aVTable 3 reports the accuracy for three tasks when we use all comments (TRAIN + TEST) from AUTO to predict on the TEST from TABLETS and in the opposite direction ( TABLETS u'\u005cu2192' AUTO
+p3
+aVNevertheless, as we see in Figure 2 , the learning curves for sentiment and type classification tasks across both product categories do not confirm this intuition
+p4
+aVFor each of the lexicons, we use the number of words found in the comment that have positive and negative sentiment as a feature
+p5
+aVWe go beyond traditional feature vectors by employing structural models ( STRUCT ), which encode each comment into a shallow syntactic tree
+p6
+aVThe learning curves depict the behavior of FVEC and STRUCT models as we increase the size of the training set
+p7
+aVWe treat each comment as expressing positive , negative or neutral sentiment
+p8
+aVNext, we show the learning curves to analyze the behavior of FVEC and STRUCT models according to the training size
+p9
+aVIn the next sections, we define a baseline feature vector model and a novel structural model based on kernel methods
+p10
+aVIntuitively, the STRUCT model relies on more general syntactic patterns and may overcome the sparseness problems incurred by the FVEC model when little training data is available
+p11
+aVThe comment contains a product name xoom and some negative expressions, thus, a bag-of-words model would derive a negative polarity for this product
+p12
+aVThis enables the use of a simple flat multi-classifiers with seven categories for the full task, instead of a hierarchical multi-label classifiers (i.e.,, type classification first and then opinion polarity
+p13
+aVAUTO is used as the source domain to train models, which are tested on TABLETS
+p14
+aVIn contrast, the opinion towards the product is neutral as the negative sentiment is expressed towards the video
+p15
+aVThe structural model, in contrast, is able to identify the product of interest ( xoom ) and associate it with the negative expression through a structural feature and thus correctly classify the comment as negative
+p16
+aVTo understand the performance of our classifiers on other YouTube domains, we perform a set of cross-domain experiments by training on the data from one product category and testing on the other
+p17
+aVGiven that the main goal of sentiment analysis is to select sentiment-bearing comments and identify their polarity, distinguishing between off-topic and spam categories is not critical
+p18
+aVStructural models generally improve on both tasks u'\u005cu2013' polarity and type classification u'\u005cu2013' yielding up to 30% of relative improvement, when little data is available
+p19
+aVIn contrast, the STRUCT model relies on the fact that the negative word, destroy , refers to the PRODUCT ( xoom ) since they form a verbal phase (VP
+p20
+aVIn particular, we define an efficient tree kernel derived from the Partial Tree Kernel, [ 10 ] , suitable for encoding structural representation of comments into Support Vector Machines (SVMs
+p21
+aVOur STRUCT model is more accurate since it is able to induce structural patterns of sentiment
+p22
+aVWe start off by presenting the results for the traditional in-domain setting, where both TRAIN and TEST come from the same domain, e.g.,, AUTO or TABLETS
+p23
+aVA recent study focuses on sentiment analysis for Twitter [ 14 ] , however, their corpus was compiled automatically by searching for emoticons expressing positive and negative sentiment only
+p24
+aVHence, the task is a three-way classification
+p25
+aVThe STRUCT model consistently outperforms the FVEC across all training sizes, but the gap in the performance does not increase when we move to smaller training sets
+p26
+aVHence, their goal is different predicting comment ratings, rather than predicting the sentiment expressed in a YouTube comment or its information content
+p27
+aV2010 ) focus on exploiting user ratings (counts of u'\u005cu2018' thumbs up/down u'\u005cu2019' as flagged by other users) of YouTube video comments to train classifiers to predict the community acceptance of new comments
+p28
+aVSimilar to the in-domain experiments, we studied the effect of the source domain size on the target test performance
+p29
+aVIn total we have annotated 208 videos with around 35k comments (128 videos TABLETS and 80 for AUTO
+p30
+aVIn contrast, comments from TABLETS category tend to be more elaborated and well-argumented, thus, benefiting from the expressiveness of the structural representations
+p31
+aVSuch classifiers are traditionally based on bag-of-words and more advanced features
+p32
+aV7 7 We exclude comments annotated as both video and product
+p33
+aVThis is an important advantage of our structural approach, since we cannot realistically expect to obtain manual annotations for 10k+ comments for each (of many thousands) product domains present on YouTube
+p34
+aVThe FVEC bag-of-words model misclassifies it to be positive , since it contains two positive expressions ( better , better functionality ) that outweigh a single negative expression ( bulky
+p35
+aV1 1 The corpus and the annotation guidelines are publicly available at http://projects.disi.unitn.it/iKernels/projects/sentube/ It is the first manually annotated corpus that enables researchers to use supervised methods on YouTube for comment classification and opinion analysis
+p36
+aVSince the number of comments per video varies, the resulting sizes of each set are different (we use the larger split for TRAIN
+p37
+aVConsidering a real-life application, it is important not only to detect the polarity of the comment, but to also identify if it is expressed towards the product or the video
+p38
+aVSimilar to Twitter, most YouTube comments are very short, the language is informal with numerous accidental and deliberate errors and grammatical inconsistencies, which makes previous corpora less suitable to train models for OM on YouTube
+p39
+aVHence, the impractical task of annotating data for each YouTube category can be mitigated by the use of models that adapt better across domains
+p40
+aVWhen applied to STRUCT trees, SHTK exactly computes the same feature space as PTK, but in faster time (on average
+p41
+aVIf the comment contains several statements of different polarities, it is annotated as both positive and negative u'\u005cu201c' Love the video but waiting for iPad 4 u'\u005cu201d'
+p42
+aVMoreover, tree kernels generate all possible subtrees, thus producing generalized (back-off) features, e.g.,, [S [negative-VP [negative-V [destroy]] [PRODUCT-NP]]]] or [S [negative-VP [PRODUCT-NP]]]]
+p43
+aVThe third contribution of the paper is a novel structural representation, based on shallow syntactic trees enriched with conceptual information, i.e.,, tags generalizing the specific topic of the video, e.g.,, iPad , Kindle , Toyota Camry
+p44
+aVThus, we merge the spam and off-topic into a single uninformative category
+p45
+aVWe perform OM on YouTube using supervised methods, e.g.,, SVM
+p46
+aVHence, for each pair of comments u'\u005cud835' u'\u005cudc99' 1 and u'\u005cud835' u'\u005cudc99' 2 , we define the following comment similarity kernel
+p47
+aVThe STRUCT model treats each comment as a tuple u'\u005cud835' u'\u005cudc99' = u'\u005cu27e8' u'\u005cud835' u'\u005cudc7b' , u'\u005cud835' u'\u005cudc97' u'\u005cu27e9' composed of a shallow syntactic tree u'\u005cud835' u'\u005cudc7b' and a feature vector u'\u005cud835' u'\u005cudc97'
+p48
+aVA binary classifier is trained for each of the classes and the predicted class is obtained by taking a class from the classifier with a maximum prediction score
+p49
+aVHence, it is of crucial importance to distinguish between these two types of comments
+p50
+aVThis difference becomes smaller as we add data from the same domain
+p51
+aVIt is likely due to the nature of the TABLETS videos, that are more geek-oriented, where users are more prone to share their opinions and enter involved discussions about a product
+p52
+aVThus, some comments do not contain any explicit positive or negative opinions, but provide detailed and well-argumented criticism, for example, this phone is heavy
+p53
+aVThe fragment space is obviously the same, as the node labels of different levels in STRUCT are different and will not be matched by PTK either
+p54
+aVNevertheless, there is almost no work showing effective OM on YouTube comments
+p55
+aVMoreover, such taggers have been recently updated with models [ 18 , 5 ] trained specifically to process noisy texts showing significant reductions in the error rate on user-generated texts, e.g.,, Twitter
+p56
+aVTherefore, rather than trying to build a specialized system for every new target domain, as it has been done in most prior work on domain adaptation [ 3 , 4 ] , the domain adaptation problem boils down to finding a more robust system [ 25 , 17 ]
+p57
+aVIndeed, SHTK required to be only applied to node pairs from the same level (see Eq
+p58
+aV- negation the count of negation words, e.g.,, { don u'\u005cu2019' t, never, not, etc
+p59
+aVMost of the videos come with a title and a short description, which can be used to encode the topicality of each comment by looking at their overlap
+p60
+aVHence, we use the CMU Twitter pos-tagger [ 5 , 13 ] to obtain the part-of-speech tags
+p61
+aVTo improve the speed computation of T u'\u005cu2062' K , we consider pairs of nodes ( n 1 , n 2 ) belonging to the same tree level
+p62
+aVExploiting the information from user ratings is a feature that we have not exploited thus far, but we believe that it is a valuable feature to use in future work
+p63
+aVHence, doing sentiment research in such an environment is highly relevant for the community
+p64
+aVThus, given H , the height of the STRUCT trees, where each level h contains nodes of the same type, i.e.,, chunk, POS, and lexical nodes, we define SHTK as the following 5 5 To have a similarity score between 0 and 1, a normalization in the kernel space, i.e., S u'\u005cu2062' H u'\u005cu2062' T u'\u005cu2062' K u'\u005cu2062' ( T 1 , T 2 ) S u'\u005cu2062' H u'\u005cu2062' T u'\u005cu2062' K u'\u005cu2062' ( T 1 , T 1 ) × S u'\u005cu2062' H u'\u005cu2062' T u'\u005cu2062' K u'\u005cu2062' ( T 2 , T 2 ) is applied
+p65
+aVAs we will see next, this picture changes when we perform the cross-domain study
+p66
+aVThe aforementioned corpora are, however, only partially suitable for developing models on social media, since the informal text poses additional challenges for Information Extraction and Natural Language Processing
+p67
+aVWhile the linguistic conventions used on Twitter and YouTube indeed show similarities [ 2 ] , focusing on YouTube allows to exploit context information, possibly also multi-modal information, not available in isolated tweets, thus rendering it a valuable resource for the future research
+p68
+aVThey help to build a system that is more robust across domains
+p69
+aVThis reduces the time for selecting the matching-node pairs carried out in PTK [ 10 , 11 ]
+p70
+aVYouTube is a unique environment, just like Twitter, but probably even richer multi-modal, with a social graph, and discussions between people sharing an interest
+p71
+aVwhere N T 1 and N T 2 are the sets of the T 1 u'\u005cu2019' s and T 2 u'\u005cu2019' s nodes, respectively and u'\u005cu0394' u'\u005cu2062' ( n 1 , n 2 ) is equal to the number of common fragments rooted in the n 1 and n 2 nodes, according to several possible definition of the atomic fragments
+p72
+aVThe largest group of errors are implicit sentiments
+p73
+a.

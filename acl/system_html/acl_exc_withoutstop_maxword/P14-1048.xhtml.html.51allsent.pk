@@ -1,0 +1,144 @@
+(lp0
+VTherefore, our model incorporates the strengths of both HILDA and Joty et al u'\u005cu2019' s model, i.e.,, the efficiency of a greedy parsing algorithm, and the ability to incorporate sequential information with CRFs
+p1
+aVFirst, with a greedy bottom-up strategy, we develop a discourse parser with a time complexity linear in the total number of sentences in the document
+p2
+aVFirst, as shown in Table 2 , the average number of sentences in a document is 26.11, which is already too large for optimal parsing models, e.g.,, the CKY-like parsing algorithm in j CRF, let alone the fact that the largest document contains several hundred of EDUs and sentences
+p3
+aVWhile research in discourse parsing can be partitioned into several directions according to different theories and frameworks, Rhetorical Structure Theory (RST) [ 12 ] is probably the most ambitious one, because it aims to identify not only the discourse relations in a small local context, but also the hierarchical tree structure for the full text from the relations relating the smallest discourse units (called elementary discourse units, EDUs), to the ones connecting paragraphs
+p4
+aVDue to the O u'\u005cu2062' ( n 3 ) time complexity, where n is the number of input discourse units, for large documents, the parsing simply takes too long 1 1 The largest document in the RST-DT contains over 180 sentences, i.e.,, n 180 for their multi-sentential CKY parsing
+p5
+aVIt is possible to optimize Joty et al u'\u005cu2019' s CKY-like parsing by replacing their CRF-based computation for upper-level constituents with some local computation based on the probabilities of lower-level constituents
+p6
+aVCKY parsing is a bottom-up parsing algorithm which searches all possible parsing paths by dynamic programming
+p7
+aVAfter an intra- or multi-sentential discourse tree is fully built, we perform a post-editing to consider possible modifications to the current tree, by considering useful information from the discourse constituents on upper levels, which is unavailable in the bottom-up tree-building process
+p8
+aVIn addition to efficiency, our use of a single CRF chain for all constituents can better capture the sequential dependencies among context, by taking into account the information from partially built discourse constituents, rather than bottom-level EDUs only
+p9
+aVAs shown by Feng and Hirst ( 2012 ) , for a pair of discourse constituents of interest, the sequential information from contextual constituents is crucial for determining structures
+p10
+aVAs a result of successfully avoiding the expensive non-greedy parsing algorithms, our discourse parser is very efficient in practice
+p11
+aVBecause the structure model is the first component in our pipeline of local models, its accuracy is crucial
+p12
+aVIn contrast, Joty et al u'\u005cu2019' s computation of intra-sentential sequences depends on the particular pair of constituents the sequence is composed of the pair in question, with other EDUs in the sentence, even if those EDUs have already been merged
+p13
+aVIn this way, we are able to take into account the sequential information from contextual discourse constituents, which cannot be naturally represented in HILDA with SVMs as local classifiers
+p14
+aVThe motivation for post-editing is that, some particular discourse relations, such as Textual-Organization , tend to occur on the top levels of the discourse tree; thus, information such as the depth of the discourse constituent can be quite indicative
+p15
+aVThird, after a discourse (sub)tree is fully built from bottom up, we perform a novel post-editing process by considering information from the constituents on upper levels
+p16
+aVAs demonstrated by Table 1 , our greedy CRF models perform significantly better than the other two models
+p17
+aVConventionally, there are two major sub-tasks related to text-level discourse parsing
+p18
+aVFor each sentence S k with m k EDUs, the overall time complexity to perform intra-sentential parsing is O u'\u005cu2062' ( m k 2
+p19
+aVSecond, by using two linear-chain CRFs to label a sequence of discourse constituents, we can incorporate contextual information in a more natural way, compared to using traditional discriminative classifiers, such as SVMs
+p20
+aVEach sentence S i , after being segmented into EDUs (not shown in the figure), goes through an intra-sentential bottom-up tree-building model M i u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' a , to form a sentence-level discourse tree T S i , with the EDUs as leaf nodes
+p21
+aVWe have thus showed that the time complexity is linear in n , which is the number of sentences in the document
+p22
+aVHowever, the exact depth of a discourse constituent is usually unknown in the bottom-up tree-building process; therefore, it might be beneficial to modify the tree by including top-down information after the tree is fully built
+p23
+aVSince we do not have the actual output of Joty et al u'\u005cu2019' s model, we are unable to conduct significance testing between our models and theirs
+p24
+aVTherefore, it is well motivated to use Conditional Random Fields (CRFs) [ 10 ] , which is a discriminative probabilistic graphical model, to make predictions for a sequence of constituents surrounding the pair of interest
+p25
+aVInstead, we choose to take a sliding-window approach to form CRF chains for a particular pair of constituents, as shown in Figure 6
+p26
+aVWe further illustrate the efficiency of our parser by demonstrating the time consumption of different models
+p27
+aVIn Table 3 , we report the parsing time 8 8 Tested on a Linux system with four duo-core 3.0GHz processors and 16G memory for the last three models, since we do not know the time of j CRF
+p28
+aVSince the computation of E i does not depend on a particular pair of constituents, we can use the same sequence E i to compute structural probabilities for all adjacent constituents
+p29
+aVSince we know, a priori, that the constituents in the chains are either leaf nodes or the ones that have been merged by our structure model, we never need to worry about the NO-REL issue as outlined in Section 4.1
+p30
+aVSecondly, as a joint model, it is mandatory to use a dynamic CRF, for which exact inference is usually intractable or slow
+p31
+aVThen, in the tree-building process, we will have to deal with the situations where the joint model yields conflicting predictions it is possible that the model predicts S j = 1 and R j = NO-REL , or vice versa, and we will have to decide which node to trust (and thus in some sense, the structure and the relation is no longer jointly modeled
+p32
+aVIf modifications have been proposed in the previous step, we build a new tree T p using P s u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' u u'\u005cu2062' c u'\u005cu2062' t as the structure model, and P r u'\u005cu2062' e u'\u005cu2062' l as the relation model, from the constituents on which modifications are proposed
+p33
+aVStarting from the EDUs on the bottom level, we need to perform inference for one chain on each level during the bottom-up tree-building, and thus the total time complexity is u'\u005cu03a3' i = 1 m k u'\u005cu2062' O u'\u005cu2062' ( m k - i ) = O u'\u005cu2062' ( m k 2 )
+p34
+aVRather, each relation node R j attempts to model the relation of one single constituent U j , by taking U j u'\u005cu2019' s left and right subtrees U j , L and U j , R as its first-layer nodes; if U j is a single EDU, then the first-layer node of R j is simply U j , and R j is a special relation symbol LEAF 3 3 These leaf constituents are represented using a special feature vector is_leaf = True ; thus the CRF never labels them with relations other than LEAF
+p35
+aVHowever, HILDA u'\u005cu2019' s approach also has obvious weakness the greedy algorithm may lead to poor performance due to local optima, and more importantly, the SVM classifiers are not well-suited for solving structural problems due to the difficulty of taking context into account
+p36
+aVSimilar to sentence-level parsing, we also post-edit T D using P m u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' t u'\u005cu2062' i to produce the final discourse tree T D p
+p37
+aVFor example, suppose we wish to compute the structural probability for the pair U j - 1 and U j , we form three chains, each of which contains two contextual constituents
+p38
+aVWe report the MAFS separately for the correctly retrieved constituents (i.e.,, the span boundary is correct) and all constituents in the reference tree
+p39
+aVAdopting a greedy approach, on an arbitrary level during the tree-building, once we decide to merge a certain pair of constituents, say U j and U j + 1 , we only need to recompute a small number of chains, i.e.,, the chains which originally include U j or U j + 1 , and inference on each chain takes O u'\u005cu2062' ( 1
+p40
+aVTherefore, the total time complexity is ( n - 1 ) × O u'\u005cu2062' ( 1 ) + ( n - 1 ) × O u'\u005cu2062' ( 1 ) = O u'\u005cu2062' ( n ) , where the first term in the summation is the complexity of computing all chains on the bottom level, and the second term is the complexity of computing the constant number of chains on higher levels
+p41
+aVTo do so, we maintain a list L to store the discourse constituents that need to be examined
+p42
+aVThus, different CRF chains have to be formed for different pairs of constituents
+p43
+aVIn fact, by performing inference on this chain, we produce predictions not only for R j , but also for all other R nodes in the chain, which correspond to all other constituents in the sentence
+p44
+aVNevertheless, a careful caching strategy can accelerate feature computation, since a large number of multi-sentential chains overlap with each other
+p45
+aVBy including a constant number k of discourse units in each chain, and considering a constant number l of such chains for computing each adjacent pair of discourse constituents ( k = 4 for M m u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' t u'\u005cu2062' i s u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' u u'\u005cu2062' c u'\u005cu2062' t and k = 3 for M m u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' t u'\u005cu2062' i r u'\u005cu2062' e u'\u005cu2062' l ; l = 3 ), we have an overall time complexity of O u'\u005cu2062' ( n
+p46
+aVSince those non-leaf constituents are already labeled in previous steps in the tree-building, we can now re-assign their relations if the model predicts differently in this step
+p47
+aVTherefore, despite its superior performance, their model is infeasible in most realistic situations
+p48
+aVAs can be seen, our g CRF model is considerably faster than g SVM F u'\u005cu2062' H , because, on one hand, feature computation is expensive in g SVM F u'\u005cu2062' H , since g SVM F u'\u005cu2062' H utilizes a rich set of features; on the other hand, in g CRF, we are able to accelerate decoding by multi-threading MALLET (we use four threads
+p49
+aVIt is fairly safe to assume that each m k is a constant, in the sense that m k is independent of the total number of sentences in the document
+p50
+aVIf the predicted pair is not merged in the original tree T , then a possible modification is located; otherwise, we merge the pair, and proceed to the next iteration
+p51
+aVTherefore, we cannot conduct significance test between different MAFS as another metric, to emphasize the performance of infrequent relation types
+p52
+aVIdentify the lowest level of T on which the constituents can be modified according to the post-editing structure component, P s u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' u u'\u005cu2062' c u'\u005cu2062' t
+p53
+aVFor evaluating relations, since there is a skewed distribution of different relation types in the corpus, we also include the macro-averaged F1-score (MAFS) 7 7 MAFS is the F1-score averaged among all relation classes by equally weighting each class
+p54
+aVTherefore, to improve its accuracy, we enforce additional commonsense constraints in its Viterbi decoding
+p55
+aVTherefore, the total time complexity u'\u005cu03a3' k = 1 n u'\u005cu2062' O u'\u005cu2062' ( m k 2 ) u'\u005cu2264' n × O u'\u005cu2062' ( max 1 u'\u005cu2264' j u'\u005cu2264' n u'\u005cu2061' ( m j 2 ) ) = n × O u'\u005cu2062' ( 1 ) = O u'\u005cu2062' ( n ) , i.e.,, linear in the total number of sentences
+p56
+aVAfter that, we apply the intra-sentential post-editing model P i u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' a to modify the generated tree T S i to T S i p , by considering upper-level information
+p57
+aVTherefore, this re-labeling procedure can compensate for the loss of accuracy caused by our greedy bottom-up strategy to some extent
+p58
+aVFor multi-sentential models, M m u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' t u'\u005cu2062' i s u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' u u'\u005cu2062' c u'\u005cu2062' t and M m u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' t u'\u005cu2062' i r u'\u005cu2062' e u'\u005cu2062' l , as shown in Figures 6 and 9 , for a pair of constituents of interest, we generate multiple chains to predict the structure or the relation
+p59
+aV4 are further related by a multi-nuclear relation Sequence , with both spans as the nucleus
+p60
+aVThe following analysis is focused on the bottom-up tree-building process, but a similar analysis can be carried out for the post-editing process
+p61
+aVSince the number of operations in the post-editing process is roughly the same (1.5 times in the worst case) as in the bottom-up tree-building, post-editing shares the same complexity as the tree-building
+p62
+aVSimilar to M m u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' t u'\u005cu2062' i s u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' u u'\u005cu2062' c u'\u005cu2062' t introduced in Section 4.2.2 , M m u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' t u'\u005cu2062' i r u'\u005cu2062' e u'\u005cu2062' l also takes a sliding-window approach to predict labels for constituents in a local context
+p63
+aVTherefore, it should be seen that non-optimal models are required in most cases
+p64
+aVwhether each unit corresponds to a single syntactic subtree, and if so, the top PoS tag of the subtree; the distance of each unit to their lowest common ancestor in the syntax tree (intra-sentential only
+p65
+aVThese four relation classes, apart from their infrequency in the corpus, are more abstractly defined, and thus are particularly challenging
+p66
+aVSimilar to M i u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' a s u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' u u'\u005cu2062' c u'\u005cu2062' t , for M m u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' t u'\u005cu2062' i s u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' u u'\u005cu2062' c u'\u005cu2062' t , we also include additional constraints in the Viterbi decoding, by disallowing transitions between two ones, and disallowing the sequence to be all zeros if it contains all the remaining constituents in the document
+p67
+aVSince the first sub-task is considered relatively easy, with the state-of-art accuracy at above 90% [ 7 ] , the recent research focus is on the second sub-task, and often uses manual EDU segmentation
+p68
+aV1 \u005cState \u005cReturn T \u005cComment Do nothing if it is a single EDU
+p69
+aVThe reason is the following
+p70
+aVThe cue phrase list is based on the connectives collected by Knott and Dale ( 1994
+p71
+a.

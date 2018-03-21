@@ -1,0 +1,475 @@
+(lp0
+VWe employ Amazon u'\u005cu2019' s Mechanical Turk (AMT) to label the emotions of Twitter data, and apply the proposed methods to the AMT dataset with the goals of improving the annotation quality at low cost, as well as learning accurate emotion classifiers
+p1
+aVGround Truth Annotation
+p2
+aVAmazon Mechanical Turk Annotation we posted the set of 100K tweets to the workers on AMT for emotion annotation
+p3
+aVCompared with the ground truth, many emotion bearing tweets were missed by the AMT annotators, despite the quality control we applied
+p4
+aVActive learning for data cleaning differs from traditional active learning because the data already has low quality labels
+p5
+aVWe used this annotated dataset as ground truth
+p6
+aVAfter that, the same dataset was annotated independently by a group of expert annotators to create the ground truth
+p7
+aVAfter we obtained the annotated dataset from AMT, we posted the same dataset (without the labels) to a group of expert annotators
+p8
+aVIn order to evaluate our approach in real world scenarios, instead of creating a high quality annotated dataset and then introducing artificial noise, we followed the common practice of crowdsoucing, and collected emotion annotations through Amazon Mechanical Turk (AMT
+p9
+aVThis AMT annotated dataset was used as the low quality dataset D ^ in our evaluation
+p10
+aVAn active learner uses a small set of labeled data to iteratively select the most informative instances from a large pool of unlabeled data for human annotators to label [ 17 ]
+p11
+aVThe basic idea of active learning is to learn an accurate classifier using less training data
+p12
+aVWe first describe the AMT annotation and ground truth annotation, and then discuss the baselines and experimental results
+p13
+aVAfter these quality control steps we defined minimum emotion annotation thresholds to determine and assign preliminary emotion labels to tweets
+p14
+aVWe applied substantial quality control to our AMT workers to improve the initial quality of annotation following the common practice of crowdsourcing
+p15
+aVOne measure of improvement for annotation quality is the number of mislabeled instances that can be fixed after a certain number of active learning iterations
+p16
+aVWe evaluate the proposed approach on two factors, the effectiveness of the models for emotion classification, and the improvement of annotation quality provided by the active learning procedure
+p17
+aVThe process of selecting and re-labeling data points can be conducted with multiple rounds to iteratively improve the data quality
+p18
+aVWith the proposed algorithm, the active learner becomes more accurate and resistant to label noise, thus the mislabeled data points can be more easily and accurately identified
+p19
+aVThis is a challenge faced by many real world applications u'\u005cu2013' given a large, quickly and cheaply created, low quality annotated dataset, how can one improve its quality and learn an accurate classifier from it
+p20
+aVWe selected the top m tweets with the highest dot product or regression scores but conflicting preliminary AMT labels as the suspected mislabeled instances for re-annotation, just as described in Algorithm 3
+p21
+aVBuilding the classifier C that allows the most likely mislabeled instances to be selected and annotated is the essence of the active learning approach
+p22
+aVFrom the set of 2 billion tweets we randomly selected a small subset of 100K tweets about the 60 most highly mentioned TV shows and movies in the dataset
+p23
+aVIt uses the difference between the low quality label for each data point and a prediction of the label using supervised machine learning models built upon the low quality labels
+p24
+aVThe data points with the highest confidence scores but conflicting preliminary labels are most likely mislabeled
+p25
+aVWe then sent these tweets to Amazon Mechanical Turk for annotation
+p26
+aVIn each iteration, the algorithm trains classifiers using the training data in T
+p27
+aVWe defined a set of annotation guidelines, which specified rules and examples to help annotators determine when to tag a tweet with an emotion
+p28
+aVNoise tolerance techniques aim to improve the learning algorithm itself to avoid over-fitting caused by mislabeled instances in the training phase, so that the constructed classifier becomes more noise-tolerant
+p29
+aVIn Active Learning [ 17 ] a small set of labeled data is used to find documents that should be annotated from a large pool of unlabeled documents
+p30
+aVSpecifically, we propose a novel non-linear distribution spreading algorithm, which first uses Delta IDF technique [ 11 ] to weight features, and then leverages the distribution of Delta IDF scores of a feature across different classes to efficiently recognize discriminative features for the classification task in the presence of mislabeled data
+p31
+aVIn this work, we borrow the idea of active learning to interactively and iteratively correct labeling errors
+p32
+aVSee Table 2 for the statistics of the ground truth annotations
+p33
+aVSince in real world applications people are primarily concerned with how well the algorithm will work for new TV shows or movies that may not be included in the training data, we defined a test fold for each TV show or movie in our labeled data set
+p34
+aVDue to these reasons, there is a lack of sufficient and high quality labeled data for emotion research
+p35
+aVWe conduct experiments on a Twitter dataset that contains tweets about TV shows and movies
+p36
+aVFor further quality control, we also gathered additional annotations from additional workers for tweets where only one out of two workers identified an emotion
+p37
+aVAlgorithm 3 illustrates an active learning approach to the problem
+p38
+aVTo create the dataset, we collected 2 billion unique tweets using Twitter API queries for a list of known TV shows and movies on IMDB
+p39
+aVFor the experimental purpose, the re-annotation was done by assigning the ground truth labels to the selected instances
+p40
+aVFigure 5 reports the accumulated average percentage of corrected labels on all emotions in each iteration of the active learning process
+p41
+aVNote that some tweets were discarded as mixed examples for each emotion based upon thresholds for how many times they were tagged, and it resulted in different number of tweets in each emotion dataset
+p42
+aVOur work employs a similar framework that uses active learning for data cleaning
+p43
+aVWe compared the improved dataset with the final ground truth at the end of each round to monitor the progress
+p44
+aVAfter each round of annotation, we compare the old labels to the new labels to measure the degree of impact this process is having on the dataset
+p45
+aVSince the dataset is highly imbalanced, we applied the under-sampling strategy when training the classifiers
+p46
+aVThis is similar to the strategy of active learning
+p47
+aVThe top m instances with the highest probabilities belonging to some class but conflicting preliminary labels are selected as the most likely errors for annotators to fix
+p48
+aVThe other important quantity to measure is annotation quality
+p49
+aVIt demonstrates the challenge of annotation by crowdsourcing
+p50
+aVD ^ contains an unknown number of mislabeled data points
+p51
+aVKalaia and Servediob (2005) present a boosting algorithm which can achieve arbitrarily high accuracy in the presence of data noise
+p52
+aVSupervised classification algorithms require annotated data to teach the machine, by example, how to perform a specific task
+p53
+aVThe imbalanced class distribution aggravates the confirmation bias u'\u005cu2013' the minority class examples are especially easy to miss when labeling quickly due to their rare presence in the dataset
+p54
+aVThere are generally two ways to collect annotations of a dataset through a few expert annotators, or through crowdsourcing services (e.g.,, Amazon u'\u005cu2019' s Mechanical Turk
+p55
+aV2012) propose a solution called Active Label Correction (ALC) which iteratively presents the experts with small sets of suspected mislabeled instances at each round
+p56
+aVOne widely used approach [ 1 , 22 ] is to create an ensemble classifier that combines the outputs of multiple classifiers by either majority vote or consensus, and an instance is tagged as mislabeled and removed from the training set if it is classified into a different class than its training label by the ensemble classifier
+p57
+aVSome researchers have studied harnessing Twitter hashtags to automatically create an emotion annotated dataset [ 23 ]
+p58
+aVWhile these feature weighting models can be used to score and rank instances for data cleaning, better classification and regression models can be built by using the feature weights generated by these models as a pre-weight on the data points for other machine learning algorithms
+p59
+aVA large number of studies have explored noise elimination techniques [ 1 , 22 , 25 , 13 , 5 ] , which identifies and removes mislabeled examples from the dataset as a pre-processing step before building classifiers
+p60
+aV2012) propose an algorithm which first trains individual SVM classifiers on several small, class-balanced, random subsets of the dataset, and then reclassifies each training instance using a majority vote of these individual classifiers
+p61
+aVInstead of eliminating the mislabeled examples from training data, some researchers [ 24 , 15 , 10 ] propose to correct labeling errors either with or without consulting human experts
+p62
+aVAn intuitive idea is to design algorithms that classify the data points and rank them according to the decreasing confidence scores of their labels
+p63
+aVGenerally, Figure 3 shows consistent performance gains as more labels are corrected during active learning
+p64
+aVTweets were randomly sampled for each show using the round robin algorithm
+p65
+aVThe latter option is appealing since it creates a large annotated dataset at low cost
+p66
+aV1) accurately predicting the labels of data points and ranking them based on prediction confidence, so that the most likely errors can be effectively identified; (2) requiring less time on training, so that the saved time can be spent on correcting more labeling errors
+p67
+aVFor example, useful information can be removed with noise elimination, since annotation errors are likely to occur on ambiguous instances that are potentially valuable for learning algorithms
+p68
+aVIn many scenarios, it is worth the effort and cost to fix the labeling errors by human experts, in order to obtain a high quality dataset that can be reused by the community
+p69
+aVBased on the dot product or SVM regression scores, we ranked the tweets by how strongly they express the emotion
+p70
+aVThe goal is to use the classifiers to efficiently and accurately seek out the most likely mislabeled instances from T for expert annotators to examine and re-annotate
+p71
+aVJiang (2001) studies some theoretical aspects of regression and classification boosting algorithms in dealing with noisy data
+p72
+aVTo reduce the annotation effort, it is desirable to have an algorithm that selects the most likely mislabeled examples first for re-labeling
+p73
+aVEach test fold corresponded to a training fold containing all the labeled data from all the other TV shows and movies
+p74
+aVFigure 4 shows the average training time of the four methods on eight emotions
+p75
+aVWhen applying a classifier to classify the instances in the corresponding data subset, we get the probability about how likely one instance belongs to a class
+p76
+aVThis algorithm takes the noisy dataset D ^ as input
+p77
+aVThe training set T is initialized with the data in D ^ and then updated each round with new labels generated during re-annotation
+p78
+aVIn addition, when the noise ratio is high, there may not be adequate amount of data remaining for building an accurate classifier
+p79
+aVVannoorenberghe and Denoeux (2002) propose a method based on belief decision trees to handle uncertain labels in the training set
+p80
+aVThe idea is that some effective features may be subdued due to label noise, and the proposed techniques are capable of counteracting such effect, so that the performance of classification algorithms could be less affected by the noise
+p81
+aVIn recent years, there have been an increasing number of studies [ 20 , 9 , 18 , 19 , 2 ] using crowdsourcing for data annotation
+p82
+aVThe problem is to obtain a high-quality dataset D by fixing labeling errors in D ^ , and learn an accurate classifier C from it
+p83
+aVExtensive experiments show that, the proposed techniques are as effective as more computational expensive techniques (e.g, Support Vector Machines) but require significantly less time for training/running, which makes it well-suited for active learning
+p84
+aVThe experts followed the same annotation guidelines, and each tweet was labeled by at least two experts
+p85
+aVWe partition T into k subsets, and each time we keep a different subset as testing data and train a classifier using the other k - 1 subsets of data
+p86
+aVThe algorithm should be computationally cheap as well as accurate, so it fits well with active learning and other problems that require frequent iterations on large datasets
+p87
+aVEmotion annotation is a non-trivial task that is typically time-consuming, expensive and error-prone
+p88
+aVLabeling noise affects the classification accuracy
+p89
+aVThis is enough time to re-annotate thousands of data points
+p90
+aVHigh-quality annotations can be produced by expert annotators, but the process is usually slow and costly
+p91
+aVResearch on handling noisy dataset of mislabeled instances has focused on three major groups of techniques
+p92
+aVZeng and Martinez (2001) present an approach based on backpropagation neural networks to automatically correct the mislabeled data
+p93
+aV2003) propose a partition-based approach, which constructs classification rules from each subset of the dataset, and then evaluates each instance using these rules
+p94
+aVWe consider emotion analysis as an interesting and challenging problem domain of this study, and conduct comprehensive experiments on Twitter data
+p95
+aVSpam tweets were filtered out using a set of heuristics and manually crafted rules
+p96
+aVThis samples an equal number of tweets for each show
+p97
+aV{algorithm} \u005cKwData noisy data D ^ \u005cKwResult cleaned data D , classifier C Initialize training set T = D ^ u'\u005cu2004' Initialize re-annotated data sets S r = u'\u005cu2205' ; S = u'\u005cu2205' u'\u005cu2004' \u005cRepeat for I iterations Train classifier C using T u'\u005cu2004' Use C to select a set S of m suspected mislabeled instances from T u'\u005cu2004' Experts re-annotate the instances in S - ( S r u'\u005cu2229' S ) u'\u005cu2004' Update T with the new labels in S u'\u005cu2004' S r = S r u'\u005cu222a' S ; S = u'\u005cu2205' u'\u005cu2004' D = T u'\u005cu2004' Active Learning Approach for Label Correction
+p98
+aVThese tests include (1) identifying workers with poor pairwise agreement, (2) identifying workers with poor performance on English language annotation, (3) identifying workers that were annotating at unrealistic speeds, (4) identifying workers with near random annotation distributions, and (5) identifying workers that annotate each tweet for a given TV show the same (or nearly the same) way
+p99
+aVFor example, the emotion expressed by laughter is a very important emotion for TV shows and movies, but this emotion is not covered by the taxonomies listed above
+p100
+aVTwo noise identification schemes, majority and non-objection, are used to combine the decision from each set of rules to decide whether an instance is mislabeled
+p101
+aVEach tweet was annotated by at least two workers
+p102
+aVAs minority classes, emotional tweets can be easily missed because the last X tweets are all not emotional, and the annotators do not expect the next one to be either
+p103
+aVKarmaker and Kwek (2006) propose a modified AdaBoost algorithm u'\u005cu2013' ORBoost, which minimizes the impact of outliers and becomes more tolerant to class label noise
+p104
+aVIn comparison, the average training time of a Spread classifier was only 21.4 seconds, and it required almost no parameter tuning
+p105
+aVOne of the main disadvantages of noise tolerance techniques is that they are learning algorithm-dependent
+p106
+aVSee Table 1 for the statistics of the annotations collected from AMT
+p107
+aVWhen the dataset is imbalanced, we apply the similar bias balancing procedure as described in Section 4.1 to the spreading model
+p108
+aVDuring the re-annotation process we keep the old labels hidden to prevent that information from biasing annotators u'\u005cu2019' decisions
+p109
+aVHowever, because annotators that are recruited this way may lack expertise and motivation, the annotations tend to be more noisy and unreliable, which significantly reduces the performance of the classification model
+p110
+aVThe widely accepted emotion taxonomies, including Ekman’s Basic Emotions [ 3 ] , Russell’s Circumplex model [ 16 ] , and Plutchik’s emotion wheel [ 14 ] , did not fit well for TV shows and Movies
+p111
+aVIn other words, our algorithm assigns high spread score (absolute value) to a term on a class for which the term has strong discriminative power and very specific to that class compared with to other classes
+p112
+aVThe time spent training SVM-TF classifiers is twice that of SVM-Delta-IDF classifiers, 12 times that of Spread classifiers, and 31 times that of Delta-IDF classifiers
+p113
+aVIn our experiments, on average, it took 258.8 seconds to train a SVM-TF classifier for one emotion
+p114
+aVFigure 3 compares the performance of different approaches in each iteration after a certain number of potentially mislabeled instances are re-annotated
+p115
+aVUnlike the work in [ 15 ] , this paper focuses on developing algorithms that can enhance the ability of active learner on identifying labeling errors, which we consider as a key challenge of this approach but ALC has not addressed
+p116
+aVThe distinction of multiple classes can be used to further force feature bias scores apart to improve the identification of class-specific features in the presence of labeling errors
+p117
+aV3) The dataset is very imbalanced, which increases the problem of confirmation bias
+p118
+aVHowever, the automatic correction may introduce new noise to the dataset by mistakenly changing a correct label to a wrong one
+p119
+aVWhen there was a disagreement between two experts, they discussed to reach an agreement or gathered additional opinion from another expert to decide the label of a tweet
+p120
+aVWhen the dataset is imblanced, to avoid building a biased model, we down sample the majority class before calculating the Delta IDF score and then use the a bias balancing procedure to balance the Delta IDF weight vector
+p121
+aVData sets S r and S are used to maintain the instances that have been selected for re-annotation in the whole process and in the current iteration, respectively
+p122
+aVAverage Precision (AP) is the average of the algorithm u'\u005cu2019' s precision at every position in the confidence ranked list of results where a true emotional document has been identified
+p123
+aVThe X axis shows the total number of data points that have been examined for each emotion so far till the current iteration (i.e.,, 300, 900, 1800, 3000, 4500, 6900, 10500, 16500, and 26100
+p124
+aVSpecifically, we propose a non-linear distribution spreading algorithm for feature weighting
+p125
+aVThe crucial step is to effectively and efficiently select the most likely mislabeled instances
+p126
+aVWe employed each method to build the active learner C described in Algorithm 3
+p127
+aV1) noise tolerance, (2) noise elimination, and (3) noise correction
+p128
+aVIn total, our method Spread saved up to ( 258.8 - 21.4 ) * 9 * 8 = 17092.8 seconds ( 4.75 hours) over nine iterations of active learning for all the eight emotions
+p129
+aV2004) propose a different approach, which represents the proximity between instances in a geometrical neighborhood graph, and an instance is considered suspect if in its neighborhood the proportion of examples of the same class is not significantly greater than in the dataset itself
+p130
+aVRemoving mislabeled instances has been demonstrated to be effective in increasing the classification accuracy in prior studies, but there are also some major drawbacks
+p131
+aVAfter browsing through the raw dataset, reviewing the literature on emotion analysis, and considering the TV and movie problem domain, we decided to focus on eight emotions funny , happy , sad , exciting , boring , angry , fear , and heartwarming
+p132
+aVThus we aim to build a classifier that is both accurate and time efficient
+p133
+aVSpecifically, according to Formula ( 3 ), a high (absolute value of) spread score indicates that the Delta IDF score of that term on that class is high and deviates greatly from the scores on other classes
+p134
+aVThis algorithm first utilizes Delta IDF to weigh the features, and then non-linearly spreads out the distribution of features u'\u005cu2019' Delta IDF scores to exaggerate the weight of discriminative features
+p135
+aVOne possible reason is that some effective features that should be given high weights are inhibited in the training phase due to the labeling errors
+p136
+aVMingers (1989) explores pruning methods for identifying and removing unreliable branches from a decision tree to reduce the influence of noise
+p137
+aVBesides the four methods, we also implemented a random baseline (Random) which randomly selected the specified number of instances for re-annotation in each round
+p138
+aVFor each class l u'\u005cu2208' L , we create a binary labeled dataset D l ^
+p139
+aVWe built the SVM classifiers using LIBLINEAR [ 4 ] and applied its L2-regularized support vector regression model
+p140
+aV2) Emotion expressions could be subtle and ambiguous and thus are easy to miss when labeling quickly
+p141
+aVMAP is the mean of the average precision scores for each ranked list
+p142
+aV1) selecting points in poorly sampled regions, and (2) selecting points that will have the greatest impact on models that were constructed using the dataset
+p143
+aVSVM-TF achieves higher MAP and F1 Score than Spread at the first few iterations, but then it is beat by Spread after 16,500 tweets had been selected and re-annotated till the eighth iteration
+p144
+aVIn practice, we apply k -fold cross-validation
+p145
+aV2011) and they further demonstrate that its performance can be significantly improved by utilizing unlabeled data
+p146
+aVOverall, at the end of the active learning process, Spread outperforms SVM-TF by 3.03% the MAP score (and by 4.29% the F1 score), and SVM-Delta-IDF outperforms SVM-TF by 8.59% the MAP score (and by 5.26% the F1 score
+p147
+aVWe stop re-annotating on the I u'\u005cu2062' t u'\u005cu2062' h round after we decide that the reward for an additional round of annotation is too low to justify
+p148
+aVDelta IDF boosts the importance of terms that tend to be class-specific in the dataset, since they are usually effective features in distinguishing one class from another
+p149
+aVDecision tree [ 12 , 21 ] and boosting [ 6 , 7 , 8 ] are two learning algorithms that have been investigated in many studies
+p150
+aVEvaluation Metric
+p151
+aVRe-annotating the whole dataset is too expensive
+p152
+aVThis process is done with multiple iterations of training, sampling, and re-annotating
+p153
+aVWe defined our own set of emotions to annotate
+p154
+aVBetter methods can fix more labels with fewer iterations
+p155
+aVwhere P (or N ) is the number of positively (or negatively) labeled training instances, P j (or N j ) is the number of positively (or negatively) labeled training instances with term t j
+p156
+aVThe model u'\u005cu2019' s ability to discriminate at the feature level can be further enhanced by leveraging the distribution of feature weights across multiple classes, e.g.,, multiple emotion categories funny , happy , sad , exciting , boring , etc
+p157
+aVWe maintain the re-annotated instances in S r to avoid annotating the same instance multiple times
+p158
+aVIn contrast, noise elimination/correction approaches are more generic and can be more easily applied to various problems
+p159
+aVFollowing this idea, we develop computationally cheap feature weighting techniques to counteract such effect by boosting the weight of discriminative features, so that they would not be subdued and the instances with such features would have higher chance to be correctly classified
+p160
+aVThis process is repeated k times so that we get a classifier for each of the k subsets
+p161
+aVTakes the dot product of the distribution spread weight vector (Formula 3 ) with the document u'\u005cu2019' s term frequency vector
+p162
+aVThe mechanism of Formula ( 3 ) is to non-linearly spread out the distribution, so that the importance of class-specific features can be further boosted to counteract the effect of noisy labels
+p163
+aVFor example, emoticon u'\u005cu201c' :D u'\u005cu201d' is a good indicator for emotion happy , however, if by mistake many instances containing this emoticon are not correctly labeled as happy , this class-specific feature would be underestimated during training
+p164
+aVTo deal with the noise in large or distributed datasets, Zhu et al
+p165
+aVWe first introduce Delta-IDF technique, and then describe our algorithm of distribution spreading
+p166
+aVUses a bag of words SVM classification with TF.Delta-IDF weights (Formula 2 ) in the feature vectors before training or testing an SVM
+p167
+aVThere are two main goals of developing this classifier
+p168
+aVSimilarly, we keep the probability scores hidden while annotating
+p169
+aVSpread
+p170
+aVWe used a series of tests to identify bad workers
+p171
+aVLet L be a set of target classes, and
+p172
+aVTakes the dot product of the Delta IDF weight vector (Formula 1 ) with the document u'\u005cu2019' s term frequency vector
+p173
+aVWe manually inspected any worker with low performance on any of these tests before we made a final decision about using any of their annotations
+p174
+aVWe evaluated the results with both Mean Average Precision (MAP) and F1 Score
+p175
+aVF1 is a widely-used measure of classification accuracy
+p176
+aVLet V l be the vocabulary of dataset D l ^ , V be the vocabulary of all datasets, and
+p177
+aVDifferent from the commonly used TF (term frequency) or TF.IDF (term frequency.inverse document frequency) weighting schemes, Delta IDF treats the positive and negative training instances as two separate corpora, and weighs the terms by how biased they are to one corpus
+p178
+aVSpread and Delta-IDF are superior with respect to the time efficiency
+p179
+aVWe reported both the macro-averaged MAP (Figure 3 ) and the macro-averaged F1 Score (Figure 3 ) on eight emotions as the overall performance of three competitive methods u'\u005cu2013' Spread, SVM-Delta-IDF and SVM-TF
+p180
+aV1) There are multiple emotions to annotate
+p181
+aVIn this work, we annotate eight different emotions
+p182
+aVThe similar approach is adopted by Guan et al
+p183
+aVWe have also conducted experiments using Delta-IDF, but its performance is low and not comparable with the other three methods
+p184
+aVLet D ^ = { ( x 1 , y 1 ) , u'\u005cu2026' , ( x n , y n ) } be a dataset of binary labeled instances, where the instance x i belongs to domain X , and its label y i u'\u005cu2208' { - 1 , + 1 }
+p185
+aVThe proposed approach does not suffer these limitations
+p186
+aVThis procedure first divides the Delta IDF weight vector to two vectors, one of which contains all the features with positive scores, and the other of which contains all the features with negative scores
+p187
+aVDelta IDF technique boosts the weight of features with strong discriminative power
+p188
+aVWe implemented the following four classification methods
+p189
+aVThis is highly desirable for many practical application such as intelligent search, recommendation, and target advertising where users almost never see results that are not at the top of the list
+p190
+aVMethods
+p191
+aVSpread achieves a F1 Score of 58.84%, which is quite competitive compared to 59.82% achieved by SVM-Delta-IDF, though SVM-Delta-IDF outperforms Spread with respect to MAP
+p192
+aVMany different strategies have been used to select the best points to annotate
+p193
+aVThis task is difficult because
+p194
+aVAfter the last iteration, SVM-Delta-IDF, SVM-TF, Spread and Delta-IDF has fixed 85.23%, 85.85%, 81.05% and 58.66% of the labels, respectively, all of which significantly outperform the Random baseline (29.74%
+p195
+aVThus, AP places extra emphasis on getting the front of the list correct
+p196
+aVWe evaluated the overall performance relative to the common SVM bag of words approach that can be ubiquitously found in text mining literature
+p197
+aVFor all the experiments, we used spread parameter s = 2
+p198
+aVThe goal is to extract consumers u'\u005cu2019' emotional reactions to multimedia content, which has broad commercial applications including targeted advertising, intelligent search, and recommendation
+p199
+aVFor any term t j u'\u005cu2208' V , we can get its Delta IDF score on a class l
+p200
+aVL be the number of classes in L
+p201
+aVIn comparison, SVM-Delta-IDF significantly outperforms SVM-TF with respect to both MAP and F1 Score
+p202
+aVEach training instance (e.g.,, a document) is represented as a feature vector x i = ( w 1 , i , u'\u005cu2026' , w
+p203
+aVV is the number of unique terms in V
+p204
+aVFor a class u , we calculate the spreading score s u'\u005cu2062' p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' a u'\u005cu2062' d j u of each feature t j u'\u005cu2208' V using a non-linear distribution spreading formula as following (where s is the configurable spread parameter
+p205
+aVThe more biased a term is to one class, the higher (absolute value of) weight it will get
+p206
+aVAccording to the figure, SVM-Delta-IDF and SVM-TF are the most advantageous methods, followed by Spread and Delta-IDF
+p207
+aVSince we focus on n-gram features, we use the words feature and term interchangeably in this paper
+p208
+aVFor each instance, we can calculate the TF.Delta-IDF score as its weight
+p209
+aVUses a bag of words SVM with term frequency weights
+p210
+aVSimple add-one smoothing is used to smooth low frequency terms and prevent dividing by zero when a term appears in only one corpus
+p211
+aVIt then applies L2 normalization to each of the two vectors, and add them together to create the final vector
+p212
+aVUsing Formula ( 1 ) and dataset D l ^ , we get the Delta IDF weight vector for each class l u'\u005cu0394' l = ( u'\u005cu0394' u'\u005cu2062' _ u'\u005cu2062' i u'\u005cu2062' d u'\u005cu2062' f 1 l , u'\u005cu2026' , u'\u005cu0394' u'\u005cu2062' _ u'\u005cu2062' i u'\u005cu2062' d u'\u005cu2062' f
+p213
+aVV is the weight of term t j in instance x i
+p214
+aVV is the number of unique terms, and w j , i ( 1 u'\u005cu2264' j u'\u005cu2264'
+p215
+aVThese strategies can be generally divided into two groups
+p216
+aVwhere t u'\u005cu2062' f j , i is the number of times term t j occurs in document x i , and u'\u005cu0394' u'\u005cu2062' _ u'\u005cu2062' i u'\u005cu2062' d u'\u005cu2062' f j is the Delta IDF score of t j
+p217
+aVWe calculate the Delta IDF score of every term in V , and get the Delta IDF weight vector u'\u005cu0394' = ( u'\u005cu0394' u'\u005cu2062' _ u'\u005cu2062' i u'\u005cu2062' d u'\u005cu2062' f 1 , u'\u005cu2026' , u'\u005cu0394' u'\u005cu2062' _ u'\u005cu2062' i u'\u005cu2062' d u'\u005cu2062' f
+p218
+aVWe used standard bag of unigram and bigram words representation and topic-based fold cross validation
+p219
+aVThe distribution of Delta IDF scores of t j on all classes in L is represented as u'\u005cu0394' j = { u'\u005cu0394' u'\u005cu2062' _ u'\u005cu2062' i u'\u005cu2062' d u'\u005cu2062' f j 1 , u'\u005cu2026' , u'\u005cu0394' u'\u005cu2062' _ u'\u005cu2062' i u'\u005cu2062' d u'\u005cu2062' f j
+p220
+aVDelta IDF [ 11 ] assigns score u'\u005cu0394' u'\u005cu2062' _ u'\u005cu2062' i u'\u005cu2062' d u'\u005cu2062' f j to term t j in V as
+p221
+aVV i ) , where each dimension in the vector corresponds to a n-gram term in vocabulary V = { t 1 , u'\u005cu2026' , t
+p222
+aVWe call it topic-based fold cross validation
+p223
+aVMuhlenbach et al
+p224
+aVLaxman et al
+p225
+aVRebbapragada et al
+p226
+aVV for all terms
+p227
+aVSVM-TF
+p228
+aVDelta-IDF
+p229
+aVSVM-Delta-IDF
+p230
+aVNote that u'\u005cu0394' u'\u005cu2062' _ u'\u005cu2062' i u'\u005cu2062' d u'\u005cu2062' f j l = 0 for any term t j u'\u005cu2208' V - V l
+p231
+aVDuplicates were not allowed
+p232
+aVL
+p233
+aVV l
+p234
+aV}
+p235
+ag235
+aVV
+p236
+a.

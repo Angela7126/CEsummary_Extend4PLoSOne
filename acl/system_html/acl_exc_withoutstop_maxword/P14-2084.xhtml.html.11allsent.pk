@@ -1,0 +1,44 @@
+(lp0
+VThe most common data source used to experiment with irony detection systems has been Twitter [] , though Amazon product reviews have been used experimentally as well []
+p1
+aVBut existing work on automatic irony detection u'\u005cu2013' reviewed in Section 2 u'\u005cu2013' has not explicitly attempted to operationalize such theories, and has instead relied on features (mostly word counts) intrinsic to the texts that are to be classified as ironic
+p2
+aVRecall that our annotation tool allows labelers to request additional context if they cannot make a decision based on the comment text alone (Figure 1
+p3
+aVOn average, annotators requested additional context for 30% of comments (range across annotators of 12% to 56%
+p4
+aV2 2 We performed naïve u'\u005cu2018' segmentation u'\u005cu2019' of comments based on punctuation
+p5
+aVFrom this contextual information, then, we can reasonably assume that the comment was intended ironically (and all three annotators did so after assessing the available contextual information
+p6
+aVReddit is a good corpus for the irony detection task in part because it provides a natural practical realization of the otherwise ill-defined context for comments
+p7
+aVWe then model the probability of this event as a linear function of whether or not any annotator labeled any sentence in comment i as ironic
+p8
+aVIn these works, verbal irony detection has mostly been treated as a standard text classification task, though with some innovative approaches specific to detecting irony
+p9
+aVFitting this to the data, we estimated u'\u005cu0398' ^ 2 = 0.971 with a 95 u'\u005cu2062' % CI of (0.810, 1.133); p 0.001
+p10
+aVThese approaches have achieved some success, but necessarily face an upper-bound the exact same sentence can be both intended ironically and unironically, depending on the context (including the speaker and the topic at hand
+p11
+aVTo this end, we introduce a variable u'\u005cu2133' i for each comment i such that u'\u005cu2133' i = 1 if y ^ i u'\u005cu2260' y i , i.e.,, u'\u005cu2133' i is an indicator variable that encodes whether or not the classifier misclassified comment i
+p12
+aVAs shown in Figure 3 , annotators are consistently more confident once they have consulted this information
+p13
+aVFor example, in the case of Amazon product reviews, knowing the kinds of books that an individual typically likes might inform our judgement someone who tends to read and review Dostoevsky is probably being ironic if she writes a glowing review of Twilight
+p14
+aVBut if we peruse the author u'\u005cu2019' s comment history, we see that he or she repeatedly derides Senator Cruz (e.g.,, writing u'\u005cu201c' Ted Cruz is no Ronald Reagan
+p15
+aVData collection and annotation is ongoing, so we will continue to release new (larger) versions of the corpus in the future
+p16
+aVAverage pairwise Cohen u'\u005cu2019' s Kappa [] is 0.341, suggesting fair to moderate agreement [] , as we might expect for a subjective task like this one
+p17
+aVOf course, many people genuinely do enjoy Twilight and so if the review is written subtly it will likely be difficult to discern the author u'\u005cu2019' s intent without this background
+p18
+aVThis suggests that, as humans require context to make their judgements for this task, so too do computers
+p19
+aVFor example, http://reddit.com/r/politics features articles (and hence comments) centered around political news
+p20
+aV[] also recently introduced the Internet Argument Corpus (IAC), which includes a sarcasm label (among others
+p21
+a.

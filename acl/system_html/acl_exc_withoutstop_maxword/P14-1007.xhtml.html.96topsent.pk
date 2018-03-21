@@ -1,0 +1,22 @@
+(lp0
+VScopal information in MRS analyses delivered by the ERG fixes the scope of operators u'\u005cu2014' such as negation, modals, scopal adverbs (including subordinating conjunctions like while ), and clause-embedding verbs (e.g., believe ) u'\u005cu2014' based on their position in the constituent structure, while leaving the scope of quantifiers (e.g., a or every , but also other determiners) free
+p1
+aVThus, the MRS crawling operations u'\u005cu2018' paint u'\u005cu2019' a subset of the MRS graph as in-scope for a given negation cue
+p2
+aVOur system, on the other hand, models the annotation guidelines more closely in the definition of the MRS crawling rules, and has more elaborated rules for handling semantically empty words
+p3
+aVOur MRS crawling algorithm was defined by looking at the annotated data rather than the annotation guidelines for the Shared Task [ 7 ]
+p4
+aVWe combine our system with the outputs from the best-performing 2012 submission, the system of \u005cciteA Rea:Vel:Ovr:12, firstly by relying on the latter for system negation cue detection, 4 4 \u005cciteA Rea:Vel:Ovr:12 predicted cues using a closed vocabulary assumption with a supervised classifier to disambiguate instances of cues and secondly as a fall-back in system combination as described in § 3.4 below
+p5
+aVThe negation cue for a negated nominal argument will appear as a quantifier EP in the MRS, triggering line 3 of our algorithm
+p6
+aVOur crawling rules operate on semantic representations, but the annotations are with reference to the surface string
+p7
+aVBy disallowing the addition of EPs to the scope if they share the label of the negation cue but are not one of its arguments, we block the head noun u'\u005cu2019' s EP (and any EPs only reachable from it) in cases of relative clauses where the head verb inside the relative clause is negated
+p8
+aVThus, we also tested fall-back configurations which use scope predictions based on MRS in some cases, and scope predictions from the system of \u005cciteA Rea:Vel:Ovr:12 in others
+p9
+aVSince the Shared Task gold standard annotations included such arguably semantically vacuous (see \u005cciteNP
+p10
+a.

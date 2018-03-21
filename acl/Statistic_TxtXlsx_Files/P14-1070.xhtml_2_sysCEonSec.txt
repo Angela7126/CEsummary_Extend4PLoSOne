@@ -1,0 +1,451 @@
+Current File: P14-1070.xhtml_2 P14-1070.xhtml
+
+Section 0:  Abstract
+	SentNum: 4
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 25.0000%
+
+Section 1:  1 Introduction
+	SentNum: 22
+	CENum: 4
+	SentCovered: 4
+	Covered_Rate: 18.1818%
+
+Section 2:  2 Related work
+	SentNum: 12
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 8.3333%
+
+Section 3:  3 Data: MWEs in Dependency Trees
+	SentNum: 75
+	CENum: 19
+	SentCovered: 24
+	Covered_Rate: 32.0000%
+
+Section 4:  4 Architectures for MWE Analysis and Parsing
+	SentNum: 12
+	CENum: 0
+	SentCovered: 0
+	Covered_Rate: 0.0000%
+
+Section 5:  5 Use of external MWE resources
+	SentNum: 26
+	CENum: 6
+	SentCovered: 9
+	Covered_Rate: 34.6154%
+
+Section 6:  6 Experiments
+	SentNum: 77
+	CENum: 23
+	SentCovered: 30
+	Covered_Rate: 38.9610%
+
+Section 7:  7 Conclusion
+	SentNum: 6
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 16.6667%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-1070.xhtml_2's CE cases
+
+Section 0:  Abstract has 1 CE cases
+	CASE: 1
+	Stag: 3 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: This can be useful for capturing the various degrees of semantic compositionality of MWEs. 
+		Cause: [(0, 5), (0, 13)]
+		Effect: [(0, 0), (0, 3)]
+
+Section 1:  1 Introduction has 4 CE cases
+	CASE: 1
+	Stag: 4 5 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: A real-life parsing system should comprise the recognition of multi-word expressions (MWEs 1 1 Multiword expressions can be roughly defined as continuous or discontinuous sets of tokens, which either do not exhibit full freedom in lexical selection or whose meaning is not fully compositional. We focus in this paper on contiguous multiword expressions, also known as u'\u201c' words with spaces u'\u201d' first because downstream semantic-oriented applications need some marking in order to distinguish between regular semantic composition and the typical semantic non-compositionality of MWEs. 
+		Cause: [(0, 22), (1, 25)]
+		Effect: [(0, 0), (0, 20)]
+
+	CASE: 2
+	Stag: 5 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: We focus in this paper on contiguous multiword expressions, also known as u'\u201c' words with spaces u'\u201d' first because downstream semantic-oriented applications need some marking in order to distinguish between regular semantic composition and the typical semantic non-compositionality of MWEs. 
+		Cause: [(0, 28), (0, 48)]
+		Effect: [(0, 0), (0, 26)]
+
+	CASE: 3
+	Stag: 17 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: The trees show syntactic dependencies between semantically sound units (made of one or several tokens), and are thus particularly appealing for downstream semantic-oriented applications, as dependency trees are considered to be closer to predicate-argument structures. 
+		Cause: [(0, 0), (0, 19)]
+		Effect: [(0, 21), (0, 37)]
+
+	CASE: 4
+	Stag: 18 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: In this paper, we investigate various strategies for predicting from a tokenized sentence both MWEs and syntactic dependencies, using the French dataset of the SPMRL 13 Shared Task. 
+		Cause: [(0, 9), (0, 29)]
+		Effect: [(0, 0), (0, 7)]
+
+Section 2:  2 Related work has 1 CE cases
+	CASE: 1
+	Stag: 35 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: It uses no feature nor treatment specific to MWEs as it focuses on the general aim of the Shared Task, namely coping with prediction of morphological and syntactic analysis. 
+		Cause: [(0, 10), (0, 29)]
+		Effect: [(0, 0), (0, 8)]
+
+Section 3:  3 Data: MWEs in Dependency Trees has 19 CE cases
+	CASE: 1
+	Stag: 50 51 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The first component of a MWE is taken as the head of the MWE. All subsequent components of the MWE depend on the first one, with the special label dep_cpd (hence the name flat representation. 
+		Cause: [(0, 9), (1, 17)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 2
+	Stag: 51 52 
+		Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: All subsequent components of the MWE depend on the first one, with the special label dep_cpd (hence the name flat representation. Furthermore, the first MWE component bears a feature mwehead equal to the POS of the MWE. 
+		Cause: [(0, 0), (0, 17)]
+		Effect: [(0, 19), (1, 15)]
+
+	CASE: 3
+	Stag: 57 58 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: In the alternative representation we propose, irregular MWEs are unchanged and appear as flat MWEs (e.g., en vain in Figure 1 has pattern preposition+adjective, which is not considered regular for an adverb, and is thus unchanged. Regular MWEs appear with u'\u2019' structured u'\u2019' syntax we modify the tree structure to recover the regular syntactic dependencies. 
+		Cause: [(0, 0), (0, 40)]
+		Effect: [(0, 10), (1, 26)]
+
+	CASE: 4
+	Stag: 67 
+		Pattern: 0 [['due', 'to']]---- [['&R'], ['&NP@C@']]
+		sentTXT: Furthermore, some sequences are both syntactically and semantically regular, but encoded as MWE due to frozen lexical selection. 
+		Cause: [(0, 17), (0, 19)]
+		Effect: [(0, 0), (0, 14)]
+
+	CASE: 5
+	Stag: 68 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: This is the case for déficit budgétaire (lit budgetary deficit , meaning u'\u2019' budget deficit u'\u2019' ), because it is not possible to use déficit du budget ( budget deficit. 
+		Cause: [(0, 30), (0, 42)]
+		Effect: [(0, 0), (0, 27)]
+
+	CASE: 6
+	Stag: 70 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: This renders the syntactic description more uniform and it provides an internal structure for regular MWEs, which is meaningful if the MWE is fully or partially compositional. 
+		Cause: [(0, 21), (0, 27)]
+		Effect: [(0, 0), (0, 19)]
+
+	CASE: 7
+	Stag: 72 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Moreover, such a distinction opens the way to a non-binary classification of MWE status the various criteria leading to classify a sequence as MWE could be annotated separately and using nominal or scaled categories for each criteria. 
+		Cause: [(0, 24), (0, 37)]
+		Effect: [(0, 0), (0, 22)]
+
+	CASE: 8
+	Stag: 76 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: The representation we propose is thus a first step towards a uniform handling of MWEs and discontinuous non-compositional phenomena like light-verb constructions or verbal frozen idioms. 
+		Cause: [(0, 0), (0, 4)]
+		Effect: [(0, 6), (0, 25)]
+
+	CASE: 9
+	Stag: 81 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: We developed an ad hoc program for structuring the regular MWEs in gold data. 
+		Cause: [(0, 7), (0, 13)]
+		Effect: [(0, 0), (0, 5)]
+
+	CASE: 10
+	Stag: 82 83 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: MWEs are first classified as regular or irregular, using regular expressions over the sequence of parts-of-speech within the MWE. To define the regular expressions, we grouped gold MWEs according to the pair [global POS of the MWE + sequence of POS of the MWE components], and designed regular expressions to match the most frequent patterns that looked regular according to our linguistic knowledge. 
+		Cause: [(0, 5), (1, 47)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 11
+	Stag: 83 
+		Pattern: 0 [['according', 'to'], [',']]---- [[], ['&NP@C@'], ['&R']]
+		sentTXT: To define the regular expressions, we grouped gold MWEs according to the pair [global POS of the MWE + sequence of POS of the MWE components], and designed regular expressions to match the most frequent patterns that looked regular according to our linguistic knowledge. 
+		Cause: [(0, 12), (0, 28)]
+		Effect: [(0, 30), (0, 47)]
+
+	CASE: 12
+	Stag: 83 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: To define the regular expressions, we grouped gold MWEs according to the pair [global POS of the MWE + sequence of POS of the MWE components], and designed regular expressions to match the most frequent patterns that looked regular according to our linguistic knowledge. 
+		Cause: [(0, 15), (0, 17)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 13
+	Stag: 87 88 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: 113 of these were classified as regular, and we judged that all of them were actually regular, and were correctly structured. Among the 87 classified as irregular, 7 should have been tagged as regular and structured. 
+		Cause: [(1, 5), (1, 15)]
+		Effect: [(0, 9), (1, 3)]
+
+	CASE: 14
+	Stag: 89 
+		Pattern: 7 [['due', 'to']]---- [['&V-ing/&NP@R@', '&BE'], ['&NP@C@', '(&Clause@C@)']]
+		sentTXT: For 4 of them, the classification error is due to errors on the (gold) POS of the MWE components. 
+		Cause: [(0, 11), (0, 21)]
+		Effect: [(0, 5), (0, 7)]
+
+	CASE: 15
+	Stag: 90 91 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: \draftreplace Counts of MWEs automatically structures because classified as regular are shown in Table 1 Table 1 shows the proportions of MWEs classified as regular, and thus further structured. About half MWEs are structured, and about two thirds of structured MWEs are nouns. 
+		Cause: [(0, 0), (0, 25)]
+		Effect: [(0, 29), (1, 13)]
+
+	CASE: 16
+	Stag: 94 95 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: In some experiments, we make use of alternative representations, which we refer later as u'\u201c' labeled representation u'\u201d' , in which the MWE features are incorporated in the dependency labels, so that MWE composition and/or the POS of the MWE be totally contained in the tree topology and labels, and thus predictable via dependency parsing. Figure shows the labeled representation for the sentence of Figure 1. 
+		Cause: [(0, 0), (0, 59)]
+		Effect: [(0, 63), (1, 9)]
+
+	CASE: 17
+	Stag: 102 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: For instance, in bottom tree of Figure 1 , arcs pointing to the non-head components ( de, biens, sociaux ) are suffixed with _r to mark them as belonging to a structured MWE, and with _N since the MWE is a noun. 
+		Cause: [(0, 43), (0, 47)]
+		Effect: [(0, 0), (0, 41)]
+
+	CASE: 18
+	Stag: 106 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: IRREG-MERGED gold irregular MWEs are merged for training; for parsing, irregular MWEs are predicted externally, merged into one token at parsing time, and re-expanded into several tokens for evaluation;. 
+		Cause: [(0, 7), (0, 10)]
+		Effect: [(0, 0), (0, 5)]
+
+	CASE: 19
+	Stag: 107 108 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: IRREG-BY-PARSER the MWE status, flat topology and POS are all predicted via dependency parsing, using representations for training and parsing, with all information for irregular MWEs encoded in topology and labels (as for in vain in Figure 2. For regular MWEs, their internal structure is always predicted by the parser. 
+		Cause: [(0, 36), (1, 11)]
+		Effect: [(0, 1), (0, 34)]
+
+Section 4:  4 Architectures for MWE Analysis and Parsing has 0 CE cases
+Section 5:  5 Use of external MWE resources has 6 CE cases
+	CASE: 1
+	Stag: 128 129 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: MWE lexicons are exploited as sources of features for both the dependency parser and the external MWE analyzer. In particular, two large-coverage general-language lexicons are used the Lefff 6 6 We use the version available in the POS tagger MElt [ 14 ] lexicon [ 21 ] , which contains approximately half a million inflected word forms, among which approx. 
+		Cause: [(0, 5), (1, 42)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 2
+	Stag: 135 136 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In order to compare the MWEs present in the lexicons and those encoded in the French treebank, we applied the following procedure (hereafter called lexicon lookup in a given sentence, the maximum number of non overlapping MWEs according to the lexicons are systematically marked as such. We obtain about 70% recall and 50% precision with respect to MWE spanning. 
+		Cause: [(0, 48), (1, 5)]
+		Effect: [(0, 0), (0, 46)]
+
+	CASE: 3
+	Stag: 143 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: MWE information can be integrated as features to be used by the dependency parser. 
+		Cause: [(0, 6), (0, 13)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 4
+	Stag: 144 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We tested to incorporate the MWE-specific features as defined in the gold flat representation (section 3.1 the mwehead=POS feature for the MWE head token, POS being the part-of-speech of the MWE; the component=y feature for the non-first MWE component. 
+		Cause: [(0, 8), (0, 35)]
+		Effect: [(0, 0), (0, 6)]
+
+	CASE: 5
+	Stag: 147 148 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The intuition behind this feature is that for an irregular MWE, the POS of the linearly first component, which serves as head, is not always representative of the external distribution of the MWE. For regular MWEs, the usefulness of such a trick is less obvious. 
+		Cause: [(0, 23), (1, 12)]
+		Effect: [(0, 0), (0, 21)]
+
+	CASE: 6
+	Stag: 149 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: The first component of a regular MWE is not necessarily its head (for instance for a nominal MWE with internal pattern adjective+noun), so the switch trick could be detrimental in such cases. 
+		Cause: [(0, 0), (0, 25)]
+		Effect: [(0, 28), (0, 36)]
+
+Section 6:  6 Experiments has 23 CE cases
+	CASE: 1
+	Stag: 157 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Predicted lemmas, POS and morphology features are computed with Morfette version 0.3.5 [ 8 , 22 ] 13 13 https://sites.google.com/site/morfetteweb/ , using 10 iterations for the tagging perceptron, 3 iterations for the lemmatization perceptron, default beam size for the decoding of the joint prediction, and the Lefff [ 21 ] as external lexicon used for out-of-vocabulary words. 
+		Cause: [(0, 55), (0, 59)]
+		Effect: [(0, 1), (0, 53)]
+
+	CASE: 2
+	Stag: 159 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: Evaluation metrics we evaluate our parsing systems by using the standard metrics for dependency parsing. 
+		Cause: [(0, 8), (0, 14)]
+		Effect: [(0, 0), (0, 6)]
+
+	CASE: 3
+	Stag: 164 165 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: For the flat MWE features, we experimented both with features predicted by the MWE analyzer, and with features predicted using the external lexicons mentioned in section 5.1 (using the lexicon lookup procedure. Both kinds of prediction lead to fairly comparable results, so in all the following, the MWE features, when used, are predicted using the external lexicons. 
+		Cause: [(0, 1), (1, 8)]
+		Effect: [(1, 11), (1, 28)]
+
+	CASE: 4
+	Stag: 174 175 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: For LAS, in both cases the three last tokens will count as incorrect if the wrong MWE status is predicted. So to sum up on the u'\u201c' labeled evaluation u'\u201d' , we obtain a LAS evaluation for the whole task of parsing plus MWE recognition, but an UAS evaluation that penalizes less errors on MWE status, while keeping a representation that is richer predicted parses contain not only the syntactic dependencies and MWE information, but also a classification of MWEs into regular and irregular, and the internal syntactic structure of regular MWEs. 
+		Cause: [(0, 13), (1, 82)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 5
+	Stag: 174 175 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: For LAS, in both cases the three last tokens will count as incorrect if the wrong MWE status is predicted. So to sum up on the u'\u201c' labeled evaluation u'\u201d' , we obtain a LAS evaluation for the whole task of parsing plus MWE recognition, but an UAS evaluation that penalizes less errors on MWE status, while keeping a representation that is richer predicted parses contain not only the syntactic dependencies and MWE information, but also a classification of MWEs into regular and irregular, and the internal syntactic structure of regular MWEs. 
+		Cause: [(0, 0), (0, 20)]
+		Effect: [(1, 1), (1, 83)]
+
+	CASE: 6
+	Stag: 176 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The evaluation on u'\u201c' structured representation u'\u201d' can be interpreted as an evaluation of the parsing task plus the recognition of irregular MWEs only both LAS and UAS are measured independently of errors on regular MWE status (note the UAS is exactly the same than in the u'\u201c' labeled u'\u201d' case. 
+		Cause: [(0, 19), (0, 66)]
+		Effect: [(0, 0), (0, 17)]
+
+	CASE: 7
+	Stag: 179 180 
+		Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: The best score for each metric is in bold.The JOINT baseline corresponds to a u'\u201c' pure u'\u201d' joint system without external MWE resources (hence the minus sign for the first three columns. \draftremove Note that columns 6 and 8 are identical, since the UAS scores for u'\u201c' labeled u'\u201d' and structured representations are the same. 
+		Cause: [(0, 0), (0, 31)]
+		Effect: [(0, 33), (1, 31)]
+
+	CASE: 8
+	Stag: 180 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: \draftremove Note that columns 6 and 8 are identical, since the UAS scores for u'\u201c' labeled u'\u201d' and structured representations are the same. 
+		Cause: [(0, 12), (0, 32)]
+		Effect: [(0, 0), (0, 9)]
+
+	CASE: 9
+	Stag: 185 186 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Concerning the tuning of parameters, it appears that the best setting is to use MWE-features, and switch for both regular and irregular MWEs, except for the pipeline architecture for which results without MWE features are slightly better. So overall, informing the parser with independently predicted POS of MWE has positive impact. 
+		Cause: [(0, 0), (0, 39)]
+		Effect: [(1, 1), (1, 14)]
+
+	CASE: 10
+	Stag: 188 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: It can be noted though, that JOINT-IRREG performs overall better on MWEs (last two columns of table 3 ), whereas JOINT performs better on irregular MWEs the \draftreplace full joint architecturelatter seems \draftreplace on the one handto be beneficial for parsing, but is less efficient to correctly spot the regular MWEs. 
+		Cause: [(0, 45), (0, 45)]
+		Effect: [(0, 0), (0, 43)]
+
+	CASE: 11
+	Stag: 189 
+		Pattern: 0 [[['lead', 'leads', 'led'], 'to']]---- [['&V-ing/&NP@C@', '(&CAN/have/has/had)'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: Concerning the three distinct representations, evaluating on structured representation (hence without looking at regular MWE status) leads to a rough 2 point performance increase for the LAS and a one point increase for the UAS, with respect to the evaluation against flat representation. 
+		Cause: [(0, 8), (0, 18)]
+		Effect: [(0, 21), (0, 37)]
+
+	CASE: 12
+	Stag: 192 
+		Pattern: 7 [['due', 'to']]---- [['&V-ing/&NP@R@', '&BE'], ['&NP@C@', '(&Clause@C@)']]
+		sentTXT: 16 16 The slight differences in LAS between the labeled and the flat representations are due to side effects of errors on MWE status some wrong reattachments performed to obtain flat representation decrease the UAS, but also in some cases the LAS. 
+		Cause: [(0, 17), (0, 42)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 13
+	Stag: 195 196 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We observe the same general trend as in the development corpus, but with tinier differences. JOINT and JOINT-IRREG significantly outperform the baseline and the PIPELINE, on labeled representation and flat representation. 
+		Cause: [(0, 7), (1, 10)]
+		Effect: [(0, 0), (0, 5)]
+
+	CASE: 14
+	Stag: 200 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: Moreover, we provide in table 5 a comparison of our best architecture with reg/irregular MWE distinction with other architectures that do not make this distinction, namely the two best comparable systems designed for the SPMRL Shared Task [ 23 ] the pipeline simple parser based on Mate-tools of Constant et al. 
+		Cause: [(0, 48), (0, 52)]
+		Effect: [(0, 0), (0, 45)]
+
+	CASE: 15
+	Stag: 205 206 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: Results can only be compared on the flat representation, because the other systems output poorer linguistic information. We computed statistical significance of differences between our systems and Const13. 
+		Cause: [(0, 11), (1, 9)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 16
+	Stag: 208 209 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: But on the test corpus (which is twice bigger), the best system is Const13 pipeline, with statistically significant differences over our joint systems. So the first observation is that our architectures that distinguish between reg/irreg MWEs do not outperform uniform architectures. 
+		Cause: [(0, 0), (0, 26)]
+		Effect: [(1, 1), (1, 17)]
+
+	CASE: 17
+	Stag: 210 211 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: But we note that the differences are slight, and the output we obtain is enhanced with regular MWE internal structure. It can thus be noted that the increased syntactic uniformity obtained by our MWE representation is mitigated so far by the additional complexity of the task. 
+		Cause: [(0, 1), (1, 1)]
+		Effect: [(1, 3), (1, 25)]
+
+	CASE: 18
+	Stag: 212 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The second observation is that currently the best system on this dataset is a pipeline system, as results on test set show (and somehow contrary to results on dev set. 
+		Cause: [(0, 18), (0, 31)]
+		Effect: [(0, 0), (0, 15)]
+
+	CASE: 19
+	Stag: 214 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: In this section, we propose to better evaluate the difficulty of combining the tasks of MWE analysis and dependency parsing by comparing our systems with systems performing simpler tasks i.e., MWE recognition without parsing, and parsing with no or limited MWE recognition, simulated by using gold MWEs. 
+		Cause: [(0, 22), (0, 30)]
+		Effect: [(0, 31), (0, 50)]
+
+	CASE: 20
+	Stag: 214 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: In this section, we propose to better evaluate the difficulty of combining the tasks of MWE analysis and dependency parsing by comparing our systems with systems performing simpler tasks i.e., MWE recognition without parsing, and parsing with no or limited MWE recognition, simulated by using gold MWEs. 
+		Cause: [(0, 17), (0, 19)]
+		Effect: [(0, 9), (0, 15)]
+
+	CASE: 21
+	Stag: 218 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: Next, we compare the best JOINT-REG system with the one based on the same architecture but where the irregular MWEs are perfectly pre-identified, in order to quantify the difficulty added by the irregular MWEs. 
+		Cause: [(0, 13), (0, 23)]
+		Effect: [(0, 25), (0, 35)]
+
+	CASE: 22
+	Stag: 222 223 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In the JOINT-REG architecture, assuming gold irregular MWE identification, increases LAS by 1.3 point. In terms of MWE recognition, as compared with the CRF-based analyzer, our best system is around 2 points below. 
+		Cause: [(1, 7), (1, 20)]
+		Effect: [(0, 1), (1, 4)]
+
+	CASE: 23
+	Stag: 227 228 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: The u'\u201d' weak point u'\u201d' of our system is therefore the identification of regular MWEs. We experimented strategies to predict both MWE analysis and dependency structure, and tested them on the dependency version of French Treebank [ 1 ] , as instantiated in the SPMRL Shared Task [ 23 ]. 
+		Cause: [(0, 0), (0, 16)]
+		Effect: [(0, 18), (1, 34)]
+
+Section 7:  7 Conclusion has 1 CE cases
+	CASE: 1
+	Stag: 231 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: This can be useful for capturing the various degrees of semantic compositionality of MWEs. 
+		Cause: [(0, 5), (0, 13)]
+		Effect: [(0, 0), (0, 3)]
+
+#-------------------------------------------------
+

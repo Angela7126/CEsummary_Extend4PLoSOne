@@ -1,0 +1,14 @@
+(lp0
+VSubsequent lines in Table 1 indicate additional surface feature templates computed over the span, which are then conjoined with the rule identity as shown in Figure 1 to give additional features
+p1
+aVAdding these simple features (first word, last word, and lengths) as span features of the X-bar grammar already gives us a substantial improvement over our baseline system, improving the parser u'\u005cu2019' s performance from 73.0 F1 to 85.0 F1 (see Table 1
+p2
+aVHowever, negative features u'\u005cu2014' features that are not observed in any tree u'\u005cu2014' are still powerful indicators of (un)grammaticality if we have never seen a PRN that starts with u'\u005cu201c' has, u'\u005cu201d' or a span that begins with a quotation mark and ends with a close bracket, then we would like the model to be able to place negative weights on these features
+p3
+aVOur base model has no surface features formally, on each anchored rule r we have only an indicator of the (unanchored) rule identity, rule u'\u005cu2062' ( r
+p4
+aVAs illustrated in Figure 1 , the actual features of the model are obtained by conjoining surface properties with various abstractions of the rule identity
+p5
+aVOur parser can be easily adapted to this task by replacing the X-bar grammar over treebank symbols with a grammar over the sentiment values to encode the output variables
+p6
+a.

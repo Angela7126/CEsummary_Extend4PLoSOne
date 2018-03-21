@@ -1,0 +1,136 @@
+(lp0
+VNext, we heuristically generate canonical utterances for each logical form based on the text descriptions of predicates from the KB
+p1
+aVOnce the candidate set of logical forms paired with canonical utterances is constructed, our problem is reduced to scoring pairs ( c , z ) based on a paraphrase model
+p2
+aVOur system generates relatively natural utterances from logical forms using simple rules based on Freebase descriptions (Section 4
+p3
+aVWe use two complementary paraphrase models an association model based on aligned phrase pairs extracted from a monolingual parallel corpus, and a vector space model , which represents each utterance as a vector and learns a similarity score between them
+p4
+aVwhere the parameters u'\u005cu0398' pr define the paraphrase model (Section 5 ), which is based on features extracted from text only (the input and canonical utterance
+p5
+aVThe parameters u'\u005cu0398' lf correspond to semantic parsing features based on the logical form and input utterance, and are briefly described in this section
+p6
+aVIn conclusion, the main contribution of this paper is a novel approach for semantic parsing based on a simple generation procedure and a paraphrase model
+p7
+aVFirst, Fader et al use a KB over natural language extractions rather than a formal KB and so querying the KB does not require a generation step u'\u005cu2013' they paraphrase questions to KB entries directly
+p8
+aVTo construct candidate logical forms u'\u005cud835' u'\u005cudcb5' x for a given utterance x , our strategy is to find an entity in x and grow the logical form from that entity
+p9
+aVIn this paper, we present a novel approach for semantic parsing based on paraphrasing that can exploit large amounts of text not covered by the KB (Figure 1
+p10
+aV2013 ) presented a QA system that maps questions onto simple queries against Open IE extractions, by learning paraphrases from a large monolingual parallel corpus, and performing a single paraphrasing step
+p11
+aVThis demonstrates that our method for constructing candidate logical forms is reasonable
+p12
+aVIn Section 6 , we show that an even simpler method of generating canonical utterances by concatenating Freebase descriptions hurts accuracy by only a modest amount
+p13
+aVWe define associations in x and c primarily by looking up phrase pairs in a phrase table constructed using the Paralex corpus [ 10 ]
+p14
+aVFirst, the paraphrase model is decoupled from the KB, so we can train it from large text corpora
+p15
+aVThis is because our simple model allows to associate u'\u005cu201c' hall of fame u'\u005cu201d' with the canonical utterance three times
+p16
+aVAs we show later, this procedure actually produces a set with better coverage than constructing logical forms recursively from spans of x , as is done in traditional semantic parsing
+p17
+aVSince we train from question-answer pairs, we collect answers by executing the gold logical forms against Freebase
+p18
+aVThe probability of an answer y is obtained by marginalizing over canonical utterances c and logical forms z whose denotation is y
+p19
+aVThe VS model ranks the canonical utterance u'\u005cu201c' What composition has Richard Wagner as lyricist u'\u005cu201d' higher, as this utterance is also in the music domain
+p20
+aVSince our generated questions are passed to a paraphrase model, we took a very simple approach, mostly ensuring that we preserved the semantics of the utterance without striving for the most fluent realization
+p21
+aVWe believe that our approach opens a window of opportunity for learning semantic parsers from raw text not necessarily related to the target KB
+p22
+aVWhile it has been shown that paraphrasing methods are useful for question answering [ 15 ] and relation extraction [ 27 ] , this is, to the best of our knowledge, the first paper to perform semantic parsing through paraphrasing
+p23
+aVFor Freebase entities, we extract a popularity feature based on the entity frequency in an entity linked subset of Reverb [ 22 ]
+p24
+aVWe use the word alignments to construct a phrase table by applying the consistent phrase pair heuristic [ 24 ] to all 5-grams
+p25
+aVBoth steps are performed with a small and simple set of deterministic rules, which suffices for our datasets, as they consist of factoid questions with a modest amount of compositional structure
+p26
+aVOne can view this work as a generalization of Fader et al along three dimensions
+p27
+aVThis is important since for each question-answer pair, we consider thousands of canonical utterances as potential paraphrases
+p28
+aVWe further modify logical forms by intersecting with a unary filter (#4 given a formula z with some Freebase type (e.g.,, People ), we look at all Freebase sub-types t (e.g.,, Composer ), and check whether one of their Freebase descriptions (e.g.,, u'\u005cu201c' composer u'\u005cu201d' ) appears in x
+p29
+aVFor example, for the logical form Character.Actor.BradPitt , if we match the entity Troy in x , we obtain Character.(Actor.BradPitt u'\u005cu2293' Film.Troy
+p30
+aVFor instance, the utterances u'\u005cu201c' Where is ACL in 2014 u'\u005cu201d' and u'\u005cu201c' What is the location of ACL 2014 u'\u005cu201d' cannot be used in traditional semantic parsing methods, since the KB does not contain an entity ACL2014 , but this pair clearly contains valuable linguistic information
+p31
+aVThe denotation of a logical form z with respect to a KB u'\u005cud835' u'\u005cudca6' is given by \u005cllbracket u'\u005cu2062' z u'\u005cu2062' \u005crrbracket u'\u005cud835' u'\u005cudca6'
+p32
+aVThus, word choice in Free917 is often close to the generated Freebase descriptions, allowing simple baselines to perform well
+p33
+aVParalex is suitable for our needs since it focuses on question paraphrases
+p34
+aVWe surmise this is because questions in Free917 were generated by annotators prompted by Freebase facts, whereas questions in WebQuestions originated independently of Freebase
+p35
+aVLastly, Freebase formulas have types (see Section 4 ), and we conjoin the type of z with the first word of x , to capture the correlation between a word (e.g.,, u'\u005cu201c' where u'\u005cu201d' ) with the Freebase type (e.g.,, Location
+p36
+aVWe also add all binary predicates in z as features
+p37
+aVScaling semantic parsers to large knowledge bases has attracted substantial attention recently [ 2 , 1 , 19 ] , since it drives applications such as question answering (QA) and information extraction (IE
+p38
+aVFor example, the association model identifies that the paraphrase for u'\u005cu201c' What type of music did Richard Wagner Play u'\u005cu201d' is u'\u005cu201c' What is the musical genres of Richard Wagner u'\u005cu201d' , by relating phrases such as u'\u005cu201c' type of music u'\u005cu201d' and u'\u005cu201c' musical genres u'\u005cu201d'
+p39
+aVThis results in many poor associations (e.g.,, u'\u005cu201c' play u'\u005cu201d' and u'\u005cu201c' the u'\u005cu201d' ), but as illustrated in Figure 3 , we learn weights that discriminate good from bad associations
+p40
+aVAnother example is the question u'\u005cu201c' Where is the Nascar hall of fame u'\u005cu201d' , where ParaSempre suggests that u'\u005cu201c' What hall of fame discipline has Nascar hall of fame as halls of fame u'\u005cu201d' is the best canonical utterance
+p41
+aVMoreover, we extract a popularity feature for predicates based on the number of instances they have in u'\u005cud835' u'\u005cudca6'
+p42
+aVFor example, ParaSempre suggests that the best paraphrase for u'\u005cu201c' What company did Henry Ford work for u'\u005cu201d' is u'\u005cu201c' What written work novel by Henry Ford u'\u005cu201d' rather than u'\u005cu201c' The employer of Henry Ford u'\u005cu201d' , due to the exact match of the word u'\u005cu201c' work u'\u005cu201d'
+p43
+aVOnce associations are constructed, we mark tokens in x and c that were not part of any association, and extract deletion features for their lemmas and POS tags
+p44
+aVWe can see that our model learns a positive score for associating u'\u005cu201c' type u'\u005cu201d' with u'\u005cu201c' genres u'\u005cu201d' , and a negative score for associating u'\u005cu201c' is u'\u005cu201d' with u'\u005cu201c' play u'\u005cu201d'
+p45
+aVThe strength u'\u005cu039b' of the L 1 regularizer is set based on cross-validation
+p46
+aVAs another reference point, out of 500,000 relations extracted by the ReVerb Open IE system [ 9 ] , only about 10,000 can be aligned to Freebase [ 1 ]
+p47
+aVA fundamental motivation and long standing goal of the paraphrasing and RTE communities has been to cast various semantic applications as paraphrasing/textual entailment [ 4 ]
+p48
+aVParaphrasing methods are well-suited for handling such text-to-text gaps
+p49
+aVClearly, we can increase the expressivity of this step by expanding the template set
+p50
+aVThis strategy is feasible in factoid QA where compositionality is low, and so the size of u'\u005cud835' u'\u005cudcb5' x is limited (Section 4
+p51
+aVBy extracting POS features, we obtain soft syntactic rules, e.g.,, the feature u'\u005cu201c' JJ N u'\u005cu2227' N u'\u005cu201d' indicates that omitting adjectives before nouns is possible
+p52
+aVFor a pair ( x , c ) , we also consider as candidate associations the set u'\u005cu212c' (represented implicitly), which contains token pairs ( x i , c i u'\u005cu2032' ) such that x i and c i u'\u005cu2032' share the same lemma, the same POS tag, or are linked through a derivation link on WordNet [ 11 ]
+p53
+aVWe start by constructing vector representations of words
+p54
+aVFor example, we could handle superlative utterances ( u'\u005cu201c' What NBA player is tallest u'\u005cu201d' ) by adding a template with an argmax operator
+p55
+aVThen, we add the logical form p p 1 e 1 u'\u005cu2293' p 2 e 2 ) , if there exists a binary p 2 with a compatible type signature ( t 1 , t 2 ) , where t 2 is one of e 2 u'\u005cu2019' s types
+p56
+aVAs our training data consists of question-answer pairs ( x i , y i ) , we maximize the log-likelihood of the correct answer
+p57
+aVThus, we combine the two models to benefit from their complementary nature
+p58
+aVThis dataset was created by crawling questions through the Google Suggest API, and then obtaining answers using Amazon Mechanical Turk
+p59
+aVWe execute u'\u005cu039b' -DCS queries by converting them into SPARQL and executing them against a copy of Freebase using the Virtuoso database engine
+p60
+aVThe template p p 1 e 1 u'\u005cu2293' p 2 e 2 ) (#3) is generated by appending the prepositional phrase in d u'\u005cu2062' ( e 2 ) , e.g, u'\u005cu201c' What character is the character of Brad Pitt in Troy u'\u005cu201d'
+p61
+aVFinally, we check whether x is an aggregation formula by identifying whether it starts with phrases such as u'\u005cu201c' how many u'\u005cu201d' or u'\u005cu201c' number of u'\u005cu201d' (#5
+p62
+aVThus, we learn that deleting pronouns is acceptable, while deleting nouns is not
+p63
+aVWe optimize the objective by initializing the parameters u'\u005cu0398' to zero and running AdaGrad [ 8 ]
+p64
+aVDue to its soporific effect though, we advise the reader to skim it quickly
+p65
+aVWe thank Kai Sheng Tai for performing the error analysis
+p66
+aVIf so, we add the formula u'\u005cud835' u'\u005cude83' u'\u005cud835' u'\u005cudea2' u'\u005cud835' u'\u005cude99' u'\u005cud835' u'\u005cude8e' t u'\u005cu2293' z to u'\u005cud835' u'\u005cudcb5' x
+p67
+a.

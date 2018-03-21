@@ -1,0 +1,28 @@
+(lp0
+V1 1 The idea to directly learn a parameter vector based on an objective optimum function is shared by Latent Dirichlet Allocation (LDA) models [ 8 , 21 ] , where parameters are set to optimize the joint probability distribution of words and documents
+p1
+aVHowever, it is worth pointing out that the evaluated parameter subset encompasses settings (narrow context window, positive PMI, SVD reduction) that have been found to be most effective in the systematic explorations of the parameter space conducted by Bullinaria and Levy [ 10 , 11 ]
+p2
+aVFor the predict models, we observe in Table 4 that negative sampling, where the task is to distinguish the target output word from samples drawn from the noise distribution, outperforms the more costly hierarchical softmax method
+p3
+aVIn this paper, we overcome the comparison scarcity problem by providing a direct evaluation of count and predict DSMs across many parameter settings and on a large variety of mostly standard lexical semantics benchmarks
+p4
+aVThe mcrae set [ 31 ] consists of 100 noun u'\u005cu2013' verb pairs, with top performance reached by the DepDM system of Baroni and Lenci ( 2010 ) , a count DSM relying on syntactic information
+p5
+aVMore precisely, words in the training data are discarded with a probability that is proportional to their frequency (capturing the same intuition that motivates traditional count vector weighting measures such as PMI
+p6
+aVThis vector optimization process is generally unsupervised, and based on independent considerations (for example, context reweighting is often justified by information-theoretic considerations, dimensionality reduction optimizes the amount of preserved variance, etc
+p7
+aV10 10 http://clic.cimec.unitn.it/dm/ This model, based on the same input corpus we use, exemplifies a u'\u005cu201c' linguistically rich u'\u005cu201d' count-based DSM, that relies on lemmas instead or raw word forms, and has dimensions that encode the syntactic relations and/or lexico-syntactic patterns linking targets and contexts
+p8
+aVState of the art performance on this set has been reported by Hassan and Mihalcea ( 2011 ) using a technique that exploits the Wikipedia linking structure and word sense disambiguation techniques
+p9
+aVIn concrete, distributional semantic models (DSMs) use vectors that keep track of the contexts (e.g.,, co-occurring words) in which target terms appear in a large corpus as proxies for meaning representations, and apply geometric techniques to these vectors to measure the similarity in meaning of the corresponding words [ 13 , 16 , 45 ]
+p10
+aVA long tradition in computational linguistics has shown that contextual information provides a good approximation to word meaning, since semantically similar words tend to have similar contextual distributions [ 36 ]
+p11
+aV2013d ) compare their predict models to u'\u005cu201c' Latent Semantic Analysis u'\u005cu201d' (LSA) count vectors on syntactic and semantic analogy tasks, finding that the predict models are highly superior
+p12
+aVA more cogent and interesting evaluation is reported in the third block of Table 2 , where we see what happens if we use the single models with worst performance across tasks (recall from Section 2 above that, in any case, we are
+p13
+a.

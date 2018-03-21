@@ -1,0 +1,232 @@
+(lp0
+VUsing an identical supervised learning procedure to Turney et al logistic regression with 10-fold cross-validation), we test whether our lexical representations based on subjectivity and concreteness convey sufficient information to perform the same classification
+p1
+aVIn this paper, we show how concreteness and subjectivity can be applied together to produce performance improvements on two classification problems distinguishing literal and non-literal adjective-noun pairs [ 27 ] , and classifying the modification type exhibited by such pairs [ 5 ]
+p2
+aVIn addition, we analyse the effect of noun concreteness and adjective subjectivity on meaning combination, illustrating how the interaction of these dimensions enables the accurate classification of adjective-noun pairs according to their semantics
+p3
+aVModels were trained with concreteness features ( CONC and ExpCONC ), subjectivity features ( SUBJ and SUBJpfl ) and the combination of both types ( Combined
+p4
+aVConcreteness , the degree to which language has a perceptible physical referent, and subjectivity , the extent to which linguistic meaning depends on the perspective of the speaker, are well established cognitive and linguistic notions
+p5
+aVWe therefore extract the frequency with which concepts are tagged as adjectives relative to as nouns, on the assumption that u'\u005cu2018' pure u'\u005cu2019' adjectives are on average more subjective than nominal-style adjectives
+p6
+aVTogether with the practical applications outlined in Section 1, these facts indicate the potential value of concreteness for models aiming to replicate human performance in language processing tasks
+p7
+aVTo verify the quality of our subjectivity features, we measured their performance as predictors in a logistic regression classifying the 3,250 adjectives labelled as subjective or not in the Wilson et al
+p8
+aVNotably, our combined model improves on the concreteness-only model, confirming that the interaction of concreteness and subjectivity provides additional information pertinent to meaning composition
+p9
+aVFor the 24,908 adjectives that occur in some adjective-noun pair with one of these nouns in the British National Corpus (BNC) [ 18 ] , we extracted subjectivity features from the Google Books Corpus [ 11 ]
+p10
+aVSpecifically, objective adjectives are more likely to modify concrete nouns and subjective adjectives are more likely to modify abstract nouns
+p11
+aVMoreover, given that humans seem to exploit both concreteness [ 20 ] and subjectivity [ 10 ] clues when processing language, it is likely that the same clues should benefit computational models aiming to replicate human-level performance in this area
+p12
+aVThe concreteness model performance represents further confirmation of the link between concreteness and composition
+p13
+aVThe results of our analyses also demonstrate a clear interaction between subjectivity and concreteness scores for nouns attributed by human raters
+p14
+aVBolinger ( 1967 ) proposed that subjective adjectives occur in predicative constructions ( the cake is sweet ), rather than attributive constructions ( the German capital ) more frequently than objective adjectives
+p15
+aV2) Subjectivity and concreteness can predict aspects of how adjective and noun concepts combine
+p16
+aVFurther, we show for the first time that adjective subjectivity correlates with noun concreteness in large corpora
+p17
+aVUnlike nouns, many adjectives are inherently subjective, and the number of adjectives in texts correlates with human judgements of their subjectivity [ 12 ]
+p18
+aVWe first tested the relationship between concreteness and subjectivity with a correlation analysis over noun concepts
+p19
+aVIn this section we have outlined a set of corpus features that, taken together, enable effective approximation of adjective subjectivity
+p20
+aVFor each noun n we defined its subjectivity profile as the mean of the subjectivity vectors of its modifying adjectives
+p21
+aVWe instead extract scores from a recently released dataset of lexical concepts rated on a 1-5 scale for concreteness by 20 annotators in a crowdsourcing experiment [ 9 ]
+p22
+aVSubjectivity analysis has already proved highly applicable to a range of NLP applications, including sentiment analysis, information extraction and text categorization [ 22 , 24 ]
+p23
+aVIn contrast, here we present six corpus-based features designed to quantify the lexical subjectivity of adjectives
+p24
+aVIntuitively, adjectives ascribing physical properties ( wooden shed ) are more objective than those conveying abstract traits ( suspicious man
+p25
+aVDemonstrable commonalities in how different people perceive the physical world suggest that concrete language may be more objective than abstract language [ 16 ]
+p26
+aVIn the non-literal expressions kill the process or black comedy , a verb or adjective that occurs with a concrete argument in literal phrases takes an abstract argument
+p27
+aV1985 ) theorizes that subjective adjectives tend to develop derived adverbial forms, whereas more objective adjectives do not
+p28
+aVIn a similar vein, interest in subjectivity analysis is set to grow with interest in extracting sentiment and opinion from the web and social media [ 3 ]
+p29
+aVWe conclude by discussing other potential applications of concreteness and subjectivity to NLP
+p30
+aV2013 ) crowdsourced data whereas Turney et al infer concreteness scores from a smaller training set
+p31
+aVHowever, while multi-modal models acquire richer representations of concrete concepts, their ability to represent abstract concepts can be weaker than text-only models [ 13 ]
+p32
+aV1) Subjective / objective adjectives are more likely to modify abstract / concrete nouns respectively
+p33
+aVRecent results suggest that they could also be useful knowledge for natural language processing systems that aim to extract and represent the meaning of language
+p34
+aVPairs in the bottom-left region of the CONC-SUBJ space (objective adjectives with abstract nouns, such as green politics ) seem to exhibit a non-literal, or at least non prototypical modification type
+p35
+aVWe evaluate the potential of our adjective subjectivity features, together with noun concreteness, to predict adjective-noun semantics, based on two existing classification tasks
+p36
+aVOn the non-literal composition task, the concreteness (83.0) and combined (85.0) models outperform that of Turney et al
+p37
+aVHowever, recent work has highlighted the application of subjectivity analysis to lexical semantics, for instance to the tasks of disambiguating words according to their usage or sense [ 28 , 2 ]
+p38
+aVIndeed, in certain cases the original, apparently objective, senses of polysemous adjectives are not modifiable ( very wooden shed ?), while their more abstract sense extensions are ( very wooden personality
+p39
+aV2011 ) present a supervised model that exploits this effect to correctly classify 79% of adjective-noun pairs as having literal or non-literal meaning
+p40
+aVAdamson ( 2000 ) proposes that more subjective adjectives typically occur furthest from the noun in multiple-modifier strings such as ( hot crossed buns
+p41
+aVSince each of the six features takes values on [ 0 , 1 ] , we define the overall subjectivity of an adjective a with feature vector u'\u005cud835' u'\u005cudc2c' a = [ s 1 a u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' s 6 a ] as
+p42
+aVThe performance of each model is presented in Table 3, along with a baseline score reflecting the strategy of allocating all pairs to the largest class
+p43
+aVA large and growing body of empirical evidence indicates clear differences between concrete concepts, such as donut or hotdog and abstract concepts, such as guilt or obesity
+p44
+aVWe describe an unsupervised corpus-based method to quantify adjective subjectivity, and show that it effectively predicts the labels of a hand-coded subjectivity lexicon
+p45
+aVThe importance of concreteness to NLP systems is likely to grow with the emergence of multi-modal semantic models [ 8 , 25 ]
+p46
+aVComputational applications of subjectivity, including sentiment analysis and information extraction, have focused largely on phrase or document meaning
+p47
+aVIn addition, to examine the effect of concreteness alone on adjective-noun semantics, we defined a new adjective feature
+p48
+aVA principled treatment of concreteness is thus likely to be important if the multi-modal approach is to prove effective on a wider range of concepts
+p49
+aVInsight into concreteness can help systems to classify adjective-noun pairs according to their semantics
+p50
+aVIn linguistic conctructions, concreteness appears to influence compound and phrasal semantics [ 26 , 7 , 27 ]
+p51
+aVConcrete words are more easily learned, remembered and processed than abstract words [ 21 ] , while differences in brain activity [ 4 ] and cognitive representation [ 13 ] have also been observed
+p52
+aVTo explore the relationship between concreteness, subjectivity and meaning, we plotted the 20,000 highest frequency ( a , n ) pairs in the BNC in the CONC-SUBJ semantic space (Figure 2, top
+p53
+aVThe features Comparability and Modifiability are identified as predictors of subjectivity by Wiebe ( 2000
+p54
+aVIn contrast, for pairs in the objective+concrete corner, the adjectives appear to perform a classifying or categorizing function ( baptist minister
+p55
+aVWe consequently extract the LeftTendency of our adjectives, defined as the frequency of occurrence as the leftmost of two adjectives as a proportion of the overall frequency of occurrence in multiple-modifier strings
+p56
+aVMany adjectives also function as nouns ( sweet cake vs boiled sweet
+p57
+aVTo create a distinct but analogous binary categorization problem to the composition task, we filtered out pairs not unanimously allocated to either class
+p58
+aVAnother characteristic of gradable adjectives noted by Wiebe ( 2000 ) is that they admit degree modifiers ( very/quite delicious
+p59
+aV2012 ) introduce a set of 370 adjective-noun pairs grouped into modification types by human judges
+p60
+aVWe denote by C u'\u005cu2062' O u'\u005cu2062' N u'\u005cu2062' C u'\u005cu2062' ( n ) the mean concreteness rating for noun n
+p61
+aVThe performance of individual features as predictors in isolation is shown in Figure 1 (top
+p62
+aVAdditive improvement over the baseline in each case was lower than for the composition task, which may reflect the greater subtlety inherent in the subsective/intersective classification
+p63
+aVSuch models, which learn representations from both linguistic and perceptual input, outperform text-only models on a range of evaluations
+p64
+aVSubjectivity is the degree to which language is interpretable independently of the speaker u'\u005cu2019' s perspective [ 17 ]
+p65
+aVQualitative investigations further suggest the interaction between these dimensions to be useful in the semantic characterization of adjective-noun pairs, a proposition we test formally in the next section
+p66
+aVTo evaluate their model of lexical concreteness, Turney et al
+p67
+aVWe thus define comparability as the frequency of comparative or superlative forms relative to the frequency of the base form, e.g
+p68
+aVFor example, the utterance he sits across the table is more subjective than he sits opposite Sam as its truth depends on the speaker u'\u005cu2019' s position
+p69
+aV2013 ) concreteness dataset
+p70
+aVBecause a red car is both a car and red, the pair is classed as intersective , whereas dark humour , which is not literally dark, is classed as subsective
+p71
+aVWe thus define adverbiability as the frequency of derived adverbial forms relative to the frequency of their base form, e.g
+p72
+aVWe therefore extract the relative frequency of occurrence with one of a hand-coded list of English degree modifiers
+p73
+aVFor such applications, subjectivity is analyzed at the phrasal or document level
+p74
+aVWe again aim to classify the remaining 211 intersective and 93 subsective pairs with a logistic regression
+p75
+aVWhile automatic methods have been proposed for the quantification of lexical concreteness, they each rely on dictionaries or similar hand-coded resources [ 15 , 27 ]
+p76
+aVAlthough all models improve on the majority-class baseline, the combined model was again most effective
+p77
+aVThe modification-type task has no performance benchmark since Boleda et al
+p78
+aVAs hypothesized, C u'\u005cu2062' O u'\u005cu2062' N u'\u005cu2062' C u'\u005cu2062' ( n ) was a significant predictor of the magnitude of the subjectivity profile (Pearson r = - 0.421 , p 0.01
+p79
+aV2011 ) is perhaps to be expected, since our model exploits the wide scope of the new Brysbaert et al
+p80
+aV3 3 Several of the features here were applied by Hill ( 2012 ) , to the task of ordering multiple-modifier strings
+p81
+aVThe improvement of this model over Turney et al
+p82
+aVFollowing Wiebe, we note that the existence of comparative forms for an adjective are indicative of gradability
+p83
+aVLanguage may also be subjective because it conveys evaluations or opinions [ 19 ]
+p84
+aVThe remainder are motivated by corpus studies and/or observations from the theoretical literature
+p85
+aVIn both spaces, the extremities reflect particular meaning combination types
+p86
+aVIndeed, inter-annotator agreement for this goldstandard (Cohen u'\u005cu2019' s u'\u005cu039a' = 0.87 ) was lower than for the composition task (0.95), implying a less cognitively salient distinction
+p87
+aV4 4 Available at http://mpqa.cs.pitt.edu/ The combination of all features produced an overall classifiction accuracy of 79%
+p88
+aVWe therefore extract the relative frequency of occurrence in such constructions
+p89
+aVThe authors are supported by St John u'\u005cu2019' s College, Cambridge and The Royal Society
+p90
+aVIn addressing (1), we extracted the 2,000 highest-frequency nouns from the Brysbaert et al
+p91
+aV2011 ) developed a list of 100 common adjective-noun pairs classified as either denotative (used literally) or connotative (non-literal) by five annotators
+p92
+aVWiebe ( 2000 ) oberve that gradable are more likely to be subjective
+p93
+aVIn the top-left, where ExpCONC is greater than CONC , the combinations are almost all non-literal, as shown in Table 2
+p94
+aVMotivated by these observations, in the following sections we test two hypotheses
+p95
+aVAway from the diagonal, meaning composition is less predictable
+p96
+aVwhere the bag A n contains an adjective a for each occurrence of the pair ( a , n ) in the BNC
+p97
+aVTurney et al
+p98
+aVThis effect is illustrated in Figure 1 (bottom
+p99
+aVBoleda et al
+p100
+aVQuirk et al
+p101
+aVwhere the bag N a contains noun n for each occurrence of the pair ( a , n ) in the BNC
+p102
+aV2012 ) do not use their data for classification
+p103
+aVFigure 2 (bottom) illustrates the the CONC-ExpCONC space
+p104
+aVIn the CONC-ExpCONC space, on the diagonal, where noun-concreteness is u'\u005cu2018' as expected u'\u005cu2019' , pairings appear to combine literally
+p105
+aVComparability
+p106
+aVModifiability
+p107
+aVAdverbiability
+p108
+aVLeftTendency
+p109
+aV2005 ) lexicon
+p110
+aV2 2 See e.g., [ 29 ]
+p111
+aVNon-nominality
+p112
+aV79.0
+p113
+aVPredicativity
+p114
+aV1 1 Available at http://crr.ugent.be/archives/1330
+p115
+a.

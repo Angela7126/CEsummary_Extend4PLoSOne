@@ -1,0 +1,16 @@
+(lp0
+VBecause NLP models typically treat sentences independently, NLP problems have long been seen as u'\u005cu201c' embarrassingly parallel u'\u005cu201d' u'\u005cu2013' large corpora can be processed arbitrarily fast by simply sending different sentences to different machines
+p1
+aVQueueing, which involves copying memory around within the GPU to process the individual parse items, takes a fairly consistent amount of time in all systems
+p2
+aVHowever, recent trends in computer architecture, particularly the development of powerful u'\u005cu201c' general purpose u'\u005cu201d' GPUs, have changed the landscape even for problems that parallelize at the sentence level
+p3
+aVPetrov and Klein ( 2007 ) showed that MBR trees substantially improved performance over Viterbi parses for latent variable grammars, earning up to 1.5F1
+p4
+aVFigure 1 shows an overview of the approach we first parse densely with a coarse grammar and then parse sparsely with the fine grammar, skipping symbols that the coarse pass deemed sufficiently unlikely
+p5
+aV2013 ) proposed an implementation of a PCFG parser that sacrifices standard sparse methods like coarse-to-fine pruning, focusing instead on maximizing the instruction and memory throughput of the parser
+p6
+aVWe know of no reason why this same trick cannot be employed in more traditional parsers, but it is especially useful here with this
+p7
+a.

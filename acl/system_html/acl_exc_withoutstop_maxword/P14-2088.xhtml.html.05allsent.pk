@@ -1,0 +1,266 @@
+(lp0
+VFinally, we compare against Structural Correspondence Learning ( SCL ; Blitzer et al., 2006) , another feature learning algorithm
+p1
+aVAs we will show, substantial efficiency improvements can be obtained by designing domain adaptation methods for learning in structured feature spaces
+p2
+aVChen et al
+p3
+aVChen et al
+p4
+aV1) feature scrambling , which randomly chooses a feature template and randomly selects an alternative value within the template, and (2) structured dropout , which randomly eliminates all but a single feature template
+p5
+aVTo solve this problem, Chen et al
+p6
+aVWe show how it is possible to marginalize over both types of noise, and find that the solution for structured dropout is substantially simpler and more efficient than the mDA approach of Chen et al
+p7
+aVBut Chen et al
+p8
+aVIn structural correspondence learning (SCL), the induced representation is based on the task of predicting the presence of pivot features
+p9
+aVFor each feature template, there are thousands of binary features
+p10
+aVPrior work on the Tycho Brahe corpus applied supervised learning to a random split of test and training data [ 17 , 7 ] ; they did not consider the domain adaptation problem of training on recent data and testing on older historical text
+p11
+aVOur work focuses on unsupervised domain adaptation, where no labeled data is available in the target domain
+p12
+aVIn all cases, we include the entire dataset to compute the feature projections; we also conducted experiments using only the test and training data for feature projections, with very similar results
+p13
+aVThen we present three versions of marginalized denoising autoencoders (mDA) by incorporating different types of noise, including two new noising processes that are designed for structured features
+p14
+aVIn this paper we investigate noising functions that are explicitly designed for structured feature spaces , which are common in NLP
+p15
+aVWe refer to baseline as training a CRF tagger on the source domain and testing on the target domain with only base features
+p16
+aV2012 ) used dropout noise for domain adaptation, which we briefly review
+p17
+aVIn dropout noise, each feature is set to zero with probability p 0
+p18
+aV2012 ) propose to use a set of pivot features, and train the autoencoder to reconstruct the pivots from the full set of features
+p19
+aVBoth structure-aware domain adaptation algorithms perform as well as standard dropout u'\u005cu2014' and better than the well-known structural correspondence learning (SCL) algorithm [ 1 ] u'\u005cu2014' but structured dropout is more than an order-of-magnitude faster
+p20
+aVConsequently, many approaches rely on each instance having a relatively large number of active features, and fail to exploit the structured feature spaces that characterize syntactic tasks such as sequence labeling and parsing [ 25 ]
+p21
+aVWe can exploit this structure by using an alternative dropout scheme for each token, choose exactly one feature template to keep, and zero out all other features that consider this token (transition feature templates such as u'\u005cu27e8' y t , y t - 1 u'\u005cu27e9' are not considered for dropout
+p22
+aVFollowing Blitzer et al
+p23
+aVFollowing the work of Nogueira Dos Santos et al
+p24
+aVBy using the autoencoder to transform the original feature space, one may obtain a representation that is less dependent on any individual feature, and therefore more robust across domains
+p25
+aVThere are 16 feature templates and 372 , 902 features in total
+p26
+aVMost previous work on domain adaptation focused on the supervised setting, in which some labeled data is available in the target domain [ 16 , 5 , 10 ]
+p27
+aVWhile the marginalized denoising autoencoder (mDA) is considerably faster than the original denoising autoencoder, it requires solving a system of equations that can grow very large, as realistic NLP tasks can involve 10 5 or more features
+p28
+aVA third alternative is to u'\u005cu201c' scramble u'\u005cu201d' the features by randomly selecting alternative features within each template
+p29
+aVSeveral representation learning methods have been proposed to solve this problem
+p30
+aVThis leads to a total of 1572 pivot features in our experiments
+p31
+aV2008 ) on this dataset, we apply the feature set of Ratnaparkhi ( 1996
+p32
+aVWe build on work from the deep learning community, in which denoising autoencoders are trained to remove synthetic noise from the observed instances [ 11 ]
+p33
+aVWe then describe two novel types of noise that are designed for structured feature spaces, and explain how they can be marginalized to efficiently compute u'\u005cud835' u'\u005cudc16'
+p34
+aV2012 ) showed that such autoencoders can be learned even as the noising process is analytically marginalized; the idea is similar in spirit to feature noising [ 29 ]
+p35
+aVStructured prediction tasks often have much more features than simple bag-of-words representation, and performance relies on the rare features
+p36
+aVDhillon et al
+p37
+aVAs a secondary contribution of this paper, we demonstrate the applicability of unsupervised domain adaptation to the syntactic analysis of historical texts
+p38
+aVTo exploit this structure, we propose two alternative noising techniques
+p39
+aVUnsupervised domain adaptation is a fundamental problem for natural language processing, as we hope to apply our systems to datasets unlike those for which we have annotations
+p40
+aVStructured dropout noise has no free hyper-parameters
+p41
+aVOn the specific problem of sequence labeling, Xiao and Guo ( 2013 ) proposed a supervised domain adaptation method by using a log-bilinear language adaptation model
+p42
+aVUnlike standard dropout, there are no free hyper-parameters to tune for structured dropout
+p43
+aVTable 2 presents results for different domain adaptation tasks
+p44
+aVWhile a number of different approaches for domain adaptation have been proposed [ 21 , 26 ] , they tend to emphasize bag-of-words features for classification tasks such as sentiment analysis
+p45
+aVWithin the context of denoising autoencoders, we have focused on dropout noise, which has also been applied as a general technique for improving the robustness of machine learning, particularly in neural networks [ 13 , 29 ]
+p46
+aVIn this section we first briefly describe the denoising autoencoder [ 12 ] , its application to domain adaptation, and the analytic marginalization of noise [ 4 ]
+p47
+aVIn many NLP settings, we have several feature templates, such as previous-word, middle-word, next-word, etc, with only one feature per template firing on any token
+p48
+aVFor a feature u'\u005cu0391' belonging to a template F , with probability p we will draw a noise feature u'\u005cu0392' also belonging to F , according to some distribution q
+p49
+aVFor example, in part-of-speech tagging, Toutanova et al
+p50
+aVAssuming we have K feature templates, this noise leads to very simple solutions for the marginalized matrices E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc0f' ] and E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc10' ]
+p51
+aVWe compare mDA with three alternative approaches
+p52
+aVAutoencoders apply a similar idea, but use the denoised instances as the latent representation [ 28 , 12 , 4 ]
+p53
+aVThe various noising approaches for mDA give very similar results
+p54
+aVFollowing Blitzer ( 2008 ) we perform feature centering/normalization, as well as rescaling for SCL
+p55
+aVFor intuition, consider standard feature dropout with p = K - 1 K
+p56
+aVUnlike these methods, our approach uses a standard CRF, but with transformed features
+p57
+aVWe compare these methods on historical Portuguese part-of-speech tagging, creating domains over historical epochs
+p58
+aVHowever, by including these elements, standard dropout is considerably slower, as we show in our experiments
+p59
+aV2003 ) define several feature u'\u005cu201c' templates u'\u005cu201d' the current word, the previous word, the suffix of the current word, and so on
+p60
+aVFor mDA, the best corruption level is p = 0.9 for dropout noise, and p = 0.1 for scrambling noise
+p61
+aVIn general, mDA outperforms SCL and PCA, the latter of which shows little improvement over the base features
+p62
+aVWe also include PCA to project the entire dataset onto a low-dimensional sub-space (while still including the original features
+p63
+aV2012 ) , which does not consider feature structure
+p64
+aV2006 ) , we consider pivot features that appear more than 50 times in all the domains
+p65
+aV1 if both features are chosen as noise features, which happens with probability p 2 u'\u005cu2062' q u'\u005cu0391' u'\u005cu2062' q u'\u005cu0392'
+p66
+aVWe apply these ideas to fine-grained part-of-speech tagging on a dataset of Portuguese texts from the years 1502 to 1836 [ 9 ] , training on recent texts and evaluating on older documents
+p67
+aVFor E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc0f' ] , we obtain a scaled version of the scatter matrix, because in each instance u'\u005cud835' u'\u005cudc31' ~ , there is exactly a 1 / K chance that each individual feature survives dropout
+p68
+aVHowever, structured dropout is orders of magnitude faster than the alternatives, as shown in Table 3
+p69
+aVAll the hyper-parameters are decided with our development data on the training set
+p70
+aVPennacchiotti and Zanzotto ( 2008 ) find that part-of-speech tagging degrades considerably when applied to a corpus of historical Italian
+p71
+aVThe two most recent domains (1800-1849 and 1750-1849) are treated as source domains, and the other domains are target domains
+p72
+aVOur evaluation concerns syntactic analysis of historical text, which is a topic of increasing interest for NLP [ 23 ]
+p73
+aVWe use a conditional random field tagger, choosing CRFsuite because it supports arbitrary real valued features [ 20 ] , with SGD optimization
+p74
+aVMoon and Baldridge ( 2007 ) tackle the challenging problem of tagging Middle English, using techniques for projecting syntactic annotations across languages
+p75
+aVWe obtain a projection matrix u'\u005cud835' u'\u005cudc16' s for each subset by reconstructing the pivot features from the features in this subset; we can then use the sum of all reconstructions as the new features, tanh u'\u005cu2061' ( u'\u005cu2211' s = 1 S u'\u005cud835' u'\u005cudc16' s u'\u005cu2062' u'\u005cud835' u'\u005cudc17' s )
+p76
+aVIn the standard denoising autoencoder, we need to generate multiple versions of the corrupted data u'\u005cud835' u'\u005cudc17' ~ to reduce the variance of the solution [ 12 ]
+p77
+aVThis is particularly relevant as labeled datasets become stale in comparison with rapidly evolving social media writing styles [ 8 ] , and as there is increasing interest in natural language processing for historical texts [ 23 ]
+p78
+aVOther entries will be all zero (only one feature belonging to the same template will fire in u'\u005cud835' u'\u005cudc31' i
+p79
+aVWe hold out 5% of data as development data to tune parameters
+p80
+aVIf we define the scatter matrix of the uncorrupted input as u'\u005cud835' u'\u005cudc12' = u'\u005cud835' u'\u005cudc17' u'\u005cud835' u'\u005cudc17' u'\u005cu22a4' , the solutions under dropout noise are
+p81
+aVThis scenario is motivated by training a tagger on a modern newstext corpus and applying it to historical documents
+p82
+aVThe form of these solutions means that computing u'\u005cud835' u'\u005cudc16' requires solving a system of equations equal to the number of features (in the naive implementation), or several smaller systems of equations (in the high-dimensional version
+p83
+aVThis will look very similar to structured dropout the matrix E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc0f' ] is identical, and E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc10' ] has off-diagonal elements which are scaled by ( 1 - p ) 2 , which goes to zero as K is large
+p84
+aVThe scrambling noise is most time-consuming, with cost dominated by a matrix multiplication
+p85
+aVu'\u005cud835' u'\u005cudc31' i , u'\u005cu0391' or u'\u005cud835' u'\u005cudc31' i , u'\u005cu0392' if one feature is unchanged and the other one is chosen as the noise feature, which happens with probability p u'\u005cu2062' ( 1 - p ) u'\u005cu2062' q u'\u005cu0392' or p u'\u005cu2062' ( 1 - p ) u'\u005cu2062' q u'\u005cu0391'
+p86
+aVwhere u'\u005cu0391' and u'\u005cu0392' index two features
+p87
+aVWe use the Tycho Brahe corpus to evaluate our methods
+p88
+aVAn off-diagonal entry in the matrix u'\u005cud835' u'\u005cudc31' ~ u'\u005cu2062' u'\u005cud835' u'\u005cudc31' ~ u'\u005cu22a4' which involves features u'\u005cu0391' and u'\u005cu0392' belonging to different templates ( F u'\u005cu0391' u'\u005cu2260' F u'\u005cu0392' ) can take four different values ( u'\u005cud835' u'\u005cudc31' i , u'\u005cu0391' denotes feature u'\u005cu0391' in u'\u005cud835' u'\u005cudc31' i
+p89
+aVMoreover, to extend mDA for high dimensional data, we no longer need to divide the corrupted input u'\u005cud835' u'\u005cudc31' ~ to several subsets
+p90
+aVThe corpus contains a total of 1,480,528 manually tagged words
+p91
+aVThe best parameters for SCL are dimensionality K = 25 and rescale factor u'\u005cu0391' = 5 , which are the same as in the original paper
+p92
+aVThe generally positive trend of these graphs indicates that adaptation becomes progressively more important as we select test sets that are more temporally remote from the training data
+p93
+aVWe divide the texts into fifty-year periods to create different domains
+p94
+aV2012 ) show that it is possible to marginalize over the noise, analytically computing expectations of both u'\u005cud835' u'\u005cudc0f' and u'\u005cud835' u'\u005cudc10' , and computing
+p95
+aVAssume instances u'\u005cud835' u'\u005cudc31' 1 , u'\u005cu2026' , u'\u005cud835' u'\u005cudc31' n , which are drawn from both the source and target domains
+p96
+aVIt uses a set of 383 tags and is composed of various texts from historical Portuguese, from 1502 to 1836
+p97
+aVAgain, it is possible to analytically marginalize over this noise
+p98
+aVIn a naive implementation of the denoising approach, both u'\u005cud835' u'\u005cudc0f' and u'\u005cud835' u'\u005cudc10' will be dense matrices with dimensionality d × d , which would be roughly 10 11 elements in our experiments
+p99
+aVWe also compute the transfer ratio , which is defined as adaptation accuracy baseline accuracy , shown in Figure 1
+p100
+aV2011 ) presented a spectral method to estimate low dimensional context-specific word representations for sequence labeling
+p101
+aVWe will u'\u005cu201c' corrupt u'\u005cu201d' these instances by adding different types of noise, and denote the corrupted version of u'\u005cud835' u'\u005cudc31' i by u'\u005cud835' u'\u005cudc31' ~ i
+p102
+aVSingle-layer denoising autoencoders reconstruct the corrupted inputs with a projection matrix u'\u005cud835' u'\u005cudc16' u'\u005cu211d' d u'\u005cu2192' u'\u005cu211d' d , which is estimated by minimizing the squared reconstruction loss
+p103
+aVIn this work, we use an uniform distribution, in which q u'\u005cu0392' = 1
+p104
+aVWe can use similar reasoning to compute the expectation of u'\u005cud835' u'\u005cudc0f'
+p105
+aVSince E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc10' ] is a diagonal matrix, we eliminate the cost of matrix inversion (or of solving a system of linear equations
+p106
+aVTable 1 presents some statistics of the datasets
+p107
+aVu'\u005cud835' u'\u005cudc31' i , u'\u005cu0391' u'\u005cu2062' u'\u005cud835' u'\u005cudc31' i , u'\u005cu0392' if both features are unchanged, which happens with probability ( 1 - p ) 2
+p108
+aVThe computation of these expectations depends on the type of noise
+p109
+aVNote also that p is a tunable parameter for this type of noise
+p110
+aVWith probability ( 1 - p ) , the original features are preserved, and we add the outer-product u'\u005cud835' u'\u005cudc31' i u'\u005cu2062' u'\u005cud835' u'\u005cudc31' i u'\u005cu22a4' ; with probability p , we add the outer-product u'\u005cud835' u'\u005cudc31' i u'\u005cu2062' q u'\u005cu22a4'
+p111
+aVIt is also possible to apply stacking, by passing this vector through another autoencoder [ 4 ]
+p112
+aVThis is equivalent to corrupting the data m u'\u005cu2192' u'\u005cu221e' times
+p113
+aVWe can therefore view the projection matrix u'\u005cud835' u'\u005cudc16' as a row-normalized version of the scatter matrix u'\u005cud835' u'\u005cudc12'
+p114
+aVHuang and Yates [ 14 , 15 ] used an HMM model to learn latent representations, and then leverage the Posterior Regularization framework to incorporate specific biases
+p115
+aVIn this case, we have the well-known closed-form solution for this ordinary least square problem
+p116
+aVHowever, the below solutions will also hold for other scrambling distributions, such as mean-preserving distributions
+p117
+aVIn pilot experiments, this slowed down estimation and had little effect on accuracy, so we did not include it
+p118
+aV1 1 E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc0f' ] is an r by d matrix, where r is the number of pivots
+p119
+aVWe try different low dimension K from 10 to 2000 for PCA
+p120
+aVThe diagonal entries take the first two values above, with probability 1 - p and p u'\u005cu2062' q u'\u005cu0391' respectively
+p121
+aVSpecifically, the corrupted input is divided to S subsets u'\u005cud835' u'\u005cudc31' ~ i = [ ( u'\u005cud835' u'\u005cudc31' ~ ) i 1 u'\u005cu22a4' , u'\u005cu2026' , ( u'\u005cud835' u'\u005cudc31' ~ ) i S u'\u005cu22a4' ] u'\u005cu22a4'
+p122
+aVPut another way, the contribution of u'\u005cu0392' to the reconstruction for u'\u005cu0391' is equal to the co-occurence count of u'\u005cu0391' and u'\u005cu0392' , divided by the count of u'\u005cu0392'
+p123
+aVAfter obtaining the weight matrix u'\u005cud835' u'\u005cudc16' , we can insert nonlinearity into the output of the denoiser, such as tanh u'\u005cu2061' ( u'\u005cud835' u'\u005cudc16' u'\u005cud835' u'\u005cudc17'
+p124
+aVTherefore E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc0f' ] can be computed as the sum of these terms
+p125
+aVE u'\u005cu2062' [ u'\u005cud835' u'\u005cudc10' ] is diagonal, because for any off-diagonal entry E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc10' ] u'\u005cu0391' , u'\u005cu0392' , at least one of u'\u005cu0391' and u'\u005cu0392' will drop out for every instance
+p126
+aVIf we write u'\u005cud835' u'\u005cudc17' = [ u'\u005cud835' u'\u005cudc31' 1 , u'\u005cu2026' , u'\u005cud835' u'\u005cudc31' n ] u'\u005cu2208' u'\u005cu211d' d × n , and we write its corrupted version u'\u005cud835' u'\u005cudc17' ~ , then the loss in ( 1 ) can be written as
+p127
+aVRecall that E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc10' ] = u'\u005cu2211' i = 1 n E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc31' ~ i u'\u005cu2062' u'\u005cud835' u'\u005cudc31' ~ i u'\u005cu22a4' ]
+p128
+aVF
+p129
+aVwhere u'\u005cud835' u'\u005cudc10' = u'\u005cud835' u'\u005cudc17' ~ u'\u005cu2062' u'\u005cud835' u'\u005cudc17' ~ u'\u005cu22a4' and u'\u005cud835' u'\u005cudc0f' = u'\u005cud835' u'\u005cudc17' u'\u005cu2062' u'\u005cud835' u'\u005cudc17' ~ u'\u005cu22a4'
+p130
+aVwhere E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc0f' ] = u'\u005cu2211' i = 1 n E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc31' i u'\u005cu2062' u'\u005cud835' u'\u005cudc31' ~ i u'\u005cu22a4' ] and E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc10' ] = u'\u005cu2211' i = 1 n E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc31' ~ i u'\u005cu2062' u'\u005cud835' u'\u005cudc31' ~ i u'\u005cu22a4' ]
+p131
+aVand
+p132
+a.

@@ -1,0 +1,70 @@
+(lp0
+VWe propose an unsupervised latent variable model, called the Latent Event Model (LEM), to extract events from tweets
+p1
+aVIn this model, we assume that each tweet message m u'\u005cu2208' { 1 u'\u005cu2062' M } is assigned to one event instance e , while e is modeled as a joint distribution over the named entities y , the date/time d when the event occurred, the location l where the event occurred and the event-related keywords k
+p2
+aVAs illustrated in Figure 1 , our proposed framework consists of three main steps, pre-processing, event extraction based on the LEM model and post-processing
+p3
+aVAfter the pre-processing step, non-location entities y , locations l , dates d and candidate keywords of the tweets are collected as the input to the LEM model for event extraction
+p4
+aVWe can treat an event as a latent variable and model the generation of an event as a joint distribution of its individual event elements
+p5
+aVWe thus propose a Latent Event Model (LEM) which can automatically detect events from social media without the use of labeled data
+p6
+aVApproaches to event extraction from Twitter make use of a graphical model to extract canonical entertainment events from tweets by aggregating information across multiple messages [ 1 ]
+p7
+aVEvents extracted in our proposed framework are represented as a 4-tuple u'\u005cu27e8' y , d , l , k u'\u005cu27e9' , where y stands for a non-location named entity, d for a date, l for a location, and k for an event-related keyword
+p8
+aVTherefore, named entities mentioned in tweets are likely to appear in news articles as well
+p9
+aVIt is not easy to accurately identify named entities in the Twitter data since tweets contain a lot of misspellings and abbreviations
+p10
+aVNamed entities from tweets are extracted by looking up the dictionary through fuzzy matching
+p11
+aVIn this section, we first describe the Twitter corpus used in our experiments and then present how we build a baseline based on the previously proposed TwiCal system [ 14 ] , the state-of-the-art open event extraction system on tweets
+p12
+aVNamed entity recognition (NER) is a crucial step since the results would directly impact the final extracted 4-tuple u'\u005cu27e8' y , d , l , k u'\u005cu27e9'
+p13
+aVThe events extracted in the baseline are represented as a 3-tuple u'\u005cu27e8' y , d , k u'\u005cu27e9' 5 5 TwiCal also groups event instances into event types such as u'\u005cu201d' Sport u'\u005cu201d' or u'\u005cu201d' Politics u'\u005cu201d' using LinkLDA which is not considered here where y stands for a non-location named entity, d for a date and k for an event phrase
+p14
+aVThis shows that our LEM model is less sensitive to the number of events E so long as E is set to a relatively larger value
+p15
+aVWe thus perform named entity recognition in the following way
+p16
+aVHowever, it is often observed that events mentioned in tweets are also reported in news articles in the same period [ 10 ]
+p17
+aVDue to the difficulties of re-implementing the sequence labeler without knowing the actual features set and the annotated training data, we assume all the event-related phrases are identified correctly and simply use the event trigger words annotated in the FSD corpus as k to form the event 3-tuples
+p18
+aVPrevious work in event extraction has focused largely on news articles, as the newswire texts have been the best source of information on current events [ 6 ]
+p19
+aVIn [ 7 ] , social events involving two persons are extracted from multiple similar tweets using a factor graph by harvesting the redundancy in tweets
+p20
+aVTherefore, the dataset was filtered by removing the events which are mentioned in less than 10 tweets
+p21
+aVIt can be observed from Table 2 that by using NW-NER, the performance of event extraction system is improved significantly by 7.5% and 3% respectively on F-measure when evaluated on 3-tuples (without keywords) or 4-tuples (with keywords
+p22
+aVOnce the class assignments for all events are known, we can easily estimate the model parameters { u'\u005cud835' u'\u005cudf45' , u'\u005cud835' u'\u005cudf3d' , u'\u005cud835' u'\u005cudf4b' , u'\u005cud835' u'\u005cudf4d' , u'\u005cud835' u'\u005cudf4e' }
+p23
+aVThis property allows us resort to statistical models that can group similar events based on the co-occurrence patterns of their event elements
+p24
+aVAs such, it is not possible to know the event types a priori and hence violates the use of existing event extraction approaches
+p25
+aVWe believe that in reality, events which are mentioned in very few tweets are less likely to be significant
+p26
+aVIt should be noted that for some events, one or more elements in their corresponding tuples might be absent as their related information is not available in tweets
+p27
+aVTo resolve the ambiguity of the time expressions, SUTime 1 1 http://nlp.stanford.edu/software/sutime.shtml [ 2 ] is employed, which takes text and a reference date as input and outputs a more accurate date which the time expression refers to
+p28
+aVIf the extracted representation contains keywords, its precision is calculated by checking both criteria 1 and 2
+p29
+aVIf the extracted representation does not contain keywords, its precision is calculated by checking the criteria 1
+p30
+aVIf P ( element) is less than 1 u'\u005cu039e' u'\u005cu2062' P u'\u005cu2062' ( S ) , where P u'\u005cu2062' ( S ) is the sum of probabilities of the other three elements and u'\u005cu039e' is a threshold value and is set to 5 empirically, the element will be removed from the extracted results
+p31
+aVSocial media messages are often short and evolve rapidly over time
+p32
+aVFor the 4-tuple u'\u005cu27e8' y , d , l , k u'\u005cu27e9' , the precision is calculated based on the following criteria
+p33
+aVThey lack the flexibility of porting to new domains since extraction patterns often need to be re-defined
+p34
+a.

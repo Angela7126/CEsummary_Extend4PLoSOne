@@ -1,0 +1,459 @@
+************************************************************
+P14-1092.xhtml_1_CE.txt: Cause-Effect links
+************************************************************
+
+CASE: 0
+Stag: 3 4 
+	Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+	sentTXT: This is problematic for NF QA, where questions are answered not by atomic facts, but by larger cross-sentence conceptual structures that convey the desired answers Thus, to answer NF questions, one needs a model of what these answer structures look like
+	Cause: [(0, 0), (0, 26)]
+	Effect: [(1, 1), (1, 17)]
+
+CASE: 1
+Stag: 6 
+	Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+	sentTXT: We propose a novel answer reranking (AR) model that combines lexical semantics (LS) with discourse information, driven by two representations of discourse a shallow representation centered around discourse markers and surface text information, and a deep one based on the Rhetorical Structure Theory (RST) discourse framework [ 7 ]
+	Cause: [(0, 45), (0, 56)]
+	Effect: [(0, 0), (0, 42)]
+
+CASE: 2
+Stag: 9 
+	Pattern: 7 [['for'], [['reason', 'reasons']]]---- [['&C', '(,/;/./--)', '(&AND)'], ['(&this)'], ['(,/that)', '&R']]
+	sentTXT: We demonstrate that modeling discourse is greatly beneficial for NF AR for two types of NF questions, manner ( u'\u201c' how u'\u201d' ) and reason ( u'\u201c' why u'\u201d' ), across two large datasets from different genres and domains u'\u2013' one from the community question-answering (CQA) site of Yahoo
+	Cause: [(0, 0), (0, 10)]
+	Effect: [(0, 34), (0, 72)]
+
+CASE: 3
+Stag: 14 15 
+	Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+	sentTXT: We demonstrate good domain transfer performance between these corpora, suggesting that answer discourse structures are largely independent of domain, and thus broadly applicable to NF QA The body of work on factoid QA is too broad to be discussed here (see, e.g.,, the TREC workshops for an overview
+	Cause: [(0, 0), (0, 19)]
+	Effect: [(0, 23), (1, 24)]
+
+CASE: 4
+Stag: 18 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: We extend this work by showing that discourse models coupled with LS achieve the best performance for NF AR
+	Cause: [(0, 5), (0, 18)]
+	Effect: [(0, 0), (0, 3)]
+
+CASE: 5
+Stag: 25 
+	Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+	sentTXT: [ 20 ] extracted 47 cue phrases such as because from a small collection of web documents, and used the cosine similarity between an answer candidate and a bag of words containing these cue phrases as a single feature in their reranking model for non-factoid why QA
+	Cause: [(0, 10), (0, 47)]
+	Effect: [(0, 0), (0, 8)]
+
+CASE: 6
+Stag: 27 
+	Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+	sentTXT: [ 12 ] built a classifier to identify causal relations using a small set of cue phrases (e.g.,, because and is caused by
+	Cause: [(0, 22), (0, 25)]
+	Effect: [(0, 0), (0, 19)]
+
+CASE: 7
+Stag: 30 
+	Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+	sentTXT: [ 18 ] conducted an initial evaluation of the utility of RST structures to why QA by evaluating performance on a small sample of seven WSJ articles drawn from the RST Treebank [ 1 ]
+	Cause: [(0, 17), (0, 26)]
+	Effect: [(0, 27), (0, 34)]
+
+CASE: 8
+Stag: 38 39 
+	Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+	sentTXT: Here we use no meta data and rely solely on linguistic features Thus, for a given question, all its answers are fetched from the answer collection, and an initial ranking is constructed based on the cosine similarity between theirs and the question u'\u2019' s lemma vector representations, with lemmas weighted using tf.idf (Ch
+	Cause: [(0, 0), (0, 11)]
+	Effect: [(1, 1), (1, 49)]
+
+CASE: 9
+Stag: 42 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We use this setup to answer questions from a biology textbook, where each section is indexed as a standalone document, and each paragraph in a given document is considered as a candidate answer
+	Cause: [(0, 18), (0, 33)]
+	Effect: [(0, 0), (0, 16)]
+
+CASE: 10
+Stag: 46 
+	Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+	sentTXT: Because the number of answer candidates is typically large (e.g.,, equal to the number of paragraphs in the textbook), we return the N top candidates with the highest scores
+	Cause: [(0, 1), (0, 10)]
+	Effect: [(0, 12), (0, 33)]
+
+CASE: 11
+Stag: 50 51 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: 7 7 http://www.cs.cornell.edu/people/tj/svm_light/svm_rank.html In addition to these features, each reranker also includes a single feature containing the score of each candidate, as computed by the above candidate retrieval (CR) component 8 8 Including these scores as features in the reranker model is a common strategy that ensures that the reranker takes advantage of the analysis already performed by the CR model
+	Cause: [(1, 6), (1, 30)]
+	Effect: [(0, 1), (1, 4)]
+
+CASE: 12
+Stag: 52 
+	Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+	sentTXT: We propose two separate discourse representation schemes u'\u2013' one shallow, centered around discourse markers, and one deep, based on RST
+	Cause: [(0, 26), (0, 26)]
+	Effect: [(0, 0), (0, 22)]
+
+CASE: 13
+Stag: 56 57 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: 1) A discourse marker from Daniel Marcu u'\u2019' s list (see Appendix B in Marcu [ 9 ] ), that serves as a divisive boundary between sentences Examples of these markers include and, in, that, for, if, as, not, by, and but ; (2) two marker arguments , i.e.,, text segments before and after the marker, labeled to indicate if they are related to the question text or not; and (3) a sentence range around the marker, which defines the length of these segments (e.g.,, ± 2 sentences
+	Cause: [(0, 29), (1, 78)]
+	Effect: [(0, 0), (0, 27)]
+
+CASE: 14
+Stag: 57 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Examples of these markers include and, in, that, for, if, as, not, by, and but ; (2) two marker arguments , i.e.,, text segments before and after the marker, labeled to indicate if they are related to the question text or not; and (3) a sentence range around the marker, which defines the length of these segments (e.g.,, ± 2 sentences
+	Cause: [(0, 16), (0, 55)]
+	Effect: [(0, 0), (0, 13)]
+
+CASE: 15
+Stag: 57 
+	Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+	sentTXT: Examples of these markers include and, in, that, for, if, as, not, by, and but ; (2) two marker arguments , i.e.,, text segments before and after the marker, labeled to indicate if they are related to the question text or not; and (3) a sentence range around the marker, which defines the length of these segments (e.g.,, ± 2 sentences
+	Cause: [(0, 30), (0, 37)]
+	Effect: [(0, 1), (0, 28)]
+
+CASE: 16
+Stag: 60 
+	Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: Further, the text preceeding by matches text from the question (and is therefore labeled QSEG ), while the text after by differs considerably from the question text, and is labeled OTHER
+	Cause: [(0, 0), (0, 13)]
+	Effect: [(0, 15), (0, 34)]
+
+CASE: 17
+Stag: 63 
+	Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+	sentTXT: We label marker arguments based on their similarity to question content
+	Cause: [(0, 6), (0, 10)]
+	Effect: [(0, 0), (0, 3)]
+
+CASE: 18
+Stag: 64 
+	Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+	sentTXT: If text before or after a marker out to a given sentence range matches the entire text of the question (with a cosine similarity score larger than a threshold), that argument takes on the label QSEG , or OTHER otherwise
+	Cause: [(0, 1), (0, 13)]
+	Effect: [(0, 32), (0, 39)]
+
+CASE: 19
+Stag: 66 
+	Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+	sentTXT: Argument labels indicate only if lemmas from the question were found in a discourse structure present in an answer candidate, and do not speak to the specific lemmas that were found
+	Cause: [(0, 5), (0, 19)]
+	Effect: [(0, 21), (0, 31)]
+
+CASE: 20
+Stag: 72 
+	Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+	sentTXT: It is important to note that these discourse features are more expressive than features based on discourse markers alone [ 5 , 19 ]
+	Cause: [(0, 16), (0, 23)]
+	Effect: [(0, 0), (0, 13)]
+
+CASE: 21
+Stag: 75 
+	Pattern: 0 [['based', 'on']]---- [['&V-ing/&NP@R@', '(&Clause@R@)', '&BE', '(&ADV)'], ['&NP@C@', '(&Clause@C@)']]
+	sentTXT: The discourse parser model (DPM) is based on the RST discourse framework [ 7 ]
+	Cause: [(0, 10), (0, 16)]
+	Effect: [(0, 0), (0, 6)]
+
+CASE: 22
+Stag: 79 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: In the bottom part of Figure 2 , we show hypotactic relations as directed arrows, from the nucleus to the satellite
+	Cause: [(0, 13), (0, 15)]
+	Effect: [(0, 0), (0, 11)]
+
+CASE: 23
+Stag: 83 
+	Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+	sentTXT: However, this also introduces noise because discourse analysis is a complex task and discourse parsers are not perfect
+	Cause: [(0, 7), (0, 18)]
+	Effect: [(0, 0), (0, 5)]
+
+CASE: 24
+Stag: 84 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: To mitigate this, we used a simple feature generation strategy, which creates one feature for each individual discourse relation by concatenating the relation type with the labels of the discourse units participating in it
+	Cause: [(0, 22), (0, 35)]
+	Effect: [(0, 0), (0, 20)]
+
+CASE: 25
+Stag: 85 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: To this end, for every relation, we extract the entire text dominated by each of its arguments, and we generate labels for the two participants in the relation using the same strategy as the DMM (based on the similarity with the question content
+	Cause: [(0, 36), (0, 46)]
+	Effect: [(0, 15), (0, 34)]
+
+CASE: 26
+Stag: 86 
+	Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+	sentTXT: Similar to the DMM, these features take real values obtained by averaging the cosine similarity of the arguments with the question content
+	Cause: [(0, 0), (0, 3)]
+	Effect: [(0, 5), (0, 22)]
+
+CASE: 27
+Stag: 86 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: Similar to the DMM, these features take real values obtained by averaging the cosine similarity of the arguments with the question content
+	Cause: [(0, 7), (0, 17)]
+	Effect: [(0, 0), (0, 5)]
+
+CASE: 28
+Stag: 87 
+	Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+	sentTXT: 9 9 We investigated more complex features, e.g.,, by exploring depths of two and three in the discourse tree, and also models that relied on tree kernels over these trees, but none improved upon this simple representation
+	Cause: [(0, 12), (0, 33)]
+	Effect: [(0, 34), (0, 35)]
+
+CASE: 29
+Stag: 93 
+	Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+	sentTXT: [ 22 ] , we include lexical semantics in our reranking model
+	Cause: [(0, 0), (0, 2)]
+	Effect: [(0, 4), (0, 11)]
+
+CASE: 30
+Stag: 97 98 
+	Pattern: 9 [['consequently']]---- [['&C', '(,/;/./--)'], ['(,)', '&R']]
+	sentTXT: Like any language model, a RNNLM estimates the probability of observing a word given the preceding context, but, in this process, it learns word embeddings into a latent, conceptual space with a fixed number of dimensions Consequently, related words tend to have vectors that are close to each other in this space
+	Cause: [(0, 0), (0, 40)]
+	Effect: [(1, 2), (1, 16)]
+
+CASE: 31
+Stag: 99 100 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We derive two LS measures from these vectors, which are then are included as features in the reranker The first is a measure of the overall LS similarity of the question and answer candidate, which is computed as the cosine similarity between the two composite vectors of the question and the answer candidate
+	Cause: [(0, 15), (1, 16)]
+	Effect: [(0, 0), (0, 13)]
+
+CASE: 32
+Stag: 100 101 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: The first is a measure of the overall LS similarity of the question and answer candidate, which is computed as the cosine similarity between the two composite vectors of the question and the answer candidate These composite vectors are assembled by summing the vectors for individual question (or answer candidate) words, and re-normalizing this composite vector to unit length
+	Cause: [(0, 21), (1, 25)]
+	Effect: [(0, 0), (0, 19)]
+
+CASE: 33
+Stag: 101 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: These composite vectors are assembled by summing the vectors for individual question (or answer candidate) words, and re-normalizing this composite vector to unit length
+	Cause: [(0, 6), (0, 26)]
+	Effect: [(0, 0), (0, 4)]
+
+CASE: 34
+Stag: 106 
+	Pattern: 0 [['due', 'to']]---- [[], ['&NP@C@', '(,)', '&R']]
+	sentTXT: Due to the speed limitations of the discourse parser, we randomly drew 10,000 QA pairs from the corpus of how questions described by Surdeanu et al
+	Cause: [(0, 2), (0, 8)]
+	Effect: [(0, 10), (0, 26)]
+
+CASE: 35
+Stag: 107 108 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: [ 17 ] using their filtering criteria, with the additional criterion that answers had to contain at least four community-generated answers, one of which was voted as the top answer The number of answers to each question ranged from 4 to over 50, with the average 9
+	Cause: [(0, 29), (1, 13)]
+	Effect: [(0, 13), (0, 27)]
+
+CASE: 36
+Stag: 111 
+	Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+	sentTXT: The setup in this paper, commonly used in the CQA community [ 21 ] , is more relevant here because it includes both high and low quality answers
+	Cause: [(0, 21), (0, 28)]
+	Effect: [(0, 0), (0, 19)]
+
+CASE: 37
+Stag: 114 115 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: The entire biology text (at paragraph granularity) serves as the possible set of answers Note that while our system retrieves answers at paragraph granularity, the expert was not constrained in any way during the annotation process, so gold answers might be smaller than a paragraph or span multiple paragraphs
+	Cause: [(0, 11), (1, 36)]
+	Effect: [(0, 0), (0, 9)]
+
+CASE: 38
+Stag: 115 
+	Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+	sentTXT: Note that while our system retrieves answers at paragraph granularity, the expert was not constrained in any way during the annotation process, so gold answers might be smaller than a paragraph or span multiple paragraphs
+	Cause: [(0, 0), (0, 22)]
+	Effect: [(0, 25), (0, 36)]
+
+CASE: 39
+Stag: 117 118 
+	Pattern: 1 [['because', 'of']]---- [['&C', '(,/;/./--)', '(&ADV)'], ['(&THIS)', '&NP', '&R']]
+	sentTXT: For the YA CQA corpora, 50% of QA pairs were used for training, 25% for development, and 25% for test Because of the small size of the Bio corpus, it was evaluated using 5-fold cross-validation, with three folds for training, one for development, and one for test
+	Cause: [(0, 0), (0, 25)]
+	Effect: [(1, 9), (1, 30)]
+
+CASE: 40
+Stag: 125 
+	Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+	sentTXT: Note that, because these domains are considerably different from the RST Treebank, the parser fails to produce a tree on a large number of answer candidates
+	Cause: [(0, 4), (0, 12)]
+	Effect: [(0, 14), (0, 27)]
+
+CASE: 41
+Stag: 131 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: The latter was created by extracting a) pages matching a word/phrase in a glossary of biology (derived from the textbook); plus (b) pages hyperlinked from (a) that are also tagged as being in a small set of (hand-selected) biology-related categories
+	Cause: [(0, 5), (0, 49)]
+	Effect: [(0, 0), (0, 3)]
+
+CASE: 42
+Stag: 138 
+	Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+	sentTXT: In the Bio corpus, because answer candidates are not guaranteed to match gold annotations exactly, these metrics do not immediately apply
+	Cause: [(0, 6), (0, 15)]
+	Effect: [(0, 17), (0, 22)]
+
+CASE: 43
+Stag: 139 140 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We adapted them to this dataset by weighing each answer by its overlap with gold answers, where overlap is measured as the highest F1 score between the candidate and a gold answer Thus, P@1 reduces to this F1 score for the top answer
+	Cause: [(0, 22), (1, 10)]
+	Effect: [(0, 0), (0, 20)]
+
+CASE: 44
+Stag: 139 140 
+	Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+	sentTXT: We adapted them to this dataset by weighing each answer by its overlap with gold answers, where overlap is measured as the highest F1 score between the candidate and a gold answer Thus, P@1 reduces to this F1 score for the top answer
+	Cause: [(0, 0), (0, 32)]
+	Effect: [(1, 1), (1, 11)]
+
+CASE: 45
+Stag: 142 
+	Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+	sentTXT: For example, if the best answer for a question appears at rank 2 with an F1 score of 0.3 , the corresponding MRR score is 0.3 / 2
+	Cause: [(0, 4), (0, 19)]
+	Effect: [(0, 21), (0, 28)]
+
+CASE: 46
+Stag: 153 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: 15 15 The performance of all models can ultimately be increased by using more sophisticated learning frameworks, and considering more answer candidates in CR (for Bio
+	Cause: [(0, 12), (0, 27)]
+	Effect: [(0, 0), (0, 10)]
+
+CASE: 47
+Stag: 157 
+	Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+	sentTXT: Examining Table 1 , several trends are clear
+	Cause: [(0, 0), (0, 2)]
+	Effect: [(0, 4), (0, 7)]
+
+CASE: 48
+Stag: 162 
+	Pattern: 0 [['due', 'to']]---- [['&R'], ['&NP@C@']]
+	sentTXT: This disparity is likely due to the difficulty in assembling LS training data at an appropriate level for the biology corpus, contrasted with the relative abundance of large scale open-domain lexical semantic resources
+	Cause: [(0, 6), (0, 33)]
+	Effect: [(0, 0), (0, 3)]
+
+CASE: 49
+Stag: 171 
+	Pattern: 7 [['for'], [['reason', 'reasons']]]---- [['&C', '(,/;/./--)', '(&AND)'], ['(&this)'], ['(,/that)', '&R']]
+	sentTXT: Finally, while the discourse models perform well for HOW or manner questions, performance on Bio WHY corpus suggests that reason questions are particularly amenable to discourse analysis
+	Cause: [(0, 0), (0, 7)]
+	Effect: [(0, 22), (0, 28)]
+
+CASE: 50
+Stag: 177 
+	Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+	sentTXT: To tease apart the relative contribution of discourse features that occur only within a single sentence versus features that span multiple sentences, we examined the performance of the full model when using only intra-sentence features, i.e.,, SR0 features for DMM, and features based on discourse relations where both EDUs appear in the same sentence for DPM, versus the full intersentence models
+	Cause: [(0, 49), (0, 66)]
+	Effect: [(0, 0), (0, 46)]
+
+CASE: 51
+Stag: 183 
+	Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+	sentTXT: Because these discourse models appear to capture high-level information about answer structures, we hypothesize that the models should make use of many of the same discourse features, even when training on data from different domains
+	Cause: [(0, 1), (0, 11)]
+	Effect: [(0, 13), (0, 36)]
+
+CASE: 52
+Stag: 190 
+	Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+	sentTXT: The in-domain performance of the ensemble model is similar to that of the single classifier in both YA and Bio HOW so we omit these results here for simplicity
+	Cause: [(0, 0), (0, 20)]
+	Effect: [(0, 22), (0, 28)]
+
+CASE: 53
+Stag: 193 
+	Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+	sentTXT: This confirms existing evidence that ensemble models perform better cross-domain because they overfit less [ 2 , 4 ]
+	Cause: [(0, 11), (0, 18)]
+	Effect: [(0, 0), (0, 9)]
+
+CASE: 54
+Stag: 194 195 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: The ensemble model without LS (third line) has a nearly identical P@1 score as the equivalent in-domain model (line 13 in Table 1), while slightly surpassing in-domain MRR performance To the best of our knowledge, this is one of the most striking demonstrations of domain transfer in answer ranking for non-factoid QA, and highlights the generality of these discourse features in identifying answer structures across domains and genres
+	Cause: [(0, 16), (1, 39)]
+	Effect: [(0, 0), (0, 14)]
+
+CASE: 55
+Stag: 197 
+	Pattern: 7 [['due', 'to']]---- [['&V-ing/&NP@R@', '&BE'], ['&NP@C@', '(&Clause@C@)']]
+	sentTXT: We hypothesize that the limited transfer observed for models with LS compared to their counterparts without LS is due to the disparity in the size and utility of the biology LS training data compared to the open-domain LS resources
+	Cause: [(0, 20), (0, 38)]
+	Effect: [(0, 3), (0, 16)]
+
+CASE: 56
+Stag: 199 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: So far, we have treated LS and discourse as distinct features in the reranking model, However, given that LS features greatly improve the CR baseline, we hypothesize that a natural extension to the discourse models would be to make use of LS similarity (in addition to the traditional information retrieval similarity) to label discourse segments
+	Cause: [(0, 10), (0, 60)]
+	Effect: [(0, 0), (0, 8)]
+
+CASE: 57
+Stag: 201 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: We implemented two such models, denoted DMM L u'\u2062' S and DPM L u'\u2062' S , by replacing the component that assigns argument labels with one that relies on LS
+	Cause: [(0, 26), (0, 38)]
+	Effect: [(0, 0), (0, 24)]
+
+CASE: 58
+Stag: 202 
+	Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+	sentTXT: Specifically, as in § 4.3 , we compute the cosine similarity between the composite LS vectors of the question text and each marker argument (in DMM) or EDU (in DPM), and label the corresponding answer segment QSEG if this score is higher than a threshold, or OTHER otherwise
+	Cause: [(0, 43), (0, 53)]
+	Effect: [(0, 0), (0, 41)]
+
+CASE: 59
+Stag: 205 
+	Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+	sentTXT: Because we are adding two new discourse models, we now tune four segment matching thresholds, one for each of the DMM, DPM, DMM L u'\u2062' S , and DPM L u'\u2062' S models
+	Cause: [(0, 1), (0, 7)]
+	Effect: [(0, 9), (0, 44)]
+
+CASE: 60
+Stag: 211 
+	Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+	sentTXT: We chose the Bio setup for this analysis because it is more complex than the CQA one here gold answers may have a granularity completely different from what the system choses as best answers (in our particular case, the QA system is currently limited to answers consisting of single paragraphs, whereas gold answers may be of any size
+	Cause: [(0, 9), (0, 38)]
+	Effect: [(0, 40), (0, 60)]
+
+CASE: 61
+Stag: 214 215 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: In these cases, the model selected an on-topic answer paragraph in the same subsection of the textbook as a gold answer Often times this paragraph directly preceded or followed the gold answer
+	Cause: [(0, 19), (1, 9)]
+	Effect: [(0, 0), (0, 17)]
+
+CASE: 62
+Stag: 216 217 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Here, both the CR and full model chose a paragraph containing a different gold answer However, as discussed, gold answers may unevenly straddle paragraph boundaries, and the paragraph chosen by the model happened to have a somewhat lower overlap with its gold answer than the one chosen by the baseline
+	Cause: [(1, 3), (1, 15)]
+	Effect: [(0, 2), (1, 0)]
+
+CASE: 63
+Stag: 222 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: The model chose a paragraph that had many of the same words as the question, but is on a different topic
+	Cause: [(0, 13), (0, 19)]
+	Effect: [(0, 0), (0, 11)]
+
+CASE: 64
+Stag: 223 
+	Pattern: 47 [['so'], ['that']]---- [['&C'], ['&adj/&adv@C@'], ['&R']]
+	sentTXT: For example, for the question u'\u201d' How are fossil fuels formed, and why do they contain so much energy u'\u201d' , the model selected an answer that mentions fossil fuels in a larger discussion of human ecological footprints
+	Cause: [(0, 0), (0, 23)]
+	Effect: [(0, 37), (0, 47)]
+

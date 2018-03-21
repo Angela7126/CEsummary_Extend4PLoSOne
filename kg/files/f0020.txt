@@ -1,0 +1,331 @@
+APPROXIMATE OBJECTS AND APPROXIMATE THEORIES
+
+Computer Science Department, Stanford University, Stanford, CA 95305
+
+jmc@cs.stanford.edu
+
+J. McCarthy
+
+Abstract
+
+We propose to extend the ontology of logical AI to include approximate objects, approximate predicates and approximate theories. Besides the ontology we treat the relations among different approximate theories of the same phenomena.
+
+Approximate predicates can't have complete if-and-only-if definitions and usually don't even have definite extensions. Some approximate concepts can be refined by learning more and some by defining more and some by both, but it isn't possible in general to make them well-defined. Approximate concepts are essential for representing common sense knowledge and doing common sense reasoning. Assertions involving approximate concepts can be represented in mathematical logic.
+
+A sentence involving an approximate concept may have a definite truth value even if the concept is ill-defined. It is definite that Mount Everest was climbed in 1953 even though exactly what rock and ice is included in that mountain is ill-defined. Likewise, it harms a mosquito to be swatted, although we haven't a sharp notion of what it means to harm a mosquito. Whatif(x,p), which denotes what x would be like if p were true, is an important kind of approximate object.
+
+The article treats successively approximate objects, approximate theories, and formalisms for describing how one object or theory approximates another.
+
+1. Introduction
+
+We propose to extend the ontology of logical AI to include approximate objects, approximate predicates and approximate theories. Besides the ontology we discuss relations among different approximations to the same or similar phenomena.
+
+The article will be as precise as we can make it. We apply Aristotle's remark to the approximate theories themselves. The article treats three topics.
+
+Approximate objects. These are not fully defined, e.g. the wishes of the United States. They may be approximations to more fully defined objects or they may be intrinsically approximate (partial). We give lots of examples, because we don't have precise definitions.
+
+Approximate theories. These often involve necessary conditions and sufficient conditions but lack conditions that are both necessary and sufficient.
+
+Relations among approximate entities. It is often necessary to relate approximate entities, e.g. objects or theories, to less approximate entities, e.g. to relate a theory in which one block is just on another to a theory in which a block may be in various positions on another.
+
+In principle, AI theories, e.g. the original proposals for situation calculus, have allowed for rich entities which could not be fully defined. However, almost all theories used in existing AI research has not taken advantage of this generality. Logical AI theories have resembled formal scientific theories in treating welldefined objects in well-defined domains. Human-level AI will require reasoning about approximate entities.
+
+Approximate predicates can't have complete if-and-only-if definitions and usually don't even have definite extensions. Moreover, approximate entities often don't have equality conditions. Some approximate concepts can be refined by learning more and some by defining more and some by both, but it isn't possible in general to make them well-defined. Approximate concepts are essential for representing common sense knowledge and doing common sense reasoning. In this article, assertions involving approximate concepts are represented in mathematical logic.
+
+A sentence involving an approximate concept may have a definite truth value even if the concept is illdefined. It is definite that Mount Everest was climbed in 1953 even though exactly what rock and ice is included in that mountain is ill-defined. We discuss the extent to which we can build solid intellectual structures on such swampy conceptual foundations.
+
+Quantitative approximation is one kind considered -- but not the most interesting or the kind that requires logical innovation. Fuzzy logic involves a semiquantitative approximation, although there are extensions as mentioned in [Zad99].
+
+For AI purposes, the key problem is relating different approximate theories of the same domain. For this we use mathematical logic fortified with contexts as objects. Further innovations in logic may be required to treat approximate concepts as flexibly in logic as people do in thought and language.
+
+Looked at in sufficient detail, all concepts are approximate, but some are precise enough for a given purpose. McCarthy's weight measured by a scales is precise enough for medical advice, and can be regarded as exact in a theory of medical advice. On the other hand, McCarthy's purposes are approximate enough so that almost any discussion of them is likely to bump against their imprecision and ambiguity.
+
+Many concepts used in common sense reasoning are imprecise. Here are some questions and issues that arise.
+
+1)  What rocks and ice constitute Mount Everest?
+
+2)  When can it be said that one block is on another block, so that On(Block1,Block2) may be asserted? Let there be an axiomatic theory in situation calculus in which it can be shown that a sequence of actions will have a certain result. Now suppose that a physical robot is to observe that one block is or is not on another and determine the actions to achieve a goal using situation calculus. It is important that the meanings of On(Block1,Block2) used in solving the problem theoretically and that used by the robot correspond well enough so that carrying out a plan physically has the desired effect. How well must they correspond?
+
+3)  What are the logical relations between different logical specifications of an approximate object?
+
+4)  What are the relations between different approximate logical theories of a domain?
+
+We claim
+
+1)  The common sense informatic situation often involves concepts which cannot be made precise. This is a question of the information available and not about computation power. It is not a specifically human limitation and will apply to computers of any possible power. This is not a claim about physics; it may be that a discoverable set of physical laws will account for all phenomena. It is rather a question of the information actually available about particular situations by people or robots with limited opportunities to observe and compute.
+
+2)  Much pedantry in science and in philosophy results from demanding if-and-only-if definitions when this is inappropriate.
+
+3)  None of the above objects and predicates admits a completely precise if-and-only-if definition.
+
+4)  Formalized scientific theories, e.g. celestial mechanics and the blocks world often have precise concepts. They are necessary tools for understanding and computation. However, they are imbedded in common sense knowledge about how to apply them in world of imprecise concepts. Moreover, the concepts are precise only within the theory. Most AI theories have also had this character.
+
+5)  Almost all concepts are approximate in the full common sense informatic situation. However, many are precise, i.e. have if-and-only-if definitions in particular contexts. Thus in the context of a particular grocery, an object is a lemon if and only if it is a small yellow fruit.
+
+6)  The human reasoning processes involving common sense knowledge correspond only partly to the mathematical and logical reasoning processes that humans have used so successfully within scientific and mathematical theories.
+
+7)  Nevertheless, mathematical logic is an appropriate tool for representing this knowledge and carrying out this reasoning in intelligent machines. The use of logic will certainly require adaptations, and the logic itself may require modifications.
+
+8)  Key tools for common sense reasoning by machines will be approximate concepts and approximate theories. These are in addition to formalized non-monotonic reasoning and formal theories of context.
+
+9)  The most important notion of approximation for common sense reasoning is not the familiar numerical approximation but a new kind of logical approximation appropriate for common sense reasoning. These mostly differ from the approximations of fuzzy logic.
+
+In the subsequent sections of this article, tools will be proposed for reasoning with approximate concepts.
+
+The article treats successively approximate objects, approximate theories, and formalisms for describing how one object or theory approximates another.
+
+2. What kinds of approximate concepts are there?
+
+Concepts can be approximate in at least two ways.
+
+On one hand, a concept may approximate another more definite but incompletely known concept. This situation is prevalent with natural kinds. Lemons are a definite species, but no-one knows all about them. In particular, a child may be barely able to tell lemons from other yellow fruit but nevertheless has a concept of lemon that may be adequate to find the lemons in the supermarket. The child can improve its concept of lemon by learning more. The fact that there isn't a continuum of fruits ranging from lemons to grapefruit is an important part of the fact that lemons form a natural kind. This fact also makes it possible for biologists to learn specific facts about lemons, e.g. to sequence lemon DNA.
+
+On the other hand, the legal concept of a person's taxable income is refined by defining more. Taxable income is partly a natural kind. A person's concept of his own taxable income is an approximation to the less approximate legal concept. He could learn more or it could be defined more as the legal concept is defined more. However, learning more about the legal concept eventually reaches a point where there is no further refinement on which people thinking independently will agree. There isn't a true notion of taxable income for economists to discover.
+
+My concept of my taxable income and even my tax accountant's concept of my taxable income has both aspects. More can be learned about what deductions are allowed, and also the concept gets refined by the courts.
+
+Here are some examples.
+
+2.1 What if?
+
+Whatif(p,x) is what x would be if p were true. Examples: (1) John McCarthy if he had gone to Harvard rather than to Caltech as an undergraduate. (2) My car if it hadn't been backed into today. (3) The cake I would have baked if I had known you were coming. (4) What the world would be like today if Pickett's charge had been successful. (5) What would have happened if another car had come over the hill when you passed that Mercedes just now.
+
+Whatif(p,x) is an intrinsically approximate concept. How approximate depends on p and x. "What if another car had come over the hill when you passed" is much less approximate than"What if wishes were horses". [CM99] treats useful counterfactual conditional sentences and gives many examples.
+
+Whatif can serve as the foundation for other concepts, including counterfactual conditional sentences and statements of causality. [CM99] treats useful counterfactual conditional sentences and gives many examples.
+
+Fiction provides an interesting class of approximate objects and theories, especially historical fiction, in which the author tries to fit his characters and their lives into a background of historical fact. Common sense knowledge tells us that Sherlock Holmes would have had a mother, but Conan Doyle does not provide us with a name. A definite address is given, but there was never a house there corresponding to Doyle's description. The author need only define his world to a point that lets the reader answer the questions the author wants the reader to ask.
+
+2.2 Mount Everest.
+
+It is clear that we cannot hope to formulate a useful definition of Mount Everest that would tell about every rock whether it is part of the mountain. However, we might suppose that there is a truth of the matter for every rock even though we cannot know it. Our axioms would then be weaker than the truth. The question would be settled for some rocks and not for others.
+
+Not even this is appropriate. The concept of the territory of Mount Everest may be further refined in the future -- and refined in incompatible ways by different people. If we suppose that there is a truth about what rocks are part of the mountain, then the people refining it in different ways would get to argue fruitlessly about which definition is getting closer to the truth. On the other hand, there is a truth of the matter, which may someday be discovered, about whether Mallory and Irvine reached the summit in 1924.
+
+Consider two theories of mountain climbing, T1 and T2. Besides these theories, there is T3 based on plate tectonics that tells us that Everest is still getting higher.
+
+In the simpler theory T1, there is a list of names of mountains paired with lists of climbing expeditions or names of climbers. As a logical theory it would have sentences like.
+
+Climbed(Everest,1953,{Hillary,Tenzing}). (1)
+
+The larger theory T2 contains routes up the mountain of the various parties. Routes are approximate entities.
+
+T1 is an approximation to T2, but T1, may be regarded as not approximate at all. In particular, it can be complete, e.g. it decides any sentence in its limited language.
+
+T1 and T2 may be related using formalized contexts as in [McC93a] or [MB97], but we won't do that here.
+
+One approximate theory may be less approximate than another. We want to discuss relations between sentences in a theory and sentences in a less approximate theory. It makes the ideas neater if we imagine that there are true and complete theories of the world even if they're not finitely expressible and none of the language of any of them is known. This permits regarding approximating the world as a case of one theory approximating another. If this is too platonic for your taste, you can regard approximating the world as a different notion than that of one theory approximating another.
+
+There are other approximate theories involving Mount Everest.
+
+One such theory that lists names of mountains and the continents containing them. Thus we have In(Annapurna,Asia). A less approximate theory gives countries, e.g. In(Annapurna,Nepal). A still less approximate theory gives locations, e.g. Location(Annapurna) = (28*32',83*53').
+
+2.3 The wants and actions of the United States
+
+In 1990 the United States wanted Iraq to withdraw from Kuwait. Evidence for this proposition was provided by the statements of U.S. officials and sending troops to Saudi Arabia. It was correctly inferred from this proposition that the U.S. would do something to implement its desires. This inference was made with only an approximate notion of "the US wants".
+
+Nevertheless, the facts can be expressed by formulas like the following.
+
+Says(President(USA),x) -> Says(USA,x), (2)
+
+Says(President(USA), Wants(USA,Leaves(Iraq,Kuwait))), (3)
+
+Says(USA,Wants(USA,Leaves(Iraq,Kuwait))), (4)
+
+Says(entity,Wants(entity,x)) -> wants(entity,x), (5)
+
+wants(USA,Leaves(Iraq,Kuwait)), (6)
+
+wants(x,y) -> (\exit(z))(Does(x,z)^Achieves(z,y)). (7)
+
+From these we infer
+
+(\exit(z))(Does(USA,z)^Achieves(z,Leaves(Iraq,Kuwait)). (8)
+
+We have not introduced all the necessary qualifications, and we have not used a proper theory of actions. There also should be some more theory of Wants, Says, and Does.
+
+Someone with a sufficiently detailed knowledge of events in the Middle East and of the American decision making community might not need "The US wants ...", because he could work directly with the various decision makers and the motivations and effects of their actions. The rest of us must make do with more approximate concepts. This will apply even more to future students of 20th century history.
+
+A fuzzy logic theory would take "The US wants" for granted and concentrate on "The US moderately wants" and "The US strongly wants".
+
+2.4 The Blocks World as an Approximate Theory
+
+The usual AI situation calculus blocks world has a propositional fluent On(x,y) asserting that block x is on block y. We can assert Holds(On(x,y),s) about some situation s and have the action Move(x,y) that moves block x on top of block y.
+
+Suppose this formalism is being used by a robot acting in the real world. The concepts denoted by On(x,y), etc. are then approximate concepts, and the theory is an approximate theory. Our goal is to relate this approximate theory to the real world. Similar considerations would apply if we were relating it to a more comprehensive but still approximate theory.
+
+We use formalized contexts as in [McC93b] and [MB97]. and let Cblocks be a blocks world context with a language allowing On(x,y), etc.
+
+Holds(On(x,y),s) is approximate in at least the following respects.
+
+1) In the original intended interpretation of the situation calculus, a situation s is a snapshot of the world at a given time. According to the theory of relativity, distant simultaneity is ill-defined. This is the least of our worries.
+
+2) Whether block x is on block y may be ambiguous in the real world. Block x may be partly on and partly off. We can handle the relation by sentences
+
+Cond1(s) -> Ist(Cblocks,Holds(On(x,y),s)) Cond2(s) -> Ist(Cblocks,Holds(Not_On(x,y),s)). (9)
+
+Cond1(s) and Cond2(s) are respectively conditions in the outer context on the situation s that x shall be on y and x shall not be on y in the context Cblocks. These need not be the negations of each other, so it can happen that it isn't justified to say either that x is on y or that it isn't. Cond1(s) and Cond2(s) need not be mutually exclusive. In that case the theory associated with Cblocks would be inconsistent. However, unless there are strong lifting rules the inconsistency within Cblocks cannot infect the rest of the reasoning.
+
+Notice that the theory in the context Cblocks approximates a theory in which blocks can be in different orientations on each other or in the air or on the table in quite different sense than numerical approximation.
+
+2.5 Relating two blocks world theories
+
+Our previous blocks world theory T1 uses Holds(On1(b1,b2),s). Our less approximate new theory T2 uses Holds(On2(b1,b2,d),\sigma) where d is a displacement of b1 from being centered on b2. Since T2 has another parameter for On, many situations \sigma can correspond to a single situation s in T1.
+
+We may have the relations
+
+Holds(On2(b1,b2,d)),\sigma) -> Holds(On1(b1,b2)),St1(\sigma)). Holds(On1(b1,b2)),St1(\sigma)) -> (\exit(d))Holds(On2(b1,b2,d)),\sigma). (10)
+
+Here St1(\sigma) is the T1-situation corresponding to \sigma. For simplicity we are assuming that every T2-situation has a corresponding T1-situation.
+
+T2 is a tiny step from T1 in the direction of the real world.
+
+Suppose a robot uses T1 as a theory of the blocks world and takes actions accordingly, but the real world corresponds to T2. This is quite a simplification, but maybe it has enough of the right formal properties.
+
+The simplest case is where there are two blocks, and the initial situation is represented by
+
+{Holds(On1(B1,Table),S0), Holds(On1(B2,Table),S0)} (11)
+
+in T1, but the real world facts are
+
+{Holds(On2(B1,Table,3.0),2.1cm),Holds(On(B2,Table,4.5),3.2cm)} (12)
+
+where
+
+S0 = St1(\sigma0). (13)
+
+The goal is Holds(On(B1,B2), which might also be written as (\lambda*s)Holds(On(B1,B2),s). Anyway the robot infers that the appropriate action is Move(B1,B2) and infers that
+
+Holds(On1(B1,B2),Result(Move1(B1,B2),S0)), (14)
+
+where we are omitting various qualifications.
+
+In T2, the form of an action is Move2(b1,b2,d), and the effect of a move action is given by
+
+Holds(On(b1,b2,d),Result2(Move2(b1,b2,d),\sigma)). (15)
+
+The translation of a move action in T1 to a move action in T2 may be given by
+
+Action12(Move1(b1,b2),St1(\sigma)) = Move2(b1,b2,Displacement(b1,b2,\sigma)). (16)
+
+The key point is that the move in T2 corresponding to a move in T1 depends on the blocks being moved and also on the situation.
+
+The success of the one step plan worked out in T1 in the less approximate world T2 is expressed by
+
+St1(Result2(Action12(Move1(B1,B2),St1(\sigma0)))) = Result1(Move(B1,B2),St1(\sigma0)). (17)
+
+The success of multi-step plans would be expressed by longer correspondence formulas.
+
+These are commutativity relations.
+
+2.6 Temporary entities, wealth and welfare
+
+In natural language, the present tense of the verb "to be" is used for asserting an intrinsic property of an entity and for asserting a property that is expected to hold long enough to provide a constant background for other events under discussion.
+
+The wealth or welfare of a human or animal is such a temporary property.
+
+The welfare of a mosquito over a short time is definable. It harms the mosquito to be squashed and helps it if it finds exposed skin from which to extract blood. Over a year the welfare of an individual mosquito is not definable. If it is to be defined, the concepts, e.g. descendants, will be quite different.
+
+This suggest using contexts. We have
+
+c(Today): Harms(Swat(M1073543907),M1073543907) (18)
+
+as a proposition about this particular mosquito.
+
+A person's wealth at a given time can be measured as an amount of money. His wealth increases as he is paid and decreases as he spends money. However, over a period of 10,000 years, the wealth or welfare of this individual is undefined.
+
+Nevertheless, wealth and welfare are useful concepts.
+
+Fiction provides an interesting class of approximate objects and theories, especially historical fiction, in which the author tries to fit his characters and their lives into a background of historical fact. Common sense knowledge tells us that Sherlock Holmes would have had a mother, but Conan Doyle does not provide us with a name. A definite address is given, but there was never a house there corresponding to Doyle's description. The author need only define his world to a point that lets the reader answer the questions the author wants the reader to ask.
+
+2.7 States of motion
+
+These present a general reason for using approximate concepts.
+
+Suppose a robot is walking from here to there in discrete steps.
+
+Holds(Walking(R2D2,Here,There),s) describes a situation that can persist. Sentences giving the robot's position at a given time must be frequently updated. An important human reason for forming an approximate concept is to get a fluent that will persist. This reason will also apply to robots but perhaps to a lesser extent, since computers can perform more frequent updating than can people.
+
+2.8 Folk physics and folk psychology as approximate theories
+
+For example, the concept of "X believes P" is approximate both in the criterion for belief and in what is the object of a belief. These notions will also be approximate for robots.
+
+Much of the criticism of folk psychology may come from demanding that it be more precise than is reasonable. Aristotle's aphorism applies here.
+
+3. Propositional approximate theories
+
+Many topics take an especially simple form when one uses propositions instead of predicates -- and accepts the reduced expressivity.
+
+Here is one approach to defining approximate propositional theories.
+
+Let reality, e.g. the situation in a room, be given by the values of the propositional variables r1,...,rn. Assume that reality is not directly observable. n may be very large, e.g. like Avogadro's number.
+
+Let the values of the propositions o1,...,ok be observable. They are functions of reality given by oi = Oi(r1,...,rn),where k is a modest number corresponding to how many bits we can actually observe.
+
+We suppose that we want to know the values of q1,...,ql, which are related to reality by qi = Qi(r1,...,rn),where l is also a modest number.
+
+An approximate theory AT is given by functions Qi'(o1,...,ok), i.e. AT undertakes to give what we want to know in terms of the observations.
+
+If we are lucky in how reality turns out, the Q' functions correspond to the Q functions, i.e. Lucky(r1,...,rn) -> qi = Qi'(o1,...,ok) for i = 1,...,l, i.e. Lucky(r1,...,rn) -> [Qi(r1,...,rn) \sigma Qi'(O1(r1,...,rn),...Ok(r1,...,rn))].
+
+If we are very fortunate we may be able to know when we are lucky, and we have KnowLucky(o1,...,ok) -> Lucky(r1,...,rn).
+
+At the moment, we have no useful propositional approximate theories in mind, and the reader should remember Einstein's dictum "Everything should be made as simple as possible -- but not simpler."
+
+3.1 Approximate Theories of Digital Circuits
+
+Consider first combinational circuits built from logic elements, i.e. without bridges and other sneak paths.
+
+The logical elements are treated as boolean functions, defined by their truth tables. The theory defines the behavior of any circuit in terms of composition of the functions associated with the logical elements. The outputs of a circuit are given by the theory for any combination of boolean inputs. Fan-in and fan-out restrictions are outside the logical theory, as are timing considerations.
+
+Now consider sequential circuits including flipflops. Now what happens is defined only for some combinations of inputs. For example, the behavior of a D flipflop is not defined when its 0 and 1 inputs are given the same value, whether that value be 0 or 1. The behavior is only defined when the inputs are opposite.
+
+The manufacturer does not say what will happen when these and other restrictions are not fulfilled, does not warrant that two of his flipflops will behave the same or that a flipflop will retain whatever behavior it has in these forbidden cases.
+
+This makes the concept of D flipflop itself approximate, perhaps not in the same sense as some other approximate theories.
+
+Thus the theory of sequential circuits is an approximate theory, and it is not an approximation to a definite less approximate theory of purely digital circuits. This is in spite of the fact that there is (or can be) an electronic theory of these digital circuits which describes their behavior. In that theory one D flipflop is different from another and changes its behavior as it ages.
+
+4. When an approximate concept becomes precise
+
+Suppose an approximate concept represented by a predicate p(x) has a sufficient condition suff(x) and a necessary condition nec(x). Thus we have
+
+(\forall(x))(suff(x) -> p(x)), and (\forall(x))(p(x) -> nec(x)). (19)
+
+In general the sufficient and the necessary conditions will not coincide, i.e. we will not have
+
+(\forall(x))(nec(x) \sigma suff(x)). (20)
+
+However, they made coincide with some restriction on x, i.e. we may have
+
+(\forall(x))(special(x) -> (nec(x) \sigma suff(x)). (21)
+
+Another way an approximate concept may become definite is by a mapping from the space in which it is first formalized into more restricted space. We'll combine specialization with mapping in
+
+(\forall(x))(special(x) -> (nec(f(x)) \sigma suff(f(x)), (22)
+
+where the function f maps a subset of the original domain into a specialized domain in which the concept p(x) becomes definite.
+
+5. Conclusions, remarks, and acknowledgements
+
+The present paper is exploratory. The large number of approximate concepts we discuss are approximate in different ways, but we don't have a classification.
+
+Many of the applications of approximate objects will result from theories connecting different levels and kinds of approximation.
+
+I thank Eyal Amir, Johan van Benthem, Sasa Buvac, Tom Costello, Aarati Parmar for helpful comments.
+
+This research has been partly supported by ARPA contract no. USC 621915, the ARPA/Rome Laboratory planning initiative under grant (ONR) N00014-94-1-0775 and ARPA/AFOSR under (AFOSR) grant # F49620-97-1-0207.
+
+References
+
+[CM99] Tom Costello and John McCarthy. Useful Counterfactuals1. Electronic Transactions on Artificial Intelligence, 1999. submitted 1999 July.
+
+[MB97] John McCarthy and Sasa Buvac. Formalizing context (expanded notes). In A. Aliseda, R.J. van Glabbeek, and D. Westerst? ahl, editors, Computing Natural Language. Center for the Study of Language and Information, Stanford University, 1997.
+
+[McC90] John McCarthy. Formalizing Common Sense: Papers by John McCarthy. Ablex Publishing Corporation, 1990.
+
+[McC93a] John McCarthy. Notes on Formalizing Context2. In IJCAI-93, 1993.
+
+[McC93b] John McCarthy. Notes on formalizing context. In IJCAI93, 1993. Available as http://wwwformal.stanford.edu/jmc/context.html.
+
+[Zad99] Lotfi A. Zadeh. From computing with numbers to computing with words -- from manipulation of measurements to manipulation of perceptions. IEEE Transactions on Circuits and Systems -- I. Fundamental theory and applications, 45(1):105-119, January 1999.

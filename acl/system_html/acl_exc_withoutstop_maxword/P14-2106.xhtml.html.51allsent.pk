@@ -1,0 +1,60 @@
+(lp0
+VOn the other hand, the increments are more evenly distributed for SS and clusters, and this can be due to the fact that the semantic information is orthogonal to the POS, giving similar improvements for sentences that contain or not POS errors
+p1
+aVWe will examine the influence of each type of semantic information on sentences that contain or not POS errors, and this will clarify whether the increments obtained when using semantic information are useful for correcting the negative influence of POS errors or they are orthogonal and constitute a source of new information independent of POS tags
+p2
+aVThe following three rows present the enhanced (combined) parsers that make use of semantic information
+p3
+aVAs the combination of the three baseline parsers did not give any improvement over the best single parser (ZPar), we can hypothesize that the gain coming from the parser combinations comes mostly from the addition of semantic information
+p4
+aVBroadly speaking, we can classify the methods to incorporate semantic information into parsers in two systems using static lexical semantic repositories, such as WordNet or similar ontologies [] , and systems using dynamic semantic clusters automatically acquired from corpora []
+p5
+aVOne of the obstacles of automatic parsers is the presence of incorrect POS tags due to automatic tagging
+p6
+aVThis aspect deserves further investigation, as the improvements seem to be related to both the type of semantic information and the parsing algorithm.We did an initial exploration but it did not give any clear indication of the types of improvements that could be expected using each parser and semantic data
+p7
+aVBroadly speaking, we can classify the attempts to add external knowledge to a parser in two sets using large semantic repositories such as WordNet and approaches that use information automatically acquired from corpora
+p8
+aVWe firstly tested the addition of each individual semantic feature to each parser, evaluating its contribution to the parser u'\u005cu2019' s performance
+p9
+aVWe will experiment with the semantic representations used in and , based on WordNet 2.1
+p10
+aVSubsection 4.1 presented the results of the base algorithms and their extensions based on semantic features report improvements over the best single parser when combining three transition-based models and one graph-based model
+p11
+aVFor each semantic representation, we need to determine the semantics of each occurrence of a target word used i) gold-standard annotations from SemCor, a subset of the PTB, to give an upper bound performance of the semantic representation, ii) first sense, where all instances of a word were tagged with their most frequent sense, and iii) automatic sense ranking, predicting the most frequent sense for each word []
+p12
+aVLooking at table 2 , we can say that the differences in baseline parser performance are accentuated when using the LTH treebank conversion, as ZPar clearly outperforms the other two parsers by more than 4 absolute points
+p13
+aVAs we will make use of the full PTB, we only have access to the first sense information
+p14
+aVWe experiment with both full SSs and SFs as instances of fine-grained and coarse-grained semantic representation, respectively
+p15
+aVFor the combinations, instead of feature-engineering each parser with the wide array of different possibilities for features, as in , we adopted the simpler approach of combining the outputs of the individual parsers by voting []
+p16
+aVCombining the 3 baselines does not give an improvement over the best baseline, as ZPar clearly outperforms the other parsers
+p17
+aVSo, for the comparison to be fair, we will compare ensembles of 3 parsers, taken from sets of 6 parsers (3 baselines + 3 SF, SS, and cluster extensions, respectively
+p18
+aVAs an example, knife in its tool sense is in the EDGE TOOL USED AS A CUTTING INSTRUMENT singleton synset, and also in the ARTIFACT SF along with thousands of words including cutter
+p19
+aVRecently, tested the incorporation of cluster features from unlabeled corpora in a multilingual setting, giving an algorithm for inducing cross-lingual clusters
+p20
+aVThe learning procedure is global since model parameters are set relative to classifying the entire dependency graph, in contrast to the local but richer contexts used by transition-based parsers
+p21
+aVThere are a total of 45 SFs (1 for adverbs, 3 for adjectives, 15 for verbs, and 26 for nouns), based on syntactic and semantic categories
+p22
+aVIt can be seen as a representation of syntactic-semantic information acquired from corpora
+p23
+aVWe will use Labeled Attachment Score (LAS) as our main evaluation criteria
+p24
+aVFor the sake of comparison, we will also perform the experiments using syntactic/semantic clusters automatically acquired from corpora
+p25
+aVWe used MaltBlender 5 5 http://w3.msi.vxu.se/users/jni/blend/ , a tool for merging the output of several dependency parsers, using the Chu-Liu/Edmonds directed MST algorithm
+p26
+aVAs in previous work, we exclude punctuation marks
+p27
+aVIt is known [] that adding more parsers to an ensemble usually improves accuracy, as long as they add to the diversity (and almost regardless of their accuracy level
+p28
+aVUsing prefixes of various lengths, it can produce clusterings of different granularities
+p29
+a.

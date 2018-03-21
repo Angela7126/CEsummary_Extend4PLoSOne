@@ -1,0 +1,240 @@
+(lp0
+VThere are two rules for merging spans one merges two complete spans into an incomplete span, the other merges an incomplete span and a complete span into a large complete span
+p1
+aVWe can reversely get the the compressed parse tree by removing all virtual arcs from the full parse tree
+p2
+aVA span is a subtree over a number of consecutive words, with the leftmost or the rightmost word as its root
+p3
+aVFor any compressed sentence, we could augment its dependency tree by adding a virtual arc i - 1 u'\u005cu2192' i for each deleted word x i
+p4
+aVRecent studies used a subtree deletion model for compression [ 1 , 13 , 15 ] , which deletes a word only if its modifier in the parse tree is deleted
+p5
+aVSuppose x j is removed, there must be a virtual arc j - 1 u'\u005cu2192' j which is a conflict with the fact that x j is the leftmost word
+p6
+aVOur method extends Eisner u'\u005cu2019' s cubic time parsing algorithm by adding signatures to each span, which indicate the number of deleted words and the rightmost kept word within the span, resulting in O u'\u005cu2062' ( n 6 ) time complexity and O u'\u005cu2062' ( n 4 ) space complexity
+p7
+aVCase 4 Merge an incomplete span and a complete span
+p8
+aVCase 3 Merge an incomplete span and a complete span
+p9
+aVThe incomplete span is covered by a virtual arc
+p10
+aVThen we augment these parse trees by adding virtual arcs and get the full parse trees of their corresponding original sentences
+p11
+aVThe two complete spans must be single words, as the length of the virtual arc is 1
+p12
+aVCase 4 u'\u005cu2019' Merge an incomplete span and a complete span
+p13
+aVWe drop the signature of the virtual arc number from each span, and thus obtain an O u'\u005cu2062' ( n 4 ) time algorithm
+p14
+aVAccording to the proposition above, if the right span is right-headed, its leftmost word is kept
+p15
+aVIf the right span is left-headed, there are two cases its leftmost word is kept, or no word in the span is kept
+p16
+aVAn incomplete span denoted as I j i is a subtree inside a single arc x i u'\u005cu2192' x j , with root x i
+p17
+aVwhere u'\u005cud835' u'\u005cudc33' is a binary vector, z i indicates x i is kept or not u'\u005cud835' u'\u005cudc32' is a square matrix denoting the projective dependency parse tree over the remaining words, y i u'\u005cu2062' j indicates if x i is the head of x j (note that each word has exactly one head w i tok is the informativeness of x i , w i u'\u005cu2062' j bgr is the score of bigram x i u'\u005cu2062' x j in an n-gram model, w dep is the score of dependency arc x i u'\u005cu2192' x j in an arc-factored dependency parsing model
+p18
+aVIn this way, we derive a full parse tree of the original sentence
+p19
+aVThe second is the subtree deletion model [ 1 ] which is solved by integer linear programming (ILP) 2 2 We use Gurobi as the ILP solver in the paper http://www.gurobi.com/
+p20
+aVHence, the first part of the objective function is the total score of the kept words, the second and third parts are the scores of the parse tree and bigrams of the compressed sentence, z i u'\u005cu2062' z j u'\u005cu2062' u'\u005cu220f' i k j ( 1 - z k ) = 1 indicates both x i and x j are kept, and are adjacent after compression
+p21
+aVWe restrict the score of all the virtual arcs to be zero, so that scores of the two parse trees are equivalent
+p22
+aVIf the first word x 1 is deleted, we connect it to the root of the parse tree x 0 , as shown in Figure 3
+p23
+aVThe incomplete span is covered by a non-virtual arc
+p24
+aVThe incomplete span is covered by a non-virtual arc
+p25
+aVHowever, the time complexity greatly increases since the parse tree dynamically depends on the compression
+p26
+aVThe number of the virtual arcs within C j i + 1 must be j - i - 1 , since the descendants of the modifier of a virtual arc x j must be removed
+p27
+aVWe define the sentence compression task as given a sentence composed of n words, u'\u005cud835' u'\u005cudc31' = x 1 , u'\u005cu2026' , x n , and a length L u'\u005cu2264' n , we need to remove ( n - L ) words from u'\u005cud835' u'\u005cudc31' , so that the sum of the weights of the dependency tree and word bigrams of the remaining part is maximized
+p28
+aVFor each combination, the algorithm enumerates the number of virtual arcs in the left and right spans, and the split position (e.g.,, k u'\u005cu2032' , k u'\u005cu2032' u'\u005cu2032' , r in case 2), thus it takes O u'\u005cu2062' ( n 3 ) running time
+p29
+aVOur model is discriminative u'\u005cu2013' the scores of the unigrams, bigrams and dependency arcs are the linear functions of features, that is, w i tok = u'\u005cud835' u'\u005cudc2f' T u'\u005cu2062' u'\u005cud835' u'\u005cudc1f' u'\u005cu2062' ( x i ) , where u'\u005cud835' u'\u005cudc1f' is the feature vector of x i , and u'\u005cud835' u'\u005cudc2f' is the weight vector of features
+p30
+aVThe root node is allowed to have two modifiers one is the modifier in the compressed sentence, the other is the first word if it is removed
+p31
+aVIf z j = 0 , then in both equations, all terms having z j are zero; If z j = 1 , i.e.,, x j is kept, since it has exactly one head word x k in the compressed sentence, the sum of the terms having z j is w j tok + w k u'\u005cu2062' j dep for both equations
+p32
+aVCase 1 Link two complete spans by a virtual arc
+p33
+aVAccording to the proposition above, we have, for any right-headed span p = i
+p34
+aVSentence compression aims to shorten a sentence by removing uninformative words to reduce reading time
+p35
+aVThe third one is the bigram model proposed by McDonald [ 12 ] which adopts dynamic programming for efficient inference
+p36
+aVCompared with TM13 u'\u005cu2019' s system, our model with exact decoding is not significantly faster due to the high order of the time complexity
+p37
+aVIt is not surprising that CRFs achieve high unigram F scores but low syntactic F scores as they do not consider the fluency of the compressed sentence
+p38
+aVAs expected, the joint models (ours and TM13) consistently outperform the subtree deletion model, since the joint models do not suffer from the subtree restriction
+p39
+aVIt usually achieves high unigram F1 score but low grammatical relation F1 score since it only considers the local interdependence between adjacent words
+p40
+aVWe further propose a faster approximate algorithm based on Lagrangian relaxation, which has T u'\u005cu2062' O u'\u005cu2062' ( n 4 ) running time and O u'\u005cu2062' ( n 3 ) space complexity ( T is the iteration number in the subgradient decent algorithm
+p41
+aVThe learning task is to estimate the feature weight vector based on the manually compressed sentences
+p42
+aVWe modify Eisner u'\u005cu2019' s algorithm by adding a signature to each span indicating the number of virtual arcs within the span
+p43
+aVThe first is linear chain CRFs, where the compression task is casted as a binary sequence labeling problem
+p44
+aVFixing u'\u005cu039b' , the optimal u'\u005cud835' u'\u005cudc33' , u'\u005cud835' u'\u005cudc32' can be found using a simpler version of the algorithm above
+p45
+aVThe scores of unigrams w i tok can be transfered to the dependency arcs, so that we can remove all linear terms w i tok u'\u005cu2062' z i from the objective function
+p46
+aVCase 2 Link two complete spans by a non-virtual arc
+p47
+aVTherefore, we only need to consider the scores of arcs
+p48
+aVWhen merging two spans, a new bigram is created, which connects the rightmost kept words in the left span and the leftmost kept word in the right span
+p49
+aVCase 2 u'\u005cu2019' Link two complete spans by a non-virtual arc
+p50
+aVFixing u'\u005cud835' u'\u005cudc33' , u'\u005cud835' u'\u005cudc32' , the dual variable is updated by
+p51
+aVOur method is a generalization of Eisner u'\u005cu2019' s dynamic programming algorithm [ 6 ] , where two types of structures are used in each iteration, incomplete spans and complete spans
+p52
+aVAs x j is a descendant of x i , x i must be kept u'\u005cu220e'
+p53
+aV[ 7 , 17 ] proposed the joint compression model, which simultaneously considers the n-gram model and dependency parse tree of the compressed sentence
+p54
+aVIn any case, we only need to consider the leftmost word in the right span
+p55
+aVNow the problem is to search the optimal full parse tree with n - L virtual arcs
+p56
+aVThe score of the new span is the sum of the two spans
+p57
+aVTrevor et al. proposed synchronous tree substitution grammar [ 5 ] , which allows local distortion of the tree topology and can thus naturally capture structural mismatches
+p58
+aVLet I j i u'\u005cu2062' ( k ) and C j i u'\u005cu2062' ( k ) denote the incomplete and complete spans with k virtual arcs respectively
+p59
+aVWe run a second order dependency parser trained on the English Penn Treebank corpus to generate the parse trees of the compressed sentences
+p60
+aVLet I j i u'\u005cu2062' ( k , p ) and C j i u'\u005cu2062' ( k , p ) denote the single and complete span with k virtual arcs and the rightmost kept word x p
+p61
+aVA complete span is denoted as C j i , where x i is the root of the subtree, and x j is the furthest descendant of x i
+p62
+aVThe score of the new span is the sum of the two spans plus w i u'\u005cu2062' j dep + w p , r + 1 bgr
+p63
+aVThey used Integer Linear Programming (ILP) for inference which requires exponential running time in the worst case
+p64
+aVWe use the same partitions as [ 10 ] , i.e.,, 1,188 sentences for training and 441 for testing
+p65
+aVThroughout the paper, we assume that all the parse trees are projective
+p66
+aVFor case 2, the weight of the dependency arc i u'\u005cu2192' j , w i u'\u005cu2062' j dep is also added to the final score
+p67
+aVIn this paper, we propose a new exact decoding algorithm for the joint model using dynamic programming
+p68
+aVEisner u'\u005cu2019' s algorithm searches the optimal tree in a bottom up order
+p69
+aVIn fact, we parsed the Edinburgh sentence compression corpus using the MSTparser 1 1 http://sourceforge.net/projects/mstparser/ , and found that 2561 of 5379 sentences ( 47.6 u'\u005cu2062' % ) do not satisfy the subtree deletion model
+p70
+aVIn this way, the annoation is transformed into a set of sentences with their augmented parse trees
+p71
+aVTo make the compressed sentence readable, some techniques consider the n-gram language models of the compressed sentence [ 4 , 12 ]
+p72
+aVWhen merging two spans, there are 4 cases, as shown in Figure 4
+p73
+aVMethods beyond the subtree model are also explored
+p74
+aVThe last one jointly infers tree structures alongside bigrams using ILP [ 17 ]
+p75
+aVDespite its empirical success, such a model fails to generate compressions that are not subject to the subtree constraint (see Figure 1
+p76
+aVIn each step, it merges two adjacent spans into a larger one
+p77
+aVFor left-headed spans, the rule is C j i u'\u005cu2062' ( k , q ) = I r i u'\u005cu2062' ( k u'\u005cu2032' , p ) + C j r u'\u005cu2062' ( k u'\u005cu2032' u'\u005cu2032' , q ) , k u'\u005cu2032' + k u'\u005cu2032' u'\u005cu2032' = k , and the score of the new span is the sum of the two spans plus w p u'\u005cu2062' r bgr ; for right-headed spans, the rule is C j i u'\u005cu2062' ( k , i ) = I r i u'\u005cu2062' ( k u'\u005cu2032' , i ) + C j r u'\u005cu2062' ( k u'\u005cu2032' u'\u005cu2032' , r ) , and the score of the new span is the sum of the two spans
+p78
+aVFirst we consider an easy case, where the bigram scores w i u'\u005cu2062' j bgr in the objective function are ignored
+p79
+aVNote that it is worth pointing out that the exact approach can output compressed sentences of all lengths, whereas the approximate method can only output one sentence at a specific compression rate
+p80
+aVThree types of features are used to learn our model unigram features, bigram features and dependency features, as shown in Table 1
+p81
+aVThe modified algorithm requires O u'\u005cu2062' ( n 6 ) running time and O u'\u005cu2062' ( n 4 ) space complexity
+p82
+aVFor any right-headed span I j i or C j i , i j , words x i , x j must be kept
+p83
+aVWe run a CRF based POS tagger to generate POS related features
+p84
+aVExperiments on the popular Edinburgh dataset show that the proposed approach is 10 times faster than a high-performance commercial ILP solver
+p85
+aVThe learning task is similar to training a parser
+p86
+aVA graph illustration of the objective function is shown in Figure 2
+p87
+aVIt includes 82 newswire articles with manually produced compression for each sentence
+p88
+aVFor fair comparison, systems were restricted to produce compressions that matched their average gold compression rate if possible
+p89
+aVThe overall time complexity is O u'\u005cu2062' ( n 5 ) and the space complexity is O u'\u005cu2062' ( n 3 )
+p90
+aVWe also use the in-between features proposed by [ 11 ] , which were shown to be very effective for dependency parsing
+p91
+aVNext, we consider the bigram scores
+p92
+aVSpace complexity is O u'\u005cu2062' ( n 3
+p93
+aVIn this section, we propose an approximate algorithm where the length constraint u'\u005cu2211' i z i = L is relaxed by Lagrangian Relaxation
+p94
+aVWe slightly modify the two merging rules above, and obtain
+p95
+aVThey also outperform McDonald u'\u005cu2019' s, demonstrating the effectiveness of considering the grammar structure for compression
+p96
+aVWe compare our method with other 4 state-of-the-art systems
+p97
+aVOn the other hand, our approximate approach is much more efficient, about 10 times faster than TM13 u'\u005cu2019' system, and achieves competitive accuracy with the exact approach
+p98
+aVThis is a one-to-one mapping
+p99
+aVWe evaluate our method on the data set from [ 4 ]
+p100
+aVWe show the comparison results in Table 2
+p101
+aVWe adopt the compression evaluation metric as used in [ 10 ] that measures the macro F-measure for the retained unigrams ( F u u'\u005cu2062' g u'\u005cu2062' r ), and the one used in [ 4 ] that calculates the F1 score of the grammatical relations labeled by RASP [ 2 ]
+p102
+aVThe following proposition is obvious
+p103
+aVThe relaxed version of Problem ( 1 ) is
+p104
+aVwhere u'\u005cu0391' 0 is the learning rate
+p105
+aVIn this paper, our choice of u'\u005cu0391' is the same as [ 16 ]
+p106
+aVFormally, we solve the following optimization problem
+p107
+aVIt has been widely used in compressive summarization [ 9 , 8 , 10 , 3 , 15 ]
+p108
+aVThis can be easily verifed
+p109
+aVThis work is partly supported by NSF award IIS-0845484 and DARPA under Contract No
+p110
+aVAny opinions expressed in this material are those of the authors and do not necessarily reflect the views of the funding agencies
+p111
+aVWe thank three anonymous reviewers for their valuable comments
+p112
+aVFA8750-13-2-0041
+p113
+aVC j i u'\u005cu2062' ( k ) = I r i u'\u005cu2062' ( k u'\u005cu2032' ) + C j r u'\u005cu2062' ( k u'\u005cu2032' u'\u005cu2032' ) , k u'\u005cu2032' + k u'\u005cu2032' u'\u005cu2032' = k
+p114
+aVI j i u'\u005cu2062' ( j - i ) = I i + 1 i u'\u005cu2062' ( 1 ) + C j i + 1 u'\u005cu2062' ( j - i - 1
+p115
+aVI j i u'\u005cu2062' ( k ) = C r i u'\u005cu2062' ( k u'\u005cu2032' ) + C r + 1 j u'\u005cu2062' ( k u'\u005cu2032' u'\u005cu2032' ) , k u'\u005cu2032' + k u'\u005cu2032' u'\u005cu2032' = k
+p116
+aVI i + 1 i u'\u005cu2062' ( 1 ) = C i i u'\u005cu2062' ( 0 ) + C i + 1 i + 1 u'\u005cu2062' ( 0 )
+p117
+aVThat is
+p118
+aVI j i u'\u005cu2062' ( k , j ) = C r i u'\u005cu2062' ( k u'\u005cu2032' , p ) + C r + 1 j u'\u005cu2062' ( k u'\u005cu2032' u'\u005cu2032' , j ) , k u'\u005cu2032' + k u'\u005cu2032' u'\u005cu2032' = k
+p119
+a.

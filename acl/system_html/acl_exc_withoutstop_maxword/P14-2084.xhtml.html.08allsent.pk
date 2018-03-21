@@ -1,0 +1,200 @@
+(lp0
+VWe show that the misclassifications (with respect to whether comments contain irony or not) made by a standard text classification model significantly correlate with those comments for which human annotators requested additional context
+p1
+aVOn average, annotators requested additional context for 30% of comments (range across annotators of 12% to 56%
+p2
+aVAnd indeed, all three annotators requested additional context for this comment
+p3
+aVThese pieces of information (previous comments by the same user, the external link of the embedding reddit thread, and the other comments in this thread) constitute our context
+p4
+aVWe introduce the first version of the reddit irony corpus , composed of annotated comments from the social news website reddit
+p5
+aVPut another way, the model makes mistakes on those comments for which annotators requested additional context (even after accounting for the annotator designation of comments
+p6
+aVWe now explore empirically whether these misclassifications are made on the same comments for which annotators requested context
+p7
+aVReddit is a good corpus for the irony detection task in part because it provides a natural practical realization of the otherwise ill-defined context for comments
+p8
+aVRecall that our annotation tool allows labelers to request additional context if they cannot make a decision based on the comment text alone (Figure 1
+p9
+aVIn other words, annotators request context significantly more frequently for those comments that (are ultimately deemed to) contain an ironic sentence
+p10
+aVHere we are interested in the correlation of the event that one or more annotators requested additional context for comment i (denoted by u'\u005cud835' u'\u005cudc9e' i ) and model misclassifications (adjusting for the comment u'\u005cu2019' s true label
+p11
+aVWe explore the extent to which human annotators rely on contextual information to decide whether or not sentences were intended ironically
+p12
+aVWe provide empirical evidence that human annotators consistently rely on contextual information to make ironic/unironic sentence judgements
+p13
+aVIn particular, each comment is associated with a specific user (the author), and we can view their previous comments
+p14
+aVThese comments in turn comprise a total of 10,401 labeled sentences
+p15
+aVFrom this contextual information, then, we can reasonably assume that the comment was intended ironically (and all three annotators did so after assessing the available contextual information
+p16
+aVThis context at first suggests that the comment may have been intended literally it was posted in the r/conservative subreddit (Ted Cruz is a conservative senator
+p17
+aVThe present version comprises 3,020 annotated comments scraped from the six subreddits enumerated in Table 1
+p18
+aVEach sentence in every comment in this corpus has been labeled by three independent annotators as having been intended by the author ironically or not
+p19
+aVThis would suggest that the words and punctuation comprising online comments alone are not sufficient to distinguish ironic from unironic comments
+p20
+aVWe tested for a correlation between these requests for context and the final decisions regarding whether comments contain at least one ironic sentence
+p21
+aVWe also introduce a new annotated corpus that will allow researchers to build models that augment existing approaches to irony detection with contextual information regarding the text (utterance) to be classified and its author
+p22
+aVWithout additional context it is difficult to know
+p23
+aVSecond, we were interested in assessing the extent of natural agreement between annotators for this task
+p24
+aVLabelers can opt to request these pieces of context via the annotation tool, and we record when they do so
+p25
+aVTo our knowledge, however, no previous work on irony detection has attempted to leverage contextual information regarding the author or speaker (external to the utterance
+p26
+aVIn these works, verbal irony detection has mostly been treated as a standard text classification task, though with some innovative approaches specific to detecting irony
+p27
+aVAs shown in Figure 3 , annotators are consistently more confident once they have consulted this information
+p28
+aVThis provides evidence that bag-of-words approaches are insufficient for the general task of irony detection more context is necessary
+p29
+aVThe forum component of reddit is extremely active popular posts often have well into 1000 u'\u005cu2019' s of user comments
+p30
+aVWe show that the standard u'\u005cu2018' bag-of-words u'\u005cu2019' approach to text classification fails to accurately judge ironic intent on those cases for which humans required additional context
+p31
+aVWe denote the probability of at least one annotator requesting additional context for comment i by P u'\u005cu2062' ( u'\u005cud835' u'\u005cudc9e' i
+p32
+aVThe raw average agreement between all annotators on all sentences is 0.844
+p33
+aVFor example, http://reddit.com/r/politics features articles (and hence comments) centered around political news
+p34
+aVBut if we peruse the author u'\u005cu2019' s comment history, we see that he or she repeatedly derides Senator Cruz (e.g.,, writing u'\u005cu201c' Ted Cruz is no Ronald Reagan
+p35
+aVMoreover, comments are embedded within discussion threads that pertain to the (usually external) content linked to in the corresponding submission (see Figure 2
+p36
+aVHere we introduce the first version ( u'\u005cu0392' 1.0) of our irony corpus
+p37
+aVData collection and annotation is ongoing, so we will continue to release new (larger) versions of the corpus in the future
+p38
+aVWe then model the probability of this event as a linear function of whether or not any annotator labeled any sentence in comment i as ironic
+p39
+aVMore specifically, annotators have provided binary u'\u005cu2018' labels u'\u005cu2019' for each sentence indicating whether or not they (the annotator) believe it was intended by the author ironically (or not
+p40
+aV2 2 We performed naïve u'\u005cu2018' segmentation u'\u005cu2019' of comments based on punctuation
+p41
+aVWe used the regression model shown in Equation 1 , where u'\u005cu0392' 0 is an intercept and u'\u005cu0392' 1 captures the correlation between requests for context for a given comment and its ultimately being deemed to contain at least one ironic sentence
+p42
+aVThis work concerns the task of detecting verbal irony online
+p43
+aVIn this paper we provide empirical evidence that context is often necessary to recognize ironic intent
+p44
+aVWe code this via the indicator variable u'\u005cu2110' i which is 1 when comment i has been deemed to contain an ironic sentence (by any of the three annotators) and 0 otherwise
+p45
+aVThree university undergraduates independently annotated each sentence in the corpus
+p46
+aVReally made the republicans look like the sane ones u'\u005cu201d' Did the author intend this statement ironically, or was this a subtle dig on Senator Ted Cruz
+p47
+aVThese approaches have achieved some success, but necessarily face an upper-bound the exact same sentence can be both intended ironically and unironically, depending on the context (including the speaker and the topic at hand
+p48
+aVReddit comprises u'\u005cu2018' sub-reddits u'\u005cu2019' , which focus on specific topics
+p49
+aVReddit ( http://reddit.com ) is a social-news website to which news stories (and other links) are posted, voted on and commented upon
+p50
+aVThis suggests that, as humans require context to make their judgements for this task, so too do computers
+p51
+aVThis is consistent with the large body of pragmatics/linguistics literature on irony and its usage, which has emphasized the role that context plays in recognizing and decoding ironic utterances []
+p52
+aVThis annotation was provided via a custom-built browser-based annotation tool, shown in Figure 1
+p53
+aVWe added additional binary features coding for the presence of punctuational features, such as exclamation points, emoticons (for example, u'\u005cu2018' ;) u'\u005cu2019' ) and question marks previous work [] has found that these are good indicators of ironic intent
+p54
+aVOther works have proposed novel approaches specifically for irony detection
+p55
+aVDespite this, most machine learning based approaches to irony detection have relied nearly exclusively on such intrinsic features
+p56
+aVThe current version of the corpus is available at https://github.com/bwallace/ACL-2014-irony
+p57
+aVConsider the following example comment taken from our dataset u'\u005cu201c' Great idea on the talkathon Cruz
+p58
+aVWe intentionally did not provide much guidance to annotators regarding the criteria for what constitutes an u'\u005cu2018' ironic u'\u005cu2019' statement, for two reasons
+p59
+aVOur principal argument is that simple bag-of-words based text classification models u'\u005cu2013' which, when coupled with sufficient data, have proven to be extremely successful for many natural language processing tasks [] u'\u005cu2013' are inadequate for irony detection
+p60
+aVBut existing work on automatic irony detection u'\u005cu2013' reviewed in Section 2 u'\u005cu2013' has not explicitly attempted to operationalize such theories, and has instead relied on features (mostly word counts) intrinsic to the texts that are to be classified as ironic
+p61
+aVAverage pairwise Cohen u'\u005cu2019' s Kappa [] is 0.341, suggesting fair to moderate agreement [] , as we might expect for a subjective task like this one
+p62
+aVThere has recently been a flurry of interesting work on automatic irony detection []
+p63
+aVSome of the findings from these previous efforts have squared with intuition e.g.,, overzealous punctuation (as in u'\u005cu201c' great idea u'\u005cu201d' ) is indicative of ironic intent []
+p64
+aV[] , for example, proposed a semi-supervised approach in which they look for sentence templates indicative of irony
+p65
+aVWe then ran a second regression in which the output variable was the logit-transformed probability of the model misclassifying comment i , i.e.,, P u'\u005cu2062' ( u'\u005cu2133' i
+p66
+aVFirst, verbal irony is a notoriously slippery concept [] and coming up with an operational definition to be consistently applied is non-trivial
+p67
+aV[] proposed a method that exploits contrasting sentiment in the same utterance to detect irony
+p68
+aVOur hope is that these observations and this dataset will spur innovative new research on methods for verbal irony detection
+p69
+aVWe performed five-fold cross-validation, recording the predictions y ^ i for each (held-out) comment i
+p70
+aV3 3 Some of the recently proposed strategies mentioned in Section 2 may improve performance here, but none of these address the fundamental issue of context
+p71
+aVWe fit this model to the annotated corpus, and found a significant correlation u'\u005cu0392' ^ 1 = 1.508 with a 95% confidence interval of (1.326, 1.690); p 0.001
+p72
+aVOf course, many people genuinely do enjoy Twilight and so if the review is written subtly it will likely be difficult to discern the author u'\u005cu2019' s intent without this background
+p73
+aVWe removed stop-words and limited the vocabulary to the 50,000 most frequently occurring unigrams and bigrams
+p74
+aV[] also recently introduced the Internet Argument Corpus (IAC), which includes a sarcasm label (among others
+p75
+aVTo this end, we introduce a variable u'\u005cu2133' i for each comment i such that u'\u005cu2133' i = 1 if y ^ i u'\u005cu2260' y i , i.e.,, u'\u005cu2133' i is an indicator variable that encodes whether or not the classifier misclassified comment i
+p76
+aVAverage F1 score over the five-folds was 0.383 with range (0.330, 0.412); mean recall was 0.496 (0.446, 0.548) and average precision was 0.315 (0.261, 0.380
+p77
+aVThe most common data source used to experiment with irony detection systems has been Twitter [] , though Amazon product reviews have been used experimentally as well []
+p78
+aVOnly obvious verbal ironies will be recognizable from intrinsic features alone
+p79
+aVWe implemented a baseline classification approach using vanilla token count features (binary bag-of-words
+p80
+aVHere we provide empirical evidence for the above claims
+p81
+aVFor example, in the case of Amazon product reviews, knowing the kinds of books that an individual typically likes might inform our judgement someone who tends to read and review Dostoevsky is probably being ironic if she writes a glowing review of Twilight
+p82
+aVThis work was made possible by the Army Research Office (ARO), grant #64481-MA
+p83
+aVFor our predictive model, we used a linear-kernel SVM (tuning the C parameter via grid-search over the training dataset to maximize F1 score
+p84
+aVIn the case of Twitter, it is likely to be difficult to classify utterances without considering the contextualizing exchange of tweets (i.e.,, the conversation) to which they belong
+p85
+aVBut this is necessary in some cases, however
+p86
+aVThey aren u'\u005cu2019' t even close u'\u005cu201d'
+p87
+aVThis dataset is publicly available
+p88
+aVFitting this to the data, we estimated u'\u005cu0398' ^ 2 = 0.971 with a 95 u'\u005cu2062' % CI of (0.810, 1.133); p 0.001
+p89
+aV1 1 https://github.com/bwallace/ACL-2014-irony
+p90
+aVThis represents reasonable performance (with intuitive predictive tokens); but obviously there is quite a bit of room for improvement
+p91
+aVThe five most predictive tokens were yeah , guys , oh and shocked
+p92
+aVDavidov et al
+p93
+aVWalker et al
+p94
+aVElsewhere, Riloff et al
+p95
+aVAll of this is readily accessible
+p96
+aVFormally
+p97
+aVBriefly, our contributions are summarized as follows
+p98
+aS''
+p99
+a.

@@ -1,0 +1,130 @@
+(lp0
+VWhen the induced projection function maps an object onto the linguistic space, the derived text vector will inherit a mixture of textual features from the concepts that activated the same hidden unit as the object
+p1
+aVThe process of learning to map objects to the their word label is implemented by training a projection function f proj v u'\u005cu2192' w from the visual onto the linguistic semantic space
+p2
+aVThe zero-shot framework leads us to frame fast mapping as the task of projecting visual representations of new objects onto language space for retrieving their word labels ( v u'\u005cu2192' w
+p3
+aVConcretely, we assume that concepts, denoted for convenience by word labels, are represented in linguistic terms by vectors in a text-based distributional semantic space (see Section 4.3
+p4
+aVWhereas for the latter our system assumes that all concepts have rich linguistic representations (i.e.,, representations estimated from a large corpus), in the case of the former, new concepts are assumed to be encounted in a limited linguistic context and therefore lacking rich linguistic representations
+p5
+aVIn this section, we aim at simulating a fast mapping scenario in which the learner has been just exposed to a new concept, and thus has limited linguistic evidence for that concept
+p6
+aVDuring training, this cross-modal vocabulary is used to induce a projection function (Section 4.4 ), which u'\u005cu2013' intuitively u'\u005cu2013' represents a mapping between visual and linguistic dimensions
+p7
+aVMoreover, if this is also the first linguistic encounter of that concept, then we refer to the task as fast mapping
+p8
+aVThus, this function, given a visual vector, returns its corresponding linguistic representation
+p9
+aVThe fast mapping setting can be seen as a special case of the zero-shot task
+p10
+aVFurthermore, since not all new concepts in the linguistic environment refer to new objects (they might denote abstract concepts or out-of-scene objects), it seems more reasonable for the learner to be more alerted to linguistic cues about a recently-spotted new object than vice versa
+p11
+aVTable 2 reports results obtained by averaging the performance on the 11,400 distinct vectors of the 19 unseen concepts
+p12
+aVWe show that the induced cross-modal semantic space is powerful enough that sensible guesses about the correct word denoting an object can be made, even when the linguistic context vector representing the word has been created from as little as 1 sentence containing it
+p13
+aVRegarding the sources of error, a qualitative analysis of predicted word labels and objects as presented in Table 6 suggests that both textual and visual representations, although capturing relevant u'\u005cu201c' topical u'\u005cu201d' or u'\u005cu201c' domain u'\u005cu201d' information, are not enough to single out the properties of the target concept
+p14
+aVIn our zero-shot experiments, we assume no access to an outlier detector, and thus, the search for the correct label is performed in the full concept space
+p15
+aVMost importantly, by projecting visual representations of objects into a shared semantic space , we do not limit ourselves to establishing a link between objects and words
+p16
+aVMoreover, once the learner observes a new object, she can easily construct a full visual representation for it (and the acquisition literature has shown that humans are wired for good object segmentation and recognition [ 50 ] ) u'\u005cu2013' the more challenging task is to scan the ongoing and very ambiguous linguistic communication for contexts that might be relevant and informative about the new object
+p17
+aVThis is achieved by means of a simple neural network trained to project image-extracted feature vectors to text-based vectors through a hidden layer that can be interpreted as a cross-modal semantic space
+p18
+aVWe first test the effectiveness of our cross-modal semantic space on the so-called zero-shot learning task [ 40 ] , which has recently been explored in the machine learning community [ 18 , 49 ]
+p19
+aVFor ESP, given the size and amount of noise in this dataset, we build vectors for visual concepts , by normalizing and summing the BoVW vectors of all the images that have the relevant concept as a tag
+p20
+aVHowever, fast mapping is often described in the psychological literature as the opposite task
+p21
+aVWe implement 4 alternative learning algorithms for inducing the cross-modal projection function f proj v u'\u005cu2192' w
+p22
+aVWe achieve this by looking at which visual concepts result in the highest hidden unit activation
+p23
+aVThis is operationalized by constructing the text-based vector for these concepts from a context of just a few occurrences
+p24
+aVFinally, similarly to the visual semantic space, raw counts are transformed by applying LMI and then reduced to 300 dimensions with SVD
+p25
+aVThe analysis demonstrates that, although prior knowledge about categories was not explicitly used to train the network, the latter induced an organization of concepts into superordinate categories in which the hidden layer acts as a cross-modal concept categorization/organization system
+p26
+aVHowever, NN , an architecture that can capture more complex, non-linear relations in features across modalities, emerges as the best performing model, confirming on a larger scale the recent findings of Socher et al
+p27
+aVIn our setup, after applying CCA on the two spaces u'\u005cud835' u'\u005cudc15' s and u'\u005cud835' u'\u005cudc16' s , we obtain the two projection mappings onto the common space and thus our projection function can be derived as
+p28
+aVThe learner is exposed to a new word in context and has to search for the right object referring to it
+p29
+aVOverall, the results suggest that cross-modal mapping could be applied in tasks where images exhibit a more complex structure, e.g.,, caption generation and event recognition
+p30
+aVOn the contrary, the first time a learner is exposed to a new object, the linguistic information available is likely also very limited
+p31
+aVBy using least-squares regression, the projection function f proj v u'\u005cu2192' w can be derived as
+p32
+aV8 8 For this post-hoc analysis, we include a sparsity parameter in the objective function of Equation 5 in order to get more interpretable results; hidden units are therefore maximally activated by a only few concepts
+p33
+aVWe operationalize this by considering the 34 concrete concepts introduced by Frassinelli and Keller ( 2012 ) , and deriving their text-based representations from just a few sentences randomly picked from the corpus
+p34
+aV7 7 We also experimented with the same objective function as Socher et al
+p35
+aVIf we think about how linguistic reference is acquired, a scenario in which a learner first encounters a new object and then seeks its reference in the language of the surrounding environment (e.g.,, adults having a conversation, the text of a book with an illustration of an unknown object) is very natural
+p36
+aVThus, in order to consider vision-to-language mapping under more plausible conditions, similar to the ones that children or robots in a new environment are faced with, we next simulate a scenario akin to fast mapping
+p37
+aVThe weights are estimated by minimizing the objective function
+p38
+aV2013 ) , however, our objective function yielded consistently better results in all experimental settings
+p39
+aVUnlike the CIFAR-100 images, which were chosen specifically for image object recognition tasks (i.e.,, each image is clearly depicting a single object in the foreground), ESP contains a random selection of images from the Web
+p40
+aVOur first model is a very simple linear mapping between the two modalities estimated by solving a least-squares problem
+p41
+aVAs a further example, the visual vector for cooker is extracted from pictures such as the one in Figure 5
+p42
+aVFinally, we provide preliminary evidence that cross-modal projections can be used effectively to simulate a fast mapping scenario, thus strengthening the claims of this approach as a full-fledged, fully inductive theory of meaning acquisition
+p43
+aVThe problem of establishing word reference has been extensively explored in computational simulations of cross-situational learning (see Fazly et al
+p44
+aVAs an example, the textual vector of dishwasher contains kitchen-related dimensions such as u'\u005cu27e8' fridge , oven , gas , hob , u'\u005cu2026' , sink u'\u005cu27e9'
+p45
+aVIf the latter is the case, then these results could be extended to traditional distributional vectors bearing other desirable properties, such as high interpretability of dimensions
+p46
+aVThus, ESP constitutes a more realistic, and at the same time more challenging, simulation of how things are encountered in real life, testing the potentials of cross-modal mapping in dealing with the complex scenes that one would encounter in event recognition and caption generation tasks
+p47
+aVThe model might suggest that the concepts of dog and cat are semantically related, but it has no means to determine the visual appearance of dogs, and consequently no way to verify the truth of such a simple statement
+p48
+aVIn our experiments we used cosine as similarity function, so that s u'\u005cu2062' i u'\u005cu2062' m u'\u005cu2062' ( u'\u005cud835' u'\u005cudc00' , u'\u005cud835' u'\u005cudc01' ) = A u'\u005cu2062' B u'\u005cu2225' A u'\u005cu2225' u'\u005cu2062' u'\u005cu2225' B u'\u005cu2225' , thus penalizing parameter settings leading to a low cosine between the target linguistic representations u'\u005cud835' u'\u005cudc16' s and those produced by the projection function u'\u005cud835' u'\u005cudc16' ^ s
+p49
+aVThe latter is shown in Figure 5 , with a gas hob well in evidence
+p50
+aVTo the best of our knowledge, this is the first time this task has been performed on a dataset as noisy as ESP
+p51
+aV2013 ) , thus preventing a direct comparison, the results reported in Table 5 are on a comparable scale to theirs
+p52
+aVHowever, a possibly even more serious pitfall of vector models is lack of reference natural language is, fundamentally, a means to communicate, and thus our words must be able to refer to objects, properties and events in the outside world [ 1 ]
+p53
+aVA natural question we aim to answer is whether the success of cross-modal mapping is due to the high-quality embeddings or to the general algorithmic design
+p54
+aVAs low-level features, we use Scale Invariant Feature Transform (SIFT) features [ 35 ]
+p55
+aVFurthermore, all models perform better than Chance , including those that are based on just 1 or 5 sentences
+p56
+aVConsequently, objects do not appear in most images in their prototypical display, but rather as elements of complex scenes (see Figure 2
+p57
+aVNote that relevant literature [ 41 ] has emphasized the importance of learners self-generating multiple views when faced with new objects
+p58
+aVThis is achieved by finding a pair of matrices, in our case u'\u005cud835' u'\u005cudc02' V u'\u005cu2208' u'\u005cu211d' d v × d and u'\u005cud835' u'\u005cudc02' W u'\u005cu2208' u'\u005cu211d' d w × d , such that the correlation between the projections of the two multidimensional variables into a common, lower-rank space is maximized
+p59
+aVWe do not attempt any parameter tuning of the pipeline
+p60
+aVThus, our multiple-image assumption should not be considered as problematic in the current setup
+p61
+aVIn our setup, we can see the two different modalities as if they were different languages
+p62
+aVThe contributions of this work are three-fold
+p63
+aVAssuming that the concept-representing rows of u'\u005cud835' u'\u005cudc15' s and u'\u005cud835' u'\u005cudc16' s are ordered in the same way, we apply the ( k -truncated) SVD to the concatenated matrix [ u'\u005cud835' u'\u005cudc15' s u'\u005cu2062' u'\u005cud835' u'\u005cudc16' s ] , such that [ u'\u005cud835' u'\u005cudc15' ^ s u'\u005cu2062' u'\u005cud835' u'\u005cudc16' ^ u'\u005cud835' u'\u005cudc2c' ] = u'\u005cud835' u'\u005cudc14' k u'\u005cu2062' u'\u005cud835' u'\u005cudeba' k u'\u005cu2062' u'\u005cud835' u'\u005cudc19' k T is a k -rank approximation of the original matrix
+p64
+a.

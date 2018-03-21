@@ -1,0 +1,138 @@
+(lp0
+VThe morphological generation step adds to the target graph all target word sequences from the monolingual data that map to the same stem sequence as one of the target phrases occurring in the baseline phrase table
+p1
+aVThe generation component is based on the observation that for structured label spaces, such as translation candidates for source phrases in SMT, even similar phrases have slightly different labels (target translations
+p2
+aVThe morphologically-generated candidates for a given source unlabeled phrase are initially defined as the target word sequences in the monolingual data that have the same stem sequence as one of the baseline u'\u005cu2019' s target translations for a source phrase which has the same stem sequence as the unlabeled source phrase
+p3
+aVOn the source side, labeled phrases (those with known translations) are extracted from bilingual corpora, and unlabeled phrases are extracted from monolingual corpora; together they are embedded as nodes in a graph, with the monolingual data determining edge strengths between nodes (§ 2.2
+p4
+aVAs mentioned previously, we construct and fix a set of translation candidates, i.e.,, the label set for each unlabeled source phrase
+p5
+aVIf a source phrase is found in the baseline phrase table it is called a labeled phrase its conditional empirical probability distribution over target phrases (estimated from the parallel data) is used as the label, and is subsequently never changed
+p6
+aVThe label space is thus the phrasal translation inventory, and like the source side it can also be represented in terms of a graph, initially consisting of target phrase nodes from the parallel corpus
+p7
+aVBaseline phrasal systems are used both for comparison and for generating translation candidates for unlabeled phrases as described in § 2.1
+p8
+aVIn particular, the definition of target similarity is similar to that of source similarity
+p9
+aVThese translation candidates are usually not present as translations for the labeled phrases (or for the labeled phrases that neighbor the unlabeled one in question
+p10
+aVFor the unlabeled phrases, the set of possible target translations could be extremely large (e.g.,, all target language n -grams
+p11
+aVAs a result, LP is suboptimal for our needs, since it is unable to appropriately handle generated translation candidates for the unlabeled phrases
+p12
+aVTherefore, we first generate and fix a list of possible target translations for each unlabeled source phrase
+p13
+aVThus, the target phrase inventory from the parallel corpus may be inadequate for unlabeled instances
+p14
+aVThe generated candidates for the unlabeled phrase u'\u005cu2013' the ones from the baseline system u'\u005cu2019' s decoder output, or from a morphological generator (e.g.,, a cat and catlike in Fig
+p15
+aVFor our purposes, node f is a source phrasal node, the set u'\u005cud835' u'\u005cudca9' u'\u005cu2062' ( f ) refers to other source phrases that are neighbors of f (restricted to the k -nearest neighbors as in § 2.2 ), and the aim is to estimate P ( e f ) , the probability of target phrase e being a phrasal translation of source phrase f
+p16
+aVTable 4 presents the results of these variations; overall, by taking into account generated candidates appropriately and using bigrams ( u'\u005cu201c' SLP 2-gram u'\u005cu201d' ), we obtained a 1.13 BLEU gain on the test set
+p17
+aVIn addition, we obtained a corpus from the ELRA 5 5 ELRA-W0038 , which contains a mix of parallel and monolingual data; based on timestamps, we extracted a comparable English corpus for the ELRA Urdu monolingual data to form a roughly 470k-sentence u'\u005cu201c' noisy parallel u'\u005cu201d' set
+p18
+aVWe re-normalize the probability distributions after each propagation step to sum to one over the fixed list of translation candidates, and run the SLP algorithm to convergence
+p19
+aVEnglish monolingual u'\u005cu201c' En II Noisy Parallel u'\u005cu201d' + u'\u005cu201c' En II Non-Comparable u'\u005cu201d'
+p20
+aVA graph propagation algorithm transfers label information from labeled nodes to unlabeled nodes by following the graph u'\u005cu2019' s structure
+p21
+aVWhen propagating information from the labeled phrases, such candidates will obtain no probability mass since e u'\u005cu2260' e u'\u005cu2032'
+p22
+aVThus, due to the setup of the problem, LP naturally biases away from translation candidates produced during the generation step (§ 2.1
+p23
+aVOur work introduces a new take on the problem using graph-based semi-supervised learning to acquire translation rules and probabilities by leveraging both monolingual and parallel data resources
+p24
+aVWith this formulation, even if e u'\u005cu2260' e u'\u005cu2032' , the similarity T t ( e u'\u005cu2032' e ) as determined by the target phrase graph will dictate propagation probability
+p25
+aVTo determine pairwise phrase similarities in order to embed these nodes in their graphs, we utilize the monolingual corpora on both the source and target sides to extract distributional features based on the context surrounding each phrase
+p26
+aVThe idea presented in this paper is similar in spirit to bilingual lexicon induction (BLI), where a seed lexicon in two different languages is expanded with the help of monolingual corpora, primarily by extracting distributional similarities from the data using word context
+p27
+aVExamples 8 9 show cases where the baseline deletes words or translates them into more common words e.g.,, u'\u005cu201c' conversation u'\u005cu201d' to u'\u005cu201c' the u'\u005cu201d' , while our system proposes reasonable candidates
+p28
+aVEnglish monolingual u'\u005cu201c' En II Non-Comparable u'\u005cu201d'
+p29
+aVBy leveraging the monolingual corpus to understand the context of this unlabeled bigram, we can utilize the graph structure to propose a syntactically correct form, also resulting in a more fluent and correct sentence as determined by the language model
+p30
+aVThe results from this setup are presented as u'\u005cu201c' Baseline u'\u005cu201d' and u'\u005cu201c' SLP+Noisy u'\u005cu201d' in Table 6
+p31
+aVRecall that LP only takes into account source similarity; since the vast majority of generated candidates do not occur as labeled neighbors u'\u005cu2019' labels, restricting propagation to the source graph drastically reduces the usage of generated candidates as labels, but does not completely eliminate it
+p32
+aVUnlike previous work [ 11 , 22 ] , we use higher order n -grams instead of restricting to unigrams, since our approach goes beyond OOV mitigation and can enrich the entire translation model by using evidence from monolingual text
+p33
+aVThe results from this setup are presented as u'\u005cu201c' Baseline+Noisy u'\u005cu201d' and u'\u005cu201c' SLP u'\u005cu201d' in Table 6
+p34
+aVA naïve way to achieve this goal would be to extract all n -grams, from n = 1 to a maximum n -gram order, from the monolingual data, but this strategy would lead to a combinatorial explosion in the number of target phrases
+p35
+aVThe fifth Arabic-English example demonstrates the pitfalls of over-reliance on the distributional hypothesis the source bigram corresponding to the name u'\u005cu201c' abd almahmood u'\u005cu201d' is distributional similar to another named entity u'\u005cu201c' mahmood u'\u005cu201d' and the English equivalent is offered as a translation
+p36
+aVIn our case, we obtain the phrase pairs from the graph structure (and therefore indirectly from the monolingual data) and a separate generation step, which plays an important role in good performance of the method
+p37
+aVHowever, the former work operates only at the level of sentences, and while the latter does extend the framework to sub-spans of sentences, they do not discover new translation pairs or phrasal probabilities for new pairs at all, but instead re-estimate phrasal probabilities using the graph structure and add this score as an additional feature during decoding
+p38
+aVThe baseline is a state-of-the-art phrase-based system; we perform word alignment using a lexicalized hidden Markov model, and then the phrase table is extracted using the grow-diag-final heuristic [ 14 ]
+p39
+aVAdditionally, because of our structured propagation algorithm, our approach is better at handling multiple translation candidates and does not need to restrict itself to the top translation
+p40
+aVWe refer to these additional candidates as u'\u005cu201c' generated u'\u005cu201d' candidates
+p41
+aVThe third and fourth examples represent bigram phrases with much better translations compared to backing off to the lexical translations as in the baseline
+p42
+aVThe two setups allow us to examine how effectively our method can learn from the noisy parallel data by treating it as monolingual (i.e.,, for graph construction), compared to treating this data as parallel, and also examines the realistic scenario of using completely non-comparable monolingual text for graph construction as in the second setup
+p43
+aVThe goal of leveraging non-parallel data in machine translation has been explored from several different angles
+p44
+aVThe sixth example shows how morphological information can propose novel candidates an OOV word is broken down to its stem via the analyzer and candidates are generated based on the stem
+p45
+aV2013 ) and Irvine and Callison-Burch ( 2013 ) conduct a more extensive evaluation of their graph-based BLI techniques, where the emphasis and end-to-end BLEU evaluations concentrated on OOVs, i.e.,, unigrams, and not on enriching the entire translation model
+p46
+aVWe utilize the graph propagation-estimated forward phrasal probabilities u'\u005cu2119' ( e f ) as the forward likelihood probabilities for the acquired phrases; to obtain the backward phrasal probability for a given phrase pair, we make use of Bayes u'\u005cu2019' Theorem
+p47
+aVBased on these functions, source and target sequences of words can be mapped to sequences of stems
+p48
+aVWe therefore need to enrich the target or label space for unknown phrases
+p49
+aVFurther examination of the differences between the two systems yielded that most of the improvements are due to better bigrams and trigrams, as indicated by the breakdown of the BLEU score precision per n -gram, and primarily leverages higher quality generated candidates from the baseline system
+p50
+aVThe morphological candidates add a small amount of improvement, primarily by targeting genuine OOVs
+p51
+aVFor Urdu-English, the training corpus was provided by the LDC for the NIST Urdu-English MT evaluation, and most of the data was automatically acquired from the web, making it quite noisy
+p52
+aVAs with previous BLI work, these approaches only take into account source-side similarity of words; only moderate gains (and in the latter work, on a subset of language pairs evaluated) are obtained
+p53
+aVIn other words, this step adds phrases that are morphological variants of existing phrases, differing only in their affixes
+p54
+aVIn our first set of experiments, we looked at the impact of choosing bigrams over unigrams as our basic unit of representation, along with performance of LP (Eq
+p55
+aV1 , this source would yield the cat and cat , among others, as candidates
+p56
+aVThis line of work, initiated by Rapp ( 1995 ) and continued by others [ 7 , 13 ] ( inter alia ) is limited from a downstream perspective, as translations for only a small number of words are induced and oftentimes for common or frequently occurring ones only
+p57
+aVIn this set of experiments, we examined if the improvements in § 3.2 can be explained primarily through the extraction of language model characteristics during the semi-supervised learning phase, or through orthogonal pieces of evidence
+p58
+aVRecent improvements to BLI [ 24 , 10 ] have contained a graph-based flavor by presenting label propagation-based approaches using a seed lexicon, but evaluation is once again done on top-1 or top-3 accuracy, and the focus is on unigrams
+p59
+aVThe inverted index structure reduces the graph construction cost from u'\u005cu0398' u'\u005cu2062' ( n 2 ) , by only computing similarities for a subset of all possible pairs of phrases, namely other phrases that have at least one feature in common
+p60
+aV2 ) compared to SLP (Eq
+p61
+aV1 1 The q most frequent words in the monolingual corpus were removed as keys from this mapping, as these high entropy features do not provide much information
+p62
+aVTable 5 presents the results of using this language model
+p63
+aVWe used a simple hand-built Arabic morphological analyzer that segments word types based on regular expressions, and an English lexicon-based morphological analyzer
+p64
+aVThis quantity is also known as the propagation probability, and its exact form will depend on the type of graph propagation algorithm used
+p65
+aVTherefore, the final update equation in SLP is
+p66
+aVThe NIST MT06 and MT08 Arabic-English evaluation sets (combining the newswire and weblog domains for both sets), with four references each, were used as tuning and testing sets respectively
+p67
+aVThe exponential dependence of the sizes of these spaces on the length of instances is to blame
+p68
+a.

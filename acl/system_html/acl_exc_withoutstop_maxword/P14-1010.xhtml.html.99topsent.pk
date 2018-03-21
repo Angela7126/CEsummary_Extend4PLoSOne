@@ -1,0 +1,20 @@
+(lp0
+VWe compose this acceptor with a desegmenting transducer, and then with an unsegmented LM acceptor, producing a fully annotated, desegmented lattice
+p1
+aVThis can be accomplished by composing the lattice with a desegmenting transducer that consumes morphemes and outputs desegmented words
+p2
+aVFortunately, LM annotation as well as any necessary lattice modifications can be performed simultaneously by composing the desegmented lattice with a finite state acceptor encoding the LM [ 26 ]
+p3
+aVWe approach this problem by augmenting an SMT system built over target segments with features that reflect the desegmented target words
+p4
+aVThe lattice (Figure 1 a) can then be desegmented by composing it with the transducer ( 1 b), producing a desegmented lattice ( 1 c
+p5
+aVThe chains found by this search are desegmented and then added to the output lattice as edges
+p6
+aVOur goal is to desegment the decoder u'\u005cu2019' s output lattice, and in doing so, gain access to a compact, desegmented view of a large portion of the translation search space
+p7
+aVFinnish does not require a table, as all words can be desegmented with simple concatenation
+p8
+aVIn this section, we describe our various strategies for desegmenting the
+p9
+a.

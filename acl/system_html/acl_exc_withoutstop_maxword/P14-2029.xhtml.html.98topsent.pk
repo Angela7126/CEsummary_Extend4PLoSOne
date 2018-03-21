@@ -1,0 +1,18 @@
+(lp0
+VAdditionally, its classifier implementation does not output scores or probabilities
+p1
+aVSince the predictions from the binary and ordinal systems are on different scales, we include the nonparametric statistic Kendall u'\u005cu2019' s u'\u005cu03a4' as a secondary evaluation metric for both tasks
+p2
+aVFor the ordinal task, we report Pearson u'\u005cu2019' s r between the averaged human judgments and each system
+p3
+aVTo train our system on binarized data, we replaced the u'\u005cu2113' 2 -regularized linear regression model with an u'\u005cu2113' 2 -regularized logistic regression and used Kendall u'\u005cu2019' s u'\u005cu03a4' rank correlation between the predicted probabilities of the positive class and the binary gold standard labels as the grid search metric (§ 3.1 ) instead of Pearson u'\u005cu2019' s r
+p4
+aVSo that predictions better match the distribution of labels in the training data, the system rescales its predictions
+p5
+aVTherefore, we used the same learning algorithms as for our system (i.e.,, ridge regression for the ordinal task and logistic regression for the binary task
+p6
+aV4 4 Regression models typically produce conservative predictions with lower variance than the original training data
+p7
+aVIt is very different from our
+p8
+a.

@@ -1,0 +1,18 @@
+(lp0
+VWe approach this problem by augmenting an SMT system built over target segments with features that reflect the desegmented target words
+p1
+aVWork on target language morphological segmentation for SMT can be divided into three subproblems segmentation, desegmentation and integration
+p2
+aVIn this section, we describe our various strategies for desegmenting the SMT system u'\u005cu2019' s output space, along with the features that we add to take advantage of this desegmented view
+p3
+aVMost techniques approach the problem by transforming the target language in some manner before training the translation model
+p4
+aVOur goal is to desegment the decoder u'\u005cu2019' s output lattice, and in doing so, gain access to a compact, desegmented view of a large portion of the translation search space
+p5
+aVWe compose this acceptor with a desegmenting transducer, and then with an unsegmented LM acceptor, producing a fully annotated, desegmented lattice
+p6
+aVDoing so enables the inclusion of an unsegmented target language model, and with a small amount of bookkeeping, it also allows the inclusion of features related to the operations performed during desegmentation (see Section 3.4
+p7
+aVNonetheless, the 1000-best and lattice desegmenters both produce significant improvements over the 1-best
+p8
+a.

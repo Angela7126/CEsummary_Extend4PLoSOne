@@ -1,0 +1,156 @@
+(lp0
+VIn contrast, our Proposed method predicts the distribution of a word in the target domain, given its distribution in the source domain, thereby explicitly translating the source domain reviews to the target
+p1
+aVRecall that the \u005ccT p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' d baseline cannot find source domain words that do not appear in the target domain as distributional features for the words in the target domain test reviews
+p2
+aVBy predicting the distribution of a word across different domains, we can find source domain features that are similar to the features in target domain reviews, thereby reducing the mismatch of features between the two domains
+p3
+aVDomain adaptation (DA) of sentiment classification becomes extremely challenging when the distributions of words in the source and the target domains are very different, because the features learnt from the source domain labeled reviews might not appear in the target domain reviews that must be classified
+p4
+aVAlthough for illustrative purposes we used the word lightweight , which occurs in both the source and the target domains, our proposed method does not require the source domain distribution w \u005ccS for a word w in a target domain document
+p5
+aVGiven the distribution w u'\u005cu2192' \u005ccS of a word w in a source domain \u005ccS , we propose a method for learning its distribution w u'\u005cu2192' \u005ccT in a target domain \u005ccT
+p6
+aVIn this paper, given the distribution w u'\u005cu2192' \u005ccS of a word w in the source domain \u005ccS , we propose an unsupervised method for predicting its distribution w u'\u005cu2192' \u005ccT in a different target domain \u005ccT
+p7
+aVConsequently, a tagger trained on WSJ would incorrectly tag signal in MEDLINE append the source domain labeled data with predicted pivots (i.e., words that appear in both the source and target domains) to adapt a POS tagger to a target domain propose a cross-domain POS tagging method by training two separate models a generalised model and a domain-specific model
+p8
+aVAt test time, for each word w that appears in a target domain test sentence, we measure the similarity, sim u'\u005cu2062' ( \u005cmat u'\u005cu2062' M u'\u005cu2062' u u'\u005cu2192' \u005ccS ( i ) , w u'\u005cu2192' \u005ccT ) , and select the most similar r words u ( i ) in the source domain labeled sentences as the distributional features for w , with their values set to sim u'\u005cu2062' ( \u005cmat u'\u005cu2062' M u'\u005cu2062' u u'\u005cu2192' \u005ccS ( i ) , w u'\u005cu2192' \u005ccT
+p9
+aVNext, for each word w in a source domain labeled (i.e., manually POS tagged) sentence, we select its neighbours u ( i ) in the source domain as additional features
+p10
+aVInterestingly, we see that by using the distributions predicted by the proposed method (i.e., sim u'\u005cu2062' ( \u005cmat u'\u005cu2062' M u'\u005cu2062' u \u005ccS , w \u005ccT ) ) we overcome this problem and find relevant distributional features from the source domain
+p11
+aVUsing two popular multi-domain datasets, we evaluate the proposed method in two prediction tasks a) predicting the POS of a word in a target domain, and (b) predicting the sentiment of a review in a target domain
+p12
+aVAt test time, we represent a test target review H using a binary-valued feature vector h u'\u005cu2192' of unigrams and bigrams of lemmas of the words in H , as we did for source domain labeled train reviews
+p13
+aVThis property enables us to apply the proposed distribution prediction method to tasks other than sentiment analysis such as POS tagging where we must identify distributional features for individual words
+p14
+aVNext, we train a PLSR model, \u005cmat u'\u005cu2062' M , as described in Section 3.2 using unlabeled reviews in the source and target domains
+p15
+aVFilter denotes the training set filtering method proposed by for the DA of POS taggers
+p16
+aVFirst, we lemmatise each word in a source domain labeled review x u'\u005cu2192' \u005ccS ( i ) , and extract both unigrams and bigrams as features to represent x u'\u005cu2192' \u005ccS ( i ) by a binary-valued feature vector
+p17
+aVThe DA method proposed in Section 4.1 is shown as the Proposed method
+p18
+aVTherefore, it can find distributional features even for words occurring only in the target domain, thereby reducing the feature mismatch between the two domains
+p19
+aVUsing the learnt distribution prediction model, we propose a method to learn a cross-domain sentiment classifier
+p20
+aVIn cross-domain POS tagging, WSJ is always the source domain, whereas the five domains in SANCL dataset are considered as the target domains
+p21
+aVFor each domain \u005ccD in the SANCL (POS tagging) and Amazon review (sentiment classification) datasets, we create a PPMI weighted co-occurrence matrix \u005cmat u'\u005cu2062' F \u005ccD
+p22
+aVThis enables us to find distributional features that are consistent with all the features in a test review
+p23
+aVUsing data from a single domain, we construct a feature co-occurrence matrix \u005cmat u'\u005cu2062' A in which columns correspond to unigram features and rows correspond to either unigram or bigram features
+p24
+aVIn particular, we do not find distributional features independently for each word in the test review
+p25
+aVUsing the learnt distribution prediction model, we propose a method to learn a cross-domain POS tagger
+p26
+aVTo evaluate DA for POS tagging, following , we use sections 2 - 21 from Wall Street Journal (WSJ) as the source domain labeled data
+p27
+aVThis upper baseline represents the classification accuracy we could hope to obtain if we were to have labeled data for the target domain
+p28
+aVAs we go on to show in Section 6 , this enables us to use the same distribution prediction method for both POS tagging and sentiment classification
+p29
+aVSpecifically, we measure the similarity, sim u'\u005cu2062' ( u u'\u005cu2192' \u005ccS ( i ) , w u'\u005cu2192' \u005ccS ) , between the source domain distributions of u ( i ) and w , and select the top r similar neighbours u ( i ) for each word w as additional features for w
+p30
+aVSST is the Sentiment Sensitive Thesaurus proposed by
+p31
+aVTherefore, larger k values result in overfitting to the train data and classification accuracy is reduced on the target test data
+p32
+aVBy limiting the evaluation to unseen words instead of all words, we can evaluate the gain in POS tagging accuracy solely due to DA
+p33
+aVFollowing , we use the POS labeled sentences in the SACNL dataset [] for the five target domains
+p34
+aVAdding latent states to the smoothing model further improves the POS tagging accuracy [] propose a training set filtering method where they eliminate shorter words from the training data based on the intuition that longer words are more likely to be examples of productive linguistic processes than shorter words
+p35
+aVWe model distribution prediction as a multivariate regression problem where, given a set { ( w u'\u005cu2192' \u005ccS ( i ) , w u'\u005cu2192' \u005ccT ( i ) ) } i = 1 n consisting of pairs of feature vectors selected from each domain for the pivots in \u005ccW , we learn a mapping from the inputs ( w u'\u005cu2192' \u005ccS ( i ) ) to the outputs ( w u'\u005cu2192' \u005ccT ( i )
+p36
+aVSince the method we propose in Section 3.2 to predict the distribution of a word across domains does not depend on the particular feature representation method, any of these alternative methods could be used
+p37
+aVDistribution prediction in this lower dimensional feature space is preferrable to prediction over the original feature space because there are reductions in overfitting, feature sparseness, and the learning time
+p38
+aVVarious criteria have been proposed for selecting a small set of pivots for DA, such as the mutual information of a word with the two domains []
+p39
+aVWe refer to such features as distributional features in this work
+p40
+aVThe improvements of Proposed over the previously proposed Filter are statistically significant in all domains except the Emails domain (denoted by u'\u005cu2020' in Table 2 according to the Binomial exact test at 95 u'\u005cu2062' % confidence
+p41
+aVHowever, if a small amount of labeled data is available for the target domain, it can be used to further improve the performance of DA tasks []
+p42
+aVFor example, in the domain of portable computer reviews the word lightweight is often associated with positive sentiment bearing words such as sleek or compact , whereas in the movie review domain the same word is often associated with negative sentiment-bearing words such as superficial or formulaic
+p43
+aVBecause the dimensionality of the source and target domain feature spaces is equal to k , the complexity of the least square regression problem increases with k
+p44
+aVIf w does not appear in the target domain, then w u'\u005cu2192' \u005ccT is set to the zero vector
+p45
+aVEach row in \u005cmat u'\u005cu2062' F ^ is considered as representing a word in a lower k ( u'\u005cu226a' n c ) dimensional feature space corresponding to a particular domain
+p46
+aVNote that the dimensionality of w u'\u005cu2192' \u005ccS ( i ) and w u'\u005cu2192' \u005ccT ( i ) need not be equal, and we may select different numbers of singular vectors to approximate \u005cmat u'\u005cu2062' F ^ \u005ccS and \u005cmat u'\u005cu2062' F ^ \u005ccT
+p47
+aVBecause our proposed distribution prediction method is unsupervised and task independent, it is potentially useful for a wide range of DA tasks such entity extraction [] or dependency parsing []
+p48
+aVTherefore, when the overlap between the vocabularies used in the source and the target domains is small, \u005ccT p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' d cannot reduce the mismatch between the feature spaces
+p49
+aVUsing a standard stop word list, we filter out frequent non-content unigrams and select the remainder as unigram features to represent a sentence
+p50
+aVThe value of a neighbour u ( i ) selected as a distributional feature is set to its similarity score sim u'\u005cu2062' ( u u'\u005cu2192' \u005ccS ( i ) , w u'\u005cu2192' \u005ccS
+p51
+aVAll methods are evaluated under the same settings, including train/test split, feature spaces, pivots, and classification algorithms so that any differences in performance can be directly attributable to their domain adaptability
+p52
+aVAn additional 100 , 000 WSJ sentences from the 1988 release of the WSJ corpus are used as the source domain unlabeled data
+p53
+aVFor representation, we considered distributional features u ( i ) in descending order of their scores given by Equation 4 , and then taking the inverse-rank as the values for the distributional features []
+p54
+aVWe use the standard split of 800 positive and 800 negative labeled reviews from each domain as training data, and the remainder for testing
+p55
+aVAs an example of the distribution prediction method, in Table 3 we show the top 3 similar distributional features u in the books (source) domain, predicted for the electronics (target) domain word w = u'\u005cud835' u'\u005cudc59' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc54' u'\u005cu210e' u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc64' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc54' u'\u005cu210e' u'\u005cud835' u'\u005cudc61' , by different similarity measures
+p56
+aVAs we have already discussed, the semantics of a word varies across different domains, and such variations are not captured by models that only learn a single semantic representation for a word using documents from a single domain
+p57
+aVTo evaluate the effect of the PLSR dimensions, we fixed k = 1000 and measured the cross-domain sentiment classification accuracy over a range of L values
+p58
+aVWe observed that setting r larger than 10 did not result in significant improvements in tagging accuracy, but only increased the train time due to the larger feature space
+p59
+aVNote that in addition to the above-mentioned representation, there are many other ways to represent the distribution of a word in a particular domain []
+p60
+aVConsequently, we set r = 10 in POS tagging
+p61
+aVIn the literature, such features are often referred to as pivots , and they have been shown to be useful for DA, allowing the weights learnt to be transferred from one domain to another
+p62
+aVLearning semantic representations for words using documents from a single domain has received much attention lately []
+p63
+aVLet \u005cmat u'\u005cu2062' X and \u005cmat u'\u005cu2062' Y denote matrices formed by arranging respectively the vectors w u'\u005cu2192' \u005ccS ( i ) s and w u'\u005cu2192' \u005ccT ( i ) in rows
+p64
+aVMatrix \u005cmat u'\u005cu2062' F has the same number of rows, n r , and columns, n c , as the raw co-occurrence matrix \u005cmat u'\u005cu2062' A
+p65
+aVConsequently, the distributional representations of the word lightweight will differ considerably between the two domains
+p66
+aVThis is an important point, and means that the distribution prediction method is independent of the task to which it may subsequently be applied
+p67
+aVConsequently, in matrix \u005cmat u'\u005cu2062' A , we consider co-occurrences only between unigrams vs unigrams, and bigrams vs unigrams
+p68
+aVAs shown in Figure 2 , accuracy remains stable across a wide range of PLSR dimensions
+p69
+aVFor example, the word signal is predominately used as a noun in MEDLINE, whereas it appears predominantly as an adjective in the Wall Street Journal (WSJ) []
+p70
+aVFor this setting we have 9822 pivots on average
+p71
+aVThe matrices, u'\u005cud835' u'\u005cudeb2' , u'\u005cud835' u'\u005cudeaa' , \u005cmat u'\u005cu2062' P , and \u005cmat u'\u005cu2062' Q are constructed respectively by arranging u'\u005cu039b' u'\u005cu2192' l , u'\u005cu0393' u'\u005cu2192' l , p u'\u005cu2192' l , and q u'\u005cu2192' l vectors as columns
+p72
+aVBecause the time complexity of Algorithm 3.2 increases linearly with L , it is desirable that we select smaller L values in practice
+p73
+aVMoreover, co-occurrences of bigrams are rare compared to co-occurrences of unigrams, and co-occurrences involving a unigram and a bigram
+p74
+aVThe baselines NA , \u005ccS u'\u005cud835' u'\u005cudc29' u'\u005cud835' u'\u005cudc2b' u'\u005cud835' u'\u005cudc1e' u'\u005cud835' u'\u005cudc1d' , and \u005ccT u'\u005cud835' u'\u005cudc29' u'\u005cud835' u'\u005cudc2b' u'\u005cud835' u'\u005cudc1e' u'\u005cud835' u'\u005cudc1d' are defined similarly as in Section 6.1
+p75
+aVHowever, none of these alternatives resulted in performance gains
+p76
+aVIt is based on the two block NIPALS routine [] and iteratively discovers L pairs of vectors ( u'\u005cu039b' u'\u005cu2192' l , u'\u005cu0393' u'\u005cu2192' l ) such that the covariances, Cov u'\u005cu2062' ( u'\u005cu039b' u'\u005cu2192' l , u'\u005cu0393' u'\u005cu2192' l ) , are maximised under the constraint \u005cnorm u'\u005cu2062' p u'\u005cu2192' l = \u005cnorm u'\u005cu2062' q u'\u005cu2192' l = 1
+p77
+a.

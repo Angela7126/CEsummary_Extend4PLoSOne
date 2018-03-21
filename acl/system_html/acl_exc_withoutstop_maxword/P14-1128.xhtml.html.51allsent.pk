@@ -1,0 +1,118 @@
+(lp0
+VRather than playing the u'\u005cu201c' hard u'\u005cu201d' uses of the bilingual segmentation knowledge, i.e.,, directly merging u'\u005cu201c' char-to-word u'\u005cu201d' alignments to words as supervisions, this study extracts word boundary information of characters from the alignments as soft constraints to regularize a CRFs model u'\u005cu2019' s learning
+p1
+aVAn intuitive manner is to directly leverage the induced boundary distributions as label constraints to regularize segmentation model learning, based on a constrained learning algorithm
+p2
+aVThey proposed to learn gainful bilingual knowledge as golden-standard segmentation supervisions for training a bilingual unsupervised model
+p3
+aV[ 4 ] enhanced a CRFs segmentation model in MT tasks by tuning the word granularity and improving the segmentation consistence
+p4
+aVCrucially, the GP expression with the bilingual knowledge is then used as side information to regularize a CRFs (conditional random fields) model u'\u005cu2019' s learning over treebank and bitext data, based on the posterior regularization (PR) framework [ 9 ]
+p5
+aVOne of our main objectives is to bias CRFs model u'\u005cu2019' s learning on unlabeled data, under a non-linear GP constraint encoding the bilingual knowledge
+p6
+aVThis study also works with a similarity graph, encoding the learned bilingual knowledge
+p7
+aVBut, unlike the prior pipelined approaches, this study performs a joint learning behavior in which GP is used as a learning constraint to interact with the CRFs model estimation
+p8
+aVIn recent years, a number of works [ 23 , 4 , 12 , 22 ] attempted to build segmentation models for SMT based on bilingual unsegmented data, instead of monolingual segmented data
+p9
+aVThis behaviour illustrates that the conventional optimizations to the monolingual supervised model, e.g.,, accumulating more supervised data or predefined segmentation properties, are insufficient to help model for achieving better segmentations for SMT
+p10
+aV[ 32 ] , proposed GP for inferring the label information of unlabeled data, and then leverage these GP outcomes to learn a semi-supervised scalable model (e.g.,, CRFs
+p11
+aVThe former primarily optimizes monolingual supervised models according to some predefined segmentation properties that are manually summarized from empirical MT evaluations
+p12
+aVSelf-training Segmenters (STS two variant models were defined by the approach reported in [ 20 ] that uses the supervised CRFs model u'\u005cu2019' s decodings, incorporating empirical and constraint information, for unlabeled examples as additional labeled data to retrain a CRFs model
+p13
+aVSecond, boundary distributions can play more flexible roles as constraints over labelings to bias the model learning
+p14
+aVThrough analyzing both models u'\u005cu2019' segmentations for train MT and test MT , we attempted to get a closer inspection on the segmentation preferences and their influence on MT
+p15
+aVIn our opinion, the learning mechanism of our approach, joint coupling of GP and CRFs, rather than the pipelined one as the other two models, contributes to maximizing the graph smoothness effects to the CRFs estimation so that the error propagation of the pipelined approaches is alleviated
+p16
+aVThe prior works showed that these models help to find some segmentations tailored for SMT, since the bilingual word occurrence feature can be captured by the character-based alignment [ 15 ]
+p17
+aVBut one outstanding problem is that these models may leave out some crucial segmentation features for SMT, since the output words conform to the treebank segmentation standard designed for monolingually linguistic intuition, rather than specific to the SMT task
+p18
+aVThe second observation shifts the emphasis to SMS and UBS, based on the treebank and the bilingual segmentation, respectively
+p19
+aVFrequently, the bilingual knowledge refers to the mappings of an individual English word to one or more consecutive Chinese characters, generated via statistical character-based alignment
+p20
+aV[ 4 ] described constraint driven learning (CODL) that augments model learning on unlabeled data by adding a cost for violating expectations of constraint features designed by domain knowledge
+p21
+aVThese approaches are referred to as pipelined learning with GP
+p22
+aVMost importantly, the constraints have a better learning guidance since they originate from the bilingual texts
+p23
+aVWord segmentation is regarded as a critical procedure for high-level Chinese language processing tasks, since Chinese scripts are written in continuous characters without explicit word boundaries (e.g.,, space in English
+p24
+aV[ 29 ] produced a better segmentation model for SMT by concatenating various corpora regardless of their different specifications
+p25
+aVThe MT experiment was conducted based on a standard log-linear phrase-based SMT model
+p26
+aVThe second step aims to collect word boundary distributions for all types, i.e.,, character-level trigrams, according to the n -to-1 mappings (Section 3.1
+p27
+aVPR performs regularization on posteriors, so that the learned model itself remains simple and tractable, while during learning it is driven to obey the constraints through setting appropriate parameters
+p28
+aVBut they only capture partial segmentation features so that less gains for SMT are achieved when comparing to other sophisticated models
+p29
+aVThis relies on statistical character-based alignment first, every Chinese character in the bitexts is divided by a white space so that individual characters are regarded as special u'\u005cu201c' words u'\u005cu201d' or alignment targets, and second, they are connected with English words by using a statistical word aligner, e.g.,, GIZA++ [ 15 ]
+p30
+aVThese models are conducive to MT to some extent, since they commonly have relatively good aggregate performance and segmentation consistency [ 4 ]
+p31
+aVThe primary idea is that consecutive Chinese characters are grouped to a candidate word, if they are aligned to the same foreign word
+p32
+aVThis constrained learning is carried out based on posterior regularization (PR) framework [ 9 ]
+p33
+aVTo be fair, the same similarity graph settings introduced in this paper were used that perform alternative ways to incorporate the bilingual constraints based on two state-of-the-art graph-based SSL approaches
+p34
+aVAs in conventional GP examples [ 7 ] , a similarity graph u'\u005cud835' u'\u005cudca2' = ( V , E ) is constructed over N types extracted from Chinese training data, including treebank u'\u005cud835' u'\u005cudc9f' l c and bitexts u'\u005cud835' u'\u005cudc9f' u c
+p35
+aVWe follow the approach introduced by [ 10 ] to set up a penalty-based PR objective with GP the CRFs likelihood is modified by adding a regularization term, as shown in Equation 4, representing the constraints
+p36
+aVIt is worth mentioning that prior works presented a straightforward usage for candidate words, treating them as golden segmentations, either dictionary units or labeled resources
+p37
+aVNote that the penalty is fired if the graph score computed based on the expected taggings given by the current CRFs model is increased vis-a-vis the previous training iteration
+p38
+aV[ 28 ] , is a hierarchical HMM segmenter that incorporates parts-of-speech (POS) information into the probability models and generates multiple HMM models for solving segmentation ambiguities
+p39
+aVFor example, UBS grouped u'\u005cu201c' {CJK} UTF8gbsnå›½(country)_ {CJK} UTF8gbsné™…(border)_ {CJK} UTF8gbsné—´(between) u'\u005cu201d' to a word u'\u005cu201c' {CJK} UTF8gbsnå›½é™…é—´(international) u'\u005cu201d' , rather than two words u'\u005cu201c' {CJK} UTF8gbsnå›½é™…(international)_ {CJK} UTF8gbsné—´(between) u'\u005cu201d' (as given by SMS), since these three characters are aligned to a single English word u'\u005cu201c' international u'\u005cu201d'
+p40
+aVBut this study treats the induced candidate words in a different way
+p41
+aVThe type-level word boundary extraction is formally described as follows
+p42
+aVIn what follows, the graph setting and propagation expression are introduced
+p43
+aVThis nature requires that the penalty term u'\u005cud835' u'\u005cudcab' u'\u005cu2062' ( v ) should be formed as a function of posteriors q over CRFs model predictions 5 5 The original PR setting also requires that the penalty term should be a linear (Ganchev et al., 2010) or non-linear [ 10 ] function on q i.e.,, u'\u005cud835' u'\u005cudcab' u'\u005cu2062' ( q
+p44
+aVRather than regularize CRFs model u'\u005cu2019' s posteriors p u'\u005cu0398' ( u'\u005cud835' u'\u005cudcb4' x i ) directly, our model uses an auxiliary distribution q ( u'\u005cud835' u'\u005cudcb4' x i ) over the possible labelings u'\u005cud835' u'\u005cudcb4' for x i , and penalizes the CRFs marginal log-likelihood by a KL-divergence term 4 4 The form of KL term
+p45
+aVThe quality (smoothness) of the similarity graph can be estimated by using a standard propagation function, as shown in Equation 1
+p46
+aVThere are four hyperparameters in our model to be tuned by using the development data ( dev MT ) among the following settings for the graph propagation, u'\u005cu039c' u'\u005cu2208' { 0.2 , 0.5 , 0.8 } and u'\u005cu03a1' u'\u005cu2208' { 0.1 , 0.3 , 0.5 , 0.8 } ; for the PR learning, u'\u005cu039b' u'\u005cu2208' { 0 u'\u005cu2264' u'\u005cu039b' i u'\u005cu2264' 1 } and u'\u005cu03a3' u'\u005cu2208' { 0 u'\u005cu2264' u'\u005cu03a3' i u'\u005cu2264' 1 } where the step is 0.1
+p47
+aV{ 1 , u'\u005cu2026' , u } , { 1 , u'\u005cu2026' , m } ) u'\u005cu2192' V from words in the corpus to vertices in the graph is defined
+p48
+aVOur learning problem belongs to semi-supervised learning (SSL), as the training is done on treebank labeled data ( X L , Y L ) = { ( x 1 , y 1 ) , u'\u005cu2026' , ( x l , y l ) } , and bilingual unlabeled data ( X U ) = { x 1 , u'\u005cu2026' , x u } where x i = { x 1 , u'\u005cu2026' , x m } is an input word sequence and y i = { y 1 , u'\u005cu2026' , y m } , y u'\u005cu2208' T is its corresponding label sequence
+p49
+aVThe similarities are measured based on co-occurrence statistics over a set of predefined features (introduced in Section 4.1
+p50
+aVThe heuristic strategy of grow-diag-final-and [ 11 ] was used to combine the bidirectional alignments for extracting phrase translations and reordering tables
+p51
+aVThe stochastic gradient descent is adopted to optimize the parameters
+p52
+aVSince the penalty term u'\u005cud835' u'\u005cudcab' u'\u005cu2062' ( v ) is a non-linear form, the optimization method in [ 9 ] via projected gradient descent on the dual is inefficient 6 6 According to [ 10 ] , the dual of quadratic program implies an expensive matrix inverse
+p53
+aVThe conditional probabilities p u'\u005cu0398' are expressed as a log-linear form
+p54
+aVWhere Z u'\u005cu0398' u'\u005cu2062' ( x i ) is a partition function that normalizes the exponential form to be a probability distribution, and f u'\u005cu2062' ( y i k - 1 , y i k , x i ) are arbitrary feature functions
+p55
+aVThe standard four-tags ( B , M , E and S ) were used as the labels
+p56
+aVThis EM-style approach monotonically increases u'\u005cud835' u'\u005cudca5' u'\u005cu2062' ( u'\u005cu0398' , q ) and thus is guaranteed to converge to a local optimum
+p57
+aVWe can thus decompose v i , t into a function of q as follows
+p58
+a.

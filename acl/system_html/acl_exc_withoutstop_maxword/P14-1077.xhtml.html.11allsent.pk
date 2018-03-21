@@ -1,0 +1,148 @@
+(lp0
+VMost existing knowledge bases represent their knowledge facts in the form of ( subject, relation, object ) triple, which can be seen as relational facts between entity tuples
+p1
+aVSpecifically, the joint inference framework operates on the output of a sentence level relation extractor as input, derives 5 types of constraints from an existing KB to implicitly capture the expected type and cardinality requirements for a relation u'\u005cu2019' s arguments, and jointly resolve the disagreements among candidate predictions
+p2
+aVIn this paper, we will address how to derive and exploit two categories of these clues the expected types and the cardinality requirements of a relation u'\u005cu2019' s arguments, in the scenario of relation extraction
+p3
+aVIn contrast, our approach learn implicit clues from existing KBs, and jointly optimize local predictions among different entity tuples to capture both relation argument type clues and cardinality clues
+p4
+aVThe previous categories of disagreements are all based on the implicit type information of the relations u'\u005cu2019' arguments, Now we make use of the clues of argument cardinality requirements
+p5
+aVFor a candidate relation r u'\u005cu2208' R t and a tuple t , we define M t r as all t u'\u005cu2019' s mentions whose candidate relations contain r
+p6
+aVFor a tuple t , we obtain its candidate relation set by combining the candidate relations of all its mentions, and represent it as R t
+p7
+aVAs discussed earlier, we will exploit from the knowledge base two categories of clues that implicitly capture relations u'\u005cu2019' backgrounds their expected argument types and argument cardinalities, based on which we can discover two categories of disagreements among the candidate predictions, summarized as argument type inconsistencies and violations of arguments u'\u005cu2019' uniqueness, which have been rarely considered before
+p8
+aVWe represent the relation pairs ( r i , r j ) that are inconsistent in terms of subjects as u'\u005cud835' u'\u005cudc9e' s u'\u005cu2062' r , the relations pairs that are inconsistent in terms of objects as u'\u005cud835' u'\u005cudc9e' r u'\u005cu2062' o , the relation pairs that are inconsistent in terms of one u'\u005cu2019' s subject and the other one u'\u005cu2019' s object as u'\u005cud835' u'\u005cudc9e' r u'\u005cu2062' e u'\u005cu2062' r
+p9
+aVIt uses Freebase as the knowledge base and New York Time corpus as the text corpus, including about 60,000 entity tuples in the training set, and about 90,000 entity tuples in the testing set
+p10
+aVWe propose to perform joint inference upon multiple local predictions by leveraging implicit clues that are encoded with relation specific requirements and can be learnt from existing knowledge bases
+p11
+aVGenerally, we expect more potentially correct relations to be put into the candidate relation set for further consideration
+p12
+aVAs discussed above, given a set of entity pairs and their candidate relations output by a preliminary extractor, our goal is to find an optimal configuration for all those entities pairs jointly, solving the disagreements among those candidate predictions and maximizing the overall confidence of the selected predictions
+p13
+aVWe also fit MultiR u'\u005cu2019' s mention level extractor into our framework
+p14
+aVSince we will focus on the open domain relation extraction, we still follow the distant supervision paradigm to collect our training data guided by a KB, and train the local extractor accordingly
+p15
+aVWhat is worse, we cannot find any clues from the top three relations because their arguments u'\u005cu2019' types are too general
+p16
+aVThe candidate relations we obtained in the previous subsection inevitably include many incorrect predictions
+p17
+aVWe add clues according to their related relations u'\u005cu2019' proportions in the local predictions
+p18
+aVTake the relation Capital as an example, we can imagine that this relation will expect a country as its subject and a city as object, and in most cases, a city can be the capital of only one country
+p19
+aVHowever, when looking at the output of a multi-class relation predictor globally, we can easily find possible incorrect predictions such as a university locates in two different cities, two different cities have been labeled as capital for one country, a country locates in a city and so on
+p20
+aVWe think the reason is that our framework make use of global clues to discard the incorrect predictions
+p21
+aVAs we observed in a pilot experiment that there is a good chance that the predictions ranked in the second or third may still be correct, we select top three predictions as the candidate relations for each mention in order to introduce more potentially correct output
+p22
+aVFor example, Country and birthPlace take up about 30% in the local predictions, we thus add clues that are related to these two relations, and then move on with new clues related to other relations according to those relations u'\u005cu2019' proportions in the local predictions
+p23
+aVFor example, in Figure 1 , given USA as the subject of the relation Capital , we can only accept one possible object, because there is great chance that a country only have one capital
+p24
+aVThese can be considered as the latent type information of the relations u'\u005cu2019' arguments, which is learnt from various data sources
+p25
+aVThe relation-entity-relation constraints ensure that if an entity works as subject and object in two tuples t i and t j respectively, their relations agree with each other
+p26
+aV28 different relations are mapped to the corpus and this results in 60,000 entity tuples, 120,000 sentences for training and 40,000 tuples, 83,000 sentences for testing
+p27
+aVAs is shown in Figure 4 , in both datasets, the clues related to more local predictions will solve more inconsistencies, thus are more effective
+p28
+aVBy adopting ILP, we can combine the local information including MaxEnt confidence scores and the implicit relation backgrounds that are embedded into global consistencies of the entity tuples together
+p29
+aVWe use integer linear programming (ILP) as the solver and evaluate our framework on English and Chinese datasets
+p30
+aVIn Figure 1 , USA, New York has a candidate relation LargestCity which restricts USA to be either countries or states, while USA, Washington D.C has a prediction LocationCity which indicates a disagreement in terms of USA u'\u005cu2019' s type because the latter prediction expects USA to be an organization located in a city
+p31
+aVWe also investigate the impacts of the constraints used in ILP, which are derived based on the two kinds of clues and can encode relation definition information into our framework
+p32
+aVOur framework takes a set of entity pairs and their supporting sentences as its input
+p33
+aVWe first train a preliminary sentence level extractor which can output confidence scores for its predictions, e.g.,, a maximum entropy or logistic regression model, and use this local extractor to produce local predictions
+p34
+aVOn the other hand, given Washington D.C as the object of the relation Capital , we can only accept one subject, since usually a city can only be the capital of one country or state
+p35
+aVThis indicates that the clues can be collected automatically, and further used to examine whether predicted relations are consistent with the existing ones in the KB, which can be considered as a form of quality control
+p36
+aVIt is worth mentioning that when sufficient learnt clues are added into the model, the results are comparable to those based on the clues refined manually, as shown in Figure 5
+p37
+aVComparing ILP-2cand and original ILP, the latter hardly makes any improvement in precision, but is slightly longer in recall, indicating using three candidates can still collect some more potentially correct predictions, although the number may be limited
+p38
+aVSince there are almost no clues in the Riedel u'\u005cu2019' s dataset, we only investigate the other two datasets
+p39
+aVIf the predictions among different entity tuples require the same entity to belong to different types, we call this an argument type inconsistency
+p40
+aVCompared to ILP-2cand and original ILP, ILP-1cand leads to slightly lower precision but much lower recall, showing that selecting more candidates may help us collect more potentially correct predictions
+p41
+aVDifferent from [ 15 ] , we use all the entity pairs instead of the ones with more than 10 mentions
+p42
+aVThe model predicts for each mention separately, and allows multi-label outputs for an entity tuple by OR-ing the outputs of its mentions
+p43
+aVAs a result, we only use the top one result as the candidate since including top two predictions without thresholding the confidences performs bad, indicating that a probabilistic sentence-level extractor is more suitable for our framework
+p44
+aVHence, our framework does not perform well due to the poor performance of MaxEnt extractor and the lack of clues
+p45
+aVSo in addition to lexical and syntactic features, we also use n-gram features to train our preliminary relation extraction model
+p46
+aVAs shown in Figure 3 , in the DBpedia dataset and the Chinese dataset, in most parts of the curve, ILP optimized MultiR outperforms original MultiR
+p47
+aVIn the Riedel u'\u005cu2019' s dataset we do not see any improvements since there are almost no clues
+p48
+aVWe think one reason is that MultiR does not perform well in these two datasets
+p49
+aVOn the other hand, most previous relation extractors process each entity pair (we will use entity pair and entity tuple exchangeably in the rest of the paper) locally and individually, i.e.,, the extractor makes decisions solely based on the sentences containing the current entity pair and ignores other related pairs, therefore has difficulties to capture possible disagreements among different entity pairs
+p50
+aVAdding the first two relations improves the model significantly, and as more relations are added, the performances keep increasing until approaching the still state
+p51
+aVWe generate the second English dataset, DBpedia dataset, by mapping the triples in DBpedia [ 2 ] to the sentences in New York Time corpus
+p52
+aVAs we described in Section 3.1 , originally we select the top three predicted relations as the candidates for each mention
+p53
+aVIn this paper, we propose to solve the problem by using an ILP tool, IBM ILOG Cplex 1 1 www.cplex.com
+p54
+aVIf these are violating in the candidates, we could know that there may be some incorrect predictions
+p55
+aVSince traditional supervised relation extraction methods [ 12 , 20 ] require manual annotations and are often domain-specific, nowadays many efforts focus on semi-supervised or unsupervised methods [ 1 , 5 ]
+p56
+aVIn the literature, relation extraction (RE) is usually investigated in a classification style, where relations are simply treated as isolated class labels, while their definitions or background information are sometimes ignored
+p57
+aVWe represent the relations expecting unique objects as u'\u005cud835' u'\u005cudc9e' o u'\u005cu2062' u , and the relations expecting unique subjects as u'\u005cud835' u'\u005cudc9e' s u'\u005cu2062' u
+p58
+aVN-gram features are considered as more ambiguous compared to traditional lexical and syntactic features, and may introduce incorrect predictions, thus improving the recall at the cost of precision
+p59
+aVAlthough we may find some clues any way, they are too few to make any improvement
+p60
+aVSimilarly, the cardinality requirements of arguments, e.g.,, a person can have only one birthdate and a city can only be labeled as capital of one country, should be considered as a strong indicator to eliminate wrong predictions, but has to be coded manually as well
+p61
+aVThis threshold is set to 0.8 in this paper
+p62
+aVUsually the triples in a KB are carefully defined by experts
+p63
+aVKeep in mind that our local extractor is trained on noisy training data, which, we admit, is not fully reliable
+p64
+aVWe conclude this paper in Section 5
+p65
+aVIdeally we should discard those wrong predictions to produce more accurate results
+p66
+aVThe clues are therefore learnt from KBs, and further refined manually if needed
+p67
+aVFor the sake of clarity, we describe the constraints derived from each scenario of the two categories of disagreements separately
+p68
+aVWe tune the models of MultiR and MIML-RE so that they fit our datasets
+p69
+aVSince the automatically generated training datasets in DS often contain noises, there are also research efforts focusing on reducing the noisy labels in the training data [ 16 ]
+p70
+aVThey implicitly consider USA as u'\u005cu201c' country u'\u005cu201d' and u'\u005cu201c' organization u'\u005cu201d' , respectively
+p71
+aVWe collect four national economic newspapers in 2009 as our corpus
+p72
+aVWe formalize this procedure as a constrained optimization problem, which can be solved by many optimization frameworks
+p73
+a.

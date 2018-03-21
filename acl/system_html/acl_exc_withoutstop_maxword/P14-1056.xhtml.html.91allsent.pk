@@ -1,0 +1,448 @@
+(lp0
+VOne consideration when using soft v.s hard constraints is that soft constraints present a new training problem, since we need to choose the vector c , the penalties for violating the constraints
+p1
+aVSince we truncate penalties at 0, this suggests that we will learn a penalty of 0 for constraints in three categories constraints that do not hold in the ground truth, constraints that hold in the ground truth but are satisfied in practice by performing inference in the base CRF model, and constraints that are satisfied in practice as a side-effect of imposing non-zero penalties on some other constraints
+p2
+aVThe algorithms we present in later sections for handling soft global constraints and for learning the penalties of these constraints can be applied to general structured linear models, not just CRFs, provided we have an available algorithm for performing MAP inference
+p3
+aVSoft constraints can be implemented inefficiently using hard constraints and dual decomposition u'\u005cu2014' by introducing copies of output variables and an auxiliary graphical model, as in Rush et al
+p4
+aVFor 11.99% of the examples, the Soft-DD algorithm satisfies constraints that were not satisfied during unconstrained inference, while in the remaining 11.72% Soft-DD converges with some constraints left unsatisfied, which is possible since we are imposing them as soft constraints
+p5
+aVHowever, there are a number of learned constraints that are often violated on the ground truth but are still useful as soft constraints
+p6
+aVWe also propose a method for learning the penalties the prediction problem incurs for violating these soft constraints
+p7
+aVThe above example constraints are almost always satisfied on the ground truth, and would be useful to enforce as hard constraints
+p8
+aVThe importance score of a constraint provides information about how often it is violated by the CRF, but holds in the ground truth, and a non-zero penalty implies we enforce it as a soft constraint at test time
+p9
+aVThis paper introduces a novel method for imposing soft constraints via dual decomposition
+p10
+aVWe then use the development set to learn the penalties for the soft constraints, using the perceptron algorithm described in section 3.1
+p11
+aVRather than enforcing these constraints using dual decomposition, they can be enforced directly when performing MAP inference in the CRF by modifying the dynamic program of the Viterbi algorithm to only allow valid pairs of adjacent labels
+p12
+aVHowever, we are using them as soft constraints, so these constraints will not necessarily be satisfied by the output of the model, which eliminates concern over enforcing logically impossible outputs
+p13
+aVNote that when performing MAP subject to soft constraints, optimal solutions might not satisfy some constraints, since doing so would reduce the model u'\u005cu2019' s score by too much
+p14
+aVFurthermore, since the dataset is so small, learning the penalties for our large collection of constraints is difficult, and test set results are unreliable
+p15
+aVBecause our learning method drives many penalties to zero, it allows practitioners to perform u'\u005cu2018' constraint selection, u'\u005cu2019' in which a large number of automatically-generated candidate global constraints can be considered and automatically culled to a smaller set of useful constraints, which can be run quickly at test time
+p16
+aVWe could have enforced these constraints as hard constraints rather than soft ones
+p17
+aVWhen hard constraints can be encoded as linear equations on the output variables, and the underlying model u'\u005cu2019' s inference task can be posed as linear optimization, one can formulate this constrained inference problem as an integer linear program (ILP) [ 15 ]
+p18
+aVAll we need to employ the structured perceptron algorithm [ 6 ] or the structured SVM algorithm [ 23 ] is a black-box procedure for performing MAP inference in the structured linear model given an arbitrary cost vector
+p19
+aVIt is still useful to impose these soft constraints, as strong evidence from the CRF allows us to violate them, and they can guide the model to good predictions when the CRF is unconfident
+p20
+aVDual Decomposition is a popular method for performing MAP inference in this scenario, since it leverages known algorithms for MAP in the base problem where these extra constraints have not been added [ 11 , 20 , 18 ]
+p21
+aVUsing our new method, we are able to incorporate not only all the soft global constraints of Chang et al
+p22
+aVSince performing inference in the CRF is by far the most computationally intensive step in the iterative algorithm, this means our procedure requires approximately twice as much work as running the baseline CRF on the dataset
+p23
+aVNote that it may make sense to consider a constraint that is sometimes violated in the ground truth, as the penalty learning algorithm can learn a small penalty for it, which will allow it to be violated some of the time
+p24
+aVWe found it beneficial, though it is not theoretically necessary, to learn the constraints on a held-out development set, separately from the other model parameters, as during training most constraints are satisfied due to overfitting, which leads to an underestimation of the relevant penalties
+p25
+aVIntuitively, the perceptron update increases the penalty for a constraint if it is satisfied in the ground truth and not in an inferred prediction, and decreases the penalty if the constraint is satisfied in the prediction and not the ground truth
+p26
+aVHowever, this only amounts to 1.24 times as much work as running the baseline CRF on the dataset, since the constraints are satisfied immediately for many examples
+p27
+aVThis both improves performance of the underlying model when used without global constraints, as well as ensures the validity of the global constraints we impose, since they operate only on B labels
+p28
+aVSoft-DD converges, and thus solves the constrained inference problem exactly, for all test set examples after at most 41 iterations
+p29
+aVWe produce a prediction by performing MAP inference [ 10 ]
+p30
+aVIn other words, the dual problem can not penalize the violation of a constraint more than the soft constraint model in the primal would penalize you if you violated it
+p31
+aVOn the other hand, recent work has demonstrated improvements in citation field extraction by imposing soft constraints [ 4 ]
+p32
+aVBelief propagation is prohibitively expensive in our model due to the high cardinalities of the output variables and of the global factors, which involve all output variables simultaneously
+p33
+aVWhile the techniques from section 3.1 can easily cope with a large numbers of constraints at training time, this can be computationally costly, specially if one is considering very large constraint families
+p34
+aVTake, for example, the constraint that the number of number segments does not exceed the number of booktitle segments, as well as the constraint that it does not exceed the number of journal segments
+p35
+aVThe MAP inference task in a CRF be can expressed as an optimization problem with a linear objective [ 21 , 20 ]
+p36
+aVThe only one author constraint is particularly useful for correctly labeling editor segments in cases where unconstrained inference mislabels them as author segments
+p37
+aVTherefore, quickly pruning bad constraints can save a substantial amount of training time, and can lead to better generalization
+p38
+aVFurthermore, in section 3.1 we described how our procedure for learning penalties will drive some penalties to 0, which effectively removes them from our set of constraints we consider
+p39
+aVThis is necessary because u'\u005cu039b' is a vector of dual variables for inequality constraints
+p40
+aVThere are multiple previous examples of augmenting chain-structured sequence models with terms capturing global relationships by expanding the chain to a more complex graphical model with non-local dependencies between the outputs
+p41
+aVNote these constraints are all linear, since they depend only on the counts of each possible conditional random field label
+p42
+aVTherefore, we can apply known training algorithms for estimating the parameters of structured linear models to choose c
+p43
+aV[ 4 ] via results on CORA, we apply their constraints on the UMass data using Soft-DD and demonstrate accuracy gains, as discussed above
+p44
+aVIn the all-constraints settings, 32.96% of the constraints have a learned parameter of 0 , and therefore only 421 constraints are active
+p45
+aVFor this underlying model, we employ a chain-structured conditional random field (CRF), since CRFs have been shown to perform better than other simple unconstrained models like hidden markov models for citation extraction [ 14 ]
+p46
+aVAn important property of problem ( 5 ) in the previous section is that it corresponds to a structured linear model over y and z
+p47
+aVRecently, dual decomposition has become a popular method for solving complex structured prediction problems in NLP [ 12 , 17 , 18 , 13 , 5 ]
+p48
+aVTherefore, we can view learning the values of the penalties not just as parameter tuning, but as a means to perform u'\u005cu2018' constraint selection, u'\u005cu2019' since constraints that have a penalty of 0 can be ignored
+p49
+aVThe two singleton constraints with highest importance score are that there should only be at most one title segment in a citation and that there should be at most one author segment in a citation
+p50
+aVThis penalization leads allows the constrained inference to correctly label the booktitle segment as a title segment
+p51
+aVFurthermore the copying of variables doubles the number of iterations needed for information to flow between output variables, and thus slows convergence
+p52
+aVIn our formulation, a soft-constrained model imposes a penalty for each unsatisfied constraint, proportional to the amount by which it is violated
+p53
+aVRegrouping terms and maximizing over the primal variables, we have the dual problem
+p54
+aVThis is problematic because the size of some constraint families we consider grows quadratically with the number of candidate labels, and there are about 100 in the UMass dataset
+p55
+aVSince the log probability of some y in the CRF is proportional to sum of the scores of all the factors, we can concatenate the indicator variables as a vector y and the scores as a vector w and write the MAP problem as
+p56
+aVHere, we define a binary indicator variable for each candidate setting of each factor in the graphical model
+p57
+aVAs can be seen in Table 3 , editor fields are among the most improved with our new method, largely due to this constraint
+p58
+aVWe find that a large portion of our gain in accuracy can be obtained when we allow ourselves as few as 2 dual decomposition iterations
+p59
+aVIf we could enforce the global constraint that there should be only one author section, accuracy could be improved
+p60
+aVThis final feature improves the F1 score on the cleaned test set from 94.0 F1 to 94.44 F1, which we use as a baseline score
+p61
+aVSince linear-chain models are unable to capture more than Markov dependencies, the models sometimes mislabel the editor as a second author
+p62
+aVSuch a family consists of constraints that the sum of the counts of two different label types has to be bounded (a useful example is that there can u'\u005cu2019' t be more than one out of u'\u005cu201c' phd thesis u'\u005cu201d' and u'\u005cu201c' journal u'\u005cu201d'
+p63
+aVThis approach is limited in its use of an HMM as an underlying model, as it has been shown that CRFs perform significantly better, achieving 95.37 token-level accuracy on CORA [ 14 ]
+p64
+aVThere are various methods for exploiting the combinatorial structure of these factors, but performance would still have higher complexity than our method
+p65
+aVTherefore, implementing soft-constrained dual decomposition is as easy as implementing hard-constrained dual decomposition, and the per-iteration complexity is the same
+p66
+aVWhile Gibbs sampling has been shown to work well tasks such as named entity recognition [ 8 ] , our previous experiments show that it does not work well for citation extraction, where it found only low-quality solutions in practice because the sampling did not mix well, even on a simple chain-structured CRF
+p67
+aVA similar analysis holds for the structured SVM approach
+p68
+aVWe prune constraints by picking a cutoff value for i u'\u005cu2062' m u'\u005cu2062' p u'\u005cu2062' ( c
+p69
+aVA value of i u'\u005cu2062' m u'\u005cu2062' p u'\u005cu2062' ( c ) above 1 implies that the constraint is more violated on the predicted examples than on the ground truth, and hence that we might want to keep it
+p70
+aVTherefore, we pay a cost c i times the degree to which the i th constraint is violated, which mirrors how slack variables are used to represent the hinge loss for SVMs
+p71
+aVTherefore, our derivation parallels how soft-margin SVMs are derived from hard-margin SVMs by introducing auxiliary slack variables [ 7 ]
+p72
+aVFor any u'\u005cu039b' , we can evaluate the dual objective D u'\u005cu2062' ( u'\u005cu039b' ) , since the maximization in ( 4 ) is of the same form as the original problem ( 1 ), and we assumed we had a method for performing MAP in this
+p73
+aVWe train and evaluate on the UMass dataset instead of CORA, because it is significantly larger, has a useful finer-grained labeling schema, and its annotation is more consistent
+p74
+aVTo do so, we calculate a score that estimates how useful each constraint is expected to be
+p75
+aVThe algorithm has converged when each constraint is either satisfied by y ( t ) with equality or its corresponding component of u'\u005cu039b' is 0, due to complimentary slackness [ 2 ]
+p76
+aVSince this Lagrangian has the same form as equation ( 3 ), we can also derive a dual problem, which is the same as in equation ( 4 ), with the additional constraint that each u'\u005cu039b' i can not be bigger than its cost c i
+p77
+aVThe optimality constraints with respect to z tell us that - c - u'\u005cu039b' - u'\u005cu039c' = 0 , hence u'\u005cu039c' = - c - u'\u005cu039b'
+p78
+aVIn addition, we use a rule-based segmenter that segments the citation string based on punctuation as well as probable start or end segment words (e.g., u'\u005cu2018' in u'\u005cu2019' and u'\u005cu2018' volume u'\u005cu2019'
+p79
+aVwhere [[ y ]] c is 1 if the constraint is violated on output y and 0 otherwise
+p80
+aVNow, we check for the KKT conditions of ( 5 ), where for every constraint i , either the constraint is satisfied with equality, u'\u005cu039b' i = 0 , or u'\u005cu039b' i = c i
+p81
+aVNote that c i has to be positive, otherwise this linear program is unbounded and an optimal value can be obtained by setting z i to infinity
+p82
+aVThis task is important because citation data is often provided only in plain text; however, having an accurate structured database of bibliographic information is necessary for many scientometric tasks, such as mapping scientific sub-communities, discovering research trends, and analyzing networks of researchers
+p83
+aVUsing a similar construction as in section 2.2 we write the Lagrangian as
+p84
+aVThis experiment is shown in the last row of Table 1 , where F1 only improves to 94.6
+p85
+aVFurthermore, a subgradient of D u'\u005cu2062' ( u'\u005cu039b' ) is A u'\u005cu2062' y * - b , for an y * which maximizes this inner optimization problem
+p86
+aVTherefore, we can minimize D u'\u005cu2062' ( u'\u005cu039b' ) with the projected subgradient method [ 2 ] , and the optimal y can be obtained when evaluating D u'\u005cu2062' ( u'\u005cu039b' *
+p87
+aVAutomated citation field extraction needs further research because it has not yet reached a level of accuracy at which it can be practically deployed in real-world systems
+p88
+aVFor positive c i , it is clear that an optimal z i will be equal to the degree to which a i T u'\u005cu2062' y u'\u005cu2264' b i is violated
+p89
+aVMoreover, since our labels are BIO-encoded, it is possible, by counting B tags, to count how often each citation tag itself appears in a sentence
+p90
+aVHere, y k represents an output tag of the CRF, so if [ [ y k = i ] ] = 1, then we have that y k was given a label with index i
+p91
+aVWe use the same features as Anzaroot and McCallum [ 1 ] , which include word type, capitalization, binned location in citation, regular expression matches, and matches into lexicons
+p92
+aVWe define C u'\u005cu2062' ( x , i ) as the function that returns 1 if the output x contains the label i in the hierarchy and 0 otherwise
+p93
+aVWe denote [ [ y k = i ] ] as the function that outputs 1 if y k has a 1 at index i and 0 otherwise
+p94
+aVMAP inference in the model with soft constraints is performed using Soft-DD, shown in Algorithm 3
+p95
+aVThese constraints are moderately violated on ground truth examples, however
+p96
+aV[ 4 ] , which include soft constraints
+p97
+aVPairwise constraints are constraints on the counts of two labels in a citation
+p98
+aVOn the other hand, our approach to soft constraints has identical per-iteration complexity as for hard constraints, and is a very easy modification to existing hard constraint code
+p99
+aVInitial work in machine learning for citation extraction used Markov models with no global constraints
+p100
+aVOur score compares how often the constraint is violated in the ground truth examples versus our predictions
+p101
+aVThe overall modeling technique we employ is to add soft constraints to a simple model for which we have an existing efficient prediction algorithm
+p102
+aVOn examples where unconstrained inference does not satisfy the constraints, Soft-DD converges after 4.52 iterations on average
+p103
+aVOne framework for adding such global constraints into tractable models is constrained inference , in which at inference time the original model is augmented with restrictions on the outputs such that they obey certain global regularities
+p104
+aVThe two hierarchical constraints with the highest importance scores with non-zero learned penalties constrain the output such that number of person segments does not exceed the number of first segments and vice-versa
+p105
+aVIn order to perform prediction subject to various global constraints, we may need to augment the problem ( 1 ) with additional constraints
+p106
+aVFor example, when booktitle segments co-occur with number segments but not with journal segments, the second constraint is violated
+p107
+aVWe now describe the families of global constraints we consider for citation extraction
+p108
+aVThe constraint that the labeling is valid BIO can be expressed as a collection of pairwise constraints on adjacent labels in the sequence
+p109
+aVThese are same global constraints that were used for citation field extraction in Chang et al
+p110
+aVIn this case, the MAP problem can be formulated as a structured linear model similar to equation ( 1 ), for which we have a MAP algorithm, but where we have imposed some additional constraints A u'\u005cu2062' y u'\u005cu2264' b that no longer allow us to use the algorithm
+p111
+aVStructured Linear Models are the general family of models where prediction requires solving a problem of the form ( 1 ), and they do not always correspond to a probabilistic model
+p112
+aVHere, prediction is done with respect to the base chain-structured CRF tagger and does not include global constraints
+p113
+aVWe now introduce an extension of Algorithm 2.2 to handle soft constraints
+p114
+aVWe now describe a number of the useful constraints that receive non-zero learned penalties and have high importance scores, defined in Section 5.6
+p115
+aVThese models support efficient dynamic-programming inference, but only model local dependencies in the output label sequence
+p116
+aVIn addition, running the DD algorithm with these constraints takes 5.21 iterations on average per example, which is 2.8 times slower than Soft-DD with learned penalties
+p117
+aVSome examples of constraints in this form enforce that journal segments should co-occur with pages segments and that booktitle segments should co-occur with address segments
+p118
+aVThe global constraints added into the model are simply that each label only occurs once per citation
+p119
+aVThe above two approaches have previously been applied to impose hard constraints on a model u'\u005cu2019' s output
+p120
+aVTable 1 shows how each type of constraint family improved the F1 score on the dataset
+p121
+aVIn our experiments, we demonstrate that the specific global constraints used by Chang et al
+p122
+aVAlgorithm 2.2 depicts the basic projected subgradient descent algorithm for dual decomposition
+p123
+aVTogether, these constraints penalize outputs in which the number of person segments do not equal the number of first segments, i.e.,, every author should have a first name
+p124
+aVHowever, at every iteration of dual decomposition, MAP must be run in this auxiliary model
+p125
+aVGiven this high performance of our base model on CORA, we did not apply our Soft-DD algorithm to the dataset
+p126
+aVFurthermore, we demonstrate that our inference technique can use and benefit from the constraints of Chang et al
+p127
+aVIt can be shown, for example, that we will never learn non-zero penalties for certain pairs of logically incompatible constraints using the perceptron-style algorithm described in section 3.1
+p128
+aVHere, the model is not required obey the global constraints, but merely pays a penalty for their violation
+p129
+aVThe first two families of constraints that we describe are general to any sequence labeling task while the last is specific to hierarchical labeling such as available in the UMass dataset
+p130
+aVThe application of this constraint increases the performance of the model on school segments dramatically, as can be seen in table 3
+p131
+aVOur importance score is defined as, for each constraint c on labeled set D
+p132
+aVHere, y d denotes the ground truth labeling and w d is the vector of scores for the CRF tagger
+p133
+aVNote that some pairs of these constraints are redundant or logically incompatible
+p134
+aVHere, the constrained inference penalizes output which contains a booktitle segment but no address segment
+p135
+aVOne important pairwise constraint penalizes outputs in which thesis segments don u'\u005cu2019' t co-occur with school segments
+p136
+aVLearning all the constraints jointly provides the largest improvement in F1 at 95.39
+p137
+aVThe labels in the citation dataset are hierarchical labels
+p138
+aVThis method increased the HMM token-level accuracy from 86.69 to 93.92 on a test set of 100 citations from the CORA dataset
+p139
+aVAn interesting form of pairwise constraints penalize outputs in which some labels do not co-occur with other labels
+p140
+aVWe constrain the output labeling of the chain-structured CRF to be a valid BIO encoding
+p141
+aVThis improvement in F1 over the baseline CRF as well as the improvement in F1 over using only-one constraints was shown to be statistically significant using the Wilcoxon signed rank test with p-values 0.05
+p142
+aVWhile this paper focusses on an application to citation field extraction, the novel methods introduced here would easily generalize to many problems with global output regularities
+p143
+aVIn Figure 2 , we analyze the performance of Soft-DD when we don u'\u005cu2019' t necessarily run it to convergence, but stop after a fixed number of iterations on each test set example
+p144
+aVHidden Markov models and linear-chain conditional random fields (CRFs) have previously been applied to citation extraction [ 9 , 14 ]
+p145
+aVDual decompositions u'\u005cu2019' s advantage over ILP is is that it can leverage existing inference algorithms for the original model as a black box
+p146
+aVCitation field extraction, an instance of information extraction, is the task of segmenting and labeling research paper citation strings into their constituent parts, including authors, editors, year, journal, volume, conference venue, etc
+p147
+aVNote that the subgradient of D u'\u005cu2062' ( u'\u005cu039b' ) is the amount by which each constraint is violated by u'\u005cu039b' when maximizing over y
+p148
+aVWe instantiate constraints from each template in section 5.1 , iterating over all possible labels that contain a B prefix at any level in the hierarchy and pruning all constraints with i u'\u005cu2062' m u'\u005cu2062' p u'\u005cu2062' ( c ) 2.75 calculated on the development set
+p149
+aVBIO labeling allows individual labels on tokens to label segmentation information as well as labels for the segments
+p150
+aVSingleton constraints ensure that each label can appear at most once in a citation
+p151
+aVFortunately, the MAP problem for  ( 5 ) can be solved using Soft-DD, in Algorithm 3
+p152
+aVInference in these models can be performed, for example, with loopy belief propagation [ 3 , 22 ] or Gibbs sampling [ 8 ]
+p153
+aVRecent work on globally-constrained inference in citation extraction used an HMM C u'\u005cu2062' C u'\u005cu2062' M , which is an HMM with the addition of global features that are restricted to have positive weights [ 4 ]
+p154
+aVHierarchical equality constraints take the forms
+p155
+aVThis property allows us to consider large families of constraints, from which the useful ones are automatically identified
+p156
+aVThis optimization problem can still be solved with projected subgradient descent and is depicted in Algorithm 3
+p157
+aVThere are 660 citations in the development set and 367 citation in the test set
+p158
+aVRunning Soft-DD to convergence requires 1.83 iterations on average per example
+p159
+aVHowever citations have strong global regularities not captured by these models
+p160
+aVwhere the set u'\u005cud835' u'\u005cudcb0' represents the set of valid configurations of the indicator variables
+p161
+aVWe add a binary feature to tokens that correspond to the start of a segment in the output of this simple segmenter
+p162
+aVOn a new, more broadly representative, and challenging citation field extraction data set, we show that our methods achieve a 17.9% reduction in error versus a linear-chain conditional random field
+p163
+aVAlternatively, one can employ dual decomposition [ 17 ]
+p164
+aVThe labels in the UMass dataset are a concatenation of labels from a hierarchically-defined schema
+p165
+aVThis dataset contains both coarse-grained and fine-grained labels; for example it contains labels for the segment of all authors, segments for each individual author, and for the first and last name of each author
+p166
+aVWe consider the UMass citation dataset, first introduced in Anzaroot and McCallum [ 1 ]
+p167
+aVWe define s u'\u005cu2062' ( i ) to be the number of times the label with index i is predicted in a citation, formally
+p168
+aVThis can be ensured by simple modifications of the perceptron and subgradient descent optimization of the structured SVM objective simply by truncating c coordinate-wise to be non-negative at every learning iteration
+p169
+aVHidden Markov models (HMMs), were originally employed for automatically extracting information from research papers on the CORA dataset [ 19 , 9 ]
+p170
+aVFor example many book citations contain both an author section and an editor section, but none have two disjoint author sections
+p171
+aVApproximate inference is performed using beam search
+p172
+aVSuch a modular algorithm is easy to implement, and works quite well in practice, providing certificates of optimality for most examples
+p173
+aVThe constraint that each label can appear at most once takes the form
+p174
+aVWe encourage further applications of soft-constraint dual decomposition to existing and new NLP problems
+p175
+aV[ 4 ] , but that including our data-driven constraints on top of these is beneficial
+p176
+aVEach of these indicator variables is associated with the score that the factor takes on when it has the indictor variable u'\u005cu2019' s corresponding value
+p177
+aVAn example of the latter constraint being employed during inference is the first example in Figure 2
+p178
+aVLater, CRFs were shown to perform better on CORA, improving the results from the Hmm u'\u005cu2019' s token-level F1 of 86.6 to 91.5 with a CRF [ 14 ]
+p179
+aVBIO is a commonly used labeling schema for information extraction tasks
+p180
+aVRather than compare our work to Chang et al
+p181
+aVWe were able to obtain better performance on CORA using our baseline CRF than the H u'\u005cu2062' M u'\u005cu2062' M C u'\u005cu2062' C u'\u005cu2062' M results presented in Chang et al
+p182
+aV[ 4 ] , but also far more complex data-driven constraints, while also providing stronger optimality certificates than their beam search technique
+p183
+aVIn this schema, labels that begin segments are prepended with a B , labels that continue a segment are prepended with an I , and tokens that don u'\u005cu2019' t have a labeling in this schema are given an O label
+p184
+aVWe can write the Lagrangian of this problem as
+p185
+aVHere, the constraints are that all neighboring factors agree on the components of y in their overlap
+p186
+aVWe asses performance in terms of field-level F1 score, which is the harmonic mean of precision and recall for predicted segments
+p187
+aVIn other words, we consider the problem
+p188
+aVEach penalty c i has to be non-negative; otherwise, the optimization problem in equation ( 5 ) is ill-defined
+p189
+aVAn example labeled citation in this dataset can be viewed in figure 1
+p190
+aVWe also find that the constraints that have the largest i u'\u005cu2062' m u'\u005cu2062' p values are semantically interesting
+p191
+aVSoft-DD projected subgradient for dual decomposition with soft constraints {algorithmic} [1] \u005cWhile has not converged \u005cState y ( t ) = argmax y u'\u005cu2208' u'\u005cud835' u'\u005cudcb0' u'\u005cu2061' u'\u005cu27e8' w + A T u'\u005cu2062' u'\u005cu039b' , y u'\u005cu27e9' \u005cState u'\u005cu039b' ( t ) = u'\u005cu03a0' 0 u'\u005cu2063' u'\u005cu2264' u'\u005cu2063' u'\u005cu22c5' u'\u005cu2063' u'\u005cu2264' c u'\u005cu2062' [ u'\u005cu039b' ( t - 1 ) - u'\u005cu0397' ( t ) u'\u005cu2062' ( A u'\u005cu2062' y - b ) ] \u005cEndWhile
+p192
+aVWe can create constraints that are dependent on only one or couple of elements in the hierarchy
+p193
+aV[ 4 ] help on the UMass dataset as well
+p194
+aVDD projected subgradient for dual decomposition with hard constraints {algorithmic} [1] \u005cWhile has not converged \u005cState y ( t ) = argmax y u'\u005cu2208' u'\u005cud835' u'\u005cudcb0' u'\u005cu2061' u'\u005cu27e8' w + A T u'\u005cu2062' u'\u005cu039b' , y u'\u005cu27e9' \u005cState u'\u005cu039b' ( t ) = u'\u005cu03a0' 0 u'\u005cu2063' u'\u005cu2264' u'\u005cu2063' u'\u005cu22c5' u'\u005cu2062' [ u'\u005cu039b' ( t - 1 ) - u'\u005cu0397' ( t ) u'\u005cu2062' ( A u'\u005cu2062' y - b ) ] \u005cEndWhile
+p195
+aVSchool segments label the name of the university that the thesis was submitted to
+p196
+aVIn addition, individual tokens are labeled using a BIO label schema for each level in the hierarchy
+p197
+aVexcept the constraint that u'\u005cu039c' = - c - u'\u005cu039b' implies that for u'\u005cu039c' to be positive u'\u005cu039b' u'\u005cu2264' c
+p198
+aVFor example, in a hierarchical BIO label schema the first token in the first name for the second author may be labeled as
+p199
+aVOur sequence output is denoted as y and an element of this sequence is y k
+p200
+aVConsider the optimization problems of the form
+p201
+aVIn Figure 2 we consider two applications of our Soft-DD algorithm, and provide analysis in the caption
+p202
+aVOur baseline is the one used in Anzaroot and McCallum [ 1 ] , with some labeling errors removed
+p203
+aVThis is a chain-structured CRF trained to maximize the conditional likelihood using L-BFGS with L2 regularization
+p204
+aVWe consider all constraints of the forms z u'\u005cu2062' ( i , j ) u'\u005cu2264' 0 , 1 , 2 , 3 and z u'\u005cu2062' ( i , j ) u'\u005cu2265' 0 , 1 , 2 , 3
+p205
+aVThis means that the labels are the concatenation of all the levels in the hierarchy
+p206
+aVIt has over 1800 citation from many academic fields, extracted from the arXiv
+p207
+aVfor an arbitrary matrix A and vector b
+p208
+aVThe projection operator u'\u005cu03a0' consists of truncating all negative coordinates of u'\u005cu039b' to 0
+p209
+aVThis work was supported in part by the Center for Intelligent Information Retrieval, in part by DARPA under agreement number FA8750-13-2-0020, in part by NSF grant #CNS-0958392, and in part by IARPA via DoI/NBC contract #D11PC20152
+p210
+aVFor example, a first name of an author is tagged as authors/person/first
+p211
+aVThe only modifications to Algorithm 2.2 are replacing the coordinate-wise projection u'\u005cu03a0' 0 u'\u005cu2063' u'\u005cu2264' u'\u005cu2063' u'\u005cu22c5' with u'\u005cu03a0' 0 u'\u005cu2063' u'\u005cu2264' u'\u005cu2063' u'\u005cu22c5' u'\u005cu2063' u'\u005cu2264' c and how we check for convergence
+p212
+aVSubstituting, we have
+p213
+aVWe define z 1 u'\u005cu2062' ( i , j ) to be
+p214
+aVWe define e u'\u005cu2062' ( i , j ) to be
+p215
+aVAny opinions, findings and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect those of the sponsor
+p216
+aVGovernment is authorized to reproduce and distribute reprint for Governmental purposes notwithstanding any copyright annotation thereon
+p217
+aV{dmath} L(y,z, u'\u005cu039b' , u'\u005cu039c' ) = u'\u005cu27e8' w,y u'\u005cu27e9' - u'\u005cu27e8' c,z u'\u005cu27e9' + u'\u005cu039b' ^T(Ay - b - z) + u'\u005cu039c' ^T (-z
+p218
+aVI-authors/B-person/B-first
+p219
+aV[ 4 ]
+p220
+aVand z 2 u'\u005cu2062' ( i , j ) to be
+p221
+aV[ 16 ]
+p222
+aVThe U.S
+p223
+a.

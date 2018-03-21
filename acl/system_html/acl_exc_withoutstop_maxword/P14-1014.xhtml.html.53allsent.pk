@@ -1,0 +1,100 @@
+(lp0
+VThis can be achieved by initializing only the first layer of the web module with the projection matrix u'\u005cud835' u'\u005cudc03' of the learned WRRBM
+p1
+aVThe best result achieved by using a 4-gram WRRBM, ( w i - 2 , u'\u005cu2026' , w i + 1 ) , with 300 hidden units learned on 1,000k web domain sentences are shown in row 3 of Table 6
+p2
+aVThe averaged accuracies are calculated across the web domain data
+p3
+aVHowever, since fine-tuning is conducted with respect to the source domain , adjusting the parameters of the pre-trained representation towards optimizing source domain tagging accuracies would disrupt its ability in modelling the web domain data
+p4
+aVThe idea of learning representations from unlabelled data and then fine-tuning a model with such representations according to some supervised criterion has been studied before [ 26 , 6 , 8 ]
+p5
+aVAs mentioned in Section 3.1, the knowledge learned from the WRRBM can be investigated incrementally, using word representation , which corresponds to initializing only the projection layer of web-feature module with the projection matrix of the learned WRRBM, or ngram-level representation , which corresponds to initializing both the projection and sigmoid layers of the web-feature module by the learned WRRBM
+p6
+aVThis can be achieved by also initializing the parameters of the second layer of the web-feature module using the position-dependent weight matrix and hidden bias of the learned WRRBM
+p7
+aVCompared with the performance of the official baseline (row 4 of Table 6), which is evaluated based on the output of BerkeleyParser [ 16 , 17 ] , our baseline tagger achieves comparable accuracies on both the source and target domain data
+p8
+aVWe integrate the learned encoder with a set of well-established features for POS tagging [ 21 , 5 ] in a single neural network, which is applied as a scorer to an easy-first POS tagger
+p9
+aVThe problem we face here can be considered as a special case of domain adaptation , where we have access to labelled data on the source domain (PTB) and unlabelled data on the target domain (web data
+p10
+aVThe new representations are induced based on the auxiliary tasks defined on unlabelled data together with a dimensionality reduction technique
+p11
+aVThis is consistent with previous work (Le Roux et al., 2011), which found that for noisy data such as web domain text, data cleaning is a effective and necessary step
+p12
+aVThe main challenge to designing the neural network structure is on the one hand, we hope that the model can take the advantage of information provided by the learned WRRBM, which reflects general properties of web texts, so that the model generalizes well in the web domain; on the other hand, we also hope to improve the model u'\u005cu2019' s discriminative power by utilizing well-established POS tagging features, such as those of Ratnaparkhi ( 1996 )
+p13
+aVOur approach is to leverage the two sources of information in one neural network by combining them though a shared output layer, as shown in Figure 1
+p14
+aVPrevious work treats the learned representations either as model parameters that are further optimized in supervised fine-tuning [ 6 ] or as fixed features that are kept unchanged [ 26 , 8 ]
+p15
+aVHowever, state-of-the-art POS taggers in the literature [ 5 , 23 ] are mainly optimized on the the Penn Treebank (PTB), and when shifted to web data, tagging accuracies drop significantly [ 18 ]
+p16
+aVAlternatively, we can choose to use the hidden states of the WRRBM, which can be treated as the representations of the input n-gram
+p17
+aVOur method achieves a 93.27 u'\u005cu2062' % average accuracy across the web-domain, which is the best result reported so far on this data set, higher than those given by ensembled syntactic parsers
+p18
+aVThe input for this module is a vector of boolean values u'\u005cu03a6' u'\u005cu2062' ( x ) = ( f 1 u'\u005cu2062' ( x ) , u'\u005cu2026' , f k u'\u005cu2062' ( x ) ) , where x denotes the partially tagged input sentence and f i u'\u005cu2062' ( x ) denotes a feature function, which returns 1 if the corresponding feature fires and 0 otherwise
+p19
+aVThe results suggest that using mixed data can achieve almost as good performance as using the target sub-domain data, while using mixed data yields a much more robust tagger across all sub-domains
+p20
+aVThis may partly be due to the fact that unlike computer vision tasks, the input structure of POS tagging or other sequential labelling tasks is relatively simple, and a single non-linear layer is enough to model the interactions within the input [ 27 ]
+p21
+aVThis condition does not hold in our case, because w ^ and w ¯ may refer to different words, which means that the margin loss in line 6 of Algorithm 2 is calculated based on two different input vectors, denoted by u'\u005cu27e8' w ^ u'\u005cu27e9' and u'\u005cu27e8' w ¯ u'\u005cu27e9' , respectively
+p22
+aVMoreover, we achieve the highest tagging accuracy reported so far on this data set, surpassing those achieved using parser combinations based on self-training [ 24 , 12 ]
+p23
+aVu'\u005cud835' u'\u005cudc14' u'\u005cu2260' [ ] \u005cSTATE ( w ¯ , t ¯ ) u'\u005cu2190' arg u'\u005cu2062' max ( w , t ) u'\u005cu2208' ( u'\u005cud835' u'\u005cudc14' × u'\u005cud835' u'\u005cudc13' / u'\u005cud835' u'\u005cudc11' ) u'\u005cu2061' n u'\u005cu2062' n u'\u005cu2062' ( w , t ) \u005cSTATE ( w ^ , t ^ ) u'\u005cu2190' arg u'\u005cu2062' max ( w , t ) u'\u005cu2208' u'\u005cud835' u'\u005cudc11' u'\u005cu2061' n u'\u005cu2062' n u'\u005cu2062' ( w , t
+p24
+aVl u'\u005cu2062' o u'\u005cu2062' s u'\u005cu2062' s u'\u005cu2190' max u'\u005cu2061' ( 0 , 1 + n u'\u005cu2062' n u'\u005cu2062' ( w ¯ , t ¯ ) - n u'\u005cu2062' n u'\u005cu2062' ( w ^ , t ^ ) ) \u005cIF l u'\u005cu2062' o u'\u005cu2062' s u'\u005cu2062' s 0 \u005cSTATE e ^ u'\u005cu2190' n u'\u005cu2062' n
+p25
+aVWe choose the easy-first tagging approach since it has been demonstrated to give higher accuracies than the standard left-to-right POS tagger [ 23 , 15 ]
+p26
+aVRather than tagging a sentence from left to right, easy-first tagging is based on a deterministic process, repeatedly selecting the easiest word to tag
+p27
+aVAt each step during the processing of a training example, the algorithm calculates a margin loss based on two word-tag pairs ( w ¯ , t ¯ ) and ( w ^ , t ^ ) (line 4 u'\u005cu223c' line 6 w ¯ , t ¯ ) denotes the word-tag pair that has the highest model score among those that are inconsistent with the gold standard, while ( w ^ , t ^ ) denotes the one that has the highest model score among those that are consistent with the gold standard
+p28
+aV[t] Training over one sentence {algorithmic} [1] \u005cREQUIRE ( x , t ) a tagged sentence, neural net n u'\u005cu2062' n \u005cENSURE updated neural net n u'\u005cu2062' n u'\u005cu2032'
+p29
+aVThis result illustrates that the ngram-level knowledge captures more complex interactions of the web text, which cannot be recovered by using only word embeddings
+p30
+aVWhile previous work [ 23 , 29 , 9 ] apply guided learning to train a linear classifier by using variants of the perceptron algorithm, we are the first to combine guided learning with a neural network, by using a margin loss and a modified back-propagation algorithm
+p31
+aVAnalysing and extracting useful information from the web has become an increasingly important research direction for the NLP community, where many tasks require part-of-speech (POS) tagging as a fundamental preprocessing step
+p32
+aVFeature templates are shown in Table 3, which are based on those of Ratnaparkhi (1996) and Shen et al
+p33
+aVSuch distribution can be easily obtained by adding a soft-max layer on top of the output layer to perform a local normalization, as done by Collobert et al
+p34
+aVIf the loss is zero, the algorithm continues to process the next untagged word
+p35
+aVBy adopting greedy layer-wise training [ 10 , 2 ] , DBNs are capable of modelling higher order non-linear relations between the input, and has been demonstrated to improve performance for many computer vision tasks [ 10 , 2 , 13 ]
+p36
+aVHere u'\u005cu201c' easiness u'\u005cu201d' is evaluated based on a statistical model
+p37
+aVThe data sets are generated by first concatenating all the cleaned unlabelled data, then selecting sentences evenly across the concatenated file
+p38
+aVThe tagging performance is evaluated according to the official evaluation metrics of SANCL 2012
+p39
+aV2006 ) propose to induce shared representations for domain adaptation, which is based on the alternating structure optimization (ASO) method of Ando and Zhang ( 2005
+p40
+aVWhile in our case, each visible variable corresponds to a word, which may take on tens-of-thousands of different values
+p41
+aVThis is because the standard loss is calculated based on a unique input vector
+p42
+aVAll these parameters are selected according to the averaged accuracy on the development set
+p43
+aVThe tagging accuracy is defined as the percentage of words (punctuations included) that are correctly tagged
+p44
+aVTherefore, a better idea is to keep the representation unchanged so that we can learn a function that maps the general web-text properties to its syntactic categories
+p45
+aVThe standard back-propagation algorithm [ 22 ] cannot be applied directly
+p46
+aVWhile emails and weblogs are used as the development sets, reviews, news groups and Yahoo!Answers are used as the final test sets
+p47
+aVHowever, in this work we do not observe further improvement by employing DBNs
+p48
+aVTherefore, the RBM need to be re-factorized to make inference tractable
+p49
+a.

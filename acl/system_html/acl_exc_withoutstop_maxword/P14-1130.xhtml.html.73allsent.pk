@@ -1,0 +1,486 @@
+(lp0
+VWhen u'\u005cu0393' = 0 , the arc scores are entirely based on the low-rank tensor and u'\u005cu0394' u'\u005cu2062' u'\u005cu0398' = 0
+p1
+aVBased on this feature representation, we define the score of each arc as s u'\u005cu0398' ( h u'\u005cu2192' m ) = u'\u005cu27e8' u'\u005cu0398' , u'\u005cu03a6' h u'\u005cu2192' m u'\u005cu27e9' where u'\u005cu0398' u'\u005cu2208' u'\u005cu211d' L represent adjustable parameters to be learned, and L is the number of parameters (and possible features in u'\u005cu03a6' h u'\u005cu2192' m
+p2
+aVWe will directly learn a low-rank tensor A (because r is small) in this form as one of our model parameters
+p3
+aVIn contrast, we expand features for parsing into a multi-way tensor, and operate with an explicit low-rank representation of the associated parameter tensor
+p4
+aVAs a result, the arc score for the tensor reduces to evaluating U u'\u005cu2062' u'\u005cu03a6' h , V u'\u005cu2062' u'\u005cu03a6' m , and W u'\u005cu2062' u'\u005cu03a6' h , m which are all r dimensional vectors and can be computed efficiently based on any sparse vectors u'\u005cu03a6' h , u'\u005cu03a6' m , and u'\u005cu03a6' h , m
+p5
+aVBy taking the cross-product of all these component feature vectors, we obtain the full feature representation for arc h u'\u005cu2192' m as a rank-1 tensor
+p6
+aVThe associated parameters are viewed as a tensor (multi-way array) of low rank, and optimized for parsing performance
+p7
+aVSpecifically, U u'\u005cu2062' u'\u005cu03a6' h (for a given sentence, suppressed) is an r dimensional vector representation of the word corresponding to h as a head word
+p8
+aVWe begin by training our model without any low-rank parameters, and obtain parameters u'\u005cu0398'
+p9
+aVWe should note that since our model parameter A is represented and learned in the low-rank form, we only have to store and maintain the low-rank projections U u'\u005cu2062' u'\u005cu03a6' h , V u'\u005cu2062' u'\u005cu03a6' m and W u'\u005cu2062' u'\u005cu03a6' h , m rather than explicitly calculate the feature tensor u'\u005cu03a6' h u'\u005cu2297' u'\u005cu03a6' m u'\u005cu2297' u'\u005cu03a6' h , m
+p10
+aVEach entry of the word vector is added as a feature value into feature vectors u'\u005cu03a6' h and u'\u005cu03a6' m
+p11
+aVThe majority of features in this MST component can be expressed as elements of the feature tensor, i.e.,, as [ u'\u005cu03a6' h u'\u005cu2297' u'\u005cu03a6' m u'\u005cu2297' u'\u005cu03a6' h , m ] i , j , k
+p12
+aVSpecifically, we unfold the tensor B into a matrix B ( h ) of dimensions n and n u'\u005cu2062' d , where n = d u'\u005cu2062' i u'\u005cu2062' m u'\u005cu2062' ( u'\u005cu03a6' h ) = d u'\u005cu2062' i u'\u005cu2062' m u'\u005cu2062' ( u'\u005cu03a6' m ) and d = d u'\u005cu2062' i u'\u005cu2062' m u'\u005cu2062' ( u'\u005cu03a6' h , m
+p13
+aVBy learning parameters U , V , and W that function well in dependency parsing, we also learn context-dependent embeddings for words and arcs
+p14
+aVWe can alternatively specify arc features in terms of rank-1 tensors by taking the Kronecker product of simpler feature vectors associated with the head (vector u'\u005cu03a6' h u'\u005cu2208' u'\u005cu211d' n ), and modifier (vector u'\u005cu03a6' m u'\u005cu2208' u'\u005cu211d' n ), as well as the arc itself (vector u'\u005cu03a6' h , m u'\u005cu2208' u'\u005cu211d' d
+p15
+aVFor each word in the sentence, we add its own word vector as well as the vectors of its left and right words
+p16
+aVwhere u'\u005cu0398' u'\u005cu2208' u'\u005cu211d' L , U u'\u005cu2208' u'\u005cu211d' r × n , V u'\u005cu2208' u'\u005cu211d' r × n , and W u'\u005cu2208' u'\u005cu211d' r × d are the model parameters to be learned
+p17
+aVHowever, if we fix any two sets of parameters, for example, if we fix V and W , then the combined score S u'\u005cu0393' u'\u005cu2062' ( x , y ) will be a linear function of both u'\u005cu0398' and U
+p18
+aVWe will commence here by casting first-order dependency parsing as a tensor estimation problem
+p19
+aV2 2 Note that in the case of high-order parsing, the sum S u'\u005cu2062' ( x , y ) may also include local scores for other syntactic structures, such as grandhead-head-modifier score s ( g u'\u005cu2192' h u'\u005cu2192' m
+p20
+aVNote that elements of this rank-1 tensor include feature combinations that are not part of the feature crossings in u'\u005cu03a6' h u'\u005cu2192' m
+p21
+aVIn an online learning setup, we update parameters successively based on each sentence
+p22
+aVIn contrast, we represent words as vectors in a manner that is directly optimized for parsing
+p23
+aVFor example, we can easily incorporate additional useful features in the feature vectors u'\u005cu03a6' h , u'\u005cu03a6' m and u'\u005cu03a6' h , m , since the low-rank assumption (for small enough r ) effectively counters the otherwise uncontrolled feature expansion
+p24
+aVThe objective as stated is not jointly convex with respect to U , V and W due to our explicit representation of the low-rank tensor
+p25
+aVFollowing standard machine learning practices, these algorithms iteratively select a subset of features by optimizing parsing performance on a development set
+p26
+aVFor instance, a rank-1 tensor can be unfolded as u u'\u005cu2297' v u'\u005cu2297' w = u u'\u005cu2297' vec u'\u005cu2062' ( v u'\u005cu2297' w
+p27
+aVWe can therefore create a tensor representation of u'\u005cu0398' such that B i , j , k equals the corresponding parameter value in u'\u005cu0398'
+p28
+aVSince our model learns a compressed representation of feature vectors, we are interested to measure its performance when part-of-speech tags are not provided (See Table 4
+p29
+aVIf the arc has not been seen in the available training data, it does not contribute to the traditional arc score s u'\u005cu0398' u'\u005cu2062' ( u'\u005cu22c5'
+p30
+aVMany machine learning problems can be cast as matrix problems where the matrix represents a set of co-varying parameters
+p31
+aVNote that u'\u005cu03a6' h , u'\u005cu03a6' m , u'\u005cu03a6' h , m , and u'\u005cu03a6' h u'\u005cu2192' m are typically very sparse for each word or arc
+p32
+aVFor example, u u'\u005cu2297' v is a rank-1 matrix u u'\u005cu2062' v T when u and v are column vectors ( u T u'\u005cu2062' v if they are row vectors
+p33
+aVWe define the inner product of two tensors (or matrices) as u'\u005cu27e8' A , B u'\u005cu27e9' = vec u'\u005cu2062' ( A ) T u'\u005cu2062' vec u'\u005cu2062' ( B ) , where vec u'\u005cu2062' ( u'\u005cu22c5' ) concatenates the tensor (or matrix) elements into a column vector
+p34
+aVThis framework enables us to learn new syntactically guided embeddings while also leveraging separately estimated word vectors as starting features, leading to improved parsing performance
+p35
+aVTherefore updating parameters and decoding a sentence is still efficient, i.e.,, linear in the number of values of the feature vector
+p36
+aVLearning of the tensor is harder because the scoring function is not linear (nor convex) with respect to parameters U , V and W
+p37
+aVFollowing standard practices, we train our full model and the baselines for 10 epochs
+p38
+aVBy comparing NT-1st and NT-3rd (models without low-rank) with our full model (with low-rank), we obtain 0.7% absolute improvement on first-order parsing, and 0.3% improvement on third-order parsing
+p39
+aVWord-level vector space embeddings have so far had limited impact on parsing performance
+p40
+aVFirst, we test our model by varying the hyper-parameter u'\u005cu0393' which balances the tensor score and the traditional MST/Turbo score components
+p41
+aVAs described in previous section, we do so by appending the values of different coordinates in the word vector into u'\u005cu03a6' h and u'\u005cu03a6' m
+p42
+aVFrom a computational perspective, adding non-sparse vectors directly as features, including their combinations, can significantly increase the number of active features for scoring syntactic structures (e.g.,, dependency arc
+p43
+aVBased on these results, estimating a rank-50 tensor together with MST parameters only increases the running time by a factor of 1.7
+p44
+aVThe two r-dimension vectors are concatenated as an u'\u005cu201c' averaged u'\u005cu201d' vector
+p45
+aVAs Table 3 shows, adding this information increases the parsing performance for all the three languages
+p46
+aVTo add auxiliary word vector representations, we use the publicly available word vectors [ 5 ] , learned from raw data [ 13 , 20 ]
+p47
+aVSimilarly, V u'\u005cu2062' u'\u005cu03a6' m provides an analogous representation for a modifier m
+p48
+aVBy automatically selecting a small number of dimensions useful for parsing, we can leverage a wide array of (correlated) features
+p49
+aVFinally, we use a similar set of feature templates as Turbo v2.1 for 3rd order parsing
+p50
+aVWe begin by representing high-dimensional feature vectors as multi-way cross-products of smaller feature vectors that represent words and their syntactic relations (arcs
+p51
+aVWe then obtain parameter increments u'\u005cu0394' u'\u005cu2062' u'\u005cu0398' and u'\u005cu0394' u'\u005cu2062' U by solving
+p52
+aVThe resulting embedding is therefore tied to the syntactic roles of the words (and arcs), and learned in order to perform well in parsing
+p53
+aVTherefore d u'\u005cu2062' u and d u'\u005cu2062' u'\u005cu0398' are also sparse and can be computed efficiently
+p54
+aVMoreover, by controlling the amount of information we can extract from each of the component feature vectors (via rank r ), the statistical estimation problem does not scale dramatically with the dimensions of u'\u005cu03a6' h , u'\u005cu03a6' m and u'\u005cu03a6' h , m
+p55
+aVThe decoding algorithm for the third-order parsing is based on [ 46 ]
+p56
+aVWe thank Volkan Cirik for sharing the unsupervised word vector data
+p57
+aVWe compute the top-r SVD of the resulting unfolded matrix such that B ( h ) = P T u'\u005cu2062' S u'\u005cu2062' Q
+p58
+aVSpecifically, we define the arc score s u'\u005cu0393' ( h u'\u005cu2192' m ) as the combination
+p59
+aVIn other words, keeping updating the model may lead to large parameter values and over-fitting
+p60
+aVThis is possible since the objective function with respect to ( u'\u005cu0398' , U ) has a similar form as in the original passive-aggressive algorithm
+p61
+aVWe depart from this view and leverage high-dimensional feature vectors by mapping them into low dimensional representations
+p62
+aVIndeed, recent approaches to matrix problems decompose the parameter matrix as a sum of low-rank and sparse matrices [ 40 , 47 ]
+p63
+aVBecause of this issue, Cirik and u'\u005cu015e' ensoy ( 2013 ) used word vectors only as unigram features (without combinations) as part of a shift reduce parser [ 32 ]
+p64
+aVTherefore, we may suffer a performance loss if we select only a small subset of the features
+p65
+aVWe use a low-rank version of B as the initialization
+p66
+aVA random initialization of these parameters is unlikely to work well, both due to the dimensions involved, and the nature of the alternating updates
+p67
+aVWe will start by introducing the notation used in the paper, followed by a more formal description of our dependency parsing task
+p68
+aVAs a result, the objective will be jointly convex with respect to u'\u005cu0398' and U and could be optimized using standard tools
+p69
+aVThe sparse matrix is used to highlight a small number of parameters that should vary independently even if most of them lie on a low-dimensional subspace [ 42 , 4 ]
+p70
+aVWe denote each element of the tensor as A i , j , k where i u'\u005cu2208' [ n ] , j u'\u005cu2208' [ n ] , k u'\u005cu2208' [ d ] and [ n ] is a shorthand for the set of integers { 1 , 2 , u'\u005cu22ef' , n }
+p71
+aVTensors are increasingly used as tools in spectral estimation [ 15 ] , including in parsing [ 6 ] and other NLP problems [ 10 ] , where the goal is to avoid local optima in maximum likelihood estimation
+p72
+aVOn the other hand, by including all the rich features, we face over-fitting problems
+p73
+aVThe constraints serve to separate the gold tree from other alternatives in u'\u005cud835' u'\u005cudcb4' u'\u005cu2062' ( x ^ i ) with a margin that increases with distance
+p74
+aVThe alternating online algorithm relies on how we initialize U , V , and W since each update is carried out in the context of the other two
+p75
+aVSuch problems include, for example, multi-task learning and collaborative filtering
+p76
+aVAs the evaluation measure, we use unlabeled attachment scores (UAS) excluding punctuation
+p77
+aVEach y is understood as a collection of arcs h u'\u005cu2192' m where h and m index words in x
+p78
+aVThese features are not redundant
+p79
+aVThe predicted parse is obtained as y ^ = arg u'\u005cu2062' max y u'\u005cu2208' u'\u005cud835' u'\u005cudcb4' u'\u005cu2062' ( x ) u'\u005cu2061' S u'\u005cu2062' ( x , y )
+p80
+aVOur parsing model aims to combine the strengths of both traditional features from the MST/Turbo parser as well as the new low-rank tensor features
+p81
+aVThis low dimensional syntactic abstraction can be thought of as a proxy to manually constructed POS tags
+p82
+aVWe expect a dependency parsing model to benefit from several aspects of the low-rank tensor scoring
+p83
+aVThe arc score s t u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' o u'\u005cu2062' r ( h u'\u005cu2192' m ) associated with the tensor representation is defined analogously as
+p84
+aVOur parameters are divided into a sparse set corresponding to manually chosen MST or Turbo parser features and a larger set governed by a low-rank tensor
+p85
+aVFor the arc feature vector u'\u005cu03a6' h u'\u005cu2192' m , we use the same set of feature templates as MST v0.5.1
+p86
+aVFor this purpose, we train a model with only a tensor component (such that it has to learn an accurate tensor) on the English dataset and obtain low dimensional embeddings U u'\u005cu2062' u'\u005cu03a6' w and V u'\u005cu2062' u'\u005cu03a6' w for each word
+p87
+aVIn our implementation, we run one epoch of our model without low-rank parameters and initialize the tensor A
+p88
+aVFor head/modifier vector u'\u005cu03a6' h and u'\u005cu03a6' m , we show the complete set of feature templates used by our model in Table 1
+p89
+aVHere u'\u005cu03a6' h , m is much lower dimensional than the MST arc feature vector u'\u005cu03a6' h u'\u005cu2192' m discussed earlier
+p90
+aVIndeed, in the full English training set of CoNLL-2008, the tensor involves around 8 × 10 11 entries while the MST feature vector has approximately 1.5 × 10 7 features
+p91
+aVOur model outperforms Turbo parser, MST parser, as well as its own variants without the tensor component
+p92
+aVWe consider here instead a reasonable deterministic u'\u005cu201c' guess u'\u005cu201d' as the initialization method
+p93
+aVThe third order parser simply adds high-order features, those typically used in MST and Turbo parsers, into our s u'\u005cu0398' u'\u005cu2062' ( x , y ) = u'\u005cu27e8' u'\u005cu0398' , u'\u005cu03a6' u'\u005cu2062' ( x , y ) u'\u005cu27e9' scoring component
+p94
+aVGiven the typical dimensions of the component feature vectors, u'\u005cu03a6' h , u'\u005cu03a6' m , u'\u005cu03a6' h , m , it is not even possible to store all the parameters in A
+p95
+aVWe implement the low-rank factorization model in the context of first- and third-order dependency parsing
+p96
+aVBy explicitly representing the tensor in a low-rank form, we have direct control over the effective dimensionality of the set of parameters
+p97
+aVWe compare our model to MST and Turbo parsers on non-projective dependency parsing
+p98
+aVFollowing the MST parser [ 27 ] we can define rich features characterizing each head-modifier arc, compiled into a sparse binary vector u'\u005cu03a6' h u'\u005cu2192' m u'\u005cu2208' u'\u005cu211d' L that depends on the sentence x as well as the chosen arc h u'\u005cu2192' m (again, we suppress the dependence on x
+p99
+aVThe resulting arc score s t u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' o u'\u005cu2062' r ( h u'\u005cu2192' m ) is then
+p100
+aVIn contrast, assume we take the cross-product of the auxiliary word vector values, POS tags and lexical items of a word and its context, and add the crossed values into a normal model (in u'\u005cu03a6' h u'\u005cu2192' m
+p101
+aVTo assess the ability of our model to incorporate a range of features, we add unsupervised word vectors to our model
+p102
+aVThe updates also illustrate how u'\u005cu0393' balances the effect of the MST component of the score relative to the low-rank tensor score
+p103
+aVWhen training with the tensor component alone ( u'\u005cu0393' = 0 ), the model converges more slowly
+p104
+aVwhere the adjustable parameters A also form a tensor
+p105
+aVWe obtain role-dependent low-dimensional representations for words (head, modifier) that are specifically tailored for parsing accuracy, and use standard online algorithms for optimizing the low-rank tensor components
+p106
+aVTable 6 illustrates the impact of estimating low-rank tensor parameters on the running time of the algorithm
+p107
+aVLow-rank constraints are commonly used for improving generalization [ 19 , 37 , 38 , 12 ]
+p108
+aVWe next focus on the first-order model and gauge the impact of the tensor component
+p109
+aVEach right singular vector S i u'\u005cu2062' Q u'\u005cu2062' ( i is also a matrix in u'\u005cu211d' n × d
+p110
+aVIn all the reported experiments, the hyper-parameters are set as follows r = 50 (rank of the tensor), C = 1 for first-order model and C = 0.01 for third-order model
+p111
+aVWe can see that the improvement of adding the low-rank tensor is consistent across various choices of hyper parameter u'\u005cu0393'
+p112
+aVTraditionally, parsing research has focused on modeling the direct connection between the features and the predicted syntactic relations such as head-modifier (arc) relations in dependency parsing
+p113
+aVLet x be a sentence and u'\u005cud835' u'\u005cudcb4' u'\u005cu2062' ( x ) the set of possible dependency trees over the words in x
+p114
+aVFor our parser, we train both a first-order parsing model (as described in Section 3 and 4) as well as a third-order model
+p115
+aVUnlike parsers such as MST, we can easily benefit from auxiliary information (e.g.,, word vectors) appended as features
+p116
+aVThese feature selection methods are particularly promising in parsing scenarios where the optimal feature set is likely to be a small subset of the original set of candidate features
+p117
+aVDiscrete features, and their cross products, can be further complemented with auxiliary information about words participating in an arc, such as continuous vector representations of words
+p118
+aVFinally, W u'\u005cu2062' u'\u005cu03a6' h , m is a vector embedding of the supplemental arc-dependent information
+p119
+aVThe improvements of our low-rank model are consistent across languages results for the first order parser are better on 11 out of 14 languages
+p120
+aVFinally, we demonstrate that the model can successfully leverage word vector representations, in contrast to the baselines
+p121
+aVThe rationale is that given all other features, the model would induce representations that play a similar role to POS tags
+p122
+aVFor instance, on the English dataset, the low-rank model trained without POS tags achieves 90.49% on first-order parsing, while the baseline gets 86.70% if trained under the same conditions, and 90.58% if trained with 12 core POS tags
+p123
+aVIn contrast, with the low-rank constraint, the arc score in Eq
+p124
+aVThe exploding dimensionality of rich feature vectors must then be balanced with the difficulty of effectively learning the associated parameters from limited training data
+p125
+aVConsider a feature u'\u005cu0394' ( x ( h ) = a ) u'\u005cu22c5' u'\u005cu0394' ( x ( m ) = b ) u'\u005cu22c5' u'\u005cu0394' ( d i s ( x , h , m ) = c ) which is non-zero only for an arc a u'\u005cu2192' b with distance c in sentence x
+p126
+aVOther possible features include, for example, the label of the arc h u'\u005cu2192' m , the POS tags between the head and the modifier, boolean flags which indicate the occurence of in-between punctutations or conjunctions, etc u'\u005cu03a6' h and u'\u005cu03a6' m , on the other hand, are built from features shown in Table 1
+p127
+aVThe power of the low-rank model becomes evident in the absence of any part-of-speech tags
+p128
+aVIn this way, our model is able to capture a wide range of information including the auxiliary features without having uncontrolled feature explosion, while still having the full accessibility to the manually engineered features that are proven useful
+p129
+aVThe Kronecker product of three vectors is denoted by u u'\u005cu2297' v u'\u005cu2297' w and forms a rank-1 tensor such that
+p130
+aVFirst, features may lack clear linguistic interpretation as in distributional features or continuous vector embeddings of words
+p131
+aVWhile this method learns to map word combinations into vectors, it builds on existing word-level vector representations
+p132
+aVEven in the case of first-order parsers, this results in a high-dimensional vector representation of each arc
+p133
+aVWe follow this decomposition while extending the parameter matrix into a tensor
+p134
+aVAnother application of word vectors is compositional vector grammar [ 36 ]
+p135
+aVFor example, x u'\u005cu2062' ( h ) is the word corresponding to h
+p136
+aV4 4 http://sourceforge.net/projects/mstparser/ In addition, we implemented two additional baselines, NT-1st (first order) and NT-3rd (third order), corresponding to our model without the tensor component
+p137
+aVTable 2 shows the performance of our model and the baselines on 14 CoNLL datasets
+p138
+aVwhere U , V u'\u005cu2208' u'\u005cu211d' r × n , W u'\u005cu2208' u'\u005cu211d' r × d and U u'\u005cu2062' ( i is the i t u'\u005cu2062' h row of matrix U
+p139
+aVThe number of features for each arc would be at least quadratic, growing into thousands, and would be a significant impediment to parsing efficiency
+p140
+aVThe leading left and right singular vectors of this matrix are assigned to V u'\u005cu2062' ( i and W u'\u005cu2062' ( i respectively
+p141
+aVIn this sense, the rank-1 tensor represents a substantial feature expansion
+p142
+aVThe low-rank parser achieves average performance of 89.08% across 14 languages, compared to 88.73% for the Turbo parser, and 87.19% for MST
+p143
+aVwhere h u'\u005cu2192' m is the head-modifier dependency arc in the tree y
+p144
+aVWe assume that the score S u'\u005cu2062' ( x , y ) of each candidate dependency tree y u'\u005cu2208' u'\u005cud835' u'\u005cudcb4' u'\u005cu2062' ( x ) decomposes into a sum of u'\u005cu201c' local u'\u005cu201d' scores for arcs
+p145
+aVThe goal is to learn values for the parameters u'\u005cu0398' , U , V and W that optimize the combined scoring function S u'\u005cu0393' ( x , y ) = u'\u005cu2211' h u'\u005cu2192' m u'\u005cu2208' y s u'\u005cu0393' ( h u'\u005cu2192' m ) , defined in Eq
+p146
+aV3 , for parsing performance
+p147
+aVThe explicit representation sidesteps inherent complexity problems associated with the tensor rank [ 14 ]
+p148
+aVWe say that tensor A is in Kruskal form if
+p149
+aVThe rank r and u'\u005cu0393' u'\u005cu2208' [ 0 , 1 ] (balancing the two scores) represent hyper-parameters in our model
+p150
+aVHowever, the tensor scoring component achieves better generalization on the test data, resulting in better UAS than NT-1st after 8 training epochs
+p151
+aVIn terms of the parameter matrix, this corresponds to a low-rank assumption
+p152
+aVWe can represent a rank-r tensor A explicitly in terms of parameter matrices U , V , and W as shown in Eq
+p153
+aVThe passive-aggressive algorithm regularizes the increments (e.g., u'\u005cu0394' u'\u005cu2062' u'\u005cu0398' and u'\u005cu0394' u'\u005cu2062' U ) during each update but does not include any overall regularization
+p154
+aVThe model was evaluated on 14 languages, using dependency data from CoNLL 2008 and CoNLL 2006
+p155
+aVTo counter this feature explosion, we restrict the parameters A to have low rank
+p156
+aVEnglish has 50 dimensional word vectors, while German and Swedish have 25 dimensional word vectors
+p157
+aVThree languages in our dataset u'\u005cu2013' English, German and Swedish u'\u005cu2013' have corresponding word vectors in this collection
+p158
+aVSpecifically, we find parameters u'\u005cu0398' , U , V , W , and { u'\u005cu039e' i } that minimize
+p159
+aVTheir orientation is defined based on usage
+p160
+aVLet A u'\u005cu2208' u'\u005cu211d' n × n × d be a 3-dimensional tensor (a 3-way array
+p161
+aVThe improvement on the overall parsing performance was marginal
+p162
+aVA predominant way to counter the high dimensionality of features is to manually design or select a meaningful set of feature templates, which are used to generate different types of features [ 27 , 16 , 22 ]
+p163
+aVWe test our dependency model on 14 languages, including the English dataset from CoNLL 2008 shared tasks and all 13 datasets from CoNLL 2006 shared tasks [ 3 , 39 ]
+p164
+aVOur model also achieves the best UAS on 5 languages
+p165
+aVOur low dimensional embeddings are tailored to the syntactic context of words (head, modifier
+p166
+aVIn order to apply the passive-aggressive algorithm, we fix two of U , V and W (say, for example, V and W ) in an alternating manner, and apply a closed-form update to the remaining parameters (here U and u'\u005cu0398'
+p167
+aVA key problem is how we parameterize the arc scores s ( h u'\u005cu2192' m
+p168
+aVRather than assuming that each parameter can be set independently of others, it is helpful to assume that the parameters vary in a low dimensional subspace that has to be estimated together with the parameters
+p169
+aVOur experiments show that low-rank parser operates effectively in the absence of tags
+p170
+aVSimilarly, we use M i , j and u i to represent the elements of matrix M and vector u , respectively
+p171
+aVWhile in most state-of-the-art parsers, features are selected manually [ 27 , 29 , 16 , 22 , 44 , 35 ] , automatic feature selection methods are gaining popularity [ 23 , 1 , 31 , 2 ]
+p172
+aVSpecifically, we use the passive-aggressive learning algorithm [ 9 ] tailored to our setting, updating pairs of parameter sets, ( u'\u005cu0398' , U ) , ( u'\u005cu0398' , V ) and ( u'\u005cu0398' , W ) in an alternating manner
+p173
+aVFor example, the closest words to the word u'\u005cu201c' increase u'\u005cu201d' are verbs in the context phrase u'\u005cu201c' will increase again u'\u005cu201d' , while the closest words become nouns given a different phrase u'\u005cu201c' an increase of u'\u005cu201d'
+p174
+aVTraditionally, these vector representations have been derived primarily from co-occurrences of words within sentences, ignoring syntactic roles of the co-occurring words
+p175
+aVWe use this vector to calculate the cosine similarity between words
+p176
+aVThese datasets include manually annotated dependency trees, POS tags and morphological information
+p177
+aVSecond, designing a small subset of templates (and features) is challenging when the relevant linguistic information is distributed across the features
+p178
+aVFollowing standard practices, we encode this information as features
+p179
+aVA great deal of parsing research has been dedicated to feature engineering [ 18 , 25 , 26 ]
+p180
+aVOur technique, in contrast, is suitable for cases where the relevant information is distributed across a larger set of related features
+p181
+aVTo counter this effect, we use parameter averaging as used in the MST and Turbo parsers
+p182
+aVWe compare our results against the MST [ 27 ] and Turbo [ 22 ] parsers
+p183
+aVThe bottom part of Table 5 shows that the neighbors change substantially depending on the syntactic role of the word
+p184
+aVIn fact, it nearly reaches the performance of the original parser that used the tags on English
+p185
+aVIn particular, the low-rank constraint can help generalize to unseen arcs
+p186
+aVFinding an expressive representation of input sentences is crucial for accurate parsing
+p187
+aVSyntactic relations manifest themselves in a broad range of surface indicators, ranging from morphological to lexical, including positional and part-of-speech (POS) tagging features
+p188
+aVFor instance, morphological properties are closely tied to part-of-speech tags, which in turn relate to positional features
+p189
+aVFor example, u'\u005cu03a6' h , m may be composed of only indicators for binned arc lengths 3 3 In our current version, u'\u005cu03a6' h , m only contains the binned arc length
+p190
+aVNote that the performance of traditional parsers drops when tags are not provided
+p191
+aVNote that the vectors u , v , and w may be column or row vectors
+p192
+aVA lot of recent work has been done on mapping words into vector spaces [ 8 , 41 , 11 , 30 ]
+p193
+aVThe magnitude of change of u'\u005cu0398' and U is controlled by the parameter C
+p194
+aVThe training set D = { ( x ^ i , y ^ i ) } i = 1 N consists of N pairs, where each pair consists of a sentence x i and the corresponding gold (target) parse y i
+p195
+aVA strict low-rank assumption can be restrictive
+p196
+aVFigure 1 shows the average UAS on CoNLL test datasets after each training epoch
+p197
+aVwhere ( u u'\u005cu2299' v ) i = u i u'\u005cu2062' v i is the Hadamard (element-wise) product
+p198
+aVFor the MST parser, we train and test using the most recent version of the code
+p199
+aVFor the Turbo parser, we directly compare with the recent published results in [ 22 ]
+p200
+aVTable 5 shows examples of five closest neighbors of queried words
+p201
+aVFor simplicity, in our algorithm we average U , V , W and u'\u005cu0398' separately, which works well empirically
+p202
+aVIn this way, the optimization problem attempts to keep the parameter change as small as possible, while forcing it to achieve mostly zero loss on this single instance
+p203
+aVThe final parameters are those averaged across all the iterations (cf
+p204
+aVNevertheless, any such word-level representation can be used to offset inherent sparsity problems associated with full lexicalization [ 5 ]
+p205
+aVMore interestingly, we can consider the impact of syntactic context on the derived projections
+p206
+aVIn this sense they perform a role similar to POS tags
+p207
+aV5 5 https://github.com/wolet/sprml13-word-embeddings The dimensionality of this representation varies by language
+p208
+aVHowever, to accelerate learning, we adopt an online learning setup
+p209
+aVwhere u'\u005cu2225' y ^ i - y i u'\u005cu2225' 1 is the number of mismatched arcs between the two trees, and u'\u005cu039e' i is a non-negative slack variable
+p210
+aVTo illustrate this, consider a training sentence x i
+p211
+aVFor example, the performance gap is 10% on German
+p212
+aVWhile these lists include some noise, we can clearly see that the neighbors exhibit similar syntactic behavior
+p213
+aVThe Arabic dataset has the longest average sentence length, while the Chinese dataset has the shortest sentence length in CoNLL 2006
+p214
+aVWe adopt a maximum soft-margin framework for this learning problem
+p215
+aVWe manually analyze low-dimensional projections to assess whether they capture syntactic abstraction
+p216
+aVFor example, s ( h u'\u005cu2192' m ) can depend on x in complicated ways as discussed below
+p217
+aVAny opinions, findings, conclusions, or recommendations expressed in this paper are those of the authors, and do not necessarily reflect the views of the funding organizations
+p218
+aVWe suppress the dependence on x whenever it is clear from context
+p219
+aVThis problem has a closed form solution
+p220
+aVFor instance, we obtain more than 0.5% absolute improvement on Swedish
+p221
+aVFor example, u'\u005cu201c' on u'\u005cu201d' is close to other prepositions
+p222
+aVwhich is the tree that violates the constraint in Eq
+p223
+aVThe update involves finding first the best competing tree
+p224
+aVTensors are multi-way generalizations of matrices and possess an analogous notion of rank
+p225
+aV1
+p226
+aVFor comparison, we also show the NT-1st times across three typical languages
+p227
+aVThe squared norm of a tensor/matrix is denoted by u'\u005cu2225' A u'\u005cu2225' 2 = u'\u005cu27e8' A , A u'\u005cu27e9'
+p228
+aV4 most (i.e., maximizes the loss u'\u005cu039e' i
+p229
+aV2 would typically be non-zero
+p230
+aVThis research is developed in collaboration with the Arabic Language Technoligies (ALT) group at Qatar Computing Research Institute (QCRI) within the lyas project
+p231
+aVSpecifically
+p232
+aVThe authors acknowledge the support of the MURI program (W911NF-10-1-0533) and the DARPA BOLT program
+p233
+aVBy varying C , we can determine an appropriate step size for the online updates
+p234
+aVThe overall approach has clear linguistic and computational advantages
+p235
+aVSee [ 22 ] for a complete list of these structures
+p236
+aVThis method is described below
+p237
+aVThanks to Amir Globerson, Andreea Gane, the members of the MIT NLP group and the ACL reviewers for their suggestions and comments
+p238
+aVDirect manual selection may be problematic for two reasons
+p239
+aV[ 7 ]
+p240
+aVU is initialized as P
+p241
+aVwhere
+p242
+a.

@@ -1,0 +1,89 @@
+Thousands of DebitCredit Transactions-Per-Second: Easy and Inexpensive
+
+Jim Gray is at Microsoft Research, San Francisco,California 94105, USA.
+
+Microsoft Research, Microsoft Corporation
+
+Jim Gray, Charles Levine
+
+Abstract
+
+A $2k computer can execute about 8k transactions per second. This is 80x more than one of the largest US bank's 1970's traffic -- it approximates the total US 1970's financial transaction volume. Very modest modern computers can easily solve yesterday's problems.
+
+1. A Thousand-Transactions-per-second was once difficult and expensive.
+
+In 1973, Bank of America wanted to convert their paper-based branches, tellers, and demand-deposit (savings) accounts to an online system, letting tellers perform a customer's deposits and withdrawals. The corresponding transaction profile, called DebitCredit, evolved to become a standard measure of transaction processing [Serlin].
+
+At the time, the system of ten thousand tellers needed to perform 100 transactions per second. The ten million account records were about 1GB and the 90-day general ledger was about 4GB. At the time, the server hardware for such a system cost more than ten million dollars; but, it was not until 1976 that a commercial database system was able to run 100 transactions per second [Gawlick].
+
+A decade later, Tandem used a 34-CPU 86-disk SQL system costing ten million dollars to process 208- transactions per second. At the time, this was considered a breakthrough because relational systems had a reputation for poor performance [Tandem].
+
+For much of the 1980's the database and transaction processing performance agenda was to achieve a thousand transactions per second. Part of that process defined the "one-transaction per second" unit. Informal definitions [Datamation], [1Ktps] and bench-marketing eventually led to the formation of the Transaction Processing Performance Council (www.tpc.org) which defined the TPC-A transaction profile largely in line with DebitCredit [Serlin]. By early 1990 several database systems had achieved the 1,000 tps milestone. By the late 1990's, clusters of 100 machines were delivering over 10,000 tpsA [Scalability]. Long before then, TPCA was replaced by the more challenging TPC-C benchmark [TPC-C], [Levine].
+
+TPC-C had a similar experience. The early systems delivered 1k tpmC at 2000$/tpmC, today systems are delivering about to 3M tpmC for about 5$/tpmC.
+
+2. DebitCredit on a PC?
+
+We conjectured that a year 2003 PC could do ALL the 1970 U.S. banking transactions and store all the 1970 US bank accounts. Is that really true? In the early 1970s Bank of America did 10% of the U.S. banking transitions so the total would be 1,000 transactions per second and 100M accounts.
+
+A Toshiba Protege M200 TabletPC (see Figure 1.4) has a 1.6 GHz Centrino? CPU with 2MB L2 cache, 1GB PC2700 RAM, a Hitachi 5K80 74GB 5400 RPM 2.5" ATA disk with 8MB write-enabled cache, and runs WindowsXP TabletPC 2005 SP2 with Microsoft SQLServer 2000 SP2. We wrote the following programs (see Appendix) for it:
+
+(1) Create and populate a SQLServer DebitCredit database with 10M accounts.
+
+(2) A DebitCredit database transaction (no message handling).
+
+(3) An N-stream DebitCredit test harness.
+
+These programs miss a few DebitCredit requirements: there is no message handling; the accounts all fit in RAM; and the log and database are on the same disk. Those issues are discussed in the next section, but here are the measurements.
+
+It takes 365 seconds to create the database and log files and 173 seconds to populate the 10M accounts and 10,000 tellers. So, the benchmark takes ten minutes to set up. Randomly warming up the cache (getting all 250MB of the accounts into memory) from a cold start takes about 4 minutes (Figure 2A) -- it takes less than 15 seconds if done as a sequential scan. The 10M account records (of about 25 bytes each) occupy about 250MB on disk and RAM. Overall, the database and database server have a working set of about 325 MB. At equilibrium the account, branch, and teller records are in main memory - there are no more reads of the database from disk. SQLServer is writing the log and the history table. Figure 2.A shows the dynamics of ramp up and of adding more request streams (threads). As threads are added one begins to see group-commit and CPU savings from shared commit processing.
+
+A single-threaded DebitCredit run uses about 70% of the processor, averages 2,250 transactions per second, and has a peak rate of 2,635 tps (Figure 2.B). In the single-threaded case each transaction is flushing a partially filled 512-byte log page. That causes 30% CPU wait time. Checkpoints are configured to limit recovery time to 10 minutes. Notice that checkpoint causes throughput to drop.
+
+A multi-threaded run averages over 8,346 transactions per second and is CPU bound (actually memory latency bound). The 8,923 tps peak rate suggests each transaction costs ~112 CPU microseconds (~191k clock ticks). CpuMon indicates 1.9 CPI and so ~100 k instructions per transaction The graph shows approximately 3 transactions per log force, about 500 log bytes per transaction, and the disk controller saturating at 3,500 requests per second. As threads are added one begins to see group-commit and CPU savings from shared commit processing.
+
+3. Caveat: Why these tps results are bogus
+
+Ten million customer accounts and 90 days of history occupy 5 GB and fit comfortably on the computer's 74 GB disk -- but that is a 100tps system. According to the DebitCredit (and TPC-A, TPC-B) scaling rules [Serlin], 8,300 tps implies a bank of 830 million customers. That is 420GB of disk space and at least 80GB of RAM. So, this is not a scaled implementation. But, 400GB disks exist, RAM prices are coming down, and 64bit addressing has arrived (even for laptops). Indeed, the system shown in Figure 1.4 is equivalent to a $400 desktop system which could be expanded to enough disk and RAM to hold a fully scaled 1K tps system. But, an 80 GB server is likely a quad Opteron that can do many more than 8k tps. So, to repeat the earlier comments, the system will be disk and memory bound, not CPU bound.
+
+The TPC-A rules specified that each transaction has a 100 byte input message and a 100 byte output message. Adding that logic would soak up some CPU and make the TabletPC a few ktps system.
+
+TPCC-A and DebitCredit require durability. The laptop battery and Windows hibernation might pass the TPC auditors durability test. But the auditor certainly would want the log to be on a separate and duplexed device so that it would mask single media failures; so that if the database disk failed, or if one of the log disks failed, the customer could recover all committed transactions from the surviving disks and from the offline database backup files. One could easily add those disks but...
+
+TPC-A rules also specify that 90% of the transactions should have less than 2 second response time. That rule was designed to prevent the kinds of performance dips shown in Figure 2. 90% of the transactions in these runs did indeed have response time less than 2 seconds -- but the 20 and 30 second "blackouts" during the 900 second runs in Figure 2 are troublesome. In a properly scaled and configured TPC-A run, we would have 830,000 terminals each submitting transactions every 100 seconds. The 20-30 second blackout would cause ~250,000 transactions to exceed the 2 second response time and that would have ripple effects. But 250k transactions is less than 4% of the 7M transactions run in the 15 minute test window -- so if the ripple effects were minor, the blackout would just be embarrassing, not disqualifying. One of the deficiencies of TPC-B and of this work is that it doesn't have terminals and so it fails to properly model these effects.
+
+4. Summary and Observations
+
+The next article in this series, scheduled for April fools day 2025, will show that a $1 wrist watch can run the world economy as of 1990. Since cell-phones are already at a gigabyte of storage and approach a GHz processor, such an article may be possible -- we hope we are around to write it.
+
+Moore's law forces give approximately a 100x price/performance improvement each decade. This progress is a combination of hardware improvements (processors, memory, disks, and networks) from software improvements (algorithms,) and from changes in business models (commoditization). Figure 3 shows this trend for the TPC benchmarks which have a wealth of audited price-performance results. The graphs show a trend line that has a 100x improvement per decade. That translates to 58% per year tps/$ improvement and consequent 37%/year price reduction in $/tps over 15 years.
+
+The first TPC-A/B systems were in the $100k/tpsA range. By 1995 they were approximately $500/tpsA. The measurements here seem to be below 1$/tpsA, even after you factor in the correct scaling rules and the costs of delivering messages (excluding the cost of the terminals mandated by the TPC-A rules).
+
+As a result of this trend, the impossible 1970 task became a $10M 1990 task and the $10K task of 2005. The old performance problems are easy to solve with today's computers.
+
+The ability to do 8ktps on a laptop demonstrates that you can use relational systems and simple algorithms if your problem involves a few thousand transactions per second per CPU and if your data fits in RAM.
+
+The results also indicate that CPU is not the problem -- if you can feed memory to the CPU, it delivers impressive transaction rates. Most processors are stalled waiting for RAM, network, or disk -- even this laptop is memory limited -- the CPI of 1.9 suggests that it is waiting for memory about half the time.
+
+The results also show that it is important to pay attention to massive main memory and checkpoint performance. Checkpoint IO should be spread across the whole checkpoint interval, rather than rushing to do it all at once. As Figure 2 shows, SQLServer 2000 keeps the IO queue 100 requests deep until the checkpoint completes -- this starves the other tasks -- most systems have a dedicated log disk and can service a 100-deep IO queue, so this is not a problem. The next version of SQLServer fixes this problem by reducing the outstanding checkpoint IO if the IO response time increases dramatically.
+
+The main point, for anyone involved in the benchmark wars of the 1980s and 1990s, is to marvel at the power of modern systems. They solve the old performance problems, leaving us free to focus on the many new performance problems. If we IT folks had the luxury of generals who fight the previous war, life would be boring. Although we do not have the DebitCredit problem anymore, it is nonetheless marvelous that we can solve it so easily.
+
+References
+
+[1Ktps] "One Thousand Transactions Per Second" J. Gray, B. Good, P.W. Homan, D.E. Gawlick, H. Sammer, IEEE COMPCON Proceedings, San Francisco, IEEE Press, 1985
+
+[Datamation] "A Measure of Transaction Processing Power" anon. et. al., Datamation, V 31.7, April 1985, pp 112-118
+
+[Gawlick] "High Performance Transaction Processing Monitors: Do We Still Need to Develop Them?" D. Gawlick, IEEE Data Engineering Bulletin, V17.1, March 1994, pp. 16-21
+
+[Levine] "TPC-C: The OLTP Benchmark", C. Levine, ACM SIGMOD, Tucson, AZ, May 29, 1997, slides 1-24 posted at http://www.tpc.org/informtion/ sessions/sigmod/ indexc.htm
+
+[Scalability] Remarks by Bill Gates & Robert Barnes, Scalability Day, May 20, 1997, New York, NY
+
+[Serlin] "The History of DebitCredit and the TPC", O. Serlin, Chapter 2 of The Benchmark Handbook, for Databases and Transaction Processing, 2nd edition, Morgan Kauffman, 1997, San Francisco
+
+[Tandem] "A Benchmark of Nonstop? SQL on the DebitCredit Transaction," the Tandem Performance Group, ACM SIGMOD 88, ACM Press, June, 1988, pp 337-341 or see "NonStop SQL Benchmark White Paper," Jim Gray, Tandem Systems Review, Feb. 1988, V4.1, Feb.1988, http://research.Microsoft.com/ ~gray/papers/NonStop_SQL_Performance.pdf
+
+[TPC-C] TPC-C, http://www.tpc.org/tpcc/

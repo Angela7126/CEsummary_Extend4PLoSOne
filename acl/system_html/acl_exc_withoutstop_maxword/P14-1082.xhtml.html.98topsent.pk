@@ -1,0 +1,40 @@
+(lp0
+VIn other words, for each word type or phrase type that occurs as a fragment in the training set, and which does not map to just a single translation, a classifier is trained
+p1
+aVThis measure may be too strict, so we add a more flexible word accuracy measure which takes into account partial matches at the word level
+p2
+aVPer classifier expert, the best scoring configuration was selected, referred to as the auto configuration in Table 2
+p3
+aVAutomatic configuration selection was done by performing leave-one-out testing (for small number of instances) or 10-fold-cross validation (for larger number of instances, n u'\u005cu2265' 20 ) on the training data per classifier expert
+p4
+aVWords or phrases that always map to a single translation are stored in a simple mapping table, as a classifier would have no added value in such cases
+p5
+aVNumerous classifiers are trained and each is an expert in translating a single word or phrase
+p6
+aVAmong the classifier experts are only words and phrases that are ambiguous and may thus map to multiple translations
+p7
+aVNo additional external data was brought in, to keep the comparison fair
+p8
+aVThe auto configuration improves results over the uniformly applied feature selection
+p9
+aVIn all of the aforementioned experiments, the system produced a single solution for each of the fragments, the one it deemed best, or no solution at all if it could not find any
+p10
+aVThis implies that such words and phrases must have occurred at least twice in the corpus, though this threshold is made configurable and could have been set higher to limit the number of classifiers
+p11
+aVThird, we observe that adding the language model to our classifier leads to another significant gain (configuration l1r1 + LM in the results in Table 2
+p12
+aVThe word accuracy for the entire set is then computed by taking the sum of the word accuracies per sentence pair, divided by the total number of sentence pairs
+p13
+aVThe language model is a trigram-based back-off language model with Kneser-Ney smoothing, computed using SRILM [] and trained on the same training data as the translation model
+p14
+aVWe therefore conducted a number of experiments with other language pairs, and present the abridged results in Table 6
+p15
+aVThis number is much larger than the 200 , 000 we mentioned before because single sentence pairs may be reused multiple times with different marked fragments
+p16
+aVIn order to draw accurate conclusions, experiments on a single data set and language pair are not sufficient
+p17
+aVThe same holds for the Chinese u'\u005cu2192' English experiment
+p18
+aVThe choice for this algorithm is motivated by the fact that it handles multiple classes with ease, but first and foremost because it has been successfully employed for word sense disambiguation in other studies [] , in particular in cross-lingual word sense disambiguation, a task
+p19
+a.

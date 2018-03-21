@@ -1,0 +1,298 @@
+(lp0
+VTo create further baselines for comparison, we selected the following features that represent ways one might approximate grammaticality if a comprehensive model was unavailable whether the link parser can fully parse the sentence ( complete_link ), the Gigaword language model score ( gigaword_avglogprob ), and the number of misspelled tokens ( num_misspelled
+p1
+aVTo train our system on binarized data, we replaced the u'\u005cu2113' 2 -regularized linear regression model with an u'\u005cu2113' 2 -regularized logistic regression and used Kendall u'\u005cu2019' s u'\u005cu03a4' rank correlation between the predicted probabilities of the positive class and the binary gold standard labels as the grid search metric (§ 3.1 ) instead of Pearson u'\u005cu2019' s r
+p2
+aVMuch of the previous research on predicting grammaticality has focused on identifying (and possibly correcting) specific types of grammatical errors that are typically made by English language learners, such as prepositions [ 19 ] , articles [ 11 ] , and collocations [ 7 ]
+p3
+aVWe create a dataset of grammatical and ungrammatical sentences written by English language learners, labeled on an ordinal scale for grammaticality
+p4
+aVThese dep relations are underspecified for function and indicate that the parser was unable to find a standard relation such as subj , possibly indicating a grammatical error
+p5
+aVFor test set evaluations, we trained on the combination of the training and development sets (§ 2 ), to maximize the amount of training data for the final experiments
+p6
+aVWe created a dataset consisting of 3,129 sentences randomly selected from essays written by non-native speakers of English as part of a test of English language proficiency
+p7
+aVFinally, the system computes the average log-probability and number of out-of-vocabulary words from a language model trained on a collection of essays written by non-native English speakers 7 7 This did not overlap with the data described in § 2 and was a subset of the data released by Blanchard et al
+p8
+aVWe also evaluated the binary system for the ordinal task by computing correlations between its estimated probabilities and the averaged human scores, and we evaluated the ordinal system for the binary task by binarizing its predictions
+p9
+aV4 4 Regression models typically produce conservative predictions with lower variance than the original training data
+p10
+aVSince the predictions from the binary and ordinal systems are on different scales, we include the nonparametric statistic Kendall u'\u005cu2019' s u'\u005cu03a4' as a secondary evaluation metric for both tasks
+p11
+aVTo identify whether the differences in performance for the ordinal task between our system and each of the baselines are statistically significant, we used the BC a Bootstrap [ 9 ] with 10,000 replications to compute 95% confidence intervals for the absolute value of r for our system minus the absolute value of r for each of the alternative methods
+p12
+aVWe find phrase structure trees and basic dependencies with the Stanford Parser u'\u005cu2019' s English PCFG model [ 12 , 8 ]
+p13
+aVRegarding sentence-level grammaticality, there has been much work on rating the grammaticality of machine translation outputs [ 10 , 14 ] , such as the MT Quality Estimation Shared Tasks [ 2 , §6] , but relatively little on evaluating the grammaticality of naturally occurring text
+p14
+aV6 6 We use the New York Times (nyt), the Los Angeles Times-Washington Post (ltw), and the Washington Post-Bloomberg News (wpb) sections from the fifth edition of English Gigaword (LDC2011T07
+p15
+aVWe thank Beata Beigman Klebanov, Yoko Futagi, Su-Youn Yoon, and the anonymous reviewers for their helpful comments
+p16
+aV12 12 We selected a threshold for binarization from a grid of 1001 points from 1 to 4 that maximized the accuracy of binarized predictions from a model trained on the training set and evaluated on the binarized development set
+p17
+aVIn this paper, we develop a system for the task of predicting the grammaticality of sentences, and present a dataset of learner sentences rated for grammaticality
+p18
+aVSuch a system could be used, for example, to check or to rank outputs from systems for text summarization, natural language generation, or machine translation
+p19
+aV14 14 In preliminary experiments, we observed little difference in performance between logistic regression and the original support vector classifier used by the system from Post ( 2011 )
+p20
+aVfeatures binning the number of dep relations returned by the dependency conversion
+p21
+aVWe use u'\u005cu2113' 2 -regularized linear regression (i.e.,, ridge regression) to learn a model of sentence grammaticality from a variety of linguistic features
+p22
+aV10 10 The complete list of relevant statistics used as features is trees, unify_cost_succ, unify_cost_fail, unifications_succ, unifications_fail, subsumptions_succ, subsumptions_fail, words, words_pruned, aedges, pedges, upedges, raedges, rpedges, medges
+p23
+aVIn preliminary experiments, averaging the six judgments (1 expert, 5 crowdsourced) for each item led to higher human-machine agreement
+p24
+aVthe parse score as provided by the Stanford PCFG Parser, normalized for sentence length, later referred to as parse_prob
+p25
+aVNote that we expect the number of misspelled tokens to be negatively correlated with grammaticality
+p26
+aVWe develop a state-of-the-art approach for predicting the grammaticality of sentences on an ordinal scale, adapting various techniques from the previous work described above
+p27
+aVThe sentence may contain one or more minor grammatical errors, including subject-verb agreement, determiner, and minor preposition errors that do not make the meaning unclear, as in Example ( 2
+p28
+aVWe report performance in terms of Pearson u'\u005cu2019' s r between the averaged 1 u'\u005cu2013' 4 human labels and unrounded system predictions
+p29
+aVWith this unique data set, which we will release to the research community, it is now possible to conduct realistic evaluations for predicting sentence-level grammaticality
+p30
+aVIn this section, we present results on the held-out test set for the full model and various baselines, summarized in Table 2
+p31
+aVWe flipped the sign of the misspelling feature when computing accuracy for the binary task
+p32
+aVThe model computes the following features from a 5 -gram language model trained on the same three sections of English Gigaword using the SRILM toolkit [ 17 ]
+p33
+aVWe measured interannotator agreement on a subset of 442 sentences that were independently annotated by both expert annotators
+p34
+aVOn 10 preliminary runs with the development set, this variance had minimal effects on correlations with human judgments (less than 0.00001 in terms of r
+p35
+aVThese grammars have been hand-crafted and designed to only provide complete syntactic analyses for grammatically correct sentences
+p36
+aVFor evaluating the three single-feature baselines discussed below, we used the same approach except with grid ranging from the minimum development set feature value to the maximum plus 0.1% of the range
+p37
+aVTwo of the authors of this paper, both native speakers of English with linguistic training, annotated the data
+p38
+aVWe oversampled lower-scoring essays to increase the chances of finding ungrammatical sentences
+p39
+aVThe sentence may contain one or more serious grammatical errors, including missing subject, verb, object, etc., verb tense errors, and serious preposition errors
+p40
+aVWe also thank Jennifer Foster for discussions about this work and Matt Post for making his system publicly available
+p41
+aVWe also trained and evaluated on binarized versions of the ordinal GUG labels a sentence was labeled 1 if the average judgment was at least 3.5 (i.e.,, would round to 4), and 0 otherwise
+p42
+aVTherefore, we used the same learning algorithms as for our system (i.e.,, ridge regression for the ordinal task and logistic regression for the binary task
+p43
+aVFor the binary task, we used the sign test to test for significant differences in accuracy
+p44
+aVSo that predictions better match the distribution of labels in the training data, the system rescales its predictions
+p45
+aVDuring development, we observed that some of these features vary for some inputs, probably due to parsing search timeouts
+p46
+aVFor the ordinal task, we report Pearson u'\u005cu2019' s r between the averaged human judgments and each system
+p47
+aVWe conducted a feature ablation study to identify the contributions of the different types of features described in § 3.2
+p48
+aVFor this experiment, all models were estimated from the training set and evaluated on the development set
+p49
+aVWe use the feature computation components of that system but replace its statistical model
+p50
+aVAlso, for practical applications, we believe that it is useful to distinguish sentences with minor errors from those with major errors that may disrupt communication
+p51
+aVThe system was designed for use with a dataset consisting of 50% grammatical and 50% ungrammatical sentences, rather than data with ordinal or continuous labels
+p52
+aVFrom these results, the most useful features appear to be the n -gram frequencies from Gigaword and whether the link parser can fully parse the sentence
+p53
+aVWe used 100 (3.2%) of the judged sentences as u'\u005cu201c' gold u'\u005cu201d' data in Crowdflower to block contributors who were not following the annotation guidelines
+p54
+aVWhile some applications (e.g.,, grammar checking) rely on such fine-grained predictions, others might be better addressed by sentence-level grammaticality judgments (e.g.,, machine translation evaluation
+p55
+aVFor the binary task, we report percentage accuracy
+p56
+aVWe know during Spring Festival, Chinese family will have a abundand family banquet with family memebers
+p57
+aVa binary feature that captures whether the top node of the tree is sentential or not (i.e., the assumption is that if the top node is non-sentential, then the sentence is a fragment
+p58
+aVAdditionally, its classifier implementation does not output scores or probabilities
+p59
+aVFor our experiments, one expert annotator was arbitrarily selected, and for the doubly-annotated sentences, only the judgments from that annotator were retained
+p60
+aVEvaluating on a binary scale allows us to measure how well the system distinguishes grammatical sentences from ungrammatical ones
+p61
+aVFor those sentences, only disagreements within 1 point of the expert annotator judgment were accepted
+p62
+aV2013 ) and Crocker and Keller ( 2005 ) who argue that the distinction between grammatical and ungrammatical is not simply binary
+p63
+aVu'\u005cu201c' Chinese family u'\u005cu201d' , which could be corrected to u'\u005cu201c' Chinese families u'\u005cu201d' , u'\u005cu201c' each Chinese family u'\u005cu201d' , etc., would be an example of a minor grammatical error involving determiners
+p64
+aVThis transformation does not affect Pearson u'\u005cu2019' s r correlations or rankings, but it would affect binarized predictions
+p65
+aVWe compare our work to a modified version of the publicly available 13 13 The Post ( 2011 ) system is available at https://github.com/mjpost/post2011judging system from Post ( 2011 ) , which performed very well on an artificial dataset
+p66
+aVOur annotation scheme was influenced by a translation rating scheme by Coughlin ( 2003 )
+p67
+aVThe police officer handed the This sentence is cut off and does not at least include one clause
+p68
+aVFor our experiments (§ 4 ), we randomly split the data into training (50%), development (25%), and testing (25%) sets
+p69
+aVThey mostly reflect information about unification success or failure and the associated costs
+p70
+aVHere, we use (1) the Link Grammar Parser 8 8 http://www.link.cs.cmu.edu/link/ and (2) the HPSG English Resource Grammar [ 4 ] and PET parser
+p71
+aV2009 ) , we use features extracted from precision grammar parsers
+p72
+aVGiven each sentence, the model obtains the counts of n -grams ( n = 1 u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' 3 ) from English Gigaword and computes the following features
+p73
+aVWe compared the performance of the full model with all of the features to models with all but one type of feature
+p74
+aVWhen making judgments of the sentences, they saw the previous sentence from the same essay as context
+p75
+aVDue to these errors, the sentence may have multiple plausible interpretations, as in Example ( 3
+p76
+aVWe use an ordinal rather than binary scale, following previous work such as that of Clark et al
+p77
+aVThese sentences, such as Example ( 5 ), appear in our corpus due to the nature of timed tests
+p78
+aVTo tune the u'\u005cu2113' 2 -regularization hyperparameter u'\u005cu0391' , the system performs 5-fold cross-validation on the data used for training
+p79
+aVWe use a binary feature, complete_link , from the Link grammar that indicates whether at least one complete linkage can be found for a sentence
+p80
+aVAlso, most other research on evaluating grammaticality involves artificial tasks or datasets [ 18 , 13 , 22 , 16 ]
+p81
+aVTo identify misspellings, we use a freely available spelling dictionary for U.S
+p82
+aVFor all experiments reported later, we used this average of six judgments as our gold standard
+p83
+aVThis section describes the statistical model (§ 3.1 ) and features (§ 3.2 ) used by our system
+p84
+aVWe refer to these annotators as expert judges
+p85
+aVThis is in contrast to treebank-trained grammars, which will generally provide some analysis regardless of grammaticality
+p86
+aVNext, we present evaluations on the GUG dataset
+p87
+aV1 1 The reported agreement values assume that u'\u005cu201c' Other u'\u005cu201d' maps to 0
+p88
+aVTo our knowledge, it is the only publicly available system for grammaticality prediction
+p89
+aVThe phrase u'\u005cu201c' do not everything u'\u005cu201d' makes the sentence practically incomprehensible since the subject of u'\u005cu201c' do u'\u005cu201d' is not clear
+p90
+aVI can gain the transportations such as buses and trains
+p91
+aVAlso, we believe that simpler, heuristic approaches could be used to identify such sentences
+p92
+aVWe also gathered 5 additional judgments using Crowdflower
+p93
+aVWe also extract several features from the HPSG analyses
+p94
+aVThe system evaluates u'\u005cu0391' u'\u005cu2208' 10 { - 4 , u'\u005cu2026' , 4 } and selects the one that achieves the highest cross-validation correlation r
+p95
+aVIt is very different from our system since it relies on partial tree-substitution grammar derivations as features
+p96
+aVThese two authors were not directly involved in development of the system in § 3
+p97
+aVGiven a sentence with with n word tokens, the model filters out tokens containing nonalphabetic characters and then computes the number of misspelled words n m u'\u005cu2062' i u'\u005cu2062' s u'\u005cu2062' s (later referred to as num_misspelled ), the proportion of misspelled words n m u'\u005cu2062' i u'\u005cu2062' s u'\u005cu2062' s n , and log u'\u005cu2061' ( n m u'\u005cu2062' i u'\u005cu2062' s u'\u005cu2062' s + 1 ) as features
+p98
+aVThere is an extra category ( u'\u005cu201c' Other u'\u005cu201d' ) for sentences that do not fit this criterion
+p99
+aVThe labels from the expert annotators are distributed as follows
+p100
+aVThe results are shown in Table 1
+p101
+aVIt could also be used in educational applications such as essay scoring
+p102
+aVIt has no grammatical errors, but may contain very minor typographical and/or collocation errors, as in Example ( 1
+p103
+aV2 2 http://www.crowdflower.com For this, we excluded the u'\u005cu201c' Other u'\u005cu201d' category and any sentences that had been marked as such by the expert annotators
+p104
+aVWe use u'\u005cu201c' GUG u'\u005cu201d' ( u'\u005cu201c' Grammatical u'\u005cu201d' versus u'\u005cu201c' UnGrammatical u'\u005cu201d' ) to refer to this dataset
+p105
+aV12, 2013 version of the Stanford Parser
+p106
+aVFor instance, i stayed in a dorm when i went to collge
+p107
+aVthe number of out-of-vocabulary words in the sentence
+p108
+aVIn each instance, we use the logarithm of one plus the frequency
+p109
+aVNext, we describe the four types of features
+p110
+aVEvery sentence judged on the 1 u'\u005cu2013' 4 scale must be a clause
+p111
+aVWe also excluded all instances labeled u'\u005cu201c' Other u'\u005cu201d'
+p112
+aVThese are relatively uncommon and less interesting to this study
+p113
+aVExact agreement was 71.3%, unweighted u'\u005cu039a' = 0.574 , and Pearson u'\u005cu2019' s r = 0.759
+p114
+aVThis sentence is incomplete
+p115
+aVThe sentence contains so many errors that it would be difficult to correct, as in Example ( 4
+p116
+aVwhere S n represents the n -grams of order n from the given sentence
+p117
+aVWe exclude instances of u'\u005cu201c' Other u'\u005cu201d' in our experiments (see § 4
+p118
+aVFollowing Wagner et al
+p119
+aVThe results are in Table 2
+p120
+aVHere, we make the following contributions
+p121
+aVEnglish
+p122
+aV{examples}
+p123
+aV{examples}
+p124
+aV{examples}
+p125
+aV{examples}
+p126
+aV{examples}
+p127
+aVFor some applications, this two-way distinction may be more relevant than the more fine-grained 1 u'\u005cu2013' 4 scale
+p128
+aV3 3 We use ridge regression from the scikit-learn toolkit [ 15 ] v0.23.1 and the SciKit-Learn Laboratory ( http://github.com/EducationalTestingService/skll
+p129
+aV2007 ) and Wagner et al
+p130
+aVthe average log-probability of the given sentence (referred to as gigaword_avglogprob later
+p131
+aVFor the sentences where both labels were in the 1 u'\u005cu2013' 4 range ( n = 424 ), Pearson u'\u005cu2019' s r = 0.767
+p132
+aVEach sentence was annotated on a scale from 1 to 4 as described below, with 4 being the most grammatical
+p133
+aVmin s u'\u005cu2208' S n u'\u005cu2061' log u'\u005cu2061' ( count u'\u005cu2062' ( s ) + 1
+p134
+aVmax s u'\u005cu2208' S n u'\u005cu2061' log u'\u005cu2061' ( count u'\u005cu2062' ( s ) + 1
+p135
+aVThe dataset is available for research at https://github.com/EducationalTestingService/gug-data
+p136
+aVWe then compute the following
+p137
+aVIt saves the mean and standard deviation of the training data gold standard ( M g u'\u005cu2062' o u'\u005cu2062' l u'\u005cu2062' d and S u'\u005cu2062' D g u'\u005cu2062' o u'\u005cu2062' l u'\u005cu2062' d , respectively) and of its own predictions on the training data ( M p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' d and S u'\u005cu2062' D p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' d , respectively
+p138
+aV2013 u'\u005cu201c' non-native LM u'\u005cu201d'
+p139
+aVDuring cross-validation, this is done for each fold
+p140
+aV11 11 We use the Nov
+p141
+aVu'\u005cu2211' s u'\u005cu2208' S n log u'\u005cu2061' ( count u'\u005cu2062' ( s ) + 1 ) u'\u005cu2225' S n u'\u005cu2225'
+p142
+aVThe sentence is native-sounding
+p143
+aVFrom an initial prediction y ^ , it produces the final prediction y ^ u'\u005cu2032' = y ^ - M p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' d S u'\u005cu2062' D p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' d * S u'\u005cu2062' D g u'\u005cu2062' o u'\u005cu2062' l u'\u005cu2062' d + M g u'\u005cu2062' o u'\u005cu2062' l u'\u005cu2062' d
+p144
+aVOr you want to say he is only a little boy do not everything clearly
+p145
+aV72 sentences are labeled 1; 538 are 2; 1,431 are 3; 978 are 4; and 110 are u'\u005cu201c' O u'\u005cu201d'
+p146
+aV5 5 http://pythonhosted.org/pyenchant/
+p147
+aV9 9 http://moin.delph-in.net/PetTop
+p148
+a.

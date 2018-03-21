@@ -1,0 +1,104 @@
+(lp0
+VAnother advantage of the learning framework is that it combines both the likelihood on parallel data and confidence on unlabeled data, so that both parallel text and unlabeled data can be utilized in our approach
+p1
+aVThe focus of this work is on building dependency parsers for target languages, assuming that an accurate English dependency parser and some parallel text between the two languages are available
+p2
+aVWe train probabilistic parsing models for resource-poor languages by maximizing a combination of likelihood on parallel data and confidence on unlabeled data
+p3
+aVIn this work, we propose a learning framework for transferring dependency grammars from a resource-rich language to resource-poor languages via parallel text
+p4
+aVFirst, by transferring the weight function to the corresponding weight in the well-developed English parsing model, we can project syntactic information across language boundaries
+p5
+aVPrepare parallel text by running word alignment method to obtain word alignments, 3 3 The word alignment methods do not require additional resources besides parallel text and prepare the unlabeled data
+p6
+aVIn this section, we will describe the details of our experiments and compare our results with previous methods
+p7
+aVIn addition to their original results, we also report results by re-implementing the direct transfer parser based on the first-order projective dependency parsing model [ 30 ] (DTP u'\u005cu2020'
+p8
+aVAs presented in Section 3.1 , we evaluate our parsing approach on both version 1.0 and version 2.0 of Google Univereal Treebanks for seven languages 6 6 Japanese and Indonesia are excluded as no practicable parallel data are available
+p9
+aVThe monolingual treebanks in our experiments are from the Google Universal Dependency Treebanks [ 31 ] , for the reason that the treebanks of different languages in Google Universal Dependency Treebanks have consistent syntactic representations
+p10
+aVTable 6 gives the results comparing the model without unlabeled data (-U) presented in this work to those five baseline systems and the oracle (OR
+p11
+aVObviously, bilingual treebanks are much more difficult to acquire than the resources required in our scenario, since the labeled training data and the parallel text in our case are completely separated
+p12
+aVA common strategy to make this parsing model efficiently computable is to factor dependency trees into sets of edges
+p13
+aVPOS tags are not available for parallel data in the Europarl and Kaist corpus, so we need to provide the POS tags for these data
+p14
+aVBy adding entropy regularization from unlabeled data, our full model achieves average improvement of 0.29% over the u'\u005cu201c' -U u'\u005cu201d' setting
+p15
+aVThroughout this paper, English is used as the source language and we evaluate our approach on ten target languages u'\u005cu2014' Danish (da), Dutch (nl), French (fr), German (de), Greek (el), Italian (it), Korean (ko), Portuguese (pt), Spanish (es) and Swedish (sv
+p16
+aVFor example, Figure 1 shows a dependency tree for the sentence, Economic news had little effect on financial markets , with the sentence u'\u005cu2019' s root-symbol as its root
+p17
+aVTable 7 shows the results of our system and the results of baseline systems u'\u005cu201c' USR u'\u005cu2020' u'\u005cu201d' is the weakly supervised system of Naseem et al
+p18
+aVThe set of POS tags needs to be consistent across languages and treebanks
+p19
+aVOur work is based on the learning framework used in Smith and Eisner [ 44 ] , which is originally designed for parser bootstrapping
+p20
+aVFor the purpose of evaluation of our approach and comparison with previous work, we need to exploit the gold POS tags to train the POS taggers
+p21
+aVWe select target languages based on the availability of these resources
+p22
+aV1 1 For the sake of simplicity, we refer to the resource-poor language as the u'\u005cu201c' target language u'\u005cu201d' , and resource-rich language as the u'\u005cu201c' source language u'\u005cu201d'
+p23
+aVFor the results on Google Universal Treebanks version 1.0, the improvement on average over the projected transfer paper (PTP u'\u005cu2020' ) is 3.96% and up to 6.22% for Korean and 4.80% for German
+p24
+aVWe introduce a multiplier u'\u005cu0393' as a trade-off between the two contributions (parallel and unsupervised) of the objective function K , and the final objective function K u'\u005cu2032' has the following form
+p25
+aVIt is based on the transition-based dependency parsing paradigm [ 40 ]
+p26
+aVSo totally we have ten target languages
+p27
+aVIn addition, in this study we use English as the source resource-rich language, but our methodology can be applied to any resource-rich languages
+p28
+aVBy reducing unaligned edges to their delexicalized forms, we can still use those delexicalized features, such as part-of-speech tags, for those unaligned edges, and can address problem that automatically generated word alignments include errors
+p29
+aVThis led to a vast amount of research on unsupervised grammar induction [ 9 , 22 , 47 , 12 , 48 , 4 , 29 , 49 ] , which appears to be a natural solution to this problem, as unsupervised methods require only unannotated text for training parsers
+p30
+aVWe extend this learning framework so that it can be used to transfer cross-lingual knowledge between different languages
+p31
+aVFor this reason we use the universal POS tag set of Petrov et al
+p32
+aVOur approaches significantly outperform all the baseline systems across all the seven target languages
+p33
+aVHowever, the manually annotated treebanks that these parsers rely on are highly expensive to create, in particular when we want to build treebanks for resource-poor languages
+p34
+aVAccording to equation ( 9 ), p ~ ( u'\u005cud835' u'\u005cudc9a' u'\u005cud835' u'\u005cudc99' ) can also be factored into the multiplication of the weight of each edge, so both K P and its gradient can be calculated by running the O u'\u005cu2062' ( n 3 ) inside-outside algorithm [ 2 , 41 ] for projective parsing
+p35
+aVFor example, if we want to make our model capable of utilizing more contextual information, we can extend our transferring weight to higher-order parts
+p36
+aVAs part-of-speech tags are also a form of syntactic analysis, this assumption weakens the applicability of our approach
+p37
+aVOne may regard this system as an oracle of transfer parsing
+p38
+aVSimilar with the calculation of K P , K U can also be computed by running the inside-outside algorithm [ 2 , 41 ] for projective parsing
+p39
+aVOne may regard u'\u005cu0393' as a Lagrange multiplier that is used to constrain the parser u'\u005cu2019' s uncertainty H to be low, as presented in several studies on entropy regularization [ 5 , 17 , 20 ]
+p40
+aVThat is, dependency tree y is treated as a set of edges e and each feature function F j u'\u005cu2062' ( u'\u005cud835' u'\u005cudc9a' , u'\u005cud835' u'\u005cudc99' ) is equal to the sum of all the features f j u'\u005cu2062' ( e , u'\u005cud835' u'\u005cudc99' )
+p41
+aVDue to the normalizing factor Z ~ u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) , the transferring distribution is a valid one
+p42
+aVParsing accuracy is measured with unlabeled attachment score (UAS the percentage of words with the correct head
+p43
+aVThe three languages are Danish, Dutch and Greek
+p44
+aVHowever, previous studies [ 34 , 31 ] have demonstrated that a homogeneous representation is critical for multilingual language technologies that require consistent cross-lingual analysis for downstream components, and the heterogenous representations used in CoNLL shared-tasks treebanks weaken any conclusion that can be drawn
+p45
+aVIn recent years, dependency parsing has gained universal interest due to its usefulness in a wide range of applications such as synonym generation [ 43 ] , relation extraction [ 37 ] and machine translation [ 21 , 51 ]
+p46
+aVFor non-projective parsing, the analogy to the inside algorithm is the O u'\u005cu2062' ( n 3 ) matrix-tree algorithm based on Kirchhoff u'\u005cu2019' s Matrix-Tree Theorem, which is dominated asymptotically by a matrix determinant [ 25 , 46 ]
+p47
+aVThe gradient of a determinant may be computed by matrix inversion, so evaluating the gradient again has the same O u'\u005cu2062' ( n 3 ) complexity as evaluating the function
+p48
+aVwhere F j are feature functions, u'\u005cu039b' = ( u'\u005cu039b' 1 , u'\u005cu039b' 2 , u'\u005cu2026' ) are parameters of the model, and Z u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) is a normalization factor, which is commonly referred to as the partition function
+p49
+aVIt should be noted that the u'\u005cu201c' NMG u'\u005cu201d' system utilizes more than one helper languages
+p50
+aVSo it is not directly comparable to our work
+p51
+a.

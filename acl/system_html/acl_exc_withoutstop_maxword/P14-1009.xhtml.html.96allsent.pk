@@ -1,0 +1,392 @@
+(lp0
+VIf distributional vectors encode certain aspects of word meaning, it is natural to expect that similar aspects of sentence meaning can also receive vector representations, obtained compositionally from word vectors
+p1
+aVTensor by vector multiplication formalizes function application and serves as the general composition method
+p2
+aVFor instance, symmetric operations like vector addition are insensitive to syntactic structure, therefore meaning differences encoded in word order are lost in composition pandas eat bamboo is identical to bamboo eats pandas
+p3
+aV2010 ) generalize the simple additive model by applying structure-encoding operators to the vectors of two sister nodes before addition, thus breaking the inherent symmetry of the simple additive model
+p4
+aVA related approach [ 24 ] assumes richer lexical representations where each word is represented with a vector and a matrix that encodes its interaction with its syntactic sister
+p5
+aVAfter applying the matrices to the corresponding argument vectors, a single representation is obtained by summing across all resulting vectors
+p6
+aVThe add (additive) model produces the vector of a sentence by summing the vectors of all content words in it
+p7
+aVWe conjecture that the lf 3-way tensor representation of transitive verbs leads to a stronger asymmetry between sentences with inverted arguments, and thus makes this model particularly sensitive to word order differences
+p8
+aVTraining plf (practical lexical function) proceeds similarly, but we also build preposition matrices (from u'\u005cu27e8' noun , preposition-noun u'\u005cu27e9' vector pairs), and for verbs we prepare separate subject and object matrices
+p9
+aVTo model passive usages, we insert the object matrix of the verb only, which will be multiplied by the syntactic subject vector, capturing the similarity between eat meat and meat is eaten
+p10
+aVThe semantic representations we propose include a semantic vector for constituents of any semantic type, thus enabling semantic comparison for words of different parts of speech (the case of demolition vs demolish
+p11
+aVThe lf model can be seen as a projection of the symbolic Montagovian approach to semantic composition in natural language onto the domain of vector spaces and linear operations on them [ 3 ]
+p12
+aVSince predicate arity is encoded in the order of the corresponding tensor, eat and the like have to be assigned different representations (matrix or tensor) depending on the context
+p13
+aVSentential adverbs are unary, while adverbs that modify adjectives ( very ) or verb phrases ( quickly ) are encoded as binary functions, represented by a vector and two matrices
+p14
+aVThese rules incorporate insights of two empirically successful models, lexical function and the simple additive approach, used as the default structure merging strategy
+p15
+aVIn lf, arguments are vectors and functions taking arguments (e.g.,, adjectives that combine with nouns) are tensors, with the number of arguments (n) determining the order of tensor (n+1
+p16
+aVIn the tfds task, not surprisingly the add and mult models, lacking determiner representations and being order-insensitive, fail to distinguish between true paraphrases and foils (indeed, for the mult model foils are significantly closer to the targets than the paraphrases, probably because the latter have lower content word overlap than the foils, that often differ in word order and determiners only
+p17
+aVThe first rule is function application , illustrated in Figure 1
+p18
+aVDespite positive empirical evaluation, this approach is hardly practical for general-purpose semantic language processing, since it requires computationally expensive approximate parameter optimization techniques, and it assumes task-specific parameter learning whose results are not meant to generalize across tasks
+p19
+aVFor instance, as shown in Table 4 , one can distinguish the transitive and intransitive usages of the verb to eat by the presence of the object-oriented matrix of the verb while keeping the rest of the representation intact
+p20
+aVThe form of semantic representations we are using is shown in Table 1
+p21
+aVIn this case, however, the traditional lf model (average difference .044, standard deviation .092) outperforms plf
+p22
+aVBaroni and Zamparelli ( 2010 ) propose a practical and empirically effective way to estimate matrices representing adjectival modifiers of nouns by linear regression from corpus-extracted examples of noun and adjective-noun vectors
+p23
+aVSo keeping the verb u'\u005cu2019' s interaction with subject and object encoded in distinct matrices not only solves the issues of representation size for arbitrary semantic types, but also provides a sensible built-in strategy for handling a word u'\u005cu2019' s occurrence in multiple constructions
+p24
+aVOur plf approach is able to handle determiners and word order correctly, as demonstrated by a highly significant ( p 0.01 ) difference between paraphrase and foil similarity (average difference in cosine .017, standard deviation .077
+p25
+aVIndeed, if we limit evaluation to those foils characterized by word order changes only, lf discriminates between paraphrases and foils even more clearly, whereas the plf difference, while still significant, decreases slightly
+p26
+aVThe foils have high lexical overlap with the targets but very different meanings, due to different determiners and/or word order
+p27
+aVSince determiners are handled identically under the two approaches, the culprit must be word order
+p28
+aVAdverbs have different semantic types depending on their syntactic role
+p29
+aVThis is a very positive result, in the light of the fact that the parser has very low performance on the onwn glosses, thus suggesting that plf can produce sensible semantic vectors from noisy syntactic representations
+p30
+aVFor example, if noun meanings are encoded in vectors of 300 dimensions, adjectives become matrices of 300 2 cells, and transitive verbs are represented as tensors with 300 3 = 27 , 000 , 000 dimensions
+p31
+aVFor anvan1, plf is just below the state of the art, which is based on disambiguating the verb vector in context [ 18 ] , and lf outperforms the baseline, which consists in using the verb vector only as a proxy to sentence similarity
+p32
+aVSince plf needs syntactic information to construct sentence vectors compositionally, we test it on onwn to make sure that it is not overly sensitive to parser noise
+p33
+aVFor instance, we treat adjectives that modify nouns (0-ary) as unary functions, encoded in a vector-matrix pair
+p34
+aVOn the other hand, if the verb occurs with more arguments than usual in testing materials, we can add a default diagonal identity matrix to its representation, signaling agnosticism about how the verb relates to the unexpected argument
+p35
+aVThese are trained using Ridge regression with generalized cross-validation from corpus-extracted vectors of nouns, as input, and phrases including those nouns as output (e.g.,, the matrix for red is trained from corpus-extracted u'\u005cu27e8' noun , red-noun u'\u005cu27e9' vector pairs
+p36
+aVFor ternary predicates such as give in a ditransitive construction, the first step in the derivation absorbs the innermost argument by multiplying its vector by the third give matrix, and then composition proceeds like for transitives
+p37
+aVEvery sentence in the anvan1 and anvan2 datasets has the form (subject) Adjective + Noun + Transitive Verb + (object) Adjective + Noun, so parsing them is trivial
+p38
+aV4 4 With the multiplicative composition model we also tried Nonnegative Matrix Factorization instead of Singular Value Decomposition, because the negative values produced by SVD are potentially problematic for mult
+p39
+aVFinally, the fact that we represent the predicate interaction with each of its arguments in a separate matrix allows for a natural and intuitive treatment of argument alternations
+p40
+aVPrepositions are the hardest, as the syntactic positions in which they occur are most diverse ( park in the dark vs play in the dark vs be in the dark vs a light glowing in the dark
+p41
+aVSince syntax guides lf and plf composition, we supplied all test sentences with categorial grammar parses
+p42
+aVOur system incorporates semantic composition via two composition rules, one for combining structures of different arity and the other for symmetric composition of structures with the same arity
+p43
+aVWe collected a 30K-by-30K matrix by counting co-occurrence of the 30K most frequent content lemmas (nouns, adjectives and verbs) within a 3-word window
+p44
+aVLast but not least, our implementation is suitable for realistic language processing since it allows to produce vectors for sentences of arbitrary size, including those containing novel syntactic configurations
+p45
+aVEvaluation is carried out by computing the Spearman correlation between the annotator similarity ratings for the sentence pairs and the cosines of the vectors produced by the various systems for the same sentence pairs
+p46
+aVAn n-ary predicate is no longer encoded as an n+1-way tensor; instead we have a sequence of n matrices
+p47
+aVIndeed, if we encounter a verb used intransitively which was only attested as transitive in the training corpus, we can simply omit the object matrix to obtain a type-appropriate representation
+p48
+aVSince each of these tensors must be learned from examples individually, their obvious relation is missed
+p49
+aV[ 23 , 24 ] , the Baroni and Zamparelli method does not require manually labeled data nor costly iterative estimation procedures, as it relies on automatically extracted phrase vectors and on the analytical solution of the least-squares-error problem
+p50
+aVThe representation size grows linearly, not exponentially, for higher semantic types, allowing for simpler and more efficient parameter estimation, storage, and computation
+p51
+aVWe did not attempt to train a lf model for the larger and more varied msrvid and onwn data sets, as this would have been extremely time consuming and impractical for all the reasons we discussed in Section 1.2 above
+p52
+aVFollowing standard practice in paraphrase detection studies (e.g.,, Blacoe and Lapata ( 2012 ) ), we use cosine similarity between sentence pairs as computed by one of our systems together with two shallow similarity cues word overlap between the two sentences and difference in sentence length
+p53
+aVThis setup was picked without tuning, as we found it effective in previous, unrelated experiments
+p54
+aVWe obtain a final similarity score by weighted addition of the 3 cues, with the optimal weights determined by linear regression on separate msrvid train data that were also provided by the SemEval task organizers (before combining, we checked that the collinearity between cues was low
+p55
+aVFor example, since the copula is empty, a sentence with a predicative adjective ( cars are red ) is treated in the same way as a phrase with the same adjective in attributive position ( red cars ) u'\u005cu2013' although the latter, being a phrase and not a full sentence, will later be embedded as argument in a larger construction
+p56
+aVWith all the advantages of lf, scaling it up to arbitrary sentences, however, leads to several issues
+p57
+aVAs a consequence of our architecture, we no longer need to perform the complicated step-by-step estimation for elements of higher arity
+p58
+aVThe two remaining data sets are larger and more u'\u005cu2018' natural u'\u005cu2019' , as they were not constructed by linguists under controlled conditions to focus on specific phenomena
+p59
+aV3 3 We did not evaluate on other STS benchmarks since they have characteristics, such as high density of named entities, that would require embedding our compositional models into more complex systems, obfuscating their impact on the overall performance
+p60
+aVIf we don u'\u005cu2019' t normalize, we do get larger differences for our models as well, but consistently lower performance in all other tasks
+p61
+aVThe overall pattern of results did not change significantly, and thus for consistency we report all models u'\u005cu2019' performance only for the SVD-reduced space
+p62
+aVHere the overlap+length baseline does not perform so well, and again the best STS 2013 system [ 16 ] uses considerably richer knowledge sources and algorithms than ours
+p63
+aVThis issue is unavoidable since we don u'\u005cu2019' t expect to find all words in all possible constructions even in the largest corpus
+p64
+aVOur current plf implementation treats most grammatical words, including conjunctions, as u'\u005cu201c' empty u'\u005cu201d' elements, that do not project into semantics
+p65
+aVOur main interest in this set stems from the fact that glosses are rarely well-formed full sentences (consider, e.g.,, cause something to pass or lead somewhere ; coerce by violence, fill with terror
+p66
+aV2013 ) , since only the former used a source corpus that is comparable to ours
+p67
+aVThis choice leads to some interesting u'\u005cu201c' serendipitous u'\u005cu201d' treatments of various constructions
+p68
+aVFor this reason, they are very challenging for standard parsers
+p69
+aVFor the lf (lexical function) model, we construct functional matrix representations of adjectives, determiners and intransitive verbs
+p70
+aVWe call our proposal practical lexical function model, or plf
+p71
+aVIn plf, a functional word is not represented by a single tensor of arity-dependent order, but by a vector plus an ordered set of matrices, with one matrix for each argument the function takes
+p72
+aVAs follows from section 1.2 , it would be desirable to have a compositional distributional model that encodes function-argument relations but avoids the troublesome high-order tensor representations of the pure lexical function model, with all the practical problems that come with them
+p73
+aVIndeed, in order to train a transitive verb tensor (e.g.,, eat ), the method of Grefenstette et al
+p74
+aVTo this end, we propose a new model of composition that maintains the idea of function application, while avoiding the complications and rigidity of lf
+p75
+aVAt the same time, we avoid high order tensor representations, produce semantic vectors for all syntactic constituents, and allow for an elegant and transparent correspondence between different syntactic usages of a lexeme, such as the transitive, the intransitive, and the passive usages of the verb to eat
+p76
+aVThe research of the last two decades has established empirically that distributional vectors for words obtained from corpus statistics can be used to represent word meaning in a variety of tasks [ 25 ]
+p77
+aVThis underlying intuition, adopted from formal semantics of natural language, motivated the creation of the lexical function model of composition ( lf ) [ 4 , 9 ]
+p78
+aVWe conclude our brief exposition of plf with an alternative intuition for it the plf model is also a more sophisticated version of the additive approach, where argument words are adapted by matrices that encode the relation to their functors before the sentence vector is derived by summing
+p79
+aVWe may still want to represent word meanings in different syntactic contexts differently, but at the same time we need to incorporate a formal connection between those representations, e.g.,, between the transitive and the intransitive instantiations of the verb to eat
+p80
+aVThis flexibility makes our model suitable to compute vector representations of sentences without stumbling at unseen syntactic usages of words
+p81
+aVFirst, one estimates matrices of verb-object phrases from subject and subject-verb-object vectors; next, transitive verb tensors are estimated from verb-object matrices and object vectors
+p82
+aVThe matrices formalize argument slot saturation, operating on an argument vector representation through matrix by vector multiplication, as described in the next section
+p83
+aV2 2 To determine the number and ordering of matrices representing the word in the current syntactic context, our plf implementation relies on the syntactic type assigned to the word in the categorial grammar parse of the sentence
+p84
+aVWe still employ a linguistically-motivated notion of semantic composition as function application and use distinct kinds of representations for different semantic types
+p85
+aVThe full range of semantic types required for natural language processing, including those of adverbs and transitive verbs, has to include, however, tensors of greater rank
+p86
+aVDeveloping a practical model of compositionality is still an open issue, which we address in this paper
+p87
+aVIn plf, all words are represented by a vector, and functional words, such as predicates and modifiers, are also assigned one or more matrices
+p88
+aVThe training proposed in this model estimates the parameters in a supervised setting
+p89
+aVThe last, and related, point is that for the tensor calculus to work, one needs to model, for each word, each of the constructions in the corpus that the word is attested in
+p90
+aVThe estimation method originally proposed by Baroni and Zamparelli has been extended to 3-way tensors representing transitive verbs by Grefenstette et al
+p91
+aVFor instance, for transitive verbs we estimate the verb-subject combination matrix from subject and verb-subject vectors, the verb-object combination matrix from object and verb-object vectors
+p92
+aVTable 2 illustrates simple cases of function application
+p93
+aVAnother issue is that the same or similar items that occur in different syntactic contexts are assigned different semantic types with incomparable representations
+p94
+aVMore worryingly, the simple word overlap baseline reported in the table sports a larger difference than our best model
+p95
+aVFor transitive verbs semantic composition applies iteratively as shown in the derivation of Figure 2
+p96
+aV2013 ) requires a sufficient number of distinct verb object phrases with that verb (e.g.,, eat cake , eat fruits ), each attested in combination with a certain number of subject nouns with sufficient frequency to extract sensible vectors
+p97
+aVDeverbal nouns like demolition , often used without mention of who demolished what, would have to get vector representations while the corresponding verbs ( demolish ) would become tensors, which makes immediately related verbs and nouns incomparable
+p98
+aVBesides losing the comparability of the semantic contribution of a word across syntactic contexts, we also worsen the data sparseness issues
+p99
+aVOne approach is to use simple, parameter-free models that perform operations such as pointwise multiplication or summing [ 20 ]
+p100
+aVThe plf model performs very well on both anvan benchmarks, outperforming not only add and mult, but also the full-fledged lf model
+p101
+aVOur result stands in contrast with Blacoe and Lapata ( 2012 ) , the only study we are aware of that compared a sophisticated composition model (Socher et al u'\u005cu2019' s 2011 model) to add and mult on realistic sentences, which attained the top performance with the simple models for both figures of merit they used
+p102
+aVOn anvan2, plf outperforms the best model reported by Grefenstette ( 2013 ) (an implementation of the lexical function ideas along the lines of Grefenstette and Sadrzadeh [ 12 , 13 ]
+p103
+aVFor example, if we only observe transitive usages of to eat in the training corpus, and encounter an intransitive or passive example of it in testing data, the system would not be able to compose a sentence vector at all
+p104
+aVFor example, verbs like eat can be used in transitive or intransitive constructions ( children eat meat / children eat ), or in passive ( meat is eaten
+p105
+aVGiven that these data sets contain, systematically, transitive verbs, the major difference between plf and lf lies in their representation of the latter
+p106
+aVLast but not least, all items need to include a common aspect of their representation (e.g.,, a vector) to allow comparison across categories (the case of demolish and demolition
+p107
+aVTo summarize, plf is an extension of the lexical function model that inherits its strengths and overcomes its weaknesses
+p108
+aVEstimating tensors of this size runs into data sparseness issues already for less common transitive verbs
+p109
+aVThe same method was later applied to matrix representations of intransitive verbs and determiners [ 5 , 10 ] , always with good empirical results
+p110
+aVEvidently, the separately-trained subject and object matrices of plf, being less affected by data sparseness than the 3-way tensors of lf, are better able to capture how verbs interact with their arguments
+p111
+aVThe general form of a semantic representation for a linguistic unit is an ordered tuple of a vector and n u'\u005cu2208' u'\u005cu2115' matrices
+p112
+aVTransitive verb tensors are estimated using the two-step regression procedure outlined by Grefenstette et al
+p113
+aVNone of the proposals mentioned above, from simple to elaborate, incorporates in its architecture the intuitive idea (standard in theoretical linguistics) that semantic composition is more than a weighted combination of words
+p114
+aVSimilarly, mult uses component-wise multiplication of vectors for composition
+p115
+aVIndeed, one can estimate each matrix of a complex representation individually using the simple method of Baroni and Zamparelli ( 2010
+p116
+aVIn particular, it is desirable for all practical purposes to limit representation size
+p117
+aVThe second composition rule, symmetric composition applies when two syntactic sisters are of the same arity (e.g.,, two vectors, or two vector-matrix pairs
+p118
+aVSymmetric composition simply sums the objects in the two tuples vector with vector, n -th matrix with n -th matrix
+p119
+aVAnd lf is, again, the only model, besides plf, that performs better than the baseline
+p120
+aVUnlike the neural network approach of Socher et al
+p121
+aVThe number of matrices in the representation encodes the arity of a linguistic unit, i.e.,, the number of other units to which it applies as a function
+p122
+aVEach matrix corresponds to a function-argument relation, and words have as many matrices as many arguments they take none for (most) nouns, one for adjectives and intransitive verbs, two for transitives, etc
+p123
+aVFor example, adjectives, as unary functors, are modeled with 2-way tensors, or matrices
+p124
+aVAs a final remark, in all experiments the running time of plf was only slightly larger than for the simpler models, but orders of magnitude smaller than lf, confirming another practical side of our approach
+p125
+aVSee two examples of Symmetric Composition application in Table 3
+p126
+aVNouns in general would oscillate between vector and matrix representations depending on argument vs. predicate vs. modifier position ( an animal runs vs this is an animal vs animal shelter
+p127
+aVOur plf model is again the best on the onwn set (albeit by a small margin over add
+p128
+aVModifiers of transitive verbs would have even greater representation size, which may not be possible to store and learn efficiently
+p129
+aVIn its pure form lf does not include an emergency backoff strategy when unknown words or constructions are encountered
+p130
+aVThe msrvid data set from the SemEval-2012 Semantic Textual Similarity (STS) task [ 2 ] consists of 750 sentence pairs that describe brief videos
+p131
+aV2013 ) at the TFDS workshop ( tfds below) was specifically designed to test compositional methods for their sensitivity to word order and the semantic effect of determiners
+p132
+aVGuevara ( 2010 ) , Mitchell and Lapata ( 2010 ) , Socher et al
+p133
+aVWe expect a reasonably large corpus to feature many occurrences of a verb with a variety of subjects and a variety of objects (but not necessarily a variety of subjects with each of the objects as required by Grefenstette et al u'\u005cu2019' s training), allowing us to avoid the data sparseness issue
+p134
+aVSuch models turn out to be surprisingly effective in practice [ 6 ] , but they have obvious limitations
+p135
+aV2011 ) and Zanzotto et al
+p136
+aVOn msrvid, the plf approach outperforms add and mult, although the difference between the three is not big
+p137
+aVIn all those cases, the same word has to be mapped to tensors of different orders
+p138
+aVIn addition, we repeated the evaluation for the multiplicative and additive models without any form of dimensionality reduction
+p139
+aVClearly, this baseline is exploiting the systematic determiner differences in the foils and, indeed, when it is evaluated on foils where only word order changes its performance is no longer significant
+p140
+aVGrefenstette et al u'\u005cu2019' s method works in two steps
+p141
+aVFirst, all issues caused by representation size disappear
+p142
+aVWe consider four composition models
+p143
+aVThis suggests that the msrvid benchmark lacks the lexical and syntactic variety we would like to test our systems on
+p144
+aVGenerally one of the components of a phrase, e.g.,, an adjective, acts as a function affecting the other component (e.g.,, a noun
+p145
+aVWe consider 5 different benchmarks that focus on different aspects of sentence-level semantic composition
+p146
+aVThe state-of-the-art row for tfds reports the lf implementation by Pham et al
+p147
+aVThe first data set, created by Edward Grefenstette and Mehrnoosh Sadrzadeh and introduced in Kartsaklis et al
+p148
+aVAdverbs like quickly that modify intransitive verbs have to be represented with 300 2 2 = 8 , 100 , 000 , 000 dimensions
+p149
+aVStill, we must also stress the impressive performance of our baseline, given by the combination of the word overlap and sentence length cues
+p150
+aVThe raw count vectors were transformed into positive Pointwise Mutual Information scores and reduced to 300 dimensions by the Singular Value Decomposition
+p151
+aVWe also consider a similar data set introduced by Grefenstette ( 2013 ) , comprising 200 sentence pairs rated by 50 annotators
+p152
+aVAll vectors were normalized to length 1
+p153
+aVIt is not feasible to obtain enough data points for all verbs in such a training design
+p154
+aVIndeed, our simple system would have obtained a respectable 25/89 ranking in the STS 2012 msrvid task
+p155
+aVModifiers of n-ary functors are represented by n+1-ary structures
+p156
+aVLet us now outline how plf addresses the shortcomings of lf listed in Section 1.2
+p157
+aVNote that the sing and dance composition in Table 3 skips the conjunction
+p158
+aVAll sentences in tfds have a predictable structure that allows perfect parsing with simple finite state rules
+p159
+aVThe tfds benchmark contains 157 target sentences that are matched with a set of (approximate) paraphrases (8 on average), and a set of u'\u005cu201c' foils u'\u005cu201d' (17 on average
+p160
+aVThe benchmark introduced by Pham et al
+p161
+aVSymmetric composition is reserved for structures in which the function-argument distinction is problematic
+p162
+aVThe main difference is that Pham and colleagues do not normalize vectors like we do
+p163
+aVSentence pairs were scored for similarity by 5 subjects each
+p164
+aVThis set contains 561 pairs of glosses (from the WordNet and OntoNotes databases), rated by 5 judges for similarity
+p165
+aVIn this data set, sentences have fixed adjective-noun-verb-adjective-noun (anvan) structure, and they were built in order to crucially require context-based verb disambiguation (e.g.,, young woman filed long nails is paired with both young woman smoothed long nails and young woman registered long nails
+p166
+aVPerformance is assessed through the t -standardized cross-target average of the difference between mean cosine with paraphrases and mean cosine with foils (Pham and colleagues, equivalently, reported non-standardized average and standard deviations
+p167
+aVSimilarly, leaving the relative pronoun empty makes cars that run identical to cars run , although, again, the former will be embedded in a larger construction later in the derivation
+p168
+aVIn all these cases, applying a general-purpose parser to the data would have, at best, had no impact and, at worst, introduced parsing errors
+p169
+aVThe final set we use is onwn , from the *SEM-2013 STS shared task [ 1 ]
+p170
+aVOur plf-based method would have reached a respectable 20/90 rank in the STS 2013 onwn task
+p171
+aV2013 ) , features 200 sentence pairs that were rated for similarity by 43 annotators
+p172
+aVTable 5 summarizes the performance of our models on the chosen tasks, and compares it to the state of the art reported in previous work, as well as to various strong baselines
+p173
+aVA good system should return higher similarities for the comparison with the paraphrases with respect to that with the foils
+p174
+aV5 5 We report state of the art from Kartsaklis and Sadrzadeh ( 2013 ) rather than Kartsaklis et al
+p175
+aVWhile these models are very simple, a long experimental tradition has proven their effectiveness [ 19 , 20 , 21 , 6 ]
+p176
+aVEvaluation proceeds as with msrvid (cue weights are determined by 10-fold cross-validation
+p177
+aVThe best 2012 STS system [ 7 ] , obtained 0.87 correlation, but with many more and considerably more complex features than the ones we used here
+p178
+aVIndeed, we estimated from a sample of 40 onwn glosses that the C C parser (see below) has only 45% accuracy on this set
+p179
+aVThings get even worse for other categories
+p180
+aVOur source corpus was given by the concatenation of ukWaC ( wacky.sslmit.unibo.it ), a mid-2009 dump of the English Wikipedia ( en.wikipedia.org ) and the British National Corpus ( www.natcorp.ox.ac.uk ), for a total of about 2.8 billion words
+p181
+aVWe will call these benchmarks anvan1 and anvan2 , respectively
+p182
+aVSystem scores are evaluated by their Pearson correlation with the human ratings
+p183
+aV2013 ) with preliminary success
+p184
+aVThey are aimed at evaluating systems on the sort of free-form sentences one encounters in real-life applications
+p185
+aV1 1 Matrices associated with term x are symbolized x u'\u005cu25a1'
+p186
+aVFor msrvid and onwn, we used the output of the C C parser [ 8 ]
+p187
+aVThe add/mult advantage was even more marked in the original paper
+p188
+aVThis research was supported by the ERC 2011 Starting Independent Research Grant n. 283554 (COMPOSES
+p189
+aVFor example, the target A man plays an acoustic guitar is matched with paraphrases such as A man plays guitar and The man plays the guitar , and foils such as The man plays no guitar and A guitar plays a man
+p190
+aV2013 ) , which outperforms ours
+p191
+aV6 6 We refer here to the results reported in the erratum available at http://homepages.inf.ed.ac.uk/s1066731/pdf/emnlp2012erratum.pdf
+p192
+aVWe thank Roberto Zamparelli and the COMPOSES team for helpful discussions
+p193
+aVSome candidates for such treatment are coordination and nominal compounds, although we recognize that the headless analysis is not the only possible one here
+p194
+aV2013
+p195
+a.

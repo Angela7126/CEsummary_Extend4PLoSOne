@@ -1,0 +1,250 @@
+(lp0
+V1) We ran LDA on TW and NW separately for each category with the number of topics set to 100; 1) We then aligned the Twitter topics and Newswire topics by the similarity measurement of word distributions of these topics [ 8 , 10 , 33 , 5 ] ; 1) Finally to generate the GS label for each aligned topic pair ( t i - t j ) , we extracted the headlines of the news articles relevant to t j and selected the top x most frequent words (after stop word removal and stemming
+p1
+aVBased on the observation that a short summary of a collection of documents can serve as a label characterising the collection, we propose to generate topic label candidates based on the summarisation of a topic u'\u005cu2019' s relevant documents
+p2
+aV\u005cENDFOR \u005cSTATE Select topic j which has the highest similarity to i and whose similarity measure is greater than a threshold (in this case 0.7) \u005cENDFOR \u005cFOR each of the extracted topic pairs ( t i - t j ) \u005cSTATE Collect relevant news articles u'\u005cud835' u'\u005cudc9e' N u'\u005cu2062' W j of topic t j from the NW set
+p3
+aV[ 15 ] proposed to label topics by selecting top- n terms to label the overall topic based on different ranking mechanisms including pointwise mutual information and conditional probabilities
+p4
+aVThis experiment shows that frequency based summarisation techniques outperform graph-based and relevance based summarisation techniques for generating topic labels that improve upon the top-terms baseline, without relying on external sources
+p5
+aVOur research task of automatic labelling a topic consists on selecting a set of words that best describes the semantics of the terms involved in this topic
+p6
+aVThese TT set corresponds to the top x terms ranked based on the probability of the word given the topic ( p ( w k ) ) from the topic model
+p7
+aVThe most generic approach to automatic labelling has been to use as primitive labels the top- n words in a topic distribution learned by a topic model such as LDA [ 9 , 2 ]
+p8
+aVGiven K topics over the document collection u'\u005cud835' u'\u005cudc9f' , the topic labelling task consists on discovering a sequence of words for each topic k u'\u005cu2208' u'\u005cud835' u'\u005cudca6'
+p9
+aVTherefore, following a similarity alignment approach we performed the steps oulined in Algorithm 3.2 for generating the GS topic labels of a topic in TW
+p10
+aV[ 14 ] generated label candidates for a topic based on top-ranking topic terms and titles of Wikipedia articles
+p11
+aVAlthough the top 5 terms set from the LDA topic extracted from TW (listed under TT ) does capture relevant information related to the event, it does not provide information regarding the blast
+p12
+aV[htbp] GS for Topic Labels {algorithmic} [1] \u005cREQUIRE LDA topics for TW , and the LDA topics for NW for category c
+p13
+aV- For each topic k u'\u005cu2208' { 1 , u'\u005cu2026' u'\u005cu2062' K } draw u'\u005cu03a6' k u'\u005cu223c' Dirichlet ( u'\u005cu0392' ) , - For each document d u'\u005cu2208' { 1 u'\u005cu2062' D } u'\u005cu22c6' draw u'\u005cu0398' d u'\u005cu223c' Dirichlet ( u'\u005cu0391' ) ; u'\u005cu22c6' For each word n u'\u005cu2208' { 1 u'\u005cu2062' N d } in document d u'\u005cu2218' draw a topic z d , n u'\u005cu223c' Multinomial ( u'\u005cu0398' d ) ; u'\u005cu2218' draw a word w d , n u'\u005cu223c' Multinomial ( u'\u005cu03a6' z d , n )
+p14
+aV- We propose a novel approach for topics labelling that relies on term relevance of documents relating to a topic; and - We show that summarisation algorithms, which are independent of extenal sources, can be used with success to label topics, presenting a higher perfomance than the top- n terms baseline
+p15
+aVIn this example, the topic certainly relates to a student protest as revealed by the top 3 terms which can be used as a good label for this topic
+p16
+aVWe propose to generate topic label candidates by summarising topic relevant documents
+p17
+aVThe generated label was used as the gold standard label for the corresponding Twitter topic t i in the topic pair
+p18
+aVOur original interest in labelling topics stems from work in topic model based event extraction from social media, in particular from tweets [ 32 , 6 ]
+p19
+aVThis task has been approached by investigating methodologies for identifying meaningful topics through semantic coherence [ 1 , 24 , 27 ] and for characterising the semantic content of a topic through automatic labelling techniques [ 12 , 14 , 22 ]
+p20
+aV\u005cSTATE Extract the headlines of news articles from u'\u005cud835' u'\u005cudc9e' N u'\u005cu2062' W j and select the top x most frequent words as the gold standard label for topic t i in the TW set \u005cENDFOR
+p21
+aVTheir proposed approach was defined as an optimisation problem involving the minimisation of the KL divergence between a given topic and the candidate labels while maximising the mutual information between these two word distributions
+p22
+aVTopic model based algorithms applied to social media data have become a mainstream technique in performing various tasks including sentiment analysis [ 11 ] and event detection [ 34 , 6 ]
+p23
+aVGiven the set of documents u'\u005cud835' u'\u005cudc9e' relevant to topic k , we proposed to generate a label of a desired length x from the summarisation of u'\u005cud835' u'\u005cudc9e'
+p24
+aVDifferent summarisation techniques reveal words which do not appear in the top terms but which are relevant to the information clustered by the topic
+p25
+aV[ 21 ] which derived candidate topic labels for topics induced by LDA using the hierarchy obtained from the Google Directory service and expanded through the use of the OpenOffice English Thesaurus
+p26
+aVFocusing on the Latent Dirichlet Allocation (LDA) model [ 2 , 9 ] , let u'\u005cud835' u'\u005cudc9f' be a corpus of documents denoted as u'\u005cud835' u'\u005cudc9f' = { u'\u005cud835' u'\u005cudc85' 1 , u'\u005cud835' u'\u005cudc85' 2 u'\u005cud835' u'\u005cudc85' D } ; where each document consists of a sequence of N d words denoted by u'\u005cud835' u'\u005cudc85' = ( w 1 , w 2 w N d ) ; and each word in a document is an item from a vocabulary index of V different terms denoted by { 1 , 2
+p27
+aV[ 12 ] proposed to make use of a structured data source (DBpedia) and employed graph centrality measures to generate semantic concept labels which can characterise the content of a topic
+p28
+aV100 } from NW \u005cSTATE Compute the Cosine similarity between word distributions of topic t i and topic t j
+p29
+aVGiven a set of documents the problem to be solved by topic modelling is the posterior inference of the variables, which determine the hidden thematic structures that best explain an observed set of documents
+p30
+aVMost previous topic labelling approaches focus on topics derived from well formatted and static documents
+p31
+aVTherefore given a topic k , a set of C documents related to this topic can be obtained via equation 1
+p32
+aVWe can see in all four categories that the SB and TFIDF approaches provide a better summarisation coverage as the length of the topic label increases
+p33
+aVWe compare different summarisation algorithms based on their ability to provide a good label to a given topic
+p34
+aVIt is similar to SB , however rather than computing the initial word probabilities based on word frequencies it weights terms based on TFIDF
+p35
+aVFigure 1 presents the ROUGE-1 performance of the summarisation approaches as the length x of the generated topic label increases
+p36
+aV\u005cENSURE Gold standard topic label for each of the LDA topics for TW
+p37
+aVMore recent approaches have explored the use of external sources (e.g., Wikipedia, WordNet) for supporting the automatic labelling of topics by deriving candidate labels by means of lexical [ 14 , 21 , 22 ] or graph-based [ 12 ] algorithms applied on these sources
+p38
+aVWe compared the results of the summarisation techniques with the top terms ( TT ) of a topic as our baseline
+p39
+aVThis is an attractive property for automatically generating topic labels for tweets where their event-related content might not have a counter part on existing external sources
+p40
+aVWe can also notice that the GS labels generated from Newswire media presented in Table 2 appear on their own, to be good labels for the TW topics
+p41
+aVwhere u'\u005cu03a6' k is the word distribution for topic k , and u'\u005cu0398' d is the distribution of topics in document d
+p42
+aVWe propose to approach the topic labelling problem as a multi-document summarisation task
+p43
+aVIn this way, the labels generated for topics belonging to different categories generally extend the information provided by the top terms
+p44
+aV[ 22 ] proposed an unsupervised probabilistic methodology to automatically assign a label to a topic model
+p45
+aVEvaluation of automatic topic labelling often relied on human assessment which requires heavy manual effort [ 14 , 12 ]
+p46
+aVThe generated labels with summarisation at x = 5 are presented in Table 2 , where GS represents the label generated from the Newswire headlines
+p47
+aVSuch top words are usually ranked using the marginal probabilities P ( w i t j ) associated with each word w i for a given topic t j
+p48
+aV\u005cFOR each topic i u'\u005cu2208' { 1 , 2 , u'\u005cu2026' , 100 } from TW \u005cFOR each topic j u'\u005cu2208' { 1 , 2
+p49
+aVIn particular we investigate the use of lexical features by comparing three different well-known multi-document summarisation algorithms against the top- n topic terms baseline
+p50
+aVHowever previous work has shown that top terms are not enough for interpreting the coherent meaning of a topic [ 22 ]
+p51
+aVThis is a frequency based summarisation algorithm [ 25 ] , which computes initial word probabilities for words in a text
+p52
+aVIn this sense the topic label generated by SB more accurately describes this event
+p53
+aVAs opposed to previous approaches, the research presented in this paper addresses the labelling of topics exposing event-related content that might not have a counter part on existing external sources
+p54
+aVSuch documents can be derived using both the observed data from the corpus u'\u005cud835' u'\u005cudc9f' and the inferred topic model variables
+p55
+aVNW consists of a collection of news articles crawled from traditional news media (BBC, CNN, and New York Times) comprising over 77,000 articles which include supplemental metadata (e.g., headline, author, publishing date
+p56
+aVSince previous research has shown that headlines are good indicators of the main focus of a text, both in structure and content, and that they can act as a human produced abstract [ 26 ] , we used headlines as the GS labels of NW
+p57
+aVMethods relying on external sources for automatic labelling of topics include the work by Magatti et al
+p58
+aVThe following describes our proposed framework to characterise documents relevant to a topic
+p59
+aVThis task can be illustrated by considering the following topic derived from social media related to Education
+p60
+aVWe also used the OpenCalais u'\u005cu2019' document categorisation service to automatically label news articles and considered the same four topical categories, ( War , DisAc , Edu and LawCri
+p61
+aVTopics are interpreted using the top N terms ranked based on the marginal probability p ( w i t j )
+p62
+aVEach of these algorithms produces a label of a desired length x for a given topic k
+p63
+aVHowever as we described in the introduction we want to avoid relaying on external sources for the derivation of topic labels
+p64
+aVThis method measures the overlap of words between the generated summary and a reference, in our case the GS generated from the NW dataset
+p65
+aVWe evaluated these summarisation approaches with the ROUGE-1 method [ 17 ] , a widely used summarisation evaluation metric that correlates well with human evaluation [ 18 ]
+p66
+aVwhere the top 10 words ranked by P ( w i t j ) for this topic are listed
+p67
+aVTherefore the task is to find the top- n terms which are more representative of the given topic
+p68
+aVThis is a relevance based ranking algorithm [ 4 ] , which avoids redundancy in the documents used for generating a summary
+p69
+aVThe obtained ROUGE-1 performance is within the same range of performance previously reported on Social Media summarisation [ 13 , 28 , 31 ]
+p70
+aVHowever performing human evaluations of Social Media test sets comprising thousands of inputs become a difficult task
+p71
+aVParticularly the SB and TFIDF summarisation techniques consistently outperform the TT baseline across all four categories
+p72
+aVHowever, one of the main challenges is the task of understanding the semantics of a topic
+p73
+aVThe final score of a word is therefore not only dependent on the terms immediately connected to it but also on how these terms connect to others
+p74
+aVTo alleviate this issue here, we followed the distribution similarity approach, which has been widely applied in the automatic generation of gold standards ( GS s) for summary evaluations [ 7 , 16 , 19 , 20 ]
+p75
+aVThe relevance of a vertex (term) to the graph is computed based on global information recursively drawn from the whole graph
+p76
+aVHowever in contrast to this type of content, the labelling of topics derived from tweets presents different challenges
+p77
+aVOnce a final score is calculated for each vertex of the graph, TextRank sorts the terms in a reverse order and provided the top T vertices in the ranking
+p78
+aVThe final TW dataset after removing retweets and short microposts (less than 5 words after removing stopwords) contains 7000 tweets in each category
+p79
+aVFinally to address the issue of data sparseness in the TW dataset, we removed words with a frequency lower than 5
+p80
+aVGiven D documents containing K topics expressed over V unique words, LDA generative process is described as follows
+p81
+aVIn particular, the prominent topic of a document d can be found by
+p82
+aVThis approach compares two corpora, one for which no GS labels exist, against a reference corpus for which a GS exists
+p83
+aVThey then built a Support Vector Regression (SVR) model for ranking the label candidates
+p84
+aVIn this case the document frequency is computed as the number of times a word appears in a micropost from the collection u'\u005cud835' u'\u005cudc9e'
+p85
+aVThe News Corpus ( NW ) was collected during the same period of time as the TW corpus
+p86
+aVIn each iteration it picks the highest weighted document and from it the highest weighted word
+p87
+aVTo assign the weight of an edge between two terms, TextRank computes word co-occurrence in windows of N words (in our case N = 10
+p88
+aVFor example in Table 2 , the DisAc headline is characteristic of the New Zealand u'\u005cu2019' s Pike River u'\u005cu2019' s coal mine blast accident, which is an event occurred in November 2010
+p89
+aVThis is due to both the corpus size, the diversity of event-related topics and the limited availability of domain experts
+p90
+aVMoreover, the use of Twitter as the u'\u005cu201c' what u'\u005cu2019' s-happening-right now u'\u005cu201d' tool, introduces new event-dependent relations between words which might not have a counter part in existing knowledge sources (e.g., Wikipedia
+p91
+aVIn particular, in both the Education and Law Crime categories, both SB and TFIDF outperforms TT and TR by a large margin
+p92
+aVIt measures the degree of dissimilarity between the documents considered and previously selected ones already in the ranked list
+p93
+aVschool protest student fee choic motherlod tuition teacher anger polic
+p94
+aVFollowing the same procedure as SB it returns the top x weighted terms
+p95
+aVWe used the OpenCalais u'\u005cu2019' document categorisation service 1 1 OpenCalais service, http://www.opencalais.com to generate categorical sets
+p96
+aVWar and Conflict ( War ), Disaster and Accident ( DisAc ), Education ( Edu ) and Law and Crime ( LawCri
+p97
+aVIn our case these corpora correspond to the TW and a Newswire dataset ( NW
+p98
+aVIt then weights each sentence in the text (in our case a micropost) by computing the average probability of the words in the sentence
+p99
+aVIn nature micropost content is sparse and present ill-formed words
+p100
+aVWe preprocessed TW by first removing punctuation, numbers, non-alphabet characters, stop words, user mentions, and URL links
+p101
+aVWe then performed Porter stemming [ 30 ] in order to reduce the vocabulary size
+p102
+aVOur Twitter Corpus ( TW ) was collected between November 2010 and January 2011
+p103
+aVIt uses an update function which penalises words which have already been picked
+p104
+aVTable 1 presents average results for ROUGE-1 in the four categories
+p105
+aV611242), and the Shenzhen International Cooperation Research Funding (grant number GJHZ20120613110641217
+p106
+aVThe same preprocessing steps were performed on NW
+p107
+aVThis is a graph-based summariser method [ 23 ] where each word is a vertex
+p108
+aVSB gives the best results in three categories except War
+p109
+aVTW comprises over 1 million tweets
+p110
+aVIt uses the PageRank algorithm [ 3 ] to recursively change the weight of the vertices
+p111
+aVThis work was supported by the EPRSC grant EP/J020427/1, the EU-FP7 project SENSE4US (grant no
+p112
+aVThe evaluation was performed at x = { 1
+p113
+aVThese algorithms include
+p114
+aVMore recently, Hulpus et al
+p115
+aVLau et al
+p116
+aVLau et al
+p117
+aVMei et al
+p118
+aVIn this paper we focus on the latter
+p119
+aVIn particular, we considered four different categories which contain many real-world events, namely
+p120
+aVThese steps can be outlined as follows
+p121
+aV10 }
+p122
+aVOur contributions are two-fold
+p123
+aVV }
+p124
+a.

@@ -1,0 +1,96 @@
+(lp0
+VWe also experimented with a number of alternative high precision approaches that space precludes our presenting in detail here, including pruning the number of expansion candidates based on the pair LM score; only allowing abbreviation expansion when at least one extracted n-gram context is present for that expansion in that context; and CART tree [] training with real valued scores
+p1
+aVThus multiple bin features can be active for a given candidate expansion of the abbreviation
+p2
+aVWe then take the Bayesian fusion of this model with the pair LM, by adding them in the log space, to get prediction from both the context and abbreviation model
+p3
+aVFirst, we simply train a smoothed n-gram LM from the data
+p4
+aVWe also have features that fire for each type of contextual feature (e.g.,, trigram with expansion as middle word, etc.), including u'\u005cu2018' no context u'\u005cu2019' , where none of the trigrams or bigrams from the current example that include the candidate expansion are present in our list
+p5
+aVThen a small amount of annotated data is used to build models to determine whether to accept a candidate expansion of an abbreviation based on these features
+p6
+aVWe then quantize these scores down into 16 bins, using the histogram in the training data to define bin thresholds so as to partition the training instances evenly
+p7
+aVBecause of the size of the data set, this is heavily pruned using relative entropy pruning []
+p8
+aVWe present methods for learning abbreviation expansion models that favor high precision (incorrect expansions 2 u'\u005cu2062' %
+p9
+aVThen, for any pair of words u , v , we can assign a pair count based on the count of contexts where both occur
+p10
+aVOur abbreviation model is a pair character language model (LM), also known as a joint multi-gram model [] , whereby aligned symbols are treated as a single token and a smoothed n-gram model is estimated
+p11
+aVA binary feature is defined for each bin that is set to 1 if the current candidate u'\u005cu2019' s score is less than the threshold of that bin, otherwise 0
+p12
+aVThe cost from this LM, normalized by the length of the expansion, serves as a score for the quality of a putative expansion for an abbreviation
+p13
+aVSecond, we used it to extract contextual n-gram features for predicting possible expansions
+p14
+aVFor a small set of frequent, conventionalized abbreviations (e.g.,, ca for California u'\u005cu2014' 63 pairs in total u'\u005cu2014' mainly state abbreviations and similar items), we assign an fixed pair LM score, since these examples are in effect irregular cases, where the regularities of the productive abbreviation process do not capture their true cost
+p15
+aVThe data we report on are taken from Google Maps TM and web pages associated with its map entries, but the methods can be applied to any data source that is relatively abbreviation rich
+p16
+aV2 2 This Thrax grammar can be found at http://openfst.cs.nyu.edu/twiki/bin/view/Contrib/ThraxContrib We count a pair of words as u'\u005cu2018' co-occurring u'\u005cu2019' if they are observed in the same context
+p17
+aVWe collect potential abbreviation/full-word pairs by looking for terms that could be abbreviations of full words that occur in the same context
+p18
+aVIf a word is already in the lexicon, it is left unprocessed, since there is an existing pronunciation for it; if a word is out-of-vocabulary (OOV), we consider expanding it to a word in the lexicon
+p19
+aVSince our target application is text-to-speech, we define the task in terms of an existing TTS lexicon
+p20
+aVIn our experiments, k = 2 since we have a trigram model, though in cases where the target word is the last word in the string, k = 1 , because there only the end-of-string symbol must be predicted in addition to the expansion
+p21
+aVTaking this very high precision system combination of the N-gram and SVM models, we then combine with the baseline TTS system as follows
+p22
+aVMost notably, the TTS baseline system has a much lower true positive rate; yet we find our systems achieve performance very close to that for the development set, so that our final combination with the TTS baseline was actually slighly better than the numbers on the development set
+p23
+aVThe abbreviation class is defined as cases where pronouncing as the expansion would be normal
+p24
+aVWe randomly selected 14,434 OOVs in their full context, and had them manually annotated as falling within one of 8 categories, along with the expansion if the category was u'\u005cu2018' abbreviation u'\u005cu2019'
+p25
+aVOf course, at test time, we will not know whether an OOV is an abbreviation or not, so we also looked at the performance on the rest of the collected data, to see how often it erroneously suggests an expansion from that set
+p26
+aVFurther, we have features for the length of the abbreviation (shorter abbreviations have more ambiguity, hence are more risky to expand); membership in the list of frequent, conventionalized abbreviations mentioned earlier; and some combinations of these, along with bias features
+p27
+aVThe same contextual information of course is used later on to disambiguate which of the expansions is appropriate for the context.) To compute the initial guess as to what can be a possible abbreviation, a Thrax grammar [] is used that, among other things, specifies that the abbreviation must start with the same letter as the full word; if a vowel is deleted, all adjacent vowels should also be deleted; consonants may be deleted in a cluster, but not the last one; and a (string) suffix may be deleted
+p28
+aVOOVs labeled as abbreviations were also labeled with the correct expansion
+p29
+aVFirst, we used it to bootstrap a model for assigning a probability of an abbreviation/expansion pair
+p30
+aVFirst we apply our system, and expand the item if it scores above threshold; for those items left unexpanded, we let the TTS system process it in its own way
+p31
+aVWe found that, for use in combination with the baseline TTS system, large overall reductions in FP rate were achieved by using an initial system with substantially higher TP and somewhat higher FP rates, since far fewer abbreviations were then passed along unexpanded to the baseline system, with its relatively high 3% FP rate
+p32
+aVWe further filter the potential abbreviations by removing ones that have a lot of potential expansions, where we set the cutoff at 10
+p33
+aVThe extracted abbreviation/expansion pairs are character-aligned and a 7-gram pair character LM is built over the alignments using the OpenGrm n-gram library []
+p34
+aVOf the 11,157 examples that were hand-labeled as non-abbreviations, our SVM u'\u005cu2229' N-gram system expanded 45 items, which is a false positive rate of 0.4% under the assumption that none of them should be expanded
+p35
+aVIn this paper we concentrate on abbreviations, which we define as alphabetic NSWs that it would be normal to pronounce as their expansion
+p36
+aVOther categories included letter sequence (expansion would not be normal, e.g.,, TV ); partial letter sequence (e.g.,, PurePictureTV ); misspelling; leave as is (part of a URL or pronounced as a word, e.g.,, NATO ); foreign; don u'\u005cu2019' t know; and junk
+p37
+aVIn other applications, such as TTS or typing auto-correction, the resulting normalized string itself is directly presented to the user; hence errors in normalization can have a very high cost relative to leaving tokens unnormalized
+p38
+aV1 1 We do not deal here with phonetic spellings in abbreviations such as 4get , or cases where letters have been transposed due to typographical errors ( scv
+p39
+aVOn the other hand, someone who writes svc ctr for service center in a product review is probably merely trying to save time and so expanding the abbreviations in that case is neutral with respect to preserving the intent of the original text
+p40
+aVPerhaps the most demanding such application is text-to-speech synthesis (TTS) since, while for parsing, machine translation and information retrieval it may be acceptable to leave such things as numbers and abbreviations unexpanded, for TTS all tokens need to be read , and for that it is necessary to know how to pronounce them
+p41
+aVIf a system is unable to reliably predict the correct reading for a string, it is better to leave the string alone and have it default to, say, a character-by-character reading, than to expand it to something wrong
+p42
+aVThis defines a joint distribution over input and output sequences, and can be efficiently encoded as a weighted finite-state transducer
+p43
+aVIdeally a navigation system should read turn on 30N correctly as turn on thirty north ; but if it cannot resolve the ambiguity in 30N , it is far better to read it as thirty N than as thirty Newtons , since listeners can more easily recover from the first kind of error than the second
+p44
+aVExpanding the latter to your website sucks, brother certainly normalizes it to standard English, but one could argue that in so doing one is losing information that the writer is trying to convey using an informal style
+p45
+aVLet c u'\u005cu2062' ( u ) be defined as u'\u005cu2211' v c u'\u005cu2062' ( u , v
+p46
+aVThis class of NSWs is particularly common in personal ads, product reviews, and so forth
+p47
+a.

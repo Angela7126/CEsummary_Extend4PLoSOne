@@ -1,0 +1,18 @@
+(lp0
+VWork on target language morphological segmentation for SMT can be divided into three subproblems segmentation, desegmentation and integration
+p1
+aVThe second indicates that the source words contained a single discontiguity, as in a word-by-word translation of the u'\u005cu201c' with his blue car u'\u005cu201d' example from Section 2.2
+p2
+aVWe approach this problem by augmenting an SMT system built over target segments with features that reflect the desegmented target words
+p3
+aVInstead of producing an abstract feature layer, morphological segmentation transforms the target sentence by segmenting relevant morphemes, which are then handled as regular tokens during alignment and translation
+p4
+aVThis is sometimes referred to as a word graph [ 32 ] , although in our case the segmented phrase table also produces tokens that correspond to morphemes
+p5
+aVThis can be accomplished by composing the lattice with a desegmenting transducer that consumes morphemes and outputs desegmented words
+p6
+aVThe chains found by this search are desegmented and then added to the output lattice as edges
+p7
+aVDoing so enables the inclusion of an unsegmented target language model, and with a small amount of bookkeeping, it also allows the inclusion of features related to the operations
+p8
+a.

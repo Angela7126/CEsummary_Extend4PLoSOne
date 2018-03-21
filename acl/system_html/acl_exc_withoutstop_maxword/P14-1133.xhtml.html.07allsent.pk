@@ -1,0 +1,504 @@
+(lp0
+VOur paraphrase model decomposes into an association model and a vector space model
+p1
+aVOnce the candidate set of logical forms paired with canonical utterances is constructed, our problem is reduced to scoring pairs ( c , z ) based on a paraphrase model
+p2
+aVWe use two complementary paraphrase models an association model based on aligned phrase pairs extracted from a monolingual parallel corpus, and a vector space model , which represents each utterance as a vector and learns a similarity score between them
+p3
+aVWe ablate the association model, the VS model, and the entire paraphrase model (using only logical form features
+p4
+aVwhere the parameters u'\u005cu0398' pr define the paraphrase model (Section 5 ), which is based on features extracted from text only (the input and canonical utterance
+p5
+aVOur framework accommodates any paraphrasing method, and in this paper we propose an association model that learns to associate natural language phrases that co-occur frequently in a monolingual parallel corpus, combined with a vector space model , which learns to score the similarity between vector representations of natural language utterances (Section 5
+p6
+aVFigure 4 gives an example for a correct paraphrase pair, where the full matrix model boosts the overall model score
+p7
+aVGiven an input utterance, we first use a simple deterministic procedure to construct a manageable set of candidate logical forms (ideally, we would generate canonical utterances for all possible logical forms, but this is intractable
+p8
+aVIn summary, while the association model aligns particular phrases to one another, the vector space model provides a soft vector-based representation for utterances
+p9
+aVWe now introduce a vector space (VS) model, which assigns a vector representation for each utterance, and learns a scoring function that ranks paraphrase candidates
+p10
+aVOur system generates relatively natural utterances from logical forms using simple rules based on Freebase descriptions (Section 4
+p11
+aVThe association model relies on having a good set of candidate associations, but mining associations suffers from coverage issues
+p12
+aVThis results in a phrase table with approximately 1.3 million phrase pairs
+p13
+aVWe define associations in x and c primarily by looking up phrase pairs in a phrase table constructed using the Paralex corpus [ 10 ]
+p14
+aVNote that the candidate set of logical forms u'\u005cud835' u'\u005cudcb5' x and canonical utterances u'\u005cud835' u'\u005cudc9e' x are constructed during the canonical utterance construction phase
+p15
+aVWe score the canonical utterances in u'\u005cud835' u'\u005cudc9e' z with respect to the input utterance x using a paraphrase model, which offers two advantages
+p16
+aVNext, we heuristically generate canonical utterances for each logical form based on the text descriptions of predicates from the KB
+p17
+aVIn contrast, traditional paraphrase detection [ 7 ] and Recognizing Textual Entailment (RTE) tasks [ 4 ] consider examples consisting of only a single pair of candidate paraphrases
+p18
+aVWe define a discriminative log-linear model that places a probability distribution over pairs of logical forms and canonical utterances ( c , z ) , given an utterance x
+p19
+aVThe NLP paraphrase literature is vast and ranges from simple methods employing surface features [ 32 ] , through vector space models [ 28 ] , to latent variable models [ 6 , 33 , 29 ]
+p20
+aVTable 5 shows that our full system obtains highest accuracy, and that removing the association model results in a much larger degradation compared to removing the VS model
+p21
+aVIn conclusion, the main contribution of this paper is a novel approach for semantic parsing based on a simple generation procedure and a paraphrase model
+p22
+aVFinally, we choose the canonical utterance that best paraphrases the input utterance, and thereby the logical form that generated it
+p23
+aVOur paraphrase model emphasizes simplicity and efficiency, but the framework is agnostic to the internals of the paraphrase method
+p24
+aVWe approximate the set of pairs of logical forms and canonical utterances with a beam of size 2,000
+p25
+aVFigure 3 presents examples of associations extracted from a paraphrase pair and visualizes the learned scores
+p26
+aVGiven an utterance x and the KB, we construct a set of candidate logical forms u'\u005cud835' u'\u005cudcb5' x , and then for each z u'\u005cu2208' u'\u005cud835' u'\u005cudcb5' x generate a small set of canonical natural language utterances u'\u005cud835' u'\u005cudc9e' z
+p27
+aVWhile mapping general language utterances to logical forms is hard, we observe that it is much easier to generate a canonical natural language utterances of our choice given a logical form
+p28
+aVThe parameters u'\u005cu0398' lf correspond to semantic parsing features based on the logical form and input utterance, and are briefly described in this section
+p29
+aVThis is important since for each question-answer pair, we consider thousands of canonical utterances as potential paraphrases
+p30
+aVIn this paper, we focus on two paraphrase models that emphasize simplicity and efficiency
+p31
+aVThe association model does not associate u'\u005cu201c' made u'\u005cu201d' and u'\u005cu201c' headquarters u'\u005cu201d' , but the VS model is able to determine that these utterances are semantically related
+p32
+aVThe VS model can identify correct paraphrases in cases where it is hard to directly associate phrases from x and c
+p33
+aVThis shows that the improvement in accuracy should not be attributed only to better logical form generation, but also to the paraphrase model
+p34
+aVTo summarize, the association model links phrases of two utterances in multiple overlapping ways
+p35
+aVTable 3 specifies the full set of features
+p36
+aVParaphrase pairs in Paralex are word-aligned using standard machine translation methods
+p37
+aVInterestingly, our system gets an oracle accuracy of 63% on WebQuestions compared to 48% obtained by BCFL13 , where the oracle accuracy is the fraction of questions for which at least one logical form in the candidate set produced by the system is correct
+p38
+aVDuring training, the model learns which associations are characteristic of paraphrases and which are not
+p39
+aVFor example, the phrase u'\u005cu201c' do for a living u'\u005cu201d' occurs mostly in questions, and we can extract associations for this phrase from Paralex
+p40
+aVWe use the word alignments to construct a phrase table by applying the consistent phrase pair heuristic [ 24 ] to all 5-grams
+p41
+aVNote that unlike standard paraphrase detection and RTE systems, we use lexicalized features, firing approximately 400,000 features on WebQuestions
+p42
+aVGiven an input utterance x , we first construct a set of logical forms u'\u005cud835' u'\u005cudcb5' x , and then generate canonical utterances from each z u'\u005cu2208' u'\u005cud835' u'\u005cudcb5' x
+p43
+aVwhere u'\u005cu0398' u'\u005cu2208' u'\u005cu211d' b is the vector of parameters to be learned, and u'\u005cu03a6' u'\u005cu2062' ( x , c , z ) is a feature vector extracted from the input utterance x , the canonical utterance c , and the logical form z
+p44
+aVThe goal of the association model is to determine whether x and c contain phrases that are likely to be paraphrases
+p45
+aVOur goal at this point is only to generate a manageable set of logical forms containing the correct one, and then generate an appropriate canonical utterance from it
+p46
+aVThe VS model ranks the canonical utterance u'\u005cu201c' What composition has Richard Wagner as lyricist u'\u005cu201d' higher, as this utterance is also in the music domain
+p47
+aVWe adopt the idea of using paraphrasing for QA, but suggest a more general paraphrase model and work against a formal KB (Freebase
+p48
+aVOn the WebQuestions dataset, we generate an average of 1,423 canonical utterances c per input utterance x
+p49
+aVIn other cases, the VS model cannot distinguish correct paraphrases from incorrect ones
+p50
+aVFirst, the paraphrase model is decoupled from the KB, so we can train it from large text corpora
+p51
+aVThis is because our simple model allows to associate u'\u005cu201c' hall of fame u'\u005cu201d' with the canonical utterance three times
+p52
+aVWe notice that in many cases the paraphrase model can be further improved
+p53
+aVTable 5 presents results on the test set
+p54
+aVTo construct candidate logical forms u'\u005cud835' u'\u005cudcb5' x for a given utterance x , our strategy is to find an entity in x and grow the logical form from that entity
+p55
+aVIn this light, associations can be viewed as soft paraphrase rules
+p56
+aVWe let u'\u005cud835' u'\u005cudc9c' denote this set of mined candidate associations
+p57
+aVThis demonstrates that our method for constructing candidate logical forms is reasonable
+p58
+aVTo further examine this, we ran BCFL13 on the development set, allowing it to use only predicates from logical forms suggested by our logical form construction step
+p59
+aV2013 ) presented a QA system that maps questions onto simple queries against Open IE extractions, by learning paraphrases from a large monolingual parallel corpus, and performing a single paraphrasing step
+p60
+aVWe will describe how associations are identified shortly.) We then define features on each association; the weighted combination of these features yields a score
+p61
+aVWe can now estimate a paraphrase score for two utterances x and c via a weighted combination of the components of the vector representations
+p62
+aVParalex is a large monolingual parallel corpora, containing 18 million pairs of question paraphrases from wikianswers.com , which were tagged as having the same meaning by users
+p63
+aVAfter describing the setup (Section 6.1 ), we present our main empirical results and analyze the components of the system (Section 6.2
+p64
+aVIn Section 6 , we show that an even simpler method of generating canonical utterances by concatenating Freebase descriptions hurts accuracy by only a modest amount
+p65
+aVWe construct canonical utterances in two steps
+p66
+aVTable 2 summarizes the rules used to generate canonical utterances from the template p e
+p67
+aVIn this paper, we present a novel approach for semantic parsing based on paraphrasing that can exploit large amounts of text not covered by the KB (Figure 1
+p68
+aVTable 6 (third section) illustrates that learning a full matrix substantially improves accuracy
+p69
+aVHowever, we opt for a simpler paraphrase model without latent variables in the interest of efficiency
+p70
+aVThe model score decomposes into two terms
+p71
+aVIn this section, we evaluate our system on WebQuestions and Free917
+p72
+aVOur system learns parameters for a full W matrix
+p73
+aVNote that the full matrix assigns a high score for the phrases u'\u005cu201c' official language u'\u005cu201d' and u'\u005cu201c' speak u'\u005cu201d' compared to the simpler models, but other pairs are less interpretable
+p74
+aVThis is expected given that our paraphrase models are not sensitive to the syntactic structure of the generated utterance
+p75
+aVWe consider logical forms defined by a set of templates, summarized in Table 1
+p76
+aVFor example, the association model identifies that the paraphrase for u'\u005cu201c' What type of music did Richard Wagner Play u'\u005cu201d' is u'\u005cu201c' What is the musical genres of Richard Wagner u'\u005cu201d' , by relating phrases such as u'\u005cu201c' type of music u'\u005cu201d' and u'\u005cu201c' musical genres u'\u005cu201d'
+p77
+aVFor each pair of utterances ( x , c ) , we go through all spans of x and c and identify a set of pairs of potential paraphrases ( x i j , c i u'\u005cu2032' j u'\u005cu2032' ) , which we call associations
+p78
+aVWe propose a general paraphrasing framework and instantiate it with two paraphrase models
+p79
+aVSince our generated questions are passed to a paraphrase model, we took a very simple approach, mostly ensuring that we preserved the semantics of the utterance without striving for the most fluent realization
+p80
+aVParalex is suitable for our needs since it focuses on question paraphrases
+p81
+aVWe consider the semantic parsing problem of mapping natural language utterances into logical forms to be executed on a knowledge base (KB) [ 35 , 36 , 34 , 20 ]
+p82
+aVWe now present the general framework for semantic parsing via paraphrasing, including the model and the learning algorithm
+p83
+aVWe believe that our approach is particularly suitable for scenarios such as factoid question answering, where the space of logical forms is somewhat constrained and a few generation rules suffice to reduce the problem to paraphrasing
+p84
+aVFirst, Fader et al use a KB over natural language extractions rather than a formal KB and so querying the KB does not require a generation step u'\u005cu2013' they paraphrase questions to KB entries directly
+p85
+aVOnce associations are constructed, we mark tokens in x and c that were not part of any association, and extract deletion features for their lemmas and POS tags
+p86
+aVThis allows us to learn paraphrases for words that appear in our datasets but are not covered by the phrase table, and to handle nominalizations for phrase pairs such as u'\u005cu201c' Who designed the game of life u'\u005cu201d' and u'\u005cu201c' What game designer is the designer of the game of life u'\u005cu201d'
+p87
+aV2013 ) first maps utterances to a domain-independent intermediate logical form , and then performs ontology matching to produce the final logical form
+p88
+aVWe also generate canonical utterances using an alignment lexicon, released by Berant et al
+p89
+aVThis results in many poor associations (e.g.,, u'\u005cu201c' play u'\u005cu201d' and u'\u005cu201c' the u'\u005cu201d' ), but as illustrated in Figure 3 , we learn weights that discriminate good from bad associations
+p90
+aVTo learn these mappings, traditional semantic parsers use data which pairs natural language with the KB
+p91
+aV2013 ) , which maps text phrases to Freebase binary predicates
+p92
+aVThe probability of an answer y is obtained by marginalizing over canonical utterances c and logical forms z whose denotation is y
+p93
+aVAs we show later, this procedure actually produces a set with better coverage than constructing logical forms recursively from spans of x , as is done in traditional semantic parsing
+p94
+aVWe evaluate our system with accuracy, that is, the proportion of questions we answer correctly
+p95
+aVSince we train from question-answer pairs, we collect answers by executing the gold logical forms against Freebase
+p96
+aVFor example, the answer to u'\u005cu201c' Where is made Kia car u'\u005cu201d' (from WebQuestions ), is given by the canonical utterance u'\u005cu201c' What city is Kia motors a headquarters of u'\u005cu201d'
+p97
+aVTo construct logical forms with multiple entities (#3) we do the following
+p98
+aVLastly, Fader et al handle queries with only one property and entity whereas we generalize to more types of logical forms
+p99
+aVWe sampled examples from the development set to examine the main reasons ParaSempre makes errors
+p100
+aVFor each logical form z , we also generate using equivalent logical forms where p is replaced with u'\u005cud835' u'\u005cudc11' u'\u005cu2062' [ p u'\u005cu2032' ]
+p101
+aVThe entire system is trained jointly from question-answer pairs only
+p102
+aVThis improved oracle accuracy on the development set to 64.5%, but accuracy was 32.2%
+p103
+aVTo query the KB, we use a logical language called simple u'\u005cu039b' -DCS
+p104
+aVIn this work, we approach the problem of semantic parsing from a paraphrasing viewpoint
+p105
+aVWith more sophisticated generation and paraphrase, we hope to tackle compositionally richer utterances
+p106
+aVOur choice allows us to benefit from the parallel monolingual corpus ParaLex and from word vectors trained on Wikipedia
+p107
+aVOn WebQuestions , this results in 645 formulas per utterance on average
+p108
+aVWe achieve a substantial relative improvement of 12% in accuracy on WebQuestions , and match the best results on Free917
+p109
+aVWe start by constructing vector representations of words
+p110
+aVWe can see that our model learns a positive score for associating u'\u005cu201c' type u'\u005cu201d' with u'\u005cu201c' genres u'\u005cu201d' , and a negative score for associating u'\u005cu201c' is u'\u005cu201d' with u'\u005cu201c' play u'\u005cu201d'
+p111
+aVThen, we join each entity e with all type-compatible 1 1 Entities in Freebase are associated with a set of types, and properties have a type signature ( t 1 , t 2 ) We use these types to compute an expected type t for any logical form z binaries b , and add these logical forms to u'\u005cud835' u'\u005cudcb5' x (#1 and #2
+p112
+aVBoth steps are performed with a small and simple set of deterministic rules, which suffices for our datasets, as they consist of factoid questions with a modest amount of compositional structure
+p113
+aVIn some sense, we approach the problem from the opposite end, using an intermediate utterance , which allows us to employ paraphrasing methods (Figure 2
+p114
+aVWe now examine results when learning parameters for a full matrix W , a diagonal matrix W , and when setting W to be the identity matrix
+p115
+aVNext, we construct a vector v x u'\u005cu2208' u'\u005cu211d' k for each utterance x by simply averaging the vectors of all content words (nouns, verbs, and adjectives) in x
+p116
+aVGiven (i) a knowledge base u'\u005cud835' u'\u005cudca6' , and (ii) a training set of question-answer pairs { ( x i , y i ) } i = 1 n , output a semantic parser that maps new questions x to answers y via latent logical forms z
+p117
+aVFor example, the logical form u'\u005cud835' u'\u005cudc11' [PlaceOfBirth].ElvisPresley would generate the utterance u'\u005cu201c' What location Elvis Presley place of birth u'\u005cu201d'
+p118
+aVMany existing paraphrase models introduce latent variables to describe the derivation of c from x , e.g.,, with transformations [ 16 , 29 ] or alignments [ 14 , 6 , 3 ]
+p119
+aVFor instance, the utterances u'\u005cu201c' Where is ACL in 2014 u'\u005cu201d' and u'\u005cu201c' What is the location of ACL 2014 u'\u005cu201d' cannot be used in traditional semantic parsing methods, since the KB does not contain an entity ACL2014 , but this pair clearly contains valuable linguistic information
+p120
+aVOur approach targets factoid questions with a modest amount of compositionality
+p121
+aVThe Free917 dataset contains 917 questions, authored by two annotators and annotated with logical forms
+p122
+aVOur model goes over all possible spans of x and c and constructs all possible associations from u'\u005cud835' u'\u005cudc9c' and u'\u005cu212c'
+p123
+aVSemantic parsers need to somehow associate natural language phrases with logical predicates, e.g.,, they must learn that the constructions u'\u005cu201c' What does X do for a living u'\u005cu201d' , u'\u005cu201c' What is X u'\u005cu2019' s profession u'\u005cu201d' , and u'\u005cu201c' Who is X u'\u005cu201d' , should all map to the logical predicate Profession
+p124
+aVOn WebQuestions , we obtain a relative improvement of 12% in accuracy over the state-of-the-art, and on Free917 we match the current best performing system
+p125
+aVIn Section 6 , we experiment with W equal to the identity matrix, constraining W to be diagonal, and learning a full W matrix
+p126
+aVFor a pair ( x , c ) , we also consider as candidate associations the set u'\u005cu212c' (represented implicitly), which contains token pairs ( x i , c i u'\u005cu2032' ) such that x i and c i u'\u005cu2032' share the same lemma, the same POS tag, or are linked through a derivation link on WordNet [ 11 ]
+p127
+aVFor Freebase entities, we extract a popularity feature based on the entity frequency in an entity linked subset of Reverb [ 22 ]
+p128
+aVSecond, natural language utterances often do not express predicates explicitly, e.g.,, the question u'\u005cu201c' What is Italy u'\u005cu2019' s money u'\u005cu201d' expresses the binary predicate CurrencyOf with a possessive construction
+p129
+aVRow SimpleGen in Table 6 demonstrates that we still get good results in this setup
+p130
+aVSecond, they suggest a particular paraphrasing method that maps a test question to a question for which the answer is already known in a single step
+p131
+aV2006 ) , who obtained close to state-of-the-art performance on the Microsoft Research paraphrase corpus
+p132
+aVThus, we combine the two models to benefit from their complementary nature
+p133
+aVWhile it has been shown that paraphrasing methods are useful for question answering [ 15 ] and relation extraction [ 27 ] , this is, to the best of our knowledge, the first paper to perform semantic parsing through paraphrasing
+p134
+aVOn the semantic parsing side, our work is most related to Kwiatkowski et al
+p135
+aVWe run the word2vec tool [ 23 ] on lower-cased Wikipedia text (1.59 billion tokens), using the CBOW model with a window of 5 and hierarchical softmax
+p136
+aVWe use the WebQuestions dataset [ 1 ] , which contains 5,810 question-answer pairs
+p137
+aVLastly, Freebase formulas have types (see Section 4 ), and we conjoin the type of z with the first word of x , to capture the correlation between a word (e.g.,, u'\u005cu201c' where u'\u005cu201d' ) with the Freebase type (e.g.,, Location
+p138
+aVQuestions begin with a question word, are followed by the Freebase description of the expected answer type ( d u'\u005cu2062' ( t ) ), and followed by Freebase descriptions of the entity ( d u'\u005cu2062' ( e ) ) and binary ( d u'\u005cu2062' ( p )
+p139
+aVWe also add all binary predicates in z as features
+p140
+aVWe surmise this is because questions in Free917 were generated by annotators prompted by Freebase facts, whereas questions in WebQuestions originated independently of Freebase
+p141
+aVThe main challenge in semantic parsing is coping with the mismatch between language and the KB
+p142
+aVBy extracting POS features, we obtain soft syntactic rules, e.g.,, the feature u'\u005cu201c' JJ N u'\u005cu2227' N u'\u005cu201d' indicates that omitting adjectives before nouns is possible
+p143
+aVThus, word choice in Free917 is often close to the generated Freebase descriptions, allowing simple baselines to perform well
+p144
+aVWebQuestions [ 1 ] , which contains 5,810 question-answer pairs with common questions asked by web users; and Free917 [ 2 ] , which has 917 questions manually authored by annotators
+p145
+aVThe parameters u'\u005cu0398' lf correspond to the following features adopted from Berant et al
+p146
+aVOur work relates to recent lines of research in semantic parsing and question answering
+p147
+aVWe tuned the L 1 regularization strength, developed features, and ran analysis experiments on the development set (averaging across random splits
+p148
+aVWe believe that our approach opens a window of opportunity for learning semantic parsers from raw text not necessarily related to the target KB
+p149
+aVHowever, this leaves untapped a vast amount of text not related to the KB
+p150
+aV2013 ) , who presented a paraphrase-driven question answering system
+p151
+aVIn simple u'\u005cu039b' -DCS, an entity (e.g.,, Seattle ) is a unary predicate (i.e.,, a subset of u'\u005cu2130' ) denoting a singleton set containing that entity
+p152
+aVAnother example is the question u'\u005cu201c' Where is the Nascar hall of fame u'\u005cu201d' , where ParaSempre suggests that u'\u005cu201c' What hall of fame discipline has Nascar hall of fame as halls of fame u'\u005cu201d' is the best canonical utterance
+p153
+aVLet u'\u005cu2130' denote a set of entities (e.g.,, BillGates ), and let u'\u005cud835' u'\u005cudcab' denote a set of properties (e.g.,, PlaceOfBirth
+p154
+aVFor example, for the logical form Character.Actor.BradPitt , if we match the entity Troy in x , we obtain Character.(Actor.BradPitt u'\u005cu2293' Film.Troy
+p155
+aVWe further modify logical forms by intersecting with a unary filter (#4 given a formula z with some Freebase type (e.g.,, People ), we look at all Freebase sub-types t (e.g.,, Composer ), and check whether one of their Freebase descriptions (e.g.,, u'\u005cu201c' composer u'\u005cu201d' ) appears in x
+p156
+aVLogical forms can be further modified by a unary u'\u005cu201c' filter u'\u005cu201d' , e.g.,, the answer to u'\u005cu201c' What composers spoke French u'\u005cu201d' is a set of composers, i.e.,, a subset of all people (#4
+p157
+aVLastly, we choose the question phrase u'\u005cu201c' How many u'\u005cu201d' for aggregation formulas (#5), and u'\u005cu201c' What u'\u005cu201d' for all other formulas
+p158
+aVOur work is also related to Fader et al
+p159
+aVFor a logical form z , we extract the size of its denotation \u005cllbracket u'\u005cu2062' z u'\u005cu2062' \u005crrbracket u'\u005cud835' u'\u005cudca6'
+p160
+aVWe compare our system to Cai and Yates ( 2013 ) ( CY13 ), Berant et al
+p161
+aVResearch on generation [ 5 , 26 , 31 , 25 ] typically focuses on generating natural utterances for human consumption, where fluency is important
+p162
+aVThe strength u'\u005cu039b' of the L 1 regularizer is set based on cross-validation
+p163
+aVFor a binary predicate b mapped from text phrase d u'\u005cu2062' ( b ) , we generate the utterance WH d u'\u005cu2062' ( t ) d u'\u005cu2062' ( b ) d u'\u005cu2062' ( e
+p164
+aVWe re-implement 13 features from Wan et al
+p165
+aVThe denotation of a logical form z with respect to a KB u'\u005cud835' u'\u005cudca6' is given by \u005cllbracket u'\u005cu2062' z u'\u005cu2062' \u005crrbracket u'\u005cud835' u'\u005cudca6'
+p166
+aVFor example, ParaSempre suggests that the best paraphrase for u'\u005cu201c' What company did Henry Ford work for u'\u005cu201d' is u'\u005cu201c' What written work novel by Henry Ford u'\u005cu201d' rather than u'\u005cu201c' The employer of Henry Ford u'\u005cu201d' , due to the exact match of the word u'\u005cu201c' work u'\u005cu201d'
+p167
+aV2013 ) and this work, an intermediate representation is employed to handle the mismatch, but while they use a logical representation, we opt for a text-based one
+p168
+aVMoreover, we extract a popularity feature for predicates based on the number of instances they have in u'\u005cud835' u'\u005cudca6'
+p169
+aVWe achieve state-of-the-art results on two recently released datasets
+p170
+aVFollowing Cai and Yates ( 2013 ) , we hold out 30% of the data for the final test, and perform 3 random 80%-20% splits of the training set for development
+p171
+aVFader et al
+p172
+aVFor a formal description of simple u'\u005cu039b' -DCS, see Liang ( 2013 ) and Berant et al
+p173
+aVTable 6 demonstrates that we improve performance over all baselines
+p174
+aVAs our training data consists of question-answer pairs ( x i , y i ) , we maximize the log-likelihood of the correct answer
+p175
+aV2013 ) u'\u005cu2019' s system on the datasets
+p176
+aVWe now consider simply concatenating Freebase descriptions
+p177
+aVWe compute the Jaccard score between the tokens of x and c and define u'\u005cu03a6' pr u'\u005cu2062' ( x , c ) to be this single feature
+p178
+aVKwiatkowski et al
+p179
+aVSpecifically, for every span of x , we take at most 10 entities whose Freebase descriptions approximately match the span
+p180
+aVWe also compared our system to the following implemented baselines
+p181
+aVFor BCFL13 , we obtained results using the Sempre package 2 2 http://www-nlp.stanford.edu/software/sempre/ and running Berant et al
+p182
+aVA fundamental motivation and long standing goal of the paraphrasing and RTE communities has been to cast various semantic applications as paraphrasing/textual entailment [ 4 ]
+p183
+aVThis strategy is feasible in factoid QA where compositionality is low, and so the size of u'\u005cud835' u'\u005cudcb5' x is limited (Section 4
+p184
+aVIn PlaceOfBirth.Seattle u'\u005cu2293' Founded.Microsoft , an intersection operator allows us to denote the set of Seattle-born Microsoft founders
+p185
+aVLastly, we handle aggregation formulas for utterances such as u'\u005cu201c' How many teams are in the NCAA u'\u005cu201d' (#5
+p186
+aVInterestingly, Jaccard and WDDC06 obtain reasonable performance on Free917 but perform much worse on WebQuestions
+p187
+aVScaling semantic parsers to large knowledge bases has attracted substantial attention recently [ 2 , 1 , 19 ] , since it drives applications such as question answering (QA) and information extraction (IE
+p188
+aVAs another reference point, out of 500,000 relations extracted by the ReVerb Open IE system [ 9 ] , only about 10,000 can be aligned to Freebase [ 1 ]
+p189
+aVTable 4 provides some statistics on the two datasets
+p190
+aVThe source code of our system ParaSempre is released at http://www-nlp.stanford.edu/software/sempre/
+p191
+aVClearly, we can increase the expressivity of this step by expanding the template set
+p192
+aVWe generate the description d u'\u005cu2062' ( t ) from the Freebase description of the type of z (this handles #4
+p193
+aVWe now perform more extensive analysis of our system u'\u005cu2019' s components and compare it to various baselines
+p194
+aVThus, we learn that deleting pronouns is acceptable, while deleting nouns is not
+p195
+aV3 3 We implement all features that do not require dependency parsing
+p196
+aVWe use the original train-test split, and divide the training set into 3 random 80% u'\u005cu2013' 20% splits for development
+p197
+aVTo handle cases of events involving multiple arguments (e.g.,, u'\u005cu201c' Who did Brad Pitt play in Troy u'\u005cu201d' ), we introduce the template p p 1 e 1 u'\u005cu2293' p 2 e 2 ) (#3), where the main event is modified by more than one entity
+p198
+aVThis dataset contains questions on rarer topics (for example, u'\u005cu201c' What is the engine in a 2010 Ferrari California u'\u005cu201d' and u'\u005cu201c' What was the cover price of the X-men Issue 1 u'\u005cu201d' ), but the phrasing of questions tends to be more rigid compared to WebQuestions
+p199
+aVThe basic template is a join of a binary and an entity, where a binary can either be one property p e (#1 in the table) or two properties p 1 p 2 e (#2
+p200
+aVIn both Kwiatkowski et al
+p201
+aVOne can view this work as a generalization of Fader et al along three dimensions
+p202
+aVParaphrasing methods are well-suited for handling such text-to-text gaps
+p203
+aVFor any logical form z = p p 1 e 1 , where p 1 has type signature ( t 1 , * ) , we look for other entities e 2 that were matched in x
+p204
+aVFor example, we could handle superlative utterances ( u'\u005cu201c' What NBA player is tallest u'\u005cu201d' ) by adding a template with an argmax operator
+p205
+aVOn WebQuestions , without L 1 regularization, the number of non-zero features was 360K; L 1 regularization brings it down to 17K
+p206
+aVWe use the Freebase KB [ 13 ] , which has 41M entities, 19K properties, and 596M assertions
+p207
+aV2013 ) ( BCFL13 ), and Kwiatkowski et al
+p208
+aVWe also experiment with publicly released word embeddings [ 17 ] , which were trained using both local and global context
+p209
+aVLast, ParaSempre does not handle temporal information, which causes errors in questions like u'\u005cu201c' Where did Harriet Tubman live after the civil war u'\u005cu201d'
+p210
+aVEntity recognition also accounts for many errors, e.g.,, the entity chosen in u'\u005cu201c' where was the gallipoli campaign waged u'\u005cu201d' is Galipoli and not GalipoliCampaign
+p211
+aVWe compute the token edit distance between x and c and define u'\u005cu03a6' pr u'\u005cu2062' ( x , c ) to be this single feature
+p212
+aVGiven an utterance x = u'\u005cu27e8' x 0 , x 1 x n - 1 u'\u005cu27e9' , we denote by x i j the span from token i to token j
+p213
+aVA property (which is a binary predicate) can be joined with a unary predicate; e.g.,, Founded.Microsoft denotes the entities that are Microsoft founders
+p214
+aVIn terms of our earlier notation, we have u'\u005cu0398' vs = vec u'\u005cu2062' ( W ) and u'\u005cu03a6' vs u'\u005cu2062' ( x , c ) = vec u'\u005cu2062' ( v x u'\u005cu2062' v c u'\u005cu22a4' ) , where vec u'\u005cu2062' ( u'\u005cu22c5' ) unrolls a matrix into a vector
+p215
+aVThe template p p 1 e 1 u'\u005cu2293' p 2 e 2 ) (#3) is generated by appending the prepositional phrase in d u'\u005cu2062' ( e 2 ) , e.g, u'\u005cu201c' What character is the character of Brad Pitt in Troy u'\u005cu201d'
+p216
+aVWe describe these rules below for completeness
+p217
+aVThen, we add the logical form p p 1 e 1 u'\u005cu2293' p 2 e 2 ) , if there exists a binary p 2 with a compatible type signature ( t 1 , t 2 ) , where t 2 is one of e 2 u'\u005cu2019' s types
+p218
+aVThis dataset was created by crawling questions through the Google Suggest API, and then obtaining answers using Amazon Mechanical Turk
+p219
+aVWe apply our semantic parser on two datasets
+p220
+aVThis dataset is characterized by questions that are commonly asked on the web (and are not necessarily grammatical), such as u'\u005cu201c' What character did Natalie Portman play in Star Wars u'\u005cu201d' and u'\u005cu201c' What kind of money to take to Bahamas u'\u005cu201d'
+p221
+aVReversed formulas have different generation rules, since entities in these formulas are in the subject position rather than object position
+p222
+aVwhere W u'\u005cu2208' u'\u005cu211d' k × k is a parameter matrix
+p223
+aVFinally, we check whether x is an aggregation formula by identifying whether it starts with phrases such as u'\u005cu201c' how many u'\u005cu201d' or u'\u005cu201c' number of u'\u005cu201d' (#5
+p224
+aVFor the template p 1 p 2 e (#2), we have a similar set of rules, which depends on the syntax of d u'\u005cu2062' ( p 1 ) and d u'\u005cu2062' ( p 2 ) and is omitted for brevity
+p225
+aVWe run all questions through the Stanford CoreNLP pipeline [ 30 , 12 , 18 ]
+p226
+aVWe execute u'\u005cu039b' -DCS queries by converting them into SPARQL and executing them against a copy of Freebase using the Virtuoso database engine
+p227
+aVA reverse operator reverses the order of arguments u'\u005cud835' u'\u005cudc11' [PlaceOfBirth].BillGates denotes Bill Gates u'\u005cu2019' s birthplace (in contrast to PlaceOfBirth.Seattle
+p228
+aVThis determines the generation rule to be used
+p229
+aVWe optimize the objective by initializing the parameters u'\u005cu0398' to zero and running AdaGrad [ 8 ]
+p230
+aVTo fill in auxiliary verbs, determiners, and prepositions, we parse the description d u'\u005cu2062' ( p ) into one of NP , VP , PP , or NP VP
+p231
+aVBoth result in k -dimensional vectors ( k = 50
+p232
+aVStanford University gratefully acknowledges the support of the Defense Advanced Research Projects Agency (DARPA) Deep Exploration and Filtering of Text (DEFT) Program under Air Force Research Laboratory (AFRL) contract no. FA8750-13-2-0040
+p233
+aVJaccard
+p234
+aVLastly, u'\u005cud835' u'\u005cude8c' u'\u005cud835' u'\u005cude98' u'\u005cud835' u'\u005cude9e' u'\u005cud835' u'\u005cude97' u'\u005cud835' u'\u005cude9d' ( u'\u005cud835' u'\u005cude75' u'\u005cud835' u'\u005cude98' u'\u005cud835' u'\u005cude9e' u'\u005cud835' u'\u005cude97' u'\u005cud835' u'\u005cude8d' u'\u005cud835' u'\u005cude8e' u'\u005cud835' u'\u005cude8d' u'\u005cud835' u'\u005cude7c' u'\u005cud835' u'\u005cude92' u'\u005cud835' u'\u005cude8c' u'\u005cud835' u'\u005cude9b' u'\u005cud835' u'\u005cude98' u'\u005cud835' u'\u005cude9c' u'\u005cud835' u'\u005cude98' u'\u005cud835' u'\u005cude8f' u'\u005cud835' u'\u005cude9d' ) denotes set cardinality, in this case, the number of Microsoft founders
+p235
+aVEach Freebase property p has an explicit property p u'\u005cu2032' equivalent to the reverse u'\u005cud835' u'\u005cudc11' u'\u005cu2062' [ p ] (e.g.,, ContainedBy and u'\u005cud835' u'\u005cudc11' u'\u005cu2062' [ u'\u005cud835' u'\u005cude72' u'\u005cud835' u'\u005cude98' u'\u005cud835' u'\u005cude97' u'\u005cud835' u'\u005cude9d' u'\u005cud835' u'\u005cude8a' u'\u005cud835' u'\u005cude92' u'\u005cud835' u'\u005cude97' u'\u005cud835' u'\u005cude9c' ]
+p236
+aVFormally, our objective function u'\u005cud835' u'\u005cudcaa' u'\u005cu2062' ( u'\u005cu0398' ) is as follows
+p237
+aVEdit
+p238
+aVDue to its soporific effect though, we advise the reader to skim it quickly
+p239
+aVThe second author is supported by a Google Faculty Research Award
+p240
+aVA knowledge base u'\u005cud835' u'\u005cudca6' is a set of assertions ( e 1 , p , e 2 ) u'\u005cu2208' u'\u005cu2130' × u'\u005cud835' u'\u005cudcab' × u'\u005cu2130' (e.g.,, ( u'\u005cud835' u'\u005cude71' u'\u005cud835' u'\u005cude92' u'\u005cud835' u'\u005cude95' u'\u005cud835' u'\u005cude95' u'\u005cud835' u'\u005cude76' u'\u005cud835' u'\u005cude8a' u'\u005cud835' u'\u005cude9d' u'\u005cud835' u'\u005cude8e' u'\u005cud835' u'\u005cude9c' , u'\u005cud835' u'\u005cude7f' u'\u005cud835' u'\u005cude95' u'\u005cud835' u'\u005cude8a' u'\u005cud835' u'\u005cude8c' u'\u005cud835' u'\u005cude8e' u'\u005cud835' u'\u005cude7e' u'\u005cud835' u'\u005cude8f' u'\u005cud835' u'\u005cude71' u'\u005cud835' u'\u005cude92' u'\u005cud835' u'\u005cude9b' u'\u005cud835' u'\u005cude9d' u'\u005cud835' u'\u005cude91' , u'\u005cud835' u'\u005cude82' u'\u005cud835' u'\u005cude8e' u'\u005cud835' u'\u005cude8a' u'\u005cud835' u'\u005cude9d' u'\u005cud835' u'\u005cude9d' u'\u005cud835' u'\u005cude95' u'\u005cud835' u'\u005cude8e' )
+p241
+aVWe thank Kai Sheng Tai for performing the error analysis
+p242
+aVIf so, we add the formula u'\u005cud835' u'\u005cude83' u'\u005cud835' u'\u005cudea2' u'\u005cud835' u'\u005cude99' u'\u005cud835' u'\u005cude8e' t u'\u005cu2293' z to u'\u005cud835' u'\u005cudcb5' x
+p243
+aVAny opinions, findings, and conclusion or recommendations expressed in this material are those of the authors and do not necessarily reflect the view of the DARPA, AFRL, or the US government
+p244
+aVIn Sections 4 and 5 , we provide the details of our implementation
+p245
+aVOur task is as follows
+p246
+aV2013
+p247
+aV2013 )
+p248
+aVWDDC06
+p249
+aV2013 ) ( KCAZ13
+p250
+aV2013
+p251
+a.

@@ -1,0 +1,574 @@
+(lp0
+VAccordingly, we generated a scenario deforestation continues u'\u005cu2192' global warming worsens u'\u005cu2192' sea temperatures rise u'\u005cu2192' vibrio parahaemolyticus fouls (water) , which is written in no document in our input web corpus that was crawled in 2007, but the vibrio risk due to global warming has actually been observed in the Baltic sea and reported in Baker-Austin et al
+p1
+aVTo increase the number of acceptable scenarios, our method identifies compatibility w.r.t causality between two phrases by a recently proposed semantic polarity, excitation [ 12 ] , which properly relaxes the chaining condition (Section 3.1 describes it
+p2
+aVWe restricted the argument positions (represented by Japanese postpositions) of the A slot to either ha (topic marker), ga (nominative), or de (instrumental) and those of the B slot to either ha , ga , de , wo (accusative), or ni (dative), and obtained 55,881 patterns
+p3
+aVTo this end, we propose a supervised method of extracting such event causality as conduct slash-and-burn agriculture u'\u005cu2192' exacerbate desertification and use its output to generate future scenarios ( scenarios ), which are chains of causality that have been or might be observed in this world like conduct slash-and-burn agriculture u'\u005cu2192' exacerbate desertification u'\u005cu2192' increase Asian dust (from China) u'\u005cu2192' asthma gets worse
+p4
+aVA common argument filter removes a scenario if a joint part consists of two templates that share no argument in our u'\u005cu27e8' argument, template u'\u005cu27e9' database, which is compiled from the syntactic dependency data between arguments and templates extracted from our web corpus
+p5
+aVFor effective decision making that carefully considers any form of future risks and chances, we need a system that helps humans do scenario planning [ 23 ] , which is a decision-making scheme that examines possible future events and assesses their potential chances and risks
+p6
+aVFor example, global warming worsens u'\u005cu2192' sea temperatures are high and sea temperatures rise u'\u005cu2192' vibrio parahaemolyticus fouls (water) can be chained to constitute an acceptable scenario, but the joint part is not the same string
+p7
+aVAs the beginning event of a scenario, we extracted nouns that describe social problems ( social problem nouns , e.g., deforestation ) from Wikipedia to focus our evaluation on the ability to generate scenarios about them, which is a realistic use-case of scenario generation
+p8
+aVAfter applying additional filters (see Section LABEL:A-sec:filtering-conditions in the supplementary notes) including those based on a stop-word list and a causal connective list to remove unlikely event causality candidates that are not removed by the above filter, we finally acquired 2,451,254 event causality candidates
+p9
+aVOur evaluation is based on average precision ; 9 9 It is obtained by computing the precision for each point in the ranked list where we find a positive sample and averaging all the precision figures [ 18 ] we believe that it is important to rank the plausible event causality candidates higher
+p10
+aVWe observed that CEA s u'\u005cu2062' u u'\u005cu2062' p and CEA u u'\u005cu2062' n u'\u005cu2062' s performed poorly and tended to favor event causality candidates whose phrase pairs were highly relevant to each other but described the contrasts of events rather than event causality (e.g., build a slow muscle and build a fast muscle ) probably because their main components are PMI values
+p11
+aVAn original sentence filter removes a scenario if two event causality pairs that are chained in it are extracted from original sentences between which no word overlap exists other than words constituting causality pairs
+p12
+aVIn addition, we invented the \u005cUnderline Excitation relation that is expressed by binary patterns made of excitatory and inhibitory templates (Section 3.1
+p13
+aVNote that, for the diversity of the sampled scenarios, our sampling proceeded as follows i) Randomly sample a beginning event phrase from the generated scenarios ii) Randomly sample an effect phrase for the beginning event phrase from the scenarios iii) Regarding the effect phrase as a cause phrase, randomly sample an effect phrase for it, and repeat (iii) up to the specified number of steps (2 or 3
+p14
+aVOur underlying intuition is the observation that event causality tends to hold between two entities linked by semantic relations which roughly entail that one entity strongly affects the other
+p15
+aVDefinition-based features , as detailed in Section LABEL:A-sec:definition-based-association-features in the supplementary notes, resemble the Wikipedia-based features except that the information source is the definition sentences automatically acquired from our 600 million web pages using the method of Hashimoto et al
+p16
+aVOur ultimate goal is to develop a system that supports scenario planning through generating possible future events using big data, which would contain what Donald Rumsfeld called u'\u005cu201c' unknown unknowns u'\u005cu201d' 1 1 http://youtu.be/GiPe1OiKQuk [ 27 ]
+p17
+aVFor example, our method can identify the compatibility between sea temperatures are high and sea temperatures rise to chain global warming worsens u'\u005cu2192' sea temperatures are high and sea temperatures rise u'\u005cu2192' vibrio parahaemolyticus 2 2 A bacterium in the sea causing food-poisoning fouls (water
+p18
+aVBase features represent the basic properties of event causality like nouns, templates, and their excitation polarities (See Section LABEL:A-sec:base-features in the supplementary notes
+p19
+aV5 5 Hashimoto et al u'\u005cu2019' s method constructs a network of templates based on their co-occurrence in web sentences with a small number of polarity-assigned seed templates and infers the polarity of all the templates in the network by a constraint solver based on the spin model [ 24 ]
+p20
+aVIndeed, after the Great East Japan Earthquake in 2011, few expected that it would lead to an enormous trade deficit in Japan due to a sharp increase in energy imports
+p21
+aVProposed , our scenario generation method without the two filters, Proposed+Orig , our method with the original sentence filter, Proposed+Orig+Comm , our method with the original sentence and common argument filters, and Exact , a method that chains event causality by exact matching
+p22
+aVOur experiments also show that we generated 50,000 scenarios with 68% precision, which include conduct terrorist operations u'\u005cu2192' terrorist bombing occurs u'\u005cu2192' cause fatalities and injuries u'\u005cu2192' cause economic losses and the above u'\u005cu201c' slash-and-burn agriculture u'\u005cu201d' scenario (Section 5.2
+p23
+aVScenario deforestation continues u'\u005cu2192' global warming worsens u'\u005cu2192' sea temperatures rise u'\u005cu2192' vibrio parahaemolyticus fouls (water) was generated by Proposed+Orig+Comm
+p24
+aVHowever, as described in Section 1 , our event causality criteria are different; since they regarded phrase pairs that were not self-contained as event causality (their annotators checked the original sentences of phrase pairs to see if they were event causality), their judgments tended to be more lenient than ours, which explains the performance difference
+p25
+aVThese features measure the association strength between slash-and-burn agriculture and desertification in conduct slash-and-burn agriculture u'\u005cu2192' exacerbate desertification for instance and consist of CEA-, Wikipedia-, definition-, and web-based features
+p26
+aVFor the test data , we randomly sampled 23,650 examples of u'\u005cu27e8' event causality candidate, original sentence u'\u005cu27e9' among which 3,645 were positive from 2,451,254 event causality candidates extracted from our web corpus (Section 3.1
+p27
+aVTo show that our future scenario generation methods can generate many acceptable scenarios with reasonable precision, we experimentally compared four methods
+p28
+aVThe samples were annotated by three annotators (not the authors), who were instructed to regard a sample as acceptable if each event causality that constitutes it is plausible and the sample as a whole constitutes a single coherent story
+p29
+aVExcitatory templates such as cause X entail that the function, effect, purpose or role of their argument u'\u005cu2019' s referent is activated, enhanced, or manifested, while inhibitory templates such as lower X entail that it is deactivated or suppressed
+p30
+aVTo favor the baselines for fairness, the event causality candidates of the development and test data were restricted to those with excitation values
+p31
+aVOur future scenario generation method creates scenarios by chaining event causalities
+p32
+aVWe simply add an additional argument position to each template in the 43,697 excitation templates to make binary patterns
+p33
+aVExcitation is divided into six sub types based on the excitation polarity of the binary patterns, the argument positions, and the existence of causative markers
+p34
+aVWe also require the predicate of the cause phrase to syntactically depend on the effect phrase in the sentence from which the event causality was extracted; we guarantee this by verifying the dependencies of the original sentence
+p35
+aVFinally, Table 5 shows the performance drop by removing the Wikipedia-, definition-, web-, and CEA-based features
+p36
+aV2013 ) that observed the emerging vibrio risk in the Baltic sea due to global warming
+p37
+aVIn Japanese, since the temporal order between events is usually determined by precedence in a sentence, we require the cause phrase to precede the effect phrase
+p38
+aVUseful context information includes the mood of the sentences (e.g.,, the uncertainty mood expressed by uncertain above), which is represented by lexical features (Section 3.2.2
+p39
+aVWe applied our event causality extraction method to 2,451,254 candidates (Section 3.1 ) and culled the top 1,200,000 phrase pairs from them (See Section LABEL:A-sec:examples-of-event-causality in the supplementary notes for examples
+p40
+aVFor event causality extraction , clues used by previous methods can roughly be categorized as lexico-syntactic patterns [ 1 , 20 ] , words in context [ 19 ] , associations among words [ 28 , 22 , 8 ] , and predicate semantics [ 12 ]
+p41
+aVIt remains uncertain whether if \u005cUnderline the recession is bottomed \u005cUnderline the declining birth rate is halted
+p42
+aVMany phrase pairs described two events that often happen in parallel but are not event causality (e.g., reduce the intake of energy and increase the energy consumption ) in the highly ranked event causality candidates of Cs u u'\u005cu2062' n u'\u005cu2062' s and Cs s u'\u005cu2062' u u'\u005cu2062' p
+p43
+aVThis relation is, so to speak, u'\u005cu201c' negative Causation u'\u005cu201d' since the entity denoted by the noun completing the A slot makes the entity denoted by the B noun NOT realized
+p44
+aVWe developed features that capture the characteristics of likely contexts for Japanese event causality (See Section LABEL:A-sec:context-features in the supplementary notes
+p45
+aVThis is probably because scenario judgment requires careful consideration about various possible futures for which individual annotators tend to draw different conclusions
+p46
+aVNote that means can be seen as u'\u005cu201c' causing u'\u005cu201d' or u'\u005cu201c' realizing u'\u005cu201d' the purpose of using the means in this relation, and actually event causality can be obtained by incorporating noun pairs of this relation into template pairs like activate A u'\u005cu2192' conduct B
+p47
+aVEven when adding the Prevention ( u'\u005cu201c' negative Causation u'\u005cu201d' ) patterns and their entailing and entailed patterns, the performance was still slightly worse than Proposed
+p48
+aVWe acquired 43,697 excitation templates by Hashimoto et al u'\u005cu2019' s method and the manual annotation of excitation template candidates
+p49
+aVFirst, we assume that two nouns (e.g., slash-and-burn agriculture and desertification ) that take some specific binary semantic relations (e.g., A causes B ) tend to constitute event causality if combined with two predicates (e.g., conduct and exacerbate
+p50
+aVNote that semantic relations are not restricted to those directly relevant to causality like A causes B but can be those that might seem irrelevant to causality like A is an ingredient for B (e.g., plutonium and atomic bomb as in plutonium is stolen u'\u005cu2192' atomic bomb is made
+p51
+aVFor context feature extraction, the event causality candidates are accompanied by the original sentences from which they were extracted
+p52
+aVIn a nutshell, they represent a connective ( C1 and C2 in Section LABEL:A-sec:context-features ), the distance between the elements of event causality candidate ( C3 and C4 ), words in context ( C5 to C8 ), the existence of adnominal modifier ( 9 to C10 ), and the existence of additional arguments of cause and effect predicates ( C13 to C20 ), among others
+p53
+aVWeb-based features provide association measures between nouns using various window sizes in the 600 million web pages
+p54
+aVWe extract the event causality between two events represented by two phrases from single sentences that are dependency parsed
+p55
+aVTable 3 shows the results of removing the semantic relation, the context, and the association features from our method
+p56
+aVPrevention is the relation expressed by patterns like A prevents B , which can be filled with toothbrushing and periodontal disease
+p57
+aVThe estimated number is calculated as the product of the recall at 70% precision and the number of acceptable scenarios in all the generated scenarios, which is estimated by the annotated samples
+p58
+aVThe challenge is that many acceptable scenarios are overlooked if we require the joint part of the chain ( B above) to be an exact match
+p59
+aVWe only keep the event causality candidates each phrase of which consists of excitation templates , which have been shown to be effective for causality extraction [ 12 ] and other semantic NLP tasks [ 19 ]
+p60
+aVThey developed an automatic excitation template acquisition method that assigns each template an excitation value in range [ - 1 , 1 ] that is positive if the template is excitatory and negative if it is inhibitory
+p61
+aVThen we check a noun pair (the nouns of the cause and effect phrases) for each event causality candidate, and give the candidate all the patterns in the database that co-occur with the noun pair
+p62
+aVFor instance, we make binary patterns A rises B and A lowers B from excitatory template rise X and inhibitory template lower X respectively
+p63
+aVThe baselines are not complete implementations of Do et al u'\u005cu2019' s method which uses discourse relations identified based on Lin et al
+p64
+aVNEC Knowledge Discovery Research Laboratories, Nara, 630-0101, Japan
+p65
+aVWe extracted 557 social problem nouns and used the cause phrases of the event causality candidates that consisted of one of the social problem nouns as the scenario u'\u005cu2019' s beginning event
+p66
+aVThe Excitation relation roughly means that A activates B (excitatory) or suppresses it (inhibitory
+p67
+aVA naive approach chains two phrase pairs by exact matching
+p68
+aVHowever, their method cannot combine more than two pieces of knowledge unlike ours, and their target knowledge consists of nouns, but ours consists of verb phrases, which are more informative
+p69
+aVExperiments using 600 million web pages [ 2 ] show that our method outperforms baselines based on state-of-the-art methods [ 8 , 12 ] by more than 19% of average precision
+p70
+aVNational Institute of Information and Communications Technology, Kyoto, 619-0289, Japan
+p71
+aVConsequently we conclude that not only semantic relations directly relevant to causality like Causation but also those that seem to lack direct relevance to causality like Material are somewhat effective
+p72
+aVNoun pairs with this relation can constitute event causality when combined with template pairs like improve A u'\u005cu2192' cultivate B
+p73
+aV2013 ) u'\u005cu2019' s web information analysis system provides a what-happens-if QA service, which is based on our scenario generation method
+p74
+aVNote that some event causality candidates were not given excitation values for their templates, since some templates were acquired by manual annotation without Hashimoto et al u'\u005cu2019' s method
+p75
+aVExcitation is a semantic property of templates that classifies them into excitatory , inhibitory , and neutral
+p76
+aVTo the best of our knowledge, future scenario generation is a new task, although previous works have addressed similar tasks [ 20 , 21 ]
+p77
+aVOther clues include shared arguments [ 28 , 4 , 5 ] , which we ignore since we target event causality about two distinct entities
+p78
+aVOur method extracts event causality based on three assumptions that are embodied as features of our classifier
+p79
+aVThe experiments in Section 5.1.1 show that not only Causation and Prevention ( u'\u005cu201c' negative Causation u'\u005cu201d' ) but the other relations are also effective for event causality extraction
+p80
+aVWe then estimated that, with the precision rate, we can extract 69,700 event causality pairs from the 2,451,254 event causality candidates, among which the estimated number of positive examples is 377,794
+p81
+aVThis network is so huge and complex that it is almost impossible for humans to exhaustively predict the consequences of a given event
+p82
+aVTable 9 shows the estimated number of acceptable scenarios generated with 70% precision
+p83
+aVThe semantic classes were obtained from our web corpus based on Kazama and Torisawa ( 2008
+p84
+aVNonetheless, we believe that this comparison is informative since CEA can be seen as the main component; they achieved a F1 of 41.7% for extracting causal event relations, but with only CEA they still achieved 38.6%
+p85
+aVTo make event causality self-contained, we wrote guidelines for manually annotating training/development/test data
+p86
+aVAll the feature types are effective and contribute to the performance gain that was about 5% higher than the Base features only
+p87
+aVNext we describe our experiments on event causality extraction and show (a) that most of our features are effective and (b) that our method outperforms the baselines based on state-of-the-art methods [ 8 , 12 ]
+p88
+aVIn this case, the two event causality pairs tend to be about different topics and constitute an incoherent scenario
+p89
+aVEach phrase in the event causality must consist of a predicate with an argument position ( template , hereafter) like conduct X and a noun like slash-and-burn agriculture that completes X
+p90
+aVBinary pattern of our semantic relations that co-occurs with two nouns of an event causality candidate in our web corpus
+p91
+aVBesides, the events they predict must be those for which similar events have previously been observed, and their method only applies to news domain
+p92
+aVWe also checked whether an Wikipedia article whose title is a cause (effect) noun contains its effect (cause) noun, as detailed in Section LABEL:A-sec:wikipedia-based-association-features in the supplementary notes
+p93
+aVIndeed materials can participate in event causality with the help of such template pairs as A is stolen u'\u005cu2192' B is made as in plutonium is stolen u'\u005cu2192' atomic bomb is made
+p94
+aVFleiss u'\u005cu2019' kappa of their judgments was 0.53 (moderate agreement), which is lower than the kappa for the causality judgment
+p95
+aVThe world can be seen as a network of causality where people, organizations, and other kinds of entities causally depend on each other
+p96
+aVRemember that excitatory templates like cause X entail that X u'\u005cu2019' s function or effect is activated, but inhibitory templates like lower X entail that it is suppressed (Section 3.1
+p97
+aVEach event causality candidate may be given multiple original sentences, since a phrase pair can appear in multiple sentences, in which case it is given more than one SVM score
+p98
+aVCEA u u'\u005cu2062' n u'\u005cu2062' s is an unsupervised method that uses CEA to rank event causality candidates, and CEA s u'\u005cu2062' u u'\u005cu2062' p is a supervised method using SVM and the CEA features, whose ranking is based on the SVM scores
+p99
+aVMoreover, for broader coverage, we acquired binary patterns that entail or are entailed by one of the patterns of the above six semantic relations
+p100
+aVNote that the two phrases are not simply paraphrases; temperatures may be rising but remain cold, or they may be decreasing even though they remain high
+p101
+aVthe performance degraded (46.27 u'\u005cu2192' 45.86) when we only used the Causation binary patterns and their entailing and entailed patterns compared to Proposed
+p102
+aVThis is important since future scenarios, which are generated by chaining event causality as described below, must be self-contained, unlike Hashimoto et al
+p103
+aVThe last assumption embodied in our association features is that each word of the cause phrase must have a strong association (i.e.,, PMI, for example) with that of the effect phrase as slash-and-burn agriculture and desertification in the above example, as in Do et al
+p104
+aVWe applied the filters to the sampled scenarios of Proposed , and the results were regarded as the sample scenarios of Proposed+Orig and Proposed+Orig+Comm
+p105
+aVNext we examined how many of the top 50,000 scenarios were acceptable and non-trivial , i.e.,, found in no page in our input web corpus, using the 341 acceptable samples
+p106
+aVWe collectively call both excitatory and inhibitory templates excitation templates
+p107
+aVSection 3.1 describes how to extract event causality candidates, and Section 3.2 details our features
+p108
+aVThis section describes our event causality extraction method
+p109
+aVAnnotators regarded as event causality only phrase pairs that were interpretable as event causality without contexts (i.e.,, self-contained
+p110
+aVFinal judgment was made by majority vote
+p111
+aVTable 6 shows the average precision of the compared methods
+p112
+aV2013b ) u'\u005cu2019' s method, which acquired 185 million entailment pairs with 80% precision from our web corpus and was used for contradiction acquisition [ 14 ]
+p113
+aVIt consists of association measures like PMI between arguments (nouns), between arguments and predicates, and between predicates (Table 2
+p114
+aVSemantic relation types (e.g Causation and Entailment ) of the binary pattern of SR1
+p115
+aVThe final label was determined by majority vote
+p116
+aVMaterial is the relation between a material and a product made of it (e.g., plutonium and atomic bomb ) and can be expressed by A is made of B
+p117
+aVNote that, in this paper, A u'\u005cu2192' B denotes that A causes B , which means that u'\u005cu201c' if A happens, the probability of B increases u'\u005cu201d' Our notion of causality should be interpreted probabilistically rather than logically
+p118
+aVTable 7 shows the average precision of the compared methods
+p119
+aVFor such candidates, we give the largest score and keep only one original sentence that corresponds to the largest score
+p120
+aV2012 ) used semantic relations to generalize acquired causality instances that include those that are not obviously related to causality
+p121
+aVWe show that such thorough exploitation of new and existing features leads to high performance
+p122
+aVOur method exploits these features on top of our base features such as nouns and predicates
+p123
+aVThey collectively constitute the \u005cUnderline Entailment relation
+p124
+aV7 7 Future work will exploit other original sentences, as suggested by an anonymous reviewer
+p125
+aV10 10 The corpus has pages where global warming , sea temperatures , and vibrio parahaemolyticus happen to co-occur
+p126
+aVA Causation pattern, B by A , constitutes an independent relation called the By relation
+p127
+aVAlthough we have no definite answer yet, we name it the causal-compatibility of two phrases and provide its preliminary characterization based on the excitation polarity
+p128
+aVSome of the scenarios we generated are written on no page in our input web corpus
+p129
+aV\u005cUnderline CO2 levels rose, so \u005cUnderline climatic anomalies were observed , while an unlikely context would be
+p130
+aVTwo phrases are causally-compatible if they mention the same entity (typically described by a noun) that is predicated by the templates of the same excitation polarity
+p131
+aVThese datasets were annotated by three annotators (not the authors), who annotated the event causality candidates without looking at the original sentences
+p132
+aVExamples are translated into English for ease of explanation
+p133
+aVNext we examined whether the semantic relations that do not seem directly relevant to causality like Material are effective
+p134
+aVWe applied the excitation filter to all 272,025,401 event causality candidates from the web and 132,528,706 remained
+p135
+aVWe evaluated the features of our method by ablation tests
+p136
+aVCEA-based features are based on the Cause Effect Association (CEA) measure of Do et al
+p137
+aVWikipedia-based features are the co-occurrence counts and the PMI values between cause and effect nouns calculated using Wikipedia (as of 2013-Sep-19
+p138
+aVSome phrase pairs have the same noun pairs and the same template polarity pairs (e.g., omit toothbrushing u'\u005cu2192' get a cavity and neglect toothbrushing u'\u005cu2192' have a cavity , where omit X and neglect X are inhibitory and get X and have X are excitatory
+p139
+aVThe training data were created by the annotators through our preliminary experiments and consists of 112,110 among which 9,657 were positive
+p140
+aVTo evaluate the top-ranked scenarios of Proposed+Orig+Comm in the three-step setting with more samples, the annotators labeled 500 samples from the top 50,000 of its output
+p141
+aVWhat characterizes two phrases that can be the joint part of acceptable scenarios
+p142
+aVNecessity u'\u005cu2019' s patterns include A is necessary for B , which can be filled with verbal aptitude and ability to think
+p143
+aVIn a sense, we u'\u005cu201c' predicted u'\u005cu201d' an event observed in 2013 from documents written in 2007, although the scenario was ranked as low as 240,738th
+p144
+aVCausation is the causal relation between two entities and is expressed by binary patterns like A causes B
+p145
+aVHe omitted toothbrushing every day and got a girlfriend who was a dental assistant of dental clinic he went to for his cavity
+p146
+aVIn a sense, we u'\u005cu201c' predicted u'\u005cu201d' the event sequence reported in 2013 by documents written in 2007
+p147
+aVThose patterns were acquired from our web corpus by Kloetzer et al
+p148
+aVshows our semantic relation features
+p149
+aVWe obtained sentences from 600 million web pages
+p150
+aVIts average precision is different from that in Table 6 due to the difference in test data described above
+p151
+aVFrom the training data, our method seemed to successfully learn what self-contained event causality is
+p152
+aVDeforestation and global warming might complete the A and B slots
+p153
+aVTo use them, we first make a database that records which noun pairs co-occur with each binary pattern
+p154
+aVNext we compared our method with the baselines based on Hashimoto et al
+p155
+aVFor B3 and B4 , 500 semantic classes were obtained from our web corpus using the method of Kazama and Torisawa ( 2008 )
+p156
+aVBut they are either diaries where the three words appear separately in different topics or lists of arbitrary words
+p157
+aV2011 ) generated semantic knowledge like causality that is written in no sentence
+p158
+aVTable 8 shows the number and precision of the samples
+p159
+aVAt 70% precision, all of the proposed methods outperformed Exact in the two-step setting, and Proposed+Orig+Comm outperformed Exact in the three-step setting
+p160
+aVFor the development data , we identically collected 11,711 examples among which 1,898 were positive
+p161
+aVSee Section LABEL:A-sec:examples-of-binary-patterns in the supplementary notes for examples of our binary patterns
+p162
+aVSee Section LABEL:A-sec:examples-of-future-scenarios in the supplementary notes for examples of the generated scenarios
+p163
+aVHowever, this approach would overlook many acceptable scenarios as discussed in Section 1
+p164
+aVOur method optionally applies the following two filters to scenarios for better precision
+p165
+aVIn this paper, our target language is Japanese
+p166
+aVshow the precision-scenario curves for the two- and three-step scenarios, which illustrate how many acceptable scenarios can be generated with what precision
+p167
+aVBesides features similar to those described above, we propose semantic relation features 3 3 Radinsky et al
+p168
+aVSection 3.3 shows how to rank event causality candidates
+p169
+aV341 (68.20%) were acceptable, and the estimated number of acceptable scenarios at a precision rate of 70% and 80% are 26,700 and 5,200 (See Section LABEL:A-sec:precision-scenario-curve in the supplementary notes
+p170
+aVNeither involves chaining and restricts themselves to only one event causality step
+p171
+aVSuch noun pairs mean event causality by substituting them into template pairs like omit A u'\u005cu2192' get B
+p172
+aVWe manually collected 748 binary patterns for this relation
+p173
+aVWe manually collected 187 binary patterns for this relation
+p174
+aVIt is written in no page in our input web corpus, which was crawled in 2007
+p175
+aVWe hypothesize that two nouns with some particular semantic relations are more likely to constitute event causality
+p176
+aVSuch semantic relations can be expressed by (otherwise unintuitive) patterns like A is an ingredient for B
+p177
+aVThese three datasets have no overlap in terms of phrase pairs
+p178
+aVIn preliminary experiments, since our proposed method u'\u005cu2019' s performance degraded when C u'\u005cu2062' s was incorporated, we did not use it in our method
+p179
+aVProposed is the best and the CEA features slightly contribute to the performance, as Proposed-CEA indicates
+p180
+aVOur method achieved 70% precision at 13% recall; we can extract about 69,700 event causality pairs with 70% precision, as described below
+p181
+aVScenarios ( s u'\u005cu2062' c s) generated by chaining causally-compatible phrase pairs are scored by S u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' ( s u'\u005cu2062' c ) , which embodies our assumption that an acceptable scenario consists of plausible event causality pairs
+p182
+aVWe compared our method and two baselines based on Do et al
+p183
+aVWe require that event causality be self-contained , i.e.,, intelligible as causality without the sentences from which it was extracted
+p184
+aVThey are class-dependent patterns , which have semantic class restrictions on arguments
+p185
+aVSimilarly, Tsuchida et al
+p186
+aVOur scenario generation method generates scenarios by chaining extracted event causality; generating A u'\u005cu2192' B u'\u005cu2192' C from A u'\u005cu2192' B and B u'\u005cu2192' C
+p187
+aVDo et al used it (along with discourse relations) to extract event causality
+p188
+aVWe implement what we consider likely contexts for event causality as context features
+p189
+aV{ 1 1 footnotemark ch, 2 2 footnotemark torisawa, 3 3 footnotemark julien, 4 4 footnotemark msano, 6 6 footnotemark rovellia, 7 7 footnotemark kidawara } @nict.go.jp
+p190
+aVPMI between a cause noun and an effect predicate
+p191
+aVPMI between a cause predicate and an effect noun
+p192
+aVIndeed, both X rise and X are high are excitatory and hence sea temperatures are high and sea temperatures rise are causally-compatible
+p193
+aVAn event causality candidate is given a causality score C u'\u005cu2062' S u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e , which is the SVM score (distance from the hyperplane) that is normalized to [ 0 , 1 ] by the sigmoid function 1 1 + e - x
+p194
+aVSince Cs s u'\u005cu2062' u u'\u005cu2062' p performed slightly better when using all of the training data in our preliminary experiments, we used all of it
+p195
+aVBelow we describe the semantic relations that we believe are likely to constitute event causality
+p196
+aVThe curve is drawn in the same way as the precision-recall curve except that the X-axis indicates the estimated number of acceptable scenarios
+p197
+aVFor example, omit toothbrushing u'\u005cu2192' get a cavity is self-contained, but omit toothbrushing u'\u005cu2192' get a girlfriend is not since this is not intelligible without a context
+p198
+aVWe removed such phrase pairs except those with the highest C u'\u005cu2062' S u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e , and 960,561 phrase pairs remained, from which we generated two- or three-step scenarios that consisted of two or three phrase pairs
+p199
+aV8 8 Using other knowledge like verb entailment [ 11 ] can be helpful too, which is further future work
+p200
+aVWeb-based association measures were obtained from the same database as AC4 in Table 2
+p201
+aVCs u u'\u005cu2062' n u'\u005cu2062' s is an unsupervised method that uses C u'\u005cu2062' s for ranking, and Cs s u'\u005cu2062' u u'\u005cu2062' p is a supervised method using SVM with C u'\u005cu2062' s as the only feature that uses SVM scores for ranking
+p202
+aVHowever, we believe that our ideas and methods are applicable to many languages
+p203
+aVThis is the association measure between arguments and predicates, which is the sum of AC8 and AC9
+p204
+aVProposed achieved 70% precision at 13% recall
+p205
+aVThe u'\u005cu201c' terrorist operations u'\u005cu201d' scenario and the u'\u005cu201c' slash-and-burn agriculture u'\u005cu201d' scenario in Section 1 were ranked 16,386th and 21,968th
+p206
+aVSee De Saeger et al
+p207
+aV2010 ) and exploits them with CEA within an ILP framework
+p208
+aVThe Kappa [ 9 ] of their judgments was 0.67 (substantial agreement [ 16 ]
+p209
+aVNeither is written in any document in our input corpus
+p210
+aVA scenario was regarded as non-trivial if its nouns co-occur in no page of the corpus
+p211
+aVUsing the above features, a classifier 6 6 We used SVM l u'\u005cu2062' i u'\u005cu2062' g u'\u005cu2062' h u'\u005cu2062' t with the polynominal kernel ( d = 2 ), available at http://svmlight.joachims.org classifies each event causality candidate into causality and non-causality
+p212
+aVA is used for B is a pattern of the relation, which can be filled with e-mailer and exchanges of e-mail messages
+p213
+aVWe believe that contexts exist where event causality candidates are more likely to appear, as described in Section 1
+p214
+aVWe omit Do et al u'\u005cu2019' s D u'\u005cu2062' i u'\u005cu2062' s u'\u005cu2062' t , which is a constant since we set our window size to one
+p215
+aVUse is the relation between means (or instruments) and the purpose for using them
+p216
+aVThey are calculated from the 132,528,706 event causality candidates in Section 3.1
+p217
+aV2009 ) , De Saeger et al
+p218
+aVThe CEA-based features were the most effective, while the Wikipedia-based ones slightly degraded the performance
+p219
+aVFigure 1 shows their precision-recall curves
+p220
+aVIts relation to event causality might seem unclear, but a material can be seen as a u'\u005cu201c' cause u'\u005cu201d' of a product
+p221
+aVFigure 2 shows their precision-recall curves
+p222
+aVOriginal sentences are also used for scenario generation, as described below
+p223
+aVThey are calculated from the 132,528,706 event causality candidates
+p224
+aVPMI between predicates
+p225
+aVThe performance was even worse when using no semantic relation ( u'\u005cu201c' None u'\u005cu201d' in Table 4
+p226
+aVTanaka et al
+p227
+aVHashimoto et al
+p228
+aVOur second assumption is that there are grammatical contexts in which event causality is more likely to appear
+p229
+aVWe obtained it in the same way as Filter 5 in the supplementary notes
+p230
+aVProposed is our proposed method
+p231
+aV2012 ) extracted 500,000 event causalities with about 70% precision
+p232
+aVFor example, a likely context of event causality (underlined) would be
+p233
+aVAs such, semantic relations like the Material relation can also be useful
+p234
+aVSee Section 3.2.1 for a more intuitive explanation
+p235
+aVAccordingly, we estimate that we can generate 2,200 ( 50 , 000 × 22 500 ) acceptable and non-trivial scenarios from the top 50,000
+p236
+aVAbout nine man-months were required to prepare the data
+p237
+aVProposed is our method
+p238
+aVWe collected 257 patterns for this relation
+p239
+aVNeutral ones like proportional to X belong to neither of them
+p240
+aVThis is the association measure between predicates, which is the product of AC5, AC6 and AC7 below
+p241
+aV2,178 patterns were collected for this relation
+p242
+aVBut we did find a paper Baker-Austin et al
+p243
+aV4 4 We used a Japanese dependency parser called J.DepP [ 30 ] , available at http://www.tkl.iis.u-tokyo.ac.jp/~ynaga/jdepp/
+p244
+aVWe acquired 335,837 patterns by this method
+p245
+aVTable 4 shows that
+p246
+aVThe numbers of two- and three-step scenarios generated by Proposed were 217,836 and 5,288,352, while those of Exact were 22,910 and 72,746
+p247
+aVSupplementary notes of this paper are available at http://khn.nict.go.jp/analysis/member/ch/acl2014-sup.pdf
+p248
+aVProposed-CEA is Proposed without the CEA-features and shows their contribution
+p249
+aV2011 ) and Kloetzer et al
+p250
+aVExact
+p251
+aVProposed
+p252
+aVExact
+p253
+aVProposed
+p254
+aVWe sampled 2,000 from Proposed u'\u005cu2019' s two- and three-step scenarios and 1,000 from those of Exact
+p255
+aV2012 ) and Tanaka et al
+p256
+aVSee Section LABEL:A-sec:web-based-association-features for detail
+p257
+aVDo et al u'\u005cu2019' s S a u'\u005cu2062' a , which is PMI between arguments
+p258
+aVThe number of patterns is 490
+p259
+aV× s 2 where p 1 and p 2 are the two phrases of event causality candidates, and s 1 and s 2 are the absolute excitation values of p 1 u'\u005cu2019' s and p 2 u'\u005cu2019' s templates
+p260
+aVFigures 3
+p261
+aVSuch a scenario tends to be incoherent too
+p262
+aVTable 1
+p263
+aVThe CEA value, the sum of AC2, AC3, and AC4
+p264
+aVThey ranked event causality candidates by C u'\u005cu2062' s u'\u005cu2062' ( p 1 , p 2 ) s 1
+p265
+aVCs u u'\u005cu2062' n u'\u005cu2062' s and Cs s u'\u005cu2062' u u'\u005cu2062' p did not perform well
+p266
+aVThe baselines are as follows
+p267
+aVwhere C u'\u005cu2062' A u'\u005cu2062' U u'\u005cu2062' S u'\u005cu2062' ( s u'\u005cu2062' c ) is a set of event causality pairs that constitutes s u'\u005cu2062' c and c u'\u005cu2062' s is a member of C u'\u005cu2062' A u'\u005cu2062' U u'\u005cu2062' S u'\u005cu2062' ( s u'\u005cu2062' c
+p268
+aV22 among the 341 samples were non-trivial
+p269
+aV2013a ) for more on our patterns
+p270
+aVDo et al u'\u005cu2019' s S p u'\u005cu2062' a
+p271
+aVDo et al u'\u005cu2019' s S p u'\u005cu2062' p
+p272
+aVC u'\u005cu2062' S u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' ( c u'\u005cu2062' s ) , which is c u'\u005cu2062' s u'\u005cu2019' s score, was described in Section 3.3
+p273
+aVDo et al u'\u005cu2019' s m u'\u005cu2062' a u'\u005cu2062' x / I u'\u005cu2062' D u'\u005cu2062' F
+p274
+aV2011
+p275
+aVProposed+Orig+Comm
+p276
+aV2011 )
+p277
+aV2012
+p278
+aV2013
+p279
+aVand 4
+p280
+aV2011
+p281
+aVProposed+Orig+Comm
+p282
+aV2011
+p283
+aV2012
+p284
+aVProposed+Orig
+p285
+aVProposed+Orig
+p286
+a.

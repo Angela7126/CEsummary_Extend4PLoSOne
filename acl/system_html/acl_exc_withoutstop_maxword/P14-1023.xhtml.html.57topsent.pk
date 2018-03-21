@@ -1,0 +1,36 @@
+(lp0
+VWe see that, for both approaches, performance is not seriously affected by using the single best setup rather than task-specific settings, except for a considerable drop in performance for the best predict model on esslli (due to the small size of this data set?), and an even more dramatic drop of the count model on ansem
+p1
+aVTop accuracy on the entire data set (an) and on the semantic subset (ansem) was reached by Mikolov et al
+p2
+aVSpecifically, we pick the models that work best on the small rg set, and report their performance on all tasks (we obtained similar results by picking other tuning sets
+p3
+aVThe CBOW model learns to predict the word in the middle of a symmetric window based on the sum of the vector representations of the words in the window
+p4
+aV2013a ) reach top accuracy on the syntactic subset (ansyn) with a CBOW predict model akin to ours (but trained on a corpus twice as large
+p5
+aVA more cogent and interesting evaluation is reported in the third block of Table 2 , where we see what happens if we use the single models with worst performance across tasks (recall from Section 2 above that, in any case, we are exploring a space of reasonable parameter settings, of the sort that an experimenter might be tempted to choose without tuning
+p6
+aVThe fourth block reports performance in what might be the most realistic scenario, namely by tuning the parameters on a development task
+p7
+aVKatrenko and Adriaans ( 2008 ) reached top performance on this set using the full Web as a corpus and manually crafted, linguistically motivated patterns
+p8
+aVState-of-the-art purity was reached by Rothenhäusler and Schütze ( 2009 ) with a count model based on carefully crafted syntactic links
+p9
+aVSeveral parameter settings are tried, and the best setting is chosen based on performance on a semantic task that has been selected for tuning
+p10
+aVInstead of first collecting context vectors and then reweighting these vectors based on various criteria, the vector weights are directly set to optimally predict the contexts in which the corresponding words tend to appear
+p11
+aVIndeed, the predictive models achieve an impressive overall performance, beating the current state of the art in several cases, and approaching it in many more
+p12
+aVPerformance is evaluated in terms of correct-answer accuracy
+p13
+aVTables 3 and 4 let us take a closer look at the most important count and predict parameters, by reporting the characteristics of the best models (in terms of average performance-based ranking across tasks) from both classes
+p14
+aVBoth count and predict models are extracted from a corpus of about 2.8 billion tokens constructed by concatenating ukWaC, 5 5 http://wacky.sslmit.unibo.it the English Wikipedia 6 6 http://en.wikipedia.org and the British National Corpus
+p15
+aVA first set of semantic benchmarks was constructed by asking human subjects to rate the degree of semantic similarity or relatedness between two words on a numerical scale
+p16
+aVOur predict results were instead achieved by simply downloading the word2vec toolkit and running
+p17
+a.

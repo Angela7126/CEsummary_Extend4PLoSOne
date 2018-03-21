@@ -1,0 +1,18 @@
+(lp0
+VWork on target language morphological segmentation for SMT can be divided into three subproblems segmentation, desegmentation and integration
+p1
+aVIn summary, we are given a segmented lattice, which encodes the decoder u'\u005cu2019' s translation space as an acceptor over morphemes
+p2
+aVDoing so enables the inclusion of an unsegmented target language model, and with a small amount of bookkeeping, it also allows the inclusion of features related to the operations performed during desegmentation (see Section 3.4
+p3
+aVOur goal is to desegment the decoder u'\u005cu2019' s output lattice, and in doing so, gain access to a compact, desegmented view of a large portion of the translation search space
+p4
+aVAs in Finnish, the 1-best desegmentation using Morfessor did not surpass the unsegmented baseline, producing a test BLEU of only 31.4 (not shown in Table 1
+p5
+aVWe compose this acceptor with a desegmenting transducer, and then with an unsegmented LM acceptor, producing a fully annotated, desegmented lattice
+p6
+aVMost techniques approach the problem by transforming the target language in some manner before training the translation model
+p7
+aVWe approach this problem by augmenting an SMT system built over target segments with features that reflect the
+p8
+a.

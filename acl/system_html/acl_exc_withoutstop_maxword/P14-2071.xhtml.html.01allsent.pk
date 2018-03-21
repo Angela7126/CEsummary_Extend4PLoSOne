@@ -1,0 +1,290 @@
+(lp0
+VReplace current sentiment model with the new sentiment mixture model;
+p1
+aVIn this paper, we focus on sentiment analysis of Twitter data (tweets
+p2
+aVWe generate two features based on the lexicons total number of positive words or negative words found in each tweet
+p3
+aVDuring classification on test tweets, we run topic inference and sentiment classification with multiple sentiment models
+p4
+aVSuch a mixture model results in further improvement on the sentiment classification accuracy
+p5
+aVWe introduce a topic-based mixture model for Twitter sentiment
+p6
+aVRun sentiment classification on the un-annotated data D u with the current sentiment model and generate probabilities of sentiment classes for each tweet, P ( c x i ) ;
+p7
+aVThe results on the test set are shown Table 3 , with the topic information inferred from either Twitter data (second column) or newswire data (third column
+p8
+aVThis motivates us to explore topic information explicitly in the task of sentiment analysis on Twitter data
+p9
+aVManual lexicons it has been shown in other work [ Nakov et al.2013 ] that lexicons with positive and negative words are important to sentiment classification
+p10
+aVSet training corpus D for sentiment classification to be the annotated training data D a ;
+p11
+aVAdditionally, we also experiment with a smoothing technique through linear interpolation between the universal sentiment model and topic-based sentiment mixture model
+p12
+aVThe distribution of positive, neutral and negative data is shown in Table 1
+p13
+aVTrain a sentiment model with current training corpus D ;
+p14
+aVWith all features combined, the universal sentiment model achieves 69.7 on average F score
+p15
+aVMany approaches have been proposed previously to improve sentiment analysis on Twitter data
+p16
+aVA variety of features have been utilized for sentiment classification on tweets
+p17
+aVAs shown in the third column in Table 3 , surprisingly, the model with topic information inferred from the newswire data works well on the Twitter domain
+p18
+aVWe conduct experiments on the data from the task B of Sentiment Analysis in Twitter in SemEval-2013
+p19
+aVThe first row shows the performance of the universal sentiment model as a baseline
+p20
+aVWe first propose a universal sentiment model that utilizes various features and resources
+p21
+aVSmoothing with the universal model adds further improvement in addition to the un-smoothed mixture model
+p22
+aV1) sum of sentiment score; (2) total number of positive words (with score s 1 ); (3) total number of negative words ( s - 1 ); (4) maximal positive score; (5) minimal negative score; (6) score of the last positive words; (7) score of the last negative words
+p23
+aVCluster data in D based on the topic distributions from Step 5 and train a separate sentiment model for each cluster
+p24
+aVOnce we identify the topics for tweets in the training data, we can split the data into multiple subsets based on topic distributions
+p25
+aVTrain a topic model on D , and store the topic inference model and topic distributions of each tweet;
+p26
+aV2013) propose a continuous Dirichlet Process Mixture model for Twitter sentiment, for the purpose of stock prediction
+p27
+aVDue to the skewness in class distribution in the training set, it is observed during error analysis on the development set that subjective (positive/negative) tweets are more likely to be classified as neutral tweets
+p28
+aVThey jointly determine the final probability of sentiment class c given tweet x i as the following in a sentiment mixture model
+p29
+aVSimilar to the universal model, we train T topic-specific sentiment models with LibSVM
+p30
+aVWith the topic information inferred from Twitter data, the F score is 2 points higher than the baseline without semi-supervised training and 1.4 higher than the baseline with semi-supervised data
+p31
+aVThe weights for positive, neutral and negative samples are set to be (1, 0.4, 1) based on the results on the development set
+p32
+aVWe propose a smoothing technique through interpolation between universal model and topic-based mixture model
+p33
+aVIf the last sentiment word found in the tweet is positive (or negative), this feature is set to 1 (or -1
+p34
+aVThe idea of semi-supervised training is to take advantage of large amount low-cost un-annotated data (tweets in this case) to further improve the accuracy of sentiment classification
+p35
+aVThe model is integrated in the framework of semi-supervised training that takes advantage of large amount of un-annotated Twitter data
+p36
+aVIn this section we propose an integrated framework of semi-supervised training that contains both topic modeling and sentiment classification
+p37
+aVA set of popular emoticons are collected from the Twitter data we have
+p38
+aVIt serves as another baseline with more training data, for a fair comparison with the topic-based mixture modeling that uses the same amount of training data
+p39
+aVWe conduct pre-processing by removing stop words and some of the frequent words found in Twitter data
+p40
+aVLast sentiment word a u'\u005cu201c' sentiment word u'\u005cu201d' is any word in the positive/negative lexicons mentioned above
+p41
+aVThe sentiment labels are either positive, neutral or negative
+p42
+aVEach word in the lexicon has an associated sentiment score
+p43
+aV2013) provide an overview on the systems submitted to one of the SemEval-2013 tasks, Sentiment Analysis in Twitter
+p44
+aVFor the topic-based mixture model and semi-supervised training, based on the experiments on the development set, we set the parameter u'\u005cu03a4' used in soft clustering to 0.4, the data selection parameter p to 0.96, and the interpolation parameter for smoothing u'\u005cu0398' to 0.3
+p45
+aVIf none of the words in the tweet is sentiment word, it is set to 0 by default
+p46
+aVIn addition to the features, we also find SVM weighting on the training samples is helpful
+p47
+aVFor each subset, a separate sentiment model can be trained
+p48
+aVIn Table 2 , we show the incremental improvement in adding various features described in Section 2, measured on the test set
+p49
+aVThe second row shows the results from re-training the universal model by simply adding tweets selected from two iterations of semi-supervised training (about 100K
+p50
+aVwhere u'\u005cu0398' is the interpolation parameter and P U ( c x i ) is the probability of sentiment c given tweet x i from the universal sentiment model
+p51
+aVInstead, we only compute two features based on counts only total number of positive bigrams; total number of negative bigrams
+p52
+aVWe compute 7 features based on each of the two lexicons
+p53
+aVThe development set is used to tune parameters and features
+p54
+aVIn this work, we adopt the lexicon from Bing Liu [ Hu and Liu2004 ] which includes about 2000 positive words and 4700 negative words
+p55
+aVHowever, all of these features only capture local information in the data and do not take into account of the global higher-level information, such as topic information
+p56
+aVUnfortunately there is no evaluation on the accuracy of sentiment classification alone in that work
+p57
+aVThe universal model outperforms the top system submitted to the SemEval-2013 task [ Mohammad et al.2013 ] , which was trained and tested on the same data
+p58
+aVPMI bigram lexicon there are also 316K bigrams in the NRC Hashtag Sentiment Lexicon
+p59
+aVThey include lexical features (e.g., word lexicon), syntactic features (e.g., Part-of-Speech), Twitter-specific features (e.g., emoticons), etc
+p60
+aVNote that for the second and third features, we ignore those with sentiment scores between -1 and 1, since we found that inclusion of those weak subjective words results in unstable performance
+p61
+aVwhere P m ( c t j , x i ) is the probability of sentiment c from topic-specific sentiment model trained on topic t j
+p62
+aVPMI unigram lexicons in [ Mohammad et al.2013 ] two lexicons were automatically generated based on pointwise mutual information (PMI
+p63
+aVThe results show that the topic-based mixture model outperforms both the baseline and the one that considers the top topics only
+p64
+aVThese features are collected from training data, with a count cutoff to avoid overtraining
+p65
+aVThe most frequent words in each topic are listed in the table
+p66
+aVIn Table 4 , we provide some examples from the topics identified in tweets as well as the newswire data
+p67
+aVThe test set is for the blind evaluation
+p68
+aVWe also compare different approaches for topic modeling, such as cross-domain topic identification by utilizing data from newswire domain
+p69
+aVAs shown in Table 2 , weighting adds a 2% improvement
+p70
+aVIn this section we present a universal topic-independent sentiment classifier to establish a state-of-the-art baseline
+p71
+aVThere exists some work on applying topic information in sentiment analysis, such as [ Mei et al.2007 ] , [ Branavan et al.2008 ] , [ Jo and Oh2011 ] and [ He et al.2012 ]
+p72
+aVThe universal model serves as a strong baseline and also provides an option for smoothing later
+p73
+aVThe training and testing data are run through tweet-specific tokenization, similar to that used in the CMU Twitter NLP tool [ Gimpel et al.2011 ]
+p74
+aVWe also conduct an experiment by only considering the most likely topic for each tweet when computing the sentiment probabilities
+p75
+aVGenerally u'\u005cu201c' offensive u'\u005cu201d' is used as a negative word (as in the first tweet), but it bears no sentiment in the second tweet when people are talking about a football game
+p76
+aVHere are the features that we use for classification
+p77
+aVOne is NRC Hashtag Sentiment Lexicon with 54K unigrams, and the other is Sentiment140 Lexicon with 62K unigrams
+p78
+aVFor evaluation, we use macro averaged F score as in [ Nakov et al.2013 ] , i.e., average of the F scores computed on positive and negative classes only
+p79
+aVThe number of topics is set to 100
+p80
+aVFor each topic, there is another multinomial distribution over words
+p81
+aVSentiment analysis is one of the areas that has large potential in real-world applications
+p82
+aVElongated words the number of words in the tweet that have letters repeated by at least 3 times in a row, e.g., the word u'\u005cu201c' gooood u'\u005cu201d'
+p83
+aVFor semi-supervised training experiments, we explored two sets of additional data
+p84
+aVFor bigrams, we did not find the sentiment scores useful
+p85
+aVThe option of probability estimation in LibSVM is turned on so that it can produce the probability of sentiment class c given tweet x at the classification time, i.e., P ( c x )
+p86
+aVA short list of Twitter-specific positive/negative words are also added to enhance the lexicons
+p87
+aVThe F score from the best system in SemEval-2013 [ Mohammad et al.2013 ] is also listed in the last row of Table 2 for a comparison
+p88
+aVFurthermore, no standard training or test corpus is used, which makes comparison with other approaches difficult
+p89
+aVFor example, K-means clustering can be conducted based on the similarity between the topic distribution vectors or their transformed versions
+p90
+aVPerform data selection
+p91
+aVWe also experimented with the popular MPQA [ Wilson et al.2005 ] lexicon but found no extra improvement on accuracies
+p92
+aVFor any sentiment words within a window following a negation word and not after punctuations u'\u005cu2018' u'\u005cu2019' , u'\u005cu2018' , u'\u005cu2019' , u'\u005cu2018' ; u'\u005cu2019' , u'\u005cu2018' u'\u005cu2019' , or u'\u005cu2018' u'\u005cu2019' , we reverse its sentiment from positive to negative, or vice versa, before computing the lexicon-based features mentioned earlier
+p93
+aVwhere C i u'\u005cu2062' j is the number of times that topic t j is assigned to some word in tweet x i , usually averaged over multiple iterations of Gibbs sampling u'\u005cu0391' j is the j -th dimension of the hyperparameter of Dirichlet distribution that can be optimized during model estimation
+p94
+aVNote that this is a soft clustering, with some tweets possibily assigned to multiple topic-specific clusters
+p95
+aVAlso, the local features often suffer from the sparsity problem
+p96
+aVThere are many ways of splitting the data
+p97
+aVThe window size was set to 4 in this work
+p98
+aVPunctuations if there exists exclamation mark or question mark in the tweet, the feature is set to 1, otherwise set to 0
+p99
+aVFor those tweets with P ( c x i ) p , add them to current training corpus D
+p100
+aVEven though some local contextual features could be helpful to distinguish the two cases above, they still may not be enough to get the sentiment on the whole message correct
+p101
+aVAlso they are conducted in a domain other than Twitter
+p102
+aVThe fundamental idea is that a document is a mixture of topics
+p103
+aVThis provides an opportunity for cross-domain topic identification when data from certain domain is more difficult to obtain than others
+p104
+aVThe posterior probability of each topic given tweet x i is computed as in Eq
+p105
+aVWord N-grams if certain N-gram (unigram, bigram, trigram or 4-gram) appears in the tweet, the corresponding feature is set to 1, otherwise 0
+p106
+aVOne of the popular algorithms for LDA model parameter estimation and inference is Gibbs sampling [ Griffiths and Steyvers2004 ] , a form of Markov Chain Monte Carlo
+p107
+aVEmoticons it is known that people use emoticons in social media data to express their emotions
+p108
+aVIt is one of the challenging tasks in NLP given the length limit on each tweet (up to 140 characters) and also the informal conversation
+p109
+aVLatent Dirichlet Allocation (LDA) [ Blei et al.2003 ] is one of the widely adopted generative models for topic modeling
+p110
+aVHashtag count the number of hashtags in each tweet
+p111
+aVA 1.4 points of improvement can be obtained compared to the baseline
+p112
+aVTwo features are created to represent the presence or absence of any positive/negative emoticons
+p113
+aVFor example, Nakov et al
+p114
+aVNote that this does not make the task a binary classification problem
+p115
+aVAll these work are significantly different from what we propose in this work
+p116
+aVIn this work an SVM classifier is trained with LibSVM [ Chang and Lin2011 ] , a widely used toolkit
+p117
+aVWe found no more noticeable benefits after two iterations of semi-supervised training
+p118
+aVThe vast amount of data available online provides a unique opportunity to the people working on natural language processing (NLP) and related fields
+p119
+aVFor example, monitoring the trend of sentiment for a specific company or product mentioned in social media can be useful in stock prediction and product marketing
+p120
+aVThe linear kernel is found to achieve higher accuracy than other kernels in our initial experiments
+p121
+aVSuppose that there are T topics in total in the training data, i.e., t 1 , t 2 , u'\u005cu2026' , t T
+p122
+aVRepeat from Step 3 until finishing a pre-determined number of iterations or no more data is added to D in Step 4
+p123
+aVIt is shown in Section 5 that such customized tokenization is helpful
+p124
+aVSocial media, such as Twitter and Facebook, has attracted significant attention in recent years
+p125
+aVWe adopt the efficient implementation of Gibbs sampling as proposed in [ Yao et al.2009 ] in this work
+p126
+aVMost recently, Si et al
+p127
+aVTwo example tweets are given below, with the word u'\u005cu201c' offensive u'\u005cu201d' appearing in both of them
+p128
+aVEach tweet is regarded as one document
+p129
+aVAn SVM model represents the examples as points in space, mapped so that the examples of the different categories are separated by a clear margin as wide as possible
+p130
+aVFor each document there is a multinomial distribution over topics, and a Dirichlet prior D u'\u005cu2062' i u'\u005cu2062' r u'\u005cu2062' ( u'\u005cu0391' ) is introduced on such distribution
+p131
+aVThe other contains 74K news documents with 50M words collected during the first half year of 2013 from online newswire
+p132
+aVSupport Vector Machine (SVM) is an effective classifier that can achieve good performance in high-dimensional feature space
+p133
+aVNegation we collect a list of negation words, including some informal words frequently observed in online conversations, such as u'\u005cu201c' dunno u'\u005cu201d' ( u'\u005cu201c' don u'\u005cu2019' t know u'\u005cu201d' ), u'\u005cu201c' nvr u'\u005cu201d' ( u'\u005cu201c' never u'\u005cu201d' ), etc
+p134
+aVAny errors related to neutral class (false positives or false negatives) will negatively impact the F scores
+p135
+aVThe first one contains 2M tweets randomly sampled from the collection in January and February 2014
+p136
+aVOur work is organized in the following way
+p137
+aVThe rest is used to replace the un-annotated corpus D u ;
+p138
+aVWe can clearly see that the topics are about phones, sports, sales and politics, respectively
+p139
+aVIn this work, we assign tweet x i to cluster j if P t ( t j x i ) u'\u005cu03a4' or P t ( t j x i ) = max k P t ( t k x i
+p140
+aVThe algorithm is as follows
+p141
+aVIm gonna post something that might be offensive to people in Singapore
+p142
+aV#FSU offensive coordinator Randy Sanders coached for Tennessee in 1st #BCS title game
+p143
+aV1
+p144
+a.

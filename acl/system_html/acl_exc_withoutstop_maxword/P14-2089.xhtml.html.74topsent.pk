@@ -1,0 +1,14 @@
+(lp0
+VWhile RCM learns embeddings suited to specific tasks based on knowledge resources, cbow learns embeddings for words not included in the resource but appear in a corpus
+p1
+aVOur model builds on word2vec [] , a neural network based language model that learns word embeddings by maximizing the probability of raw text
+p2
+aVFor each objective (cbow or RCM), we sample 15 words as negative samples for each training instance according to their frequencies in raw texts (i.e., training data of cbow
+p3
+aVWhile the joint model balances between fitting the text and learning relations, modeling the text at the expense of the relations may negatively impact the final embeddings for tasks that use the embeddings outside of the context of word2vec
+p4
+aVTherefore, we use the embeddings from a trained joint model to pre-train an RCM model
+p5
+aVWe propose a new training objective
+p6
+a.

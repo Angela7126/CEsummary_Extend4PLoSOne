@@ -1,0 +1,102 @@
+(lp0
+VRoughly five hours after that turn was issued on the discussion page, user Sbharris added a wikilink to the u'\u005cu201c' History and etymology u'\u005cu201d' section of the article by performing the following edit
+p1
+aVAn edit-turn-pair is defined as a pair of an edit from a Wikipedia article u'\u005cu2019' s revision history and a turn from the discussion page bound to the same article
+p2
+aVWikipedia, as one of the most prominent collaboratively created resources, offers its users a platform to coordinate their writing, the so called talk or discussion pages [ 18 ]
+p3
+aVEdits are coherent modifications based on a pair of adjacent revisions from Wikipedia article pages
+p4
+aVIndividual turns are retrieved from topics by considering the revision history of the discussion page
+p5
+aVThe search space for corresponding edit-turn-pairs is quite big, as any edit to an article may correspond to any turn from the article u'\u005cu2019' s discussion page
+p6
+aVMost of the resources used for collaborative writing do not explicitly allow their users to interact directly, so that the implicit effort of coordination behind the actual writing is not documented
+p7
+aVIf an article has no discussion page, there are no edit-turn-pairs for this article
+p8
+aVWe propose a number of features which are purely based on the textual similarity between the text of the turn, and the edited text and context
+p9
+aVSome of the false positives (i.e., non-corresponding pairs classified as corresponding) were caused by pairs where the revision (as judged by its comment or the edit context) is related to the turn text, however the specific edit in this pair is not
+p10
+aVSeveral of our features are based on metadata from both the edit and the turn
+p11
+aVIn the present study, we have analyzed cases where explicit coordination lead to implicit coordination and vice versa
+p12
+aVWe therefore define an edit-turn-pair as corresponding, if i) The turn is an explicit suggestion, recommendation or request and the edit performs this suggestion, recommendation or request, ii) the turn is an explicit reference or pointer and the edit adds or modifies this reference or pointer, iii) the turn is a commitment to an action in the future and the edit performs this action, and iv) the turn is a report of a performed action and the edit performs this action
+p13
+aVFurthermore, we removed all edits which are part of a revision created by bots, based on the Wikimedia user group 2 2 http://meta.wikimedia.org/wiki/User_classes scheme
+p14
+aVFurthermore, we deleted 21 pairs for which the turn segmentation algorithm clearly failed (e.g., when the turn text was empty
+p15
+aVThe context of an edit is defined as one preceding and one following paragraph of the edited paragraph
+p16
+aVSome features are based on the edit or the turn alone and do not take into account the pair itself
+p17
+aVHowever, we still expect a certain amount of non-corresponding edit-turn-pairs in this data, as the annotator judged the correspondence based on the entire revision and not the individual edit
+p18
+aVPrevious work [ 11 , 4 ] has shown that these algorithms work well for edit and turn classification
+p19
+aVThe 1,000 most frequent uni-, bi- and trigrams from the turn text are represented as binary features
+p20
+aVTo keep the class imbalance within reasonable margins, we limited the time span between edits and turns to 86,000 seconds (about 24 hours
+p21
+aVMore details follow in Section 2
+p22
+aVDue to their performative nature, we assume that these dialog acts make the turn they belong to a good candidate for a corresponding edit-turn-pair
+p23
+aVBased on an automatic classification using the model presented in our previous work [ 7 ] , we excluded edits classified as Vandalism, Revert or Other
+p24
+aV{mdframed} [backgroundcolor=gray!30, linewidth=0pt, leftmargin=0, rightmargin=0, skipabove=4pt, skipbelow=3pt, innertopmargin=3pt, innerbottommargin=3pt] '' borax '' u'\u005cu2192' [[borax]] This is what we define as a corresponding edit-turn-pair
+p25
+aVHowever, given the high price for a new corresponding edit-turn-pair (due to the high class imbalance in random data), we consider it as a useful starting point for research on edit-turn-pairs in Wikipedia
+p26
+aVIt was important to find a reasonable amount of corresponding edit-turn-pairs before the actual annotation could take place, as we needed a certain amount of positive seeds to keep turkers from simply labeling pairs as non-corresponding all the time
+p27
+aVThis step is intended to make sure that we have a substantial number of corresponding pairs in the data for the final annotation study
+p28
+aVTo understand the mistakes of the classifier, we manually assessed error patterns within the model of the Random Forest classifier
+p29
+aVFinally, for the Mechanical Turk annotation study, we selected 500 random edit-turn-pairs from ETP-all excluding ETP-unconfirmed
+p30
+aVDue to the high class imbalance in the data, the majority class baseline sets a challenging accuracy score of .80
+p31
+aVTo select good turkers and to block spammers, we carried out a pilot study on a small portion of manually confirmed corresponding and non-corresponding pairs, and required turkers to pass a qualification test
+p32
+aVBoth of these may be part of a corresponding edit-turn-pair, according to our definition in Section 2
+p33
+aVAssuming that most edit-turn-pairs are non-corresponding, we expect a heavy imbalance in the class distribution
+p34
+aVWe treat the automatic classification of edit-turn-pairs as a binary classification problem
+p35
+aVAs baseline, we defined a majority class classifier, which labels all edit-turn-pairs as non-corresponding
+p36
+aVIn our 24 hours search space, the probability to find a corresponding edit-turn-pair drops steeply for time spans of more than 6 hours
+p37
+aVFrom ETP-all, a set of 262 edit-turn-pairs have been annotated as corresponding as part of a preliminary annotation study with one human annotator
+p38
+aVThe low F1 on corresponding pairs is likely due to the small number of training examples
+p39
+aVA reduction of the feature set as judged by a u'\u005cu03a7' 2 ranker improved the results for both Random Forest as well as the SVM, so we limited our feature set to the 100 best features
+p40
+aVWe therefore expect to cover the vast majority of corresponding edit-turn-pairs within a search space of 24 hours
+p41
+aVTo assess the reliability of these annotations, one of the co-authors manually annotated a random subset of 100 edit-turn-pairs contained in ETP-gold as corresponding or non-corresponding
+p42
+aVThe inter-rater agreement between ETP-gold (majority votes over Mechanical Turk annotations) and our expert annotations on this subset is Cohen u'\u005cu2019' s u'\u005cu039a' = .72
+p43
+aVFor the same reason, we did not further divide the data into train/test and development data
+p44
+aVWe counted an edit-turn-pair as corresponding, if it was annotated as u'\u005cu201c' corresponding u'\u005cu201d' by least three out of five annotators, and likewise for non-corresponding pairs
+p45
+aVGiven the small size of ETP-gold, we did not assign a fixed train/test split to the data
+p46
+aVThe result is a set of 13,331 edit-turn-pairs, referred to as ETP-all
+p47
+aVThis was calculated as 1 N u'\u005cu2062' u'\u005cu2211' i = 1 N u'\u005cu2211' c = 1 C v i c C , where N = 750 is the overall number of annotated edit-turn-pairs, C = R 2 - R 2 is the number of pairwise comparisons, R = 5 is the number of raters per edit-turn-pair, and v i c = 1 if a pair of raters c labeled edit-turn-pair i equally, and 0 otherwise
+p48
+aVWe refer to this 262 edit-turn-pairs as ETP-unconfirmed
+p49
+aVEach edit-turn-pair could be labeled as u'\u005cu201c' corresponding u'\u005cu201d' , u'\u005cu201c' non-corresponding u'\u005cu201d' or u'\u005cu201c' can u'\u005cu2019' t tell u'\u005cu201d'
+p50
+a.

@@ -1,0 +1,486 @@
+Current File: P14-1022.xhtml_2 P14-1022.xhtml
+
+Section 0:  Abstract
+	SentNum: 9
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 11.1111%
+
+Section 1:  1 Introduction
+	SentNum: 28
+	CENum: 13
+	SentCovered: 14
+	Covered_Rate: 50.0000%
+
+Section 2:  2 Parsing Model
+	SentNum: 28
+	CENum: 5
+	SentCovered: 6
+	Covered_Rate: 21.4286%
+
+Section 3:  3 Surface Feature Framework
+	SentNum: 21
+	CENum: 6
+	SentCovered: 7
+	Covered_Rate: 33.3333%
+
+Section 4:  4 Features
+	SentNum: 39
+	CENum: 17
+	SentCovered: 17
+	Covered_Rate: 43.5897%
+
+Section 5:  5 Annotations
+	SentNum: 19
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 5.2632%
+
+Section 6:  6 Other Languages
+	SentNum: 24
+	CENum: 4
+	SentCovered: 4
+	Covered_Rate: 16.6667%
+
+Section 7:  7 Sentiment Analysis
+	SentNum: 24
+	CENum: 8
+	SentCovered: 11
+	Covered_Rate: 45.8333%
+
+Section 8:  8 Conclusion
+	SentNum: 6
+	CENum: 4
+	SentCovered: 4
+	Covered_Rate: 66.6667%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-1022.xhtml_2's CE cases
+
+Section 0:  Abstract has 1 CE cases
+	CASE: 1
+	Stag: 2 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Moving context out of the grammar and onto surface features can greatly simplify the structural component of the parser because so many deep syntactic cues have surface reflexes, our system can still parse accurately with context-free backbones as minimal as X-bar grammars. 
+		Cause: [(0, 0), (0, 19)]
+		Effect: [(0, 21), (0, 42)]
+
+Section 1:  1 Introduction has 13 CE cases
+	CASE: 1
+	Stag: 9 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: Naïve context-free grammars, such as those embodied by standard treebank annotations, do not parse well because their symbols have too little context to constrain their syntactic behavior. 
+		Cause: [(0, 19), (0, 29)]
+		Effect: [(0, 0), (0, 17)]
+
+	CASE: 2
+	Stag: 11 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: Much of the last few decades of parsing research has therefore focused on propagating contextual information from the leaves of the tree to internal nodes. 
+		Cause: [(0, 0), (0, 9)]
+		Effect: [(0, 11), (0, 24)]
+
+	CASE: 3
+	Stag: 13 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: The underlying reason that such propagation is even needed is that PCFG parsers score trees based on local configurations only, and any information that is not threaded through the tree becomes inaccessible to the scoring function. 
+		Cause: [(0, 17), (0, 18)]
+		Effect: [(0, 21), (0, 36)]
+
+	CASE: 4
+	Stag: 14 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: There have been non-local approaches as well, such as tree-substitution parsers [ 2 , 26 ] , neural net parsers [ 13 ] , and rerankers [ 6 , 4 , 14 ]. 
+		Cause: [(0, 6), (0, 31)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 5
+	Stag: 15 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: These non-local approaches can actually go even further in enriching the grammar u'\u2019' s structural complexity by coupling larger domains in various ways, though their non-locality generally complicates inference. 
+		Cause: [(0, 21), (0, 26)]
+		Effect: [(0, 27), (0, 33)]
+
+	CASE: 6
+	Stag: 16 17 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In this work, we instead try to minimize the structural complexity of the grammar by moving as much context as possible onto local surface features. We examine the position that grammars should not propagate any information that is available from surface strings, since a discriminative parser can access that information directly. 
+		Cause: [(0, 18), (1, 25)]
+		Effect: [(0, 0), (0, 16)]
+
+	CASE: 7
+	Stag: 17 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: We examine the position that grammars should not propagate any information that is available from surface strings, since a discriminative parser can access that information directly. 
+		Cause: [(0, 19), (0, 26)]
+		Effect: [(0, 0), (0, 16)]
+
+	CASE: 8
+	Stag: 17 18 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: We examine the position that grammars should not propagate any information that is available from surface strings, since a discriminative parser can access that information directly. We therefore begin with a minimal grammar and iteratively augment it with rich input features that do not enrich the context-free backbone. 
+		Cause: [(0, 1), (1, 0)]
+		Effect: [(1, 2), (1, 21)]
+
+	CASE: 9
+	Stag: 21 
+		Pattern: 47 [['so'], ['that']]---- [['&C'], ['&adj/&adv@C@'], ['&R']]
+		sentTXT: As a thought experiment, consider a parser with no grammar, which functions by independently classifying each span ( i , j ) of a sentence as an NP, VP, and so on, or null if that span is a non-constituent. 
+		Cause: [(0, 0), (0, 35)]
+		Effect: [(0, 41), (0, 44)]
+
+	CASE: 10
+	Stag: 20 21 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: By contrast, we investigate the extent to which we need a grammar at all. As a thought experiment, consider a parser with no grammar, which functions by independently classifying each span ( i , j ) of a sentence as an NP, VP, and so on, or null if that span is a non-constituent. 
+		Cause: [(0, 0), (0, 31)]
+		Effect: [(0, 5), (0, 35)]
+
+	CASE: 11
+	Stag: 23 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: An independent classification approach is actually very viable for part-of-speech tagging [ 29 ] , but is problematic for parsing u'\u2013' if nothing else, parsing comes with a structural requirement that the output be a well-formed, nested tree. 
+		Cause: [(0, 26), (0, 43)]
+		Effect: [(0, 5), (0, 24)]
+
+	CASE: 12
+	Stag: 32 33 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: For example, Socher et al. 2013 ) demonstrates that sentiment analysis, which is usually approached as a flat classification task, can be viewed as tree-structured. 
+		Cause: [(1, 12), (1, 21)]
+		Effect: [(0, 1), (1, 10)]
+
+	CASE: 13
+	Stag: 35 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: Our parser can be easily adapted to this task by replacing the X-bar grammar over treebank symbols with a grammar over the sentiment values to encode the output variables and then adding n-gram indicators to our feature set to capture the bulk of the lexical effects. 
+		Cause: [(0, 10), (0, 45)]
+		Effect: [(0, 0), (0, 8)]
+
+Section 2:  2 Parsing Model has 5 CE cases
+	CASE: 1
+	Stag: 42 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: An anchored rule r is the conjunction of an unanchored grammar rule rule u'\u2062' ( r ) and the start, stop, and split indexes where that rule is anchored, which we refer to as span u'\u2062' ( r. 
+		Cause: [(0, 41), (0, 46)]
+		Effect: [(0, 0), (0, 39)]
+
+	CASE: 2
+	Stag: 46 47 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: We start with a simple X-bar grammar whose only symbols are NP, NP-bar, VP, and so on. Our base model has no surface features formally, on each anchored rule r we have only an indicator of the (unanchored) rule identity, rule u'\u2062' ( r. 
+		Cause: [(0, 0), (0, 15)]
+		Effect: [(0, 8), (1, 33)]
+
+	CASE: 3
+	Stag: 48 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Because the X-bar grammar is so minimal, this grammar does not parse very accurately, scoring just 73 F1 on the standard English Penn Treebank task. 
+		Cause: [(0, 0), (0, 4)]
+		Effect: [(0, 6), (0, 26)]
+
+	CASE: 4
+	Stag: 60 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: Hall and Klein ( 2012 ) attempted to reduce this state space by factoring these annotations into individual components. 
+		Cause: [(0, 13), (0, 18)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 5
+	Stag: 61 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Their approach changed the multiplicative penalty of annotation into an additive penalty, but even so their individual grammar projections are much larger than the base X-bar grammar. 
+		Cause: [(0, 0), (0, 14)]
+		Effect: [(0, 16), (0, 27)]
+
+Section 3:  3 Surface Feature Framework has 6 CE cases
+	CASE: 1
+	Stag: 66 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: We say that an indicator is a surface property if it can be extracted without reference to the parse tree. 
+		Cause: [(0, 10), (0, 19)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 2
+	Stag: 73 74 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: For example, the first word in a constituent is a surface property, as is the word directly preceding the constituent. As illustrated in Figure 1 , the actual features of the model are obtained by conjoining surface properties with various abstractions of the rule identity. 
+		Cause: [(1, 1), (1, 24)]
+		Effect: [(0, 0), (0, 21)]
+
+	CASE: 3
+	Stag: 76 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: The surface features are somewhat more involved, and so we introduce them incrementally. 
+		Cause: [(0, 0), (0, 6)]
+		Effect: [(0, 10), (0, 13)]
+
+	CASE: 4
+	Stag: 80 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because these u'\u201c' positive u'\u201d' features correspond to observed constituents, they are far less numerous than the set of all possible features extracted from all spans. 
+		Cause: [(0, 1), (0, 16)]
+		Effect: [(0, 19), (0, 34)]
+
+	CASE: 5
+	Stag: 82 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: However, negative features u'\u2014' features that are not observed in any tree u'\u2014' are still powerful indicators of (un)grammaticality if we have never seen a PRN that starts with u'\u201c' has, u'\u201d' or a span that begins with a quotation mark and ends with a close bracket, then we would like the model to be able to place negative weights on these features. 
+		Cause: [(0, 32), (0, 46)]
+		Effect: [(0, 48), (0, 83)]
+
+	CASE: 6
+	Stag: 82 83 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: However, negative features u'\u2014' features that are not observed in any tree u'\u2014' are still powerful indicators of (un)grammaticality if we have never seen a PRN that starts with u'\u201c' has, u'\u201d' or a span that begins with a quotation mark and ends with a close bracket, then we would like the model to be able to place negative weights on these features. Thus, we use a simple feature hashing scheme where positive features are indexed individually, while negative features are bucketed together. 
+		Cause: [(0, 0), (0, 84)]
+		Effect: [(1, 1), (1, 21)]
+
+Section 4:  4 Features has 17 CE cases
+	CASE: 1
+	Stag: 97 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because the lexicon is especially sensitive to morphological effects, we also fire features on all prefixes and suffixes of the current word up to length 5, regardless of frequency. 
+		Cause: [(0, 1), (0, 8)]
+		Effect: [(0, 10), (0, 30)]
+
+	CASE: 2
+	Stag: 98 
+		Pattern: 0 [[['indicate', 'indicates', 'indicated', 'realize', 'realizes', 'realized', 'ensure', 'ensures', 'ensured', 'imply', 'implies', 'implied']]]---- [['&NP@C@', '(&Clause@C@)'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: Subsequent lines in Table 1 indicate additional surface feature templates computed over the span, which are then conjoined with the rule identity as shown in Figure 1 to give additional features. 
+		Cause: [(0, 0), (0, 4)]
+		Effect: [(0, 6), (0, 31)]
+
+	CASE: 3
+	Stag: 100 101 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Note that many of these features have been used before [ 28 , 10 , 23 ] ; our goal here is not to amass as many feature templates as possible, but rather to examine the extent to which a simple set of features can replace a complicated state space. We start with some of the most obvious properties available to us, namely, the identity of the first and last words of a span. 
+		Cause: [(0, 26), (1, 12)]
+		Effect: [(0, 18), (0, 24)]
+
+	CASE: 4
+	Stag: 102 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because heads of constituents are often at the beginning or the end of a span, these feature templates can (noisily) capture monolexical properties of heads without having to incur the inferential cost of lexicalized annotations. 
+		Cause: [(0, 1), (0, 14)]
+		Effect: [(0, 16), (0, 37)]
+
+	CASE: 5
+	Stag: 107 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: We try to capture some of this same intuition by introducing a feature on the length of a span. 
+		Cause: [(0, 10), (0, 18)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 6
+	Stag: 108 109 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: For instance, VPs embedded in NPs tend to be short, usually as embedded gerund phrases. Because constituents in the treebank can be quite long, we bin our length features into 8 buckets, of lengths 1, 2, 3, 4, 5, 10, 20, and u'\u2265' 21 words. 
+		Cause: [(0, 14), (1, 37)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 7
+	Stag: 109 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because constituents in the treebank can be quite long, we bin our length features into 8 buckets, of lengths 1, 2, 3, 4, 5, 10, 20, and u'\u2265' 21 words. 
+		Cause: [(0, 1), (0, 8)]
+		Effect: [(0, 10), (0, 42)]
+
+	CASE: 8
+	Stag: 109 110 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Because constituents in the treebank can be quite long, we bin our length features into 8 buckets, of lengths 1, 2, 3, 4, 5, 10, 20, and u'\u2265' 21 words. Adding these simple features (first word, last word, and lengths) as span features of the X-bar grammar already gives us a substantial improvement over our baseline system, improving the parser u'\u2019' s performance from 73.0 F1 to 85.0 F1 (see Table 1. 
+		Cause: [(1, 15), (1, 51)]
+		Effect: [(0, 1), (1, 13)]
+
+	CASE: 9
+	Stag: 111 112 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Of course, there is no reason why we should confine ourselves to just the words within the span words outside the span also provide a rich source of context. As an example, consider disambiguating the POS tag of the word read in Figure 2. 
+		Cause: [(1, 1), (1, 12)]
+		Effect: [(0, 0), (0, 29)]
+
+	CASE: 10
+	Stag: 113 114 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: A VP is most frequently preceded by a subject NP, whose rightmost word is often its head. Therefore, we fire features that (separately) look at the words immediately preceding and immediately following the span. 
+		Cause: [(0, 0), (0, 17)]
+		Effect: [(1, 2), (1, 19)]
+
+	CASE: 11
+	Stag: 116 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: Figure 3 shows an example of one instance of this feature template impact is a noun that is more likely to take a PP than other nouns, and so we expect this feature to have high weight and encourage the attachment; this feature proves generally useful in resolving such cases of right-attachments to noun phrases, since the last word of the noun phrase is often the head. 
+		Cause: [(0, 59), (0, 69)]
+		Effect: [(0, 0), (0, 56)]
+
+	CASE: 12
+	Stag: 116 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Figure 3 shows an example of one instance of this feature template impact is a noun that is more likely to take a PP than other nouns, and so we expect this feature to have high weight and encourage the attachment; this feature proves generally useful in resolving such cases of right-attachments to noun phrases, since the last word of the noun phrase is often the head. 
+		Cause: [(0, 0), (0, 26)]
+		Effect: [(0, 30), (0, 56)]
+
+	CASE: 13
+	Stag: 116 117 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Figure 3 shows an example of one instance of this feature template impact is a noun that is more likely to take a PP than other nouns, and so we expect this feature to have high weight and encourage the attachment; this feature proves generally useful in resolving such cases of right-attachments to noun phrases, since the last word of the noun phrase is often the head. As another example, coordination can be represented by an indicator of the conjunction, which comes immediately after the split point. 
+		Cause: [(1, 1), (1, 21)]
+		Effect: [(0, 43), (0, 69)]
+
+	CASE: 14
+	Stag: 122 
+		Pattern: 0 [[['indicate', 'indicates', 'indicated', 'realize', 'realizes', 'realized', 'ensure', 'ensures', 'ensured', 'imply', 'implies', 'implied']]]---- [['&NP@C@', '(&Clause@C@)'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: If it begins with punctuation, we indicate the punctuation mark explicitly. 
+		Cause: [(0, 1), (0, 6)]
+		Effect: [(0, 8), (0, 10)]
+
+	CASE: 15
+	Stag: 124 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because this feature indicates capitalization, it can also capture properties of NP internal structure relevant to named entities, and its sensitivity to capitalization and punctuation makes it useful for recognizing appositive constructions. 
+		Cause: [(0, 1), (0, 4)]
+		Effect: [(0, 6), (0, 33)]
+
+	CASE: 16
+	Stag: 124 
+		Pattern: 0 [[['indicate', 'indicates', 'indicated', 'realize', 'realizes', 'realized', 'ensure', 'ensures', 'ensured', 'imply', 'implies', 'implied']]]---- [['&NP@C@', '(&Clause@C@)'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: Because this feature indicates capitalization, it can also capture properties of NP internal structure relevant to named entities, and its sensitivity to capitalization and punctuation makes it useful for recognizing appositive constructions. 
+		Cause: [(0, 0), (0, 1)]
+		Effect: [(0, 3), (0, 3)]
+
+	CASE: 17
+	Stag: 124 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: Because this feature indicates capitalization, it can also capture properties of NP internal structure relevant to named entities, and its sensitivity to capitalization and punctuation makes it useful for recognizing appositive constructions. 
+		Cause: [(0, 25), (0, 27)]
+		Effect: [(0, 0), (0, 23)]
+
+Section 5:  5 Annotations has 1 CE cases
+	CASE: 1
+	Stag: 137 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: By annotating grammar nonterminals with their headwords, the idea is to better model phenomena that depend heavily on the semantics of the words involved, such as coordination and PP attachment. 
+		Cause: [(0, 1), (0, 6)]
+		Effect: [(0, 7), (0, 31)]
+
+Section 6:  6 Other Languages has 4 CE cases
+	CASE: 1
+	Stag: 152 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: The u'\u201c' Replaced u'\u201d' system modifies the Berkeley parser by replacing rare words with morphological descriptors of those words computed using language-specific modules, which have been hand-crafted for individual languages or are trained with additional annotation layers in the treebanks that we do not exploit. 
+		Cause: [(0, 18), (0, 26)]
+		Effect: [(0, 27), (0, 53)]
+
+	CASE: 2
+	Stag: 161 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: However, even when language-specific unknown word handling is added to the parser, our model still outperforms the Berkeley parser overall, showing that our model generalizes even better across languages than a parser for which this is touted as a strength [ 22 ]. 
+		Cause: [(0, 41), (0, 45)]
+		Effect: [(0, 0), (0, 39)]
+
+	CASE: 3
+	Stag: 162 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Our span features appear to work well on both head-initial and head-final languages (see Basque and Korean in the table), and the fact that our parser performs well on such morphologically-rich languages as Hungarian indicates that our suffix model is sufficient to capture most of the morphological effects relevant to parsing. 
+		Cause: [(0, 36), (0, 53)]
+		Effect: [(0, 0), (0, 34)]
+
+	CASE: 4
+	Stag: 165 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: These closely related languages use templatic morphology, for which suffixing is not appropriate; however, using additional surface features based on the output of a morphological analyzer did not lead to increased performance. 
+		Cause: [(0, 23), (0, 34)]
+		Effect: [(0, 1), (0, 20)]
+
+Section 7:  7 Sentiment Analysis has 8 CE cases
+	CASE: 1
+	Stag: 168 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Finally, because the system is, at its core, a classifier of spans, it can be used equally well for tasks that do not normally use parsing algorithms. 
+		Cause: [(0, 3), (0, 5)]
+		Effect: [(0, 7), (0, 30)]
+
+	CASE: 2
+	Stag: 174 
+		Pattern: 0 [[['concern', 'concerns', 'concerned', 'require', 'requires', 'required', 'request', 'requests', 'requested']]]---- [['&R', '(,/./;/--)', '&this', '(&adj)', '(&N)', '(&CAN/have/has/had)', '(&ADV)'], ['(about)', '&V-ing/&NP@C@']]
+		sentTXT: Figure 5 shows an example that requires some analysis of sentence structure to correctly understand. 
+		Cause: [(0, 7), (0, 11)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 3
+	Stag: 176 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: The grammar rule 2 u'\u2192' 4 1 already encodes the notion of the sentiment of the right child being dominant, so when this is conjoined with our span feature on the first word ( While ), we end up with a feature that captures this effect. 
+		Cause: [(0, 0), (0, 23)]
+		Effect: [(0, 26), (0, 51)]
+
+	CASE: 4
+	Stag: 181 182 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: Syntax is often driven by heads of constituents, which tend to be located at the beginning or the end, whereas sentiment is more likely to depend on modifiers such as adjectives, which are typically present in the middle of spans. Therefore, we augment our existing model with standard sentiment analysis features that look at unigrams and bigrams in the span [ 31 ]. 
+		Cause: [(0, 0), (0, 42)]
+		Effect: [(1, 2), (1, 23)]
+
+	CASE: 5
+	Stag: 184 185 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We exploit this by adding an additional feature template similar to our span shape feature from Section 4.4 which uses the (deterministic) tag for each word as its descriptor. We evaluated our model on the fine-grained sentiment analysis task presented in Socher et al. 
+		Cause: [(0, 29), (1, 10)]
+		Effect: [(0, 0), (0, 27)]
+
+	CASE: 6
+	Stag: 187 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: The task is to predict the root sentiment label of each parse tree; however, because the data is annotated with sentiment at each span of each parse tree, we can also evaluate how well our model does at these intermediate computations. 
+		Cause: [(0, 17), (0, 29)]
+		Effect: [(0, 31), (0, 43)]
+
+	CASE: 7
+	Stag: 188 
+		Pattern: 45 [['so', 'that']]---- [['&C'], ['&R']]
+		sentTXT: Following their experimental conditions, we filter the test set so that it only contains trees with non-neutral sentiment labels at the root. 
+		Cause: [(0, 0), (0, 9)]
+		Effect: [(0, 12), (0, 22)]
+
+	CASE: 8
+	Stag: 191 192 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Their model has high capacity to model complex interactions of words through a combinatory tensor, but it appears that our simpler, feature-driven model is just as effective at capturing the key effects of compositionality for sentiment analysis. To date, the most successful constituency parsers have largely been generative, and operate by refining the grammar either manually or automatically so that relevant information is available locally to each parsing decision. 
+		Cause: [(0, 28), (1, 26)]
+		Effect: [(0, 9), (0, 26)]
+
+Section 8:  8 Conclusion has 4 CE cases
+	CASE: 1
+	Stag: 192 
+		Pattern: 45 [['so', 'that']]---- [['&C'], ['&R']]
+		sentTXT: To date, the most successful constituency parsers have largely been generative, and operate by refining the grammar either manually or automatically so that relevant information is available locally to each parsing decision. 
+		Cause: [(0, 0), (0, 22)]
+		Effect: [(0, 25), (0, 33)]
+
+	CASE: 2
+	Stag: 193 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: Our main contribution is to show that there is an alternative to such annotation schemes namely, conditioning on the input and firing features based on anchored spans. 
+		Cause: [(0, 26), (0, 27)]
+		Effect: [(0, 0), (0, 23)]
+
+	CASE: 3
+	Stag: 194 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We build up a small set of feature templates as part of a discriminative constituency parser and outperform the Berkeley parser on a wide range of languages. 
+		Cause: [(0, 10), (0, 26)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 4
+	Stag: 197 198 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Our system is available as open-source at https://www.github.com/dlwh/epic. This work was partially supported by BBN under DARPA contract HR0011-12-C-0014, by a Google PhD fellowship to the first author, and an NSF fellowship to the second. 
+		Cause: [(0, 5), (1, 27)]
+		Effect: [(0, 0), (0, 3)]
+
+#-------------------------------------------------
+

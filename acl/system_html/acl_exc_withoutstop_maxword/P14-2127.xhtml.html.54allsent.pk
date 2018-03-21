@@ -1,0 +1,72 @@
+(lp0
+VThe max-violation method performs the update where the model score difference between the incorrect Viterbi partial derivation and the best y -good partial derivation is maximal, by penalizing the incorrect Viterbi partial derivation and rewarding the y -good partial derivation
+p1
+aVIf a boundary word does not occur in the reference, its index is set to u'\u005cu221e' so that its language model score will always be - u'\u005cu221e' ; if a boundary word occurs more than once in the reference, its - u'\u005cu2062' LM node is split into multiple + u'\u005cu2062' LM nodes, one for each such index
+p2
+aVHowever, in the following experiments, due to efficiency considerations, we use the u'\u005cu201c' tight u'\u005cu201d' rule extraction in cdec that is more strict than the standard u'\u005cu201c' loose u'\u005cu201d' rule extraction, which generates a reduced rule set and, thus, a reduced reachability
+p3
+aVwhere s u'\u005cu2062' ( r 5 ) is the score of rule r 5 , and the LM combo score u'\u005cu039b' is log P lm ( talks u'\u005cu2223' held ) P lm ( with u'\u005cu2223' talks ) P lm ( Sharon u'\u005cu2223' with )
+p4
+aVSo we run a binary search for the length penalty weight after each training iteration to tune the length ratio to u'\u005cu223c' 0.97 on dev set
+p5
+aVExperiments show that our training algorithm outperforms mainstream tuning methods (which optimize on small devsets) by +1.2 Bleu over Mert and Pro on FBIS
+p6
+aVAfter numerous attempts by various researchers [ 17 , 20 , 1 , 2 , 5 , 9 , 10 ] , the recent work of \u005cnewcite yu+:2013 finally reveals a major reason it is the vast amount of (inevitable) search errors in MT decoding that astray learning
+p7
+aVWe find that even simple Word-Edges features boost the performance significantly, and adding complex Word-Edges features from \u005cnewcite yu+:2013 brings limited improvement and slows down the decoding
+p8
+aVWe generalize the latent variable violation-fixing perceptron framework to inexact search over hypergraphs, which subsumes previous algorithms for PBMT and bottom-up parsing as special cases (see Fig
+p9
+aVIWSLT04 is used as development set in MaxForce training, and as tuning set for n -best Mert , Hypergraph Mert , and Pro
+p10
+aV2 2 Our formulation of index-based language model fixes a bug in the word-based LM of \u005cnewcite yu+:2013 when a substring appears more than once in the reference (e.g.,  u'\u005cu201c' the man u'\u005cu2026' the man u'\u005cu2026' u'\u005cu201d' ); thanks to Dan Gildea for pointing it out
+p11
+aVSuch derivations can be generated in way similar to \u005cnewcite yu+:2013 by using a language model tailored for forced decoding
+p12
+aV3 3 We find that while MaxForce generates translations of length ratio close to 1 during training, the length ratios on dev/test sets are significantly lower, due to OOVs
+p13
+aVFor clarity reasons we will describe Hiero decoding as a two-pass process, first without a language model, and then integrating the LM
+p14
+aVHowever, the underlying phrase-based model suffers from limited distortion and thus can only employ a small portion (about 1/3 in their Ch-En experiments) of the bitext in training
+p15
+aVNIST06 newswire is used as development set for MaxForce training, and as tuning set for all other tuning methods
+p16
+aVSo in the following experiments we only use Word-Edges features consisting of combinations of English and Chinese words, and Chinese characters, and do not use word clusters nor word types
+p17
+aVThe max-violation method is more than 15 Bleu points better than the standard perceptron (also known as u'\u005cu201c' bold-update u'\u005cu201d' in \u005cnewcite liang+:2006) which updates at the root of the derivation tree
+p18
+aVThus a - u'\u005cu2062' LM node N [ i j ] is split into multiple + u'\u005cu2062' LM nodes of signature N [ i j ] a u'\u005cu22c6' b , where a and b are the boundary words
+p19
+aVAs mentioned in Section 1, the key to the success of \u005cnewcite yu+:2013 is the adoption of violation-fixing perceptron of \u005cnewcite huang+:2012 which is tailored for vastly inexact search
+p20
+aVTo incorporate the language model, each node also needs to remember its target side boundary words
+p21
+aVWe say D u'\u005cu2208' H u'\u005cu2062' ( x ) if D is a full derivation of decoding x , and D can be derived from the hypergraph
+p22
+aVTake the partial translation of u'\u005cu201c' held talks with Sharon u'\u005cu201d' in Figure 2 (b) for example, the deduction is
+p23
+aVWe show the reachability distributions of both tight and loose rule extraction in Figure 4
+p24
+aVOn the other hand, \u005cnewcite zhang+:2013 has generalized \u005cnewcite huang+:2012 from graphs to hypergraphs for bottom-up parsing, which resembles Hiero decoding
+p25
+aVWe further denote the real decoding hypergraph with beam-pruning and cube-pruning as H u'\u005cu2032' u'\u005cu2062' ( x
+p26
+aVWhat makes large-scale MT training so hard then
+p27
+aVThe set of y -bad derivations is defined as
+p28
+aVBoth IWSLT04 and IWSLT05 contain 16 references.We mainly use this corpus to investigate the properties of MaxForce
+p29
+aVMore formally, the whole decoding process can be cast as a deductive system
+p30
+aVFor simplicity and efficiency reasons, we also exclude all non-local features
+p31
+aVFollowing \u005cnewcite yu+:2013, we call our max-violation method MaxForce
+p32
+aVSo we just need to combine the two generalizing directions (latent variable and hypergraph, see Fig
+p33
+aVIWSLT05 is used as test set
+p34
+aVNIST08 newswire is used as test set
+p35
+a.

@@ -1,0 +1,236 @@
+(lp0
+VAlso, as suggested by the experimental result, among the four corpora, FCE corpus is a comparably good resource for training correction detection models with our current feature set
+p1
+aVOne reason is that FCE corpus has many more training instances, which benefits model training
+p2
+aVFirst, Table 4 shows that by incorporating correction patterns into the merging algorithm, the errors in correction detection step were reduced
+p3
+aVThe models built on corpora can generally improve the correction detection accuracy 5 5 We currently do not evaluate the end-to-end system over different corpora
+p4
+aVWe propose to improve upon the correction detection component by training a classifier that determines which edits in a revised sentence address the same error in the original sentence
+p5
+aVOur analysis confirms that the merging step is the bottleneck in the current correction detection system u'\u005cu2013' it accounts for 75% of the mis-detections
+p6
+aVThis is because different corpora employ different error type categorization standards
+p7
+aVComparing a student-written sentence with its revision, we observe that each correction can be decomposed into a set of more basic edits such as word insertions, word deletions and word substitutions
+p8
+aVWe considered four corpora with different ESL populations and annotation standards, including FCE corpus [ 17 ] , NUCLE corpus [ 2 ] , UIUC corpus 2 2 UIUC corpus contains annotations of essays collected from ICLE [ 6 ] and CLEC [ 7 ]
+p9
+aVSince mis-detected corrections cannot be analyzed down the pipeline, the correction detection component became the bottle-neck of their overall system
+p10
+aVIf the resulting basic edits do not match with those that compose the actual corrections, we attribute the error to the first step
+p11
+aVThis led to a significant improvement on the overall system u'\u005cu2019' s F 1 -score on all corpora
+p12
+aVWe then create a training instance for each pair of two consecutive basic edits if two consecutive basic edits need to be merged, we will mark the outcome as True , otherwise it is False
+p13
+aVTherefore, to effectively reduce the algorithm u'\u005cu2019' s mis-detection errors, we propose to build a classifier to merge with better accuracies
+p14
+aVBecause the Levenshtein algorithm only tries to minimize the number of edits, it does not care whether the edits make any linguistic sense
+p15
+aVIn the example shown in Figure 1 , the correction u'\u005cu201c' to change u'\u005cu21d2' changing u'\u005cu201d' is composed of a deletion of to and a substitution from change to changing ; the correction u'\u005cu201c' moment u'\u005cu21d2' minute u'\u005cu201d' is itself a single word substitution
+p16
+aVThe teachers u'\u005cu2019' annotations are treated as gold standard for the detailed corrections
+p17
+aVFor example, in Figure 11 , when the insertion of one word is followed by the deletion of the same word, the insertion and deletion are likely addressing one single error
+p18
+aVOn the other hand, in Figure 11 , if one edit includes a substitution between words with the same POS u'\u005cu2019' s, then it is likely fixing a word choice error by itself
+p19
+aVTo predict whether two basic-edits address the same writing problem more discriminatively, we train a Maximum Entropy binary classifier based on features extracted from relevant contexts for the basic edits
+p20
+aVThus, we can build systems to detect corrections which operates in two steps
+p21
+aVBecause the classifier were trained on revisions where corrections are explicitly marked by English experts, it is also possible to build systems adjusted to different annotation standards
+p22
+aVWe simulate the revisions by applying corrections onto the original sentence
+p23
+aVThis is because these two edits would combine together as a word-order change
+p24
+aVComputer aided language learning tools offer a solution for providing more detailed feedback
+p25
+aVDue to the effort involved in comparing revisions with the original texts, students often fail to learn from these revisions [ 16 ]
+p26
+aVIn practice, however, this two-step approach may result in mis-detections due to ambiguities
+p27
+aVFurthermore, it is not clear if the heuristics will work as well for tutors trained to mark up revisions under different guidelines
+p28
+aVBecause this is time consuming, tutors often just rewrite the sentences without giving any explanations [ 5 ]
+p29
+aVA bigger concern is to guarantee the extracted phrase pairs are indeed translations or paraphrases
+p30
+aVRecent work therefore focuses on identifying the alignment/edits between two sentences [ 13 , 8 ]
+p31
+aVWe conducted an error analysis to attribute errors to either step when the system detects a wrong set of corrections for a sentence
+p32
+aVThe improvement is most noticeable on FCE corpus, where the error in correction detection step was reduced by 9%
+p33
+aVFigure 13 suggests that the model u'\u005cu2019' s accuracies increase with the training corpus size
+p34
+aVTheir correction detection algorithm relies on a set of heuristics developed from one single data collection (the FCE corpus [ 17 ]
+p35
+aVUnlike evaluating grammar error correction systems [ 3 ] , correction detection cannot refer to a gold standard
+p36
+aV1) detecting the basic edits that took place during the revision, and (2) merging those basic edits that address the same error
+p37
+aVThe merging heuristic proposed by Swanson and Yamangil, which merges the adjacent basic edits into single corrections
+p38
+aVAn improvement in correction detection may increase the system accuracy overall
+p39
+aVAlthough they reported a high accuracy for the error type selection classifier alone, the bottleneck of their system is the other component u'\u005cu2013' correction detection
+p40
+aV2) We have developed a merging model that reduces mis-detection by 1/3, leading to significant improvement in the accuracies of combined correction detection and error type selection
+p41
+aVThe basic statistics of the corpora are shown in Table 2
+p42
+aVWe tried varying the training dataset size, and test it on different corpora
+p43
+aVWe combine Levenshtein algorithm with different merging algorithms for correction detection
+p44
+aVTable 5 shows that the number of merging errors are significantly reduced by the new merging algorithm
+p45
+aVModels built on the same corpus generally perform the best
+p46
+aVTheir approach has two components one to detect individual corrections within a revision, which they termed correction detection ; another to determine what the correction fixes, which they termed error type selection
+p47
+aV1) We show empirically that a major challenge in correction detection is to determine the number of edits that address the same error
+p48
+aVFor merging basic edits, Swanson and Yamangilapplied a distance heuristic u'\u005cu2013' basic-edits that are close to each other (e.g., basic edits with at most one word lying in between) are merged
+p49
+aVThese corpora all provide experts u'\u005cu2019' corrections along with error type mark-ups
+p50
+aVThe error type selector u'\u005cu2019' s accuracies are shown in Table 3 3 3 Our replication has a slightly lower error type selection accuracy on FCE (80.02%) than the figure reported by Swanson and Yamangil(82.5%
+p51
+aVOtherwise, we attribute the error to the second step
+p52
+aVIn addition to evaluating the merging algorithms on the stand-alone task of correction detection, we have also plugged in the merging algorithms into an end-to-end system in which every automatically detected correction is further classified into an error type
+p53
+aVTable 6 shows the system u'\u005cu2019' s F 1 score when trained and tested on different corpora
+p54
+aVIn these corpora, around half of revised sentences contains multiple corrections
+p55
+aVWe evaluate extrinsically the merging components u'\u005cu2019' effect on overall system performance by comparing the boundaries of system u'\u005cu2019' s detected corrections with the gold standard
+p56
+aVThis small difference on error type selection does not affect our conclusions about correction detection
+p57
+aVWhen determining whether a set of basic-edits (word insertions, deletions, substitutions) contributes to the same correction, these heuristics lack the flexibility to adapt to a specific context
+p58
+aVFigure 2 illustrates the process for a fragment of the example sentence from Figure 1
+p59
+aVSecond, our proposed model is able to generalize over different corpora
+p60
+aV3) We have conducted experiments across multiple corpora, indicating that the proposed merging model is generalizable
+p61
+aVThese errors caused their system to mis-detect 30% of the corrections
+p62
+aVWe train the classifier using samples extracted from revisions where individual corrections are explicitly annotated
+p63
+aVHowever, existing revision corpora do not have the fine-grained annotations necessary for our experimental gold standard
+p64
+aVAn analysis of their system shows that approximately 70% of the system u'\u005cu2019' s mistakes are caused by mis-detections in the first place
+p65
+aVWe instead use error annotated data, in which the corrections were provided by human experts
+p66
+aVWhile detecting basic edits, Figures 5 gives an example of problems that might arise
+p67
+aVTable 4 compares the overall educational system u'\u005cu2019' s accuracies with different merging algorithms
+p68
+aVOur error analysis above also highlights our task u'\u005cu2019' s difference with previous work that identify corresponding phrases between two sentences, including phrase extraction [ 9 ] and paraphrase extraction [ 1 ]
+p69
+aVWe examine the first step u'\u005cu2019' s output
+p70
+aVFigure 8 shows cases for which the heuristic results in the wrong scope
+p71
+aVHow much does a classifier trained for this task improve the system u'\u005cu2019' s overall accuracy
+p72
+aVIn comparison, phrase extraction systems aim to improve the end-to-end MT or paraphrasing systems
+p73
+aVWe evaluate both (1) the F-score in detecting corrections (2) the F-score in correctly detecting both the corrections u'\u005cu2019' and the error types they address
+p74
+aVIn particular, the number of false positives (system proposes merges when it should not) is significantly reduced
+p75
+aVFigures 8 highlights the problems with indiscriminantly merging basic-edits that are adjacent
+p76
+aVPrograms can be developed to compare the student u'\u005cu2019' s original sentences with the tutor-revised sentences
+p77
+aVAs shown in Table 6
+p78
+aVWe use features in Table 1 in the proposed classifier
+p79
+aVThey are fundamentally different in that the granularity of the extracted phrase pairs is a major concern in our work u'\u005cu2013' we need to guarantee each detected phrase pair to address exactly one writing problem
+p80
+aVIn this case, it should not be merged with other edits
+p81
+aVWe first extract the basic-edits that compose each correction
+p82
+aVQuality feedback from language tutors can help English-as-a-Second-Language (ESL) students improve their writing skills
+p83
+aVWe replicated the error type selector described in Swanson and Yamangil ( 2012
+p84
+aVWe compare two merging algorithms, combined with Levenshtein algorithm
+p85
+aVThe classifier can make more accurate decisions adjusted to contexts
+p86
+aVDo the additional contextual information about correction patterns help guide the merging decisions
+p87
+aVAn ideal data resource would be a real-world collection of student essays and their revisions [ 15 ]
+p88
+aVOur major experimental results are presented in Table 4 and Table 6
+p89
+aVOther previous tasks also involve comparing two sentences
+p90
+aV[ 12 ] and HOO2011 corpus [ 4 ]
+p91
+aVOut of the 42% corrections that are incorrectly analyzed 1 1 Swanson and Yamangilreported an overall system with 58% F-score
+p92
+aVA) whether merging the two basic-edits matches the pattern for a common correction
+p93
+aVThat is, one third of the correction mis-detections were eliminated
+p94
+aVCertain patterns may indicate that two adjacent basic-edits are a part of the same correction while others may indicate that they each address a different problem
+p95
+aVWe illustrate this in Figure 12
+p96
+aVOne of the tutors u'\u005cu2019' tasks is to isolate writing mistakes within sentences, and point out (1) why each case is considered a mistake, and (2) how each mistake should be corrected
+p97
+aVSwanson and Yamangil ( 2012 ) have proposed a promising framework for this purpose
+p98
+aVB) whether one basic-edit addresses one single error
+p99
+aVWe have split each corpus into 11 equal parts
+p100
+aVWe use the Maximum Entropy classifier to predict whether we should merge the two edits, as described in Section 3 4 4 We use the implementation at http://homepages.inf.ed.ac.uk/lzhang10/maxent_toolkit.html
+p101
+aVIntuitively, it seems that the decision should be more context dependent
+p102
+aVHow well does our method generalize over revisions from different sources
+p103
+aVMis-detections may be introduced from either steps
+p104
+aV30%/42% u'\u005cu2248' 70% are caused by mis-detections in the first place
+p105
+aVWe make the following observations
+p106
+aVThis work is supported by U.S
+p107
+aVOne part is used as the development dataset; the rest are used for 10-fold cross validation
+p108
+aVWe design the features to indicate
+p109
+aVThe contributions of this paper are
+p110
+aVWe design experiments to answer two questions
+p111
+aVNational Science Foundation Grant IIS-0745914
+p112
+aVWe thank the anonymous reviewers for their suggestions; we also thank Homa Hashemi, Wencan Luo, Fan Zhang, Lingjia Deng, Wenting Xiong and Yafei Wei for helpful discussions
+p113
+aV[b]0.5
+p114
+aV[b]0.23
+p115
+aV[b]0.5
+p116
+aV[b]0.23
+p117
+a.

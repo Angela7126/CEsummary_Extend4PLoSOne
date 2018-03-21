@@ -1,0 +1,164 @@
+(lp0
+VFigures 6 and 7 show the average distance from the convergence reward as a function of the number of episodes per epoch during training, for 4 and 5 fruits respectively
+p1
+aV1) we propose concurrent learning using multi-agent RL as a way to deal with some of the issues of current approaches to dialogue policy learning (i.e.,, the need for SUs and corpora), which may also potentially prove useful for learning via live interaction with human users; (2) we show that concurrent learning can address changes in user behavior over time, and requires multi-agent RL techniques and variable exploration rates; (3) to our knowledge this is the first time that PHC and PHC-WoLF are used for learning dialogue policies; (4) for the first time, the above techniques are applied to a negotiation domain; and (5) this is the first study that compares Q-learning, PHC, and PHC-WoLF in such a variety of situations (varying a large number of parameters
+p2
+aVWe vary the scenario complexity (i.e.,, the quantity of resources to be shared and consequently the state space size), the number of training episodes, the learning rate, and the exploration rate
+p3
+aVAs we will see in section 5 , even though the number of states for each agent is not large, it takes many iterations and high exploration rates for convergence due to the fact that both agents are learning at the same time and the assumption of interacting with a stationary environment no longer holds
+p4
+aVIt is clear that as the state space becomes larger 100,000 training episodes per epoch are not enough for convergence
+p5
+aVGiven that Agent 1 is more interested in apples and Agent 2 cares more about oranges, the maximum total utility solution would be the case where each agent offers to get all the fruits it cares about and to give its interlocutor all the fruits it does not care about, and the other agent accepts this offer
+p6
+aVIn this case the environment of a learning agent is one or more other agents that can also be learning at the same time
+p7
+aVThus, when converging to the maximum total utility solution, in the case of 4 fruits (4 apples and 4 oranges), the average reward of the two agents should be 1200 minus 10 for making or accepting an offer
+p8
+aVOn the other hand when the agent is u'\u005cu201c' losing u'\u005cu201d' the learning rate u'\u005cu0394' L u'\u005cu2062' F should be high so that the agent has more time to adapt to the other agents u'\u005cu2019' policies, which also facilitates convergence
+p9
+aVTherefore, unlike single-agent RL, multi-agent RL can handle changes in user behavior or in the behavior of other agents participating in the interaction, and thus potentially lead to more realistic dialogue policies in complex dialogue scenarios
+p10
+aVThis is to make all graphs comparable because in all cases the optimal average distance from the convergence reward of the two agents should be equal to 10 (make the optimal offer or accept the optimal offer that the other agent makes
+p11
+aVThe main idea is that when the agent is u'\u005cu201c' winning u'\u005cu201d' the learning rate u'\u005cu0394' W should be low so that the opponents have more time to adapt to the agent u'\u005cu2019' s policy, which helps with convergence
+p12
+aVAgent 1 makes an offer to Agent 2, namely 0 apples and 4 oranges, and Agent 2 accepts
+p13
+aVThus the reward for Agent 1 is 1190, the reward for Agent 2 is 1190, and the average reward of the two agents is also 1190
+p14
+aVAs the number of fruits increases, Q-learning starts performing worse than the multi-agent RL algorithms
+p15
+aVFor this reason, recently much attention has been drawn to machine learning approaches to dialogue management and in particular Reinforcement Learning (RL) of dialogue policies [ 40 , 34 , 22 ]
+p16
+aVThus below we focus only on research that is directly related to our work, specifically research on concurrent learning of the policies of multiple agents, and the application of RL to negotiation domains
+p17
+aVThen the dialogue policy can be learned by having the system interact with the SU for a large number of dialogues (usually thousands of dialogues
+p18
+aVFor 7 fruits PHC-W appears to perform worse than Q-learning but this is because, as we can see in Figure 5 , in this case more than 400,000 episodes per epoch are required for convergence
+p19
+aVWe call 1200 (or 1500) the convergence reward , i.e.,, the reward after converging to the maximum total utility solution if we do not take into account the action penalty
+p20
+aVAs we discuss below, concurrent learning could potentially be used for learning via live interaction with human users
+p21
+aVFor example, if the policies were learned for 5 epochs with each epoch containing 25,000 episodes, then for testing the two policies will interact for another 25,000 episodes
+p22
+aVFurthermore, it is not clear what constitutes a good SU for dialogue policy learning
+p23
+aVClearly having a constant exploration rate in all epochs is problematic
+p24
+aVIn either case, one can build a user simulation model that is the average of different user behaviors or learn a policy from a corpus that contains a variety of interaction patterns, and thus safely assume that single-agent RL techniques will work
+p25
+aVThis ability of multi-agent RL can also have important implications for learning via live interaction with human users
+p26
+aVThus the environment of an agent is one or more other agents that continuously change their behavior because they are also learning at the same time
+p27
+aVThen Heeman ( 2009 ) extended this work by experimenting with different representations of the RL state in the same domain (this time learning against a hand-crafted SU
+p28
+aVBecause it is very difficult for the agent to know what will happen in the rest of the interaction, the agent must select an action based on the average reward it has previously observed after having performed that action in similar contexts
+p29
+aVAlso, to avoid long dialogues, if none of the agents accepts the other agent u'\u005cu2019' s offers, the negotiation finishes after 20 pairs of exchanges between the two agents (20 offers from Agent 1 and 20 offers from Agent 2
+p30
+aVMoreover, for negotiation in particular there is one more reason in favor of concurrent learning as opposed to learning against a SU
+p31
+aVFor 5 fruits the average reward should be 1500 minus 10, and so forth
+p32
+aVTypically learning a dialogue policy is a slow process requiring thousands of dialogues, hence the need for SUs
+p33
+aVThus after only 100,000 episodes per epoch all policies still behave somewhat randomly
+p34
+aVSingle-agent RL methods make the assumption that the system learns by interacting with a stationary environment, i.e.,, an environment that does not change over time
+p35
+aVIndeed, as we see in section 5 , Q-learning can converge to the optimal policy for small state spaces
+p36
+aVWith regard to using RL for learning negotiation policies, the amount of research that has been performed is very limited compared to slot-filling
+p37
+aVFor all algorithms and experiments each agent is rewarded only at the end of the dialogue based on the negotiation outcome (see Table 1
+p38
+aVThus the two agents have different reward functions
+p39
+aVSo unlike PHC-WoLF, PHC-W and PHC-LF do not use a variable learning rate
+p40
+aVDepending on the application, building a realistic SU can be just as difficult as building a good dialogue policy
+p41
+aVAlso, for 1, 2, and 3 fruits all algorithms converge and perform comparably
+p42
+aVTypically, data are collected in a Wizard-of-Oz setup where human users think that they interact with a system while in fact they interact with a human pretending to be the system, or by having human users interact with a preliminary version of the dialogue system
+p43
+aVThey are both negotiators, thus building a good SU is as difficult as building a good system policy
+p44
+aV1 1 Though corpora or SUs may still be useful for bootstrapping the policies and encoding real user behavior (see section 6
+p45
+aVAs we can see, each agent can offer any combination of apples and oranges
+p46
+aVIn each step the mixed policy is updated by increasing the probability of selecting the highest valued action according to a learning rate u'\u005cu0394' (see equations (2), (3), and (4) below
+p47
+aVPHC-WoLF determines whether the agent is u'\u005cu201c' winning u'\u005cu201d' or u'\u005cu201c' losing u'\u005cu201d' by comparing the current policy u'\u005cu2019' s u'\u005cu03a0' u'\u005cu2062' ( s , a ) expected payoff with that of the average policy u'\u005cu03a0' ~ u'\u005cu2062' ( s , a ) over time
+p48
+aVS × A i u'\u005cu2192' [0, 1] that maps states to mixed strategies, which are probability distributions over the agent u'\u005cu2019' s actions, so that the agent u'\u005cu2019' s expected discounted (with discount factor u'\u005cu0393' ) future reward is maximized
+p49
+aVBuilding a dialogue policy can be a challenging task especially for complex applications
+p50
+aVAn MDP is defined as a tuple ( S , A , T , R , u'\u005cu0393' ) where S is the set of states (representing different contexts) which the agent may be in, A is the set of actions of the agent, T is the transition function S × A × S u'\u005cu2192' [0, 1] which defines a set of transition probabilities between states after taking an action, R is the reward function S × A u'\u005cu2192' u'\u005cu211c' which defines the reward received when taking an action from the given state, and u'\u005cu0393' is a factor that discounts future rewards
+p51
+aVHowever, in the latter case if the behavior of the user changes significantly over time then the assumption that the environment is stationary will no longer hold
+p52
+aVBoth agents are trained simultaneously and there is no need for building a SU separately or having access to a corpus
+p53
+aVTherefore the environment is no longer stationary and single-agent RL techniques do not work well or do not work at all
+p54
+aVSpace constraints prevent us from providing an exhaustive list of previous work on using RL for dialogue management
+p55
+aVThus all results presented in section 5 are averages of 20 runs
+p56
+aVImagine a system that learns to change its strategy as it realizes that a particular user is no longer a novice user, or that a user no longer cares about five star restaurants
+p57
+aVTo ensure that the policies do not converge by chance, we run the training and test sessions 20 times each and we report averages
+p58
+aVA stochastic game is defined as a tuple ( n , S , A 1 u'\u005cu2062' n , T , R 1 u'\u005cu2062' n , u'\u005cu0393' ) where n is the number of agents, S is the set of states, A i is the set of actions available for agent i (and A is the joint action space A 1 × A 2 × u'\u005cu2026' × A n ), T is the transition function S × A × S u'\u005cu2192' [0, 1] which defines a set of transition probabilities between states after taking a joint action, R i is the reward function for the i th agent S × A u'\u005cu2192' u'\u005cu211c' , and u'\u005cu0393' is a factor that discounts future rewards
+p59
+aVShould the SU resemble real user behavior as closely as possible, or should it exhibit some degree of randomness to explore a variety of interaction patterns
+p60
+aVAlso, they have human-like constraints of imperfect information about each other; they do not know each other u'\u005cu2019' s reward function or degree of rationality (during learning our agents can be irrational
+p61
+aVIf the current policy u'\u005cu2019' s expected payoff is greater then the agent is u'\u005cu201c' winning u'\u005cu201d' , otherwise it is u'\u005cu201c' losing u'\u005cu201d'
+p62
+aVGaussian processes have been shown to speed up learning
+p63
+aVTable 3 also shows the number of state-action pairs (Q-values
+p64
+aVHere two or more agents learn simultaneously
+p65
+aVHowever, as the state space size increases the performance of Q-learning drops (compared to PHC and PHC-WoLF
+p66
+aVAn example interaction between the two agents is shown in Figure 1
+p67
+aVAlso, n r is the number of runs (in our case always equal to 20
+p68
+aVTherefore it is important to investigate RL approaches that do not make such assumptions about the user/environment
+p69
+aVFurthermore, Cuayáhuitl and Dethlefs ( 2012 ) used hierarchical multi-agent RL for co-ordinating the verbal and non-verbal actions of a robot
+p70
+aVWe chose these two algorithms because, unlike other multi-agent RL methods [ 26 , 21 ] , they do not make assumptions that do not always hold and do not require quadratic or linear programming that does not always scale
+p71
+aVImagine a situation where a negotiator is so uncooperative and arrogant that the other negotiators decide to completely change their negotiation strategy in order to punish her
+p72
+aVThus PHC-WoLF uses two learning rates u'\u005cu0394' W and u'\u005cu0394' L u'\u005cu2062' F
+p73
+aVNevertheless, despite its shortcomings Q-learning has been used successfully for multi-agent RL [ 7 ]
+p74
+aVIn the first case which from now on will be referred to as PHC-W, we set u'\u005cu0394' to be equal to u'\u005cu0394' W (also used for PHC-WoLF
+p75
+aVThus in the case of 4 fruits, we will have C u'\u005cu2062' R 1 = C u'\u005cu2062' R 2 =1200, and if for all runs R 1 u'\u005cu2062' j = R 2 u'\u005cu2062' j =1190, then A u'\u005cu2062' D =10
+p76
+aVSo if we have X apples and Y oranges for sharing, there can be ( X + 1 ) × ( Y + 1 ) possible offers
+p77
+aVIn the second case which from now on will be referred to as PHC-LF, we set u'\u005cu0394' to be equal to u'\u005cu0394' L u'\u005cu2062' F (also used for PHC-WoLF
+p78
+aVFor example if we have 2 apples and 2 oranges for sharing, there can be 9 possible offers u'\u005cu201c' offer-0-0 u'\u005cu201d' , u'\u005cu201c' offer-0-1 u'\u005cu201d' , u'\u005cu2026' , u'\u005cu201c' offer-2-2 u'\u005cu201d'
+p79
+aVOur research contributions are as follows
+p80
+aVThus a Nash equilibrium (if there exists one) cannot be computed in advance
+p81
+a.

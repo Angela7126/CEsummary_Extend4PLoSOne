@@ -1,0 +1,184 @@
+(lp0
+VIn the third section, we describe experiments regarding the detection of machine translation and in the fourth section we discuss the use of detection techniques as a machine translation quality estimation method
+p1
+aVRegarding the detection of machine translated text, Carter and Inkpen [] translated the Hansards of the 36th Parliament of Canada using the Microsoft Bing MT web service, and conducted three detection experiments at document level, using unigrams, average token length, and type-token ratio as features
+p2
+aVSeveral works [] used text classification techniques in order to distinguish human translated text from native language text at document or paragraph level, using features like word and POS n-grams, proportion of grammatical words in the text, nouns, finite verbs, auxiliary verbs, adjectives, adverbs, numerals, pronouns, prepositions, determiners, conjunctions etc
+p3
+aVWhile Arase and Zhou [] considered MT detection at sentence level, as we do in this paper, they did not study the correlation between the translation quality of the machine translated text and the ability to detect it
+p4
+aVIn the first experiment set, we explore the ability to detect outputs of machine translated text from different MT systems, in an environment containing both human generated and machine translated text
+p5
+aVArase and Zhou [] trained a sentence-level classifier to distinguish machine translated text from human generated text on English and Japanese web-page corpora, translated by Google Translate, Bing and an in-house SMT system
+p6
+aVSpecifically, given a corpus consisting of both machine-translated English text (English being the target language) and native English text (not necessarily the reference translation of the machine-translated text), we measure the accuracy of the system in classifying the sentences in the corpus as machine-translated or not
+p7
+aVUsing simple linear regression, we also obtain an R 2 value (coefficient of determination) over the measurements of detection accuracy and BLEU score, for each of three feature set combinations (function words, POS tags and mixed) and the two data combinations (MT vs reference and MT vs non reference sentences
+p8
+aVAfter translating the sentences, we take 20,000 sentences from each engine output and conduct the detection experiment by labeling those sentences as MT sentences, and another 20,000 sentences, which are the human reference translations, labeled as reference sentences
+p9
+aVWe have shown that it is possible to detect machine translation from monolingual corpora containing both machine translated text and human generated text, at sentence level
+p10
+aVFurthermore, additional features and feature selection techniques can be applied, both for improving detection accuracy and for strengthening the correlation with human quality estimation
+p11
+aVThere is a strong correlation between the detection accuracy that can be obtained and the BLEU score or the human evaluation score of the machine translation itself
+p12
+aVWhile applying the same classification method as with the reference sentences, the detection accuracy rises, while the correlation with the translation quality yields R 2 = 0.556 , as can be seen in Figure 4
+p13
+aVWe wish to distinguish machine translated English sentences from either human-translated sentences or native English sentences
+p14
+aVWe first use 3000 reference sentences from the WMT13 u'\u005cu2019' English reference translations, against the matching 3000 output sentences from one MT system at a time, resulting in 6000 sentence instances per experiment
+p15
+aVFurther work might include applying our methods to other language pairs and domains, acquiring word-level quality estimation or integrating our method in a machine translation system
+p16
+aVTo do this, we use the French-English data from the 8th Workshop on Statistical Machine Translation - WMT13 u'\u005cu2019' [] , containing outputs from 13 different MT systems and their human evaluations
+p17
+aVIn the second experiment set, we test our detection method on SMT systems we created, in which we have control over the training data and the expected overall relative translation quality
+p18
+aVUsing automatic text classification methods in the field of translation studies had many use cases in recent years, mainly as an empirical method of measuring, proving or contradicting translation universals
+p19
+aVIn the second experiment, we use 3000 random, non reference sentences from the newstest 2011-2012 corpora published in WMT12 u'\u005cu2019' [] against 3000 output sentences from one MT system at a time, again resulting in 6000 sentence instances per experiment
+p20
+aVGoogle Translate, Systran, and five other commercial MT systems available at the http://itranslate4.eu website, which enables to query example MT systems built by several european MT companies
+p21
+aVUsing these features alone, without the FW and POS tag based features presented above, we obtain an R 2 = 0.829 with a proportion of identically ordered pairs at 0.923 (72 of 78), as shown in Figure 5
+p22
+aVWe examine this detection accuracy vs quality correlation, with various MT systems, such as rule-based and statistical MT, both commercial and in-house, using various feature sets
+p23
+aVFor data, we use 20,000 random, non reference sentences from the Hansard corpus, against 20,000 sentences from one MT system per experiment, again resulting in 40,000 sentence instances per experiment
+p24
+aVAs is evident, regardless of the feature set or non-MT sentences used, the correlation between detection accuracy and BLEU score is very high, as we can also see from the R 2 values in Table 1
+p25
+aVProminent among these are how to evaluate the quality of such a system efficiently and how to detect the output of such systems (for example, to avoid using it circularly as input for refining MT systems
+p26
+aVWe will see that the success of such classifiers are strongly correlated with the quality of the underlying machine translation system
+p27
+aVThe relationship between the detection results for each MT system and the BLEU score for that system, resulting in R 2 = 0.774 , is shown in Figure 2
+p28
+aVThe differences between native and translated texts found there go well beyond systematic translation errors and point to a distinct u'\u005cu201d' Translationese u'\u005cu201d' dialect
+p29
+aVAs can be seen in the above experiments, there is a strong correlation between the BLEU score and the MT detection accuracy of our method
+p30
+aVThe recent success and proliferation of statistical machine translation (MT) systems raise a number of important questions
+p31
+aVWe also wish to consider the relationship between detection accuracy and a human quality estimation score
+p32
+aV[] also tested various hypotheses regarding u'\u005cu201d' Translationese u'\u005cu201d' , using 32 different linguistically-informed features, to assess the degree to which different sets of features can distinguish between translated and original texts
+p33
+aVWe note that the second leftmost point in Figures 3 , 4 is an outlier that is, our method has a hard time detecting sentences produced by this system although it is not highly rated by human evaluators
+p34
+aVIn Figure 1 , we show the relationship of the observed detection accuracy for each system with the BLEU score of that system
+p35
+aVIn fact, the correlation is strong enough that we propose that this accuracy measure itself can be used as a measure of MT system quality, obviating the need for a reference corpus, as for example is necessary for BLEU []
+p36
+aVThis accuracy will be shown to decrease as the quality of the underlying MT system increases
+p37
+aVThis suggests that our method might be used as an unsupervised quality estimation method when no reference sentences are available, such as for resource-poor source languages
+p38
+aVOur features are binary, denoting the presence or absence of each of a set of part-of-speech n-grams acquired using the Stanford POS tagger [] , as well as the presence or absence of each of 467 function words taken from LIWC []
+p39
+aVThey achieved very high detection accuracy using application-specific feature sets for this purpose, including indicators of the u'\u005cu201d' Phrase Salad u'\u005cu201d' [] phenomenon or u'\u005cu201d' Gappy-Phrases u'\u005cu201d' []
+p40
+aVFirst, we will show that using style-related linguistic features, such as frequencies of parts-of-speech n-grams and function words, it is possible to learn classifiers that distinguish machine-translated text from human-translated or native English text
+p41
+aVWe conduct the same classification experiment as above, with features based on function words and POS tags, and SMO-based SVM as the classifier
+p42
+aVTo provide another measure of correlation, we compared every pair of data points in the experiment to get the proportion of pairs ordered identically by the human evaluators and our method, with a result of 0.846 (66 of 78
+p43
+aVFor purposes of classification, we use the same content independent features as in the previous experiment, based on function words and POS tags, again with SMO-based SVM as the classifier
+p44
+aVIn order to do so, we use the Moses statistical machine translation toolkit []
+p45
+aVTo train the systems, we take a portion of the Europarl corpus [] , creating 7 different SMT systems, each using a different amount of training data, for both the translation model and language model
+p46
+aVThis system is syntax-based, which apparently confound our POS and FW-based classifier, despite it u'\u005cu2019' s low human evaluation score
+p47
+aVWe do this in order to create different quality translation systems, details of which are described in Table 3
+p48
+aVAs can be seen, best detection results are obtained using the full combined feature set
+p49
+aVAs our learning algorithm we use SVM with sequential minimal optimization (SMO), taken from the WEKA machine learning toolkit []
+p50
+aVDue to the sparseness of the data at the sentence level, we use common content-independent linguistic features for the classification task
+p51
+aVThe special features of translated texts have been studied widely for many years
+p52
+aVAs can be seen in Figure 3 , the detection accuracy is strongly correlated with the evaluations scores, yielding R 2 = 0.774
+p53
+aVKoppel and Ordan [] classified texts to original or translated, using a list of 300 function words taken from LIWC [] as features
+p54
+aVFor this task, we use a portion of the Canadian Hansard corpus [] , containing 48,914 parallel sentences from French to English
+p55
+aVTo verify this intuition, we create parse trees using the Berkeley parser [] and extract the one-level CFG rules as features
+p56
+aVWe also conduct the same experiment using 20,000 random, non-reference sentences from the same corpus, instead of the reference sentences
+p57
+aVIt can also be seen that, as might be expected, it is easier to distinguish machine-translated sentences from a non-reference set than from the reference set
+p58
+aVAgain, we represent each sentence as a boolean vector, in which each entry represents the presence or absence of the CFG rule in the parse-tree of the sentence
+p59
+aVThe detection and R 2 results are shown in Table 1
+p60
+aVWe show below that such detection is possible with very high accuracy only on low-quality translations
+p61
+aVIn fact, results are linearly and negatively correlated with BLEU, as can be seen both on commercial systems and our in-house SMT systems
+p62
+aVAttempts to define their characteristics, often called u'\u005cu201d' Translation Universals u'\u005cu201d' , include []
+p63
+aVThis research was funded in part by the Intel Collaborative Research Institute for Computational Intelligence
+p64
+aVWe translate the French portion of the corpus using several MT systems, respectively
+p65
+aVIn the final section we offer conclusions and suggestions for future work
+p66
+aVThis point represents the Joshua [] SMT system
+p67
+aV[title= R 2 = 0.556 , width=7.5cm,height=7.5cm, xlabel= human evaluation score,ylabel=detection accuracy (%)] \u005caddplot [color=black,mark=*] coordinates (0.638,74.05) (0.604,73.56) (0.591,73.36) (0.573,73.63) (0.562,73.83) (0.541,74.10) (0.512,74.36) (0.486,73.80) (0.439,74.55) (0.429,75.10) (0.420,75.65) (0.389,73.71) (0.322,76.68) ; \u005caddplot [color=black,mark=none,style=dashed] table[ y=create col/linear regression=y=Y] X Y 0.638 74.05 0.604 73.56 0.591 73.36 0.573 73.63 0.562 73.83 0.541 74.10 0.512 74.36 0.486 73.80 0.439 74.55 0.429 75.10 0.420 75.65 0.389 73.71 0.322 76.68 ;
+p68
+aV[title= R 2 = 0.829 , width=7.5cm,height=7.5cm, xlabel= human evaluation score,ylabel=detection accuracy (%)] \u005caddplot [color=black,mark=*] coordinates (0.638,60.92) (0.604,61.54) (0.591,62.41) (0.573,62.87) (0.562,62.46) (0.541,62.97) (0.512,63.81) (0.486,62.87) (0.439,64.09) (0.429,64.72) (0.420,66.81) (0.389,65.24) (0.322,65.87) ; \u005caddplot [color=black,mark=none,style=dashed] table[ y=create col/linear regression=y=Y] X Y 0.638 60.92 0.604 61.54 0.591 62.41 0.573 62.87 0.562 62.46 0.541 62.97 0.512 63.81 0.486 62.87 0.439 64.09 0.429 64.72 0.420 66.81 0.389 65.24 0.322 65.87 ;
+p69
+aV[title= R 2 = 0.774 , width=7.5cm,height=7.5cm, xlabel= human evaluation score,ylabel=detection accuracy (%)] \u005caddplot [color=black,mark=*] coordinates (0.638,58.58) (0.604,58.61) (0.591,57.63) (0.573,58.78) (0.562,59.38) (0.541,58.63) (0.512,59.86) (0.486,58.53) (0.439,60.46) (0.429,61.65) (0.420,62.66) (0.389,60.83) (0.322,64.10) ;
+p70
+aVWe would like to thank Noam Ordan and Shuly Wintner for their help and feedback on the early stages of this work
+p71
+aVWe hypothesize that the use of syntax-based features might improve results
+p72
+aVWe consider only those entries that appear at least ten times in the entire corpus, in order to reduce sparsity in the data
+p73
+aVWe conduct a 10-fold cross-validation experiment on the entire 40,000 sentence corpus
+p74
+aVThis correlation holds whether or not a reference set is used
+p75
+aVIn the next section, we review previous related work
+p76
+aVHere, the proportion of identically ordered pairs is 0.782 (61 of 78
+p77
+aVWhile this is a straightforward and not entirely novel result, our main contribution is to relativize the result
+p78
+aV[width=7.5cm,height=7.5cm, xlabel= BLEU,ylabel=detection accuracy (%)]
+p79
+aV[title= R 2 = 0.789 ,width=7.5cm,height=7.5cm, xlabel= BLEU,ylabel=detection accuracy (%)] \u005caddplot [color=black,mark=*] coordinates (29.18,72.33) (28.54,73.10) (27.76,73.90) (24.34,74.12) (23.83,73.59) (22.46,74.78) (20.72,75.98) ;
+p80
+aVThe paper is structured as follows
+p81
+aVVolanski et al
+p82
+aVIn this paper, we will answer both these questions
+p83
+aV[color=blue,mark=x,style=densely dashed] coordinates (36.06, 57.21) (29, 65.55) (24.66, 64.1225) (18.25, 70.29) (15.44, 73.065) (12.36, 73.0475) ( 8.39, 78.84) ; \u005caddlegendentry pos-r
+p84
+aV[color=black,mark=none,style=dashed] table[ y=create col/linear regression=y=Y] X Y 29.18 72.33 28.54 73.10 27.76 73.90 24.34 74.12 23.83 73.59 22.46 74.78 20.72 75.98 ;
+p85
+aV[color=red,mark=*,style=solid] coordinates (36.06, 63.34) (29, 72.02) (24.66, 72.36) (18.25, 78.20) (15.44, 79.57) (12.36, 80.90) (8.39 , 89.36) ; \u005caddlegendentry mix-nr
+p86
+aV[color=blue,mark=*,style=solid] coordinates (36.06, 59.51) (29, 69.47) (24.66, 69.77) (18.25, 75.86) (15.44, 78.11) (12.36, 79.24) ( 8.39, 88.85) ; \u005caddlegendentry mix-r
+p87
+aV[color=red,mark=x,style=densely dotted] coordinates (36.06, 60.43) (29, 69.17) (24.66, 69.87) (18.25, 69.78) (15.44, 71.38) (12.36, 75.46) ( 8.39, 84.97) ; \u005caddlegendentry fw-nr
+p88
+aV[color=red,mark=x,style=densely dashed] coordinates (36.06, 60.32) (29, 64.39) (24.66, 66.61) (18.25, 73) (15.44, 73.90) (12.36, 74.33) ( 8.39, 79.60) ; \u005caddlegendentry pos-nr
+p89
+aV[color=black,mark=none,style=dashed] table[ y=create col/linear regression=y=Y] X Y 0.638 58.58 0.604 58.61 0.591 57.63 0.573 58.78 0.562 59.38 0.541 58.63 0.512 59.86 0.486 58.53 0.439 60.46 0.429 61.65 0.420 62.66 0.389 60.83 0.322 64.10 ;
+p90
+aV[color=blue,mark=x,style=densely dotted] coordinates (36.06, 57.27) (29, 66.05) (24.66, 67.48) (18.25, 67.06) (15.44, 68.58) (12.36, 73.37) ( 8.39, 84.79) ; \u005caddlegendentry fw-r
+p91
+a.

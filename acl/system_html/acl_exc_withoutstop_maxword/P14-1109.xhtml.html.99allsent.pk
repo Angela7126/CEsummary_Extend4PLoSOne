@@ -1,0 +1,398 @@
+(lp0
+VThe idea behind copula theory is that the cumulative distribution function (CDF) of a random vector can be represented in the form of uniform marginal cumulative distribution functions, and a copula that connects these marginal CDFs, which describes the correlations among the input random variables
+p1
+aVOn one hand, copula models [ 31 ] seek to explicitly model the dependency of random variables by separating the marginals and their correlations
+p2
+aVIn NLP, many of the probabilistic text models work in the discrete space [ 9 , 2 ] , but our model is different since the text features are sparse, we first perform kernel density estimates to smooth out the zeroing items, and then calculate the empirical cumulative distribution function (CDF) of the random variables
+p3
+aVFinally, we investigate the robustness of the proposed semiparametric Gaussian copula regression model by varying the amount of features in the covariate space
+p4
+aVTo do this, we formulate the problem as a text regression task, and use a Gaussian copula with probability integral transform to model the uniform marginals and their dependencies
+p5
+aVBy doing this, we are essentially performing probability integral transform u'\u005cu2014' an important statistical technique that moves beyond the count-based bag-of-words feature space to marginal cumulative density functions space
+p6
+aVBy applying the Probability Integral Transform to raw features in the copula model, we essentially avoid comparing apples and oranges in the feature space, which is a common problem in bag-of-features models in NLP
+p7
+aVTherefore, by modeling the correlations among marginal CDFs, the copula model has gained the insights on the dependency structures of the random variables, and thus, the performance of the regression task is boosted
+p8
+aVLast but not least, by using a parametric copula, in our case, the Gaussian copula, we reduce the computational cost from fully nonparametric methods, and explicitly model the correlations among the covariate and the dependent variable
+p9
+aVTherefore, the copula does not have requirements on the marginal distributions, and any arbitrary marginals can be combined and their dependency structure can be modeled using the copula
+p10
+aVNow that we have obtained the marginals, and then the joint distribution can be constructed by applying the copula function that models the stochastic dependencies among marginal CDFs
+p11
+aVNote that the above step is also known as probability integral transform [ 11 ] , which allows us to convert any given continuous distribution to random variables having a uniform distribution
+p12
+aVNote that since the kernel density estimation in the proposed copula model is nonparametric, and we only need to learn the u'\u005cu03a3' in the Gaussian copula, there is no hyperparameters that need to be tuned
+p13
+aVFurthermore, if the distributions are continuous, the multivariate dependency structure and the marginals might be separated, and the copula can be considered independent of the marginals [ 21 , 32 ]
+p14
+aVOne advantage we see from the copula model is that it does not require any assumptions on the marginal distributions
+p15
+aVIn the statistics literature, copula is widely known as a family of distribution function
+p16
+aVHowever, in order to have a valid multivariate distribution function regardless of n -dimensional covariates, not every function can be used as a copula function
+p17
+aVComparing to second-best approaches, all improvements obtained by the copula model are statistically significant
+p18
+aVFor example, when bag-of-word-unigrams are present in the feature space, it is easier if one does not explicitly model the stochastic dependencies among the words, even though doing so might hurt the predictive power, while the variance from the correlations among the random variables is not explained
+p19
+aVFrom an information-theoretic point of view [ 38 ] , various problems in text analytics can be formulated as estimating the probability mass/density functions of tokens in text
+p20
+aVThe central idea behind copula, therefore, can be summarize by the Sklar u'\u005cu2019' s theorem and the corollary
+p21
+aVThen, if the marginal functions are continuous, there exists a unique copula C , such that
+p22
+aVAgain, the reason why we perform approximated inference is that exact inference in the high-dimensional Gaussian copula density is non-trivial, and might not have analytical solutions, but approximate inference using maximum density sampling from the Gaussian copula significantly relaxes the complexity of inference
+p23
+aVThe problem is that text features are sparse, so we need to perform nonparametric kernel density estimation to smooth out the distribution of each variable
+p24
+aVThis is of crucial importance to modeling text data instead of using the classic bag-of-words representation that uses raw counts, we are now working with uniform marginal CDFs, which helps coping with the overfitting issue due to noise and data sparsity
+p25
+aVTherefore, coping with the tradeoff between expressiveness and overfitting, seems to be rather important in statistical approaches that capture stochastic dependency
+p26
+aVAlso, by modeling the marginals and their correlations seperately, our approach is cleaner, easy-to-understand, and allows us to have more flexibility to model the uncertainty of data
+p27
+aVOur pilot experiment also aligns with our hypothesis when not performing the kernel density estimation part for smoothing out the marginal distributions, the performances dropped significantly when sparser features are included
+p28
+aVOn the other hand, once such assumptions are removed, another problem arises u'\u005cu2014' they might be prone to errors, and suffer from the overfitting issue
+p29
+aVIn contrast, by considering the semiparametric case, we not only obtain some expressiveness from the nonparametric models, but also reduce the complexity of the task we are only interested in the finite-dimensional components u'\u005cu03a3' in the Gaussian copula with O u'\u005cu2062' ( n u'\u005cu2062' log u'\u005cu2061' n ) complexity, which is not as computationally difficult as the completely nonparametric cases
+p30
+aVUsing the same dataset, Tsai and Wang [ 41 ] reformulate the regression problem as a text ranking problem
+p31
+aVWe use the Statistical Toolbox u'\u005cu2019' s linear regression implementation in Matlab, and LibSVM [ 6 ] for training and testing the SVM models
+p32
+aVComparing to the Gaussian kernel and other kernels, the Box kernel is simple, and computationally inexpensive
+p33
+aVWhat are the advantages of copula-based models, and what makes it perform so well
+p34
+aVBoth linear and non-linear SVM models do not have any advantages over the proposed approach
+p35
+aVTherefore, the computational complexity of MLE for the proposed model is O u'\u005cu2062' ( n u'\u005cu2062' log u'\u005cu2061' n )
+p36
+aVThis is not surprising at all, because as max-margin models, soft-margin SVM only needs a handful of examples that come with nonvanishing coefficients (support vectors) to find a reasonable margin
+p37
+aVThe parameter h is the bandwidth for smoothing 3 3 In our implementation, we use the default h of the Box kernel in the ksdensity function in Matlab
+p38
+aVOn the post-2009 dataset that concerns economic growth and recovery, the boundaries among all methods are very clear
+p39
+aVHere, K u'\u005cu2062' ( u'\u005cu22c5' ) is the kernel function, where in our case, we use the Box kernel 2 2 It is also known as the original Parzen windows [ 33 ]
+p40
+aVBy varying the number of dimensions of the covariates and the size of the training data, we show that the improvements over the baselines are robust across different parameter settings on three datasets
+p41
+aV[ 45 ] have proposed the use of frame-level semantic features to understand financial news, but they treat the stock movement prediction problem as a binary classification task
+p42
+aVChristensen [ 8 ] shows that sorting and balanced binary trees can be used to calculate the correlation coefficients with complexity of O u'\u005cu2062' ( n u'\u005cu2062' log u'\u005cu2061' n
+p43
+aVThis is extremely practical, because in many natural language processing tasks, we often have to deal with features that are extracted from many different domains and signals
+p44
+aVUsing the stock prices, we can use the equations above to calculate the measured stock volatility after the earnings call, which is the standard measure of risks in finance, and the dependent variable y of our predictive task
+p45
+aVwhere u'\u005cud835' u'\u005cudc08' u'\u005cu2062' { u'\u005cu22c5' } is the indicator function, and u'\u005cu039d' indicates the current value that we are evaluating
+p46
+aVSpearman u'\u005cu2019' s correlation [ 20 ] and Kendall u'\u005cu2019' s tau [ 23 ] have been widely used in many regression problems in NLP [ 1 , 46 , 42 , 41 ] , and here we use them to measure the quality of predicted values u'\u005cud835' u'\u005cudc32' ^ by comparing to the vector of ground truth u'\u005cud835' u'\u005cudc32'
+p47
+aVBroadly speaking, our work is also aligned to recent studies that make use of social media data to predict the stock market [ 3 , 47 ]
+p48
+aVHowever, this might not be practical at all in image processing, the u'\u005cu201c' cloud u'\u005cu201d' pixel of a pixel showing the blue sky of a picture are more likelihood to co-occur in the same picture; in natural language processing, the word u'\u005cu201c' mythical u'\u005cu201d' is more likely to co-occur with the word u'\u005cu201c' unicorn u'\u005cu201d' , rather than the word u'\u005cu201c' popcorn u'\u005cu201d'
+p49
+aVGiven a piece of earnings call transcript, we investigate a semiparametric approach for automatic prediction of future financial risk 1 1 In this work, the risk is defined as the measured volatility of stock prices from the week following the earnings call teleconference
+p50
+aVSee details in Section 5
+p51
+aVF x 1 ( x 1 ) , u'\u005cu2026' , F x n ( x n ) ) , one needs to solve the mean response u'\u005cud835' u'\u005cudc04' ^ ( F y ( y
+p52
+aVThis is rather restricted, because the possible shapes from a K - 1 simplex of Dirichlet is always limited in some sense
+p53
+aVThen we describe the proposed semiparametric Gaussian copula text regression model
+p54
+aVThe algorithmic implementation of our semiparametric Gaussian copula text regression model is shown in Algorithm 3.3
+p55
+aVWe propose a novel semiparametric Gaussian copula model for text regression
+p56
+aVIn our copula model, instead of using some priors, we just calculate the empirical cumulative distribution function of the random variables, and model the correlation among them
+p57
+aVOur proposed semiparametric copula regression model takes a different perspective
+p58
+aVIn this work, we apply the parametric Gaussian copula to model the correlations among the text features and the label
+p59
+aV[t] A Semi-parametric Gaussian Copula Model Based Text Regression Algorithm {algorithmic} \u005cSTATE Given
+p60
+aVCalculate the empirical cumulative distribution functions of the smoothed random variables
+p61
+aVIn NLP, many statistical machine learning methods that capture the dependencies among random variables, including topic models [ 2 , 25 , 43 ] , always have to make assumptions with the underlying distributions of the random variables, and make use of informative priors
+p62
+aVIn the experimental section, we notice that the proposed semiparametric Gaussian copula model has obtained promising results in various setups on three datasets in this text regression task
+p63
+aVOne important question regarding the proposed semiparametric Gaussian copula model is the corresponding computational complexity
+p64
+aVIn the first experiment, we compare the proposed semiparametric Gaussian copula regression model to three baselines on three datasets with all features
+p65
+aVThe improvements of copula model over squared loss linear regression model are increasing, when working with larger feature spaces
+p66
+aVOn the post-2009 dataset, none of results from the linear and non-linear SVM models can match up with the linear regression model, but our proposed copula model still improves over all baselines by a large margin
+p67
+aVOn the other hand, it does not make use of any assumptions on the distributions of the random variables, yet, the copula model is still expressive
+p68
+aVInfer the predicted value of the dependent variable by sampling the Gaussian copula probability density function
+p69
+aVWe formulate the copula regression model as follows
+p70
+aVIn Section 3 , the details of the semiparametric copula model are introduced
+p71
+aVOn the pre-2009 dataset, we see that the gaps between the best-perform copula model and the second-best linear regression model are consistent throughout all feature sizes
+p72
+aVThe baselines are standard squared-loss linear regression, linear kernel SVM, and non-linear (Gaussian) kernel SVM
+p73
+aVIn this parametric part of the model, the parameter estimation boils down to the problem of learning the covariance matrix u'\u005cu03a3' of this Gaussian copula
+p74
+aVAssume in the simple bivariate case of Gaussian copula regression, the covariance matrix u'\u005cu03a3' is
+p75
+aVLike linear classifiers, by u'\u005cu201c' opening the hood u'\u005cu201d' to the Gaussian copula regression model, one can examine features that exhibit high correlations with the dependent variable
+p76
+aVTo calibrate the u'\u005cu03a3' matrix, we make use of the power of randomness using the initial u'\u005cu03a3' from MLE, we generate random samples from the Gaussian copula, and then concatenate previously generated joint of Gaussian inverse marginal CDFs with the newly generated random copula numbers, and re-estimate using MLE to derive the final adjusted u'\u005cu03a3'
+p77
+aVTo understand the learning curve of our proposed copula regression model, we use the 25%, 50%, 75% subsets from the training data, and evaluate all four models
+p78
+aVThe second hypothesis is about the semiparametirc parameterization, which contains the nonparametric kernel density estimation and the parametric Gaussian copula regression components
+p79
+aV[ 24 ] model the SEC-mandated annual reports, and performs linear SVM regression with u'\u005cu0395' -insensitive loss function to predict the measured volatility
+p80
+aVPerform nonparametric Box kernel density estimates of the covariates and the dependent variable for smoothing
+p81
+aVwhere u'\u005cu03a6' u'\u005cu03a3' is the joint cumulative distribution function of a multivariate Gaussian with zero mean and u'\u005cu03a3' variance u'\u005cu03a6' - 1 is the inverse CDF of a standard Gaussian
+p82
+aVEstimate the parameters (covariance u'\u005cu03a3' ) of the Gaussian copula
+p83
+aVOn the pre-2009 dataset, we see that the linear regression and linear SVM perform reasonably well, but the Gaussian kernel SVM performs less well, probably due to overfitting
+p84
+aVThe empirical cumulative distribution functions are defined as
+p85
+aVWhen increasing the amount of training data to 50%, we do see the proposed copula model catches up quickly, and lead all baseline methods undoubtably at 75% training data
+p86
+aVInterestingly, the proposed copula regression model has dominated all methods for both metrics throughout all proportions of the u'\u005cu201c' post-2009 u'\u005cu201d' earnings calls dataset, where instead of financial crisis, the economic recovery is the main theme
+p87
+aVOn the 2009 dataset, we see that the performance of Gaussian copula is aligned with the linear regression model in terms of Spearman u'\u005cu2019' s correlation, where the former seems to perform better in terms of Kendall u'\u005cu2019' s tau
+p88
+aVThe main questions we ask are how is the proposed model different from standard text regression/classification models
+p89
+aVTo evaluate the performance of our approach, we compare with a standard squared loss linear regression baseline, as well as strong baselines such as linear and non-linear support vector machines (SVMs) that are widely used in text regression tasks
+p90
+aVLet F be the joint cumulative distribution function of n random variables X 1 , X 2 , u'\u005cu2026' , X n
+p91
+aVThis nice property essentially allows us to fuse distinctive lexical, syntactic, and semantic feature sets naturally into a single compact model
+p92
+aVCurrently we have not experienced the difficulty when estimating the Gaussian copula model, but parallel methods might be needed to speedup learning when significantly more marginal CDFs are involved
+p93
+aVThe copula model outperformed all three baselines by a wide margin on this dataset with both metrics
+p94
+aVWhile these approaches have merits, they suffer from the problem of not explicitly modeling the correlations and interactions among random variables, which in some sense, corresponding to the impractical assumption of independent and identically distributed (i.i.d) of the data
+p95
+aVIn this work, we propose an efficient sampling method to derive y given the text features u'\u005cu2014' we sample F y u'\u005cu2062' ( y ) s.t it maximizes the joint high-dimensional Gaussian copula density
+p96
+aVIn the next section, we outline related work in modeling financial reports and text regression
+p97
+aVOur results significantly outperform standard linear regression and strong SVM baselines
+p98
+aVCopula models [ 37 , 31 ] are often used by statisticians [ 16 , 27 , 30 ] and economists [ 7 ] to study the bivariate and multivariate stochastic dependency among random variables, but they are very new to the machine learning [ 17 , 18 , 44 , 28 ] and related communities [ 12 ]
+p99
+aVIn this regression task, in order to perform exact inference of the conditional probability distribution p ( F y ( y
+p100
+aVTraditionally, in statistics, independent and identically distributed (i.i.d) assumptions among the instances and the random variables are often used in various models, such that the correlations among the instances or the variables are often ignored
+p101
+aVAssume we have n random variables of text features X 1 , X 2 , u'\u005cu2026' , X n
+p102
+aVIn this section, we first briefly look at the theoretical foundations of copulas, including the Sklar u'\u005cu2019' s theorem
+p103
+aVThe Spearman u'\u005cu2019' s correlation for both SVM baselines is less than 0.15 throughout all settings, but copula model is able to achieve 0.4 when using 400 features
+p104
+aVFinally, we plan to extend the proposed approach to text classification and structured prediction problems in NLP
+p105
+aVThe algorithmic implementation of our approach is introduced at the end of this section
+p106
+aVDespite our financial domain, our approach is more relevant to text regression
+p107
+aVTraditional discriminative models, such as linear regression and linear SVM, have been very popular in various text regression tasks, such as predicting movie revenues from reviews [ 22 ] , understanding the geographic lexical variation [ 13 ] , and predicting food prices from menus [ 5 ]
+p108
+aVThis might be rather restricting the expressiveness of the model in some sense [ 36 ]
+p109
+aVThe third advantage we observe is the power of modeling the covariance of the random variables
+p110
+aVTo the best of our knowledge, even though the term u'\u005cu201c' copula u'\u005cu201d' is named for the resemblance to grammatical copulas in linguistics, copula models have not been explored in the NLP community
+p111
+aVThey are all standard algorithms in regression problems, and have been shown to have outstanding performances in many recent text regression [ 24 , 5 , 45 , 42 , 41 ]
+p112
+aVHowever, text regression in the financial domain have not been explored until recently
+p113
+aVIn this work, we perform standard maximum likelihood estimation for the u'\u005cu03a3' matrix
+p114
+aVThe benefit of a semiparametric model is that here we are not interested in performing completely nonparametric estimations, where the infinite dimensional parameters might bring intractability
+p115
+aVFrom the experiments on the pre-2009 dataset, we see that when the amount of training data is small (25%), both SVM models have obtained very impressive results
+p116
+aVWe then describe the dataset and dependent variable in this study, and the experiments are shown in Section 6
+p117
+aVThis boils down to the estimation of the u'\u005cu03a3' ^ matrix [ 27 ] one only needs to calculate the correlation coefficients of n u'\u005cu2062' ( n - 1 ) / 2 pairs of random variables
+p118
+aVThe inverse of Sklar u'\u005cu2019' s Theorem is also true in the following
+p119
+aVLet the corresponding marginal cumulative distribution functions of the random variable be F 1 u'\u005cu2062' ( x 1 ) , F 2 u'\u005cu2062' ( x 2 ) , u'\u005cu2026' , F n u'\u005cu2062' ( x n
+p120
+aVWe see that when features are rather noisy, we might need to investigate regularized copula models to avoid this
+p121
+aVTo do this, we sample equal amount of features from each feature set, and concatenate them into a feature vector
+p122
+aVThe hyperparameter C in linear SVM, and the u'\u005cu0393' and C hyperparameters in Gaussian SVM are tuned on the training set using 10-fold cross-validation
+p123
+aVF x 1 ( x 1 ) , u'\u005cu2026' , F x 1 ( x 1 ) ) from a joint distribution of high-dimensional Gaussian copula
+p124
+aVSimilar performances are also obtained in the 2009 dataset, where the result of linear SVM baseline falls behind
+p125
+aVAssume x i is the smoothed version of random variable X i , and y is the smoothed label, we have
+p126
+aVIf there exists a copula C
+p127
+aV[ 14 ] are among the first to study SVM and text mining methods in the market prediction domain, where they align financial news articles with multiple time series to simulate the 33 stocks in the Hong Kong Hang Seng Index
+p128
+aVThe advantage of these models is that the estimation of the parameters is often simple, the results are easy to interpret, and the approach often yields strong performances
+p129
+aVWhen increasing the amount of total features from 100 to 400, the results are shown in Figure 2
+p130
+aVAssume we have m samples, the kernel density estimator can be defined as
+p131
+aVNote that unlike the standard news corpora in NLP or the SEC-mandated financial report, Transcripts of earnings call is a very special genre of text
+p132
+aV0 , 1 ) n and marginal cumulative distribution functions F 1 u'\u005cu2062' ( x 1 ) , F 2 u'\u005cu2062' ( x 2 ) , u'\u005cu2026' , F n u'\u005cu2062' ( x n ) , then C u'\u005cu2062' [ F 1 u'\u005cu2062' ( x 1 ) , u'\u005cu2026' , F n u'\u005cu2062' ( x n ) ] defines a multivariate cumulative distribution function
+p133
+aVIn contrast to the previous two datasets, both linear and non-linear SVMs fail to reach reasonable performances on this dataset
+p134
+aVWe have extracted lexical, named entity, syntactic, and frame-semantics features, most of which have been shown to perform well in previous work [ 45 ]
+p135
+aVIn contrast to Pearson u'\u005cu2019' s correlation, Spearman u'\u005cu2019' s correlation has no assumptions on the relationship of the two measured variables
+p136
+aVIn the future, we plan to apply the proposed approach to large datasets where millions of features and millions of instances are involved
+p137
+aVKendall u'\u005cu2019' s tau is a nonparametric statistical metric that have shown to be inexpensive, robust, and representation independent [ 26 ]
+p138
+aVNote that all these regression studies above investigate the SEC-mandated annual reports, which are very different from the earnings calls in many aspects such as length, format, vocabulary, and genre
+p139
+aVWe can easily derive the conditional density that can be used to calculate the expected value of the CDF of the label
+p140
+aVAnother recent study [ 42 ] uses exactly the same max-margin regression technique, but with a different focus on the financial sentiment
+p141
+aVNote that the final u'\u005cu03a3' matrix has to be symmetric and positive definite
+p142
+aVVolatility is an important measure of the financial risk, and in this work, we focus on predicting the future volatility following the earnings teleconference call
+p143
+aVFigure 1 shows the evaluation results
+p144
+aVNow, we can derive the empirical cumulative distribution functions F ^ X 1 u'\u005cu2062' ( f ^ 1 u'\u005cu2062' ( X 1 ) ) , F ^ X 2 u'\u005cu2062' ( f ^ 2 u'\u005cu2062' ( X 2 ) ) , u'\u005cu2026' , F ^ X n u'\u005cu2062' ( f ^ n u'\u005cu2062' ( X n ) ) of the smoothed covariates, as well as the dependent variable y and its CDF F ^ y u'\u005cu2062' ( f ^ u'\u005cu2062' ( y )
+p145
+aVFor each of the five sets, we collect the top-100 most frequent features, and end up with a total of 500 features
+p146
+aVThe second issue is about overfitting
+p147
+aVWe discuss the results and findings in Section 7 and then conclude in Section 8
+p148
+aV\u005cSTATE (1) training data ( X ( t u'\u005cu2062' r ) , y u'\u005cu2192' ( t u'\u005cu2062' r ) ); \u005cSTATE (2) testing data ( X ( t u'\u005cu2062' e ) , y u'\u005cu2192' ( t u'\u005cu2062' e ) ); \u005cSTATE \u005cSTATE Learning
+p149
+aVLet f 1 , f 2 , u'\u005cu2026' , f n be the unknown density, we are interested in deriving the shape of these functions
+p150
+aVInterestingly, the phrase u'\u005cu201c' third quarter u'\u005cu201d' and its variations, not only play an important role in the model, but also highly correlated to the timeline of the financial crisis the Q3 of 2008 is a critical period in the recession, where Lehman Brothers falls on the Sept
+p151
+aVThe detailed statistics is shown in Table 1
+p152
+aVThe detailed results are shown in Table 2
+p153
+aVMost recently, Xie et al
+p154
+aVOn the 2009 dataset, we observe very similar patterns
+p155
+aVTable 3 shows the top features that are positively correlated with the future stock volatility in the three datasets
+p156
+aVBy varying different experimental settings on three datasets concerning different periods of the Great Recession from 2006-2013, we empirically show that our approach significantly outperforms the baselines by a wide margin
+p157
+aVKogan et al
+p158
+aVFung et al
+p159
+aVFinally, to derive y ^ , the last step is to compute the inverse CDF of F y u'\u005cu2062' ( y ) ^
+p160
+aVOn the top features from the u'\u005cu201c' pre-2009 u'\u005cu201d' dataset, which primarily (82%) includes calls from 2008, we can clearly observe that the word u'\u005cu201c' 2008 u'\u005cu201d' has strong correlation with the financial risks
+p161
+aVUnfortunately, the exact inference can be intractable in the multivariate case, and approximate inference, such as Markov Chain Monte Carlo sampling [ 15 , 34 ] is often used for posterior inference
+p162
+aVToday, even though earnings calls transcripts are abundantly available, their distinctive communicative practices [ 4 ] , and correlations with the financial risks, in particular, future stock performances [ 35 ] , are not well studied in the past
+p163
+aVBasically, the algorithm can be decomposed into four parts
+p164
+aVWe also use paired two-tailed t-test to measure the statistical significance between the best and the second best approaches
+p165
+aVOn the top features from u'\u005cu201c' 2009 u'\u005cu201d' dataset, again, we see the word u'\u005cu201c' 2008 u'\u005cu201d' is still prominent in predicting financial risks, indicating the hardship and extended impacts from the center of the economic crisis
+p166
+aVInterestingly, after the 2008-2009 crisis, in the recovery period, we have observed new words like u'\u005cu201c' revenue u'\u005cu201d' , indicating the u'\u005cu201c' back-to-normal u'\u005cu201d' trend of financial environment, and new features that predict financial volatility
+p167
+aVWe use the unigrams and bigrams to represent lexical features, and the Stanford part-of-speech tagger [ 40 ] to extract the lexicalized named entity and part-of-speech features
+p168
+aVThe post-2009 dataset includes earnings calls from the period of 2010 to 2013, which concerns the recovery of global economy
+p169
+aVIn all experiments throughout this section, we use 80-20 train/test splits on all three datasets
+p170
+aVWe are among the first to formally study transcripts of earnings calls to predict financial risks
+p171
+aVTraditionally, analysts focus on quantitative modeling of historical trading data
+p172
+aVThis mixed form of formal statement and informal speech brought difficulties to machine learning algorithms
+p173
+aVThe pre-2009 dataset consists of earnings calls from the period of 2006-2008, which includes calls from the beginning of economic downturn, the outbreak of the subprime mortgage crisis, and the epidemic of collapses of large financial institutions
+p174
+aVEarnings calls are conference calls where a listed company discusses the financial performance
+p175
+aVA probabilistic frame-semantics parser, SEMAFOR [ 10 ] , is used to provide the FrameNet-style frame-level semantic annotations
+p176
+aVThe question we ask is that, even though each earnings call has distinct styles, as well as different speakers and mixed formats, can we use earnings calls to predict the financial risks of the company in the limited future
+p177
+aVFor example, in latent Dirichlet allocation [ 2 ] , the topic proportion of a document is always drawn from a D u'\u005cu2062' i u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' h u'\u005cu2062' l u'\u005cu2062' e u'\u005cu2062' t u'\u005cu2062' ( u'\u005cu0391' ) distribution
+p178
+aVDepending on the amount of interactions in the question answering session, the complexities of the calls vary
+p179
+aVTypically, a earnings call contains two parts the senior executives first report the operational outcomes, as well as the current financial performance, and then discuss their perspectives on the future of the company
+p180
+aVFor each earning call, we have a week of stock prices of the company after the day on which the earnings call is made
+p181
+aVWe use three datasets 4 4 http://www.cs.cmu.edu/~yww/data/earningscalls.zip of transcribed quarterly earnings calls from the U.S stock market, focusing on the period of the Great Recession
+p182
+aVOur main contributions are
+p183
+aVThe 2009 dataset contains earnings calls from the year of 2009, which is a period where the credit crisis spreads globally, and the Dow Jones Industrial Average hit the lowest since the beginning of the millennium
+p184
+aVFor example, the length of WSJ documents is typically one to three hundreds [ 19 ] , but the averaged document length of our three earnings calls datasets is 7677
+p185
+aVwhere x t represents the share price of Day t , and the Measured Stock Volatility from Day t to t + u'\u005cu03a4'
+p186
+aVThis huge panic soon broke out in various financial institutions in the Wall Street
+p187
+aVThe second part of the teleconference includes a question answering session where the floor will be open to investors, analysts, and other parties for inquiries
+p188
+aVAfter examining the transcripts, we found sentences like u'\u005cu201c' u'\u005cu2026' our specialty lighting business that we discontinued in the fourth quarter of 2008 u'\u005cu2026' u'\u005cu201d' , u'\u005cu201c' u'\u005cu2026' the exception of fourth quarter revenue which was $100,000 below our guidance target u'\u005cu2026' u'\u005cu201d' , and u'\u005cu201c' u'\u005cu2026' to address changing economic conditions and their impact on our operations, in the fourth quarter we took the painful but prudent step of decreasing our headcount by about 5% u'\u005cu2026' u'\u005cu201d' , showing the crucial role that Q4 of 2008 plays in 2009 earnings calls
+p189
+aVPredicting the risks of publicly listed companies is of great interests not only to the traders and analysts on the Wall Street, but also virtually anyone who has investments in the market [ 24 ]
+p190
+aV\u005cFOR j = 1 u'\u005cu2192' m instances \u005cSTATE max j u'\u005cu2190' 0 ; \u005cSTATE Y ^ u'\u005cu2032' = 0 ; \u005cFOR k = 0.01 u'\u005cu2192' 1 \u005cSTATE Z ( t u'\u005cu2062' e ) u'\u005cu2190' G u'\u005cu2062' a u'\u005cu2062' u u'\u005cu2062' s u'\u005cu2062' s u'\u005cu2062' i u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' I u'\u005cu2062' n u'\u005cu2062' v u'\u005cu2062' e u'\u005cu2062' r u'\u005cu2062' s u'\u005cu2062' e u'\u005cu2062' C u'\u005cu2062' D u'\u005cu2062' F u'\u005cu2062' ([ U ( t u'\u005cu2062' e ) u'\u005cu2062' k ]) ; \u005cSTATE p j = M u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' V u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' G u'\u005cu2062' a u'\u005cu2062' u u'\u005cu2062' s u'\u005cu2062' s u'\u005cu2062' i u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' P u'\u005cu2062' D u'\u005cu2062' F u'\u005cu2062' ( Z ( t u'\u005cu2062' e ) , u'\u005cu03a3' ^ ) u'\u005cu220f' n G u'\u005cu2062' a u'\u005cu2062' u u'\u005cu2062' s u'\u005cu2062' s u'\u005cu2062' i u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' P u'\u005cu2062' D u'\u005cu2062' F u'\u005cu2062' ( Z ( t u'\u005cu2062' e ) ) ; \u005cIF p j u'\u005cu2265' max j \u005cSTATE max j = p j ; \u005cSTATE Y ^ u'\u005cu2032' = k ; \u005cENDIF \u005cENDFOR \u005cENDFOR \u005cSTATE y ^ u'\u005cu2190' I u'\u005cu2062' n u'\u005cu2062' v u'\u005cu2062' e u'\u005cu2062' r u'\u005cu2062' s u'\u005cu2062' e u'\u005cu2062' C u'\u005cu2062' D u'\u005cu2062' F u'\u005cu2062' ( y u'\u005cu2192' ( t u'\u005cu2062' r ) , Y ^ u'\u005cu2032' ) ;
+p191
+aV\u005cFOR i = 1 u'\u005cu2192' n dimensions \u005cSTATE X i ( t u'\u005cu2062' r ) u'\u005cu2032' u'\u005cu2190' B o x K D E ( X i ( t u'\u005cu2062' r ) , X i ( t u'\u005cu2062' r ) ); \u005cSTATE U i ( t u'\u005cu2062' r ) u'\u005cu2190' E u'\u005cu2062' m u'\u005cu2062' p u'\u005cu2062' i u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' C u'\u005cu2062' D u'\u005cu2062' F u'\u005cu2062' ( X i ( t u'\u005cu2062' r ) u'\u005cu2032' ) ; \u005cSTATE X i ( t u'\u005cu2062' e ) u'\u005cu2032' u'\u005cu2190' B o x K D E ( X i ( t u'\u005cu2062' r ) , X i ( t u'\u005cu2062' e ) ); \u005cSTATE U i ( t u'\u005cu2062' e ) u'\u005cu2190' E u'\u005cu2062' m u'\u005cu2062' p u'\u005cu2062' i u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' C u'\u005cu2062' D u'\u005cu2062' F u'\u005cu2062' ( X i ( t u'\u005cu2062' e ) u'\u005cu2032' ) ; \u005cENDFOR \u005cSTATE y ( t u'\u005cu2062' r ) u'\u005cu2032' u'\u005cu2190' B o x K D E ( y ( t u'\u005cu2062' r ) , y ( t u'\u005cu2062' r ) ); \u005cSTATE v ( t u'\u005cu2062' r ) u'\u005cu2190' E u'\u005cu2062' m u'\u005cu2062' p u'\u005cu2062' i u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' C u'\u005cu2062' D u'\u005cu2062' F u'\u005cu2062' ( y ( t u'\u005cu2062' r ) u'\u005cu2032' ) ; \u005cSTATE Z ( t u'\u005cu2062' r ) u'\u005cu2190' G u'\u005cu2062' a u'\u005cu2062' u u'\u005cu2062' s u'\u005cu2062' s u'\u005cu2062' i u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' I u'\u005cu2062' n u'\u005cu2062' v u'\u005cu2062' e u'\u005cu2062' r u'\u005cu2062' s u'\u005cu2062' e u'\u005cu2062' C u'\u005cu2062' D u'\u005cu2062' F u'\u005cu2062' ([ U ( t u'\u005cu2062' r ) u'\u005cu2062' v ( t u'\u005cu2062' r ) ]) ; \u005cSTATE u'\u005cu03a3' ^ u'\u005cu2190' C u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' l u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' o u'\u005cu2062' n u'\u005cu2062' C u'\u005cu2062' o u'\u005cu2062' e u'\u005cu2062' f u'\u005cu2062' f u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' i u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' s u'\u005cu2062' ( Z ( t u'\u005cu2062' r ) ) ; \u005cSTATE r u'\u005cu2190' M u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' V u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' G u'\u005cu2062' a u'\u005cu2062' u u'\u005cu2062' s u'\u005cu2062' s u'\u005cu2062' i u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' R u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' d u'\u005cu2062' N u'\u005cu2062' u u'\u005cu2062' m u'\u005cu2062' ( 0 , u'\u005cu03a3' ^ , n ) ; \u005cSTATE Z ( t u'\u005cu2062' r ) u'\u005cu2032' = G u'\u005cu2062' a u'\u005cu2062' u u'\u005cu2062' s u'\u005cu2062' s u'\u005cu2062' i u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' C u'\u005cu2062' D u'\u005cu2062' F u'\u005cu2062' ( r ) ; \u005cSTATE u'\u005cu03a3' ^ u'\u005cu2190' C u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' l u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' o u'\u005cu2062' n u'\u005cu2062' C u'\u005cu2062' o u'\u005cu2062' e u'\u005cu2062' f u'\u005cu2062' f u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' i u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' s u'\u005cu2062' ([ Z ( t u'\u005cu2062' r ) u'\u005cu2062' Z ( t u'\u005cu2062' r ) u'\u005cu2032' ]) ; \u005cSTATE \u005cSTATE Inference
+p192
+aVThe Return of Day t is
+p193
+aV15 of 2008, filing $613 billion of debt u'\u005cu2014' the biggest bankruptcy in U.S history [ 29 ]
+p194
+aVWe thank Alex Smola, Barnabás Póczos, Sam Thomson, Shoou-I Yu, Zi Yang, and anonymous reviewers for their useful comments
+p195
+aVwhere
+p196
+aVwhere u'\u005cu0394' = u'\u005cu03a6' - 1 u'\u005cu2062' [ F y u'\u005cu2062' ( y ) ] - u'\u005cu03a3' 12 T u'\u005cu2062' u'\u005cu03a3' 11 - 1 u'\u005cu2062' u'\u005cu03a6' - 1 u'\u005cu2062' [ F x 1 u'\u005cu2062' ( x 1 ) ]
+p197
+aVK u'\u005cu2062' ( z )
+p198
+a.

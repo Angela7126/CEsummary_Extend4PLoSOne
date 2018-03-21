@@ -1,0 +1,306 @@
+(lp0
+VFinally, for the Mechanical Turk annotation study, we selected 500 random edit-turn-pairs from ETP-all excluding ETP-unconfirmed
+p1
+aVHowever, we still expect a certain amount of non-corresponding edit-turn-pairs in this data, as the annotator judged the correspondence based on the entire revision and not the individual edit
+p2
+aVAssuming that most edit-turn-pairs are non-corresponding, we expect a heavy imbalance in the class distribution
+p3
+aVAs baseline, we defined a majority class classifier, which labels all edit-turn-pairs as non-corresponding
+p4
+aVSome of the false positives (i.e., non-corresponding pairs classified as corresponding) were caused by pairs where the revision (as judged by its comment or the edit context) is related to the turn text, however the specific edit in this pair is not
+p5
+aVTo assess the reliability of these annotations, one of the co-authors manually annotated a random subset of 100 edit-turn-pairs contained in ETP-gold as corresponding or non-corresponding
+p6
+aVWe refer to this 262 edit-turn-pairs as ETP-unconfirmed
+p7
+aVThe search space for corresponding edit-turn-pairs is quite big, as any edit to an article may correspond to any turn from the article u'\u005cu2019' s discussion page
+p8
+aVWe therefore expect to cover the vast majority of corresponding edit-turn-pairs within a search space of 24 hours
+p9
+aVThe inter-rater agreement between ETP-gold (majority votes over Mechanical Turk annotations) and our expert annotations on this subset is Cohen u'\u005cu2019' s u'\u005cu039a' = .72
+p10
+aVIt was important to find a reasonable amount of corresponding edit-turn-pairs before the actual annotation could take place, as we needed a certain amount of positive seeds to keep turkers from simply labeling pairs as non-corresponding all the time
+p11
+aVDue to the high class imbalance in the data, the majority class baseline sets a challenging accuracy score of .80
+p12
+aVAn edit-turn-pair is defined as a pair of an edit from a Wikipedia article u'\u005cu2019' s revision history and a turn from the discussion page bound to the same article
+p13
+aVThe result is a set of 13,331 edit-turn-pairs, referred to as ETP-all
+p14
+aVHowever, given the high price for a new corresponding edit-turn-pair (due to the high class imbalance in random data), we consider it as a useful starting point for research on edit-turn-pairs in Wikipedia
+p15
+aVFrom ETP-all, a set of 262 edit-turn-pairs have been annotated as corresponding as part of a preliminary annotation study with one human annotator
+p16
+aVWe treat the automatic classification of edit-turn-pairs as a binary classification problem
+p17
+aVWe propose a number of features which are purely based on the textual similarity between the text of the turn, and the edited text and context
+p18
+aVThe context of an edit is defined as one preceding and one following paragraph of the edited paragraph
+p19
+aVIf an article has no discussion page, there are no edit-turn-pairs for this article
+p20
+aVTo keep the class imbalance within reasonable margins, we limited the time span between edits and turns to 86,000 seconds (about 24 hours
+p21
+aVPrevious work [ 11 , 4 ] has shown that these algorithms work well for edit and turn classification
+p22
+aVFurthermore, we deleted 21 pairs for which the turn segmentation algorithm clearly failed (e.g., when the turn text was empty
+p23
+aVThis step is intended to make sure that we have a substantial number of corresponding pairs in the data for the final annotation study
+p24
+aVTo select good turkers and to block spammers, we carried out a pilot study on a small portion of manually confirmed corresponding and non-corresponding pairs, and required turkers to pass a qualification test
+p25
+aVTo understand the mistakes of the classifier, we manually assessed error patterns within the model of the Random Forest classifier
+p26
+aVSeveral of our features are based on metadata from both the edit and the turn
+p27
+aVRoughly five hours after that turn was issued on the discussion page, user Sbharris added a wikilink to the u'\u005cu201c' History and etymology u'\u005cu201d' section of the article by performing the following edit
+p28
+aVIndividual turns are retrieved from topics by considering the revision history of the discussion page
+p29
+aVIn our 24 hours search space, the probability to find a corresponding edit-turn-pair drops steeply for time spans of more than 6 hours
+p30
+aVSome features are based on the edit or the turn alone and do not take into account the pair itself
+p31
+aVThe 1,000 most frequent uni-, bi- and trigrams from the turn text are represented as binary features
+p32
+aVThe low F1 on corresponding pairs is likely due to the small number of training examples
+p33
+aVBased on an automatic classification using the model presented in our previous work [ 7 ] , we excluded edits classified as Vandalism, Revert or Other
+p34
+aVEdits are coherent modifications based on a pair of adjacent revisions from Wikipedia article pages
+p35
+aVWe counted an edit-turn-pair as corresponding, if it was annotated as u'\u005cu201c' corresponding u'\u005cu201d' by least three out of five annotators, and likewise for non-corresponding pairs
+p36
+aVA reduction of the feature set as judged by a u'\u005cu03a7' 2 ranker improved the results for both Random Forest as well as the SVM, so we limited our feature set to the 100 best features
+p37
+aVWe therefore define an edit-turn-pair as corresponding, if i) The turn is an explicit suggestion, recommendation or request and the edit performs this suggestion, recommendation or request, ii) the turn is an explicit reference or pointer and the edit adds or modifies this reference or pointer, iii) the turn is a commitment to an action in the future and the edit performs this action, and iv) the turn is a report of a performed action and the edit performs this action
+p38
+aVDue to their performative nature, we assume that these dialog acts make the turn they belong to a good candidate for a corresponding edit-turn-pair
+p39
+aVGiven the small size of ETP-gold, we did not assign a fixed train/test split to the data
+p40
+aVFurthermore, we removed all edits which are part of a revision created by bots, based on the Wikimedia user group 2 2 http://meta.wikimedia.org/wiki/User_classes scheme
+p41
+aVFor the same reason, we did not further divide the data into train/test and development data
+p42
+aVIn the present study, we have analyzed cases where explicit coordination lead to implicit coordination and vice versa
+p43
+aVThis was calculated as 1 N u'\u005cu2062' u'\u005cu2211' i = 1 N u'\u005cu2211' c = 1 C v i c C , where N = 750 is the overall number of annotated edit-turn-pairs, C = R 2 - R 2 is the number of pairwise comparisons, R = 5 is the number of raters per edit-turn-pair, and v i c = 1 if a pair of raters c labeled edit-turn-pair i equally, and 0 otherwise
+p44
+aVEach edit-turn-pair could be labeled as u'\u005cu201c' corresponding u'\u005cu201d' , u'\u005cu201c' non-corresponding u'\u005cu201d' or u'\u005cu201c' can u'\u005cu2019' t tell u'\u005cu201d'
+p45
+aVWikipedia, as one of the most prominent collaboratively created resources, offers its users a platform to coordinate their writing, the so called talk or discussion pages [ 18 ]
+p46
+aVBoth of these may be part of a corresponding edit-turn-pair, according to our definition in Section 2
+p47
+aVMost of the resources used for collaborative writing do not explicitly allow their users to interact directly, so that the implicit effort of coordination behind the actual writing is not documented
+p48
+aV{mdframed} [backgroundcolor=gray!30, linewidth=0pt, leftmargin=0, rightmargin=0, skipabove=4pt, skipbelow=3pt, innertopmargin=3pt, innerbottommargin=3pt] '' borax '' u'\u005cu2192' [[borax]] This is what we define as a corresponding edit-turn-pair
+p49
+aVMore details follow in Section 2
+p50
+aVThe turkers were presented the turn text, the turn topic name, the edit in its context, and the edit comment (if present
+p51
+aVSimilarity has been calculated between i) the plain edit text and the turn text, ii) the edit and turn text after any wiki markup has been removed, iii) the plain edit context and turn text, and iv) the edit context and turn text after any wiki markup has been removed
+p52
+aVFrom ETP-unconfirmed, we selected 250 random edit-turn-pairs
+p53
+aVThis partially explains the high number of non-corresponding edit-turn-pairs and the consequent class imbalance
+p54
+aVThe turn text includes the entire text from the turn
+p55
+aVFor each edit, we stored both the edited paragraph and its context from the old revision as well as the edited paragraph and context from the new revision
+p56
+aVAmong these, we expect to find mostly non-corresponding pairs
+p57
+aVWe recorded whether the name of the edit user and the turn user are equal, the absolute time difference between the turn and the edit, and whether the edit occurred before the turn
+p58
+aVWith the help of Amazon Mechanical Turk 1 1 www.mturk.com , we crowdsourced annotations on a corpus of edit-turn-pairs from 26 random English Wikipedia articles in various thematic categories
+p59
+aVCosine similarity, longest common subsequence, and word n-gram similarity were also applied to measure the similarity between the edit comment and the turn text as well as the similarity between the edit comment and the turn topic name
+p60
+aVThe edit context includes the edited paragraph and one preceding and one following paragraph
+p61
+aVKaltenbrunner and Laniado ( 2012 ) analyze the development of discussion pages in Wikipedia with respect to time and compare dependences between edit peaks in the revision history of the article itself and the respective discussion page
+p62
+aVFirst, we want to understand the nature of correspondence between Wikipedia article edits and discussion page turns
+p63
+aVWe define all edit-turn-pairs which do not conform to the upper classification as non-corresponding
+p64
+aVWe used Apache OpenNLP 4 4 http://opennlp.apache.org for the segmentation of edit and turn text
+p65
+aVTo deal with the class imbalance problem, we applied cost-sensitive classification
+p66
+aVA definition of correspondence is not straightforward in the context of edit-turn-pairs
+p67
+aVFurthermore, we measured the length of the edit text and the length of the turn text
+p68
+aVWe used DKPro TC [ 5 ] to carry out the machine learning experiments on edit-turn-pairs
+p69
+aVAmong the false negatives, we found errors caused by a missing direct textual overlap between edit and turn text
+p70
+aVIn correspondence with the distribution of class sizes in the training data, the cost for false negatives was set to 4, and for false positives to 1
+p71
+aVTurns are segments from Wikipedia discussion pages
+p72
+aVIn these cases, the correspondence was indicated only (if at all) by some relationship between turn text and edit comment
+p73
+aVWe refer to this dataset as ETP-gold
+p74
+aVTheir study shows that both implicit coordination (on the article itself) and explicit coordination (on the discussion page of the article) play important roles for the improvement of article quality
+p75
+aVThe edit text is composed of any inserted, deleted or relocated text from both the old and the new revision
+p76
+aVTraining and testing the classifier has been carried out with the help of the Weka Data Mining Software [ 12 ]
+p77
+aVIn addition to that, Wikipedia stores all edits made to any of its pages in a revision history, which makes the actual writing process explicit
+p78
+aVThe resulting 750 pairs have each been annotated by five turkers
+p79
+aVEach pair of adjacent revisions found in the edit history of an article consists of one or more edits, which describe either inserted, deleted, changed or relocated text
+p80
+aVTo the best of our knowledge, this study is the first attempt to detect corresponding edit-turn-pairs in the English Wikipedia fully automatically
+p81
+aVIn the following, we explain the step-by-step approach we chose to create a suitable corpus for the annotation study
+p82
+aVTo capture a fine-grained picture of changes to Wikipedia article pages, we rely on the notion of edits defined in our previous work [ 6 ]
+p83
+aVWhile there are several studies which analyze the high-level relationship between discussion and edit activity in Wikipedia articles, very few have investigated the correspondence between edits and turns on the textual level
+p84
+aVThe average pairwise percentage agreement over all pairs is 0.66
+p85
+aVTo enable such interaction, we extract segments from discussion pages, called turns, and connect them to corresponding edits in the respective article
+p86
+aVFirst, an automatic detection of corresponding edit-turn-pairs in Wikipedia pages might help users of the encyclopedia to better understand the development of the article they are reading
+p87
+aVThis resulted in 128 corresponding and 508 non-corresponsing pairs, or 636 pairs in total
+p88
+aVAs shown in Figure 1 , more than 50% of all corresponding edit-turn-pairs in ETP-gold occur within a time span of less than one hour
+p89
+aVConsider the following snippet from the discussion page of the article u'\u005cu201c' Boron u'\u005cu201d' in the English Wikipedia
+p90
+aVEdits are associated with metadata from the revision they belong to, this includes the comment (if present), the user name and the time stamp
+p91
+aV2012 ) suggest four types of explicit performatives in their annotation scheme for dialog acts of Wikipedia turns
+p92
+aVTo rule out ambiguous cases, we created the Gold Standard corpus with the help of majority voting
+p93
+aVAlong with each turn, we store the name of its user, the time stamp, and the name of the topic to which the turn belongs
+p94
+aVTo segment discussion pages into turns, we follow a procedure proposed by Ferschke et al
+p95
+aVWe consider this agreement high enough to draw conclusions from the annotations [ 2 ]
+p96
+aVWe make ETP-gold freely available
+p97
+aVKittur and Kraut ( 2008 ) analyze correspondence between article quality and activity on the discussion page
+p98
+aVDiscussion pages are then segmented into topics based upon the structure of the page
+p99
+aVWe used the Sweble parser [ 8 ] to remove Wiki markup
+p100
+aVA subsequent study [ 17 ] adds more dimensions, among these an explicit category for references to article edits
+p101
+aV2007 ) propose 11 dimensions to classify discussion page turns
+p102
+aV2012 ) which is the basis for our turn segmentation, there are several studies dedicated to discourse structure in Wikipedia
+p103
+aVFurthermore, they observed that the edit peaks in articles and their discussion pages are mostly independent
+p104
+aVThey find that the development of a discussion page is often bound to the topic of the article, i.e., articles on time-specific topics such as events grow much faster than discussions about timeless, encyclopedic content
+p105
+aVSecond, we want to know the distinctive properties of corresponding edit-turn-pairs and how to use these to automatically detect corresponding pairs
+p106
+aVThe moderate pairwise agreement reflects the complexity of this task for non-experts
+p107
+aVThe authors would like to give special thanks to Viswanathan Arunachalam and Dat Quoc Nguyen, who carried out initial experiments and the preliminary annotation study, and to Emily Jamison, who set up the Mechanical Turk task
+p108
+aVThis procedure successfully segmented 94 % of all turns in a corpus from the Simple English Wikipedia [ 11 ]
+p109
+aVObviously, this is a fairly small dataset which does not cover a representative sample of articles from the English Wikpedia
+p110
+aVThe detection of correspondence between edits and turns is also relevant beyond Wikipedia
+p111
+aVIn a 10-fold cross-validation experiment, we tested a Random Forest classifier [ 3 ] and an SVM [ 16 ] with polynomial kernel
+p112
+aVThis might happen, when somebody corrects a spelling error in a paragraph that is heavily disputed on the discussion page
+p113
+aVWe applied various filters to avoid annotating trivial content
+p114
+aVOn February 16th of 2011, user JCM83 added the turn
+p115
+aVTo calculate edits, a line-based diff comparison between the old revision and the new revision is made, followed by several post-processing steps
+p116
+aVFurthermore, we will explain the kind of correspondence between edits and turns we are interested in
+p117
+aVIn this section, we will define the basic units of our task, namely edits and turns
+p118
+aVInstead of having to read through all of the discussion page which can be an exhausting task for many of the larger articles in the English Wikipedia, users could focus on those discussions that actually had an impact on the article they are reading
+p119
+aVWith the help of the Java Wikipedia Library [ 19 ] , we access discussion pages from a database
+p120
+aVSecond, assuming that edits often introduce new knowledge to an article, it might be interesting to analyze how much of this knowledge was actually generated within the discourse on the discussion page
+p121
+aVBesides the work by Ferschke et al
+p122
+aVIn the following, we list the features extracted from preprocessed edits and turns
+p123
+aVwidth= {axis} [ ylabel=% of pairs, xlabel= time span in hours, axis x line*=none, axis y line*=left, tick align=outside, ymajorgrids, legend style=at=(0.55,0.95),anchor=north,legend columns=6, height=30mm, bar width=2mm, xticklabels= u'\u005cu2264' 1, 2-6, 7-11, 12-16, 17-21, xtick=1, u'\u005cu2026' ,5, ymin=0, ymax=60, ybar ] \u005caddplot [smooth, ybar, fill=lightgray, mark=none, draw=black] coordinates (1, 51) (2, 31) (3, 9) (4, 2) (5, 2) ; \u005caddlegendentry corresponding
+p124
+aVIn particular, they find a correlation between the article edits and their discussions around the anniversaries of the events
+p125
+aVThe process of user interaction in collaborative writing has been the topic of many studies in recent years [ 9 ]
+p126
+aVThe classification results for the above configuration are displayed in Table 1
+p127
+aVFerschke et al
+p128
+aVWe recorded whether the edit is an insertion, deletion, modification or relocation
+p129
+aVRather, hyperparameters were optimized using grid-search over multiple cross-validation experiments, aiming to maximize accuracy
+p130
+aVWith an overall macro-averaged F1 of .79, Random Forest yielded the best results, both with respect to precision as well as recall
+p131
+aVCosine similarity was applied on binary weighted term vectors ( L 2 norm
+p132
+aVAmong the latter, Ferron and Massa ( 2014 ) analyze 88 articles and their discussion pages related to traumatic events
+p133
+aV[bar shift = 2pt, smooth, ybar, fill=black, mark=none, draw=black] coordinates (1, 26) (2, 28) (3, 11) (4, 14) (5, 14) ; \u005caddlegendentry non-corresponding
+p134
+aVWe used the cosine similarity, longest common subsequence, and word n-gram similarity measures
+p135
+aVWe argue that linking these two resources helps to get a better picture of the collaborative writing process
+p136
+aV{mdframed} [backgroundcolor=gray!30, linewidth=0pt, leftmargin=0, rightmargin=0, skipabove=4pt, skipbelow=3pt, innertopmargin=3pt, innerbottommargin=3pt] Shouldn u'\u005cu2019' t borax be wikilinked in the u'\u005cu201c' etymology u'\u005cu201d' paragraph
+p137
+aVThe most frequent dimensions in their sample are requests for coordination and requests for information
+p138
+aVThe word n-gram measure [ 15 ] calculates a Jaccard similarity coefficient on trigrams
+p139
+aVThis dimension accounts for roughly 5 to 10% of all turns
+p140
+aVBoth classifiers performed significantly better than the baseline (non-overlapping confidence intervals, see Table 1
+p141
+aVViégas et al
+p142
+aVThis work has been supported by the Volkswagen Foundation as part of the Lichtenberg-Professorship Program under grant No
+p143
+aVAn alignment between edits in the company Wiki and issues discussed in email conversations, on mailing lists, or other forums, can be helpful to track the flow or generation of knowledge within the company
+p144
+aVIn the limited scope of this paper, we will focus on two research questions
+p145
+aVI/82806, and by the Hessian research excellence program u'\u005cu201c' Landes-Offensive zur Entwicklung Wissenschaftlich-ökonomischer Exzellenz u'\u005cu201d' (LOEWE) as part of the research center u'\u005cu201c' Digital Humanities u'\u005cu201d'
+p146
+aVOur motivation for this task is two-fold
+p147
+aVThis information can be useful to improve communication and knowledge sharing
+p148
+aVMany companies use Wikis to store internal information and documentation [ 1 ]
+p149
+aVWe thank the anonymous reviewers for their helpful suggestions
+p150
+aV2012
+p151
+aV3 3 http://www.ukp.tu-darmstadt.de/data/edit-turn-pairs
+p152
+a.

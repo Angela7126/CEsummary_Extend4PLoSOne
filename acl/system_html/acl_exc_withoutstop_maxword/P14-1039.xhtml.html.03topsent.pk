@@ -1,0 +1,20 @@
+(lp0
+VSimilarly, we conjectured that large differences in the realizer u'\u005cu2019' s perceptron model score may more reliably reflect human fluency preferences than small ones, and thus we combined this score with features for parser accuracy in an SVM ranker
+p1
+aVSimple ranking with the Berkeley parser of the generative model u'\u005cu2019' s n -best realizations raised the BLEU score from 85.55 to 86.07, well below the averaged perceptron model u'\u005cu2019' s BLEU score of 87.93
+p2
+aVTherefore, to develop a more nuanced self-monitoring reranker that is more robust to such parsing mistakes, we trained an SVM using dependency precision and recall features for all three parses, their n -best parsing results, and per-label precision and recall for each type of dependency, together with the realizer u'\u005cu2019' s normalized perceptron model score as a feature
+p3
+aVWe initially tried using OpenCCG u'\u005cu2019' s parser in a simple ranking approach, but found that it did not improve upon the averaged perceptron model, like the three parsers used subsequently
+p4
+aVWith the SVM reranker, we obtain a significant improvement in BLEU scores over White Rajkumar u'\u005cu2019' s averaged perceptron model on both development and test data
+p5
+aVFor each parser, we trained a model with its overall precision and recall features, as shown at the top of Table 3
+p6
+aVWith this simple reranking strategy and each of three different Treebank parsers, we find that it is possible to improve BLEU scores on Penn Treebank development data with White Rajkumar u'\u005cu2019' s [ 28 , 36 ] baseline generative model, but not with their averaged perceptron model
+p7
+aVWith wsj_0041.18, the SVM ranker unfortunately prefers a realization where presumably seems to modify shows rather than of two politicians as in the original, which the averaged perceptron model prefers
+p8
+aVThe second one is the averaged perceptron model (hereafter, perceptron model), which uses all the features reviewed in Section 2
+p9
+a.

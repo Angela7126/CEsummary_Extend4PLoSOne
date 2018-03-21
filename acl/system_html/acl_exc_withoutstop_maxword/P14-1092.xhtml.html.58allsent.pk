@@ -1,0 +1,148 @@
+(lp0
+VSo far, we have treated LS and discourse as distinct features in the reranking model, However, given that LS features greatly improve the CR baseline, we hypothesize that a natural extension to the discourse models would be to make use of LS similarity (in addition to the traditional information retrieval similarity) to label discourse segments
+p1
+aVWe propose a novel answer reranking (AR) model that combines lexical semantics (LS) with discourse information, driven by two representations of discourse a shallow representation centered around discourse markers and surface text information, and a deep one based on the Rhetorical Structure Theory (RST) discourse framework [ 7 ]
+p2
+aVTo tease apart the relative contribution of discourse features that occur only within a single sentence versus features that span multiple sentences, we examined the performance of the full model when using only intra-sentence features, i.e.,, SR0 features for DMM, and features based on discourse relations where both EDUs appear in the same sentence for DPM, versus the full intersentence models
+p3
+aVThe discourse parser model (DPM) is based on the RST discourse framework [ 7 ]
+p4
+aVThe first is a measure of the overall LS similarity of the question and answer candidate, which is computed as the cosine similarity between the two composite vectors of the question and the answer candidate
+p5
+aVFinally, while the discourse models perform well for HOW or manner questions, performance on Bio WHY corpus suggests that reason questions are particularly amenable to discourse analysis
+p6
+aVWe extend this work by showing that discourse models coupled with LS achieve the best performance for NF AR
+p7
+aV15 15 The performance of all models can ultimately be increased by using more sophisticated learning frameworks, and considering more answer candidates in CR (for Bio
+p8
+aVThe in-domain performance of the ensemble model is similar to that of the single classifier in both YA and Bio HOW so we omit these results here for simplicity
+p9
+aVHere, both the CR and full model chose a paragraph containing a different gold answer
+p10
+aVThe ensemble model without LS (third line) has a nearly identical P@1 score as the equivalent in-domain model (line 13 in Table 1), while slightly surpassing in-domain MRR performance
+p11
+aVBecause these discourse models appear to capture high-level information about answer structures, we hypothesize that the models should make use of many of the same discourse features, even when training on data from different domains
+p12
+aVSpecifically, as in § 4.3 , we compute the cosine similarity between the composite LS vectors of the question text and each marker argument (in DMM) or EDU (in DPM), and label the corresponding answer segment QSEG if this score is higher than a threshold, or OTHER otherwise
+p13
+aVWe demonstrate good domain transfer performance between these corpora, suggesting that answer discourse structures are largely independent of domain, and thus broadly applicable to NF QA
+p14
+aVIt is important to note that these discourse features are more expressive than features based on discourse markers alone [ 5 , 19 ]
+p15
+aVWe hypothesize that the limited transfer observed for models with LS compared to their counterparts without LS is due to the disparity in the size and utility of the biology LS training data compared to the open-domain LS resources
+p16
+aV8 8 Including these scores as features in the reranker model is a common strategy that ensures that the reranker takes advantage of the analysis already performed by the CR model
+p17
+aV[ 22 ] , we include lexical semantics in our reranking model
+p18
+aVSimilar to the DMM, these features take real values obtained by averaging the cosine similarity of the arguments with the question content
+p19
+aVThus, to answer NF questions, one needs a model of what these answer structures look like
+p20
+aVTo the best of our knowledge, this is one of the most striking demonstrations of domain transfer in answer ranking for non-factoid QA, and highlights the generality of these discourse features in identifying answer structures across domains and genres
+p21
+aV[ 20 ] extracted 47 cue phrases such as because from a small collection of web documents, and used the cosine similarity between an answer candidate and a bag of words containing these cue phrases as a single feature in their reranking model for non-factoid why QA
+p22
+aV7 7 http://www.cs.cornell.edu/people/tj/svm_light/svm_rank.html In addition to these features, each reranker also includes a single feature containing the score of each candidate, as computed by the above candidate retrieval (CR) component
+p23
+aVBecause the number of answer candidates is typically large (e.g.,, equal to the number of paragraphs in the textbook), we return the N top candidates with the highest scores
+p24
+aVThis disparity is likely due to the difficulty in assembling LS training data at an appropriate level for the biology corpus, contrasted with the relative abundance of large scale open-domain lexical semantic resources
+p25
+aVWe label marker arguments based on their similarity to question content
+p26
+aVIn these cases, the model selected an on-topic answer paragraph in the same subsection of the textbook as a gold answer
+p27
+aVThus, for a given question, all its answers are fetched from the answer collection, and an initial ranking is constructed based on the cosine similarity between theirs and the question u'\u005cu2019' s lemma vector representations, with lemmas weighted using tf.idf (Ch
+p28
+aVHowever, this also introduces noise because discourse analysis is a complex task and discourse parsers are not perfect
+p29
+aVDue to the speed limitations of the discourse parser, we randomly drew 10,000 QA pairs from the corpus of how questions described by Surdeanu et al
+p30
+aVIf text before or after a marker out to a given sentence range matches the entire text of the question (with a cosine similarity score larger than a threshold), that argument takes on the label QSEG , or OTHER otherwise
+p31
+aVWe chose the Bio setup for this analysis because it is more complex than the CQA one here gold answers may have a granularity completely different from what the system choses as best answers (in our particular case, the QA system is currently limited to answers consisting of single paragraphs, whereas gold answers may be of any size
+p32
+aVWe adapted them to this dataset by weighing each answer by its overlap with gold answers, where overlap is measured as the highest F1 score between the candidate and a gold answer
+p33
+aVIn the Bio corpus, because answer candidates are not guaranteed to match gold annotations exactly, these metrics do not immediately apply
+p34
+aVNote that, because these domains are considerably different from the RST Treebank, the parser fails to produce a tree on a large number of answer candidates
+p35
+aVTo mitigate this, we used a simple feature generation strategy, which creates one feature for each individual discourse relation by concatenating the relation type with the labels of the discourse units participating in it
+p36
+aVTo this end, for every relation, we extract the entire text dominated by each of its arguments, and we generate labels for the two participants in the relation using the same strategy as the DMM (based on the similarity with the question content
+p37
+aVHowever, as discussed, gold answers may unevenly straddle paragraph boundaries, and the paragraph chosen by the model happened to have a somewhat lower overlap with its gold answer than the one chosen by the baseline
+p38
+aVWe use this setup to answer questions from a biology textbook, where each section is indexed as a standalone document, and each paragraph in a given document is considered as a candidate answer
+p39
+aVArgument labels indicate only if lemmas from the question were found in a discourse structure present in an answer candidate, and do not speak to the specific lemmas that were found
+p40
+aVWe propose two separate discourse representation schemes u'\u005cu2013' one shallow, centered around discourse markers, and one deep, based on RST
+p41
+aVThese composite vectors are assembled by summing the vectors for individual question (or answer candidate) words, and re-normalizing this composite vector to unit length
+p42
+aVWe derive two LS measures from these vectors, which are then are included as features in the reranker
+p43
+aVThe entire biology text (at paragraph granularity) serves as the possible set of answers
+p44
+aV9 9 We investigated more complex features, e.g.,, by exploring depths of two and three in the discourse tree, and also models that relied on tree kernels over these trees, but none improved upon this simple representation
+p45
+aV[ 17 ] using their filtering criteria, with the additional criterion that answers had to contain at least four community-generated answers, one of which was voted as the top answer
+p46
+aVExamples of these markers include and, in, that, for, if, as, not, by, and but ; (2) two marker arguments , i.e.,, text segments before and after the marker, labeled to indicate if they are related to the question text or not; and (3) a sentence range around the marker, which defines the length of these segments (e.g.,, ± 2 sentences
+p47
+aVFurther, the text preceeding by matches text from the question (and is therefore labeled QSEG ), while the text after by differs considerably from the question text, and is labeled OTHER
+p48
+aVThe model chose a paragraph that had many of the same words as the question, but is on a different topic
+p49
+aVBecause we are adding two new discourse models, we now tune four segment matching thresholds, one for each of the DMM, DPM, DMM L u'\u005cu2062' S , and DPM L u'\u005cu2062' S models
+p50
+aVThus, P@1 reduces to this F1 score for the top answer
+p51
+aVWe implemented two such models, denoted DMM L u'\u005cu2062' S and DPM L u'\u005cu2062' S , by replacing the component that assigns argument labels with one that relies on LS
+p52
+aVWe demonstrate that modeling discourse is greatly beneficial for NF AR for two types of NF questions, manner ( u'\u005cu201c' how u'\u005cu201d' ) and reason ( u'\u005cu201c' why u'\u005cu201d' ), across two large datasets from different genres and domains u'\u005cu2013' one from the community question-answering (CQA) site of Yahoo
+p53
+aVThis is problematic for NF QA, where questions are answered not by atomic facts, but by larger cross-sentence conceptual structures that convey the desired answers
+p54
+aV[ 18 ] conducted an initial evaluation of the utility of RST structures to why QA by evaluating performance on a small sample of seven WSJ articles drawn from the RST Treebank [ 1 ]
+p55
+aVThe number of answers to each question ranged from 4 to over 50, with the average 9
+p56
+aVNote that while our system retrieves answers at paragraph granularity, the expert was not constrained in any way during the annotation process, so gold answers might be smaller than a paragraph or span multiple paragraphs
+p57
+aVHere we use no meta data and rely solely on linguistic features
+p58
+aV1) A discourse marker from Daniel Marcu u'\u005cu2019' s list (see Appendix B in Marcu [ 9 ] ), that serves as a divisive boundary between sentences
+p59
+aVFor example, if the best answer for a question appears at rank 2 with an F1 score of 0.3 , the corresponding MRR score is 0.3 / 2
+p60
+aVFor example, for the question u'\u005cu201d' How are fossil fuels formed, and why do they contain so much energy u'\u005cu201d' , the model selected an answer that mentions fossil fuels in a larger discussion of human ecological footprints
+p61
+aVOften times this paragraph directly preceded or followed the gold answer
+p62
+aVBecause of the small size of the Bio corpus, it was evaluated using 5-fold cross-validation, with three folds for training, one for development, and one for test
+p63
+aVThe setup in this paper, commonly used in the CQA community [ 21 ] , is more relevant here because it includes both high and low quality answers
+p64
+aVLike any language model, a RNNLM estimates the probability of observing a word given the preceding context, but, in this process, it learns word embeddings into a latent, conceptual space with a fixed number of dimensions
+p65
+aVExamining Table 1 , several trends are clear
+p66
+aVFor the YA CQA corpora, 50% of QA pairs were used for training, 25% for development, and 25% for test
+p67
+aV[ 12 ] built a classifier to identify causal relations using a small set of cue phrases (e.g.,, because and is caused by
+p68
+aVThis confirms existing evidence that ensemble models perform better cross-domain because they overfit less [ 2 , 4 ]
+p69
+aVIn the bottom part of Figure 2 , we show hypotactic relations as directed arrows, from the nucleus to the satellite
+p70
+aVThe body of work on factoid QA is too broad to be discussed here (see, e.g.,, the TREC workshops for an overview
+p71
+aVConsequently, related words tend to have vectors that are close to each other in this space
+p72
+aVThe latter was created by extracting a) pages matching a word/phrase in a glossary of biology (derived from the textbook); plus (b) pages hyperlinked from (a) that are also tagged as being in a small set of (hand-selected) biology-related categories
+p73
+a.

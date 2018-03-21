@@ -1,0 +1,22 @@
+(lp0
+VFor English-to-Arabic, 1-best desegmentation results in a 0.7 BLEU point improvement over training on unsegmented Arabic
+p1
+aVWork on target language morphological segmentation for SMT can be divided into three subproblems segmentation, desegmentation and integration
+p2
+aV2008 ) also tune on unsegmented references by simply desegmenting SMT output before MERT collects sufficient statistics for BLEU and translate with both segmented and unsegmented language models for English-to-Finnish translation
+p3
+aVMoving to lattice desegmentation more than doubles that improvement, resulting in a BLEU score of 34.4 and an improvement of 1.0 BLEU point over 1-best desegmentation
+p4
+aVOur first baseline is Unsegmented , where we train on unsegmented target text, requiring no desegmentation step
+p5
+aVLattice desegmentation is a non-local lattice transformation
+p6
+aVThe unsegmented LM alone yields a 0.4 point improvement over the 1-best desegmentation score
+p7
+aVThis is a natural place to introduce features that describe the desegmentation process, such as scores provided by a desegmentation table, which can be incorporated into the desegmenting transducer u'\u005cu2019' s edge weights
+p8
+aVWe compose this acceptor with a desegmenting transducer, and then with an unsegmented LM acceptor, producing a fully annotated, desegmented lattice
+p9
+aVWe approach this problem by
+p10
+a.

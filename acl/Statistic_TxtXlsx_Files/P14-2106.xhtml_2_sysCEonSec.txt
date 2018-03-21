@@ -1,0 +1,241 @@
+Current File: P14-2106.xhtml_2 P14-2106.xhtml
+
+Section 0:  Abstract
+	SentNum: 4
+	CENum: 0
+	SentCovered: 0
+	Covered_Rate: 0.0000%
+
+Section 1:  1 Introduction
+	SentNum: 21
+	CENum: 2
+	SentCovered: 2
+	Covered_Rate: 9.5238%
+
+Section 2:  2 Related work
+	SentNum: 8
+	CENum: 2
+	SentCovered: 2
+	Covered_Rate: 25.0000%
+
+Section 3:  3 Experimental Framework
+	SentNum: 38
+	CENum: 8
+	SentCovered: 9
+	Covered_Rate: 23.6842%
+
+Section 4:  4 Results
+	SentNum: 58
+	CENum: 14
+	SentCovered: 16
+	Covered_Rate: 27.5862%
+
+Section 5:  5 Conclusions
+	SentNum: 6
+	CENum: 1
+	SentCovered: 2
+	Covered_Rate: 33.3333%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-2106.xhtml_2's CE cases
+
+Section 0:  Abstract has 0 CE cases
+Section 1:  1 Introduction has 2 CE cases
+	CASE: 1
+	Stag: 6 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Broadly speaking, we can classify the methods to incorporate semantic information into parsers in two systems using static lexical semantic repositories, such as WordNet or similar ontologies [] , and systems using dynamic semantic clusters automatically acquired from corpora []. 
+		Cause: [(0, 0), (0, 1)]
+		Effect: [(0, 3), (0, 43)]
+
+	CASE: 2
+	Stag: 18 
+		Pattern: 2 [['for', 'the', 'sake', 'of'], [',']]---- [[], ['&V-ing/&NP@C@'], ['&R']]
+		sentTXT: For the sake of comparison, we will also perform the experiments using syntactic/semantic clusters automatically acquired from corpora. 
+		Cause: [(0, 4), (0, 4)]
+		Effect: [(0, 6), (0, 18)]
+
+Section 2:  2 Related work has 2 CE cases
+	CASE: 1
+	Stag: 25 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Broadly speaking, we can classify the attempts to add external knowledge to a parser in two sets using large semantic repositories such as WordNet and approaches that use information automatically acquired from corpora. 
+		Cause: [(0, 0), (0, 1)]
+		Effect: [(0, 3), (0, 33)]
+
+	CASE: 2
+	Stag: 32 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: Recently, tested the incorporation of cluster features from unlabeled corpora in a multilingual setting, giving an algorithm for inducing cross-lingual clusters. 
+		Cause: [(0, 20), (0, 20)]
+		Effect: [(0, 0), (0, 18)]
+
+Section 3:  3 Experimental Framework has 8 CE cases
+	CASE: 1
+	Stag: 44 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: The learning procedure is global since model parameters are set relative to classifying the entire dependency graph, in contrast to the local but richer contexts used by transition-based parsers. 
+		Cause: [(0, 6), (0, 16)]
+		Effect: [(0, 18), (0, 28)]
+
+	CASE: 2
+	Stag: 56 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: We will experiment with the semantic representations used in and , based on WordNet 2.1. 
+		Cause: [(0, 13), (0, 14)]
+		Effect: [(0, 0), (0, 9)]
+
+	CASE: 3
+	Stag: 59 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: There are a total of 45 SFs (1 for adverbs, 3 for adjectives, 15 for verbs, and 26 for nouns), based on syntactic and semantic categories. 
+		Cause: [(0, 28), (0, 31)]
+		Effect: [(0, 0), (0, 24)]
+
+	CASE: 4
+	Stag: 61 62 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We experiment with both full SSs and SFs as instances of fine-grained and coarse-grained semantic representation, respectively. As an example, knife in its tool sense is in the EDGE TOOL USED AS A CUTTING INSTRUMENT singleton synset, and also in the ARTIFACT SF along with thousands of words including cutter. 
+		Cause: [(0, 9), (1, 33)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 5
+	Stag: 61 62 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We experiment with both full SSs and SFs as instances of fine-grained and coarse-grained semantic representation, respectively. As an example, knife in its tool sense is in the EDGE TOOL USED AS A CUTTING INSTRUMENT singleton synset, and also in the ARTIFACT SF along with thousands of words including cutter. 
+		Cause: [(1, 1), (1, 34)]
+		Effect: [(0, 0), (0, 17)]
+
+	CASE: 6
+	Stag: 64 65 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: For each semantic representation, we need to determine the semantics of each occurrence of a target word used i) gold-standard annotations from SemCor, a subset of the PTB, to give an upper bound performance of the semantic representation, ii) first sense, where all instances of a word were tagged with their most frequent sense, and iii) automatic sense ranking, predicting the most frequent sense for each word []. As we will make use of the full PTB, we only have access to the first sense information. 
+		Cause: [(1, 1), (1, 18)]
+		Effect: [(0, 1), (0, 78)]
+
+	CASE: 7
+	Stag: 68 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Using prefixes of various lengths, it can produce clusterings of different granularities. 
+		Cause: [(0, 0), (0, 4)]
+		Effect: [(0, 6), (0, 12)]
+
+	CASE: 8
+	Stag: 69 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: It can be seen as a representation of syntactic-semantic information acquired from corpora. 
+		Cause: [(0, 5), (0, 11)]
+		Effect: [(0, 0), (0, 3)]
+
+Section 4:  4 Results has 14 CE cases
+	CASE: 1
+	Stag: 72 73 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We firstly tested the addition of each individual semantic feature to each parser, evaluating its contribution to the parser u'\u2019' s performance. For the combinations, instead of feature-engineering each parser with the wide array of different possibilities for features, as in , we adopted the simpler approach of combining the outputs of the individual parsers by voting []. 
+		Cause: [(1, 20), (1, 38)]
+		Effect: [(0, 3), (1, 17)]
+
+	CASE: 2
+	Stag: 74 75 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We will use Labeled Attachment Score (LAS) as our main evaluation criteria. As in previous work, we exclude punctuation marks. 
+		Cause: [(0, 10), (1, 7)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 3
+	Stag: 74 75 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We will use Labeled Attachment Score (LAS) as our main evaluation criteria. As in previous work, we exclude punctuation marks. 
+		Cause: [(1, 1), (1, 8)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 4
+	Stag: 89 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Looking at table 2 , we can say that the differences in baseline parser performance are accentuated when using the LTH treebank conversion, as ZPar clearly outperforms the other two parsers by more than 4 absolute points. 
+		Cause: [(0, 0), (0, 3)]
+		Effect: [(0, 5), (0, 37)]
+
+	CASE: 5
+	Stag: 89 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Looking at table 2 , we can say that the differences in baseline parser performance are accentuated when using the LTH treebank conversion, as ZPar clearly outperforms the other two parsers by more than 4 absolute points. 
+		Cause: [(0, 20), (0, 32)]
+		Effect: [(0, 0), (0, 17)]
+
+	CASE: 6
+	Stag: 95 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: Subsection 4.1 presented the results of the base algorithms and their extensions based on semantic features report improvements over the best single parser when combining three transition-based models and one graph-based model. 
+		Cause: [(0, 14), (0, 31)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 7
+	Stag: 97 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: We used MaltBlender 5 5 http://w3.msi.vxu.se/users/jni/blend/ , a tool for merging the output of several dependency parsers, using the Chu-Liu/Edmonds directed MST algorithm. 
+		Cause: [(0, 10), (0, 16)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 8
+	Stag: 104 105 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: It is known [] that adding more parsers to an ensemble usually improves accuracy, as long as they add to the diversity (and almost regardless of their accuracy level. So, for the comparison to be fair, we will compare ensembles of 3 parsers, taken from sets of 6 parsers (3 baselines + 3 SF, SS, and cluster extensions, respectively. 
+		Cause: [(0, 0), (0, 31)]
+		Effect: [(1, 2), (1, 36)]
+
+	CASE: 9
+	Stag: 112 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Combining the 3 baselines does not give an improvement over the best baseline, as ZPar clearly outperforms the other parsers. 
+		Cause: [(0, 15), (0, 20)]
+		Effect: [(0, 1), (0, 12)]
+
+	CASE: 10
+	Stag: 115 
+		Pattern: 0 [['due', 'to']]---- [['&R'], ['&NP@C@']]
+		sentTXT: One of the obstacles of automatic parsers is the presence of incorrect POS tags due to automatic tagging. 
+		Cause: [(0, 16), (0, 17)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 11
+	Stag: 117 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: We will examine the influence of each type of semantic information on sentences that contain or not POS errors, and this will clarify whether the increments obtained when using semantic information are useful for correcting the negative influence of POS errors or they are orthogonal and constitute a source of new information independent of POS tags. 
+		Cause: [(0, 35), (0, 41)]
+		Effect: [(0, 0), (0, 33)]
+
+	CASE: 12
+	Stag: 121 122 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The following three rows present the enhanced (combined) parsers that make use of semantic information. As the combination of the three baseline parsers did not give any improvement over the best single parser (ZPar), we can hypothesize that the gain coming from the parser combinations comes mostly from the addition of semantic information. 
+		Cause: [(1, 1), (1, 40)]
+		Effect: [(0, 0), (0, 16)]
+
+	CASE: 13
+	Stag: 125 
+		Pattern: 0 [['due', 'to', 'the', 'fact', 'that'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: On the other hand, the increments are more evenly distributed for SS and clusters, and this can be due to the fact that the semantic information is orthogonal to the POS, giving similar improvements for sentences that contain or not POS errors. 
+		Cause: [(0, 25), (0, 32)]
+		Effect: [(0, 34), (0, 44)]
+
+	CASE: 14
+	Stag: 128 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: This aspect deserves further investigation, as the improvements seem to be related to both the type of semantic information and the parsing algorithm.We did an initial exploration but it did not give any clear indication of the types of improvements that could be expected using each parser and semantic data. 
+		Cause: [(0, 7), (0, 50)]
+		Effect: [(0, 0), (0, 4)]
+
+Section 5:  5 Conclusions has 1 CE cases
+	CASE: 1
+	Stag: 131 132 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Compared to [] , which used MaltParser on the LTH conversion and gold POS tags, our results can be seen as a negative outcome, as the improvements are very small and non-significant in most of the cases. For parser combination, WordNet semantic file information does give a small significant increment in the more fine-grained LTH representation. 
+		Cause: [(0, 23), (1, 18)]
+		Effect: [(0, 0), (0, 21)]
+
+#-------------------------------------------------
+

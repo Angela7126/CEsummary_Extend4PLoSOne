@@ -1,0 +1,20 @@
+(lp0
+VWork on target language morphological segmentation for SMT can be divided into three subproblems segmentation, desegmentation and integration
+p1
+aVWe compose this acceptor with a desegmenting transducer, and then with an unsegmented LM acceptor, producing a fully annotated, desegmented lattice
+p2
+aVWe approach this problem by augmenting an SMT system built over target segments with features that reflect the desegmented target words
+p3
+aVThis can be accomplished by composing the lattice with a desegmenting transducer that consumes morphemes and outputs desegmented words
+p4
+aVNonetheless, the 1000-best and lattice desegmenters both produce significant improvements over the 1-best desegmentation baseline, with Lattice Deseg achieving a 1-point improvement in TER
+p5
+aVThe chains found by this search are desegmented and then added to the output lattice as edges
+p6
+aVFortunately, LM annotation as well as any necessary lattice modifications can be performed simultaneously by composing the desegmented lattice with a finite state acceptor encoding the LM [ 26 ]
+p7
+aVFinnish does not require a table, as all words can be desegmented with simple concatenation
+p8
+aVAs in Finnish, the 1-best desegmentation using Morfessor did not surpass the unsegmented baseline, producing a test BLEU of only 31.4 (not shown
+p9
+a.

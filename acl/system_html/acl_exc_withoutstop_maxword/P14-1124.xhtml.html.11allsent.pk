@@ -1,0 +1,116 @@
+(lp0
+VWe consider term detection rather than the transcription task in considering how to exploit topic context, because in evaluating the retrieval of certain key terms we need not focus on improving the entire word sequence
+p1
+aVThe BABEL task is modeled on the 2006 NIST Spoken Term Detection evaluation [] but focuses on limited resource conditions
+p2
+aVThe x -coordinate of each point in Figure 1 is the frequency of k in the training data, and the y -coordinate is the correlation coefficient u'\u005cu03a1' k between T u'\u005cu2062' ( k , w ) and D u'\u005cu2062' ( k , w
+p3
+aVLastly, the reductions in P u'\u005cu2062' ( Miss ) suggests that we are improving the term detection metric, which is sensitive to threshold changes, by doing what we set out to do, which is to boost lower confidence repeated words and correctly asserting them as true hits
+p4
+aVFor each keyword k , we count how often it co-occurs in the same conversation as a vocabulary word w in the ASR training data and the development data, and designate the counts T u'\u005cu2062' ( k , w ) and D u'\u005cu2062' ( k , w ) respectively
+p5
+aVWe illustrate this variability by looking at how consistent word co-occurrences are between two separate corpora in the same language i.e.,, if we observe words that frequently co-occur with a keyword in the training corpus, do they also co-occur with the keywords in a second held-out corpus
+p6
+aVIn general, we can think of using word repetitions to re-score term detection as applying a limited form of adaptive or cache language model []
+p7
+aVThe spoken term detection task arises as a key subtask in applying NLP applications to spoken content
+p8
+aVA high u'\u005cu03a1' k implies that words w that co-occur frequently with k in the training data also do so in the search collection
+p9
+aVFor example, if we determine the context of the detection hypothesis is about computers, containing words like u'\u005cu2018' monitor, u'\u005cu2019' u'\u005cu2018' internet u'\u005cu2019' and u'\u005cu2018' mouse, u'\u005cu2019' then we would be more confident of a term such as u'\u005cu2018' keyboard u'\u005cu2019' and less confident of a term such as u'\u005cu2018' cheese board u'\u005cu2019'
+p10
+aVWe denote this as E u'\u005cu2062' [ k ] and can interpret burstiness as the expected word count given we see w at least once
+p11
+aVAs it turns out this u'\u005cu2018' burstiness u'\u005cu2019' of words within documents, as the term is defined by Church and Gale in their work on Poisson mixtures (1995), provides a more reliable framework for successfully exploiting document context
+p12
+aVAs with word co-occurrence, we consider if estimates of P a u'\u005cu2062' d u'\u005cu2062' a u'\u005cu2062' p u'\u005cu2062' t u'\u005cu2062' ( w ) from training data are consistent when estimated on development data
+p13
+aVimplies that cost of a miss is inversely proportional to the frequency of the term in the corpus, but the cost of a false alarm is fixed
+p14
+aVFor the Tagalog data, we let u'\u005cu0391' range from 0 (the baseline) to 0.4 and re-score each term detection score according to ( 6
+p15
+aVIn applying the burstiness quantity to term detection, we recall that the task requires us to locate a particular instance of a term, not estimate a count, hence the utility of N-gram language models predicting words in sequence
+p16
+aVTable 1 shows the results of this parameter sweep and yields us 1 to 2% absolute performance gains in a number of term detection metrics
+p17
+aVThe typical use of Document Frequency ( DF ) in information retrieval or text categorization is to emphasize words that occur in only a few documents and are thus more u'\u005cu201c' rich in content u'\u005cu201d'
+p18
+aVUsing our final algorithm, we are able to boost repeated term detections and improve results in all languages and training conditions
+p19
+aVFigure 1 , based on the BABEL Tagalog corpus, suggests this is true only for high frequency keywords
+p20
+aVTo further illustrate how Figure 1 was obtained, consider the high-frequency keyword bukas (count = u'\u005cud835' u'\u005cudfd6' u'\u005cud835' u'\u005cudfd5' u'\u005cud835' u'\u005cudfd7' ) and the low-frequency keyword Davao (count = u'\u005cud835' u'\u005cudfcf' u'\u005cud835' u'\u005cudfcf' ), and plot T u'\u005cu2062' ( k , u'\u005cu22c5' ) versus D u'\u005cu2062' ( k , u'\u005cu22c5' ) , as done in Figure 4
+p21
+aVThus the deviation in the Tagalog corpus is more pronounced, i.e., words are less uniformly distributed across documents
+p22
+aVIf we had perfectly accurate ASR in the language of the corpus, term detection is reduced to an exact string matching task
+p23
+aVThe first illustration of word burstiness can be seen by plotting observed inverse document frequency, IDF w , versus f w in the log domain (Figure 7
+p24
+aVClose examination of DF statistics by Church and Gale in their work on Poisson Mixtures (1995) resulted in an analysis of the burstiness of content words
+p25
+aVWe will show that by focusing on contextual information in the form of word repetition within documents, we obtain consistent improvement across five languages in the so called Base Phase of the IARPA BABEL program
+p26
+aVLooking close to the y -axis in Figure 9 , we observe a second class of exclusively low frequency words whose burstiness ranges from highly concentrated to singletons
+p27
+aVMost recently, looked at word bursts in the IARPA BABEL conversational corpora, and were also able to successfully improve performance by leveraging the burstiness of language
+p28
+aVHowever, considering this estimate in light of the two classes of words in Figure 9 , there are clearly words in Class B with high burstiness that will be ignored by trying to compensate for the high adaptation variability in the low-frequency range
+p29
+aVIn light of this finding, we will restrict the type of context we use for term detection to the co-occurrence of the term itself elsewhere within the document
+p30
+aVBut despite the strong evidence of the adaptation phenomenon in both high and low-frequency words (Figure 11 ), we have less confidence in the adaptation strength of any particular word
+p31
+aVHowever, if the goal is to help a speech retrieval system detect content-rich (and presumably infrequent) keywords, then using word co-occurrence information (i.e., topic context) does not appear to be too promising, even though intuition suggests that such information ought to be helpful
+p32
+aVLastly, we re-score the search output by interpolating the top term detection score for a document with subsequent hits according to Equation 6 using the u'\u005cu0391' ^ estimated for this training condition
+p33
+aVHowever, conditioning on one occurrence, most word types are more likely to occur again, due to their burstiness
+p34
+aVNow that we have tested word repetition-based re-scoring on a small Tagalog development set we want to know if our approach, and particularly our u'\u005cu0391' ^ estimate is sufficiently robust to apply broadly
+p35
+aVMoreover, we are able to accomplish this in a wide variety of languages
+p36
+aVSince our corpus size is fixed, we might expect this to occur, as more word occurrences must be pigeon-holed into the same number of documents
+p37
+aVIndeed there is work in the literature that shows that various topic models, latent or otherwise, can be useful for improving language model perplexity and word error rate (Khudanpur and Wu, 1999; Chen, 2009; Naptali et al., 2012
+p38
+aVAlthough spoken term detection does not require the use of word-based automatic speech recognition (ASR), it is closely related
+p39
+aVWe encounter the burstiness property of words again by looking at unigram occurrence probabilities
+p40
+aVLikewise, Katz attempts to capture these two classes in his G model of word frequencies (1996
+p41
+aVTable 2 contrasts the results for using the three different interpolation heuristics on the Tagalog development queries
+p42
+aVThe correlation coefficients u'\u005cu03a1' u'\u005cud835' u'\u005cudc4f' u'\u005cud835' u'\u005cudc62' u'\u005cud835' u'\u005cudc58' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc60' and u'\u005cu03a1' u'\u005cud835' u'\u005cudc37' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc63' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc5c' from the two plots end up as two points in Figure 1
+p43
+aVWe then demonstrate that the method generalizes well, by applying it to the 2006 English data and the remaining four 2013 BABEL languages
+p44
+aVSpoken term detection converts the raw acoustics into time-marked keyword occurrences, which may subsequently be fed (e.g., as a bag-of-terms) to standard NLP algorithms
+p45
+aVWe validate this by developing an interpolation formula to boost putative word repetitions in the search results, and then investigate a method for setting interpolation weights without manually tuning on a development set
+p46
+aVFor this reason, we report both ATWV and the P u'\u005cu2062' ( Miss ) component
+p47
+aVGiven the variability in estimating P a u'\u005cu2062' d u'\u005cu2062' a u'\u005cu2062' p u'\u005cu2062' t u'\u005cu2062' ( w ) , an alternative approach would be take P w ^ as an upper bound on u'\u005cu0391' , reached as the DF w increases (cf
+p48
+aVUsing topic information will be helpful if u'\u005cu2018' monitor, u'\u005cu2019' u'\u005cu2018' keyboard u'\u005cu2019' and u'\u005cu2018' mouse u'\u005cu2019' consistently predict that u'\u005cu2018' keyboard u'\u005cu2019' is present
+p49
+aVFor the first class, burstiness increases slowly but steadily as w occurs more frequently
+p50
+aVIn contrast, the AP English data exhibits a correlation of u'\u005cu03a1' = 0.93 []
+p51
+aVIn all of these cases WER gains in the 1-2% range were observed by interpolating latent topic information with N-gram models
+p52
+aVIf we take the Class A concentration trend as typical, we can argue that most Class B words exhibit a larger than average concentration
+p53
+aVWe focus specifically on the so called no target audio reuse (NTAR) condition to make our method broadly applicable
+p54
+aVGiven the rise of unsupervised latent topic modeling with Latent Dirchlet Allocation [] and similar latent variable approaches for discovering meaningful word co-occurrence patterns in large text corpora, we ought to be able to leverage these topic contexts instead of merely N-grams
+p55
+aVTasks like topic identification and named-entity detection require transforming a continuous acoustic signal into a stream of discrete tokens which can then be handled by NLP and other statistical machine learning techniques
+p56
+aVThe strength of this phenomenon suggests it may be more viable for improving term-detection than, say, topic-sensitive language models
+p57
+a.

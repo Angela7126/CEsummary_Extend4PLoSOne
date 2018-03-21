@@ -1,0 +1,84 @@
+(lp0
+VTable 2 lists the most frequent categories in the three datasets, with their percentage of the overall number of brackets (%gold), their score based just on the head identification (F-h), their score based on head identification and (left and right) span (F-s), and the attachment (att) and span-right (spanR) scores for those that match based on the head
+p1
+aV1) For each regex match, we score whether it matches based on the span as well
+p2
+aV2) Since the derivation tree is really a dependency tree with more complex nodes [] , we can also score each regex for attachment
+p3
+aVWe decompose both the gold and parser output trees into derivation trees with spinal etrees, and score based on the regexes projected by each word
+p4
+aVHowever, the F-s score is for separate syntactic constructions (including also head identification), although we can also sum it over all the structures, as done later in Figure 6
+p5
+aVWe show in Section 2.3 how this derivation tree representation is used to score this attachment error directly, rather than obscuring it as an NP bracket error as evalb would do
+p6
+aVThe simultaneous F-h and F-s scores let us identify constructions where the parser has the head projection correct, but gets the span wrong
+p7
+aVFor example, the mediocre performance of the parser on SQ-vp barely affects the score with OntoNotes, but has a larger negative effect with Answers, due to its increased frequency in the latter
+p8
+aV2) We wouldn u'\u005cu2019' t expect the test-on-training evalb score to be 100%, since it has to back off from the training data, but the results for the different categories vary widely, with e.g.,, the NP-modr F-h score much lower than other frequent regexes
+p9
+aVPhrase-structure parsing is usually evaluated using evalb [] , which provides a score based on matching brackets
+p10
+aVIn Figure 3 , NP-t in etree #a5 is considered as having the attachment to #a3
+p11
+aVFor example, while u'\u005cu201c' to u'\u005cu201d' is a match for PP-t, its attachment is not, since in Figure 3 it is a child of the u'\u005cu201c' trip u'\u005cu201d' etree (#a5) and in Figure 3 it is a child of the u'\u005cu201c' make u'\u005cu201d' etree (#b3
+p12
+aVFor example, u'\u005cu201c' make u'\u005cu201d' is a match for VP-t in Figures 3 and 3 , and is also a match for the span as well, since in both derivation trees it includes the words u'\u005cu201c' make u'\u005cu2026' Florida u'\u005cu201d'
+p13
+aV1) The high performance on the OntoNotes WSJ material is in large part due to the score on the non-recursive regexes of NP-t, VP-t, S-vp, and the auxiliaries (points 1, 2, 4, 6 in the graphs
+p14
+aVThe two graphs in Figure 6 show the cumulative results based on F-h and F-s, respectively
+p15
+aVIn this case, the NP on the left is identified as the head d) VP-crd is also a regex for a recursive structure, in this case for VP coordination, picking out the leftmost conjunct as the head of the structure
+p16
+aVThe benefit of the approach described here is that now we can see the contribution to the evalb score of the particular types of constructions, and within those constructions, how well the parser is doing at getting the same head projection, but failing or not on the spans
+p17
+aVWe ran the gold and parsed versions through our regex decomposition and derivation tree creation
+p18
+aVThis is the case even if the score is broken down by brackets (NP, VP, etc.), because the brackets can represent different types of structures
+p19
+aV4 4 We do not have space here to discuss the data structure in complete detail, but multiple regex names at a node, such a VP-aux and VP-t at tree a3 in Figure 3 , indicate multiple VP nonterminals
+p20
+aVThe regexes allow us to also provide scores based on spans of different construction types
+p21
+aVWe trained the parser on sections 2-21 of OntoNotes WSJ, and parsed the three datasets with the gold tags, since at present we wish to analyze the parser performance in isolation from Part-of-Speech tagging errors
+p22
+aVThe word u'\u005cu201c' make u'\u005cu201d' has a match for the regexes VP-t, VP-aux, and S-vp, and so on
+p23
+aVThere is a match for a regex if the corresponding words in gold/parser files project to that regex, a precision error if the parser file does but the gold does not, and a recall error if the gold does but the parser file does not
+p24
+aVTo facilitate comparison of our analysis with evalb, we used corpora versions with the same bracket deletion (empty yields and most punctuation) as evalb
+p25
+aVFirst, inspired by the tradition of Tree Adjoining Grammar-based research [] , we use a decomposition of the full trees into u'\u005cu201c' elementary trees u'\u005cu201d' (henceforth u'\u005cu201c' etrees u'\u005cu201d' ), with a derivation tree that records how the etrees relate to each other, as in
+p26
+aVSince this affects the F-s scores for VP-t, VP-aux, and S-vp, the negative effect is large
+p27
+aVDecomposing the original phrase-structure tree into the smaller components requires some method of determining the u'\u005cu201c' head u'\u005cu201d' of a nonterminal, from among its children nodes, similar to parsing work such as
+p28
+aVEach structure within a circle is one etree, and the derivation as a whole indicates how these etrees are combined
+p29
+aVSumming such scores over the corresponding gold/parser trees gives us F-scores for each regex
+p30
+aVWe derived the regexes via an iterative process of inspection of tree decomposition on dataset (a), together with taking advantage of the treebanking experience from some of the co-authors
+p31
+aVWhile this metric serves a valuable purpose in pushing parser research forward, it has limited utility for understanding what sorts of errors a parser is making
+p32
+aVThese are best thought of as an extension of head-finding rules, which not only find a head but simultaneously identify each parent/children relation as one of a limited number of types of structures (right-modification, etc
+p33
+aVWe trained the parser on sections 2-21, and so (a) is u'\u005cu201c' test-on-train u'\u005cu201d'
+p34
+aV3 3 Some among the 49 are duplicates, used for different nonterminals, as with (a) and (b) in Figure 1
+p35
+aVThis work is in the same basic line of research as the inter-annotator agreement analysis work in
+p36
+aVAs described above, we are also interested in the type of linguistic construction represented by that one-level structure, each of which instantiates one of a few types - recursive coordination, simple head-and-sister, etc
+p37
+aVAs this is work-in-progress, the analysis is not yet complete
+p38
+aVIn contrast to the sort of head rules in [] , these refer as little as possible to specific POS tags
+p39
+aVInstead of explicitly listing the POS tags of possible heads, the heads are in most cases determined by their location in the structure
+p40
+aVIn particular, we use the u'\u005cu201c' spinal u'\u005cu201d' structure approach of [] , where etrees are constrained to be unary-branching
+p41
+a.

@@ -1,0 +1,16 @@
+(lp0
+VTherefore, we use the embeddings from a trained joint model to pre-train an RCM model
+p1
+aVIn fact, RCM does not even observe all the words that appear in the training set, so it makes little sense to use the RCM embeddings directly for language modeling
+p2
+aVBased on our initial experiments, RCM uses the output embeddings of cbow
+p3
+aVWhile RCM learns embeddings suited to specific tasks based on knowledge resources, cbow learns embeddings for words not included in the resource but appear in a corpus
+p4
+aVWe propose a new training objective for learning word embeddings that incorporates prior knowledge
+p5
+aVTherefore, in order to make fair comparison, for every set of trained embeddings, we fix them as input embedding for word2vec, then learn the remaining input embeddings (words not in the relations) and all the output embeddings using cbow
+p6
+aVThis enables the
+p7
+a.

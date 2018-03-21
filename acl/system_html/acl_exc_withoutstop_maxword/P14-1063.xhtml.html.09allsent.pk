@@ -1,0 +1,378 @@
+(lp0
+VBelow, we reformulate the model from vector to tensor space
+p1
+aVAs mentioned in Section 2.1 , a tensor model has many more degrees of u'\u005cu201c' design freedom u'\u005cu201d' than a vector model, which makes the problem of finding a good tensor structure a nontrivial one
+p2
+aVProperties of linear tensor model
+p3
+aVA linear tensor model represents both features and weights in tensor-space, hence the weight tensor can be factorized and approximated by a linear sum of rank-1 tensors
+p4
+aVTo apply a tensor model, we first need to convert the feature vector into a tensor u'\u005cud835' u'\u005cudebd'
+p5
+aVThe linear tensor model is illustrated in Figure 1
+p6
+aVSo what is the advantage of learning with a tensor model instead of a vector model
+p7
+aVA vector space linear model requires estimating 1,000,000 free parameters
+p8
+aVSpecifically, a vector is a 1 st order tensor, a matrix is a 2 nd order tensor, and data organized as a rectangular cuboid is a 3 rd order tensor etc
+p9
+aVThe order of a tensor affects the model in two ways the expressiveness of the model and the number of parameters to be estimated
+p10
+aVThis property makes the the tensor model very effective when training a large number of feature weights in a low-resource environment
+p11
+aVHowever if we use a 2 nd order tensor model, organize the features into a 1000 × 1000 matrix u'\u005cud835' u'\u005cudebd' , and use just one rank-1 matrix to approximate the weight tensor, then the linear model becomes
+p12
+aVMost traditional models are linear models, in the sense that both the features of the data and model parameters are represented as vectors in a vector space
+p13
+aVThe size n d of each tensor mode, d = 1 , u'\u005cu2026' , D , determines the structure of feature weights a tensor model can precisely represent, as well as the number of parameters to estimate (we also assume H = 1 in the analysis below
+p14
+aVWe now turn to the problem of learning the feature weight tensor
+p15
+aVSpecifically, a vector space model assumes each feature weight to be a u'\u005cu201c' free u'\u005cu201d' parameter, and estimating them reliably could therefore be hard when training data are not sufficient or the feature set is huge
+p16
+aVObviously, the 1 st order tensor (vector) model is the most expressive, since it is structureless and any arbitrary set of numbers can always be represented exactly as a vector
+p17
+aVIn general, if V features are defined for a learning problem, and we (i) organize the feature set as a tensor u'\u005cud835' u'\u005cudebd' u'\u005cu2208' u'\u005cu211d' n 1 × n 2 × u'\u005cu2026' u'\u005cu2062' n D and (ii) use H component rank-1 tensors to approximate the corresponding target weight tensor
+p18
+aVUsing a D th order tensor as container, we can assign each feature of the task a D -dimensional index in the tensor and represent the data as tensors
+p19
+aVThis also makes training the model parameters a challenging problem, since the amount of labeled training data is usually small compared to the size of feature sets the feature weights cannot be estimated reliably
+p20
+aVWe give detailed description of the tensor space model in Section 2
+p21
+aVThe impact of using H 1 rank-1 tensors is obvious a larger H increases the model complexity and makes the model more expressive, since we are able to approximate target weight tensor with smaller error
+p22
+aVThis of course ignores correlation between features since the original feature order in the vector could be totally meaningless, and this strategy is not expected to be a good solution for vector to tensor mapping
+p23
+aVThis reminds us of the well-known low-rank matrix approximation of images via SVD, and we are applying similar techniques to approximate target feature weights, which is made possible only after we shift from vector to tensor space models
+p24
+aVIn general, a D th order rank-1 tensor is more expressive than a ( D + 1 ) th order rank-1 tensor, as a lower-order tensor imposes less structural constraints on the set of numbers it can express
+p25
+aVOf course, shifting from a vector to a tensor representation entails several additional degrees of freedom, e.g.,, the order D of the tensor and the sizes { n d } d = 1 D of the modes, which must be addressed when selecting a tensor model
+p26
+aVFinally, we need to find a way to map the original feature vector to a tensor, i.e., to associate each feature with an index in the tensor
+p27
+aVIn tensor space, a linear model may be written (ignoring a bias term) as
+p28
+aVThis approximation can be treated as a form of model regularization, since the weight tensor is represented in a constrained form and made highly structured via the rank-1 tensor approximation
+p29
+aVMost of the learning algorithms for NLP problems are based on vector space models, which represent data as vectors u'\u005cu03a6' u'\u005cu2208' u'\u005cu211d' n , and try to learn feature weight vectors u'\u005cud835' u'\u005cudc98' u'\u005cu2208' u'\u005cu211d' n such that a linear model y = u'\u005cud835' u'\u005cudc98' u'\u005cu22c5' u'\u005cu03a6' is able to discriminate between, say, good and bad hypotheses
+p30
+aVTherefore we expect the tensor model to be more effective in a low-resource training environment
+p31
+aVThis is because the weight tensors learned by T-MIRA are highly structured, which significantly reduces model/training complexity and makes the learning process very effective in a low-resource environment, but as the amount of data increases, the more complex and expressive vector-based models adapt to the data better, whereas further improvements from the tensor model is impeded by its structural constraints, making it insensitive to the increase of training data
+p32
+aVAs a way out, we first run a simple vector-model based learning algorithm (say the Perceptron) on the training data and estimate a weight vector, which serves as a u'\u005cu201c' surrogate u'\u005cu201d' weight vector
+p33
+aVBy contrast, a linear tensor model only needs to learn H u'\u005cu2062' u'\u005cu2211' d = 1 D n d u'\u005cu201c' bases u'\u005cu201d' of the m feature weights instead of individual weights directly
+p34
+aVOn the other hand, tensor models have many more degrees of u'\u005cu201c' design freedom u'\u005cu201d' than vector space models
+p35
+aVAnother popular form of tensor decomposition is called Tucker decomposition, which decomposes a tensor into a core tensor multiplied by a matrix along each mode
+p36
+aVOn the other hand, tensor order also affects the number of parameters to be trained
+p37
+aVSuch models require learning individual feature weights directly, so that the number of parameters to be estimated is identical to the size of the feature set
+p38
+aVA tensor weight learning algorithm is then proposed in 4
+p39
+aVThen the total number of parameters to be learned for this tensor model is H u'\u005cu2062' u'\u005cu2211' d = 1 D n d , which is usually much smaller than V = u'\u005cu220f' d = 1 D n d for a traditional vector space model
+p40
+aVAssuming that a D th order has equal size on each mode (we will elaborate on this point in Section 3.2 ) and the volume (number of entries) of the tensor is fixed as V , then the total number of parameters of the model is D u'\u005cu2062' V 1 D
+p41
+aVIf the corresponding target weight tensor has internal structure that makes it approximately low-rank, the learning procedure becomes more effective
+p42
+aVA 2 nd order tensor has already reduced the number of parameters from the original 1.33 million to only 2310, and it does not help to further reduce the number of parameters using higher order tensors
+p43
+aVThe resulting tensor will have an approximate low-rank structure, provided that the sorted feature weights have roughly group-wise proportional relations
+p44
+aVAccording to the strategy given in 3.2 , once the tensor order and number of features are fixed, the sizes of modes and total number of parameters to estimate are fixed as well, as shown in the tables below
+p45
+aVThe weight corresponding to the feature u'\u005cu03a6' i 1 , i 2 , u'\u005cu2026' , i D in the tensor model is expressed as
+p46
+aVDifferent dimensions of a tensor 1 , 2 , u'\u005cu2026' , D are named modes of the tensor
+p47
+aVwhere × l is the l -mode product operator between a D th order tensor u'\u005cud835' u'\u005cudcaf' and a vector u'\u005cud835' u'\u005cudc1a' of dimension n d , yielding a ( D - 1 ) th order tensor such that
+p48
+aVAdding more rank-1 tensors increases the model u'\u005cu2019' s complexity and ability of expression, making the model more adaptive to larger data sets
+p49
+aVHowever while we are doing the mapping, we hope to arrange the features in a way such that the corresponding target weight tensor has approximately a low-rank structure, this way it can be well approximated by very few component rank-1 tensors
+p50
+aVThe optimal tensor order depends on the nature of the actual problem, and we tune this hyper-parameter on a held-out set
+p51
+aVIdeally we hope to find a permutation of the surrogate weights to map to a tensor in such a way that the tensor has a rank as low as possible
+p52
+aVSeveral issues that come with the tensor model construction are addressed in Section 3
+p53
+aVHowever it is hard to know the structure of target feature weights before learning, and it would be impractical to try every possible combination of mode sizes, therefore we choose the criterion of determining the mode sizes as minimization of the total number of parameters, namely we solve the problem
+p54
+aVThe 2 nd order rank-1 tensor (rank-1 matrix) is less expressive because not every set of numbers can be organized into a rank-1 matrix
+p55
+aVJust as a matrix can be decomposed as a linear combination of several rank-1 matrices via SVD, tensors also admit decompositions 1 1 The form of tensor decomposition defined here is named as CANDECOMP/PARAFAC(CP) decomposition [ Kolda and Bader2009 ]
+p56
+aVwhere u'\u005cud835' u'\u005cudebd' u'\u005cu2208' u'\u005cu211d' n 1 × n 2 × u'\u005cu2026' u'\u005cu2062' n D is the feature tensor, u'\u005cud835' u'\u005cudc7e' is the corresponding weight tensor, and u'\u005cu2218' denotes the Hadamard product
+p57
+aVwhere u'\u005cud835' u'\u005cudc7b' is a decomposed weight tensor and
+p58
+aVThe best results are consistently given by 2 nd order tensor models, and the differences between the 3 rd and 4 th order tensors are not significant
+p59
+aVAssuming the tensor volume V is the same as the number of features, then there are in all V ways of mapping, which is an intractable number of possibilities even for modest sized feature sets, making it impractical to carry out a brute force search
+p60
+aVwhere R , called the rank of the tensor, is the minimum number of rank-1 tensors whose sum equals u'\u005cud835' u'\u005cudcaf'
+p61
+aVOf course, as we reduce the model complexity, e.g., by choosing a smaller and smaller H , the model u'\u005cu2019' s expressive ability is weakened at the same time
+p62
+aVA set of real numbers that can be represented by a ( D + 1 ) th order tensor u'\u005cud835' u'\u005cudcac' can also be represented by a D th order tensor u'\u005cud835' u'\u005cudcab' , provided u'\u005cud835' u'\u005cudcab' and u'\u005cud835' u'\u005cudcac' have the same volume
+p63
+aVHere we propose an online learning algorithm similar to MIRA but modified to accommodate tensor models
+p64
+aVA prediction z t is made by the model T t at time t from a set of candidates u'\u005cud835' u'\u005cudcb5' u'\u005cu2062' ( x t ) , and the model updates the weight tensor by solving the following problem
+p65
+aVWhile this makes them very flexible, it also creates much difficulty in designing an optimal tensor structure for a given training set
+p66
+aVWe would like to observe from the experiments how the amount of training data as well as different settings of the tensor degrees of freedom affects the algorithm performance
+p67
+aVIn other words, a true feature weight is now approximated by a set of bases
+p68
+aVWe then use this surrogate vector to guide the design of the mapping
+p69
+aVTherefore, in order for tensor u'\u005cud835' u'\u005cudcac' to represent the same set of real numbers that u'\u005cud835' u'\u005cudcab' represents, there needs to exist a vector [ s 1 d , u'\u005cu2026' , s n d d ] that can be represented by a rank-1 matrix as indicated by Equation ( 12 ), which is in general not guaranteed
+p70
+aVWhile this strategy might work well with small amount of training data, it is not guaranteed to be the best strategy in all cases, especially when more data is available we might want to increase the number of parameters, making the model more complex so that the data can be more precisely modeled
+p71
+aVDenote the weight vector of the d th mode of the h th tensor at time t as u'\u005cud835' u'\u005cudc98' h , t d
+p72
+aVWhen very few labeled data are available for training (compared with the number of features), T-MIRA performs much better than the vector-based models MIRA and Perceptron
+p73
+aVThis low-rank approximation imposes structural constraints on the feature weights and can be regarded as a form of regularization
+p74
+aVIn this section we shows empirical results of the training algorithm on a parsing task
+p75
+aVTherefore, as D increases from 1 to D * , we lose more and more of the expressive power of the model but reduce the number of parameters to be trained
+p76
+aVAs the amount of training data increases, there is a trend that the best results come from models with more rank-1 component tensors
+p77
+aVWhen millions of features are used but the amount of labeled data is limited, it can be difficult to precisely estimate each feature weight
+p78
+aVVia decomposition, one may approximate a tensor by the sum of H major rank-1 tensors with H u'\u005cu2264' R
+p79
+aVIdeally the mode size needs to be adaptive to the amount of training data as well as the property of target weights
+p80
+aVA D th order tensor u'\u005cud835' u'\u005cudcaf' u'\u005cu2208' u'\u005cu211d' n 1 × n 2 × u'\u005cu2026' u'\u005cu2062' n D can be factorized into a sum of component rank-1 tensors as
+p81
+aVWe assume H = 1 in the analysis below, noting that one can always add as many rank-1 component tensors as needed to approximate a tensor with arbitrary precision
+p82
+aVTherefore, the performance of T-MIRA is influenced significantly by the way features are mapped to the tensor
+p83
+aVWith this representation, we no longer need to estimate individual feature weights directly but only a small number of u'\u005cu201c' bases u'\u005cu201d' instead
+p84
+aVAs discussed in Section 3.1 , although 3 rd and 4 th order tensors have less parameters, the benefit of reduced training complexity does not compensate for the loss of expressiveness
+p85
+aVNevertheless, with a huge number of parameters to fit a limited amount of data, they tend to over-fit and give much worse results on the held-out set than T-MIRA does
+p86
+aVAs a trade-off, the number of parameters and training complexity will be increased
+p87
+aVHowever matrix rank minimization is in general a hard problem [ Fazel2002 ]
+p88
+aVTo simulate a low-resource training environment, our training sets were selected from sections 2-9 of the Penn WSJ treebank, section 24 was used as the held-out set and section 23 as the evaluation set
+p89
+aVHowever as the amount of training data increases, the advantage of T-MIRA fades away, and vector-based models catch up
+p90
+aVIn this paper, we shift the model from vector-space to tensor-space
+p91
+aVA tensor is a multidimensional array, and is a generalization of commonly used algebraic objects such as vectors and matrices
+p92
+aVTo further contrast the behavior of T-MIRA, MIRA and Perceptron, we plot the f -scores on both the training and held-out sets given by these algorithms after each training epoch in Figure 7
+p93
+aVWe focus only on the CP decomposition in this paper into linear combinations of u'\u005cu201c' rank-1 u'\u005cu201d' tensors
+p94
+aVA D th order tensor u'\u005cud835' u'\u005cudc9c' u'\u005cu2208' u'\u005cu211d' n 1 × n 2 × u'\u005cu2026' u'\u005cu2062' n D is rank-1 if it can be written as the outer product of D vectors, i.e
+p95
+aVTo make further comparison of the two strategies, in Figure 8 we plot the 20 largest singular values of the matrices which the surrogate weights (given by the Perceptron after running for 1 epoch) are mapped to by both strategies (from the experiment with training data sections 2-5
+p96
+aVGiven D and V , there are many possible combinations of n d , d = 1 , u'\u005cu2026' , D , and the optimal combination should indeed be determined by the structure of target features weights
+p97
+aVOnce the structure of u'\u005cud835' u'\u005cudebd' is determined, the structure of u'\u005cud835' u'\u005cudc7e' is fixed as well
+p98
+aVWhile we are updating one vector, the rest are fixed
+p99
+aVHence { x 1 , u'\u005cu2026' , x n } can also be represented by a D th order tensor u'\u005cud835' u'\u005cudcac' u'\u005cu2032' u'\u005cu220e'
+p100
+aVBasically, what the algorithm does is to divide the surrogate weights into hierarchical groups such that groups on the same level are approximately proportional to each other
+p101
+aVData can be represented in a compact and structured way using tensors as containers
+p102
+aVUsing these groups as units we are able to u'\u005cu201c' fill u'\u005cu201d' the tensor in a hierarchical way
+p103
+aVFor comparison, we also investigated training the reranker with Perceptron and MIRA
+p104
+aVOnce a vector has been updated, it is fixed for future updates
+p105
+aVWe used the Charniak parser [ Charniak et al.2005 ] for our experiment, and we used the proposed algorithm to train the reranking feature weights
+p106
+aVTherefore, we initialize the entries of u'\u005cud835' u'\u005cudc98' h , 1 i uniformly such that the Frobenius-norm of the weight tensor u'\u005cud835' u'\u005cudc7e' is unity
+p107
+aVThe heuristic vector-to-tensor mapping strategy given by Figure 4 gives consistently better results than the sequential mapping strategy, as expected
+p108
+aVFor D = 1 , it is obvious that if a set of real numbers { x 1 , u'\u005cu2026' , x n } can be represented by a rank-1 matrix, it can always be represented by a vector, but the reverse is not true
+p109
+aVFinally we give our experimental results on a parsing task and analysis in Section 5
+p110
+aVThe plots are for the experimental setting with mapping=surrogate, # rank-1 tensors=2, tensor order=2, training data=sections 2-3
+p111
+aVFor comparison, we also experimented a trivial solution which maps each entry of the feature tensor to the tensor just in sequential order, namely u'\u005cu03a6' 0 is mapped to u'\u005cu03a6' 0 , 0 , u'\u005cu2026' , 0 , u'\u005cu03a6' 1 is mapped to u'\u005cu03a6' 0 , 0 , u'\u005cu2026' , 1 etc
+p112
+aVHere u'\u005cu201c' approximate u'\u005cu201d' and u'\u005cu201c' sequential u'\u005cu201d' means using, respectively, the algorithm given in Figure 4 and the sequential mapping mentioned in Section 3.4
+p113
+aVWhile this is a natural way of representing data, it is not the only choice
+p114
+aV0.48 {algorithmic} \u005cREQUIRE \u005cSTATE Tensor order D , tensor volume V , mode size n d , d = 1 , u'\u005cu2026' , D , surrogate weight vector u'\u005cud835' u'\u005cudc97' \u005cSTATE Let \u005cSTATE u'\u005cud835' u'\u005cudc97' + = [ v 1 + , u'\u005cu2026' , v p + ] be the non-negative part of u'\u005cud835' u'\u005cudc97' \u005cSTATE u'\u005cud835' u'\u005cudc97' - = [ v 1 - , u'\u005cu2026' , v q - ] be the negative part of u'\u005cud835' u'\u005cudc97' \u005cREQUIRE \u005cSTATE u'\u005cud835' u'\u005cudc97' ~ + = sort ( u'\u005cud835' u'\u005cudc97' + ) in descending order \u005cSTATE u'\u005cud835' u'\u005cudc97' ~ - = sort ( u'\u005cud835' u'\u005cudc97' - ) in ascending order \u005cSTATE u = V / n D \u005cSTATE e = p - m u'\u005cu2062' o u'\u005cu2062' d u'\u005cu2062' ( p , u ) , f = q - m u'\u005cu2062' o u'\u005cu2062' d u'\u005cu2062' ( q , u ) \u005cSTATE Construct vector \u005cSTATE u'\u005cud835' u'\u005cudc17' = [ v ~ 1 + , u'\u005cu2026' , v ~ e + , v ~ 1 - , u'\u005cu2026' , v ~ f - , v ~ e + 1 + , u'\u005cu2026' , v ~ p + , v ~ f + 1 - , u'\u005cu2026' , v ~ q - ] \u005cSTATE Map X a , a = 1 , u'\u005cu2026' , p + q to the tensor entry u'\u005cud835' u'\u005cudcaf' i 1 , u'\u005cu2026' , i D , such that \u005cSTATE
+p115
+aVLet the model be f u'\u005cu2062' ( u'\u005cud835' u'\u005cudc7b' ) = u'\u005cud835' u'\u005cudc7b' u'\u005cu2218' u'\u005cud835' u'\u005cudebd' u'\u005cu2062' ( x , y ) , where u'\u005cud835' u'\u005cudc7b' = u'\u005cu2211' h = 1 H u'\u005cud835' u'\u005cudc98' h 1 u'\u005cu2297' u'\u005cud835' u'\u005cudc98' h 2 u'\u005cu2297' , u'\u005cu2026' , u'\u005cu2297' u'\u005cud835' u'\u005cudc98' h D is the weight tensor, u'\u005cud835' u'\u005cudebd' u'\u005cu2062' ( x , y ) is the feature tensor for an input-output pair ( x , y
+p116
+aVTherefore, we follow an approximate algorithm given in Figure 4 , whose main idea is illustrated via an example in Figure 4
+p117
+aVIt is clearly seen that both MIRA and Perceptron do much better than T-MIRA on the training set
+p118
+aVFrom the contrast between the largest and the 2 nd -largest singular values, it can be seen that the matrix generated by the first strategy approximates a low-rank structure much better than the second strategy
+p119
+aVTo find out the optimal value of H for a given problem, we tune this hyper-parameter too on a held-out set
+p120
+aVThis problem setting follows the same u'\u005cu201c' passive-aggressive u'\u005cu201d' strategy as in the original MIRA
+p121
+aVTraining samples ( x i , y i ) , i = 1 , u'\u005cu2026' , m , where x i is the input and y i is the reference or oracle hypothesis, are fed to the weight learning algorithm in sequential order
+p122
+aVThe [ u'\u005cu220f' d = 1 D n d ] - V extra entries of the tensor correspond to no features and are used just for padding
+p123
+aVIn general, a D th order tensor is represented as u'\u005cud835' u'\u005cudcaf' u'\u005cu2208' u'\u005cu211d' n 1 × n 2 × u'\u005cu2026' u'\u005cu2062' n D , and an entry in u'\u005cud835' u'\u005cudcaf' is denoted by u'\u005cud835' u'\u005cudcaf' i 1 , i 2 , u'\u005cu2026' , i D
+p124
+aVFor example, if the tensor order is 2 and the volume V is 12, then we can either choose n 1 = 3 , n 2 = 4 or n 1 = 2 , n 2 = 6
+p125
+aVThis convex optimization problem is just like the original MIRA and may be solved in a similar way
+p126
+aVTensor representations have been applied to computer vision problems [ Hazan et al.2005 , Shashua and Hazan2005 ] and information retrieval [ Cai et al.2006a ] a long time ago
+p127
+aVThe f -scores of the held-out and evaluation set given by T-MIRA as well as the Perceptron and MIRA baseline are given in Table 5
+p128
+aVThe initial vectors u'\u005cud835' u'\u005cudc98' h , 1 i cannot be made all zero, since otherwise the l -mode product in Equation ( 9 ) would yield all zero u'\u005cu03a6' h , t d u'\u005cu2062' ( x , y ) and the model would never get a chance to be updated
+p129
+aVMany NLP applications use models that try to incorporate a large number of linguistic features so that as much human knowledge of language can be brought to bear on the (prediction) task as possible
+p130
+aVA theoretically guaranteed optimal approach to determining the mode sizes remains an open problem, and will be explored in our future work
+p131
+aVWe will elaborate on this point in Section 3.1
+p132
+aVFor the problem setting given above, each of the sub-problems that need to be solved is convex, and according to [ Cai et al.2006b ] the objective function value will decrease after each individual weight update and eventually this procedure will converge
+p133
+aVConsider the case where we have defined 1,000,000 features for our task
+p134
+aVMany learning algorithms applied to NLP problems, such as the Perceptron [ Collins2002 ] , MIRA [ Crammer et al.2006 , McDonald et al.2005 , Chiang et al.2008 ] , PRO [ Hopkins and May2011 ] , RAMPION [ Gimpel and Smith2012 ] etc., are based on vector-space models
+p135
+aVUnfortunately we have no knowledge about the target weights in advance, since that is what we need to learn after all
+p136
+aVThere are around V = 1.33 million features in all defined for reranking, and the n -best size for reranking is set to 50
+p137
+aVAs an aside, observe that MIRA consistently outperformed Perceptron, as expected
+p138
+aVObviously, the two possible choices of ( n 1 , n 2 ) also lead to different numbers of free parameters (7 vs
+p139
+aVThis is a convex function of D , and the minimum 2 2 The optimal integer solution can be determined simply by comparing the two function values is reached at either D u'\u005cu2217' = \u005cfloor u'\u005cu2062' ln u'\u005cu2061' V or D u'\u005cu2217' = \u005cceil u'\u005cu2062' ln u'\u005cu2061' V
+p140
+aVTherefore we tried all combinations of the following experimental parameters
+p141
+aVWe formally state this fact as follows
+p142
+aVHere we are only following the principle of minimizing the parameter number
+p143
+aVTo optimize the vectors u'\u005cud835' u'\u005cudc98' h d , h = 1 , u'\u005cu2026' , H , d = 1 , u'\u005cu2026' , D , we use a similar iterative strategy as proposed in [ Cai et al.2006b ]
+p144
+aVWe call the algorithm above u'\u005cu201c' Tensor-MIRA u'\u005cu201d' and abbreviate it as T-MIRA
+p145
+aVThat is to say, now we only need to estimate 2000 parameters
+p146
+aVFor n 1 = 3 , n 2 = 4 , the numbers that can be precisely represented are divided into 3 groups, each having 4 numbers, that are scaled versions of one another
+p147
+aVSince for each n d there are only two possible values to choose, we can simply enumerate all the possible 2 D (which is usually a small number) combinations of values and pick the one that matches the conditions given above
+p148
+aVThis will be done in Section 3
+p149
+aVis the structured hinge loss
+p150
+aVThis work was partially supported by IBM via DARPA/BOLT contract number HR0011-12-C-0015 and by the National Science Foundation via award number IIS-0963898
+p151
+aVHowever it would be a bad idea to choose a D beyond D *
+p152
+aVwhere w h , i j j is the i j th element in the vector u'\u005cud835' u'\u005cudc98' h j
+p153
+aVIn order to update from u'\u005cud835' u'\u005cudc98' h , t d to get u'\u005cud835' u'\u005cudc98' h , t + 1 d , the sub-problem to solve is
+p154
+aVThe updating strategy for u'\u005cud835' u'\u005cudc98' h , t d is derived as
+p155
+aVSimilarly for n 1 = 2 , n 2 = 6 , the numbers can be divided into 2 groups with different scales
+p156
+aVFor D 1 , if { x 1 , u'\u005cu2026' , x n } can be represented by u'\u005cud835' u'\u005cudcab' = u'\u005cud835' u'\u005cudc29' 1 u'\u005cu2297' u'\u005cud835' u'\u005cudc29' 2 u'\u005cu2297' u'\u005cu2026' u'\u005cu2297' u'\u005cud835' u'\u005cudc29' D , namely x i = u'\u005cud835' u'\u005cudcab' i 1 , u'\u005cu2026' , i D = u'\u005cu220f' d = 1 D p i d d , then for any component vector in mode d
+p157
+aVIf u'\u005cud835' u'\u005cudc7e' is further decomposed as the sum of H major component rank-1 tensors, i.e., u'\u005cud835' u'\u005cudc7e' u'\u005cu2248' u'\u005cu2211' h = 1 H u'\u005cud835' u'\u005cudc98' h 1 u'\u005cu2297' u'\u005cud835' u'\u005cudc98' h 2 u'\u005cu2297' , u'\u005cu2026' , u'\u005cu2297' u'\u005cud835' u'\u005cudc98' h D , then
+p158
+aVand this representation is unique for a given D (up to the ordering of u'\u005cud835' u'\u005cudc29' j and s j d in u'\u005cud835' u'\u005cudc29' j , which simply assigns { x 1 , u'\u005cu2026' , x n } with different indices in the tensor), due to the pairwise proportional constraint imposed by x i / x j , i , j = 1 , u'\u005cu2026' , n
+p159
+aVThis way n 1 , u'\u005cu2026' , n D are fully determined
+p160
+aVWe now give this procedure in more detail
+p161
+aVsince otherwise { x 1 , u'\u005cu2026' , x n } would be represented by a different set of factors than those given in Equation ( 11
+p162
+aVThe optimal solution is reached when n 1 = n 2 = u'\u005cu2026' = n D = V 1 D
+p163
+aVMore recently, it has also been applied to parsing [ Cohen and Collins2012 , Cohen and Satta2013 ] and semantic analysis [ Van de Cruys et al.2013 ]
+p164
+aVFrom the results, we have the following observations
+p165
+aVWe will update the vectors in turn in the following order u'\u005cud835' u'\u005cudc98' 1 , t 1 , u'\u005cu2026' , u'\u005cud835' u'\u005cudc98' 1 , t D , u'\u005cud835' u'\u005cudc98' 2 , t 1 , u'\u005cu2026' , u'\u005cud835' u'\u005cudc98' 2 , t D , u'\u005cu2026' , u'\u005cud835' u'\u005cudc98' H , t 1 , u'\u005cu2026' , u'\u005cud835' u'\u005cudc98' H , t D
+p166
+aVWe applied the default settings of the parser
+p167
+aVLetting
+p168
+aVOn the other hand, if { x 1 , u'\u005cu2026' , x n } can be represented by u'\u005cud835' u'\u005cudcac' , namely
+p169
+aVBasically, the idea is that instead of optimizing u'\u005cud835' u'\u005cudc98' h d all together, we optimize u'\u005cud835' u'\u005cudc98' 1 1 , u'\u005cud835' u'\u005cudc98' 1 2 , u'\u005cu2026' , u'\u005cud835' u'\u005cudc98' H D in turn
+p170
+aVBy way of notation, define
+p171
+aVwe may compactly write
+p172
+aVSee appendix u'\u005cu220e'
+p173
+aVThen it must be the case that
+p174
+aVBut the reverse is not true
+p175
+aVWe selected the parse with the highest f -score from the 50-best list as the oracle
+p176
+aVOf course it is not guaranteed that V 1 D is an integer, therefore we choose n d = \u005cfloor u'\u005cu2062' V 1 D or \u005cceil u'\u005cu2062' V 1 D , d = 1 , u'\u005cu2026' , D such that u'\u005cu220f' d = 1 D n d u'\u005cu2265' V and [ u'\u005cu220f' d = 1 D n d ] - V is minimized
+p177
+aVIf x i can also be represented by u'\u005cud835' u'\u005cudcac' , then x i = u'\u005cud835' u'\u005cudcac' i 1 , u'\u005cu2026' , i D + 1 = x 1 , u'\u005cu2026' , 1 u'\u005cu2062' u'\u005cu220f' d = 1 D + 1 t i d d , where t j d has a similar definition as s j d
+p178
+aVwhere n d p is the size of mode d of u'\u005cud835' u'\u005cudcab' , s j d is a constant and s j d = p i u'\u005cu2062' 1 , u'\u005cu2026' , i d - 1 , j , i d + 1 , u'\u005cu2026' , i D p i u'\u005cu2062' 1 , u'\u005cu2026' , i d - 1 , 1 , i d + 1 , u'\u005cu2026' , i D Therefore
+p179
+aVthen we can just pick d 1 u'\u005cu2208' { 1 , u'\u005cu2026' , D } , d 2 = d 1 + 1 and let
+p180
+aVwhere l d = l d - 1 u'\u005cu2062' n d , and l 0 = 1
+p181
+aVwhere
+p182
+aVand
+p183
+aV0.5
+p184
+aVwhere u'\u005cud835' u'\u005cudc1a' i u'\u005cu2208' u'\u005cu211d' n d , 1 u'\u005cu2264' d u'\u005cu2264' D
+p185
+aV8
+p186
+aVand
+p187
+aVwhere u'\u005cud835' u'\u005cudc98' 1 , u'\u005cud835' u'\u005cudc98' 2 u'\u005cu2208' u'\u005cu211d' 1000
+p188
+a.

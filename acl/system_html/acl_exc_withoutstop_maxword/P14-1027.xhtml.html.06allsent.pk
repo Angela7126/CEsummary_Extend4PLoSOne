@@ -1,0 +1,352 @@
+(lp0
+VTheir experiments suggest that function words play a special role in the acquisition process children learn function words before they learn the vast bulk of the associated content words, and they use function words to help identify context words
+p1
+aVThe goal of this paper is to determine whether computational models of human language acquisition can provide support for the hypothesis that function words are treated specially in human language acquisition
+p2
+aVSection 2 describes the specific word segmentation models studied in this paper, and the way we extended them to capture certain properties of function words
+p3
+aVWe have shown that a model that expects function words on the left periphery performs more accurate word segmentation on English, where function words do indeed typically occur on the left periphery, leaving open the question how could a learner determine whether function words generally appear on the left or the right periphery of phrases in the language they are learning
+p4
+aVBy comparing the posterior probability of two models u'\u005cu2014' one in which function words appear at the left edges of phrases, and another in which function words appear at the right edges of phrases u'\u005cu2014' we show that a learner could use Bayesian posterior probabilities to determine that function words appear at the left edges of phrases in English, even though they are not told the locations of word boundaries or which words are function words
+p5
+aVWe do this by comparing two computational models of word segmentation which differ solely in the way that they model function words
+p6
+aVSection 4 explains how a learner could use Bayesian model selection to determine that function words appear on the left periphery in English by comparing the posterior probability of the data under our u'\u005cu201c' function word u'\u005cu201d' Adaptor Grammar to that obtained using a grammar which is identical except that rules ( 22 u'\u005cu2013' 24 ) are replaced with the mirror-image rules in which u'\u005cu201c' function words u'\u005cu201d' are attached to the right periphery
+p7
+aVThis suggests that there are acquisition advantages to treating function words specially that human learners could take advantage of (at least to the extent that they are learning similar generalisations as our models), and thus supports the hypothesis that function words are treated specially in human lexical acquisition
+p8
+aVThe rest of this introduction provides background on function words, the Adaptor Grammar models we use to describe lexical acquisition and the Bayesian inference procedures we use to infer these models
+p9
+aVhistorically, the rate of innovation of function words is much lower than the rate of innovation of content words (i.e.,, function words are typically u'\u005cu201c' closed class u'\u005cu201d' , while content words are u'\u005cu201c' open class u'\u005cu201d'
+p10
+aVWe show that a model equipped with the ability to learn some rudimentary properties of the target language u'\u005cu2019' s function words is able to learn the vocabulary of that language more accurately than a model that is identical except that it is incapable of learning these generalisations about function words
+p11
+aVThe word segmentation experiments are presented in section 3 , and section 4 discusses how a learner could determine whether function words occur on the left-periphery or the right-periphery in the language they are learning
+p12
+aVAs section 2 explains in more detail, word segmentation is such a case words are composed of syllables and belong to phrases or collocations, and modelling this structure improves word segmentation accuracy
+p13
+aVFunction words differ from content words in at least the following ways
+p14
+aVOver the past two decades psychologists have investigated the role that function words might play in human language acquisition
+p15
+aVWhile absolute accuracy is not directly relevant to the main point of the paper, we note that the models that learn generalisations about function words perform unsupervised word segmentation at 92.5% token f-score on the standard corpus, which improves the previous state-of-the-art by more than 4%
+p16
+aVFollowing and our word segmentation models identify word boundaries from unsegmented sequences of phonemes corresponding to utterances, effectively performing unsupervised learning of a lexicon
+p17
+aVIn addition, it is plausible that function words play a crucial role in children u'\u005cu2019' s acquisition of more complex syntactic phenomena [] , so it is interesting to investigate the roles they might play in computational models of language acquisition
+p18
+aVThus, the present model, initially aimed at segmenting words from continuous speech, shows three interesting characteristics that are also exhibited by human infants it distinguishes between function words and content words [] , it allows learners to acquire at least some of the function words of their language (e.g., [] ); and furthermore, it may also allow them to start grouping together function words according to their category []
+p19
+aVHowever, the words of a language are typically composed of one or more syllables, and explicitly modelling the internal structure of words typically improves word segmentation considerably
+p20
+aVfunction word types typically have much higher token frequency than content word types
+p21
+aVsemantically, content words denote sets of objects or events, while function words denote more complex relationships over the entities denoted by content words
+p22
+aVSection 2.3 presents the major novel contribution of this paper by explaining how we modify these adaptor grammars to capture some of the special properties of function words
+p23
+aVCrucially for our purpose, infants of this age were shown to exploit frequent function words to segment neighboring content words []
+p24
+aVIn this section, we show that learners could use Bayesian model selection to determine that function words appear on the left periphery in English by comparing the marginal probability of the data for the left-periphery and the right-periphery models
+p25
+aVWe put u'\u005cu201c' function words u'\u005cu201d' in scare quotes below because our model only approximately captures the linguistic properties of function words
+p26
+aVThis means that u'\u005cu201c' function words u'\u005cu201d' are memoised independently of the u'\u005cu201c' content words u'\u005cu201d' that u'\u005cud835' u'\u005cuddb6' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddbd' expands to; i.e.,, the model learns distinct u'\u005cu201c' function word u'\u005cu201d' and u'\u005cu201c' content word u'\u005cu201d' vocabularies
+p27
+aVthere are usually far fewer function word types than content word types in a language
+p28
+aVPerhaps the simplest word segmentation model is the unigram model , where utterances are modeled as sequences of words, and where each word is a sequence of segments []
+p29
+aVThis grammar builds in the fact that function words appear on the left periphery of phrases
+p30
+aVAs noted earlier, the u'\u005cu201c' function word u'\u005cu201d' model generates function words via adapted nonterminals other than the u'\u005cud835' u'\u005cuddb6' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddbd' category
+p31
+aVThe model that achieves the best token f-score expects function words to appear at the left edge of phrases
+p32
+aVHere we evaluate the word segmentations found by the u'\u005cu201c' function word u'\u005cu201d' Adaptor Grammar model described in section 2.3 and compare it to the baseline grammar with collocations and phonotactics from
+p33
+aVThe next two subsections review the Adaptor Grammar word segmentation models presented in and section 2.1 reviews how phonotactic syllable-structure constraints can be expressed with Adaptor Grammars, while section 2.2 reviews how phrase-like units called u'\u005cu201c' collocations u'\u005cu201d' capture inter-word dependencies
+p34
+aVAs a reviewer points out, the changes we make to our models to incorporate function words can be viewed as u'\u005cu201c' building in u'\u005cu201d' substantive information about possible human languages
+p35
+aVProperties 1 u'\u005cu2013' 4 suggest that function words might play a special role in language acquisition because they are especially easy to identify, while property 5 suggests that they might be useful for identifying lexical categories
+p36
+aVFor comparison purposes we also include results for a mirror-image model that permits u'\u005cu201c' function words u'\u005cu201d' on the right periphery, a model which permits u'\u005cu201c' function words u'\u005cu201d' on both the left and right periphery (achieved by changing rules 22 u'\u005cu2013' 24 ), as well as a model that analyses all words as monosyllabic
+p37
+aVInformally, Adaptor Grammars can be viewed as caching entire subtrees of the adapted nonterminals
+p38
+aVfunction words typically appear in peripheral positions of phrases (e.g.,, prepositions typically appear at the beginning of prepositional phrases
+p39
+aVfunction words are typically morphologically and phonologically simple (e.g.,, they are typically monosyllabic
+p40
+aVOur model thus captures two of the properties of function words discussed in section 1.1 they are monosyllabic (and thus phonologically simple), and they appear on the periphery of phrases
+p41
+aVpoint out the detrimental effect that inter-word dependencies can have on word segmentation models that assume that the words of an utterance are independently generated
+p42
+aVAdaptor grammars are non-parametric, i.e.,, not characterisable by a finite set of parameters, if the set of possible subtrees of the adapted nonterminals is infinite
+p43
+aVFor example, we hoped that given an Adaptor Grammar that permits u'\u005cu201c' function words u'\u005cu201d' on both the left and right periphery, the inference procedure would decide that the right-periphery rules simply are not used in a language like English
+p44
+aVThe rule ( 3 ) models words as sequences of independently generated phones this is what called the u'\u005cu201c' monkey model u'\u005cu201d' of word generation (it instantiates the metaphor that word types are generated by a monkey randomly banging on the keys of a typewriter
+p45
+aVTraditional descriptive linguistics distinguishes function words , such as determiners and prepositions, from content words , such as nouns and verbs, corresponding roughly to the distinction between functional categories and lexical categories of modern generative linguistics []
+p46
+aVAdaptor grammars are a framework for Bayesian inference of a certain class of hierarchical non-parametric models []
+p47
+aVA number of psychological experiments have shown that infants are sensitive to the function words of their language within their first year of life [] , often before they have experienced the u'\u005cu201c' word learning spurt u'\u005cu201d'
+p48
+aVAdaptor grammar models cannot express bigram dependencies, but they can capture similiar inter-word dependencies using phrase-like units that calls collocations showed that word segmentation accuracy improves further if the model learns a nested hierarchy of collocations
+p49
+aVIn order to better understand just how the model works, we give the 5 most frequent words in each word category found during 8 MCMC runs of the left-peripheral u'\u005cu201c' function word u'\u005cu201d' grammar above
+p50
+aVIn addition, 14 to 18-month-old children were shown to exploit function words to constrain lexical access to known words â€“- for instance, they expect a noun after a determiner []
+p51
+aVThe models we study here focus on properties 3 and 4, in that they are capable of learning specific sequences of monosyllabic words in peripheral (i.e.,, initial or final) positions of phrase-like units
+p52
+aVFigure 3 depicts how the Bayes factor in favour of left-peripheral attachment of u'\u005cu201c' function words u'\u005cu201d' varies as a function of the number of utterances in the training data D (calculated from the last 1000 sweeps of 8 MCMC runs of the corresponding adaptor grammars
+p53
+aVGoldwater et al show that word segmentation accuracy improves when the model is extended to capture bigram dependencies
+p54
+aVThis section presents results of running our Adaptor Grammar models on subsets of the corpus of child-directed English
+p55
+aVExperimental evidence suggests that infants as young as 8 months of age already expect function words on the correct side for their language u'\u005cu2014' left-periphery for Italian infants and right-periphery for Japanese infants [] u'\u005cu2014' so it is interesting to see whether purely distributional learners such as the ones studied here can identify the correct location of function words in phrases
+p56
+aVAdaptor Grammars (AGs) are an extension of Probabilistic Context-Free Grammars (PCFGs), which we describe first
+p57
+aVThey define distributions over the trees specified by a context-free grammar, but unlike probabilistic context-free grammars, they u'\u005cu201c' learn u'\u005cu201d' distributions over the possible subtrees of a user-specified set of u'\u005cu201c' adapted u'\u005cu201d' nonterminals
+p58
+aVAdaptor grammars are useful when the goal is to learn a potentially unbounded set of entities that need to satisfy hierarchical constraints
+p59
+aVThis question is important because knowing the side where function words preferentially occur is related to the question of the direction of syntactic headedness in the language, and an accurate method for identifying the location of function words might be useful for initialising a syntactic learner
+p60
+aVSpecifically, an Adaptor Grammar identifies a subset A u'\u005cu2286' N of adapted nonterminals
+p61
+aVeach function word class is associated with specific content word classes (e.g.,, determiners and prepositions are associated with nouns, auxiliary verbs and complementisers are associated with main verbs
+p62
+aVAs a reviewer points out, we present no evidence that children use function words in the way that our model does, and we want to emphasise we make no such claim
+p63
+aVFigure 2 presents the standard token and lexicon (i.e.,, type) f-score evaluations for word segmentations proposed by these models [] , and Table 1 summarises the token and lexicon f-scores for the major models discussed in this paper
+p64
+aVPCFGs can be viewed as recursive mixture models over trees
+p65
+aVSpecifically, given a training corpus D of unsegmented sentences and model families G 1 and G 2 (here the u'\u005cu201c' function word u'\u005cu201d' adaptor grammars with left-peripheral and right-peripheral attachment respectively), the Bayes factor K is the ratio of the marginal likelihoods of the data
+p66
+aVPresumably this is because it tends to misanalyse multi-syllabic words on the right periphery as sequences of monosyllabic words
+p67
+aVWhile PCFGs are expressive enough to describe a range of linguistically-interesting phenomena, PCFGs are parametric models , which limits their ability to describe phenomena where the set of basic units, as well as their properties, are the target of learning
+p68
+aVFor example, the word u'\u005cu201c' string u'\u005cu201d' begins with the onset cluster str, which is relatively rare word-internally showed that word segmentation accuracy improves if the model can learn different consonant sequences for word-inital onsets and word-final codas
+p69
+aVInformally, a model that generates words independently is likely to incorrectly segment multi-word expressions such as u'\u005cu201c' the doggie u'\u005cu201d' as single words because the model has no way to capture word-to-word dependencies, e.g.,, that u'\u005cu201c' doggie u'\u005cu201d' is typically preceded by u'\u005cu201c' the u'\u005cu201d'
+p70
+aVLexical acqusition is an example of a phenomenon that is naturally viewed as non-parametric inference , where the number of lexical entries (i.e.,, words) as well as their properties must be learnt from the data
+p71
+aVThe starting point and baseline for our extension is the adaptor grammar with syllable structure phonotactic constraints and three levels of collocational structure ( 5 - 21 ), as prior work has found that this yields the highest word segmentation token f-score []
+p72
+aVIt u'\u005cu2019' s interesting that after about 1,000 sentences the model that allows u'\u005cu201c' function words u'\u005cu201d' only on the right periphery is considerably less accurate than the baseline model
+p73
+aVBecause u'\u005cud835' u'\u005cuddb6' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddbd' is an adapted nonterminal, the adaptor grammar memoises u'\u005cud835' u'\u005cuddb6' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddbd' subtrees, which corresponds to learning the phone sequences for the words of the language
+p74
+aVThe PCFG rules expanding an adapted nonterminal X define the u'\u005cu201c' base distribution u'\u005cu201d' of the associated DP or PYP, and the a X and b X parameters determine how much mass is reserved for u'\u005cu201c' new u'\u005cu201d' trees
+p75
+aVA unigram model can be expressed as an Adaptor Grammar with one adapted non-terminal u'\u005cud835' u'\u005cuddb6' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddbd' ¯ (we indicate adapted nonterminals by underlining them in grammars here; regular expressions are expanded into right-branching productions
+p76
+aVIn an Adaptor Grammar the unadapted nonterminals N u'\u005cu2216' A expand via ( 1 ), just as in a PCFG, but the distributions of the adapted nonterminals A are u'\u005cu201c' concentrated u'\u005cu201d' by passing them through a DP or PYP
+p77
+aVThere are Markov Chain Monte Carlo (MCMC) and Variational Bayes procedures for estimating the posterior distribution over rule probabilities u'\u005cud835' u'\u005cudf3d' and parse trees given data consisting of terminal strings alone []
+p78
+aVThere are several different procedures for inferring the parse trees and the rule probabilities given a corpus of strings describe a MCMC sampler and describe a Variational Bayes procedure
+p79
+aVIt is interesting to note that adding u'\u005cu201c' function words u'\u005cu201d' improves token f-score by more than 4%, corresponding to a 40% reduction in overall error rate
+p80
+aVWe use the MCMC procedure here since this has been successfully applied to word segmentation problems in previous work []
+p81
+aVSection 5 concludes and describes possible future work
+p82
+aVThe model that allows u'\u005cu201c' function words u'\u005cu201d' only on the left periphery is more accurate than the model that allows them on both the left and right periphery when the input data ranges from about 100 to about 1,000 sentences, but when the training data is larger than about 1,000 sentences both models are equally accurate
+p83
+aVAs explain, by inserting a Dirichlet Process (DP) or Pitman-Yor Process (PYP) into the generative mechanism ( 1 ) the model u'\u005cu201c' concentrates u'\u005cu201d' mass on a subset of trees []
+p84
+aVa word segmentation model should segment this as ju wÉ‘nt tu si Ã°É™ bÊŠk, which is the IPA representation of u'\u005cu201c' you want to see the book u'\u005cu201d'
+p85
+aVWhile not designed to correspond to syntactic phrases, by examining the sample parses induced by the Adaptor Grammar we noticed that the collocations often correspond to noun phrases, prepositional phrases or verb phrases
+p86
+aVsuggested replacing ( 3 ) with the following model of word structure
+p87
+aVThe PCFG generates the distribution G S over the set of trees u'\u005cud835' u'\u005cudcaf' S generated by the start symbol S ; the distribution over the strings it generates is obtained by marginalising over the trees
+p88
+aVInstead, we used Bayesian model selection techniques to determine whether left-peripheral or a right-peripheral model better fits the unsegmented utterances that constitute the training data
+p89
+aVRoughly speaking, the probability of generating a particular subtree of an adapted nonterminal is proportional to the number of times that subtree has been generated before
+p90
+aVHowever, given the magnitude of the differences and the fact that the two models being compared are of similar complexity, we believe that these results suggest that Bayesian model selection can be used to determine properties of the language being learned
+p91
+aVAdaptor Grammars are formally defined in , which should be consulted for technical details
+p92
+aVHowever, at around 25 sentences the more complex models that are capable of finding multisyllabic words start to become more accurate
+p93
+aVWhile the probability of any specific Adaptor Grammar configuration u'\u005cud835' u'\u005cudf3d' is not too hard to calculate (the MCMC sampler for Adaptor Grammars can print this after each sweep through D ), the integral in ( 31 ) is in general intractable
+p94
+aVThis motivates the extension to the Adaptor Grammar discussed below
+p95
+aVWhen the training data is very small the Monosyllabic grammar produces the highest accuracy results, presumably because a large proportion of the words in child-directed speech are monosyllabic
+p96
+aVWe use the Adaptor Grammar software available from http://web.science.mq.edu.au/~mjohnson/ with the same settings as described in , i.e.,, we perform Bayesian inference with u'\u005cu201c' vague u'\u005cu201d' priors for all hyperparameters (so there are no adjustable parameters in our models), and perform 8 different MCMC runs of each condition with table-label resampling for 2,000 sweeps of the training data
+p97
+aVIt is easy to express this as an Adaptor Grammar
+p98
+aVThis model memoises (i.e.,, learns) both the individual u'\u005cu201c' function words u'\u005cu201d' and the sequences of u'\u005cu201c' function words u'\u005cu201d' that modify the u'\u005cud835' u'\u005cudda2' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cudfe3' - u'\u005cud835' u'\u005cudda2' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cudfe5' constituents
+p99
+aVUnfortunately we did not find this in our experiments; the right-periphery rules were used almost as often as the left-periphery rules (recall that a large fraction of the words in English child-directed speech are monosyllabic
+p100
+aVWhile this is true for languages such as English, it is not true universally
+p101
+aVThe more sophisticated Adaptor Grammars discussed below can be understood as specialising either the first or the second of the rules in ( 2 u'\u005cu2013' 3
+p102
+aVThis paper is structured as follows
+p103
+aVThat is, TD X u'\u005cu2062' ( G 1 , u'\u005cu2026' , G n ) is a distribution over the set of trees u'\u005cud835' u'\u005cudcaf' X generated by nonterminal X , where each subtree t i is generated independently from G i
+p104
+aVFigure 1 depicts a sample parse generated by this grammar
+p105
+aVThis is true of languages such as English, but is not true cross-linguistically
+p106
+aVFor example, given input consisting of unsegmented utterances such as the following
+p107
+aVWe experimented with a variety of approaches that use a single adaptor grammar inference process, but none of these were successful
+p108
+aVA u'\u005cu2062' u'\u005cu2192' u'\u005cu2061' u'\u005cu0391' u'\u005cu2208' R } is the set of rules expanding A
+p109
+aVInformally, u'\u005cu0398' A u'\u005cu2062' u'\u005cu2192' u'\u005cu2061' u'\u005cu0391' is the probability of a node labelled A expanding to a sequence of nodes labelled u'\u005cu0391' , and the probability of a tree is the product of the probabilities of the rules used to construct each non-leaf node in it
+p110
+aVHere a X and b X are parameters of the PYP associated with the adapted nonterminal X
+p111
+aVThis u'\u005cu201c' rich get richer u'\u005cu201d' behaviour causes the distribution of subtrees to follow a power-law (the power is specified by the a X parameter of the PYP
+p112
+aVMore precisely, for each X u'\u005cu2208' N u'\u005cu222a' W a PCFG associates distributions G X over the set of trees u'\u005cud835' u'\u005cudcaf' X generated by X as follows
+p113
+aVwhere R X is the subset of rules in R expanding nonterminal X u'\u005cu2208' N , and
+p114
+aVAt every 10th sweep of the last 1,000 sweeps we use the model to segment the entire corpus (even if it is only trained on a subset of it), so we collect 800 sample segmentations of each utterance
+p115
+aVNote that the model simply has the ability to learn that different clusters can occur word-peripherally and word-internally; it is not given any information about the relative complexity of these clusters
+p116
+aVA Context-Free Grammar (CFG) G = ( N , W , R , S ) consists of disjoint finite sets of nonterminal symbols N and terminal symbols W , a finite set of rules R of the form A u'\u005cu2062' u'\u005cu2192' u'\u005cu2061' u'\u005cu0391' where A u'\u005cu2208' N and u'\u005cu0391' u'\u005cu2208' ( N u'\u005cu222a' W ) u'\u005cu22c6' , and a start symbol S u'\u005cu2208' N
+p117
+aV2 2 Note that neither the left-peripheral nor the right-peripheral model is correct even strongly left-headed languages like English typically contain a few right-headed constructions
+p118
+aVBecause u'\u005cud835' u'\u005cuddae' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddcc' u'\u005cud835' u'\u005cuddbe' u'\u005cud835' u'\u005cuddcd' , u'\u005cud835' u'\u005cuddad' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddbe' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddcc' and u'\u005cud835' u'\u005cudda2' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddbd' u'\u005cud835' u'\u005cuddba' are adapted, this model learns the possible syllable onsets, nucleii and coda of the language, even though neither syllable structure nor word boundaries are explicitly indicated in the input to the model
+p119
+aVThe most frequent segmentation in these 800 sample segmentations is the one we score in the evaluations below
+p120
+aVSpecifically, we replace rules ( 19 u'\u005cu2013' 21 ) with the following sequence of rules
+p121
+aVIt turns out there is a straight-forward modification to the PCFG distribution ( 1 ) that makes it suitably non-parametric
+p122
+aVNote also that u'\u005cu201c' function words u'\u005cu201d' expand directly to u'\u005cud835' u'\u005cuddb2' u'\u005cud835' u'\u005cuddd2' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddba' u'\u005cud835' u'\u005cuddbb' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddbe' u'\u005cud835' u'\u005cudda8' u'\u005cud835' u'\u005cudda5' , which in turn expands to a monosyllable with a word-initial onset and word-final coda
+p123
+aVIn a Bayesian PCFG one puts Dirichlet priors Dir u'\u005cu2062' ( u'\u005cud835' u'\u005cudf36' ) on the rule probability vector u'\u005cud835' u'\u005cudf3d' , such that there is one Dirichlet parameter u'\u005cu0391' A u'\u005cu2062' u'\u005cu2192' u'\u005cu2061' u'\u005cu0391' for each rule A u'\u005cu2062' u'\u005cu2192' u'\u005cu2061' u'\u005cu0391' u'\u005cu2208' R
+p124
+aVAs explain, such Pitman-Yor Processes naturally generate power-law distributed data
+p125
+aVHere the variable u'\u005cud835' u'\u005cudf3d' ranges over the space u'\u005cu0394' of all possible parses for the utterances in D and all possible configurations of the Pitman-Yor processes and their parameters that constitute the u'\u005cu201c' state u'\u005cu201d' of the Adaptor Grammar G
+p126
+aVThe model just described assumes that word-internal syllables have the same structure as word-peripheral syllables, but in languages such as English word-peripheral onsets and codas can be more complex than the corresponding word-internal onsets and codas
+p127
+aVOur extension assumes that the u'\u005cud835' u'\u005cudda2' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cudfe3' - u'\u005cud835' u'\u005cudda2' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cudfe5' constituents are in fact phrase-like, so we extend the rules ( 19 u'\u005cu2013' 21 ) to permit an optional sequence of monosyllabic words at the left edge of each of these constituents
+p128
+aVwhere the marginal likelihood or u'\u005cu201c' evidence u'\u005cu201d' for a model G is obtained by integrating over all of the hidden or latent structure and parameters u'\u005cud835' u'\u005cudf3d'
+p129
+aVWhile Bayesian model selection is in principle straight-forward, it turns out to require the ratio of two integrals (for the u'\u005cu201c' evidence u'\u005cu201d' or marginal likelihood) that are often intractable to compute
+p130
+aVA Probabilistic Context-Free Grammar (PCFG) is a quintuple ( N , W , R , S , u'\u005cud835' u'\u005cudf3d' ) where N , W , R and S are the nonterminals, terminals, rules and start symbol of a CFG respectively, and u'\u005cud835' u'\u005cudf3d' is a vector of non-negative reals indexed by R that satisfy u'\u005cu2211' u'\u005cu0391' u'\u005cu2208' R A u'\u005cu0398' A u'\u005cu2062' u'\u005cu2192' u'\u005cu2061' u'\u005cu0391' = 1 for each A u'\u005cu2208' N , where R A = { A u'\u005cu2062' u'\u005cu2192' u'\u005cu2061' u'\u005cu0391'
+p131
+aVIf X u'\u005cu2208' W (i.e.,, if X is a terminal) then G X is the distribution that puts probability 1 on the single-node tree labelled X
+p132
+aVTextbooks such as describe a number of methods for calculating P ( D u'\u005cu2223' G ) , but most of them assume that the parameter space u'\u005cu0394' is continuous and so cannot be directly applied here
+p133
+aVAs that figure shows, once the training data contains more than about 1,000 sentences the evidence for the left-peripheral grammar becomes very strong
+p134
+aVbook
+p135
+aVWe assume that there are rules expanding u'\u005cud835' u'\u005cudda2' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddcc' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddba' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddcd' and u'\u005cud835' u'\u005cuddb5' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddd0' u'\u005cud835' u'\u005cuddbe' u'\u005cud835' u'\u005cuddc5' to the set of all consonants and vowels respectively (this amounts to assuming that the learner can distinguish consonants from vowels
+p136
+aVOn the full training data the estimated log Bayes factor is over 6,000, which would constitute overwhelming evidence in favour of left-peripheral attachment
+p137
+aVThe first rule ( 2 ) says that a sentence consists of one or more u'\u005cud835' u'\u005cuddb6' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddbd' s, while the second rule ( 3 ) states that a u'\u005cud835' u'\u005cuddb6' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddbd' consists of a sequence of one or more u'\u005cud835' u'\u005cuddaf' u'\u005cud835' u'\u005cuddc1' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddbe' s; we assume that there are rules expanding u'\u005cud835' u'\u005cuddaf' u'\u005cud835' u'\u005cuddc1' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddbe' into all possible phones
+p138
+aV4 ) is replaced with ( 10 u'\u005cu2013' 11 ) and ( 12 u'\u005cu2013' 17 ) are added to the grammar
+p139
+aVwhere u'\u005cud835' u'\u005cudf3d' i , u'\u005cu2026' , u'\u005cud835' u'\u005cudf3d' n are n samples from P ( u'\u005cud835' u'\u005cudf3d' u'\u005cu2223' D , G ) , which can be generated by the MCMC procedure
+p140
+aVWe assume there are no u'\u005cu201c' u'\u005cu0395' -rules u'\u005cu201d' in R , i.e.,, we require that u'\u005cu0391' u'\u005cu2265' 1 for each A u'\u005cu2062' u'\u005cu2192' u'\u005cu2061' u'\u005cu0391' u'\u005cu2208' R
+p141
+aVIf X u'\u005cu2208' N (i.e.,, if X is a nonterminal) then
+p142
+aVIn this grammar the suffix u'\u005cu201c' u'\u005cud835' u'\u005cudda8' u'\u005cu201d' indicates a word-initial element, and u'\u005cu201c' u'\u005cud835' u'\u005cudda5' u'\u005cu201d' indicates a word-final element
+p143
+aVbook, doggy, house, want, I
+p144
+aVa, the, your, little 1 1 The phone u'\u005cu2018' l u'\u005cu2019' is generated by both Consonant and Vowel , so u'\u005cu201c' little u'\u005cu201d' can be (incorrectly) analysed as one syllable in
+p145
+aVInterestingly, these categories seem fairly reasonable
+p146
+aVThe u'\u005cud835' u'\u005cuddb6' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddbd' category includes open-class nouns and verbs, the u'\u005cud835' u'\u005cudda5' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cuddb6' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddbd' u'\u005cud835' u'\u005cudfe3' category includes noun modifiers such as determiners, while the u'\u005cud835' u'\u005cudda5' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cuddb6' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddbd' u'\u005cud835' u'\u005cudfe4' and u'\u005cud835' u'\u005cudda5' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cuddb6' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddbd' u'\u005cud835' u'\u005cudfe5' categories include prepositions, pronouns and auxiliary verbs
+p147
+aVUnfortunately, as Murphy and others warn, the Harmonic Mean estimator is extremely unstable (Radford Neal calls it u'\u005cu201c' the worst MCMC method ever u'\u005cu201d' in his blog), so we think it is important to confirm these results using a more stable estimator
+p148
+aVThis can be achieved by replacing ( 2 ) with ( 18 u'\u005cu2013' 21
+p149
+aVInformally, u'\u005cud835' u'\u005cudda2' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cudfe3' , u'\u005cud835' u'\u005cudda2' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cudfe4' and u'\u005cud835' u'\u005cudda2' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cudfe5' define a nested hierarchy of phrase-like units
+p150
+aVThis work was supported in part by the Australian Research Council u'\u005cu2019' s Discovery Projects funding scheme (project numbers DP110102506 and DP110102593), the European Research Council (ERC-2011-AdG-295810 BOOTPHON), the Agence Nationale pour la Recherche (ANR-10-LABX-0087 IEC, and ANR-10-IDEX-0001-02 PSL*), and the Mairie de Paris, Ecole des Hautes Etudes en Sciences Sociales, the Ecole Normale Supérieure, and the Fondation Pierre Gilles de Gennes
+p151
+aVto, in, you, what, put
+p152
+aVThe Harmonic Mean estimator ( 4 ) for ( 31 ), which we used here, is a popular estimator for ( 31 ) because it only requires the ability to calculate P ( D , u'\u005cud835' u'\u005cudf3d' u'\u005cu2223' G ) for samples from P ( u'\u005cud835' u'\u005cudf3d' u'\u005cu2223' D , G )
+p153
+aVHere and below superscripts indicate iteration (e.g.,, a u'\u005cud835' u'\u005cuddb6' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddbd' consists of 1 to 4 u'\u005cud835' u'\u005cuddb2' u'\u005cud835' u'\u005cuddd2' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddba' u'\u005cud835' u'\u005cuddbb' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddbe' s), while an u'\u005cud835' u'\u005cuddae' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddcc' u'\u005cud835' u'\u005cuddbe' u'\u005cud835' u'\u005cuddcd' consists of an unbounded number of u'\u005cud835' u'\u005cudda2' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddcc' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddba' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddcd' s), while parentheses indicate optionality (e.g.,, a u'\u005cud835' u'\u005cuddb1' u'\u005cud835' u'\u005cuddc1' u'\u005cud835' u'\u005cuddd2' u'\u005cud835' u'\u005cuddc6' u'\u005cud835' u'\u005cuddbe' consists of an obligatory u'\u005cud835' u'\u005cuddad' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddbe' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddcc' followed by an optional u'\u005cud835' u'\u005cudda2' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddbd' u'\u005cud835' u'\u005cuddba'
+p154
+aVFor example, u'\u005cu201c' ago u'\u005cu201d' is arguably the head of the phrase u'\u005cu201c' ten years ago u'\u005cu201d'
+p155
+aVu'\u005cud835' u'\u005cudda5' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cuddb6' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddbd' u'\u005cud835' u'\u005cudfe5'
+p156
+aVu'\u005cud835' u'\u005cuddb2' u'\u005cud835' u'\u005cuddbe' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddcd' u'\u005cud835' u'\u005cuddbe' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cuddbe'
+p157
+aVu'\u005cud835' u'\u005cudda2' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cudfe5'
+p158
+aVu'\u005cud835' u'\u005cudda5' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cuddb6' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddbd' u'\u005cud835' u'\u005cuddcc' u'\u005cud835' u'\u005cudfe5'
+p159
+aVu'\u005cud835' u'\u005cudda5' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cuddb6' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddbd' u'\u005cud835' u'\u005cudfe5'
+p160
+aVyou
+p161
+aVu'\u005cud835' u'\u005cuddb6' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddbd'
+p162
+aVu'\u005cud835' u'\u005cudda5' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cuddb6' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddbd' u'\u005cud835' u'\u005cudfe5'
+p163
+aS''
+p164
+aVu'\u005cud835' u'\u005cudda2' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cudfe4'
+p165
+aVu'\u005cud835' u'\u005cudda2' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cudfe3'
+p166
+aVu'\u005cud835' u'\u005cuddb6' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddbd'
+p167
+aVsee
+p168
+aVu'\u005cud835' u'\u005cudda2' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cudfe3'
+p169
+aVu'\u005cud835' u'\u005cudda5' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cuddb6' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddbd' u'\u005cud835' u'\u005cuddcc' u'\u005cud835' u'\u005cudfe3'
+p170
+aVu'\u005cud835' u'\u005cudda5' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddbc' u'\u005cud835' u'\u005cuddb6' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddbd' u'\u005cud835' u'\u005cudfe3'
+p171
+aVthe
+p172
+aVyou, a, what, no, can
+p173
+aVwant
+p174
+aVto
+p175
+a.

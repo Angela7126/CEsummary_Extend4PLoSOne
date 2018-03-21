@@ -1,0 +1,18 @@
+(lp0
+VIf the annotator is unable to label a topic then we randomly select a class label from the set of all class labels
+p1
+aVIf a word in a document is a sprinkled word then while sampling a class label for it, we sample the class label associated with the sprinkled word, otherwise we sample a class label for the word using Gibbs update in Equation 1
+p2
+aVWe use this new model to infer the probability distribution of each unlabeled training document over the class labels
+p3
+aVC number of topics on the sprinkled dataset using collapsed Gibbs sampling, where C is the set of class labels of the training documents
+p4
+aVIn this approach, a topic model on a given set of unlabeled training documents is constructed using LDA, then an annotator assigns a class label to some topics based on their most probable words
+p5
+aVWe modify collapsed Gibbs sampling update in Equation 1 to carry class label information while inferring topics
+p6
+aVWhile classifying a test document, its probability distribution over class labels is inferred using TS-LDA model and it is classified to its most probable class label
+p7
+aVAs in ClassifyLDA, we ask an annotator to assign class labels to
+p8
+a.

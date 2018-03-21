@@ -1,0 +1,428 @@
+(lp0
+VFrom linguistic perspectives, new sentiment words are commonly modified by adverbial words and thus can be extracted by lexical patterns
+p1
+aVThis has linguistic interpretations because new sentiment words are commonly modified by adverbial words and thus should have close association with lexical patterns
+p2
+aVFrom linguistic perspectives, new sentiment words are commonly modified by adverbial words and thus should have close association with lexical patterns
+p3
+aVA lexical pattern is a triplet A D , * , A U , where A u'\u005cu2062' D is an adverbial word, the wildcard * means an arbitrary number of words 1 1 We set the number to 3 words in this work considering computation costs and A u'\u005cu2062' U denotes an auxiliary word
+p4
+aVAs can be seen from Table 4 , the association model (LRT) remarkably boosts the performance of new word detection, indicating LRT is a key factor for new sentiment word extraction
+p5
+aVAdding new words as feature in classification models will improve the performance of polarity classification, as demonstrated later in this paper
+p6
+aVIn such words, each single character has high probability to be a word
+p7
+aVAs our algorithm outputs a ranked list of words, we adapt average precision to evaluate the performance of new sentiment word detection
+p8
+aVThe second genre of the studies is to treat new word detection as a classification problem
+p9
+aVIn this setting, new word detection is mostly known as multi-word expression extraction
+p10
+aVIn [ 12 ] , new word detection was viewed as a binary classification problem
+p11
+aVIn these works, new word detection is considered as an integral part of segmentation, where new words are identified as the most probable segments inferred by the probabilistic models; and the detected new word can be further used to improve word segmentation
+p12
+aVFirst, we assess the influence of likelihood ratio test, which measures the association of a word to the pattern set
+p13
+aVNew words are usually multi-word expressions, where a variety of statistical measures have been proposed to detect multi-word expressions
+p14
+aVIf a candidate word is a new word, it will be more commonly used with diversified lexical patterns since the non-compositionality of new word means that the word can be used in many different linguistic scenarios
+p15
+aVNote that at the early stage of Algorithm 1, larger k p (perhaps with noisy patterns) may lead to lower quality of new words; while larger k w (perhaps with noisy seed words) may lead to lower quality of lexical patterns
+p16
+aVBased on the statistics shown in Table 3 , the likelihood ratio tests (LRT) model captures the statistical association between a pattern p and a word w by employing the following formula
+p17
+aVAll words in the top 100 words can be used as feature we thus manually label the polarity of all top 100 words (we did NOT remove incorrect new word
+p18
+aVBy looking into the pattern set and the selected words at each iteration, we found that the pattern set ( u'\u005cud835' u'\u005cudcab' ) converges soon to the same set after a few iterations; and at the beginning several iterations, the selected words are almost the same although the order of adding the words is different
+p19
+aVAgain, we choose only one seed word u'\u005cu201d' u'\u005cu5751' u'\u005cu7239' (reverse one u'\u005cu2019' s expectation) u'\u005cu201d' , and the number of words returned is set to K = 300
+p20
+aVNote that we do not augment the pattern set ( u'\u005cud835' u'\u005cudcab' ) at each iteration, instead, we keep a fixed small number of patterns during iteration because this strategy produces optimal results
+p21
+aVTo measure multi-word association, the first model is Pointwise Mutual Information (PMI) [ 6 ]
+p22
+aVwhere u'\u005cu039c' u'\u005cu2062' ( w ) is the set of documents in which all single words in w = w 1 u'\u005cu2062' w 2 u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' w n co-occur, u'\u005cu03a6' u'\u005cu2062' ( w ) is the set of documents in which word w occurs as a whole, and N is the total number of documents
+p23
+aVNote, that T u'\u005cu2062' 100 is automatically obtained from Algorithm 1 so that it may contain words that are not new sentiment words, but the resource also improves performance remarkably
+p24
+aVWe conjecture that this may be because new sentiment words are more frequently co-occurring with emoticons than with these opinion words
+p25
+aVResults in Table 7 shows that larger u'\u005cud835' u'\u005cudcab' c decrease the performance, particularly when the number of words returned ( K ) becomes larger
+p26
+aVwhere P u'\u005cu2062' ( k ) is the precision at cut-off k , r u'\u005cu2062' e u'\u005cu2062' l u'\u005cu2062' ( k ) is 1 if the word at position k is a new word and 0 otherwise, and K is the number of words in the ranked list
+p27
+aVZhou [ 25 ] proposed a discriminative Markov Model to detect new words by chunking one or more separated words
+p28
+aVSince then, a variety of statistical methods have been proposed to measure b u'\u005cu2062' i -gram association, such as Log-likelihood [ 9 ] and Symmetrical Conditional Probability (SCP) [ 7 ]
+p29
+aVThe annotation led to 323 new words, among which there are 116 positive words, 112 negative words, and 95 neutral words 3 3 All the resources are available upon request
+p30
+aVMoreover, existing lexical resources never have adequate and timely coverage since new words appear constantly
+p31
+aVThe first model is a lexicon-based model (denoted by L u'\u005cu2062' e u'\u005cu2062' x u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' n ) that counts the number of positive and negative opinion words in a post respectively, and classifies a post to be positive if there are more positive words than negative ones, and to be negative otherwise
+p32
+aVThe second model is a SVM model in which opinion words are used as feature, and 5-fold cross validation is conducted
+p33
+aVLastly, we need to decide the optimal number of patterns in u'\u005cud835' u'\u005cudcab' c (that is, k c in Algorithm 1) because the set has been used in computing left pattern entropy, see Formula ( 4
+p34
+aVSince the algorithm will finally sort the words at step (11) and u'\u005cud835' u'\u005cudcab' is the same, the ranking of the words becomes all the same
+p35
+aVThe polarity is judged according to this rule if M u'\u005cu2062' V u'\u005cu2062' ( w ) t u'\u005cu2062' h 1 , the word w is positive; if M u'\u005cu2062' V u'\u005cu2062' ( w ) - t u'\u005cu2062' h 1 the word negative; otherwise neutral
+p36
+aVAnother line is to treat new word detection as a separate task, usually preceded by part-of-speech tagging
+p37
+aVSince the tags of adverbial and auxiliary words are relatively static and can be easily identified, such a method can safely obtain lexical patterns
+p38
+aVwhere w = w 1 u'\u005cu2062' w 2 u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' w n , each w i is a single character, and p u'\u005cu2062' ( w i ) is the probability of the character w i being a word, as computed as follows
+p39
+aVPeople thus resort to statistical methods such as Pointwise Mutual Information [ 6 ] , Symmetrical Conditional Probability [ 7 ] , Mutual Expectation [ 8 ] , Enhanced Mutual Information [ 22 ] , and Multi-word Expression Distance [ 2 ]
+p40
+aVIn our problem, LRT computes a contingency table of a pattern p and a word w , derived from the corpus statistics, as given in Table 3 , where k 1 u'\u005cu2062' ( w , p ) is the number of documents that w matches pattern p , k 2 u'\u005cu2062' ( w , p ¯ ) is the number of documents that w occurs while p does not, k 3 u'\u005cu2062' ( w ¯ , p ) is the number of documents that p occurs while w does not, and k 4 u'\u005cu2062' ( w ¯ , p ¯ ) is the number of documents containing neither p nor w
+p41
+aVThe second observation is that three-class polarity classification is much more difficult than two-class polarity classification because many extracted new words are nouns such as u'\u005cu201d' u'\u005cu57fa' u'\u005cu53cb' (gay) u'\u005cu201d' , u'\u005cu201d' u'\u005cu83c7' u'\u005cu51c9' (girl) u'\u005cu201d' , and u'\u005cu201d' u'\u005cu76c6' u'\u005cu53cb' (friend) u'\u005cu201d'
+p42
+aVNote that we use u'\u005cud835' u'\u005cudcab' c , instead of u'\u005cud835' u'\u005cudcab' , because the latter set is very small while computing entropy needs a large number of patterns
+p43
+aVwhere a u'\u005cu2062' l u'\u005cu2062' l u'\u005cu2062' ( w i ) is the total frequency of w i , and s u'\u005cu2062' ( w i ) is the frequency of w i being a single character word
+p44
+aVOnly using L u'\u005cu2062' R u'\u005cu2062' T can obtain a fairly good results when K is small, however, the performance drops sharply because it u'\u005cu2019' s unable to measure non-compositionality
+p45
+aVAs can be seen from the formula, the key idea of this metric is to compute the ratio of the co-occurrence of all words in a multi-word expressions to the occurrence of the whole expression
+p46
+aVStarting from very few seed words (for example, just one seed word), we can extract lexical patterns that have strong statistical association with the seed words; the extracted lexical patterns can be further used in finding more new words, and the most probable new words can be added into the seed word set for the next iteration; and the process can be run iteratively until a stop condition is met
+p47
+aVHowever, these supervised models requires not only heavy engineering of linguistic features, but also expensive annotation of training data
+p48
+aVThe measure setting we take here is F N u'\u005cu2062' M u'\u005cu2062' E u'\u005cu2062' D u'\u005cu2062' ( w ) , as shown in Formula ( 12
+p49
+aVAdding N u'\u005cu2062' M u'\u005cu2062' E u'\u005cu2062' D or E u'\u005cu2062' M u'\u005cu2062' I leads to remarkable improvements because of their capability of measuring non-compositionality of new words
+p50
+aVThe algorithm works as follows starting from very few seed words (for example, a word in Table 1 ), the algorithm can find lexical patterns that have strong statistical association with the seed words in which the likelihood ratio test (LRT) is used to quantify the degree of association
+p51
+aVL u'\u005cu2062' ( u'\u005cu03a1' , k , n ) = u'\u005cu03a1' k * ( 1 - u'\u005cu03a1' ) n - k ; n 1 = k 1 + k 3 ; n 2 = k 2 + k 4 ; u'\u005cu03a1' 1 = k 1 / n 1 ; u'\u005cu03a1' 2 = k 2 / n 2 ; u'\u005cu03a1' = ( k 1 + k 2 ) / ( n 1 + n 2 )
+p52
+aVIn order to obtain lexical patterns, we can define regular expressions with POS tags 2 2 Such expressions are very simple and easy to write because we only need to consider POS tags of adverbial and auxiliary word and apply the regular expressions on POS tagged texts
+p53
+aVWe investigate the problem of polarity prediction of new sentiment word and demonstrate that inclusion of new sentiment word benefits sentiment classification tasks
+p54
+aVToo small size of u'\u005cud835' u'\u005cudcab' c may lead to insufficient estimation of left pattern entropy
+p55
+aVFor example, u'\u005cu201d' u'\u005cu7231' u'\u005cu5403' (love to eat) u'\u005cu201d' and u'\u005cu201d' u'\u005cu7231' u'\u005cu8bf4' (love to talk) u'\u005cu201d' can be matched by many lexical patterns, however, they are not new words due to the lack of non-compositionality
+p56
+aVTherefore, we set u'\u005cud835' u'\u005cudcab' c
+p57
+aVTherefore, we choose the optimal setting to small numbers, as k p = 5 , k w = 10
+p58
+aVWe design several measures to quantify the possibility of a candidate word being a new word, and the top-ranked words will be added into the seed word set for the next iteration
+p59
+aVThe polarity is judged according to the rule if P u'\u005cu2062' M u'\u005cu2062' I u'\u005cu2062' ( w ) t u'\u005cu2062' h 2 , w is positive; if P u'\u005cu2062' M u'\u005cu2062' I u'\u005cu2062' ( w ) - t u'\u005cu2062' h 2 negative; otherwise neutral
+p60
+aVTypical models include conditional random fields proposed by [ 14 ] , and a joint model trained with adaptive online gradient descent based on feature frequency information [ 18 ]
+p61
+aVNew word detection is also important for sentiment analysis such as opinionated phrase extraction and polarity classification
+p62
+aVDifferent from EMI, this measure is a strict distance metric, meaning that a smaller value indicates a larger possibility of being a multi-word expression
+p63
+aVWe will describe the proposed method in Section 3, including definitions, the overview of the algorithm, and the statistical measures for addressing the two key issues
+p64
+aVAs can be seen, all the proposed measures outperform the two baselines ( E u'\u005cu2062' M u'\u005cu2062' I and N u'\u005cu2062' M u'\u005cu2062' E u'\u005cu2062' D ) remarkably and consistently
+p65
+aVIn order to measure arbitrary n -grams, most common strategies are to separate n -gram into two parts X and Y so that existing b u'\u005cu2062' i -gram methods can be used [ 7 , 8 , 16 ]
+p66
+aVUser behavior data has recently been explored for finding new words
+p67
+aVTaking into account the aforementioned factors, we have different settings to score a new word, as follows
+p68
+aVAs for the resources P u'\u005cu2062' W and N u'\u005cu2062' W , we have three settings
+p69
+aVThus, we design the following measure to favor this observation
+p70
+aVIn the previous example, u'\u005cu201d' u'\u005cu7ed9' u'\u005cu529b' (cool; powerful) u'\u005cu201d' is a strong feature for classification models while each single character is not
+p71
+aVIt tells nothing about the possibility of a word being a new word, however, a new sentiment word, should have close association with the lexical patterns
+p72
+aVThe threshold t u'\u005cu2062' h 2 is manually tuned
+p73
+aVThus, such measures can be naturally incorporated into our algorithm
+p74
+aVIn polarity classification, new words can be informative features for classification models
+p75
+aVThe results are shown in Figure 1
+p76
+aVNew word detection is one of the most critical issues in Chinese word segmentation
+p77
+aVThus, the utility of a pattern can be measured as follows
+p78
+aVThis is the reason why the algorithm will work
+p79
+aV[t] New word detection algorithm \u005cKwIn u'\u005cud835' u'\u005cudc9f' a large set of POS tagged posts u'\u005cud835' u'\u005cudcb2' s a set of seed words k p the number of patterns chosen at each iteration k c the number of patterns in the candidate pattern set k w the number of words added at each iteration K the number of words returned \u005cKwOut A list of ranked new words u'\u005cud835' u'\u005cudcb2' Obtain all lexical patterns using regular expressions on u'\u005cud835' u'\u005cudc9f' u'\u005cu2004' Count the frequency of each lexical pattern and extract words matched by each pattern u'\u005cu2004' Obtain top k c frequent patterns as candidate pattern set u'\u005cud835' u'\u005cudcab' c and top 5,000 frequent words as candidate word set u'\u005cud835' u'\u005cudcb2' c u'\u005cu2004' u'\u005cud835' u'\u005cudcab' = u'\u005cu03a6' ; u'\u005cud835' u'\u005cudcb2' = u'\u005cud835' u'\u005cudcb2' s ; t = 0 u'\u005cu2004' \u005cFor u'\u005cud835' u'\u005cudcb2'
+p80
+aVThe first genre of such studies is to leverage complex linguistic rules or knowledge
+p81
+aVIn this section, we justify whether inclusion of new sentiment word would benefit sentiment classification
+p82
+aVThis measure only quantifies the association of a candidate word to the given pattern set
+p83
+aVAutomatic extraction of new words is indispensable to many tasks such as Chinese word segmentation, machine translation, named entity extraction, question answering, and sentiment analysis
+p84
+aVAnother key issue in the proposed algorithm is to quantify the possibility of a candidate word being a new word
+p85
+aVThe key issues are to measure the utility of a pattern and to quantify the possibility of a word being a new word
+p86
+aVThis paper aims to detect new word for sentiment analysis
+p87
+aVThe results in Table 6 show very stable performance when different numbers of seed words are chosen
+p88
+aVVery similar to the pattern utility measure, LRT can also be used to measure the association of a candidate word to a given pattern set, as follows
+p89
+aVWe design statistical measures to quantify the utility of a pattern and to quantify the possibility of a word being a new word, respectively
+p90
+aVThis can be measured by the association of a pattern to the current word set used in the algorithm
+p91
+aVResults in Table 10 show that inclusion of new words in both models improves the performance remarkably
+p92
+aVOur algorithm is in spirit to double propagation [ 15 ] , however, the differences are apparent in that firstly, we use very lightweight linguistic information (except POS tags); secondly, our major contributions are to propose statistical measures to address the following key issues first, to measure the utility of lexical patterns; second, to measure the possibility of a candidate word being a new word
+p93
+aVIn Chinese, such words are like u'\u005cu201d' u'\u005cu7740' , u'\u005cu4e86' , u'\u005cu5566' , u'\u005cu7684' , u'\u005cu554a' u'\u005cu201d' , and punctuation marks include u'\u005cu201d' u'\u005cuff0c' u'\u005cu3002' u'\u005cuff01' u'\u005cuff1f' u'\u005cuff1b' u'\u005cuff1a' u'\u005cu201d' and so on
+p94
+aVNew word detection has been usually interweaved with word segmentation, particularly in Chinese NLP
+p95
+aVOur central idea for new sentiment word detection is as follows
+p96
+aVThis results in 138 positive words and 125 negative words
+p97
+aVSecondly, we justify whether the proposed algorithm is sensitive to the number of seed words
+p98
+aVWe experimented with only one seed word, two, three, and four seed words, respectively
+p99
+aVCompact Hownet opinion words (denoted by cptHownet we count the frequency of the above opinion words on the training data and remove words whose document frequency is less than 2
+p100
+aVThe annotators were requested to judge whether a candidate word is a new word, and also to judge the polarity of a new word (positive, negative, and neutral
+p101
+aVWe are particulary interested in extracting new sentiment word that can express opinions or sentiment, which is of high value towards sentiment analysis
+p102
+aVThis association model has also been used to model association between opinion target words by [ 10 ]
+p103
+aVAfter removing some obviously inappropriate words, the left lexicons have 627 positive opinion words and 1,038 negative opinion words, respectively
+p104
+aVHowever, both of the work are limited due to the public unavailability of expensive commercial resources
+p105
+aVIn this section, we will conduct the following experiments first, we will compare our method to several baselines, and perform parameter tuning with extensive experiments; second, we will classify polarity of new sentiment words using two methods; third, we will demonstrate how new sentiment words will benefit sentiment classification
+p106
+aVSubsequently, the extracted lexical patterns can be further used in finding more new words
+p107
+aVIn two-class polarity classification, we remove neutral words and only make prediction with positive/negative classes
+p108
+aVWe apply two models for polarity classification
+p109
+aV[ 22 ] proposed Enhanced Mutual Information (EMI) which measures the cohesion of n -gram by the frequency of itself and the frequency of each single word
+p110
+aVSome words occur very frequently and can be widely matched by lexical patterns, but they are not new words
+p111
+aVThe performance of polarity prediction is shown in Table 9
+p112
+aV[ 1 ] segmented the POS sequence of a multi-word into small POS tiles, counted tile frequency in the new word and non-new-word on the training set respectively, and detected new words using these counts
+p113
+aVRecent studies [ 17 ] [ 3 ] have shown that more than 60% of word segmentation errors result from new words
+p114
+aVChen and Ma [ 4 ] employed morphological and statistical rules to extract Chinese new word
+p115
+aVwhere u'\u005cud835' u'\u005cudcb2' is the current word set used in the algorithm (see Algorithm 1
+p116
+aVIt u'\u005cu2019' s interesting that the performance is totally the same with different numbers of seed words
+p117
+aVwhere u'\u005cud835' u'\u005cudcab' is the current pattern set used in the algorithm (see Algorithm 1), and p i is a lexical pattern
+p118
+aVThen, we asked two annotators to label the top 5,000 frequent words that were extracted by lexical patterns as described in Algorithm 1
+p119
+aVResults in Table 5 show that the performance drops consistently across different k w settings when the number of patterns increases
+p120
+aVThe first observation is that the performance of using emoticons is much better than that of using seed opinion words
+p121
+aVHownet opinion words (denoted by Hownet
+p122
+aVwhere L u'\u005cu2062' ( u'\u005cud835' u'\u005cudcab' c , w ) is the set of left word of all patterns by which word w can be matched in u'\u005cud835' u'\u005cudcab' c , c u'\u005cu2062' ( l i , w ) is the count that word w can be matched by patterns whose left word is l i , and N u'\u005cu2062' ( w ) is the count that word w can be matched by the patterns in u'\u005cud835' u'\u005cudcab' c
+p123
+aVStatistical methods for new word detection have been extensively studied, and in some sense exhibit advantages over linguistics-based methods
+p124
+aVThis results in 52 positive and 34 negative words
+p125
+aVNew sentiment word , as exemplified in Table 1 , is a sub-class of multi-word expressions which is a sequence of neighboring words u'\u005cu201d' whose exact and unambiguous meaning or connotation cannot be derived from the meaning or connotation of its components u'\u005cu201d' [ 5 ]
+p126
+aVIn the above experiments, we set k p = 5 (the number of patterns chosen at each iteration) and k w = 10 (the number of words added at each iteration), which is the optimal setting and will be discussed in the next subsection
+p127
+aVIn the setting of the original lexicon (Hownet), both models obtain 2-3% gains from the inclusion of new words
+p128
+aVA sentiment phrase with complete meaning should have a correct boundary, however, characters in a new word may be broken up
+p129
+aVSuch new words cannot be directly identified using grammatical rules, which poses a major challenge to automatic analysis
+p130
+aV[ 2 ] proposed multi-word expression distance (MED) and the normalized version, and reported superior performance to EMI, SCP, and other measures
+p131
+aVwhere P u'\u005cu2062' W and N u'\u005cu2062' W are a positive and negative set of emoticons (or seed words) respectively, and # u'\u005cu2062' ( w , w p ) is the co-occurrence count of the input word w and the item w p
+p132
+aVFor this purpose, we randomly sampled and annotated 4,500 Weibo posts that contain at least one opinion word in the union of the Hownet 4 4 http://www.keenage.com/html/c_index.html opinion lexicons and our annotated new words
+p133
+aVIn this section, we attempt to classifying the polarity of the annotated 323 new words
+p134
+aVThe first measure is enhanced mutual information (EMI) [ 22 ]
+p135
+aVWe propose a novel framework for new word detection from large-scale user-generated data
+p136
+aVObviously, in order to obtain the value of s u'\u005cu2062' ( w i ) , some particular Chinese word segmentation tool is required
+p137
+aVThen, we add into the above resources the labeled new polar words(denoted by N u'\u005cu2062' W , including 116 positive and 112 negative words) and the top 100 words produced by the algorithm (denoted by T u'\u005cu2062' 100 ), respectively
+p138
+aVTable 2 gives some examples of lexical patterns
+p139
+aVThe first key issue is to quantify the utility of a pattern at each iteration
+p140
+aVThe posts were then part-of-speech tagged using a Chinese word segmentation tool named ICTCLAS [ 21 ]
+p141
+aVStatistics show that more than 1000 new Chinese words appear every year [ 19 ]
+p142
+aVWords that are auxiliaries, model particles, or punctuation marks
+p143
+aV[ 24 ] explored user typing behaviors in Sogou Chinese Pinyin input method to detect new words
+p144
+aVSuch nouns are more difficult to classify sentiment orientation
+p145
+aVThe second measure we take into account is normalized multi-word expression distance [ 2 ] , which has been proposed to measure the non-compositionality of multi-word expressions
+p146
+aVNote that the lexicon-based model requires the sentiment orientation of each dictionary entry 5 5 This is not necessary for the SVM model
+p147
+aVThe key idea of EMI is to measure word pair u'\u005cu2019' s dependency as the ratio of its probability of being a multi-word to its probability of not being a multi-word
+p148
+aVSort words in u'\u005cud835' u'\u005cudcb2' with F u'\u005cu2062' ( w ) u'\u005cu2004' Output the ranked list of words in u'\u005cud835' u'\u005cudcb2'
+p149
+aVMost of them are not yet correctly recognized by the segmentation algorithm, and remain as out of vocabulary (OOV) words
+p150
+aVHowever, such new words have made many natural language processing tasks more challenging
+p151
+aVWe set k p = 5 and k w = 10 , and take F N u'\u005cu2062' M u'\u005cu2062' E u'\u005cu2062' D as the weighting measure of new word
+p152
+aV[ 23 ] proposed to use dynamic time warping to detect new words from query logs
+p153
+aVAnd only one seed word u'\u005cu201d' u'\u005cu5751' u'\u005cu7239' (reverse one u'\u005cu2019' s expectation) u'\u005cu201d' is used
+p154
+aVThe second one (denoted by Small_Emo) is a set of 10 emoticons, which are chosen from the 36 emoticons, as shown in Table 8
+p155
+aVAmong all the 84 b u'\u005cu2062' i -gram association measures, PMI has been reported to be the best one in Czech data [ 13 ]
+p156
+aVBased on the information distance theory, Bu et al
+p157
+aVThe first setting (denoted by Large_Emo) is a set of most frequent 36 emoticons in which there are 21 positive and 15 negative emoticons respectively
+p158
+aVHowever, the new word probability ( N u'\u005cu2062' W u'\u005cu2062' P ) has only marginal contribution to improvement
+p159
+aVThis measure is proved to be an influential factor by our experiments in Section 4.3
+p160
+aVNo elaborated linguistic rules are needed to filter undesirable results
+p161
+aVThese words are mostly domain-specific technical terms and time-sensitive political/social /cultural terms
+p162
+aVZhang et al
+p163
+aVZhang et al
+p164
+aVFor example, Justeson and Katz [ 11 ] extracted technical terminologies from documents using a regular expression
+p165
+aVSimilar improvement is observed in the setting of the compact lexicon
+p166
+aVThe first one is enhanced mutual information (EMI) where we set F u'\u005cu2062' ( w ) = E u'\u005cu2062' M u'\u005cu2062' I u'\u005cu2062' ( w ) [ 22 ] and the second baseline is normalized multi-word expression distance (NMED) [ 2 ] where we set F u'\u005cu2062' ( w ) = N u'\u005cu2062' M u'\u005cu2062' E u'\u005cu2062' D u'\u005cu2062' ( w
+p167
+aVThe process can be run iteratively until a stop condition is met
+p168
+aVUsers like to update and share their information on social websites with their own language styles, among which new political/social/cultural words are constantly used
+p169
+aVArgamon et al
+p170
+aVFirstly, we will show how to obtain the optimal settings of k p and k w
+p171
+aVThe main contributions of this paper are summarized as follows
+p172
+aVThe third one (denoted by Opin_Words) is two sets of seed opinion words, where P u'\u005cu2062' W ={ u'\u005cu9ad8' u'\u005cu5174' (happy), u'\u005cu5927' u'\u005cu65b9' (generous), u'\u005cu6f02' u'\u005cu4eae' (beautiful), u'\u005cu5584' u'\u005cu826f' (kind), u'\u005cu806a' u'\u005cu660e' (smart)} and N u'\u005cu2062' W = { u'\u005cu4f24' u'\u005cu5fc3' (sad), u'\u005cu5c0f' u'\u005cu6c14' (mean), u'\u005cu96be' u'\u005cu770b' (ugly), u'\u005cu90aa' u'\u005cu6076' (wicked), u'\u005cu7b28' (stupid)}
+p173
+aVThe setting of F N u'\u005cu2062' M u'\u005cu2062' E u'\u005cu2062' D produces the best performance
+p174
+aVNew words on the Internet have been emerging all the time, particularly in user-generated content
+p175
+aVThe first one is majority vote (MV), and the second one is pointwise mutual information, similar to [ 20 ]
+p176
+aVFinally, the work is summarized in Section 5
+p177
+aVWe experiment with different settings of Hownet lexicon resources
+p178
+aVThe likelihood ratio tests [ 9 ] is used for this purpose
+p179
+aVThis can be measured by information entropy, as follows
+p180
+aVThis framework is fully unsupervised and purely data-driven, and requires very lightweight linguistic resources (i.e.,, only POS tags
+p181
+aVFor example, in a sentence u'\u005cu201d' u'\u005cu8868' u'\u005cu6f14' /n u'\u005cu975e' u'\u005cu5e38' /adv u'\u005cu7ed9' /v u'\u005cu529b' /n u'\u005cuff08' artists u'\u005cu2019' performance is very impressive u'\u005cuff09' u'\u005cu201d' the two Chinese characters u'\u005cu201c' u'\u005cu7ed9' /v u'\u005cu529b' /n(cool; powerful) u'\u005cu201d' should always be extracted together
+p182
+aVZheng et al
+p183
+aVIn practice, the use of likelihood ratios tends to result in significant improvements in text-analysis performance
+p184
+aVTwo methods are adapted with different settings for this purpose
+p185
+aVThe rest of the paper is structured as follows we will introduce related work in the next section
+p186
+aVThe larger the value, the more possible the expression will be a multi-word expression
+p187
+aVwhere F is the number of posts in which a multi-word expression w = w 1 u'\u005cu2062' w 2 u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' w n occurs, F i is the number of posts where w i occurs, and N is the total number of posts
+p188
+aVWe then present the experiments in Section 4
+p189
+aVIf there is a disagreement on either of the two tasks, discussions are required to make the final decision
+p190
+aVComparison between L u'\u005cu2062' R u'\u005cu2062' T + L u'\u005cu2062' P u'\u005cu2062' E (or L u'\u005cu2062' R u'\u005cu2062' T + L u'\u005cu2062' P u'\u005cu2062' E + N u'\u005cu2062' W u'\u005cu2062' P ) and L u'\u005cu2062' R u'\u005cu2062' T shows that inclusion of left pattern entropy also boosts the performance apparently
+p191
+aVSecond, we compare different settings of our method to two baselines
+p192
+aVThe LRT is well known for not relying critically on the assumption of normality, instead, it uses the asymptotic assumption of the generalized likelihood ratio
+p193
+aVAnd PMI is computed as follows
+p194
+aVIn this work, we resort to ICTCLAS [ 21 ] , a widely used tool in the literature
+p195
+aVK Use u'\u005cud835' u'\u005cudcb2' to score each pattern in u'\u005cud835' u'\u005cudcab' c with U u'\u005cu2062' ( p ) u'\u005cu2004' u'\u005cud835' u'\u005cudcab' = { t u'\u005cu2062' o u'\u005cu2062' p u'\u005cu2062' k p u'\u005cu2062' p u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' r u'\u005cu2062' n u'\u005cu2062' s } u'\u005cu2004' Use u'\u005cud835' u'\u005cudcab' to extract new words and if the words are in u'\u005cud835' u'\u005cudcb2' c , score them with F u'\u005cu2062' ( w ) u'\u005cu2004' u'\u005cud835' u'\u005cudcb2' = u'\u005cud835' u'\u005cudcb2' u'\u005cu2062' u'\u005cu22c3' { t u'\u005cu2062' o u'\u005cu2062' p u'\u005cu2062' k w u'\u005cu2062' w u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' d u'\u005cu2062' s } u'\u005cu2004' u'\u005cud835' u'\u005cudcb2' c = u'\u005cud835' u'\u005cudcb2' c - u'\u005cud835' u'\u005cudcb2'
+p196
+aVTuning the size of u'\u005cud835' u'\u005cudcab' c will be further discussed in Section 4.4
+p197
+aVWords that are used mainly to modify a verb or an adjective, such as u'\u005cu201d' u'\u005cu592a' (too) u'\u005cu201d' , u'\u005cu201d' u'\u005cu975e' u'\u005cu5e38' (very) u'\u005cu201d' , u'\u005cu201d' u'\u005cu5341' u'\u005cu5206' (very) u'\u005cu201d' , and u'\u005cu201d' u'\u005cu7279' u'\u005cu522b' (specially) u'\u005cu201d'
+p198
+aVThis feature may enable our approach to be portable to other languages
+p199
+aVA perfect list (all top K items are correct) has an AP value of 1.0
+p200
+aVThe majority vote method is formulated as below
+p201
+aVWe consider several factors for this purpose
+p202
+aVThe threshold t u'\u005cu2062' h 1 is manually tuned
+p203
+aVThe metric is computed as follows
+p204
+aVWe crawled 237,108,977 Weibo posts from http://www.weibo.com, the largest social website in China
+p205
+aVThese posts range from January of 2011 to December of 2012
+p206
+aVThis work was partly supported by the following grants from the National Basic Research Program (973 Program) under grant No
+p207
+aVwhere P u'\u005cu2062' M u'\u005cu2062' I u'\u005cu2062' ( x , y ) = l u'\u005cu2062' o u'\u005cu2062' g 2 u'\u005cu2062' ( P u'\u005cu2062' r u'\u005cu2062' ( x , y ) P u'\u005cu2062' r u'\u005cu2062' ( x ) * P u'\u005cu2062' r u'\u005cu2062' ( y ) ) , and P u'\u005cu2062' r u'\u005cu2062' ( u'\u005cu22c5' ) denotes probability
+p208
+aV2012CB316301 and 2013CB329403, the National Science Foundation of China project under grant No
+p209
+aV60803075, and the Beijing Higher Education Young Elite Teacher Project
+p210
+aV100
+p211
+aV61332007 and No
+p212
+aVwhere
+p213
+a.

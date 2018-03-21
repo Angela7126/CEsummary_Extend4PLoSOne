@@ -1,0 +1,16 @@
+(lp0
+VFigure 1 shows an overview of the approach we first parse densely with a coarse grammar and then parse sparsely with the fine grammar, skipping symbols that the coarse pass deemed sufficiently unlikely
+p1
+aVBecause the grammar used in the coarse pass is a projection of the grammar used in the fine pass, these coarse scores correlate reasonably closely with the probabilities computed in the fine pass
+p2
+aVWe tested our new pruning approach using an X-bar grammar as the coarse pass
+p3
+aVThus, we can use the coarse pass u'\u005cu2019' s inside and outside scores as the scaling values for the fine pass u'\u005cu2019' s scores
+p4
+aVThe coarse to fine pruning approach of Petrov and Klein ( 2007 ) employs an X-bar grammar as its first pruning phase, but there is no reason why we cannot begin with a more complex grammar for our initial pass
+p5
+aVTheir system uses a grammar based on the Berkeley parser [ 9 ] (which is particularly amenable to GPU processing), u'\u005cu201c' compiling u'\u005cu201d' the grammar into a sequence of GPU kernels that are applied densely to every item in the parse chart
+p6
+aVThe result is a parsing speed of 185.5 sentences per second, as
+p7
+a.

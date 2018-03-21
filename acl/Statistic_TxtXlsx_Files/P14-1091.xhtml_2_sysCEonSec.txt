@@ -1,0 +1,549 @@
+Current File: P14-1091.xhtml_2 P14-1091.xhtml
+
+Section 0:  Abstract
+	SentNum: 6
+	CENum: 4
+	SentCovered: 3
+	Covered_Rate: 50.0000%
+
+Section 1:  1 Introduction
+	SentNum: 15
+	CENum: 6
+	SentCovered: 8
+	Covered_Rate: 53.3333%
+
+Section 2:  2 Translation-Based KB-QA
+	SentNum: 117
+	CENum: 26
+	SentCovered: 29
+	Covered_Rate: 24.7863%
+
+Section 3:  3 Comparison with Previous Work
+	SentNum: 21
+	CENum: 5
+	SentCovered: 5
+	Covered_Rate: 23.8095%
+
+Section 4:  4 Experiment
+	SentNum: 59
+	CENum: 27
+	SentCovered: 32
+	Covered_Rate: 54.2373%
+
+Section 5:  5 Conclusion and Future Work
+	SentNum: 5
+	CENum: 3
+	SentCovered: 4
+	Covered_Rate: 80.0000%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-1091.xhtml_2's CE cases
+
+Section 0:  Abstract has 4 CE cases
+	CASE: 1
+	Stag: 2 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: We translate questions to answers based on CYK parsing. 
+		Cause: [(0, 7), (0, 8)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 2
+	Stag: 3 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: Answers as translations of the span covered by each CYK cell are obtained by a question translation method, which first generates formal triple queries as MRs for the span based on question patterns and relation expressions, and then retrieves answers from a given KB based on triple queries generated. 
+		Cause: [(0, 32), (0, 36)]
+		Effect: [(0, 38), (0, 50)]
+
+	CASE: 3
+	Stag: 3 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: Answers as translations of the span covered by each CYK cell are obtained by a question translation method, which first generates formal triple queries as MRs for the span based on question patterns and relation expressions, and then retrieves answers from a given KB based on triple queries generated. 
+		Cause: [(0, 10), (0, 12)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 4
+	Stag: 4 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: A linear model is defined over derivations, and minimum error rate training is used to tune feature weights based on a set of question-answer pairs. 
+		Cause: [(0, 21), (0, 25)]
+		Effect: [(0, 0), (0, 18)]
+
+Section 1:  1 Introduction has 6 CE cases
+	CASE: 1
+	Stag: 6 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: Knowledge-based question answering (KB-QA) computes answers to natural language (NL) questions based on existing knowledge bases (KBs. 
+		Cause: [(0, 17), (0, 21)]
+		Effect: [(0, 0), (0, 14)]
+
+	CASE: 2
+	Stag: 8 9 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: First, the input question is transformed into its meaning representation (MR) by an independent semantic parser [ 26 , 20 , 2 , 17 , 4 , 22 , 1 , 14 , 3 ] ; Then, the answers are retrieved from existing KBs using generated MRs as queries. Unlike existing KB-QA systems which treat semantic parsing and answer retrieval as two cascaded tasks, this paper presents a unified framework that can integrate semantic parsing into the question answering procedure directly. 
+		Cause: [(1, 12), (1, 32)]
+		Effect: [(0, 20), (1, 10)]
+
+	CASE: 3
+	Stag: 10 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Borrowing ideas from machine translation (MT), we treat the QA task as a translation procedure. 
+		Cause: [(0, 0), (0, 7)]
+		Effect: [(0, 9), (0, 17)]
+
+	CASE: 4
+	Stag: 11 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: Like MT, CYK parsing is used to parse each input question, and answers of the span covered by each CYK cell are considered the translations of that cell; unlike MT, which uses offline-generated translation tables to translate source phrases into target translations, a semantic parsing-based question translation method is used to translate each span into its answers on-the-fly, based on question patterns and relation expressions. 
+		Cause: [(0, 66), (0, 70)]
+		Effect: [(0, 0), (0, 62)]
+
+	CASE: 5
+	Stag: 13 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: Derivations generated during such a translation procedure are modeled by a linear model, and minimum error rate training (MERT) [ 21 ] is used to tune feature weights based on a set of question-answer pairs. 
+		Cause: [(0, 33), (0, 37)]
+		Effect: [(0, 0), (0, 30)]
+
+	CASE: 6
+	Stag: 20 21 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: 2) We propose a robust method to transform single-relation questions into formal triple queries as their MRs, which trades off between transformation accuracy and recall using question patterns and relation expressions respectively. Formally, given a knowledge base u'\ud835' u'\udca6' u'\u2062' u'\u212c' and an NL question u'\ud835' u'\udcac' , our KB-QA method generates a set of formal triples-answer pairs { u'\u27e8' u'\ud835' u'\udc9f' , u'\ud835' u'\udc9c' u'\u27e9' } as derivations, which are scored and ranked by the distribution P ( u'\u27e8' u'\ud835' u'\udc9f' , u'\ud835' u'\udc9c' u'\u27e9' u'\ud835' u'\udca6' u'\u212c' , u'\ud835' u'\udcac' ) defined as follows. 
+		Cause: [(0, 16), (1, 156)]
+		Effect: [(0, 2), (0, 14)]
+
+Section 2:  2 Translation-Based KB-QA has 26 CE cases
+	CASE: 1
+	Stag: 21 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Formally, given a knowledge base u'\ud835' u'\udca6' u'\u2062' u'\u212c' and an NL question u'\ud835' u'\udcac' , our KB-QA method generates a set of formal triples-answer pairs { u'\u27e8' u'\ud835' u'\udc9f' , u'\ud835' u'\udc9c' u'\u27e9' } as derivations, which are scored and ranked by the distribution P ( u'\u27e8' u'\ud835' u'\udc9f' , u'\ud835' u'\udc9c' u'\u27e9' u'\ud835' u'\udca6' u'\u212c' , u'\ud835' u'\udcac' ) defined as follows. 
+		Cause: [(0, 85), (0, 155)]
+		Effect: [(0, 0), (0, 83)]
+
+	CASE: 2
+	Stag: 25 
+		Pattern: 2 [['for', 'the', 'sake', 'of'], [',']]---- [[], ['&V-ing/&NP@C@'], ['&R']]
+		sentTXT: For the sake of convenience, we omit the I u'\u2062' D information in the rest of the paper. 
+		Cause: [(0, 4), (0, 4)]
+		Effect: [(0, 6), (0, 22)]
+
+	CASE: 3
+	Stag: 33 
+		Pattern: 0 [['according', 'to'], [',']]---- [[], ['&NP@C@'], ['&R']]
+		sentTXT: According to the above description, our KB-QA method can be decomposed into four tasks as. 
+		Cause: [(0, 2), (0, 4)]
+		Effect: [(0, 6), (0, 15)]
+
+	CASE: 4
+	Stag: 46 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: The above operations are equivalent to answering a simplified question, which is obtained by replacing the answerable spans in the original question with their corresponding answers. 
+		Cause: [(0, 15), (0, 26)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 5
+	Stag: 51 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Note that if no predicate p or answer e o u'\u2062' b u'\u2062' j can be generated, { u'\ud835' u'\udcac' , N u'\u2062' u u'\u2062' l u'\u2062' l , u'\ud835' u'\udcac' } will be returned as a special triple, which sets e o u'\u2062' b u'\u2062' j to be u'\ud835' u'\udcac' itself, and p to be N u'\u2062' u u'\u2062' l u'\u2062' l. 
+		Cause: [(0, 73), (0, 129)]
+		Effect: [(0, 4), (0, 71)]
+
+	CASE: 6
+	Stag: 55 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: Two question translation methods are presented in the rest of this subsection, which are based on question patterns and relation expressions respectively. 
+		Cause: [(0, 17), (0, 21)]
+		Effect: [(0, 0), (0, 14)]
+
+	CASE: 7
+	Stag: 60 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: Algorithm 2 shows how to generate formal triples for a span u'\ud835' u'\udcac' based on question patterns ( u'\ud835' u'\udcac' u'\u2062' u'\ud835' u'\udcab' -based question translation. 
+		Cause: [(0, 23), (0, 54)]
+		Effect: [(0, 0), (0, 20)]
+
+	CASE: 8
+	Stag: 66 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: The answers of q are returned by A u'\u2062' n u'\u2062' s u'\u2062' w u'\u2062' e u'\u2062' r u'\u2062' R u'\u2062' e u'\u2062' t u'\u2062' r u'\u2062' i u'\u2062' e u'\u2062' v u'\u2062' e u'\u2062' ( q , u'\ud835' u'\udca6' u'\u2062' u'\u212c' ) based on q and u'\ud835' u'\udca6' u'\u2062' u'\u212c' (Line 10), each of which is used to construct a formal triple and added to T for u'\ud835' u'\udcac' (from Line 11 to Line 16. 
+		Cause: [(0, 117), (0, 142)]
+		Effect: [(0, 144), (0, 175)]
+
+	CASE: 9
+	Stag: 69 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: First, 5W queries, which begin with What, Where, Who, When, or Which, are selected from a large scale query log of a commercial search engine; Then, a cleaned entity dictionary is used to annotate each query by replacing all entity mentions it contains with the symbol [ S u'\u2062' l u'\u2062' o u'\u2062' t ]. 
+		Cause: [(0, 46), (0, 48)]
+		Effect: [(0, 49), (0, 75)]
+
+	CASE: 10
+	Stag: 71 72 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: From experiments (Table 3 in Section 4.3) we can see that, question pattern based question translation can achieve high end-to-end accuracy. But as human efforts are needed in the mining procedure, this method cannot be extended to large scale very easily. 
+		Cause: [(1, 2), (1, 21)]
+		Effect: [(0, 2), (1, 0)]
+
+	CASE: 11
+	Stag: 76 77 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Aiming to alleviate the coverage issue occurring in u'\ud835' u'\udcac' u'\u2062' u'\ud835' u'\udcab' -based method, an alternative relation expression ( u'\u211b' u'\u2062' u'\u2130' ) -based method is proposed, and will be used when the u'\ud835' u'\udcac' u'\u2062' u'\ud835' u'\udcab' -based method fails. We define u'\u211b' u'\u2062' u'\u2130' p as a relation expression set for a given KB predicate p u'\u2208' u'\ud835' u'\udca6' u'\u2062' u'\u212c'. 
+		Cause: [(1, 19), (1, 53)]
+		Effect: [(0, 3), (1, 17)]
+
+	CASE: 12
+	Stag: 82 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: Algorithm 3 shows how to generate triples for a question u'\ud835' u'\udcac' based on relation expressions. 
+		Cause: [(0, 22), (0, 23)]
+		Effect: [(0, 0), (0, 19)]
+
+	CASE: 13
+	Stag: 85 
+		Pattern: 0 [['if'], ['then']]---- [[], ['&C', '(,)'], ['&R']]
+		sentTXT: If this score is larger than 0 , which means there are overlaps between u'\ud835' u'\udcac' u'\u2019' s context and u'\u211b' u'\u2062' u'\u2130' p , then q will be used as the triple query of u'\ud835' u'\udcac' , and a set of formal triples will be generated based on q and u'\ud835' u'\udca6' u'\u2062' u'\u212c' (from Line 7 to Line 15. 
+		Cause: [(0, 1), (0, 47)]
+		Effect: [(0, 50), (0, 109)]
+
+	CASE: 14
+	Stag: 85 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: If this score is larger than 0 , which means there are overlaps between u'\ud835' u'\udcac' u'\u2019' s context and u'\u211b' u'\u2062' u'\u2130' p , then q will be used as the triple query of u'\ud835' u'\udcac' , and a set of formal triples will be generated based on q and u'\ud835' u'\udca6' u'\u2062' u'\u212c' (from Line 7 to Line 15. 
+		Cause: [(0, 31), (0, 59)]
+		Effect: [(0, 0), (0, 28)]
+
+	CASE: 15
+	Stag: 96 97 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Then, we extract the shortest path between paired entities in the dependency tree of each sentence as an u'\u211b' u'\u2062' u'\u2130' candidate for the given predicate. The intuition is that any sentence containing such entity pairs occur in an assertion is likely to express the predicate of that assertion in some way. 
+		Cause: [(0, 18), (1, 24)]
+		Effect: [(0, 0), (0, 16)]
+
+	CASE: 16
+	Stag: 102 103 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Sometimes, a question may provide multiple constraints to its answers movie starred by Tom Hanks in 1994 is one such question. All the films as the answers of this question should satisfy the following two constraints. 
+		Cause: [(1, 4), (1, 14)]
+		Effect: [(0, 2), (1, 2)]
+
+	CASE: 17
+	Stag: 106 107 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We propose a dependency tree-based method to handle such multiple-constraint questions by (i) decomposing the original question into a set of sub-questions using syntax-based patterns; and (ii) intersecting the answers of all sub-questions as the final answers of the original question. Note, question decomposition only operates on the original question and question spans covered by complete dependency subtrees. 
+		Cause: [(0, 39), (1, 12)]
+		Effect: [(0, 0), (0, 37)]
+
+	CASE: 18
+	Stag: 109 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: If a question matches any one of these patterns, then sub-questions are generated by collecting the paths between n 0 and each n i ( i 0 ) in the pattern, where each n denotes a complete subtree with a noun, number, or question word as its root node, the symbol * above p u'\u2062' r u'\u2062' e u'\u2062' p * denotes this preposition can be skipped in matching. 
+		Cause: [(0, 50), (0, 85)]
+		Effect: [(0, 4), (0, 48)]
+
+	CASE: 19
+	Stag: 109 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: If a question matches any one of these patterns, then sub-questions are generated by collecting the paths between n 0 and each n i ( i 0 ) in the pattern, where each n denotes a complete subtree with a noun, number, or question word as its root node, the symbol * above p u'\u2062' r u'\u2062' e u'\u2062' p * denotes this preposition can be skipped in matching. 
+		Cause: [(0, 11), (0, 40)]
+		Effect: [(0, 41), (0, 42)]
+
+	CASE: 20
+	Stag: 110 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: For the question mentioned at the beginning, its two sub-questions generated are movie starred by Tom Hanks and movie starred in 1994 , as its dependency form matches pattern (a. 
+		Cause: [(0, 25), (0, 30)]
+		Effect: [(0, 0), (0, 22)]
+
+	CASE: 21
+	Stag: 111 112 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Similar ideas are used in IBM Watson [ 13 ] as well. As dependency parsing is not perfect, we generate single triples for such questions without considering constraints as well, and add them to the search space for competition h s u'\u2062' y u'\u2062' n u'\u2062' t u'\u2062' a u'\u2062' x u'\u2062' _ u'\u2062' c u'\u2062' o u'\u2062' n u'\u2062' s u'\u2062' t u'\u2062' r u'\u2062' a u'\u2062' i u'\u2062' n u'\u2062' t u'\u2062' ( u'\u22c5' ) is used to boost triples that are converted from sub-questions generated by question decomposition. 
+		Cause: [(1, 1), (1, 134)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 22
+	Stag: 123 124 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The underlying intuition is that, dependency subtrees of u'\ud835' u'\udcac' should be treated as units for question translation. h s u'\u2062' y u'\u2062' n u'\u2062' t u'\u2062' a u'\u2062' x u'\u2062' _ u'\u2062' c u'\u2062' o u'\u2062' n u'\u2062' s u'\u2062' t u'\u2062' r u'\u2062' a u'\u2062' i u'\u2062' n u'\u2062' t u'\u2062' ( u'\u22c5' ) , which counts the number of triples in u'\ud835' u'\udc9f' that are converted from sub-questions generated by the question decomposition component. 
+		Cause: [(0, 23), (1, 137)]
+		Effect: [(0, 0), (0, 21)]
+
+	CASE: 23
+	Stag: 133 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: These three scores are used as features to rank answers generated in QA procedure. 
+		Cause: [(0, 6), (0, 11)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 24
+	Stag: 134 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Given a set of question-answer pairs { u'\ud835' u'\udcac' i , u'\ud835' u'\udc9c' i r u'\u2062' e u'\u2062' f } as the development (dev) set, we use the minimum error rate training (MERT) [ 21 ] algorithm to tune the feature weights u'\u039b' i M in our proposed model. 
+		Cause: [(0, 45), (0, 81)]
+		Effect: [(0, 20), (0, 43)]
+
+	CASE: 25
+	Stag: 136 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: N is the number of questions in the dev set, u'\ud835' u'\udc9c' i r u'\u2062' e u'\u2062' f is the correct answers as references of the i t u'\u2062' h question in the dev set, u'\ud835' u'\udc9c' i ^ is the top-1 answer candidate of the i t u'\u2062' h question in the dev set based on feature weights u'\u039b' 1 M , E u'\u2062' r u'\u2062' r u'\u2062' ( u'\u22c5' ) is the error function which is defined as. 
+		Cause: [(0, 40), (0, 132)]
+		Effect: [(0, 0), (0, 38)]
+
+	CASE: 26
+	Stag: 136 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: N is the number of questions in the dev set, u'\ud835' u'\udc9c' i r u'\u2062' e u'\u2062' f is the correct answers as references of the i t u'\u2062' h question in the dev set, u'\ud835' u'\udc9c' i ^ is the top-1 answer candidate of the i t u'\u2062' h question in the dev set based on feature weights u'\u039b' 1 M , E u'\u2062' r u'\u2062' r u'\u2062' ( u'\u22c5' ) is the error function which is defined as. 
+		Cause: [(0, 51), (0, 59)]
+		Effect: [(0, 61), (0, 92)]
+
+Section 3:  3 Comparison with Previous Work has 5 CE cases
+	CASE: 1
+	Stag: 141 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: Poon ( 2013 ) has proposed an unsupervised method by adopting grounded-learning to leverage the database for indirect supervision. 
+		Cause: [(0, 10), (0, 18)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 2
+	Stag: 145 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: 2013 ) use Wiktionary and a limited manual lexicon to map POS tags to a set of predefined CCG lexical categories, which aims to reduce the need for learning lexicon from training data. 
+		Cause: [(0, 29), (0, 33)]
+		Effect: [(0, 0), (0, 27)]
+
+	CASE: 3
+	Stag: 150 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: 1) Question answering and semantic parsing are performed in an joint way under a unified framework; (2) A robust method is proposed to map NL questions to their formal triple queries, which trades off the mapping quality by using question patterns and relation expressions in a cascaded way; and (3) We use domain independent feature set which allowing us to use a relatively small number of question-answer pairs to tune model parameters. 
+		Cause: [(0, 43), (0, 52)]
+		Effect: [(0, 53), (0, 79)]
+
+	CASE: 4
+	Stag: 154 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: 1) Instead of using facts extracted using the open IE method, we leverage a large scale, high-quality knowledge base; (2) We can handle multiple-relation questions, instead of single-relation queries only, based on our translation based KB-QA framework. 
+		Cause: [(0, 40), (0, 44)]
+		Effect: [(0, 0), (0, 36)]
+
+	CASE: 5
+	Stag: 156 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: But MT in there work means to translate questions into n -best translations, which are used for finding similar sentences in the document collection that probably contain answers. 
+		Cause: [(0, 19), (0, 29)]
+		Effect: [(0, 0), (0, 17)]
+
+Section 4:  4 Experiment has 27 CE cases
+	CASE: 1
+	Stag: 160 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: 2013 ) , we use the same subset of WEBQUESTIONS (3,778 questions) as the development set (Dev) for weight tuning in MERT, and use the other part of WEBQUESTIONS (2,032 questions) as the test set (Test. 
+		Cause: [(0, 15), (0, 43)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 2
+	Stag: 160 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: 2013 ) , we use the same subset of WEBQUESTIONS (3,778 questions) as the development set (Dev) for weight tuning in MERT, and use the other part of WEBQUESTIONS (2,032 questions) as the test set (Test. 
+		Cause: [(0, 24), (0, 26)]
+		Effect: [(0, 0), (0, 22)]
+
+	CASE: 3
+	Stag: 162 163 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Table 2 shows the statistics of question patterns and relation expressions used in our KB-QA system. As all question patterns are collected with human involvement as we discussed in Section 2.3.1, the quality is very high ( 98 u'\u2062' %. 
+		Cause: [(1, 1), (1, 28)]
+		Effect: [(0, 0), (0, 15)]
+
+	CASE: 4
+	Stag: 168 169 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: 2013 ) is one of the latest work which has reported QA results based on a large scale, general domain knowledge base (Freebase), we consider their evaluation result on WEBQUESTIONS as our baseline. Our KB-QA system generates the k -best derivations for each question span, where k is set to 20. 
+		Cause: [(0, 35), (1, 18)]
+		Effect: [(0, 9), (0, 33)]
+
+	CASE: 5
+	Stag: 174 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since Freebase is completely contained by our KB, we disallow all entities which are not included by Freebase. 
+		Cause: [(0, 1), (0, 7)]
+		Effect: [(0, 9), (0, 18)]
+
+	CASE: 6
+	Stag: 174 175 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Since Freebase is completely contained by our KB, we disallow all entities which are not included by Freebase. By doing so, our KB provides the same knowledge as Freebase does, which means we do not gain any extra advantage by using a larger KB. 
+		Cause: [(0, 1), (1, 1)]
+		Effect: [(1, 4), (1, 27)]
+
+	CASE: 7
+	Stag: 176 177 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: But we still allow ourselves to use the static rank scores and confidence scores of entities as features, as we described in Section 2.4. We first show the overall evaluation results of our KB-QA system and compare them with baseline u'\u2019' s results on Dev and Test. 
+		Cause: [(0, 17), (1, 25)]
+		Effect: [(0, 0), (0, 15)]
+
+	CASE: 8
+	Stag: 184 185 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: 2013 ) have used a lexicon extracted from a subset of ReVerb triples [ 19 ] , which is similar to the relation expression set used in question translation. But as our relation expressions are extracted by an in-house extractor, we can record their extraction-related statistics as extra information, and use them as features to measure the mapping quality. 
+		Cause: [(1, 2), (1, 29)]
+		Effect: [(0, 4), (1, 0)]
+
+	CASE: 9
+	Stag: 185 186 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: But as our relation expressions are extracted by an in-house extractor, we can record their extraction-related statistics as extra information, and use them as features to measure the mapping quality. Besides, as a portion of entities in our KB are extracted from Wiki, we know the one-to-one correspondence between such entities and Wiki pages, and use this information in relation expression extraction for entity disambiguation. 
+		Cause: [(1, 3), (1, 37)]
+		Effect: [(0, 1), (1, 0)]
+
+	CASE: 10
+	Stag: 191 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: The underlying intuition of using patterns is that those high-frequent questions/queries should and can be treated and solved in the QA task, by involving human effort at a relative small price but with very impressive accuracy. 
+		Cause: [(0, 24), (0, 36)]
+		Effect: [(0, 0), (0, 22)]
+
+	CASE: 11
+	Stag: 195 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: 1) The quality of the relation expressions is better than the quality of the lexicon entries used in the baseline; and (2) We use the extraction-related statistics of relation expressions as features, which brings more information to measure the confidence of mapping between NL phrases and KB predicates, and makes the model to be more flexible. 
+		Cause: [(0, 35), (0, 61)]
+		Effect: [(0, 20), (0, 33)]
+
+	CASE: 12
+	Stag: 196 
+		Pattern: 0 [['due', 'to']]---- [['&R'], ['&NP@C@']]
+		sentTXT: Meanwhile, u'\ud835' u'\udcac' u'\u2062' u'\ud835' u'\udcab' o u'\u2062' n u'\u2062' l u'\u2062' y perform worse ( 11.8 u'\u2062' % ) than u'\u211b' u'\u2062' u'\u2130' o u'\u2062' n u'\u2062' l u'\u2062' y , due to coverage issue. 
+		Cause: [(0, 95), (0, 96)]
+		Effect: [(0, 0), (0, 92)]
+
+	CASE: 13
+	Stag: 197 
+		Pattern: 0 [['due', 'to']]---- [['&R'], ['&NP@C@']]
+		sentTXT: But by comparing the precisions of these two settings, we find u'\ud835' u'\udcac' u'\u2062' u'\ud835' u'\udcab' o u'\u2062' n u'\u2062' l u'\u2062' y (97.5%) outperforms u'\u211b' u'\u2062' u'\u2130' o u'\u2062' n u'\u2062' l u'\u2062' y (73.2%) significantly, due to its high quality. 
+		Cause: [(0, 103), (0, 105)]
+		Effect: [(0, 0), (0, 100)]
+
+	CASE: 14
+	Stag: 197 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: But by comparing the precisions of these two settings, we find u'\ud835' u'\udcac' u'\u2062' u'\ud835' u'\udcab' o u'\u2062' n u'\u2062' l u'\u2062' y (97.5%) outperforms u'\u211b' u'\u2062' u'\u2130' o u'\u2062' n u'\u2062' l u'\u2062' y (73.2%) significantly, due to its high quality. 
+		Cause: [(0, 2), (0, 8)]
+		Effect: [(0, 9), (0, 100)]
+
+	CASE: 15
+	Stag: 198 199 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: This means how to extract high-quality question patterns is worth to be studied for the question answering task. As the performance of our KB-QA system relies heavily on the k -best beam approximation, we evaluate the impact of the beam size and list the comparison results in Figure 6. 
+		Cause: [(1, 1), (1, 27)]
+		Effect: [(0, 0), (0, 17)]
+
+	CASE: 16
+	Stag: 200 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We can see that as we increase k incrementally, the accuracy increase at the same time. 
+		Cause: [(0, 5), (0, 16)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 17
+	Stag: 201 202 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: However, a larger k (e.g., 200) cannot bring significant improvements comparing to a smaller one (e.g.,, 20), but using a large k has a tremendous impact on system efficiency. So we choose k = 20 as the optimal value in above experiments, which trades off between accuracy and efficiency. 
+		Cause: [(0, 0), (0, 38)]
+		Effect: [(1, 1), (1, 20)]
+
+	CASE: 18
+	Stag: 203 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: Actually, the size of our system u'\u2019' s search space is much smaller than the one of the semantic parser used in the baseline.This is due to the fact that, if triple queries generated by the question translation component cannot derive any answer from KB, we will discard such triple queries directly during the QA procedure. 
+		Cause: [(0, 37), (0, 51)]
+		Effect: [(0, 53), (0, 63)]
+
+	CASE: 19
+	Stag: 205 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since named entity recognizers trained on Penn TreeBank usually perform poorly on web queries, We instead use a simple string-match method to detect entity mentions in the question using a cleaned entity dictionary dumped from our KB. 
+		Cause: [(0, 1), (0, 13)]
+		Effect: [(0, 15), (0, 37)]
+
+	CASE: 20
+	Stag: 205 206 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Since named entity recognizers trained on Penn TreeBank usually perform poorly on web queries, We instead use a simple string-match method to detect entity mentions in the question using a cleaned entity dictionary dumped from our KB. One problem of doing so is the entity detection issue. 
+		Cause: [(0, 1), (1, 3)]
+		Effect: [(1, 5), (1, 9)]
+
+	CASE: 21
+	Stag: 207 208 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: For example, in the question who was Esther u'\u2019' s husband we cannot detect Esther as an entity, as it is just part of an entity name. We need an ad-hoc entity detection component to handle such issues, especially for a web scenario, where users often type entity names in their partial or abbreviation forms. 
+		Cause: [(0, 22), (1, 20)]
+		Effect: [(0, 4), (0, 20)]
+
+	CASE: 22
+	Stag: 210 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since each relation expression must contain at least one content word, this question cannot match any relation expression. 
+		Cause: [(0, 1), (0, 10)]
+		Effect: [(0, 12), (0, 19)]
+
+	CASE: 23
+	Stag: 213 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: For the following question who did Steve Spurrier play pro football for as an example, since the unigram play exists in both Film.Film.Actor and American_Football.Player.Current_Team u'\u2019' s relation expression sets, we made a wrong prediction, which led to wrong answers. 
+		Cause: [(0, 17), (0, 38)]
+		Effect: [(0, 40), (0, 50)]
+
+	CASE: 24
+	Stag: 215 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: For this example, we can give all book names where Sherlock Holmes appeared in, but we cannot rank them based on their publication date , as we cannot learn the alignment between the constraint word first occurred in the question and the predicate Book.Written_Work.Date_Of_First_Publication from training data automatically. 
+		Cause: [(0, 29), (0, 55)]
+		Effect: [(0, 0), (0, 26)]
+
+	CASE: 25
+	Stag: 215 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: For this example, we can give all book names where Sherlock Holmes appeared in, but we cannot rank them based on their publication date , as we cannot learn the alignment between the constraint word first occurred in the question and the predicate Book.Written_Work.Date_Of_First_Publication from training data automatically. 
+		Cause: [(0, 24), (0, 26)]
+		Effect: [(0, 0), (0, 21)]
+
+	CASE: 26
+	Stag: 216 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: Although we have followed some work [ 22 , 18 ] to handle such special linguistic phenomena by defining some specific operators, it is still hard to cover all unseen cases. 
+		Cause: [(0, 18), (0, 21)]
+		Effect: [(0, 22), (0, 31)]
+
+	CASE: 27
+	Stag: 217 218 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We leave this to future work as an independent topic. This paper presents a translation-based KB-QA method that integrates semantic parsing and QA in one unified framework. 
+		Cause: [(0, 7), (1, 14)]
+		Effect: [(0, 0), (0, 5)]
+
+Section 5:  5 Conclusion and Future Work has 3 CE cases
+	CASE: 1
+	Stag: 219 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Comparing to the baseline system using an independent semantic parser with state-of-the-art performance, we achieve better results on a general domain evaluation set. 
+		Cause: [(0, 0), (0, 12)]
+		Effect: [(0, 14), (0, 23)]
+
+	CASE: 2
+	Stag: 220 221 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Several directions can be further explored in the future i) We plan to design a method that can extract question patterns automatically, using existing labeled question patterns and KB as weak supervision. As we discussed in the experiment part, how to mine high-quality question patterns is worth further study for the QA task; (ii) We plan to integrate an ad-hoc NER into our KB-QA system to alleviate the entity detection issue; (iii) In fact, our proposed QA framework can be generalized to other intelligence besides knowledge bases as well. 
+		Cause: [(1, 1), (1, 53)]
+		Effect: [(0, 0), (0, 33)]
+
+	CASE: 3
+	Stag: 222 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: Any method that can generate answers to questions, such as the Web-based QA approach, can be integrated into this framework, by using them in the question translation component. 
+		Cause: [(0, 24), (0, 30)]
+		Effect: [(0, 5), (0, 22)]
+
+#-------------------------------------------------
+

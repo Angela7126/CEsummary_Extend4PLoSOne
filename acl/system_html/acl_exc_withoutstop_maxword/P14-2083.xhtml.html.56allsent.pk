@@ -1,0 +1,42 @@
+(lp0
+VMoreover, this allows us to focus on really hard cases, as any debatable case in the coarse-grained tag set is necessarily also part of the finer-grained tag set
+p1
+aVThe results show that the majority of disagreements are due to hard cases, and only about 20% of conflicting annotations are actual errors
+p2
+aVWe did so in order to make comparison between existing data sets possible
+p3
+aVWe then collect a corpus of such disagreements and have experts mark which ones are due to actual annotation errors , and which ones reflect linguistically hard cases (Section 3
+p4
+aVOur analyses show that a) experts disagree on the known hard cases when freely annotating text, and b) that these disagreements are the same across text types
+p5
+aVHowever, it is well known that there are linguistically hard cases [] , where no theory provides a clear answer, so annotation schemes commit to more or less arbitrary decisions
+p6
+aVIn order to do so, we train a classifier on the annotated data set containing 440 tag-confusion pairs by relying only on surface form features
+p7
+aVIf we pre-filter the data via Wiktionary and use an item-response model [] rather than majority voting, the agreement rises to 80.58%
+p8
+aVNote that the spoken language data does not include punctuation
+p9
+aVIf this was true, the specific theory should be learnable from the annotated data
+p10
+aVWe present disagreements as Hinton diagrams in Figure 2 a u'\u005cu2013' c
+p11
+aVIn this section, we investigate what happens if we weed out obvious errors by detecting annotation inconsistencies across a corpus
+p12
+aVIn NLP, we often model annotation as if it reflected a single ground truth that was guided by an underlying linguistic theory
+p13
+aVIf we balance the data set and perform 3-fold cross-validation, a L2-regularized logistic regression (L2-LR) model achieves an f 1 -score for detecting errors at 70% (cf. Table 1 ), which is above average, but not very impressive
+p14
+aVOne difference is that lay people do not confuse numerals very often, probably because they rely more on orthographic cues than on distributional evidence
+p15
+aVthat actual errors are in fact so infrequent as to be negligible, even when linguists annotate without guidelines
+p16
+aVIn Twitter, the X category is often confused with punctuations, e.g.,, when annotating punctuation acting as discourse continuation marker
+p17
+aVIt works by collecting u'\u005cu201c' variation n -grams u'\u005cu201d' , i.e., the longest sequence of words ( n -gram) in a corpus that has been observed with a token being tagged differently in another occurence of the same n -gram in the same corpus
+p18
+aVIn particular, adpositions (ADP) are confused with particles (PRT) (as in the case of u'\u005cu201c' get out u'\u005cu201d' ); adjectives (ADJ) are confused with nouns (as in u'\u005cu201c' stone lion u'\u005cu201d' ); pronouns (PRON) are confused with determiners (DET) ( u'\u005cu201c' my house u'\u005cu201d' ); numerals are confused with adjectives, determiners, and nouns ( u'\u005cu201c' 2nd time u'\u005cu201d' ); and adjectives are confused with adverbs (ADV) ( u'\u005cu201c' see you later u'\u005cu201d'
+p19
+aVThe algorithm starts off by looking for unigrams and expands them until no longer n -grams are found
+p20
+a.

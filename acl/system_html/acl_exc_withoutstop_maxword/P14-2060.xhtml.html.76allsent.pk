@@ -1,0 +1,274 @@
+(lp0
+VThen a small amount of annotated data is used to build models to determine whether to accept a candidate expansion of an abbreviation based on these features
+p1
+aVWe present methods for learning abbreviation expansion models that favor high precision (incorrect expansions 2 u'\u005cu2062' %
+p2
+aVIn this paper we concentrate on abbreviations, which we define as alphabetic NSWs that it would be normal to pronounce as their expansion
+p3
+aVWe also experimented with a number of alternative high precision approaches that space precludes our presenting in detail here, including pruning the number of expansion candidates based on the pair LM score; only allowing abbreviation expansion when at least one extracted n-gram context is present for that expansion in that context; and CART tree [] training with real valued scores
+p4
+aVOur abbreviation model is a pair character language model (LM), also known as a joint multi-gram model [] , whereby aligned symbols are treated as a single token and a smoothed n-gram model is estimated
+p5
+aVWe also have features that fire for each type of contextual feature (e.g.,, trigram with expansion as middle word, etc.), including u'\u005cu2018' no context u'\u005cu2019' , where none of the trigrams or bigrams from the current example that include the candidate expansion are present in our list
+p6
+aVThus multiple bin features can be active for a given candidate expansion of the abbreviation
+p7
+aVOOVs labeled as abbreviations were also labeled with the correct expansion
+p8
+aVWe then take the Bayesian fusion of this model with the pair LM, by adding them in the log space, to get prediction from both the context and abbreviation model
+p9
+aVSince our target application is text-to-speech, we define the task in terms of an existing TTS lexicon
+p10
+aVFirst, we simply train a smoothed n-gram LM from the data
+p11
+aVThe cost from this LM, normalized by the length of the expansion, serves as a score for the quality of a putative expansion for an abbreviation
+p12
+aVThe abbreviation class is defined as cases where pronouncing as the expansion would be normal
+p13
+aVFor a small set of frequent, conventionalized abbreviations (e.g.,, ca for California u'\u005cu2014' 63 pairs in total u'\u005cu2014' mainly state abbreviations and similar items), we assign an fixed pair LM score, since these examples are in effect irregular cases, where the regularities of the productive abbreviation process do not capture their true cost
+p14
+aVWe collect potential abbreviation/full-word pairs by looking for terms that could be abbreviations of full words that occur in the same context
+p15
+aVWe randomly selected 14,434 OOVs in their full context, and had them manually annotated as falling within one of 8 categories, along with the expansion if the category was u'\u005cu2018' abbreviation u'\u005cu2019'
+p16
+aVOf course, at test time, we will not know whether an OOV is an abbreviation or not, so we also looked at the performance on the rest of the collected data, to see how often it erroneously suggests an expansion from that set
+p17
+aVIf a word is already in the lexicon, it is left unprocessed, since there is an existing pronunciation for it; if a word is out-of-vocabulary (OOV), we consider expanding it to a word in the lexicon
+p18
+aVPerhaps the most demanding such application is text-to-speech synthesis (TTS) since, while for parsing, machine translation and information retrieval it may be acceptable to leave such things as numbers and abbreviations unexpanded, for TTS all tokens need to be read , and for that it is necessary to know how to pronounce them
+p19
+aVIn our experiments, k = 2 since we have a trigram model, though in cases where the target word is the last word in the string, k = 1 , because there only the end-of-string symbol must be predicted in addition to the expansion
+p20
+aVFurther, we have features for the length of the abbreviation (shorter abbreviations have more ambiguity, hence are more risky to expand); membership in the list of frequent, conventionalized abbreviations mentioned earlier; and some combinations of these, along with bias features
+p21
+aV2 2 This Thrax grammar can be found at http://openfst.cs.nyu.edu/twiki/bin/view/Contrib/ThraxContrib We count a pair of words as u'\u005cu2018' co-occurring u'\u005cu2019' if they are observed in the same context
+p22
+aVThen, for any pair of words u , v , we can assign a pair count based on the count of contexts where both occur
+p23
+aVSecond, we used it to extract contextual n-gram features for predicting possible expansions
+p24
+aVBecause of the size of the data set, this is heavily pruned using relative entropy pruning []
+p25
+aVTaking this very high precision system combination of the N-gram and SVM models, we then combine with the baseline TTS system as follows
+p26
+aVThe extracted abbreviation/expansion pairs are character-aligned and a 7-gram pair character LM is built over the alignments using the OpenGrm n-gram library []
+p27
+aVFirst we apply our system, and expand the item if it scores above threshold; for those items left unexpanded, we let the TTS system process it in its own way
+p28
+aVThe data we report on are taken from Google Maps TM and web pages associated with its map entries, but the methods can be applied to any data source that is relatively abbreviation rich
+p29
+aVThe same contextual information of course is used later on to disambiguate which of the expansions is appropriate for the context.) To compute the initial guess as to what can be a possible abbreviation, a Thrax grammar [] is used that, among other things, specifies that the abbreviation must start with the same letter as the full word; if a vowel is deleted, all adjacent vowels should also be deleted; consonants may be deleted in a cluster, but not the last one; and a (string) suffix may be deleted
+p30
+aVA binary feature is defined for each bin that is set to 1 if the current candidate u'\u005cu2019' s score is less than the threshold of that bin, otherwise 0
+p31
+aVWe further filter the potential abbreviations by removing ones that have a lot of potential expansions, where we set the cutoff at 10
+p32
+aVMost notably, the TTS baseline system has a much lower true positive rate; yet we find our systems achieve performance very close to that for the development set, so that our final combination with the TTS baseline was actually slighly better than the numbers on the development set
+p33
+aVOther categories included letter sequence (expansion would not be normal, e.g.,, TV ); partial letter sequence (e.g.,, PurePictureTV ); misspelling; leave as is (part of a URL or pronounced as a word, e.g.,, NATO ); foreign; don u'\u005cu2019' t know; and junk
+p34
+aVWe found that, for use in combination with the baseline TTS system, large overall reductions in FP rate were achieved by using an initial system with substantially higher TP and somewhat higher FP rates, since far fewer abbreviations were then passed along unexpanded to the baseline system, with its relatively high 3% FP rate
+p35
+aVWe then quantize these scores down into 16 bins, using the histogram in the training data to define bin thresholds so as to partition the training instances evenly
+p36
+aVGiven an OOV item (possible abbreviation) in context, we make use of features of the context and of the OOV item itself to enumerate and score candidate expansions
+p37
+aVFirst, we used it to bootstrap a model for assigning a probability of an abbreviation/expansion pair
+p38
+aV1 1 We do not deal here with phonetic spellings in abbreviations such as 4get , or cases where letters have been transposed due to typographical errors ( scv
+p39
+aVTo predict the expansion given the context, we extract n-gram observations for full words in the TTS lexicon
+p40
+aVOf the 11,157 examples that were hand-labeled as non-abbreviations, our SVM u'\u005cu2229' N-gram system expanded 45 items, which is a false positive rate of 0.4% under the assumption that none of them should be expanded
+p41
+aVFor the u'\u005cu201c' SVM u'\u005cu201d' model, we extract features from the log likelihood and log odds scores associated with contextual n-grams, as well as from the pair LM probability and characteristics of the abbreviation itself
+p42
+aVWe consider a possible expansion for an abbreviation to be any word in the lexicon from which the abbreviation can be derived by only deletion of letters
+p43
+aVMultiple contextual n-grams may be observed, and we take the maximum log likelihood and log odds scores for each candidate expansion in the observed context
+p44
+aVSecond, we use log likelihood and log odds ratios (this time using standardly defined n-gram counts) to extract reliable bigram and trigram contexts for words
+p45
+aVFinally, we sampled just over 14 thousand OOV items in context and had them manually labeled with a number of categories, including u'\u005cu2018' abbreviation u'\u005cu2019'
+p46
+aVFor present purposes we use the Google English text-to-speech lexicon, consisting of over 430 thousand words
+p47
+aVOn the other hand, someone who writes svc ctr for service center in a product review is probably merely trying to save time and so expanding the abbreviations in that case is neutral with respect to preserving the intent of the original text
+p48
+aVIf a system is unable to reliably predict the correct reading for a string, it is better to leave the string alone and have it default to, say, a character-by-character reading, than to expand it to something wrong
+p49
+aVIn other applications, such as TTS or typing auto-correction, the resulting normalized string itself is directly presented to the user; hence errors in normalization can have a very high cost relative to leaving tokens unnormalized
+p50
+aVOur data consists of 15.1 billion words of text data from Google Maps TM , lower-cased and tokenized to remove punctuation symbols
+p51
+aVThis class of NSWs is particularly common in personal ads, product reviews, and so forth
+p52
+aVSpace precludes a detailed treatment of these two statistics, but, briefly, both can be derived from contingency table values calculated from the frequencies of (1) the word in the particular context; (2) the word in any context; (3) the context with any word; and (4) all words in the corpus
+p53
+aVWe filter the set of n-grams based on both their log likelihood and log odds ratios, and provide those scores as features
+p54
+aVUnannotated data is used to collect evidence for contextual disambiguation and to train an abbreviation model
+p55
+aVThe resulting ranked list of abbreviation expansion pairs is then thresholded before building the abbreviation model (see below) to provide a smaller but more confident training set
+p56
+aVThe contexts include trigrams with the target word in any of the three positions, and bigrams with the target word in either position
+p57
+aVScores derived from these type (rather than token ) counts highly rank pairs of in-vocabulary words and OOV possible abbreviations that are substitutable in many contexts
+p58
+aVBoth systems make use of the pair LM outlined in Section 3.1 , but differ in how they model context
+p59
+aVFor this paper, we used 5-gram contexts (two words on either side) to extract abbreviations and their expansions
+p60
+aVIdeally a navigation system should read turn on 30N correctly as turn on thirty north ; but if it cannot resolve the ambiguity in 30N , it is far better to read it as thirty N than as thirty Newtons , since listeners can more easily recover from the first kind of error than the second
+p61
+aVWe train a linear model on a subset of the annotated data (see section 4
+p62
+aVExpanding the latter to your website sucks, brother certainly normalizes it to standard English, but one could argue that in so doing one is losing information that the writer is trying to convey using an informal style
+p63
+aVThis defines a joint distribution over input and output sequences, and can be efficiently encoded as a weighted finite-state transducer
+p64
+aVWe also create 16 bins for the pair LM score
+p65
+aVThus the score of the word is
+p66
+aVWe train the model using standard options with Google internal SVM training tools
+p67
+aVWe used this data in several ways
+p68
+aVFor a given context C , e.g.,, the center , let W C be the set of words found in that context
+p69
+aVOne simple way to combine these two system outputs in a way that does not require tuning a decision threshold is to expand the abbreviation if and only if (1) both the SVM model and the N-gram model agree on the best expansion; and (2) the SVM model score is greater than zero
+p70
+aVWe extract the part of the n-gram probability of the string that is not constant across all competing expansions, and normalize by the number of words in that window
+p71
+aVThis system includes some manually built patterns and an address parser to find common abbreviations that occur in a recognizable context
+p72
+aVIn our case, we use them to derive associations between contexts and words occuring in those contexts
+p73
+aVLet c u'\u005cu2062' ( u ) be defined as u'\u005cu2211' v c u'\u005cu2062' ( u , v
+p74
+aVFor both systems, for any given input OOV, the possible expansion with the highest score is output, along with the decision of whether to expand
+p75
+aVSimilarly instances of clng in contexts that can contain cooling or cleaning are evidence that clng could be an abbreviation of either of these words
+p76
+aVFrom these counts, we can define a 2 × 2 table and calculate statistics such as the log likelihood statistic [] , which we use to rank possible abbreviation/expansion pairs
+p77
+aVWe can see that the SVM model has very high precision for its highest ranked examples, yielding nearly 20% of the correct expansions without any incorrect expansions
+p78
+aVThe first system, which we call u'\u005cu201c' N-gram u'\u005cu201d' , uses a pruned smoothed trigram model
+p79
+aVNote that, as we u'\u005cu2019' ve defined it, the alignments from abbreviation to expansion allow only identity and insertion, no deletions or substitutions
+p80
+aVWe split the 3,209 labeled abbreviations into a training set of 2,209 examples and a held aside development set of 1,000 examples
+p81
+aVAbbreviations accounted for nearly 23% of the cases, and about 3/5 of these abbreviations were instances from the set of 63 conventional abbreviation/expansion pairs mentioned in Section 3.1
+p82
+aVcontributes evidence that svc is an abbreviation of service
+p83
+aVThe second system, which we call u'\u005cu201c' SVM u'\u005cu201d' , uses a Support Vector Machine [] to classify candidate expansions as being correct or not
+p84
+aVLet w i be the position of the target expansion
+p85
+aVThe first two rows show the baseline TTS system and SVM model
+p86
+aVWe would like to thank Daan van Esch and the Google Speech Data Operations team for their work on preparing the annotated data
+p87
+aVThe basic task of text normalization is to convert non-standard words (NSWs) u'\u005cu2014' numbers, abbreviations, dates, etc u'\u005cu2014' into standard words, though depending on the task and the domain a greater or lesser number of these NSWs may need to be normalized
+p88
+aVThe other two systems were built using data extracted as described above
+p89
+aVWe present each of these uses in turn
+p90
+aVFigure 1 presents an ROC curve for the N-gram and SVM systems, and for the simple Bayesian fusion (sum in log space) of their scores
+p91
+aVFor the u'\u005cu201c' N-gram u'\u005cu201d' system, n-gram negative log probabilities are extracted as follows
+p92
+aVWe first evaluate on the development set, then perform a final 10-fold cross validation over the entire set of labeled examples
+p93
+aVTo report true and false positive rates for the N-gram system we would need to select an arbitrary decision threshold operating point, unlike the deterministic TTS baseline and the SVM model with its decision threshold of 0
+p94
+aVIn fact, manual inspection found that 20% of these were correct expansions of abbreviations that had been mis-labeled
+p95
+aVWe do this in two ways
+p96
+aVEach of the examples above contains an abbreviation that, unlike, e.g.,, conventionalized state abbreviations such as ca for California , is either only slightly standard ( ctr for center ) or not standard at all ( ser for service
+p97
+aVTo ensure that we did not overtune our systems to the development set through experimentation, we performed 10-fold cross validation over the full set of abbreviations
+p98
+aVSee , and for useful overviews of how to calculate these and other statistics to derive reliable associations
+p99
+aVThis removes mostly short abbreviations that are highly ambiguous
+p100
+aVOn the development set, both systems have a false positive rate near 3%, i.e.,, three abbreviations are expanded incorrectly for every 100 examples; and over 50% true positive rate, i.e.,, more than half of the abbreviations are expanded correctly
+p101
+aVWe also tried a more heavily pruned n-gram model, and the results are only very slightly worse, certainly acceptable for a low-resource scenario
+p102
+aVThe simple combination of their scores achieves strong improvements over either model, with an operating point associated with the SVM decision boundary that yields a couple of points improvement in true positives and a full 1% reduction in false positive rate
+p103
+aVThe N-gram system has around 200M n-grams after pruning; while the SVM model uses around a quarter of that
+p104
+aVThe first is the hand-built TTS normalization system
+p105
+aVRather than tune such a meta-parameter to the development set, we instead present an ROC curve comparison of the N-gram and SVM models, and then propose a method for u'\u005cu201c' intersecting u'\u005cu201d' their output without requiring a tuned decision threshold
+p106
+aVNote that the number of n-grams in the two models differs
+p107
+aVWe note in passing that similar issues arise in automatic spelling correction work [] , where it is better to leave a word alone than to u'\u005cu201c' correct u'\u005cu201d' it wrongly
+p108
+aVSome of these yielded very high precision systems, though at the cost of leaving many more abbreviations unexpanded
+p109
+aVFor example, the grammar covers several hundred city-state combinations, such as Fairbanks AK , yielding good performance on such cases
+p110
+aVUsing this approach, our true positive rate on the development set declines a bit to just over 50%, but our false positive rate declines over two full percentage points to 1.1%, yielding a very high precision system
+p111
+aVWe evaluate in terms of the percentage of abbreviations that were correctly expanded (true positives, TP) and that were incorrectly expanded (false positives, FP
+p112
+aVHowever the N-gram system achieves higher true positive rates when the false positive rate falls between 1 and 3 percent, though both systems reach roughly the same performance at the SVM u'\u005cu2019' s decision threshold corresponding to around 3.3% false positive rate
+p113
+aVIn this way, we actually reduce the false positive rate on the development set over the baseline TTS system by over 1% absolute to less than 2%, while also increasing the true positive rate to 73.5%, an increase of 18.5% absolute
+p114
+aVNote that these are relatively lightweight annotations that do not require extensive linguistics expertise
+p115
+aVAn important principle in text normalization for TTS is do no harm
+p116
+aVSee Table 1 for some examples
+p117
+aVWe have three base systems that we compare here
+p118
+aVResults are shown in Table 2
+p119
+aVWhile this may seem like a trivial trade off between precision and recall, our goal motivates developing measures that minimize the u'\u005cu201c' risk u'\u005cu201d' of expanding a term, something that is important in an application such as TTS, where one cannot correct a misexpansion after it is spoken
+p120
+aVThese results are presented in Table 2
+p121
+aVIn a slight abuse of the term u'\u005cu2018' intersection u'\u005cu2019' , we call this combination u'\u005cu2018' SVM intersect N-gram u'\u005cu2019' (or u'\u005cu2018' SVM u'\u005cu2229' N-gram u'\u005cu2019' in Table 2
+p122
+aVWhat is also very application-dependent is the cost of errors in normalization
+p123
+aVText normalization [] is an important initial phase for many natural language and speech applications
+p124
+aVFor Twitter, much of the normalization task involves non-standard language such as ur website suxx brah (from
+p125
+aVThis is particularly true in accessibility applications for users who rely on TTS for most or all of their information needs
+p126
+aVFor some applications, where the normalized string is an intermediate stage in a larger application such as translation or information retrieval, overgeneration of normalized alternatives is often a beneficial strategy, to the extent that it may improve the accuracy of what is eventually being presented to the user
+p127
+aVWhich normalizations are required depends very much on the application
+p128
+aVOne other difference between the work we report from much of the recent work cited above is that that work focuses on getting high F scores, whereas we are most concerned with getting high precision
+p129
+aVThere has been a lot of interest in recent years on u'\u005cu201c' normalization u'\u005cu201d' of social media such as Twitter, but that work defines normalization much more broadly than we do here []
+p130
+aVThere is a good reason for us to focus more narrowly
+p131
+aVWe also thank the reviewers for their comments
+p132
+aVFor example
+p133
+aVThus
+p134
+aVFor example
+p135
+aVc:c u'\u005cu0395' :e u'\u005cu0395' :n t:t u'\u005cu0395' :e r:r
+p136
+a.

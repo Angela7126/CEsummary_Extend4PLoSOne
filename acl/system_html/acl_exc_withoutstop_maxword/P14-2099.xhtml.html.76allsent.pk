@@ -1,0 +1,239 @@
+(lp0
+VDeveloping a gold-standard alignment of privacy policies would either require an interface that allows each annotator to interact with the entire corpus of previously aligned documents while reading the one she is annotating, or the definition (and likely iterative refinement) of a set of categories for manually labeling policy sections
+p1
+aVThough our model (particularly the restricted variants) treats the problem as one of alignment , our evaluations consider groupings of policy sections
+p2
+aVWe therefore crowdsourced the privacy policy document collection using Amazon Mechanical Turk
+p3
+aVThese were too costly for us to consider, so we instead propose two generic methods to evaluate models for sequence alignment of a collection of documents with generally similar content
+p4
+aVPrivacy policy documents are verbose, often esoteric legal documents that many people encounter as clients of companies that provide services on the web
+p5
+aVIn the human QA evaluation, this is mostly due to recall improvements (i.e.,, more pairs of sections relevant to the same policy question were grouped together
+p6
+aVWe are inspired by multiple sequence alignment methods in computational biology [ 8 ] and by Barzilay and Lee ( 2004 ) , who described a hidden Markov model (HMM) for document content where each state corresponds to a distinct topic and generates sentences relevant to that topic according to a language model
+p7
+aVOur method allows these to overlap (63% of the sections in any A i occurred in more than one A i ), and they are not exhaustive (since many sections of the policies were not deemed to contain answers to any of the nine questions by any expert
+p8
+aVTogether, these can be used as a gold standard grouping of policy sections, against which we can compare our system u'\u005cu2019' s output
+p9
+aVAs in § 4.1 , we calculate precision and recall on pairs
+p10
+aVMcDonald and Cranor ( 2008 ) showed that, if users were to read the privacy policies of every website they access during the course of a year, they would end up spending a substantial amount of their time doing just that and would often still not be able to answer basic questions about what these policies really say
+p11
+aVExperts were allowed to select as many sections for each question as they saw fit, since answering some questions may require synthesizing information from different sections
+p12
+aVSample the t th section of the document by drawing a bag of terms, u'\u005cud835' u'\u005cudc90' t , according to the emission multinomial distribution for state y t
+p13
+aVThis does not penalize the model for grouping together a u'\u005cu201c' no u'\u005cu201d' pair; we chose it nonetheless because it is interpretable
+p14
+aVIndeed, our model does not even generate these lengths, since doing so would force the states to u'\u005cu201c' explain u'\u005cu201d' the length of each section, not just its content
+p15
+aVSample the next state, y t + 1 , according to the transition distribution over u'\u005cud835' u'\u005cudcae'
+p16
+aVSuch policies therefore offer an excellent opportunity for NLP tools that summarize or extract key information that (i) helps users understand the implications of agreeing to these policies and (ii) helps legal analysts understand the contents of these policies and make recommendations on how they can be improved or made more clear
+p17
+aVIn this method, the desired K -way clustering solution is computed by performing a sequence of bisections
+p18
+aVSince every site is different in its placement of the document (e.g.,, buried deep within the website, distributed across several pages, or mingled together with Terms of Service) and format (e.g.,, HTML, PDF, etc.), and since we wish to preserve as much document structure as possible (e.g.,, section labels), full automation was not a viable solution
+p19
+aV3 3 The u'\u005cu201c' Adult u'\u005cu201d' category was excluded; the u'\u005cu201c' World u'\u005cu201d' category was excluded since it contains mainly popular websites in different languages, and we opted to focus on policies in English in this first stage of research, though mulitlingual policy analysis presents interesting challenges for future work
+p20
+aVFor each website, we created a HIT in which a worker was asked to copy and paste the following privacy policy-related information into text boxes i) privacy policy URL; (ii) last updated date (or effective date) of the current privacy policy; (iii) privacy policy full text; and (iv) the section subtitles in the top-most layer of the privacy policy
+p21
+aVChoose a start state y 1 from u'\u005cud835' u'\u005cudcae' according to the start-state distribution
+p22
+aVUnsurprisingly, many people do not read them [ 9 ]
+p23
+aVAn example is shown in Figure 2
+p24
+aVWe created a separate gold standard of judgments of pairs of privacy policy sections
+p25
+aV4 4 The emission distributions are not a proper language models (e.g.,, a bigram may be generated by as many as three draws from the emission distribution once for each unigram it contains and once for the bigram
+p26
+aVIn the sequel, a grouping on a set X is defined as a collection of subsets X i u'\u005cu2286' X ; these may overlap (i.e.,, there might be x u'\u005cu2208' X i u'\u005cu2229' X j ) and need not be exhaustive (i.e.,, there might be x u'\u005cu2208' X u'\u005cu2216' u'\u005cu22c3' i X i
+p27
+aVGiven the privacy policy full text and the section subtitles, we partition the full privacy document into different sections, delimited by the section subtitles
+p28
+aVGiven the corpus of privacy policies described in § 2 , we designed a model to efficiently infer an alignment of policy sections
+p29
+aVAlternatively, they could form a search query using the website name and u'\u005cu201c' privacy policy u'\u005cu201d' (e.g.,, u'\u005cu201c' Amazon.com privacy policy u'\u005cu201d' ) and search in the returned results for the most appropriate privacy policy URL
+p30
+aVTo identify the privacy policy URL, workers were encouraged to go to the website and search for the privacy link
+p31
+aVYes, both the sections essentially convey the same message in a privacy policy
+p32
+aVA privacy policy is then converted into XML
+p33
+aVThe transition distribution captures tendencies of privacy policy authors to organize these sections in similar orders, though with some variation
+p34
+aVA HIT consisted of a pair of policy sections and a multiple choice question, u'\u005cu201c' After reading the two sections given below, would you say that they broadly discuss the same topic u'\u005cu201d' The possible answers were
+p35
+aVTwo reusable evaluation benchmarks for the resulting alignment of policy sections (§ 4
+p36
+aVFor each of the nine questions, we take the union of all policy sections that contain text selected by any annotator as support for her answer
+p37
+aVAn unsupervised approach to aligning the policy sections based on the issues they discuss
+p38
+aVIn addition to answering each question for each policy, we also asked each expert to copy and paste the text of the policy that contains the answer
+p39
+aVIn our formulation, each hidden state corresponds to an issue or topic, characterized by a distribution over words and bigrams appearing in privacy policy sections addressing that issue
+p40
+aVWe collected 1,010 unique privacy policy documents from the top websites ranked by Alexa.com
+p41
+aVThe data selected for judgment was a sample of pairs stratified by a simple measure of text similarity
+p42
+aVTo do this, we define the set of section pairs that are grouped together in answer sets, G
+p43
+aVWe estimate an HMM-like model on our corpus, exploiting similarity across privacy policies to the extent it is evident in the data
+p44
+aVA new corpus of over 1,000 privacy policies gathered from widely used websites, manually segmented into subtitled sections by crowdworkers (§ 2
+p45
+aVWe sampled 994 section pairs uniformly across the 15 categories u'\u005cu2019' four bins each
+p46
+aVIn that work, we have formulated a set of nine multiple choice questions about a single policy that ask about collection of contact, location, health, and financial information, sharing of each with third parties, and deletion of data
+p47
+aVWe then binned pairs of sections by cosine similarity (into four bins bounded by 0.25, 0.5, and 0.75
+p48
+aVThis results in nine groups of policy sections, which we call answer-sets denoted A 1 , u'\u005cu2026' , A 9
+p49
+aVAligning policy sections is a first step toward our aforementioned summarization and extraction goals
+p50
+aVFor thirty policies, we obtained answers from each of six domain experts who were not involved in designing the questions
+p51
+aVThis study was carried out as part of a larger collaboration with legal scholars who study privacy
+p52
+aVAll of the methods require the specification of the number of groups or hidden states, which we fix to ten, the average number of sections per policy
+p53
+aVThis paper instead analyzes policies in aggregate, seeking to align sections of policies
+p54
+aVWe derived unigram tfidf vectors for each section in each of 50 randomly sampled policies per category
+p55
+aVAlthough, the sections do not convey the same message, the broadly discuss the same topic
+p56
+aVOne shortcoming of this approach, for which the second evaluation seeks to compensate, is that a very small, and likely biased, subset of the policy sections is considered
+p57
+aV535 out of the 994 pairs were annotated to be similar in topic
+p58
+aVNo, the sections discuss two different topics
+p59
+aVAligning the policies is a first step in a larger effort to (i) automatically analyze policies to make them less opaque to users and (ii) support legal experts who wish to characterize the state of privacy online and make recommendations [ 7 , 1 , 6 ]
+p60
+aVEven once the policy u'\u005cu2019' s URL is identified, extracting the text presents the usual challenges associated with scraping documents from the web
+p61
+aVThey are a snapshot of privacy policies of mainstream websites covering fifteen of Alexa.com u'\u005cu2019' s seventeen categories (Table 1
+p62
+aVFinding a website u'\u005cu2019' s policy is not trivial
+p63
+aVThis task is motivated by an expectation that many policies will address similar issues, 1 1 Personal communication, Joel Reidenberg such as collection of a user u'\u005cu2019' s contact, location, health, and financial information, sharing with third parties, and deletion of data
+p64
+aVThe approach is inspired by the application of hidden Markov models to sequence alignment in computational biology (Durbin et al., 1998; § 3
+p65
+aVWhile we expect that different kinds of websites will likely address different privacy issues, we believe that many policies will discuss roughly the same set of issues
+p66
+aVFor the purposes of this study, the experts u'\u005cu2019' answers are not important
+p67
+aVThis expectation is supported by recommendation by privacy experts [ 10 ] and policymakers [ 9 ] ; in the financial services sector, the Gramm-Leach-Bliley Act requires these institutions to address a specific set of issues
+p68
+aVThe questions were inspired primarily by the substantive interest of these domain experts u'\u005cu2014' not by this particular algorithmic study
+p69
+aVFor example, sections that discuss u'\u005cu201c' user data on the company u'\u005cu2019' s server u'\u005cu201d' should be grouped together
+p70
+aVOur first baseline is a greedy divisive clustering algorithm 6 6 As implemented in CLUTO, http://glaros.dtc.umn.edu/gkhome/cluto/cluto/overview to partition the policy sections into ten clusters
+p71
+aVPast applications of NLP have sought to parse privacy policies into machine-readable representations [ 5 ] or extract sub-policies from larger documents [ 14 ]
+p72
+aV{ u'\u005cu27e8' a , b u'\u005cu27e9' u'\u005cu2223' u'\u005cu2203' A i u'\u005cu220b' a , b } and a similar set of pairs H from a model u'\u005cu2019' s grouping
+p73
+aVFrom these sets, we calculate estimates of precision
+p74
+aVAfter learning, the most probable assignment of a policy u'\u005cu2019' s sections to states can be recovered using a variant of the Viterbi algorithm
+p75
+aVCrowdsourcing was used to determine, for each pair, whether the two sections should be grouped together
+p76
+aVIn this section, we evaluate the three HMM variants described in § 3 , and two baselines, using the methods in § 4
+p77
+aVThough many well-regulated commercial websites provide a u'\u005cu201c' privacy u'\u005cu201d' link on their homepages, not all do
+p78
+aVThis model can nearly be understood as a hidden semi -Markov model [ 3 ] , though we treat the section lengths as observable
+p79
+aVThe first two options were considered a u'\u005cu201c' yes u'\u005cu201d' for the majority voting and for defining a gold standard
+p80
+aVFor ease of understanding, some examples of content on u'\u005cu201c' the same topic u'\u005cu201d' were included
+p81
+aVThe likelihood function for the model is shown in Figure 1
+p82
+aVThe implementation uses unigram features and cosine similarity
+p83
+aVH and recall
+p84
+aVFor LDA and the HMM variants (which use random initialization), we report mean and standard deviation across ten independent runs
+p85
+aVLet u'\u005cud835' u'\u005cudcae' denote the set of hidden states
+p86
+aVEach HIT was completed by three workers, paid $0.05, for a total cost of $380 (including Amazon u'\u005cu2019' s surcharge
+p87
+aVThe total cost including some initial trials was $130
+p88
+aVThe three variants of the model performed similarly on average, though Strict Forward had very high variance
+p89
+aV5 5 The questions are available in an online appendix at http://usableprivacy.org/data
+p90
+aVNote the difference from traditional HMMs, in which a single observation symbol is drawn at each time step u'\u005cud835' u'\u005cudc90' t is generated by repeatedly sampling from a distribution over terms that includes all unigrams and bigrams except those that occur in fewer than 5% of the documents and in more than 98% of the documents
+p91
+aVTo more closely match our models, LDA is given access to the same unigram and bigram tokens
+p92
+aVWe demonstrate that our approach outperforms naïve methods (§ 5
+p93
+aVWe found university websites to be exceptionally unlikely to provide such a link
+p94
+aVTable 3 shows the results
+p95
+aVThe parameters of the model are almost identical to those of a classic HMM (start state distribution, emission distributions, and transition distributions), except that emissions are characterized by multinomial rather than a categorical distributions
+p96
+aVThe generative story for our model is as follows
+p97
+aVTurkers with an acceptance rate greater than 95% with an experience of at least 100 HITs were allowed and paid $0.03 per annotation
+p98
+aVAll three variants of the HMM improve over the baselines on both tasks, in terms of F 1
+p99
+aVEvery section-pair was annotated by at least three annotators (as many as 15, increased until an absolute majority was reached
+p100
+aVOur second baseline is latent Dirichlet allocation (LDA; Blei et al., 2003), with ten topics and online variational Bayes for inference [ 11 ]
+p101
+aVWe consider three HMM variants u'\u005cu201c' Vanilla u'\u005cu201d' allows all transitions
+p102
+aVMachine learning has been applied to assess certain attributes of policies [ 7 , 1 , 6 , 15 ]
+p103
+aVOur corpus and benchmarks are available at http://usableprivacy.org/data
+p104
+aV2 2 http://www.alexa.com These policies were collected during a period of six weeks during December 2013 and January 2014
+p105
+aVIts maximum performance across ten runs was very high (67% and 53% F 1 on the two tasks), suggesting the potential benefits of good initialization or model selection
+p106
+aVThese are learned using Expectation-Maximization, with a forward-backward algorithm to calculate marginals (E-step) and smoothed maximum likelihood estimation for the M-step [ 13 ]
+p107
+aVThis filtering rule was designed to eliminate uninformative stopwords as well as company-specific terms (e.g.,, the name of the company
+p108
+aVThe other two posit an ordering on the states u'\u005cud835' u'\u005cudcae' = { s 1 , s 2 , u'\u005cu2026' , s K } , and restrict the set of transitions that are possible, imposing bias on the learner u'\u005cu201c' All Forward u'\u005cu201d' only allows s k to transition to { s k , s k + 1 , u'\u005cu2026' , s K } u'\u005cu201c' Strict Forward u'\u005cu201d' only allows s k to transition to s k or s k + 1
+p109
+aVThe authors gratefully acknowledge helpful comments from Lorrie Cranor, Joel Reidenberg, Florian Schaub, and several anonymous reviewers
+p110
+aV7 7 As implemented in gensim [ 16 ]
+p111
+aVFor t = 1 , 2 , u'\u005cu2026' , until y t is the stopping state
+p112
+aVThis research was supported by NSF grant SaTC-1330596
+p113
+aVWe present the following contributions
+p114
+aV/
+p115
+aVG u'\u005cu2229' H
+p116
+ag115
+aVG u'\u005cu2229' H
+p117
+aVG
+p118
+a.

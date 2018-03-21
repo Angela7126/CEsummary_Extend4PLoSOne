@@ -1,0 +1,20 @@
+(lp0
+VIn the coarse pass, we compute Viterbi inside and outside scores for every span
+p1
+aVThe unpruned Viterbi computations in a fine grammar using the clustering method of Canny et al
+p2
+aVBecause the grammar used in the coarse pass is a projection of the grammar used in the fine pass, these coarse scores correlate reasonably closely with the probabilities computed in the fine pass
+p3
+aVFigure 1 shows an overview of the approach we first parse densely with a coarse grammar and then parse sparsely with the fine grammar, skipping symbols that the coarse pass deemed sufficiently unlikely
+p4
+aVNow, when we use a coarse pruning pass, we are able to parse nearly 280 sentences per second, a 70% increase in parsing performance relative to Canny et al
+p5
+aVThus, we can use the coarse pass u'\u005cu2019' s inside and outside scores as the scaling values for the fine pass u'\u005cu2019' s scores
+p6
+aVWe tested our new pruning approach using an X-bar grammar as the coarse pass
+p7
+aVThe Viterbi algorithm is a reasonably effective method for parsing
+p8
+aVThe coarse to fine pruning approach of Petrov and Klein ( 2007 ) employs an X-bar grammar as its first pruning phase, but there is
+p9
+a.

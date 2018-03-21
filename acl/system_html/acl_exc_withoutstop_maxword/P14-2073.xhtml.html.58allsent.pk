@@ -1,0 +1,62 @@
+(lp0
+VThus we perform a set of experiments in which we perform Gibbs initialization 20 times on the initialization set, setting the particle filter u'\u005cu2019' s initial model to the model out of these 20 with the highest in-sample NMI
+p1
+aVThen, for each dataset, for rejuvenation disabled, rejuvenation based on a reservoir of size 1000, and rejuvenation based on the entire history (in turn), we perform 30 runs of the particle filter from that fixed initial model
+p2
+aVThe results, shown in Figure 3 , show that we can ameliorate the variance due to initialization by tuning the initial model to NMI or perplexity
+p3
+aVWe observed previously that variance in the Gibbs initialization of the model contributes significantly to variance of the overall algorithm, as measured by NMI
+p4
+aVWe attempted to correct this by drawing the rejuvenation sequence from a reservoir, but our results indicate that the particle filter for LDA on our dataset is highly sensitive to initialization and not influenced by rejuvenation
+p5
+aVWith this in mind, we consider whether we can reduce variance in the initialization by tuning the initial model
+p6
+aVWe may not always have labeled data for initialization, so we also consider a variation in which Gibbs initialization is performed 20 times on the first 80% of the initialization sample, held-out perplexity (per word) is estimated on the remaining 20%, using a first-moment particle learning approximation [ 20 ] , and the particle filter is started from the model out of these 20 with the lowest held-out perplexity
+p7
+aVThe variance of the particle filter is often large, so for each experiment we perform 30 runs and plot the mean NMI inside bands spanning one sample standard deviation in either direction
+p8
+aVIn the experiments of Börschinger and Johnson ( 2012 ) , the particle cloud appears to be resampled once per utterance with a large rejuvenation sequence; 4 4 The ESS threshold is P ; the rejuvenation sequence is 100 or 1600 utterances, almost one sixth of the training data each particle takes many more rejuvenation MCMC steps than new state transitions and thus resembles a batch MCMC sampler
+p9
+aV2009 ) presented a method for LDA inference based on particle filters, where a sample set of models is updated online with each new token observed from a stream
+p10
+aVAs each token of the training data is ingested by the particle filter, we decide to insert that token into the reservoir, or not, independent of the other tokens in the current document
+p11
+aVThus, at the end of step i of the particle filter, each of the i tokens seen so far in the training sequence has an equal probability of being in the reservoir, hence being selected for rejuvenation
+p12
+aVIf we want to fit a model to a long non-i.i.d. stream, we require an unbiased rejuvenation sequence as well as sub-linear storage complexity
+p13
+aVTo ensure constant space over an unbounded stream, we draw the rejuvenation sequence u'\u005cu211b' u'\u005cu2062' ( i ) uniformly from a reservoir
+p14
+aVThis algorithm thus has linear storage complexity and is not an online learning algorithm in a strict sense [ 6 ]
+p15
+aVPerplexity (or likelihood) is often used to estimate model performance in LDA [ 3 , 11 , 22 , 12 ] , and does not compare the inferred model against gold-standard labels, yet it appears to be a good proxy for NMI in our experiment
+p16
+aVDuring training we report the out-of-sample NMI, calculated by holding the word proportions u'\u005cu03a6' fixed, running five sweeps of collapsed Gibbs sampling on the test set, and computing the topic for each document as the topic assigned to the most tokens in that document
+p17
+aVThey later showed that rejuvenation improved performance [ 6 ] , but this impaired cognitive plausibility by necessitating storage of all previous states and observations
+p18
+aVTo combat this inefficiency, after every state transition we estimate the effective sample size (ESS) of the particle weights as u'\u005cu2225' u'\u005cu03a9' i u'\u005cu2225' 2 - 2 [ 14 ] and resample the particles when that estimate drops below a prespecified threshold
+p19
+aVThus, if initialization continues to be crucial to performance, at least we may have the flexibility of initializing without gold-standard labels
+p20
+aVAfter these steps, we compute the vocabulary for each dataset as the set of all non-singleton types in the training data augmented with a special out-of-vocabulary symbol
+p21
+aVReservoir sampling is a widely-used family of algorithms for choosing an array ( u'\u005cu201c' reservoir u'\u005cu201d' ) of k items
+p22
+aV2009 ) rejuvenates over independent draws from the history by storing all past observations and states
+p23
+aVThe one existing algorithm that can be directly applied under this constraint, to our knowledge, is the streaming variational Bayes framework [ 4 ] in which the posterior is recursively updated as new data arrives using a variational approximation
+p24
+aVLDA [ 3 ] u'\u005cu201c' explains u'\u005cu201d' the occurrence of each word by postulating that a document was generated by repeatedly
+p25
+aVThe most common example, presented in Vitter ( 1985 ) as Algorithm R, chooses k elements of a stream such that each possible subset of k elements is equiprobable
+p26
+aVWe preprocess the data by splitting each line on non-alphabet characters, converting the resulting tokens to lower-case, and filtering out any tokens that appear in a list of common English stop words
+p27
+aVNow each particle p is propagated forward by drawing a topic z i ( p ) from the conditional posterior distribution u'\u005cud835' u'\u005cudc0f' ( z i ( p ) u'\u005cu2223' u'\u005cud835' u'\u005cudc33' i - 1 ( p ) , u'\u005cud835' u'\u005cudc30' i ) and scaling the particle weight by u'\u005cud835' u'\u005cudc0f' ( w i u'\u005cu2223' u'\u005cud835' u'\u005cudc33' i - 1 ( p ) , u'\u005cud835' u'\u005cudc30' i - 1
+p28
+aVDropping the superscript ( p ) for notational convenience, the conditional posterior used in the propagation step is given by
+p29
+aVwhere I u'\u005cud835' u'\u005cudc33' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33' u'\u005cu2032' ) is the indicator function, evaluating to 1 if u'\u005cud835' u'\u005cudc33' = u'\u005cud835' u'\u005cudc33' u'\u005cu2032' and 0 otherwise
+p30
+a.

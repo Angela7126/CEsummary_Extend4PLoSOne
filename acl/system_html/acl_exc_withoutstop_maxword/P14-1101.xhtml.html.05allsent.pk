@@ -1,0 +1,440 @@
+(lp0
+VIn the LD model, vowel phones appear within words drawn from the lexicon
+p1
+aVBoth the LD and TLD models are computational-level models of phonetic (specifically, vowel) categorization where phones (vowels) are presented to the model in the context of words
+p2
+aVThis is the baseline IGMM model, which clusters vowel tokens using bottom-up distributional information only; the LD model adds top-down information by assigning categories in the lexicon, rather than on the token level
+p3
+aVTo demonstrate the benefit of situational information, we develop the Topic-Lexical-Distributional (TLD) model, which extends the LD model by assuming that words appear in situations analogous to documents in a topic model
+p4
+aVThe TLD model retains the IGMM vowel phone component, but extends the lexicon of the LD model by adding topic-specific lexicons, which capture the notion that lexeme probabilities are topic-dependent
+p5
+aVOur own Topic-Lexical-Distributional (TLD) model extends the LD model to include an additional type of context the situations in which words appear
+p6
+aVIn the HDP lexicon, a top-level global lexicon is generated as in the LD model
+p7
+aVWe compare all three models u'\u005cu2014' TLD, LD, and IGMM u'\u005cu2014' on the vowel categorization task, and TLD and LD on the lexical categorization task (since IGMM does not infer a lexicon
+p8
+aVFollowing previous models of vowel learning ( 8 ; 50 ; 26 ; 9 ) we assume that vowel tokens are drawn from a Gaussian mixture model
+p9
+aV11 ) implemented the Lexical-Distributional (LD) model, which jointly learns a set of phonetic vowel categories and a set of word-forms containing those categories
+p10
+aVBoth the TLD and the LD models find u'\u005cu2018' supervowel u'\u005cu2019' categories, which cover multiple vowel categories and are used to merge minimal pairs into a single lexical item
+p11
+aVThese datasets are intended to evaluate the degree of reliance on consonant information in the LD and TLD models, and to what extent the topics in the TLD model can replace this information
+p12
+aVFigure 4 shows example vowel categories inferred by the TLD model, including two supervowels
+p13
+aVSince our model is not a model of the learning process, we do not compare the infant learning process to the learning algorithm.) We evaluate both the inferred phonetic categories and words using the clustering evaluation measure V-Measure (VM; 36
+p14
+aVThe task is to infer a set of phonetic categories and a set of lexical items on the basis of the data observed for each word token x i
+p15
+aVIn this section we describe more formally the generative process for the LD model ( 11 ) , a joint Bayesian model over phonetic categories and a lexicon, before describing the TLD extension in the following section
+p16
+aVSimulations with the LD model show that using lexical information to constrain phonetic learning can greatly improve categorization accuracy ( 11 ) , but it can also introduce errors
+p17
+aVWe use Gibbs sampling to infer three sets of variables in the TLD model assignments to vowel categories in the lexemes, assignments of tokens to topics, and assignments of tokens to tables (from which the assignment to lexemes can be read off
+p18
+aVGiven the data, the model must assign each vowel token to a vowel category, w i u'\u005cu2062' j = c
+p19
+aVAgain performance decreases as the consonant categories become coarser, but the additional semantic information in the TLD model compensates for the lack of consonant information
+p20
+aVThese topic-specific lexicons are used to generate the tokens in a similar manner to the LD model
+p21
+aVIn the TLD model, tokens appear within situations, each of which has a distribution over topics u'\u005cu0398' h
+p22
+aVThe set of phonetic categories and the lexicon are both modeled using non-parametric Dirichlet Process priors, which return a potentially infinite number of categories or lexemes
+p23
+aVWe therefore obtain the topic distributions used as input to the TLD model by training an LDA topic model ( 5 ) on a superset of the child-directed transcript data we use for lexical-phonetic learning, dividing the transcripts into small sections (the u'\u005cu2018' documents u'\u005cu2019' in LDA) that serve as our distinct situations u'\u005cud835' u'\u005cudc89'
+p24
+aVThe situational information in our model is similar to that assumed by theories of cross-situational word learning ( 14 ; 40 ; 53 ) , but our model does not require learners to map individual words to their referents
+p25
+aVIn this paper we explore the potential contribution of semantic information to phonetic learning by formalizing a model in which learners attend to the word-level context in which phones appear (as in the lexical-phonetic learning model of 11 ) and also to the situations in which word-forms are used
+p26
+aVFurthermore, TLD consistently outperforms the LD model, finding better phonetic categories, both for vowels generated from the combined categories of all speakers ( u'\u005cu2018' all u'\u005cu2019' ) and vowels generated from adult female speakers only ( u'\u005cu2018' w u'\u005cu2019' ), although the latter are clearly much easier for both models to learn
+p27
+aVIn the original LD model, the observations for token x i are its frame f i , which consists of a list of consonants and slots for vowels, and the list of vowel tokens u'\u005cud835' u'\u005cudc98' i
+p28
+aVThe category for each vowel token in the word is determined by the lexeme; the formant values are drawn from the corresponding Gaussian as in the IGMM
+p29
+aVFor vowels, VM measures how well the inferred phonetic categorizations match the gold categories; for lexemes, it measures whether tokens have been assigned to the same lexemes both by the model and the gold standard
+p30
+aVSpecifically, the TLD model replaces the Dirichlet Process lexicon with a Hierarchical Dirichlet Process (HDP; Teh ( 43 )
+p31
+aVHowever, in our simulations we approximate the environmental information by running a topic model ( 5 ) over a corpus of child-directed speech to infer a topic distribution for each situation
+p32
+aVThe input to the TLD model includes a distribution over topics for each situation, which we infer in advance from the full Brent corpus (not only the C1 subset) using LDA
+p33
+aVIn a model of phonological learning, Fourtassi and Dupoux (submitted) show that semantic context information similar to that used here remains useful despite segmentation errors
+p34
+aVThese topic distributions are then used as input to our model to represent situational contexts
+p35
+aV37 ) found that topics learned from similar transcript data using a topic model were strongly correlated with immediate activities and contexts
+p36
+aVHowever, due to a widespread assumption that infants do not know the meanings of many words at the age when they are learning phonetic categories (see 42 for a review), most recent models of early phonetic category acquisition have explored the phonetic learning problem in the absence of semantic information ( 8 ; 9 ; 11 ; 26 ; 50 )
+p37
+aVAlthough the model observes the distribution of topics in each situation (corresponding to the child observing her non-linguistic environment), it must learn to associate each (phonetically and lexically ambiguous) word token with a particular topic from that distribution
+p38
+aVEach vowel in the lexicon must be assigned to a category in the IGMM
+p39
+aVThe topic-word distributions learned by LDA are discarded, since these are based on the (correct and unambiguous) words in the transcript, whereas the TLD model is presented with phonetically ambiguous versions of these word tokens and must learn to disambiguate them and associate them with topics
+p40
+aVLexical information helps with phonetic categorization because it can disambiguate highly overlapping categories, such as the ae and eh categories in Figure 1
+p41
+aVIn the individual components of VM, TLD and LD have similar VC ( u'\u005cu201c' recall u'\u005cu201d' ), but TLD has higher VH ( u'\u005cu201c' precision u'\u005cu201d' ), demonstrating that the semantic information given by the topics can separate potentially ambiguous words, as hypothesized
+p42
+aVAs noted above, the learned document-topic distributions u'\u005cud835' u'\u005cudf3d' are treated as observed variables in the TLD model to represent the situational context
+p43
+aVThe third factor, the likelihood of the vowel formants u'\u005cud835' u'\u005cudc98' h u'\u005cu2062' i in the categories given by the lexeme u'\u005cud835' u'\u005cudc97' l , is of the same form as the likelihood of vowel categories when resampling lexeme vowel assignments
+p44
+aVWhen two word tokens contain the same consonant frame but different vowels (i.e.,, minimal pairs), the model is more likely to categorize those two vowels together
+p45
+aV11 ) , we show a clear improvement over previous models in both phonetic and lexical (word-form) categorization when situational context is used as an additional source of information
+p46
+aVIf a word token is assigned to a lexeme, x i = u'\u005cu2113' , the vowels within the word are assigned to that lexeme u'\u005cu2019' s vowel categories, w i u'\u005cu2062' j = v u'\u005cu2113' u'\u005cu2062' j = c
+p47
+aVSimulations showed that the use of lexical context greatly improved phonetic learning
+p48
+aVConversely, potential minimal pairs that occur in situations with similar topic distributions are more likely to belong to the same topic and thus the same lexeme
+p49
+aVAlthough we assume that children infer topic distributions from the non-linguistic environment, we will use transcripts from childes to create the word/phone learning input for our model
+p50
+aVThus, the model has trouble distinguishing minimal pairs
+p51
+aVThere are a fixed number of lower level topic-lexicons; these are matched to the number of topics in the LDA model used to infer the topic distributions (see Section 6.4
+p52
+aVOverall, the contextual semantic information added in the TLD model leads to both better phonetic categorization and to a better protolexicon, especially when the input is noisier, using degraded consonants
+p53
+aVEach vowel phoneme in the word is then replaced by formant values drawn from the corresponding Hillenbrand Gaussian for that vowel
+p54
+aVBoth models perform less well when the consonant frames provide less information, but the TLD model performance degrades less than the LD performance
+p55
+aVFigure 5 shows that TLD also outperforms LD on the lexeme/word categorization task
+p56
+aVModels without any semantic information are likely to underestimate infants u'\u005cu2019' ability to learn phonetic categories
+p57
+aVThe TLD model includes additional observations, described below.) A single vowel token, w i u'\u005cu2062' j , is a two dimensional vector representing the first two formants (peaks in the frequency spectrum, ordered from lowest to highest
+p58
+aVThe remaining hyperparameters for the vowel category and lexeme priors are set to the same values used by Feldman et al
+p59
+aVAlthough young children also have trouble with minimal pairs ( 41 ; 45 ) , the LD model may overestimate the degree of the problem
+p60
+aVIn simulations of vowel learning, inspired by Vallabha et al
+p61
+aVTopic-specific lexicons are then drawn from the global lexicon, containing a subset of the global lexicon (but since the size of the global lexicon is unbounded, so are the topic-specific lexicons
+p62
+aVThe above model generates a category assignment c i u'\u005cu2062' j for each vowel token w i u'\u005cu2062' j
+p63
+aVBoth the LD and the TLD models do this using intermediate lexemes, u'\u005cu2113' , which contain vowel category assignments, v u'\u005cu2113' u'\u005cu2062' j = c , as well as a frame f u'\u005cu2113'
+p64
+aVEven in the absence of word-meaning mappings, situational information is potentially useful because similar-sounding words uttered in similar situations are more likely to be tokens of the same lexeme (containing the same phones) than similar-sounding words uttered in different situations
+p65
+aVDistinguishing all consonant categories assumes perfect learning of consonants prior to vowel categorization and is thus somewhat unrealistic ( 29 ) , but provides an upper limit on the information that word-contexts can give
+p66
+aVThus, in the TLD model, the words used in a situation are topic-dependent, implying meaning, but without pinpointing specific referents
+p67
+aVThe modeled situations consist of combinations of categories of salient activities or objects, similar to the activity contexts explored by Roy et al
+p68
+aVThe TLD supervowels are used much less frequently than the supervowels found by the LD model, containing, on average, only two-thirds as many tokens
+p69
+aVVowel categorization results are shown in Figure 3
+p70
+aVThe posterior probability of a category assignment is composed of the DP prior over categories and the likelihood of the observed vowels belonging to that category
+p71
+aVThe datasets correspond to two sets of conditions firstly, either using vowel categories synthesized from all speakers or only adult female speakers, and secondly, varying the coarseness of the observed consonant categories
+p72
+aVEach such lexeme is represented as a frame plus a list of vowel categories u'\u005cud835' u'\u005cudc97' u'\u005cu2113'
+p73
+aVEach condition (model, vowel speakers, consonant set) is run five times, using 1500 iterations of Gibbs sampling with hyperparameter sampling
+p74
+aVThe Infinite Gaussian Mixture Model (IGMM) ( 35 ) includes a DP prior, as described above, in which the base distribution H C generates multivariate Gaussians drawn from a Normal Inverse-Wishart prior
+p75
+aVLexeme assignments for each token are drawn from a DP with a lexicon-generating base distribution H L
+p76
+aVThe form of the semantic information added in the TLD model is itself quite weak, so the improvements shown here are in line with what infant learners could achieve
+p77
+aVSince infants are not likely to have perfect knowledge of phonetic categories at this stage, semantic information is a potentially rich source of information that could be drawn upon to offset noise from other domains
+p78
+aVThis dataset makes minimal assumptions about the category categories that infants could use in this learning setting
+p79
+aVVM is the harmonic mean of two components, similar to F-score, where the components (VC and VH) are measures of cross entropy between the gold and model categorization
+p80
+aVThis u'\u005cu201c' protolexicon u'\u005cu201d' can help differentiate phonetic categories by adding word contexts in which certain sound categories appear ( 42 ; 12
+p81
+aVThe formant values for w h u'\u005cu2062' i u'\u005cu2062' j are drawn in the same way as in the LD model, given the lexeme assignment at x h u'\u005cu2062' i
+p82
+aVH may be continuous, as when it generates phonetic categories in formant space, or discrete, as when it generates lexemes as a list of phonetic categories
+p83
+aVVowel categorization improves when attending only to more prosodically and phonologically salient tokens ( 1 ) , which generally appear within content, not function words
+p84
+aVThese results demonstrate that relying on situational co-occurrence can improve phonetic learning, even if learners do not yet know the meanings of individual words
+p85
+aVHowever, here it is calculated over the set of vowels in the token assigned to each vowel category (i.e.,, the vowels at indices where v u'\u005cu2113' t u'\u005cu2063' u'\u005cu22c5' = c
+p86
+aVA purely distributional learner who observes a cluster of data points in the ae - eh region is likely to assume all these points belong to a single category because the distributions of the categories are so similar
+p87
+aVTable 1 shows the percentage of types and tokens that are ambiguous in each dataset, that is, words in frames that match multiple wordtypes
+p88
+aVWe hypothesize that if a learner is able to associate words with the contexts of their use (as children likely are), this could provide a weak source of information for disambiguating minimal pairs even without knowing their exact meanings
+p89
+aV4 4 The notation is overloaded w i u'\u005cu2062' j refers both to the vowel formants and the vowel category assignments, and x i refers to both the token identity and its assignment to a lexeme
+p90
+aVWe evaluate against adult categories, i.e.,, the u'\u005cu2018' gold-standard u'\u005cu2019' , since all learners of a language eventually converge on similar categories
+p91
+aVThe transcripts do not include phonetic information, so, following Feldman et al
+p92
+aVIn the mixture model setting, the category assignments are then generated from G , with the datapoints themselves generated by the corresponding components from H
+p93
+aVWe assume that child learners are able to infer a representation of the situational context from their non-linguistic environment
+p94
+aVThe topic-specific lexicons are restaurants, each with its own distribution over dishes; this distribution is defined by seating customers (word tokens) at tables , each of which serves a single dish from the menu all tokens x at the same table t are assigned to the same lexeme u'\u005cu2113' t
+p95
+aV2 2 For a related model that also tackles the word segmentation problem, see Elsner et al
+p96
+aVThis results in the following model, shown in Figure 2
+p97
+aVNote that we always evaluate against the gold word identities, even when these are not distinguished in the model u'\u005cu2019' s input
+p98
+aVThe word-topic assignments are used to calculate unsmoothed situation-topic distributions u'\u005cud835' u'\u005cudf3d' used by the TLD model
+p99
+aVMore formally, the global lexicon is generated as a top-level DP
+p100
+aVWe use u'\u005cud835' u'\u005cudc98' u'\u005cu2113' u'\u005cu2062' j to denote the set of vowel formants at position j in words that have been assigned to lexeme u'\u005cu2113'
+p101
+aVH L generates lexemes by first drawing the number of phones from a geometric distribution and the number of consonant phones from a binomial distribution
+p102
+aVOn average, situations are only 59 words long, reflecting the relative lack of content words in CDS utterances
+p103
+aVThe consonants are then generated from a DP with a uniform base distribution (but note they are fixed at inference time, i.e.,, are observed categorically), while the vowel phones u'\u005cud835' u'\u005cudc97' u'\u005cu2113' are generated by the IGMM DP above, v u'\u005cu2113' u'\u005cu2062' j u'\u005cu223c' G C
+p104
+aVFor example, a token of the word kitty would have the frame f i = k_t_ , containing two consonant phones, / k / and / t /, with two vowel phone slots in between, and two vowel formant vectors, w i u'\u005cu2062' 0 = [ 464 , 2294 ] and w i u'\u005cu2062' 1 = [ 412 , 2760 ]
+p105
+aVThe occurrence of similar-sounding words in different situations with mostly non-overlapping topics will provide evidence that those words belong to different topics and that they are therefore different lexemes
+p106
+aVIGMM performs substantially worse than both TLD and LD, with scores more than 30 points lower than the best results for these models, clearly showing the value of the protolexicon and replicating the results found by Feldman et al
+p107
+aVThe second factor is the prior probability of assigning word x i to table t with lexeme u'\u005cu2113' given topic k
+p108
+aVIn theory, semantic information could offer a valuable cue for phoneme induction 1 1 The models in this paper do not distinguish between phonetic and phonemic categories, since they do not capture phonological processes (and there are also none present in our synthetic data
+p109
+aVInfants begin learning the phonetic categories of their native language in their first year ( 19 ; 29 ; 51
+p110
+aVWords are evaluated against gold orthography, so homophones, e.g., hole and whole , are distinct gold words
+p111
+aVThe joint conditional probability of a table and topic assignment, given all other current token assignments, is
+p112
+aVWe assume further that as the child learns the language, she will begin to associate specific words with each topic as well
+p113
+aVFor each vowel category, we construct a Gaussian from the mean and covariance of the datapoints belonging to that category, using the first and second formant values measured at steady state
+p114
+aVThe three hyperparameters governing the HDP over the lexicon, u'\u005cu0391' l and u'\u005cu0391' k , and the DP over vowel categories, u'\u005cu0391' c , are estimated using a slice sampler
+p115
+aVwhere n c is the number of other vowels in the lexicon, u'\u005cud835' u'\u005cudc97' u'\u005cu2216' l u'\u005cu2062' j , assigned to category c
+p116
+aVWe infer 50 topics for this set of situations using the mallet toolkit ( 25
+p117
+aVThe final corpus consists of 13138 tokens and 1497 word types
+p118
+aVA draw from a DP, G u'\u005cu223c' D u'\u005cu2062' P u'\u005cu2062' ( u'\u005cu0391' , H ) , returns a distribution over a set of draws from H , i.e.,, a discrete distribution over a set of categories or lexemes generated by H
+p119
+aVThis dataset consists of a set of 1669 manually gathered formant values from 139 American English speakers (men, women and children) for 12 vowels
+p120
+aVInfants attend to distributional characteristics of their input ( 24 ; 23 ) , leading to the hypothesis that phonetic categories could be acquired on the basis of bottom-up distributional learning alone ( 8 ; 50 ; 26
+p121
+aVHere n k u'\u005cu2062' t is the number of other tokens at table t , n k are the total number of tokens in topic k , m u'\u005cu2113' is the number of tables across all topics with the lexeme u'\u005cu2113' , and m is the total number of tables
+p122
+aVWe construct datasets both using the full set of consonants u'\u005cu2014' the u'\u005cu2018' C24 u'\u005cu2019' dataset u'\u005cu2014' and with less fine-grained consonant categories
+p123
+aVRecent work has investigated whether infants could overcome such distributional ambiguity by incorporating top-down information, in particular, the fact that phones appear within words
+p124
+aVThese transcripts are not annotated with environmental context, but Roy et al
+p125
+aVThe word and lexeme frames must match, f i = f u'\u005cu2113'
+p126
+aVThis is in line with evidence that infants distinguish content and function words on the basis of acoustic signals ( 38
+p127
+aVOverall, we find that TLD outperforms the other models in both tasks, across all conditions
+p128
+aVInference (Section 5 ) is defined in terms of tables rather than lexemes; if multiple tables draw the same dish from G L , tokens at these tables share a lexeme
+p129
+aVWe test our model on situated child directed speech, taken from the C1 section of the Brent corpus in childes ( 6 ; 20
+p130
+aVWe restrict the corpus to content words by retaining only words tagged as adj, n, part and v (adjectives, nouns, particles, and verbs
+p131
+aVHowever, a learner who attends to lexical context will notice a difference contexts that only occur with ae will be observed in one part of the ae - eh region, while contexts that only occur with eh will be observed in a different (though partially overlapping) space
+p132
+aV11 ) , we synthesize the formant values using data from Hillenbrand et al
+p133
+aVThus, for the i th token in situation h , denoted x h u'\u005cu2062' i , the observed data will be its frame f h u'\u005cu2062' i , vowels u'\u005cud835' u'\u005cudc98' h u'\u005cu2062' i , and topic vector u'\u005cu0398' h
+p134
+aVThe extent of infants u'\u005cu2019' semantic knowledge is not yet known, but existing evidence shows that six-month-olds can associate some words with their referents ( 4 ; 46 ; 47 ) , leverage non-acoustic contexts such as objects or articulations to distinguish similar sounds ( 44 ; 52 ) , and map meaning (in the form of objects or images) to new word-forms in some laboratory settings ( 15 ; 16 ; 39
+p135
+aVThe learner then has evidence of two different categories occurring in different sets of lexemes
+p136
+aVFrom an acquisition perspective, the observed topic distribution represents the child u'\u005cu2019' s knowledge of the context of the interaction she can distinguish bathtime from dinnertime, and is able to recognize that some topics appear in certain contexts (e.g., animals on walks, vegetables at dinnertime) and not in others (few vegetables appear at bathtime
+p137
+aVHowever, this would require sound categories to be well separated, which often is not the case u'\u005cu2014' for example, see Figure 1 , which shows the English vowel space that is the focus of this paper
+p138
+aVInfants learn language in the wild, and quickly attune to the fact that words have (possibly unknown) meanings
+p139
+aVG L u'\u005cu223c' D u'\u005cu2062' P u'\u005cu2062' ( u'\u005cu0391' l , H L ) (see Section 3.2 ; remember H L includes draws from the IGMM over vowel categories
+p140
+aVThe transcripts do not delimit situations, so we do this somewhat arbitrarily by splitting each transcript after 50 CDS utterances, resulting in 203 situations for the Brent C1 dataset
+p141
+aVWe jointly sample u'\u005cud835' u'\u005cudc99' and u'\u005cud835' u'\u005cudc9b' , the variables assigning tokens to tables and topics
+p142
+aVIn the u'\u005cu2018' C15 u'\u005cu2019' dataset, the voicing distinction is collapsed, leaving 15 consonant categories
+p143
+aVAs well as function words, we also remove the five most frequent content words ( be, go, get, want, come
+p144
+aVWe thus use the terms interchangeably by helping infants distinguish between minimal pairs, as linguists do ( 48
+p145
+aVResampling the table assignment includes the possibility of changing to a table with a different lexeme or drawing a new table with a previously seen or novel lexeme
+p146
+aVEach token x h u'\u005cu2062' i has a co-indexed topic assignment variable, z h u'\u005cu2062' i , drawn from u'\u005cu0398' h , designating the topic-lexicon from which the table for x h u'\u005cu2062' i is to be drawn
+p147
+aV3 3 In simulations we also experiment with frames in which consonants are not represented perfectly
+p148
+aVThis improvement is especially noticeable when the word-level context is providing less information, arguably the more realistic setting
+p149
+aVEach situation h is associated with a mixture of topics u'\u005cu0398' h , which is assumed to be observed
+p150
+aVThe other topics are less frequent but capture stronger semantic meaning (e.g., yummy, peach, cookie, daddy, bib in one topic, shoe, let, put, hat, pants in another
+p151
+aVThe likelihood of the vowels is calculated by marginalizing over all possible means and variances of the Gaussian category parameters, given the NIW prior
+p152
+aVEach transcript in the Brent corpus captures about 75 minutes of parent-child interaction, and thus multiple situations will be included in each file
+p153
+aVUtterances with unintelligible words or quotes are removed
+p154
+aVWe also construct a second dataset using only datapoints from adult female speakers
+p155
+aVWe assume that the child would learn these topics from observing the world around her and the co-occurrences of entities and activities in the world
+p156
+aV50 ) and Feldman et al
+p157
+aVThat is, if the learner hears k V 1 t and k V 2 t in different situational contexts, they are likely to be different lexical items (and V 1 and V 2 different phones), despite the lexical similarity between them
+p158
+aVEach word in the dataset is converted to a phonemic representation using the CMU pronunciation dictionary, which returns a sequence of Arpabet phoneme symbols
+p159
+aVWithin any given situation, there might be a mixture of different (actual or possible) topics that are salient to the child
+p160
+aVDecreasing the number of consonants increases the ambiguity in the corpus bat not only shares a frame ( b_t ) with boat and bite , but also, in the C15 dataset, with put , pad and bad ( b/p_d/t ), and in the C6 dataset, with dog and kite , among many others ( STOP_STOP
+p161
+aVAt six months, infants begin to recognize word-forms such as their name and other frequently occurring words ( 21 ; 18 ) , without necessarily linking a meaning to these forms
+p162
+aVFor a new lexeme, we approximate the likelihood using 100 samples drawn from the prior, each weighted by u'\u005cu0391' / 100 ( 28 )
+p163
+aVTo explore this idea further, Feldman et al
+p164
+aVHyperparameters are inferred, which leads to a dominant topic that includes mainly light verbs ( have, let, see, do
+p165
+aVIn the Chinese Restaurant Franchise metaphor often used to describe HDPs, G L is a global menu of dishes (lexemes
+p166
+aV6 6 Other clustering measures, such as 1-1 matching and pairwise precision and recall (accuracy and completeness) showed the same trends, but VM has been demonstrated to be the most stable measure when comparing solutions with varying numbers of clusters ( 7
+p167
+aVThe first factor, the prior probability of topic k in document h , is given by u'\u005cu0398' h u'\u005cu2062' k obtained from the LDA
+p168
+aV1 ), this predictive posterior is in the form of a Student- t distribution; for the more general case see Feldman et al
+p169
+aVThis corpus consists of transcripts of speech directed at infants between the ages of 9 and 15 months, captured in a naturalistic setting as parent and child went about their day
+p170
+aVThe Arpabet encoding used in the phonemic representation includes 24 consonants
+p171
+aVTo motivate this extension and clarify the differences between the models, we now provide a high-level overview of both models; details are given in Sections 3 and 4
+p172
+aVIt is given by the HDP, and depends on whether the table t exists in the HDP topic-lexicon for k and, likewise, whether any table in the topic-lexicon has the lexeme u'\u005cu2113'
+p173
+aVThis ensures variability of situations
+p174
+aVThe first (DP prior) factor is defined as
+p175
+aVNote that there is always positive probability of creating a new category
+p176
+aV5 5 This compound distribution is equivalent to u'\u005cu03a3' c u'\u005cu223c' u'\u005cud835' u'\u005cudc3c' u'\u005cud835' u'\u005cudc4a' ( u'\u005cu03a3' 0 , u'\u005cu039d' 0 ) , u'\u005cu039c' c u'\u005cu03a3' c u'\u005cu223c' N ( u'\u005cu039c' 0 , u'\u005cu03a3' c u'\u005cu039d' 0 ) Each observation, a formant vector w i u'\u005cu2062' j , is drawn from the Gaussian corresponding to its category assignment c i u'\u005cu2062' j
+p177
+aVA DP is parametrized as D u'\u005cu2062' P u'\u005cu2062' ( u'\u005cu0391' , H ) , where u'\u005cu0391' is a real-valued hyperparameter and H is a base distribution
+p178
+aVNote that two draws from H L may result in identical lexemes; these are nonetheless considered to be separate (homophone) lexemes
+p179
+aVIf H is infinite, the support of the DP is likewise infinite
+p180
+aV11 ) on this dataset
+p181
+aVThis dataset mirrors the finding in Mani and Plunkett ( 22 ) that 12 month old infants are not sensitive to voicing mispronunciations
+p182
+aVThe collapsed categories are B/P, G/K, D/T, CH/JH, V/F, TH/DH, S/Z, SH/ZH, R/L while HH, M, NG, N, W, Y remain separate phonemes
+p183
+aVThese findings indicate that young infants are sensitive to co-occurrences between linguistic stimuli and at least some aspects of the world
+p184
+aVG L is in turn used as the base distribution in the topic-level DPs, G k u'\u005cu223c' D u'\u005cu2062' P u'\u005cu2062' ( u'\u005cu0391' k , G L
+p185
+aVThe u'\u005cu2018' C6 u'\u005cu2019' dataset distinguishes between only 6 coarse consonant phonemes, corresponding to stops ( B,P,G,K,D,T ), affricates ( CH,JH ), fricatives ( V, F, TH, DH, S, Z, SH, ZH, HH ), nasals ( M, NG, N ), liquids ( R, L ), and semivowels/glides ( W, Y
+p186
+aV37 ) , e.g.,, u'\u005cu2018' getting dressed u'\u005cu2019' or u'\u005cu2018' eating breakfast u'\u005cu2019'
+p187
+aVIf there are multiple possible pronunciations, the first one is used
+p188
+aVFor a single point (if u'\u005cud835' u'\u005cudc98' u'\u005cu2113' u'\u005cu2062' j
+p189
+aVDuring inference, we marginalize over G
+p190
+aVMcDonnell Foundation Scholar Award to the final author
+p191
+aV11 ) , Eq
+p192
+aVThis work was supported by EPSRC grant EP/H050442/1 and a James S
+p193
+aV11 )
+p194
+aV10
+p195
+aVu'\u005cu039c' 0 , u'\u005cu039a' 0 , u'\u005cu03a3' 0 , u'\u005cu039d' 0
+p196
+aVG C
+p197
+aVu'\u005cu0391' c
+p198
+aVu'\u005cu039c' c , u'\u005cu03a3' c
+p199
+aVu'\u005cu221e'
+p200
+aVu'\u005cud835' u'\u005cudf40'
+p201
+aVH L
+p202
+aVG L
+p203
+aVu'\u005cu0391' l
+p204
+aVG k
+p205
+aVu'\u005cu0391' k
+p206
+aVK
+p207
+aVz h u'\u005cu2062' i
+p208
+aVx h u'\u005cu2062' i
+p209
+aVf h u'\u005cu2062' i
+p210
+aVw h u'\u005cu2062' i u'\u005cu2062' j
+p211
+aVu'\u005cud835' u'\u005cudc98' h u'\u005cu2062' i
+p212
+aVu'\u005cud835' u'\u005cudc99' h
+p213
+aVD
+p214
+aVu'\u005cu0398' h
+p215
+aVThen
+p216
+aVB3
+p217
+aV17
+p218
+aVH C
+p219
+a.

@@ -1,0 +1,180 @@
+(lp0
+VBecause NLP models typically treat sentences independently, NLP problems have long been seen as u'\u005cu201c' embarrassingly parallel u'\u005cu201d' u'\u005cu2013' large corpora can be processed arbitrarily fast by simply sending different sentences to different machines
+p1
+aVFigure 1 shows an overview of the approach we first parse densely with a coarse grammar and then parse sparsely with the fine grammar, skipping symbols that the coarse pass deemed sufficiently unlikely
+p2
+aVAs expected, binary rules account for the vast majority of the time in the unpruned Viterbi case, but much less time in the pruned case, with the total time taken for binary rules in the coarse and fine passes taking about 1/5 of the time taken by binaries in the unpruned version
+p3
+aVGPUs work by executing thousands of threads at once, but impose the constraint that large blocks of threads must be executing the same instructions in lockstep, differing only in their input data
+p4
+aVTheir system uses a grammar based on the Berkeley parser [ 9 ] (which is particularly amenable to GPU processing), u'\u005cu201c' compiling u'\u005cu201d' the grammar into a sequence of GPU kernels that are applied densely to every item in the parse chart
+p5
+aVBecause we are summing instead of maxing scores in the fine pass, the scaling factors computed using max scores are not quite large enough, and so the rescaled inside probabilities grow too large when multiplied together
+p6
+aVIn our GPU system, multiple scores in any given span are being updated at the same time, which makes this dynamic rescaling tricky and expensive, especially since inter-warp communication is fairly limited
+p7
+aVA good clustering will group rules together that use the same symbols, since this means fewer memory accesses to read and write scores for symbols
+p8
+aVThe coarse to fine pruning approach of Petrov and Klein ( 2007 ) employs an X-bar grammar as its first pruning phase, but there is no reason why we cannot begin with a more complex grammar for our initial pass
+p9
+aVMBR algorithms for parsing do not compute the best derivation, as in Viterbi parsing, but instead the parse tree that maximizes the expected count of some figure of merit
+p10
+aVIt is worth pointing out that although 98% of labeled spans can be skipped due to X-bar pruning, we found that only about 79% of binary rule applications can be skipped, because the unpruned symbols tend to be the ones with a larger grammar footprint
+p11
+aVThis approach works because a low quality coarse grammar can still reliably be used to prune many symbols from the fine chart without loss of accuracy
+p12
+aVFirst, classic single-core processors and main memory architectures are no longer getting substantially faster over time, so speed gains must now come from parallelism within a single machine
+p13
+aVThus, it makes sense to choose a clustering algorithm that exploits the structure introduced by the pruning masks
+p14
+aVBecause all threads execute all code paths that any thread takes, time can only be saved if an entire warp agrees to skip any particular branch
+p15
+aVUsing coarse pruning and log domain calculations, our system produces MBR trees at a rate of 130.4 sentences per second, a four-fold increase
+p16
+aVAt the top level, the CPU and GPU communicate via a work queue of parse items of the form ( s , i , k , j ) , where s is an identifier of a sentence, i is the start of a span, k is the split point, and j is the end point
+p17
+aVIt is of course important verify the correctness of our system; one easy way to do so is to examine parsing accuracy, as compared to the original Berkeley parser
+p18
+aVAs usual, profiles exhibit an observer effect, where the act of measuring the system changes the execution
+p19
+aVThere is greater overhead in the scaling system, because scaling factors are copied to the CPU between the coarse and fine passes
+p20
+aVSpreading symbols across clusters may be inefficient if a parse item licenses a given symbol, we will have to enqueue that item to any queue that has the symbol in its signature, no matter how many other symbols are in that cluster
+p21
+aVBecause the Berkeley grammar is so large, the compiler is not able to efficiently schedule all of the operations in the grammar, resulting in register spills
+p22
+aVIn this paper, we develop algorithms that can exploit sparsity on a GPU by adapting coarse-to-fine pruning to a GPU setting
+p23
+aVSince tasks like parsing boil down to repeated read-multiply-write loops, GPUs should be many times more efficient in time, power, or cost
+p24
+aVMoreover, it typically has worse memory access patterns, leading to slower performance
+p25
+aVAll threads in a warp must execute the same instruction at every clock cycle if one thread takes a branch the others do not, then all threads in the warp must follow both code paths
+p26
+aVBecause of the overhead associated with creating pruning masks and the further overhead of GPU communication, we found that this method did not actually produce any time savings at all
+p27
+aVWe call the set of coarse symbols for a partition (and therefore the corresponding labeled work queue) a signature
+p28
+aVSuch extreme speedups over a dense GPU baseline currently seem unlikely because fine-grained sparsity appears to be directly at odds with dense parallelism
+p29
+aVBecause the grammars are compiled into code, the additional operations are all inlined into the kernels, producing much larger kernels
+p30
+aVUnless otherwise noted, all experiments are conducted on sentences of length u'\u005cu2264' 40 words, and we estimate times based on batches of 20K sentences
+p31
+aVIn order to subcluster, we divde up rules among subclusters so that each subcluster has the same number of active parent symbols
+p32
+aVBecause the grammar used in the coarse pass is a projection of the grammar used in the fine pass, these coarse scores correlate reasonably closely with the probabilities computed in the fine pass
+p33
+aVWhenever f becomes either too big or too small, the number is rescaled back to a less u'\u005cu201c' dangerous u'\u005cu201d' range by shifting mass from the exponent e to the scaling factor s
+p34
+aVThe result is a parsing speed of 185.5 sentences per second, as shown in Table 1 on the row labeled u'\u005cu2018' Reimpl u'\u005cu2019' with u'\u005cu2018' Empty, Coarse u'\u005cu2019' pruning
+p35
+aVBecause of the overhead associated with transferring work items to GPU, using a very small grammar may not be an efficient use of the GPU u'\u005cu2019' s computational resources
+p36
+aVMost of this difference arises at the leaves, where the lexicon typically has more uncertainty than higher up in the tree
+p37
+aVThese timing numbers are computed using the built-in profiling capabilities of the programming environment
+p38
+aVBecause the entire partition (though not necessarily the entire grammar) is applied to each item in the queue, we still do not need to worry about warp divergence
+p39
+aVRegisters are many times faster than variables located in thread-local memory, which is actually the same speed as global memory
+p40
+aV3 3 Specifically, after clustering based on the coarse parent symbol, we merge all clusters with less than 300 rules in them into one large cluster
+p41
+aVThis architecture environment puts very different constraints on parsing algorithms from a CPU environment
+p42
+aVIn coarse-to-fine inference, one applies the grammars in sequence, computing inside and outside scores
+p43
+aVTo begin, we can compute the number of seconds needed to parse 1000 sentences
+p44
+aVHowever, we would only avoid the work of applying the rule if all threads in the warp agreed to skip it
+p45
+aVWhen coarse symbols are extremely unlikely (and therefore have few corresponding rules), we merge their clusters to avoid the overhead of beginning work on clusters where little work has to be done
+p46
+aVSecond, we are able to skip a parse item for an entire cluster if that item u'\u005cu2019' s pruning mask does not intersect the cluster u'\u005cu2019' s signature
+p47
+aVFor instance, one might want to maximize the expected number of correct constituents [ 3 ] , or the expected rule counts [ 10 , 9 ]
+p48
+aVEach SM can process up to 48 different warps at a time it interleaves the execution of each warp, so that when one warp is stalled another warp can execute
+p49
+aVTherefore, they inlined the iteration over the grammar directly into the GPU kernels (i.e., the code itself), which allows the compiler to more effectively use all of its registers
+p50
+aVUsing scaling, we are able to push our parser to 190.6 sentences/second for MBR extraction, just under half the speed of the Viterbi system
+p51
+aVIf a span has a very high or very low score in the coarse pass, it typically has a similar score in the fine pass
+p52
+aVIn this section, we describe their dense algorithm, which we take as the baseline for our work; we present it in a way that sets up the changes to follow
+p53
+aVAs Petrov and Klein ( 2007 ) have shown, intermediate-sized Berkeley grammars prune many more symbols than the X-bar system
+p54
+aVTherefore, in the fine pass, we normalize the inside scores at the leaves to sum to 1.0
+p55
+aVBecause all rules are applied to all parse items, all threads are executing the same sequence of instructions
+p56
+aVThe resulting speed is 187.5 sentences per second, labeled in Table 1 as row labeled u'\u005cu2018' Reimpl u'\u005cu2019' with u'\u005cu2018' Labeled, Coarse u'\u005cu2019' pruning
+p57
+aVThe natural implementation would be for each thread to check if each rule is licensed before applying it
+p58
+aVThus sparsely skipping rules and symbols will not save any work
+p59
+aVThroughput increases through parsing 10,000 sentences, and then levels off by the time it reaches 100,000 sentences
+p60
+aVBecause so many labeled spans are pruned, we are able to skip many of the grammar clusters and thus avoid many of the expensive operations
+p61
+aVDuring parsing, we only enqueue items ( s , i , k , j ) to a labeled queue if two conditions are met
+p62
+aVNevertheless, the general trends should more or less be preserved as compared to the unprofiled code
+p63
+aVOne way to accomplish this is to unroll loops at compilation time
+p64
+aVWe use seconds per sentence rather than sentences per second because the former measure is additive.) The results are in Table 3
+p65
+aVUsing this approach, we see gains of nearly 2.5x over the dense GPU implementation, resulting in overall speeds of up to 404 sentences per second
+p66
+aVIn Table 4 , we break down the time taken by our system into individual components
+p67
+aVThus, we can use the coarse pass u'\u005cu2019' s inside and outside scores as the scaling values for the fine pass u'\u005cu2019' s scores
+p68
+aVIndeed, in practice the compiler will often hang if we use the same size grammar clusters as we did for Viterbi
+p69
+aVThus, the vast majority of rules can be skipped, and therefore most computation can be avoided
+p70
+aVWe should expect this algorithm to be at least a factor of two slower the outside pass performs at least as much work as the inside pass
+p71
+aVClustering using this method is labeled u'\u005cu2018' Reimplementation u'\u005cu2019' in Table 1
+p72
+aV2 2 A thread can use more registers than this, but the full complement of 48 warps cannot execute if too many are used
+p73
+aVClustering using this method is labeled u'\u005cu2018' Parent u'\u005cu2019' in Table 1
+p74
+aVThat way, we are more likely to be able to skip a subcluster, since fewer distinct symbols need to be u'\u005cu201c' off u'\u005cu201d' for a parse item to be skipped in a given subcluster
+p75
+aVFinally, when pruning, it is best if symbols that have the same coarse projection are clustered together
+p76
+aVOn the 600 series, maximum occupancy can only be achieved if each thread uses at most 63 registers [ 8 ]
+p77
+aVHow can we best cluster and subcluster the grammar so as to maximize performance
+p78
+aVWe tested our new pruning approach using an X-bar grammar as the coarse pass
+p79
+aVSince each thread in the warp is processing a different span (perhaps even from a different sentence), consensus from all 32 threads on any skip would be unlikely
+p80
+aVHowever, they are slower to parse with in a CPU context, and so they begin with an X-bar grammar
+p81
+aVBecause registers are so much faster than thread-local memory, it is critical to keep as many variables in registers as possible
+p82
+aV4 4 One can instead interpret this approach as changing the scaling factors to s i , j I u'\u005cu2032' = s i , j I u'\u005cu22c5' u'\u005cu220f' i u'\u005cu2264' k j u'\u005cu2211' A inside u'\u005cu2062' ( A , k , k + 1 ) , where inside is the array of scores for the fine pass
+p83
+aVWe use a coarse-to-fine approach as in Petrov and Klein ( 2007 ) , but with only one coarse pass
+p84
+aVThen, when applying rules in the fine pass, each fine inside score over a split span ( i , k , j ) is scaled to the appropriate s i , j I by multiplying the score by exp u'\u005cu2061' ( s i , k I + s k , j I - s i , j I ) , where s i , k I , s k , j I , s i , j I are the scaling factors for the left child, right child, and parent, respectively
+p85
+aVThus, there is no concern of warp divergence
+p86
+aVBecause parsing with these grammars is still quite fast, we tried using them as the coarse pass instead
+p87
+aVFor instance, in a latent variable parser, the coarse grammar would have symbols like N u'\u005cu2062' P , V u'\u005cu2062' P , etc., and the fine pass would have refined symbols N u'\u005cu2062' P 0 , N u'\u005cu2062' P 1 , V u'\u005cu2062' P 4 , and so on
+p88
+aVThat is, the number is represented as f u'\u005cu2032' = f u'\u005cu22c5' exp u'\u005cu2061' ( s
+p89
+a.

@@ -1,0 +1,241 @@
+Current File: P14-2119.xhtml_2 P14-2119.xhtml
+
+Section 0:  Abstract
+	SentNum: 4
+	CENum: 0
+	SentCovered: 0
+	Covered_Rate: 0.0000%
+
+Section 1:  1 Introduction
+	SentNum: 16
+	CENum: 6
+	SentCovered: 8
+	Covered_Rate: 50.0000%
+
+Section 2:  2 The Challenge
+	SentNum: 18
+	CENum: 5
+	SentCovered: 6
+	Covered_Rate: 33.3333%
+
+Section 3:  3 Guided DS
+	SentNum: 24
+	CENum: 4
+	SentCovered: 4
+	Covered_Rate: 16.6667%
+
+Section 4:  4 Training
+	SentNum: 16
+	CENum: 2
+	SentCovered: 2
+	Covered_Rate: 12.5000%
+
+Section 5:  5 Experiments
+	SentNum: 23
+	CENum: 7
+	SentCovered: 6
+	Covered_Rate: 26.0870%
+
+Section 6:  6 Conclusions and Future Work
+	SentNum: 4
+	CENum: 2
+	SentCovered: 2
+	Covered_Rate: 50.0000%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-2119.xhtml_2's CE cases
+
+Section 0:  Abstract has 0 CE cases
+Section 1:  1 Introduction has 6 CE cases
+	CASE: 1
+	Stag: 5 6 
+		Pattern: 1 [['because', 'of']]---- [['&C', '(,/;/./--)', '(&ADV)'], ['(&THIS)', '&NP', '&R']]
+		sentTXT: Recently, distant supervision has emerged as an important technique for relation extraction and has attracted increasing attention because of its effective use of readily available databases []. It automatically labels its own training data by heuristically aligning a knowledge base of facts with an unlabeled corpus. 
+		Cause: [(0, 0), (0, 17)]
+		Effect: [(1, 0), (1, 18)]
+
+	CASE: 2
+	Stag: 7 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: The intuition is that any sentence which mentions a pair of entities ( e 1 and e 2 ) that participate in a relation, r , is likely to express the fact r u'\u2062' ( e 1 , e 2 ) and thus forms a positive training example of r. 
+		Cause: [(0, 0), (0, 45)]
+		Effect: [(0, 48), (0, 54)]
+
+	CASE: 3
+	Stag: 10 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: Sophisticated multi-instance learning algorithms [] have been proposed to address the issue by loosening the distant supervision assumption. 
+		Cause: [(0, 14), (0, 18)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 4
+	Stag: 12 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: On top of that, researchers further improved performance by explicitly adding preprocessing steps [] or additional layers inside the model [] to reduce the effect of training noise. 
+		Cause: [(0, 10), (0, 30)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 5
+	Stag: 14 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: In this paper, we present the first effective approach, u'\ud835' u'\udc06' u'\u2062' u'\ud835' u'\uddce' u'\ud835' u'\uddc2' u'\ud835' u'\uddbd' u'\ud835' u'\uddbe' u'\ud835' u'\uddbd' u'\u2062' u'\ud835' u'\udda3' u'\ud835' u'\uddb2' (distant supervision), to incorporate labeled data into distant supervision for extracting relations from sentences. 
+		Cause: [(0, 114), (0, 117)]
+		Effect: [(0, 0), (0, 112)]
+
+	CASE: 6
+	Stag: 15 16 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In contrast to simply taking the union of the hand-labeled data and the corpus labeled by distant supervision as in the previous work by Zhang et al. [] , we generalize the labeled data through feature selection and model this additional information directly in the latent variable approaches. 
+		Cause: [(0, 19), (1, 17)]
+		Effect: [(0, 1), (0, 17)]
+
+Section 2:  2 The Challenge has 5 CE cases
+	CASE: 1
+	Stag: 20 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: Simply taking the union of the hand-labeled data and the corpus labeled by distant supervision is not effective since hand-labeled data will be swamped by a larger amount of distantly labeled data. 
+		Cause: [(0, 19), (0, 31)]
+		Effect: [(0, 0), (0, 17)]
+
+	CASE: 2
+	Stag: 21 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: An effective approach must recognize that the hand-labeled data is more reliable than the automatically labeled data and so must take precedence in cases of conflict. 
+		Cause: [(0, 0), (0, 16)]
+		Effect: [(0, 19), (0, 25)]
+
+	CASE: 3
+	Stag: 22 23 
+		Pattern: 1 [['because', 'of']]---- [['&C', '(,/;/./--)', '(&ADV)'], ['(&THIS)', '&NP', '&R']]
+		sentTXT: Conflicts cannot be limited to those cases where all the features in two examples are the same; this would almost never occur, because of the dozens of features used by a typical relation extractor []. Instead we propose to perform feature selection to generalize human labeled data into training guidelines , and integrate them into latent variable model. 
+		Cause: [(0, 0), (0, 23)]
+		Effect: [(1, 0), (1, 21)]
+
+	CASE: 4
+	Stag: 26 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: We experimentally tested alternative feature sets by building supervised Maximum Entropy (MaxEnt) models using the hand-labeled data (Table 3 ), and selected an effective combination of three features from the full feature set used by Surdeanu et al., []. 
+		Cause: [(0, 7), (0, 22)]
+		Effect: [(0, 23), (0, 44)]
+
+	CASE: 5
+	Stag: 36 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: We keep only those guidelines which make the correct prediction for a u'\u2062' l u'\u2062' l and at least k =3 examples in the training corpus (threshold 3 was obtained by running experiments on the development dataset. 
+		Cause: [(0, 41), (0, 46)]
+		Effect: [(0, 0), (0, 39)]
+
+Section 3:  3 Guided DS has 4 CE cases
+	CASE: 1
+	Stag: 39 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: To do this, we extend the MIML model [] by adding a new layer as shown in Figure 1. 
+		Cause: [(0, 12), (0, 20)]
+		Effect: [(0, 0), (0, 10)]
+
+	CASE: 2
+	Stag: 41 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: Given a bag of sentences, u'\ud835' u'\udc31' u'\ud835' u'\udc22' , which mention an i th entity pair ( e 1 , e 2 ), our goal is to correctly predict which relation is mentioned in each sentence, or N u'\u2062' R if none of the relations under consideration are mentioned. 
+		Cause: [(0, 65), (0, 72)]
+		Effect: [(0, 1), (0, 63)]
+
+	CASE: 3
+	Stag: 53 54 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We define relabeled relations h i u'\u2062' j as following. Thus, relation r u'\u2062' ( g ) is assigned to h i u'\u2062' j iff there exists a unique guideline g u'\u2208' u'\ud835' u'\udc06' , such that the feature vector u'\ud835' u'\udc31' i u'\u2062' j contains all constituents of g , i.e., entity types, a dependency path and maybe a span word, if g has one. 
+		Cause: [(0, 13), (1, 89)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 4
+	Stag: 53 54 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: We define relabeled relations h i u'\u2062' j as following. Thus, relation r u'\u2062' ( g ) is assigned to h i u'\u2062' j iff there exists a unique guideline g u'\u2208' u'\ud835' u'\udc06' , such that the feature vector u'\ud835' u'\udc31' i u'\u2062' j contains all constituents of g , i.e., entity types, a dependency path and maybe a span word, if g has one. 
+		Cause: [(0, 0), (0, 13)]
+		Effect: [(1, 1), (1, 91)]
+
+Section 4:  4 Training has 2 CE cases
+	CASE: 1
+	Stag: 64 
+		Pattern: 7 [['due', 'to']]---- [['&V-ing/&NP@R@', '&BE'], ['&NP@C@', '(&Clause@C@)']]
+		sentTXT: where the last equality is due to conditional independence. 
+		Cause: [(0, 7), (0, 8)]
+		Effect: [(0, 1), (0, 3)]
+
+	CASE: 2
+	Stag: 69 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: \State z i u'\u2062' j * = argmax z i u'\u2062' j p ( z i u'\u2062' j u'\ud835' u'\udc31' u'\ud835' u'\udc22' , u'\ud835' u'\udc32' u'\ud835' u'\udc22' , u'\ud835' u'\udc30' u'\ud835' u'\udc33' , u'\ud835' u'\udc30' u'\ud835' u'\udc32' ) \State h i u'\u2062' j * = { r u'\u2062' ( g ) , if u'\u2062' u'\u2203' u'\u2003' g u'\u2208' u'\ud835' u'\udc06'. 
+		Cause: [(0, 0), (0, 14)]
+		Effect: [(0, 15), (0, 169)]
+
+Section 5:  5 Experiments has 7 CE cases
+	CASE: 1
+	Stag: 80 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: This dataset is generated by mapping Wikipedia infoboxes into a large unlabeled corpus that consists of 1.5M documents from KBP source corpus and a complete snapshot of Wikipedia. 
+		Cause: [(0, 5), (0, 28)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 2
+	Stag: 82 83 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We used 40 queries as development set and the rest 160 queries (3334 entity pairs that express a relation) as the test set. The official KBP evaluation is performed by pooling the system responses and manually reviewing each response, producing a hand-checked assessment data. 
+		Cause: [(0, 5), (1, 20)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 3
+	Stag: 83 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: The official KBP evaluation is performed by pooling the system responses and manually reviewing each response, producing a hand-checked assessment data. 
+		Cause: [(0, 7), (0, 21)]
+		Effect: [(0, 0), (0, 5)]
+
+	CASE: 4
+	Stag: 88 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: Training u'\ud835' u'\uddac' u'\ud835' u'\udda8' u'\ud835' u'\uddac' u'\ud835' u'\uddab' on a simple fusion of distantly-labeled and human-labeled datasets does not improve the maximum F-score since this hand-labeled data is swamped by a much larger amount of distant-supervised data of much lower quality. 
+		Cause: [(0, 57), (0, 73)]
+		Effect: [(0, 0), (0, 55)]
+
+	CASE: 5
+	Stag: 88 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Training u'\ud835' u'\uddac' u'\ud835' u'\udda8' u'\ud835' u'\uddac' u'\ud835' u'\uddab' on a simple fusion of distantly-labeled and human-labeled datasets does not improve the maximum F-score since this hand-labeled data is swamped by a much larger amount of distant-supervised data of much lower quality. 
+		Cause: [(0, 0), (0, 0)]
+		Effect: [(0, 1), (0, 15)]
+
+	CASE: 6
+	Stag: 95 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: The difference between u'\ud835' u'\udc06' u'\u2062' u'\ud835' u'\uddce' u'\ud835' u'\uddc2' u'\ud835' u'\uddbd' u'\ud835' u'\uddbe' u'\ud835' u'\uddbd' u'\u2062' u'\ud835' u'\udda3' u'\ud835' u'\uddb2' and all other systems is significant with p -value less than 0.05 according to a paired t -test assuming a normal distribution. 
+		Cause: [(0, 108), (0, 110)]
+		Effect: [(0, 0), (0, 105)]
+
+	CASE: 7
+	Stag: 96 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: We scored our model against all 41 relations and thus replicated the actual KBP evaluation. 
+		Cause: [(0, 0), (0, 7)]
+		Effect: [(0, 10), (0, 14)]
+
+Section 6:  6 Conclusions and Future Work has 2 CE cases
+	CASE: 1
+	Stag: 102 
+		Pattern: 45 [['so', 'that']]---- [['&C'], ['&R']]
+		sentTXT: We propose a strategy to generate and select guidelines so that they are more generalized forms of labeled instances. 
+		Cause: [(0, 0), (0, 8)]
+		Effect: [(0, 11), (0, 18)]
+
+	CASE: 2
+	Stag: 104 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: Our approach significantly improves performance in practice and thus opens up many opportunities for further research in RE where only a very limited amount of labeled training data is available. 
+		Cause: [(0, 0), (0, 6)]
+		Effect: [(0, 9), (0, 29)]
+
+#-------------------------------------------------
+

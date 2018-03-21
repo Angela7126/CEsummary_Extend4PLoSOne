@@ -1,0 +1,22 @@
+(lp0
+VTable 1 presents hedge parsing accuracy on the development set for the full parsing baseline, where the output of regular PCFG parsing is transformed to hedges and evaluated, versus parsing with a hedgebank grammar, with no segmentation of the strings
+p1
+aVThe hedge tree transform converts the original parse tree into a hedge parse tree
+p2
+aVTable 2 shows the results on the development set when segmenting prior to hedge parsing
+p3
+aVFinally, Figure 3 shows the speed of inference, labeled precision and labeled recall of annotating hedge constituents on the test set as a function of the maximum span parameter L , versus the baseline parser
+p4
+aVSegmentation accuracy is reported as an F1-score of unlabeled segment bracketing
+p5
+aVWe investigate pre-segmenting the sentences with a finite-state model prior to hedge parsing, and achieve large speedups relative to hedge parsing the whole string, though at a loss in accuracy due to cascading segmentation errors
+p6
+aVIn the resulting hedge parse tree, every child of the top-most node spans at most L words
+p7
+aVIn this section we present our segmentation model which takes the input sentence and chunks it into appropriate segments for hedge parsing
+p8
+aVFirst, we present the simple tree transform from a full treebank parse tree to a (root attached) sequence of hedges
+p9
+aVIn all trials, we evaluate accuracy with respect to the hedge transformed reference treebank, i.e.,, we are not penalizing the parser for not discovering constituents
+p10
+a.

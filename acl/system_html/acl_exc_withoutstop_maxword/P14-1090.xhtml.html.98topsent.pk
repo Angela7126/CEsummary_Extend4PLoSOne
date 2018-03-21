@@ -1,0 +1,16 @@
+(lp0
+VWe define answer node as the node that is the answer and answer relation as the relation from the answer node to its direct parent
+p1
+aVWe treat QA on Freebase as a binary classification task for each node in the topic graph, we extract features and judge whether it is the answer node
+p2
+aVspecial case) if a qtopic node was tagged as a named entity, then replace this node with its its named entity form, e.g.,, bieber u'\u005cu2192' qtopic=person;
+p3
+aVThus for the Freebase graph, we use relations (with directions) and properties as features for each node
+p4
+aVGiven a topic, we selectively roll out the Freebase graph by choosing those nodes within a few hops of relationship to the topic node , and form a topic graph
+p5
+aVWe combine question features and Freebase features (per node) by doing a pairwise concatenation
+p6
+aVThen we computed how much and how well
+p7
+a.

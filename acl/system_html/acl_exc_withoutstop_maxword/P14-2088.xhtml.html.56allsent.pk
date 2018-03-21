@@ -1,0 +1,98 @@
+(lp0
+VThen we present three versions of marginalized denoising autoencoders (mDA) by incorporating different types of noise, including two new noising processes that are designed for structured features
+p1
+aVWhile the marginalized denoising autoencoder (mDA) is considerably faster than the original denoising autoencoder, it requires solving a system of equations that can grow very large, as realistic NLP tasks can involve 10 5 or more features
+p2
+aVAs we will show, substantial efficiency improvements can be obtained by designing domain adaptation methods for learning in structured feature spaces
+p3
+aVFor each feature template, there are thousands of binary features
+p4
+aV2012 ) showed that such autoencoders can be learned even as the noising process is analytically marginalized; the idea is similar in spirit to feature noising [ 29 ]
+p5
+aVWe can exploit this structure by using an alternative dropout scheme for each token, choose exactly one feature template to keep, and zero out all other features that consider this token (transition feature templates such as u'\u005cu27e8' y t , y t - 1 u'\u005cu27e9' are not considered for dropout
+p6
+aVBy using the autoencoder to transform the original feature space, one may obtain a representation that is less dependent on any individual feature, and therefore more robust across domains
+p7
+aVBoth structure-aware domain adaptation algorithms perform as well as standard dropout u'\u005cu2014' and better than the well-known structural correspondence learning (SCL) algorithm [ 1 ] u'\u005cu2014' but structured dropout is more than an order-of-magnitude faster
+p8
+aVAssuming we have K feature templates, this noise leads to very simple solutions for the marginalized matrices E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc0f' ] and E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc10' ]
+p9
+aVFor a feature u'\u005cu0391' belonging to a template F , with probability p we will draw a noise feature u'\u005cu0392' also belonging to F , according to some distribution q
+p10
+aVConsequently, many approaches rely on each instance having a relatively large number of active features, and fail to exploit the structured feature spaces that characterize syntactic tasks such as sequence labeling and parsing [ 25 ]
+p11
+aVHowever, by including these elements, standard dropout is considerably slower, as we show in our experiments
+p12
+aVWithin the context of denoising autoencoders, we have focused on dropout noise, which has also been applied as a general technique for improving the robustness of machine learning, particularly in neural networks [ 13 , 29 ]
+p13
+aVIn structural correspondence learning (SCL), the induced representation is based on the task of predicting the presence of pivot features
+p14
+aV1 if both features are chosen as noise features, which happens with probability p 2 u'\u005cu2062' q u'\u005cu0391' u'\u005cu2062' q u'\u005cu0392'
+p15
+aVThis leads to a total of 1572 pivot features in our experiments
+p16
+aVAs a secondary contribution of this paper, we demonstrate the applicability of unsupervised domain adaptation to the syntactic analysis of historical texts
+p17
+aVWhile a number of different approaches for domain adaptation have been proposed [ 21 , 26 ] , they tend to emphasize bag-of-words features for classification tasks such as sentiment analysis
+p18
+aVOn the specific problem of sequence labeling, Xiao and Guo ( 2013 ) proposed a supervised domain adaptation method by using a log-bilinear language adaptation model
+p19
+aVIf we define the scatter matrix of the uncorrupted input as u'\u005cud835' u'\u005cudc12' = u'\u005cud835' u'\u005cudc17' u'\u005cud835' u'\u005cudc17' u'\u005cu22a4' , the solutions under dropout noise are
+p20
+aVFor E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc0f' ] , we obtain a scaled version of the scatter matrix, because in each instance u'\u005cud835' u'\u005cudc31' ~ , there is exactly a 1 / K chance that each individual feature survives dropout
+p21
+aVUnsupervised domain adaptation is a fundamental problem for natural language processing, as we hope to apply our systems to datasets unlike those for which we have annotations
+p22
+aV2006 ) , we consider pivot features that appear more than 50 times in all the domains
+p23
+aVThe two most recent domains (1800-1849 and 1750-1849) are treated as source domains, and the other domains are target domains
+p24
+aVThe form of these solutions means that computing u'\u005cud835' u'\u005cudc16' requires solving a system of equations equal to the number of features (in the naive implementation), or several smaller systems of equations (in the high-dimensional version
+p25
+aVSingle-layer denoising autoencoders reconstruct the corrupted inputs with a projection matrix u'\u005cud835' u'\u005cudc16' u'\u005cu211d' d u'\u005cu2192' u'\u005cu211d' d , which is estimated by minimizing the squared reconstruction loss
+p26
+aVAutoencoders apply a similar idea, but use the denoised instances as the latent representation [ 28 , 12 , 4 ]
+p27
+aVWe obtain a projection matrix u'\u005cud835' u'\u005cudc16' s for each subset by reconstructing the pivot features from the features in this subset; we can then use the sum of all reconstructions as the new features, tanh u'\u005cu2061' ( u'\u005cu2211' s = 1 S u'\u005cud835' u'\u005cudc16' s u'\u005cu2062' u'\u005cud835' u'\u005cudc17' s )
+p28
+aVWe will u'\u005cu201c' corrupt u'\u005cu201d' these instances by adding different types of noise, and denote the corrupted version of u'\u005cud835' u'\u005cudc31' i by u'\u005cud835' u'\u005cudc31' ~ i
+p29
+aV2003 ) define several feature u'\u005cu201c' templates u'\u005cu201d' the current word, the previous word, the suffix of the current word, and so on
+p30
+aVWe hold out 5% of data as development data to tune parameters
+p31
+aVThis will look very similar to structured dropout the matrix E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc0f' ] is identical, and E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc10' ] has off-diagonal elements which are scaled by ( 1 - p ) 2 , which goes to zero as K is large
+p32
+aVwhere u'\u005cu0391' and u'\u005cu0392' index two features
+p33
+aVSince E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc10' ] is a diagonal matrix, we eliminate the cost of matrix inversion (or of solving a system of linear equations
+p34
+aVWe use a conditional random field tagger, choosing CRFsuite because it supports arbitrary real valued features [ 20 ] , with SGD optimization
+p35
+aVThis scenario is motivated by training a tagger on a modern newstext corpus and applying it to historical documents
+p36
+aVu'\u005cud835' u'\u005cudc31' i , u'\u005cu0391' or u'\u005cud835' u'\u005cudc31' i , u'\u005cu0392' if one feature is unchanged and the other one is chosen as the noise feature, which happens with probability p u'\u005cu2062' ( 1 - p ) u'\u005cu2062' q u'\u005cu0392' or p u'\u005cu2062' ( 1 - p ) u'\u005cu2062' q u'\u005cu0391'
+p37
+aVWe can therefore view the projection matrix u'\u005cud835' u'\u005cudc16' as a row-normalized version of the scatter matrix u'\u005cud835' u'\u005cudc12'
+p38
+aVAssume instances u'\u005cud835' u'\u005cudc31' 1 , u'\u005cu2026' , u'\u005cud835' u'\u005cudc31' n , which are drawn from both the source and target domains
+p39
+aVWe also compute the transfer ratio , which is defined as adaptation accuracy baseline accuracy , shown in Figure 1
+p40
+aVThe generally positive trend of these graphs indicates that adaptation becomes progressively more important as we select test sets that are more temporally remote from the training data
+p41
+aVIt is also possible to apply stacking, by passing this vector through another autoencoder [ 4 ]
+p42
+aVWith probability ( 1 - p ) , the original features are preserved, and we add the outer-product u'\u005cud835' u'\u005cudc31' i u'\u005cu2062' u'\u005cud835' u'\u005cudc31' i u'\u005cu22a4' ; with probability p , we add the outer-product u'\u005cud835' u'\u005cudc31' i u'\u005cu2062' q u'\u005cu22a4'
+p43
+aVMoon and Baldridge ( 2007 ) tackle the challenging problem of tagging Middle English, using techniques for projecting syntactic annotations across languages
+p44
+aVIn pilot experiments, this slowed down estimation and had little effect on accuracy, so we did not include it
+p45
+aVIf we write u'\u005cud835' u'\u005cudc17' = [ u'\u005cud835' u'\u005cudc31' 1 , u'\u005cu2026' , u'\u005cud835' u'\u005cudc31' n ] u'\u005cu2208' u'\u005cu211d' d × n , and we write its corrupted version u'\u005cud835' u'\u005cudc17' ~ , then the loss in ( 1 ) can be written as
+p46
+aVTherefore E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc0f' ] can be computed as the sum of these terms
+p47
+aVE u'\u005cu2062' [ u'\u005cud835' u'\u005cudc10' ] is diagonal, because for any off-diagonal entry E u'\u005cu2062' [ u'\u005cud835' u'\u005cudc10' ] u'\u005cu0391' , u'\u005cu0392' , at least one of u'\u005cu0391' and u'\u005cu0392' will drop out for every instance
+p48
+a.

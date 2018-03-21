@@ -1,0 +1,426 @@
+(lp0
+VThis result was unexpected since the Convote labels are noisier than the annotated ibc labels; however, there are three possible explanations for the discrepancy
+p1
+aVTherefore we use the filtering procedure outlined in Section 3.1.1 to obtain a subset of 55,932 sentences
+p2
+aVSecond, since the sentences in Convote were originally spoken, they are almost half as short (21.3 words per sentence) as those in the ibc (42.2 words per sentence
+p3
+aVFirst, we parse the filtered ibc sentences using the Stanford constituency parser [ 25 ]
+p4
+aVFirst, Convote has twice as many sentences as ibc , and the extra training data might help the model more than ibc u'\u005cu2019' s better-quality labels
+p5
+aV7 7 The Convote dataset was not annotated on the phrase level, so we only provide a result for the IBC dataset
+p6
+aVFinally, we balance the resulting dataset so that it contains an equal number of sentences from Democrats and Republicans, leaving us with a total of 7,816 sentences
+p7
+aV60% of contributors passed the initial quiz (the 40% that failed were barred from working on the task), while only 10% of workers who passed the quiz were kicked out for mislabeling subsequent gold paths
+p8
+aVTo account for label imbalance, we subsample the data so that there are an equal number of labels and report accuracy over this balanced dataset
+p9
+aVThere are over a million sentences in the ibc , most of which have no noticeable political bias
+p10
+aVFinally, some information is lost at every propagation step, so rnn s are able to model the shorter sentences in Convote more effectively than the longer ibc sentences
+p11
+aVWe also want to thank Justin Gross for providing the ibc and Asad Sayeed for help with the Crowdflower task design, as well as Richard Socher and Karl Moritz Hermann for assisting us with our model implementations
+p12
+aVTo train the dualist classifier, we manually assigned class labels of u'\u005cu201c' neutral u'\u005cu201d' or u'\u005cu201c' biased u'\u005cu201d' to 200 sentences, and selected typical partisan unigrams to represent the u'\u005cu201c' biased u'\u005cu201d' class dualist labels 11,555 sentences as politically biased, 5,434 of which come from conservative authors and 6,121 of which come from liberal authors
+p13
+aVIn this section we describe our initial dataset (Convote) and explain the procedure we followed for creating our new dataset ( ibc
+p14
+aVBecause of the expense of labeling every node in a sentence, we only label one path in each sentence
+p15
+aVSince the root of each sentence is always annotated, this strategy ensures that every node in the tree has a label
+p16
+aV5 5 This is a simplification, as the ideological hierarchy in ibc makes clear
+p17
+aVDue to this discrepancy, the objective function in Eq. ( 6 ) was minimized by making neutral predictions for almost every node in the dataset
+p18
+aVSince many different issues are discussed in the ibc , it is likely that our dataset has too few examples of some of these issues for the model to adequately learn the appropriate ideological positions, and more training data would resolve many of these errors
+p19
+aVThe process for selecting paths is as follows first, if any paths contain one of the top-ten partisan unigrams, 6 6 The words that the multinomial naïve Bayes classifier in dualist marked as highest probability given a polarity market, abortion, economy, rich, liberal, tea, economic, taxes, gun, abortion we select the longest such path; otherwise, we select the path with the most open class constituencies ( np , vp , adjp
+p20
+aVBecause our goal is to distinguish between liberal and conservative bias, instead of the more general task of classifying sentences as u'\u005cu201c' neutral u'\u005cu201d' or u'\u005cu201c' biased u'\u005cu201d' , we filter the dataset further using dualist [ 23 ] , an active learning tool, to reduce the proportion of neutral sentences in our dataset
+p21
+aVSince identifying political bias is a relatively difficult and subjective task, we include all sentences where at least two workers agree on a label for the root node in our final dataset, except when that label is u'\u005cu201c' Not neutral, but I u'\u005cu2019' m unsure of which direction u'\u005cu201d'
+p22
+aVAs phrases themselves merge into complete sentences, the underlying vector representation is trained to retain the sentence u'\u005cu2019' s whole meaning
+p23
+aVFor this model, we also introduce a hyperparameter u'\u005cu0392' that weights the error at annotated nodes ( 1 - u'\u005cu0392' ) higher than the error at unannotated nodes ( u'\u005cu0392' ); since we have more confidence in the annotated labels, we want them to contribute more towards the objective function
+p24
+aVThis model requires richer data than currently available, so we develop a new political ideology dataset annotated at the phrase level
+p25
+aVIf you feel like the phrase indicates some position to the left or right of the political center, but you u'\u005cu2019' re not sure which direction, please mark Not neutral, but I u'\u005cu2019' m unsure of which direction
+p26
+aVWe say a sentence contains ideological bias if its author u'\u005cu2019' s political position (here liberal or conservative , in the sense of U.S politics) is evident from the text
+p27
+aVIn Figure 5 D, u'\u005cu201c' be used as an instrument to achieve charitable or social ends u'\u005cu201d' reflects a liberal ideology, which the model predicts correctly
+p28
+aVThese phrase vectors should represent the meaning of the phrases composed of individual words
+p29
+aVExisting approaches toward bias detection have not gone far beyond u'\u005cu201c' bag of words u'\u005cu201d' classifiers, thus ignoring richer linguistic context of this kind and often operating at the level of whole documents
+p30
+aVFor purposes of annotation, we define the task of political ideology detection as identifying, if possible, the political position of a given sentence u'\u005cu2019' s author, where position is either liberal or conservative
+p31
+aVSupervised rnn s achieve this distinction by applying a regression that takes the node u'\u005cu2019' s vector x p as input and produces a prediction y ^ p
+p32
+aVSince most ideological bias becomes identifiable only at higher levels of sentence trees (as verified by our annotation, Figure 4 ), models relying primarily on word-level distributional statistics are not desirable for our problem
+p33
+aVAs in previous work [ 27 ] , we visualize the learned vector space by listing the most probable n-grams for each political affiliation in Table 2
+p34
+aVIf two words w a and w b merge to form phrase p , we posit that the phrase-level vector is
+p35
+aVE.g., Gerrish and Blei ( 2011 ) predict the voting patterns of Congress members based on bag-of-words representations of bills and inferred political leanings of those members
+p36
+aVBased on a parse tree, these words form phrases p (Figure 2
+p37
+aVWe generate the final instance representation by concatenating the root vector and the average of all other vectors [ 27 ]
+p38
+aVBy taking into account the hierarchical nature of language, rnn s can model semantic composition , which is the principle that a phrase u'\u005cu2019' s meaning is a combination of the meaning of the words within that phrase and the syntax that combines those words
+p39
+aVEach of these phrases also has an associated vector x p u'\u005cu2208' u'\u005cu211d' d of the same dimension as the word vectors
+p40
+aVThis initialization of the composition matrices has previously been effective for parsing [ 25 ]
+p41
+aVHowever, lr 2 also includes phrase-level annotations as separate training instances
+p42
+aVThe word2vec embeddings have linear relationships (e.g.,, the closest vectors to the average of u'\u005cu201c' green u'\u005cu201d' and u'\u005cu201c' energy u'\u005cu201d' include phrases such as u'\u005cu201c' renewable energy u'\u005cu201d' , u'\u005cu201c' eco-friendly u'\u005cu201d' , and u'\u005cu201c' efficient lightbulbs u'\u005cu201d'
+p43
+aVThis is an expedient choice; in future work we plan to make use of work in political science characterizing candidates u'\u005cu2019' ideological positions empirically based on their behavior [ 3 ]
+p44
+aVWhile phrase-level annotations do not improve baseline performance, the rnn model significantly benefits from these annotations because the phrases are themselves derived from nodes in the network structure
+p45
+aV8 8 We do not include phrase-level annotations in the lr 3 feature set because the pseudo-word features can only be computed from full sentence parses
+p46
+aVMany of the issues discussed by politicians and the media are so nuanced that even word choice entails choosing an ideological position
+p47
+aVMost previous work on ideology detection ignores the syntactic structure of the language in use in favor of familiar bag-of-words representations for the sake of simplicity
+p48
+aVTo preserve these relationships as phrases are formed in our sentences, we initialize our left and right composition matrices such that parent vector p is computed by taking the average of children a and b ( W L = W R = 0.5 u'\u005cu2062' u'\u005cud835' u'\u005cudd40' d × d
+p49
+aVWhen initializing our model, we have two choices we can initialize all of our parameters randomly or provide the model some prior knowledge
+p50
+aV2 2 Many sentences in Convote are variations on u'\u005cu201c' I think this is a good/bad bill u'\u005cu201d' , and there is also substantial parliamentary boilerplate language
+p51
+aVAs we see in Section 4 , these choices have a significant effect on final performance
+p52
+aVWe therefore use the features in Yano et al
+p53
+aVCompared to our final Convote dataset, an even larger percentage of the ibc sentences exhibit no noticeable political bias
+p54
+aVOur final balanced ibc dataset consists of 3,412 sentences (4,062 before balancing and removing neutral sentences) with a total of 13,640 annotated nodes
+p55
+aVHowever, the raw Convote dataset contains a low percentage of sentences with explicit ideological bias
+p56
+aVTo avoid conflating partisanship and ideology we create a new dataset annotated for ideological bias on the sentence and phrase level
+p57
+aVWe used the Crowdflower crowdsourcing platform (crowdflower.com), which has previously been used for subsentential sentiment annotation [ 22 ] , to obtain human annotations of the filtered ibc dataset for political bias on both the sentence and phrase level
+p58
+aVWe had workers annotate 7,000 randomly selected paths from the filtered ibc dataset, with half of the paths coming from conservative authors and the other half from liberal authors, as annotated by Gross et al
+p59
+aVOf these sentences, 543 switch polarity (liberal u'\u005cu2192' conservative or vice versa) on an annotated path
+p60
+aVWhile sentences lacking subjective language may contain ideological bias (e.g.,, the topic of the sentence), highly-opinionated sentences likely have obvious ideological leanings
+p61
+aVThree workers annotated each path in the dataset, and we paid $0.03 per sentence
+p62
+aVIn Convote, every sentence is part of a debate about 2005 political policy
+p63
+aVWe obtain better results on Convote than on ibc with both bag-of-words and rnn models
+p64
+aVThe root node of a sentence is always included in a path
+p65
+aVWith this new dataset we show that rnn s not only label sentences well but also improve further when given additional phrase-level annotations rnn s are quantitatively more effective than existing methods that use syntactic and semantic features separately, and we also illustrate how our model correctly identifies ideological bias in complex syntactic constructions
+p66
+aVIn particular, the phrase annotations allow our best model to detect bias accurately in complex sentences that the baseline models cannot handle
+p67
+aV[ 32 ] , which correlate with political bias, to select sentences to annotate that have a higher likelihood of containing bias
+p68
+aVIn addition to Convote, we use the Ideological Books Corpus ( ibc ) developed by Gross et al
+p69
+aVWe propagate party labels down from the speaker to all of their individual sentences and map from party label to ideology label (Democrat u'\u005cu2192' liberal, Republican u'\u005cu2192' conservative
+p70
+aVWhile the Convote dataset has seen widespread use for document-level political classification, we are unaware of similar efforts at the sentence level
+p71
+aVWhile we initially wanted to incorporate neutral labels into our model, we observed that lower-level phrases are almost always neutral while full sentences are much more likely to be biased (Figure 4
+p72
+aVThe strong correlation between us political parties and political ideologies (Democrats with liberal, Republicans with conservative) lends confidence that this dataset contains a rich mix of ideological statements
+p73
+aVWe train an L 2 -regularized logistic regression model over these concatenated vectors to obtain final accuracy numbers on the sentence level
+p74
+aVEach of these models have the same task to predict sentence-level ideology labels for sentences in a test set
+p75
+aVIn this paper, we examine the problem of detecting ideological bias on the sentence level
+p76
+aVOur best model is able to accurately model the compositional effects of bias in sentences with complex syntactic structures
+p77
+aVBuilding from those insights, we introduce a recursive neural network ( rnn ) to detect ideological bias on the sentence level
+p78
+aVIn this section, we describe a supervised rnn model for bias detection and highlight differences from previous work in training procedure and initialization
+p79
+aVAll unannotated nodes receive the label of their closest annotated ancestor
+p80
+aVWhile members of the Crowdflower workforce are certainly not experts in political science, our simple task and the ubiquity of political bias allows us to acquire useful annotations
+p81
+aVrnn 2-( w2v ) is initialized using word2vec embeddings and also includes annotated phrase labels in its training
+p82
+aV2013 ) detect biased words in sentences using indicator features for bias cues such as hedges and factive verbs in addition to standard bag-of-words and part-of-speech features
+p83
+aVIf an element of this vector space, x d , represents a sentence with liberal bias, its vector should be distinct from the vector x r of a conservative-leaning sentence
+p84
+aVFor rnn models, we generate a feature vector for every node in the tree
+p85
+aVThe Convote dataset [ 29 ] consists of us Congressional floor debate transcripts from 2005 in which all speakers have been labeled with their political party (Democrat, Republican, or independent
+p86
+aVWe performed initial experiments on a dataset of Congressional debates that has annotations on the author level for partisanship, not ideology
+p87
+aV4 4 This difference can be mainly attributed to a historical topics in the ibc (e.g.,, the Crusades, American Civil War
+p88
+aVlr -( w2v ) is a logistic regression model trained on the average of the pretrained word embeddings for each sentence (Section 2.2
+p89
+aVManually identifying ideological bias in political text, especially in the age of big data, is an impractical and expensive process
+p90
+aVWhile acquiring data with obscure political biases from the ibc or Convote is unfeasible, we can apply a similar analysis to social media (e.g.,, Twitter or Facebook updates) to discover how many different ideologies propagate in these networks
+p91
+aVTo ensure our annotators have a basic understanding of us politics, we restrict workers to us ip addresses and require workers manually annotate one node from 60 different u'\u005cu201c' gold u'\u005cu201d' paths annotated by the authors
+p92
+aVThe increased accuracy suggests that the trained rnn s are capable of detecting bias polarity switches at higher levels in parse trees
+p93
+aVThe basic idea behind the standard rnn model is that each word w in a sentence is associated with a vector representation x w u'\u005cu2208' u'\u005cu211d' d
+p94
+aVThe cross-entropy loss of a single sentence is the sum over the true labels y i in the sentence
+p95
+aVThis induces a supervised objective function over all sentences a regularized sum over all node losses normalized by the number of nodes N in the training set
+p96
+aVThe lr -( w2v ) baseline allows us to compare against a strong lexical representation that encodes syntactic and semantic information without the RNN tree structure lr 1 , lr 2 ) offer a comparison to simple bag of words models, while the lr 3 baseline contrasts traditional syntactic features with those learned by RNN models
+p97
+aVFinally, we investigate sentence constructions that our model cannot handle and offer possible explanations for these errors
+p98
+aVFigure 5 B shows an example of a bias polarity switch in the opposite direction the sentence negatively portrays supporters of nationalized health care, which our model picks up on
+p99
+aVWe choose this design to prevent workers from changing their lower-level phrase annotations after reading the full sentence
+p100
+aVThe first three sentences in Figure 5 were correctly classified by our best model ( rnn 2-( w2v ) ) and incorrectly classified by all of the baselines
+p101
+aVThey use an hmm -based model, defining the states as a set of fine-grained political ideologies, and rely on a closed set of lexical bigram features associated with each ideology, inferred from a manually labeled ideological books corpus
+p102
+aVWe optimize the model parameters to minimize the cross-entropy loss over all sentences in the corpus
+p103
+aVThe most straightforward choice is to initialize the word embedding matrix W e and composition matrices W L and W R randomly such that without any training, representations for words and phrases are arbitrarily projected into the vector space
+p104
+aVWe also give examples of sentences that are correctly classified by our best rnn model but incorrectly classified by all of the baselines
+p105
+aVWe first extract the subset of sentences that contains any words in the liwc categories of Negative Emotion, Positive Emotion, Causation, Anger, and Kill verbs
+p106
+aVEach document in the ibc has been manually labeled with coarse-grained ideologies (right, left, and center) as well as fine-grained ideologies (e.g.,, religious-right, libertarian-right) by political science experts
+p107
+aVFirst, we can consider more nuanced political ideologies beyond liberal and conservative
+p108
+aVFor example, a moderate Republican might agree with the liberal position on increased gun control but take conservative positions on other issues
+p109
+aVAnother direction is to implement more sophisticated rnn models (along with more training data) for bias detection
+p110
+aVSimilarly, authors have relied on simple models of language when leveraging inferred ideological positions
+p111
+aVWe select these nodes such that the associated phrase is either obviously biased or obviously neutral
+p112
+aVOur model often makes errors when polarity switches occur at nodes that are high up in the tree
+p113
+aV70.4% of all annotated nodes fit this definition of agreement
+p114
+aVHowever, our model is unable to detect the polarity switch when this phrase is negated with u'\u005cu201c' should not u'\u005cu201d'
+p115
+aV2013 ) have proposed a model to infer mixtures of ideological positions in documents, applied to understanding the evolution of ideological rhetoric used by political candidates during the campaign cycle
+p116
+aVIdeological bias is difficult to detect, even for humans u'\u005cu2014' the task relies not only on political knowledge but also on the annotator u'\u005cu2019' s ability to pick up on subtle elements of language use
+p117
+aVWe only keep phrase-level annotations where at least two workers agree on the label
+p118
+aVThe challenge is to describe how vectors combine to form complete representations
+p119
+aVWe initialize our model with 300-dimensional word2vec toolkit vectors generated by a continuous skip-gram model trained on around 100 billion words from the Google News corpus [ 16 ]
+p120
+aVWe are interested in learning representations that can distinguish political polarities given labeled data
+p121
+aVAfter computing a list of the top 100 sticky bigrams for each category, ranked by log-likelihood ratio, and selecting another subset from the original data that included only sentences containing at least one sticky bigram, we take the union of the two subsets
+p122
+aVThe random baseline chooses a label at random from { liberal , conservative }
+p123
+aVFor example, the sentence in Figure 1 includes phrases typically associated with conservatives, such as u'\u005cu201c' small businesses u'\u005cu201d' and u'\u005cu201c' death tax u'\u005cu201d'
+p124
+aVWe show that it is possible to detect ideological bias given this binary problem; however, a finer-grained study that also includes neutral annotations may reveal more subtle distinctions between ideologies
+p125
+aVOther approaches on the document level use topic models to analyze bias in news articles, blogs, and political speeches [ 1 , 15 , 17 ]
+p126
+aVWorkers must correctly annotate at least six of eight gold paths before they are granted access to the full task
+p127
+aVrnn 1 initializes all parameters randomly and uses only sentence-level labels for training
+p128
+aVIn addition, workers must maintain 75% accuracy on gold paths that randomly appear alongside normal paths
+p129
+aVIf the phrase is not indicative of a position to the left or right of center, please mark Neutral
+p130
+aVIf the phrase is indicative of a position to the left of center, please choose Liberal
+p131
+aVFor all RNN models, we set the word vector dimension d to 300 to facilitate direct comparison against the lr -( w2v ) baseline
+p132
+aVFigures 5 A and C show traditional conservative phrases, u'\u005cu201c' free market ideology u'\u005cu201d' and u'\u005cu201c' huge amounts of taxpayer money u'\u005cu201d' , that switch polarities higher up in the tree when combined with phrases such as u'\u005cu201c' made worse by u'\u005cu201d' and u'\u005cu201c' saved by u'\u005cu201d'
+p133
+aVWe want the predictions of the softmax layer to match our annotated data; the discrepancy between categorical predictions and annotations is measured through the cross-entropy loss
+p134
+aVlr 1 , our most basic logistic regression baseline, uses only bag of words ( BoW ) features
+p135
+aVGreene and Resnik ( 2009 ) also emphasize the connection between syntactic and semantic relationships in their work on u'\u005cu201c' implicit sentiment u'\u005cu201d' , which refers to sentiment carried by sentence structure and not word choice
+p136
+aVOpen class constituencies are revealed to the worker incrementally, starting with the np , vp , or adjp furthest from the root and progressing up the tree
+p137
+aVFinally, combining sentence-level and document-level models might improve bias detection at both levels
+p138
+aVrnn 1-( w2v ) uses the word2vec initialization described in Section 2.2 but is also trained on only sentence-level labels
+p139
+aVGold paths dramatically improve the quality of our workforce
+p140
+aVThey have achieved state-of-the-art performance on a variety of sentence-level nlp tasks, including sentiment analysis, paraphrase detection, and parsing [ 26 , 13 ] rnn models represent a shift from previous research on ideological bias detection in that they do not rely on hand-made lexicons, dictionaries, or rule sets
+p141
+aVIf the phrase is indicative of a position to the right of center, please choose Conservative
+p142
+aVEquation 2 allows us to percolate the representations to the root of the tree
+p143
+aVWe attempted to apply syntactically-untied rnn s [ 25 ] to our data with the idea that associating separate matrices for phrasal categories would improve representations at high-level nodes
+p144
+aVRecursive neural networks ( rnn s) are machine learning models that capture syntactic and semantic composition
+p145
+aVA newspaper u'\u005cu2019' s slant index is governed by the frequency of use of partisan collocations of 2-3 tokens
+p146
+aVOur task is shown in Figure 3
+p147
+aVand W c u'\u005cu2062' a u'\u005cu2062' t is a k × d matrix for a dataset with k -dimensional labels
+p148
+aVIn this section, we examine the rnn models to see why they improve over our baselines
+p149
+aVAlthough it takes elements of discourse structure into account (capturing the u'\u005cu201c' burstiness u'\u005cu201d' of ideological terminology usage), their model explicitly ignores intrasentential contextual influences of the kind seen in Figure 1
+p150
+aVThis work extends their insight of modeling sentiment as an interaction between syntax and semantics to ideological bias
+p151
+aV[ 32 ] adopted it from Greene and Resnik ( 2009 ) and showed it to be a useful predictor of political bias
+p152
+aVTo analyze the effects of initialization and phrase-level annotations, we report results for three different rnn settings
+p153
+aVWe report results for rnn models with the following configurations
+p154
+aVWe discuss strong baselines that use lexical and syntactic information (including framing-specific features from previous work) as well as multiple RNN configurations
+p155
+aVIn this section we describe our experimental framework
+p156
+aVwhere W L and W R are d × d left and right composition matrices shared across all nodes in the tree, b 1 is a bias term, and f is a nonlinear activation function such as tanh
+p157
+aVTheir features come from the Linguistic Inquiry and Word Count lexicon ( liwc ) [ 20 ] , as well as from lists of u'\u005cu201c' sticky bigrams u'\u005cu201d' [ 2 ] strongly associated with one party or another (e.g.,, u'\u005cu201c' illegal aliens u'\u005cu201d' implies conservative, u'\u005cu201c' universal healthcare u'\u005cu201d' implies liberal
+p158
+aVIt includes words such as u'\u005cu201c' slaughter u'\u005cu201d' and u'\u005cu201c' starve u'\u005cu201d'
+p159
+aVFor example, Gentzkow and Shapiro [ 6 ] derive a u'\u005cu201c' slant index u'\u005cu201d' to rate the ideological leaning of newspapers
+p160
+aVThis is a collection of books and magazine articles written between 2008 and 2012 by authors with well-known political leanings
+p161
+aVThis is similar to improvements from pretrained vectors from neural language models [ 27 ]
+p162
+aVWhile there were too many parameters for this model to work well here, other variations might prove successful, especially with more data
+p163
+aVWhile semantic composition does not apply universally (e.g.,, sarcasm and idioms), most language follows this principle
+p164
+aVWhile the two terms are highly correlated (e.g.,, a member of the Republican party likely agrees with conservative stances on most issues), they are not identical
+p165
+aVWe perform 10-fold cross-validation on the training data to find the best rnn hyperparameters
+p166
+aVWhile objectivity remains an important principle of journalistic professionalism, scholars and watchdog groups claim that the media are biased [ 10 , 6 , 18 ] , backing up their assertions by publishing examples of obviously biased articles on their websites
+p167
+aVWhen we take more of the structure into account, however, we find that scare quotes and a negative propositional attitude ( a lie about X ) yield an evident liberal bias
+p168
+aVlr 2 uses only BoW features
+p169
+aVWhether or not it reflects an underlying lack of objectivity, quantitative changes in the popular framing of an issue over time u'\u005cu2014' favoring one ideologically-based position over another u'\u005cu2014' can have a substantial effect on the evolution of policy [ 5 ]
+p170
+aVlr 3 uses BoW features as well as syntactic pseudo-word features from Greene Resnik [ 9 ]
+p171
+aV10 10 Using smaller vector sizes ( d u'\u005cu2208' { 50 , 100 } , as in previous work) does not significantly change accuracy
+p172
+aV2004 ) show that low-frequency words and some collocations are a good indicators of subjectivity
+p173
+aVInitializing the rnn W e matrix with word2vec embeddings improves accuracy over randomly initialization by 1%
+p174
+aVIn addition, sentiment and subjectivity analysis offers methodological approaches that can be applied to automatic bias detection
+p175
+aVThey use syntactic dependency relation features combined with lexical information to achieve then state-of-the-art performance on standard sentiment analysis datasets
+p176
+aVMeanwhile, liberals inveigh against the gap between the rich and the poor while expressing concern for minority groups and the working class
+p177
+aVThis improves the performance of rnn models over random initializations [ 4 , 26 ]
+p178
+aVThe gradient of the objective, shown in Eq. ( 7 ), is computed using backpropagation through structure [ 8 ]
+p179
+aVMoreover, bias may be localized to a small portion of a document, undetectable by coarse-grained methods
+p180
+aVTable 1 shows the rnn models outperforming the bag-of-words baselines as well as the word2vec baseline on both datasets
+p181
+aVAll three models were implemented as described in Section 2 with the nonlinearity f set to the normalized tanh function
+p182
+aVWorkers receive the following instructions
+p183
+aVFor example, what liberals call the u'\u005cu201c' estate tax u'\u005cu201d' conservatives call the u'\u005cu201c' death tax u'\u005cu201d' ; there are no ideologically neutral alternatives [ 14 ]
+p184
+aVIn general, work in this category tends to combine traditional surface lexical modeling (e.g.,, bag-of-words) with hand-designed syntactic features or lexicons
+p185
+aVDetecting subjective language, which conveys opinion or speculation, is a related nlp problem
+p186
+aVHowever, these syntactic features are only computed for a thresholded list of domain-specific verbs
+p187
+aVAs expected, conservatives emphasize values such as freedom and religion while disparaging excess government spending and their liberal opposition
+p188
+aVThey show that this type of linguistic information dramatically improves performance over several standard baselines
+p189
+aV3 3 While Kill verbs are not a category in liwc , Yano et al
+p190
+aVThe word-level vectors x a and x b come from a d × V dimensional word embedding matrix W e , where V is the size of the vocabulary
+p191
+aVIn contrast, recent work in sentiment analysis has used deep learning to discover compositional effects [ 27 , 28 ]
+p192
+aVThese features from dependency relations specify properties of verbs (e.g.,, transitivity or nominalization
+p193
+aVThe other alternative is to initialize the word embedding matrix W e with values that reflect the meanings of the associated word types
+p194
+aVWe use l-bfgs with parameter averaging [ 12 ] to optimize the model parameters u'\u005cu0398' = ( W L , W R , W c u'\u005cu2062' a u'\u005cu2062' t , W e , b 1 , b 2
+p195
+aVThis work was supported by nsf Grant CCF-1018625
+p196
+aVWiebe et al
+p197
+aVAny opinions, findings, conclusions, or recommendations expressed here are those of the authors and do not necessarily reflect the view of the sponsor
+p198
+aVRecently, Sim et al
+p199
+aVwhere the softmax function is
+p200
+aVThere are a few obvious directions in which this work can be expanded
+p201
+aVMore recently, Recasens et al
+p202
+aV9 9 [ u'\u005cu039b' W e = 1e-6 , u'\u005cu039b' W = 1e-4 , u'\u005cu039b' W c u'\u005cu2062' a u'\u005cu2062' t = 1e-3 , u'\u005cu0392' = 0.3 ]
+p203
+aVA growing nlp subfield detects private states such as opinions, sentiment, and beliefs [ 31 , 19 ] from text
+p204
+aVWe thank the anonymous reviewers, Hal Daumé, Yuening Hu, Yasuhiro Takayama, and Jyothi Vinjumur for their insightful comments
+p205
+aVBoyd-Graber is also supported by nsf Grant IIS-1320538
+p206
+aVThis is a softmax layer
+p207
+aVHere we review the most salient literature related to the present paper
+p208
+aV1 1 Available at http://cs.umd.edu/~miyyer/ibc
+p209
+aV{itemize*}
+p210
+aV[ 11 ]
+p211
+aV[ 11 ]
+p212
+a.

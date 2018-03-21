@@ -1,0 +1,453 @@
+Interactive semantics
+
+Knowledge Grid Research Group, Key Lab of Intelligent Information Processing, Institute of Computing Technology, Chinese Academy of Sciences, Beijing, 100190, China
+
+Email: zhuge@ict.ac.cn; www.knowledgegrid.net/~h.zhug
+
+Hai Zhuge
+
+ABSTRACT
+
+Much research pursues machine intelligence through better representation of semantics. What is semantics? People in different areas view semantics from different facets although it accompanies interaction through civilization. Some researchers believe that humans have some innate structure in mind for processing semantics. Then, what the structure is like? Some argue that humans evolve a structure for processing semantics through constant learning. Then, how the process is like? Humans have invented various symbol systems to represent semantics. Can semantics be accurately represented? Turing machines are good at processing symbols according to algorithms designed by humans, but they are limited in ability to process semantics and to do active interaction. Super computers and high-speed networks do not help solve this issue as they do not have any semantic worldview and cannot reﬂect themselves. Can future cyber-society have some semantic images that enable machines and individuals (humans and agents) to reﬂect themselves and interact with each other with knowing social situation through time? This paper concerns these issues in the context of studying an interactive semantics for the future cyber-society. It ﬁrstly distinguishes social semantics from natural semantics, and then explores the interactive semantics in the category of social semantics. Interactive semantics consists of an interactive system and its semantic image, which co-evolve and inﬂuence each other. The semantic worldview and interactive semantic base are proposed as the semantic basis of interaction. The process of building and explaining semantic image can be based on an evolving structure incorporating adaptive multi-dimensional classiﬁcation space and self-organized semantic link network. A semantic lens is proposed to enhance the potential of the structure and help individuals build and retrieve semantic images from different facets, abstraction levels and scales through time.
+
+Keywords: Classiﬁcation; Open system; Semantics; Semantic link network; Social semantics; Interaction; Interactive semantics
+
+1. Introduction
+
+The creation of symbols opens the door of human civilization. Versatile symbol systems help humans create, record, and develop civilization.
+
+1.1 Semantics in computer science
+
+Research on semantics accompanies the development of computer science. Formal semantics studies the speciﬁcation, operation and veriﬁcation of computer program by mathematical tools [28,47]. Mathematical models like relational data model were established to regulate the organizations and behaviors of systems [10]. Informal semantics concerns the modeling of the real world by such languages as UML and ER ([9,24], http://www.uml.org). Object-oriented method tries to transform the real-world model into program by some basic semantic abstractions such as class, object, instance, inheritance, method, message, encapsulation and polymorphism [7,42]. Meta-languages were used to deﬁne the semantics of languages.
+
+Human beings are specialized in creative thinking but limited in ability to deal with large amount of data. Statistical and empirical methods can help discover some underlying rules [23]. Much effort has been made to enable computers to capture and understand the general semantics in text [2,15,43]. Four semantic worlds (real world, mental world, machine world and document world) were classiﬁed for understanding semantics [49].
+
+1.2 Semantics in AI and philosophy
+
+As the science and engineering of making intelligent machines, AI concerns human intelligence, knowledge, and intelligent machines. Many knowledge representation approaches such as the production rule, frame and semantic network were proposed [16,41].
+
+Newell early proposed the notion of agent in his work on the knowledge level [37]. Agent communication language KQML and formal semantics for group communication were studied [17,27]. The Knowledge Interchange Format KIF
+(http://logic.stanford.edu/kif/) and Open Knowledge Base Connectivity OKBC (http://www.ksl.stanford.edu/software/OKBC/) were developed to facilitate the exchange of knowledge. Ontologists regard semantics as a particular interpretation function between things and symbols [22]. Minsky argues that knowledge needs multiple representations [35].
+
+In recent ten years, some researchers have moved focus from human intelligence to analyzing the artifacts of humans, e.g., to extract implicit and previously unknown rules from data [18]. McCarthy early studied the formalization of common-sense and context. In recent years, he has called for human-level AI research, which was also the early concern of Turing, Simon and Newell [36,44]. He pointed out that the key to human-level AI is making systems know the common sense informatic situation [32,33].
+
+AI research is closely related to philosophy at the beginning as both of them concern the essential problems: What is meaning? How do we know? These problems are also the major concerns of semantics study. The issues of attached situation and the role of experience and metaphor in understanding were studied [3,29]. The situation issue was studied with logic for situated inference [4].
+
+1.3 Semantics in language studies
+
+Languages play an important role in the evolution of human and society. The semantics of natural language was studied from various aspects such as modeling and statistics [11,31]. Cognitive grammar studies languages based on semantic, phonological, and symbolic units. It assumes that linguistic structures are motivated by general cognitive processes [30]. Cognitive linguistics studies language creation, learning, and usage from cognition point of view. It argues that there is no autonomous linguistic faculty in mind, and that knowledge of language arises from language use [12]. Computational semantics studies the semantic representation in natural languages. The issues of intentionality and raising concept were studied [13]. Language studies concern multi-disciplinary and using computers to process and transform natural languages.
+
+Different from natural languages and machine languages, art languages render the theme of artwork. They are simple in form but leave large creation space for artists. Some art languages are based on several basic elements and operations such as shot, sequence and scene in ﬁlm language. Art languages are usually learned through social interactions and practice.
+
+1.4 Semantics in Semantic Web
+
+The Semantic Web is to represent the semantics in documents so that machines can behave more intelligently according to comprehension of documents on the Web. It also concerns knowledge, agents, and logic as AI does [6]. The Extensible Markup Language XML (http://www.w3.org/XML) and Resource Description Framework RDF (http://www.w3.org/TR/rdf-mt/) are for lower level representation, while the Web Ontology Language OWL (http://www.w3.org/TR), rules and logic are for higher level representation. These semantic description tools can be seen as the development of the traditional knowledge representation approaches on the Web. Research also concerns ontology modeling, mapping, learning and integration. Semantic Web research also concerns the linked data on the Web, a kind of loosely coupled database. Some efforts from computer science, AI, database and information retrieval converge in this area.
+
+1.5 Implied semantics in complex networks
+
+The rapid development of various artiﬁcial networks like the Web provides experiment data for studying complex networks. Complex network analysis is to ﬁnd the rules and structure such as the scale-free and community structures hidden in large-scale complex networks [1,5,19,20,26]. Research has been carried out in economic, social and ecological networks to help humans deal with large-scale change [40]. Complex network analysis provides an approach for us to understand how the world works at large scale.
+
+Web 2.0 allows users to freely comment and tag Web resources. The structure and semiotic dynamics of collaborative tagging implies some underlying consensus on organizing and sharing resources [8,21].
+
+Complex network analysis, data mining and semantic web initiate research independently but almost at the same time when researchers pay more attention to artifacts than human intelligence. Some researchers try to capture some knowledge by analyzing artifacts. Relevant research beneﬁts from the development of the Web—the largest artiﬁcial network created by humans.
+
+1.6 Comments
+
+Traditional knowledge representation approaches tried to represent knowledge in human mind. But it is hard to accurately represent knowledge in the rigid, isolated and static forms. It is even harder for knowledge engineers to obtain knowledge from domain experts.
+
+The statistical, document analysis and natural language processing approaches try to obtain semantics from text or data
+[2,15,18,23,31,43]. However text or data is limited in ability to contain human-level or society-level semantics. Author is the best person to explain text, but author's meaning is more or less changed when it is transformed into text through language.
+
+Semantic modeling is a way to explain semantics in particular application, but it is hard to create one model to suit all applications. Different semantic models should co-exist, support each other, and play different roles in computing and modeling. Establishing mappings between models can help people understand their characteristics. Based on the mappings, complementing or integrating existing models can obtain new capacity of semantic modeling [49].
+
+Humans, interaction, and society are inseparable. We should concern society-level intelligence when studying human-level AI. Humans also need the help from machine-level AI because human minds are limited in ability to ﬁnd the intrinsic rules in large-scale networks. So, the “machine-level AI + human-level AI + social-level AI” is the right direction.
+
+1.7 Necessity of studying interactive semantics
+
+The necessity of studying interactive semantics lies in the following aspects.
+
+(1) Humans can perceive the nature and communicate with each other before the creation of various symbolic languages. Language itself is generated from and evolves with social interaction. Language is an interaction tool rather than semantics itself. So, interaction is more essential than language in studying semantics.
+
+(2) The evolution of society and language hinders humans from interaction cross times. New ways of interaction do not lead to the development of human thought. The study of interactive semantics would help individuals (humans and agents) to interact with each other cross times and cultures in the future cyber-society—the fusion of human society and virtual digital world.
+
+(3) Interaction is the major force to form and evolve society. In the future cyber-society, social requirements will be mainly fulﬁlled by searching, interacting, possibly adapting, and then composing services during interaction. Predesigned algorithms may be unavailable or cannot suit the changing requirements. To enable individuals to work in cooperation through interaction is a challenge issue in developing future cyber-society.
+
+(4) Turing early pointed out that neither logic nor algorithms can completely model computing and human thought. Efforts to make machines support interaction have been made [34,45,46]. Interaction will play more important role than algorithm in the cyber-society. However, we still lack in-depth understanding on social interaction. For example, humans may not rely on grammar analysis to understand each other. Then, how individuals in the future cyber-society effectively interact with each other based on understanding? The study of interactive semantics can help establish the interaction basis for the future cyber-society.
+
+2. Semantic worldview
+
+Nature exhibits a kind of natural classiﬁcation. Genetic, physical, or chemical structure determines the primitive classes of natural organic or inorganic objects. Different from the creationist point of view, Charles Darwin's theory on the origin of species argues that populations evolve over generations through a process of natural selection. This kind of selection can be regarded as a continuous natural classiﬁcation on natural classes. Classiﬁcation is also the natural way for humans to manage artifacts.
+
+The formation and evolution of the nature exhibit objective natural semantics. Natural semantics is the structure and laws of the nature. Humans can invent scientiﬁc instruments to detect the natural semantics.
+
+The development of society generates social semantics that evolves independently from the natural semantics. Social semantics is the explanation, indication, or metaphor of natural or social existence. It is the basis of the whole civilization of human beings, but it cannot be accurately and completely represented as it concerns uncertain and undecidable social interaction, motivation, and evolution. Different explanations on the same social or natural existence can coexist. Consensuses are reached or changed from time to time. There is no absolute truth in social semantics. Social semantics emphasizes diversity and rationality rather than correctness.
+
+Interaction is the most basic social behavior. Interactive semantics belongs to social semantics. It reﬂects, traces, and facilitates social interaction.
+
+Telegraphy early realizes distance interaction. To reduce cost, people limited the number of keywords to indicate semantics. For example, “father sick back” is understandable between family members, but it is hard for computers to understand. Why? Because keywords are indicators of semantics rather than semantics, only analyzing keywords is not suﬃcient to know what writers indicate. On the other hand, family members know social relations between them, and they are likely to know the current situations and share some conventions and experiences. The telegraph-based interaction goes beyond telegraph into human society.
+
+The major difference between humans and machines in intelligence is that humans have worldview but machines do not have. To help machines establish worldview is critical to realize human-level or society-level AI. A semantic worldview helps machines establish some basic semantic images. Ordinary image statically reﬂects object or scene, while semantic images dynamically reﬂect classiﬁcation, object, individual, relation, rule, and interaction.
+
+(1) Classiﬁcation semantic image reﬂects evolving classiﬁcation spaces. Classiﬁcation methods generate classes and the classes of classes (i.e., super-class). As the consequence, classiﬁcation trees are constituted. Classiﬁcation trees are then expanded with the generation of new classes. Classiﬁcation trees are further coordinated into multi-dimensional classiﬁcation spaces [49,50]. Classiﬁcation spaces evolve with the generation of new classes. A class has attributes and instances, and may have subclasses.
+
+(2) Object semantic image reﬂects the attributes and class of object from multiple facets. It is an instance of a point in a multi-dimensional classiﬁcation space.
+
+(3) Individual semantic image is a semantic link network (a self-organized semantic model introduced in [51,52]) of objects or points in individual classiﬁcation space. It is waved during lifetime interaction directly or indirectly, and it dynamically reﬂects the characteristics, behaviors and experiences of individuals.
+
+(4) Relation semantic image is the direct or indirect relation between two nodes (objects, individuals or classes). Some relations are determined by attributes while others are determined by the third party that participates in interaction.
+
+(5) Rule semantic image reﬂects rules of classiﬁcation, reasoning, and interaction. Rules may be connected with each other for reasoning. The inter-connected rules form a kind of rule closure that determines the implied semantic links.
+
+(6) Interaction semantic image is a semantic link network of objects or points in the classiﬁcation space shared between individuals. It forms and evolves through constant interaction. Different from hyperlink, a semantic link not only reﬂects relation but also traces the information ﬂow during interaction between two individuals. The interaction semantic image between two individuals will be waved during their lifetime interaction.
+
+The semantic images emphasize on dynamicity. A semantic link network may imply some relations or ﬂows, and it evolves with the increase of nodes and semantic links. Some semantic link networks are built naturally like the food web but some are built through interaction.
+
+Semantic images of different types inﬂuence each other. Change of rules inﬂuences evolution, interaction, derivation of relation, and result of classiﬁcation. The increase of new objects or the evolution of objects inﬂuences the relations between objects and between classes. Interaction establishes and changes relations between individuals or objects as some relations are known through interaction. Interaction also inﬂuences the motion and evolution of objects, and evolves semantic images. Semantic communities are formed within semantic images and evolve with the evolution of semantic images.
+
+The following are emphasis of interactive semantics:
+
+(1) Explanation and indication. The explanation of semantics is about the intension of semantic image. The indication of semantics is about the extension of semantic image. Indications from multiple facets could make stronger indication. Explanation and indication from multiple channels can help individuals build rich individual semantic images. Knowing the relation between the richness of single media, the richness of channels, and indicators helps build and rebuild semantic images [14,38]. Interactive semantics is explained, indicated, complemented and adjusted through interaction rather than guaranteeing the correctness at the beginning. The explanation of a semantic image may vary with different individuals, but consensus could be reached through a process of interaction. A collaborative explanation and indication process can help reach consensus.
+
+(2) Interaction guarantee. Every individual in the society should guarantee interaction. Isolated individuals do not contribute to any social semantics.
+
+(3) Society and experience. Interaction is the basis of forming and evolving society. The society should enable individuals to participate in interaction with knowing past experience and relevant social relations.
+
+(4) Semantics without representation. As social semantics, interactive semantics emphasizes on the evolution of semantic images rather than accurate representation. This does not hinder individuals from effective interaction as there is no evidence to show that human behaviors rely on accurate representation. Semantic images play an important role in effective interaction. Semantic image can be built and adapted during interaction by indication and explanation from different facets, abstraction levels and scales.
+
+3. Building and explaining semantic image
+
+Humans used behavior, sound and natural objects to indicate semantics at the initial stage and then invented symbols to indicate semantics. The use cases of symbols help users select appropriate indicators to identify objects. One symbol may be used to indicate several objects, and one object may be identiﬁed by several symbols. Early education helps children establish the correspondence between symbol, pronunciation and real world object, and then the relation between symbols.
+
+Classiﬁcation trees will be established and maintained along with the whole education process. Classiﬁcation trees will be coordinated into a multi-dimensional classiﬁcation space S = (X1, ..., Xn), where Xi (i = 1, ..., n) represents a classiﬁcation method (i.e., axis or dimension of the space). A real world object and its indicator will be internalized as an item (instance) in a point of the space S as shown in Fig. 1. Each axis consists of coordinates representing a class or a class hierarchy where a low-level class is the subclass of a high-level class. A point in a normalized space S has projection on every dimension, denoted as p(X1 = c1p, ..., Xn = cnp), where cip indicates a class at dimension Xi [50]. A classiﬁcation space may increase or change its coordinate and dimension during use. The structures of individual classiﬁcation spaces vary with the difference of the initial classiﬁcation trees and individual experience.
+
+A point determined by the leave coordinates at every axis regulates a basic semantic image that reﬂects classiﬁcations from multiple facets. It features symbols, pronunciations, attributes, explanations, experiences and instances about one or a set of objects. A complex semantic image is a subspace or a semantic link network of points. Different semantic links can be added to the same pair of points so multiple semantic images can be established on the same set of points. Points have weights reﬂecting the number of items it contains as well as the number and weights of linked neighbors.
+
+A semantic link network of points at time t takes the following form:
+
+<P, L, Rules>, where P = {<p1(t), w1(t)>, ... ,<pn(t), wn(t)>}, n will change with the evolution of classiﬁcation space; wk(t) in [0, 1] is the weight of point pk(t) in classiﬁcation space at time t, it is adapted in positive proportion to the times of being accessed; L = {l(pi(τ), pj(τ)) τ in [0,t] is the time of adding relation l between pi(τ) and p j(τ), i and j in [1,n]} is a set of semantic links added to the network from time to time during the evolution of the network; and, Rules is a set of reasoning or inﬂuence rules on L. The reasoning rules are on relations. New relations could be derived from existing relations according to the reasoning rules. The inﬂuence rules reﬂect the inﬂuence between relations, points and weights. A new semantic image emerges when the weights are adapted according to the sensing object or scene.
+
+The semantically linked points in the classiﬁcation space S form a structure <S, L, Rules> that helps individuals build and explain semantic images through an internalization process and an externalization process. Individuals may have different classiﬁcation spaces, so may have different outputs for the same input.
+
+The basic internalization process.
+
+(1) Initialization. Individual establishes an initial classiﬁcation space with the help of early educator.
+
+(2) Recognition. An object is recognized if a point containing the item of the similar object is found in the classiﬁcation space. Matching will be based on attributes, explanation and experience of multiple channels. Similar objects can share one indicator. When similar object cannot be found, the individual puts the object into a point with some coordinates matching the attributes of the object or into a temporal set. At the mature stage, an individual will sense object together with the surrounding objects and relations. Object may be segmented or transformed into another form according to experience for in-depth matching. A continuous moving scene will be captured according to the weights of the matched points. Individual interest and intention inﬂuence the selection of objects. Reasoning may derive out the class of the new object item by structure matching when no appropriate point can be found to host the new object item. Analogy may carry out to locate a network of objects by comparing past internalization experience in similar situation. The relation between the moving objects and the points in the classiﬁcation space is quickly detected.
+
+(3) Enrichment. The items of points will be enriched with new explanations and experiences about the objects. New attributes may be added to relevant items. Comparison between similar items is often carried out at this stage, as the consequence, distinguished features may be added to the items.
+
+(4) Adaptation. The classiﬁcation space is adapted to host new items by adding new dimensions or coordinates to the space. An item together with all relevant items can be moved from one point or from the temporal set to a more appropriate point.
+
+(5) Learning and interaction. Rules for linking indicators and patterns are learned for indicating objects. Questions will be generated when no suitable point is found to host an object item. Answers from interaction form explanations that help locate object items. Interaction is often carried out during which externalization process is executed.
+
+(6) Establishing and adapting interest. Interest is reﬂected by the points with high weights. The weights of the often accessed points will become higher during interaction.
+
+(7) Repeat from (2) to build a new semantic image.
+
+After continuous internalization process, a point will include rich explanation, experience, images, symbols, and links to other points. Individual can use symbols in points to indicate semantic images during interaction. Indicators can be linked to indicate complex semantic image. The following operations are for composing a set of indicators K1, K2, ..., and Kn by making abstraction.
+
+(1) {Class(K1), Class(K2), ..., Class(Kn)}, a set of the classes of indicators.
+
+(2) Class(Class(K1), Class(K2), ..., Class(Kn)), the common super-class of the classes of indicators.
+
+(3) Subclass(Class(K1), Class(K2), ..., Class(Kn)), the common sub-class of the classes of indicators.
+
+(4) <{K1, K2, ..., Kn}, L>, a semantic link network of indicators, where L indicates a set of semantic links between indicators. Its special case is <K1, K2, ..., Kn>.
+
+(5) Class(<{K1, K2, ..., Kn}, L>), the class of the semantic link network of indicators.
+
+(6) <{Class(K1), Class(K2), ..., Class(Kn)}, L>, the semantic link network of the classes of indicators, L indicates the set of semantic links between classes. Its special case is <Class(K1), Class(K2), ..., Class(Kn)>.
+
+(7) Class(<{Class(K1), Class(K2), ..., Class(Kn)}, L>), the class of the semantic link network of Class(K1), Class(K2), ..., and Class(Kn).
+
+The semantic image indicated by <{Class(K1), Class(K2), ..., Class(Kn)}, L> explains the semantic image indicated by <{K1, K2, ..., Kn}, L>.
+
+An individual explains or externalizes semantic image by the following process:
+
+The basic process of externalizing a semantic image.
+
+(1) Stimulation. Receiving stimulus (message, question, event, etc.) or raising motivation.
+
+(2) Emerging. Emerging semantic images according to the stimulus.
+
+(3) Selection. Selecting one semantic image or composing the emerging semantic images into one semantic image.
+
+(4) Explanation. Explaining the composed semantic image—a point or a semantic link network of points. Explaining a point is to show its object items including indicators, attributes, explanations and experiences through the channels suitable for the object items. Explaining a semantic link network of points is to retrieve its formation process and render it from different facets and abstraction levels. At the advanced stage, externalization may use analogy and metaphor to indicate semantic image, and a semantic image can range from abstraction to speciﬁc and from speciﬁc to abstraction.
+
+(5) Interaction. Carrying out possible interaction, during which internalization process may be triggered.
+
+(6) Repeat from (1).
+
+During sensing or indicating, individuals continuously relate sense to previously built semantic images to update or rebuild semantic images. For example, semantic images corresponding to the words in text continuously emerge during reading, and words are selected according to the semantic images emerged during writing. Two individuals can understand each other if they have similar linked classiﬁcation spaces. The similar degree determines the understanding degree.
+
+With constant interaction, a classiﬁcation space will contain more dimensions and coordinates, and points will contain more object items, therefore an individual can rebuild richer semantic image when reading a set of indicators. With the internalization and externalization of semantic images, we can imagine an interaction without using natural language.
+
+4. Interactive semantic base
+
+Individuals in the cyber-society need a basic structure to understand the basic semantic indication and explanation. An Interactive Semantic Base ISB consists of the following components as shown in Fig. 2:
+
+(1) Number and set are the most basic abstraction. Basic concepts on set such as member, subset, union, intersection and difference are commonsense.
+
+(2) Class, object, instance and attribute are primitives. An object belongs to a class. Both class and object have attributes. An attribute has a name and a value. Basic attributes like color are reﬂection of existence. Commonsense on attributes is reached during interaction.
+
+(3) Relation is based on class and set. Various relations connect classes and objects to form structure. The basic relations consist of space relation, subclass or superclass relation, member relation, and mapping.
+
+(4) Structure is constructed based on class, object, attribute, and relation.
+
+(5) Classiﬁcation inputs objects or classes, and then outputs classes. Classiﬁcation is fundamental to recognize, differentiate, and understand natural semantics and social semantics.
+
+(6) Rules are for operating commonsense, primitives and constructs as well as for reﬂecting instinct stimulus-response.
+
+The ISB provides the basic consensus for various existing or future semantic models to interact with each other and work in cooperation to form stronger semantic indication or explanation. A semantic model such as the multi-dimensional classiﬁcation space and the semantic link network is explained by its meta-model, which is further explained by the ISB.
+
+The explanation function is responsible for generating explanations according to ISB. The interaction interface is responsible for supporting friendly interaction operations and recording the interaction process. New semantic models and interaction interfaces will be created from time to time but the ISB is relatively stable.
+
+The following is an example of using the ISB to explain a piece of text. The most basic commonsense is the set of words and the number of words. A word can be viewed as an object with certain attributes like front and color. Words can be classiﬁed into classes, which can be further classiﬁed into super-classes. Relation on a word set can be such relations as sequential, co-occurrence and reference. New relations can be derived from the existing relations according to the rules on relations. Semantic link network can be established at the word level, the class level or the relation level with some constraints [51]. Further, when an individual reads the text, the words will be associated with the experiences in the points of the multi-dimensional classiﬁcation space, therefore, a semantic image (a semantic link network of experience) emerges.
+
+The basic architecture of semantic interaction is shown in Fig. 3. The explanation function indicates or explains the semantics of the input and output based on ISB. An advanced explanation function will use meta-models to explain semantic models. The classiﬁcation methods in ISB can classify interactions. The points in individual classiﬁcation spaces that match the contents of interactions become active and all objects in the points are quickly accessible during interaction. Interactions will build and evolve individual semantic images of participants. The interaction semantic image dynamically explains the content and topic of interaction.
+
+The basic explanation function ϕ(r, ISB) generates the structure of the input object r according to ISB such that
+
+(1) ϕ(r, ISB) = r in Class(r);
+
+(2) ϕ({r1, ..., rn}, ISB) = {ϕ(r1, ISB), ..., ϕ(rn, ISB)};
+
+(3) ϕ( r -α-> r, ISB ) = ϕ( r, ISB ) -α-> ϕ( r', ISB ), where ' -α-> ' indicates a directed relation α between r and r link); and,
+
+(4) if ϕ( r, ISB ) = ϕ( r', ISB ), r and r' can replace with each other for indicating semantics.
+
+An individual can use multiple semantic models or one model integrating multiple semantic models, e.g., Semantic Link Network + Resource Space Model, Resource Space Model + Database + OWL, etc. [49]. The cyber-society is responsible for regulating social processes and rules of interactions. The control mechanism of individual implements the basic individual behaviors. It includes instinct stimulus-response behaviors and various operations. The rules of response in a behavioral organization can be predicted [39].
+
+5. Interactive semantics = interactive system + semantic image
+
+Interactive semantics consists of the following two parts that inﬂuence each other:
+
+(1) Open, self-organized and evolving interactive system. It consists of individuals, objects, channels, and rules for interaction, reasoning and classiﬁcation. Individuals can add themselves or objects to the system at any time. All individuals in the system guarantee interaction. Communities are formed and evolve with constant interaction.
+
+(2) Semantic image. The semantic image of the interactive system records the images of individuals, objects, relations, classes and interactions within the system. Individuals build their own semantic images based on semantic worldview while leaving tracks in the semantic image of the system. A community in the system has a semantic image that reﬂects the structure of interactions and consensus on recognizing object, relation and class. Semantic images evolve with constant interaction.
+
+Interactive semantics has the following characteristics:
+
+(1) Individuals tend to interact with each other on the topic relevant to the interaction semantic image or individual semantic images.
+
+(2) The status of the system is uncertain due to the uncertain and undecidable behavior of individuals.
+
+(3) Individual B understands individual A's externalization with degree η if A understands B's externalization with the same degree.
+
+(4) It is sensitive to the order of adding semantic links to a semantic image. Adding one semantic link to a semantic image could inﬂuence the whole semantic image. A semantic link network SLN may change when adding a semantic link l to the network and then remove it, because the semantic links derived from the network with l may not be derived from the network without l.
+
+(5) Different individuals may have different individual semantic images on the same thing (object, relation or class), but they tend to converge through interaction within a community.
+
+Research on the interactive system will beneﬁt from artiﬁcial intelligence, cognitive science, system methodology, ecology, economics, sociology, and various networking technologies. Research on the semantic image will beneﬁt from such research as self-organized semantic model, semantic community discovery, emerging semantics, and complex network analysis.
+
+Fig. 4 shows a scenario of interaction between two individuals within a community. Semantic images in form of semantic link networks are waved during constant interactions within the system. Semantic communities on different topics are formed during interaction. Different semantic images may be linked due to the relevance between topics or between nodes. During internalizing and externalizing, any individual can access relevant semantic images (the interaction semantic images and individual semantic images) and objects through multiple channels and multiple communities with certain privilege.
+
+An individual or object will ﬁnd an appropriate community to participate in according to some social criteria that beneﬁt both the new comer and the community. New communities would emerge when new semantic links are added to the system constantly. Communities of different types will be expanded, merged or split with lifetime interaction of individuals.
+
+Individuals in the same semantic community can better understand each other than those in different semantic communities. The relation between individuals is implied by the semantic link networks waved during interaction between them. It is worth investigating the mechanism of forming and evolving community semantic image.
+
+It is useful for the third party to know whether individual A and B understand each other without previously interacting with them. If individuals A and B understand each other, and there is a relation l between inputs r and r' to relate ϕ'(r', ϕ(r)) to ϕ(r). Fig. 5 depicts an indirect interaction: Individual A inputs r and then outputs ϕ(r), individual B inputs ϕ(r) and r' and then output ϕ'(r', ϕ(r)). If B links ϕ'(r', ϕ(r)) to ϕ(r) with with relation l, then B understands A's output with high probability. This also implies that some knowledge ﬂow from A to B. A and B could be classiﬁed into the same community where individuals can understand each other. For example, if author B's publication ϕ
+, ϕ(r)) cites author A's publication ϕ(r) with citation relation l, then A and B could be in the same research community. Further, relation l may be inferred by the other relations in the network shown as the dotted arrows according to some rules on semantic links [51].
+
+The semantic image of a community is built through a social process of indication and explanation. Fig. 6 shows a process of rebuilding the semantic image of the Newton law of motion through inventing, learning, teaching and learning the law. Symbols f , m, a, and f = m · a do not have any meaning before Newton's scientiﬁc explanation. Newton perceived the natural semantics about object movement, built individual semantic image about the law, and then externalized the individual semantic image onto paper through language. Scientists read the paper and then wrote their papers and books based on Newton's work, therefore waving a citation network. A scientiﬁc semantic community autonomously evolves with constant increment of publications and scientists. Teachers read the papers and books to rebuild the semantic image about the law, and then externalize it by writing textbooks, which enrich the explanation and indication of the law. Students rebuild their semantic images about the law by reading the textbooks, listening lectures and doing exercises. Different rebuilding processes may lead to the differences of individual explanation. The process of building and rebuilding the semantic image generates knowledge ﬂows as shown in the dotted red arrows [52]. The knowledge ﬂow is recorded when papers that cite the Newton's paper are published.
+
+A semantic image can also be indicated implicitly according to such heuristic rules as follows:
+
+(1) Two semantic images are similar to each other to a certain degree if an individual or a group of individuals/objects is often involved in both semantic images.
+
+(2) Different indicators indicate the same semantic image to a certain degree if they are often referred by or refer to the same thing (e.g., relation, object, individual and class).
+
+(3) An individual semantic image is reﬂected to a certain degree by the interaction semantic images waved during interacting with other individuals. Repeated questions could be avoided with knowing the neighbors' semantic images in a self-organized society [48].
+
+(4) A semantic image is indicated with certain probability by some situations where some events often happen and individuals often interact with each other about the same topic. Situations are usually sensed through multiple channels.
+
+6. Semantic lens
+
+Humans can freely change the focus on any speciﬁc part while observing a general scene. On the other hand, humans are good at creative thinking, but are easy to get lost in large-scale object space and symbol space. Can we invent a semantic lens to extent the ability of individuals in the future cyber-society?
+
+A semantic lens should have the following characteristics:
+
+(1) Abstraction ability. The lens can emerge an abstract semantic image while observing a semantic image.
+
+(2) Focusing ability. The lens can focus on any speciﬁc semantic image.
+
+(3) Coordination ability. The lens can coordinate one semantic image to other relevant semantic images.
+
+(4) Zooming ability. The lens can sense semantic image from multiple facets, abstraction levels and scales through time.
+
+(5) Emerging ability. Signiﬁcant semantic images autonomously emerge during zooming.
+
+6.1 Zooming
+
+Semantic lens can zoom on semantic image in form of semantic link network. Given a node and zoom-out to the farthest, the semantic lens shows a semantic community that includes the node. Zoom-in a bit, its structure emerges. Zoom-in a bit more, communities or connected branches emerge. Zoom-in more, semantic links and the potential links that can be derived from reasoning rules emerge. The lens can show the reasoning process step-by-step. Zoom-in further, explanations of relevant relations emerge. Zoom-in to the nearest, a node and its attributes emerge. The semantic link network can show different semantic views with only interested semantic links. Due to the dynamic and self-organized nature of the semantic link network, semantic images may be different at different time.
+
+The lens can also zoom on the classiﬁcation space as shown in Fig. 7. The multi-dimensional classiﬁcation space enables a semantic lens to focus on a point, on a subspace that contains a part of original dimensions, or on a view that contains a part of original dimensions and a part of coordinates. A semantic lens can focus on a semantic image within a range by giving a pair of classes or a pair of super-classes on the same abstraction path. For example, [apple, fruit] and [apple, computer] indicate sharper semantic image than just apple. Zoom-in to show more speciﬁc semantics by increasing dimensions or going down to the lower level of the coordinate trees (class hierarchy) at every dimension, zoom-out to show more general semantics by decreasing dimensions or going up to the higher level of coordinate trees (class hierarchy) at every dimension.
+
+Communities of different granularities in a semantic link network form classiﬁcation hierarchy. The semantic link network (SLN) and the classiﬁcation space can be integrated by mapping the nodes or communities in the semantic link network into the points or subspaces of the classiﬁcation space. Therefore, the lens can zoom onto the semantic link network from the classiﬁcation space or zoom onto the classiﬁcation space from the semantic link network.
+
+When focusing on a semantic image, relevant semantic images emerged in the past can be augmented to reemerge, just like relevant old events will emerge when we hear an old song or watch an old movie. The re-focusing rate can contribute to the weight of a semantic image and then inﬂuence other semantic images through semantic links.
+
+6.2 Zooming on semantic image through time
+
+A semantic lens based on self-organized semantic link network and adaptive classiﬁcation space is depicted in Fig. 8. The SLN of models enables semantic lens to access and manage objects through various semantic models such as OWL and relational data model. The SLN of languages establishes the mapping between languages to support translation. The SLN of texts enables individuals to read and write in natural languages through semantic lens so that a piece of text can be viewed from different facets, abstraction levels, scales and versions. Techniques of natural language processing can help preprocess texts. The SLN of events enables individuals to know one event from the other through semantic links. An event consists of involved objects and individuals as well as scene, place and time. The SLN of objects enables the lens to sense one object together with relevant objects and to navigate among objects through semantic links. The SLN of individuals reﬂects social relations among individuals. The SLN of scenes enables the semantic lens to coordinate scenes so that relevant scenes can emerge when observing one scene. Mappings between scenes, individuals, objects and sounds help coordinate SLNs. The SLN of sounds reﬂects such relations as similarity, co-occurrence, cause-effect and coherence between sounds. It enables the semantic lens to sense and make use of sounds based on the mappings between sound, event, scene and object. Nodes in SLNs will be mapped into the points of the classiﬁcation space. The SLN of points is a large granularity SLN where any point can include object and relevant sounds, symbols, events and scenes. The SLN of rules reﬂects the relations among rules like the reasoning relation between rules. Reasoning can carry out cross different types of SLNs.
+
+Various metadata, information retrieval techniques, statistical techniques, classiﬁcation techniques, reasoning techniques
+(relational, inductive and analogical reasoning), text analysis and social network analysis can suggest semantic links but are not suﬃcient to create rich semantic images, which evolve with constant interaction. Integrating these techniques, studying interaction behaviors, and tracing interactions and recording the content of interaction and the co-occurrence scenes, sounds, objects, individuals and events can obtain more indication when waving semantic images.
+
+Various semantic link networks are coordinated based on ISB and the relation between the observer's interest and the following factors established during interaction: (1) the formation order of semantic links; (2) semantic communities; (3) reasoning on semantic links; (4) co-occurrence relation among nodes, semantic links and experiences; (5) analogy between SLNs; (6) time of nodes' presence; (7) workﬂows among nodes; and, (8) direct and indirect relation between individuals and between objects. Showing one type of SLN, relevant SLNs will emerge according to coordination rules and relations (may be implicit) regardless of their types. Nodes and semantic links of SLN can have corresponding points in the classiﬁcation space. The lens can show semantic image from different dimensions and abstraction levels. The time dimension records the time of interaction, event occurrence, and adding a semantic link to the semantic link network so that the semantic lens can show semantic image through time.
+
+Current e-presence techniques can capture the videos, photos, audios, texts and their synchronization relations of human presence and replay them according to the synchronization relations. The key issue is how to automatically link diverse types of resources and coordinate semantic link networks according to diverse individuals' interests that may change from time to time. It is diﬃcult if we only know objects. Interactive semantics provides explanation, indication, social relation, abstraction mechanism, and interaction mechanism to solve this issue.
+
+Zooming may be navigated between different types of SLNs or between points in a classiﬁcation space by changing the focus according to interest. For example, the navigation route can start from the SLN of scenes to its communities, to the classiﬁcation space (may change abstraction levels), and then go to the SLN of sound. The navigation route can also start from a point in the classiﬁcation space to an SLN, and then go back to the classiﬁcation space (may be another point).
+
+6.3 Automatic emerging
+
+When individuals are only interested in the network structure, the central nodes and their communities have the priority of emerge [19,20,25]. Different from the centrality principle in general network, linking a new node or adding a new semantic link to a semantic link network could generate new semantic links due to relational reasoning on semantic links. A new node will be immediately known by relevant nodes within a community through relational reasoning. The potential semantic links inﬂuence the measurement of centrality.
+
+Semantic image can also emerge according to the following richness principle, simplest (easy-to-understand) principle, distinguish principle, and relevance principle.
+
+Richness of a semantic node in semantic image is in positive proportion to the number and diversity of the semantic links it has and the richness of its neighbors [51]. Richness of a semantic link is in positive proportion to the following three factors: the number and the richness of the semantic links it can interact (reasoning) with, the more the richer; the times of the relation appeared in SLN, the more the richer; and, the richness of its two connecting nodes, the richer the richer.
+
+The richness of a semantic community is in positive proportion to the richness of its semantic links, nodes, relations and rules. A richer semantic link contributes more to the richness of the connecting nodes, and a richer node contributes more to the richness of its connected semantic links. To become rich, a new node should link to enrich semantic links, that is, the new semantic link should be relevant to the potential neighbor semantic links. This is different from the preference attachment effect of the Web: a new node tends to link to a high-rank node.
+
+Multiple semantic paths may exist between semantic nodes. The less information a semantic path contains, the easier people understand and remember. This indicates the simplest emerging principle: the shortest path with least types of semantic links takes priority to emerge as the relation between two nodes. This can be explained by Shannon and Weiner's theory of information entropy: the lower entropy a path has, the less semantic link type it contains, therefore it can be more easily understood. The simplest emerging principle focuses on a particular semantic path while the massive emerging principle emphasizes on the status of a semantic node or a semantic link in the whole network.
+
+The distinguish principle lies in the distinguished characteristics like uniqueness: The semantic image of community/ individual/object/relation has priority of emerging if it is distinguished from others for a certain period of time in interactive semantics. To be distinguished, an individual or a community needs to maintain distinguished characteristics. A humanized cyber-society should enable any individual to autonomously select appropriate friends, and enable any community to maintain appropriate structure. To do this, individual and community should be able to predict situation and be able to actively select new semantic links. This is different from the Web, where Web pages cannot prevent themselves from being linked. The distinguished principle provides a strategy for the poor individuals to take priority of emerging.
+
+The relevance principle is about the following conditional emerging: a semantic image has the priority of emerge if it is linked to an emerging semantic image by a semantic link or a potential semantic link that can be derived from reasoning, or if it is indicated by an emerging semantic image through some heuristic rules.
+
+7. Conclusion
+
+Interaction is the primitive force to form and evolve society. The study of interaction is more fundamental than the study of symbolic languages as humans can effectively interact with each other before the invention of symbol languages. The study of interactive semantics will open a new door of civilization.
+
+Interactive semantics consists of an open, self-organized and evolving social interactive system and its semantic image. The semantic image records the evolution of the system so it enables the system as well as its individuals and machines to behave with knowing their present and past. Individuals interact with each other based on the semantic worldview, interactive semantic base, processes of building and explaining semantic image, and instinct control mechanism. The semantic lens extends individual ability to build and retrieve semantic image from different facets, abstraction levels and scales through time. Social indication and explanation help build semantic images. Signiﬁcant semantic images emerge with the evolution of the interactive system according to the centrality, the richness principle, the simplest principle, the distinguish principle and the relevance principle.
+
+The adaptive classiﬁcation space and the self-organized semantic link network are uniﬁed in the semantic lens to extend individual ability to build, retrieve and organize semantic images. A semantic link network reﬂects not only the relations between objects but also the formation process of semantic image. More semantic models can be incorporated into the semantic lens to extend the ability of managing resources organized in different models. Actually, a semantic model is effective only when it reﬂects the essence of organizing artifacts and semantic images of individual and society.
+
+Turing machines input and output symbols according to pre-designed algorithms without knowing real-world meaning. They even do not know what they are doing, and what they have done. The semantic worldviews, interactive semantic base and semantic images help machines know themselves and each other. We can imagine an interactive machine that can actively input a set of symbols and then generate the corresponding semantic image, or input a semantic image and then generate the corresponding symbols, without special-purpose algorithm. For the same input, different machines may generate different outputs. We can further imagine the future cyber-society where individuals can access their semantic images of different times, interact with the semantic images of communities and artifacts to know all relevant stories, and participate in discussion through generations.
+
+The future cyber-society will preserve rather complete semantic images of individuals and society, help individuals to sense the human-level semantics during interaction, and allow individuals to know panorama social existence and evolution. The study of interactive semantics will help create the future cyber-society.
+
+The following issues are worth further studying:
+
+(1) Automatically capturing and evolving various semantic images.
+
+(2) Automatically generating and adapting classiﬁcation spaces.
+
+(3) Multi-channel interactions using diverse symbol systems.
+
+(4) Interactive semantics management for effective interaction.
+
+(5) General system development method and environment based on interaction.
+
+(6) The semantic lens that integrates various semantic models.
+
+(7) Multi-disciplinary study on human models and society models, which help realize machine-level AI + human-level AI + society-level AI.
+
+References
+
+[1] L.A. Adamic, B.A. Huberman, Power-law distribution of the World Wide Web, Science 287 (2000) 2115.
+
+[2] M. Aiello, et al., Document understanding for a broad class of documents, International Journal on Document Analysis and Recognition 5 (1) (2002)
+1–16.
+
+[3] M.D.S. Ainsworth, M.C. Blehar, E. Waters, S. Wall, Patterns of Attachment: A Psychological Study of the Strange Situation, Lawrence Erlbaum Associates,
+1979.
+
+[4] J. Barwise, The Situation in Logic, Center for the Study of Language and Information, Stanford, 1989.
+
+[5] A.-L. Barabási, R. Albert, Emergence of scaling in random networks, Science 286 (1999) 509–512.
+
+[6] T. Berners-Lee, J. Hendler, O. Lassila, Semantic Web, Scientiﬁc American 284 (2001) 34–43.
+
+[7] G. Booch, J. Rumbaugh, I. Jacobson, The Uniﬁed Modeling Language User Guide, Addison–Wesley, Longman Publishing Co., Inc., Redwood City, CA, 1999.
+
+[8] C. Cattuto, V. Loreto, L. Pietronero, Semiotic dynamics and collaborative tagging, PNAS 104 (5) (2007) 1461–1464.
+
+[9] P.P. Chen, The entity-relationship model, towards a uniﬁed view of data, ACM Transactions on Database Systems 1 (1976) 9–36.
+
+[10] E.F. Codd, Extending the database relational model to capture more meaning, ACM Transactions on Database Systems 4 (1979) 397–434.
+
+[11] M.C. Cooper, A mathematical model of historical semantics and the grouping of word meanings into concepts, Computational Linguistics 31 (2005) 227–248.
+
+[12] W. Croft, D.A. Cruse, Cognitive Linguistics, Cambridge University Press, Cambridge, 2004.
+
+[13] L.G. Creary, C.J. Pollard, A computational semantics for natural language, in: Proceedings of the 23rd Annual Meeting on Association for Computational Linguistics, 1985, pp. 172–179.
+
+[14] R.L. Daft, R.H. Lengel, Organizational information requirements, media richness and structural design, Management Science 32 (5) (1986) 554–571.
+
+[15] S. Deerwester, et al., Indexing by latent semantic indexing, Journal of the American Society for Information Science 41 (1990) 391–407.
+
+[16] R. Fikes, T. Kehler, The role of frame-based representation in reasoning, Communications of the ACM 28 (1985) 904–920.
+
+[17] T. Finin, R. Fritzson, D. Mckay, R. McEntire, KQML as an agent communication language, in: Proceedings of the 3rd International Conference on Information and Knowledge Management, 1994, pp. 456–463.
+
+[18] W.J. Frawley, G. Piatetsky-Shapiro, C.J. Matheus, Knowledge discovery in databases: An overview, AI Magazine 12 (3) (1992) 57–70.
+
+[19] S. Fortunato, V. Latora, M. Marchiori, Method to ﬁnd community structures based on information centrality, Physical Review E 70 (5) (2004) 56104.
+
+[20] M. Girvan, M. Newman, Community structure in social and biological networks, Proc. National Academy of Sciences of the USA 99 (12) (2002) 8271–8276.
+
+[21] S. Golder, B.A. Huberman, The structure of collaborative tagging systems, arXiv:cs/0508082v1 [cs.DL], 2005.
+
+[22] N. Guarino, Formal ontology, conceptual analysis and knowledge representation, International Journal of Human–Computer Studies 43 (5–6) (1995) 625–640.
+
+[23] J. Han, M. Kamber, Data Mining: Concepts and Techniques, Morgan Kaufmann, 2001.
+
+[24] D. Harel, B. Rumpe, Meaningful modeling: What's the semantics of “semantics”? IEEE Computer 37 (2004) 64–72.
+
+[25] J. Kleinberg, Authoritative sources in a hyperlinked environment, Journal of ACM 46 (5) (1999) 604–632.
+
+[26] J. Kleinberg, Navigation in a small world, Nature 406 (2000) 845.
+
+[27] S. Kumar, et al., Semantics of agent communication languages for group interaction, in: Proceedings of AAAI-2000, pp. 42–47.
+
+[28] D.E. Knuth, Semantics of context-free languages, Theory of Computing Systems 2 (2) (1968) 127–145.
+
+[29] G. Lakoff, M. Johnson, Philosophy in the Flesh, Basic Books, New York, 1999.
+
+[30] R.W. Langacker, Foundations of Cognitive Grammar, vol. 1. Theoretical Prerequisites, Stanford University Press, Stanford, 1987.
+
+[31] C.D. Manning, H. Schütze, Foundations of Statistical Natural Language Processing, MIT Press, 1999.
+
+[32] J. McCarthy, From here to human-level AI, Artiﬁcial Intelligence 171 (18) (2007) 1174–1182.
+
+[33] J. McCarthy, The well-designed child, Artiﬁcial Intelligence 172 (18) (2008) 2003–2014.
+
+[34] R. Milner, Elements of interaction: Turing award lecture, Communications of the ACM 36 (1) (1993) 78–89.
+
+[35] M. Minsky, The Emotion Machine: Commonsense Thinking, Artiﬁcial Intelligence, and the Future of the Human Mind, Simon & Schuster, 2006.
+
+[36] A. Newell, H.A. Simon, Human Problem Solving, Prentice Hall, Englewood Cliffs, NJ, 1972.
+
+[37] A. Newell, The knowledge level, Artiﬁcial Intelligence 18 (1982) 87–127.
+
+[38] O.K. Ngwenyama, A.S. Lee, Communication richness in electronic mail: Critical social theory and the contextuality of meaning, MIS Quarterly 21 (2) (1997) 145–167.
+
+[39] W.T. Powers, Feedback: Beyond behaviorism, Science 179 (4071) (1973) 351–356.
+
+[40] F. Schweitzer, et al., Economic networks: The new challenges, Science 325 (2009) 422–425.
+
+[41] M.R. Quillian, Semantic memory, in: M. Minsky (Ed.), Semantic Information Processing, MIT Press, Cambridge, MA, 1968.
+
+[42] J. Rumbaugh, M. Blaha, W. Premerlani, F. Eddy, W. Lorensen, Object-Oriented Modeling and Design, Prentice Hall, Inc., 1991.
+
+[43] G. Salton, A. Wong, C.S. Yang, A vector space model for automatic indexing, Communications of the ACM 18 (11) (1975) 613–620.
+
+[44] A. Turing, Computing machinery and intelligence, Mind 21 (1950).
+
+[45] P. Wegner, Why interaction is more powerful than algorithms, Communications of the ACM 40 (5) (1997) 80–91.
+
+[46] P. Wegner, D.Q. Goldin, Computation beyond Turing machines, Communications of the ACM 46 (4) (2003) 100–102.
+
+[47] G. Winskel, The Formal Semantics of Programming Languages: An Introduction, MIT Press, 1993.
+
+[48] H. Zhuge, X. Li, Peer-to-peer in the metric space and semantic space, IEEE Transactions on Knowledge and Data Engineering 6 (19) (2007) 759–771.
+
+[49] H. Zhuge, Y. Xing, P. Shi, Resource space model, OWL and database: Mapping and integration, ACM Transactions on Internet Technology 8 (4) (2008). Article 20.
+
+[50] H. Zhuge, The Web Resource Space Model, Springer, 2008.
+
+[51] H. Zhuge, Communities and emerging semantics in semantic link network: Discovery and learning, IEEE Transactions on Knowledge and Data Engineering 21 (3) (2009) 785–799.
+
+[52] H. Zhuge, The Knowledge Grid, 2nd edition, World Scientiﬁc Publishing Co., Singapore, 2010.

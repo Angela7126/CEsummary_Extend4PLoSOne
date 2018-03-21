@@ -1,0 +1,272 @@
+(lp0
+VIn this approach, a topic model on a given set of unlabeled training documents is constructed using LDA, then an annotator assigns a class label to some topics based on their most probable words
+p1
+aVAs in ClassifyLDA, we ask an annotator to assign class labels to a set of topics inferred on the unlabeled training documents
+p2
+aV[] used LDA topics as features in text classification, but they use labeled documents while learning a classifier sLDA [] , DiscLDA [] and MedLDA [] are few extensions of LDA which model both class labels and words in the documents
+p3
+aVWe then infer a set of topics on the sprinkled training documents
+p4
+aVIf the annotator is unable to label a topic then we randomly select a class label from the set of all class labels
+p5
+aVThe basic idea involves encoding of class labels as artificial words which are u'\u005cu201c' sprinkled u'\u005cu201d' (appended) to training documents
+p6
+aVWe then ask a human annotator to assign one or more class labels to the topics based on their most probable words
+p7
+aVAs LDA uses higher order word associations [] while discovering topics, we hypothesize that sprinkling will improve text classification performance of ClassifyLDA
+p8
+aVAs the most probable words of topics are representative of the dataset, there is no need for the annotator to search for the right set of features for each class
+p9
+aVWhile classifying a test document, its probability distribution over class labels is inferred using TS-LDA model and it is classified to its most probable class label
+p10
+aVIf more than one class labels are assigned to the topic t, then we randomly select one of the class labels assigned to the topic t
+p11
+aVIf a word in a document is a sprinkled word then while sampling a class label for it, we sample the class label associated with the sprinkled word, otherwise we sample a class label for the word using Gibbs update in Equation 1
+p12
+aVIn this paper, we propose a text classification algorithm based on Latent Dirichlet Allocation (LDA) [] which does not need labeled documents
+p13
+aVWe extend ClassifyLDA algorithm by u'\u005cu201c' sprinkling u'\u005cu201d' topics to unlabeled documents
+p14
+aVThe paper revolves around the idea of labeling topics (which are far fewer in number compared to documents) as in ClassifyLDA, and using these labeled topic for sprinkling
+p15
+aVIf a document d belongs to the class c1 then a set of artificial words which represent the class c1 are appended into the document d, otherwise a set of artificial words which represent the class c2 are appended
+p16
+aVThese models can be used for text classification, but they need expensive labeled documents
+p17
+aVIf the topic assigned to the word w at the position n in document d is t, then we replace it by the class label assigned to the topic t
+p18
+aVWe should note here that in TS-LDA, the annotator only labels a few topics and not a single document
+p19
+aVWe name this model as Topic Sprinkled LDA (TS-LDA
+p20
+aVHowever, in our approach the annotator can assign multiple class labels to a topic, hence our approach is more flexible for the annotator to encode her domain knowledge efficiently
+p21
+aVIf the annotator assigns a wrong class label to a topic representing multiple classes (e.g., first topic in Table 3), then it may affect the performance of the resulting classifier
+p22
+aVHence, our approach exerts a low cognitive load on the annotator, at the same time achieves text classification performance close to LDA-SVM which needs labeled documents
+p23
+aVThese topics are very few, when compared to the number of documents
+p24
+aVHence, we can say here that, in addition to text classification, sprinkling improves coherence of topics
+p25
+aVWe randomly split this dataset such that 80% is used as training and 20% is used as test data
+p26
+aVHowever, Sprinkled LSI is a supervised technique and hence it requires expensive labeled documents
+p27
+aVAs LSI uses higher order word associations [] , sprinkling of artificial words gives better and class-enriched latent semantic structure
+p28
+aVAs LDA topics are semantically more meaningful than individual words and can be acquired easily, our approach overcomes limitations of the semi-supervised methods discussed above
+p29
+aVWe evaluate and compare our text classification algorithm by computing Macro averaged F1
+p30
+aVWe can observe here that these two topics are more coherent than the topics in Table 3
+p31
+aVThe third type of semi-supervised text classification algorithms is based on active learning
+p32
+aVSingular Value Decomposition (SVD) is then performed on the sprinkled training documents and a lower rank approximation is constructed by ignoring dimensions corresponding to lower singular values
+p33
+aVWe randomly split SRAA dataset such that 80% is used as training data and remaining is used as test data
+p34
+aVAs the inference of LDA is approximate, we repeat all the experiments for each dataset ten times and report average MacroF1
+p35
+aVWe use the labeled topics to find probability distribution of each training document over the class labels
+p36
+aVC number of topics on the sprinkled dataset using collapsed Gibbs sampling, where C is the set of class labels of the training documents
+p37
+aVAn important limitation of these algorithms is coming up with a small set of words that should be presented to the annotators for labeling
+p38
+aVIn sprinkling, a set of artificial words are appended to a training document which are specific to the class label of the document
+p39
+aVWe use this new model to infer the probability distribution of each unlabeled training document over the class labels
+p40
+aVIn our text classification algorithm, we first infer a set of topics on the given unlabeled document corpus
+p41
+aVWe create a set of artificial words corresponding to a class label and add (or sprinkle) them to the document
+p42
+aVThese labeled topics are used to create a new topic model such that in the new model topics are better aligned to class labels
+p43
+aVSprinkling [] integrates class labels of documents into Latent Semantic Indexing (LSI) []
+p44
+aVA class label is assigned to a test document on the basis of its most prominent topics
+p45
+aVThe number of such artificial terms is proportional to the probability of generating the document by the class label
+p46
+aVIn our approach, an annotator does not label documents or words, rather she labels a small set of interpretable topics which are inferred in an unsupervised manner
+p47
+aVWe modify collapsed Gibbs sampling update in Equation 1 to carry class label information while inferring topics
+p48
+aVIn the first category, a small set of labeled documents and a large set of unlabeled documents is used while learning a classifier
+p49
+aVChakraborti et al., 2007) empirically show that sprinkled words boost higher order word associations and projects documents with same class labels close to each other in latent semantic space
+p50
+aVWe should note here that, in ClassifyLDA, the annotator is able to assign a single class label to a topic
+p51
+aVFor SRAA dataset we infer 8 topics on the training dataset and label these 8 topics for all the three classification tasks
+p52
+aVWe use these labeled topics to create a new LDA model as follows
+p53
+aVChakraborti et al., 2007) propose a simple approach called u'\u005cu201c' sprinkling u'\u005cu201d' to incorporate class labels of documents into LSI
+p54
+aVLDA is an unsupervised probabilistic topic model and it is widely used to discover latent semantic structure of a document collection by modeling words in the documents
+p55
+aVWe set K i.e., maximum number of words sprinkled per class to 10
+p56
+aVWe then update the new LDA model using collapsed Gibbs sampling
+p57
+aVTWe use these labeled topics and create a TSLDA model using the algorithm described in Table 1
+p58
+aVWe can observe here that most prominent words of the first topic do not represent a single class, while other topics represent either med (medical) or space class
+p59
+aVWe then infer a set of
+p60
+aVWhere, T is the number of topics, u'\u005cu03a6' t is the word probabilities for topic t, u'\u005cu0398' d is the topic probability distribution, zd,n is topic assignment and wd,n is word assignment for nth word position in document d respectively u'\u005cu0391' t and u'\u005cu0392' w are topic and word Dirichlet priors
+p61
+aVIn supervised text classification learning algorithms, the learner (a program) takes human labeled documents as input and learns a decision function that can classify a previously unseen document to one of the predefined classes
+p62
+aVLet, u'\u005cu0398' c,d be the probability of generating document d by class c
+p63
+aVLDA is an unsupervised probabilistic generative model for collections of discrete data such as text documents
+p64
+aVTable 4 shows words corresponding to the top two topics of the TS-LDA model
+p65
+aVWhile labeling a topic, we show its 30 most probable words to the human annotator
+p66
+aV[] , [] , [] are a few examples of active learning based text classification algorithms
+p67
+aVWe then sprinkle s artificial words of class label c to document d, such that s = K u'\u005cu2217' u'\u005cu0398' c,d for some constant K
+p68
+aVSimilar to (Griffiths and Steyvers, 2004), we set symmetric Dirichlet word prior ( u'\u005cu0392' w) for each topic to 0.01 and symmetric Dirichlet topic prior ( u'\u005cu0391' t) for each document to 50/T, where T is number of topics
+p69
+aVIn active learning, particular unlabeled documents or features are selected and queried to an oracle (e.g., human annotator
+p70
+aVHowever, these algorithms are sensitive to initial labeled documents and hyper-parameters of the algorithm
+p71
+aVTable 3 shows most prominent words of four topics inferred on the med-space subset of the 20Newsgroup dataset
+p72
+aVUsually a large number of documents labeled by humans are used by the learner to classify unseen documents with adequate accuracy
+p73
+aVwhere u'\u005cu03a8' w,c is the count of the word w assigned to the topic c, u'\u005cu2126' c,d is the count of the topic c assigned to words in the document d and W is the vocabulary of the corpus
+p74
+aVThe task is to classify the webpages as student, course, faculty or project
+p75
+aVThe Gibbs sampling equation used to update the assignment of a topic t to the word w u'\u005cu2208' W at the position n in document d, conditioned on u'\u005cu0391' t, u'\u005cu0392' w is
+p76
+aVThe Gibbs sampling equation used to update the assignment of a topic t to the word w u'\u005cu2208' W at the position n in document d, conditioned on u'\u005cu0391' t, u'\u005cu0392' w is
+p77
+aVSeveral researchers have proposed semi-supervised text classification algorithms with the aim of reducing the time, effort and cost involved in labeling documents
+p78
+aVThe posterior inference involves the inference of the hidden topic structure given the observed documents
+p79
+aVAn approach that is less demanding in terms of knowledge engineering is ClassifyLDA (Hingmire et al., 2013
+p80
+aVFor various subsets of the 20Newsgroups and WebKB datasets discussed above, we choose number of topics as twice the number of classes
+p81
+aVWe determine the effectiveness of our algorithm in relation to ClassifyLDA algorithm proposed in (Hingmire et al., 2013
+p82
+aVHowever, these algorithms are sensitive to the sampling strategy used to query documents or features
+p83
+aVSemi-supervised text classification algorithms proposed in [] , [] , [] and [] are a few examples of this type
+p84
+aVHowever, ClassifyLDA performs better than TS-LDA for the three classification tasks of SRAA dataset
+p85
+aVAfter performing collapsed Gibbs sampling using equation 1, we use word topic assignments to compute a point estimate of the distribution over words u'\u005cu03a6' w,c and a point estimate of the posterior distribution over topics for each document d ( u'\u005cu0398' d) is u'\u005cu03a6' w,t = u'\u005cu03a8' w,t + u'\u005cu0392' w P v u'\u005cu2208' W u'\u005cu03a8' v,t + u'\u005cu0392' v (2) u'\u005cu0398' t,d = u'\u005cu2126' t,d + u'\u005cu0391' t PT i=1 u'\u005cu2126' i,d + u'\u005cu0391' i (3
+p86
+aVSimilar to (Blei et al., 2003) we also learn supervised SVM classifier (LDA-SVM) for each dataset using topics as features and report average Macro-F1
+p87
+aVAlso a human annotator may discard or mislabel a polysemous word, which may affect the performance of a text classifier
+p88
+aVUnfortunately, labeling a large number of documents is a labor-intensive and time consuming process
+p89
+aVIn this paper we estimate approximate posterior inference using collapsed Gibbs sampling (Griffiths and Steyvers, 2004
+p90
+aVWe experimentally verify this hypothesis on three real world datasets
+p91
+aVIn the second category, supervision comes in the form of labeled words (features
+p92
+aVThis version of the dataset is divided into training (60%) and test (40%) datasets
+p93
+aV1 for each topic t, draw a distribution over words u'\u005cu03a6' t u'\u005cu223c' Dirichlet( u'\u005cu0392' w
+p94
+aVFor the compreligion-sci dataset TS-LDA and ClassifyLDA have the same performance
+p95
+aVThe key problem in LDA is posterior inference
+p96
+aVThen, the sprinkled terms are removed from the lower rank approximation
+p97
+aVWe construct classifiers on training datasets and evaluate them on test datasets
+p98
+aVLet MD = Z, u'\u005cu03a6' , u'\u005cu0398' be the hidden topic structure, where Z is per word per document topic assignment, u'\u005cu03a6' = { u'\u005cu03a6' t} and u'\u005cu0398' = { u'\u005cu0398' d}
+p99
+aVAlgorithm for TS-LDA is summarized in Table 1
+p100
+aVWe can say here that, these topics are not u'\u005cu201c' coherent u'\u005cu201d'
+p101
+aVFollowing are the three classification tasks associated with this dataset
+p102
+aVWe can observe that, TS-LDA performs better than ClassifyLDA in 5 of the total 9 subsets
+p103
+aVWe use a subscript d, ¬n to denote the current token, zd,n is ignored in the Gibbs sampling update
+p104
+aVWe can also observe that, performance of TS-LDA is close to supervised LDA-SVM
+p105
+aVConsider a case of binary classification with classes c1 and c2
+p106
+aV2 for each document d u'\u005cu2208' D
+p107
+aVThe generative process of LDA can be described as follows
+p108
+aVBlei et al
+p109
+aVDraw a vector of topic proportions u'\u005cu0398' d u'\u005cu223c' Dirichlet( u'\u005cu0391' t
+p110
+aVDraw a topic assignment zd,n u'\u005cu223c' Multinomial( u'\u005cu0398' d); ii
+p111
+aVTable 2 shows experimental results
+p112
+aVDraw a word wd,n u'\u005cu223c' Multinomial(zd,n
+p113
+aVb for each word w at position n in d i
+p114
+aVHowever, computing the exact posterior inference is intractable
+p115
+aVThis dataset contains 73,218 UseNet articles from four discussion groups, for simulated auto racing (sim auto), simulated aviation (sim aviation), real autos (real auto), real aviation (real aviation
+p116
+aV[] and [] are a few examples of this type
+p117
+aV3 simulated (sim auto + sim aviation) vs real (real auto + real aviation
+p118
+aVSRAA
+p119
+aVWe use the following datasets in our experiments
+p120
+aVThese algorithms can be broadly categorized into three categories depending on how supervision is provided
+p121
+aVThis dataset contains messages across twenty newsgroups
+p122
+aV2 auto (sim auto + real auto) vs aviation (sim aviation + real aviation
+p123
+aV1 sim auto vs sim aviation vs real auto vs real aviation
+p124
+aVWe preprocess these datasets by removing HTML tags and stop-words
+p125
+aVWebKB
+p126
+aVIn our experiments, we use bydate version of the 20Newsgroup dataset1
+p127
+aVThe WebKB dataset3 contains 8145 web pages gathered from university computer science departments
+p128
+aV20 Newsgroups
+p129
+aV1
+p130
+aV3
+p131
+aVP(zd,n = t zd,¬n, wd,n = w, u'\u005cu0391' t, u'\u005cu0392' w) u'\u005cu221d' u'\u005cu03a8' w,t + u'\u005cu0392' w u'\u005cu2212' 1 P v u'\u005cu2208' W u'\u005cu03a8' v,t + u'\u005cu0392' v u'\u005cu2212' 1 × ( u'\u005cu2126' t,d + u'\u005cu0391' t u'\u005cu2212' 1) (1
+p132
+aVSimulated/Real/Aviation/AutoUseNet data2
+p133
+aVa
+p134
+aV2
+p135
+a.

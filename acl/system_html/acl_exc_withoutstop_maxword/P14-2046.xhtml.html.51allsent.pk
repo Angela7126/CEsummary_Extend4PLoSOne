@@ -1,0 +1,44 @@
+(lp0
+VWe create English, Pinyin training pairs from our phrasebook simply by pronouncing the Chinglish with FST D
+p1
+aVHere, we start with reference English and measure the accuracy of Pinyin syllable production, since the choice of Chinglish character does not affect the Chinglish pronunciation
+p2
+aVAs Table 6 shows, the ratio of unseen English word tokens is small, thus large portion of tokens are transformed using word-based method
+p3
+aVTo do this, we first take our phrasebook triples and construct sample string pairs Epron, Pinyin-split by pronouncing the phrasebook English with FST A, and by pronouncing the phrasebook Chinglish with FSTs D and C
+p4
+aVThe word-based model can only decode 29 of the 65 test utterances, because wFST E fails if an utterance contains a new English word type, previously unseen in training
+p5
+aVSpeech recognition is more fragile than human transcription, so edit distances are greater
+p6
+aVFirst, because Chinglish and Chinese are written with the same characters, they render the same inventory of 416 distinct syllables
+p7
+aVSince the speaker may not be able to pronounce the foreign-language orthography, phrasebooks additionally provide phonetic spellings that approximate the sounds of the foreign phrase
+p8
+aVIf the Franglish is well designed, an English speaker can pronounce it and be understood by a French listener
+p9
+aVwhere as the reference Pinyin-split sequence is
+p10
+aVIf a Chinese speaker wants to say u'\u005cu2018' u'\u005cu2018' {CJK} UTF8gkai u'\u005cu975e' u'\u005cu5e38' u'\u005cu611f' u'\u005cu8c22' u'\u005cu4f60' u'\u005cu8fd9' u'\u005cu987f' u'\u005cu7f8e' u'\u005cu9910' u'\u005cu2019' u'\u005cu2019' , she need only read off the Chinglish u'\u005cu201c' {CJK} UTF8gkai u'\u005cu4e09' u'\u005cu53ef' u'\u005cu6cb9' u'\u005cu5426' u'\u005cu70ed' u'\u005cu65af' u'\u005cu5f2f' u'\u005cu5fb7' u'\u005cu5426' u'\u005cu7c73' u'\u005cu6b27' u'\u005cu201d' , which approximates the sounds of u'\u005cu201c' Thank you for this wonderful meal u'\u005cu201d' using Chinese characters
+p11
+aVWe seek to imitate phonetic transformations found in phrasebooks, so phrasebooks themselves are a good source of training data
+p12
+aVWe must now estimate the values of FST B parameters, such as P( s i
+p13
+aVNotice that this model makes alignment errors due to sparser data (e.g.,, the word u'\u005cu2018' u'\u005cu2018' tips u'\u005cu2019' u'\u005cu2019' and u'\u005cu2018' u'\u005cu2018' ti pu si u'\u005cu2019' u'\u005cu2019' only appear once each in the training data
+p14
+aVFor example, when we decode English u'\u005cu2018' u'\u005cu2018' grandmother u'\u005cu2019' u'\u005cu2019' , we get
+p15
+aVIt is reasonable for u'\u005cu2018' u'\u005cu2018' can I u'\u005cu2019' u'\u005cu2019' to be rendered as u'\u005cu2018' u'\u005cu2018' kan nai u'\u005cu2019' u'\u005cu2019' , with u'\u005cu2018' u'\u005cu2018' nai u'\u005cu2019' u'\u005cu2019' spanning both English words, but this is rare
+p16
+aVFollowing phrase-based methods in statistical machine translation [ 4 ] and machine transliteration [ 1 ] , we model substitution of longer sequences
+p17
+aVSyllables u'\u005cu2018' u'\u005cu2018' si u'\u005cu2019' u'\u005cu2019' and u'\u005cu2018' u'\u005cu2018' te u'\u005cu2019' u'\u005cu2019' are very popular, because while consonant clusters like English u'\u005cu2018' u'\u005cu2018' st u'\u005cu2019' u'\u005cu2019' are impossible to reproduce exactly, the particular vowels in u'\u005cu2018' u'\u005cu2018' si u'\u005cu2019' u'\u005cu2019' and u'\u005cu2018' u'\u005cu2018' te u'\u005cu2019' u'\u005cu2019' are fortunately very weak
+p18
+aVThe main challenge is that different languages have different orthographies, different phoneme inventories, and different phonotactic constraints, so mismatches are inevitable
+p19
+aVFSTs A, C, and D are unweighted, and remain so throughout this paper
+p20
+aVIn this paper, we lift this restriction by designing and evaluating a software program with the following
+p21
+a.

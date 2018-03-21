@@ -1,0 +1,444 @@
+(lp0
+VCombining the outputs of Berkeley Parser and GParser ( u'\u005cu201c' Unlabeled u'\u005cu2190' B+G u'\u005cu201d' ), we get higher oracle score (96.37% on English and 89.72% on Chinese) and higher syntactic divergence (1.085 candidate heads per word on English, and 1.188 on Chinese) than u'\u005cu201c' Unlabeled u'\u005cu2190' Z+G u'\u005cu201d' , which verifies our earlier discussion that Berkeley Parser produces more different structures than ZPar
+p1
+aVDifferent from traditional self/co/tri-training which only use 1-best parse trees on unlabeled data, our approach adopts ambiguous labelings, represented by parse forest, as gold-standard for unlabeled sentences
+p2
+aVUsing three supervised parsers, we have many options to construct parse forest on unlabeled data
+p3
+aVCombining the outputs of Berkeley Parser and ZPar ( u'\u005cu201c' Unlabeled u'\u005cu2190' B+Z u'\u005cu201d' ), we get the best performance on English, which is also significantly better than both co-training ( u'\u005cu201c' Unlabeled u'\u005cu2190' B u'\u005cu201d' ) and tri-training ( u'\u005cu201c' Unlabeled u'\u005cu2190' B=Z u'\u005cu201d' ) on both English and Chinese
+p4
+aVAppropriately composing the forest parse, our approach outperforms the best results of co-training or tri-training by 0.28% (93.78-93.50) on English and 0.92% (84.26-83.34) on Chinese
+p5
+aVTo construct parse forest on unlabeled data, we employ three supervised parsers based on different paradigms, including our baseline graph-based dependency parser, a transition-based dependency parser [] , and a generative constituent parser []
+p6
+aVWe divide the unlabeled data into three sets according to the divergence of the 1-best outputs of Berkeley Parser and ZPar
+p7
+aVThe last experiment in the second major row is known as tri-training , which only uses unlabeled sentences on which Berkeley Parser and ZPar produce identical outputs ( u'\u005cu201c' Unlabeled u'\u005cu2190' B=Z u'\u005cu201d'
+p8
+aVA possible explanation is that by using the intersection of the outputs of GParser and ZPar, the size of the parse forest is better controlled, which is helpful considering that ZPar performs worse on this data than both Berkeley Parser and GParser
+p9
+aVFirst, noise in unlabeled data is largely alleviated, since parse forest encodes only a few highly possible parse trees with high oracle score
+p10
+aVBoth work employs two parsers to process the unlabeled data, and only select as extra training data sentences on which the 1-best parse trees of the two parsers are identical
+p11
+aVEspecially, the unlabeled data with highly divergent structures leads to slightly higher improvement
+p12
+aVAdding the output of GParser itself ( u'\u005cu201c' Unlabeled u'\u005cu2190' B+Z+G u'\u005cu201d' ) leads to accuracy drop, although the oracle score is higher (96.95% on English and 91.50% on Chinese) than u'\u005cu201c' Unlabeled u'\u005cu2190' B+Z u'\u005cu201d'
+p13
+aV16K for Chinese), it is likely that the unlabeled data may overwhelm the labeled data during SGD training
+p14
+aVTherefore, exploiting such unlabeled data may introduce more discriminative syntactic knowledge, largely compensating labeled training data
+p15
+aVHowever, it leads to slightly worse accuracy than co-training with Berkeley Parser ( u'\u005cu201c' Unlabeled u'\u005cu2190' B u'\u005cu201d'
+p16
+aVHere, u'\u005cu201c' ambiguous labelings u'\u005cu201d' mean an unlabeled sentence may have multiple parse trees as gold-standard reference, represented by parse forest (see Figure 1
+p17
+aVIntuitively, if several parsers disagree on an unlabeled sentence, it implies that the unlabeled sentence contains some difficult syntactic phenomena which are not sufficiently covered in manually labeled data
+p18
+aVWe suspect the reason is that the model is likely to distribute the probability mass to these parse trees produced by itself instead of those by Berkeley Parser or ZPar under this setting
+p19
+aVFinally, using a conditional random field (CRF) based probabilistic parser, we train a better model by maximizing mixed likelihood of labeled data and auto-parsed unlabeled data with ambiguous labelings
+p20
+aVThe results on both English and Chinese re-confirm that self-training may not work for dependency parsing , which is consistent with previous studies []
+p21
+aVFinally, with sufficient unlabeled data, it is possible that the parser can learn to resolve such uncertainty by biasing to more reasonable parse trees
+p22
+aVWhen using the outputs of GParser itself ( u'\u005cu201c' Unlabeled u'\u005cu2190' G u'\u005cu201d' ), the experiment reproduces traditional self-training
+p23
+aVWe believe the reason is that being a generative model designed for constituent parsing, Berkeley Parser is more different from discriminative dependency parsers, and therefore can provide more divergent syntactic structures
+p24
+aVThis kind of syntactic divergence is helpful because it can provide complementary knowledge from a different perspective also show that the diversity of parsers is important for performance improvement when integrating different parsers in the supervised track
+p25
+aVDuring experimental trials, we find that u'\u005cu201c' Unlabeled u'\u005cu2190' B+(Z u'\u005cu2229' G) u'\u005cu201d' can further boost performance on Chinese
+p26
+aVExperiments show that the constituent parser is very helpful since it produces more divergent structures for our semi-supervised parser than discriminative dependency parsers
+p27
+aVThe key idea is the use of ambiguous labelings for the purpose of aggregating multiple 1-best parse trees produced by several diverse parsers
+p28
+aVTraining with the combined labeled and unlabeled data, the objective is to maximize the mixed likelihood
+p29
+aVIn this way, the auto-parsed unlabeled data becomes more reliable
+p30
+aVOnce the feature weights u'\u005cud835' u'\u005cudc30' are learnt, we can parse the test data to find the optimal parse tree
+p31
+aVMoreover, our method may be combined with other semi-supervised approaches, since they are orthogonal in methodology and utilize unlabeled data from different perspectives
+p32
+aVFor Berkeley Parser, we use the model after 5 split-merge iterations to avoid over-fitting the training data according to the manual
+p33
+aVStacked learning uses one parser u'\u005cu2019' s outputs as guide features for another parser, leading to improved performance []
+p34
+aVOther sentences are split into two sets according to averaged number of heads per word in parse forests, denoted by u'\u005cu201c' low divergence u'\u005cu201d' and u'\u005cu201c' high divergence u'\u005cu201d' respectively
+p35
+aVTherefore, we can conclude that co-training helps dependency parsing, especially when using a more divergent parser
+p36
+aVUsing the probabilistic parser, we benchmark and conduct systematic comparisons among ours and all previous bootstrapping methods, including self/co/tri-training
+p37
+aVAll above work leads to significant improvement on parsing accuracy
+p38
+aVIn this work, we adopt the graph-based paradigm because it allows us to naturally derive conditional probability of a dependency tree u'\u005cud835' u'\u005cudc1d' given a sentence u'\u005cud835' u'\u005cudc31' , which is required to compute likelihood of both labeled and unlabeled data
+p39
+aVFor the semi-supervised parsers trained with Algorithm 3.2 , we use N 1 = 20 K and M 1 = 50 K for English, and N 1 = 15 K and M 1 = 50 K for Chinese, based on a few preliminary experiments
+p40
+aVThey first apply the idea of ambiguous labelings to multilingual parser transfer in the unsupervised parsing field, which aims to build a dependency parser for a resource-poor target language by making use of source-language treebanks
+p41
+aVRe-parsing merges the outputs of several parsers into a dependency graph, and then apply Viterbi decoding to find a better tree []
+p42
+aVWe adopt the second-order graph-based dependency parsing model of as our core parser, which incorporates features from the two kinds of subtrees in Fig
+p43
+aVTo address above issues, we propose ambiguity-aware ensemble training , which can be interpreted as a generalized tri-training framework
+p44
+aVTo solve above issues, this paper proposes a more general and effective framework for semi-supervised dependency parsing, referred to as ambiguity-aware ensemble training
+p45
+aVTherefore, we propose a simple corpus-weighting strategy, as shown in Algorithm 3.2 , where u'\u005cud835' u'\u005cudc9f' i , k b is the subset of training data used in k t u'\u005cu2062' h update and b is the batch size; u'\u005cu0397' k is the update step, which is adjusted following the simulated annealing procedure []
+p46
+aVMoreover, it is very convenient to parallel SGD since computations among examples in the same batch is mutually independent
+p47
+aVThe graph-based method views the problem as finding an optimal tree from a fully-connected directed graph [] , while the transition-based method tries to find a highest-scoring transition sequence that leads to a legal dependency tree []
+p48
+aVwhere the first term is the empirical counts and the second term is the model expectations
+p49
+aVSince u'\u005cud835' u'\u005cudcb4' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' i ) contains exponentially many dependency trees, direct calculation of the second term is prohibitive
+p50
+aVThe upper tree take u'\u005cu201c' deer u'\u005cu201d' as the subject of u'\u005cu201c' riding u'\u005cu201d' , whereas the lower one indicates that u'\u005cu201c' he u'\u005cu201d' rides the bicycle
+p51
+aVSince u'\u005cud835' u'\u005cudc9f' u'\u005cu2032' contains much more instances than u'\u005cud835' u'\u005cudc9f' (1.7M vs
+p52
+aVGiven an input sentence u'\u005cud835' u'\u005cudc31' = w 0 u'\u005cu2062' w 1 u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' w n , the goal of dependency parsing is to build a dependency tree as depicted in Figure 1 , denoted by u'\u005cud835' u'\u005cudc1d' = { ( h , m
+p53
+aV3 ) can be efficiently computed by running the inside-outside algorithm in the constrained search space u'\u005cud835' u'\u005cudcb1' i
+p54
+aV0 u'\u005cu2264' h u'\u005cu2264' n , 0 m u'\u005cu2264' n } , where ( h , m ) indicates a directed arc from the head word w h to the modifier w m , and w 0 is an artificial node linking to the root of the sentence
+p55
+aVThe other difference is where the preposition phrase (PP) u'\u005cu201c' in the park u'\u005cu201d' should be attached, which is also known as the PP attachment problem, a notorious challenge for parsing
+p56
+aVReserving such uncertainty has three potential advantages
+p57
+aVUsing unlabeled data with the results of Berkeley Parser ( u'\u005cu201c' Unlabeled u'\u005cu2190' B u'\u005cu201d' ) significantly improves parsing accuracy by 0.55% (93.40-92.85) on English and 1.06% (83.34-82.28) on Chinese
+p58
+aVThe second major row shows the results when we use single 1-best parse trees on unlabeled data
+p59
+aVWhen the parse forests of the unlabeled data are the union of the outputs of GParser and ZPar, denoted as u'\u005cu201c' Unlabeled u'\u005cu2190' Z+G u'\u005cu201d' , each word has 1.053 candidate heads on English and 1.136 on Chinese, and the oracle accuracy is higher than using 1-best outputs of single parsers (94.97% vs
+p60
+aVHowever, we find that although the parser significantly outperforms the supervised GParser on English, it does not gain significant improvement over co-training with ZPar ( u'\u005cu201c' Unlabeled u'\u005cu2190' Z u'\u005cu201d' ) on both English and Chinese
+p61
+aVThe first three experiments combine 1-best outputs of two parsers to compose parse forest on unlabeled data u'\u005cu201c' Unlabeled u'\u005cu2190' B+(Z u'\u005cu2229' G) u'\u005cu201d' means that the parse forest is initialized with the Berkeley parse and augmented with the intersection of dependencies of the 1-best outputs of ZPar and GParser
+p62
+aVUsing unlabeled data with the results of ZPar ( u'\u005cu201c' Unlabeled u'\u005cu2190' Z u'\u005cu201d' ) significantly outperforms the baseline GParser by 0.30% (93.15-82.85) on English
+p63
+aVEvaluation on labeled data shows the oracle accuracy of parse forest is much higher than that of 1-best outputs of single parsers (see Table 3
+p64
+aVAlthough using less unlabeled sentences (0.7M for English and 1.2M for Chinese), tri-training achieves comparable performance to co-training (slightly better on English and slightly worse on Chinese
+p65
+aVWe propose a generalized ambiguity-aware ensemble training framework for semi-supervised dependency parsing, which can make better use of unlabeled data, especially when parsers from different views produce divergent syntactic structures
+p66
+aVTo construct parse forests for unlabeled data, we employ three diverse parsers, i.e.,, our baseline GParser, a transition-based parser (ZPar 3 3 http://people.sutd.edu.sg/~yue_zhang/doc/ ) [] , and a generative constituent parser (Berkeley Parser 4 4 https://code.google.com/p/berkeleyparser/ ) []
+p67
+aVThe reason may be that dependency parsing models are prone to amplify previous mistakes during training on self-parsed unlabeled data apply a variant of co-training to dependency parsing and report positive results on out-of-domain text combine tri-training and parser ensemble to boost parsing accuracy
+p68
+aVFor an unlabeled instance, the model is updated to maximize the probability of its parse forest, instead of a single parse tree in traditional tri-training
+p69
+aVTo alleviate the noise, the tri-training method only uses unlabeled data on which multiple parsers from different views produce identical parse trees
+p70
+aVWe adopt the best settings on development data for semi-supervised GParser with our proposed approach, and make comparison with previous results on test data
+p71
+aVResults show all the three sets of unlabeled data can help the parser
+p72
+aVWe can see that the three parsers achieve comparable performance on English, but the performance of ZPar is largely inferior on Chinese
+p73
+aVThe third major row shows the results of the semi-supervised GParser with our proposed approach
+p74
+aV[tb] SGD training with mixed labeled and unlabeled data
+p75
+aVFor unlabeled data, we follow and use the BLLIP WSJ corpus [] for English and Xinhua portion of Chinese Gigaword Version 2.0 (LDC2009T14) [] for Chinese
+p76
+aVThis demonstrates that our approach can better exploit unlabeled data on which parsers of different views produce divergent structures
+p77
+aVTo understand how our approach performs with regards to the unlabeled data size, we train semi-supervised GParser with different sizes of unlabeled data
+p78
+aVThese three parsers are trained on labeled data and then used to parse each unlabeled sentence
+p79
+aVThe reason may be that dependency parsers are prone to amplify previous mistakes on unlabeled data during training
+p80
+aVThen we train semi-supervised GParser using the three sets of unlabeled data
+p81
+aVThe next two experiments in the second major row reimplement co-training , where another parser u'\u005cu2019' s 1-best results are projected into unlabeled data to help the core parser
+p82
+aVThe training procedure aims to maximize mixed likelihood of both manually labeled and auto-parsed unlabeled data with ambiguous labelings
+p83
+aVThe first major row presents performance of the three supervised parsers
+p84
+aVWe can see that unlabeled data with identical outputs from Berkeley Parser and ZPar tends to be short sentences (18.25 words per sentence on average
+p85
+aVTable 5 make comparisons with previous results on Chinese test data and use joint models for POS tagging and dependency parsing, significantly outperforming their pipeline counterparts
+p86
+aVExperimental results on both English and Chinese datasets demonstrate that the proposed ambiguity-aware ensemble training outperforms other entire-tree based methods such as self/co/tri-training
+p87
+aVWe can see that the parser consistently achieves higher accuracy with more unlabeled data, demonstrating the effectiveness of our approach
+p88
+aV1) supervised single parsers; 2) CRF-based GParser with conventional self/co/tri-training; 3) CRF-based GParser with our approach
+p89
+aVWe experiment with different combinations of the 1-best parse trees of the three supervised parsers
+p90
+aVIn summary, we can conclude that our proposed ambiguity-aware ensemble training is significantly better than both the supervised approaches and the semi-supervised approaches that use 1-best parse trees
+p91
+aVFor an unlabeled sentence u'\u005cud835' u'\u005cudc2e' i , the probability of its parse forest u'\u005cud835' u'\u005cudcb1' i is the summation of the probabilities of all the parse trees contained in the forest
+p92
+aVImpact of unlabeled data size
+p93
+aVFor English, we follow the popular practice to split data into training (sections 2-21), development (section 22), and test (section 23
+p94
+aVTo better understand the effectiveness of our proposed approach, we make detailed analysis using the semi-supervised GParser with u'\u005cu201c' Unlabeled u'\u005cu2190' B+Z u'\u005cu201d' on English datasets
+p95
+aVIn standard entire-tree based semi-supervised methods such as self/co/tri-training, automatically parsed unlabeled sentences are used as additional training data, and noisy 1-best parse trees are considered as gold-standard
+p96
+aVThis demonstrates that our proposed approach can better exploit unlabeled data than traditional self/co/tri-training
+p97
+aVHowever, unlabeled data with divergent syntactic structures should be more useful
+p98
+aVContribution of unlabeled data with regard to syntactic divergence
+p99
+aVWe aggregate the three parsers u'\u005cu2019' outputs on unlabeled data in different ways and evaluate the effectiveness through experiments
+p100
+aVPrevious work on graph-based dependency parsing mostly adopts linear models and perceptron based training procedures, which lack probabilistic explanations of dependency trees and do not need to compute likelihood of labeled training data
+p101
+aVTable 2 shows the data statistics
+p102
+aVMoreover, our approach can benefit from these methods in that we can get parse forests of higher quality on unlabeled data []
+p103
+aVWe measure parsing performance using the standard unlabeled attachment score (UAS), excluding punctuation marks
+p104
+aVThe results show that our approach achieves comparable accuracy with most previous semi-supervised methods
+p105
+aVThe tagging accuracy on test sets is 97.3 u'\u005cu2062' % on English and 94.0 u'\u005cu2062' % on Chinese
+p106
+aVHowever, one obvious drawback of these methods is that they are unable to exploit unlabeled data with divergent outputs from different parsers
+p107
+aVOur experiments show that unlabeled data with identical outputs from different parsers tends to be short (18.25 words per sentence on average), and only has a small proportion of 40% (see Table 6
+p108
+aVThe first set contains those sentences that the two parsers produce identical parse trees, denoted by u'\u005cu201c' consistent u'\u005cu201d' , which corresponds to the setting for tri-training
+p109
+aVOur approach can be combined with their work to utilize unlabeled data to improve both POS tagging and parsing simultaneously
+p110
+aVThe first major row lists several state-of-the-art supervised methods propose a second-order graph-based parser, but use a smaller feature set than our work propose a third-order graph-based parser explore higher-order features for graph-based dependency parsing, and adopt beam search for fast decoding propose a feature-rich transition-based parser
+p111
+aVA few effective learning methods are also proposed for dependency parsing to implicitly utilize distributions on unlabeled data []
+p112
+aVTable 4 shows the results
+p113
+aVFigure 1 shows an example sentence with an ambiguous parse forest
+p114
+aVIn the last setting, the parse forest contains all three 1-best results
+p115
+aVDefault parameter settings are used for training ZPar and Berkeley Parser
+p116
+aVAnother line of research is to pick up some high-quality auto-parsed training instances from unlabeled data using bootstrapping methods, such as self-training [] , co-training [] , and tri-training []
+p117
+aVDifferent from their work, we explore the idea for semi-supervised dependency parsing where a certain amount of labeled training data is available
+p118
+aVWe first employ a generative constituent parser for semi-supervised dependency parsing
+p119
+aVTable 3 presents the results
+p120
+aVThe phrase-structure outputs of Berkeley Parser are converted into dependency structures using the same head-finding rules
+p121
+aVIntuitively, an unlabeled sentence with divergent outputs should contain some ambiguous syntactic structures (such as preposition phrase attachment) that are very hard to resolve and lead to the disagreement of different parsers
+p122
+aVThe 1-best parse trees of these three parsers are aggregated in different ways
+p123
+aVFor the latter two cases, we also present the oracle accuracy and averaged head number per word ( u'\u005cu201c' Head/Word u'\u005cu201d' ) of parse forest when applying different ways to construct forests on development datasets
+p124
+aVIn other words, the model is free to distribute probability mass among the trees in the parse forest to its liking, as long as the likelihood improves []
+p125
+aVOne possible drawback of parser ensemble is that several parsers are required to parse the same sentence during the test phase
+p126
+aVWe run ZPar for 50 iterations, and choose the model that achieves highest accuracy on the development data
+p127
+aVHowever, the improvement on Chinese is not significant
+p128
+aVThe training objective is to maximize the log likelihood of the training data u'\u005cu2112' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc9f'
+p129
+aVPlease note that the parse forest in Figure 1 contains four parse trees after combination of the two different choices
+p130
+aVTo examine the effect of different ways for forest construction, we conduct extensive methodology study on development data
+p131
+aVTo verify the effectiveness of our proposed approach, we conduct experiments on Penn Treebank (PTB) and Penn Chinese Treebank 5.1 (CTB5
+p132
+aVWe expect that our approach has potential to achieve higher accuracy with more additional data
+p133
+aVWe apply L2-norm regularized SGD training to iteratively learn feature weights u'\u005cud835' u'\u005cudc30' for our CRF-based baseline and semi-supervised parsers
+p134
+aV82.46% on Chinese
+p135
+aV82.46% on Chinese
+p136
+aVInstead, we build a log-linear CRF-based dependency parser, which is similar to the CRF-based constituent parser of
+p137
+aVSuch sentences can provide more discriminative instances for training which may be unavailable in labeled data
+p138
+aVSecond, the parser is able to learn useful features from the unambiguous parts of the parse forest
+p139
+aVThe auto-parsed unlabeled data with ambiguous labelings is denoted as u'\u005cud835' u'\u005cudc9f' u'\u005cu2032' = { ( u'\u005cud835' u'\u005cudc2e' i , u'\u005cud835' u'\u005cudcb1' i ) } i = 1 M , where u'\u005cud835' u'\u005cudc2e' i is an unlabeled sentence, and u'\u005cud835' u'\u005cudcb1' i is the corresponding parse forest
+p140
+aVFor CTB5, we adopt the data split of []
+p141
+aVWe build the first state-of-the-art CRF-based dependency parser
+p142
+aVThe forest is formed by two parse trees, respectively shown at the upper and lower sides of the sentence
+p143
+aVMore importantly, we believe that unlabeled data with divergent outputs is equally (if not more) useful
+p144
+aVAll work in the second major row adopts semi-supervised methods
+p145
+aVWhen training our CRF-based parsers with SGD, we use the batch size b = 100 for all experiments
+p146
+aVWe can see that with the verification of two views, the oracle accuracy is much higher than using single parsers (97.52% vs
+p147
+aVOur work achieves comparable accuracy with , although they adopt the higher-order model of
+p148
+aVThe idea is to use a fraction of training data ( u'\u005cud835' u'\u005cudc9f' i ) at each iteration, and do corpus weighting by randomly sampling labeled and unlabeled instances in a certain proportion ( N 1 vs
+p149
+aVTable 6 illustrates the results and statistics
+p150
+aVMoreover, we for the first time build a state-of-the-art CRF-based dependency parser and conduct in-depth comparisons with previous methods
+p151
+aVWe build a CRF-based bigram part-of-speech (POS) tagger with the features described in [] , and produce POS tags for all train/development/test/unlabeled sets (10-way jackknifing for training sets
+p152
+aVFor example, and show that incorporating higher-order features into a graph-based parser only leads to modest increase in parsing accuracy
+p153
+aVIn parsing community, two mainstream methods tackle the dependency parsing problem from different perspectives but achieve comparable accuracy on a variety of languages
+p154
+aVHowever, it is very difficult to further improve performance of supervised parsers
+p155
+aVFor significance test, we adopt Dan Bikel u'\u005cu2019' s randomized parsing evaluation comparator []
+p156
+aVIn contrast, semi-supervised approaches, which can make use of large-scale unlabeled data, have attracted more and more interest
+p157
+aVBoth and adopt the higher-order parsing model of , and also incorporate word cluster features proposed by in their system
+p158
+aVOur work is also related with the parser ensemble approaches such as stacked learning and re-parsing in the supervised track
+p159
+aVThis indicates that adding the outputs of GParser itself does not help the model
+p160
+aVWe run SGD for I = 100 iterations and choose the model that performs best on development data
+p161
+aV3 shows the accuracy curve on the test set
+p162
+aVPreviously, unlabeled data is explored to derive useful local-context features such as word clusters [] , subtree frequencies [] , and word co-occurrence counts []
+p163
+aVWe expect our approach may achieve higher performance with such enhancements, which we leave for future work
+p164
+aVAlthough working well on constituent parsing [] , self-training is shown unsuccessful for dependency parsing []
+p165
+aVWe convert original bracketed structures into dependency structures using Penn2Malt with its default head-finding rules
+p166
+aV2 2 http://www.chokkan.org/software/crfsuite/ At each step, the algorithm approximates a gradient with a small subset of the training examples, and then updates the feature weights show that SGD achieves optimal test performance with far fewer iterations than other optimization routines such as L-BFGS
+p167
+aVAgain, our method may be combined with their work to achieve higher performance
+p168
+aVThen the score of a dependency tree is
+p169
+aVThe differences between the two parse trees are highlighted using dashed arcs
+p170
+aV92.85% on English, 86.66% vs
+p171
+aVUnder the graph-based model, the score of a dependency tree is factored into the scores of small subtrees u'\u005cud835' u'\u005cudc29'
+p172
+aV92.85% on English, and 95.06% vs
+p173
+aV40K for English, and 4M vs
+p174
+aVSupervised dependency parsing has made great progress during the past decade
+p175
+aVHowever, these methods gain limited success in dependency parsing
+p176
+aVLabeled data u'\u005cud835' u'\u005cudc9f' = { ( u'\u005cud835' u'\u005cudc31' i , u'\u005cud835' u'\u005cudc1d' i ) } i = 1 N , and unlabeled data u'\u005cud835' u'\u005cudc9f' u'\u005cu2032' = { ( u'\u005cud835' u'\u005cudc2e' i , u'\u005cud835' u'\u005cudcb1' i ) } j = 1 M ; Parameters
+p177
+aVSuppose the labeled training data is u'\u005cud835' u'\u005cudc9f' = { ( u'\u005cud835' u'\u005cudc31' i , u'\u005cud835' u'\u005cudc1d' i ) } i = 1 N
+p178
+aVAssuming the feature weights u'\u005cud835' u'\u005cudc30' are known, the probability of a dependency tree u'\u005cud835' u'\u005cudc1d' given an input sentence u'\u005cud835' u'\u005cudc31' is defined as
+p179
+aVThe first term in Eq
+p180
+aVThe second term in Eq
+p181
+aV1 1 Higher-order models of and can achieve higher accuracy, but has much higher time cost ( O u'\u005cu2062' ( n 4 )
+p182
+aVTo accelerate the training, we adopt parallelized implementation of SGD and employ 20 threads for each run
+p183
+aVThese atomic features are concatenated in different combinations to compose rich feature sets
+p184
+aVFor syntactic features, we adopt those of which include two categories corresponding to the two types of scoring subtrees in Fig
+p185
+aVOur approach is applicable to these higher-order models, which we leave for future work
+p186
+aVMore analysis and discussions are in Section 4.4
+p187
+aVwhere p ~ ( u'\u005cud835' u'\u005cudc1d' u'\u005cu2032' u'\u005cud835' u'\u005cudc2e' i , u'\u005cud835' u'\u005cudcb1' i ; u'\u005cud835' u'\u005cudc30' ) is the probability of u'\u005cud835' u'\u005cudc1d' u'\u005cu2032' under the space constrained by the parse forest u'\u005cud835' u'\u005cudcb1' i
+p188
+aVWe summarize the atomic features used in each feature category in Table 1
+p189
+aVWe divide the systems into three types
+p190
+aV3 ) is the same with the second term in Eq
+p191
+aVInstead, we can use the classic inside-outside algorithm to efficiently compute the model expectations within O u'\u005cu2062' ( n 3 ) time complexity, where n is the input sentence length
+p192
+aVThen we can derive the partial derivative of the log likelihood with respect to u'\u005cud835' u'\u005cudc30'
+p193
+aVWe follow the implementation in CRFsuite
+p194
+aVPlease refer to Table 4 of for the complete feature list
+p195
+aVThen the log likelihood of u'\u005cud835' u'\u005cudc9f' is
+p196
+aVThis can be done with the Viterbi decoding algorithm described in in O u'\u005cu2062' ( n 3 ) parsing time
+p197
+aV{algorithmic} [1] \u005cSTATE Input
+p198
+aVThe partial derivative with respect to the feature weights u'\u005cud835' u'\u005cudc30' is
+p199
+aVThen the log likelihood of u'\u005cud835' u'\u005cudc9f' u'\u005cu2032' is
+p200
+aVSimilar ideas of learning with ambiguous labelings are previously explored for classification [] and sequence labeling problems []
+p201
+aVOur work is originally inspired by the work of
+p202
+aVwhere Z u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' ) is the normalization factor and u'\u005cud835' u'\u005cudcb4' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' ) is the set of all legal dependency trees for u'\u005cud835' u'\u005cudc31'
+p203
+aVI , N 1 , M 1 , b \u005cSTATE Output u'\u005cud835' u'\u005cudc30' \u005cSTATE Initialization u'\u005cud835' u'\u005cudc30' ( 0 ) = u'\u005cud835' u'\u005cudfce' , k = 0 ; \u005cFOR [ iterations ] i = 1 \u005cTO I \u005cSTATE Randomly select N 1 instances from u'\u005cud835' u'\u005cudc9f' and M 1 instances from u'\u005cud835' u'\u005cudc9f' u'\u005cu2032' to compose a new dataset u'\u005cud835' u'\u005cudc9f' i , and shuffle it
+p204
+aVwhere p ( u'\u005cud835' u'\u005cudc1d' u'\u005cu2032' u'\u005cud835' u'\u005cudc2e' i ; u'\u005cud835' u'\u005cudc30' ) is the conditional probability of u'\u005cud835' u'\u005cudc1d' u'\u005cu2032' given u'\u005cud835' u'\u005cudc2e' i , as defined in Eq
+p205
+aVFor semi-supervised cases, one iteration takes about 2 hours on an IBM server having 2.0 GHz Intel Xeon CPUs and 72G memory
+p206
+aV\u005cSTATE Traverse u'\u005cud835' u'\u005cudc9f' i a small batch u'\u005cud835' u'\u005cudc9f' i , k b u'\u005cu2286' u'\u005cud835' u'\u005cudc9f' i at one step
+p207
+aVFig
+p208
+aVIn summary, we make following contributions
+p209
+aV2 ; u'\u005cud835' u'\u005cudc30' d u'\u005cu2062' e u'\u005cu2062' p / s u'\u005cu2062' i u'\u005cu2062' b are feature weight vectors; the dot product gives scores contributed by corresponding subtrees
+p210
+aVThis work was supported by National Natural Science Foundation of China (Grant No
+p211
+aV\u005cSTATE u'\u005cud835' u'\u005cudc30' k + 1 = u'\u005cud835' u'\u005cudc30' k + u'\u005cu0397' k u'\u005cu2062' 1 b u'\u005cu2062' u'\u005cu2207' u'\u005cu2061' u'\u005cu2112' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc9f' i , k b ; u'\u005cud835' u'\u005cudc30' k ) \u005cSTATE k = k + 1 \u005cENDFOR
+p212
+aVwhere u'\u005cud835' u'\u005cudc1f' d u'\u005cu2062' e u'\u005cu2062' p u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' , h , m ) and u'\u005cud835' u'\u005cudc1f' s u'\u005cu2062' i u'\u005cu2062' b u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' , h , s , m ) are the feature vectors of the two subtree in Fig
+p213
+aVThe authors would like to thank the critical and insightful comments from our anonymous reviewers
+p214
+aV5 5 http://www.cis.upenn.edu/~dbikel/software.html
+p215
+aV61373095, 61333018
+p216
+aVM 1
+p217
+aV2
+p218
+aV1
+p219
+ag218
+ag218
+aV/ref/reference
+p220
+a.

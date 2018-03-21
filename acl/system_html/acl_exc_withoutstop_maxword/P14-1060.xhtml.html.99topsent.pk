@@ -1,0 +1,24 @@
+(lp0
+VThis would involve initializing the weights prior to the semi-supervised procedure with the weights from the supervised learning model, so as to seed the semi-supervised approach with reasonable model, and use the partially annotated data to fine-tune the supervised model
+p1
+aVImplicitly, the weight learning algorithm can be seen as a gradient descent procedure minimizing the difference between the scores of highest scoring (Viterbi) state sequences, and the label state sequences
+p2
+aVWe describe learning of the model parameters with fully annotated training data, as well as an approach for learning motif segmentation that requires only partial supervision
+p3
+aVHence, in this case, we use a variation of the hard EM algorithm for learning
+p4
+aVUpdates are run for a large number of iterations until the change in objective drops below a threshold, and the learning rate u'\u005cu0391' is adaptively modified as described in Collins et al
+p5
+aVWhile the Viterbi algorithm can be used for tagging optimal state-sequences given the weights, the structured perceptron can learn optimal model weights given gold-standard sequence labels
+p6
+aVSection 3 describes our methodology, which consists of a frequency-driven segmentation model to partition text into semantically meaningful recurring lineal-subunits, a representation learning framework for learning new semantic embeddings based on this segmentation, and an approach to use such embeddings in downstream applications
+p7
+aVSince our state definitions preclude certain transitions (such as from state T 2 to T 1 ), these weights are initialized to - u'\u005cu221e' to expedite training
+p8
+aVHence, we use the Hellinger measure between neighbourhood motif distributions in learning representations
+p9
+aVFor this task, the motif based distributional embeddings vastly outperform a conventional distributional model (DSM) based on token distributions, as well as additive (AVM) and multiplicative (MVM) models of vector compositionality, as proposed by Lapata et al
+p10
+aVFor this task, the motif
+p11
+a.

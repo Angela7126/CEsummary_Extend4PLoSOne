@@ -1,0 +1,22 @@
+(lp0
+VThis can be accomplished by composing the lattice with a desegmenting transducer that consumes morphemes and outputs desegmented words
+p1
+aVWe compose this acceptor with a desegmenting transducer, and then with an unsegmented LM acceptor, producing a fully annotated, desegmented lattice
+p2
+aVFinnish does not require a table, as all words can be desegmented with simple concatenation
+p3
+aVWork on target language morphological segmentation for SMT can be divided into three subproblems segmentation, desegmentation and integration
+p4
+aVWe approach this problem by augmenting an SMT system built over target segments with features that reflect the desegmented target words
+p5
+aVThe first feature indicates that the desegmented morphemes were translated from contiguous source words
+p6
+aVFortunately, LM annotation as well as any necessary lattice modifications can be performed simultaneously by composing the desegmented lattice with a finite state acceptor encoding the LM [ 26 ]
+p7
+aVA desegmenting transducer can be constructed by first encoding our desegmenter as a table that maps morpheme sequences to words
+p8
+aVThe lattice (Figure 1 a) can then be desegmented by composing it with the transducer ( 1 b), producing a desegmented lattice ( 1 c
+p9
+aVThe chains found by this search are
+p10
+a.

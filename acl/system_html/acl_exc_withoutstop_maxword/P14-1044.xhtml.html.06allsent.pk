@@ -1,0 +1,408 @@
+(lp0
+VThe structural similarity component, instead, is a novel graph-based similarity measurement technique which calculates the similarity between a pair of concepts across the semantic networks of the two resources by leveraging the semantic structure of those networks
+p1
+aVThe definitional similarity component computes the similarity of two concepts in terms of the similarity of their definitions, a method that has also been used in previous work for aligning lexical resources [ 27 , 12 ]
+p2
+aVInstead of measuring the similarity of two concepts on the basis of their distance in the combined graph, our approach models each concept through a rich vectorial representation we refer to as semantic signature and compares the two concepts in terms of the similarity of their semantic signatures
+p3
+aVAs can be seen, the approach consists of two main components definitional similarity and structural similarity
+p4
+aVEach of these components gets, as its input, a pair of concepts belonging to two different semantic networks and produces a similarity score
+p5
+aVWhen applied to a semantic graph by initializing the random walks from a set of concepts (nodes), ppr yields a vector in which each concept is associated with a weight denoting its semantic relevance to the initial concepts
+p6
+aVThis component goes beyond the surface realization of concepts, thus providing a deeper measure of concept similarity
+p7
+aVWe explained in Section 2.1 that our concept similarity measure consists of two components the definitional and the structural similarities
+p8
+aVThe structural similarity component of our approach, however, is novel, but at the same time one of the very few measures which enables the computation of the similarity of concepts across two resources directly and independently of the similarity of their definitions
+p9
+aVFigure 1 illustrates the procedure underlying our cross-resource concept similarity measurement technique
+p10
+aVOur approach for aligning lexical resources exploits the graph structure of each resource
+p11
+aVIn the structural similarity component (Figure 1 (b), bottom), the semantic signature for each concept c i is computed by running the ppr algorithm on its corresponding graph G i , hence a different u'\u005cud835' u'\u005cudc0c' i is built for each of the two concepts
+p12
+aVIn spite of its simplicity, the mere calculation of the similarity of concept definitions provides a strong baseline, especially for cases where the definitional texts for a pair of concepts to be aligned are lexically similar, yet distinguishable from the other definitions
+p13
+aVWhen a lexical resource can be viewed as a semantic graph, as with WordNet or Wikipedia, this limit can be overcome by means of alignment algorithms that exploit the network structure to determine the similarity of concept pairs
+p14
+aVWe use the same semantic graph H for computing the semantic signatures of both definitions
+p15
+aVIn this case, both the definitional and structural similarity scores are treated as equally important and two concepts are aligned if their overall similarity exceeds the middle point of the similarity scale
+p16
+aVThe aim of this stage is to model a given concept or set of concepts through a vectorial semantic representation, which we refer to as the semantic signature of the input
+p17
+aVOur ontologization algorithm takes as input a lexicon L and outputs a semantic graph G = ( V , E ) where, as already defined in Section 2 , V is the set of concepts in L and E is the set of semantic relations between these concepts
+p18
+aVAs mentioned earlier, semantic signatures are vectors with dimension equal to the number of nodes in the semantic graph
+p19
+aVThese two scores are then combined into an overall score (part (e) of Figure 1 ) which quantifies the semantic similarity of the two input concepts c 1 and c 2
+p20
+aVDifferent resource alignment techniques usually vary in the way they compute the similarity of a pair of concepts across two resources (line 2 in Algorithm 2
+p21
+aVTherefore, we assume that a lexical resource L can be represented as an undirected graph G = ( V , E ) where V is the set of nodes, i.e.,, the concepts defined in the resource, and E is the set of undirected edges, i.e.,, semantic relations between concepts
+p22
+aVHowever, other resources such as Wiktionary do not provide semantic relations between concepts and, therefore, have first to be transformed into semantic networks before they can be aligned using our alignment algorithm
+p23
+aVTherefore, the considerable performance improvement over Dijkstra-WSA on this resource pair shows the effectiveness of our novel concept similarity measure independently of the underlying semantic network
+p24
+aVHaving at hand the semantic signatures for the two input concepts, we proceed to comparing them (part (d) in Figure 1
+p25
+aVThe original PageRank ( pr ) algorithm [ 3 ] computes, for a given graph, a single vector wherein each node is associated with a weight denoting its structural importance in that graph ppr is a variation of pr where the computation is biased towards a set of initial nodes in order to capture the notion of importance with respect to those particular nodes ppr has been previously used in a wide variety of tasks such as definition similarity-based resource alignment [ 27 ] , textual semantic similarity [ 14 , 30 ] , Word Sense Disambiguation [ 1 , 6 ] and semantic text categorization [ 24 ]
+p26
+aVAlgorithm 2 formalizes the alignment process the algorithm takes as input the semantic graphs G 1 and G 2 corresponding to the two resources, as explained above, and produces as output an alignment in the form of a set A of concept pairs
+p27
+aVAs an example, assume we are given two semantic signatures computed for two concepts in WordNet and Wiktionary
+p28
+aVDeeper approaches leverage semantic similarity to go beyond the surface realization of definitions [ 26 , 20 , 27 ]
+p29
+aVHaving lexical resources represented as semantic networks is highly beneficial
+p30
+aVAs a result of the unification process, we obtain a pair of equally-sized semantic signatures with comparable components
+p31
+aVHowever, not all lexical resources provide explicit semantic relations between concepts and, hence, machine-readable dictionaries like Wiktionary have first to be transformed into semantic graphs before such graph-based approaches can be applied to them
+p32
+aVIn the following, we present our novel approach for measuring the similarity of concept pairs
+p33
+aVMeasuring the similarity of two concepts in terms of their definitions has been investigated in previous work [ 27 , 12 ]
+p34
+aVWe therefore propose an approach (part (c) of Figure 1 ) that finds a common ground between the two signatures to this end we consider all the concepts associated with monosemous words in the two signatures as landmarks and restrict the two signatures exclusively to those common concepts
+p35
+aVThe other two resources, i.e.,, wt and ow , do not provide a reliable network of semantic relations, therefore we used our ontologization approach to construct their corresponding semantic graphs
+p36
+aVWe utilized Personalized PageRank [ 10 , ppr ] , a random walk graph algorithm, for calculating semantic signatures
+p37
+aVIn the definitional similarity component, the two concepts c 1 and c 2 are first represented by their corresponding definitions d 1 and d 2 in the respective resources L 1 and L 2 (Figure 1 (a), top
+p38
+aVThe measure was shown to outperform the conventional cosine distance when comparing different semantic signatures in multiple textual similarity tasks [ 30 ]
+p39
+aVAny semantic network with a dense relational structure, providing good coverage of the words appearing in the definitions, is a suitable candidate for H
+p40
+aVTo do this, recent work has proposed graph construction by monosemous linking, where a concept is linked to all the concepts associated with the monosemous words in its definition [ 17 ]
+p41
+aVTo gain more insight into the effectiveness of our structural similarity measure in comparison to the Dijkstra-WSA method, we carried out an experiment where our alignment system used only the structural similarity component, a variant of our system we refer to as SemAlign s u'\u005cu2062' t u'\u005cu2062' r
+p42
+aVIn Section 2 , we presented our approach for aligning lexical resources
+p43
+aVHowever, the approach assumes that the input resources can be viewed as semantic networks, which seems to limit its applicability to structured resources only
+p44
+aVOur approach, in contrast, aims at transforming a lexical resource into a full-fledged semantic network, hence providing a denser graph with most of its nodes connected
+p45
+aVThese results show that our ontologization approach can be used to obtain dense semantic graph representations of lexical resources, while at the same time preserving a high level of accuracy
+p46
+aVIn Section 4.2.1 , we explain how we set, in our experiments, the values of u'\u005cu0392' and the similarity threshold u'\u005cu0398' (cf alignment algorithm in Section 2
+p47
+aVWe explain in Section 3 how a semi-structured resource which does not exhibit a graph structure can be transformed into a semantic network
+p48
+aVThis approach, however, in addition to setting the threshold for the definition similarity component by means of cross validation, also required other parameters to be tuned, such as the allowed path length ( u'\u005cu039b' ) and the maximum number of edges in a graph
+p49
+aVA comparable approach is the Dijkstra-WSA proposed by Matuschek and Gurevych ( 2013 ) which, as also mentioned earlier in the Introduction, first connects the two resources u'\u005cu2019' graphs by leveraging monosemous linking and then aligns two concepts across the two graphs on the basis of their shortest distance
+p50
+aVLast year Matuschek and Gurevych ( 2013 ) proposed Dijkstra-WSA, a graph-based approach relying on shortest paths between two concepts when the two corresponding resources graphs were combined by leveraging monosemous linking
+p51
+aVAs a result of this procedure, we obtain a semantic graph representation G for the lexicon L
+p52
+aVIn this component the personalization vector u'\u005cud835' u'\u005cudc2f' i is set by uniformly distributing the probability mass over the nodes corresponding to the senses of all the content words in the extended definition of d i according to the sense inventory of a semantic network H
+p53
+aVTo do this, we apply our definitional similarity measure introduced in Section 2.1
+p54
+aVThis made the approach dependent on the training data for the specific pair of resources that were to be aligned
+p55
+aVIn this paper we propose a unified approach to aligning arbitrary pairs of lexical resources which is independent of their specific structure
+p56
+aVTheir method when backed off with other definition similarity based approaches [ 27 , 20 ] , achieved state-of-the-art results on the mapping of WordNet to different collaboratively-constructed resources
+p57
+aVFor this purpose we used the WordNet [ 7 ] graph which was further enriched by connecting each concept to all the concepts appearing in its disambiguated gloss
+p58
+aVFor instance, WordNet can be readily represented as an undirected graph G whose nodes are synsets and edges are modeled after the relations between synsets defined in WordNet (e.g.,, hypernymy, meronymy, etc.), and u'\u005cu2112' G is the mapping between each synset node and the set of synonyms which express the concept
+p59
+aVRecall from Section 2 that our resource alignment technique has two parameters the similarity threshold u'\u005cu0398' and the combination parameter u'\u005cu0392' , both defined in [0, 1]
+p60
+aVIn the following, we explain all the stages involved in the two components (gray blocks in the figure
+p61
+aVLeveraging monosemous words as bridges between two signatures is a particularly reliable technique as typically a significant portion of all words in a lexicon are monosemous
+p62
+aVNow that all the four resources are transformed into semantic graphs, we move to our alignment experiments
+p63
+aVIn order to address this issue and hence generalize our alignment approach to any given lexical resource, we propose a method for transforming a given machine-readable dictionary into a semantic network, a process we refer to as ontologization
+p64
+aVThe consistency in the performance of SemAlign in its different configurations and across different resource pairs indicates its robustness and shows that our system can be utilized effectively for aligning any pair of lexical resources, irrespective of their structure or availability of training data
+p65
+aVHowever, this alignment method still involves tuning of parameters which are highly dependent on the characteristics of the generated graphs and, hence, requires hand-crafted sense alignments for the specific pair of resources to be aligned, a task which has to be replicated every time the resources are updated
+p66
+aVAs mentioned in Section 2.1.1 , we build the wn graph by including all the synsets and semantic relations defined in WordNet (e.g.,, hypernymy and meronymy) and further populate the relation set by connecting a synset to all the other synsets that appear in its disambiguated gloss
+p67
+aVThe two components share the same backbone (parts (b) and (d) of Figure 1 ), but differ in some stages (parts (a) and (c) in Figure 1
+p68
+aVHowever, as mentioned in the introduction, definition similarity-based techniques fail at identifying the correct alignments in cases where different wordings are used or definitions are not of high quality
+p69
+aVThen, each of the two unified sub-signatures will contain a component whose weight is determined by the weight of the only concept associated with tradeoff n in the corresponding semantic signature
+p70
+aVNevertheless, when it comes to aligning textual definitions in different resources, the lexical approach [ 32 , 5 , 11 ] falls short because of the potential use of totally different wordings to define the same concept
+p71
+aVThe sb system corresponds to the state-of-the-art definition similarity approaches for wn - wp [ 27 ] , wn - wt [ 20 ] , and wn - ow [ 9 ] dwsa stands for Dijkstra-WSA, the state-of-the-art graph-based alignment approach of Matuschek and Gurevych ( 2013
+p72
+aVIf their similarity score exceeds a certain value denoted by u'\u005cu0398' (line 2 ), the two concepts c 1 and c 2 are aligned and the pair ( c 1 , c 2 ) is added to A (line 2
+p73
+aVOnce the set of target candidates C for a source concept c 1 is obtained, the alignment task can be cast as that of identifying those concepts in C to which c 1 should be aligned
+p74
+aVWe therefore measure the similarity between the definition of cone 4 n and all the 5 definitions of fruit and introduce a link from cone 4 n to the sense of fruit which yields the maximal similarity value (defined as u'\u005cu201c' (botany) The seed-bearing part of a plant u'\u005cu2026' u'\u005cu201d'
+p75
+aVSection 5 ) in order to create denser semantic graphs for ow and wt
+p76
+aVHere, we describe how the four semantic graphs for our four lexical resources (i.e.,, wn , wp , wt , ow ) were constructed
+p77
+aVThe algorithm iterates over all concepts c 1 u'\u005cu2208' V 1 and, for each of them, obtains the set of concepts C u'\u005cu2282' V 2 , which can be considered as alignment candidates for c 1 (line 2
+p78
+aVThis is particularly interesting as the wktwsd system uses a rule-based technique specific to relation disambiguation in wt , whereas our method is resource independent and can be applied to arbitrary words in the definition of any concept
+p79
+aV[t!] Lexical Resource Aligner {algorithmic} [1] \u005cREQUIRE graphs H = ( V H , E H ) , G 1 = ( V 1 , E 1 ) and G 2 = ( V 2 , E 2 ) , the similarity threshold u'\u005cu0398' , and the combination parameter u'\u005cu0392' \u005cENSURE A , the set of all aligned concept pairs
+p80
+aVFor ontologizing wt and ow , the bag of content words W is given by the content words in sense definitions and, if available, additional related words obtained from lexicon relations (see Section 3
+p81
+aVThe resulting graphs for wt and ow contain 430K and 48K nodes, respectively, each providing more than 95% coverage of concepts, with the average node degree being around 10 for both resources
+p82
+aVTo do this, the algorithm calculates the similarity between c 1 and each c 2 u'\u005cu2208' C (line 2
+p83
+aVThis is usually the case with machine-readable dictionaries, where structuring the resource involves the arduous task of connecting lexicographic senses by means of semantic relations
+p84
+aVIn this latter case, we choose the most appropriate concept c i u'\u005cu2208' u'\u005cu2110' G L u'\u005cu2062' ( w i ) by finding the maximal similarity between the definition of c and the definitions of each sense of w i
+p85
+aVIn addition to these, we performed experiments where the two parameters of SemAlign were tuned on pair-independent training data, i.e.,, a training dataset for a pair of resources different from the one being aligned
+p86
+aVIn addition, as we mentioned earlier, for wn - wp we used the same graph as that of Dijkstra-WSA, since both wn and wp provide a full-fledged semantic network and thus neither needed to be ontologized
+p87
+aVFormally, let u'\u005cu2110' G u'\u005cu2062' ( w ) be an inventory mapping function that maps a term w to the set of concepts which are expressed by w in graph G
+p88
+aVThen, given two signatures u'\u005cud835' u'\u005cudcae' u'\u005cud835' u'\u005cudc2f' 1 and u'\u005cud835' u'\u005cudcae' u'\u005cud835' u'\u005cudc2f' 2 , computed on the respective graphs G 1 and G 2 , we first obtain the set u'\u005cu2133' of words that are monosemous according to both semantic networks, i.e.,, u'\u005cu2133' = { w u'\u005cu2110' G 1 u'\u005cu2062' ( w
+p89
+aVA good example is WordNet, which has been exploited as a semantic network in dozens of NLP tasks [ 7 ]
+p90
+aVGiven a pair of lexical resources L 1 and L 2 , we align each concept in L 1 by mapping it to its corresponding concept(s) in the target lexicon L 2
+p91
+aVThis enables our system to be applied effectively for aligning new pairs of resources for which no training data is available, with state-of-the-art performance
+p92
+aVFor each source concept c u'\u005cu2208' V we create a bag of content words W = { w 1 , u'\u005cu2026' , w n } which includes all the content words in its definition d and, if available, additional related words obtained from lexicon relations (e.g.,, synonyms in Wiktionary
+p93
+aVOwing to its ability to bring together features like multilinguality and increasing coverage, over the past few years resource alignment has proven beneficial to a wide spectrum of tasks, such as Semantic Parsing [ 33 ] , Semantic Role Labeling [ 28 ] , and Word Sense Disambiguation [ 25 ]
+p94
+aV2013 ) which first transforms each signature into a list of sorted elements and then calculates the similarity on the basis of the average ranking of elements across the two lists
+p95
+aVThe three datasets contained 320, 484, and 315 wn concepts that were manually mapped to their corresponding concepts in wp , wt , and ow , respectively
+p96
+aVWe report state-of-the-art performance when aligning WordNet to Wikipedia, OmegaWiki and Wiktionary
+p97
+aVAligning lexical resources has been a very active field of research in the last decade
+p98
+aVFormally, we first represent a semantic network consisting of N concepts as a row-stochastic transition matrix u'\u005cud835' u'\u005cudc0c' u'\u005cu2208' u'\u005cu211d' N × N
+p99
+aVWhile providing good results in general, these approaches fail when the definitions of a given word are not of adequate quality and expressiveness to be distinguishable from one another
+p100
+aVWe first create the empty undirected graph G L = ( V , E ) such that V is the set of concepts in L and E = u'\u005cu2205'
+p101
+aVThe improvement is especially noticeable for pairs involving either wt or ow where, thanks to the relatively denser semantic graphs obtained by means of our ontologization technique, the gap in F1 is about 0.23 ( wn - wt ) and 0.15 ( wn - ow
+p102
+aVThe optimal value for the u'\u005cu039b' parameter varied from one resource pair to another, and even for a specific resource pair it had to be tuned for each configuration
+p103
+aVThanks to a novel modeling of the sense entries and an effective ontologization algorithm, our approach also fares well when resources lack relational structure or pair-specific training data is absent, meaning that it is applicable to arbitrary pairs without adaptation
+p104
+aVAs a matter of fact, most efforts have been concentrated on aligning the de facto community standard sense inventory, i.e., WordNet, to other resources
+p105
+aVTo enable a comparison with the state of the art, we followed Matuschek and Gurevych ( 2013 ) and performed an alignment of WordNet synsets ( wn ) to three different collaboratively-constructed resources
+p106
+aVWe show in Table 3 the alignment performance of different systems on the task of aligning wn - wp , wn - wt , and wn - ow in terms of Precision (P), Recall (R), F1, and Accuracy
+p107
+aVMeyer and Gurevych ( 2012a ) and Matuschek and Gurevych ( 2013 ) provided approaches for building graph representations of Wiktionary and OmegaWiki
+p108
+aVSince the structural similarity signatures u'\u005cud835' u'\u005cudcae' u'\u005cud835' u'\u005cudc2f' 1 and u'\u005cud835' u'\u005cudcae' u'\u005cud835' u'\u005cudc2f' 2 are calculated on different graphs and thus have different dimensions, we need to make them comparable by unifying them
+p109
+aVAlso, consider the noun tradeoff which is monosemous according to both these resources
+p110
+aVNotable examples are WordNet, Wikipedia and, more recently, collaboratively-curated resources such as OmegaWiki and Wiktionary [ 13 ]
+p111
+aVOur approach, however, thanks to the connections obtained through ambiguous words, can provide graphs with significantly higher coverage
+p112
+aVAs an example, for wt , Matuschek and Gurevych ( 2013 ) generated a graph where around 30% of the nodes were in isolation, whereas this number drops to around 5% in our corresponding graph
+p113
+aVFor wp , we used the graph provided by Matuschek and Gurevych ( 2013 ) , constructed by directly connecting an article (concept) to all the hyperlinks in its first paragraph, together with the category links
+p114
+aVThis rich representation leads to our approach having a good degree of robustness such that it can achieve competitive results even in the absence of training data
+p115
+aVIn addition, as can be seen in the table, SemAlign benefits from pair-independent training data in most cases across the three resource pairs with performance surpassing that of sb+dwsa , a system which is dependent on pair-specific training data
+p116
+aVThe cell ( i , j ) in the matrix denotes the probability of moving from a concept i to j in the graph
+p117
+aVWikipedia ( wp ), Wiktionary ( wt ), and OmegaWiki ( ow
+p118
+aVWe present in Table 1 , for wt and ow , the total number of edges together with their distribution across types (i.e.,, ambiguous and unambiguous) and sources (i.e.,, definitions and relations) from which candidate words were obtained
+p119
+aVHowever, there are many large-scale resources, such as Wiktionary for instance, which by their very nature are not in the form of a graph
+p120
+aVFor this setting, we used the whole dataset of the corresponding resource pair to tune the two parameters of our system
+p121
+aVMore recently, the growth of collaboratively-constructed resources has seen the development of alignment approaches with Wikipedia [ 32 , 2 , 34 , 31 , 25 ] , Wiktionary [ 20 ] and OmegaWiki [ 9 ]
+p122
+aVOur wn and wp graphs have 118K and 2.8M nodes, respectively, with the average node degree being roughly 9 in both resources
+p123
+aVHowever, the dataset for wn - ow was originally built for the German language and, hence, was missing many English ow concepts that could be considered as candidate target alignments
+p124
+aVThen the ppr vector, hence the semantic signature u'\u005cud835' u'\u005cudcae' u'\u005cud835' u'\u005cudc2f' of vector u'\u005cud835' u'\u005cudc2f' is the unique solution to the linear system u'\u005cud835' u'\u005cudcae' u'\u005cud835' u'\u005cudc2f' = ( 1 - u'\u005cu0391' ) u'\u005cu2062' u'\u005cud835' u'\u005cudc2f' + u'\u005cu0391' u'\u005cu2062' u'\u005cud835' u'\u005cudc0c' u'\u005cu2062' u'\u005cud835' u'\u005cudcae' u'\u005cud835' u'\u005cudc2f' , where u'\u005cud835' u'\u005cudc2f' is the personalization vector of size N in which all the probability mass is put on the concepts for which a semantic signature is to be computed and u'\u005cu0391' is the damping factor, which is usually set to 0.85 [ 3 ]
+p125
+aVGiven the large scale this intrinsic issue can only be addressed automatically, by means of lexical resource alignment algorithms
+p126
+aVThe system performance is generally higher on the alignment task for wp compared to wt and ow
+p127
+aVOne of the main objectives in this area has been to enrich existing ontologies by means of complementary information from other resources
+p128
+aVWe would like to thank Michael Matuschek for providing us with Wikipedia graphs and alignment datasets
+p129
+aVMore recently, Matuschek and Gurevych ( 2013 ) leveraged monosemous linking (cf
+p130
+aVLexical resources are repositories of machine-readable knowledge that can be used in virtually any Natural Language Processing task
+p131
+aVThe authors also provided results for SB+Dijkstra-WSA, a hybrid system where dwsa was tuned for high precision and, in the case when no alignment target could be found, the algorithm fell back on sb judgments
+p132
+aVWe followed previous work [ 25 , 17 ] and evaluated the alignment performance in terms of four measures precision, recall, F1, and accuracy
+p133
+aVWe compared our similarity-based disambiguation approach against the state of the art on this dataset, i.e.,, the wktwsd system, which is a wt relation disambiguation algorithm based on a series of rules [ 22 ]
+p134
+aVwhere T is the intersection of all concepts with non-zero probability in the two signatures and r i j is the rank of the i t u'\u005cu2062' h entry in the j t u'\u005cu2062' h sorted list
+p135
+aV3 3 For instance, we calculated that more than 80% of the words in WordNet are monosemous, with over 60% of all the synsets containing at least one of them
+p136
+aVFor ow , however, the encoded relations, though relatively small in number, are already disambiguated and, therefore, the ontologization was just performed on the definition u'\u005cu2019' s content words
+p137
+aVBoth words in these relations, however, should be disambiguated according to the given lexicon [ 29 ] , making the task particularly prone to mistakes due to the high number of possible sense pairings
+p138
+aVOn the one hand, these resources are heterogeneous in design, structure and content, but, on the other hand, they often provide complementary knowledge which we would like to see integrated
+p139
+aVWe also note that the graph constructed by Meyer and Gurevych ( 2010 ) had an average node degree of around 1
+p140
+aVThe latter word is monosemous in Wiktionary, hence we directly connect cone 4 n to the only sense of conifer n
+p141
+aVWe leverage a non-parametric measure proposed by Pilehvar et al
+p142
+aVTo improve expressiveness, we follow Niemann and Gurevych ( 2011 ) and further extend d i with all the word forms associated with concept c i and its neighbours, i.e.,, the union of all lexicalizations u'\u005cu2112' G i u'\u005cu2062' ( x ) for all concepts x u'\u005cu2208' { c u'\u005cu2032' u'\u005cu2208' V i c , c u'\u005cu2032' ) u'\u005cu2208' E i } u'\u005cu222a' { c } , where E i is the set of edges in G i
+p143
+aVEach concept c u'\u005cu2208' V is associated with a set of lexicalizations u'\u005cu2112' G u'\u005cu2062' ( c ) = { w 1 , w 2 , u'\u005cu2026' , w n }
+p144
+aVFinally (part (e) of Figure 1 ), we calculate the overall similarity between two concepts as a linear combination of their definitional and structural similarities u'\u005cu0392' u'\u005cu2062' S u'\u005cu2062' i u'\u005cu2062' m d u'\u005cu2062' e u'\u005cu2062' f u'\u005cu2062' ( u'\u005cud835' u'\u005cudcae' u'\u005cud835' u'\u005cudc2f' 1 , u'\u005cud835' u'\u005cudcae' u'\u005cud835' u'\u005cudc2f' 2 ) + ( 1 - u'\u005cu0392' ) u'\u005cu2062' S u'\u005cu2062' i u'\u005cu2062' m s u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' ( u'\u005cud835' u'\u005cudcae' u'\u005cud835' u'\u005cudc2f' 1 , u'\u005cud835' u'\u005cudcae' u'\u005cud835' u'\u005cudc2f' 2
+p145
+aVHence, given that a large portion of edges came from ambiguous words (see Table 1 ), we carried out an experiment to evaluate the accuracy of our disambiguation method
+p146
+aVFor a concept c 1 , alignment candidates in G 2 usually consist of every concept c 2 u'\u005cu2208' V 2 that shares at least one lexicalization with c 1 in the same part of speech tag, i.e.,, u'\u005cu2112' G 1 u'\u005cu2062' ( c 1 ) u'\u005cu2229' u'\u005cu2112' G 2 u'\u005cu2062' ( c 2 ) u'\u005cu2260' u'\u005cu2205' [ 31 , 20 ]
+p147
+aVThe definition contains two content words fruit n and conifer n
+p148
+aVWe attribute this difference to the dictionary nature of the latter two, where sense distinctions are more fine-grained, as opposed to the relatively concrete concepts in the wp encyclopedia
+p149
+aVWe report, in the following subsection, the experiments carried out to assess the accuracy of our ontologization method, together with the statistics of the obtained graphs for wt and ow
+p150
+aVThe main feature worth remarking upon is the consistency in the results across different resource pairs the unsupervised system gains the best recall among the three configurations (with the improvement over sb+dwsa being always statistically significant 4 4 All significance tests are done using z-test at p 0.05 whereas tuning, both on a subset or through cross-validation, consistently leads to the best performance in terms of F1 and accuracy (with the latter being statistically significant with respect to sb+dwsa on wn - wp and wn - wt
+p151
+aVAs our benchmark we tested on the gold standard datasets used in Matuschek and Gurevych ( 2013 ) for three alignment tasks
+p152
+aVA first option is to extract binary relations between pairs of words from raw text
+p153
+aVThe problem is then cast as a disambiguation task whose goal is to identify the intended sense of each word w i u'\u005cu2208' W according to the sense inventory of L if w i is monosemous, i.e
+p154
+aVTable 2 shows the performance of our disambiguation method, together with that of wktwsd , in terms of Precision (P), Recall (R), F1, and accuracy
+p155
+aVThe edges obtained from unambiguous entries are essentially sense disambiguated on both sides whereas those obtained from ambiguous terms are a result of our similarity-based disambiguation
+p156
+aVFor our approach (SemAlign) we show the results of six different runs each corresponding to a different setting
+p157
+aVPrecision is the fraction of correct alignment judgments returned by the system and recall is the fraction of alignment judgments in the gold standard dataset that are correctly returned by the system
+p158
+aVThe resulting graphs, however, were either sparse or had a considerable portion of the nodes left in isolation
+p159
+aV1 , we connect our source concept c to the only sense c w i of w i and set E := E u'\u005cu222a' { { c , c w i } } ; else, w i has multiple senses in L
+p160
+aVAs can be seen, our method proves to be very accurate, surpassing the performance of the wktwsd system in terms of precision, F1, and accuracy
+p161
+aVA recent prominent case is Wikipedia [ 18 , 13 ] which, thanks to its inter-article hyperlink structure, provides a rich backbone for structuring additional information [ 2 , 34 , 23 , 8 ]
+p162
+aVIn wt , both of these are in word surface form and hence had to be disambiguated
+p163
+aVThe first three (middle part of the table) correspond to the results obtained with the three configurations of SemAlign unsupervised, with tuning on subset, and cross-validation (see Section 4.2.1
+p164
+aVThe noun fruit , however, has 5 senses in Wiktionary
+p165
+aVCross-validation , where a 5-fold cross validation is carried out to find the optimal values for the parameters, a technique used in most of the recent alignment methods [ 27 , 21 , 17 ]
+p166
+aVWe therefore fixed the dataset for the English language and reproduced the performance of previous work on the new dataset
+p167
+aVHere, we take an alternative approach which requires disambiguation on the target side only, hence reducing the size of the search space significantly
+p168
+aVWe utilized the DKPro software [ 35 , 9 ] to access the information in the foregoing three resources
+p169
+aVWe show the results for this setting in the bottom part of the table (last three lines
+p170
+aVUnsupervised , where the two parameters are set to their middle values (i.e.,, 0.5), hence, no tuning is performed for either of the parameters
+p171
+aVSurprisingly, despite their vast potential, little research has been conducted on the automatic ontologization of collaboratively-constructed dictionaries like Wiktionary and OmegaWiki
+p172
+aVWordNet-Wikipedia ( wn - wp ), WordNet-Wiktionary ( wn - wt ), and WordNet-OmegaWiki ( wn - ow
+p173
+aVWe then transform each of the two signatures u'\u005cud835' u'\u005cudcae' u'\u005cud835' u'\u005cudc2f' i into a new sub-signature u'\u005cud835' u'\u005cudcae' u'\u005cud835' u'\u005cudc2f' i u'\u005cu2032' whose dimension is u'\u005cu2133' the k t u'\u005cu2062' h component of u'\u005cud835' u'\u005cudcae' u'\u005cud835' u'\u005cudc2f' i u'\u005cu2032' corresponds to the weight in u'\u005cud835' u'\u005cudcae' u'\u005cud835' u'\u005cudc2f' i of the only concept of w k in u'\u005cu2110' G i u'\u005cu2062' ( w k
+p174
+aVThe u'\u005cu201c' Human u'\u005cu201d' row corresponds to the inter-rater F1 and accuracy scores, i.e.,, the upperbound performance on this dataset, as calculated by Meyer and Gurevych ( 2010
+p175
+aVTo this end, we took as our benchmark the dataset provided by Meyer and Gurevych ( 2010 ) for evaluating relation disambiguation in wt
+p176
+aVAs an example, consider the 4 t u'\u005cu2062' h sense of the noun cone in Wiktionary (i.e.,, cone 4 n ) which is defined as u'\u005cu201c' The fruit of a conifer u'\u005cu201d'
+p177
+aVThe method penalizes the differences in the higher rankings more than it does for the lower ones
+p178
+aVThis is particularly interesting as the latter system involves tuning of several parameters, whereas SemAlign, in its unsupervised configuration, does not need any training data nor does it involve any tuning
+p179
+aVThese include the Roget u'\u005cu2019' s thesaurus and Longman Dictionary of Contemporary English [ 15 ] , FrameNet [ 16 ] , VerbNet [ 33 ] or domain-specific terminologies such as the Unified Medical Language System [ 4 ]
+p180
+aVThe denominator is a normalization factor to guarantee a maximum value of one
+p181
+aVWe also show the results for this system as sb+dwsa in the table
+p182
+aVMoreover, the unsupervised system proves to be very robust inasmuch as it provides competitive results on all the three datasets, while it surpasses the performance of sb+dwsa on wn - wt
+p183
+aVWe used the ukb 1 1 http://ixa2.si.ehu.es/ukb/ off-the-shelf implementation of ppr
+p184
+aVTuning , where we follow Matuschek and Gurevych ( 2013 ) and tune the parameters on a subset of the dataset comprising 100 items
+p185
+aVIntroducing relational links into a lexicon can be achieved in different ways
+p186
+aVconcept c 1 u'\u005cu2208' V 1 \u005cSTATE C u'\u005cu2190' getCandidates ( c 1 , V 2 ) \u005cFORALL concept c 2 u'\u005cu2208' C \u005cSTATE s u'\u005cu2062' i u'\u005cu2062' m u'\u005cu2190' calculateSimilarity ( H , G 1 , G 2 , c 1 , c 2 , u'\u005cu0392' ) \u005cIF s u'\u005cu2062' i u'\u005cu2062' m u'\u005cu0398' \u005cSTATE A u'\u005cu2190' A u'\u005cu222a' { ( c 1 , c 2 ) } \u005cENDIF \u005cENDFOR
+p187
+aVWe show in Table 4 the performance of the two systems on our three datasets
+p188
+aVWe also report results for accuracy which, in addition to true positives, takes into account true negatives, i.e.,, pairs which are correctly judged as unaligned
+p189
+aVThe dataset contains 394 manually-disambiguated relations
+p190
+aVAs can be seen in the table, SemAlign s u'\u005cu2062' t u'\u005cu2062' r consistently improves over Dijkstra-WSA according to recall, F1 and accuracy with all the differences in recall and accuracy being statistically significant (p 0.05
+p191
+aVBoth systems (i.e.,, SemAlign s u'\u005cu2062' t u'\u005cu2062' r and Dijkstra-WSA) were tuned on 100-item subsets of the corresponding datasets
+p192
+aVFor wp , wt , ow we used the dump versions 20090822 , 20131002 , and 20131115 , respectively
+p193
+aVWe performed experiments with three different configurations
+p194
+aVHaving found the intended sense c ^ w i of w i , we add the edge { c , c ^ w i } to E
+p195
+aVF1 is the harmonic mean of precision and recall
+p196
+aV0 if no edge exists from i to j and 1 / d u'\u005cu2062' e u'\u005cu2062' g u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' e u'\u005cu2062' ( i ) otherwise
+p197
+aVA u'\u005cu2190' u'\u005cu2205'
+p198
+aV2 2 http://wordnet.princeton.edu
+p199
+aV1 u'\u005cu2227' u'\u005cu2110' G 2 u'\u005cu2062' ( w
+p200
+aV{ u'\u005cu2110' G L u'\u005cu2062' ( w i ) }
+p201
+aVA
+p202
+aV1 }
+p203
+a.

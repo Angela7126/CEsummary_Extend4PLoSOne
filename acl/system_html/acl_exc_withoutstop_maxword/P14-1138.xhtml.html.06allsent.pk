@@ -1,0 +1,464 @@
+(lp0
+VThe model proposed by Yang et al
+p1
+aVThe model consists of a lookup layer, a hidden layer, and an output layer, which have weight matrices
+p2
+aVWe evaluated the proposed RNN-based alignment models against two baselines the IBM Model 4 and the FFNN-based model with one hidden layer
+p3
+aVFinally, the output layer receives the output of the hidden layer ( z 1 ) and computes a lexical translation score
+p4
+aVVarious word alignment models have been proposed
+p5
+aVThe output of the hidden layer ( y j ) is copied and fed to the output layer and the next hidden layer
+p6
+aVThe NN-based alignment models are supervised models
+p7
+aVThese models are roughly clustered into two groups generative models, such as those proposed by Brown et al
+p8
+aVNext, the hidden layer receives the output of the lookup layer ( x j ) and that of the previous hidden layer ( y j - 1
+p9
+aVYang et al
+p10
+aVYang et al
+p11
+aVYang et al
+p12
+aV[ 40 ] trained their model from word alignments produced by traditional unsupervised probabilistic models
+p13
+aVThe model finds the Viterbi alignment using the Viterbi algorithm, similar to the classic HMM model
+p14
+aVWe evaluated the alignment performance of the proposed models with two tasks
+p15
+aVIn the lookup layer, each of these words is converted to its word embedding, and then the concatenation of the two embeddings ( x j ) is fed to the hidden layer in the same manner as the FFNN-based model
+p16
+aVFor the weights of a lookup layer L , we preliminarily trained word embeddings for the source and target language from each side of the training data
+p17
+aVThe model consists of a lookup layer, a hidden layer, and an output layer, which have weight matrices L , { H d , R d , B H d } , and { O , B O } , respectively
+p18
+aVThe alignment model based on an FFNN is formed in the same manner as the lexical translation model
+p19
+aVThe RNN-based model can be trained by a supervised approach, similar to the FFNN-based model, where training proceeds based on the ranking loss defined by Eq
+p20
+aV[ 39 ] , and Och and Ney [ 28 ] , and discriminative models, such as those proposed by Taskar et al
+p21
+aVFollowing Yang et al
+p22
+aVFollowing Yang et al
+p23
+aV[ 4 ] , Vogel et al
+p24
+aVTherefore, the proposed model can find alignments by taking advantage of the long alignment history, while the FFNN-based model considers only the last alignment
+p25
+aVWe assume that this property would fit with a word alignment task, and we propose an RNN-based word alignment model
+p26
+aVThe proposed RNN produces a single score that is constructed in the hidden layer by employing the distance-dependent weight matrices
+p27
+aVSpecifically, the lexical translation and alignment probability in Eq
+p28
+aVAs an instance of discriminative models, we describe an FFNN-based word alignment model [ 40 ] , which is our baseline
+p29
+aVThese results indicate that the proposed unsupervised learning and agreement constraint benefit the FFNN-based model, similar to the RNN-based model
+p30
+aVNote that the proposed model also uses nonprobabilistic scores, similar to the FFNN-based model
+p31
+aVThe IBM Models 1 and 2 and the HMM model decompose it into an alignment probability p a and a lexical translation probability p t as
+p32
+aVThe proposed unsupervised learning and agreement constraints can be applied to any NN-based alignment model
+p33
+aVUnder the recurrence, the proposed model compactly encodes the entire history of previous alignments in the hidden layer configuration y i
+p34
+aVOur RNN-based alignment model has a direction, such as other alignment models, i.e.,, from f (source language) to e (target language) and from e to f
+p35
+aVFor example, the HMM model identifies the Viterbi alignment using the Viterbi algorithm
+p36
+aVDyer et al
+p37
+aVDyer et al
+p38
+aVThe proposed method trains two directional models concurrently based on the following objective by incorporating a penalty term that expresses the difference between word embeddings
+p39
+aVFor simplicity, this paper describes the model with 1 hidden layer
+p40
+aVThese models are trained using the expectation-maximization algorithm [ 8 ] from bilingual sentences without word-level alignments (unlabeled training data
+p41
+aVNote that alignments in the FFNN-based model are also governed by first-order Markov dynamics because an alignment score depends on the previous alignment a j - 1
+p42
+aVAsymmetric models are usually trained in each alignment direction
+p43
+aVTherefore, the RNN-based model has less effect on French-English word alignment than Japanese-English word alignment, as indicated in Table 2
+p44
+aVThis indicates that the proposed agreement constraint is effective in training better models in both the supervised and unsupervised approaches
+p45
+aVThe Viterbi alignment is determined using the Viterbi algorithm, similar to the FFNN-based model, where the model is sequentially applied from f 1 to f J 5 5 Strictly speaking, we cannot apply the dynamic programming forward-backward algorithm (i.e.,, the Viterbi algorithm) due to the long alignment history of y i
+p46
+aVFor the FFNN-based model, we set the word embedding length M to 30, the number of units of a hidden layer z 1 to 100, and the window size of contexts to 5
+p47
+aVIn N u'\u005cu2062' T u'\u005cu2062' C u'\u005cu2062' I u'\u005cu2062' R and F u'\u005cu2062' B u'\u005cu2062' I u'\u005cu2062' S , each alignment model was trained from the randomly sampled 100 K data, and then a translation model was trained from all the training data that was word-aligned by the alignment model
+p48
+aVThe proposed constraint penalizes overfitting to a particular direction and enables two directional models to optimize across alignment directions globally
+p49
+aVThis section proposes an RNN-based alignment model, which computes a score for alignments a 1 J using an RNN
+p50
+aVSpecifically, the computations in the hidden and output layer are as follows
+p51
+aVWhen computing the score of the alignment between f j and e a j , the two words are input to the lookup layer
+p52
+aVThis indicates that our unsupervised learning benefits our models because the supervised models are adversely affected by errors in the automatically generated training data
+p53
+aVAs described above, the RNN-based model has a hidden layer with recurrent connections
+p54
+aVSpecifically, our training encourages word embeddings to be consistent across alignment directions by introducing a penalty term that expresses the difference between embedding of words into an objective function
+p55
+aVwhere u'\u005cu0398' denotes the weights of layers in the model, T is a set of training data, u'\u005cud835' u'\u005cudc82' + is the gold standard alignment, u'\u005cud835' u'\u005cudc82' - is the incorrect alignment with the highest score under u'\u005cu0398' , and s u'\u005cu0398' denotes the score defined by Eq
+p56
+aVThese results demonstrate that capturing the long alignment history in the RNN-based model improves the alignment performance
+p57
+aVThe hidden layer then computes and outputs the nonlinear relations between them
+p58
+aVThe concatenation ( z 0 ) is then fed to the hidden layer to capture nonlinear relations
+p59
+aVIn French-English word alignment, the most valuable clues are located locally because English and French have similar word orders and their alignment has more one-to-one mappings than Japanese-English word alignment (Figure 3
+p60
+aVIn addition, an l u'\u005cu2062' 2 regularization term is added to the objective to prevent the model from overfitting the training data
+p61
+aVThe three models differ in their definition of alignment probability
+p62
+aVGiven a specific model, the best alignment (Viterbi alignment) of the sentence pair ( f 1 J , e 1 I ) can be found as
+p63
+aVNote that the FFNN-based model consists of two components one is for lexical translation and the other is for alignment
+p64
+aVFor the RNN-based models, we set M to 30 and the number of units of each recurrent hidden layer y j to 100
+p65
+aVThe model receives a source and target word with their contexts as inputs, which are words in a predefined window (the window size is three in Figure 1
+p66
+aVThe results illustrate that our RNN-based model outperforms the FFNN-based model (up to +0.0792 F1-measure) and the IBM Model 4 (up to +0.0703 F1-measure) for the word alignment tasks
+p67
+aV[ 9 ] presented an unsupervised alignment model based on contrastive estimation (CE) [ 32 ]
+p68
+aVBoth of the FFNN-based and RNN-based models are based on the HMM alignment model, and they are therefore asymmetric, i.e.,, they can represent one-to-many relations from the target side
+p69
+aVThe IBM Model 1 with l 0 prior is convenient for reducing translation candidates because it generates more sparse alignments than the standard IBM Model 1
+p70
+aVFor the translation tasks, our model achieves up to 0.74% gain in BLEU as compared to the FFNN-based model, which matches the translation qualities of the IBM Model 4
+p71
+aVAutomatic word alignment is an important task for statistical machine translation
+p72
+aVThe IBM Model 4 was trained by previously presented model sequence schemes [ 28 ]
+p73
+aVFinally, the output layer computes the score of a j ( t R u'\u005cu2062' N u'\u005cu2062' N ( a j a 1 j - 1 , f j , e a j ) ) from the output of the hidden layer ( y j
+p74
+aVFirst, the lookup layer converts each input word into its word embedding by looking up its corresponding column in the embedding matrix ( L ), and then concatenates them
+p75
+aVTo overcome this drawback, we propose an unsupervised method using NCE, which learns from unlabeled training data
+p76
+aVThus, the Viterbi alignment is computed approximately using heuristic beam search
+p77
+aVThe most classical approaches are the probabilistic IBM models 1-5 [ 4 ] and the HMM model [ 39 ]
+p78
+aVTo solve this problem, we apply noise-contrastive estimation (NCE) [ 15 , 26 ] for unsupervised training of our RNN-based model without gold standard alignments or pseudo-oracle alignments
+p79
+aVOur model can maintain and arbitrarily integrate an alignment history, e.g.,, bilingual context, which is longer than the FFNN-based model
+p80
+aVwhere t a and t l u'\u005cu2062' e u'\u005cu2062' x are an alignment score and a lexical translation score, respectively, s N u'\u005cu2062' N is a score of alignments a 1 J , and u'\u005cu201c' c u'\u005cu2062' ( a word u'\u005cu2062' w ) u'\u005cu201d' denotes a context of word w
+p81
+aV[ 40 ] adapted the Context-Dependent Deep Neural Network for HMM (CD-DNN-HMM) [ 7 ] , a type of feed-forward neural network (FFNN)-based model, to the HMM alignment model and achieved state-of-the-art performance
+p82
+aV[ 40 ] have adapted a type of FFNN, i.e.,, CD-DNN-HMM [ 7 ] , to the HMM alignment model
+p83
+aVTable 5 shows the alignment performance of the FFNN-based models trained by our supervised/unsupervised approaches (s/u) with and without our agreement constraints
+p84
+aVThe motivation for this stems from the fact that model and generalization errors by the two models differ, and the models must complement each other
+p85
+aVEach a j is a hidden variable indicating that the source word f j is aligned to the target word e a j
+p86
+aVThe number of units of each layer of the FFNN-based and RNN-based models and M were set through preliminary experiments
+p87
+aVIn training all the models except I u'\u005cu2062' B u'\u005cu2062' M u'\u005cu2062' 4 , the weights of each layer were initialized first
+p88
+aVHowever, this approach requires gold standard alignments
+p89
+aVTo employ more discriminative negative samples, our implementation samples each word of u'\u005cud835' u'\u005cudc86' - from a set of the target words that co-occur with f i u'\u005cu2208' u'\u005cud835' u'\u005cudc87' + whose probability is above a threshold C under the IBM Model 1 incorporating l 0 prior [ 37 ]
+p90
+aV[ 9 ] regarded all possible alignments of the bilingual sentences, which are given as training data ( T ), and those of the full translation search space ( u'\u005cu03a9' ) as the observed data and its neighborhood, respectively
+p91
+aVFigure 1 shows the network structure with one hidden layer for computing a lexical translation probability t l u'\u005cu2062' e u'\u005cu2062' x ( f j , e a j c ( f j ) , c ( e a j )
+p92
+aVBased on this motivation, our directional models are also simultaneously trained
+p93
+aVWe evaluated the word alignments produced by first applying each model in both directions and then combining the alignments using the u'\u005cu201c' grow-diag-final-and u'\u005cu201d' heuristic [ 18 ]
+p94
+aVThis constraint prevents each model from overfitting to a particular direction and leads to global optimization across alignment directions
+p95
+aVNote that R u'\u005cu2062' N u'\u005cu2062' N s + c u'\u005cu2062' ( R ) cannot be trained from the 40 K data because the 40 K data does not have gold standard word alignments
+p96
+aVTo demonstrate the effectiveness of the proposed learning methods, we evaluated four types of RNN-based models
+p97
+aVAn RNN has a hidden layer with recurrent connections that propagates its own previous signals
+p98
+aVThe constraint concretely enforces agreement in word embeddings of both directions
+p99
+aVTable 4 demonstrates that the proposed RNN-based model outperforms I u'\u005cu2062' B u'\u005cu2062' M u'\u005cu2062' 4 trained from the unlabeled 40 K data by employing either the 1 K labeled data or the 9 K unlabeled data, which is less than 25% of the training data for I u'\u005cu2062' B u'\u005cu2062' M u'\u005cu2062' 4
+p100
+aVwhere u'\u005cu0398' F u'\u005cu2062' E (or u'\u005cu0398' E u'\u005cu2062' F ) denotes the weights of layers in a source-to-target (or target-to-source) alignment model, u'\u005cu0398' L denotes weights of a lookup layer, i.e.,, word embeddings, and u'\u005cu0391' is a parameter that controls the strength of the agreement constraint u'\u005cu2225' u'\u005cu0398' u'\u005cu2225' indicates the norm of u'\u005cu0398'
+p101
+aVThis paper presents evaluations of Japanese-English and French-English word alignment tasks and Japanese-to-English and Chinese-to-English translation tasks
+p102
+aVIn addition, the IBM models 3-5 are extensions of these, which consider the fertility and distortion of each translated word
+p103
+aVHowever, it has been demonstrated that encouraging directional models to agree improves alignment performance [ 22 , 21 , 14 , 11 ]
+p104
+aVWord embeddings are dense, low dimensional, and real-valued vectors that can capture syntactic and semantic properties of the words [ 2 ]
+p105
+aVIn addition, Table 3 shows that these proposed models are comparable to I u'\u005cu2062' B u'\u005cu2062' M u'\u005cu2062' 4 a u'\u005cu2062' l u'\u005cu2062' l in N u'\u005cu2062' T u'\u005cu2062' C u'\u005cu2062' I u'\u005cu2062' R and F u'\u005cu2062' B u'\u005cu2062' I u'\u005cu2062' S even though the proposed models are trained from only a small part of the training data
+p106
+aVRecurrent neural network (RNN)-based models have recently demonstrated state-of-the-art performance that outperformed FFNN-based models for various tasks [ 24 , 25 , 1 , 16 , 34 ]
+p107
+aV[ 40 ] , the FFNN-based model was trained by the supervised approach described in Section 2.2 ( F u'\u005cu2062' F u'\u005cu2062' N u'\u005cu2062' N s
+p108
+aVGradients are computed by the back-propagation through time algorithm [ 31 ] , which unfolds the network in time ( j ) and computes gradients over time steps
+p109
+aVFor example, the HMM model uses an alignment probability with a first-order Markov property p a ( a j a j - a j - 1
+p110
+aVEach model is optimized by minimizing the following ranking loss with a margin using stochastic gradient descent (SGD) 4 4 In our experiments, we used a mini-batch SGD instead of a plain SGD where gradients are computed by the back-propagation algorithm [ 31 ]
+p111
+aVHowever, with this approach, errors induced by probabilistic models are learned as correct alignments; thus, generalization capabilities are limited
+p112
+aVTable 2 shows the alignment performance by the F1-measure
+p113
+aVTo reduce computation, we employ NCE, which uses randomly sampled sentences from all target language sentences in u'\u005cu03a9' as u'\u005cud835' u'\u005cudc86' - , and calculate the expected values by a beam search with beam width W to truncate alignments with low scores
+p114
+aVNCE artificially generates bilingual sentences through samplings as pseudo-negative samples, and then trains the model such that the scores of the original bilingual sentences are higher than those of the sampled bilingual sentences
+p115
+aV4 as computed by the model under u'\u005cu0398'
+p116
+aVNote that the model uses nonprobabilistic scores rather than probabilities because normalization over all words is computationally expensive
+p117
+aVNote that the development data was not used in the alignment tasks, i.e.,, B u'\u005cu2062' T u'\u005cu2062' E u'\u005cu2062' C and H u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' d u'\u005cu2062' s , because the hyperparameters of the alignment models were set by preliminary small-scale experiments
+p118
+aVHowever, the FFNN-based model assumes a first-order Markov dependence for alignments
+p119
+aVThe B u'\u005cu2062' T u'\u005cu2062' E u'\u005cu2062' C data is the first 9,960 sentence pairs in the training data for I u'\u005cu2062' W u'\u005cu2062' S u'\u005cu2062' L u'\u005cu2062' T , which were annotated with word alignment [ 12 ]
+p120
+aVIn Algorithm 1, line 2 randomly samples D bilingual sentences ( u'\u005cud835' u'\u005cudc1f' + , u'\u005cud835' u'\u005cudc1e' + ) D from training data T
+p121
+aVThe computations in the hidden and output layer are as follows 2 2 Consecutive l hidden layers can be used z l = f u'\u005cu2062' ( H l × z l - 1 + B H l
+p122
+aVIn addition, for a detailed comparison, we evaluated the SMT system where the IBM Model 4 was trained from all the training data ( I u'\u005cu2062' B u'\u005cu2062' M u'\u005cu2062' 4 a u'\u005cu2062' l u'\u005cu2062' l
+p123
+aVFigure 3 shows word alignment examples from F u'\u005cu2062' F u'\u005cu2062' N u'\u005cu2062' N s and R u'\u005cu2062' N u'\u005cu2062' N s , where solid squares indicate the gold standard alignments
+p124
+aVUsually, a u'\u005cu201c' null u'\u005cu201d' word e 0 is added to the target language sentence and a 1 J may contain a j = 0 , which indicates that f j is not aligned to any target word
+p125
+aVDuring training, we optimize the weight matrices of each layer (i.e.,, L , H d , R d , B H d , O , and B O ) following a given objective using a mini-batch SGD with batch size D , which converges faster than a plain SGD ( D = 1
+p126
+aVThrough the recurrent architecture, RNN-based models have the inherent property of modeling long-span dependencies, e.g.,, long contexts, in input data
+p127
+aVAn FFNN learns a hierarchy of nonlinear features that can automatically capture complex statistical patterns in input data
+p128
+aVTable 4 shows the alignment performance on B u'\u005cu2062' T u'\u005cu2062' E u'\u005cu2062' C with various training data sizes, i.e.,, training data for I u'\u005cu2062' W u'\u005cu2062' S u'\u005cu2062' L u'\u005cu2062' T (40 K), training data for B u'\u005cu2062' T u'\u005cu2062' E u'\u005cu2062' C (9 K), and the randomly sampled 1 K data from the B u'\u005cu2062' T u'\u005cu2062' E u'\u005cu2062' C training data
+p129
+aVGEN is a subset of all possible word alignments u'\u005cu03a6' , which is generated by beam search
+p130
+aVTable 3 also shows that better word alignment does not always result in better translation, which has been discussed previously [ 40 ]
+p131
+aVThe RNN-based model is illustrated in Figure 2
+p132
+aVFigure 3 (a) shows that R u'\u005cu2062' R u'\u005cu2062' N s adequately identifies complicated alignments with long distances compared to F u'\u005cu2062' F u'\u005cu2062' N u'\u005cu2062' N s (e.g.,, jaggy alignments of u'\u005cu201c' have you been learning u'\u005cu201d' in Fig 3 (a)) because R u'\u005cu2062' N u'\u005cu2062' N s captures alignment paths based on long alignment history, which can be viewed as phrase-level alignments, while F u'\u005cu2062' F u'\u005cu2062' N u'\u005cu2062' N s employs only the last alignment
+p133
+aVEach matrix in the hidden layer ( H d , R d , and B H d ) depends on alignment, where d denotes the jump distance from a j - 1 to a j d = a j - a j - 1
+p134
+aVNote that the weight matrices used in this computation are embodied by the specific jump distance d
+p135
+aVOur unsupervised learning procedure is summarized in Algorithm 1
+p136
+aVLet V f (or V e ) be a set of source words (or target words) and M be a predetermined embedding length
+p137
+aVConsequently, the SMT system using R u'\u005cu2062' N u'\u005cu2062' N u + c trained from a small part of training data can achieve comparable performance to that using I u'\u005cu2062' B u'\u005cu2062' M u'\u005cu2062' 4 trained from all training data, which is shown in Table 3
+p138
+aVwhere t R u'\u005cu2062' N u'\u005cu2062' N is the score of an alignment a j
+p139
+aVWe discuss the difference of the RNN-based model u'\u005cu2019' s effectiveness between language pairs in Section 6.1
+p140
+aVIt has been proven that the limitation may be overcome by encouraging two directional models to agree by training them concurrently [ 22 , 21 , 14 , 11 ]
+p141
+aVIn H u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' d u'\u005cu2062' s , all models were trained from randomly sampled 100 K data 10 10 Due to high computational cost, we did not use all the training data
+p142
+aVIn the training, long sentences with over 40 words were filtered out
+p143
+aV[ 36 ] , Moore [ 27 ] , and Blunsom and Cohn [ 3 ]
+p144
+aVVarious studies have extended those models
+p145
+aVwhere u'\u005cu03a6' is a set of all possible alignments given ( u'\u005cud835' u'\u005cudc87' , u'\u005cud835' u'\u005cudc86' ) , E [ s u'\u005cu0398' ] u'\u005cu03a6' is the expected value of the scores s u'\u005cu0398' on u'\u005cu03a6' , u'\u005cud835' u'\u005cudc86' + denotes a target language sentence in the training data, and u'\u005cud835' u'\u005cudc86' - denotes a pseudo-target language sentence
+p146
+aVThese results indicate that our proposals contribute to improving translation performance 12 12 We also confirmed the effectiveness of our models on the NIST05 and NTCIR-10 evaluation data
+p147
+aVLines 4-1 and 4-2 update the weights in each layer following a given objective (Sections 4.1 and 4.2
+p148
+aVWe then set the word embeddings to L to avoid falling into local minima
+p149
+aVJapanese-English word alignment with the Basic Travel Expression Corpus ( B u'\u005cu2062' T u'\u005cu2062' E u'\u005cu2062' C ) [ 35 ] and French-English word alignment with the Hansard dataset ( H u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' d u'\u005cu2062' s ) from the 2003 NAACL shared task [ 23 ]
+p150
+aVIn addition, we evaluated the end-to-end translation performance of three tasks a Chinese-to-English translation task with the FBIS corpus ( F u'\u005cu2062' B u'\u005cu2062' I u'\u005cu2062' S ), the IWSLT 2007 Japanese-to-English translation task ( I u'\u005cu2062' W u'\u005cu2062' S u'\u005cu2062' L u'\u005cu2062' T ) [ 10 ] , and the NTCIR-9 Japanese-to-English patent translation task ( N u'\u005cu2062' T u'\u005cu2062' C u'\u005cu2062' I u'\u005cu2062' R ) [ 13 ] 6 6 We did not evaluate the translation performance on the Hansards data because the development data is very small and performance is unreliable
+p151
+aVLines 3-1 and 3-2 generate N pseudo-negative samples for each u'\u005cud835' u'\u005cudc1f' + and u'\u005cud835' u'\u005cudc1e' + based on the translation candidates of u'\u005cud835' u'\u005cudc1f' + and u'\u005cud835' u'\u005cudc1e' + found by the IBM Model 1 with l 0 prior, I u'\u005cu2062' B u'\u005cu2062' M u'\u005cu2062' 1 (Section 4.1
+p152
+aVwhere u'\u005cud835' u'\u005cudc86' + is a target language sentence aligned to u'\u005cud835' u'\u005cudc87' + in the training data, i.e.,, ( u'\u005cud835' u'\u005cudc87' + , u'\u005cud835' u'\u005cudc86' + ) u'\u005cu2208' T , u'\u005cud835' u'\u005cudc86' - is a randomly sampled pseudo-target language sentence with length u'\u005cud835' u'\u005cudc86' + and N denotes the number of pseudo-target language sentences per source sentence u'\u005cud835' u'\u005cudc87' +
+p153
+aVWe split these pairs into the first 9,000 for training data and the remaining 960 as test data
+p154
+aVHereafter, M u'\u005cu2062' O u'\u005cu2062' D u'\u005cu2062' E u'\u005cu2062' L u'\u005cu2062' ( R ) and M u'\u005cu2062' O u'\u005cu2062' D u'\u005cu2062' E u'\u005cu2062' L u'\u005cu2062' ( I ) denote the M u'\u005cu2062' O u'\u005cu2062' D u'\u005cu2062' E u'\u005cu2062' L trained from gold standard alignments and word alignments found by the IBM Model 4, respectively
+p155
+aVUsing the SRILM Toolkits [ 33 ] with modified Kneser-Ney smoothing, we trained a 5-gram language model on the English side of each training data for I u'\u005cu2062' W u'\u005cu2062' S u'\u005cu2062' L u'\u005cu2062' T and N u'\u005cu2062' T u'\u005cu2062' C u'\u005cu2062' I u'\u005cu2062' R , and a 5-gram language model on the Xinhua portion of the English Gigaword corpus for F u'\u005cu2062' B u'\u005cu2062' I u'\u005cu2062' S
+p156
+aVThe prediction of the j -th alignment a j depends on all preceding alignments a 1 j - 1
+p157
+aVCE seeks to discriminate observed data from its neighborhood, which can be viewed as pseudo-negative samples
+p158
+aVEquations 13 and 14 can be applied to both supervised and unsupervised approaches
+p159
+aVRecently, FFNNs have been applied successfully to several tasks, such as speech recognition [ 7 ] , statistical machine translation [ 20 , 38 ] , and other popular natural language processing tasks [ 6 , 5 ]
+p160
+aV1 5 u'\u005cu2062' H 5 u'\u005cu2062' 3 5 u'\u005cu2062' 4 5 , i.e.,, five iterations of the IBM Model 1 followed by five iterations of the HMM Model, etc., which is the default setting for GIZA++ ( I u'\u005cu2062' B u'\u005cu2062' M u'\u005cu2062' 4
+p161
+aVThe probability of generating the sentence f 1 J from e 1 I is defined as
+p162
+aVThe significance test on word alignment performance was performed by the sign test with a 5% significance level u'\u005cu201c' + u'\u005cu201d' in Table 2 indicates that the comparisons are significant over corresponding baselines, I u'\u005cu2062' B u'\u005cu2062' M u'\u005cu2062' 4 and F u'\u005cu2062' F u'\u005cu2062' N u'\u005cu2062' N s u'\u005cu2062' ( R / I )
+p163
+aVThe first expectation term is for the observed data, and the second is for the neighborhood
+p164
+aVInspired by their work, we introduce an agreement constraint to our learning
+p165
+aVIn a simple implementation, each u'\u005cud835' u'\u005cudc86' - is generated by repeating a random sampling from a set of target words ( V e u'\u005cud835' u'\u005cudc86' + times and lining them up sequentially
+p166
+aVUnfortunately, it is usually difficult to prepare word-by-word aligned bilingual data
+p167
+aVThis is especially true when the quality of training data, i.e.,, the performance of I u'\u005cu2062' B u'\u005cu2062' M u'\u005cu2062' 4 , is low
+p168
+aVAll the data in B u'\u005cu2062' T u'\u005cu2062' E u'\u005cu2062' C is word-aligned, and the training data in H u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' d u'\u005cu2062' s is unlabeled data
+p169
+aV2 are computed using FFNNs as
+p170
+aVGiven a source language sentence f 1 J = f 1 , u'\u005cu2026' , f J and a target language sentence e 1 I = e 1 , u'\u005cu2026' , e I , f 1 J is generated by e 1 I via the alignment a 1 J = a 1 , u'\u005cu2026' , a J
+p171
+aVEquations 7 and 12 are substituted into l u'\u005cu2062' o u'\u005cu2062' s u'\u005cu2062' s u'\u005cu2062' ( u'\u005cu0398' ) in supervised and unsupervised learning, respectively
+p172
+aVNext, each weight was optimized using the mini-batch SGD, where batch size D was 100, learning rate was 0.01, and an l 2 regularization parameter was 0.1
+p173
+aVW , N and C in the unsupervised learning were 100, 50, and 0.001, respectively, and u'\u005cu0391' for the agreement constraint was 0.1
+p174
+aVSpecifically, the hidden layer has weight matrices { H u'\u005cu2264' - 8 , H - 7 , u'\u005cu22ef' , H 7 , H u'\u005cu2265' 8 , R u'\u005cu2264' - 8 , R - 7 , u'\u005cu22ef' , R 7 , R u'\u005cu2265' 8 , B H u'\u005cu2264' - 8 , B H - 7 , u'\u005cu22ef' , B H 7 , B H u'\u005cu2265' 8 } and computes y j using the corresponding matrices of the jump distance d
+p175
+aVIn Table 2 , R u'\u005cu2062' N u'\u005cu2062' N u + c , which includes all our proposals, i.e.,, the RNN-based model, the unsupervised learning, and the agreement constraint, achieves the best performance for both B u'\u005cu2062' T u'\u005cu2062' E u'\u005cu2062' C and H u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' d u'\u005cu2062' s
+p176
+aVWe introduce this idea to a ranking loss with margin as
+p177
+aVThe performance of these models is comparable in H u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' d u'\u005cu2062' s
+p178
+aVThe performance of these models is comparable with H u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' d u'\u005cu2062' s
+p179
+aVV e matrix 1 1 We add a special token u'\u005cu27e8' u u'\u005cu2062' n u'\u005cu2062' k u'\u005cu27e9' to handle unknown words and u'\u005cu27e8' n u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' l u'\u005cu27e9' to handle null alignments to V f and V e
+p180
+aVIn F u'\u005cu2062' B u'\u005cu2062' I u'\u005cu2062' S , we used the NIST02 evaluation data as the development data, and the NIST03 and 04 evaluation data as test data ( N u'\u005cu2062' I u'\u005cu2062' S u'\u005cu2062' T u'\u005cu2062' 03 and N u'\u005cu2062' I u'\u005cu2062' S u'\u005cu2062' T u'\u005cu2062' 04
+p181
+aVIn our experiments, we set W to 100
+p182
+aVThe training stopped after 50 epochs
+p183
+aV7 (Section 2.2
+p184
+aVIn the translation tasks, we used the Moses phrase-based SMT systems [ 17 ]
+p185
+aVTable 3 shows the translation performance by the case sensitive BLEU4 metric 11 11 We used mteval-v13a.pl as the evaluation tool ( http://www.itl.nist.gov/iad/mig/tests/mt/2009/
+p186
+aVThe SMT weighting parameters were tuned by MERT [ 29 ] in the development data
+p187
+aVThe significance test on translation performance was performed by the bootstrap method [ 19 ] with a 5% significance level u'\u005cu201c' * u'\u005cu201d' in Table 3 indicates that the comparisons are significant over both baselines, i.e.,, I u'\u005cu2062' B u'\u005cu2062' M u'\u005cu2062' 4 and F u'\u005cu2062' F u'\u005cu2062' N u'\u005cu2062' N s u'\u005cu2062' ( I )
+p188
+aVFigure 3 (b) shows that both R u'\u005cu2062' R u'\u005cu2062' N s and F u'\u005cu2062' F u'\u005cu2062' N u'\u005cu2062' N s work for such simpler alignments
+p189
+aVIn addition, the above criterion is converted to an online fashion as
+p190
+aVWe mapped all words that occurred less than five times to the special token u'\u005cu27e8' u u'\u005cu2062' n u'\u005cu2062' k u'\u005cu27e9'
+p191
+aVIn Table 5 , u'\u005cu201c' +c u'\u005cu201d' denotes that the agreement constraint was used, and u'\u005cu201c' + u'\u005cu201d' indicates that the comparison with its corresponding baseline, i.e.,, F u'\u005cu2062' F u'\u005cu2062' N u'\u005cu2062' N s (I/R), is significant in the sign test with a 5% significance level
+p192
+aVNote that u'\u005cu0398' F u'\u005cu2062' E t and u'\u005cu0398' E u'\u005cu2062' F t are concurrently updated in each iteration, and u'\u005cu0398' E u'\u005cu2062' F t (or u'\u005cu0398' F u'\u005cu2062' E t ) is employed to enforce agreement between word embeddings when updating u'\u005cu0398' F u'\u005cu2062' E t (or u'\u005cu0398' E u'\u005cu2062' F t
+p193
+aVHowever, the computation for u'\u005cu03a9' is prohibitively expensive
+p194
+aVR u'\u005cu2062' N u'\u005cu2062' N s , R u'\u005cu2062' N u'\u005cu2062' N s + c , R u'\u005cu2062' N u'\u005cu2062' N u , and R u'\u005cu2062' N u'\u005cu2062' N u + c , where u'\u005cu201c' s / u u'\u005cu201d' denotes a supervised/unsupervised model and u'\u005cu201c' + c u'\u005cu201d' indicates that the agreement constraint was used
+p195
+aVThe other parameters were set as follows
+p196
+aVTable 1 shows the sizes of our experimental datasets
+p197
+aVNote that y j - 1 y j f u'\u005cu2062' ( x ) is an activation function, which is a hard hyperbolic tangent, i.e.,, htanh ( x ) , in this study
+p198
+aVOther weights were randomly initialized to [ - 0.1 , 0.1 ]
+p199
+aV× 1 , 1 × y j and 1 × 1 matrices, respectively
+p200
+aV× 1 , 1 × z 1 and 1 × 1 matrices, respectively, and f u'\u005cu2062' ( x ) is an activation function
+p201
+aVNote that u'\u005cud835' u'\u005cudc86' + u'\u005cud835' u'\u005cudc86' -
+p202
+aV2-norm is used in our experiments
+p203
+aVTable 3 presents the average BLEU of three different MERT runs
+p204
+aV[ 40 ] is no exception
+p205
+aVScaling up to larger datasets will be addressed in future work
+p206
+aVTable 2 also shows that R u'\u005cu2062' N u'\u005cu2062' N s + c u'\u005cu2062' ( R / I ) and R u'\u005cu2062' N u'\u005cu2062' N u + c achieve significantly better performance than R u'\u005cu2062' N u'\u005cu2062' N s u'\u005cu2062' ( R / I ) and R u'\u005cu2062' N u'\u005cu2062' N u in both tasks, respectively
+p207
+aVAll Japanese and Chinese sentences were segmented by ChaSen 8 8 http://chasen-legacy.sourceforge.jp/ and the Stanford Chinese segmenter 9 9 http://nlp.stanford.edu/software/segmenter.shtml , respectively
+p208
+aVThe differences from the baselines are statistically significant
+p209
+aVIn our experiments, we merge distances that are greater than 8 and less than -8 into the special u'\u005cu201c' u'\u005cu2265' 8 u'\u005cu201d' and u'\u005cu201c' u'\u005cu2264' -8 u'\u005cu201d' distances, respectively
+p210
+aVTable 2 shows that R u'\u005cu2062' N u'\u005cu2062' N s u'\u005cu2062' ( R / I ) outperforms F u'\u005cu2062' F u'\u005cu2062' N u'\u005cu2062' N s u'\u005cu2062' ( R / I ) , which is statistically significant in B u'\u005cu2062' T u'\u005cu2062' E u'\u005cu2062' C
+p211
+aVFor the pretraining, we used the RNNLM Toolkit 7 7 http://www.fit.vutbr.cz/~imikolov/rnnlm/ [ 24 ] with the default options
+p212
+aV[ 40 ] , a u'\u005cu201c' hard u'\u005cu201d' version of the hyperbolic tangent, htanh ( x ) 3 3 htanh ( x ) = - 1 for x - 1 , htanh ( x ) = 1 for x 1 , and htanh ( x ) = x for others is used as f u'\u005cu2062' ( x ) in this study
+p213
+aVWe thank the anonymous reviewers for their helpful suggestions and valuable comments on the first version of this paper
+p214
+aVTable 5 shows that F u'\u005cu2062' F u'\u005cu2062' N u'\u005cu2062' N s + c (R/I) and F u'\u005cu2062' F u'\u005cu2062' N u'\u005cu2062' N u + c achieve significantly better performance than F u'\u005cu2062' F u'\u005cu2062' N u'\u005cu2062' N s (R/I) and F u'\u005cu2062' F u'\u005cu2062' N u'\u005cu2062' N u , respectively, in both B u'\u005cu2062' T u'\u005cu2062' E u'\u005cu2062' C and H u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' d u'\u005cu2062' s
+p215
+aVHowever, R u'\u005cu2062' N u'\u005cu2062' N u and R u'\u005cu2062' N u'\u005cu2062' N u + c outperform F u'\u005cu2062' F u'\u005cu2062' N u'\u005cu2062' N s u'\u005cu2062' ( I ) and I u'\u005cu2062' B u'\u005cu2062' M u'\u005cu2062' 4 in all tasks
+p216
+aVIn addition, F u'\u005cu2062' F u'\u005cu2062' N u'\u005cu2062' N u and F u'\u005cu2062' F u'\u005cu2062' N u'\u005cu2062' N u + c significantly outperform F u'\u005cu2062' F u'\u005cu2062' N u'\u005cu2062' N s (I) and F u'\u005cu2062' F u'\u005cu2062' N u'\u005cu2062' N s + c (I), respectively, in B u'\u005cu2062' T u'\u005cu2062' E u'\u005cu2062' C
+p217
+aVIn B u'\u005cu2062' T u'\u005cu2062' E u'\u005cu2062' C , R u'\u005cu2062' N u'\u005cu2062' N u and R u'\u005cu2062' N u'\u005cu2062' N u + c significantly outperform R u'\u005cu2062' N u'\u005cu2062' N s u'\u005cu2062' ( I ) and R u'\u005cu2062' N u'\u005cu2062' N s + c u'\u005cu2062' ( I ) , respectively
+p218
+aV[ 30 ]
+p219
+aVwhere H , B H , O , and B O are z 1
+p220
+aVs N u'\u005cu2062' N ( a 1 J f 1 J , e 1 I ) = u'\u005cu220f' j = 1 J t R u'\u005cu2062' N u'\u005cu2062' N ( a j a 1 j - 1 , f j , e a j )
+p221
+aV+
+p222
+aVV f
+p223
+aVL is a M ×
+p224
+aV× x j y j
+p225
+aV× y j - 1 y j
+p226
+aVp ( f 1 J , a 1 J e 1 I ) = u'\u005cu220f' j = 1 J p a ( a j a j - 1 , j ) p t ( f j e a j )
+p227
+aVHence z 0 is 300 ( 30 × 5 × 2
+p228
+aVThus x j is 60 ( 30 × 2
+p229
+aVwhere H d , R d , B H d , O , and B O are y j
+p230
+aV× z 0 z 1
+p231
+a.

@@ -1,0 +1,522 @@
+(lp0
+VReferring to Figure 1 , whose timeline is shown in Figure 2 , we see that the time span with the most number of events is when the latest cyclone made landfall
+p1
+aVThen the temporal coverage of a sentence is defined as the number of time spans between the earliest time span T u'\u005cu2062' S a and the latest time span T u'\u005cu2062' S c
+p2
+aVAssigning higher scores for sentences which contain events in this time span will help us to select more relevant sentences if we want a summary about the cyclone
+p3
+aVThe timelines built in the earlier temporal processing can be incorporated into this pipeline by deriving a set of features used to score sentences in Sentence Scoring , and as input to the MMR algorithm when computing similarity in Sentence Re-ordering
+p4
+aVAs a simplifying assumption, events are laid out on the timeline based on the starting time of their time span
+p5
+aVThe importance of a time span T u'\u005cu2062' S i is computed by normalizing the number of events in T u'\u005cu2062' S i against the number of events in T u'\u005cu2062' S L
+p6
+aVIn this case time span importance is able to correctly guide summary generation by favoring time spans containing events related to the actual toppling
+p7
+aVSWING is a supervised, extractive summarization system which ranks sentences based on scores computed using a set of features in the Sentence Scoring phase
+p8
+aVTime Span Importance
+p9
+aVThus, temporal information does assist in identifying which sentences are more relevant to the final summary
+p10
+aVTwo events are said to be in the same time span if one happens within the time period the other happens in
+p11
+aVTCD parallels this idea with the use of temporal information, i.e., if two sentences are of the same temporal coverage, then the one with more events should carry more useful facts
+p12
+aVFormally, if a sentence s contains events u'\u005cud835' u'\u005cudd3c' s = { e 1 , u'\u005cu2026' , e n } , where each event is associated with a time span T u'\u005cu2062' S i , then T u'\u005cu2062' C u'\u005cu2062' D is computed using
+p13
+aVThis is achieved with 1) three novel features derived from timelines to help measure the saliency of sentences, as well as 2) TimeMMR , a modification to the traditional Maximal Marginal Relevance (MMR) [ 3 ]
+p14
+aVBy doing so, we are able to make better use of the available temporal information, taking into account all known events and the time in which they occur
+p15
+aVIn this work we construct timelines (as a representation of temporal information) automatically and incorporate them into a state-of-the-art multi-document summarization system
+p16
+aVContextual Time Span Importance
+p17
+aVContextual Time Span Importance (CTSI
+p18
+aVSince the focus of this paper is on multi-document summarization, we employ only the three generic features, i.e.,, 1) sentence position, 2) sentence length, and 3) interpolated n-gram document frequency in our experiments below
+p19
+aVAfter laying out these events onto a timeline by making use of these timestamps, the number of events that happen within the same day is used to influence sentence scoring
+p20
+aVThe constraint on the number of sentences that can be included in a summary requires us to select compact sentences which contain as many relevant facts as possible
+p21
+aVThus, we propose further penalizing the score of s if it contains events that happen in similar time spans as those contained in sentences within S
+p22
+aVTraditional lexical measures may attempt to achieve this by computing the ratio of keyphrases to the number of words in a sentence [ 11 ]
+p23
+aVThe intuition for this is that for longer timelines (which contain more events), possible errors are spread over the entire timeline, and do not overpower any useful signal that can be obtained from the timeline features outlined earlier
+p24
+aVwhere S u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' ( s ) is the score of s , S is the set of sentences already selected to be in the summary from previous iterations, and R u'\u005cu2062' 2 is the predicted ROUGE-2 score of s with respect to the already selected sentences ( S u'\u005cu0393' is a weighting parameter which is empirically set to 0.9 after tuning over a development dataset u'\u005cud835' u'\u005cudcaf' is the proportion of events in s which happen in the same time span as another event in any other sentence in S
+p25
+aVThe temporal coverage in this case includes all the time spans from time span A to time span A + 4 , inclusive
+p26
+aVTemporal processing is imperfect
+p27
+aVTime Span Importance (TSI
+p28
+aVRecall that TimeMMR seeks to eliminate redundancy based on time span similarities and not lexical likeness
+p29
+aVGeneralizing, we refer to the time period an event takes place in as its time span (vertical dotted lines
+p30
+aVWe assume that the various input document sets to be summarized are available at the time of processing
+p31
+aVSince ( u'\u005cu211d' 1) and ( u'\u005cu211d' 3) talk about the same time span, TimeMMR down-weights ( u'\u005cu211d' 3
+p32
+aVAs the threshold increases from 0 to 40 u'\u005cu2013' 50, summarization performance improves while the number of document sets where temporal information is used is reduced
+p33
+aVWe postulate that the length of a timeline can serve as a simple reliability filtering metric
+p34
+aVOur work is significant as it addresses an important gap in the exploitation of temporal information
+p35
+aVWhile TimeMMR is proposed here as an improvement over MMR, the premise is that incorporating temporal information can be helpful to minimize redundancy in summaries
+p36
+aVAs the state-of-the-art improves, these workshops have moved away from the piecemeal evaluation of individual temporal processing tasks and towards the evaluation of complete end-to-end systems in TempEval-3
+p37
+aVHence in these experiments, the threshold for filtering is set to be the average of all the timeline sizes over the whole input dataset
+p38
+aVIn sentence re-ordering, final summaries are re-arranged so that the extracted sentences that form the summary are in a chronological order
+p39
+aVWe hope to improve the quality of the summaries that are generated by considering temporal information found in the input text
+p40
+aVAt these higher thresholds, temporal information is still able to help get an improvement in R-2
+p41
+aVIn each iteration, s is penalized if it is lexically similar to other sentences that have already been selected to form the eventual summary S = { s 1 , s 2 , u'\u005cu2026' }
+p42
+aVWe hypothesize that when more events happen within a particular time span, that time span is potentially more relevant for summarization
+p43
+aVThey indicate the temporal relationships between two basic temporal units
+p44
+aVT =0 means that timelines are used for all input document sets, whereas T =100 means that no timelines are used, as the length of the longest timeline is less than 100
+p45
+aVFor the analysis on timeline features, we only present an analysis for TSI and CTSI due to space constraints
+p46
+aVTo help visualize what the differences in these ROUGE scores mean, Figure 7 shows two summaries 1 1 The produced summaries are truncated to fit within a 100-word limit imposed by the TAC-2011 guidelines generated for document set D1117C of the TAC-2011 dataset
+p47
+aVThe use of recency as an indicator of saliency is useful, yet disregards other accessible temporal information
+p48
+aVThe motivating idea is to reduce repeated information by preferring sentences which bring in new facts
+p49
+aVIt is easy to see why ( u'\u005cud835' u'\u005cudd43' 1) scores higher for R-2 u'\u005cu2014' it describes the cause of the accident just as it occurred u'\u005cu211d' 1) however talks about events which happened before the accident itself (e.g.,, how much of the tower had already been erected
+p50
+aVRecognizing that sentence (3) is about a storm that had happened in the past is important when writing a summary about the recent storm, as it is not relevant and can likely be excluded
+p51
+aVThis affirms our use of the average length of timelines as the threshold value in our earlier experiments
+p52
+aVThis corresponds to the number of time spans that the events in a sentence talk about
+p53
+aVThis work additionally proposes the use of the lengths of timelines as a metric to gauge the usefulness of timelines
+p54
+aVT u'\u005cu2062' S w is the number of events within the time span
+p55
+aVSummarization evaluation is done using ROUGE-2 (R-2) [ 13 ] , as it has previously been shown to correlate well with human assessment [ 14 ] and is often used to evaluate automatic text summarization
+p56
+aVLooking at Rows 1 to 8, and Rows 9 to 16, we see the importance of reliability filtering
+p57
+aVIn Figure 4 , taking reference from event e (shaded in black), the left peak to the time span which e is in happens to be time span A , while the right peak is time span A + 4
+p58
+aVThe importance of a time span may not depend solely on the number of events that happen within it
+p59
+aVIf a summary of a whole sequence of events is desired, recency becomes less useful
+p60
+aVThese indicate that all the proposed features are important and need to be used together to be effective
+p61
+aVA summary about the hurricane need not contain all of these sentences as they are all describing the same thing
+p62
+aVThe same drop occurs even when reliability filtering is used (Rows 9 to 12
+p63
+aVHowever as this affects only very few out of the 44 document sets, statistical variances mean that these R-2 scores are no longer significant from that produced by SWING
+p64
+aVThis can be done by computing a metric which can be used to decide whether or not timelines should be used for a particular input document collection
+p65
+aVSentences that mention events found in such a time span should be assigned higher scores
+p66
+aVLet T u'\u005cu2062' S L be the time span with the largest number of events in a timeline
+p67
+aVStated equivalently, when two sentences are of the same length, if one contains more keyphrases, it should contain more useful facts
+p68
+aVHowever we believe it is because the ROUGE measures that are used for evaluation are not suited for this purpose
+p69
+aVIn this work, we have simplified this idea by dropping the need for event co-referencing (removing a source of propagated error), and augmented it with two additional features derived from timelines
+p70
+aVCLASSY and POLYCOM are top performing systems at TAC-2011 (ranked 2nd and 3rd by R-2 in TAC 2011, respectively; the full version of SWING was ranked 1st with a R-2 score of 0.1380
+p71
+aVBeyond 60, the R-2 scores are still higher than that obtained by SWING , but no longer significantly different
+p72
+aVu'\u005cu211d' 3) The incident occurred as Bush was appearing with Iraqi Prime Minister Nouri al-Maliki
+p73
+aVEvents which appear to the left of others take place earlier, while events within the same time span happen together over the same time period
+p74
+aVTimeMMR penalizes ( u'\u005cu211d' 3 u'\u005cu211d' 3) reports that the shoe-throwing incident happened as the U.S
+p75
+aV[2]
+p76
+aVFormally, the contextual time span importance of a word w can be expressed as
+p77
+aVHowever it is not trivial for the lexically-motivated MMR algorithm to detect that events like u'\u005cu201c' passed u'\u005cu201d' , u'\u005cu201c' uprooted u'\u005cu201d' or u'\u005cu201c' damaged u'\u005cu201d' are in fact repetitive
+p78
+aVIn Figure 5 , the sentences describe many events which took place within the same time span
+p79
+aVIt is imaginable that this can be useful information to be included in a summary, even though from looking at the corresponding timeline in Figure 2 , the u'\u005cu201c' evacuated u'\u005cu201d' event falls in a time span with a low importance score (i.e.,, the time span only has one event
+p80
+aVWe chose to use MMR here as a proof-of-concept to demonstrate the viability of such a technique, and to easily integrate our work into SWING
+p81
+aVWe derive the CTSI of a sentence by first computing the contextual importance of words in the sentence
+p82
+aVTogether with the earlier described contributions, this metric further improves summarization, yielding an overall 5.9% performance increase
+p83
+aVSentence Temporal Coverage Density (TCD
+p84
+aVThere are fewer events which talk about the previous storm
+p85
+aV2) More than 100,000 coastal villagers have been evacuated before the cyclone made landfall
+p86
+aVu'\u005cu211d' 2) A top Army general vowed to personally oversee the upgrading of Walter Reed Army Medical Center u'\u005cu2019' s Building 18, a dilapidated former hotel that houses wounded soldiers as outpatients
+p87
+aVDepending on the style of writing or journalistic guidelines, a summary can arguably be written in a number of ways
+p88
+aVHowever his approach is guided by the number of events happening within the same time span, and relies on event co-referencing
+p89
+aVPresident Bush appeared together with the Iraqi Prime Minister Nouri al-Maliki
+p90
+aV1) temporal processing, and 2) summarization
+p91
+aVWe first define the temporal coverage of a sentence
+p92
+aVThe timeline can be viewed as a continuum of time, with points on the timeline referring to specific moments of time
+p93
+aVThe T u'\u005cu2062' S u'\u005cu2062' I of a sentence s is then the sum of the time span importance associated to all the words in s
+p94
+aVNote that in our work, time spans may not correspond to specific instances of time, but instead help in inferring an ordering of events
+p95
+aV1) An official in Barisal, 120 kilometres south of Dhaka, spoke of severe destruction as the 500 kilometre-wide mass of cloud passed overhead
+p96
+aV1) A fierce cyclone packing extreme winds and torrential rain smashed into Bangladesh u'\u005cu2019' s southwestern coast Thursday, wiping out homes and trees in what officials described as the worst storm in years
+p97
+aVWe also show the results of two reference systems, CLASSY [ 5 ] and POLYCOM [ 30 ] , as benchmarks
+p98
+aVThe CTSI of a sentence is computed as
+p99
+aVIf it is near time spans which are u'\u005cu201c' important u'\u005cu201d' (i.e.,, one that has a large number of events), it should also be of relative importance
+p100
+aVWe define the contextual importance of a word found in time span T u'\u005cu2062' S i as a weighted sum of the time span importance of the two nearest peaks T u'\u005cu2062' S l u'\u005cu2062' p and T u'\u005cu2062' S r u'\u005cu2062' p found to the left and right of T u'\u005cu2062' S i , respectively
+p101
+aVCTSI recognizes that events which happen around the time of a big cluster of other events can be important too
+p102
+aVReferring to Figure 4 , suppose a sentence contains the three events which have been shaded black
+p103
+aVThe time spans are ordered in the sequence they appear on the timeline
+p104
+aV1) events, and 2) time expressions (or timexes for short
+p105
+aVThe two events inside ( u'\u005cud835' u'\u005cudd43' 3) fall in time spans A and B marked in the figure
+p106
+aVFigure 2 illustrates a possible timeline laid out with the events found in Figure 1
+p107
+aVSummarization
+p108
+aVTemporal Processing generates timelines from text, one for each input document
+p109
+aVTo incorporate temporal information into multi-document summarization, we adopt the workflow in Figure 3 , which has two key processes
+p110
+aVThe events from the more recent storm are found together at the same time
+p111
+aVThey estimated the chronological ordering of events with a small set of heuristics, and also made use of lexical patterns to perform basic time normalization on terms like u'\u005cu201c' today u'\u005cu201d' relative to the document creation time
+p112
+aVwhere T u'\u005cu2062' S w denotes the time span which a word w is associated with, and
+p113
+aVVisualized on a timeline, this will translate to more events (bolded in Figure 1 ) around the time when the recent storm occurred
+p114
+aVEvents can either occur at a specific instance of time (e.g.,, an explosion), or over a period of time (e.g., a football match
+p115
+aVThe Maximal Marginal Relevance (MMR) algorithm is then used in the Sentence Re-ordering phase to re-order and select sentences to form the final summary
+p116
+aVEvents within a document set correspond to vertices in their proposed graph, while edges are determined by the temporal ordering of events
+p117
+aVBoth sentences score similarly for the SWING features of sentence position (SP), sentence length (Length), and interpolated n-gram document frequency (INDF); however, the scores for all three timeline features higher for ( u'\u005cud835' u'\u005cudd43' 2) than ( u'\u005cu211d' 2
+p118
+aVwhere T u'\u005cu2062' S w is the time span associated with w
+p119
+aVThere should be fewer events mentioned in the collection for the earlier 1991 time period
+p120
+aVBesides the increasing availability of annotation standards (e.g.,, TimeML [ 21 ] ) and corpora (e.g.,, TIDES [ 9 ] , TimeBank [ 22 ] ), the community has also organized three successful evaluation workshops u'\u005cu2014' TempEval-1 [ 25 ] , -2 [ 26 ] , and -3 [ 24 ]
+p121
+aV1) timex normalization, 2) event-timex temporal relationship classification, and 3) event-event temporal relationship classification, are merged to obtain timelines (top half of Figure 3
+p122
+aV2010 ) , results from the three temporal processing steps
+p123
+aV1999 ) were one of the first to use time for multi-document summarization
+p124
+aVSuppose a sentence contains events which are associated with time spans T u'\u005cu2062' S a , T u'\u005cu2062' S b , T u'\u005cu2062' S c
+p125
+aVIn the sentence re-ordering stage of the SWING pipeline, the iterative MMR algorithm is used to adjust the score of a candidate sentence, s
+p126
+aVTo motivate how temporal information can be useful in summarization, let us refer to Figure 1
+p127
+aVWe derive three features from the constructed timelines, which are then used for downstream Sentence Scoring
+p128
+aVI l u'\u005cu2062' p and I r u'\u005cu2062' p are the time span importance of the peaks to the left and right of T u'\u005cu2062' S w respectively, while
+p129
+aVThey recognized the importance of generating a summary which presents the time perspective of the summarized documents correctly
+p130
+aVThe black square boxes above the timeline denote events
+p131
+aVWe make use of a state-of-the-art summarization system, SWING [ 16 ] (bottom half of Figure 3
+p132
+aVwhere u'\u005cud835' u'\u005cudd3c' s is the number of events found in s , and
+p133
+aVThrough these, we demonstrate that temporal information is useful for multi-document summarization
+p134
+aVIn this paper, we present our work in incorporating the use of such temporal information into multi-document summarization
+p135
+aVHe had also made use of temporal information to weight sentences to generate summaries
+p136
+aVT u'\u005cu2062' S r u'\u005cu2062' p - T u'\u005cu2062' S w are the number of time spans between the left and right peaks of T u'\u005cu2062' S w respectively u'\u005cu0391' balances the importance of the left and right peaks, intuitively set to 0.5
+p137
+aVCTSI seeks to promote sentences such as this
+p138
+aVA typical timeline used in this work has been shown earlier in Figure 2
+p139
+aVSentence (2) explains that a lot of people have been evacuated prior to the cyclone making landfall
+p140
+aVFigure 4 shows a simplified timeline, along with annotations that are referenced in this section to help explain how these timeline features are derived
+p141
+aVIt turns out that this sentence was lifted exactly in one of the model summaries for this document set, resulting in a very good R-2 score when contextual importance is used
+p142
+aVwhere u'\u005cud835' u'\u005cudd3c' s denotes the set of events words in s
+p143
+aVTogether with the simplifying assumptions that were made in timeline construction, our generated timelines have errors which propagate into the summarization process
+p144
+aVTheir proximity to the peak P between them gives the sentence a higher score for CTSI
+p145
+aVIncorporating temporal information can potentially improve this
+p146
+aVFigure 6 shows the raw feature scores of both sentences
+p147
+aVFigure 8 shows the last sentences from a pair of summaries generated with and without the use of TSI (all other sentences were the same
+p148
+aVThe higher R-2 score obtained by the summary on the left (0.0873) compared to the one on the right (0.0723) suggests that temporal information can help to identify salient sentences more accurately
+p149
+aVTimelines are well-understood constructs which have often been used to represent temporal information [ 7 , 8 ]
+p150
+aVThis helps our time sensitive system prefer ( u'\u005cud835' u'\u005cudd43' 2
+p151
+aVThis is not the same as our approach here, which makes use of temporal information encoded in timelines to generate prose summaries
+p152
+aVThis boost results in the sentence being selected for inclusion in the final summary
+p153
+aVThe ablation test results in Rows 2 to 4 show a drop in R-2 each time a feature is left out
+p154
+aVA useful note here is that this work is arguably different from the Temporal Summarization (TmpSum) track at the Text Retrieval Conference [ 1 ]
+p155
+aVGiven a large stream of data in real-time, the purpose of the TmpSum track is to look out for a query event, and retrieve specific details about the event over a period of time
+p156
+aVWu ( 2008 ) also made use of the relative ordering of events
+p157
+aV2000 ) made use of the temporal ordering of documents to be summarized
+p158
+aVHe assigned complete timestamps to events extracted from text
+p159
+aVSmall solid blocks on the timeline itself are references to absolute timestamps along the timeline (e.g.,, u'\u005cu201c' 2013-Feb-13 11:32 +0000 u'\u005cu201d' in the figure
+p160
+aVFigure 10 shows an extract of the timeline generated for the source document from which ( u'\u005cud835' u'\u005cudd43' 3) is extracted
+p161
+aVThe motivation behind this approach is that days which have a large number of events should be more important and more worthy of reporting than others
+p162
+aV2009 ) proposed an interesting approach using a temporal graph
+p163
+aVWhile there has been prior work making use of temporal information for multi-document summarization, they 1) have been largely confined to helping to chronologically order content within summaries [ 2 ] , or 2) focus only on the use of recency as an indicator of saliency [ 10 , 27 ]
+p164
+aVAn event refers to an eventuality, a situation that occurs or an action; while a timex is a reference to a particular date or time (e.g., u'\u005cu201c' 2013 December 31 u'\u005cu201d'
+p165
+aVIn the table, each row refers to a specific summarization system configuration
+p166
+aVSWING makes use of three generic features and two features targeted specifically at guided summarization
+p167
+aVRows 9 to 16 additionally incorporate our timeline reliability filtering
+p168
+aVWe believe our understanding of the temporal information found in text is sufficiently robust, and that there is an opportunity to now leverage this information in downstream applications
+p169
+aVThe goal of multi-document summarization is to generate a summary which includes the main points from an input collection of documents with minimal repetition of similar points
+p170
+aVThe proposed timeline features and TimeMMR were implemented on top of SWING , and evaluated on the test documents from TAC-2011 [ 19 ]
+p171
+aVT u'\u005cu2062' S n - T u'\u005cu2062' S 1 is the temporal coverage of s
+p172
+aVAutomatic temporal processing systems are not perfect yet, and this may have an impact on their use for downstream applications
+p173
+aVWe now examine the proposed 1) timeline features, 2) TimeMMR algorithm, and 3) reliability filtering metric in greater detail to gain insight into their efficacy
+p174
+aVThese prior works target either 1) sentence re-ordering, or 2) the use of recency as an indicator of saliency
+p175
+aV2010 ) made similar assumptions in their work on TimedTextRank and entity summarization, respectively
+p176
+aVIn this work, we adopt the definitions proposed in the standardized TimeML annotation [ 21 ]
+p177
+aVWe incorporate this into our process as follows given an input document collection (which consists of 10 documents), the average size of all the timelines for each of these 10 documents is computed
+p178
+aVTimeMMR promotes diversity by additionally considering temporal information instead of just lexical similarities
+p179
+aVThe left one is produced by the configuration in Row 9, and the right one is produced by SWING without the use of any temporal information
+p180
+aVThe arrowed, horizontal axis is the timeline itself
+p181
+aVThe summary on the left achieved a R-2 score of 0.1215 while the one on the right achieved 0.0861 u'\u005cud835' u'\u005cudd43' 2) and ( u'\u005cud835' u'\u005cudd43' 3) were both boosted by the use of the contextual importance feature
+p182
+aVErrors are however very easily propagated into summary generation for shorter timelines, leading to less useful results
+p183
+aVThis suggests that filtering is successful in identifying timelines that are not sufficiently accurate to be useful for summarization
+p184
+aVFrom the resulting weakly-connected graph, the largest forests are assumed to contain key topics within the document set and used to influence a scoring mechanism which prefers sentences touching on these topics
+p185
+aVThe three sentences describe a recent cyclone and a previous one which happened in 1991
+p186
+aVA more concrete illustration of this can also be seen in Figure 1
+p187
+aVThe summary on the left is generated using TimeMMR and achieved a lower ROUGE score
+p188
+aVThe contribution of each peak to the weighted sum is decayed by its distance from T u'\u005cu2062' S i
+p189
+aVIn computing the relevance of a passage for inclusion into the final summary, they considered the recency of the passage u'\u005cu2019' s source document
+p190
+aV2) u'\u005cu201c' Many trees have been uprooted and houses and schools blown away, u'\u005cu201d' Mostofa Kamal, a district relief and rehabilitation officer, told AFP by telephone
+p191
+aVWe refer to this as reliability filtering
+p192
+aVThe work of Wu ( 2008 ) is closely related to one of the features proposed in this paper
+p193
+aVRow 1 shows the usefulness of the proposed timeline-based features
+p194
+aVThere has been a good amount of research invested into improving the temporal interpretation of text
+p195
+aVAn interesting case in point is given in Figure 11
+p196
+aVSystems are also expected to identify the source sentences from which these details are retrieved
+p197
+aVReliability Filtering
+p198
+aVWith this in mind, we selectively employ timelines to generate summaries only when we are confident of their accuracy
+p199
+aV3) u'\u005cu201c' Mud huts have been damaged and the roofs of several houses blown off, u'\u005cu201d' said the state u'\u005cu2019' s relief minister, Mortaza Hossain
+p200
+aVIt is able to guide the use of timelines such that significant improvements in R-2 over SWING are obtained
+p201
+aVFollowing the u'\u005cu201c' divide-and-conquer u'\u005cu201d' approach described in Verhagen et al
+p202
+aVThe results obtained are shown in Table 1
+p203
+aVModifying the MMR equation from Ng et al
+p204
+aVThe benefits of this feature can be clearly seen in Figure 9
+p205
+aVThe induced ordering is used to present the selected summary content, following the chronological order in the original documents
+p206
+aVWe tap on existing systems for each of these steps [ 18 , 23 , 17 ]
+p207
+aVA statistically significant improvement of 4.1% is obtained with the use of all three features over SWING
+p208
+aVThey describe the destruction caused by a hurricane with trees uprooted and buildings blown away
+p209
+aVThe one on the right is generated without TimeMMR and scores higher, suggesting that TimeMMR is not helpful
+p210
+aVA closer look at sentences ( u'\u005cud835' u'\u005cudd43' 2) and ( u'\u005cu211d' 2) and their R-2 scores (0.0424 and 0.0249, respectively) is instructive
+p211
+aVIn future work, one could apply it to other state-of-the-art lexical-based approaches including that of Hendrickx et al
+p212
+aVIn another line of work, Goldstein et al
+p213
+aVIn a production environment where this assumption may not hold, this threshold could be set by empirical tuning over a development set
+p214
+aVWe refer to this as TimeMMR
+p215
+aVFor example, an event that takes place in u'\u005cu201c' 2014 June u'\u005cu201d' is said to take place within the year u'\u005cu201c' 2014 u'\u005cu201d'
+p216
+aVOnly when this value is larger than a threshold value are the timelines used
+p217
+aVBarzilay et al
+p218
+aVFrom these results, we can see that SWING is a very competitive baseline
+p219
+aVWhen we use reliability filtering (Row 9), this improvement increases to 5.9%
+p220
+aVTable 2 shows the effect of varying the filtering threshold on R-2 for the best performing configuration from Table 1 (i.e.,, SWING +TSI+CTSI+TCD
+p221
+aVWe also believe the same idea can be transplanted even to non-lexical motivated techniques such as the corpus-based similarity measure proposed by Xie and Liu ( 2008
+p222
+aVIt is reasonable to expect that a collection of documents about the recent storm will contain more references to it, compared with the earlier one that happened in 1991
+p223
+aVInstead of just considering the notion of recency, Liu et al
+p224
+aVPassages from more recent documents are deemed to be more important
+p225
+aVWith the exception of Row 4, removing a feature lessens the improvement in R-2 to be insignificant from SWING u'\u005cu2019' s
+p226
+aVR-2 performance peaks around a threshold of 40
+p227
+aVWan ( 2007 ) and Demartini et al
+p228
+aVWhile the results do not uniformly show that TimeMMR is effective, it can be helpful, such as when comparing Rows 2 and 6, or Rows 10 and 14, where R-2 improves marginally
+p229
+aVThe experimental results do not conclusively affirm the usefulness of TimeMMR
+p230
+aVThe result obtained in Row 9 using a threshold of 42.68 is also re-produced for reference
+p231
+aVWe argue that this is better even though the ROUGE scores indicate otherwise
+p232
+aVRows 5 to 8 and Rows 13 to 16 show the effect of TimeMMR
+p233
+aV3) The storm matched one in 1991 that sparked a tidal wave that killed an estimated 138,000 people, Karmakar told AFP
+p234
+aVIs TimeMMR Useful
+p235
+aVCompared to a competitive baseline, significant improvements of up to 4.1% are obtained
+p236
+aVIn future work it will be worthwhile to consider the use of metrics like Pyramid [ 20 ] which are less bound to superficial lexicons
+p237
+aVThis work is also partially supported by the National Natural Science Foundation of China (Grant Nos
+p238
+aVWe argue that this may not be appropriate for all summaries
+p239
+aV61170189, 61370126, 61202239), the Fund of the State Key Laboratory of Software Development Environment (Grant No
+p240
+aVROUGE, however, measures the latter
+p241
+aVThe original articles describe an accident where casualties were suffered when a crane toppled onto a building
+p242
+aVHowever their joint appearance is already reported in ( u'\u005cu211d' 1) (and similarly ( u'\u005cud835' u'\u005cudd43' 1 u'\u005cu211d' 3) repeats what had been presented earlier
+p243
+aVThe key difference in the two summaries is ( u'\u005cu211d' 3 u'\u005cud835' u'\u005cudd43' 3) is the equivalent of ( u'\u005cu211d' 4), while ( u'\u005cud835' u'\u005cudd43' 4) is the full version of the truncated ( u'\u005cu211d' 5
+p244
+aVu'\u005cud835' u'\u005cudd43' 3) Scientists warn that up to half of the world u'\u005cu2019' s coral reefs could disappear by 2045
+p245
+aVu'\u005cud835' u'\u005cudd43' 3) Top Army officials visited Building 18, the decrepit former hotel housing more than 80 recovering soldiers, outside
+p246
+aV2009 ) and Celikyilmaz and Hakkani-Tur ( 2010
+p247
+aVThis research is supported by the Singapore National Research Foundation under its International Research Centre @ Singapore Funding Initiative and administered by the IDM Programme Office
+p248
+aVu'\u005cud835' u'\u005cudd43' 4) The president lowered his head and the first shoe hit the American and Iraqi flags behind the two leaders
+p249
+aVSKLSDE-2013ZX-19), and the Innovation Foundation of Beihang University for Ph.D
+p250
+aVGraduates (YWF-13-T-YJSY-024
+p251
+aV[2]
+p252
+aV2
+p253
+aVT u'\u005cu2062' S w - T u'\u005cu2062' S l u'\u005cu2062' p and
+p254
+aV3
+p255
+aV[1]
+p256
+aV2012 )
+p257
+aV[1]
+p258
+aV[1]
+p259
+aV1
+p260
+a.

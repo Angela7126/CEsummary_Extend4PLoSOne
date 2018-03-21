@@ -1,0 +1,188 @@
+(lp0
+VEach training set had a target of 600 users (300 background, 300 self-identified); for those roles with less than 300 users self-identifying, all users were used, with an equal number background
+p1
+aVFirst, we counted all terms matching a target social role u'\u005cu2019' s possessive pattern (e.g.,, doctor u'\u005cu2019' s ) in the web-scale n-gram corpus Google V2 [ 13 ] 5 5 In this corpus, follower-type roles like belieber and directioner are not at all prevalent
+p2
+aVIf one views a role, in their case gender, as two conceptual classes, male and female , then existing attribute extraction methods for third-person content (e.g.,, news articles) can be cheaply used to create a set of bootstrapping features for building classifiers over first-person content (e.g.,, tweets
+p3
+aVBergsma and Van Durme ( 2013 ) showed that the task of mining attributes for conceptual classes can relate straightforwardly to author attribute prediction
+p4
+aVThese tweets served as representative content for that role, with any tweet matching the self-reporting patterns filtered
+p5
+aVAs compared to prior research that required actively polling users for ground truth in order to construct predictive models for demographic information [ 11 ] , we demonstrate that some users specify such properties publicly through direct natural language
+p6
+aVIn the second study we exploit a complementary signal based on characteristic conceptual attributes of a social role, or concept class [ 20 , 1 , 17 ]
+p7
+aVAs a hint of the sort of user studies one might explore given access to social role prediction, we see in Figure 1 a correlation between self-reported role and the chance of an account still being publicly visible, with roles such as belieber and directioner on the one hand, and doctor and teacher on the other
+p8
+aVFrom the remaining attribute terms, we identified users with tweets scoring 4.0 or better as positive examples of the associated roles
+p9
+aVIn the first study, we seek to determine whether such a signal exists in self-identification we rely on variants of a single pattern, u'\u005cu201c' I am a u'\u005cu201d' , to bootstrap data for training balanced-class binary classifiers using unigrams observed in tweet content
+p10
+aVAll role-representative users were drawn from the free public 1% sample of the Twitter Firehose, over the period 2011-2013, from the subset that selected English as their native language (85,387,204 unique users
+p11
+aVWe identify typical attributes of a given social role by collecting terms in the Google n-gram corpus that occur frequently in a possessive construction with that role
+p12
+aVTweets from those users were scraped via the Twitter API to construct corpora for each role
+p13
+aVWe found that making conceptual class assignments based on a single tweet was often a subtle task
+p14
+aVThree sets of background populations were extracted based on randomly sampling users that self-reported English (post-filtered via LID
+p15
+aVWe therefore include a role verification step in curating a collection of positively identified users
+p16
+aVPredicting social roles such as doctor , teacher , vegetarian , christian , may open the door to large-scale passive surveys of public discourse that dwarf what has been previously available to social scientists
+p17
+aVProbabilities were estimated from counts of the class-attribute pairs along with counts matching the generic possessive patterns his and her which serve as general background categories
+p18
+aVUsing this smaller high-precision set of attribute terms, we collected tweets from the Twitter Firehose over the period 2011-2013
+p19
+aVTo explore whether language provides signal for future work in fine-grain social role prediction, we constructed a set of experiments, one per role, where training and test sets were balanced between users from a random background sample and self-reported users
+p20
+aVThese results qualitatively suggest many roles under consideration may be teased out from a background population by focussing on language that follows expected use patterns
+p21
+aVTo identify users of a particular role, we performed a case-agnostic search of variants of a single pattern
+p22
+aVWe approached this task by selecting target roles from the first experiment and ranking characteristic attributes for each using pointwise mutual information (PMI) [ 5 ]
+p23
+aVAny given user taken to be representative based on a previously posted tweet may no longer be available to query on
+p24
+aVI am a(n) , and I u'\u005cu2019' m a(n) , where all single tokens filling the slot were taken as evidence of the author self-reporting for the given u'\u005cu201c' role u'\u005cu201d'
+p25
+aVFor example, if we learn from news corpora that a man may have a wife , then a tweet saying u'\u005cu2026' my wife u'\u005cu2026' can be taken as potential evidence of membership in the male conceptual class
+p26
+aVAttribute terms are less indicative overall than self-ID, e.g.,, the phrase I u'\u005cu2019' m a barber is a clearer signal than my scissors
+p27
+aVIn our second study, we test whether this idea extends to our wider set of fine-grained roles
+p28
+aVUsing the same collection as the previous experiment, we trained classifiers conditioned on a given attribute term
+p29
+aVExample tweets can be seen in Table 1 , examples of frequency per role in Table 2
+p30
+aVWith the rise of social media, researchers have sought to induce models for predicting latent author attributes such as gender, age, and political preferences [ 9 , 19 , 4 , 22 , 24 ]
+p31
+aV3 3 This removes users that selected English as their primary language, used a self-identification phrase, e.g., I am a belieber , but otherwise tended to communicate in non-English
+p32
+aVAttribute terms shown in red were manually discarded as being inaccurate (low on the y-axis) or non-prevalent (small shape
+p33
+aVFor example, if one sends a tweet saying my coach , then how likely is it that author is an athlete
+p34
+aVFollowing suggestions by Bergsma and Van Durme, we manually filtered the ranked list
+p35
+aVFor example, work on tracking the spread of flu infections across Twitter [ 12 ] might be enhanced with a factor based on aggregate predictions of author occupation
+p36
+aVBased on this tweet, would you think this person is a Barber/Hairdresser along with four response options
+p37
+aVWe therefore focused on occupational and habitual roles (e.g.,, doctor, smoker
+p38
+aVWe examined tweets with a first person possessive pattern for each attribute term from a small corpus of tweets collected over a single month in 2013, discarding those attribute terms with no positive matches
+p39
+aVThe attribute term chart , for example, had high PMI with doctor ; but a precision test on the phrase my chart yielded a single tweet which referred not to a medical chart but to a top ten list (prompting removal of this attribute
+p40
+aVWhile some users explicitly share their GPS coordinates through their Twitter clients, having a larger collection of automatically identified users within a region was preferable even though the predictions for any given user were uncertain
+p41
+aVDespite the varied noisiness of our simple pattern-bootstrapped training data, and the small size of our annotated test set, we see in Figure 3 that we are able to successfully achieve statistically significant predictions of social role for the majority of our selected examples
+p42
+aVSuch models are clearly in line with the goals of both computational advertising [ 23 ] and the growing area of computational social science [ 6 , 15 , 16 , 18 , 14 ] where big data and computation supplement methods based on, e.g.,, direct human surveys
+p43
+aVWe manually selected a set of roles for further exploration, aiming for a diverse sample across occupation (e.g.,, doctor , teacher ), family ( mother ), disposition ( pessimist ), religion ( christian ), and u'\u005cu201c' followers u'\u005cu201d' ( belieber , directioner
+p44
+aVFor each selected role, we randomly sampled up to 500 unique self-reporting users and then queried Twitter for up to 200 of their recent publicly posted tweets
+p45
+aVMost work in user classification relies on featurizing language use, most simply through binary indicators recording whether a user did or did not use a particular word in a history of n tweets
+p46
+aV6 6 Evidence from cognitive work on memory-dependent tasks suggests that such relevance based filtering (recognition) involves less cognitive effort than generating relevant attributes (recall) see [ 10 ]
+p47
+aVWe used the Jerboa [ 21 ] platform to convert data to binary feature vectors over a unigram vocabulary filtered such that the minimum frequency was 5 (across unique users
+p48
+aVWe used the positively annotated data to form test sets, balanced with data from the background set
+p49
+aVHow accurately we can predict membership in a given class when a Twitter user sends a tweet matching one of the targeted attributes
+p50
+aVSeveral classes in this balanced setup can be predicted with accuracies in the 70-90% range, supporting our claim that there is discriminating content for a variety of these social roles
+p51
+aVWe filtered users via language ID [ 2 ] to better ensure English content
+p52
+aVFor example, with the role doctor we extract terms matching the simple pattern u'\u005cu201c' doctor u'\u005cu2019' s u'\u005cu201d'
+p53
+aVWe use the crowdsourcing platform Mechanical Turk 7 7 https://www.mturk.com/mturk/ to judge whether the person tweeting held a given role Tweets were judged 5-way redundantly
+p54
+aVPositive instances were taken to be those with a score of 4.0 or higher, with negative instances taken to be those with scores of 1.0 or lower (strong agreement by judges that the original tweet did not provide evidence of the given role
+p55
+aVThis demonstrates self-identification as a viable signal in building predictive models of social roles
+p56
+aVWe piloted this labeling task on 10 tweets per attribute term over a variety of classes
+p57
+aVThe authors examined the self-identifying tweet of 20 random users per role
+p58
+aVWe ranked the collected terms by computing PMI between classes and attribute terms
+p59
+aVThe results of this labeling study are shown in Figure 4 , which gives the percent of tweets per attribute that were 4.0 or above
+p60
+aVTwitter users are empowered to at any time delete, rename or make private their accounts
+p61
+aVWhile these samples are small (and thus estimates of quality come with wide variance), it is noteworthy that a non-trivial number for each were judged as actually self-identifying
+p62
+aVThese were split intro train and test, balanced with data from the same background set used in the self-ID study
+p63
+aVWe found in development that an aggregate score of 4.0 (out of 5.0) led to an acceptable agreement rate between the Turkers and the experimenters, when the tweets were randomly sampled and judged internally
+p64
+aVEach test set had a theoretical maximum size of 40, but for several classes it was in the single digits (see Figure 2
+p65
+aVWe present two studies showing that first-person social content (tweets) contains intuitive signals for such fine-grained roles
+p66
+aVTable 3 highlights examples of language indicative of role, as determined by the most positively weighted unigrams in the classification experiment
+p67
+aVWe argue that non-trivial classifiers may be constructed based purely on leveraging simple linguistic patterns
+p68
+aV2010 ) demonstrated a model that predicted where an author was located in order to analyze regional distinctions in communication
+p69
+aVThis left fewer than 30 attribute terms per role, with many roles having fewer than 10
+p70
+aVWe removed attributes that were either (a) not nominal, or (b) not indicative of the social role
+p71
+aVThe accuracy of the self-identification pattern varied across roles and is attributable to various factors including quotes, e.g., @StarTrek Jim, I u'\u005cu2019' m a DOCTOR not a download
+p72
+aV1 1 Future work should consider identifying multi-word role labels (e.g.,, Doctor Who fan , or dog walker
+p73
+aVMany of the resultant models show intuitive strongly-weighted features, such as a writer being likely to tweet about a story , or an athlete discussing a game
+p74
+aV4 4 Roughly half of the classes had less than 500 self-reporting users in total, in those cases we used all matches
+p75
+aVBaseline accuracy in these experiments was thus 50 u'\u005cu2062' %
+p76
+aVWe next performed a precision test to identify potentially useful attributes in these lists
+p77
+aVThese baselines suggest a wide range of author categories to be explored further in future work
+p78
+aVWe show that media such as Twitter can support classification that is more fine-grained than gender or general location
+p79
+aVTest sets were usually of size 40 (20 positive, 20 background), with a few classes being sparse (the smallest had only 16 instances
+p80
+aVThis precision test is useful regardless of how attribute lists are generated
+p81
+aVFor example, we aimed to discover that a doctor may have a patient , while a hairdresser may have a salon ; these properties can be expressed in first-person content as possessives like my patient or my salon
+p82
+aVIndeed, this filtering step generally took less than a minute per class
+p83
+aVMechanical Turk judges ( u'\u005cu201c' Turkers u'\u005cu201d' ) were presented with a tweet and the prompt
+p84
+aVClassification results are shown in Figure 6
+p85
+aVTraining and testing was done with a log-linear model via LibLinear [ 8 ]
+p86
+aVThis resulted in 63,858 unique roles identified, of which 44,260 appeared only once
+p87
+aVFor example the use of the term game by athletes, studio by artists, mixtape by rappers, or jesus by Christians
+p88
+aVResults are shown in Figure 5
+p89
+aV2 2 Those that follow the music/life of the singer Justin Bieber and the band One Direction, respectively
+p90
+aVFor example, Eisenstein et al
+p91
+aVEach answer was associated with a score (Yes = 1, Maybe = .5, Hard to tell = No = 0) and aggregated across the five judges
+p92
+aVYes , Maybe , Hard to tell , and No
+p93
+a.

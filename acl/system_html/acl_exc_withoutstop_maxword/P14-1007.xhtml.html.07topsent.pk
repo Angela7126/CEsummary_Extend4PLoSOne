@@ -1,0 +1,22 @@
+(lp0
+V[1] \u005cSTATE Activate the cue EP \u005cIF the cue EP is a quantifier \u005cSTATE Activate EPs reached by functor crawling from the distinguished variable ( \u005csrl ARG0) of the cue EP \u005cENDIF \u005cREPEAT \u005cFOR each active EP X \u005cSTATE Activate EPs reached by argument crawling or label crawling unless they are co-modifiers of the negation cue
+p1
+aVBoth systems map from logical forms with explicit representations of scope of negation out to string-based annotations in the format provided by the Shared Task gold standard
+p2
+aVIn terms of our operations defined over semantic representations, this is rendered as follows all arguments of the negated verb are selected by argument crawling , all intersective modifiers by label crawling , and functor crawling (Fig
+p3
+aVHowever, as shown below, the information about fixed scopal elements in an underspecified MRS is sufficient to model the Shared Task annotations
+p4
+aVOur system, on the other hand, models the annotation guidelines more closely in the definition of the MRS crawling rules, and has more elaborated rules for handling semantically empty words
+p5
+aVThe ERG maps surface strings to meaning representations in the format of Minimal Recursion Semantics [] MRS; Cop:Fli:Pol:05
+p6
+aVScopal information in MRS analyses delivered by the ERG fixes the scope of operators u'\u005cu2014' such as negation, modals, scopal adverbs (including subordinating conjunctions like while ), and clause-embedding verbs (e.g., believe ) u'\u005cu2014' based on their position in the constituent structure, while leaving the scope of quantifiers (e.g., a or every , but also other determiners) free
+p7
+aVOur MRS crawling algorithm is sketched in Fig
+p8
+aVFrom these underspecified representations of possible scopal configurations, a scope resolution component can spell out the full range of fully-connected logical forms [ 4 ] , but it turns out that such enumeration is not relevant here the notion of scope encoded in the Shared Task annotations is not concerned with the relative scope of quantifiers and negation, such as the two possible readings of ( 3 ) represented informally below
+p9
+aVThis system operates over the normalized
+p10
+a.

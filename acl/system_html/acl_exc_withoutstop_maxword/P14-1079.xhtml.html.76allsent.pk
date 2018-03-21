@@ -1,0 +1,387 @@
+(lp0
+VThe matrix rank minimization problem is NP-hard
+p1
+aVMoreover, Goldfrab and Ma [ 11 ] proved the convergence of the FPC algorithm for solving the nuclear norm minimization problem
+p2
+aVIn such a way, relation classification is transformed into a problem of completing the unknown labels for testing items in the sparse matrix that concatenates training and testing textual features with training labels, based on the assumption that the item-by-feature and item-by-label joint matrix is of low rank
+p3
+aVMore specifically, as shown in Figure 2, we model the task with a sparse matrix whose rows present items (entity pairs) and columns contain noisy textual features and incomplete relation labels
+p4
+aVDue to the noisy features and incomplete labels, the underlying low-rank data matrix with truly effective information tends to be corrupted and the rank of observed data matrix can be extremely high
+p5
+aVFPC algorithm for solving DRMC-1 {algorithmic} \u005cREQUIRE Initial matrix u'\u005cud835' u'\u005cudc19' u'\u005cud835' u'\u005cudfce' ; Parameters u'\u005cu039c' , u'\u005cu039b' ; Step sizes u'\u005cu03a4' z
+p6
+aVSuppose that we have built a training corpus for relation classification with n items (entity pairs), d -dimensional textual features, and t labels (relations), based on the basic alignment assumption proposed by Mintz et al
+p7
+aVOur models for relation extraction are based on the theoretic framework proposed by Goldberg et al
+p8
+aVFPC algorithm for solving DRMC-b {algorithmic} \u005cREQUIRE Initial matrix u'\u005cud835' u'\u005cudc19' u'\u005cud835' u'\u005cudfce' , bias u'\u005cud835' u'\u005cudc1b' u'\u005cud835' u'\u005cudfce' ; Parameters u'\u005cu039c' , u'\u005cu039b' ; Step sizes u'\u005cu03a4' z , u'\u005cu03a4' b
+p9
+aVOur work is more relevant to Riedel et al u'\u005cu2019' s [ 21 ] which considered the task as a matrix factorization problem
+p10
+aVTherefore, Candés and Recht [ 5 ] suggested to use a convex relaxation, the nuclear norm minimization instead
+p11
+aVThe reason is that we suppose the optimal low-rank representation of the matrix Z conveys the truly effective information about underlying semantic correlation between the features and the corresponding labels
+p12
+aVSimilar to noisy features, the generated labels can be incomplete
+p13
+aVwhere u'\u005cud835' u'\u005cudc19' * as the underlying low-rank matrix
+p14
+aVThe new framework for classification enhances the robustness to data noise by penalizing different cost functions for features and labels
+p15
+aV\u005cENSURE Completed Matrix Z
+p16
+aVFor example, the second relation mention in Figure 1 does not explicitly describe any relation instance, so features extracted from this sentence can be noisy
+p17
+aVAs we are stepping into the big data era, the explosion of unstructured Web texts simulates us to build more powerful models that can automatically extract relation instances from large-scale online natural language corpora without hand-labeled annotation
+p18
+aVand E is the error matrix
+p19
+aVAlgorithm 1 describes the modified FPC algorithm for solving DRMC-b, which contains two steps for each iteration
+p20
+aVAs the ranks decline before approaching the optimum, the performance gradually improves, implying that our approaches filter the noise in data and keep the principal information for classification via recovering the underlying low-rank data matrix
+p21
+aVHowever, the incomplete knowledge base does not contain the corresponding relation instance ( Senate-of(Barack Obama, U.S.)
+p22
+aVWe thus adopt and modify the algorithm aiming to find the optima for our noise-tolerant models, i.e.,, Formulae (3) and (4
+p23
+aVTo the best of our knowledge, we are the first to apply this technique on relation extraction with distant supervision
+p24
+aVOn both two datasets, we observe an identical phenomenon that the performance gradually increases as the rank of the matrix declines before reaching the optimum
+p25
+aVAn intuitive explanation is that the high-rank matrix contains much noise and the model tends to be overfitting, whereas the matrix of excessively low rank is more likely to lose principal information and the model tends to be underfitting
+p26
+aVThis linear classification problem can be transformed into completing the unobservable entries in Y t u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t by means of the observable entries in X t u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' i u'\u005cu2062' n , Y t u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' i u'\u005cu2062' n and X t u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t , based on the assumption that the rank of matrix u'\u005cud835' u'\u005cudc19' u'\u005cu2208' u'\u005cu211d' ( n + m ) × ( d + t ) is low
+p27
+aV[ 16 ] revealed that as long as the non-negative step sizes satisfy u'\u005cu03a4' z m u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' ( 4 u'\u005cu2062' u'\u005cu03a9' Y u'\u005cu039b' u'\u005cu03a9' X and u'\u005cu03a4' b 4 u'\u005cu2062' u'\u005cu03a9' Y u'\u005cu039b' u'\u005cu2062' ( n + m ) , the FPC algorithm will guarantee to converge to a global optimum
+p28
+aVFormula (2) is usually impractical for real problems as the entries in the matrix u'\u005cud835' u'\u005cudc19' are corrupted by noise
+p29
+aVAccording to Formula (1), u'\u005cud835' u'\u005cudc19' * u'\u005cu2208' u'\u005cu211d' ( n + m ) × ( d + t ) can be represented as [ X * , u'\u005cud835' u'\u005cudc16' u'\u005cu2062' X * ] instead of [ X * , Y * ] , by explicitly modeling the bias vector u'\u005cud835' u'\u005cudc1b'
+p30
+aV\u005cFOR u'\u005cu039c' = u'\u005cu039c' 1 u'\u005cu039c' 2 u'\u005cu2026' u'\u005cu039c' F \u005cWHILE relative error u'\u005cu0395' \u005cSTATE Gradient step u'\u005cud835' u'\u005cudc00' = u'\u005cud835' u'\u005cudc19' - u'\u005cu03a4' z u'\u005cu2062' g u'\u005cu2062' ( u'\u005cud835' u'\u005cudc19'
+p31
+aVThe basic alignment assumption of this work is that if a pair of entities participate in a relation, all sentences that mention these entities are labeled by that relation name
+p32
+aV\u005cFOR u'\u005cu039c' = u'\u005cu039c' 1 u'\u005cu039c' 2 u'\u005cu2026' u'\u005cu039c' F \u005cWHILE relative error u'\u005cu0395' \u005cSTATE Gradient step u'\u005cud835' u'\u005cudc00' = u'\u005cud835' u'\u005cudc19' - u'\u005cu03a4' z u'\u005cu2062' g u'\u005cu2062' ( u'\u005cud835' u'\u005cudc19' ) , u'\u005cud835' u'\u005cudc1b' = u'\u005cud835' u'\u005cudc1b' - u'\u005cu03a4' b u'\u005cu2062' g u'\u005cu2062' ( u'\u005cud835' u'\u005cudc1b'
+p33
+aVIn practical applications, we also concern about the precision on Top-N predicted relation instances
+p34
+aVTo accelerate the convergence, we use a continuation method to improve the speed u'\u005cu039c' is initialized by a large value u'\u005cu039c' 1 , thus resulting in the fast reduction of the rank at first
+p35
+aVIn other words, for each approach, the amount of truly effective information about underlying semantic correlation keeps constant for the same dataset, which, to some extent, explains the reason why our approaches are robust to sparse features
+p36
+aVIn practice, we record the rank of matrix Z at each round of iteration until it converges at a rather small threshold u'\u005cu0395' = 10 - 4
+p37
+aVAn example accounting for the basic but practical assumption is illustrated in Figure 1, in which we know that the two entities ( Barack Obama, U.S are not only involved in the relation instances 8 8 According to convention, we regard a structured triple r u'\u005cu2062' ( e i , e j ) as a relation instance which is composed of a pair of entities e i , e j and a relation name r with respect to them coming from knowledge bases ( President-of(Barack Obama, U.S.) and Born-in(Barack Obama, U.S.) ), but also co-occur in several relation mentions 9 9 The sentences that contain the given entity pair are called relation mentions appearing in free texts ( Barack Obama is the 44th and current President of the U.S and Barack Obama was born in Honolulu, Hawaii, U.S etc
+p38
+aVDuring the iteration, any negative value in u'\u005cud835' u'\u005cudeba' - u'\u005cu03a4' u'\u005cud835' u'\u005cudc33' u'\u005cu2062' u'\u005cu039c' is assigned by zero, so that the rank of reconstructed matrix u'\u005cud835' u'\u005cudc19' will be reduced, where u'\u005cud835' u'\u005cudc19' = u'\u005cud835' u'\u005cudc14' u'\u005cu2062' m u'\u005cu2062' a u'\u005cu2062' x u'\u005cu2062' ( u'\u005cud835' u'\u005cudeba' - u'\u005cu03a4' u'\u005cud835' u'\u005cudc33' u'\u005cu2062' u'\u005cu039c' , 0 ) u'\u005cu2062' u'\u005cud835' u'\u005cudc15' u'\u005cud835' u'\u005cudc13'
+p39
+aVTherefore, this convex optimization model is called DRMC-b
+p40
+aVThe intuition of the paradigm is that one can take advantage of several knowledge bases, such as WordNet 3 3 http://wordnet.princeton.edu , Freebase 4 4 http://www.freebase.com and YAGO 5 5 http://www.mpi-inf.mpg.de/yago-naga/yago , to automatically label free texts, like Wikipedia 6 6 http://www.wikipedia.org and New York Times corpora 7 7 http://catalog.ldc.upenn.edu/LDC2008T19 , based on some heuristic alignment assumptions
+p41
+aV[ 23 ] used WordNet as the knowledge base to discover more hpyernym/hyponym relations between entities from news articles
+p42
+aVTherefore, we follow their settings and adopt the same way to filter the features
+p43
+aVTherefore, we set u'\u005cu03a4' z = u'\u005cu03a4' b = 0.5 to satisfy the above constraints on both two datasets
+p44
+aVThe two widely used datasets that we adopt are both automatically generated by aligning Freebase to New York Times corpora
+p45
+aVTherefore, the distant supervision paradigm may generate incomplete labeling corpora
+p46
+aVHowever, as producing hand-labeled corpora is laborius and expensive, the supervised approach can not satisfy the increasing demand of building large-scale knowledge repositories with the explosion of Web texts
+p47
+aVMa et al
+p48
+aVIf we implicitly model the bias vector u'\u005cud835' u'\u005cudc1b' , u'\u005cud835' u'\u005cudc19' * u'\u005cu2208' u'\u005cu211d' ( n + m ) × ( 1 + d + t ) can be denoted by [ u'\u005cud835' u'\u005cudfcf' , X * , u'\u005cud835' u'\u005cudc16' u'\u005cu2032' u'\u005cu2062' X * ] instead of [ X * , Y * ] , in which u'\u005cud835' u'\u005cudc16' u'\u005cu2032' takes the role of [ u'\u005cud835' u'\u005cudc1b' T ; u'\u005cud835' u'\u005cudc16' ] in DRMC-b
+p49
+aVTraditional supervised methods [ 28 , 1 ] on small hand-labeled corpora, such as MUC 1 1 http://www.itl.nist.gov/iaui/894.02/related projects/muc/ and ACE 2 2 http://www.itl.nist.gov/iad/mig/tests/ace/ , can achieve high precision and recall
+p50
+aVTherefore, We compare the precision of Top-100s, Top-200s and Top-500s for DRMC-1, DRMC-b and the state-of-the-art method NFE-13 [ 21 ]
+p51
+aVThen the convergence slows down as u'\u005cu039c' decreases while obeying u'\u005cu039c' k + 1 = m u'\u005cu2062' a u'\u005cu2062' x u'\u005cu2062' ( u'\u005cu039c' k u'\u005cu2062' u'\u005cu0397' u'\u005cu039c' , u'\u005cu039c' F u'\u005cu039c' F is the final value of u'\u005cu039c' , and u'\u005cu0397' u'\u005cu039c' is the decay parameter
+p52
+aVTheir approach is composed of several models, such as PCA [ 7 ] and collaborative filtering [ 15 ]
+p53
+aVHowever, it sharply decreases if we continue reducing the optimal rank
+p54
+aVGradient step
+p55
+aVThen, Ma et al
+p56
+aV[ 16 ] proposed the fixed point continuation (FPC) algorithm which is fast and robust
+p57
+aVSurdeanu et al
+p58
+aVSurdeanu et al
+p59
+aVThey set u'\u005cu0398' = 5 in the original code by default
+p60
+aV[ 10 ] , which formulated the multi-label transductive learning as a matrix completion problem
+p61
+aVHowever, either bioinformatic database or WordNet is maintained by a few experts, thus hardly kept up-to-date
+p62
+aVHoffmann et al
+p63
+aVThe goal of this step is to minimize the nuclear norm u'\u005cud835' u'\u005cudc19'
+p64
+aVMintz et al
+p65
+aVWe apply a new technique in the field of applied mathematics, i.e.,, low-rank matrix completion with convex optimization
+p66
+aVWe have mentioned that the basic alignment assumption of distant supervision [ 19 ] tends to generate noisy (noisy features and incomplete labels) and sparse (sparse features) data
+p67
+aVFor our relation classification task, both features and labels are binary
+p68
+aV[ 13 ] and Surdeanu et al
+p69
+aVWe also modify the fixed point continuation (FPC) algorithm [ 16 ] to find the global optimum
+p70
+aVShrinkage step
+p71
+aV\u005cENSURE Completed Matrix Z , bias b
+p72
+aVThe surrogate of the function can be the convex nuclear norm u'\u005cud835' u'\u005cudc19'
+p73
+aVIn essence, distantly supervised relation extraction is an incomplete multi-label classification task with sparse and noisy features
+p74
+aVIn this step, we infer the matrix gradient g u'\u005cu2062' ( u'\u005cud835' u'\u005cudc19' ) and bias vector gradient g u'\u005cu2062' ( u'\u005cud835' u'\u005cudc1b' ) as follows
+p75
+aVHowever, those high ranks result in poor performance
+p76
+aVTo tolerate the noise entries in the error matrix u'\u005cud835' u'\u005cudc04' , we minimize the cost functions C x and C y for features and labels respectively, rather than using the hard constraints in Formula (2
+p77
+aVIncomplete labels
+p78
+aV\u005cSTATE Projection step u'\u005cud835' u'\u005cudc19'
+p79
+aVNoisy features
+p80
+aVMore specifically, we minimize the nuclear norm u'\u005cud835' u'\u005cudc19'
+p81
+aVMoreover, the logistic cost function is integrated in our models to reduce the influence of noisy features and incomplete labels, due to that it is suitable for binary variables
+p82
+aVWe extract diverse textual features from all those relation mentions and combine them into a rich feature vector labeled by the relation names ( President-of and Born-in ) to produce a weak training corpus for relation classification
+p83
+aVSecond, a projection step is added to enforce the first column of matrix Z to be 1
+p84
+aVSparse features
+p85
+aVSnow et al
+p86
+aV[ 24 ] proposed a novel approach to multi-instance multi-label learning for relation extraction, which jointly modeled all the sentences in texts and all labels in knowledge bases for a given entity pair
+p87
+aVInspired by multi-instance learning [ 17 ] , Riedel et al
+p88
+aVThe rationale of this assumption is that noisy features and incomplete labels are semantically correlated
+p89
+aVThe low-rank factorization of the sparse feature-label matrix delivers the low-dimensional representation of de-correlation for features and labels
+p90
+aV\u005cENDWHILE
+p91
+aV\u005cENDWHILE
+p92
+aVWe relax the feature filtering threshold ( u'\u005cu0398' = 4 , 3 , 2 ) in Surdeanu et al u'\u005cu2019' s [ 24 ] open source program to generate more sparse features from NYT u'\u005cu2019' 10 dataset
+p93
+aVAlgorithm 2 is similar to Algorithm 1 except for two differences
+p94
+aVIn addition, The matrix gradient g u'\u005cu2062' ( u'\u005cud835' u'\u005cudc19' ) for DRMC-1 is
+p95
+aVThree kinds of features, namely, lexical, syntactic and named entity tag features, were extracted from relation mentions
+p96
+aV[ 22 ] , and also used by Hoffmann et al
+p97
+aVThe breakthrough work on this topic was made by Candès and Recht [ 5 ] who proved that most low-rank matrices can be perfectly recovered from an incomplete set of entries
+p98
+aVIn this paper, we formulate the relation-extraction task from a novel perspective of using matrix completion with low rank criterion
+p99
+aVThe linear classifier we adopt aims to explicitly learn the weight matrix u'\u005cud835' u'\u005cudc16' u'\u005cu2208' u'\u005cu211d' d × t and the bias column vector u'\u005cud835' u'\u005cudc1b' u'\u005cu2208' u'\u005cu211d' t × 1 with the constraint of minimizing the loss function l
+p100
+aVRelation Extraction (RE) is the process of generating structured relation knowledge from unstructured natural language texts
+p101
+aV[ 19 ] adopted Freebase [ 3 , 2 ] , a large-scale crowdsourcing knowledge base online which contains billions of relation instances and thousands of relation names, to distantly supervise Wikipedia corpus
+p102
+aVWe contribute two optimization models, DRMC 11 11 It is the abbreviation for D istant supervision for R elation extraction with M atrix C ompletion -b and DRMC-1, aiming at exploiting the sparsity to recover the underlying low-rank matrix and to complete the unknown testing labels simultaneously
+p103
+aVNot all relation mentions express the corresponding relation instances
+p104
+aVThe rank function in Formula (2) is a non-convex function that is difficult to be optimized
+p105
+aVWe assume that the actual entry u belonging to the underlying matrix u'\u005cud835' u'\u005cudc19' * is randomly generated via a sigmoid function [ 14 ]
+p106
+aV* via employing the regularization terms, i.e.,, the cost functions C x and C y for features and labels
+p107
+aVThen, we can apply the log-likelihood cost function to measure the conditional probability and derive the logistic cost function for C x and C y
+p108
+aVFor the stopping criteria in inner iterations, we define the relative error to measure the residual of matrix u'\u005cud835' u'\u005cudc19' between two successive iterations
+p109
+aVThen we can extract a variety of textual features and learn a multi-class logistic regression classifier
+p110
+aVThe first dataset 12 12 http://iesl.cs.umass.edu/riedel/ecml/ , NYT u'\u005cu2019' 10, was developed by Riedel et al
+p111
+aVThis promising theory has been successfully applied on many active research areas, such as computer vision [ 4 ] , recommender system [ 20 ] and system controlling [ 9 ]
+p112
+aVEven though the FPC algorithm converges in iterative fashion, the value of u'\u005cu0395' varying with different datasets is difficult to be decided
+p113
+aVFor example, the fourth relation mention in Figure 1 should have been labeled by the relation Senate-of
+p114
+aVThe second dataset 13 13 http://iesl.cs.umass.edu/riedel/data-univSchema/ , NYT u'\u005cu2019' 13, was also released by Riedel et al
+p115
+aVWe use the gradient descents u'\u005cud835' u'\u005cudc00' = u'\u005cud835' u'\u005cudc19' - u'\u005cu03a4' z u'\u005cu2062' g u'\u005cu2062' ( u'\u005cud835' u'\u005cudc19' ) and u'\u005cud835' u'\u005cudc1b' = u'\u005cud835' u'\u005cudc1b' - u'\u005cu03a4' b u'\u005cu2062' g u'\u005cu2062' ( u'\u005cud835' u'\u005cudc1b' ) to gradually find the global minima of the cost function terms in Formula (3), where u'\u005cu03a4' z and u'\u005cu03a4' b are step sizes
+p116
+aVMore specifically, NYT u'\u005cu2019' 10 contains much higher dimensional features than NYT u'\u005cu2019' 13, whereas fewer training and testing items
+p117
+aVThey extended the multi-instance learning framework [ 22 ] to the multi-label circumstance
+p118
+aVAs we cannot tell what kinds of features are effective in advance, we have to use NLP toolkits, such as Stanford CoreNLP 10 10 http://nlp.stanford.edu/downloads/corenlp.shtml , to extract a variety of textual features, e.g.,, named entity tags, part-of-speech tags and lexicalized dependency paths
+p119
+aVIn order to conduct reliable experiments, we adjust and estimate the parameters for our approaches, DRMC-b and DRMC-1, and compare them with other four kinds of landmark methods [ 19 , 13 , 24 , 21 ] on two public datasets
+p120
+aV[ 13 ] pointed out that many entity pairs have more than one relation
+p121
+aVThen we derive another optimization model called DRMC-1
+p122
+aVHowever, they did not concern about the data noise brought by the basic assumption of distant supervision
+p123
+aVOther literatures [ 25 , 18 , 27 , 26 ] addressed more specific issues, like how to construct the negative class in learning or how to adopt more information, such as name entity tags, to improve the performance
+p124
+aVFigure 5 demonstrates that the ranks of data matrices are approximately 2,000 for the initial optimization of DRMC-b and DRMC-1
+p125
+aVThe idea of distant supervision was firstly proposed in the field of bioinformatics [ 8 ]
+p126
+aV* in Formula (3
+p127
+aVWe set u'\u005cu039b' = 1 to make the contribution of the cost function terms for feature and label matrices equal in Formulae (3) and (4 u'\u005cu039c' is assigned by a series of values obeying u'\u005cu039c' k + 1 = m u'\u005cu2062' a u'\u005cu2062' x u'\u005cu2062' ( u'\u005cu039c' k u'\u005cu2062' u'\u005cu0397' u'\u005cu039c' , u'\u005cu039c' F
+p128
+aVIn this part, we address the issue of setting parameters the trade-off weights u'\u005cu039c' and u'\u005cu039b' , the step sizes u'\u005cu03a4' z and u'\u005cu03a4' b , and the decay parameter u'\u005cu0397' u'\u005cu039c'
+p129
+aVwhere u'\u005cu0395' is the convergence threshold
+p130
+aVP r ( u v ) = 1 / ( 1 + e - u u'\u005cu2062' v ) , given the observed binary entry v from the observed sparse matrix u'\u005cud835' u'\u005cudc19'
+p131
+aVAfter completing the entries in Y t u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t , we adopt the sigmoid function to calculate the conditional probability of relation r j , given entity pair p i pertaining to y i u'\u005cu2062' j in Y t u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t
+p132
+aVThen we can predict the label matrix Y t u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2208' u'\u005cu211d' m × t of m testing items with respect to the feature matrix X t u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2208' u'\u005cu211d' m × d
+p133
+aVUnfortunately, most of them appear only once in the training corpus, and hence leading to very sparse features
+p134
+aVFirst, there is no bias vector b
+p135
+aV[ 21 ] , in which they only regarded the lexicalized dependency path between two entities as features
+p136
+aVwhere 1 is the all-one column vector
+p137
+aVWe follow the suggestion in [ 10 ] that u'\u005cu039c' starts at u'\u005cu03a3' 1 u'\u005cu2062' u'\u005cu0397' u'\u005cu039c' , and u'\u005cu03a3' 1 is the largest singular value of the matrix Z
+p138
+aVAfter recording the rank associated with the highest F1 score on each fold, we compute the mean and the standard deviation to estimate the range of optimal rank for testing
+p139
+aVFigure 6 shows that our approaches consistently outperform the baseline and the state-of-the-art methods with diverse feature sparsity degrees
+p140
+aV[ 22 ] relaxed the strong assumption and replaced all sentences with at least one sentence
+p141
+aVThis paradigm is promising to generate large-scale training corpora automatically
+p142
+aVLet X t u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2208' u'\u005cu211d' n × d and Y t u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2208' u'\u005cu211d' n × t denote the feature matrix and the label matrix for training, respectively
+p143
+aVFigure 4 (a) shows that our approaches achieve the significant improvement on performance
+p144
+aVFinally, we can achieve Top-N predicted relation instances via ranking the values of P r ( r j p i )
+p145
+aVMoreover, their programs can control the feature sparsity degree through a threshold u'\u005cu0398' which filters the features that appears less than u'\u005cu0398' times
+p146
+aVWe bypass the description due to the limitation of space
+p147
+aVTo address the lacking training data issue, we consider the distant [ 19 ] or weak [ 13 ] supervision paradigm attractive, and we improve the effectiveness of the paradigm in this paper
+p148
+aVFurthermore, we discuss the influence of feature sparsity, and our approaches consistently achieve better performance than compared methods under different sparsity degrees
+p149
+aVTable 2 also lists the range of optimal rank for DRMC-b and DRMC-1 with different u'\u005cu0398'
+p150
+aVSuch analogous cases commonly exist in feature extraction
+p151
+aVFirstly, we conduct experiments to compare our approaches with Mintz-09 [ 19 ] , MultiR-11 [ 13 ] , MIML-12 and MIML-at-least-one-12 [ 24 ] on NYT u'\u005cu2019' 10 dataset
+p152
+aVFurthermore, we discuss the influence of the feature sparsity for our approaches and the state-of-the-art methods
+p153
+aVExperiments on two widely used datasets demonstrate that our noise-tolerant approaches outperform the baseline and the state-of-the-art methods
+p154
+aVThe model can be written as
+p155
+aVTable 1 shows that the two datasets differ in some main attributes
+p156
+aVWe perform the singular value decomposition (SVD) [ 12 ] for u'\u005cud835' u'\u005cudc00' at first, and then cut down each singular value
+p157
+aVTable 2 lists the range of optimal ranks for DRMC-b and DRMC-1 on NYT u'\u005cu2019' 10 and NYT u'\u005cu2019' 13
+p158
+aV1 ) denotes the first column of u'\u005cud835' u'\u005cudc19'
+p159
+aVWe set u'\u005cu0397' u'\u005cu039c' = 0.01
+p160
+aVFigure 4 (b) illustrates that our approaches still outperform the state-of-the-art methods
+p161
+aVwhere we use u'\u005cu03a9' X to represent the index set of observable feature entries in X t u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' i u'\u005cu2062' n and X t u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t , and u'\u005cu03a9' Y to denote the index set of observable label entries in Y t u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' i u'\u005cu2062' n
+p162
+aVWe use the five-fold cross validation on the validation set and evaluate the performance on each fold with different ranks
+p163
+aV\u005cSTATE Shrinkage step u'\u005cud835' u'\u005cudc14' u'\u005cu2062' u'\u005cud835' u'\u005cudeba' u'\u005cu2062' u'\u005cud835' u'\u005cudc15' u'\u005cud835' u'\u005cudc13' = SVD u'\u005cu2062' ( u'\u005cud835' u'\u005cudc00' ) , u'\u005cud835' u'\u005cudc19' = u'\u005cud835' u'\u005cudc14' u'\u005cu2062' m u'\u005cu2062' a u'\u005cu2062' x u'\u005cu2062' ( u'\u005cud835' u'\u005cudeba' - u'\u005cu03a4' u'\u005cud835' u'\u005cudc33' u'\u005cu2062' u'\u005cu039c' , 0 ) u'\u005cu2062' u'\u005cud835' u'\u005cudc15' u'\u005cud835' u'\u005cudc13'
+p164
+aV\u005cSTATE Shrinkage step u'\u005cud835' u'\u005cudc14' u'\u005cu2062' u'\u005cud835' u'\u005cudeba' u'\u005cu2062' u'\u005cud835' u'\u005cudc15' u'\u005cud835' u'\u005cudc13' = SVD u'\u005cu2062' ( u'\u005cud835' u'\u005cudc00' ) , u'\u005cud835' u'\u005cudc19' = u'\u005cud835' u'\u005cudc14' u'\u005cu2062' m u'\u005cu2062' a u'\u005cu2062' x u'\u005cu2062' ( u'\u005cud835' u'\u005cudeba' - u'\u005cu03a4' u'\u005cud835' u'\u005cudc33' u'\u005cu2062' u'\u005cu039c' , 0 ) u'\u005cu2062' u'\u005cud835' u'\u005cudc15' u'\u005cud835' u'\u005cudc13'
+p165
+aVWe also perform the experiments to compare our approaches with the state-of-the-art NFE-13 16 16 Readers may refer to the website, http://www.riedelcastro.org/uschema for the details of those methods
+p166
+aVSet u'\u005cud835' u'\u005cudc19' = u'\u005cud835' u'\u005cudc19' u'\u005cud835' u'\u005cudfce'
+p167
+aVWe thus define
+p168
+aV[ 24 ] released the open source code 15 15 http://nlp.stanford.edu/software/mimlre.shtml to reproduce the experimental results on those previous methods
+p169
+aVWe observe that for each approach, the optimal range is relatively stable
+p170
+aVIn this way, we guarantee the fair comparison for all methods
+p171
+aVIn this section, we discuss how our approaches tackle these natural flaws
+p172
+aVAt each round of iteration, we gain a recovered matrix and average the F1 14 14 F u'\u005cu2062' 1 = 2 × p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' c u'\u005cu2062' i u'\u005cu2062' s u'\u005cu2062' i u'\u005cu2062' o u'\u005cu2062' n × r u'\u005cu2062' e u'\u005cu2062' c u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' l p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' c u'\u005cu2062' i u'\u005cu2062' s u'\u005cu2062' i u'\u005cu2062' o u'\u005cu2062' n + r u'\u005cu2062' e u'\u005cu2062' c u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' l scores from Top-5 to Top-all predicted relation instances to measure the performance
+p173
+aVTable 3 shows that DRMC-b and DRMC-1 achieve 24.0% and 26.6% precision increments on average, respectively
+p174
+aV[ 21 ] and its sub-methods (N-13, F-13 and NF-13) on NYT u'\u005cu2019' 13 dataset
+p175
+aVFigure 3 illustrates the curves of average F1 scores
+p176
+aVThis work is supported by National Program on Key Basic Research Project (973 Program) under Grant 2013CB329304, National Science Foundation of China (NSFC) under Grant No.61373075
+p177
+aVwhere u'\u005cu039c' and u'\u005cu039b' are the positive trade-off weights
+p178
+aVSet u'\u005cud835' u'\u005cudc19' = u'\u005cud835' u'\u005cudc19' u'\u005cud835' u'\u005cudfce' , u'\u005cud835' u'\u005cudc1b' = u'\u005cud835' u'\u005cudc1b' u'\u005cud835' u'\u005cudfce'
+p179
+aV* = u'\u005cu2211' u'\u005cu03a3' k u'\u005cu2062' ( u'\u005cud835' u'\u005cudc19' ) [ 5 ] , where u'\u005cu03a3' k is the k - t u'\u005cu2062' h largest singular value of u'\u005cud835' u'\u005cudc19'
+p180
+aVThe final value of u'\u005cu039c' , namely u'\u005cu039c' F , is equal to 0.01
+p181
+aVHowever, it comes up against three technical challeges
+p182
+aS''
+p183
+aVwhere u'\u005cud835' u'\u005cudc19'
+p184
+aVLet
+p185
+aV1 ) = 1
+p186
+aV[ 19 ]
+p187
+aV[ 24 ]
+p188
+ag183
+ag183
+ag183
+ag183
+ag183
+ag183
+ag183
+aVand
+p189
+a.

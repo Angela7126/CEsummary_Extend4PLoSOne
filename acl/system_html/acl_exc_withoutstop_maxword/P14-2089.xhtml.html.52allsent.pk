@@ -1,0 +1,90 @@
+(lp0
+VOur model builds on word2vec [] , a neural network based language model that learns word embeddings by maximizing the probability of raw text
+p1
+aVTherefore, in order to make fair comparison, for every set of trained embeddings, we fix them as input embedding for word2vec, then learn the remaining input embeddings (words not in the relations) and all the output embeddings using cbow
+p2
+aVWhile RCM learns embeddings suited to specific tasks based on knowledge resources, cbow learns embeddings for words not included in the resource but appear in a corpus
+p3
+aVMeasuring perplexity means computing the exact probability of each word, which requires summation over all words in the vocabulary in the denominator of the softmax
+p4
+aVEven when our goal is to strictly model the raw text corpus, we obtain improvements by injecting semantic information into the objective
+p5
+aVWe use distributed training, where shared embeddings are updated by each thread based on training data within the thread, i.e.,, asynchronous stochastic gradient ascent
+p6
+aVWhile the joint model balances between fitting the text and learning relations, modeling the text at the expense of the relations may negatively impact the final embeddings for tasks that use the embeddings outside of the context of word2vec
+p7
+aVFor each objective (cbow or RCM), we sample 15 words as negative samples for each training instance according to their frequencies in raw texts (i.e., training data of cbow
+p8
+aVSince this involves running cbow on NYT data for 2 iterations (one iteration for word2vec-training/pre-training/joint-modeling and the other for tuning the language model), we use Joint-r (random initialization) for a fair comparison
+p9
+aVWe begin by reviewing the word2vec objective and then present augmentations of the objective for prior knowledge, including different training strategies
+p10
+aVWe present a general model for learning word embeddings that incorporates prior knowledge available for a domain
+p11
+aVWe initially created WordNet training data, but found it too small to affect results
+p12
+aVWe propose a new training objective for learning word embeddings that incorporates prior knowledge
+p13
+aVWhile we see improvements from XL to XXL (5 times as many relations), we get worse results on XXXL, likely because this set contains the lowest quality relations in PPDB
+p14
+aVTraining learns these representations for each word w t (the t th word in a corpus of size T ) so as to maximize the log likelihood of each token given its context words within a window sized c
+p15
+aVThis enables the RCM model to benefit from the unlabeled data, but refine the embeddings constrained by the given relations
+p16
+aVIn fact, RCM does not even observe all the words that appear in the training set, so it makes little sense to use the RCM embeddings directly for language modeling
+p17
+aVWe consider two resources for training the RCM term the Paraphrase Database (PPDB) [] and WordNet []
+p18
+aVUsing the human judgements, we compute the swapped pairs rate the ratio between the number of swapped pairs and the number of all pairs
+p19
+aVWe assign a score using the dot product between the output embeddings of each word in the pair, then order all 868 pairs according to this score
+p20
+aVDivision into these sets is based on an automatically derived accuracy metric
+p21
+aVTherefore, we also trained the language models with hierarchical classification [] strategy (HS
+p22
+aVThe cbow and RCM objectives use separate data for learning
+p23
+aVThe baseline word2vec and the joint model have nearly the same averaged running times (2,577s and 2,644s respectively), since they have same number of threads for the CBOW objective and the joint model uses additional threads for the RCM objective
+p24
+aVBased on our initial experiments, RCM uses the output embeddings of cbow
+p25
+aVTherefore, we include only RCM results trained on PPDB, but show evaluations on both PPDB and WordNet
+p26
+aVBased on this resource, we learn embeddings that predict one word from another related word
+p27
+aVIn the case of semantics, we could have a resource that encodes semantic similarity between words
+p28
+aVWe define u'\u005cud835' u'\u005cudc11' as a set of relations between two words w and w u'\u005cu2032' u'\u005cud835' u'\u005cudc11' can contain typed relations (e.g.,, w is related to w u'\u005cu2032' through a specific type of semantic relation), and relations can have associated scores indicating their strength
+p29
+aVWe found this an effective method for balancing the two objectives
+p30
+aVWord2vec [] is an algorithm for learning embeddings using a neural language model
+p31
+aVThe resulting trained model is then used to initialize the RCM model
+p32
+aVSince we use both resources for evaluation, we divide each into train, dev and test
+p33
+aVWe trained 200-dimensional embeddings and used output embeddings for measuring similarity
+p34
+aVNext, we removed duplicate pairs if A,B occurred in PPDB, we removed relations of B,A
+p35
+aVThe latter was also used in [] for training a network for predicting synset relation
+p36
+aVTraining was based on one of the other sets minus relations from S
+p37
+aVWhile word2vec and joint are trained as language models, RCM is not
+p38
+aVTherefore, we use the embeddings from a trained joint model to pre-train an RCM model
+p39
+aVSuppose we have a resource that indicates relations between words
+p40
+aVHowever we did not use the training data because it is too small to affect the results
+p41
+aVFor our semantic relations e w u'\u005cu2032' and e w are symmetrical, so we use a single embedding
+p42
+aVThe latter worked better in our experiments so we focus on it in our presentation cbow defines p ( w t w t - c t + c ) as
+p43
+aVSuppose w has frequency u u'\u005cu2062' ( w ) , then the probability of sampling w is p u'\u005cu2062' ( w ) u'\u005cu221d' u u'\u005cu2062' ( w ) 3 / 4
+p44
+a.

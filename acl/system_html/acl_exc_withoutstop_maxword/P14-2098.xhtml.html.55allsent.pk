@@ -1,0 +1,64 @@
+(lp0
+VFirst, Table 4 shows that by incorporating correction patterns into the merging algorithm, the errors in correction detection step were reduced
+p1
+aVAlso, as suggested by the experimental result, among the four corpora, FCE corpus is a comparably good resource for training correction detection models with our current feature set
+p2
+aVThe models built on corpora can generally improve the correction detection accuracy 5 5 We currently do not evaluate the end-to-end system over different corpora
+p3
+aVWe propose to improve upon the correction detection component by training a classifier that determines which edits in a revised sentence address the same error in the original sentence
+p4
+aVOur analysis confirms that the merging step is the bottleneck in the current correction detection system u'\u005cu2013' it accounts for 75% of the mis-detections
+p5
+aVOne reason is that FCE corpus has many more training instances, which benefits model training
+p6
+aVThis is because different corpora employ different error type categorization standards
+p7
+aVIf the resulting basic edits do not match with those that compose the actual corrections, we attribute the error to the first step
+p8
+aVSince mis-detected corrections cannot be analyzed down the pipeline, the correction detection component became the bottle-neck of their overall system
+p9
+aVWe considered four corpora with different ESL populations and annotation standards, including FCE corpus [ 17 ] , NUCLE corpus [ 2 ] , UIUC corpus 2 2 UIUC corpus contains annotations of essays collected from ICLE [ 6 ] and CLEC [ 7 ]
+p10
+aVComparing a student-written sentence with its revision, we observe that each correction can be decomposed into a set of more basic edits such as word insertions, word deletions and word substitutions
+p11
+aVThis led to a significant improvement on the overall system u'\u005cu2019' s F 1 -score on all corpora
+p12
+aVTherefore, to effectively reduce the algorithm u'\u005cu2019' s mis-detection errors, we propose to build a classifier to merge with better accuracies
+p13
+aVBecause the classifier were trained on revisions where corrections are explicitly marked by English experts, it is also possible to build systems adjusted to different annotation standards
+p14
+aVIn the example shown in Figure 1 , the correction u'\u005cu201c' to change u'\u005cu21d2' changing u'\u005cu201d' is composed of a deletion of to and a substitution from change to changing ; the correction u'\u005cu201c' moment u'\u005cu21d2' minute u'\u005cu201d' is itself a single word substitution
+p15
+aVWe then create a training instance for each pair of two consecutive basic edits if two consecutive basic edits need to be merged, we will mark the outcome as True , otherwise it is False
+p16
+aVWe simulate the revisions by applying corrections onto the original sentence
+p17
+aVBecause the Levenshtein algorithm only tries to minimize the number of edits, it does not care whether the edits make any linguistic sense
+p18
+aVThus, we can build systems to detect corrections which operates in two steps
+p19
+aVFor example, in Figure 11 , when the insertion of one word is followed by the deletion of the same word, the insertion and deletion are likely addressing one single error
+p20
+aVThe teachers u'\u005cu2019' annotations are treated as gold standard for the detailed corrections
+p21
+aVTo predict whether two basic-edits address the same writing problem more discriminatively, we train a Maximum Entropy binary classifier based on features extracted from relevant contexts for the basic edits
+p22
+aVFurthermore, it is not clear if the heuristics will work as well for tutors trained to mark up revisions under different guidelines
+p23
+aVOn the other hand, in Figure 11 , if one edit includes a substitution between words with the same POS u'\u005cu2019' s, then it is likely fixing a word choice error by itself
+p24
+aVA bigger concern is to guarantee the extracted phrase pairs are indeed translations or paraphrases
+p25
+aVComputer aided language learning tools offer a solution for providing more detailed feedback
+p26
+aVRecent work therefore focuses on identifying the alignment/edits between two sentences [ 13 , 8 ]
+p27
+aVDue to the effort involved in comparing revisions with the original texts, students often fail to learn from these revisions [ 16 ]
+p28
+aVThis is because these two edits would combine together as a word-order change
+p29
+aVBecause this is time consuming, tutors often just rewrite the sentences without giving any explanations [ 5 ]
+p30
+aVIn practice, however, this two-step approach may result in mis-detections due to ambiguities
+p31
+a.

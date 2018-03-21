@@ -1,0 +1,26 @@
+(lp0
+VThe main research question in this research is how to disambiguate an L1 word or phrase to its L2 translation based on an L2 context, and whether such cross-lingual contextual approaches provide added value compared to baseline models that are not context informed or compared to standard language models
+p1
+aVWe do so by normalising the class probability from the classifier ( s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e T u'\u005cu2062' ( H ) ), which is our translation model, and the language model ( s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e l u'\u005cu2062' m u'\u005cu2062' ( H ) ), in such a way that the highest classifier score for the alternatives under consideration is always 1.0 , and the highest language model score of the sentence is always 1.0
+p2
+aVPreparing the data to build training and test data for our intended translation assistance system is not trivial, as the type of interactive translation assistant we aim to develop does not exist yet
+p3
+aVThe language model is a trigram-based back-off language model with Kneser-Ney smoothing, computed using SRILM [] and trained on the same training data as the translation model
+p4
+aVThe fact that a phrase-translation table needs to be constructed for the test data is also the reason that the parallel corpus split from which the test data is derived has to be large enough, ensuring better quality
+p5
+aVIf not, we check for the presence of a classifier expert for the offered L1 fragment; only then we can proceed by extracting the desired number of L2 local context words to the immediate left and right of this fragment and adding those to the feature vector
+p6
+aVWe see that the language model baseline for English u'\u005cu2192' French shows the same substantial improvement over the baseline as our English u'\u005cu2192' Spanish results
+p7
+aVAutomatic configuration selection was done by performing leave-one-out testing (for small number of instances) or 10-fold-cross validation (for larger number of instances, n u'\u005cu2265' 20 ) on the training data per classifier expert
+p8
+aVA second baseline was constructed by weighing the probabilities from the translation table directly with the L2 language model described earlier
+p9
+aVThe word accuracy for the entire set is then computed by taking the sum of the word accuracies per sentence pair, divided by the total number of sentence pairs
+p10
+aVThird, we observe that adding the language model to our classifier leads to another significant gain (configuration l1r1 + LM in the results in Table 2
+p11
+aVA second parameter u'\u005cu039b' 2 further limits the considered phrase pairs ( f s , f t ) to have the product of their conditional probabilities not not deviate more than a fraction u'\u005cu039b' 2 from the joint probability for the strongest possible pairing for f s , the
+p12
+a.

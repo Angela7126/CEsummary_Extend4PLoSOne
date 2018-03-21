@@ -1,0 +1,60 @@
+(lp0
+VCluster data in D based on the topic distributions from Step 5 and train a separate sentiment model for each cluster
+p1
+aVWe generate two features based on the lexicons total number of positive words or negative words found in each tweet
+p2
+aVFor the topic-based mixture model and semi-supervised training, based on the experiments on the development set, we set the parameter u'\u005cu03a4' used in soft clustering to 0.4, the data selection parameter p to 0.96, and the interpolation parameter for smoothing u'\u005cu0398' to 0.3
+p3
+aVAs shown in the third column in Table 3 , surprisingly, the model with topic information inferred from the newswire data works well on the Twitter domain
+p4
+aVOnce we identify the topics for tweets in the training data, we can split the data into multiple subsets based on topic distributions
+p5
+aVWith the topic information inferred from Twitter data, the F score is 2 points higher than the baseline without semi-supervised training and 1.4 higher than the baseline with semi-supervised data
+p6
+aVGenerally u'\u005cu201c' offensive u'\u005cu201d' is used as a negative word (as in the first tweet), but it bears no sentiment in the second tweet when people are talking about a football game
+p7
+aVThe option of probability estimation in LibSVM is turned on so that it can produce the probability of sentiment class c given tweet x at the classification time, i.e., P ( c x )
+p8
+aVNote that for the second and third features, we ignore those with sentiment scores between -1 and 1, since we found that inclusion of those weak subjective words results in unstable performance
+p9
+aVIf the last sentiment word found in the tweet is positive (or negative), this feature is set to 1 (or -1
+p10
+aVWe conduct pre-processing by removing stop words and some of the frequent words found in Twitter data
+p11
+aVWe also compare different approaches for topic modeling, such as cross-domain topic identification by utilizing data from newswire domain
+p12
+aVThe first row shows the performance of the universal sentiment model as a baseline
+p13
+aVDue to the skewness in class distribution in the training set, it is observed during error analysis on the development set that subjective (positive/negative) tweets are more likely to be classified as neutral tweets
+p14
+aVInstead, we only compute two features based on counts only total number of positive bigrams; total number of negative bigrams
+p15
+aVIf none of the words in the tweet is sentiment word, it is set to 0 by default
+p16
+aVThe second row shows the results from re-training the universal model by simply adding tweets selected from two iterations of semi-supervised training (about 100K
+p17
+aVSimilar to the universal model, we train T topic-specific sentiment models with LibSVM
+p18
+aVThe weights for positive, neutral and negative samples are set to be (1, 0.4, 1) based on the results on the development set
+p19
+aVAn SVM model represents the examples as points in space, mapped so that the examples of the different categories are separated by a clear margin as wide as possible
+p20
+aVPMI unigram lexicons in [ Mohammad et al.2013 ] two lexicons were automatically generated based on pointwise mutual information (PMI
+p21
+aVFor example, K-means clustering can be conducted based on the similarity between the topic distribution vectors or their transformed versions
+p22
+aVPunctuations if there exists exclamation mark or question mark in the tweet, the feature is set to 1, otherwise set to 0
+p23
+aVThe universal model serves as a strong baseline and also provides an option for smoothing later
+p24
+aVWe compute 7 features based on each of the two lexicons
+p25
+aVFor evaluation, we use macro averaged F score as in [ Nakov et al.2013 ] , i.e., average of the F scores computed on positive and negative classes only
+p26
+aVAs shown in Table 2 , weighting adds a 2% improvement
+p27
+aVNote that this does not make the task a binary classification problem
+p28
+aVIn this work, we assign tweet x i to cluster j if P t ( t j x i ) u'\u005cu03a4' or P t ( t j x i ) = max k P t ( t k x i
+p29
+a.

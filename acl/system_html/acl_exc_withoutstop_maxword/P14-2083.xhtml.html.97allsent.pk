@@ -1,0 +1,200 @@
+(lp0
+VThe results show that the majority of disagreements are due to hard cases, and only about 20% of conflicting annotations are actual errors
+p1
+aVIn NLP, we often model annotation as if it reflected a single ground truth that was guided by an underlying linguistic theory
+p2
+aVHowever, it is well known that there are linguistically hard cases [] , where no theory provides a clear answer, so annotation schemes commit to more or less arbitrary decisions
+p3
+aVWe then collect a corpus of such disagreements and have experts mark which ones are due to actual annotation errors , and which ones reflect linguistically hard cases (Section 3
+p4
+aVIf this was true, the specific theory should be learnable from the annotated data
+p5
+aVWe present disagreements as Hinton diagrams in Figure 2 a u'\u005cu2013' c
+p6
+aVIn order to do so, we train a classifier on the annotated data set containing 440 tag-confusion pairs by relying only on surface form features
+p7
+aVNote that the spoken language data does not include punctuation
+p8
+aVIf we balance the data set and perform 3-fold cross-validation, a L2-regularized logistic regression (L2-LR) model achieves an f 1 -score for detecting errors at 70% (cf. Table 1 ), which is above average, but not very impressive
+p9
+aVIf we pre-filter the data via Wiktionary and use an item-response model [] rather than majority voting, the agreement rises to 80.58%
+p10
+aVthat actual errors are in fact so infrequent as to be negligible, even when linguists annotate without guidelines
+p11
+aVWe did so in order to make comparison between existing data sets possible
+p12
+aVMoreover, this allows us to focus on really hard cases, as any debatable case in the coarse-grained tag set is necessarily also part of the finer-grained tag set
+p13
+aVOur analyses show that a) experts disagree on the known hard cases when freely annotating text, and b) that these disagreements are the same across text types
+p14
+aVIn this section, we investigate what happens if we weed out obvious errors by detecting annotation inconsistencies across a corpus
+p15
+aVIn Twitter, the X category is often confused with punctuations, e.g.,, when annotating punctuation acting as discourse continuation marker
+p16
+aVIt works by collecting u'\u005cu201c' variation n -grams u'\u005cu201d' , i.e., the longest sequence of words ( n -gram) in a corpus that has been observed with a token being tagged differently in another occurence of the same n -gram in the same corpus
+p17
+aVIn particular, adpositions (ADP) are confused with particles (PRT) (as in the case of u'\u005cu201c' get out u'\u005cu201d' ); adjectives (ADJ) are confused with nouns (as in u'\u005cu201c' stone lion u'\u005cu201d' ); pronouns (PRON) are confused with determiners (DET) ( u'\u005cu201c' my house u'\u005cu201d' ); numerals are confused with adjectives, determiners, and nouns ( u'\u005cu201c' 2nd time u'\u005cu201d' ); and adjectives are confused with adverbs (ADV) ( u'\u005cu201c' see you later u'\u005cu201d'
+p18
+aVThe algorithm starts off by looking for unigrams and expands them until no longer n -grams are found
+p19
+aVOne difference is that lay people do not confuse numerals very often, probably because they rely more on orthographic cues than on distributional evidence
+p20
+aVIn this section, we examine whether we can learn a classifier to distinguish between hard cases and annotation errors
+p21
+aVFinally, in Section 4 , we present an experiment trying to learn a model to distinguish between hard cases and annotation errors
+p22
+aVDisagreements are very similar to the disagreements between expert annotators, especially on Twitter data (Figure 2 b
+p23
+aVWe noted earlier, though, that disagreements can arise both from hard cases and from annotation errors
+p24
+aVLastly, we compare the disagreements of annotators on a French social media data set [] , which we mapped to the universal POS tag set
+p25
+aVThe disagreements that remain are the truly hard cases
+p26
+aVpresents work on detecting linguistically hard cases in the context of word sense annotations, e.g.,, cases where expert annotators will disagree, as well as differentiating between underspecified, overspecified and metaphoric cases
+p27
+aVThis suggests that most annotation differences derive from hard cases, rather than random errors
+p28
+aVWhile we also quantify the proportion of hard cases and present an analysis of these cases, we also show that disagreements are systematic
+p29
+aVFigure 2 presents the Hinton diagram of the disagreements of lay people
+p30
+aVThe correlations between the disagreements are highly significant, with Spearman coefficients ranging from 0.644 (spoken and WSJ) to 0.869 (spoken and Twitter
+p31
+aVInstead of using overly specific annotation guidelines, designed to minimize inter-annotator disagreement [] , and adjudicating between annotators of different opinions, we should embrace systematic inter-annotator disagreements
+p32
+aVThis suggests that inter-annotator agreement scores often hide the fact that the vast majority of annotations are actually linguistically motivated
+p33
+aVThis position paper argues that annotation projects should embrace these hard cases rather than pretend they can be unambiguously resolved
+p34
+aVThe crowdsourced annotations aggregated using majority voting agree with the expert annotations in 79.54% of the cases
+p35
+aVBesides these English data sets, we also obtained doubly-annotated POS data from the French Social Media Bank project []
+p36
+aVA survey of hard cases
+p37
+aVMoreover, we compare professional annotation to that of lay people
+p38
+aVIn total, our data set contains 880 items, i.e., 440 annotated confusion tag pairs
+p39
+aVIn this study, we had between 2-10 individual annotators with degrees in linguistics annotate different kinds of English text with POS tags, e.g.,, newswire text (PTB WSJ Section 00), transcripts of spoken language (from a database containing transcripts of conversations, Talkbank 1 1 http://talkbank.org/ ), as well as Twitter posts
+p40
+aVAnnotators were specifically not presented with guidelines that would help them resolve hard cases
+p41
+aV2 2 Experiments with variation n -grams on WSJ [] and the French data lead us to estimate that the fine-to-coarse mapping of POS tags disregards about 20% of observed tag-pair confusion types, most of which relate to fine-grained verb and noun distinctions, e.g., past participle versus past in u'\u005cu201c' [..] criminal lawyers speculated/VBD vs
+p42
+aVTo substantiate our claims, we first compare the distribution of inter-annotator disagreements across domains and languages, showing that most disagreements are systematic (Section 2
+p43
+aVNOUN-PRON disagreements are always linguistically debatable cases, while they are less frequent
+p44
+aVIn the previous section, we demonstrated that some disagreements are consistent across domains and languages
+p45
+aVWe use a modified version of the a priori algorithm introduced in to identify annotation inconsistencies
+p46
+aVKendall u'\u005cu2019' s u'\u005cu03a4' ranges from 0.498 (Twitter and WSJ) to 0.659 (spoken and Twitter
+p47
+aVThe figure shows, for instance, that the variation n -gram regarding ADP-ADV is the second most frequent one (dark gray), and approximately 70% of ADP-ADV disagreements are linguistically hard cases (light gray
+p48
+aVWhile other features may reveal that the problem is in fact learnable, our initial experiments lead us to conclude that, given the low ratio of errors over truly hard cases, learning to detect errors is often not worthwhile
+p49
+aVIn our case, less than 2% of the overall annotations are linguistically unmotivated
+p50
+aVFigure 3 shows how truly hard cases are distributed over tag pairs (dark gray bars), as well as the proportion of confusions with respect to a given tag pair that are truly hard cases (light gray bars
+p51
+aVThe following sentences exemplify some of these hard cases that annotators frequently disagree on
+p52
+aVMore surprisingly, though, we also find that, as discussed next, c) roughly the same disagreements are also observed when comparing the linguistic intuitions of lay people
+p53
+aV3 3 We mapped POS tags into the universal POS tags using the mappings available here https://code.google.com/p/universal-pos-tags/ All data sets, except the French one, are publicly available at http://lowlands.ku.dk/
+p54
+aVTo motivate this, we present an empirical analysis showing
+p55
+aVFor example, in parsing auxiliary verbs may head main verbs, or vice versa, and in part-of-speech (POS) tagging, possessive pronouns may belong to the category of determiners or the category of pronouns
+p56
+aVWe instructed annotators to use the 12 universal POS tags of Petrov et al
+p57
+aVThe full data set contains 14,619 items and is described in further detail in
+p58
+aVMore specifically, we had lay annotators on the crowdsourcing platform Crowdflower re-annotate the training section of
+p59
+aVTo further test the idea of there being truly hard cases that probably cannot be resolved by linguistic theory, we presented nine linguistics faculty members with 10 of the above examples and asked them to pick their favorite analyses
+p60
+aVDisagreements are very similar across all three domains
+p61
+aVThe disagreements are still strongly correlated with the ones observed with expert annotators, but at a slightly lower coefficient (with a Spearman u'\u005cu2019' s u'\u005cu03a1' of 0.493 and Kendall u'\u005cu2019' s u'\u005cu03a4' of 0.366 for WSJ
+p62
+aVOnly annotators that had answered correctly on 4 gold items (randomly chosen from a set of 20 gold items provided by the authors) were allowed to submit annotations
+p63
+aVThe empirical analysis presented below relies on text corpora annotated with syntactic categories or parts-of-speech (POS
+p64
+aVFinally, use small samples of doubly-annotated POS data to estimate annotator reliability and show how those metrics can be implemented in the loss function when inducing POS taggers to reflect confidence we can put in annotations
+p65
+aVthat certain inter-annotator disagreements are systematic, and
+p66
+aVFor each variation n -gram that we found in WSJ-00, i.e, a word in various contexts and the possible tags associated with it, we present annotators with the cross product of contexts and tags
+p67
+aVNote that we do not claim that both analyses in each of these cases (1 u'\u005cu2013' 3) are equally good, but that there is some linguistic motivation for either analysis in each case
+p68
+aVThey collected five annotations per word
+p69
+aVThey show that not biasing the theory towards a single annotator but using a cost-sensitive learning scheme makes POS taggers more robust and more applicable for downstream tasks
+p70
+aVThe Spearman coefficient with English Twitter is 0.288; Kendall u'\u005cu2019' s u'\u005cu03a4' is 0.204
+p71
+aVAll diagrams have a vaguely u'\u005cu201c' dagger u'\u005cu201d' -like shape, with the blade going down the diagonal from top left to bottom right, and a slightly curved u'\u005cu201c' hilt u'\u005cu201d' across the counter-diagonal, ending in the more pronounced ADP/PRT confusion cells
+p72
+aVAgain, their objective is orthogonal to ours, namely to collapse multiple annotations into a gold standard rather than embracing disagreements
+p73
+aVOur work also relates to work on automatically correcting expert annotations for inconsistencies []
+p74
+aVIn total, 177 individual annotators supplied answers
+p75
+aVPOS is part of most linguistic theories, but nevertheless, there are still many linguistic constructions u'\u005cu2013' even very frequent ones u'\u005cu2013' whose POS analysis is widely debated
+p76
+aVVBN that [..] u'\u005cu201d'
+p77
+aVIn 8/10 cases, the faculty members disagreed on the right analysis
+p78
+aVWe paid annotators a reward of $0.05 for 10 items
+p79
+aVThere has also been recent work on adjudicating noisy crowdsourced annotations []
+p80
+aVThis can explain some of the variation
+p81
+aVWe would like to thank the anonymous reviewers for their feedback, as well as Djamé Seddah for the French data
+p82
+aVThis work is very different in spirit from our work, but shares an interest in reconsidering expert annotations, and we made use of their mining algorithm here
+p83
+aVThe two classes are apparently not easily separable using surface form features, as illustrated in the two-dimensional plot in Figure 1 , obtained using PCA
+p84
+aVAnnotators were satisfied with the task (4.5 on a scale from 1 to 5) and felt that instructions were clear (4.4/5), and the pay reasonable (4.1/5
+p85
+aVWe used 3 annotators with PhD degrees in linguistics
+p86
+aVThe raw agreement was 86%
+p87
+aVFor each domain, we collected exactly 500 doubly-annotated sentences/tweets
+p88
+aVThis is probably also why the nearest neighbor (NN) classifier does slightly better, but again, performance is rather low
+p89
+aVWhile the correlation is weaker across languages than across domains, it remains statistically significant ( p 0.001
+p90
+aV1) Noam goes out tonight Noun Verb Adp/Prt Adv/Noun (2) Noam likes social media Noun Verb Adj/Noun Noun (3) Noam likes his car Noun Verb Det/Pron Noun
+p91
+aVIs the tag plausible for the given context
+p92
+aVThe logistic regression decision boundary is plotted as a solid, black line
+p93
+aVThis work is similar to ours in spirit, but considers a very different task
+p94
+aVAgain, we see the familiar dagger shape
+p95
+aVEssentially, we ask for a binary decision
+p96
+aVThis research is funded by the ERC Starting Grant LOWLANDS No. 313695
+p97
+aV[]
+p98
+aV/biblio.bib
+p99
+a.

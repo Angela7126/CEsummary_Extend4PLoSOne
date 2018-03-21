@@ -1,0 +1,317 @@
+(lp0
+VLinLearn denotes model combination by overloading the vector representation of queries u'\u005cud835' u'\u005cudc2a' and documents u'\u005cud835' u'\u005cudc1d' in the VW linear learner by incorporating arbitrary ranking models as dense features
+p1
+aVIn difference to grid search for Borda , optimal weights for the linear combination of incorporated ranking models can be learned automatically
+p2
+aVThe best result is achieved by combining DT and PSQ with DK and VW
+p3
+aVOptimization for these additional models including domain knowledge features was done by overloading the vector representation of queries u'\u005cud835' u'\u005cudc2a' and documents u'\u005cud835' u'\u005cudc1d' in the VW linear learner
+p4
+aVWe do not report combination results including the sparse BM model since they were consistently lower than the ones with the sparse VW model
+p5
+aVUnder NDCG and PRES, LinLearn achieves the best results, showing the advantage of automatically learning combination weights that leads to stable results across various metrics
+p6
+aVIn addition to dense domain-knowledge features, we incorporate arbitrary ranking models as dense features whose value is the score of the ranking model
+p7
+aVIn both cases, as standalone systems, DT and PSQ are very close and far better than any ranking approach, irrespective of the objective function or the choice of sparse or dense features
+p8
+aVThis is due to the already high scores of the combined models, but also to the combination of yet other types of orthogonal information
+p9
+aVSince Wikipedia articles vary greatly in length, we restricted EN documents to the first 200 words after extracting the link graph to reduce the number of features for BM and VW models
+p10
+aVTraining data was sampled from the dev set and processed with VW
+p11
+aVAs can be seen from inspecting the two blocks of results, one for patents, one for Wikipedia, we find the same system rankings on both datasets
+p12
+aV2013 ) advocate the use of dense features encoding domain knowledge on inventors, assignees, location and date, together with dense similarity scores based on bag-of-word representations of patents
+p13
+aVBorda voting gives the best result under MAP which is probably due to the adjustment of the interpolation parameter for MAP on the development set
+p14
+aVDomain knowledge features for patents were inspired by Guo and Gomes ( 2009 a feature fires if two patents share similar aspects, e.g., a common inventor
+p15
+aVFurthermore, we show that our approach can be seen as supervised model combination that allows to combine SMT-based and ranking-based approaches for further substantial improvements
+p16
+aVSince patent applicants and lawyers are required to list relevant prior work explicitly in the patent application, patent citations can be used to automatically extract large amounts of relevance judgments across languages [ 12 ]
+p17
+aVAs we do not have access to address data, we omit geolocation features and instead add features that evaluate similarity w.r.t patent classes extracted from IPC codes
+p18
+aVWe conjecture that the gains are due to orthogonal information contributed by domain-knowledge, ranking-based word associations, and translation-based information
+p19
+aVSince typically the first sentence of any Wikipedia article is such a well-formed definition, this allows us to extract a large set of one sentence queries from Wikipedia articles
+p20
+aVWe will refer to DT and PSQ as SMT-based models that translate a query, and then perform monolingual retrieval using BM25
+p21
+aVSince authors are encouraged to avoid orphan articles and to cite their sources, Wikipedia has a rich linking structure between related articles, which can be exploited to create relevance links between articles across languages [ 2 ]
+p22
+aVFor example, in patent prior art search, patents granted at any patent office worldwide are considered relevant if they constitute prior art with respect to the invention claimed in the query patent
+p23
+aVSince for Wikipedia data, the DE and EN vocabularies were both large (6.7M and 6M), we used the same filtering and preprocessing as for the patent data before applying CFH with F =40k and k =5 on both sides
+p24
+aVTo reduce the EN vocabulary to a comparable size, we applied similar preprocessing and CFH with F =30k and k =5
+p25
+aVEN patents are regarded as relevant with level (3) to a JP query patent, if they are in a family relationship (e.g.,, same invention), cited by the patent examiner (2), or cited by the applicant (1
+p26
+aVThis approach is advantageous if large amounts of in-domain sentence-parallel data are available to train SMT systems, but relevance rankings to train retrieval models are not
+p27
+aVThe information need may be paraphrased as a high-level definition of the topic
+p28
+aVTranslation is agnostic of the retrieval task
+p29
+aVThe intersection between target set T n and the source category set S reflects the category level similarity between query and document, which we calculate as a mutual containment score s n = 1 2 u'\u005cu2062'
+p30
+aV2012 ) brought SMT back into this paradigm by projecting terms from n -best translations from synchronous context-free grammars
+p31
+aVThe advantage of this technique is an implicit query expansion effect due to the use of probability distributions over term translations [ 27 ]
+p32
+aVMemory usage was reduced using the same hashing technique as for boosting
+p33
+aVModel combination of similar models, e.g.,, DT and PSQ, gives minimal gains, compared to combining orthogonal models, e.g., DK and VW
+p34
+aVIn order to acquire the best combination of more than two models, we created vectors of model scores along with domain knowledge features and reused the VW pairwise ranking approach
+p35
+aVWe show that for both domains, patents and Wikipedia, jointly learning bilingual sparse word associations and dense knowledge-based similarities directly on relevance ranked data improves significantly over approaches that use either only sparse or only dense features, and over approaches that combine query translation by SMT with standard retrieval in the target language
+p36
+aVBorda denotes model combination by Borda Count voting where the linear interpolation parameter is adjusted for MAP on the respective development sets with grid search
+p37
+aV2013 ) by presenting an alternative learning-to-rank approach that can be used for supervised model combination to integrate dense and sparse features, and by evaluating both approaches on cross-lingual retrieval for patents and Wikipedia
+p38
+aVDK denotes VW training of a model that represents queries u'\u005cud835' u'\u005cudc2a' and documents u'\u005cud835' u'\u005cudc1d' by dense domain-knowledge features instead of by sparse word-based vectors
+p39
+aV2010 ) show that for the domain of Wikipedia, learning a sparse matrix of word associations between the query and document vocabularies from relevance rankings is useful in monolingual and cross-lingual retrieval
+p40
+aVWe present a combination of SMT-based CLIR, DT+PSQ, a combination of dense and sparse features, DK+VW, and a combination of both combinations, (DT+PSQ)+(DK+VW
+p41
+aVVW denotes a sparse model using word-based features trained with SGD
+p42
+aV2013 ) apply the idea of learning a sparse matrix of bilingual phrase associations from relevance rankings to cross-lingual retrieval in the patent domain
+p43
+aVBesides a rich citation structure, patent documents and Wikipedia articles contain a number of further cues on relatedness that can be exploited as features in learning-to-rank approaches
+p44
+aVFor the DE-EN system, a 4-gram model was built on the EN side of the training data and the EN Wikipedia documents
+p45
+aVWe investigate the same combinations of ranking models as described for Borda above
+p46
+aVThe situation is different for CLIR in special domains such as patents or Wikipedia
+p47
+aVFor both tasks, DT and PSQ require an SMT baseline system trained on parallel corpora that are disjunct from the ranking data
+p48
+aVFor Wikipedia, we implemented features that compare the relative length of documents, number of links and images, the number of common links and common images, and Wikipedia categories
+p49
+aVIn Wikipedia search, one can imagine a Wikipedia author trying to investigate whether a Wikipedia article covering the subject the author intends to write about already exists in another language
+p50
+aVParallel data for translation have to be extracted with some effort from comparable or noisy parallel data [ 26 , 22 ] , however, relevance judgments are often straightforwardly encoded in special domains
+p51
+aVThis means that the vector representation of queries u'\u005cud835' u'\u005cudc2a' and documents u'\u005cud835' u'\u005cudc1d' in the VW linear learner is overloaded once more
+p52
+aVThe task of a CLIR engine is to return relevant EN Wikipedia articles that may describe the very same concept ( Stack (geology) ), or relevant instances of it ( Bako National Park , Lange Anna
+p53
+aVPatent retrieval for DT was done by sentence-wise translation and subsequent re-joining to form one query per patent, which was ranked against the documents using BM25
+p54
+aVA linear ranking model is defined as
+p55
+aVIt contains automatically induced relevance judgments for patent abstracts [ 12 ]
+p56
+aVIn order to simulate pass-through behavior of out-of-vocabulary terms in SMT systems, additional features accounting for source and target term identity were added to DK and BM models
+p57
+aVPSQ on patents reuses settings found by Sokolov et al
+p58
+aVWe assign relevance level (3) to the EN mate and level (2) to all other EN articles that link to the mate, and are linked by the mate
+p59
+aVInstead of sparse word-based features, u'\u005cud835' u'\u005cudc2a' and u'\u005cud835' u'\u005cudc1d' are represented by real-valued vectors of dense domain-knowledge features
+p60
+aVFor monolingual patent retrieval, Guo and Gomes ( 2009 ) and Oh et al
+p61
+aVThe parameter u'\u005cu039b' for VW was found on dev set
+p62
+aV2010 ) we induce relevance judgments by aligning DE queries with their EN counterparts ( u'\u005cu201c' mates u'\u005cu201d' ) via the graph of inter-language links available in articles and Wikidata 3 3 www.wikidata.org/
+p63
+aVThe main contribution of this paper is a thorough evaluation of dense and sparse features for learning-to-rank that have so far been used only monolingually or only on either patents or Wikipedia
+p64
+aVCross-Language Information Retrieval (CLIR) for the domain of web search successfully leverages state-of-the-art Statistical Machine Translation (SMT) to either produce a single most probable translation, or a weighted list of alternatives, that is used as search query to a standard search engine [ 5 , 25 ]
+p65
+aVIn a direct translation approach (DT), a state-of-the-art SMT system is used to produce a single best translation that is used as search query in the target language
+p66
+aVBoth approaches work in a cross-lingual setting, the former on Wikipedia data, the latter on patents
+p67
+aVFor patents, vocabularies contained 60k and 365k words for JP and EN
+p68
+aVThe JP-EN system uses a 5-gram language model from the EN side of the training data
+p69
+aVBM denotes a similar model trained using Boosting
+p70
+aVThis type of model combination only allows to combine pairs of rankings
+p71
+aVBoth show improvements of learning-to-rank on relevance data over SMT-based approaches on their respective domains
+p72
+aVWikipedia (DE-EN
+p73
+aVTheir method is a classical learning-to-rank setup where pairwise ranking is applied to a few hundred dense features
+p74
+aVDarwish and Oard ( 2003 ) termed this method the probabilistic structured query approach (PSQ
+p75
+aVResults are reported with respect to MAP [ 17 ] , NDCG [ 15 ] , and PRES [ 16 ]
+p76
+aVBorda
+p77
+aVBorda
+p78
+aVGiven the categories associated with a foreign query, we use the language links on the Wikipedia category pages to generate a set of u'\u005cu201c' translated u'\u005cu201d' English categories S
+p79
+aVDocuments within a patent section, i.e., the topmost hierarchy, are too diverse to provide useful information but more detailed classes and the count of matching classes do
+p80
+aVMethods to learn sparse word-based translation correspondences from supervised ranking signals have been presented by Bai et al
+p81
+aVStatistics on the ranking data are given in Table 1
+p82
+aVInstead of using all outgoing links from the mate, we only use articles with bidirectional links
+p83
+aVPatents (JP-EN
+p84
+aVIn addition to lowercasing and punctuation removal, we applied Correlated Feature Hashing (CFH), that makes collisions more likely for words with close meaning [ 2 ]
+p85
+aVExperimental results on test data are given in Table 2
+p86
+aVRanking approaches have been presented by Guo and Gomes ( 2009 ) and Oh et al
+p87
+aVFiltering special symbols and stopwords reduced the JP vocabulary size to 50k (small enough not to resort to CFH
+p88
+aVTo avoid rendering the task too easy for literal keyword matching of queries about named entities, we removed title words from the German queries
+p89
+aVLanguage models were trained with the KenLM toolkit [ 14 ]
+p90
+aVA native speaker of German with profound knowledge in geology intends to write it, naming it u'\u005cu201c' Brandungspfeiler u'\u005cu201d' , while seeking to align its structure with the EN counterpart
+p91
+aVOptimization for the overloaded vectors is done as described above for VW
+p92
+aVFor ranking-based retrieval, we compare several combinations of learners and features (Table 2
+p93
+aVConsider the situation where the German (DE) Wikipedia article on geological sea stacks does not yet exist
+p94
+aVAlternative approaches avoid to solve the hard problem of word reordering, and instead rely on token-to-token translations that are used to project the query terms into the target language with a probabilistic weighting of the standard term tf-idf scheme
+p95
+aVA JP-EN system was trained on data described and preprocessed by Sokolov et al
+p96
+aVThe found corresponding models are averaged
+p97
+aVThe intuition behind our Wikipedia retrieval setup is as follows
+p98
+aVThis newly added model utilizes the standard implementation of online SGD from the Vowpal Wabbit (VW) toolkit [ 11 ] and was run on a data sample of 5M to 10M tuples from u'\u005cu211b'
+p99
+aVFor example u'\u005cu201c' Brandungspfeiler sind vor einer Kliffküste aufragende Felsentürme und vergleichbare Formationen, die durch Brandungserosion gebildet werden u'\u005cu201d' 2 2 de.wikipedia.org/wiki/Brandungspfeiler Similar to Bai et al
+p100
+aVThe SMT-based models use cdec [ 8 ]
+p101
+aVOur approach extends the work of Sokolov et al
+p102
+aVBai et al
+p103
+aVFor Wikipedia, we trained a DE-EN system on 4.1M parallel sentences from Europarl, Common Crawl, and News-Commentary
+p104
+aVWe optimize this model by pairwise ranking, which assumes labeled data in the form of a set u'\u005cu211b' of tuples ( u'\u005cud835' u'\u005cudc2a' , u'\u005cud835' u'\u005cudc1d' + , u'\u005cud835' u'\u005cudc1d' - ) , where u'\u005cud835' u'\u005cudc1d' + is a relevant (or higher ranked) document and u'\u005cud835' u'\u005cudc1d' - an irrelevant (or lower ranked) document for query u'\u005cud835' u'\u005cudc2a'
+p105
+aVTo create this data 4 4 www.cl.uni-heidelberg.de/wikiclir we downloaded XML and SQL dumps of the DE and EN Wikipedia from, resp., 22 nd and 4 th of November 2013
+p106
+aVLinLearn
+p107
+aVLinLearn
+p108
+aVSokolov et al
+p109
+aVWe use BoostCLIR 1 1 www.cl.uni-heidelberg.de/boostclir , a Japanese-English (JP-EN) corpus of patent abstracts from the MAREC and NTCIR data [ 24 ]
+p110
+aVOn average, queries and documents contain about 5 sentences
+p111
+aVParameter u'\u005cu039a' was adjusted on the dev set
+p112
+aVFor example, Google u'\u005cu2019' s CLIR approach combines their state-of-the-art SMT system with their proprietary search engine [ 5 ]
+p113
+aVThis relates our work to supervised model merging approaches [ 20 ]
+p114
+aVFor PSQ, BM25 is computed on expected term and document frequencies
+p115
+aVCLIR addresses the problem of translating or projecting a query into the language of the document repository across which retrieval is performed
+p116
+aVWikipedia markup removal and link extraction was carried out using the Cloud9 toolkit 5 5 lintool.github.io/Cloud9/index.html
+p117
+aV2013 ) ; settings for Wikipedia were adjusted on its dev set ( n = 1000 , u'\u005cu039b' = 0.4 , L = 0 , C = 1
+p118
+aVTure et al
+p119
+aV2010 ) and Sokolov et al
+p120
+aVThe English-side category graph is used to construct sets of super- and subcategories related to the candidate document u'\u005cu2019' s categories
+p121
+aVThe algorithm of Sokolov et al
+p122
+aVWeights for the standard feature set were optimized using cdec u'\u005cu2019' s MERT (JP-EN) and MIRA (DE-EN) implementations [ 18 , 4 ]
+p123
+aVThe baseline consensus-based voting Borda Count procedure endows each voter with a fixed amount of voting points which he is free to distribute among the scored documents [ 1 , 24 ]
+p124
+aVParameter tuning was done on 3k parallel sentences from the WMT u'\u005cu2019' 11 test set
+p125
+aVThis research was supported in part by DFG grant RI-2221/1-1 u'\u005cu201c' Cross-language Learning-to-Rank for Patent Retrieval u'\u005cu201d'
+p126
+aVScores were computed on the top 1,000 retrieved documents
+p127
+aVstandalone
+p128
+aVstandalone
+p129
+aV2013 ) , consisting of 1.8M parallel sentences from the NTCIR-7 JP-EN PatentMT subtask [ 10 ] and 2k parallel sentences for parameter development from the NTCIR-8 test collection
+p130
+aVThe Boosting-based Ranking baseline [ 9 ] optimizes an exponential loss
+p131
+aVThis expansion is done in both directions for two levels resulting in 5 category sets
+p132
+aVTo reduce memory requirements we used random feature hashing with the size of the hash of 30 bits [ 21 ]
+p133
+aV2013 ) combines batch boosting with bagging over a number of independently drawn bootstrap data samples from u'\u005cu211b'
+p134
+aVLet u'\u005cud835' u'\u005cudc2a' u'\u005cu2208' { 0 , 1 } Q be a query and u'\u005cud835' u'\u005cudc1d' u'\u005cu2208' { 0 , 1 } D be a document where the j th vector dimension indicates the occurrence of the j th word for dictionaries of size Q and D
+p135
+aVwhere W u'\u005cu2208' I u'\u005cu2062' R Q × D encodes a matrix of ranking-specific word associations [ 2 ]
+p136
+aVSentence extraction was done with NLTK 6 6 www.nltk.org/
+p137
+aVStatistics are given in Table 1
+p138
+aVWord alignments were created with mgiza (JP-EN) and fast_align [ 7 ] (DE-EN
+p139
+aVThe goal is to find a weight matrix W such that an inequality f u'\u005cu2062' ( u'\u005cud835' u'\u005cudc2a' , u'\u005cud835' u'\u005cudc1d' + ) f u'\u005cu2062' ( u'\u005cud835' u'\u005cudc2a' , u'\u005cud835' u'\u005cudc1d' - ) is violated for the fewest number of tuples from u'\u005cu211b'
+p140
+aVThe second objective is an u'\u005cu2113' 1 -regularized hinge loss
+p141
+aVIn each step, the single word pair feature is selected that provides the largest decrease of u'\u005cu2112' e u'\u005cu2062' x u'\u005cu2062' p
+p142
+aVwhere ( x ) + = max u'\u005cu2061' ( 0 , 1 - x ) and u'\u005cu039b' is the regularization parameter
+p143
+aVOn each step, W is updated with a scaled gradient vector u'\u005cu2207' W u'\u005cu2061' u'\u005cu2112' h u'\u005cu2062' n u'\u005cu2062' g and clipped to account for u'\u005cu2113' 1 -regularization
+p144
+aVThe aggregate score for two rankings f 1 u'\u005cu2062' ( u'\u005cud835' u'\u005cudc2a' , u'\u005cud835' u'\u005cudc1d' ) and f 2 u'\u005cu2062' ( u'\u005cud835' u'\u005cudc2a' , u'\u005cud835' u'\u005cudc1d' ) for all ( u'\u005cud835' u'\u005cudc2a' , u'\u005cud835' u'\u005cudc1d' ) in the test set is then a simple linear interpolation f a u'\u005cu2062' g u'\u005cu2062' g u'\u005cu2062' ( u'\u005cud835' u'\u005cudc2a' , u'\u005cud835' u'\u005cudc1d' ) = u'\u005cu039a' u'\u005cu2062' f 1 u'\u005cu2062' ( u'\u005cud835' u'\u005cudc2a' , u'\u005cud835' u'\u005cudc1d' ) u'\u005cu2211' u'\u005cud835' u'\u005cudc1d' f 1 u'\u005cu2062' ( u'\u005cud835' u'\u005cudc2a' , u'\u005cud835' u'\u005cudc1d' ) + ( 1 - u'\u005cu039a' ) u'\u005cu2062' f 2 u'\u005cu2062' ( u'\u005cud835' u'\u005cudc2a' , u'\u005cud835' u'\u005cudc1d' ) u'\u005cu2211' u'\u005cud835' u'\u005cudc1d' f 2 u'\u005cu2062' ( u'\u005cud835' u'\u005cudc2a' , u'\u005cud835' u'\u005cudc1d'
+p145
+aVwhere u'\u005cud835' u'\u005cudc9f' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc2a' , u'\u005cud835' u'\u005cudc1d' + , u'\u005cud835' u'\u005cudc1d' - ) is a non-negative importance function on tuples
+p146
+aVFor regularization we rely on early stopping
+p147
+aVStatistical significance testing was performed using the paired randomization test [ 23 ]
+p148
+aVWe present two methods for optimizing W in the following
+p149
+aVS u'\u005cu2229' T n
+p150
+aV/
+p151
+aVS
+p152
+aV+
+p153
+aVS u'\u005cu2229' T n
+p154
+aV2013
+p155
+aV2013
+p156
+aVT n for n u'\u005cu2208' { - 2 , - 1 , 0 , + 1 , + 2 } [ 3 ]
+p157
+ag151
+a.

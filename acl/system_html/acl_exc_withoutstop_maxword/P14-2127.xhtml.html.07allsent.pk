@@ -1,0 +1,273 @@
+(lp0
+VTable 3 shows Bleu scores of Hypergraph Mert , Pro , and MaxForce on FBIS
+p1
+aVOn the development set, max-violation update without Word-Edges features achieves Bleu similar to n -best Mert and Pro , but lower than Hypergraph Mert
+p2
+aVIWSLT04 is used as development set in MaxForce training, and as tuning set for n -best Mert , Hypergraph Mert , and Pro
+p3
+aVMaxForce actives 4.5M features, and achieves +1.2 Bleu over Pro and +0.9 Bleu over Hypergraph Mert
+p4
+aVWe evaluate MaxForce for Hiero over two Ch-En corpora, IWSLT09 and FBIS, and compare the performance with vanilla n -best Mert [ 19 ] from Moses [ 14 ] , Hypergraph Mert [ 15 ] , and Pro [ 11 ] from cdec
+p5
+aVThe training time (on 32 cores) for Hypergraph Mert and Pro is about 30 min. on the dev set, and is about 5 hours for MaxForce on the training set
+p6
+aVFollowing \u005cnewcite yu+:2013, we call our max-violation method MaxForce
+p7
+aVThe results of n -best Mert , Hypergraph Mert , and Pro are averages from 3 runs
+p8
+aVNIST06 newswire is used as development set for MaxForce training, and as tuning set for all other tuning methods
+p9
+aVThe max-violation method is more than 15 Bleu points better than the standard perceptron (also known as u'\u005cu201c' bold-update u'\u005cu201d' in \u005cnewcite liang+:2006) which updates at the root of the derivation tree
+p10
+aVOn the other hand, \u005cnewcite zhang+:2013 has generalized \u005cnewcite huang+:2012 from graphs to hypergraphs for bottom-up parsing, which resembles Hiero decoding
+p11
+aVHere we formally define the latent variable u'\u005cu201c' max-violation u'\u005cu201d' perceptron over a hypergraph for MT training
+p12
+aVIn addition, we use minibatch parallelization of [ 22 ] to speedup perceptron training
+p13
+aVWe first report the forced decoding reachability for Hiero on FBIS in Table 1
+p14
+aVLuckily, \u005cnewcite zhang+:2013 have recently generalized the underlying violation-fixing perceptron of \u005cnewcite huang+:2012 from graphs to hypergraphs for bottom-up parsing, which resembles syntax-based decoding
+p15
+aVThe key challenge here is to extend the latent variable violation-fixing perceptron of \u005cnewcite yu+:2013 to handle tree-structured derivations and translation hypergraphs
+p16
+aVExperiments show that our training algorithm outperforms mainstream tuning methods (which optimize on small devsets) by +1.2 Bleu over Mert and Pro on FBIS
+p17
+aVAdding simple Word-Edges features improves Bleu by u'\u005cu223c' 2 points, outperforming the very strong Hypergraph Mert baseline by u'\u005cu223c' 1 point
+p18
+aVWith the full rule set, 65% sentences and 55% words of the whole corpus are forced decodable in Hiero
+p19
+aVAs mentioned in Section 1, the key to the success of \u005cnewcite yu+:2013 is the adoption of violation-fixing perceptron of \u005cnewcite huang+:2012 which is tailored for vastly inexact search
+p20
+aVAfter pruning 1-count rules, our forced decoding covers significantly more words than phrase-based MT in \u005cnewcite yu+:2013
+p21
+aVFinally we also try the u'\u005cu201c' local-update u'\u005cu201d' method from \u005cnewcite liang+:2006 which updates towards the derivation with the best Bleu + 1 in the root group S [ 0 x
+p22
+aVIn other words, the gold derivation to update towards is a latent variable
+p23
+aVWe also use the u'\u005cu201c' skip u'\u005cu201d' strategy of \u005cnewcite zhang+:2013 which updates at the root of the derivation only when it fixes a search error, avoiding all invalid updates
+p24
+aVWe mainly use this corpus to demonstrate the performance of MaxForce in large-scale training
+p25
+aVWe find that even simple Word-Edges features boost the performance significantly, and adding complex Word-Edges features from \u005cnewcite yu+:2013 brings limited improvement and slows down the decoding
+p26
+aVThis achieves u'\u005cu223c' 10 Bleu better than the standard update, but is still more than u'\u005cu223c' 5 Bleu worse than Max-Violation update
+p27
+aVSuch derivations can be generated in way similar to \u005cnewcite yu+:2013 by using a language model tailored for forced decoding
+p28
+aVThis method is about 2 Bleu points worse than max-violation
+p29
+aVNote that the y -good derivations are defined over the unpruned whole decoding hypergraph, while the y -bad derivations are defined over the real decoding hypergraph with pruning
+p30
+aVSo we run a binary search for the length penalty weight after each training iteration to tune the length ratio to u'\u005cu223c' 0.97 on dev set
+p31
+aVTo adapt it to MT where many derivations can output the same translation (i.e.,, spurious ambiguity), \u005cnewcite yu+:2013 extends it to handle latent variables which correspond to phrase-based derivations
+p32
+aVThe general idea is to update somewhere in the middle of the search (where search error happens) rather than at the very end (standard update is often invalid
+p33
+aV3 3 We find that while MaxForce generates translations of length ratio close to 1 during training, the length ratios on dev/test sets are significantly lower, due to OOVs
+p34
+aVFor IWSLT, we first compare the performance from various update methods in Figure 5
+p35
+aVThe key difference between bottom-up parsing and MT decoding is that in parsing the gold tree for each input sentence is unique, while in MT many derivations can generate the same reference translation
+p36
+aVTo alleviate this problem, their work adopts the theoretically-motivated framework of violation-fixing perceptron [ 12 ] tailed for inexact search, yielding great results on phrase-based MT (outperforming small-scale Mert / Pro by a large margin for the first time
+p37
+aVThe max-violation method performs the update where the model score difference between the incorrect Viterbi partial derivation and the best y -good partial derivation is maximal, by penalizing the incorrect Viterbi partial derivation and rewarding the y -good partial derivation
+p38
+aV4 4 We report Bleu with averaged reference lengths
+p39
+aVSo we just need to combine the two generalizing directions (latent variable and hypergraph, see Fig
+p40
+aVOur implementation is mostly in Python on top of the cdec system [ 8 ] via the pycdec interface [ 3 ]
+p41
+aVWe generalize the latent variable violation-fixing perceptron framework to inexact search over hypergraphs, which subsumes previous algorithms for PBMT and bottom-up parsing as special cases (see Fig
+p42
+aVNIST08 newswire is used as test set
+p43
+aVMore formally, we first find the Viterbi partial derivation d - and the best y -good partial derivation d + for each N [ i j ] group in the pruned + u'\u005cu2062' LM hypergraph
+p44
+aVThe set of y -bad derivations is defined as
+p45
+aVWe have a similar deductive system for forced decoding
+p46
+aVHowever, in the following experiments, due to efficiency considerations, we use the u'\u005cu201c' tight u'\u005cu201d' rule extraction in cdec that is more strict than the standard u'\u005cu201c' loose u'\u005cu201d' rule extraction, which generates a reduced rule set and, thus, a reduced reachability
+p47
+aVWe show that syntax-based MT, with its better handling of long-distance reordering, can exploit a larger portion of the training set, which facilitates sparse lexicalized features
+p48
+aVFurthermore, in phrase-based MT, most decodable sentences are very short, while in Hiero the lengths of decodable sentences are more evenly distributed
+p49
+aVTo better utilize the large training set, we propose to generalize from phrase-based MT to syntax-based MT, in particular the hierarchical phrase-based translation model ( Hiero ) [ 6 ] , in order to exploit sentence pairs beyond the expressive capacity of phrase-based MT
+p50
+aVFor both corpora, we do standard tokenization, alignment and rule extraction using the cdec tools
+p51
+aVWe further investigate the contribution of sparse features in Figure 6
+p52
+aVThis can be explained by the fact that in training u'\u005cu223c' 58% of the standard updates are invalid (i.e.,, they do not fix any violation
+p53
+aVFor a given sentence pair u'\u005cu27e8' x , y u'\u005cu27e9' , we denote H u'\u005cu2062' ( x ) as the decoding hypergraph of Hiero without any pruning
+p54
+aVFor sparse features we use Word-Edges features [ 4 , 13 ] which are shown to be extremely effective in both parsing and phrase-based MT [ 21 ]
+p55
+aVWe use all the 18 dense features from cdec , including language model, direct translation probability p ( e f ) , lexical translation probabilities p l ( e f ) and p l ( f e ) , length penalty, counts for the source and target sides in the training corpus, and flags for the glue rules and pass-through rules
+p56
+aVWe then define the set of y -good partial derivations that cover x [ i j ] with root N [ i j ] as
+p57
+aVIWSLT05 is used as test set
+p58
+aVAfter numerous attempts by various researchers [ 17 , 20 , 1 , 2 , 5 , 9 , 10 ] , the recent work of \u005cnewcite yu+:2013 finally reveals a major reason it is the vast amount of (inevitable) search errors in MT decoding that astray learning
+p59
+aVThe second corpus, FBIS, contains u'\u005cu223c' 240k sentences
+p60
+aVThis section mostly follows \u005cnewcite huang+chiang:2007
+p61
+aVWe show the reachability distributions of both tight and loose rule extraction in Figure 4
+p62
+aVBoth IWSLT04 and IWSLT05 contain 16 references.We mainly use this corpus to investigate the properties of MaxForce
+p63
+aVFor clarity reasons we will describe Hiero decoding as a two-pass process, first without a language model, and then integrating the LM
+p64
+aVand update as follows
+p65
+aVWe further denote the real decoding hypergraph with beam-pruning and cube-pruning as H u'\u005cu2032' u'\u005cu2062' ( x
+p66
+aVThen it finds the group N [ i * j * ] * with the maximal score difference between the Viterbi derivation and the best y -good derivation
+p67
+aVWe say D u'\u005cu2208' H u'\u005cu2062' ( x ) if D is a full derivation of decoding x , and D can be derived from the hypergraph
+p68
+aVIf a boundary word does not occur in the reference, its index is set to u'\u005cu221e' so that its language model score will always be - u'\u005cu221e' ; if a boundary word occurs more than once in the reference, its - u'\u005cu2062' LM node is split into multiple + u'\u005cu2062' LM nodes, one for each such index
+p69
+aVWhat makes large-scale MT training so hard then
+p70
+aVwhere p and q are the indices of the boundary words in the reference translation
+p71
+aVSo in the following experiments we only use Word-Edges features consisting of combinations of English and Chinese words, and Chinese characters, and do not use word clusters nor word types
+p72
+aVWe now describe how to find the gold derivations
+p73
+aVOur first corpus, IWSLT09, contains u'\u005cu223c' 30k short sentences collected from spoken language
+p74
+aVMore formally, the whole decoding process can be cast as a deductive system
+p75
+aV2 2 Our formulation of index-based language model fixes a bug in the word-based LM of \u005cnewcite yu+:2013 when a substring appears more than once in the reference (e.g.,  u'\u005cu201c' the man u'\u005cu2026' the man u'\u005cu2026' u'\u005cu201d' ); thanks to Dan Gildea for pointing it out
+p76
+aVFor simplicity and efficiency reasons, we also exclude all non-local features
+p77
+aV2 (a) for an example), producing a - u'\u005cu2062' LM hypergraph where each node has a signature N [ i j ] , where N is the nonterminal type (either X or S in Hiero ) and [ i j ] is the span, and each hyperedge e is an application of the translation rule r u'\u005cu2062' ( e ) (see Figure 3
+p78
+aVMany natural language processing problems including part-of-speech tagging [ 7 ] , parsing [ 18 ] , and event extraction [ 16 ] have enjoyed great success using large-scale discriminative training algorithms
+p79
+aVBoth NIST06 newswire and NIST08 newswire contain 4 references
+p80
+aVSee Table 2 for details
+p81
+aVIn rule extraction, we remove all 1-count rules but keep the rules mapping from one Chinese word to one English word to help balancing between overfitting and coverage
+p82
+aVWe just need to further extend it to handle latent variables
+p83
+aVWe use a trigram language model trained from the target sides of the two corpora respectively
+p84
+aVTo incorporate the language model, each node also needs to remember its target side boundary words
+p85
+aVTake the partial translation of u'\u005cu201c' held talks with Sharon u'\u005cu201d' in Figure 2 (b) for example, the deduction is
+p86
+aVHowever, the underlying phrase-based model suffers from limited distortion and thus can only employ a small portion (about 1/3 in their Ch-En experiments) of the bitext in training
+p87
+aVwhere e u'\u005cu2062' ( D ) is the translation from derivation D
+p88
+aVFor the previous example, rule r 5 in Figure 2 (a) is rewritten as
+p89
+aVHowever, a similar success on machine translation has been elusive, where the mainstream methods still tune on small datasets
+p90
+aVwhere 1 and 4 are the indexes for reference words u'\u005cu201c' held u'\u005cu201d' and u'\u005cu201c' with u'\u005cu201d' respectively
+p91
+aVLet u'\u005cud835' u'\u005cudc54' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc51' u'\u005cu2062' ( x , y ) be the set of y -good derivations for u'\u005cu27e8' x , y u'\u005cu27e9'
+p92
+aVThe + u'\u005cu2062' LM node now has signature N [ i j ] p u'\u005cu22c6' q , where p and q are the indexes of the boundary words
+p93
+aV5 ] in Figure 2 (b) is
+p94
+aVThus a - u'\u005cu2062' LM node N [ i j ] is split into multiple + u'\u005cu2062' LM nodes of signature N [ i j ] a u'\u005cu22c6' b , where a and b are the boundary words
+p95
+aVwhere u'\u005cud835' u'\u005cudebd' u'\u005cu2062' ( x , d ) is the feature vector for derivation d
+p96
+aVwhere s u'\u005cu2062' ( r 5 ) is the score of rule r 5 , and the LM combo score u'\u005cu039b' is log P lm ( talks u'\u005cu2223' held ) P lm ( with u'\u005cu2223' talks ) P lm ( Sharon u'\u005cu2223' with )
+p97
+aV1 1 We only consider single reference in this paper
+p98
+aVIn the first, - u'\u005cu2062' LM phase, the decoder parses the source sentence using the source projection of the synchronous grammar (see Fig
+p99
+aV5 ] held u'\u005cu22c6' Sharon is a node whose translation starts with u'\u005cu201c' held u'\u005cu201d' and ends with u'\u005cu201c' Sharon u'\u005cu201d'
+p100
+aVWe make the following contributions
+p101
+aVFor example, with a bigram LM, X [ 1
+p102
+aVWe thank Martin u'\u005cu010c' mejrek and Lemao Liu for discussions, David Chiang for pointing us to pycdec , Dan Gildea for Footnote 3.2 , and the anonymous reviewers for comments
+p103
+aVThe deduction for X [ 1
+p104
+aVheld 2
+p105
+aVheld 4
+p106
+aVSharon 5
+p107
+aVSharon 3
+p108
+aVtalks 5
+p109
+aVtalks 3
+p110
+aVThis work is supported by DARPA FA8750-13-2-0041 (DEFT), DARPA HR0011-12-C-0015 (BOLT), and a Google Faculty Research Award
+p111
+aVPart of this work was done during K. Z u'\u005cu2019' s internship at IBM
+p112
+aVwhere u'\u005cu039b' = log u'\u005cu220f' i u'\u005cu2208' { 1 , 3 , 4 } P u'\u005cud835' u'\u005cudc53' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc5f' u'\u005cud835' u'\u005cudc50' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc51' ( i + 1 u'\u005cu2223' i ) = 0
+p113
+aV0 Bush 1
+p114
+aV0 Bush 1
+p115
+aVSh u'\u005cu0100' lóng 3
+p116
+aVSh u'\u005cu0100' lóng 3
+p117
+aV0 Bùshí 1
+p118
+aVwith 4
+p119
+aVy u'\u005cu01d3' 2
+p120
+aVj u'\u005cu01d3' xíng 4
+p121
+aVhuìtán 5
+p122
+aV]
+p123
+aVwhere u'\u005cu0394' u'\u005cu2062' u'\u005cud835' u'\u005cudebd' u'\u005cu2062' ( x , d , d u'\u005cu2032' ) = u'\u005cu0394' u'\u005cud835' u'\u005cudebd' u'\u005cu2062' ( x , d ) - u'\u005cud835' u'\u005cudebd' u'\u005cu2062' ( x , d u'\u005cu2032' )
+p124
+aS''
+p125
+ag125
+ag125
+ag125
+ag125
+ag125
+ag125
+aV0 Bùshí 1
+p126
+aVy u'\u005cu01d3' 2
+p127
+aVj u'\u005cu01d3' xíng 4
+p128
+aVhuìtán 5
+p129
+aVwith 2
+p130
+aV1
+p131
+ag131
+ag125
+ag125
+a.

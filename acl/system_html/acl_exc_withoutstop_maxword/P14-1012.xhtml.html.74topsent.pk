@@ -1,0 +1,16 @@
+(lp0
+VTo address the first shortcoming, we adapt and extend some simple but effective phrase features as the input features for new DNN feature learning, and these features have been shown significant improvement for SMT, such as, phrase pair similarity [ Zhao et al.2004 ] , phrase frequency, phrase length [ Hopkins and May2011 ] , and phrase generative probability [ Foster et al.2010 ] , which also show further improvement for new phrase feature learning in our experiments
+p1
+aVMoreover, although we have introduced another four types of phrase features ( X 2 , X 3 , X 4 and X 5 ), the only 16 features in X are a bottleneck for learning large hidden layers feature representation, because it has limited information, the performance of the high-dimensional DAE features which are directly learned from single DAE is not very satisfactory
+p2
+aVFor our semi-supervised DAE feature learning task, we use the unsupervised pre-trained DBN to initialize DAE u'\u005cu2019' s parameters and use the input original phrase features as the u'\u005cu201c' teacher u'\u005cu201d' for semi-supervised back-propagation
+p3
+aVNext, we adapt and extend some original phrase features as the input features for DAE feature learning
+p4
+aVUsing the 4 original phrase features in the phrase table as the input features, they pre-trained the DBN by contrastive divergence [ Hinton2002 ] , and generated new unsupervised DBN features using forward computation
+p5
+aVThese new features are appended as extra features to the phrase table for the translation decoder
+p6
+aVAfter the fine-tuning, for each phrase pair in the phrase table, we estimate our DAE features by passing the original phrase features X through the
+p7
+a.

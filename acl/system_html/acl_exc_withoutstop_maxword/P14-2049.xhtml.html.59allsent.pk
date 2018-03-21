@@ -1,0 +1,84 @@
+(lp0
+VAll the systems show degraded nearest neighbor quality as target words grow rare, but at lower ranks, the u'\u005cu0391' = .04 nearest neighbor system fares considerably better than the symmetric u'\u005cu0391' = .50 system; the line across the bottom tracks the score of a system with randomly generated nearest neighbors
+p1
+aVThe symmetric dice prod system is as an excellent nearest neighbor system at high ranks but drops below the u'\u005cu0391' = .04 system at around rank 3500
+p2
+aVFigure 2 gives the results of our nearest neighbor study on the BNC for the case of dice prod
+p3
+aVThe function dice prod is not well known in the word similarity literature, but in the data mining literature it is often just called Dice coefficient, because it generalized the set comparison function of Dice [ 5 ]
+p4
+aVSuppose we want to measure the semantic similarity of boat , rank 682 among the nouns in the BNC corpus studied below, which has 1057 nonzero dependency features based on 50 million words of data, with dinghy , rank 6200, which has only 113 nonzero features
+p5
+aVThe nearest neighbor problem is a rather a natural ground in which to try out ideas on asymmetry, since the nearest neighbor relation is itself not symmetrical
+p6
+aVThus, u'\u005cu0391' = .80 works best for high rank target words, because most nearest neighbor candidates are less frequent, and u'\u005cu0391' = .8 tips the balance toward the nontarget words
+p7
+aVso with si set to min , Equation ( 3 ) includes Equation ( 2 ) as a special case
+p8
+aVThus, all three of these functions are special cases of symmetric ratio models
+p9
+aVIf in Tversky/Rosch terms, the more frequent word is also a more likely focus, then this is exactly the kind of situation in which asymmetric similarity judgments will arise
+p10
+aVObserve that cosine is a special case of dice prod dice u'\u005cu2020' was introduced in Curran [ 3 ] and was the most successful function in his evaluation
+p11
+aVHere, T u'\u005cu0391' , si u'\u005cu2062' ( w h , w l ) is as defined in ( 9 ), and the u'\u005cu0391' -weighted word is always the less frequent word
+p12
+aVThis yields the three similarity functions cited above
+p13
+aV[ 9 ] , which also proposes an asymmetric similarity framework based on Tversky u'\u005cu2019' s insights
+p14
+aVTo reflect natural judgments of similarity for comparisons of representations of differing sparseness, u'\u005cu0391' should be tipped toward the sparser representation
+p15
+aVCiting a number of empirical studies, Tversky [ 19 ] calls symmetry directly into question, and proposes two general models that abandon symmetry
+p16
+aVOn the other hand, when the target word is a low ranking word, a high u'\u005cu0391' weight means it never receives the highest weight, and this is disastrous, since most good candidates are higher ranking
+p17
+aVFor example, consider comparing the 100-feature vector for dinghy to the 1000 feature vector for boat if u'\u005cu0391' is high, we give more weight to the proportion of dinghy u'\u005cu2019' s features that are shared than we give to the proportion of boat u'\u005cu2019' s features that are shared
+p18
+aVBelow, we investigate asymmetric versions of all three, which we write as T u'\u005cu0391' , si u'\u005cu2062' ( w 1 , w 2 ) , defined as
+p19
+aVMotivated by the problem of measuring how well the distribution of one word w 1 captures the distribution of another w 2 , Weeds and Weir [ 21 ] also explore asymmetric models, expressing similarity calculations as weighted combinations of several variants of what they call precision and recall
+p20
+aVChoosing u'\u005cu0391' = .9 , weights recall toward the rarer word
+p21
+aVGoldstone [ 8 ] summarizes the results succinctly u'\u005cu201c' Asymmetrical similarity occurs when an object with many features is judged as less similar to a sparser object than vice versa; for example, North Korea is judged to be more like China than China is [like] North Korea u'\u005cu201d' Thus, one source of asymmetry is the comparison of sparse and dense representations
+p22
+aVThus, if u'\u005cu0391' + u'\u005cu0392' = 1 , Tversky u'\u005cu2019' s ratio model becomes simply
+p23
+aVTversky shows that many similarity judgment tasks have an inherent asymmetry; but he also argues, following Rosch [ 17 ] , that certain kinds of stimuli are more naturally used as foci or standards than others
+p24
+aVThe graphs for the other two u'\u005cu0391' -skewed systems are nearly identical, and are not shown due to space limitations
+p25
+aVNext, since we are interested in generalizing from sets of features, to real-valued vectors of features, w 1 , w 2 , we define
+p26
+aVSome of their models are also Tverskyan ratio models
+p27
+aVSince lin was introduced in Lin [ 13 ] ; several different functions have born that name
+p28
+aVIt is natural to use the sparser representation as the focus in the comparison
+p29
+aVIf the si is min , then the two terms in the denominator are the inverses of what W W call difference-weighted precision and recall
+p30
+aVThe value .97 was chosen for u'\u005cu0391' because it produced the best u'\u005cu0391' -system on the MC/RG corpus
+p31
+aVLike Weeds and Weir, her perspective was to calculate the effectiveness of using one distribution as a proxy for the other, a fundamentally asymmetric problem
+p32
+aVIf the operation is min and w 1 u'\u005cu2062' [ f ] and w 2 u'\u005cu2062' [ f ] both contain the feature weights for f , then
+p33
+aVWhen u'\u005cu0391' 0.5 , sim u'\u005cu2062' ( w 1 , w u'\u005cu2062' 2 ) is biased in favor of w 1 as the referent; When u'\u005cu0391' 0.5 , sim u'\u005cu2062' ( w 1 , w u'\u005cu2062' 2 ) is biased in favor of w 2
+p34
+aVFirst, since Tversky has primarily additive f in mind, we can reformulate f u'\u005cu2062' ( A u'\u005cu2229' B ) as follows
+p35
+aVIf n is the number of items, then the improvement on that item is
+p36
+aVIn this generalized form, then, ( 1 ) becomes
+p37
+aVW W u'\u005cu2019' s additive precision/recall models appear not to be Tversky models, since they compute separate sums for precision and recall from the f u'\u005cu2208' w 1 u'\u005cu2229' w 2 , one using w 1 u'\u005cu2062' [ f ] , and one using w 2 u'\u005cu2062' [ f ]
+p38
+aV4 4 The approximation is based on the formula for computing Spearman u'\u005cu2019' s R with no ties
+p39
+aVSo for T min , ( 9 ) can be rewritten
+p40
+aVFor distributions q and r , Lee u'\u005cu2019' s u'\u005cu0391' -skew divergence takes the KL-divergence of a mixture of q and r from q , using the u'\u005cu0391' parameter to define the proportions in the mixture
+p41
+a.

@@ -1,0 +1,22 @@
+(lp0
+VIn the coarse pass, we compute Viterbi inside and outside scores for every span
+p1
+aVBecause the grammar used in the coarse pass is a projection of the grammar used in the fine pass, these coarse scores correlate reasonably closely with the probabilities computed in the fine pass
+p2
+aVThus, we can use the coarse pass u'\u005cu2019' s inside and outside scores as the scaling values for the fine pass u'\u005cu2019' s scores
+p3
+aVMBR algorithms for parsing do not compute the best derivation, as in Viterbi parsing, but instead the parse tree that maximizes the expected count of some figure of merit
+p4
+aVTogether these kernels implement the Viterbi inside algorithm
+p5
+aVThe Viterbi algorithm is a reasonably effective method for parsing
+p6
+aVPetrov and Klein ( 2007 ) showed that MBR trees substantially improved performance over Viterbi parses for latent variable grammars, earning up to 1.5F1
+p7
+aVThis algorithm maximizes the expected number of correct coarse symbols ( A , i , j ) with respect to the posterior distribution over parses for a sentence
+p8
+aVThe unpruned Viterbi computations in a fine grammar using the clustering method of Canny et al
+p9
+aVFigure 1 shows an overview of the approach we first parse densely
+p10
+a.

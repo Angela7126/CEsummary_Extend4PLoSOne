@@ -1,0 +1,34 @@
+(lp0
+VThis would involve initializing the weights prior to the semi-supervised procedure with the weights from the supervised learning model, so as to seed the semi-supervised approach with reasonable model, and use the partially annotated data to fine-tune the supervised model
+p1
+aVSupervised learning
+p2
+aVWe describe learning of the model parameters with fully annotated training data, as well as an approach for learning motif segmentation that requires only partial supervision
+p3
+aVSemi-supervised learning
+p4
+aVWe briefly discuss data-driven learning of weights for features that define the motif affinity scores and penalties
+p5
+aVHowever, the supervised learning model with subsequent annealing outperforms the supervised model in terms of both precision and recall; showing the utility of the semi-supervised method when seeded with a good initial model, and the additive value of partially labeled data
+p6
+aVWhile the Viterbi algorithm can be used for tagging optimal state-sequences given the weights, the structured perceptron can learn optimal model weights given gold-standard sequence labels
+p7
+aVThis is necessary for the scenario of semi-supervised learning of weights with partially annotated sentences, as described later
+p8
+aVPseudocode of the learning algorithm for the partially labeled case is given in Algorithm 1
+p9
+aVIn the supervised case, optimal state sequences u'\u005cud835' u'\u005cudc32' ( u'\u005cud835' u'\u005cudc24' ) are fully observed for the training set
+p10
+aVImplicitly, the weight learning algorithm can be seen as a gradient descent procedure minimizing the difference between the scores of highest scoring (Viterbi) state sequences, and the label state sequences
+p11
+aVIn the M-step, we take the decoded state-sequences in the E-step as observed, and run perceptron learning to update feature weights w i
+p12
+aVRun Structured Perceptron algorithm with decoded tag-sequences to update weights w \u005cEndFor \u005cState return w
+p13
+aVWeights w \u005cState Initialization
+p14
+aVThe semi-supervised approach enables incorporation of significantly more training data
+p15
+aVThe algorithm proceeds as follows
+p16
+a.

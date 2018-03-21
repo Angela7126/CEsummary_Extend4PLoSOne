@@ -1,0 +1,16 @@
+(lp0
+VFirst, with a greedy bottom-up strategy, we develop a discourse parser with a time complexity linear in the total number of sentences in the document
+p1
+aVWe have thus showed that the time complexity is linear in n , which is the number of sentences in the document
+p2
+aVDue to the O u'\u005cu2062' ( n 3 ) time complexity, where n is the number of input discourse units, for large documents, the parsing simply takes too long 1 1 The largest document in the RST-DT contains over 180 sentences, i.e.,, n 180 for their multi-sentential CKY parsing
+p3
+aVTherefore, the total time complexity is ( n - 1 ) × O u'\u005cu2062' ( 1 ) + ( n - 1 ) × O u'\u005cu2062' ( 1 ) = O u'\u005cu2062' ( n ) , where the first term in the summation is the complexity of computing all chains on the bottom level, and the second term is the complexity of computing the constant number of chains on higher levels
+p4
+aVIt is fairly safe to assume that each m k is a constant, in the sense that m k is independent of the total number of sentences in the document
+p5
+aVIn addition to efficiency, our use of a single CRF chain for all constituents can better capture the sequential dependencies among context, by taking into account the information from partially built discourse constituents, rather than bottom-level EDUs only
+p6
+aVTherefore, our
+p7
+a.

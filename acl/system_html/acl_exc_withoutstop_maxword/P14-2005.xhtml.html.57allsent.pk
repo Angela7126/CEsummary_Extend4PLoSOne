@@ -1,0 +1,78 @@
+(lp0
+VIn particular, MUC measures the degree of agreement between key coreference links (i.e.,, links among mentions within entities) and response coreference links, while non-coreference links (i.e.,, links formed by mentions from different entities) are not explicitly taken into account
+p1
+aVHowever, when response mentions are not identical to key mentions, a key coreference link may not appear in either C r or N r , so Equations ( 2 ) to ( 7 ) cannot be applied directly to systems with imperfect mentions
+p2
+aVFor instance, if the key entities are { a,b,c } { d,e }; and the response entities are { b,c } { e,f,g }, then the key coreference link (a,b) is not seen on the response side; similarly, it is possible that a response link does not appear on the key side either c,f) and (f,g) are not in the key in the above example
+p3
+aVFor example, R c is the ratio of the number of correct coreference links over the number of key coreference links; P c is the ratio of the number of correct coreference links over the number of response coreference links, and so on
+p4
+aVThe BLANC-gold metric was developed with the assumption that response mentions and key mentions are identical
+p5
+aVSince there is no non-coreference link, BLANC reduces to the coreference F-measure F c
+p6
+aVSince there is no coreference link, BLANC reduces to the non-coreference F-measure F n
+p7
+aVB-cubed and CEAF treat entities as sets of mentions and measure the agreement between key (or gold standard) entities and response (or system-generated) entities, while MUC and BLANC-gold are link-based
+p8
+aVUsing the notations in Section 2 , the recall, precision, and F-measure on coreference links are
+p9
+aVIt calculates recall, precision and F-measure separately on coreference and non-coreference links in the usual way, and defines the overall recall, precision and F-measure as the mean of the respective measures for coreference and non-coreference links
+p10
+aVSo the final definition of BLANC can be succinctly stated as
+p11
+aVUnder the assumption that the key and response mention sets are identical (which implies that T k = T r ), Equations ( 2 ) to ( 7 ) make sense
+p12
+aVThis is boundary case (3 there are no non-coreference links
+p13
+aVWe observe that the definition of the proposed BLANC, Equ. ( 9 )-( 14 ) subsume the BLANC-gold ( 2 ) to ( 7 ) due to the following proposition
+p14
+aVIt is easy to see that the gold mention assumption u'\u005cu2014' same set of response mentions as the set of key mentions u'\u005cu2014' can be equivalently stated as T k = T r (this does not necessarily mean that C k = C r or N k = N r
+p15
+aVWhen T k = T r , Rand Index can be applied directly since coreference resolution reduces to a clustering problem where mentions are partitioned into clusters (entities
+p16
+aVRand Index is defined as the ratio between the number of correct within-cluster links plus the number of correct cross-cluster links, and the total number of links
+p17
+aVSo BLANC = F n = 1 3
+p18
+aVSo we only need to augment the BLANC definition for the following cases
+p19
+aVThis leads to a phenomenon where coreference systems outputting large entities are scored more favorably than those outputting small entities [ 3 ]
+p20
+aVHowever, the CoNLL data sets come from OntoNotes [ 2 ] , where singleton entities are not annotated, and BLANC has a wider dynamic range on data sets with singletons [ 7 ]
+p21
+aVIn practice, though, the simple-minded adoption of Rand Index is not satisfactory since the number of non-coreference links often overwhelms that of coreference links [ 7 ] , or
+p22
+aVBLANC-gold solves this problem by averaging the F-measure computed over coreference links and the F-measure over non-coreference links
+p23
+aVLet C k u'\u005cu2062' ( i ) and C r u'\u005cu2062' ( j ) be the set of coreference links formed by mentions in k i and r j
+p24
+aVThis can happen when all key (or response) mentions are in one cluster or are all singletons the former case will lead to N k = u'\u005cu2205' (or N r = u'\u005cu2205' ); the latter will lead to C k = u'\u005cu2205' (or C r = u'\u005cu2205'
+p25
+aVAs can be seen, a link is an undirected edge between two mentions, and it can be equivalently represented by a pair of mentions
+p26
+aVSo the correlations will likely be lower on data sets with singleton entities
+p27
+aVK where k i is the i t u'\u005cu2062' h key entity; accordingly, R = { r j } j = 1
+p28
+aVWe prove the first one (the other proofs are similar and elided due to space limitations
+p29
+aVUnification for other component recalls and precisions can be done similarly
+p30
+aVWe write l 1 = l 2 if two links are equal
+p31
+aVIndeed, since C k is a union of three disjoint subsets
+p32
+aV1) If C k = C r = u'\u005cu2205' and N k = N r = u'\u005cu2205' , then BLANC = I ( M k = M r ) , where I u'\u005cu2062' ( u'\u005cu22c5' ) is an indicator function whose value is 1 if its argument is true, and 0 otherwise
+p33
+aVThis establishes that R c = R c ( g )
+p34
+aVSince C k = { ( a u'\u005cu2062' b ) , ( b u'\u005cu2062' c ) , ( c u'\u005cu2062' a ) } , and C r = { ( b u'\u005cu2062' c ) } , we have C k u'\u005cu2229' C r = { ( b u'\u005cu2062' c ) } , and R c = 1 3 , P c = 1 , So BLANC = F c = 2 4 = 1 2
+p35
+aVIn Eqn. ( 2 ) - ( 3 ) and Eqn. ( 5 ) - ( 6 ), denominators are written as a sum of disjoint subsets so they can be related to the contingency table in [ 7 ]
+p36
+aVUnder the assumption that T k = T r , it is clear that C k = ( C k u'\u005cu2229' C r ) u'\u005cu222a' ( C k u'\u005cu2229' N r ) , C r = ( C k u'\u005cu2229' C r ) u'\u005cu222a' ( N k u'\u005cu2229' C r ) , and so on
+p37
+aVClearly, C k and N k form a partition of T k since C k u'\u005cu2229' N k = u'\u005cu2205' , T k = C k u'\u005cu222a' N k
+p38
+a.

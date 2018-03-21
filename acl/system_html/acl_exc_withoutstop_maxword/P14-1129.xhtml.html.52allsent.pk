@@ -1,0 +1,130 @@
+(lp0
+VWe chose these values for the hidden layer size, vocabulary size, and source window size because they seemed to work best on our data sets u'\u005cu2013' larger sizes did not improve results, while smaller sizes degraded results
+p1
+aVWe treat NULL as a normal target word, and if a source word aligns to multiple target words, it is treated as a single concatenated token
+p2
+aVAdditionally, on top of a simpler decoder equivalent to Chiang u'\u005cu2019' s [ 5 ] original Hiero implementation, our NNJM features are able to produce an improvement of +6.3 BLEU u'\u005cu2013' as much as all of the other features in our strong baseline system combined
+p3
+aVHere, our goal is to be able to use a fairly large vocabulary without word classes, and to simply avoid computing the entire output layer at decode time
+p4
+aVA number of recent papers have proposed methods for creating neural network translation/joint models, but nearly all of these works have obtained much smaller BLEU improvements than ours
+p5
+aVWe also present a novel technique for training the neural network to be self-normalized , which avoids the costly step of posteriorizing over the entire vocabulary in decoding
+p6
+aVWhile we cannot train a neural network with this guarantee, we can explicitly encourage the log-softmax normalizer to be as close to 0 as possible by augmenting our training objective function
+p7
+aVThe fact that the model is purely lexicalized, which avoids both data sparsity and implementation complexity
+p8
+aVWe also show strong improvements on the NIST OpenMT12 Chinese-English task, as well as the DARPA BOLT (Broad Operational Language Translation) Arabic-English and Chinese-English conditions
+p9
+aVBecause our NNJM is fundamentally an n -gram NNLM with additional source context, it can easily be integrated into any SMT decoder
+p10
+aVThe baseline used in the last section is a highly-engineered research system, which uses a wide array of features that were refined over a number of years, and some of which require linguistic resources
+p11
+aVTherefore, we also present results using a simpler version of our decoder which emulates Chiang u'\u005cu2019' s original Hiero implementation [ 5 ]
+p12
+aVBecause of this, the baseline BLEU scores are much higher than a typical MT system u'\u005cu2013' especially a real-time, production engine which must support many language pairs
+p13
+aVIt is easy and computationally inexpensive to use this model in decoding, since only one neural network computation must be made for each source word
+p14
+aVAlthough we consider the RNNLM to be part of our baseline, we give it special treatment in the results section because we would expect it to have the highest overlap with our NNJM
+p15
+aVThe use of a large bilingual context vector, which is provided to the neural network in u'\u005cu201c' raw u'\u005cu201d' form, rather than as the output of some other algorithm
+p16
+aVThe decoding cost is based on a measurement of u'\u005cu223c' 1200 unique NNJM lookups per source word for our Arabic-English system
+p17
+aVThe smaller improvement on Chinese-English compared to Arabic-English is consistent with the behavior of our baseline features, as we show in the next section
+p18
+aVFor unaligned words, the normal heuristic can also be used, except when the word is on the edge of a rule, because then the target neighbor words are not necessarily known
+p19
+aVFor aligned target words, the normal affiliation heuristic can be used, since the word alignment is available within the rule
+p20
+aVWhen used as MT decoding features, these models are able to produce a gain of +3.0 BLEU on top of a very strong and feature-rich baseline, as well as a +6.3 BLEU gain on top of a simpler system
+p21
+aVIf this likelihood is worse than the previous epoch, the learning rate is multiplied by 0.5
+p22
+aVAt every epoch, which we define as 20,000 minibatches, the likelihood of a validation set is computed
+p23
+aVHowever, the n -grams created for the NNJM can be shared with the Kneser-Ney LM, which reduces the cost of that feature
+p24
+aVSpecifically, if unaligned target word t is on the right edge of an arc that covers source span [ s i , s j ] , we simply say that t is affiliated with source word s j
+p25
+aVThe T2S variations cannot be used in decoding due to the large target context required, and are thus only used in k -best rescoring
+p26
+aVOn Arabic-English, the primary S2T/L2R NNJM gains +1.4 BLEU on top of our baseline, while the S2T NNLTM gains another +0.8, and the directional variations gain +0.8 BLEU more
+p27
+aVIf our neural network has only one hidden layer and is self-normalized, the only remaining computation is 512 calls to t u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' h u'\u005cu2062' ( ) and a single 513-dimensional dot product for the final output score
+p28
+aV4 4 We are not concerned with speeding up training time, as we already find GPU training time to be adequate
+p29
+aVThis can be reduced to just 5 scalar additions by pre-summing each 11-word source window when starting a test sentence
+p30
+aVOne issue with the S2T NNJM is that the probability is computed over every target word, so it does not explicitly model NULL-aligned source words
+p31
+aVWe have described a novel formulation for a neural network-based machine translation joint model, along with several simple variations of this model
+p32
+aVHere, we present a u'\u005cu201c' trick u'\u005cu201d' for pre-computing the first hidden layer, which further increases the speed of NNJM lookups by a factor of 1,000x
+p33
+aVIf t i is unaligned, we inherit its affiliation from the closest aligned word, with preference given to the right
+p34
+aVTherefore, for every word in the vocabulary, and for each position, we can pre-compute the dot product between the word embedding and the first hidden layer
+p35
+aVThe vocabulary is selected by frequency-sorting the words in the parallel training data
+p36
+aVThus, the total cost increase of using the NNJM+NNLTM features in decoding is only u'\u005cu223c' 0.01 seconds per source word
+p37
+aVThe u'\u005cu201c' Simple Hierarchical u'\u005cu201d' baseline is used here because it more closely approximates a real-time MT engine
+p38
+aV12 12 Note that the official 1st place OpenMT12 result was our own system, so we can assure that these comparisons are accurate
+p39
+aVThey have since been extended to translation modeling, parsing, and many other NLP tasks
+p40
+aVThe baseline here uses the same feature set as the strong NIST system
+p41
+aVBy combining self-normalization and pre-computation, we can achieve a speed of 1.4M lookups/second, which is on par with fast back-off LM implementations [ 27 ]
+p42
+aVFor the sake of a fair comparison, these all use one hidden layer
+p43
+aVThis leads to a total improvement of +3.0 BLEU from the NNJM and its variations
+p44
+aVOut-of-vocabulary words are mapped to their POS tag (or OOV , if POS is not available), and in this case P ( P O S i t i - 1 , u'\u005cu22ef' ) is used directly without further normalization
+p45
+aVOn Arabic, the total gain is +2.6 BLEU, while on Chinese, the gain is +1.3 BLEU
+p46
+aVThus, the one and two-model conditions still significantly outperform any past work
+p47
+aVHowever, we have demonstrated that we can obtain 50%-80% of the total improvement with only one model (S2T/L2R NNJM), and 70%-90% with only two models (S2T/L2R NNJM + S2T NNLTM
+p48
+aVIf we could guarantee that log u'\u005cu2061' ( Z u'\u005cu2062' ( x ) ) were always equal to 0 (i.e.,, Z u'\u005cu2062' ( x ) = 1) then at decode time we would only have to compute row r of the output layer instead of the whole matrix
+p49
+aVThus, only u'\u005cu223c' 3500 arithmetic operations are required per n -gram lookup, compared to u'\u005cu223c' 2.8M for self-normalized NNJM without pre-computation, and u'\u005cu223c' 35M for the standard NNJM
+p50
+aVThey score a 1000-best list using only their model and are able to achieve the same BLEU as using all 12 standard MT features (21.8 vs 21.7
+p51
+aVHowever, Le u'\u005cu2019' s formulation could only be used in k -best rescoring, since it requires long-distance re-ordering and a large target context
+p52
+aVFor the sake of speed, these experiments only use the S2T/L2R NNJM+S2T NNLTM
+p53
+aVHowever, additive results are not presented
+p54
+aVTo do this, we first say that each target word t i is affiliated with exactly one source word at index a i u'\u005cud835' u'\u005cudcae' i is then the m -word source window centered at a i
+p55
+aVIf t is on the left edge of the arc, we say it is affiliated with s i
+p56
+aV2012 ) require a 2-20k shortlist vocabulary, and are therefore still quite costly
+p57
+aVAt decode time, we simply use U r u'\u005cu2062' ( x ) as the feature score, rather than log u'\u005cu2061' ( P u'\u005cu2062' ( x )
+p58
+aVAlso, their model is recurrent, so it cannot be used in decoding
+p59
+aVThe S2T/R2L variant could be used in decoding, but we have not found this beneficial, so we only use it in rescoring
+p60
+aVHowever, note that there are only 3 possible positions for each target word, and 11 for each source word
+p61
+aV13 13 The difference in score for self-normalized vs pre-computed is entirely due to two vs one hidden layers
+p62
+aVIntuitively, we want to define u'\u005cud835' u'\u005cudcae' i as the window that is most relevant to t i
+p63
+aV6 6 t u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' h u'\u005cu2062' ( ) is implemented using a lookup table
+p64
+a.

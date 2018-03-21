@@ -1,0 +1,30 @@
+(lp0
+VWe proceed with argument crawling and label crawling , which pick up \u005cspred _the_q \u005cslnkc 03 and \u005cspred _german_n_1 as the \u005csrl ARG1
+p1
+aVThis leads us to \u005cspred _no_q as our entry point into the graph
+p2
+aVAs with the logical-forms representations we use, the DRS logical forms do not include function words as predicates in the semantics
+p3
+aVFurther, as the \u005csrl ARG2 of \u005cspred _know_v_1, we reach \u005cspred thing and through recursive invocation we activate \u005cspred _of_p and, in yet another level of recursion, \u005cspred _the_q \u005cslnkc 5760 and \u005cspred _matter_n_of
+p4
+aVThus in order to match the gold annotations, we define a set of heuristics for when to count vacuous words as in scope
+p5
+aVAt this point, crawling has no more links to follow
+p6
+aVOur crawling rules operate on semantic representations, but the annotations are with reference to the surface string
+p7
+aVOur system, on the other hand, models the annotation guidelines more closely in the definition of the MRS crawling rules, and has more elaborated rules for handling semantically empty words
+p8
+aVSince the Shared Task gold standard annotations included such arguably semantically vacuous (see \u005cciteNP [p.107]Bender:13) words in the scope, further heuristics are needed to repair the string-based annotations coming from the DRS-based system
+p9
+aVHowever, the string-based annotations also include words which the ERG treats as semantically vacuous
+p10
+aVAccordingly, we need projection rules to map from the u'\u005cu2018' painted u'\u005cu2019' MRS to the string
+p11
+aVBy disallowing the addition of EPs to the scope if they share the label of the negation cue but are not one of its arguments, we block the head noun u'\u005cu2019' s EP (and any EPs only reachable from it) in cases of relative clauses where the head verb inside the relative clause is negated
+p12
+aVSince in this case, the negation cue will not be a quantifier in the MRS, there will be no functor crawling to the verb u'\u005cu2019' s EP
+p13
+aVHaving been unable to find a generalization capturing when comodifiers are annotated as in scope,
+p14
+a.

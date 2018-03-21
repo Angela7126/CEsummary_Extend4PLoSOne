@@ -1,0 +1,18 @@
+(lp0
+VGiven an input sentence u'\u005cud835' u'\u005cudc31' = w 0 u'\u005cu2062' w 1 u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' w n , the goal of dependency parsing is to build a dependency tree as depicted in Figure 1 , denoted by u'\u005cud835' u'\u005cudc1d' = { ( h , m
+p1
+aVTo construct parse forest on unlabeled data, we employ three supervised parsers based on different paradigms, including our baseline graph-based dependency parser, a transition-based dependency parser [] , and a generative constituent parser []
+p2
+aVThe other difference is where the preposition phrase (PP) u'\u005cu201c' in the park u'\u005cu201d' should be attached, which is also known as the PP attachment problem, a notorious challenge for parsing
+p3
+aVBoth work employs two parsers to process the unlabeled data, and only select as extra training data sentences on which the 1-best parse trees of the two parsers are identical
+p4
+aVTraining with the combined labeled and unlabeled data, the objective is to maximize the mixed likelihood
+p5
+aVDifferent from traditional self/co/tri-training which only use 1-best parse trees on unlabeled data, our approach adopts ambiguous labelings, represented by parse forest, as gold-standard for unlabeled sentences
+p6
+aV16K for Chinese), it is likely that the unlabeled data may overwhelm the labeled data during SGD training
+p7
+aVIn this work, we adopt the graph-based paradigm because it allows us to naturally derive conditional probability of a dependency tree u'\u005cud835' u'\u005cudc1d' given a sentence u'\u005cud835' u'\u005cudc31' , which is required to compute likelihood of
+p8
+a.

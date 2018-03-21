@@ -1,0 +1,301 @@
+(lp0
+VThese domain-specific words are mostly not included in any other existing general-purpose emotion lexicons
+p1
+aVThe experimental results show that our algorithm can successfully construct a fine-grained domain-specific emotion lexicon for this corpus that is able to understand the connotation of the words that may not be obvious without the context
+p2
+aVFor each emotion category, we evaluates it as a binary classification problem
+p3
+aVIn the evaluation of emotion lexicons, the binary classification is performed in a very simple way
+p4
+aVUsually, a high quality emotion lexicon play a significant role when apply the unsupervised approaches for fine-grained emotion classification
+p5
+aVWe descrige with the model description, a Gibbs sampling algorithm to infer the model parameters, and finally how to generate a emotion lexicon based on the model output
+p6
+aVLastly, previous emotion lexicons are mostly annotated based on many manually constructed resources (e.g.,, emotion lexicon, parsers, etc
+p7
+aVThus, the word is considered neutral and not included in the emotion dictionary
+p8
+aVHence, the topics consequently group semantically related words into a same emotion category
+p9
+aVSince there is no metric explicitly measuring the quality of an emotion lexicon, we demonstrate the performance of our algorithm in two ways
+p10
+aVOur approach is a weakly supervised approach since only some seeds emotion sentiment words are needed to lanch the process of lexicon construction
+p11
+aVThus far, most lexicon construction approaches focus on constructing general-purpose emotion lexicons [ 11 , 7 , 16 , 4 ]
+p12
+aVThe second kind of approaches is based on an idea that emotion words co-occurring with each others are likely to convey the same polarity
+p13
+aVIf u'\u005cu03a6' i , w ( e ) is the largest, then the word w is added to the emotion dictionary for the i th emotion
+p14
+aVHowever, since a specific word can carry various emotions in different domains, a general-purpose emotion lexicon is less accurate and less informative than a domain-specific lexicon [ 1 ]
+p15
+aVOur approach relates most closely to the method proposed by Xie and Li ( 2012 ) for the construction of lexicon annotated for polarity based on LDA model
+p16
+aVAs mentioned, we use a few domain-independent seed words as prior information for our model
+p17
+aVWhat we reported here are based on our judgments what are appropriate and what are not for each emotion topic
+p18
+aVFor each word in the document, we decide whether its topic is an emotion topic or a non-emotion topic by flipping a coin with head-tail probability ( p ( e ) , p ( n ) ) , where ( p ( e ) , p ( n ) ) u'\u005cu223c' Dir u'\u005cu2062' ( u'\u005cu0391'
+p19
+aVThe proposed EaLDA model extends the standard Latent Dirichlet Allocation (LDA) [ 3 ] model by employing a small set of seeds to guide the model generating topics
+p20
+aVThe lexicon is thus able to best meet the user u'\u005cu2019' s specific needs
+p21
+aVThe vector u'\u005cu0392' ( e ) is constructed from the seed dictionary using u'\u005cu0393' = ( 0.25 , 0.95 )
+p22
+aVThe emotion (or non-emotion) topic is sampled according to a multinomial distribution Mult u'\u005cu2062' ( u'\u005cu0398' ( e ) ) (or Mult u'\u005cu2062' ( u'\u005cu0398' ( n ) )
+p23
+aVAssuming hyperparameters u'\u005cu0391' , u'\u005cu0391' ( e ) , u'\u005cu0391' ( n ) , and u'\u005cu0392' ( e ) , u'\u005cu0392' ( n ) , we develop a collapsed Gibbs sampling algorithm to estimate the latent variables in the EaLDA model
+p24
+aVDue to the popularity of opinion-rich resources (e.g.,, online review sites, forums, blogs and the microblogging websites), automatic extraction of opinions, emotions and sentiments in text is of great significance to obtain useful information for social and security studies
+p25
+aVThe first kind of approaches is based on thesaurus that utilizes synonyms or glosses to d etermine the sentiment orientation of a word
+p26
+aVUsing the above equations, we can sample the topic z for each word iteratively and estimate all latent random variables
+p27
+aVAs an alternative representation, the graphical model of the the generative process is shown by Figure 1
+p28
+aVOtherwise, 1 K u'\u005cu2062' u'\u005cu2211' i = 1 K u'\u005cu03a6' i , w ( n ) is the largest among the M + 1 values, which suggests that the word w is more probably drawn from a non-emotion topic
+p29
+aVdraw w u'\u005cu223c' Mult u'\u005cu2062' ( u'\u005cu03a6' z ( n ) ( n ) ) , emit word w
+p30
+aVUsing the definition of the EaLDA model and the Bayes Rule, we find that the joint density of these random variables are equal to
+p31
+aVIn practical applications, asking users to provide some seeds is easy as they usually have a good knowledge what are important in their domains
+p32
+aVVarious opinion mining applications have been proposed by different researchers, such as question answering, opinion mining, sentiment summarization, etc
+p33
+aVThen, by examining the property of Dirichlet distribution, we can compute expectations on the right hand side of equation ( 2 ) and equation ( 3 ) by
+p34
+aVAs the fine-grained annotated data are expensive to get, the unsupervised approaches are preferred and more used in reality
+p35
+aVAccording to equation ( 1 ), we see that { p ( e ) , p ( n ) } , { u'\u005cu0398' i ( e ) , u'\u005cu0398' j ( n ) } , { u'\u005cu03a6' i , w ( e ) } and { u'\u005cu03a6' j , w ( n ) } are mutually independent sets of random variables
+p36
+aVFinally, Snowball stemmer 2 2 http://snowball.tartarus.org/ is applied so as to reduce the vocabulary size and settle the issue of data spareness
+p37
+aVAs an easy observation, the emotion lexicon generated by the EaLDA model consistently and significantly outperforms the WordNet-Affect emotion lexicon and other three emotion classification systems
+p38
+aVThe emotion classification results is evaluated for each emotion category separately
+p39
+aV1) we perform a case study for the lexicon generated by our algorithm, and (2) we compare the results of solving emotion classification task using our lexicon against different methods, and demonstrate the advantage of our lexicon over other lexicons and other emotion classification systems
+p40
+aVFor each emotion category and each text, we compare the number of words within this emotion category, and the average number of words within other emotion categories, to output a binary prediction of 1 or 0
+p41
+aVFor emotion topics, the EaLDA model draws the word distribution from a biased Dirichlet prior Dir u'\u005cu2062' ( u'\u005cu0392' k ( e )
+p42
+aVWe compare the performance between a popular emotion lexicon WordNet-Affect [ 13 ] and our approach for emotion classifica tion task
+p43
+aVLike the standard LDA model, EaLDA is a generative model
+p44
+aVThis simple approach is chosen to evaluate the robustness of our emotion lexicon
+p45
+aVExample words for each emotion gener ated from the SemEval-2007 dataset are reported in Table 1
+p46
+aVOur final step is to construct the domain-specific emotion lexicon from the estimates u'\u005cu03a6' ( e ) and u'\u005cu03a6' ( n ) that we obtained from the EaLDA model
+p47
+aVTo meet the challenges mentioned above, we propose a novel EaLDA model to construct a domain-specific emotion lexicon consisting of six primary emotions (i.e.,, anger, disgust, fear, joy, sadness and surprise
+p48
+aVTo be specific, the seed words list contains 8 to 12 emotional words for each of the six emotion categories
+p49
+aVIn this section, we rigorously define the emotion-aware LDA model and its learning algorithm
+p50
+aVEmotion lexicon plays an important role in opinion mining and sentiment analysis
+p51
+aVOur approach differs from [ 17 ] in two important ways first, we do not address the task of polarity lexicon construction, but instead we focus on building fine-grained emotion lexicon
+p52
+aVThe results demonstrate that our EaLDA model improves the quality and the coverage of state-of-the-art fine-grained lexicon
+p53
+aVThe algorithm iteratively takes a word w from a document and sample the topic that this word belongs to
+p54
+aVThe advantage of our model may come from its capability of exploring domain-specific emotions which include not only explicit emotion words, but also implicit ones
+p55
+aVFrom Table 1 , we observe that the generated words are informative and coherent
+p56
+aVMost of the previous studies for emotion lexicon construction are limited to positive and negative emotions
+p57
+aVWe also compare our results with those obtained by three systems participating in the SemEval-2007 emotion annotation task
+p58
+aVif s = u'\u005cu201c' emotion topic u'\u005cu201d'
+p59
+aVIntuitively, when u'\u005cu0393' 1 ( e ) u'\u005cu0393' 0 ( e ) , the biased prior ensures that the seed words are more probably drawn from the associated emotion topic
+p60
+aVM emotion topics (corresponding to M different emotions) and K non-emotion topics (corresponding to topics that are not associated with any emotion
+p61
+aVWe summarize the generative process of the EaLDA model as below
+p62
+aVIn this section, we report empirical evaluations of our proposed model
+p63
+aVEach topic is represented by a multinomial distribution over words
+p64
+aVFor example, the words u'\u005cu201c' flu u'\u005cu201d' and u'\u005cu201c' cancer u'\u005cu201d' are seemingly neutral by its surface meaning, actually expressing fear emotion for SemEval dataset
+p65
+aVThe generative process of word distributions for non-emotion topics follows the standard LDA definition with a scalar hyperparameter u'\u005cu0392' ( n )
+p66
+aVfor each word in document
+p67
+aVfor each emotion topic k u'\u005cu2208' { 1 , u'\u005cu2026' , M } , draw u'\u005cu03a6' k ( e ) u'\u005cu223c' Dir u'\u005cu2062' ( u'\u005cu0392' k ( e )
+p68
+aVWe summarize the results in Table 2
+p69
+aVRecently, to enhance the increasingly emotional data, a few researches have been done to identity the fine-grained emotion of words [ 12 , 6 , 10 ]
+p70
+aVWe first settle down the implementation details for the EaLDA model, specifying the hyperparameters that we choose for the experiment
+p71
+aV2012 ) propose an method of automatically building the word-emotion mapping dictionary for social emotion detection
+p72
+aVdraw w u'\u005cu223c' Mult u'\u005cu2062' ( u'\u005cu03a6' z ( e ) ( e ) ) , emit word w
+p73
+aVEach of these random variables satisfies Dirichlet distribution with a specific set of parameters
+p74
+aVBy the mutual independence, we decompose the probability of the topic z for the current word as
+p75
+aVWe conduct experiments to evaluate the effectiveness of our model on SemEval-2007 dataset
+p76
+aVTo prevent conceptual confusion, we use a superscript u'\u005cu201c' (e) u'\u005cu201d' to indicate variables related to emotion topics, and use a superscript u'\u005cu201c' (n) u'\u005cu201d' to indicate variables of non-emotion topics
+p77
+aVIn addition, in previous work, most of the lexicons label the words on coarse-grained dimensions (positive, negative and neutrality
+p78
+aVfor each non-emotion topic k u'\u005cu2208' { 1 , u'\u005cu2026' , K } , draw u'\u005cu03a6' k ( n ) u'\u005cu223c' Dir u'\u005cu2062' ( u'\u005cu0392' ( n )
+p79
+aVIn particular, we are able to obtain an overall F1-score of 10.52% for disgust classification task which is difficult to work out using previously proposed methods
+p80
+aVLet m i ( e ) (or m j ( n ) ) indicate the number of occurrence of topic i ( e ) (or topic j ( n ) ) in the current document
+p81
+aV2008 ) utilize computational linguistic tools to identity the emotions of the words (such as, joy, sadness, acceptance, disgust, fear, anger, surprise and anticipation
+p82
+aVLet n i , w ( e ) (or n j , w ( n ) ) indicate the number of occurrences of topic i ( e ) (or topic j ( n ) ) with word w in the whole corpus
+p83
+aVIn addition, we assume that the corpus vocabulary consists of V distinct words indexed by { 1 , u'\u005cu2026' , V }
+p84
+aVThe judgment is to some extent subjective
+p85
+aVLet the whole corpus excluding the current word be denoted by D
+p86
+aVdraw topic class indicator s u'\u005cu223c' Bernoulli u'\u005cu2062' ( p s
+p87
+aVAll these counts are defined excluding the current word
+p88
+aVHowever, the emtion lexicon is not outputed explicitly in this paper, and the approach is fully unsupervised which may be difficult to be adjusted to fit the personalized data set
+p89
+aVThe scalars u'\u005cu0393' 0 ( e ) and u'\u005cu0393' 1 ( e ) are hyperparameters of the model
+p90
+aV3 3 http://minyang.me/acl2014/seed-words.html However, it is important to note that the proposed models are flexible and do not need to have seeds for every topic
+p91
+aVIn the experiments, performance is evaluated in terms of F1-score
+p92
+aVExtensive experiments are carried out to evaluate our model both qualitatively and quantitatively using benchmark dataset
+p93
+aVWe assume that each document has two classes of topics
+p94
+aVIn order to build such a lexicon, many researchers have investigated various kinds of approaches
+p95
+aVdraw z ( e ) u'\u005cu223c' Mult u'\u005cu2062' ( u'\u005cu0398' ( e )
+p96
+aVdraw z ( n ) u'\u005cu223c' Mult u'\u005cu2062' ( u'\u005cu0398' ( n )
+p97
+aVSecond, we don u'\u005cu2019' t assume that every word in documents is subjective, which is impractical in real world corpus
+p98
+aVdraw u'\u005cu0398' ( e ) u'\u005cu223c' Dir u'\u005cu2062' ( u'\u005cu0391' ( e )
+p99
+aVdraw u'\u005cu0398' ( n ) u'\u005cu223c' Dir u'\u005cu2062' ( u'\u005cu0391' ( n )
+p100
+aVThis is an gold-standard English dataset used in the 14th task of the SemEval-2007 workshop which focuses on classification of emotions in the text
+p101
+aVWe set topic number M = 6 , K = 4 , and hyperparameters u'\u005cu0391' = 0.75 , u'\u005cu0391' ( e ) = u'\u005cu0391' ( n ) = 0.45 , u'\u005cu0392' ( n ) = 0.5
+p102
+aVThey are generated from Dirichlet priors Dir u'\u005cu2062' ( u'\u005cu0391' ( e ) ) and Dir u'\u005cu2062' ( u'\u005cu0391' ( n ) ) with u'\u005cu0391' ( s ) and u'\u005cu0391' ( n ) being hyperparameters
+p103
+aVIn experiments, data preprocessing is performed on the data set
+p104
+aVfor each document
+p105
+aVThen, we remove non-alphabet characters, numbers, pronoun, punctuation and stop words from the texts
+p106
+aVSuch lexicons cannot accurately reflect the complexity of human emotions and sentiments
+p107
+aVThe vector u'\u005cu0392' k ( e ) u'\u005cu2208' u'\u005cu211d' V is constructed with u'\u005cu0392' k ( e ) := u'\u005cu0393' 0 ( e ) u'\u005cu2062' ( 1 V - u'\u005cu03a9' k ) + u'\u005cu0393' 1 ( e ) u'\u005cu2062' u'\u005cu03a9' k , for k u'\u005cu2208' { 1 , u'\u005cu2026' , M } u'\u005cu03a9' k , w = 1 if and only if word w is a seed word for emotion k , otherwise u'\u005cu03a9' k , w = 0
+p108
+aVHowever, these methods could roughly be classified into two categories in terms of the used information
+p109
+aVSWAT, UPAR7 and UA
+p110
+aVFor each word w in the vocabulary, we compare the M + 1 values { u'\u005cu03a6' 1 , w ( e ) , u'\u005cu2026' , u'\u005cu03a6' M , w ( e ) } and 1 K u'\u005cu2062' u'\u005cu2211' i = 1 K u'\u005cu03a6' i , w ( n
+p111
+aVThe attributes include the news headlines, the score of emotions of anger, disgust, fear, joy, sad and surprise normalizing from 0 to 100
+p112
+aVTwo data sets are available a training data set consisting of 250 records, and a test data set with 1000 records
+p113
+aVThe availability of the WordNet [ 9 ] database is an important starting point for many thesaurus-based approaches [ 8 , 7 , 5 ]
+p114
+aVHere, both u'\u005cu0398' ( e ) and u'\u005cu0398' ( n ) are document-level latent variables
+p115
+aVWhile, this approach is mainly for public use in general domains
+p116
+aVFollowing the strategy used in [ 12 ] , the task was carried out in an unsupervised setting for experiments
+p117
+aVThis limits the applicability of these methods to a broader range of tasks and languages
+p118
+aVdraw ( p ( e ) , p ( n ) ) u'\u005cu223c' D u'\u005cu2062' i u'\u005cu2062' r u'\u005cu2062' ( u'\u005cu0391'
+p119
+aVRao et al
+p120
+aVFor example, Gill et al
+p121
+aVThere are numerous studies in this field [ 14 , 15 , 5 , 2 ]
+p122
+aVFirst, the texts are tokenized with a natural language toolkit NLTK 1 1 http://www.nltk.org
+p123
+aVw ( e
+p124
+aVw
+p125
+aVotherwise
+p126
+aS''
+p127
+aVM
+p128
+ag127
+aVK
+p129
+ag127
+ag127
+aVN d
+p130
+ag127
+ag127
+aVD
+p131
+ag127
+ag127
+aVu'\u005cu0393'
+p132
+aVu'\u005cu0392' ( n
+p133
+aVu'\u005cu0392' ( e
+p134
+aVu'\u005cu03a6' ( n
+p135
+aVu'\u005cu03a6' ( e
+p136
+aVu'\u005cu0391'
+p137
+aVu'\u005cu0391' ( n
+p138
+aVu'\u005cu0391' ( e
+p139
+aVp
+p140
+aVu'\u005cu0398' ( e
+p141
+aVs
+p142
+aVz ( n
+p143
+aVz ( e
+p144
+aVw ( n
+p145
+aVu'\u005cu0398' ( n
+p146
+a.

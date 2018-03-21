@@ -1,0 +1,24 @@
+(lp0
+VScopal information in MRS analyses delivered by the ERG fixes the scope of operators u'\u005cu2014' such as negation, modals, scopal adverbs (including subordinating conjunctions like while ), and clause-embedding verbs (e.g., believe ) u'\u005cu2014' based on their position in the constituent structure, while leaving the scope of quantifiers (e.g., a or every , but also other determiners) free
+p1
+aVThus, the MRS crawling operations u'\u005cu2018' paint u'\u005cu2019' a subset of the MRS graph as in-scope for a given negation cue
+p2
+aVOur MRS crawling algorithm was defined by looking at the annotated data rather than the annotation guidelines for the Shared Task [ 7 ]
+p3
+aVThe negation cue for a negated nominal argument will appear as a quantifier EP in the MRS, triggering line 3 of our algorithm
+p4
+aVOur system, on the other hand, models the annotation guidelines more closely in the definition of the MRS crawling rules, and has more elaborated rules for handling semantically empty words
+p5
+aVBy disallowing the addition of EPs to the scope if they share the label of the negation cue but are not one of its arguments, we block the head noun u'\u005cu2019' s EP (and any EPs only reachable from it) in cases of relative clauses where the head verb inside the relative clause is negated
+p6
+aVOur crawling rules operate on semantic representations, but the annotations are with reference to the surface string
+p7
+aVSince in this case, the negation cue will not be a quantifier in the MRS, there will be no functor crawling to the verb u'\u005cu2019' s EP
+p8
+aVThus, we also tested fall-back configurations which use scope predictions based on MRS in some cases, and scope predictions from the system of \u005cciteA Rea:Vel:Ovr:12 in others
+p9
+aVBecause our crawling algorithm so closely models the guidelines, this puts our system in an interesting position to provide feedback to the Shared Task organizers
+p10
+aVFor the purposes of the present task, we take a negation cue as our entry point into the MRS graph (as our initial active
+p11
+a.

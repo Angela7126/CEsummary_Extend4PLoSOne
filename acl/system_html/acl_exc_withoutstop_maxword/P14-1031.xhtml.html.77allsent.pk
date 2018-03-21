@@ -1,0 +1,537 @@
+(lp0
+VSpecifically, we use the Conditional Random Field (CRF) model as the learner for sentence-level sentiment classification, and incorporate rich discourse and lexical knowledge as soft constraints into the learning of CRF parameters via Posterior Regularization (PR) [ 7 ]
+p1
+aVWe develop a rich set of context-aware posterior constraints for sentence-level sentiment analysis by exploiting lexical and discourse knowledge
+p2
+aVIn this paper, we propose a sentence-level sentiment classification method that can (1) incorporate rich discourse information at both local and global levels; (2) encode discourse knowledge as soft constraints during learning; (3) make use of unlabeled data to enhance learning
+p3
+aVSpecifically, we construct the lexical constraints by extracting sentiment-bearing patterns within sentences and construct the discourse-level constraints by extracting discourse relations that indicate sentiment coherence or sentiment changes both within and across sentences
+p4
+aVNote that sentences with neutral sentiment can also contain such lexical patterns
+p5
+aVWe can incorporate the proposed constraints (constraints derived from lexical patterns and discourse connectives) as hard constraints into CRF during inference by manually setting u'\u005cu039b' in equation 4 to a large value, 9 9 We set u'\u005cu039b' to 1000 for the lexical constraints and -1000 to the discourse connective constraints in the experiments
+p6
+aVWe encode the extracted lexical patterns along with their sentiment values as feature-label constraints
+p7
+aVIn contrast, both PR l u'\u005cu2062' e u'\u005cu2062' x and PR significantly outperform CRF , which implies that incorporating lexical and discourse constraints as posterior constraints is much more effective
+p8
+aVThis confirms that encoding lexical and discourse knowledge as posterior constraints allows the feature-based model to gain additional learning power for sentence-level sentiment prediction
+p9
+aVFor the CRF baseline and its invariants, we observe a similar performance trend as in the two-way classification task there is nearly no performance improvement from applying the lexical and discourse-connective-based constraints during CRF inference
+p10
+aV1) we encode the coreference relations as soft constraints during learning instead of applying them as hard constraints during inference time; (2) our constraints can apply to both polar and non-polar sentences; (3) our identification of coreference relations is automatic without any fine-grained annotations for opinion targets
+p11
+aVWe also show that constraints derived from the discourse context can be highly useful for disambiguating sentence-level sentiment
+p12
+aVPR makes the assumption that the labeled data we have is not enough for learning good model parameters, but we have a set of constraints on the posterior distribution of the labels
+p13
+aVIn this work, we apply PR in the context of CRFs for sentence-level sentiment classification
+p14
+aVIt has the advantages of utilizing rich discourse knowledge at different levels of context and encoding it as soft constraints during learning
+p15
+aVThen we introduce the context-aware constraints derived based on intuitive discourse and lexical knowledge
+p16
+aVUsing the polarity indicated by lexical patterns to constrain the sentiment of sentences is quite aggressive
+p17
+aVTherefore we allow the lexical patterns to be assigned a neutral sentiment with a prior probability r 0 (we compute this value as the empirical probability of neutral sentiment in the training documents
+p18
+aVIn the supervised setting, we treated the test data as unlabeled data and performed transductive learning
+p19
+aVIn contrast, the PR model is able to associate stronger sentiment signals to these features by leveraging unlabeled data for indirect supervision
+p20
+aVThe poor performance of CRF-inf l u'\u005cu2062' e u'\u005cu2062' x indicates that directly applying lexical constraints as hard constraints during inference could only hurt the performance
+p21
+aVTo better understand the different effects of lexical and discourse constraints, we report results for applying only the lexical constraints ( CRF-inf l u'\u005cu2062' e u'\u005cu2062' x ) as well as results for applying only the discourse constraints ( CRF-inf d u'\u005cu2062' i u'\u005cu2062' s u'\u005cu2062' c
+p22
+aVIn addition, we include the discourse connectives as local or transition features and the document-level sentiment labels as features (only available in the MD dataset
+p23
+aVIn particular, incorporating discourse constraints leads to consistent improvements to our model
+p24
+aVIn general, discourse connectives can also be used to connect non-polar (neutral) sentences
+p25
+aVBy introducing the u'\u005cu201c' neutral u'\u005cu201d' category, the sentiment classification problem becomes harder
+p26
+aVNote that these constraints are not necessary for our model and can be applied when the document-level sentiment labels are naturally available
+p27
+aVWe also show that discourse knowledge is highly useful for improving sentence-level sentiment classification
+p28
+aVHowever, if we examine these sentences within the discourse context, we can see that the second sentence expresses sentiment towards the same aspect u'\u005cu2013' the music u'\u005cu2013' as the first sentence; the third sentence expands the second sentence with the discourse connective In fact
+p29
+aVIn the MD dataset, a neutral label may be given because the sentence contains mixed sentiment or no sentiment or it is off-topic
+p30
+aVThe lexical constraints alone are often not sufficient since their coverage is limited by the sentiment lexicon and they can only constrain sentiment locally
+p31
+aVThus it is hard to directly constrain the posterior expectation for each type of sentiment transitions using inter-sentential discourse connectives
+p32
+aVHowever, the discourse relations were obtained from fine-grained annotations and implemented as hard constraints on polarity
+p33
+aVInstead, we impose constraints on the model posteriors by reducing constraint violations
+p34
+aVIn the semi-supervised setting, our unlabeled data consists of both the available unlabeled data and the test data
+p35
+aVTherefore we only consider lexical patterns that are strongly discriminative (many opinion words in the lexicon only indicate sentiment with weak strength
+p36
+aVThis demonstrates that our modeling of discourse information is effective and that taking into account the discourse context is important for improving sentence-level sentiment analysis
+p37
+aVTherefore all the constraints are applied as soft constraints
+p38
+aVThis is because it over-predicts the polar sentences in the polar documents, and predicts no polar sentences in the neutral documents
+p39
+aVThe rule-based baseline VoteFlip gave the weakest performance because it has no prediction power on sentences with no opinion words
+p40
+aVA plausible explanation is that most of our constraints focus on discriminating polar sentences
+p41
+aVAs a result they could not help disambiguate neutral sentiment from polar sentiment, such as the third example in Table 5
+p42
+aVTo capture context at the clause or sentence level, we consider discourse connectives, which are cue phrases or words that indicate discourse relations between adjacent sentences or clauses
+p43
+aVMost of our constraints can be factorized in the same way as factorizing the model features in the first-order CRF model, and we can compute the expectations under q very efficiently using the forward-backward algorithm
+p44
+aVBased on an analysis of the Amazon review data, we observe that sentence-level sentiment usually doesn u'\u005cu2019' t conflict with the document-level sentiment in terms of polarity
+p45
+aVIn this work, we also take into account this information and encode it as posterior constraints
+p46
+aVThis indicates that the document-level sentiment is a very strong indicator of the sentence-level sentiment label
+p47
+aVWhen u'\u005cu039b' is large enough, it is equivalent to adding hard constraints to the viterbi inference
+p48
+aVOne reason is that they do not constrain the neutral sentiment
+p49
+aVHowever, hard-constraint baselines can hardly improve the performance in general because the contributions of different constraints are not learned and their combination may not lead to better predictions
+p50
+aVAs a framework for structured learning with constraints, PR has been successfully applied to many structural NLP tasks [ 6 , 7 , 5 ]
+p51
+aVWe consider a set of polar sentences to be linked by the opinion coreference relation if they contain coreferring opinion-related entities
+p52
+aVThe first idea is to exploit sentiment signals at the sentence level by learning the relevance of sentiment and words while taking into account the context in which they occur
+p53
+aVEach constraint can be formulated as equality between the expectation of a constraint function value and a desired value set by prior knowledge
+p54
+aVWe set the CRF regularization parameter u'\u005cu03a3' = 1 and set the posterior regularization parameter u'\u005cu0392' and u'\u005cu0393' (a trade-off parameter we introduce to balance the supervised objective and the posterior regularizer in 2 ) by using grid search 8 8 We conducted 10-fold cross-validation on each training fold with the parameter space u'\u005cu0392'
+p55
+aVThe PR objective can be written as the original model objective penalized with a regularization term, which minimizes the KL-divergence between the desired model posteriors and the learned model posteriors with an L2 penalty 2 2 Other convex functions can be used for the penalty
+p56
+aVWe focus on the equality constraints since we found them to express the sentiment-relevant constraints well
+p57
+aVExisting feature-based classifiers may be effective in identifying the positive sentiment of the first sentence due to the use of the word revelation , but they could be less effective in the last two sentences due to the lack of explicit sentiment signals
+p58
+aVTo identify discourse connectives, we apply a discourse tagger trained on the Penn Discourse Treebank [ 20 ] 4 4 http://www.cis.upenn.edu/~epitler/discourse.html to our data
+p59
+aVAs these opinion targets are coreferential (referring to the same entity u'\u005cu201c' the speaker phone u'\u005cu201d' ), they are linked by the opinion coreference relation 5 5 In general, the opinion-related entities include both the opinion targets and the opinion holders
+p60
+aVIntuitively, discourse connectives with the senses of Expansion (e.g., also, for example, furthermore) and Contingency (e.g., as a result, hence, because) are likely to indicate sentiment coherence; discourse connectives with the sense of Comparison (e.g., but, however, nevertheless) are likely to indicate sentiment changes
+p61
+aVThe desired value for the constraint expectation is set to 0 so that the model is encouraged to have less constraint violations
+p62
+aVWe consider a discourse connective to be intra-sentential if it has the Comparison sense and connects two polar clauses with opposite polarities (determined by the lexical patterns
+p63
+aVThe second example in Table 5 shows that the PR model learned with discourse constraints correctly predicts the sentiment of two sentences where no lexical constraints apply
+p64
+aV2013 ) explored the use of explanatory discourse relations as soft constraints in a Markov Logic Network framework for extracting subjective text segments
+p65
+aVWe extract lexical patterns that consist of polar words and negators 3 3 The polar words are identified using the MPQA lexicon and the negators are identified using a handful of seed words extended by the General Inquirer dictionary and WordNet as described in [ 2 ] and apply the heuristics based on compositional semantics [ 2 ] to assign a sentiment value to each pattern
+p66
+aVLeveraging both ideas, our approach exploits sentiment signals from both intra-sentential and inter-sentential context
+p67
+aVIn our tables, boldface numbers are statistically significant by paired t-test for p 0.05 against the best baseline developed in this paper 7 7 Significance test was not conducted over the previous methods as we do not have their results for each fold
+p68
+aVFor example, the following sentences express opinions towards u'\u005cu201c' the speaker phone u'\u005cu201d' , u'\u005cu201c' The speaker phone u'\u005cu201d' and u'\u005cu201c' it u'\u005cu201d' respectively
+p69
+aVThe opinion holders can be included in a similar way as the opinion targets
+p70
+aVThe equality is not strictly enforced (due to the regularization in the PR objective 2
+p71
+aVFor documents where the higher-order constraints apply, we use the same Gibbs sampler as described above to infer the most likely label assignment, otherwise, we use the Viterbi algorithm
+p72
+aVDenote u'\u005cud835' u'\u005cudc31' as a sequence of sentences within a document and u'\u005cud835' u'\u005cudc32' as a vector of sentiment labels associated with u'\u005cud835' u'\u005cudc31'
+p73
+aVHowever, the improvement on the neutral category is modest
+p74
+aVLexical patterns can be limited in capturing contextual information since they only look at interactions between words within an expression
+p75
+aVObtaining sentiment labels at the fine-grained level is costly
+p76
+aVSolving the minimization problem is equivalent to solving its dual since the objective is convex
+p77
+aVListing Patterns Another type of coherence relations we observe in online reviews is listing, where a reviewer expresses his/her opinions by listing a series of statements followed by a sequence of numbers
+p78
+aVCRF augmented with inference constraints
+p79
+aVSince the possible label assignments only differ at position i , we can make the computation efficient by maintaining the structure of the coreference clusters and precomputing the constraint function for different types of violations
+p80
+aVThe constraint function can be written as
+p81
+aVWhen combining discourse constraints with features from different sentences, the PR model becomes more powerful in disambiguating sentiment
+p82
+aVStill, their methods can encounter difficulty when the sentence on its own does not contain strong enough sentiment signals (due to the lack of statistical evidence or the requirement for background knowledge
+p83
+aVLexical Patterns The existence of a polarity-carrying word alone may not correctly indicate the polarity of the sentence, as the polarity can be reversed by other polarity-reversing words
+p84
+aVWe can derive q by solving the dual problem in 3
+p85
+aVTable 4 shows the results in terms of F1 scores for each sentiment category (positive, negative and neutral
+p86
+aVWe use accuracy as the performance measure
+p87
+aVMy favorite features are the speaker phone and the radio
+p88
+aVThe ability to extract sentiment from text is crucial for many opinion-mining applications such as opinion summarization, opinion question answering and opinion retrieval
+p89
+aVAccordingly, extracting sentiment at the fine-grained level (e.g., at the sentence- or phrase-level) has received increasing attention recently due to its challenging nature and its importance in supporting these opinion analysis tasks [ 18 ]
+p90
+aVWe trained our model using a CRF incorporated with the proposed posterior constraints
+p91
+aVCRF with the same set of model features as in our method
+p92
+aVThe inputs to the model are sentence-segmented documents annotated with sentence-level sentiment labels (positive, negative or neutral) along with a set of unlabeled documents
+p93
+aVWe first report results on a binary (positive or negative) sentence-level sentiment classification task
+p94
+aVUnlike most previous work, we explore a rich set of structural constraints that cannot be naturally encoded in the feature-label form, and show that such constraints can improve the performance of the CRF model
+p95
+aVWe also report both two-way classification (positive vs negative) and three-way classification results (positive, negative or neutral
+p96
+aVDuring prediction, the model outputs sentiment labels for a sequence of sentences in the test document
+p97
+aVWe plan to explore more refined constraints that can deal with the neutral sentiment in future work
+p98
+aVTable 3 shows the results in terms of accuracy for each domain in the MD dataset
+p99
+aVOur approach is also semi-supervised
+p100
+aVThey can help reduce the errors of misclassifying polar sentences, but the model needs more constraints in order to distinguish neutral sentences from polar sentences
+p101
+aVWe use L2 norm because it works well in practice u'\u005cu0392' is a regularization constant for the constraint violations
+p102
+aVWe found that the PR model is able to correct many CRF errors caused by the lack of labeled data
+p103
+aVSimilar to the inter-sentential discourse connectives, modeling opinion coreference via constraint violations allows the model to handle neutral sentiment
+p104
+aV3) PR l u'\u005cu2062' e u'\u005cu2062' x a variant of our PR model which only applies the lexical constraints
+p105
+aVFor the MD dataset, we also used the dvd domain as additional labeled data for developing the constraints
+p106
+aVCompared to the CRF baseline and its variants, we found that the PR models can greatly improve the precision of predicting positive and negative sentences, resulting in a significant improvement on the positive/negative F1 scores
+p107
+aVThe superior performance of PR over PR l u'\u005cu2062' e u'\u005cu2062' x further suggests that the proper use of discourse information can significantly improve accuracy for sentence-level sentiment classification
+p108
+aV2010 ) uses tree-CRF to model word interactions based on dependency tree structures; Choi and Cardie ( 2008 ) applies compositional inference rules to handle polarity reversal; Socher et al
+p109
+aVIn this work, we only consider the targets since we experiment with single-author product reviews
+p110
+aVFor each domain in the MD dataset, we made use of no more than 100 unlabeled documents in which our posterior constraints apply
+p111
+aVDocOracle performs much better than VoteFlip and performs especially well on the Music domain
+p112
+aVWe also found that the discourse constraints play an important role in improving the sentiment prediction
+p113
+aVWe can see that PR significantly outperforms all other baselines in both the CR dataset and the MD dataset (average accuracy across domains is reported
+p114
+aVFor the three-way classification task on the MD dataset, we also implemented the following baselines
+p115
+aVWe utilize conditional random fields and use Posterior Regularization (PR) to learn their parameters with a rich set of context-aware constraints
+p116
+aVWe also analyzed the model u'\u005cu2019' s performance on a three-way sentiment classification task
+p117
+aVHowever, with limited labeled data, the CRF learner can only associate very weak sentiment signals to these features
+p118
+aVA potential way to address this issue is to learn discourse constraints jointly with sentiment
+p119
+aVExisting machine learning approaches for the task can be classified based on the use of two ideas
+p120
+aVDiscourse Connectives
+p121
+aVUnlike the intra-sentential discourse connectives, the inter-sentential discourse connectives can indicate sentiment transitions between sentences
+p122
+aVPR is a framework for structured learning with constraints [ 7 ]
+p123
+aVThe lexical features return and exchange may be good indicators of negative sentiment for the sentence
+p124
+aVOur work is the first to explore PR for sentiment analysis
+p125
+aVOn the contrary, discourse constraints are not dependent on sentiment lexicons, and more importantly, they can provide sentiment preferences on multiple sentences at the same time
+p126
+aVWe formulate the sentence-level sentiment classification task as a sequence labeling problem
+p127
+aVWe construct a feature-label constraint for each intra-sentential discourse connective and set its expected sentiment value to be neutral
+p128
+aVWe can see that the PR models are able to provide improvements over all the sentiment categories compared to all the baselines in general
+p129
+aVTable 2 shows the accuracy results
+p130
+aVIn contrast, both PR l u'\u005cu2062' e u'\u005cu2062' x and PR provide substantial improvements over CRF
+p131
+aVMost previous work using PR mainly experiments with feature-label constraints
+p132
+aVIn general, it is hard to learn reliable indicators for the neutral sentiment
+p133
+aV4) VoteFlip a rule-based algorithm that leverages the positive, negative and neutral cues along with the effect of negation to determine the sentence sentiment [ 3 ]
+p134
+aVAll posterior constraints were developed using the training data on each training fold
+p135
+aVThis is also a problem for most of our lexical constraints
+p136
+aV2013 ) encode the discourse connectors as model features in supervised classifiers
+p137
+aVHowever, some of our discourse constraints (opinion coreference and listing) can break the tractable structure of the model
+p138
+aVIn contrast, our PR models provide more balanced F1 scores among all the sentiment categories
+p139
+aVCompared to the existing work on semi-supervised learning for sentence-level sentiment classification [ 27 , 28 , 21 ] , our work does not rely on a large amount of coarse-grained (document-level) labeled data, instead, distant supervision mainly comes from linguistically-motivated constraints
+p140
+aVThe CRF model the following conditional probabilities
+p141
+aVFor this task, we used the supervised setting and performed transductive learning for our model
+p142
+aVFor the CRF features, we include the tokens, the part-of-speech tags, the prior polarities of lexical patterns indicated by the opinion lexicon and the negator lexicon, the number of positive and negative tokens and the output of the vote-flip algorithm [ 3 ]
+p143
+aVBaselines
+p144
+aVFinally we describe how to perform learning and inference with these constraints
+p145
+aVAnother limitation of the discourse constraints is that they could be affected by the errors of the discourse parser and the coreference resolver
+p146
+aV1) CRF
+p147
+aVFor example, the proportion of negative sentences in the positive documents is very small compared to the proportion of positive sentences
+p148
+aVWe observe that the DocOracle baseline provides very strong F1 scores on the positive and negative categories especially in the Books and Music domains, but very poor F1 on the neutral category
+p149
+aVWe compared our method to a number of baselines
+p150
+aVHowever, discourse constraints are not always helpful
+p151
+aVVery little work has explored long-distance discourse relations for sentiment analysis
+p152
+aVOur work also relates to the study of posterior regularization (PR) [ 7 ]
+p153
+aVIn our experiments, we set the expected value to be the empirical estimate of the probability of u'\u005cu201c' conflicting u'\u005cu201d' sentiment in polar documents using the training data
+p154
+aVWe also compare our results to the previously published results on the same dataset
+p155
+aVIn this paper, we focus on the task of sentence-level sentiment classification in online reviews
+p156
+aVTable 1 provides intuitive description and examples for all the constraints used in our model
+p157
+aVIn this work, we explore coreference in the context of sentence-level sentiment analysis
+p158
+aVWe analyze the errors to better understand the merits and limitations of the PR model
+p159
+aVGlobal Sentiment Previous studies have demonstrated the value of document-level sentiment in guiding the semi-supervised learning of sentence-level sentiment [ 28 , 21 ]
+p160
+aVMost existing work considers discourse relations between adjacent sentences or clauses and incorporates them as constraints [ 11 , 31 ] or features in classifiers Trivedi and Eisenstein ( 2013 ), Lazaridou et al
+p161
+aVWe can see that our best model PR gives the best results in most categories
+p162
+aVWe can see that both PR and PR l u'\u005cu2062' e u'\u005cu2062' x significantly outperform all other baselines in all domains
+p163
+aVFor sentences connected by the opinion coreference relation, we expect their sentiment to be consistent
+p164
+aVIn this paper, we focus on the study of sentence-level sentiment classification
+p165
+aVThe selected lexical patterns include a handful of seed patterns (such as u'\u005cu201c' pros u'\u005cu201d' and u'\u005cu201c' cons u'\u005cu201d' ) and the lexical patterns that have high precision (larger then 0.9) of predicting sentiment in the training data
+p166
+aVWe experimented with two product review datasets for sentence-level sentiment classification the Customer Review (CR) data [ 9 ] 6 6 Available at http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html which contains 638 reviews of 14 products such as cameras and cell phones, and the Multi-domain Amazon (MD) data from the test set of Täckström and McDonald ( 2011a ) which contains 294 reivews from 5 different domains
+p167
+aVThis intuition is reasonable but it assumes the two sentences connected by the discourse connective are both polar sentences
+p168
+aV10-fold cross validation for the CR dataset and 3-fold cross validation for the MD dataset
+p169
+aVExperimental results show that our model outperforms state-of-the-art methods in both the supervised and semi-supervised settings
+p170
+aVOpinion Coreference Sentences in a discourse can be linked by many types of coherence relations [ 10 ]
+p171
+aVVarious attempts have been made to incorporate discourse relations into sentiment analysis
+p172
+aVIn contrast, we explore a rich set of linguistically-motivated constraints which cannot be naturally formulated in the feature-label form
+p173
+aVWe evaluate our approach on the sentence-level sentiment classification task using two standard product review datasets
+p174
+aVWe expect sentences connected by a listing to have consistent sentiment
+p175
+aVWe plan to address this issue in future work
+p176
+aVThe importance of discourse for sentiment analysis has become increasingly recognized
+p177
+aV2008 ) defines coreference relations on opinion targets and applies them to constrain the polarity of sentences
+p178
+aVSemi-supervised techniques have been proposed for sentence-level sentiment classification [ 27 , 21 ]
+p179
+aVThe objective function for a standard CRF is to maximize the log-likelihood over a collection of labeled documents plus a regularization term
+p180
+aVThe constraint expectation value is set to be the prior probability of associating w with its sentiment value
+p181
+aVIt is important to distinguish these two types of discourse connectives
+p182
+aV2007 ) , and Täckström and McDonald ( 2011a ) developed structured learning models to capture sentiment dependencies between adjacent sentences; Kanayama and Nasukawa ( 2006 ) and Zhou et al
+p183
+aVFor approximation inference with higher-order constraints, we perform 2000 Gibbs sampling iterations where the first 1000 iterations are burn-in iterations
+p184
+aVPolanyi and Zaenen ( 2006 ) argue that discourse structure is important in polarity classification
+p185
+aVHCRF [ 27 ] and MEM [ 21 ] are two state-of-the-art semi-supervised methods for sentence-level sentiment classification
+p186
+aVEach domain also comes with 33,000 extra reviews with only document-level sentiment labels
+p187
+aVVery little work has explored long-distance discourse relations
+p188
+aVThese discourse-level relations help indicate that sentence 2 and 3 are likely to have positive sentiment as well
+p189
+aVWe adopted the evaluation schemes used in previous work
+p190
+aVWe evaluated our method in two settings supervised and semi-supervised
+p191
+aV5) DocOracle assigns each sentence the label of its corresponding document
+p192
+aVWe can define the set of desirable posterior distrbutions as
+p193
+aVNote that the distribution q is defined over a collection of unlabeled documents where the constraint functions apply, and we assume independence between documents
+p194
+aVDiscourse connectives are tagged with four senses
+p195
+aVThe first row in Table 5 shows an example of such errors
+p196
+aVTypical approaches to the task employ supervised machine learning algorithms with rich features and take into account the interactions between words to handle compositional effects such as polarity reversal (e.g., [ 16 , 23 ]
+p197
+aVIn what follows, we first briefly describe the framework of Posterior Regularization
+p198
+aVHowever, they rely on a large amount of document-level sentiment labels that may not be naturally available in many domains
+p199
+aVwhere u'\u005cu03a6' is a constraint function, u'\u005cud835' u'\u005cudc1b' is a vector of desired values of the expectations of the constraint functions under the distribution q 1 1 In general, inequality constraints can also be used
+p200
+aVThere has been a large amount of work on sentiment analysis at various levels of granularity [ 18 ]
+p201
+aVDiscourse connectives can operate at both intra-sentential and inter-sentential level
+p202
+aVwhere f w u'\u005cu2062' ( x i , y i ) is a feature function which has value 1 when sentence x i contains the lexical pattern w and its sentiment label y i equals to the expected sentiment value and has value 0 otherwise
+p203
+aVTo make the results more stable, we construct three Markov chains that run in parallel, and select the sample with the largest objective value
+p204
+aVFor constraints with higher-order structures, we use Gibbs Sampling [ 8 ] to approximate the expectations
+p205
+aVWe plan to study this in future research
+p206
+aV2008 ) define opinion target relations and apply them to constrain the polarity of text segments annotated with target relations
+p207
+aVThis is also demonstrated by the limited performance of CRF-inf in our experiments
+p208
+aV2012 ) , we chose the books, electronics and music domains for evaluation
+p209
+aVA simple lexicon-based constraint during inference time may also correct this case
+p210
+aV2011 ) use discourse relations to constrain two text segments to have either the same polarity or opposite polarities; Trivedi and Eisenstein ( 2013 ) and Lazaridou et al
+p211
+aVCRF-inf d u'\u005cu2062' i u'\u005cu2062' s u'\u005cu2062' c slightly outperforms CRF but the improvement is not significant
+p212
+aVTo extract coreferential opinion targets, we apply Stanford u'\u005cu2019' s coreference system [ 13 ] to extract coreferential mentions in the document, and then apply a set of syntactic rules to identify opinion targets from the extracted mentions
+p213
+aVPR has been successfully applied to many structured NLP tasks such as dependency parsing, information extraction and cross-lingual learning tasks [ 6 , 1 , 7 , 5 ]
+p214
+aVThe second idea is to exploit sentiment signals at the inter-sentential level
+p215
+aVThe expected value of the constraint functions is set to 0
+p216
+aVWe consider the 10 most frequent dependency paths in the training data
+p217
+aVFor example, the word u'\u005cu201c' although u'\u005cu201d' is often used to connect two polar clauses within a sentence, while the word u'\u005cu201c' however u'\u005cu201d' is often used to at the beginning of the sentence to connect two polar sentences
+p218
+aVIn this section, we present the details of our proposed approach
+p219
+aVTo encode this intuition, we define the following constraint function
+p220
+aVTo encode this intuition, we define the following constraint function
+p221
+aVWe define the following constraint function
+p222
+aVThe dual problem is
+p223
+aVOur coreference relations indicated by opinion targets overlap with the same target relation introduced in [ 24 ]
+p224
+aVExample dependency paths include nsubj (opinion, mention), nobj (opinion, mention), and amod (mention, opinion
+p225
+aVPang and Lee ( 2004 ) explored the consistency of subjectivity between neighboring sentences; Mao and Lebanon ( 2007 ) , McDonald et al
+p226
+aVAs in Qu et al
+p227
+aVWe implement this constraint in the same form as the coreference constraint (the antecedent assignments are constructed from the numberings
+p228
+aVThe objective can be optimized by an EM-like scheme that iteratively solves the minimization problem and the maximization problem
+p229
+aVWe hope the expectation of the constraint function takes a small value
+p230
+aVwhere f u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' , u'\u005cud835' u'\u005cudc32' ) are the model features, u'\u005cu0398' are the model parameters, and Z u'\u005cu0398' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' ) = u'\u005cu2211' u'\u005cud835' u'\u005cudc32' exp u'\u005cu2061' ( u'\u005cu0398' u'\u005cu22c5' f u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' , u'\u005cud835' u'\u005cudc32' ) ) is a normalization constant
+p231
+aV2013 ) compute compositional vector representations for words and phrases and use them as features in a classifier
+p232
+aVwhere a u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' ( i ) denotes the index of the sentence which contains an antecedent target of the target mentioned in sentence i (the antecedent relations over pairs of opinion targets can be constructed using the coreference resolver), and f c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' f is a penalty function which takes value 1.0 when the expected sentiment coherency is violated, that is, y i u'\u005cu2260' p u'\u005cu2062' o u'\u005cu2062' l u'\u005cu2062' a u'\u005cu2062' r y j
+p233
+aVCoreference is one of the commonly used relations in written text
+p234
+aVSomasundaran et al
+p235
+aVSomasundaran et al
+p236
+aVDuring training, we need to compute the constraint expectations and the feature expectations under the auxiliary distribution q at each gradient step
+p237
+aVWe optimize the objective function 2 using stochastic projected gradient, and compute the learning rate using AdaGrad [ 4 ]
+p238
+aVDuring inference, we find the best label assignment by computing arg max u'\u005cud835' u'\u005cudc32' q ( u'\u005cud835' u'\u005cudc32' u'\u005cud835' u'\u005cudc31'
+p239
+aVwhere g u'\u005cu2208' { p u'\u005cu2062' o u'\u005cu2062' s u'\u005cu2062' i u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' v u'\u005cu2062' e , n u'\u005cu2062' e u'\u005cu2062' g u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' v u'\u005cu2062' e } denotes the sentiment value of a polar document, n is the total number of sentences in x , and u'\u005cu0394' is an indicator function
+p240
+aVRecently, Zhang et al
+p241
+aVNakagawa et al
+p242
+aVThe syntactic rules correspond to the shortest dependency paths between an opinion word and an extracted mention
+p243
+aV2011 ) and Socher et al
+p244
+aVWe thank Igor Labutov for helpful discussion and suggestions; Oscar Täckström and Lizhen Qu for providing their Amazon review datasets; and the anonymous reviewers for helpful comments and suggestions
+p245
+aVExpansion, Contingency, Comparison, Temporal
+p246
+aVThe speaker phone is very functional
+p247
+aVThis work was supported in part by DARPA-BAA-12-47 DEFT grant #12475008 and NSF grant BCS-0904822
+p248
+aVHearing the music in real stereo is a true revelation
+p249
+aVwhere c denotes a discourse connective, s indicates its sense, and f c , s is a penalty function that takes value 1.0 when y i and y i - 1 form a contradictory sentiment transition, that is, y i u'\u005cu2260' p u'\u005cu2062' o u'\u005cu2062' l u'\u005cu2062' a u'\u005cu2062' r y i - 1 if s u'\u005cu2208' { u'\u005cud835' u'\u005cudc38' u'\u005cud835' u'\u005cudc65' u'\u005cud835' u'\u005cudc5d' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc5b' u'\u005cud835' u'\u005cudc60' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc5b' , u'\u005cud835' u'\u005cudc36' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc5b' u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc5b' u'\u005cud835' u'\u005cudc54' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc5b' u'\u005cud835' u'\u005cudc50' u'\u005cud835' u'\u005cudc66' } , or y i = p u'\u005cu2062' o u'\u005cu2062' l u'\u005cu2062' a u'\u005cu2062' r y i - 1 if s = u'\u005cud835' u'\u005cudc36' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc5a' u'\u005cud835' u'\u005cudc5d' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc5f' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc60' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc5b'
+p250
+aVYou can feel that the music is no longer constrained by the mono recording
+p251
+aVGiven a sequence u'\u005cud835' u'\u005cudc31' , we sample a label u'\u005cud835' u'\u005cudc32' i at each position i by computing the unnormalized conditional probabilities p ( u'\u005cud835' u'\u005cudc32' i = l u'\u005cud835' u'\u005cudc32' - i ) u'\u005cu221d' e x p ( u'\u005cu0398' u'\u005cu22c5' f ( u'\u005cud835' u'\u005cudc31' , u'\u005cud835' u'\u005cudc32' i = l , u'\u005cud835' u'\u005cudc32' - i ) + u'\u005cu039b' u'\u005cu22c5' u'\u005cu03a6' ( u'\u005cud835' u'\u005cudc31' , u'\u005cud835' u'\u005cudc32' i = l , u'\u005cud835' u'\u005cudc32' - i ) ) and renormalizing them
+p252
+aVConsider the following review for example
+p253
+aVThe differences are
+p254
+aVwhere Z u'\u005cu039b' , u'\u005cu0398' u'\u005cu2062' ( X ) is a normalization constant
+p255
+aVI use it in the car, very audible even with freeway noise
+p256
+aVIt u'\u005cu2019' s smaller than the ipod mini u'\u005cu2026'
+p257
+aVIt has a removable battery u'\u005cu2026' u'\u005cu201d'
+p258
+aVIn fact, it is more like the players are performing on a stage in front of you u'\u005cu2026'
+p259
+aV2
+p260
+aV1
+p261
+aV[ 0.01 , 0.05 , 0.1 , 0.5 , 1.0 ] and u'\u005cu0393'
+p262
+aV2013
+p263
+aV3
+p264
+aV2) CRF-inf
+p265
+aVFor example, u'\u005cu201c' 1
+p266
+ag260
+aV[ 0.1 , 0.5 , 1.0 , 5.0 , 10.0 ]
+p267
+a.

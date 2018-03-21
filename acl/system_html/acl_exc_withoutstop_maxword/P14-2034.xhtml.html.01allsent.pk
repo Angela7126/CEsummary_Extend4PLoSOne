@@ -1,0 +1,216 @@
+(lp0
+VThe creation of annotated corpora in dialectal Arabic [ 11 ] has promoted the development of new systems that support dialectal Arabic, but these systems tend to be tailored to specific dialects and require separate efforts for Egyptian Arabic, Levantine Arabic, Maghrebi Arabic, etc
+p1
+aVHowever, the variety of Arabic dialects presents challenges in Arabic NLP
+p2
+aVSegmentation is a common practice in Arabic NLP due to the language u'\u005cu2019' s morphological richness
+p3
+aVWe present a single clitic segmentation model that is accurate on both MSA and informal Arabic
+p4
+aVTable 2 shows the segmentation scores our model achieves when evaluated on the three test sets, as well as the results for MADA and MADA-ARZ
+p5
+aVTable 1 contains results on the development set for the model of Green and DeNero and our improvements
+p6
+aVOur segmenter achieves a 95.1% F 1 segmentation score evaluated against a gold standard on Egyptian dialect data, compared to 90.8% for MADA-ARZ and 92.9% for Green and DeNero
+p7
+aVIn addition, our segmenter is faster than MADA
+p8
+aVWe demonstrate that our system achieves better performance across the board, beating all three systems on MSA newswire, informal broadcast news, and Egyptian dialect
+p9
+aVOur segmenter achieves higher scores than MADA and MADA-ARZ on all datasets under both evaluation metrics
+p10
+aVWe compare our work to the original Green and DeNero model and two other Arabic segmentation systems the MADA+TOKAN toolkit v. 3.1 [ 6 ] and its Egyptian dialect variant, MADA-ARZ v. 0.4 [ 7 ]
+p11
+aVSegmentation of words, clitics, and affixes is essential for a number of natural language processing (NLP) applications, including machine translation, parsing, and speech recognition [ 1 , 14 , 9 ]
+p12
+aVSpecifically, clitic separation has been shown to improve performance on Arabic parsing [ 5 ] and Arabic-English machine translation [ 8 ]
+p13
+aVUsing domain adaptation alone helps performance on two of the three datasets (with a statistically insignificant decrease on broadcast news), and that our additional features further improve segmentation on all datasets
+p14
+aVFirst, we handle two Arabic orthographic normalization rules that commonly require rewriting of tokens after segmentation
+p15
+aVDialectal Arabic contains non-standard orthography, vocabulary, morphology, and syntax
+p16
+aVIn addition, our model decodes input an order of magnitude faster than either version of MADA
+p17
+aVLike the Green and DeNero system, but unlike MADA and MADA-ARZ, our system does not rely on a morphological analyzer, and can be applied directly to any dialect for which segmented training data is available
+p18
+aVOur segmenter achieves a 7x or more speedup over MADA and MADA-ARZ on all datasets
+p19
+aVThe model is an extension of the character-level conditional random field (CRF) model of Green and DeNero ( 2012
+p20
+aVIn this work, we train our model to segment Arabic text drawn from three domains newswire, which consists of formal text in MSA; broadcast news, which contains scripted, formal MSA as well as extemporaneous dialogue in a mix of MSA and dialect; and discussion forum posts written primarily in Egyptian dialect
+p21
+aVSecond, we add new features that improve segmentation accuracy
+p22
+aVTools that depend on corpora or grammatical properties that only consider formal Modern Standard Arabic (MSA) do not perform well when confronted with these differences
+p23
+aVIn addition to these, we include two other types of features motivated by specific errors the original system made on Egyptian dialect development data
+p24
+aVWe sampled 100 errors randomly from all errors made by our final model (trained on all three datasets with domain adaptation and additional features) on the ARZ development set; see Table 4
+p25
+aVTable 3 compares the running times of the three systems
+p26
+aVTEDEval was developed to evaluate joint segmentation and parsing 5 5 In order to evaluate segmentation in isolation, we convert each segmented sentence from both the model output and the gold standard to a flat tree with all segments descending directly from the root in Hebrew, which requires a greater variety of orthographic rewrites than those possible in Arabic
+p27
+aVAs a result, we expect this model to perform similarly well when applied to other Arabic dialects
+p28
+aVSpecifically, we show that even simple feature space augmentation [ 3 ] yields significant improvements in task accuracy
+p29
+aVThird, we show that dialectal data can be handled in the framework of domain adaptation
+p30
+aVWe train and evaluate on three corpora parts 1 u'\u005cu2013' 3 of the newswire Arabic Treebank (ATB), 1 1 LDC2010T13, LDC2011T09, LDC2010T08 the Broadcast News Arabic Treebank (BN), 2 2 LDC2012T07 and parts 1 u'\u005cu2013' 8 of the BOLT Phase 1 Egyptian Arabic Treebank (ARZ
+p31
+aVWe train the Green and DeNero model and our improvements using L-BFGS with L 2 regularization
+p32
+aVWe target the segmentation scheme used by these corpora (leaving morphological affixes and the definite article attached
+p33
+aVThe model of Green and DeNero is a third-order (i.e.,, 4-gram) Markov CRF, employing the following indicator features
+p34
+aVThis set of features addresses a particular dialectal Arabic construction, the negation mA - + [verb] + -^s , which requires a matching prefix and suffix to be segmented simultaneously
+p35
+aVAlso, tokens containing foreign words are sometimes not segmented, despite carrying Arabic affixes
+p36
+aVOur segmenter expands this label space in order to handle two Arabic-specific orthographic rules
+p37
+aVWe classify 7 as typos and 26 as annotation inconsistencies, although the distinction between the two is murky typos are intentionally preserved in the treebank data, but segmentation of typos varies depending on how well they can be reconciled with standard Arabic orthography
+p38
+aVIts edit distance-based scoring algorithm is robust enough to handle the rewrites produced by both MADA and our segmenter
+p39
+aVThe source code is available in the latest public release of the Stanford Word Segmenter ( http://nlp.stanford.edu/software/ segmenter.shtml
+p40
+aVF 1 scores provide a more informative assessment of performance than word-level or character-level accuracy scores, as over 80% of tokens in the development sets consist of only one segment, with an average of one segmentation every 4.7 tokens (or one every 20.4 characters
+p41
+aVA notable property of this feature set is that it remains highly dialect-agnostic, even though our additional features were chosen in response to errors made on text in Egyptian dialect
+p42
+aVFor each of the other two corpora, we split the data into 80% training, 10% development, and 10% test in chronological order by document
+p43
+aVEach indicator feature from the model described in Section 2.1 is replaced by N + 1 features in the augmented model, where N is the number of domains from which the data is drawn (here, N = 3
+p44
+aVThe approach to domain adaptation we use is that of feature space augmentation [ 3 ]
+p45
+aVGreen and DeNero use a linear-chain model with u'\u005cud835' u'\u005cudc17' as the sequence of input characters , and u'\u005cud835' u'\u005cudc18' * chosen according to the decision rule
+p46
+aVIn particular, a few colloquial u'\u005cu2018' u'\u005cu2018' filler u'\u005cu2019' u'\u005cu2019' expressions are sometimes not segmented, despite being compound Arabic words that are segmented elsewhere in the data
+p47
+aVtypographical errors and annotation inconsistencies in the gold data;
+p48
+aVOf the 100 errors we sampled, 33 are due to typographical errors or inconsistencies in the gold data
+p49
+aVRewAl indicates that the current character, which is always the Arabic letter l , starts a new segment and should additionally be transformed into the definite article al u'\u005cu2014' when segmented
+p50
+aVThe 4-character window lAyh occurs commonly with a segment boundary after the l , but the segment u'\u005cu2014' ayuhimm is not a well-formed Arabic word
+p51
+aVThis feature set also allows the model to take into account other interactions between the beginning and end of a word, particularly those involving the definite article al u'\u005cu2014'
+p52
+aVOf the annotation inconsistencies that do not involve typographical errors, a handful are segmentation mistakes; however, in the majority of these cases, the annotator chose not to segment a word for justifiable but arbitrary reasons
+p53
+aVThese N + 1 features consist of the original feature and N u'\u005cu2018' u'\u005cu2018' domain-specific u'\u005cu2019' u'\u005cu2019' features, one for each of the N domains, each of which is active only when both the original feature is present and the current text comes from its assigned domain
+p54
+aVArabic orthography rules restrict the occurrence of T to the word-final position, writing it instead as t whenever it is followed by a suffix
+p55
+aVThe first example is segmented in the Egyptian treebank but is left unsegmented by our system; the second is left as a single token in the treebank but is split into the above three segments by our system
+p56
+aVRewTa indicates that the current character, which is always the Arabic letter t , is a continuation but should be transformed into the letter T when segmented
+p57
+aVThis work was supported by the Defense Advanced Research Projects Agency (DARPA) Broad Operational Language Translation (BOLT) program through IBM
+p58
+aVIn particular, it does not depend on the existence of a dialect-specific lexicon or morphological analyzer
+p59
+aVWe use two evaluation metrics in our experiments
+p60
+aVwafi.tarIqaT u'\u005cu201c' and in the way u'\u005cu201d' segmented as wa - + fi.tarIqaT (correct analysis is wa - + fi u'\u005cu2014' + .tarIqaT f.tr u'\u005cu2018' u'\u005cu2018' break u'\u005cu2019' u'\u005cu2019' / u'\u005cu2018' u'\u005cu2018' breakfast u'\u005cu2019' u'\u005cu2019' is a common Arabic root, but the presence of q should indicate that f.tr is not the root in this case
+p61
+aVerrors that would require additional context or sophisticated semantic awareness to fix
+p62
+aVTheir model classifies each y i as one of I (continuation of a segment), O (whitespace outside any segment), B (beginning of a segment), or F (pre-grouped foreign characters
+p63
+aVOur work goes beyond theirs in three aspects
+p64
+aVIn our model, each y i can take on one of the six values { I , O , B , F , RewAl , RewTa }
+p65
+aVOne token accounts for five of these errors wlA , which in Egyptian dialect can be analyzed as wa - + lA u'\u005cu2018' u'\u005cu2018' and [do/does] not u'\u005cu2019' u'\u005cu2019' or as wallA u'\u005cu2018' u'\u005cu2018' or u'\u005cu2019' u'\u005cu2019'
+p66
+aVFor the ATB, we use the same split as Chiang et al
+p67
+aVWe measure the statistical significance of differences in these metrics with an approximate randomization test [ 15 , 12 ] , with R = 10,000 samples
+p68
+aVerrors that can be fixed with a fuller analysis of just the problematic token, and therefore represent a deficiency in the feature set; and
+p69
+aVSome incorrect segmentations produced by the original system could be ruled out with the knowledge of these statistics
+p70
+aVFour of the seven typos are the result of a missing space, such as
+p71
+aVIn 36 of the 100 sampled errors, we conjecture that the presence of the error indicates a shortcoming of the feature set, resulting in segmentations that make sense locally but are not plausible given the full token
+p72
+aVA CRF model [ 10 ] defines a distribution p ( u'\u005cud835' u'\u005cudc18' u'\u005cud835' u'\u005cudc17' ; u'\u005cu0398' ) , where u'\u005cud835' u'\u005cudc17' = { x 1 , u'\u005cu2026' , x N } is the observed input sequence and u'\u005cud835' u'\u005cudc18' = { y 1 , u'\u005cu2026' , y N } is the sequence of labels we seek to predict
+p73
+aVThe first is an F 1 precision-recall measure, ignoring orthographic rewrites
+p74
+aVWord length and position within a word for each 1 u'\u005cu2264' i u'\u005cu2264' N , the pairs ( u'\u005cu2113' , y i ) , ( a , y i ) , and ( b , y i ) , where u'\u005cu2113' , a , and b are the total length of the word containing x i , the number of characters after x i in the word, and the number of characters before x i in the word, respectively
+p75
+aVThese errors fall into three general categories
+p76
+aVwhere u'\u005cu03a6' is the feature map defined in Section 2.1
+p77
+aVAn example of this is wamistur u'\u005cu2018' u'\u005cu2018' and Mister [English] u'\u005cu2019' u'\u005cu2019' , which could be segmented as wa - + mistur
+p78
+aVTwo other ambiguities are a frequent cause of error and seem to require sophisticated disambiguation
+p79
+aV3 3 LDC2012E{93,98,89,99,107,125}, LDC2013E{12,21} These correspond respectively to the domains in section 2.2
+p80
+aVThe second metric we use is the TEDEval metric [ 13 ]
+p81
+aVThe former is segmented, while the latter is not
+p82
+aVwalAyuhimmhum u'\u005cu2018' u'\u005cu2018' and it u'\u005cu2019' s not important to them u'\u005cu2019' u'\u005cu2019' segmented as wa - + li u'\u005cu2014' + u'\u005cu2014' ayuhimm + u'\u005cu2014' hum (correct analysis is wa - + lA + yuhimm + u'\u005cu2014' hum
+p83
+aVIn the remaining 31 of 100 errors, external context is needed
+p84
+aVOne example of this distinction that appeared in the development set is the pair maw.dU u'\u005cu2018' I u'\u005cu2018' u'\u005cu2018' my topic u'\u005cu2019' u'\u005cu2019' ( maw.dU u'\u005cu2018' + u'\u005cu2014' y ) versus maw.dU u'\u005cu2018' Iy u'\u005cu2018' u'\u005cu2018' topical u'\u005cu2019' u'\u005cu2019' , u'\u005cu2018' u'\u005cu2018' objective u'\u005cu2019' u'\u005cu2019'
+p85
+aV4 4 These splits are publicly available at http://nlp.stanford.edu/software/parser-arabic-data-splits.shtml
+p86
+aVThe other is u'\u005cu2014' y , which is both a first person singular possessive pronoun and the nisba adjective ending (which turns a noun into an adjective meaning u'\u005cu2018' u'\u005cu2018' of or related to u'\u005cu2019' u'\u005cu2019' ); only the former is segmented
+p87
+aVthe Unicode character class of the current character
+p88
+aVWe thank the three anonymous reviewers, and Reut Tsarfaty for valuable correspondence regarding TEDEval
+p89
+aVthe Unicode block of the current character
+p90
+aVwhether the current character is punctuation
+p91
+aVwhether the current character is a digit
+p92
+aVThis type of transformation occurs after the prefix li u'\u005cu2014' u'\u005cu2018' u'\u005cu2018' to u'\u005cu2019' u'\u005cu2019'
+p93
+aVThe second author is supported by a National Science Foundation Graduate Research Fellowship
+p94
+aVFirst and last two characters of the current word, separately influencing the first two labels and the last two labels for each word consisting of characters x s u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' x t , the tuples ( x s x s + 1 , x t - 1 u'\u005cu2062' x t , y s u'\u005cu2062' y s + 1 , u'\u005cu201c' begin u'\u005cu201d' ) and ( x s x s + 1 , x t - 1 u'\u005cu2062' x t , y t - 1 u'\u005cu2062' y t , u'\u005cu201c' end u'\u005cu201d'
+p95
+aVIn a few cases, either is syntactically correct, and the meaning must be inferred from context
+p96
+aVThe first is u'\u005cu2014' nA , which is both a first person plural object pronoun and a first person plural past tense ending
+p97
+aVAn example of this is the pair u'\u005cu2018' ilmunA u'\u005cu2018' u'\u005cu2018' our knowledge u'\u005cu2019' u'\u005cu2019' ( u'\u005cu2018' ilmu + u'\u005cu2014' nA ) versus u'\u005cu2018' alimnA u'\u005cu2018' u'\u005cu2018' we knew u'\u005cu2019' u'\u005cu2019' (one segment
+p98
+aVIn many of these, it is not clear how to address the error without sophisticated semantic reasoning about the surrounding sentence
+p99
+aVAny opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the view of DARPA or the US government
+p100
+aVa five-character window around the current character for each - 2 u'\u005cu2264' u'\u005cu0394' u'\u005cu2264' 2 and 1 u'\u005cu2264' i u'\u005cu2264' N , the triple ( x i + u'\u005cu0394' , u'\u005cu0394' , y i
+p101
+aVn -grams consisting of the current character and up to three preceding characters for each 2 u'\u005cu2264' n u'\u005cu2264' 4 and n u'\u005cu2264' i u'\u005cu2264' N , the character-sequence/label-sequence pair ( x i - n + 1 u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' x i , y i - n + 1 u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' y i
+p102
+aVThese include rabbinA u'\u005cu2018' u'\u005cu2018' [our] Lord u'\u005cu2019' u'\u005cu2019' (oath); u'\u005cu2018' indamA u'\u005cu2018' u'\u005cu2018' when u'\u005cu2019' u'\u005cu2019' / u'\u005cu2018' u'\u005cu2018' while u'\u005cu2019' u'\u005cu2019' ; and _hallIk u'\u005cu2018' u'\u005cu2018' keep u'\u005cu2019' u'\u005cu2019' / u'\u005cu2018' u'\u005cu2018' stay u'\u005cu2019' u'\u005cu2019'
+p103
+aVTwo examples of these are
+p104
+aVu'\u005cu2018' amilatnA- u'\u005cu2019' an u'\u005cu2018' u'\u005cu2018' madeus u'\u005cu2019' u'\u005cu2019' ( u'\u005cu2018' amilat + u'\u005cu2014' nA + u'\u005cu2019' an
+p105
+aVyas har-bi-al-layAlI u'\u005cu2018' u'\u005cu2018' staysawakeatnight u'\u005cu2019' u'\u005cu2019' ( yashar + bi- + al-layAlI
+p106
+aV2006
+p107
+a.

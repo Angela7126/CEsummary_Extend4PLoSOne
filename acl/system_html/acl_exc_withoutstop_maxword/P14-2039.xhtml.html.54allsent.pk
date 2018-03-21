@@ -1,0 +1,56 @@
+(lp0
+VThe chunk size directly determines the latency of the system to the end user, as alignment cannot begin until an entire chunk is captured
+p1
+aVSecond, the fixed window alignment algorithm requires longer chunks ( u'\u005cu2265' 10 seconds) to obtain reasonable accuracy, and thus introduces unsatisfactory latency
+p2
+aVThe materials in the output alignment that follow this point is thrown away, and replaced with the output produced by aligning the next chunk starting from this point (line 8
+p3
+aVThe A * search algorithm treats each node position n = [ n 1 , u'\u005cu2026' , n K ] as a search state, and estimates the cost function g u'\u005cu2062' ( n ) and the heuristic function h u'\u005cu2062' ( n ) for each state
+p4
+aVNext, we show the trade-off between computation speed and accuracy in Figure 3, as we fix the heuristic weight and vary the chunk size over the range [5, 10, 15, 20, 30] seconds
+p5
+aVIn order to address the problems described above, we explore a technique based on a sliding alignment window, shown in Algorithm 3
+p6
+aVAs the chunk size parameter increases, the performance of sliding window systems with different values of keep-length parameter converges
+p7
+aVThe fact that the various instances of a single word in each transcription may fall on either side of a chunk boundary leads to errors where a word is either duplicated in the final output for more than one chunk, or omitted entirely
+p8
+aVThe accuracy of the ASR systems can be improved using the u'\u005cu2018' re-speaking u'\u005cu2019' technique, which requires a person that the ASR has been trained on to repeat the words said by a speaker as he hears them
+p9
+aVAfter all, if the timestamps corresponded precisely to the original time at which each word was spoken, the entire alignment problem would be trivial
+p10
+aVLarger chunks are more accurately aligned but require computation time that grows as N K in the chunk size N in the worst case
+p11
+aVThis is because the chunk boundaries are defined with respect to the timestamps associated with each word in the captions, but the timestamps can vary greatly between words that should in fact be aligned
+p12
+aVWe ignore the alignment columns where the majority vote is below a certain threshold t v (typically t v = 2 ), and thus filter out spurious errors and spelling mistakes
+p13
+aVWe use a single point in the aligned output as the starting point for the next chunk, and determine the corresponding starting position within each original transcription
+p14
+aVFor the caption alignment task, we treat each individual word as a symbol in our alphabet u'\u005cu03a3'
+p15
+aVThe substitution cost for two words is estimated based on the edit distance between two words
+p16
+aVThis problem also causes errors in ordering among the words remaining within one chunk, because there is less information available to constrain the ordering relations between transcriptions
+p17
+aVFurthermore, we can see that for smaller values of the chunk size parameter, increasing the keep-length makes the system less accurate
+p18
+aVTherefore, at larger chunk sizes, for which there are smaller number of boundaries, the keep-length parameter has lower impact
+p19
+aVOur approach is based on weighted A * search for approximately solving the MSA problem []
+p20
+aVIf the beam size is set to b seconds, then any state that aligns two words having more than b seconds time lag is ignored
+p21
+aVFurthermore, smaller weights allow faster alignment, but provide lower accuracy
+p22
+aVTherefore, the j t u'\u005cu2062' h column of A indicates an alignment state for the j t u'\u005cu2062' h position, where the state can have one of the 2 K - 1 possible combinations
+p23
+aVThe special gap symbol u'\u005cu2018' - u'\u005cu2019' represents a missing word and does not belong to u'\u005cu03a3'
+p24
+aVIf a i u'\u005cu2062' l and a j u'\u005cu2062' l are identical, the substitution cost is zero
+p25
+aVLet A = ( a i u'\u005cu2062' j ) be a K × N f matrix, where a i u'\u005cu2062' j u'\u005cu2208' u'\u005cu03a3' u'\u005cu222a' { - } , and the i t u'\u005cu2062' h row has exactly ( N f - N i ) gaps and is identical to S i if we ignore the gaps
+p26
+aVEvery column of A must have at least one non-gap symbol
+p27
+a.

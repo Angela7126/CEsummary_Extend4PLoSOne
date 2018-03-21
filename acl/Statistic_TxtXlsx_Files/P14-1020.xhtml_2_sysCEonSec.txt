@@ -1,0 +1,710 @@
+Current File: P14-1020.xhtml_2 P14-1020.xhtml
+
+Section 0:  Abstract
+	SentNum: 7
+	CENum: 2
+	SentCovered: 2
+	Covered_Rate: 28.5714%
+
+Section 1:  1 Introduction
+	SentNum: 26
+	CENum: 9
+	SentCovered: 9
+	Covered_Rate: 34.6154%
+
+Section 2:  2 A Note on Experiments
+	SentNum: 8
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 12.5000%
+
+Section 3:  3 Sparsity and CPUs
+	SentNum: 14
+	CENum: 5
+	SentCovered: 5
+	Covered_Rate: 35.7143%
+
+Section 4:  4 GPU Architectures
+	SentNum: 19
+	CENum: 8
+	SentCovered: 9
+	Covered_Rate: 47.3684%
+
+Section 5:  5 Anatomy of a Dense GPU Parser
+	SentNum: 26
+	CENum: 6
+	SentCovered: 8
+	Covered_Rate: 30.7692%
+
+Section 6:  6 Pruning on a GPU
+	SentNum: 28
+	CENum: 10
+	SentCovered: 10
+	Covered_Rate: 35.7143%
+
+Section 7:  7 Grammar Clustering
+	SentNum: 32
+	CENum: 12
+	SentCovered: 12
+	Covered_Rate: 37.5000%
+
+Section 8:  8 Pruning with Finer Grammars
+	SentNum: 10
+	CENum: 5
+	SentCovered: 5
+	Covered_Rate: 50.0000%
+
+Section 9:  9 Minimum Bayes risk parsing
+	SentNum: 58
+	CENum: 22
+	SentCovered: 21
+	Covered_Rate: 36.2069%
+
+Section 10:  10 Analyzing System Performance
+	SentNum: 18
+	CENum: 6
+	SentCovered: 9
+	Covered_Rate: 50.0000%
+
+Section 11:  11 Related Work
+	SentNum: 7
+	CENum: 0
+	SentCovered: 0
+	Covered_Rate: 0.0000%
+
+Section 12:  12 Conclusion
+	SentNum: 7
+	CENum: 1
+	SentCovered: 2
+	Covered_Rate: 28.5714%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-1020.xhtml_2's CE cases
+
+Section 0:  Abstract has 2 CE cases
+	CASE: 1
+	Stag: 0 
+		Pattern: 0 [['due', 'to']]---- [[], ['&NP@C@', '(,)', '&R']]
+		sentTXT: Due to their origin in computer graphics, graphics processing units (GPUs) are highly optimized for dense problems, where the exact same operation is applied repeatedly to all data points. 
+		Cause: [(0, 2), (0, 6)]
+		Effect: [(0, 8), (0, 32)]
+
+	CASE: 2
+	Stag: 4 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: In this work, we reintroduce sparsity to GPU parsing by adapting a coarse-to-fine pruning approach to the constraints of a GPU. 
+		Cause: [(0, 11), (0, 21)]
+		Effect: [(0, 0), (0, 9)]
+
+Section 1:  1 Introduction has 9 CE cases
+	CASE: 1
+	Stag: 7 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because NLP models typically treat sentences independently, NLP problems have long been seen as u'\u201c' embarrassingly parallel u'\u201d' u'\u2013' large corpora can be processed arbitrarily fast by simply sending different sentences to different machines. 
+		Cause: [(0, 1), (0, 6)]
+		Effect: [(0, 8), (0, 46)]
+
+	CASE: 2
+	Stag: 7 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: Because NLP models typically treat sentences independently, NLP problems have long been seen as u'\u201c' embarrassingly parallel u'\u201d' u'\u2013' large corpora can be processed arbitrarily fast by simply sending different sentences to different machines. 
+		Cause: [(0, 32), (0, 38)]
+		Effect: [(0, 0), (0, 30)]
+
+	CASE: 3
+	Stag: 9 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: First, classic single-core processors and main memory architectures are no longer getting substantially faster over time, so speed gains must now come from parallelism within a single machine. 
+		Cause: [(0, 0), (0, 16)]
+		Effect: [(0, 19), (0, 29)]
+
+	CASE: 4
+	Stag: 11 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since tasks like parsing boil down to repeated read-multiply-write loops, GPUs should be many times more efficient in time, power, or cost. 
+		Cause: [(0, 1), (0, 9)]
+		Effect: [(0, 11), (0, 14)]
+
+	CASE: 5
+	Stag: 15 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: Their system uses a grammar based on the Berkeley parser [ 9 ] (which is particularly amenable to GPU processing), u'\u201c' compiling u'\u201d' the grammar into a sequence of GPU kernels that are applied densely to every item in the parse chart. 
+		Cause: [(0, 7), (0, 21)]
+		Effect: [(0, 23), (0, 52)]
+
+	CASE: 6
+	Stag: 18 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: In this paper, we develop algorithms that can exploit sparsity on a GPU by adapting coarse-to-fine pruning to a GPU setting. 
+		Cause: [(0, 15), (0, 21)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 7
+	Stag: 20 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: Such extreme speedups over a dense GPU baseline currently seem unlikely because fine-grained sparsity appears to be directly at odds with dense parallelism. 
+		Cause: [(0, 12), (0, 22)]
+		Effect: [(0, 0), (0, 10)]
+
+	CASE: 8
+	Stag: 22 23 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We use a coarse-to-fine approach as in Petrov and Klein ( 2007 ) , but with only one coarse pass. Figure 1 shows an overview of the approach we first parse densely with a coarse grammar and then parse sparsely with the fine grammar, skipping symbols that the coarse pass deemed sufficiently unlikely. 
+		Cause: [(0, 6), (1, 24)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 9
+	Stag: 24 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Using this approach, we see gains of nearly 2.5x over the dense GPU implementation, resulting in overall speeds of up to 404 sentences per second. 
+		Cause: [(0, 0), (0, 2)]
+		Effect: [(0, 4), (0, 27)]
+
+Section 2:  2 A Note on Experiments has 1 CE cases
+	CASE: 1
+	Stag: 37 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: Unless otherwise noted, all experiments are conducted on sentences of length u'\u2264' 40 words, and we estimate times based on batches of 20K sentences. 
+		Cause: [(0, 26), (0, 29)]
+		Effect: [(0, 0), (0, 23)]
+
+Section 3:  3 Sparsity and CPUs has 5 CE cases
+	CASE: 1
+	Stag: 45 46 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: For instance, in a latent variable parser, the coarse grammar would have symbols like N u'\u2062' P , V u'\u2062' P , etc., and the fine pass would have refined symbols N u'\u2062' P 0 , N u'\u2062' P 1 , V u'\u2062' P 4 , and so on. In coarse-to-fine inference, one applies the grammars in sequence, computing inside and outside scores. 
+		Cause: [(0, 0), (0, 67)]
+		Effect: [(0, 71), (1, 14)]
+
+	CASE: 2
+	Stag: 51 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: This approach works because a low quality coarse grammar can still reliably be used to prune many symbols from the fine chart without loss of accuracy. 
+		Cause: [(0, 4), (0, 25)]
+		Effect: [(0, 0), (0, 2)]
+
+	CASE: 3
+	Stag: 53 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: Thus, the vast majority of rules can be skipped, and therefore most computation can be avoided. 
+		Cause: [(0, 0), (0, 9)]
+		Effect: [(0, 13), (0, 17)]
+
+	CASE: 4
+	Stag: 54 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: It is worth pointing out that although 98% of labeled spans can be skipped due to X-bar pruning, we found that only about 79% of binary rule applications can be skipped, because the unpruned symbols tend to be the ones with a larger grammar footprint. 
+		Cause: [(0, 36), (0, 48)]
+		Effect: [(0, 0), (0, 33)]
+
+	CASE: 5
+	Stag: 54 
+		Pattern: 1 [['it', 'is'], ['due', 'to'], ['that']]---- [[], ['(&ADV)'], ['&NP@C@'], ['&R']]
+		sentTXT: It is worth pointing out that although 98% of labeled spans can be skipped due to X-bar pruning, we found that only about 79% of binary rule applications can be skipped, because the unpruned symbols tend to be the ones with a larger grammar footprint. 
+		Cause: [(0, 17), (0, 18)]
+		Effect: [(0, 23), (0, 33)]
+
+Section 4:  4 GPU Architectures has 8 CE cases
+	CASE: 1
+	Stag: 56 57 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: GPUs work by executing thousands of threads at once, but impose the constraint that large blocks of threads must be executing the same instructions in lockstep, differing only in their input data. Thus sparsely skipping rules and symbols will not save any work. 
+		Cause: [(0, 0), (0, 33)]
+		Effect: [(1, 1), (1, 9)]
+
+	CASE: 2
+	Stag: 61 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: All threads in a warp must execute the same instruction at every clock cycle if one thread takes a branch the others do not, then all threads in the warp must follow both code paths. 
+		Cause: [(0, 15), (0, 23)]
+		Effect: [(0, 25), (0, 34)]
+
+	CASE: 3
+	Stag: 63 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because all threads execute all code paths that any thread takes, time can only be saved if an entire warp agrees to skip any particular branch. 
+		Cause: [(0, 1), (0, 10)]
+		Effect: [(0, 12), (0, 26)]
+
+	CASE: 4
+	Stag: 63 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: Because all threads execute all code paths that any thread takes, time can only be saved if an entire warp agrees to skip any particular branch. 
+		Cause: [(0, 6), (0, 14)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 5
+	Stag: 67 
+		Pattern: 45 [['so', 'that']]---- [['&C'], ['&R']]
+		sentTXT: Each SM can process up to 48 different warps at a time it interleaves the execution of each warp, so that when one warp is stalled another warp can execute. 
+		Cause: [(0, 0), (0, 19)]
+		Effect: [(0, 22), (0, 30)]
+
+	CASE: 6
+	Stag: 71 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: On the 600 series, maximum occupancy can only be achieved if each thread uses at most 63 registers [ 8 ]. 
+		Cause: [(0, 12), (0, 21)]
+		Effect: [(0, 0), (0, 10)]
+
+	CASE: 7
+	Stag: 72 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: 2 2 A thread can use more registers than this, but the full complement of 48 warps cannot execute if too many are used. 
+		Cause: [(0, 22), (0, 25)]
+		Effect: [(0, 4), (0, 20)]
+
+	CASE: 8
+	Stag: 73 74 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Registers are many times faster than variables located in thread-local memory, which is actually the same speed as global memory. This architecture environment puts very different constraints on parsing algorithms from a CPU environment. 
+		Cause: [(0, 19), (1, 12)]
+		Effect: [(0, 0), (0, 17)]
+
+Section 5:  5 Anatomy of a Dense GPU Parser has 6 CE cases
+	CASE: 1
+	Stag: 78 79 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In this section, we describe their dense algorithm, which we take as the baseline for our work; we present it in a way that sets up the changes to follow. At the top level, the CPU and GPU communicate via a work queue of parse items of the form ( s , i , k , j ) , where s is an identifier of a sentence, i is the start of a span, k is the split point, and j is the end point. 
+		Cause: [(0, 14), (1, 50)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 2
+	Stag: 83 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because all rules are applied to all parse items, all threads are executing the same sequence of instructions. 
+		Cause: [(0, 1), (0, 8)]
+		Effect: [(0, 10), (0, 18)]
+
+	CASE: 3
+	Stag: 83 84 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: Because all rules are applied to all parse items, all threads are executing the same sequence of instructions. Thus, there is no concern of warp divergence. 
+		Cause: [(0, 0), (0, 18)]
+		Effect: [(1, 1), (1, 8)]
+
+	CASE: 4
+	Stag: 87 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Because registers are so much faster than thread-local memory, it is critical to keep as many variables in registers as possible. 
+		Cause: [(0, 0), (0, 2)]
+		Effect: [(0, 4), (0, 21)]
+
+	CASE: 5
+	Stag: 88 89 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: One way to accomplish this is to unroll loops at compilation time. Therefore, they inlined the iteration over the grammar directly into the GPU kernels (i.e., the code itself), which allows the compiler to more effectively use all of its registers. 
+		Cause: [(0, 0), (0, 11)]
+		Effect: [(1, 2), (1, 33)]
+
+	CASE: 6
+	Stag: 91 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Because the Berkeley grammar is so large, the compiler is not able to efficiently schedule all of the operations in the grammar, resulting in register spills. 
+		Cause: [(0, 0), (0, 4)]
+		Effect: [(0, 6), (0, 27)]
+
+Section 6:  6 Pruning on a GPU has 10 CE cases
+	CASE: 1
+	Stag: 102 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: The natural implementation would be for each thread to check if each rule is licensed before applying it. 
+		Cause: [(0, 11), (0, 17)]
+		Effect: [(0, 0), (0, 9)]
+
+	CASE: 2
+	Stag: 103 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: However, we would only avoid the work of applying the rule if all threads in the warp agreed to skip it. 
+		Cause: [(0, 13), (0, 21)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 3
+	Stag: 104 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since each thread in the warp is processing a different span (perhaps even from a different sentence), consensus from all 32 threads on any skip would be unlikely. 
+		Cause: [(0, 1), (0, 18)]
+		Effect: [(0, 20), (0, 30)]
+
+	CASE: 4
+	Stag: 107 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because of the overhead associated with creating pruning masks and the further overhead of GPU communication, we found that this method did not actually produce any time savings at all. 
+		Cause: [(0, 1), (0, 14)]
+		Effect: [(0, 17), (0, 30)]
+
+	CASE: 5
+	Stag: 107 108 
+		Pattern: 4 [['result'], ['is']]---- [['&C', '(,/./;/--)', '&ONE', '(&adj)'], ['(of &THIS (&NP))'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: Because of the overhead associated with creating pruning masks and the further overhead of GPU communication, we found that this method did not actually produce any time savings at all. The result is a parsing speed of 185.5 sentences per second, as shown in Table 1 on the row labeled u'\u2018' Reimpl u'\u2019' with u'\u2018' Empty, Coarse u'\u2019' pruning. 
+		Cause: [(0, 0), (0, 30)]
+		Effect: [(1, 3), (1, 46)]
+
+	CASE: 6
+	Stag: 113 114 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: We call the set of coarse symbols for a partition (and therefore the corresponding labeled work queue) a signature. During parsing, we only enqueue items ( s , i , k , j ) to a labeled queue if two conditions are met. 
+		Cause: [(0, 0), (0, 10)]
+		Effect: [(0, 13), (1, 23)]
+
+	CASE: 7
+	Stag: 114 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: During parsing, we only enqueue items ( s , i , k , j ) to a labeled queue if two conditions are met. 
+		Cause: [(0, 21), (0, 24)]
+		Effect: [(0, 0), (0, 19)]
+
+	CASE: 8
+	Stag: 119 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because the entire partition (though not necessarily the entire grammar) is applied to each item in the queue, we still do not need to worry about warp divergence. 
+		Cause: [(0, 1), (0, 19)]
+		Effect: [(0, 21), (0, 30)]
+
+	CASE: 9
+	Stag: 124 125 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We tested our new pruning approach using an X-bar grammar as the coarse pass. The resulting speed is 187.5 sentences per second, labeled in Table 1 as row labeled u'\u2018' Reimpl u'\u2019' with u'\u2018' Labeled, Coarse u'\u2019' pruning. 
+		Cause: [(0, 11), (1, 40)]
+		Effect: [(0, 0), (0, 9)]
+
+	CASE: 10
+	Stag: 124 125 
+		Pattern: 4 [['result'], ['is']]---- [['&C', '(,/./;/--)', '&ONE', '(&adj)'], ['(of &THIS (&NP))'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: We tested our new pruning approach using an X-bar grammar as the coarse pass. The resulting speed is 187.5 sentences per second, labeled in Table 1 as row labeled u'\u2018' Reimpl u'\u2019' with u'\u2018' Labeled, Coarse u'\u2019' pruning. 
+		Cause: [(0, 0), (0, 13)]
+		Effect: [(1, 4), (1, 41)]
+
+Section 7:  7 Grammar Clustering has 12 CE cases
+	CASE: 1
+	Stag: 129 
+		Pattern: 5 [['so'], ['as', 'to']]---- [['&C', '(,)'], ['(&adj/&adv@C@)'], ['&R']]
+		sentTXT: How can we best cluster and subcluster the grammar so as to maximize performance. 
+		Cause: [(0, 0), (0, 8)]
+		Effect: [(0, 12), (0, 13)]
+
+	CASE: 2
+	Stag: 130 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: A good clustering will group rules together that use the same symbols, since this means fewer memory accesses to read and write scores for symbols. 
+		Cause: [(0, 14), (0, 25)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 3
+	Stag: 133 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: Finally, when pruning, it is best if symbols that have the same coarse projection are clustered together. 
+		Cause: [(0, 9), (0, 18)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 4
+	Stag: 134 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: That way, we are more likely to be able to skip a subcluster, since fewer distinct symbols need to be u'\u201c' off u'\u201d' for a parse item to be skipped in a given subcluster. 
+		Cause: [(0, 16), (0, 43)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 5
+	Stag: 141 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Clustering using this method is labeled u'\u2018' Reimplementation u'\u2019' in Table 1. 
+		Cause: [(0, 0), (0, 3)]
+		Effect: [(0, 4), (0, 13)]
+
+	CASE: 6
+	Stag: 144 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: Second, we are able to skip a parse item for an entire cluster if that item u'\u2019' s pruning mask does not intersect the cluster u'\u2019' s signature. 
+		Cause: [(0, 15), (0, 36)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 7
+	Stag: 145 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: Spreading symbols across clusters may be inefficient if a parse item licenses a given symbol, we will have to enqueue that item to any queue that has the symbol in its signature, no matter how many other symbols are in that cluster. 
+		Cause: [(0, 8), (0, 14)]
+		Effect: [(0, 16), (0, 43)]
+
+	CASE: 8
+	Stag: 145 146 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: Spreading symbols across clusters may be inefficient if a parse item licenses a given symbol, we will have to enqueue that item to any queue that has the symbol in its signature, no matter how many other symbols are in that cluster. Thus, it makes sense to choose a clustering algorithm that exploits the structure introduced by the pruning masks. 
+		Cause: [(0, 0), (0, 43)]
+		Effect: [(1, 1), (1, 18)]
+
+	CASE: 9
+	Stag: 148 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: When coarse symbols are extremely unlikely (and therefore have few corresponding rules), we merge their clusters to avoid the overhead of beginning work on clusters where little work has to be done. 
+		Cause: [(0, 0), (0, 6)]
+		Effect: [(0, 9), (0, 34)]
+
+	CASE: 10
+	Stag: 149 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: 3 3 Specifically, after clustering based on the coarse parent symbol, we merge all clusters with less than 300 rules in them into one large cluster. 
+		Cause: [(0, 8), (0, 11)]
+		Effect: [(0, 13), (0, 27)]
+
+	CASE: 11
+	Stag: 150 
+		Pattern: 45 [['so', 'that']]---- [['&C'], ['&R']]
+		sentTXT: In order to subcluster, we divde up rules among subclusters so that each subcluster has the same number of active parent symbols. 
+		Cause: [(0, 0), (0, 10)]
+		Effect: [(0, 13), (0, 22)]
+
+	CASE: 12
+	Stag: 152 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Clustering using this method is labeled u'\u2018' Parent u'\u2019' in Table 1. 
+		Cause: [(0, 0), (0, 3)]
+		Effect: [(0, 4), (0, 13)]
+
+Section 8:  8 Pruning with Finer Grammars has 5 CE cases
+	CASE: 1
+	Stag: 160 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The coarse to fine pruning approach of Petrov and Klein ( 2007 ) employs an X-bar grammar as its first pruning phase, but there is no reason why we cannot begin with a more complex grammar for our initial pass. 
+		Cause: [(0, 18), (0, 41)]
+		Effect: [(0, 0), (0, 16)]
+
+	CASE: 2
+	Stag: 160 161 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The coarse to fine pruning approach of Petrov and Klein ( 2007 ) employs an X-bar grammar as its first pruning phase, but there is no reason why we cannot begin with a more complex grammar for our initial pass. As Petrov and Klein ( 2007 ) have shown, intermediate-sized Berkeley grammars prune many more symbols than the X-bar system. 
+		Cause: [(1, 1), (1, 20)]
+		Effect: [(0, 0), (0, 41)]
+
+	CASE: 3
+	Stag: 162 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: However, they are slower to parse with in a CPU context, and so they begin with an X-bar grammar. 
+		Cause: [(0, 0), (0, 11)]
+		Effect: [(0, 15), (0, 20)]
+
+	CASE: 4
+	Stag: 163 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because of the overhead associated with transferring work items to GPU, using a very small grammar may not be an efficient use of the GPU u'\u2019' s computational resources. 
+		Cause: [(0, 1), (0, 9)]
+		Effect: [(0, 12), (0, 33)]
+
+	CASE: 5
+	Stag: 166 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because parsing with these grammars is still quite fast, we tried using them as the coarse pass instead. 
+		Cause: [(0, 1), (0, 8)]
+		Effect: [(0, 10), (0, 18)]
+
+Section 9:  9 Minimum Bayes risk parsing has 22 CE cases
+	CASE: 1
+	Stag: 172 173 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: MBR algorithms for parsing do not compute the best derivation, as in Viterbi parsing, but instead the parse tree that maximizes the expected count of some figure of merit. For instance, one might want to maximize the expected number of correct constituents [ 3 ] , or the expected rule counts [ 10 , 9 ]. 
+		Cause: [(0, 12), (1, 26)]
+		Effect: [(0, 0), (0, 9)]
+
+	CASE: 2
+	Stag: 183 184 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We should expect this algorithm to be at least a factor of two slower the outside pass performs at least as much work as the inside pass. Moreover, it typically has worse memory access patterns, leading to slower performance. 
+		Cause: [(0, 21), (1, 11)]
+		Effect: [(0, 0), (0, 19)]
+
+	CASE: 3
+	Stag: 188 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because the grammars are compiled into code, the additional operations are all inlined into the kernels, producing much larger kernels. 
+		Cause: [(0, 1), (0, 6)]
+		Effect: [(0, 8), (0, 21)]
+
+	CASE: 4
+	Stag: 189 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Indeed, in practice the compiler will often hang if we use the same size grammar clusters as we did for Viterbi. 
+		Cause: [(0, 18), (0, 21)]
+		Effect: [(0, 2), (0, 16)]
+
+	CASE: 5
+	Stag: 189 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: Indeed, in practice the compiler will often hang if we use the same size grammar clusters as we did for Viterbi. 
+		Cause: [(0, 8), (0, 14)]
+		Effect: [(0, 0), (0, 6)]
+
+	CASE: 6
+	Stag: 192 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: Because so many labeled spans are pruned, we are able to skip many of the grammar clusters and thus avoid many of the expensive operations. 
+		Cause: [(0, 0), (0, 17)]
+		Effect: [(0, 20), (0, 25)]
+
+	CASE: 7
+	Stag: 192 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because so many labeled spans are pruned, we are able to skip many of the grammar clusters and thus avoid many of the expensive operations. 
+		Cause: [(0, 1), (0, 6)]
+		Effect: [(0, 8), (0, 17)]
+
+	CASE: 8
+	Stag: 193 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Using coarse pruning and log domain calculations, our system produces MBR trees at a rate of 130.4 sentences per second, a four-fold increase. 
+		Cause: [(0, 0), (0, 6)]
+		Effect: [(0, 8), (0, 24)]
+
+	CASE: 9
+	Stag: 199 200 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: That is, the number is represented as f u'\u2032' = f u'\u22c5' exp u'\u2061' ( s. Whenever f becomes either too big or too small, the number is rescaled back to a less u'\u201c' dangerous u'\u201d' range by shifting mass from the exponent e to the scaling factor s. 
+		Cause: [(0, 8), (1, 28)]
+		Effect: [(0, 0), (0, 6)]
+
+	CASE: 10
+	Stag: 200 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: Whenever f becomes either too big or too small, the number is rescaled back to a less u'\u201c' dangerous u'\u201d' range by shifting mass from the exponent e to the scaling factor s. 
+		Cause: [(0, 31), (0, 41)]
+		Effect: [(0, 0), (0, 29)]
+
+	CASE: 11
+	Stag: 202 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: In our GPU system, multiple scores in any given span are being updated at the same time, which makes this dynamic rescaling tricky and expensive, especially since inter-warp communication is fairly limited. 
+		Cause: [(0, 30), (0, 34)]
+		Effect: [(0, 18), (0, 28)]
+
+	CASE: 12
+	Stag: 205 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because the grammar used in the coarse pass is a projection of the grammar used in the fine pass, these coarse scores correlate reasonably closely with the probabilities computed in the fine pass. 
+		Cause: [(0, 1), (0, 18)]
+		Effect: [(0, 20), (0, 33)]
+
+	CASE: 13
+	Stag: 206 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: If a span has a very high or very low score in the coarse pass, it typically has a similar score in the fine pass. 
+		Cause: [(0, 1), (0, 14)]
+		Effect: [(0, 16), (0, 25)]
+
+	CASE: 14
+	Stag: 206 207 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: If a span has a very high or very low score in the coarse pass, it typically has a similar score in the fine pass. Thus, we can use the coarse pass u'\u2019' s inside and outside scores as the scaling values for the fine pass u'\u2019' s scores. 
+		Cause: [(0, 0), (0, 25)]
+		Effect: [(1, 1), (1, 32)]
+
+	CASE: 15
+	Stag: 209 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: Then, when applying rules in the fine pass, each fine inside score over a split span ( i , k , j ) is scaled to the appropriate s i , j I by multiplying the score by exp u'\u2061' ( s i , k I + s k , j I - s i , j I ) , where s i , k I , s k , j I , s i , j I are the scaling factors for the left child, right child, and parent, respectively. 
+		Cause: [(0, 36), (0, 64)]
+		Effect: [(0, 65), (0, 99)]
+
+	CASE: 16
+	Stag: 213 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Because we are summing instead of maxing scores in the fine pass, the scaling factors computed using max scores are not quite large enough, and so the rescaled inside probabilities grow too large when multiplied together. 
+		Cause: [(0, 0), (0, 24)]
+		Effect: [(0, 28), (0, 37)]
+
+	CASE: 17
+	Stag: 213 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because we are summing instead of maxing scores in the fine pass, the scaling factors computed using max scores are not quite large enough, and so the rescaled inside probabilities grow too large when multiplied together. 
+		Cause: [(0, 1), (0, 11)]
+		Effect: [(0, 13), (0, 24)]
+
+	CASE: 18
+	Stag: 214 215 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: Most of this difference arises at the leaves, where the lexicon typically has more uncertainty than higher up in the tree. Therefore, in the fine pass, we normalize the inside scores at the leaves to sum to 1.0. 
+		Cause: [(0, 0), (0, 21)]
+		Effect: [(1, 2), (1, 18)]
+
+	CASE: 19
+	Stag: 216 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: 4 4 One can instead interpret this approach as changing the scaling factors to s i , j I u'\u2032' = s i , j I u'\u22c5' u'\u220f' i u'\u2264' k j u'\u2211' A inside u'\u2062' ( A , k , k + 1 ) , where inside is the array of scores for the fine pass. 
+		Cause: [(0, 9), (0, 64)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 20
+	Stag: 216 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: 4 4 One can instead interpret this approach as changing the scaling factors to s i , j I u'\u2032' = s i , j I u'\u22c5' u'\u220f' i u'\u2264' k j u'\u2211' A inside u'\u2062' ( A , k , k + 1 ) , where inside is the array of scores for the fine pass. 
+		Cause: [(0, 0), (0, 6)]
+		Effect: [(0, 8), (0, 51)]
+
+	CASE: 21
+	Stag: 219 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Using scaling, we are able to push our parser to 190.6 sentences/second for MBR extraction, just under half the speed of the Viterbi system. 
+		Cause: [(0, 0), (0, 1)]
+		Effect: [(0, 3), (0, 25)]
+
+	CASE: 22
+	Stag: 220 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: It is of course important verify the correctness of our system; one easy way to do so is to examine parsing accuracy, as compared to the original Berkeley parser. 
+		Cause: [(0, 0), (0, 16)]
+		Effect: [(0, 18), (0, 30)]
+
+Section 10:  10 Analyzing System Performance has 6 CE cases
+	CASE: 1
+	Stag: 230 231 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: These timing numbers are computed using the built-in profiling capabilities of the programming environment. As usual, profiles exhibit an observer effect, where the act of measuring the system changes the execution. 
+		Cause: [(1, 1), (1, 13)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 2
+	Stag: 232 233 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Nevertheless, the general trends should more or less be preserved as compared to the unprofiled code. To begin, we can compute the number of seconds needed to parse 1000 sentences. 
+		Cause: [(0, 12), (1, 13)]
+		Effect: [(0, 0), (0, 10)]
+
+	CASE: 3
+	Stag: 234 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: We use seconds per sentence rather than sentences per second because the former measure is additive.) The results are in Table 3. 
+		Cause: [(0, 11), (0, 23)]
+		Effect: [(0, 0), (0, 9)]
+
+	CASE: 4
+	Stag: 236 237 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In Table 4 , we break down the time taken by our system into individual components. As expected, binary rules account for the vast majority of the time in the unpruned Viterbi case, but much less time in the pruned case, with the total time taken for binary rules in the coarse and fine passes taking about 1/5 of the time taken by binaries in the unpruned version. 
+		Cause: [(1, 1), (1, 54)]
+		Effect: [(0, 0), (0, 15)]
+
+	CASE: 5
+	Stag: 240 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: There is greater overhead in the scaling system, because scaling factors are copied to the CPU between the coarse and fine passes. 
+		Cause: [(0, 10), (0, 22)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 6
+	Stag: 245 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: Throughput increases through parsing 10,000 sentences, and then levels off by the time it reaches 100,000 sentences. 
+		Cause: [(0, 3), (0, 5)]
+		Effect: [(0, 6), (0, 16)]
+
+Section 11:  11 Related Work has 0 CE cases
+Section 12:  12 Conclusion has 1 CE cases
+	CASE: 1
+	Stag: 259 260 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Our system is available as open-source at https://www.github.com/dlwh/puck. This work was partially supported by BBN under DARPA contract HR0011-12-C-0014, by a Google PhD fellowship to the first author, and an NSF fellowship to the second. 
+		Cause: [(0, 5), (1, 21)]
+		Effect: [(0, 0), (0, 3)]
+
+#-------------------------------------------------
+

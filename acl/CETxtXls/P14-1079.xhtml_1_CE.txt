@@ -1,0 +1,347 @@
+************************************************************
+P14-1079.xhtml_1_CE.txt: Cause-Effect links
+************************************************************
+
+CASE: 0
+Stag: 1 2 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Traditional supervised methods [ 28 , 1 ] on small hand-labeled corpora, such as MUC 1 1 http://www.itl.nist.gov/iaui/894.02/related projects/muc/ and ACE 2 2 http://www.itl.nist.gov/iad/mig/tests/ace/ , can achieve high precision and recall However, as producing hand-labeled corpora is laborius and expensive, the supervised approach can not satisfy the increasing demand of building large-scale knowledge repositories with the explosion of Web texts
+	Cause: [(1, 3), (1, 30)]
+	Effect: [(0, 2), (1, 0)]
+
+CASE: 1
+Stag: 4 
+	Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+	sentTXT: The intuition of the paradigm is that one can take advantage of several knowledge bases, such as WordNet 3 3 http://wordnet.princeton.edu , Freebase 4 4 http://www.freebase.com and YAGO 5 5 http://www.mpi-inf.mpg.de/yago-naga/yago , to automatically label free texts, like Wikipedia 6 6 http://www.wikipedia.org and New York Times corpora 7 7 http://catalog.ldc.upenn.edu/LDC2008T19 , based on some heuristic alignment assumptions
+	Cause: [(0, 55), (0, 58)]
+	Effect: [(0, 0), (0, 51)]
+
+CASE: 2
+Stag: 5 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: An example accounting for the basic but practical assumption is illustrated in Figure 1, in which we know that the two entities ( Barack Obama, U.S are not only involved in the relation instances 8 8 According to convention, we regard a structured triple r u'\u2062' ( e i , e j ) as a relation instance which is composed of a pair of entities e i , e j and a relation name r with respect to them coming from knowledge bases ( President-of(Barack Obama, U.S.) and Born-in(Barack Obama, U.S.) ), but also co-occur in several relation mentions 9 9 The sentences that contain the given entity pair are called relation mentions appearing in free texts ( Barack Obama is the 44th and current President of the U.S and Barack Obama was born in Honolulu, Hawaii, U.S etc
+	Cause: [(0, 61), (0, 154)]
+	Effect: [(0, 0), (0, 59)]
+
+CASE: 3
+Stag: 5 
+	Pattern: 0 [['according', 'to'], [',']]---- [[], ['&NP@C@'], ['&R']]
+	sentTXT: An example accounting for the basic but practical assumption is illustrated in Figure 1, in which we know that the two entities ( Barack Obama, U.S are not only involved in the relation instances 8 8 According to convention, we regard a structured triple r u'\u2062' ( e i , e j ) as a relation instance which is composed of a pair of entities e i , e j and a relation name r with respect to them coming from knowledge bases ( President-of(Barack Obama, U.S.) and Born-in(Barack Obama, U.S.) ), but also co-occur in several relation mentions 9 9 The sentences that contain the given entity pair are called relation mentions appearing in free texts ( Barack Obama is the 44th and current President of the U.S and Barack Obama was born in Honolulu, Hawaii, U.S etc
+	Cause: [(0, 40), (0, 40)]
+	Effect: [(0, 42), (0, 59)]
+
+CASE: 4
+Stag: 14 
+	Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+	sentTXT: For example, the second relation mention in Figure 1 does not explicitly describe any relation instance, so features extracted from this sentence can be noisy
+	Cause: [(0, 0), (0, 16)]
+	Effect: [(0, 19), (0, 26)]
+
+CASE: 5
+Stag: 17 
+	Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+	sentTXT: Similar to noisy features, the generated labels can be incomplete
+	Cause: [(0, 0), (0, 3)]
+	Effect: [(0, 5), (0, 10)]
+
+CASE: 6
+Stag: 19 20 
+	Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: However, the incomplete knowledge base does not contain the corresponding relation instance ( Senate-of(Barack Obama, U.S.) Therefore, the distant supervision paradigm may generate incomplete labeling corpora
+	Cause: [(0, 0), (0, 20)]
+	Effect: [(1, 2), (1, 10)]
+
+CASE: 7
+Stag: 23 24 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: To the best of our knowledge, we are the first to apply this technique on relation extraction with distant supervision More specifically, as shown in Figure 2, we model the task with a sparse matrix whose rows present items (entity pairs) and columns contain noisy textual features and incomplete relation labels
+	Cause: [(1, 4), (1, 34)]
+	Effect: [(0, 1), (1, 1)]
+
+CASE: 8
+Stag: 25 
+	Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+	sentTXT: In such a way, relation classification is transformed into a problem of completing the unknown labels for testing items in the sparse matrix that concatenates training and testing textual features with training labels, based on the assumption that the item-by-feature and item-by-label joint matrix is of low rank
+	Cause: [(0, 37), (0, 49)]
+	Effect: [(0, 0), (0, 33)]
+
+CASE: 9
+Stag: 35 36 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: [ 23 ] used WordNet as the knowledge base to discover more hpyernym/hyponym relations between entities from news articles However, either bioinformatic database or WordNet is maintained by a few experts, thus hardly kept up-to-date
+	Cause: [(0, 6), (1, 17)]
+	Effect: [(0, 1), (0, 4)]
+
+CASE: 10
+Stag: 36 
+	Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+	sentTXT: However, either bioinformatic database or WordNet is maintained by a few experts, thus hardly kept up-to-date
+	Cause: [(0, 0), (0, 12)]
+	Effect: [(0, 15), (0, 17)]
+
+CASE: 11
+Stag: 36 37 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: However, either bioinformatic database or WordNet is maintained by a few experts, thus hardly kept up-to-date As we are stepping into the big data era, the explosion of unstructured Web texts simulates us to build more powerful models that can automatically extract relation instances from large-scale online natural language corpora without hand-labeled annotation
+	Cause: [(1, 1), (1, 37)]
+	Effect: [(0, 0), (0, 17)]
+
+CASE: 12
+Stag: 40 
+	Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+	sentTXT: The basic alignment assumption of this work is that if a pair of entities participate in a relation, all sentences that mention these entities are labeled by that relation name
+	Cause: [(0, 10), (0, 17)]
+	Effect: [(0, 19), (0, 30)]
+
+CASE: 13
+Stag: 50 51 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Our work is more relevant to Riedel et al u'\u2019' s [ 21 ] which considered the task as a matrix factorization problem Their approach is composed of several models, such as PCA [ 7 ] and collaborative filtering [ 15 ]
+	Cause: [(0, 23), (1, 7)]
+	Effect: [(0, 0), (0, 21)]
+
+CASE: 14
+Stag: 56 
+	Pattern: 0 [['based', 'on']]---- [['&V-ing/&NP@R@', '(&Clause@R@)', '&BE', '(&ADV)'], ['&NP@C@', '(&Clause@C@)']]
+	sentTXT: Our models for relation extraction are based on the theoretic framework proposed by Goldberg et al
+	Cause: [(0, 8), (0, 15)]
+	Effect: [(0, 0), (0, 4)]
+
+CASE: 15
+Stag: 58 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: The new framework for classification enhances the robustness to data noise by penalizing different cost functions for features and labels
+	Cause: [(0, 12), (0, 19)]
+	Effect: [(0, 0), (0, 10)]
+
+CASE: 16
+Stag: 59 
+	Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+	sentTXT: Suppose that we have built a training corpus for relation classification with n items (entity pairs), d -dimensional textual features, and t labels (relations), based on the basic alignment assumption proposed by Mintz et al
+	Cause: [(0, 34), (0, 42)]
+	Effect: [(0, 0), (0, 30)]
+
+CASE: 17
+Stag: 66 
+	Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+	sentTXT: This linear classification problem can be transformed into completing the unobservable entries in Y t u'\u2062' e u'\u2062' s u'\u2062' t by means of the observable entries in X t u'\u2062' r u'\u2062' a u'\u2062' i u'\u2062' n , Y t u'\u2062' r u'\u2062' a u'\u2062' i u'\u2062' n and X t u'\u2062' e u'\u2062' s u'\u2062' t , based on the assumption that the rank of matrix u'\ud835' u'\udc19' u'\u2208' u'\u211d' ( n + m ) × ( d + t ) is low
+	Cause: [(0, 117), (0, 155)]
+	Effect: [(0, 0), (0, 113)]
+
+CASE: 18
+Stag: 69 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Formula (2) is usually impractical for real problems as the entries in the matrix u'\ud835' u'\udc19' are corrupted by noise
+	Cause: [(0, 11), (0, 29)]
+	Effect: [(0, 0), (0, 9)]
+
+CASE: 19
+Stag: 71 72 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: where u'\ud835' u'\udc19' * as the underlying low-rank matrix and E is the error matrix
+	Cause: [(0, 13), (1, 4)]
+	Effect: [(0, 1), (0, 11)]
+
+CASE: 20
+Stag: 77 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: According to Formula (1), u'\ud835' u'\udc19' * u'\u2208' u'\u211d' ( n + m ) × ( d + t ) can be represented as [ X * , u'\ud835' u'\udc16' u'\u2062' X * ] instead of [ X * , Y * ] , by explicitly modeling the bias vector u'\ud835' u'\udc1b'
+	Cause: [(0, 42), (0, 89)]
+	Effect: [(0, 0), (0, 40)]
+
+CASE: 21
+Stag: 77 
+	Pattern: 0 [['according', 'to'], [',']]---- [[], ['&NP@C@'], ['&R']]
+	sentTXT: According to Formula (1), u'\ud835' u'\udc19' * u'\u2208' u'\u211d' ( n + m ) × ( d + t ) can be represented as [ X * , u'\ud835' u'\udc16' u'\u2062' X * ] instead of [ X * , Y * ] , by explicitly modeling the bias vector u'\ud835' u'\udc1b'
+	Cause: [(0, 2), (0, 5)]
+	Effect: [(0, 7), (0, 40)]
+
+CASE: 22
+Stag: 77 78 
+	Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: According to Formula (1), u'\ud835' u'\udc19' * u'\u2208' u'\u211d' ( n + m ) × ( d + t ) can be represented as [ X * , u'\ud835' u'\udc16' u'\u2062' X * ] instead of [ X * , Y * ] , by explicitly modeling the bias vector u'\ud835' u'\udc1b' Therefore, this convex optimization model is called DRMC-b
+	Cause: [(0, 0), (0, 89)]
+	Effect: [(1, 2), (1, 8)]
+
+CASE: 23
+Stag: 82 
+	Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+	sentTXT: If we implicitly model the bias vector u'\ud835' u'\udc1b' , u'\ud835' u'\udc19' * u'\u2208' u'\u211d' ( n + m ) × ( 1 + d + t ) can be denoted by [ u'\ud835' u'\udfcf' , X * , u'\ud835' u'\udc16' u'\u2032' u'\u2062' X * ] instead of [ X * , Y * ] , in which u'\ud835' u'\udc16' u'\u2032' takes the role of [ u'\ud835' u'\udc1b' T ; u'\ud835' u'\udc16' ] in DRMC-b
+	Cause: [(0, 1), (0, 15)]
+	Effect: [(0, 18), (0, 146)]
+
+CASE: 24
+Stag: 92 93 
+	Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: The matrix rank minimization problem is NP-hard Therefore, Candés and Recht [ 5 ] suggested to use a convex relaxation, the nuclear norm minimization instead
+	Cause: [(0, 0), (0, 6)]
+	Effect: [(1, 2), (1, 20)]
+
+CASE: 25
+Stag: 96 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: Moreover, Goldfrab and Ma [ 11 ] proved the convergence of the FPC algorithm for solving the nuclear norm minimization problem
+	Cause: [(0, 16), (0, 21)]
+	Effect: [(0, 0), (0, 14)]
+
+CASE: 26
+Stag: 96 97 
+	Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+	sentTXT: Moreover, Goldfrab and Ma [ 11 ] proved the convergence of the FPC algorithm for solving the nuclear norm minimization problem We thus adopt and modify the algorithm aiming to find the optima for our noise-tolerant models, i.e.,, Formulae (3) and (4
+	Cause: [(0, 1), (1, 0)]
+	Effect: [(1, 2), (1, 26)]
+
+CASE: 27
+Stag: 98 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: Algorithm 1 describes the modified FPC algorithm for solving DRMC-b, which contains two steps for each iteration
+	Cause: [(0, 8), (0, 17)]
+	Effect: [(0, 0), (0, 6)]
+
+CASE: 28
+Stag: 107 
+	Pattern: 45 [['so', 'that']]---- [['&C'], ['&R']]
+	sentTXT: During the iteration, any negative value in u'\ud835' u'\udeba' - u'\u03a4' u'\ud835' u'\udc33' u'\u2062' u'\u039c' is assigned by zero, so that the rank of reconstructed matrix u'\ud835' u'\udc19' will be reduced, where u'\ud835' u'\udc19' = u'\ud835' u'\udc14' u'\u2062' m u'\u2062' a u'\u2062' x u'\u2062' ( u'\ud835' u'\udeba' - u'\u03a4' u'\ud835' u'\udc33' u'\u2062' u'\u039c' , 0 ) u'\u2062' u'\ud835' u'\udc15' u'\ud835' u'\udc13'
+	Cause: [(0, 0), (0, 48)]
+	Effect: [(0, 51), (0, 178)]
+
+CASE: 29
+Stag: 108 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: FPC algorithm for solving DRMC-b {algorithmic} \REQUIRE Initial matrix u'\ud835' u'\udc19' u'\ud835' u'\udfce' , bias u'\ud835' u'\udc1b' u'\ud835' u'\udfce' ; Parameters u'\u039c' , u'\u039b' ; Step sizes u'\u03a4' z , u'\u03a4' b
+	Cause: [(0, 3), (0, 81)]
+	Effect: [(0, 0), (0, 1)]
+
+CASE: 30
+Stag: 110 
+	Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+	sentTXT: \FOR u'\u039c' = u'\u039c' 1 u'\u039c' 2 u'\u2026' u'\u039c' F \WHILE relative error u'\u0395' \STATE Gradient step u'\ud835' u'\udc00' = u'\ud835' u'\udc19' - u'\u03a4' z u'\u2062' g u'\u2062' ( u'\ud835' u'\udc19' ) , u'\ud835' u'\udc1b' = u'\ud835' u'\udc1b' - u'\u03a4' b u'\u2062' g u'\u2062' ( u'\ud835' u'\udc1b'
+	Cause: [(0, 0), (0, 7)]
+	Effect: [(0, 8), (0, 136)]
+
+CASE: 31
+Stag: 114 115 
+	Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+	sentTXT: To accelerate the convergence, we use a continuation method to improve the speed u'\u039c' is initialized by a large value u'\u039c' 1 , thus resulting in the fast reduction of the rank at first Then the convergence slows down as u'\u039c' decreases while obeying u'\u039c' k + 1 = m u'\u2062' a u'\u2062' x u'\u2062' ( u'\u039c' k u'\u2062' u'\u0397' u'\u039c' , u'\u039c' F u'\u039c' F is the final value of u'\u039c' , and u'\u0397' u'\u039c' is the decay parameter
+	Cause: [(0, 0), (0, 30)]
+	Effect: [(0, 33), (1, 101)]
+
+CASE: 32
+Stag: 115 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Then the convergence slows down as u'\u039c' decreases while obeying u'\u039c' k + 1 = m u'\u2062' a u'\u2062' x u'\u2062' ( u'\u039c' k u'\u2062' u'\u0397' u'\u039c' , u'\u039c' F u'\u039c' F is the final value of u'\u039c' , and u'\u0397' u'\u039c' is the decay parameter
+	Cause: [(0, 6), (0, 101)]
+	Effect: [(0, 1), (0, 4)]
+
+CASE: 33
+Stag: 122 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: FPC algorithm for solving DRMC-1 {algorithmic} \REQUIRE Initial matrix u'\ud835' u'\udc19' u'\ud835' u'\udfce' ; Parameters u'\u039c' , u'\u039b' ; Step sizes u'\u03a4' z
+	Cause: [(0, 3), (0, 52)]
+	Effect: [(0, 0), (0, 1)]
+
+CASE: 34
+Stag: 124 
+	Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+	sentTXT: \FOR u'\u039c' = u'\u039c' 1 u'\u039c' 2 u'\u2026' u'\u039c' F \WHILE relative error u'\u0395' \STATE Gradient step u'\ud835' u'\udc00' = u'\ud835' u'\udc19' - u'\u03a4' z u'\u2062' g u'\u2062' ( u'\ud835' u'\udc19'
+	Cause: [(0, 0), (0, 7)]
+	Effect: [(0, 8), (0, 84)]
+
+CASE: 35
+Stag: 129 
+	Pattern: 0 [[['indicate', 'indicates', 'indicated', 'realize', 'realizes', 'realized', 'ensure', 'ensures', 'ensured', 'imply', 'implies', 'implied']]]---- [['&NP@C@', '(&Clause@C@)'], ['&NP@R@', '(&Clause@R@)']]
+	sentTXT: \ENSURE Completed Matrix Z
+	Cause: [(0, 0), (0, 0)]
+	Effect: [(0, 2), (0, 4)]
+
+CASE: 36
+Stag: 131 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: The two widely used datasets that we adopt are both automatically generated by aligning Freebase to New York Times corpora
+	Cause: [(0, 13), (0, 19)]
+	Effect: [(0, 0), (0, 11)]
+
+CASE: 37
+Stag: 151 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: [ 16 ] revealed that as long as the non-negative step sizes satisfy u'\u03a4' z m u'\u2062' i u'\u2062' n u'\u2062' ( 4 u'\u2062' u'\u03a9' Y u'\u039b' u'\u03a9' X and u'\u03a4' b 4 u'\u2062' u'\u03a9' Y u'\u039b' u'\u2062' ( n + m ) , the FPC algorithm will guarantee to converge to a global optimum
+	Cause: [(0, 6), (0, 106)]
+	Effect: [(0, 0), (0, 4)]
+
+CASE: 38
+Stag: 151 152 
+	Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: [ 16 ] revealed that as long as the non-negative step sizes satisfy u'\u03a4' z m u'\u2062' i u'\u2062' n u'\u2062' ( 4 u'\u2062' u'\u03a9' Y u'\u039b' u'\u03a9' X and u'\u03a4' b 4 u'\u2062' u'\u03a9' Y u'\u039b' u'\u2062' ( n + m ) , the FPC algorithm will guarantee to converge to a global optimum Therefore, we set u'\u03a4' z = u'\u03a4' b = 0.5 to satisfy the above constraints on both two datasets
+	Cause: [(0, 3), (0, 106)]
+	Effect: [(1, 2), (1, 27)]
+
+CASE: 39
+Stag: 154 155 
+	Pattern: 1 [['reason'], [['that', 'because']]]---- [['&R', '(,/./;/--)', '&ONE', '(&ADJ)'], ['(for &THIS (&NP))', '&BE'], ['&C']]
+	sentTXT: In practice, we record the rank of matrix Z at each round of iteration until it converges at a rather small threshold u'\u0395' = 10 - 4 The reason is that we suppose the optimal low-rank representation of the matrix Z conveys the truly effective information about underlying semantic correlation between the features and the corresponding labels
+	Cause: [(1, 4), (1, 29)]
+	Effect: [(0, 2), (0, 31)]
+
+CASE: 40
+Stag: 161 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: On both two datasets, we observe an identical phenomenon that the performance gradually increases as the rank of the matrix declines before reaching the optimum
+	Cause: [(0, 16), (0, 25)]
+	Effect: [(0, 0), (0, 14)]
+
+CASE: 41
+Stag: 162 
+	Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+	sentTXT: However, it sharply decreases if we continue reducing the optimal rank
+	Cause: [(0, 6), (0, 11)]
+	Effect: [(0, 0), (0, 4)]
+
+CASE: 42
+Stag: 162 163 
+	Pattern: 2 [[['explanation', 'motivation'], 'is', 'that']]---- [['&R', '(,/./;/--)', '&ONE', '(&adj)'], ['&C']]
+	sentTXT: However, it sharply decreases if we continue reducing the optimal rank An intuitive explanation is that the high-rank matrix contains much noise and the model tends to be overfitting, whereas the matrix of excessively low rank is more likely to lose principal information and the model tends to be underfitting
+	Cause: [(1, 5), (1, 39)]
+	Effect: [(0, 0), (0, 11)]
+
+CASE: 43
+Stag: 172 173 
+	Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: They set u'\u0398' = 5 in the original code by default Therefore, we follow their settings and adopt the same way to filter the features
+	Cause: [(0, 0), (0, 14)]
+	Effect: [(1, 2), (1, 14)]
+
+CASE: 44
+Stag: 177 
+	Pattern: 0 [['due', 'to']]---- [['&R'], ['&NP@C@']]
+	sentTXT: We bypass the description due to the limitation of space
+	Cause: [(0, 6), (0, 9)]
+	Effect: [(0, 0), (0, 3)]
+
+CASE: 45
+Stag: 180 181 
+	Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: In practical applications, we also concern about the precision on Top-N predicted relation instances Therefore, We compare the precision of Top-100s, Top-200s and Top-500s for DRMC-1, DRMC-b and the state-of-the-art method NFE-13 [ 21 ]
+	Cause: [(0, 0), (0, 14)]
+	Effect: [(1, 2), (1, 23)]
+
+CASE: 46
+Stag: 185 
+	Pattern: 0 [['due', 'to']]---- [[], ['&NP@C@', '(,)', '&R']]
+	sentTXT: Due to the noisy features and incomplete labels, the underlying low-rank data matrix with truly effective information tends to be corrupted and the rank of observed data matrix can be extremely high
+	Cause: [(0, 2), (0, 7)]
+	Effect: [(0, 9), (0, 32)]
+
+CASE: 47
+Stag: 187 188 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: However, those high ranks result in poor performance As the ranks decline before approaching the optimum, the performance gradually improves, implying that our approaches filter the noise in data and keep the principal information for classification via recovering the underlying low-rank data matrix
+	Cause: [(1, 1), (1, 36)]
+	Effect: [(0, 0), (0, 8)]
+
+CASE: 48
+Stag: 194 
+	Pattern: 2 [['for', 'the'], ['reason']]---- [['&R', '(,)', '(&ADV)'], ['(&ADJ)'], ['(that)', '&C']]
+	sentTXT: In other words, for each approach, the amount of truly effective information about underlying semantic correlation keeps constant for the same dataset, which, to some extent, explains the reason why our approaches are robust to sparse features
+	Cause: [(0, 34), (0, 41)]
+	Effect: [(0, 0), (0, 19)]
+

@@ -1,0 +1,20 @@
+(lp0
+VWe describe learning of the model parameters with fully annotated training data, as well as an approach for learning motif segmentation that requires only partial supervision
+p1
+aVConsider the following sentences tagged by the segmentation model, that would correspond to different representations of the token u'\u005cu2018' remains u'\u005cu2019' once as a standalone motif, and once as part of an encompassing bigram motif ( u'\u005cu2018' remains classified u'\u005cu2019'
+p2
+aVWe present a framework for extending distributional semantics to learn semantic representations of both words and phrases in terms of recurrent motifs, rather than arbitrary word tokens
+p3
+aVSection 3 describes our methodology, which consists of a frequency-driven segmentation model to partition text into semantically meaningful recurring lineal-subunits, a representation learning framework for learning new semantic embeddings based on this segmentation, and an approach to use such embeddings in downstream applications
+p4
+aVWhile this framework is attractive in the lack of assumptions on representation that it makes, the use of distributional embeddings for individual tokens means that it suffers from the same shortcomings as described for the example in Table 1, and hence these methods model semantic relations between word-nodes very weakly
+p5
+aVHence, we use the Hellinger measure between neighbourhood motif distributions in learning representations
+p6
+aVGiven constituent motifs of each sentence in the data, we can now define neighbourhood distributions for unary or phrasal motifs in terms of other motifs (as envisioned in Table 1
+p7
+aVThis would involve initializing the weights prior to the semi-supervised procedure with the weights from the supervised learning model, so as to seed the semi-supervised approach with reasonable model, and use the partially annotated data to fine-tune the supervised model
+p8
+aVThe model is an instantiation of a simple featurized HMM, and the weighted sum of features corresponding to a segment is cognate with an affinity score for
+p9
+a.

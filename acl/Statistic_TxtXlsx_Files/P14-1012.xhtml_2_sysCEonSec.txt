@@ -1,0 +1,374 @@
+Current File: P14-1012.xhtml_2 P14-1012.xhtml
+
+Section 0:  Abstract
+	SentNum: 4
+	CENum: 2
+	SentCovered: 2
+	Covered_Rate: 50.0000%
+
+Section 1:  1 Introduction
+	SentNum: 28
+	CENum: 11
+	SentCovered: 15
+	Covered_Rate: 53.5714%
+
+Section 2:  2 Related Work
+	SentNum: 14
+	CENum: 5
+	SentCovered: 4
+	Covered_Rate: 28.5714%
+
+Section 3:  3 Input Features for DNN Feature Learning
+	SentNum: 26
+	CENum: 8
+	SentCovered: 12
+	Covered_Rate: 46.1538%
+
+Section 4:  4 Semi-Supervised Deep Auto-encoder Features Learning for SMT
+	SentNum: 43
+	CENum: 14
+	SentCovered: 17
+	Covered_Rate: 39.5349%
+
+Section 5:  5 Experiments and Results
+	SentNum: 59
+	CENum: 2
+	SentCovered: 2
+	Covered_Rate: 3.3898%
+
+Section 6:  6 Conclusions
+	SentNum: 9
+	CENum: 3
+	SentCovered: 3
+	Covered_Rate: 33.3333%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-1012.xhtml_2's CE cases
+
+Section 0:  Abstract has 2 CE cases
+	CASE: 1
+	Stag: 0 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: In this paper, instead of designing new features based on intuition, linguistic knowledge and domain, we learn some new and effective features using the deep auto-encoder (DAE) paradigm for phrase-based translation model. 
+		Cause: [(0, 11), (0, 11)]
+		Effect: [(0, 13), (0, 36)]
+
+	CASE: 2
+	Stag: 1 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Using the unsupervised pre-trained deep belief net (DBN) to initialize DAE u'\u2019' s parameters and using the input original phrase features as a teacher for semi-supervised fine-tuning, we learn new semi-supervised DAE features, which are more effective and stable than the unsupervised DBN features. 
+		Cause: [(0, 0), (0, 32)]
+		Effect: [(0, 34), (0, 51)]
+
+Section 1:  1 Introduction has 11 CE cases
+	CASE: 1
+	Stag: 5 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: However, most of these features are manually designed on linguistic phenomena that are related to bilingual language pairs, thus they are very difficult to devise and estimate. 
+		Cause: [(0, 0), (0, 18)]
+		Effect: [(0, 21), (0, 28)]
+
+	CASE: 2
+	Stag: 6 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: Instead of designing new features based on intuition, linguistic knowledge and domain, for the first time, Maskey and Zhou (2012) explored the possibility of inducing new features in an unsupervised fashion using deep belief net (DBN) [ Hinton et al.2006 ] for hierarchical phrase-based translation model. 
+		Cause: [(0, 7), (0, 7)]
+		Effect: [(0, 9), (0, 53)]
+
+	CASE: 3
+	Stag: 7 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Using the 4 original phrase features in the phrase table as the input features, they pre-trained the DBN by contrastive divergence [ Hinton2002 ] , and generated new unsupervised DBN features using forward computation. 
+		Cause: [(0, 0), (0, 13)]
+		Effect: [(0, 15), (0, 34)]
+
+	CASE: 4
+	Stag: 8 9 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: These new features are appended as extra features to the phrase table for the translation decoder. However, the above approach has two major shortcomings. 
+		Cause: [(0, 6), (1, 7)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 5
+	Stag: 11 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Second, it only uses the unsupervised layer-wise pre-training of DBN built with stacked sets of Restricted Boltzmann Machines (RBM) [ Hinton2002 ] , does not have a training objective, so its performance relies on the empirical parameters. 
+		Cause: [(0, 0), (0, 31)]
+		Effect: [(0, 34), (0, 40)]
+
+	CASE: 6
+	Stag: 11 12 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: Second, it only uses the unsupervised layer-wise pre-training of DBN built with stacked sets of Restricted Boltzmann Machines (RBM) [ Hinton2002 ] , does not have a training objective, so its performance relies on the empirical parameters. Thus, this approach is unstable and the improvement is limited. 
+		Cause: [(0, 0), (0, 40)]
+		Effect: [(1, 1), (1, 10)]
+
+	CASE: 7
+	Stag: 14 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: To address the first shortcoming, we adapt and extend some simple but effective phrase features as the input features for new DNN feature learning, and these features have been shown significant improvement for SMT, such as, phrase pair similarity [ Zhao et al.2004 ] , phrase frequency, phrase length [ Hopkins and May2011 ] , and phrase generative probability [ Foster et al.2010 ] , which also show further improvement for new phrase feature learning in our experiments. 
+		Cause: [(0, 17), (0, 36)]
+		Effect: [(0, 0), (0, 15)]
+
+	CASE: 8
+	Stag: 15 16 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: To address the second shortcoming, inspired by the successful use of DAEs for handwritten digits recognition [ Hinton and Salakhutdinov2006 , Hinton et al.2006 ] , information retrieval [ Salakhutdinov and Hinton2009 , Mirowski et al.2010 ] , and speech spectrograms [ Deng et al.2010 ] , we propose new feature learning using semi-supervised DAE for phrase-based translation model. By using the input data as the teacher, the u'\u201c' semi-supervised u'\u201d' fine-tuning process of DAE addresses the problem of u'\u201c' back-propagation without a teacher u'\u201d' [ Rumelhart et al.1986 ] , which makes the DAE learn more powerful and abstract features [ Hinton and Salakhutdinov2006 ]. 
+		Cause: [(1, 6), (1, 64)]
+		Effect: [(0, 2), (1, 4)]
+
+	CASE: 9
+	Stag: 17 18 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: For our semi-supervised DAE feature learning task, we use the unsupervised pre-trained DBN to initialize DAE u'\u2019' s parameters and use the input original phrase features as the u'\u201c' teacher u'\u201d' for semi-supervised back-propagation. Compared with the unsupervised DBN features, our semi-supervised DAE features are more effective and stable. 
+		Cause: [(0, 32), (1, 14)]
+		Effect: [(0, 0), (0, 30)]
+
+	CASE: 10
+	Stag: 20 21 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: It is encouraging that, non-parametric feature expansion using gaussian mixture model (GMM) [ Nguyen et al.2007 ] , which guarantees invariance to the specific embodiment of the original features, has been proved as a feasible feature generation approach for SMT. Deep models such as DNN have the potential to be much more representationally efficient for feature learning than shallow models like GMM. 
+		Cause: [(0, 38), (1, 20)]
+		Effect: [(0, 0), (0, 36)]
+
+	CASE: 11
+	Stag: 21 22 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: Deep models such as DNN have the potential to be much more representationally efficient for feature learning than shallow models like GMM. Thus, instead of GMM, we use DNN (DBN, DAE and HCDAE) to learn new non-parametric features, which has the similar evolution in speech recognition [ Dahl et al.2012 , Hinton et al.2012 ]. 
+		Cause: [(0, 0), (0, 21)]
+		Effect: [(1, 1), (1, 40)]
+
+Section 2:  2 Related Work has 5 CE cases
+	CASE: 1
+	Stag: 34 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: 2012) improved translation quality of n-gram translation model by using a bilingual neural LM, where translation probabilities are estimated using a continuous representation of translation units in lieu of standard discrete representations. 
+		Cause: [(0, 10), (0, 13)]
+		Effect: [(0, 14), (0, 32)]
+
+	CASE: 2
+	Stag: 37 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: 2013) presented a joint language and translation model based on a recurrent neural network which predicts target words based on an unbounded history of both source and target words. 
+		Cause: [(0, 21), (0, 29)]
+		Effect: [(0, 0), (0, 18)]
+
+	CASE: 3
+	Stag: 37 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: 2013) presented a joint language and translation model based on a recurrent neural network which predicts target words based on an unbounded history of both source and target words. 
+		Cause: [(0, 11), (0, 18)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 4
+	Stag: 41 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: 2013) presented an ITG reordering classifier based on recursive auto-encoders, and generated vector space representations for variable-sized phrases, which enable predicting orders to exploit syntactic and semantic information. 
+		Cause: [(0, 9), (0, 10)]
+		Effect: [(0, 12), (0, 30)]
+
+	CASE: 5
+	Stag: 44 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: However, none of these above works have focused on learning new features automatically with input data, and while learning suitable features (representations) is the superiority of DNN since it has been proposed. 
+		Cause: [(0, 32), (0, 35)]
+		Effect: [(0, 3), (0, 30)]
+
+Section 3:  3 Input Features for DNN Feature Learning has 8 CE cases
+	CASE: 1
+	Stag: 47 48 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Next, we adapt and extend some original phrase features as the input features for DAE feature learning. We assume that source phrase f = f 1 , u'\u22ef' , f l f and target phrase e = e 1 , u'\u22ef' , e l e include l f and l e words, respectively. 
+		Cause: [(0, 11), (1, 26)]
+		Effect: [(0, 0), (0, 9)]
+
+	CASE: 2
+	Stag: 51 52 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: 2004) proposed a way of using term weight based models in a vector space as additional evidences for phrase pair translation quality. This model employ phrase pair similarity to encode the weights of content and non-content words in phrase translation pairs. 
+		Cause: [(0, 16), (1, 17)]
+		Effect: [(0, 1), (0, 14)]
+
+	CASE: 3
+	Stag: 56 57 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: K = k 1 u'\u2062' ( ( 1 - b ) + J / a u'\u2062' v u'\u2062' g u'\u2062' ( l ) ) , and J is the phrase length ( l e or l f ), a u'\u2062' v u'\u2062' g u'\u2062' ( l ) is the average phrase length. Thus, we have the second type of input features. 
+		Cause: [(0, 0), (0, 80)]
+		Effect: [(1, 1), (1, 9)]
+
+	CASE: 4
+	Stag: 58 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We adapt and extend bidirectional phrase generative probabilities as the input features, which have been used for domain adaptation [ Foster et al.2010 ]. 
+		Cause: [(0, 9), (0, 22)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 5
+	Stag: 59 
+		Pattern: 0 [['according', 'to'], [',']]---- [[], ['&NP@C@'], ['&R']]
+		sentTXT: According to the background LMs, we estimate the bidirectional (source/target side) forward and backward phrase generative probabilities as. 
+		Cause: [(0, 2), (0, 4)]
+		Effect: [(0, 6), (0, 20)]
+
+	CASE: 6
+	Stag: 61 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: 2011), which successfully capture both the preceding and succeeding contexts of the current word, and we estimate the backward LM by inverting the order in each sentence in the training data from the original order to the reverse order background 4-gram LMs are trained by the corresponding side of bilingual corpus 2 2 This corpus is used to train the translation model in our experiments, and we will describe it in detail in section 5.1. 
+		Cause: [(0, 24), (0, 33)]
+		Effect: [(0, 34), (0, 77)]
+
+	CASE: 7
+	Stag: 63 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We consider bidirectional phrase frequency as the input features, and estimate them as. 
+		Cause: [(0, 6), (0, 13)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 8
+	Stag: 68 69 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We normalize bidirectional phrase length by the maximum phrase length, and introduce them as the last type of input features. In summary, except for the first type of phrase feature X 1 which is used by [ Maskey and Zhou2012 ] , we introduce another four types of effective phrase features X 2 , X 3 , X 4 and X 5. 
+		Cause: [(0, 15), (1, 41)]
+		Effect: [(0, 6), (0, 13)]
+
+Section 4:  4 Semi-Supervised Deep Auto-encoder Features Learning for SMT has 14 CE cases
+	CASE: 1
+	Stag: 83 84 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: After learning the first RBM, we treat the activation probabilities of its hidden units, when they are being driven by data, as the data for training a second RBM. Similarly, a n t u'\u2062' h RBM is built on the output of the n - 1 t u'\u2062' h one and so on until a sufficiently deep architecture is created. 
+		Cause: [(0, 25), (1, 38)]
+		Effect: [(0, 0), (0, 22)]
+
+	CASE: 2
+	Stag: 84 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Similarly, a n t u'\u2062' h RBM is built on the output of the n - 1 t u'\u2062' h one and so on until a sufficiently deep architecture is created. 
+		Cause: [(0, 0), (0, 29)]
+		Effect: [(0, 32), (0, 38)]
+
+	CASE: 3
+	Stag: 87 88 
+		Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: To deal with real-valued input features X in our task, we use an RBM with Gaussian visible units (GRBM) [ Dahl et al.2012 ] with a variance of 1 on each dimension. Hence, P ( v h ) and E u'\u2062' ( v , h ) in the first RBM of DBN need to be modified as. 
+		Cause: [(0, 0), (0, 35)]
+		Effect: [(1, 2), (1, 29)]
+
+	CASE: 4
+	Stag: 94 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: After the pre-training, for each phrase pair in the phrase table, we generate the DBN features [ Maskey and Zhou2012 ] by passing the original phrase features X through the DBN using forward computation. 
+		Cause: [(0, 24), (0, 35)]
+		Effect: [(0, 0), (0, 22)]
+
+	CASE: 5
+	Stag: 95 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: To learn a semi-supervised DAE, we first u'\u201c' unroll u'\u201d' the above n layer DBN by using its weight matrices to create a deep, 2n-1 layer network whose lower layers use the matrices to u'\u201c' encode u'\u201d' the input and whose upper layers use the matrices in reverse order to u'\u201c' decode u'\u201d' the input [ Hinton and Salakhutdinov2006 , Salakhutdinov and Hinton2009 , Deng et al.2010 ] , as shown in Figure 2. 
+		Cause: [(0, 25), (0, 28)]
+		Effect: [(0, 29), (0, 100)]
+
+	CASE: 6
+	Stag: 95 96 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: To learn a semi-supervised DAE, we first u'\u201c' unroll u'\u201d' the above n layer DBN by using its weight matrices to create a deep, 2n-1 layer network whose lower layers use the matrices to u'\u201c' encode u'\u201d' the input and whose upper layers use the matrices in reverse order to u'\u201c' decode u'\u201d' the input [ Hinton and Salakhutdinov2006 , Salakhutdinov and Hinton2009 , Deng et al.2010 ] , as shown in Figure 2. The layer-wise learning of DBN as above must be treated as a pre-training stage that finds a good region of the parameter space, which is used to initialize our DAE u'\u2019' s parameters. 
+		Cause: [(1, 6), (1, 23)]
+		Effect: [(0, 2), (1, 4)]
+
+	CASE: 7
+	Stag: 97 98 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Starting in this region, the DAE is then fine-tuned using average squared error (between the output and input) back-propagation to minimize reconstruction error, as to make its output as equal as possible to its input. For the fine-tuning of DAE, we use the method of conjugate gradients on larger mini-batches of 1000 cases, with three line searches performed for each mini-batch in each epoch. 
+		Cause: [(0, 28), (1, 30)]
+		Effect: [(0, 0), (0, 25)]
+
+	CASE: 8
+	Stag: 104 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: After the fine-tuning, for each phrase pair in the phrase table, we estimate our DAE features by passing the original phrase features X through the u'\u201c' encoder u'\u201d' part of the DAE using forward computation. 
+		Cause: [(0, 19), (0, 44)]
+		Effect: [(0, 0), (0, 17)]
+
+	CASE: 9
+	Stag: 107 108 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Then, we append these features for each phrase pair to the phrase table as extra features. Although DAE can learn more powerful and abstract feature representation, the learned features usually have smaller dimensionality compared with the dimensionality of the input features, such as the successful use for handwritten digits recognition [ Hinton and Salakhutdinov2006 , Hinton et al.2006 ] , information retrieval [ Salakhutdinov and Hinton2009 , Mirowski et al.2010 ] , and speech spectrograms [ Deng et al.2010 ]. 
+		Cause: [(0, 15), (1, 66)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 10
+	Stag: 109 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Moreover, although we have introduced another four types of phrase features ( X 2 , X 3 , X 4 and X 5 ), the only 16 features in X are a bottleneck for learning large hidden layers feature representation, because it has limited information, the performance of the high-dimensional DAE features which are directly learned from single DAE is not very satisfactory. 
+		Cause: [(0, 44), (0, 47)]
+		Effect: [(0, 49), (0, 66)]
+
+	CASE: 11
+	Stag: 110 111 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: To learn high-dimensional feature representation and to further improve the performance, we introduce a natural horizontal composition for DAEs that can be used to create large hidden layer representations simply by horizontally combining two (or more) DAEs [ Baldi2012 ] , as shown in Figure 3. Two single DAEs with architectures 16 / m 1 / 16 and 16 / m 2 / 16 can be trained and the hidden layers can be combined to yield an expanded hidden feature representation of size m 1 + m 2 , which can then be fed to the subsequent layers of the overall architecture. 
+		Cause: [(0, 45), (1, 42)]
+		Effect: [(0, 6), (0, 42)]
+
+	CASE: 12
+	Stag: 111 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Two single DAEs with architectures 16 / m 1 / 16 and 16 / m 2 / 16 can be trained and the hidden layers can be combined to yield an expanded hidden feature representation of size m 1 + m 2 , which can then be fed to the subsequent layers of the overall architecture. 
+		Cause: [(0, 0), (0, 36)]
+		Effect: [(0, 37), (0, 43)]
+
+	CASE: 13
+	Stag: 111 112 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: Two single DAEs with architectures 16 / m 1 / 16 and 16 / m 2 / 16 can be trained and the hidden layers can be combined to yield an expanded hidden feature representation of size m 1 + m 2 , which can then be fed to the subsequent layers of the overall architecture. Thus, these new m 1 + m 2 -dimensional DAE features are added as extra features to the phrase table. 
+		Cause: [(0, 0), (0, 55)]
+		Effect: [(1, 1), (1, 21)]
+
+	CASE: 14
+	Stag: 114 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: In our task, we introduce differences by using different initializations and different fractions of the phrase table. 
+		Cause: [(0, 8), (0, 17)]
+		Effect: [(0, 0), (0, 6)]
+
+Section 5:  5 Experiments and Results has 2 CE cases
+	CASE: 1
+	Stag: 172 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Although we have pre-trained the corresponding DBN, this DAE network is so deep, the fine-tuning does not work very well and typically finds poor local minima. 
+		Cause: [(0, 0), (0, 11)]
+		Effect: [(0, 13), (0, 26)]
+
+	CASE: 2
+	Stag: 173 
+		Pattern: 0 [[['lead', 'leads', 'led'], 'to']]---- [['&C', '(,/./;/--)', '&this', '(&adj)', '(&N)', '(&CAN/have/has/had)', '(&ADV)'], ['&NP@R@']]
+		sentTXT: We suspect this leads to the decreased performance. 
+		Cause: [(0, 0), (0, 1)]
+		Effect: [(0, 5), (0, 7)]
+
+Section 6:  6 Conclusions has 3 CE cases
+	CASE: 1
+	Stag: 174 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: In this paper, instead of designing new features based on intuition, linguistic knowledge and domain, we have learned new features using the DAE for the phrase-based translation model. 
+		Cause: [(0, 11), (0, 11)]
+		Effect: [(0, 13), (0, 30)]
+
+	CASE: 2
+	Stag: 175 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Using the unsupervised pre-trained DBN to initialize DAE u'\u2019' s parameters and using the input original phrase features as the u'\u201c' teacher u'\u201d' for semi-supervised back-propagation, our semi-supervised DAE features are more effective and stable than the unsupervised DBN features [ Maskey and Zhou2012 ]. 
+		Cause: [(0, 0), (0, 37)]
+		Effect: [(0, 39), (0, 57)]
+
+	CASE: 3
+	Stag: 176 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Moreover, to further improve the performance, we introduce some simple but effective features as the input features for feature learning. 
+		Cause: [(0, 16), (0, 21)]
+		Effect: [(0, 2), (0, 14)]
+
+#-------------------------------------------------
+

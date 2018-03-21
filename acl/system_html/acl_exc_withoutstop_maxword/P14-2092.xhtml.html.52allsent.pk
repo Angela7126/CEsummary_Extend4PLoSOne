@@ -1,0 +1,56 @@
+(lp0
+VWe chose the default feature set of the NiuTrans.Phrase engine for building the baseline, including phrase translation probabilities, lexical weights, a 5-gram language model, word and phrase bonuses, a ME-based lexicalized reordering model
+p1
+aVCurrent Statistical Machine Translation (SMT) approaches model the translation problem as a process of generating a derivation of atomic translation units, assuming that every unit is drawn out of the same model
+p2
+aVHere we choose a simple and straightforward method a skeleton is obtained by dropping all unimportant words in the original sentence, while preserving the grammaticality
+p3
+aVHowever, using different skeleton identification results for training and inference (row 3) does not show big improvements due to the data inconsistency problem
+p4
+aVFor comparison, we also manually annotated the MT development and test data with skeleton information according to the annotation standard provided within NEUCSS
+p5
+aVIn contrast, we define sentence skeleton as the key segments of a sentence and develop a new MT approach based on this information
+p6
+aVAs is standard in SMT, we further assume that 1) the translation process can be decomposed into a derivation of phrase-pairs (for phrase-based models) or translation rules (for syntax-based models); 2) and a linear function g u'\u005cu2062' ( u'\u005cu22c5' ) is used to assign a model score to each derivation
+p7
+aVWe used the NEU Chinese sentence simplification (NEUCSS) corpus as our training data [ Zhang et al.2013 ]
+p8
+aVSome of them developed syntax-based models on complete syntactic trees with Treebank annotations [ Liu et al.2006 , Huang et al.2006 , Zhang et al.2008 ] , and others used source-language syntax as soft constraints [ Marton and Resnik2008 , Chiang2010 ]
+p9
+aVFor our skeletal language model, we trained a 5-gram language model on the target-side of the bilingual data by generalizing non-skeleton segments to Xs
+p10
+aVFirst, as the skeleton is a well-formed (but simple) sentence, all current MT approaches are applicable to the skeleton translation problem
+p11
+aVHowever, these approaches suffer from the same problem as the phrase-based counterpart and use the single global model to handle different translation units, no matter they are from the skeleton of the input tree/sentence or other not-so-important sub-structures
+p12
+aVWe used the newswire portion of the NIST MT06 evaluation data as our development set, and used the evaluation data of MT04 and MT05 as our test sets
+p13
+aVE.g., one may introduce syntactic features into g s u'\u005cu2062' k u'\u005cu2062' e u'\u005cu2062' l u'\u005cu2062' ( d ) due to their good ability in capturing structural information; and employ a standard phrase-based model for g f u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' l u'\u005cu2062' ( d ) in which not all segments of the sentence need to respect syntactic constraints
+p14
+aVThis model makes the skeleton translation and full translation much simpler because they perform in the same way of string translation in phrase-based MT
+p15
+aVThe simplest of these is the phrase-based approach [ Och et al.1999 , Koehn et al.2003 ] which employs a global model to process any sub-strings of the input sentence
+p16
+aVFurther, we regarded skeleton-consistent derivations as an indicator feature and introduced it into the baseline system
+p17
+aVThen we define skeleton-based translation as a task of searching for the best target string t ^ given the source string and its skeleton u'\u005cu03a4'
+p18
+aVThere are some previous studies on the use of sentence skeleton or related information in MT [ Mellebeek et al.2006a , Mellebeek et al.2006b , Owczarzak et al.2006 ]
+p19
+aVA derivation d is skeleton-consistent if no phrases in d cross skeleton boundaries (e.g.,, a phrase where two of the source words are in the skeleton and one is outside
+p20
+aVDue to the lack of space, we do not go deep into this problem
+p21
+aVSeen from row s-feat., this feature does not show promising improvements
+p22
+aVObviously the skeleton used in this work can be viewed as a simplified sentence
+p23
+aVThese results indicate that the real improvements are due to the skeleton-based model/features used in this work, rather than the u'\u005cu201d' well-formed u'\u005cu201d' derivations
+p24
+aVThe motivations of defining the problem in this way are two-fold
+p25
+aVThus the problem is in principle the same as sentence simplification/compression
+p26
+aVThen, we can simply define g s u'\u005cu2062' k u'\u005cu2062' e u'\u005cu2062' l u'\u005cu2062' ( d ) and g f u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' l u'\u005cu2062' ( d ) as the model scores of d u'\u005cu03a4' and d
+p27
+a.

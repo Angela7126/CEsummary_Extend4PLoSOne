@@ -1,0 +1,210 @@
+(lp0
+VIt could be that the distinctions between lexical items that embeddings capture are already modeled by parsers in other ways and therefore provide no further benefit
+p1
+aVWord embeddings u'\u005cu2014' representations of lexical items as points in a real vector space u'\u005cu2014' have a long history in natural language processing, going back at least as far as work on latent semantic analysis (LSA) for information retrieval [ 4 ]
+p2
+aVAs described above, the full featured model adds indicator features on the bucketed value of each dimension of the word embedding
+p3
+aVWhile word embeddings can be constructed directly from surface distributional statistics, as in LSA, more sophisticated tools for unsupervised extraction of word representations have recently gained popularity [ 3 , 10 ]
+p4
+aVSemi-supervised and unsupervised models for a variety of core NLP tasks, including named-entity recognition [ 5 ] , part-of-speech tagging [ 13 ] , and chunking [ 15 ] have been shown to benefit from the inclusion of word embeddings as features
+p5
+aVHere, the trend observed in the other two models is even more prominent u'\u005cu2014' embedding features lead to improvements over the featured baseline, but in no case outperform the standard baseline with a generative lexicon
+p6
+aVA baseline featured model ( u'\u005cu201c' ident u'\u005cu201d' ) contains only indicator features on word identity (and performs considerably worse than its generative counterpart on small data sets
+p7
+aVIn this paper, we investigate this question empirically, by isolating three potential mechanisms for improvement from pre-trained word embeddings
+p8
+aVThis paper investigates a variety of ways in which word embeddings might augment a constituency parser with a discrete state space
+p9
+aVWe use the Maryland implementation of the Berkeley parser as our baseline for the kernel-smoothed lexicon, and the Maryland featured parser as our baseline for the embedding-featured lexicon
+p10
+aVApparent gains from the OOV and lexicon pooling models remain so small as to be statistically indistinguishable
+p11
+aVWord embeddings are useful for handling out-of-vocabulary words, because they automatically ensure that unknown words are treated the same way as known words with similar representations
+p12
+aVWord embeddings are useful for handling in-vocabulary words, by making it possible to pool statistics for related words
+p13
+aVIn the other direction, access to a syntactic parse has been shown to be useful for constructing word embeddings for phrases compositionally [ 7 , 1 ]
+p14
+aVTo evaluate the embedding structure hypothesis, we take the Maryland featured parser, and replace the set of lexical template features used by that parser with a set of indicator features on a discretized version of the embedding
+p15
+aVWe begin by investigating the OOV model
+p16
+aVWe take the best-performing combination of all of these models (based on development experiments, a combination of the lexical pooling model with u'\u005cu0392' = 0.3 , and OOV, both using c w word embeddings), and evaluate this on the WSJ test set (Table 2
+p17
+aVAs can be seen, this model alone achieves small gains over the baseline for a 300-word training corpus, but these gains become statistically insignificant with more training data
+p18
+aVThis ensures that our model continues to include the original Berkeley parser model as a limiting case
+p19
+aVA parser which exploited this effect could use this to acquire a robust model of name behavior by sharing statistics from all first names together, preventing low counts from producing noisy models of names
+p20
+aVIf we want to encourage similarly-embedded words to exhibit similar behavior in the generative model, we need to ensure that the are preferentially mapped onto the same latent preterminal tag
+p21
+aVThe first block in Table 1 shows the best settings of u'\u005cu0392' for each corpus size; as can be seen, this also gives a small improvement on the 300-sentence training corpus, but no discernible once the system has access to a few thousand labeled sentences
+p22
+aVEach u'\u005cu0391' t , w is learned in the same way as its corresponding probability in the original parser model u'\u005cu2014' during each M step of the training procedure, u'\u005cu0391' w , t is set to the expected number of times the word w appears under the refined tag t
+p23
+aVAs in the OOV model, we also need to worry about how to handle words for which we have no vector representation
+p24
+aVIn these cases, we simply treat the words as if their vectors were so far away from everything else they had no influence, and report their weights as p ( w t ) = u'\u005cu0391' w
+p25
+aVAs u'\u005cu0392' grows large words become more independent (and in the limit where u'\u005cu0392' = u'\u005cu221e' , each summand in Equation 1 is zero except where w u'\u005cu2032' = w , and we recover the original direct-lookup model
+p26
+aVThe extensions we propose are certainly not the only way to target the hypotheses described above, but they have the advantage of being minimal and straightforwardly interpretable, and each can be reasonably expected to improve parser performance if its corresponding hypothesis is true
+p27
+aVEmpirically, taking k = 20 gives adequate performance, and increasing it does not seem to alter the behavior of the parser
+p28
+aVWe began by searching over exponentially-spaced values of u'\u005cu0392' to determine an optimal setting for each training set size; as expected, for small settings of u'\u005cu0392' (corresponding to aggressive smoothing) performance decreased; as we increased the parameter, performance increased slightly before tapering off to baseline parser performance
+p29
+aVIntuitively, as u'\u005cu0392' grows small groups of related words will be assigned increasingly similar probabilities of being generated from the same tag (in the limit where u'\u005cu0392' = 0 , Equation 1 is a uniform distribution over the entire vocabulary
+p30
+aVPer-corpus-size settings of the parameter u'\u005cu0392' are set by searching over several possible settings on the development set
+p31
+aVOur first task is thus to design a set of orthogonal experiments which make it possible to test each of the three hypotheses in isolation
+p32
+aVThus we have two questions
+p33
+aVBut we don u'\u005cu2019' t know how prevalent or important such u'\u005cu201c' syntactic axes u'\u005cu201d' are in practice
+p34
+aVDependency parsers have seen gains from distributional statistics in the form of discrete word clusters [ 9 ] , and recent work [ 2 ] suggests that similar gains can be derived from embeddings like the ones used in this paper
+p35
+aVFor OOV words which are not in the dictionary of embeddings, we back off to the unknown word model for the underlying parser
+p36
+aVThe Maryland parser builds on the state-splitting parser, replacing its basic word emission model with a feature-rich, log-linear representation of the lexicon
+p37
+aVIn order to isolate the contribution from word embeddings, it is useful to demonstrate improvement over a parser that already achieves state-of-the-art performance without vector representations
+p38
+aVIn order to focus specifically on the effect of word embeddings, we remove the morphological features from the parser, but retain indicators on the identity of each lexical item
+p39
+aVTo evaluate the vocabulary expansion hypothesis, we introduce a simple but targeted out-of-vocabulary (OOV) model in which every unknown word is simply replaced by its nearest neighbor in the training set
+p40
+aVWith extremely limited training data, parser extensions using word embeddings give modest improvements in accuracy (relative error reduction on the order of 1.5%
+p41
+aVThe Berkeley lexicon stores, for each latent (tag, word) pair, the probability p ( w t ) directly in a lookup table
+p42
+aVLast we consider a model with a featured lexicon, as described in Huang and Harper ( 2011
+p43
+aVNext we consider the lexicon pooling model
+p44
+aVWe hypothesize that dependency parsers benefit from the introduction of features (like clusters and embeddings) that provide syntactic abstractions; but that constituency parsers already have access to such abstractions in the form of supervised preterminal tags
+p45
+aVIt seems clear that word embeddings exhibit some syntactic structure
+p46
+aVFor the experiments in this paper, we will use the Berkeley parser [ 12 ] and the related Maryland parser [ 8 ]
+p47
+aVHowever, with reasonably-sized training corpora, performance does not improve even when a wide variety of embedding methods, parser modifications, and parameter settings are considered
+p48
+aVThe fact that word embedding features result in nontrivial gains for discriminative dependency parsing [ 2 ] , but do not appear to be effective for constituency parsing, points to an interesting structural difference between the two tasks
+p49
+aVWe are interested in the question of whether a state-of-the-art discrete-variable constituency parser can be improved with word embeddings, and, more precisely, what aspect (or aspects) of the parser can be altered to make effective use of embeddings
+p50
+aVThe structure of the space used for the embeddings directly encodes syntactic information in its coordinate axes
+p51
+aVWe observe very small (but statistically significant) gains with 300 and 3000 train sentences, but a decrease in performance on the full corpus
+p52
+aVThere certainly exist competitive parsers that internally represent lexical items as real-valued vectors, such as the neural network-based parser of Henderson ( 2004 ) , and even parsers which use pre-trained word embeddings to represent the lexicon, such as Socher et al
+p53
+aVHow much data is needed to learn them without word embeddings
+p54
+aVBut its distributional representation is very close to the known word hello , and a model capable of mapping hey to its neighbor should be able to assign the right tag
+p55
+aVLuckily, the exponential decay of the kernel ensures that each word shares most of its weight with a small number of close neighbors, and almost none with words farther away
+p56
+aVThe fundamental question we want to explore is whether embeddings provide any information beyond what a conventional parser is able to induce from labeled parse trees
+p57
+aVEmbedding structure hypothesis
+p58
+aVIn these parsers, however, use of word vectors is a structural choice, rather than an added feature, and it is difficult to disentangle whether vector-space lexicons are actually more powerful than their discrete analogs u'\u005cu2014' perhaps the performance of neural network parsers comes entirely from the model u'\u005cu2019' s extra-lexical syntactic structure
+p59
+aVwith Z a normalizing constant to ensure that p ( u'\u005cu22c5' t ) sums to one over the entire vocabulary u'\u005cu03a6' u'\u005cu2062' ( w ) is the vector representation of the word w , u'\u005cu0391' t , w are per-basis weights, and u'\u005cu0392' is an inverse radius parameter which determines the strength of the smoothing
+p60
+aVSecond, and more importantly, the fact that they use no continuous state representations internally makes it easy to design experiments that isolate the contributions of word vectors, without worrying about effects from real-valued operators higher up in the model
+p61
+aVUpon encountering the unknown word hey , the parser assigns a low posterior probability of having been generated from UH
+p62
+aVTo investigate the possibility that improvements from embeddings are exceptionally difficult to achieve on the Wall Street Journal corpus, or on English generally, we perform (1) a domain adaptation experiment, in which we use the OOV and lexicon pooling models to train on WSJ and test on the first 4000 sentences of the Brown corpus (the u'\u005cu201c' WSJ u'\u005cu2192' Brown u'\u005cu201d' column in Table 3 ), and (2) a multilingual experiment, in which we train and test on the French treebank (the u'\u005cu201c' French u'\u005cu201d' column
+p63
+aVExample individual first names are also rare in the treebank, but tend to cluster together in distributional representations
+p64
+aV1 1 Both downloaded from https://code.google.com/p/umd-featured-parser/ For all experiments, we use 50-dimensional word embeddings
+p65
+aVFirst, these parsers are among the best in the literature, with a test performance of 90.7 F 1 for the baseline Berkeley parser on the Wall Street Journal corpus (compared to 90.4 for Socher et al
+p66
+aVTo exploit this, we pre-compute the k -nearest-neighbor graph of points in the embedding space, and take the sum in Equation 1 only over this set of nearest neighbors
+p67
+aVIt has been less clear how (and indeed whether) word embeddings in and of themselves are useful for constituency parsing
+p68
+aVFor each dimension i , we create an indicator feature corresponding to the linearly-bucketed value of the feature at that index
+p69
+aVThese are precisely the kinds of distinctions between determiners that state-splitting in the Berkeley parser has shown to be useful [ 12 ] , and existing work [ 11 ] has observed that such regular embedding structure extends to many other parts of speech
+p70
+aVThis allows the parser to distinguish between words which share the same tag but exhibit very different syntactic behavior u'\u005cu2014' for example, between articles and demonstrative pronouns
+p71
+aVThere are computational concerns associated with this approach the original scoring procedure for a (word, tag) pair was a single (constant-time) lookup; here it might take time linear in the size of the vocabulary
+p72
+aVAre such groupings (learned on large data sets but from less syntactically rich models) better than the ones the parser finds on its own
+p73
+aVTo evaluate the statistic sharing hypothesis, we propose a novel smoothing technique
+p74
+aVWe consider three general hypotheses about how embeddings might interact with a parser
+p75
+aVConsider Figure 1 , which shows embeddings for a variety of English determiners, projected onto their first two principal components
+p76
+aVFor each training corpus size we also choose a different setting of the number of splitting iterations over which the Berkeley parser is run; for 300 sentences this is two splits, and for 3000 four splits
+p77
+aVWe prepare three training sets the complete training set of 39,832 sentences from the treebank (sections 2 through 21), a smaller training set, consisting of the first 3000 sentences, and an even smaller set of the first 300
+p78
+aVVarious model-specific experiments are shown in Table 1
+p79
+aV2011 ) ; embeddings labeled cbow are from Mikolov et al
+p80
+aVEmbeddings labeled c w are from Collobert et al
+p81
+aVStatistic sharing hypothesis
+p82
+aVThis behavior is almost completely insensitive to the choice of embedding
+p83
+aVThe Berkeley parser induces a latent, state-split PCFG in which each symbol V of the (observed) X-bar grammar is refined into a set of more specific symbols { V 1 , V 2 , u'\u005cu2026' } which capture more detailed grammatical behavior
+p84
+aVWe would expect a feature corresponding to a word u'\u005cu2019' s position along this axis to be a useful feature in a feature-based lexicon
+p85
+aVConsistent with the existing literature, we stop at six splits when using the full training corpus
+p86
+aVVocabulary expansion hypothesis
+p87
+aVIn order to do this, we replace this direct lookup with a smoothed, kernelized lexicon, where
+p88
+aVNote that these hypotheses are not all mutually exclusive, and two or all of them might provide independent gains
+p89
+aVExample with the exception of a , the vertical axis in Figure 1 seems to group words by definiteness
+p90
+aVThis is necessary to avoid overfitting on smaller training sets
+p91
+aVThe choice of this parser family has two motivations
+p92
+aVWe consider the following extensions
+p93
+aVIt is also possible that other mechanisms are at play that are not covered by these three hypotheses, but we consider these three to be likely central effects
+p94
+aVExample the infrequently-occurring treebank tag UH dominates greetings (among other interjections
+p95
+aV2013a ) , trained with a context window of size 2
+p96
+aVThis work was partially supported by BBN under DARPA contract HR0011-12-C-0014
+p97
+aVExperiments are conducted on the Wall Street Journal portion of the English Penn Treebank
+p98
+aVOur result is mostly negative
+p99
+aVThis causes parsing to become unacceptably slow, so an approximation is necessary
+p100
+aVWe can see that the quantifiers each and every cluster together, as do few and most
+p101
+aVThe first author is supported by a National Science Foundation Graduate Research Fellowship
+p102
+aV2013 ) and 90.1 for Henderson ( 2004 )
+p103
+aV2013
+p104
+a.

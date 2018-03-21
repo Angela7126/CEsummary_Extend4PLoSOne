@@ -1,0 +1,458 @@
+(lp0
+VGuided by studies in second language development, we design a measure of syntactic complexity that captures patterns indicative of proficient and non-proficient grammatical structures by a shallow-analysis of spoken language, as opposed to a deep syntactic analysis, and analyze the performance of the automatic scoring model with its inclusion
+p1
+aVNot surprisingly, Chen and Zechner ( 2011 ) studied measures of grammatical complexity via syntactic parsing and found that a Pearson u'\u005cu2019' s correlation coefficient of 0.49 between syntactic complexity measures (derived from manual transcriptions) and proficiency scores, was drastically reduced to near non-existence when the measures were applied to ASR word hypotheses
+p2
+aVThese high error rates at the recognition stage negatively affect the subsequent stages of the speech scoring system in general, and in particular, during a deep syntactic analysis, which operates on a long sequence of words as its context
+p3
+aVBased on this idea, Yoon and Bhat ( 2012 ) developed a set of features of syntactic complexity based on POS sequences extracted from a large corpus of ESL learners u'\u005cu2019' spoken responses, grouped by human-assigned scores of proficiency level
+p4
+aVChen and Zechner ( 2011 ) found that while using measures of syntactic complexity obtained from transcriptions, errors in ASR transcripts caused over 0.40 drop in correlation from that found with manual transcriptions 5 5 Due to differences in the dataset and ASR system, a direct comparison between the current study and the cited prior study was not possible
+p5
+aVSimilarly, Scarborough ( 1990 ) proposed the Index of Productive Syntax (IPSyn), according to which, the presence of particular grammatical structures, from a list of 60 structures (ranging from simple ones such as including only subjects and verbs, to more complex constructions such as conjoined sentences) is evidence of language acquisition milestones
+p6
+aVA distinguishing feature of the current study is that the measure is based on a comparison of characteristics of the test response to models trained on large amounts of data from each score point, as opposed to measures that are simply characteristics of the responses themselves (which is how measures have been considered in prior studies
+p7
+aVHowever, due to substantial amount of speech recognition errors in our data, the POS error rate (resulting from the combined errors of ASR and automated POS tagger) is expected to be higher
+p8
+aVIn order to avoid the problems encountered with deep analysis-based measures, Yoon and Bhat ( 2012 ) explored a shallow analysis-based approach, based on the assumption that the level of grammar sophistication at each proficiency level is reflected in the distribution of part-of-speech (POS) tag bigrams
+p9
+aVWe observe that the proposed approach elegantly and effectively captures this presence-based criterion of grammatical development, since the feature indicative of presence or absence of a grammatical structure is optimal from an algorithmic point of view
+p10
+aVLength-based measures do not meet the constraints of the design, that, in order for measures to be effectively incorporated in the automated speech scoring system, they must be generated in a fully automated manner, via a multi-stage automated process that includes speech recognition, part of speech (POS) tagging, and parsing
+p11
+aVInformed by studies in second language acquisition and language testing that regard these factors as key determiners of spoken language proficiency, some researchers have focused on the objective measurement of these aspects of spoken language in the context of automatic assessment of language ability
+p12
+aV1998 ) , Ortega ( 2003 ) , and Lu ( 2010 ) found that measures such as mean length of T-unit 2 2 T-units are defined as u'\u005cu201c' the shortest grammatically allowable sentences into which writing can be split u'\u005cu201d' [ 16 ] and dependent clauses per clause (henceforth termed as length-based measures) are well correlated with holistic proficiency scores suggesting that these quantitative measures can be used as objective indices of grammatical development
+p13
+aVFluency and pronunciation may, by themselves, already be good indicators of proficiency in non-native speakers, but from a construct validity perspective 1 1 Construct validity is the degree to which a test measures what it claims, or purports, to be measuring and an important criterion in the development and use of assessments or tests it is necessary that an automatic assessment model measure higher-order aspects of language proficiency
+p14
+aVInstead of focusing on grammatical errors that are found to be highly representative of language proficiency, our interest is in capturing the range of forms that surface in language production and the degree of sophistication of such forms, collectively referred to as syntactic complexity in [ 24 ]
+p15
+aVThe relative success of these studies has yielded objective measures of acoustic aspects of speaking ability, resulting in a shift in focus to more complex aspects of assessment of grammar [ 2 , 5 , 6 ] , topic development [ 36 ] , and coherence [ 32 ]
+p16
+aVSince a preliminary analysis of the effect of varying the feature (binary or frequency) revealed that the binary-valued feature was optimal (in terms of yielding the best agreement between human and machine scores), we only report our results for this case
+p17
+aVSubsequently, the feature extraction stage (a VSM or a MaxEnt model as the case may be) generates the syntactic complexity feature which is then incorporated in a multiple linear regression model to generate a score
+p18
+aVThe D-Level Scale categorizes grammatical development into 8 levels according to the presence of a set of diverse grammatical expressions varying in difficulty (for example, level 0 consists of simple sentences, while level 5 consists of sentences joined by a subordinating conjunction
+p19
+aVPrior studies in language acquisition and second language research have conclusively shown that proficiency in a second language is characterized by several factors, some of which are, fluency in language production, pronunciation accuracy, choice of vocabulary, grammatical sophistication and accuracy
+p20
+aVIn an effort to assess grammar and usage in a second language learning environment, numerous studies have focused on identifying relevant quantitative measures
+p21
+aVThe productive feature engineering aspects of incorporating features into the discriminative MaxEnt classifier motivate the model choice for the problem at hand
+p22
+aVIn particular, the ability of the MaxEnt model u'\u005cu2019' s estimation routine to handle overlapping (correlated) features makes it directly applicable to address the first limitation of the VSM model
+p23
+aVWe show that the measure of syntactic complexity derived from a shallow-analysis of spoken utterances satisfies the design constraint of high discriminative ability between proficiency levels
+p24
+aVSeeking to study the robustness of the measures derived using a shallow analysis, we next compare the two measures studied here, with respect to the impact of speech recognition errors on their correlation with scores of syntactic complexity
+p25
+aVThe design of automated scoring systems for non-native speaker speaking proficiency is guided by these studies in the choice of pertinent objective measures of these key aspects of language proficiency
+p26
+aVThe training and test sets used in this study had similar underlying distributions u'\u005cu2013' they both sought unconstrained responses to a set of items with some minor differences in item type
+p27
+aVIn its state-of-the-art set-up, the following model uses the features u'\u005cu2013' HMM acoustic model score (global normalized), speaking rate, word types per second, average chunk length in words and language model score (global normalized
+p28
+aVSpeaking in a non-native language requires diverse abilities, including fluency, pronunciation, intonation, grammar, vocabulary, and discourse
+p29
+aVStudies in native language acquisition, have considered multiple grammatical developmental indices that represent the grammatical levels reached at various stages of language acquisition
+p30
+aVTaking an approach different from previous studies, we formulate the task of assigning a score of syntactic complexity to a spoken response as a classification problem given a spoken response, assign the response to a proficiency class
+p31
+aVHuman raters u'\u005cu2019' extent of agreement in the subjective task of rating responses for language proficiency constrains the extent to which we can expect a machine u'\u005cu2019' s score to agree with that of humans
+p32
+aVAn estimate of the extent to which human raters agree on the subjective task of proficiency assessment, is obtained by two raters scoring approximately 5% of data (2,388 responses from ASR set and 140 responses from SM set
+p33
+aVThe measures could only broadly discriminate between students u'\u005cu2019' proficiency levels, rated on a scale with moderate to weak correlations, and strong data dependencies on the participant groups were observed [ 14 , 17 , 18 ]
+p34
+aVAs in prior studies, here too the level of agreement is evaluated by means of the weighted kappa measure as well as unrounded and rounded Pearson u'\u005cu2019' s correlations between machine and human scores (since the output of the regression model can either be rounded or regarded as is
+p35
+aVIn addition, an intuitive justification for the choice is that the score-4 vector is a grammatical u'\u005cu201c' norm u'\u005cu201d' representing the average grammar usage distribution of the most proficient ESL students
+p36
+aVAccordingly, we will summarize the previously studied model, outline its limitations, show how our proposed measure addresses those limitations and compare the two measures for the task of automatic scoring of speech
+p37
+aVThe second limitation, related to the ineffective weighting of terms via the the t u'\u005cu2062' f - i u'\u005cu2062' d u'\u005cu2062' f scheme, seems to be addressed by the fact that the MaxEnt model assigns a weight to each feature (in our case, POS bigrams) on a per-class basis (in our case, score group), by taking every instance into consideration
+p38
+aVThe assessment consisted of questions to which speakers were prompted to provide spontaneous spoken responses lasting approximately 45-60 seconds per question
+p39
+aVIn addition, including our proposed measure of syntactic complexity in an automatic scoring model results in a statistically significant performance gain over the state-of-the-art
+p40
+aVFor instance, Chen and Zechner ( 2011 ) reported a 50.5% word error rate (WER) and Yoon and Bhat ( 2012 ) reported a 30% WER in the recognition of ESL students u'\u005cu2019' spoken responses
+p41
+aVAlthough the skewed distribution limits the number of score-specific instances for the highest and lowest scores available for model training, we used the data without modifying the distribution since it is representative of responses in a large-scale language assessment scenario
+p42
+aVThe syntactic complexity of a test spoken response was estimated based on its similarity to the proficiency groups in the reference corpus with respect to the score-specific constructions
+p43
+aVIn the area of text-genre classification, POS tag distributions have been found to capture genre differences in text [ 11 , 21 ] ; in a language testing context, it has been used in grammatical error detection and essay scoring [ 7 , 31 ]
+p44
+aVWith the recent interest in the area of automatic assessment of speech, there is a concurrent need to assess the grammatical development of ESL students automatically
+p45
+aVOur current work is inspired by the shallow analysis-based approach of Yoon and Bhat ( 2012 ) and operates under the same assumptions of capturing the range and sophistication of grammatical constructions at each score level
+p46
+aVA classifier is trained in an inductive fashion, using a large corpus of learner responses that is divided into proficiency scores as the training data and then used to test data that is similar to the training data
+p47
+aVThe state-of-the art automated scoring system for spontaneous speech [ 38 , 15 ] currently uses measures of fluency and pronunciation (acoustic aspects) to produce scores that are in reasonable agreement with human-rated scores of proficiency
+p48
+aVComparing the unrounded correlation results in Table 3 we notice that the model Base+mescore shows the highest correlation of predicted scores with human scores
+p49
+aVThe idea that the level of syntactic complexity (in terms of its range and sophistication) can be assessed based on the distribution of POS-tags is informed by prior studies in second language acquisition
+p50
+aVIn the case of MaxEnt, the observation that binary-valued features (presence/absence of POS bigrams) yield better performance than features indicative of the occurrence frequency of the bigram has interesting implications
+p51
+aVIn addition, studies such as Foster and Skehan ( 1996 ) have successfully explored the utility of frequency of grammatical errors as objective measures of grammatical development
+p52
+aVThe steps for automatic assessment of overall proficiency follow an analogous process (either including the POS tagger or not), depending on the objective measure being evaluated
+p53
+aVAdditionally, we compare the performance of an automatic scoring model of overall proficiency that includes the measures of syntactic complexity from each of the two models being compared and analyze the gains with respect to the state-of-the-art
+p54
+aVDespite the functional differences between the indices, there is a fundamental operational similarity - that they both use the presence or absence of grammatical structures, rather than their occurrence count, as evidence of acquisition of certain grammatical levels
+p55
+aVA small portion of the available data with inadequate audio quality and lack of student response was excluded from the study
+p56
+aVThe assumption that a presence-based view of grammatical level acquisition is also applicable to second language assessment helps validate our observation that binary-valued features yield a better performance when compared with frequency-valued features
+p57
+aVA critical impediment to the robustness constraint in the state-of-the-art is the multi-stage automated process, where errors in the speech recognition stage (the very first stage) affect subsequent stages
+p58
+aVThis suggests that measures that rely on deep syntactic analysis are unreliable in current ASR-based scoring systems for spontaneous speech
+p59
+aVIn a shallow-analysis approach to measuring syntactic complexity, we rely on the distribution of POS bigrams at every proficiency level to be representative of the range and sophistication of grammatical constructions at that level
+p60
+aVAutomatic recognition of non-native speakers u'\u005cu2019' spontaneous speech is a challenging task as evidenced by the error rate of the state-of-the-art speech recognizer
+p61
+aVWe sought to verify empirically that the MaxEnt model really outperforms the VSM in the case of correlated POS bigrams
+p62
+aVThe focus of this study is the design and performance analysis of a measure of the syntactic complexity of non-native English responses for use in automatic scoring systems
+p63
+aVA major bottleneck in the multi-stage process of an automated speech scoring system for second language is the stage of automated speech recognition (ASR
+p64
+aVAs a result, measures of grammatical complexity that are closely tied to a correct syntactic analysis are rendered unreliable
+p65
+aVThus, the inclusion of the MaxEnt-based measure of syntactic complexity results in improved agreement between machine and human scores compared to the state-of-the-art model (here, Base
+p66
+aVThe tagger achieved a tagging accuracy of 96.3% on a Switchboard evaluation set composed of 379K words, suggesting high accuracy of the tagger
+p67
+aVThe result is a new measure based on POS bigrams to assess ESL learners u'\u005cu2019' mastery of syntactic complexity
+p68
+aVTest takers read and/or listened to stimulus materials and then responded to questions based on the stimuli
+p69
+aVIn an ideal situation, we would have compared machine score with scores of grammatical skill assigned by human raters
+p70
+aVThe measures of syntactic complexity in this approach are POS bigrams and are not obtained by a deep analysis (syntactic parsing) of the structure of the sentence
+p71
+aVWe considered binary-valued features (whether a POS bigram occurred or not), occurrence frequency, and relative frequency as input for the purpose of experimentation
+p72
+aVThe results reported are averaged over a 5-fold cross validation of the multiple regression model, where 80% of the SM data set is used to train the model and the evaluation is done using 20% of the data in every fold
+p73
+aVA gender independent triphone acoustic model and combination of bigram, trigram, and four-gram language models were used
+p74
+aVThe study found that the measures showed reasonable discriminative ability across proficiency levels
+p75
+aVGrammatical expressions that occur frequently in one score level but rarely in other levels can be assumed to be characteristic of a specific score level
+p76
+aVThis comparison suggests that the current POS-based shallow analysis approach is more robust to ASR errors compared to a syntactic analysis-based approach
+p77
+aVThese representative constructions are gathered from a collection of ESL learners u'\u005cu2019' spoken responses rated for overall proficiency
+p78
+aVThe idea of capturing differences in POS tag distributions for classification has been explored in several previous studies
+p79
+aVA criterion for evaluating the performance of the scoring model is the extent to which the automatic scores of overall proficiency agree with the human scores
+p80
+aVIt has been shown that the usage of certain grammatical constructions (such as that of the embedded relative clause in the second sentence above) are indicators of specific milestones in grammar development [ 8 ]
+p81
+aVThen, regarding POS bigrams as terms, they construct POS-based vector space models for each score-class (there are four score classes denoting levels of proficiency as will be explained in Section 5.2 ), thus yielding four score-specific vector-space models (VSMs
+p82
+aVThe choice and design of objective measures of language proficiency is governed by two crucial constraints
+p83
+aVAssessment of a speaker u'\u005cu2019' s proficiency in a second language is the main task in the domain of automatic evaluation of spontaneous speech [ 38 ]
+p84
+aVValidity a measure should show high discriminative ability between various levels of language proficiency, and the scores produced by the use of this measure should show high agreement with human-assigned scores
+p85
+aVA combination of 36 tags from the Penn Treebank tag set and 6 tags generated for spoken languages were used in the tagger
+p86
+aVIn the domain of native language acquisition, the presence or absence of a grammatical structure indicates grammatical development
+p87
+aVWhen using t u'\u005cu2062' f - i u'\u005cu2062' d u'\u005cu2062' f weighting to extract words that were strongly associated with positive sentiment in a movie review corpus (they considered each review as a document and a word as a term), it was found that a substantial proportion of words with the highest t u'\u005cu2062' f - i u'\u005cu2062' d u'\u005cu2062' f were rare words (e.g.,, proper nouns) which were not directly associated with the sentiment
+p88
+aVHowever, the performance drop (around 0.05) resulting from a shallow analysis is relatively small compared to the drop observed while employing a deep syntactic analysis
+p89
+aVLooking ahead, an important question is the extent to which our measure is sensitive to a mismatch between training and test data
+p90
+aVStudies that explored the applicability of length-based measures in an automated scoring system [ 6 , 5 ] observed another important drawback of these measures in that setting
+p91
+aVThe main assumption was that each score level is characterized by different types of prominent grammatical structures
+p92
+aVTo illustrate this, consider a scenario where the classifier assigns two responses A and B to score level 2 (based on the maximum a posteriori condition
+p93
+aVThese measures have been used to estimate proficiency levels in English as a second language (ESL) writing with reasonable success
+p94
+aVThe classifier was trained using the LBFGS algorithm for parameter estimation and used equal-scale gaussian priors for smoothing
+p95
+aVAt first glance, the use of the presence/absence of grammatical structures may raise concerns about a potential loss of information (e.g., the distinction between an expression that is used once and another that is used multiple times is lost
+p96
+aVThe ASR data set was used to train the MaxEnt classifier and the features generated from the SM data set were used for evaluation
+p97
+aVEach response was rated for overall proficiency by trained human scorers using a 4-point scoring scale, where 1 indicates low speaking proficiency and 4 indicated high speaking proficiency
+p98
+aVAn HMM recognizer was trained using ASR set (approximately 733 hours of non-native speech collected from 7,872 speakers
+p99
+aVHere we outline the multiple stages involved in the automatic syntactic complexity assessment
+p100
+aVA pattern that occurs rarely but uniformly across different score groups can get the same weight as a pattern which is unevenly distributed to one score group
+p101
+aVDespite its encouraging empirical performance, the VSM method of capturing grammatical sophistication has the following limitations
+p102
+aVThe various objective measures are then combined in the multiple regression scoring model to generate an overall score of proficiency
+p103
+aVThis permits us to better represent the score assigned by the MaxEnt classifier as a relative preference over score assignments
+p104
+aVThe intuition behind the approach is that responses in the same proficiency level often share similar grammar and usage patterns
+p105
+aVWe propose to address these important limitations of the VSM approach by the use of a method that accounts for each of the deficiencies
+p106
+aVThe proposed measure, derived through a completely automated process, satisfies the robustness criterion reasonably well
+p107
+aVA measure u'\u005cu2019' s utility has been evaluated according to its ability to discriminate between levels of proficiency assigned by human raters
+p108
+aVThe remaining responses were partitioned into two datasets the ASR set and the scoring model training/test (SM) set
+p109
+aVYoon and Bhat ( 2012 ) explored an approach inspired by information retrieval
+p110
+aVUnlike previous studies, it did not rely on the occurrence of normative grammatical constructions
+p111
+aVWhat is the effect of including the proposed measure of syntactic complexity in the state-of-the-art automatic scoring model
+p112
+aVWe compare and contrast the proposed measure with that found to be optimum in Yoon and Bhat ( 2012 )
+p113
+aVc u'\u005cu2062' o u'\u005cu2062' s 4 the cosine similarity score between the test response and the vector of POS bigrams for the highest score class (level 4); and
+p114
+aVWe consider a multiple regression automatic scoring model as studied in Zechner et al
+p115
+aVThe results that follow are based on MaxEnt classifier u'\u005cu2019' s parameter settings initialized to zero
+p116
+aVIn addition, we test the significance of the difference between two dependent correlations using Steiger u'\u005cu2019' s Z-test (via the paired.r function in the R statistical package [ 26 ]
+p117
+aVThe effect of the measure of syntactic complexity is best studied by including it in an automatic scoring model of overall proficiency
+p118
+aVThis suggests that when correlated POS bigrams occur, MaxEnt is more likely to provide better score predictions than VSM does
+p119
+aVSuppose that, for response A, the score class with the second highest probability corresponds to score level 1 and that, for response B, it corresponds to score level 3
+p120
+aVA word error rate (WER) of 31% on the SM dataset was observed
+p121
+aVFor a given response, the MaxEnt classifier calculates the conditional probability of a score-class given the response, in turn yielding conditional probabilities of each score group given the observation u'\u005cu2013' p i for score group i u'\u005cu2208' { 1 , 2 , 3 , 4 }
+p122
+aVAll questions solicited spontaneous, unconstrained natural speech
+p123
+aVFor each group of responses s u'\u005cu2208' { A , B , C } , we calculate the percentage of responses P s where two highly correlated POS bigrams occur 6 6 We consider two POS bigrams to be highly correlated, when the their pointwise-mutual information is higher than 4
+p124
+aVTable 3 shows the system performance with different grammar sophistication measures
+p125
+aVFirst, we compare the discriminative ability of measures of syntactic complexity (VSM-model based measure with that of the MaxEnt-based measure) across proficiency levels
+p126
+aVAs seen in Table 1 , there is a strong bias towards the middle scores (score 2 and 3) with approximately 84-85% of the responses belonging to these two score levels
+p127
+aVFirst, the VSM-based method is likely to over-estimate the contribution of the POS bigrams when highly correlated bigrams occur as terms in the VSM
+p128
+aVIt is apparent that the classifier has an overall tendency to assign a higher score to B, but looking at its top preference alone (2 for both responses), masks this tendency
+p129
+aVDespite its good performance, there is a need to extend its coverage to higher order aspects of language ability
+p130
+aVWe mentioned that the measure proposed in this study is derived from assumptions similar to those studied in [ 37 ]
+p131
+aVBy u'\u005cu201c' syntactic complexity u'\u005cu201d' , we mean a learner u'\u005cu2019' s ability to use a wide range of sophisticated grammatical structures
+p132
+aVIn the second task, we study the measures u'\u005cu2019' robustness to errors incurred by ASR
+p133
+aVIn this study, we used a collection of responses from an international English language assessment
+p134
+aVThe SM set, with 2,950 responses, was used for feature evaluation and automated scoring model evaluation
+p135
+aVTherefore, the more uneven the distribution of a grammatical expression across score classes, the more important that grammatical expression should be as an indicator of a particular score class
+p136
+aVSecond, the t u'\u005cu2062' f - i u'\u005cu2062' d u'\u005cu2062' f weighting scheme for relatively rare POS bigrams does not adequately capture their underlying distribution with respect to score groups
+p137
+aVThe distribution of proficiency scores, along with other details of the data sets, are presented in Table 1
+p138
+aVWe illustrate to the contrary, that they are indeed able to capture certain grammatical errors and sophisticated constructions by means of the following instances
+p139
+aVRobustness a measures should be derived automatically and should be robust to errors in the measure generation process
+p140
+aVThe similarity between a test response and a score-specific vector is then calculated by a cosine similarity metric
+p141
+aVThe first stage, ASR, yields an automatic transcription, which is followed by the POS tagging stage
+p142
+aVThe inductive classifier we use here is the maximum-entropy model (MaxEnt) which has been used to solve several statistical natural language processing problems with much success [ 1 , 3 , 4 , 25 , 19 , 28 ]
+p143
+aVIn order to answer the motivating questions of the study, we set-up two tasks
+p144
+aVThe ASR set, with 47,227 responses, was used for ASR training and POS similarity model training
+p145
+aV2006 ) proposed the revised D-level scale which was originally studied by Rosenberg and Abbeduto ( 1987
+p146
+aVThe input to the classifier is a set of POS bigrams (1366 bigrams in all) obtained from the POS-tagged output of the data
+p147
+aVPearson correlation r between the scores assigned by the two raters was 0.62 in ASR set and 0.58 in SM set
+p148
+aVHowever, the approaches differ in the way in which a spoken response is assigned to a score group
+p149
+aVWe thus capture the classifier u'\u005cu2019' s finer-grained scoring tendency by calculating the expected value of the classifier output
+p150
+aVThe correlation was approximately 0.1 higher in absolute value than that of c u'\u005cu2062' o u'\u005cu2062' s 4 , which was the best performing feature in the VSM-based model and the difference is statistically significant
+p151
+aVWe compare the performance gains over the state-of-the-art with the inclusion of additional features (VSM-based and MaxEnt-based, in turn
+p152
+aVA score was assigned to the response based on how similar it was to the high score group
+p153
+aVTherefore, a MaxEnt model has an advantage over the model described in 4.1 in that it uses four different weight schemes (one per score level) and each scheme is optimized for each score level
+p154
+aVThis is beneficial in situations where the features are not evenly important across all score levels
+p155
+aVOf these, c u'\u005cu2062' o u'\u005cu2062' s 4 was selected based on its empirical performance (it showed the strongest correlation with human-assigned scores of proficiency among the distance-based measures
+p156
+aVHowever, when considered in the context of language acquisition studies, this approach seems to be justified
+p157
+aVThis is done by resorting to a maximum entropy model based approach, to which we turn next
+p158
+aVWe used the ASR data set to train a POS-bigram VSM for the highest score class and generated c u'\u005cu2062' o u'\u005cu2062' s 4 and c u'\u005cu2062' o u'\u005cu2062' s u'\u005cu2062' m u'\u005cu2062' a u'\u005cu2062' x reported in Yoon and Bhat ( 2012 ) , for the SM data set as outlined in Section 4.1
+p159
+aVIn order to address the limitations discussed in 4.1 , we propose a classification-based approach
+p160
+aVIn the first task, we compare the extent to which the VSM-based measure and the MaxEnt-based measure (outlined in 4.1 and 4.2 above) discriminate between levels of syntactic complexity
+p161
+aVHow robust is the measure to errors in the various stages of automatic generation
+p162
+aVTable 2 summarizes our experimental results for this task
+p163
+aVIn our case, however, with only access to the overall proficiency scores, we use scores of language proficiency as those of grammatical skill
+p164
+aVThe feature that maximizes this degree of agreement will be preferred
+p165
+aVConsider the presence of a grammar pattern represented by more than one POS bigram
+p166
+aVConsider the two sentence fragments below taken from actual responses (the bigrams of interest and their associated POS tags are bold-faced
+p167
+aVWe found that the percentages follow the order
+p168
+aVSet A contains responses where MaxEnt outperforms VSM; set B contains responses where VSM outperforms MaxEnt; set C contains responses where their predictions are comparable
+p169
+aVWe evaluate the measures using the metrics chosen in previous studies [ 38 , 6 , 37 ]
+p170
+aVThe measure of syntactic complexity of a response, c u'\u005cu2062' o u'\u005cu2062' s 4 , is its similarity to the highest score class
+p171
+aVAt the outset, POS-bigrams may seem too simplistic to represent any aspect of true syntactic complexity
+p172
+aVOne straightforward way of using the maximum entropy classifier u'\u005cu2019' s prediction for our case is to directly use its predicted score-level u'\u005cu2013' 1, 2, 3 or 4
+p173
+aVWe first analyze the limitations of the model studied in [ 37 ] and then describe how our model can address those limitations
+p174
+aVThe error stems from the fact that it has a modal verb followed by the word u'\u005cu201c' to u'\u005cu201d'
+p175
+aV2002 ) where it was interpreted to mean that overall sentiment is indicated by the presence/absence of keywords, as opposed to topic of a text, which is indicated by the repeated use of the same or similar terms
+p176
+aVMartineau and Finin ( 2009 ) observed this weakness of the t u'\u005cu2062' f - i u'\u005cu2062' d u'\u005cu2062' f weighting in the domain of sentiment analysis
+p177
+aVWe used the maximum entropy classifier implementation in the MaxEnt toolkit 4 4 http://homepages.inf.ed.ac.uk/lzhang10/maxent_toolkit.html
+p178
+aVThey treat the concatenated collection of responses from a particular score-class as a u'\u005cu2018' super u'\u005cu2019' document
+p179
+aVWe now discuss some of the observations and results of our study with respect to the following items
+p180
+aVHowever, the simple i u'\u005cu2062' d u'\u005cu2062' f scheme cannot capture this uneven distribution
+p181
+aVThis study is different from studies that focus on capturing grammatical errors in non-native speakers [ 12 , 17 ]
+p182
+aVOur experiments seek answers to the following questions
+p183
+aVOn the other hand, Example 2 contains a relative clause composed of a noun introduced by u'\u005cu201c' that u'\u005cu201d'
+p184
+aVIt was trained on the Switchboard (SWBD) corpus
+p185
+aVThis is done by considering the Pearson correlation coefficient between the feature and the human scores
+p186
+aVHowever, this forces the classifier to make a coarse-grained choice and may over-penalize the classifier u'\u005cu2019' s scoring errors
+p187
+aVPOS tags were generated using the POS tagger implemented in the Open-NLP toolkit 3 3 http://opennlp.apache.org
+p188
+aVThe VSM set-up has no mechanism to handle correlated features
+p189
+aVWe note that the performance gain of Base+mescore over Base as well as over Base + cos4 is statistically significant at level = 0.01
+p190
+aVThere was no overlap in speakers between the ASR set and the SM set
+p191
+aVThe performance gain of Base+cos4 over Base , however, is not statistically significant at level = 0.01
+p192
+aVThis level of agreement will guide the evaluation of the human-machine agreement on scores
+p193
+aVThe terms of the VSM are weighted by the term frequency-inverse document frequency ( t u'\u005cu2062' f - i u'\u005cu2062' d u'\u005cu2062' f ) weighting scheme [ 29 ]
+p194
+aVIn the context of spoken ESL, these measures have been studied as well but the results have been inconclusive
+p195
+aVNotable are studies that have focused on assessment of fluency [ 9 , 10 ] , pronunciation [ 33 , 34 , 13 , 23 ] , and intonation [ 38 ]
+p196
+aVTo what extent does a MaxEnt-score of syntactic complexity discriminate between levels of proficiency
+p197
+aVHowever, we note that the two bigrams are correlated and including them both results in an over-estimation of their contribution
+p198
+aVNotice how these grammatical expressions (one erroneous and the other sophisticated) can be detected by the POS bigrams u'\u005cu201c' MD-TO u'\u005cu201d' and u'\u005cu201c' NN-WDT u'\u005cu201d' , respectively
+p199
+aV2009 ), Chen and Zechner ( 2011 ), Higgins et al
+p200
+aVFor instance, Covington et al
+p201
+aVAn analogous explanation is applicable here
+p202
+aVWe use these features by themselves ( Base ), and also in conjunction with the VSM-based feature ( cva4 ) and the MaxEnt-based feature ( mescore
+p203
+aVOur primary contributions in this study are
+p204
+aVFeature design
+p205
+aVSyntactic complexity is one such aspect of proficiency
+p206
+aVImproved performance
+p207
+aVAs seen in Table 3 , using the proposed measure, m u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e , leads to an improved agreement between human and machine scores of proficiency
+p208
+aVFor example, both u'\u005cu201c' NN-WDT u'\u005cu201d' and u'\u005cu201c' WDT-RB u'\u005cu201d' in Sentence 2 reflect the learner u'\u005cu2019' s usage of a relative clause
+p209
+aVTowards this end, we compare m u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e and c u'\u005cu2062' o u'\u005cu2062' s 4 when POS bigrams are extracted from manual transcriptions (ideal ASR) and ASR transcriptions
+p210
+aVAlthough a total of 4 cosine similarity scores (one per score group) were generated, only c u'\u005cu2062' o u'\u005cu2062' s 4 from among the four similarity scores, and c u'\u005cu2062' o u'\u005cu2062' s u'\u005cu2062' m u'\u005cu2062' a u'\u005cu2062' x , were selected as features
+p211
+aVHence we will refer to this approach as u'\u005cu2018' shallow analysis u'\u005cu2019'
+p212
+aVTo see this, we separate the test set into three subsets A , B , C
+p213
+aVThis was also observed in Pang et al
+p214
+aVWe notice that of the measures compared, m u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e shows the highest correlation with scores of syntactic complexity
+p215
+aVThis POS tagger was trained on about 528K word/tag pairs
+p216
+aVc u'\u005cu2062' o u'\u005cu2062' s u'\u005cu2062' m u'\u005cu2062' a u'\u005cu2062' x the score level of the VSM with which the given response shows maximum similarity
+p217
+aVWe notice that Example 1 is not only less grammatically sophisticated than Example 2 but also has a grammatical error
+p218
+aVIn Table 2 , noticing that the correlations decrease going along a row, we can say that the errors in the ASR system caused both m u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e and c u'\u005cu2062' o u'\u005cu2062' s 4 to under-perform
+p219
+aVIn Section 4.1 , we go over the approach in further detail
+p220
+aVWe will see next what aspects of syntactic complexity are captured by such a shallow-analysis
+p221
+aVGeneralizability
+p222
+aVIn our case, we consider the predicted score of syntactic complexity to be the expected value of the class label given the observation as, m u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e = 1 × p 1 + 2 × p 2 + 3 × p 3 + 4 × p 4
+p223
+aVThey created the culture/NN that/WDT now/RB is common in the US
+p224
+aVWolf-Quintero et al
+p225
+aVThey can/MD to/TO survive u'\u005cu2026'
+p226
+aVP A = 12.93 u'\u005cu2062' % P C = 7.29 u'\u005cu2062' % P B = 4.41 u'\u005cu2062' %
+p227
+aV2011
+p228
+a.

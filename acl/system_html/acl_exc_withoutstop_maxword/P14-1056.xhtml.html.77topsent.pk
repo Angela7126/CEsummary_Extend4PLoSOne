@@ -1,0 +1,14 @@
+(lp0
+VSince we truncate penalties at 0, this suggests that we will learn a penalty of 0 for constraints in three categories constraints that do not hold in the ground truth, constraints that hold in the ground truth but are satisfied in practice by performing inference in the base CRF model, and constraints that are satisfied in practice as a side-effect of imposing non-zero penalties on some other constraints
+p1
+aVTake, for example, the constraint that the number of number segments does not exceed the number of booktitle segments, as well as the constraint that it does not exceed the number of journal segments
+p2
+aVThe algorithms we present in later sections for handling soft global constraints and for learning the penalties of these constraints can be applied to general structured linear models, not just CRFs, provided we have an available algorithm for performing MAP inference
+p3
+aVHowever, there are a number of learned constraints that are often violated on the ground truth but are still useful as soft constraints
+p4
+aVThe only one author constraint is particularly useful for correctly labeling editor segments in cases where unconstrained inference mislabels them as author segments
+p5
+aVFor 11.99% of the examples, the Soft-DD algorithm satisfies constraints that were not satisfied during unconstrained inference, while in the remaining 11.72% Soft-DD converges with some constraints left unsatisfied, which is possible since we are imposing them as soft
+p6
+a.

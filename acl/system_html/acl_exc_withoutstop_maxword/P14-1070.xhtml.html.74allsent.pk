@@ -1,0 +1,450 @@
+(lp0
+VSo to sum up on the u'\u005cu201c' labeled evaluation u'\u005cu201d' , we obtain a LAS evaluation for the whole task of parsing plus MWE recognition, but an UAS evaluation that penalizes less errors on MWE status, while keeping a representation that is richer predicted parses contain not only the syntactic dependencies and MWE information, but also a classification of MWEs into regular and irregular, and the internal syntactic structure of regular MWEs
+p1
+aVTo define the regular expressions, we grouped gold MWEs according to the pair [global POS of the MWE + sequence of POS of the MWE components], and designed regular expressions to match the most frequent patterns that looked regular according to our linguistic knowledge
+p2
+aVIn some experiments, we make use of alternative representations, which we refer later as u'\u005cu201c' labeled representation u'\u005cu201d' , in which the MWE features are incorporated in the dependency labels, so that MWE composition and/or the POS of the MWE be totally contained in the tree topology and labels, and thus predictable via dependency parsing
+p3
+aVIn this section, we propose to better evaluate the difficulty of combining the tasks of MWE analysis and dependency parsing by comparing our systems with systems performing simpler tasks i.e., MWE recognition without parsing, and parsing with no or limited MWE recognition, simulated by using gold MWEs
+p4
+aVThe evaluation on u'\u005cu201c' structured representation u'\u005cu201d' can be interpreted as an evaluation of the parsing task plus the recognition of irregular MWEs only both LAS and UAS are measured independently of errors on regular MWE status (note the UAS is exactly the same than in the u'\u005cu201c' labeled u'\u005cu201d' case
+p5
+aVIRREG-BY-PARSER the MWE status, flat topology and POS are all predicted via dependency parsing, using representations for training and parsing, with all information for irregular MWEs encoded in topology and labels (as for in vain in Figure 2
+p6
+aVMWEs are first classified as regular or irregular, using regular expressions over the sequence of parts-of-speech within the MWE
+p7
+aVRegular MWEs appear with u'\u005cu2019' structured u'\u005cu2019' syntax we modify the tree structure to recover the regular syntactic dependencies
+p8
+aVMWE lexicons are exploited as sources of features for both the dependency parser and the external MWE analyzer
+p9
+aVIt can be noted though, that JOINT-IRREG performs overall better on MWEs (last two columns of table 3 ), whereas JOINT performs better on irregular MWEs the \u005cdraftreplace full joint architecturelatter seems \u005cdraftreplace on the one handto be beneficial for parsing, but is less efficient to correctly spot the regular MWEs
+p10
+aVFor the flat MWE features, we experimented both with features predicted by the MWE analyzer, and with features predicted using the external lexicons mentioned in section 5.1 (using the lexicon lookup procedure
+p11
+aVWe tested to incorporate the MWE-specific features as defined in the gold flat representation (section 3.1 the mwehead=POS feature for the MWE head token, POS being the part-of-speech of the MWE; the component=y feature for the non-first MWE component
+p12
+aVIn the alternative representation we propose, irregular MWEs are unchanged and appear as flat MWEs (e.g., en vain in Figure 1 has pattern preposition+adjective, which is not considered regular for an adverb, and is thus unchanged
+p13
+aVConcerning the tuning of parameters, it appears that the best setting is to use MWE-features, and switch for both regular and irregular MWEs, except for the pipeline architecture for which results without MWE features are slightly better
+p14
+aVConcerning the three distinct representations, evaluating on structured representation (hence without looking at regular MWE status) leads to a rough 2 point performance increase for the LAS and a one point increase for the UAS, with respect to the evaluation against flat representation
+p15
+aVThis renders the syntactic description more uniform and it provides an internal structure for regular MWEs, which is meaningful if the MWE is fully or partially compositional
+p16
+aV16 16 The slight differences in LAS between the labeled and the flat representations are due to side effects of errors on MWE status some wrong reattachments performed to obtain flat representation decrease the UAS, but also in some cases the LAS
+p17
+aV\u005cdraftreplace Counts of MWEs automatically structures because classified as regular are shown in Table 1 Table 1 shows the proportions of MWEs classified as regular, and thus further structured
+p18
+aVThe first component of a regular MWE is not necessarily its head (for instance for a nominal MWE with internal pattern adjective+noun), so the switch trick could be detrimental in such cases
+p19
+aVFurthermore, the first MWE component bears a feature mwehead equal to the POS of the MWE
+p20
+aVIRREG-MERGED gold irregular MWEs are merged for training; for parsing, irregular MWEs are predicted externally, merged into one token at parsing time, and re-expanded into several tokens for evaluation;
+p21
+aVThe best score for each metric is in bold.The JOINT baseline corresponds to a u'\u005cu201c' pure u'\u005cu201d' joint system without external MWE resources (hence the minus sign for the first three columns
+p22
+aVMoreover, we provide in table 5 a comparison of our best architecture with reg/irregular MWE distinction with other architectures that do not make this distinction, namely the two best comparable systems designed for the SPMRL Shared Task [ 23 ] the pipeline simple parser based on Mate-tools of Constant et al
+p23
+aVNext, we compare the best JOINT-REG system with the one based on the same architecture but where the irregular MWEs are perfectly pre-identified, in order to quantify the difficulty added by the irregular MWEs
+p24
+aVBut we note that the differences are slight, and the output we obtain is enhanced with regular MWE internal structure
+p25
+aVThe first component of a MWE is taken as the head of the MWE
+p26
+aVMWE information can be integrated as features to be used by the dependency parser
+p27
+aVThe intuition behind this feature is that for an irregular MWE, the POS of the linearly first component, which serves as head, is not always representative of the external distribution of the MWE
+p28
+aVAll subsequent components of the MWE depend on the first one, with the special label dep_cpd (hence the name flat representation
+p29
+aVBoth kinds of prediction lead to fairly comparable results, so in all the following, the MWE features, when used, are predicted using the external lexicons
+p30
+aVIt can thus be noted that the increased syntactic uniformity obtained by our MWE representation is mitigated so far by the additional complexity of the task
+p31
+aVA real-life parsing system should comprise the recognition of multi-word expressions (MWEs 1 1 Multiword expressions can be roughly defined as continuous or discontinuous sets of tokens, which either do not exhibit full freedom in lexical selection or whose meaning is not fully compositional
+p32
+aVWe focus in this paper on contiguous multiword expressions, also known as u'\u005cu201c' words with spaces u'\u005cu201d' first because downstream semantic-oriented applications need some marking in order to distinguish between regular semantic composition and the typical semantic non-compositionality of MWEs
+p33
+aVSo overall, informing the parser with independently predicted POS of MWE has positive impact
+p34
+aVIn order to compare the MWEs present in the lexicons and those encoded in the French treebank, we applied the following procedure (hereafter called lexicon lookup in a given sentence, the maximum number of non overlapping MWEs according to the lexicons are systematically marked as such
+p35
+aVFor regular MWEs, their internal structure is always predicted by the parser
+p36
+aVIn the JOINT-REG architecture, assuming gold irregular MWE identification, increases LAS by 1.3 point
+p37
+aVResults can only be compared on the flat representation, because the other systems output poorer linguistic information
+p38
+aVFor 4 of them, the classification error is due to errors on the (gold) POS of the MWE components
+p39
+aVAbout half MWEs are structured, and about two thirds of structured MWEs are nouns
+p40
+aVJOINT and JOINT-IRREG significantly outperform the baseline and the PIPELINE, on labeled representation and flat representation
+p41
+aVFor LAS, in both cases the three last tokens will count as incorrect if the wrong MWE status is predicted
+p42
+aVFurthermore, some sequences are both syntactically and semantically regular, but encoded as MWE due to frozen lexical selection
+p43
+aVSo the first observation is that our architectures that distinguish between reg/irreg MWEs do not outperform uniform architectures
+p44
+aVMoreover, such a distinction opens the way to a non-binary classification of MWE status the various criteria leading to classify a sequence as MWE could be annotated separately and using nominal or scaled categories for each criteria
+p45
+aVWe developed an ad hoc program for structuring the regular MWEs in gold data
+p46
+aVIn terms of MWE recognition, as compared with the CRF-based analyzer, our best system is around 2 points below
+p47
+aVBut on the test corpus (which is twice bigger), the best system is Const13 pipeline, with statistically significant differences over our joint systems
+p48
+aVThe evaluation on the labeled representation provides an evaluation of the full task (parsing, regular/irregular MWE recognition and regular MWEs structuring), with a UAS that is less impacted by errors on regular MWE status, while LAS reflects the full difficulty of the task
+p49
+aVFor instance, in bottom tree of Figure 1 , arcs pointing to the non-head components ( de, biens, sociaux ) are suffixed with _r to mark them as belonging to a structured MWE, and with _N since the MWE is a noun
+p50
+aVThe second observation is that currently the best system on this dataset is a pipeline system, as results on test set show (and somehow contrary to results on dev set
+p51
+aVIt uses no feature nor treatment specific to MWEs as it focuses on the general aim of the Shared Task, namely coping with prediction of morphological and syntactic analysis
+p52
+aVPredicted lemmas, POS and morphology features are computed with Morfette version 0.3.5 [ 8 , 22 ] 13 13 https://sites.google.com/site/morfetteweb/ , using 10 iterations for the tagging perceptron, 3 iterations for the lemmatization perceptron, default beam size for the decoding of the joint prediction, and the Lefff [ 21 ] as external lexicon used for out-of-vocabulary words
+p53
+aVIn this paper, we investigate various strategies for predicting from a tokenized sentence both MWEs and syntactic dependencies, using the French dataset of the SPMRL 13 Shared Task
+p54
+aVFeatures are added for that purpose the syntactic head of the structured MWE bears a regmwehead for the POS of the MWE ( abus in Figure 1 ), and the other components of the MWE bear a regcomponent feature (the orange tokens in Figure 1
+p55
+aVAmong the 87 classified as irregular, 7 should have been tagged as regular and structured
+p56
+aVFor regular MWEs, the usefulness of such a trick is less obvious
+p57
+aVEvaluation metrics we evaluate our parsing systems by using the standard metrics for dependency parsing
+p58
+aVWe obtain about 70% recall and 50% precision with respect to MWE spanning
+p59
+aVThe representation we propose is thus a first step towards a uniform handling of MWEs and discontinuous non-compositional phenomena like light-verb constructions or verbal frozen idioms
+p60
+aVWhen a predicted structured MWE is flattened, all the dependents of any token of the MWE that are not themselves belonging to the MWE are attached to the head component of the MWE
+p61
+aV\u005cdraftremove Note that columns 6 and 8 are identical, since the UAS scores for u'\u005cu201c' labeled u'\u005cu201d' and structured representations are the same
+p62
+aVThe architectures we investigated vary depending on whether the MWE status of sequences of tokens is predicted via dependency parsing or via an external tool (described in section 5 ), and this dichotomy applies both to structured MWEs and flat MWEs
+p63
+aVThe MWE analyzer is a CRF-based sequential labeler, which, given a tokenized text, jointly performs MWE segmentation and POS tagging (of simple tokens and of MWEs), both tasks mutually helping each other 9 9 Note that in our experiments, we use this analyzer for MWE analysis only, and discard the POS tagging prediction
+p64
+aVFigure shows the labeled representation for the sentence of Figure 1
+p65
+aVConcerning related work on the representation of MWE internal structure, we can cite the Prague Dependency Bank, which captures both regular syntax of non-compositional MWEs and their MWE status, in two distinct annotation layers [ 3 ]
+p66
+aVIn order to better deal with MWE prediction, we use external MWE resources, namely MWE lexicons and an MWE analyzer
+p67
+aVIn particular, two large-coverage general-language lexicons are used the Lefff 6 6 We use the version available in the POS tagger MElt [ 14 ] lexicon [ 21 ] , which contains approximately half a million inflected word forms, among which approx
+p68
+aVWe computed statistical significance of differences between our systems and Const13
+p69
+aVThe MWE analyzer also jointly classifies its predicted MWEs as regular or irregular (the distinction being learnt on gold training set, with structured MWEs cf section 3.2
+p70
+aVtraining set irregular MWEs merged into one token, regular MWEs are structured, and integration of regular MWE information into the labels ( FCT_r_POS
+p71
+aV113 of these were classified as regular, and we judged that all of them were actually regular, and were correctly structured
+p72
+aVThis is the case for déficit budgétaire (lit budgetary deficit , meaning u'\u005cu2019' budget deficit u'\u005cu2019' ), because it is not possible to use déficit du budget ( budget deficit
+p73
+aVREG-BY-PARSER all regular MWE information (topology, status, POS) is predicted via dependency parsing, using representations with all information for regular MWEs encoded in topology and labels (Figure 2
+p74
+aVThe trees show syntactic dependencies between semantically sound units (made of one or several tokens), and are thus particularly appealing for downstream semantic-oriented applications, as dependency trees are considered to be closer to predicate-argument structures
+p75
+aV2012 ) report results on the joint MWE recognition and parsing task, in which errors in MWE recognition alleviate their positive effect on parsing performance
+p76
+aVWe ran experiments for all value combinations of the following parameters i) the architecture, (ii) whether MWE features are used, whether the switch trick is applied or not (iii) for irregular MWEs and (iv) for regular MWEs
+p77
+aVFor structured MWEs, in order to get full MWE account within the tree structure and labels, we need to incorporate both the MWE POS, and to mark it as belonging to a MWE
+p78
+aVparsing i) MWE analysis with classification of MWEs into regular or irregular, (ii) merge of predicted irregular MWEs, (iii) tagging and morphological prediction, (iv) parsing
+p79
+aVREG-POST-ANNOTATION the regular MWEs are encoded/predicted as shown for abus de biens sociaux in bottom tree of Figure 1 , and their MWE status and POS is predicted after parsing, by an external tool
+p80
+aVWhile the realistic scenario of syntactic parsing with automatic MWE recognition (either done jointly or in a pipeline) has already been investigated in constituency parsing [ 16 , 10 , 17 ] , the French dataset of the SPMRL 2013 Shared Task [ 23 ] only recently provided the opportunity to evaluate this scenario within the framework of dependency syntax
+p81
+aVMoreover, in some of the architectures, the external MWE analyzer is used either to pre-group irregular MWEs (for the architectures using IRREG-MERGED), or to post-annotate regular MWEs
+p82
+aV2013 ) , who experimented joint dependency parsing and light verb construction identification on predicting both MWEs and dependency trees are those presented to the SPMRL 2013 Shared Task that provided scores for French (which is the only dataset containing MWEs
+p83
+aVThe MWE analyzer integrates, among others, features computed from the external lexicons described in section 5.1 , which greatly improve POS tagging [ 14 ] and MWE segmentation [ 11 ]
+p84
+aVMoreover, for the u'\u005cu201c' labeled representation u'\u005cu201d' evaluation, though the MWE information in the predicted parses is obtained in various ways, depending on the architecture, we always map all this information in the dependency labels, to obtain predicted parses matching the u'\u005cu201c' labeled representation u'\u005cu201d'
+p85
+aV10 10 We also experimented to use POS of MWE plus suffixes to force disjoint tagsets for single words, irregular MWEs and regular MWEs, but this showed comparable results
+p86
+aV\u005cdraftreplace We describe the French dataset in section 3 , with the original and modified MWE representations, and we detail the motivations for this alternative representationIn section 3 , we describe the French dataset, how MWEs are originally represented in it, and we present and motivate an alternative representation
+p87
+aVWith this representation, the algorithm to recover regular MWEs is any node bearing regmwehead forms a MWE with the set of direct or indirect dependents bearing a regcomponent feature
+p88
+aVWe manually evaluated both the regular versus irregular classification and the structuring of regular MWEs on the first 200 MWEs of the development set
+p89
+aVIn gold data, the MWEs appear in an expanded flat format each MWE bears a part-of-speech and consists of a sequence of tokens (hereafter the u'\u005cu201c' components u'\u005cu201d' of the MWE), each having their proper POS, lemma and morphological features
+p90
+aV4 4 The syntactic head of a structured MWE may not be the first token, whereas the head token of a flat MWE is always the first one
+p91
+aVtraining set flat representation of irregular MWEs, with label suffixing ( dep_cpd_POS ), structured representation of regular MWEs without label suffixing
+p92
+aVFor instance for a sequence N1 preposition N2 , though some external attachments might vary depending on whether the sequence forms a MWE or not, some may not, and the internal dependency structure ( N1 u'\u005cu2192' ( preposition u'\u005cu2192' N2 ) ) is quite regular
+p93
+aVWe observe the same general trend as in the development corpus, but with tinier differences
+p94
+aVMore generally, keeping a regular representation would allow to better deal with the interaction between idiomatic status and regular syntax, such as the insertion of modifiers on MWE subparts (e.g., make a quick decision
+p95
+aVSwitch instead or on top of using the mwehead feature, we use the POS of the MWE instead of the POS of the first component of a flat MWE
+p96
+aVFurther, annotation is often incoherent for the MWEs with both regular syntax and a certain amount of semantic compositionality, the same token sequence (with same meaning) being sometimes annotated as MWE and sometimes not
+p97
+aVSecond, MWE information, is intuitively supposed to help parsing \u005cdraftremove , in particular for MWEs that exhibit irregular internal syntax
+p98
+aVWe describe below the flat representation of MWEs in this dataset, and the modified representation for regular MWEs that we propose
+p99
+aVIn the dependency trees, there is no u'\u005cu201c' node u'\u005cu201d' for a MWE as a whole, but one node per MWE component (more generally one node per token
+p100
+aVIn all our experiments, for the switch trick (section 5.3 ), the POS of MWE is always predicted using the MWE analyzer
+p101
+aVThe joint systems perform syntactic parsing and MWE analysis via a single dependency parser, using representations as in 3.3
+p102
+aVThe French dataset is the only one containing MWEs the French treebank has the particularity to contain a high ratio of tokens belonging to a MWE ( 12.7 u'\u005cu2062' % of non numerical tokens
+p103
+aVparsing i) MWE analysis and classification into regular or irregular, used for MWE-specific features, (ii) tagging and morphological prediction, (iii) parsing
+p104
+aVWe first compare our best system with a parser where all MWEs have been perfectly pre-grouped, in order to quantify the difficulty that MWEs add to the parsing task
+p105
+aV\u005cdraftreplace The main point of our work is to investigateWe focus on the use of an alternative representation for those MWEs that exhibit regular internal syntax
+p106
+aVOne objective of the current work is to investigate whether this increased uniformity eases parsing or whether it is mitigated by the additional difficulty of finding the internal structure of a MWE
+p107
+aVThis quantifies the additional difficulty of deciding for a regular sequence of tokens whether it forms a MWE or not
+p108
+aVThe algorithm to recover MWEs is any node having dependents with the dep_cpd label forms a MWE with such dependents
+p109
+aVIn the u'\u005cu201c' labeled representation u'\u005cu201d' evaluation, the UAS provides a measure of syntactic attachments for sequences of words, independently of the (regular) MWE status of subsequences
+p110
+aVFor each architecture, Table 3 shows the results for two systems first the baseline system without any MWE features nor switches and immediately below the best settings for the architecture
+p111
+aVThe idea is to represent these using regular syntactic internal structure, while keeping the semantic information that they are MWEs
+p112
+aVFor predicted parses with structured MWEs, we use an inverse transformation of structured MWEs into flat MWEs, for evaluation against the gold data
+p113
+aVparsing i) MWE analysis, (ii) merge of predicted MWEs, (iii) tagging and morphological prediction, (iv) parsing
+p114
+aVSyntactically regular MWEs (hereafter regular MWEs) show various degrees of semantic non-compositionality
+p115
+aV2007 ) report a small improvement on the pure parsing task when using external MWE lexicons to help English parsing, Constant et al
+p116
+aVFor the sequence abus de biens sociaux , suppose that the correct internal structure is predicted, but not the MWE status
+p117
+aVNote that the lexicons do not include any information on the irregular or the regular status of the MWEs
+p118
+aVThe joint systems that integrate MWE information in the labels seem to suffer from increased data sparseness
+p119
+aVWe compare these four architectures between them and also with two simpler architectures used by [ 9 ] within the SPMRL 13 Shared Task, in which regular and irregular MWEs are not distinguished
+p120
+aV15 15 The compare.pl script, formerly available at www.cis.upenn.edu/ dbikel/ For MWEs, we use the Fmeasure for recognition of untagged MWEs (hereafter FUM) and for recognition of tagged MWEs (hereafter FTM
+p121
+aVIt contains projective dependency trees that were automatically derived from the latest status of the French Treebank [ 1 ] , which consists of constituency trees for sentences from the newspaper Le Monde , manually annotated with phrase structures, morphological information, and grammatical functional tags for dependents of verbs
+p122
+aV\u005cdraftreplace From this matching, we applied internal attachment heuristics favoring local attachments.The internal structure for the matching MWEs was built deterministically, using heuristics favoring local attachments
+p123
+aV\u005cdraftreplace The baseline appears in first row, and corresponds to a pure joint system without external MWE resources
+p124
+aVOur contribution with respect to that work is the representation of the internal syntactic structure of MWEs, and use of MWE-specific features for the joint system
+p125
+aVFor instance the unlabeled dependencies for abus de biens sociaux are the same, independently of predicting whether it forms a MWE or not
+p126
+aVAnother advantage of representing internal MWE structure is to allow discontinuity within MWEs, which are known to show various degrees of frozenness, and do not necessarily block insertions of modifiers for instance
+p127
+aVSection 5 presents the external resources targeted to improve MWE recognition
+p128
+aVFinally, using regular syntax for MWEs provides a more uniform training set
+p129
+aVThis shows that considering a larger syntactic context helps recognition of irregular MWEs
+p130
+aVWe also provide a finer evaluation of the MWE recognition task, in particular with respect to their regular/irregular status
+p131
+aVFor instance, in the French Treebank, population active (lit active population , meaning u'\u005cu2019' working population u'\u005cu2019' ) is a partially compositional MWE
+p132
+aVFor the MWE analyzer, we used the tool lgtagger 11 11 http://igm.univ-mlv.fr/~mconstan (version 1.1) with its default set of feature templates, and a 10-fold jackknifing on the training corpus
+p133
+aVIn such a scenario, a system predicts dependency trees with marked groupings of tokens into MWEs
+p134
+aVWe can see that without considering MWE analysis the parsing accuracy is about 2.5 points better in terms of LAS
+p135
+aVThe u'\u005cu201d' weak point u'\u005cu201d' of our system is therefore the identification of regular MWEs
+p136
+aVFor each architecture, we apply the appropriate normalization procedures on the predicted parses, in order to evaluate against (i) the pseudo-gold data in structured representation, and (ii) the gold data in flat representation
+p137
+aVWe gave in introduction references to previous work on predicting MWEs and constituency parsing
+p138
+aVFlat MWE features
+p139
+aVBut we use two kinds of predictions for their MWE status and POS
+p140
+aVFor flat MWEs, the only missing information is the MWE part-of-speech we concatenate it to the dep_cpd labels
+p141
+aVWhile this non-realistic scenario has been shown to help parsing [ 18 , 15 ] ,That intuition is confirmed in a classical but non-realistic setting in which gold MWEs are pre-grouped [ 2 , 18 , 15 ]
+p142
+aVWe introduce information from the external MWE resources in different ways
+p143
+aVSection 4 describes the different architectures we test for \u005cdraftreplace double prediction ofpredicting both syntax and MWEs
+p144
+aV2013 ) , by adding MWE features and switch
+p145
+aVBut the situation is \u005cdraftreplace quite differentmuch less clear when switching to automatic MWE prediction
+p146
+aVOur representation also resembles that of light-verb constructions (LVC) in the hungarian dependency treebank [ 24 ] the construction has regular syntax, and a suffix is used on labels to express it is a LVC [ 25 ]
+p147
+aVIt is a less language-specific system that reranks n-best dependency parses from 3 parsers, informed with features from predicted constituency trees
+p148
+aVWithout any surprise, the task is much easier without considering MWE recognition
+p149
+aVYet, A classical parsing scenario is to pre-group gold MWEs [ 2 ]
+p150
+aVThe MWE en vain ( pointlessly ) is an adverb, containing a preposition and an adjective
+p151
+aVBut the situation is quite different when breaking the evaluation by MWE type
+p152
+aVOur system is 1 point better than the CRF-based analyzer for irregular MWEs
+p153
+aVOur first motivation is to increase the quantity of information conveyed by the dependency trees, by distinguishing syntactic regularity and semantic regularity
+p154
+aVWe performed evaluation of the predicted parses using the three representations described in section 3 , namely flat, structured and labeled representations
+p155
+aVStructured MWEs cannot be spotted using the tree topology and labels only
+p156
+aVWe also compare the performance on MWEs of our best system with that achieved by the CRF-based analyzer described in section 5.2
+p157
+aVMWE Analysis and Tagging
+p158
+aVOur alternative representation distinguishes between syntactic internal regularity and semantic regularity
+p159
+aVFor instance, in the bottom tree of the figure, biens is attached to the preposition, and the adjective sociaux is attached to biens , with regular labels
+p160
+aVMore precisely, we consider the following alternative for irregular MWEs
+p161
+aVThe UAS for labeled representation will be maximal, whereas for the flat representation, the last two tokens will count as incorrect for UAS
+p162
+aVIn the last two cases, the evaluation is performed against an instance of the gold data automatically transformed to match the representation type
+p163
+aVWhile the evaluation in flat representation is the only one comparable to other works on this dataset, the other two evaluations provide useful information
+p164
+aVIn both cases, this label suffixing is translated back into features for evaluation against gold data
+p165
+aVWe compare the baseline JOINT system with the best system for all four reg/irreg architectures (cf section 6.3
+p166
+aVThe best architectures are JOINT and JOINT-IRREG, with the former slightly better than the latter for parsing metrics, though only some of the differences are significant between the two
+p167
+aV[ 13 , 12 ] lexicon, which contains approx one million inflected forms, among which about 110 , 000 are MWEs
+p168
+aV2 2 The main focus of the Shared Task was on predicting both morphological and syntactic analysis for morphologically-rich languages
+p169
+aV5 5 The six regular expressions that we obtained cover nominal, prepositional, adverbial and verbal compounds
+p170
+aVOn dev, the best system is the enhanced uniform joint, but differences are not significant between that and the best reg/irreg joint (1st row) and the Const13 pipeline
+p171
+aVLabeled Attachment Score (LAS) and Unlabeled Attachment Score (UAS), computed using all tokens including punctuation
+p172
+aVMWEs merged into one token
+p173
+aVBoth resources help to predict MWE-specific features (section 5.3 ) to guide the MWE-aware dependency parser
+p174
+aV2010 ) , with different handling of MWEs
+p175
+aVTo evaluate statistical significance of parsing performance differences, we use eval07.pl 14 14 http://nextens.uvt.nl/depparse-wiki/SoftwarePage with -b option, and then Dan Bikel u'\u005cu2019' s comparator
+p176
+aV2013 ) proposed to combine pipeline and joint systems in a reparser [ 20 ] , and ranked first at the Shared Task
+p177
+aVWe describe experiments and discuss their results in section 6 and conclude in section 7
+p178
+aVWe also reimplemented and improved the uniform joint architecture of Constant et al
+p179
+aVThese resources are completed with specific lexicons freely available in the platform Unitex 8 8 http://igm.univ-mlv.fr/~unitex the toponym dictionary Prolex [ 19 ] and a dictionary of first names
+p180
+aVWe provide the final results on the test set in table 4
+p181
+aVOn the structured representation, the two best systems (JOINT and JOINT-IRREG) significantly outperform the other systems ( p 0.01 for all; p 0.05 for JOINT-REG
+p182
+aVThe data we use is the SPMRL 13 dataset for French, in dependency format
+p183
+aVBest JOINT has statistically significant difference ( p 0.01 ) over both best JOINT-REG and best PIPELINE
+p184
+aVWe used the Anna3.3 version, in projective mode, with default feature sets and parameters proposed in the documentation, augmented or not with MWE-specific features, depending on the experiments
+p185
+aVWe had to convert the DELA POS tagset to that of the French Treebank
+p186
+aVFor each architecture except the PIPELINE one, differences between the baseline and the best setting are statistically significant ( p 0.01
+p187
+aVStructured representation
+p188
+aVFlat representation
+p189
+aVFor instance, it is meaningful to have the adjective sociaux attach to biens instead of on the first component abus
+p190
+aVThe Shared Task used an enhanced version of the constituency-to-dependency conversion of Candito et al
+p191
+aVTo our knowledge, the first works 3 3 Concerning non contiguous MWEs, we can cite the work of Vincze et al
+p192
+aVLabeled representation
+p193
+aVWe can see that there is no significant difference between JOINT and JOINT-IRREG and between JOINT-REG and JOINT-IRREG
+p194
+aVWe devote section 2 to related work
+p195
+aVJOINT slightly outperforms JOINT-REG ( p 0.05
+p196
+aVThe dataset consists of 18535 sentences, split into 14759 , 1235 and 2541 sentences for training, development, and final evaluation respectively
+p197
+aVFor instance, déficit budgétaire could be marked as fully compositional, but with frozen lexical selection
+p198
+aVFor instance in Figure 1 , the token en gets pos=ADV instead of pos=P
+p199
+aVTagging is performed along with lemmatization with the Morfette tool (section 6.1
+p200
+aVResults are given in table 6
+p201
+aVtraining set
+p202
+aVMorphological prediction
+p203
+aVWe obtain four architectures, schematized in table 2
+p204
+aV25 , 000 are MWEs; and the DELA 7 7 We use the version in the platform Unitex (http://igm.univ-mlv.fr/~unitex
+p205
+aVThe system of Björkelund et al
+p206
+aV2013 ) (Const13) and the Mate-tools system (without reranker) of Björkelund et al
+p207
+aVWe describe more precisely two of them, the other two being easily inferable
+p208
+aVFor instance, the arc from en to vain is relabeled dep_cpd_ADV
+p209
+aVDifferences between best PIPELINE and best JOINT-REG are not
+p210
+aVWe performed a 10-fold jackknifing on the training corpus
+p211
+aVConstant et al
+p212
+aVThe situation for best JOINT-IRREG with respect to the other three is borderline (with various p-values depending on the metrics
+p213
+aVAn example is shown in Figure 1
+p214
+aV\u005cdraftreplace In that case,While Cafferkey et al
+p215
+aVThe suffixed label has the form FCT_r_POS
+p216
+aV2013 ) ranked second on French, though with close UAS/LAS scores
+p217
+aVWe used the second-order graph-based parser available in Mate-tools 12 12 http://code.google.com/p/mate-tools/ [ 5 ]
+p218
+aVParser
+p219
+aVThe latter depends on former, which bears mwehead=ADV+
+p220
+aVb
+p221
+aVc
+p222
+aVa
+p223
+aV2013 ) (Bjork13
+p224
+a.

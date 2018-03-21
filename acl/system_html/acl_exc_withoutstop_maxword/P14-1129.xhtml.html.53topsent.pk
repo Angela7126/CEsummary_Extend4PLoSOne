@@ -1,0 +1,16 @@
+(lp0
+VOne issue with the S2T NNJM is that the probability is computed over every target word, so it does not explicitly model NULL-aligned source words
+p1
+aVIt is easy and computationally inexpensive to use this model in decoding, since only one neural network computation must be made for each source word
+p2
+aVThe decoding cost is based on a measurement of u'\u005cu223c' 1200 unique NNJM lookups per source word for our Arabic-English system
+p3
+aVHowever, note that there are only 3 possible positions for each target word, and 11 for each source word
+p4
+aVFor aligned target words, the normal affiliation heuristic can be used, since the word alignment is available within the rule
+p5
+aVAdditionally, on top of a simpler decoder equivalent to Chiang u'\u005cu2019' s [ 5 ] original Hiero implementation, our NNJM features are able to produce an improvement of +6.3 BLEU u'\u005cu2013' as much as all of the other features in our strong baseline system combined
+p6
+aVTo do this, we first say that each target word t i is affiliated with
+p7
+a.

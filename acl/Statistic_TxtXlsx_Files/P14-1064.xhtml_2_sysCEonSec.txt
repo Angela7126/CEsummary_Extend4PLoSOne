@@ -1,0 +1,451 @@
+Current File: P14-1064.xhtml_2 P14-1064.xhtml
+
+Section 0:  Abstract
+	SentNum: 6
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 16.6667%
+
+Section 1:  1 Introduction
+	SentNum: 16
+	CENum: 4
+	SentCovered: 3
+	Covered_Rate: 18.7500%
+
+Section 2:  2 Generation Propagation
+	SentNum: 95
+	CENum: 25
+	SentCovered: 32
+	Covered_Rate: 33.6842%
+
+Section 3:  3 Evaluation
+	SentNum: 79
+	CENum: 20
+	SentCovered: 24
+	Covered_Rate: 30.3797%
+
+Section 4:  4 Related Work
+	SentNum: 23
+	CENum: 7
+	SentCovered: 9
+	Covered_Rate: 39.1304%
+
+Section 5:  5 Conclusion
+	SentNum: 2
+	CENum: 0
+	SentCovered: 0
+	Covered_Rate: 0.0000%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-1064.xhtml_2's CE cases
+
+Section 0:  Abstract has 1 CE cases
+	CASE: 1
+	Stag: 1 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: In this work, we present a semi-supervised graph-based approach for generating new translation rules that leverages bilingual and monolingual data. 
+		Cause: [(0, 11), (0, 20)]
+		Effect: [(0, 0), (0, 9)]
+
+Section 1:  1 Introduction has 4 CE cases
+	CASE: 1
+	Stag: 14 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: Our work introduces a new take on the problem using graph-based semi-supervised learning to acquire translation rules and probabilities by leveraging both monolingual and parallel data resources. 
+		Cause: [(0, 20), (0, 26)]
+		Effect: [(0, 0), (0, 18)]
+
+	CASE: 2
+	Stag: 15 16 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: On the source side, labeled phrases (those with known translations) are extracted from bilingual corpora, and unlabeled phrases are extracted from monolingual corpora; together they are embedded as nodes in a graph, with the monolingual data determining edge strengths between nodes (§ 2.2. Unlike previous work [ 11 , 22 ] , we use higher order n -grams instead of restricting to unigrams, since our approach goes beyond OOV mitigation and can enrich the entire translation model by using evidence from monolingual text. 
+		Cause: [(0, 33), (1, 31)]
+		Effect: [(0, 10), (0, 31)]
+
+	CASE: 3
+	Stag: 16 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: Unlike previous work [ 11 , 22 ] , we use higher order n -grams instead of restricting to unigrams, since our approach goes beyond OOV mitigation and can enrich the entire translation model by using evidence from monolingual text. 
+		Cause: [(0, 23), (0, 41)]
+		Effect: [(0, 0), (0, 20)]
+
+	CASE: 4
+	Stag: 16 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: Unlike previous work [ 11 , 22 ] , we use higher order n -grams instead of restricting to unigrams, since our approach goes beyond OOV mitigation and can enrich the entire translation model by using evidence from monolingual text. 
+		Cause: [(0, 14), (0, 18)]
+		Effect: [(0, 0), (0, 12)]
+
+Section 2:  2 Generation Propagation has 25 CE cases
+	CASE: 1
+	Stag: 29 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: If a source phrase is found in the baseline phrase table it is called a labeled phrase its conditional empirical probability distribution over target phrases (estimated from the parallel data) is used as the label, and is subsequently never changed. 
+		Cause: [(0, 35), (0, 41)]
+		Effect: [(0, 1), (0, 33)]
+
+	CASE: 2
+	Stag: 31 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: The label space is thus the phrasal translation inventory, and like the source side it can also be represented in terms of a graph, initially consisting of target phrase nodes from the parallel corpus. 
+		Cause: [(0, 0), (0, 3)]
+		Effect: [(0, 5), (0, 34)]
+
+	CASE: 3
+	Stag: 32 33 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: For the unlabeled phrases, the set of possible target translations could be extremely large (e.g.,, all target language n -grams. Therefore, we first generate and fix a list of possible target translations for each unlabeled source phrase. 
+		Cause: [(0, 0), (0, 24)]
+		Effect: [(1, 2), (1, 17)]
+
+	CASE: 4
+	Stag: 40 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: The generation component is based on the observation that for structured label spaces, such as translation candidates for source phrases in SMT, even similar phrases have slightly different labels (target translations. 
+		Cause: [(0, 6), (0, 12)]
+		Effect: [(0, 14), (0, 33)]
+
+	CASE: 5
+	Stag: 41 42 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: The exponential dependence of the sizes of these spaces on the length of instances is to blame. Thus, the target phrase inventory from the parallel corpus may be inadequate for unlabeled instances. 
+		Cause: [(0, 0), (0, 16)]
+		Effect: [(1, 1), (1, 15)]
+
+	CASE: 6
+	Stag: 42 43 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: Thus, the target phrase inventory from the parallel corpus may be inadequate for unlabeled instances. We therefore need to enrich the target or label space for unknown phrases. 
+		Cause: [(0, 1), (1, 0)]
+		Effect: [(1, 2), (1, 12)]
+
+	CASE: 7
+	Stag: 44 
+		Pattern: 0 [[['lead', 'leads', 'led'], 'to']]---- [['&C', '(,/./;/--)', '&this', '(&adj)', '(&N)', '(&CAN/have/has/had)', '(&ADV)'], ['&NP@R@']]
+		sentTXT: A naïve way to achieve this goal would be to extract all n -grams, from n = 1 to a maximum n -gram order, from the monolingual data, but this strategy would lead to a combinatorial explosion in the number of target phrases. 
+		Cause: [(0, 1), (0, 34)]
+		Effect: [(0, 40), (0, 48)]
+
+	CASE: 8
+	Stag: 47 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We refer to these additional candidates as u'\u201c' generated u'\u201d' candidates. 
+		Cause: [(0, 7), (0, 17)]
+		Effect: [(0, 0), (0, 5)]
+
+	CASE: 9
+	Stag: 52 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: Based on these functions, source and target sequences of words can be mapped to sequences of stems. 
+		Cause: [(0, 2), (0, 3)]
+		Effect: [(0, 5), (0, 17)]
+
+	CASE: 10
+	Stag: 53 54 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The morphological generation step adds to the target graph all target word sequences from the monolingual data that map to the same stem sequence as one of the target phrases occurring in the baseline phrase table. In other words, this step adds phrases that are morphological variants of existing phrases, differing only in their affixes. 
+		Cause: [(0, 25), (1, 15)]
+		Effect: [(0, 0), (0, 23)]
+
+	CASE: 11
+	Stag: 56 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: To determine pairwise phrase similarities in order to embed these nodes in their graphs, we utilize the monolingual corpora on both the source and target sides to extract distributional features based on the context surrounding each phrase. 
+		Cause: [(0, 33), (0, 37)]
+		Effect: [(0, 0), (0, 30)]
+
+	CASE: 12
+	Stag: 62 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: 1 1 The q most frequent words in the monolingual corpus were removed as keys from this mapping, as these high entropy features do not provide much information. 
+		Cause: [(0, 14), (0, 27)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 13
+	Stag: 63 64 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The inverted index structure reduces the graph construction cost from u'\u0398' u'\u2062' ( n 2 ) , by only computing similarities for a subset of all possible pairs of phrases, namely other phrases that have at least one feature in common. As mentioned previously, we construct and fix a set of translation candidates, i.e.,, the label set for each unlabeled source phrase. 
+		Cause: [(1, 1), (1, 18)]
+		Effect: [(0, 0), (0, 49)]
+
+	CASE: 14
+	Stag: 70 71 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: 1 , this source would yield the cat and cat , among others, as candidates. The generated candidates for the unlabeled phrase u'\u2013' the ones from the baseline system u'\u2019' s decoder output, or from a morphological generator (e.g.,, a cat and catlike in Fig. 
+		Cause: [(0, 15), (1, 26)]
+		Effect: [(0, 2), (0, 12)]
+
+	CASE: 15
+	Stag: 73 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The morphologically-generated candidates for a given source unlabeled phrase are initially defined as the target word sequences in the monolingual data that have the same stem sequence as one of the baseline u'\u2019' s target translations for a source phrase which has the same stem sequence as the unlabeled source phrase. 
+		Cause: [(0, 13), (0, 54)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 16
+	Stag: 78 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: A graph propagation algorithm transfers label information from labeled nodes to unlabeled nodes by following the graph u'\u2019' s structure. 
+		Cause: [(0, 14), (0, 23)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 17
+	Stag: 83 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: This quantity is also known as the propagation probability, and its exact form will depend on the type of graph propagation algorithm used. 
+		Cause: [(0, 6), (0, 22)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 18
+	Stag: 84 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: For our purposes, node f is a source phrasal node, the set u'\ud835' u'\udca9' u'\u2062' ( f ) refers to other source phrases that are neighbors of f (restricted to the k -nearest neighbors as in § 2.2 ), and the aim is to estimate P ( e f ) , the probability of target phrase e being a phrasal translation of source phrase f. 
+		Cause: [(0, 51), (0, 69)]
+		Effect: [(0, 1), (0, 49)]
+
+	CASE: 19
+	Stag: 96 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: As a result, LP is suboptimal for our needs, since it is unable to appropriately handle generated translation candidates for the unlabeled phrases. 
+		Cause: [(0, 12), (0, 24)]
+		Effect: [(0, 0), (0, 9)]
+
+	CASE: 20
+	Stag: 97 98 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: These translation candidates are usually not present as translations for the labeled phrases (or for the labeled phrases that neighbor the unlabeled one in question. When propagating information from the labeled phrases, such candidates will obtain no probability mass since e u'\u2260' e u'\u2032'. 
+		Cause: [(0, 8), (1, 25)]
+		Effect: [(0, 0), (0, 6)]
+
+	CASE: 21
+	Stag: 98 99 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: When propagating information from the labeled phrases, such candidates will obtain no probability mass since e u'\u2260' e u'\u2032'. Thus, due to the setup of the problem, LP naturally biases away from translation candidates produced during the generation step (§ 2.1. 
+		Cause: [(0, 16), (1, 19)]
+		Effect: [(0, 0), (0, 14)]
+
+	CASE: 22
+	Stag: 98 99 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: When propagating information from the labeled phrases, such candidates will obtain no probability mass since e u'\u2260' e u'\u2032'. Thus, due to the setup of the problem, LP naturally biases away from translation candidates produced during the generation step (§ 2.1. 
+		Cause: [(0, 0), (0, 27)]
+		Effect: [(1, 1), (1, 23)]
+
+	CASE: 23
+	Stag: 104 105 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: In particular, the definition of target similarity is similar to that of source similarity. Therefore, the final update equation in SLP is. 
+		Cause: [(0, 0), (0, 14)]
+		Effect: [(1, 2), (1, 8)]
+
+	CASE: 24
+	Stag: 106 107 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: With this formulation, even if e u'\u2260' e u'\u2032' , the similarity T t ( e u'\u2032' e ) as determined by the target phrase graph will dictate propagation probability. We re-normalize the probability distributions after each propagation step to sum to one over the fixed list of translation candidates, and run the SLP algorithm to convergence. 
+		Cause: [(0, 33), (1, 20)]
+		Effect: [(0, 0), (0, 31)]
+
+	CASE: 25
+	Stag: 113 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We utilize the graph propagation-estimated forward phrasal probabilities u'\u2119' ( e f ) as the forward likelihood probabilities for the acquired phrases; to obtain the backward phrasal probability for a given phrase pair, we make use of Bayes u'\u2019' Theorem. 
+		Cause: [(0, 18), (0, 48)]
+		Effect: [(0, 0), (0, 16)]
+
+Section 3:  3 Evaluation has 20 CE cases
+	CASE: 1
+	Stag: 126 127 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Baseline phrasal systems are used both for comparison and for generating translation candidates for unlabeled phrases as described in § 2.1. The baseline is a state-of-the-art phrase-based system; we perform word alignment using a lexicalized hidden Markov model, and then the phrase table is extracted using the grow-diag-final heuristic [ 14 ]. 
+		Cause: [(0, 17), (1, 7)]
+		Effect: [(0, 0), (0, 15)]
+
+	CASE: 2
+	Stag: 133 134 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The NIST MT06 and MT08 Arabic-English evaluation sets (combining the newswire and weblog domains for both sets), with four references each, were used as tuning and testing sets respectively. For Urdu-English, the training corpus was provided by the LDC for the NIST Urdu-English MT evaluation, and most of the data was automatically acquired from the web, making it quite noisy. 
+		Cause: [(0, 28), (1, 19)]
+		Effect: [(0, 0), (0, 26)]
+
+	CASE: 3
+	Stag: 141 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: In addition, we obtained a corpus from the ELRA 5 5 ELRA-W0038 , which contains a mix of parallel and monolingual data; based on timestamps, we extracted a comparable English corpus for the ELRA Urdu monolingual data to form a roughly 470k-sentence u'\u201c' noisy parallel u'\u201d' set. 
+		Cause: [(0, 26), (0, 26)]
+		Effect: [(0, 28), (0, 57)]
+
+	CASE: 4
+	Stag: 144 145 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In our first set of experiments, we looked at the impact of choosing bigrams over unigrams as our basic unit of representation, along with performance of LP (Eq. 2 ) compared to SLP (Eq. 
+		Cause: [(0, 18), (1, 2)]
+		Effect: [(0, 0), (0, 16)]
+
+	CASE: 5
+	Stag: 147 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Recall that LP only takes into account source similarity; since the vast majority of generated candidates do not occur as labeled neighbors u'\u2019' labels, restricting propagation to the source graph drastically reduces the usage of generated candidates as labels, but does not completely eliminate it. 
+		Cause: [(0, 11), (0, 28)]
+		Effect: [(0, 30), (0, 51)]
+
+	CASE: 6
+	Stag: 147 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Recall that LP only takes into account source similarity; since the vast majority of generated candidates do not occur as labeled neighbors u'\u2019' labels, restricting propagation to the source graph drastically reduces the usage of generated candidates as labels, but does not completely eliminate it. 
+		Cause: [(0, 10), (0, 16)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 7
+	Stag: 147 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Recall that LP only takes into account source similarity; since the vast majority of generated candidates do not occur as labeled neighbors u'\u2019' labels, restricting propagation to the source graph drastically reduces the usage of generated candidates as labels, but does not completely eliminate it. 
+		Cause: [(0, 0), (0, 5)]
+		Effect: [(0, 6), (0, 7)]
+
+	CASE: 8
+	Stag: 149 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: Table 4 presents the results of these variations; overall, by taking into account generated candidates appropriately and using bigrams ( u'\u201c' SLP 2-gram u'\u201d' ), we obtained a 1.13 BLEU gain on the test set. 
+		Cause: [(0, 12), (0, 34)]
+		Effect: [(0, 35), (0, 45)]
+
+	CASE: 9
+	Stag: 156 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: We used a simple hand-built Arabic morphological analyzer that segments word types based on regular expressions, and an English lexicon-based morphological analyzer. 
+		Cause: [(0, 14), (0, 17)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 10
+	Stag: 157 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: The morphological candidates add a small amount of improvement, primarily by targeting genuine OOVs. 
+		Cause: [(0, 12), (0, 14)]
+		Effect: [(0, 0), (0, 10)]
+
+	CASE: 11
+	Stag: 158 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: In this set of experiments, we examined if the improvements in § 3.2 can be explained primarily through the extraction of language model characteristics during the semi-supervised learning phase, or through orthogonal pieces of evidence. 
+		Cause: [(0, 9), (0, 35)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 12
+	Stag: 162 
+		Pattern: 4 [['result'], ['is']]---- [['&C', '(,/./;/--)', '&ONE', '(&adj)'], ['(of &THIS (&NP))'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: Table 5 presents the results of using this language model. 
+		Cause: [(0, 0), (0, 2)]
+		Effect: [(0, 8), (0, 9)]
+
+	CASE: 13
+	Stag: 164 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Further examination of the differences between the two systems yielded that most of the improvements are due to better bigrams and trigrams, as indicated by the breakdown of the BLEU score precision per n -gram, and primarily leverages higher quality generated candidates from the baseline system. 
+		Cause: [(0, 24), (0, 48)]
+		Effect: [(0, 0), (0, 21)]
+
+	CASE: 14
+	Stag: 164 
+		Pattern: 7 [['due', 'to']]---- [['&V-ing/&NP@R@', '&BE'], ['&NP@C@', '(&Clause@C@)']]
+		sentTXT: Further examination of the differences between the two systems yielded that most of the improvements are due to better bigrams and trigrams, as indicated by the breakdown of the BLEU score precision per n -gram, and primarily leverages higher quality generated candidates from the baseline system. 
+		Cause: [(0, 18), (0, 21)]
+		Effect: [(0, 11), (0, 14)]
+
+	CASE: 15
+	Stag: 172 173 
+		Pattern: 4 [['result'], ['is']]---- [['&C', '(,/./;/--)', '&ONE', '(&adj)'], ['(of &THIS (&NP))'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: English monolingual u'\u201c' En II Noisy Parallel u'\u201d' + u'\u201c' En II Non-Comparable u'\u201d'. The results from this setup are presented as u'\u201c' Baseline u'\u201d' and u'\u201c' SLP+Noisy u'\u201d' in Table 6. 
+		Cause: [(0, 0), (0, 29)]
+		Effect: [(1, 4), (1, 34)]
+
+	CASE: 16
+	Stag: 177 178 
+		Pattern: 4 [['result'], ['is']]---- [['&C', '(,/./;/--)', '&ONE', '(&adj)'], ['(of &THIS (&NP))'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: English monolingual u'\u201c' En II Non-Comparable u'\u201d'. The results from this setup are presented as u'\u201c' Baseline+Noisy u'\u201d' and u'\u201c' SLP u'\u201d' in Table 6. 
+		Cause: [(0, 0), (0, 14)]
+		Effect: [(1, 4), (1, 35)]
+
+	CASE: 17
+	Stag: 179 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The two setups allow us to examine how effectively our method can learn from the noisy parallel data by treating it as monolingual (i.e.,, for graph construction), compared to treating this data as parallel, and also examines the realistic scenario of using completely non-comparable monolingual text for graph construction as in the second setup. 
+		Cause: [(0, 22), (0, 59)]
+		Effect: [(0, 0), (0, 20)]
+
+	CASE: 18
+	Stag: 188 189 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The third and fourth examples represent bigram phrases with much better translations compared to backing off to the lexical translations as in the baseline. The fifth Arabic-English example demonstrates the pitfalls of over-reliance on the distributional hypothesis the source bigram corresponding to the name u'\u201c' abd almahmood u'\u201d' is distributional similar to another named entity u'\u201c' mahmood u'\u201d' and the English equivalent is offered as a translation. 
+		Cause: [(0, 21), (1, 50)]
+		Effect: [(0, 0), (0, 19)]
+
+	CASE: 19
+	Stag: 191 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: The sixth example shows how morphological information can propose novel candidates an OOV word is broken down to its stem via the analyzer and candidates are generated based on the stem. 
+		Cause: [(0, 29), (0, 30)]
+		Effect: [(0, 0), (0, 26)]
+
+	CASE: 20
+	Stag: 194 195 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: By leveraging the monolingual corpus to understand the context of this unlabeled bigram, we can utilize the graph structure to propose a syntactically correct form, also resulting in a more fluent and correct sentence as determined by the language model. Examples 8 9 show cases where the baseline deletes words or translates them into more common words e.g.,, u'\u201c' conversation u'\u201d' to u'\u201c' the u'\u201d' , while our system proposes reasonable candidates. 
+		Cause: [(0, 37), (1, 36)]
+		Effect: [(0, 0), (0, 35)]
+
+Section 4:  4 Related Work has 7 CE cases
+	CASE: 1
+	Stag: 196 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: The idea presented in this paper is similar in spirit to bilingual lexicon induction (BLI), where a seed lexicon in two different languages is expanded with the help of monolingual corpora, primarily by extracting distributional similarities from the data using word context. 
+		Cause: [(0, 37), (0, 45)]
+		Effect: [(0, 0), (0, 35)]
+
+	CASE: 2
+	Stag: 197 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: This line of work, initiated by Rapp ( 1995 ) and continued by others [ 7 , 13 ] ( inter alia ) is limited from a downstream perspective, as translations for only a small number of words are induced and oftentimes for common or frequently occurring ones only. 
+		Cause: [(0, 32), (0, 50)]
+		Effect: [(0, 0), (0, 29)]
+
+	CASE: 3
+	Stag: 198 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: Recent improvements to BLI [ 24 , 10 ] have contained a graph-based flavor by presenting label propagation-based approaches using a seed lexicon, but evaluation is once again done on top-1 or top-3 accuracy, and the focus is on unigrams. 
+		Cause: [(0, 15), (0, 22)]
+		Effect: [(0, 23), (0, 41)]
+
+	CASE: 4
+	Stag: 200 201 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: 2013 ) and Irvine and Callison-Burch ( 2013 ) conduct a more extensive evaluation of their graph-based BLI techniques, where the emphasis and end-to-end BLEU evaluations concentrated on OOVs, i.e.,, unigrams, and not on enriching the entire translation model. As with previous BLI work, these approaches only take into account source-side similarity of words; only moderate gains (and in the latter work, on a subset of language pairs evaluated) are obtained. 
+		Cause: [(1, 1), (1, 34)]
+		Effect: [(0, 22), (0, 43)]
+
+	CASE: 5
+	Stag: 201 202 
+		Pattern: 1 [['because', 'of']]---- [['&C', '(,/;/./--)', '(&ADV)'], ['(&THIS)', '&NP', '&R']]
+		sentTXT: As with previous BLI work, these approaches only take into account source-side similarity of words; only moderate gains (and in the latter work, on a subset of language pairs evaluated) are obtained. Additionally, because of our structured propagation algorithm, our approach is better at handling multiple translation candidates and does not need to restrict itself to the top translation. 
+		Cause: [(0, 1), (1, 0)]
+		Effect: [(1, 8), (1, 28)]
+
+	CASE: 6
+	Stag: 206 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: In our case, we obtain the phrase pairs from the graph structure (and therefore indirectly from the monolingual data) and a separate generation step, which plays an important role in good performance of the method. 
+		Cause: [(0, 0), (0, 13)]
+		Effect: [(0, 16), (0, 37)]
+
+	CASE: 7
+	Stag: 212 213 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: However, the former work operates only at the level of sentences, and while the latter does extend the framework to sub-spans of sentences, they do not discover new translation pairs or phrasal probabilities for new pairs at all, but instead re-estimate phrasal probabilities using the graph structure and add this score as an additional feature during decoding. The goal of leveraging non-parallel data in machine translation has been explored from several different angles. 
+		Cause: [(0, 56), (1, 14)]
+		Effect: [(0, 12), (0, 54)]
+
+Section 5:  5 Conclusion has 0 CE cases
+#-------------------------------------------------
+

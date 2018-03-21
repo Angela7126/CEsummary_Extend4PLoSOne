@@ -1,0 +1,130 @@
+(lp0
+VIn the network the width of a feature map at an intermediate layer varies depending on the length of the input sentence; the resulting architecture is the Dynamic Convolutional Neural Network
+p1
+aVThe binary result is based on a DCNN that has a wide convolutional layer followed by a folding layer, a dynamic k -max pooling layer and a non-linearity; it has a second wide convolutional layer followed by a folding layer, a k -max pooling layer and a non-linearity
+p2
+aVBy adding a max pooling layer to the network, the TDNN can be adopted as a sentence model []
+p3
+aVLike in the convolutional networks for object recognition [] , we enrich the representation in the first layer by computing multiple feature maps with different filters applied to the input sentence
+p4
+aVThe network is topped by a softmax classification layer
+p5
+aVA convolutional layer in the network is obtained by convolving a matrix of weights u'\u005cud835' u'\u005cudc26' u'\u005cu2208' u'\u005cu211d' d × m with the matrix of activations at the layer below
+p6
+aVSubsequent layers also have multiple feature maps computed by convolving filters with all the maps from the layer below
+p7
+aVFinally, a further class of neural sentence models is based on the convolution operation and the TDNN architecture []
+p8
+aVAs in convolutional networks for object recognition, to increase the number of learnt feature detectors of a certain order, multiple feature maps u'\u005cud835' u'\u005cudc05' 1 i , u'\u005cu2026' , u'\u005cud835' u'\u005cudc05' n i may be computed in parallel at the same layer
+p9
+aVA sentence model based on a recurrent neural network is sensitive to word order, but it has a bias towards the latest words that it takes as input []
+p10
+aVMultiple convolutional layers may be stacked by taking the resulting sequence u'\u005cud835' u'\u005cudc1c' as input to the next layer
+p11
+aVWith a folding layer, a feature detector of the i -th order depends now on two rows of feature values in the lower maps of order i - 1
+p12
+aVThe Max-TDNN performs worse than the NBoW likely due to the excessive pooling of the max pooling operation; the latter discards most of the sentiment features of the words in the input sentence
+p13
+aVBesides comprising powerful classifiers as part of their architecture, neural sentence models can be used to condition a neural language model to generate sentences word by word []
+p14
+aVIncreasing m or stacking multiple convolutional layers of the narrow type makes the range of the feature detectors larger; at the same time it also exacerbates the neglect of the margins of the sentence and increases the minimum size s of the input sentence required by the convolution
+p15
+aVWe describe some of the properties of the sentence model based on the DCNN
+p16
+aVThis guarantees that the input to the fully connected layers is independent of the length of the input sentence
+p17
+aVThe filters u'\u005cud835' u'\u005cudc26' of the wide convolution in the first layer can learn to recognise specific n -grams that have size less or equal to the filter width m ; as we see in the experiments, m in the first layer is often set to a relatively large value such as 10
+p18
+aVA node from a layer is connected to a node from the next higher layer if the lower node is involved in the convolution that computes the value of the higher node
+p19
+aVFor example, the second layer is obtained by applying a convolution to the sentence matrix u'\u005cud835' u'\u005cudc2c' itself
+p20
+aVSecondly, the pooling parameter k can be dynamically chosen by making k a function of other aspects of the network or the input
+p21
+aVThe DCNN for the fine-grained result has the same architecture, but the filters have size 10 and 7, the top pooling parameter k is 5 and the number of maps is, respectively, 6 and 12
+p22
+aVThe Max-TDNN sentence model is based on the architecture of a TDNN []
+p23
+aVA central class of models are those based on neural networks
+p24
+aVIf we temporarily ignore the pooling layer, we may state how one computes each d -dimensional column a in the matrix u'\u005cud835' u'\u005cudc1a' resulting after the convolutional and non-linear layers
+p25
+aVVarious neural sentence models have been described
+p26
+aVThe feature extraction function as stated in Eq
+p27
+aVThrough supervised training, neural sentence models can fine-tune these vectors to information that is specific to a certain task
+p28
+aVBut, as we see next, at intermediate convolutional layers the pooling parameter k is not fixed, but is dynamically selected in order to allow for a smooth extraction of higher-order and longer-range features
+p29
+aVThe RNN is primarily used as a language model, but may also be viewed as a sentence model with a linear structure
+p30
+aVThe difference in performance between the DCNN and the NBoW further suggests that the ability of the DCNN to both capture features based on long n -grams and to hierarchically combine these features is highly beneficial
+p31
+aVConcretely, we think of u'\u005cud835' u'\u005cudc2c' as the input sentence and u'\u005cud835' u'\u005cudc2c' i u'\u005cu2208' u'\u005cu211d' is a single feature value associated with the i -th word in the sentence
+p32
+aVThe fixed-sized vector u'\u005cud835' u'\u005cudc1c' m u'\u005cu2062' a u'\u005cu2062' x is then used as input to a fully connected layer for classification
+p33
+aVFor an example in sentiment prediction, according to the equation a first order feature such as a positive word occurs at most k 1 times in a sentence of length s , whereas a second order feature such as a negated phrase or clause occurs at most k 2 times
+p34
+aVSecond order features are similarly obtained by applying Eq
+p35
+aVEach feature map u'\u005cud835' u'\u005cudc05' j i is computed by convolving a distinct set of filters arranged in a matrix u'\u005cud835' u'\u005cudc26' j , k i with each feature map u'\u005cud835' u'\u005cudc05' k i - 1 of the lower order i - 1 and summing the results
+p36
+aVHigher-order features have highly variable ranges that can be either short and focused or global and long as the input sentence
+p37
+aVThe result of the narrow convolution is a subsequence of the result of the wide convolution
+p38
+aVThe feature detectors learn to recognise not just single n -grams, but patterns within n -grams that have syntactic, semantic or structural significance
+p39
+aVThis gives the RNN excellent performance at language modelling, but it is suboptimal for remembering at once the n -grams further back in the input sentence
+p40
+aVLikewise, the edges of a subgraph in the induced graph reflect these varying ranges
+p41
+aVThe network matches the accuracy of other state-of-the-art methods that are based on large sets of engineered features and hand-coded knowledge resources
+p42
+aVFor a map of d rows, folding returns a map of d / 2 rows, thus halving the size of the representation
+p43
+aVWe begin by specifying aspects of the implementation and the training of the network
+p44
+aVSince individual sentences are rarely observed or not observed at all, one must represent a sentence in terms of features that depend on the words and short n -grams in the sentence that are frequently observed
+p45
+aVThey can be trained to obtain generic vectors for words and phrases by predicting, for instance, the contexts in which the words and phrases occur
+p46
+aVAs in the TDNN for phoneme recognition [] , the sequence u'\u005cud835' u'\u005cudc2c' is viewed as having a time dimension and the convolution is applied over the time dimension
+p47
+aVSince the filters have width 7, for each of the 288 feature detectors we rank all 7 -grams occurring in the validation and test sets according to their activation of the detector
+p48
+aVWe denote a feature map of the i -th order by u'\u005cud835' u'\u005cudc05' i
+p49
+aVUsing the well-known convolution theorem, we can compute fast one-dimensional linear convolutions at all rows of an input matrix by using Fast Fourier Transforms
+p50
+aVFor this reason higher-order and long-range feature detectors cannot be easily incorporated into the model
+p51
+aVThe network is trained on 1.6 million tweets labelled automatically according to the emoticon that occurs in them
+p52
+aVwhere * indicates the wide convolution
+p53
+aVA TDNN convolves a sequence of inputs u'\u005cud835' u'\u005cudc2c' with a set of weights u'\u005cud835' u'\u005cudc26'
+p54
+aVIn the next experiment we compare the performance of the DCNN with those of methods that use heavily engineered resources
+p55
+aVLabelled phrases that occur as subparts of the training sentences are treated as independent training instances
+p56
+aVThe Max-TDNN model has many desirable properties
+p57
+aV6 has a more general form than that in a RecNN, where the value of m is generally 2
+p58
+aVFull dependence between different rows could be achieved by making u'\u005cud835' u'\u005cudc0c' in Eq
+p59
+aVOut-of-range input values u'\u005cud835' u'\u005cudc2c' i where i 1 or i s are taken to be zero
+p60
+aVEach u'\u005cud835' u'\u005cudc2c' j is often not just a single value, but a vector of d values so that u'\u005cud835' u'\u005cudc2c' u'\u005cu2208' u'\u005cu211d' d × s
+p61
+aVLikewise, in the fine-grained case, we use the standard 8544/1101/2210 splits
+p62
+aVWe find detectors for multiple other notable constructs including u'\u005cu2018' all u'\u005cu2019' , u'\u005cu2018' or u'\u005cu2019' , u'\u005cu2018' with u'\u005cu2026' that u'\u005cu2019' , u'\u005cu2018' as u'\u005cu2026' as u'\u005cu2019'
+p63
+aVAs an aid to question answering, a question may be classified as belonging to one of many question types
+p64
+a.

@@ -1,0 +1,152 @@
+(lp0
+VWe did this evaluation for the candidate birth, join and split sense clusters obtained by comparing 1909-1953 time period with respect to 2002-2005
+p1
+aVAn element of the table shows the number of candidate words obtained by comparing the corresponding source and target time periods
+p2
+aVColumns correspond to the candidate words, words obtained in the cluster of each candidate word (we will use the term u'\u005cu2018' birth cluster u'\u005cu2019' for these words, henceforth), which indicated a new sense, the results of manual evaluation as well as the possible sense this birth cluster denotes
+p3
+aVIf a word undergoes sense change, this can be detected by comparing the sense clusters obtained from two different time periods by the algorithm outlined above
+p4
+aVWe, therefore, utilize the basic hypothesis of unsupervised sense induction to induce the sense clusters over various time periods and then compare these clusters to detect sense change
+p5
+aVFor a candidate word flagged as birth, we first find out the set of all WordNet synset ids for its CW clusters in the source time period (1909-1953 in this case
+p6
+aVTable 3 shows the evaluation results for a few candidate words, flagged due to birth
+p7
+aVIf a word undergoes a sense change, this can be detected by comparing its senses obtained from two different time periods
+p8
+aVFor the join case, we find WordNet synset ids s 1 and s 2 for the clusters obtained in the source time period and s n u'\u005cu2062' e u'\u005cu2062' w for the join cluster in the target time period
+p9
+aVDuring evaluation, we considered the clusters obtained using the 1909-1953 time-slice as our reference and attempted to track sense change by comparing these with the clusters obtained for 2002-2005
+p10
+aVWe next describe our algorithm for detecting sense change from these sets of sense clusters
+p11
+aVIn summary, the aligner tool takes as input the CW cluster and returns a WordNet synset id that corresponds to the cluster words
+p12
+aVSince it was difficult to go through all the candidate sense changes for all the comparisons manually, we decided to randomly select some candidate words, which were flagged by our algorithm as undergoing sense change, while comparing 1909-1953 and 2002-2005 DT
+p13
+aVWe therefore decided to perform an evaluation as to how many slang words were being detected by our candidate birth clusters
+p14
+aVSince we can not expect a perfect split, birth etc., we used certain threshold values to detect if a candidate word is undergoing sense change via one of these four cases
+p15
+aVRemarkably, comparison with the English WordNet indicates that in 44% cases, as identified by our algorithm, there has been a birth of a completely novel sense, in 46% cases a new sense has split off from an older sense and in 43% cases two or more older senses have merged in to form a new sense
+p16
+aVSince we aim to detect this change automatically, we require distributional representations corresponding to word senses for different time periods
+p17
+aVWe prune these lists further based on the stability of the sense, as well as to locate the approximate time interval, in which the sense change might have occurred
+p18
+aVThe CW cluster is then aligned to WordNet synsets by comparing the clusters with WordNet graph and the synset with the maximum alignment score is returned as the output
+p19
+aVA further analysis of the words marked due to birth in the random samples indicates that there are 22 technology-related words, 2 slangs, 3 economics related words and 2 general words
+p20
+aVTo detect a true death of a sense, persistence analysis was required, that is, to verify if the sense was persisting earlier and vanished after a certain time period
+p21
+aVWe append an additional row and column to capture the fraction of words, which did not show up in any of the sense clusters in another time interval
+p22
+aVHowever, not all the candidate words were stable
+p23
+aVThe algorithm, in particular, produces a set of clusters for each target word by decomposing its open neighborhood
+p24
+aVMuch of our evaluation was focussed on the birth sense clusters, mainly because these are more interesting from a lexicographic perspective
+p25
+aVThis corresponds to the fact that the number of years in the time periods decreases as we move downwards, and therefore, the gap also decreases
+p26
+aVFor most of the cases, the number of candidate birth senses tends to increase as we go from left to right
+p27
+aVIn Section 4 we present an approach based on graph clustering to identify the time-varying sense clusters and in Section 5 we present the split-merge based approach for tracking word sense changes
+p28
+aVWe sort the candidate list obtained in Stage 2 as per their occurrence in the first time period
+p29
+aVToward this objective we make the following contributions a) devise a time-varying graph clustering based sense induction algorithm, (b) use the time-varying sense clusters to develop a split-join based approach for identifying new senses of a word, and (c) evaluate the performance of the algorithms on various datasets using different suitable approaches along with a detailed error analysis
+p30
+aVOne of the authors annotated each of the birth cases identifying whether or not the algorithm signalled a true sense change while another author did the same task for the split/join cases
+p31
+aVOnce we were able to locate the senses as well as to find the age of the senses, we attempted to select some representative words and plotted them on a timeline as per the birth period and their age in Figure 2
+p32
+aVWe chose WordNet for automated evaluation because not only does it have a wide coverage of word senses but also it is being maintained and updated regularly to incorporate new senses
+p33
+aVFor instance, among the 4238 candidate birth sense detected by comparing T 1 and T 6 , many of these new senses might have come up in between T 2 to T 5 as well
+p34
+aVFor the split-join case we found that there are 3 technology-related words while the rest of the words are general
+p35
+aVThe accuracy as per manual evaluation was found to be 60.4% for the birth cases and 57% for the split/join cases
+p36
+aVNew slang words come up every now and then, and this plays an integral part in the phenomena of sense change
+p37
+aVSimilarly, for a candidate sense change from t u'\u005cu2062' v i to t u'\u005cu2062' v j , we say that the location of the sense change is t u'\u005cu2062' v j if and only if that sense change does not get detected by comparing t u'\u005cu2062' v i with any time interval t u'\u005cu2062' v k , intermediate between t u'\u005cu2062' v i and t u'\u005cu2062' v j
+p38
+aVWe then manually verified some of the words that were deemed as successes, as well as investigated WordNet sense they were mapped to
+p39
+aVFormally, we consider a sense change from t u'\u005cu2062' v i to t u'\u005cu2062' v j stable if it was also detected while comparing t u'\u005cu2062' v i with the following time periods t u'\u005cu2062' v k s
+p40
+aVWe hypothesize that word w can undergo sense change from one time interval ( t u'\u005cu2062' v i ) to another ( t u'\u005cu2062' v j ) as per one of the following scenarios
+p41
+aVIn Figure 1 , as an example, we illustrate the birth of a new sense for the word u'\u005cu2018' compiler u'\u005cu2019'
+p42
+aV1 u'\u005cu2264' k u'\u005cu2264' m , l = n + 1 denotes the fraction of words in the sense cluster s i u'\u005cu2062' k , that did not show up in any of the n clusters in t u'\u005cu2062' v j
+p43
+aVSimilarly, this number decreases as we go down in the table
+p44
+aVEven while moving diagonally, the candidate words tend to decrease as we move downwards
+p45
+aVThus, the matrix I captures all the four possible scenarios for sense change
+p46
+aVOpinion formation deals with the self-organisation and emergence of shared vocabularies whereas our work focuses on how the different senses of these vocabulary words change over time and thus become u'\u005cu201c' out-of-vocabulary u'\u005cu201d'
+p47
+aVTherefore one of the key observations is that most of the technology related words (where the neighborhood is completely new) could be extracted from our birth results
+p48
+aVThen, if s n u'\u005cu2062' e u'\u005cu2062' w u'\u005cu2209' S i u'\u005cu2062' n u'\u005cu2062' i u'\u005cu2062' t , it implies that this is a new sense that was not present in the source clusters and we call it a u'\u005cu2018' success u'\u005cu2019' as per WordNet
+p49
+aVThis is quite intuitive since going from left to right corresponds to increasing the gap between two time periods while going down corresponds to decreasing this gap
+p50
+aVA sense cluster s i u'\u005cu2062' z in t u'\u005cu2062' v i splits into two (or more) sense clusters, s j u'\u005cu2062' p 1 and s j u'\u005cu2062' p 2 in t u'\u005cu2062' v j
+p51
+aVIn contrast, for the split-join instances most of the results are from the general category since the neighborhood did not change much here; it either got split or merged from what it was earlier
+p52
+aVHowever, this method is limited as it only considers two time points to identify sense changes as opposed to our approach which is over a much larger timescale, thereby, effectively allowing us to track the points of change and the underlying causes
+p53
+aVAs the gap increases (decreases), one would expect more (less) new senses coming in
+p54
+aVThus, it was important to prune these results using stability analysis
+p55
+aVHowever, another equally important aspect that has not been so far well investigated corresponds to one or more changes that a word might undergo in its sense
+p56
+aVFrom the above list, we retain only those candidate words, which have a part-of-speech tag u'\u005cu2018' NN u'\u005cu2019' or u'\u005cu2018' NNS u'\u005cu2019' , as we focus on nouns for this work
+p57
+aVFollowing this, we compute the frequencies of the word, the context and the words along with their context
+p58
+aV[ Cook et al.2013 ] attempts to induce word senses and then identify novel senses by comparing two different corpora the u'\u005cu201c' focus corpora u'\u005cu201d' (i.e.,, a recent version of the corpora) and the u'\u005cu201c' reference corpora u'\u005cu201d' (older version of the corpora
+p59
+aVThen, we remove the top 20 u'\u005cu2062' % and the bottom 20 u'\u005cu2062' % words from this list
+p60
+aVThis change is further interesting because while traditionally u'\u005cu201c' sick u'\u005cu201d' has been associated to something negative in general, the current meaning associates positivity with it
+p61
+aVSome of the first attempts to automatic word sense discovery were made by Karen Spärck Jones [ Jones1986 ] ; later in lexicography, it has been extensively used as a pre-processing step for preparing mono- and multi-lingual dictionaries [ Kilgarriff and Tugwell2001 , Kilgarriff2004 ]
+p62
+aVIn this approach, we first extract each word and a set of its context features, which are formed by labeled and directed dependency parse edges as provided in the dataset
+p63
+aVIt only reports frequency of word usage over the years, but does not give any correlation among them as e.g.,, in [ Heyer et al.2009 ] , and does not analyze their senses
+p64
+aVA few approaches suggested by [ Bond et al.2009 , Pääkkö and Lindén2012 ] attempt to augment WordNet synsets primarily using methods of annotation
+p65
+aVAs a motivating example one could consider the word u'\u005cu201c' sick u'\u005cu201d' u'\u005cu2013' while according to the standard English dictionaries the word is normally used to refer to some sort of illness, a new meaning of u'\u005cu201c' sick u'\u005cu201d' referring to something that is u'\u005cu201c' crazy u'\u005cu201d' or u'\u005cu201c' cool u'\u005cu201d' is currently getting popular in the English vernacular
+p66
+aVSo, an element I k u'\u005cu2062' l of the matrix
+p67
+aVTherefore, we consider the torso of the frequency distribution which is the most informative part for this type of an analysis
+p68
+aVOther similar works on dynamic topic modelling can be found in [ Blei and Lafferty2006 , Wang and McCallum2006 ]
+p69
+aVTopic detection involves detecting the occurrence of a new event such as a plane crash, a murder, a jury trial result, or a political scandal in a stream of news stories from multiple sources and tracking is the process of monitoring a stream of news stories to find those that track (or discuss) the same event
+p70
+aVThis particular aspect is getting increasingly attainable as more and more time-varying text data become available in the form of millions of digitized books [ Goldberg and Orwant2013 ] gathered over the last centuries
+p71
+aVThis is done on shorter timescales (hours, days), whereas our study focuses on larger timescales (decades, centuries) and we are interested in common nouns, verbs and adjectives as opposed to events that are characterized mostly by named entities
+p72
+aVHowever, as we have already pointed out that none of these works consider the temporal aspect of the problem
+p73
+aVPG would like to thank Google India Private Ltd for extending travel support to attend the conference
+p74
+aVAM would like to thank DAAD for supporting the faculty exchange programme to TU Darmstadt
+p75
+a.

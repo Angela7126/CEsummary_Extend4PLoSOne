@@ -1,0 +1,20 @@
+(lp0
+VNext, we present a number of synthetic experiments performed in order to find the best distance function for this kind of annotation; finally we contrast our new metric and simple accuracy scores as applied to real-world corpora before concluding and presenting some potential avenues for future work
+p1
+aVHowever, most evaluations of syntactic treebanks use simple accuracy measures such as bracket F 1 scores for constituent trees (NEGRA, [] ; TIGER, [] ; Cat3LB, [] ; The Arabic Treebank, [] ) or labelled or unlabelled attachment scores for dependency syntax (PDT, [] ; PCEDT [] ; Norwegian Dependency Treebank, []
+p2
+aVThe Star-Sem Data is a portion of the dataset released for the *SEM 2012 shared task [] , parsed using the LinGO English Resource Grammar (ERG, [] ) and the resulting parse forest disambiguated based on discriminants
+p3
+aVA distinguishing feature of the tectogrammatical analyses, vis a vis the other treebanks we are using, is that semantically empty words only take part in the analytical annotation layer and nodes are inserted at the tectogrammatical layer to represent covert elements of the sentence not present in the surface syntax of the analytical layer
+p4
+aVThe results of these experiments are shown in Figure 3 , with the labelled attachment score 6 6 The de facto standard parser evaluation metric in dependency parsing the percentage of tokens that receive the correct head and dependency relation
+p5
+aVWhereas LAS responds linearly to perturbation of both labels and structure, with its parabolic behaviour in Figure 3 being simply the product of these two linear responses, the u'\u005cu0391' metrics respond differently to structural noise and label noise, with label disagreements being penalised less harshly than structural disagreements
+p6
+aVInstead, the grammar parses the input sentences, and the annotator selects the correct parse (or rejects all the candidates) based on discriminants 2 2 A discriminant is an attribute of the analyses produced by the grammar where some of the analyses differ, e.g., is the word jump a noun or a verb, or does a PP attach to a VP or the VP u'\u005cu2019' s object NP of the parse forest
+p7
+aVTherefore we remove the leaf nodes in the case of phrase structure trees, and in the case of dependency trees we compare trees whose edges are unlabelled and nodes are labelled with the dependency relation between that word and its head; the root node receives the label u'\u005cu0395'
+p8
+aVAs shown in
+p9
+a.

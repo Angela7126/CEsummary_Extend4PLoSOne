@@ -1,0 +1,28 @@
+(lp0
+VThe main research question in this research is how to disambiguate an L1 word or phrase to its L2 translation based on an L2 context, and whether such cross-lingual contextual approaches provide added value compared to baseline models that are not context informed or compared to standard language models
+p1
+aVWe see that the language model baseline for English u'\u005cu2192' French shows the same substantial improvement over the baseline as our English u'\u005cu2192' Spanish results
+p2
+aVPreparing the data to build training and test data for our intended translation assistance system is not trivial, as the type of interactive translation assistant we aim to develop does not exist yet
+p3
+aVWe do so by normalising the class probability from the classifier ( s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e T u'\u005cu2062' ( H ) ), which is our translation model, and the language model ( s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e l u'\u005cu2062' m u'\u005cu2062' ( H ) ), in such a way that the highest classifier score for the alternatives under consideration is always 1.0 , and the highest language model score of the sentence is always 1.0
+p4
+aVThe language model is a trigram-based back-off language model with Kneser-Ney smoothing, computed using SRILM [] and trained on the same training data as the translation model
+p5
+aVThis intuitively makes sense; a context of one may seem to be better than any other when uniformly applied to all classifier experts, but it may well be that certain classifiers benefit from different feature selections
+p6
+aVWhen presented with test data, in which the L1 fragment is explicitly marked, we first check whether there is ambiguity for this L1 fragment and if a direct translation is available in our simple mapping table
+p7
+aVIf not, we check for the presence of a classifier expert for the offered L1 fragment; only then we can proceed by extracting the desired number of L2 local context words to the immediate left and right of this fragment and adding those to the feature vector
+p8
+aVIn other words, for each word type or phrase type that occurs as a fragment in the training set, and which does not map to just a single translation, a classifier is trained
+p9
+aVA second baseline was constructed by weighing the probabilities from the translation table directly with the L2 language model described earlier
+p10
+aVThird, we observe that adding the language model to our classifier leads to another significant gain (configuration l1r1 + LM in the results in Table 2
+p11
+aVThe fact that a phrase-translation table needs to be constructed for the test data is also the reason that the parallel corpus split from which the test data is derived has to be large enough, ensuring better quality
+p12
+aVAn ideal test corpus would consist
+p13
+a.

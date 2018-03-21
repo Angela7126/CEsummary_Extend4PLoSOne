@@ -1,0 +1,17 @@
+<html>
+<head>
+<title>f0029.txt.s3</title>
+</head>
+<body bgcolor="white">
+<a name="0">[0]</a> <a href="#0" id=0>Computing misses is more complex.</a>
+<a name="1">[1]</a> <a href="#1" id=1>First, we need to know for each object O1 in run1 what other runs overlap O1 to within the run-run2 classification distance.</a>
+<a name="2">[2]</a> <a href="#2" id=2>In order to do so, we create a Overlap table and filled it with all Overlap records find in run1 and run 2.</a>
+<a name="3">[3]</a> <a href="#3" id=3>For each Overlap record, we uses the HTM fRegionGetObjectsFromRegionId function to search the catalog for run1 objects that are in the run1-run2 overlap region but do not yet have a run2 entry in the Match table.</a>
+<a name="4">[4]</a> <a href="#4" id=4>When this is done, the Miss table lists all the O1-Run2 misses.</a>
+<a name="5">[5]</a> <a href="#5" id=5>Next, we need to judge if the missing object O1 is either near the run2 footprint edge or is inside a run2 mask.</a>
+<a name="6">[6]</a> <a href="#6" id=6>We categorize each miss as ephemeral, masked or edge, and put that characterization in the Match table.</a>
+<a name="7">[7]</a> <a href="#7" id=7>First, we find the edge cases by using the Overlap.OverlapRegionEdgeID.</a>
+<a name="8">[8]</a> <a href="#8" id=8>Then, we use the Overlap.run2MasksID which is region ID of the union of the run2 and the HTM code to identify all the Miss objects inside the mask region.</a>
+<a name="9">[9]</a> <a href="#9" id=9>The residual misses must be ephemeral.</a>
+</body>
+</html>

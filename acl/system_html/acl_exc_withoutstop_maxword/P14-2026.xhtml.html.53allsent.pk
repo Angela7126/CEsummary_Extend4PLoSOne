@@ -1,0 +1,92 @@
+(lp0
+VBy applying our rules and Wang et al u'\u005cu2019' s rules, one can use both dependency and constituency parsers for pre-ordering in Chinese-English PBSMT
+p1
+aV2) Filter out the structures from which it was almost impossible to derive candidate pre-ordering rules because x or y was an u'\u005cu201c' irrespective u'\u005cu201d' dependency relation, for example, root, conj, cc and so on
+p2
+aVIf the reordering produced a Chinese phrase that had a closer word order to that of the English one, this structure would be a candidate pre-ordering rule
+p3
+aVBy using both our rules and Wang et al u'\u005cu2019' s rules, one can obtain diverse machine translation results because the pre-ordering results of these two rule sets are generally different
+p4
+aV[ 2007 ] , we carried out human evaluations to assess the accuracy of our dependency-based pre-ordering rules by employing the system u'\u005cu201c' OUR DEP 2 u'\u005cu201d' in Table 1
+p5
+aVAs a result, we obtained eight pre-ordering rules in total, which can be divided into three dependency relation categories
+p6
+aVTherefore, we applied a rule plmod lobj (localizer object) to reposition the dependent word of the plmod relation (e.g.,, u'\u005cu201c' 前 u'\u005cu201d' in Figure 2) to the position before the lobj structure (e.g.,, u'\u005cu201c' 美国�大使馆 u'\u005cu201d' in Figure 2
+p7
+aVSearch the Chinese dependency parse trees in the corpus and rank all of the structures matching the two types of rules respectively according to their frequencies
+p8
+aVRecognizing that prep structures occur before the verb in Chinese (e.g.,, u'\u005cu201c' 在�此�地 u'\u005cu201d' in Figure 5) but after the verb in English (usually in the last position of a verb phrase, e.g.,, u'\u005cu201c' here u'\u005cu201d' in the caption of Figure 5), we applied a rule prep - dobj to reposition prep structures after their sibling dobj structures
+p9
+aVThe purpose of this paper is to introduce a novel dependency-based pre-ordering approach through creating a pre-ordering rule set and applying it to the Chinese-English PBSMT system
+p10
+aVWe define the dependency structure of a dependency relation as the structure containing the dependent word (e.g.,, the word directly indicated by plmod, or u'\u005cu201c' 前 u'\u005cu201d' in Figure 2) and the whole subtree under the dependency relation (all of the words that directly or indirectly depend on the dependent word, or the words under u'\u005cu201c' 前 u'\u005cu201d' in Figure 2
+p11
+aVSince dependency parsing is more concise than constituent parsing in describing sentences, some research has used dependency parsing in pre-ordering approaches for language pairs such as Arabic-English [ 2007 ] , and English-SOV languages [ 2009 , 2011 ]
+p12
+aVBecause there are a lot of language specific decisions that reflect specific aspects of the source language and the language pair combination, our rule set provides a valuable resource for pre-ordering in Chinese-English PBSMT
+p13
+aVHowever, both of them substantially decreased the total times about 60% (or 1,600,000) for pre-ordering rule applications on the training set, compared with WR07
+p14
+aVFor each kind of structure, we selected some of the sample dependency parse trees that contained it, tried to restructure the parse trees according to the matched rule and judged the reordered Chinese phrases
+p15
+aVFirst, we converted the constituent parse trees in the results of the Berkeley Parser into dependency parse trees by employing a tool in the Stanford Parser [ 2003 ]
+p16
+aVThe overall accuracy of this rule set is 60.0%, which is almost at the same level as the WR07 rule set (62.1%), according to the similar evaluation (200 sentences and one annotator) conducted in Wang et al
+p17
+aVThus, we attempted to conduct pre-ordering based on dependency parsing
+p18
+aVIn this case, the affect of the performance of the constituent parsers on pre-ordering is larger than that of the dependency ones so that the constituent parsers are likely to bring about more incorrect pre-orderings
+p19
+aVHere, both x and y are dependency relations (e.g.,, plmod or lobj in Figure 2
+p20
+aVHowever, in English, this kind of word (e.g.,, u'\u005cu201c' front u'\u005cu201d' in the caption of Figure 2) always occur directly after prepositions, which is to say, in the second position in a prepositional phrase
+p21
+aVFurther, we define X and Y as the corresponding dependency structures of the dependency relations x and y , respectively
+p22
+aVBecause dependency parse trees are generally more concise than the constituent ones, they can conduct long-distance reorderings in a finer way
+p23
+aVAs we thought that Stanford typed dependencies could describe language phenomena more meticulously owing to more types of grammatical relations, we preferred to use it for searching candidate pre-ordering rules
+p24
+aVIn our opinion, the reason for the great decrease was that the dependency parse trees were more concise than the constituent parse trees in describing sentences and they could also describe the reordering at the sentence level in a finer way
+p25
+aVSyntax-based pre-ordering by employing constituent parsing have demonstrated effectiveness in many language pairs, such as English-French [ 2004 ] , German-English [ 2005 ] , Chinese-English [ 2007 , 2008 ] , and English-Japanese [ 2010 ]
+p26
+aVAs shown in the figure, relative clause modifiers in Chinese (e.g.,, u'\u005cu201c' 接近�夏隆�的 u'\u005cu201d' in Figure 3) occurs before the noun being modified, which is in contrast to English (e.g.,, u'\u005cu201c' close to Sharon u'\u005cu201d' in the caption of Figure 3), where they come after
+p27
+aVIn the primary experiments, we tested the effectiveness of the candidate rules and filtered the ones that did not work based on the BLEU scores on the development set
+p28
+aVThe Berkeley Parser [ 2006 ] was employed for parsing the Chinese sentences
+p29
+aVThus, we introduced a series of rules NOUN rcmod to restructure rcmod structures so that the noun is moved to the head
+p30
+aVSince the accuracy check for dependency parse trees took great deal of time, we did not try to select error free (100% accurately parsed) sentences
+p31
+aVSMT systems have difficulties translating between distant language pairs such as Chinese and English
+p32
+aVPrevious work has shown that the approaches tackling the problem by introducing a pre-ordering procedure into phrase-based SMT (PBSMT) were effective
+p33
+aVFor Chinese, there are 45 types of grammatical relations for Stanford typed dependencies [ 2009 ] and 25 for CoNLL typed dependencies
+p34
+aVConduct primary experiments which used the same training set and development set as the experiments described in Section 3
+p35
+aVAs a kind of constituent structure, HPSG [ 1994 ] parsing-based pre-ordering showed improvements in SVO-SOV translations, such as English-Japanese [ 2010 , 2011 ] and Chinese-Japanese [ 2012 ]
+p36
+aVHere u'\u005cu201c' mw u'\u005cu201d' means u'\u005cu201c' measure word u'\u005cu201d'
+p37
+aVReordering therefore becomes a key issue in SMT systems between distant language pairs
+p38
+aVThus, we then extracted the POS information from the results of the Berkeley Parser and used these as the pre-specified POS tags for the Mate Parser
+p39
+aVThis is especially important on the point of the system combination of PBSMT systems, because the diversity of outputs from machine translation systems is important for system combination [ 2013 ]
+p40
+aVInvestigate the remaining structures
+p41
+aVFor the Mate Parser, POS tagged inputs are required both in training and in inference
+p42
+aVWe define X \u005c Y as structure X except Y
+p43
+aVSince a noun can be nsubj, dobj (direct object), pobj (prepositional object
+p44
+aVThe reason for this is that there are great differences in their word orders
+p45
+a.

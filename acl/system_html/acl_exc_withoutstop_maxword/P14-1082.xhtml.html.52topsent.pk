@@ -1,0 +1,32 @@
+(lp0
+VThe choice for this algorithm is motivated by the fact that it handles multiple classes with ease, but first and foremost because it has been successfully employed for word sense disambiguation in other studies [] , in particular in cross-lingual word sense disambiguation, a task closely resembling our current task []
+p1
+aVWhilst other thresholds may possibly produce cleaner sets, this is hard to evaluate as finding optimal values causes a prohibitive increase in complexity of the search space, and again this is not necessary to test our hypothesis
+p2
+aVPreparing the data to build training and test data for our intended translation assistance system is not trivial, as the type of interactive translation assistant we aim to develop does not exist yet
+p3
+aVThe main research question in this research is how to disambiguate an L1 word or phrase to its L2 translation based on an L2 context, and whether such cross-lingual contextual approaches provide added value compared to baseline models that are not context informed or compared to standard language models
+p4
+aVIt invokes GIZA++ [] to establish statistical word alignments based on the IBM Models and subsequently extracts phrases using the grow-diag-final algorithm []
+p5
+aVStep 4 is effectively a filter two thresholds can be configured to discard weak alignments, i.e., those with low probabilities, from the phrase-translation table so that only strong couplings make it into the generated set
+p6
+aVThe word accuracy for the entire set is then computed by taking the sum of the word accuracies per sentence pair, divided by the total number of sentence pairs
+p7
+aVIn order to draw accurate conclusions, experiments on a single data set and language pair are not sufficient
+p8
+aVWe first measure absolute accuracy by simply counting all output fragments that exactly match the reference fragments, as a fraction of the total amount of fragments
+p9
+aVIf not, we check for the presence of a classifier expert for the offered L1 fragment; only then we can proceed by extracting the desired number of L2 local context words to the immediate left and right of this fragment and adding those to the feature vector
+p10
+aVAutomatic configuration selection was done by performing leave-one-out testing (for small number of instances) or 10-fold-cross validation (for larger number of instances, n u'\u005cu2265' 20 ) on the training data per classifier expert
+p11
+aVThis measure may be too strict, so we add a more flexible word accuracy measure which takes into account partial matches at the word level
+p12
+aVIn earlier work , we reported a decrease in performance due to overfitting when this is done, so we do not expect it to make a positive impact
+p13
+aVThird, we observe that adding the language model to our classifier leads to another significant gain (configuration l1r1 + LM in the results in Table 2
+p14
+aVOur
+p15
+a.

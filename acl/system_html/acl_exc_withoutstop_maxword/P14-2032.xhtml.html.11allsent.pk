@@ -1,0 +1,48 @@
+(lp0
+VIn this section, we describe the character-based and word-based models we use as baselines, review existing approaches to combination, and describe our algorithm for joint decoding with dual decomposition
+p1
+aVIn the most commonly used contemporary approach to character-based segmentation, first proposed by [ 23 ] , CWS is seen as a character sequence tagging task, where each character is tagged on whether it is at the beginning, middle, or end of a word
+p2
+aVDual decomposition (DD) [ 14 ] offers an attractive framework for combining these two types of models without incurring high costs in model complexity (in contrast to [ 18 ] ) or decoding efficiency (in contrast to bagging in [ 22 , 17 ]
+p3
+aVIn this work, we propose a simple and principled joint decoding method for combining character-based and word-based segmenters based on dual decomposition
+p4
+aVThere are two primary classes of models character-based, where the foundational units for processing are individual Chinese characters [ 23 , 19 , 24 , 20 ] , and word-based, where the units are full words based on some dictionary or training lexicon [ 1 , 25 ]
+p5
+aV\u005cnewcite Sun:2010:COLING details their respective theoretical strengths character-based approaches better model the internal compositional structure of words and are therefore more effective at inducing new oov words; word-based approaches are better at reproducing the words of the training lexicon and can capture information from significantly larger contextual spans
+p6
+aVDD has been successfully applied to similar situations for combining local with global models; for example, in dependency parsing [ 9 ] , bilingual sequence tagging [ 21 ] and word alignment [ 6 ]
+p7
+aVWe also report out-of-vocabulary recall (R oov ) as an estimation of the model u'\u005cu2019' s generalizability to previously unseen words
+p8
+aVThe idea is that jointly modelling both character-sequence and word information can be computationally challenging, so instead we can try to find outputs that the two models are most likely to agree on
+p9
+aVWe use the publicly available Stanford CRF segmenter [ 19 ] 2 2 http://nlp.stanford.edu/software/segmenter.shtml as our character-based baseline model, and reproduce the perceptron-based segmenter from \u005cnewcite Zhang:2007:ACL as our word-based baseline model
+p10
+aVA powerful feature of the dual decomposition approach is that it can generate correct segmentation decisions in cases where a voting or product-of-experts model could not, since joint decoding allows the sharing of information at decoding time
+p11
+aVThis penalty exchange is similar to message passing, and as the penalty accumulates over iterations, the two models are pushed towards agreeing with each other
+p12
+aVFinally, since dual decomposition is a method of joint decoding, it is still liable to reproduce errors made by the constituent systems
+p13
+aVWe conduct experiments on the SIGHAN 2003 [ 16 ] and 2005 [ 7 ] bake-off datasets to evaluate the effectiveness of the proposed dual decomposition algorithm
+p14
+aVIn each iteration, if the best segmentations provided by the two models do not agree, then the two models will receive penalties for the decisions they made that differ from the other
+p15
+aVwhere u'\u005cud835' u'\u005cudc32' u'\u005cud835' u'\u005cudc50' is the output of character-based CRF, u'\u005cud835' u'\u005cudc32' u'\u005cud835' u'\u005cudc64' is the output of word-based perceptron, and the agreements are expressed as constraints s.t is a shorthand for u'\u005cu201c' such that u'\u005cu201d'
+p16
+aVConditional random fields (CRF) [ 11 ] have been widely adopted for this task, and give state-of-the-art results [ 19 ]
+p17
+aVThese mixing models perform well on standard datasets, but are not in wide use because of their high computational costs and difficulty of implementation
+p18
+aVWe adopt a learning rate update rule from \u005cnewcite Koo:2010:EMNLP where u'\u005cu0391' t is defined as 1 N , where N is the number of times we observed a consecutive dual value increase from iteration 1 to t
+p19
+aVUnknown words, also known as out-of-vocabulary ( oov ) words, lead to difficulties for word- or dictionary-based approaches
+p20
+aVChinese text is written without delimiters between words; as a result, Chinese word segmentation (CWS) is an essential foundational step for many tasks in Chinese natural language processing
+p21
+aVWe can then form the dual of this problem by taking the min outside of the max , which is an upper bound on the original problem
+p22
+aVSearching through the entire GEN u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' ) space is intractable even with a local model, so a beam-search algorithm is used
+p23
+a.

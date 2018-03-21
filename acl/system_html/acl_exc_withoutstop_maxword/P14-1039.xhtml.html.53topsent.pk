@@ -1,0 +1,18 @@
+(lp0
+VSimilarly, we conjectured that large differences in the realizer u'\u005cu2019' s perceptron model score may more reliably reflect human fluency preferences than small ones, and thus we combined this score with features for parser accuracy in an SVM ranker
+p1
+aVSimple ranking with the Berkeley parser of the generative model u'\u005cu2019' s n -best realizations raised the BLEU score from 85.55 to 86.07, well below the averaged perceptron model u'\u005cu2019' s BLEU score of 87.93
+p2
+aVTherefore, to develop a more nuanced self-monitoring reranker that is more robust to such parsing mistakes, we trained an SVM using dependency precision and recall features for all three parses, their n -best parsing results, and per-label precision and recall for each type of dependency, together with the realizer u'\u005cu2019' s normalized perceptron model score as a feature
+p3
+aVWith this simple reranking strategy and each of three different Treebank parsers, we find that it is possible to improve BLEU scores on Penn Treebank development data with White Rajkumar u'\u005cu2019' s [ 28 , 36 ] baseline generative model, but not with their averaged perceptron model
+p4
+aVWith wsj_0041.18, the SVM ranker unfortunately prefers a realization where presumably seems to modify shows rather than of two politicians as in the original, which the averaged perceptron model prefers
+p5
+aVIn sum, although simple ranking helps to avoid vicious ambiguity in some cases, the overall results of simple ranking are no better than the perceptron model (according to BLEU, at least), as parse failures that are not reflective of human intepretive tendencies too often lead the ranker to choose dispreferred realizations
+p6
+aV2 2 Note that the features from the local classification model for that -complementizer choice have not yet been incorporated into OpenCCG u'\u005cu2019' s global realization ranking model, and thus do not inform the baseline realization choices in this work
+p7
+aVRajkumar White [ 28 , 36 ] have
+p8
+a.

@@ -1,0 +1,254 @@
+(lp0
+VBroadly speaking, we can classify the methods to incorporate semantic information into parsers in two systems using static lexical semantic repositories, such as WordNet or similar ontologies [] , and systems using dynamic semantic clusters automatically acquired from corpora []
+p1
+aVBroadly speaking, we can classify the attempts to add external knowledge to a parser in two sets using large semantic repositories such as WordNet and approaches that use information automatically acquired from corpora
+p2
+aVOn the other hand, the increments are more evenly distributed for SS and clusters, and this can be due to the fact that the semantic information is orthogonal to the POS, giving similar improvements for sentences that contain or not POS errors
+p3
+aVWe experiment with both full SSs and SFs as instances of fine-grained and coarse-grained semantic representation, respectively
+p4
+aVAs the combination of the three baseline parsers did not give any improvement over the best single parser (ZPar), we can hypothesize that the gain coming from the parser combinations comes mostly from the addition of semantic information
+p5
+aVThe following three rows present the enhanced (combined) parsers that make use of semantic information
+p6
+aVWe will examine the influence of each type of semantic information on sentences that contain or not POS errors, and this will clarify whether the increments obtained when using semantic information are useful for correcting the negative influence of POS errors or they are orthogonal and constitute a source of new information independent of POS tags
+p7
+aVThis aspect deserves further investigation, as the improvements seem to be related to both the type of semantic information and the parsing algorithm.We did an initial exploration but it did not give any clear indication of the types of improvements that could be expected using each parser and semantic data
+p8
+aVWe firstly tested the addition of each individual semantic feature to each parser, evaluating its contribution to the parser u'\u005cu2019' s performance
+p9
+aVOne of the obstacles of automatic parsers is the presence of incorrect POS tags due to automatic tagging
+p10
+aVFor the combinations, instead of feature-engineering each parser with the wide array of different possibilities for features, as in , we adopted the simpler approach of combining the outputs of the individual parsers by voting []
+p11
+aVSubsection 4.1 presented the results of the base algorithms and their extensions based on semantic features report improvements over the best single parser when combining three transition-based models and one graph-based model
+p12
+aVWe will experiment with the semantic representations used in and , based on WordNet 2.1
+p13
+aVFor each semantic representation, we need to determine the semantics of each occurrence of a target word used i) gold-standard annotations from SemCor, a subset of the PTB, to give an upper bound performance of the semantic representation, ii) first sense, where all instances of a word were tagged with their most frequent sense, and iii) automatic sense ranking, predicting the most frequent sense for each word []
+p14
+aVSo, for the comparison to be fair, we will compare ensembles of 3 parsers, taken from sets of 6 parsers (3 baselines + 3 SF, SS, and cluster extensions, respectively
+p15
+aVCombining the 3 baselines does not give an improvement over the best baseline, as ZPar clearly outperforms the other parsers
+p16
+aVLooking at table 2 , we can say that the differences in baseline parser performance are accentuated when using the LTH treebank conversion, as ZPar clearly outperforms the other two parsers by more than 4 absolute points
+p17
+aVAs we will make use of the full PTB, we only have access to the first sense information
+p18
+aVWe will use Labeled Attachment Score (LAS) as our main evaluation criteria
+p19
+aVIt can be seen as a representation of syntactic-semantic information acquired from corpora
+p20
+aVAs in previous work, we exclude punctuation marks
+p21
+aVWe used MaltBlender 5 5 http://w3.msi.vxu.se/users/jni/blend/ , a tool for merging the output of several dependency parsers, using the Chu-Liu/Edmonds directed MST algorithm
+p22
+aVAs an example, knife in its tool sense is in the EDGE TOOL USED AS A CUTTING INSTRUMENT singleton synset, and also in the ARTIFACT SF along with thousands of words including cutter
+p23
+aVFor the sake of comparison, we will also perform the experiments using syntactic/semantic clusters automatically acquired from corpora
+p24
+aVIt is known [] that adding more parsers to an ensemble usually improves accuracy, as long as they add to the diversity (and almost regardless of their accuracy level
+p25
+aVRecently, tested the incorporation of cluster features from unlabeled corpora in a multilingual setting, giving an algorithm for inducing cross-lingual clusters
+p26
+aVThere are a total of 45 SFs (1 for adverbs, 3 for adjectives, 15 for verbs, and 26 for nouns), based on syntactic and semantic categories
+p27
+aVThe learning procedure is global since model parameters are set relative to classifying the entire dependency graph, in contrast to the local but richer contexts used by transition-based parsers
+p28
+aVDoes semantic information in WordNet help dependency parsing found improvements in dependency parsing using MaltParser on gold POS tags
+p29
+aVTable 5 suggests that the improvements coming from WordNet u'\u005cu2019' s semantic file (SF) are unevenly distributed between the sentences that contain POS errors and those that do not (an increase of 0.28 for sentences without POS errors and 0.55 for those with errors
+p30
+aVTable 5 presents the results of the best single parser on the LTH conversion (ZPar) with gold and automatic POS tags in the first two rows
+p31
+aVFor example, with MST and SF the gains almost doubled for sentences with incorrect POS tags (+0.37 with respect to +0.21 for sentences with correct POS tags) while the gains of adding clusters u'\u005cu2019' information for sentences without and with POS errors were similar (0.91 and 1.33, repectively
+p32
+aVFor example, ZPar u'\u005cu2019' s LAS score on the LTH conversion drops from 90.45% with gold POS tags to 89.12% with automatic POS tags
+p33
+aVExtended parsers, adding semantic information to the baselines
+p34
+aVThis could mean that a big part of the information contained in SF helps to alleviate the errors performed by the automatic POS tagger
+p35
+aVIn this work, we will investigate the effect of semantic information using predicted POS tags
+p36
+aVDoes parser combination benefit from semantic information
+p37
+aVThe LAS scores are particularized for sentences that contain or not POS errors
+p38
+aVLater, successfully introduced WordNet classes in a dependency parser, obtaining improvements on the full PTB using gold POS tags, trying different combinations of semantic classes investigate the addition of semantic annotations in the form of word sense hypernyms, in HPSG parse ranking, reducing error rate in dependency F-score by 1%, while some methods produce substantial decreases in performance showed that fully disambiguated sense-based features smoothed using ontological information are effective for parse selection
+p39
+aVHowever, adding the semantic parsers gives an increase with respect to the best single parser (ZPar + SF), which is small but significant for SF and clusters
+p40
+aVWith this objective in mind, we analyzed the performance on the subset of the test corpus containing the sentences which had POS errors (1,025 sentences and 27,300 tokens) and the subset where the sentences had (automatically assigned) correct POS tags (1,391 sentences and 29,386 tokens
+p41
+aVWordNet
+p42
+aVThis work presents a set of experiments to investigate the use of lexical semantic information in dependency parsing of English
+p43
+aVWe will run parser combination experiments with and without semantic information, to determine whether it is useful in the combined parsers
+p44
+aVWe will apply different types of semantic information to three dependency parsers
+p45
+aVIs the type of semantic information related to the type of parser
+p46
+aVRegarding the WordNet information, there were 2 different features to experiment with (SF and SS
+p47
+aVDifferent parsers can use semantic information in diverse ways
+p48
+aVWe extend the feature set of ZPar to include semantic features
+p49
+aVWe independently tested this fact for the individual parsers
+p50
+aVWe can also conclude that automatically acquired clusters are specially effective with the MST parser in both treebank conversions, which suggests that the type of semantic information has a direct relation to the parsing algorithm
+p51
+aVThe results showed a signiﬁcant improvement, giving the first results over both WordNet and the Penn Treebank (PTB) to show that semantics helps parsing
+p52
+aVIn all the experiments we employed a baseline feature set using word forms and parts of speech, and an enriched feature set (WordNet or clusters
+p53
+aVWe include the three base algorithms and their semantic extensions (SF, SS, and clusters
+p54
+aVFor all the tests, we used a perceptron POS-tagger [] , trained on WSJ sections 2 u'\u005cu2013' 21, to assign POS tags automatically to both the training (using 10-way jackknifing) and test data, obtaining a POS tagging accuracy of 97.32% on the test data
+p55
+aVOverall, we see that the small improvements do not confirm the previous results on Penn2Malt, MaltParser and gold POS tags
+p56
+aVAfter introducing related work in section 2 , section 3 describes the treebank conversions, parsers and semantic features
+p57
+aVHow does WordNet compare to automatically obtained information
+p58
+aVEach synset in turn belongs to a unique semantic file (SF
+p59
+aVTable 3 shows that the combination of the baselines, without any semantic information, considerably improves the best baseline
+p60
+aVWe modified the system in order to add semantic features, combining them with wordforms and POS tags, on the parent and child nodes of each arc
+p61
+aVIn this section we analyze the data trying to understand where and how semantic information helps most
+p62
+aVThese are the two extremes of semantic granularity in WordNet
+p63
+aVIn each experiment, we took the best combination of individual parsers on the development set for the final test
+p64
+aVFor comparison with automatically acquired information, we will also experiment with bit clusters
+p65
+aVOur aim was to experiment with different types of WordNet-related semantic information
+p66
+aVClusters describe a semi-supervised approach that makes use of cluster features induced from unlabeled data, providing significant performance improvements for supervised dependency parsers on the Penn Treebank for English and the Prague Dependency Treebank for Czech
+p67
+aVHow does the semantic information relate to the style of dependency annotation
+p68
+aVWordNet is organized into sets of synonyms, called synsets (SS
+p69
+aVTable 1 shows that the only significant increase over the baseline is for ZPar with SS and for MST with clusters
+p70
+aVIn all of the experiments the parsers were trained on sections 2-21 of the PTB and evaluated on the development set (section 22
+p71
+aVOn the second group, presented a semisupervised method for training dependency parsers, introducing features that incorporate word clusters automatically acquired from a large unannotated corpus
+p72
+aVLTH 2 2 http://nlp.cs.lth.se/software/treebank_converter [] presents a conversion better suited for semantic processing, with a richer structure and a more fine-grained set of dependency labels (42 different dependency labels), including links to handle long-distance phenomena, giving a 6.17% of nonprojective sentences
+p73
+aVWe will test three different parsers representative of successful paradigms in dependency parsing
+p74
+aVFor example, while MaltParser can use the semantic information in local contexts, MST can incorporate them in global contexts
+p75
+aVThis set includes the 3 baseline algorithms, MaltParser, MST, and ZPar
+p76
+aVEach set of semantic information is represented by two atomic feature templates, associated with the top of the stack and the head of the queue, respectively
+p77
+aVThey demonstrated its effectiveness in dependency parsing experiments on the PTB and the Prague Dependency Treebank and also experiment with the same cluster method
+p78
+aVWe can see that SF helps all parsers, although it is only significant for MST
+p79
+aVWe will make use of Bikel u'\u005cu2019' s randomized parsing evaluation comparator to test the statistical signiﬁcance of the results
+p80
+aVWe will also examine the LTH conversion, with richer structure and an extended set of dependency labels
+p81
+aVGiven the computational requirements and the previous results on Malt and MST, we only tested all bits in ZPar
+p82
+aVWe run a series of experiments testing each individual semantic feature, also trying different learning configurations for each one
+p83
+aVIn the first group, trained two state-of-the-art constituency-based statistical parsers [] on semantically-enriched input, substituting content words with their semantic classes, trying to overcome the limitations of lexicalized approaches to parsing [] where related words, like scissors and knife , cannot be generalized
+p84
+aVBit clusters improve significantly MST, with the highest increase across the table
+p85
+aVLTH (table 4
+p86
+aVLTH
+p87
+aVFinally, we will describe the different types of semantic representation that were used
+p88
+aVFinally, the best performing system was evaluated on the test set (section 23
+p89
+aVOur main objective will be to determine whether static semantic knowledge can help parsing
+p90
+aVAdding semantics does not give a noticeable increase with respect to combining the baselines
+p91
+aVWe trained different types of combination
+p92
+aVWe have made use of three parsers representative of successful paradigms in dependency parsing
+p93
+aVSection 4 presents the results and section 5 draws the main conclusions
+p94
+aVMaltParser [] is a deterministic transition-based dependency parser that obtains a dependency tree in linear-time in a single pass over the input using a stack of partially analyzed items and the remaining input sequence, by means of history-based feature models
+p95
+aVAfter several tests we noticed that weighted voting by each parser u'\u005cu2019' s labeled accuracy gave good results, using it in the rest of the experiments
+p96
+aVThe results from parsing the LTH output are lower than those for Penn2Malt conversions
+p97
+aVThe clusters include strongly semantic associations like {apple, pear} or {Apple, IBM} and also syntactic clusters like {of, in}
+p98
+aVWe added two features that inspect the semantic feature at the top of the stack and the next input token
+p99
+aVZPar was directly trained on the Penn2Malt conversion, while we applied the pseudo-projective transformation [] on LTH, in order to deal with non-projective arcs
+p100
+aVWe extracted dependencies using standard head rules [] , and a reduced set of 12 general dependency tags
+p101
+aVFor example, noun SFs differentiate nouns denoting acts or actions, and nouns denoting animals, among others
+p102
+aVWhether semantics improve parsing is one interesting research topic both on parsing and lexical semantics
+p103
+aVMost experiments for English were evaluated on the Penn2Malt conversion of the constituency-based Penn Treebank
+p104
+aVZPar 4 4 www.sourceforge.net/projects/zpar [] performs transition-based dependency parsing with a stack of partial analysis and a queue of remaining inputs
+p105
+aVIn contrast to MaltParser (local model and greedy deterministic search) ZPar applies global discriminative learning and beam search
+p106
+aVTables 3 and 4 show the results
+p107
+aVTables 1 and 2 show the results
+p108
+aVIn this section we will briefly describe the PTB-based datasets (subsection 3.1 ), followed by the data-driven parsers used for the experiments (subsection 3.2
+p109
+aVFor the bit clusters, there are different possibilities, depending on the number of bits used
+p110
+aVPenn2Malt 1 1 http://w3.msi.vxu.se/�nivre/research/Penn2Malt.html performs a simple and direct conversion from the constituency-based PTB to a dependency treebank
+p111
+aVFor Malt and MST, all the different lengths of bit strings were used
+p112
+aVMST 3 3 http://mstparser.sourceforge.net represents global, exhaustive graph-based parsing [] that finds the highest scoring directed spanning tree in a graph
+p113
+aVSection 4.3 will look at the details by each knowledge type
+p114
+aVIt obtains projective trees and has been used in several works, which allows us to compare our results with related experiments []
+p115
+aVThe same technique was also used by the winning team of the CoNLL 2007 Shared Task [] , combining six transition-based parsers
+p116
+aVThey use short strings of 4-6 bits to represent parts of speech and the full strings for wordforms
+p117
+aVThe system can be trained using first or second order models
+p118
+aVBase algorithms
+p119
+aVThe second order projective algorithm performed best on both conversions, and we used it in the rest of the evaluations
+p120
+aVSpecifically, we will test the following questions
+p121
+aVThe process defines a hierarchical clustering of the words, which can be represented as a binary tree where each node is associated to a bit-string, from the more general (root of the tree) to the more specific (leaves
+p122
+aVUsing prefixes of various lengths, it can produce clusterings of different granularities
+p123
+aVThis research was supported by the the Basque Government (IT344- 10, S PE11UN114), the University of the Basque Country (GIU09/19) and the Spanish Ministry of Science and Innovation (MICINN, TIN2010-20218
+p124
+aVPenn2Malt
+p125
+aVPenn2Malt
+p126
+a.

@@ -1,0 +1,313 @@
+(lp0
+VWe learn from code-switched social media by extending the polylingual topic model framework to infer the language of each token and then automatically processing the learned topics to identify aligned topics
+p1
+aVWe use a block Gibbs sampler to jointly sample topic and language variables for each token
+p2
+aVIn this case, a polylingual topic model, which necessarily infers a topic-specific word distribution for each topic in each language, would learn two unrelated word distributions in two languages for a single topic
+p3
+aVTo train a polylingual topic model on social media, we make two modifications to the model of add a token specific language variable, and a process for identifying aligned topics
+p4
+aVWe create alignments by classifying each LDA topic by language using the KL-divergence between the topic u'\u005cu2019' s words distribution and a word distribution for the English/foreign language inferred from the monolingual documents
+p5
+aVTopics appearing in at least one code-switched document with probability greater than a threshold p are selected as candidates for true cross-language topics
+p6
+aVOur solution is to automatically identify aligned polylingual topics after learning by examining a topic u'\u005cu2019' s distribution across code-switched documents
+p7
+aVPolylingual topic models enable cross language analysis by grouping documents by topic regardless of language
+p8
+aVSince csLDA duplicates topic distributions ( u'\u005cud835' u'\u005cudcaf' × u'\u005cu2112' ) we used twice as many topics for LDA
+p9
+aVIf a topic never occurs in a code-switched document, then there can be no evidence to support alignment across languages
+p10
+aVLanguage is assigned to a topic by taking the minimum KL
+p11
+aVWe begin by measuring how often each topic occurs in code-switched documents
+p12
+aVWhile our goal is to learn polylingual topics, we cannot compare to previous polylingual models since they require comparable data, which we lack
+p13
+aVThe first two goals are achieved by incorporating new hidden variables in the traditional polylingual topic model
+p14
+aVTherefore, naively using the produced topics as u'\u005cu201c' aligned u'\u005cu201d' across languages is ill-advised
+p15
+aVFor Spanish, we removed workers who disagreed with the majority more than 50% of the time (83 deletions), leaving 6.5 annotations for each alignment (85.47% inter-annotator agreement.) For Chinese, since quality of general Chinese turkers is low [] we invited specific workers and obtained 9.3 annotations per alignment (78.72% inter-annotator agreement.) For Olympics, LDA alignments matched the judgements 25% of the time, while csLDA matched 50% of the time
+p16
+aVFor Weibo data, this was not effective since the vocabularies of each language are highly unbalanced
+p17
+aVWe optimize the hyperparameters u'\u005cu0391' , u'\u005cu0392' , u'\u005cu0393' and u'\u005cu0394' by interleaving sampling iterations with a Newton-Raphson update to obtain the MLE estimate for the hyperparameters
+p18
+aVTaking u'\u005cu0391' as an example, one step of the Newton-Raphson update is
+p19
+aVWe then sampled an additional 2475 code-switched messages, 4221 English and 4211 Chinese messages as test data
+p20
+aVThis system provides the top three possible languages for a given document with confidence scores; we identify a tweet as code-switched if two predicted languages each have confidence greater than 33%
+p21
+aVWe collected tweets from July 27, 2012 to August 12, 2012, and identified 302,775 tweets about the Olympics based on related hashtags and keywords (e.g., olympics, #london2012, etc.) We identified code-switched tweets using the Chromium Language Detector 2 2 https://code.google.com/p/chromium-compact-language-detector/
+p22
+aVTopic models [] have become standard tools for analyzing document collections, and topic analyses are quite common for social media []
+p23
+aVTo summarize, based on the model of we will learn
+p24
+aVWe experimented with different numbers of topics ( u'\u005cud835' u'\u005cudcaf'
+p25
+aVAs is customary, we collapse out u'\u005cu03a6' , u'\u005cu0398' and u'\u005cu03a8'
+p26
+aVIn the model presentation we will refer to both as u'\u005cu201c' documents u'\u005cu201d'
+p27
+aVWe used two datasets a Sina Weibo Chinese-English corpus [] and a Spanish-English Twitter corpus
+p28
+aVA good candidate for multi-lingual topic analyses are polylingual topic models [] , which learn topics for multiple languages, creating tuples of language specific distributions over monolingual vocabularies for each topic
+p29
+aVFor each topic, a language specific word distribution
+p30
+aVSecond, polylingual topic models assume the aligned topics are from parallel or comparable corpora, which implicitly assumes that a topics popularity is balanced across languages
+p31
+aVFirst, polylingual topic models require parallel or comparable corpora in which each document has an assigned language
+p32
+aVTraining of polylingual topic models requires parallel or comparable corpora document tuples from multiple languages that discuss the same topic
+p33
+aVTo ensure a fair comparison, we select the same number of aligned topics for LDA and csLDA
+p34
+aVFor each aligned topic, we show an annotator the 20 most frequent words from the foreign language topic (Chinese or Spanish) with the 20 most frequent words from the aligned English topic and two random English topics
+p35
+aVWhile csLDA found 12 alignments and LDA 29, the 12 topics evaluated from both models show that csLDA u'\u005cu2019' s alignments are higher quality
+p36
+aVA Gibbs sampler learns the word distributions u'\u005cu03a6' z l for each language and topic
+p37
+aVTopic pairs with similarity above t are considered aligned topics
+p38
+aVTo address the lack of available LID systems, we add a per-token latent language variable to the polylingual topic model
+p39
+aVDuring sampling, words are first assigned to the background/topic distribution and then topic and language are sampled for non-background words
+p40
+aVLDA may learn comparable topics in different languages but gives no explicit alignments
+p41
+aVTable 1 shows some csLDA topics
+p42
+aVWe call the resulting model Code-Switched LDA (csLDA
+p43
+aVWe next identify learned topics (a set of related word-distributions) that truly represent an aligned topic across languages, as opposed to an unrelated set of distributions for which there is no supporting alignment evidence in the corpus
+p44
+aVWe also used a threshold p (§ 3.2 ) to select aligned topics in csLDA
+p45
+aVIn the case of code-switched social media data, we require a per-token language variable
+p46
+aVInstead, we manually labeled the topics by language
+p47
+aVThese results confirm our automated results csLDA finds higher quality topics that span both languages
+p48
+aVBoth obtained high quality alignments u'\u005cu2013' likely due both to the fact that the code-switched data is curated to find translations and we hand labeled topic language u'\u005cu2013' but csLDA found many more alignments
+p49
+aVFor each topic, an identification as to whether the topic captures an alignment across languages
+p50
+aVInference for csLDA follows directly from LDA
+p51
+aVThe background distribution (-bg) has mixed results for LDA, whereas for csLDA it shows consistent improvement
+p52
+aVWe evaluate topic alignment quality through a human judgements []
+p53
+aVFor the Weibo data, LDA matched judgements 71.4%, while csLDA matched 75%
+p54
+aVInstead, we constructed a baseline from LDA run on the entire dataset (no language information.) For each model, we measured the document completion perplexity [] on the held out data
+p55
+aVAdditionally, we use a single background distribution for each language to capture stopwords; a control variable u'\u005cu03a0' , which follows a Dirichlet distribution with prior parameterized by u'\u005cu0394' , is introduced to decide the choice between background words and topic words following [] 1 1 Omitted from the generative process but shown in Fig
+p56
+aVwhere ( n w i l , z ) - i is the number of times the type for word w i assigned to topic z and language l (excluding current word w i ), m - i z , d is the number of tokens assigned to topic z in document d (excluding current word w i ), o - i l , d is the number of tokens assigned to language l in document d (excluding current word w i ), and these variables with superscripts or subscripts omitted are totals across all values for the variable u'\u005cud835' u'\u005cudcb2' is the number of words in the corpus
+p57
+aVWe evaluated csLDA on the two datasets and evaluated each model using perplexity on held out data and human judgements
+p58
+aVIn the case of code-switched documents, these variables are inferred during model inference
+p59
+aVHowever, while document level language identification (LID) systems are common place, very few languages have per-token LID systems []
+p60
+aVWe use the available per-token LID system [] for Spanish/English to justify csLDA u'\u005cu2019' s ability to infer the hidden language variables
+p61
+aVThe table lists both monolingual and code-switched test data; csLDA improves over LDA in almost every case, and across all values of u'\u005cud835' u'\u005cudcaf'
+p62
+aVWe then pair topics across languages using the cosine similarity of their co-occurrence statistics in code-switched documents
+p63
+aVThe topics discussed are influenced by users, time, and location, all factors intertwined with choice of language
+p64
+aVIn social media especially, there is a large diversity in terms of both the topic and language, necessitating the modeling of multiple languages simultaneously
+p65
+aVWe ran csLDA-bg with l i set to the value provided by the LID system for code-switched documents (csLDA-bg with LID), which gives csLDA high quality LID labels
+p66
+aVFor each (code-switched) token, a language
+p67
+aVThe annotators are asked to select the most related English topic among the three; the one with the most votes is considered the aligned topic
+p68
+aVAll counts omit words assigned to the background
+p69
+aVThis mixture of languages in the same context suggests alignments between words across languages through the common topics discussed in the context
+p70
+aVBy collecting the entire conversation into a single document we provide the topic model with additional content
+p71
+aVFor documents that are not code-switched, we observe these variables to be the output of a document level LID system
+p72
+aVOur model improves both in terms of perplexity and a human evaluation, and we provide some example analyses of social media that rely on our learned topics
+p73
+aVHowever, the ever changing vocabulary and topics of social media [] make finding suitable comparable corpora difficult
+p74
+aVFor the topics that appear at least once in a code-switched document, we estimate their probability in the code-switched documents by a MAP estimate of u'\u005cu0398'
+p75
+aVTopics that show up in one language necessarily show up in another
+p76
+aVWe used the best performing setting csLDA u'\u005cud835' u'\u005cudcaf' = 60 , LDA u'\u005cud835' u'\u005cudcaf' = 120 , which produced 12 alignments from Olympics and 28 from Weibo
+p77
+aVWhile there are some mistakes, overall the topics are coherent and aligned
+p78
+aVCode-switching specifically in social media has also received some recent attention trained a supervised token level language identification system for Spanish and English code-switched social media to study code-switching behaviors mined translation spans for Chinese and English in code-switched documents to improve a translation system, relying on an existing translation model to aid in the identification and extraction task
+p79
+aVThere may be little or no documents on a given topic in one language, while they are plentiful in another
+p80
+aVFigure 3 shows test perplexity for varying u'\u005cud835' u'\u005cudcaf' and perplexity for the best setting of csLDA ( u'\u005cud835' u'\u005cudcaf' = 60 ) and LDA ( u'\u005cud835' u'\u005cudcaf' = 120
+p81
+aVDraw a topic z i u'\u005cu223c' u'\u005cu0398' d
+p82
+aVThe sampling posterior is
+p83
+aVThe result an inability to train polylingual models on social media
+p84
+aVWhile we see gains for the code-switched data, overall the results for csLDA-bg and csLDA-bg with LID are similar, suggesting that the model can operate effectively even without a supervised per-token LID system
+p85
+aVStandard techniques u'\u005cu2013' such as relying on machine translation parallel corpora or comparable documents extracted from Wikipedia in different languages u'\u005cu2013' fail to capture the specific terminology of social media
+p86
+aVOur metric relies on distributional properties of an inferred topic across the entire collection
+p87
+aVFor monolingual documents, we fix l i to the LID tag for all tokens
+p88
+aVDraw a language l i u'\u005cu223c' u'\u005cu03a8' d
+p89
+aVFor each topic z u'\u005cu2208' u'\u005cud835' u'\u005cudcaf'
+p90
+aVWe interleave 200 sampling iterations with one Newton-Raphson update
+p91
+aVIn contrast to this work, we take an unsupervised approach, relying only on readily available document level language ID systems to utilize code-switched data
+p92
+aVWhile additional non-aligned documents can be folded in during training, the u'\u005cu201c' glue u'\u005cu201d' documents are required to aid in the alignment across languages
+p93
+aVIn this work we consider two types of code-switched documents single messages and conversations, and two language pairs
+p94
+aVWe limited the model with more alignments to match the one with less
+p95
+aVWe count how often the model u'\u005cu2019' s alignments agree
+p96
+aVUsing Mechanical Turk we collected multiple judgements per alignment
+p97
+aVSeveral tasks have focused on identification and analysis, including mining translations in code-switched documents [] , predicting code-switched points [] , identifying code-switched tokens [] , adding code-switched support to language models [] , linguistic processing of code switched data [] , corpus creation [] , and computational linguistic analyses and theories of code-switching []
+p98
+aVDraw a topic distribution u'\u005cu0398' d u'\u005cu223c' D u'\u005cu2062' i u'\u005cu2062' r u'\u005cu2062' ( u'\u005cu0391'
+p99
+aVFor each language l u'\u005cu2208' u'\u005cu2112'
+p100
+aVHowever, in the case of social media, we can make no such assumption
+p101
+aVThe graphical model is shown in Figure 2
+p102
+aVDraw a language distribution u'\u005cu03a8' d u'\u005cu223c' D u'\u005cu2062' i u'\u005cu2062' r u'\u005cu2062' ( u'\u005cu0393'
+p103
+aVWe use asymmetric Dirichlet priors [] , and let the optimization process learn the hyperparameters
+p104
+aVWe then used the tagger of to obtain token level LID tags, and only tweets with tokens in both Spanish and English are used as code-switched tweets
+p105
+aVDraw a word w i u'\u005cu223c' u'\u005cu03a6' z l
+p106
+aVIn this paper, we offer a solution utilize code-switched social media to discover correlations across languages
+p107
+aVTheir popularity owes in part to their data driven nature, allowing them to adapt to new corpora and languages
+p108
+aVIn this conversation, some tweets are code-switched and some are in a single language
+p109
+aVDraw word distribution u'\u005cu03a6' z l u'\u005cu223c' D u'\u005cu2062' i u'\u005cu2062' r u'\u005cu2062' ( u'\u005cu0392' l
+p110
+aVWe further expanded the mined tweets to full conversations, yielding 1055 Spanish-English code-switched documents (including both tweets and conversations), along with 4007 English and 4421 Spanish tweets composes our data set
+p111
+aVSocial media is filled with examples of code-switching, where users switch between two or more languages, both in a conversation and even a single message []
+p112
+aVFor example, English speakers will more likely discuss Olympic basketball while Spanish speakers football
+p113
+aVWe empirically evaluate our model on both conversations and messages
+p114
+aV[bl]0.35 {subfigure} [bl]0.35 {subfigure} [bl]0.3 u'\u005cud835' u'\u005cudcaf' = 60 / 120 Olympics Weibo En Es CS En Cn CS LDA 11.32 9.44 6.97 29.19 23.06 11.69 LDA-bg 11.35 9.51 6.79 40.87 27.56 10.91 csLDA 8.72 7.94 6.17 18.20 17.31 12.72 csLDA-bg 8.72 7.73 6.04 18.25 17.74 12.46 csLDA-bg 8.73 7.93 4.91 - - - with LID
+p115
+aVThe third goal requires an automated post-processing step
+p116
+aVAdditionally, our focus is not on individual messages, rather we aim to train a model that can be used to analyze entire corpora
+p117
+aVWe used these data for training
+p118
+aVHere a user switches between languages in a single message
+p119
+aVFor each document d u'\u005cu2208' u'\u005cud835' u'\u005cudc9f'
+p120
+aVFigure 1 shows an example of a code-switched Spanish-English conversation , in which three users discuss Mexico u'\u005cu2019' s football team advancing to the Gold medal game in the 2012 Summer Olympics
+p121
+aVThe generative process is as follows
+p122
+aVWe reserve 10% of the data for testing
+p123
+aVFor each token i u'\u005cu2208' d
+p124
+aVCode-switched documents has received considerable attention in the NLP community
+p125
+aVextracted over 1m Chinese-English parallel segments from Sina Weibo, which are code-switched messages
+p126
+aVWe randomly sampled 29,705 code-switched messages along with 42,116 Chinese and 42,116 English messages from the the same time frame
+p127
+aVAlternate methods that rely on bilingual lexicons [] similarly fail to adapt to shifting vocabularies
+p128
+aVwhere u'\u005cud835' u'\u005cudc07' is the Hessian matrix and u'\u005cu2202' u'\u005cu2061' u'\u005cu2112' u'\u005cu2202' u'\u005cu2061' u'\u005cu0391' is the gradient of the likelihood function with respect to the optimizing hyperparameter
+p129
+aV60 as compared to 28
+p130
+aVIn total we identified 822 Spanish-English code-switched tweets
+p131
+aV3 3 We used thresholds p = 0.2 and t = 0.0001
+p132
+aVAn example of a Chinese-English code-switched messages is given by
+p133
+aVUTF8gbsn watup Kenny Mayne
+p134
+aV- Kenny Mayne u'\u005cu6700' u'\u005cu8fd1' u'\u005cu8fd9' u'\u005cu4e48' u'\u005cu6837' u'\u005cu554a'
+p135
+aV5
+p136
+aV2
+p137
+aVu'\u005cu0393'
+p138
+aVu'\u005cu0391'
+p139
+aVl i
+p140
+aVu'\u005cu03a8' d
+p141
+aVu'\u005cu0398' d
+p142
+aVu'\u005cu03a6' b l
+p143
+aVu'\u005cu0392'
+p144
+aVB
+p145
+aVu'\u005cu0394'
+p146
+aVz i
+p147
+aVb i
+p148
+aVw i
+p149
+aVD
+p150
+aVN
+p151
+aVu'\u005cu2112'
+p152
+aVu'\u005cud835' u'\u005cudcaf'
+p153
+aVChinese-English and Spanish-English
+p154
+ag136
+aVu'\u005cu03a6' z l
+p155
+a.

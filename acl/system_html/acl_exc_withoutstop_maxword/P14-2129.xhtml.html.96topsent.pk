@@ -1,0 +1,20 @@
+(lp0
+VFinally, Figure 3 shows the speed of inference, labeled precision and labeled recall of annotating hedge constituents on the test set as a function of the maximum span parameter L , versus the baseline parser
+p1
+aVFigure 2 plots the percentage of constituents from the original WSJ Penn treebank (sections 2-21) retained in the transformed version, as we vary the maximum span length parameter L
+p2
+aVA unique property of hedge constituents compared to constituents in the original parse trees is that they are sequentially connected to the top-most node
+p3
+aVIf we apply this transform to an entire treebank, we can use the transformed trees to induce a PCFG for parsing
+p4
+aVIt is possible to parse with a standardly induced PCFG using this sort of hedge constrained parsing that only considers a subset of the chart cells, and speedups are achieved, however this is clearly non-optimal, since the model is ill-suited to combining hedges into flat structures at the root of the tree
+p5
+aVAfter applying such a transform to a treebank, we can induce grammars and modify parsing to search as needed to recover just these constituents
+p6
+aVSince we limit the span of non-terminal labels, we can constrain the search performed by the parser, greatly reduce the CYK processing time
+p7
+aVAs stated earlier, our brute-force baseline approach is to parse the sentence using a full context-free grammar (CFG) and then hedge-transform the result
+p8
+aVKeep in mind
+p9
+a.

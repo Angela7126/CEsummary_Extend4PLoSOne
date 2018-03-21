@@ -1,0 +1,424 @@
+(lp0
+VInspired by [ 36 ] and [ 14 ] , we adopt the graph model for Chinese spell checking for pinyin segmentation and typo correction, which is based on the shortest path word segmentation algorithm [ 1 ]
+p1
+aVCorresponding Chinese words are fetched from a PTC dictionary u'\u005cud835' u'\u005cudd3b' c , which is a dictionary maps pinyin words to Chinese words, and added as vertices
+p2
+aVA Chinese word may contain from 1 to over 10 characters due to different word segmentation conventions
+p3
+aVHowever, using pinyin words instead of syllables is not a wise choice because pinyin word segmentation is not so easy a task as syllable segmentation
+p4
+aVSince pinyin syllables have a very limited vocabulary and follow a set of regularities strictly, it is convenient to perform pinyin syllable segmentation by using rules
+p5
+aVSince pinyin syllable is much shorter than pinyin word, this ratio can be higher for pinyin syllables
+p6
+aVNon-Chinese users may feel confused or even surprised if they know that when typing pinyin through an IME, Chinese IME users will never enter delimiters such as u'\u005cu201c' Space u'\u005cu201d' key to segment either pinyin syllables or pinyin words, but just input the entire un-segmented pinyin sequence
+p7
+aVBut as the pinyin input is not segmented, it is nearly impossible to adopt previous spell checking methods for English to pinyin typo checking, although techniques for English spell checking have been well developed
+p8
+aVPinyin is originally designed as the phonetic symbol of a Chinese character (based on the standard modern Chinese, mandarin) , using Latin letters as its syllable notation
+p9
+aVThe original vocabulary is not labeled with pinyin, thus we use the PTC dictionary of sunpinyin 1 1 http://code.google.com/p/sunpinyin/ which is an open source Chinese pinyin IME, to label the vocabulary u'\u005cud835' u'\u005cudcb1' with pinyin
+p10
+aVThe advantage of pinyin IME is that it only adopts the pronunciation perspective of Chinese characters so that it is simple and easy to learn
+p11
+aVThe pinyin part is segmented according to the Chinese part
+p12
+aVPossible legal syllables fetched from dictionary u'\u005cud835' u'\u005cudd3b' p according to the input pinyin sequence
+p13
+aVMost characters usually have unique pinyin representations, while a few Chinese characters may be pronounced in several different ways, so they may have multiple pinyin representations
+p14
+aVWe will also report the conversion error rate (ConvER) proposed by [ 44 ] , which is the ratio of the number of mistyped pinyin word that is not converted to the right Chinese word over the total number of mistyped pinyin words 3 3 Other evaluation metrics are also proposed by [ 44 ] which is only suitable for their system since our system uses a joint model
+p15
+aVA bit confusing but interesting, pinyin typo correction and segmentation come as two sides of one problem when a pinyin sequence is mistyped, it is unlikely to be correctly segmented; when it is segmented in an awkward way, it is likely to be mistyped
+p16
+aVWe release this assumption since our model solves segmentation, typo correction and PTC conversion jointly
+p17
+aVTo make typo correction better, we consider to integrate it with PTC conversion using a joint model
+p18
+aVAs we observe on \u005cmsc Train that the average pinyin word length is 5.24, then typo rate in the experiment of [ 44 ] can be roughly estimated as
+p19
+aVThe emission probabilities are estimated using the lexical translation module of MOSES [ 17 ] as u'\u005cu201c' translation probability u'\u005cu201d' from pinyin to Chinese
+p20
+aVAccording to our empirical observation, emission probabilities are mostly 1 since most Chinese words have unique pronunciation
+p21
+aVThe major reason is that the basic semantic unit of Chinese language is actually word (tough vaguely defined) which is usually composed of several characters
+p22
+aVSince Chinese characters are entered via IME, those user-made typos do not immediately lead to spelling errors
+p23
+aVThe shortest path segmentation algorithm is based on the idea that a reasonable segmentation should minimize the number of segmented units
+p24
+aVWe will use conventional sequence labeling evaluation metrics such as sequence accuracy and character accuracy 2 2 We only work on the PTC conversion part of IME, thus we are unable to use existing evaluation systems [ 15 ] for full Chinese IME functions
+p25
+aVThe graph G = ( u'\u005cud835' u'\u005cudd4d' , u'\u005cud835' u'\u005cudd3c' ) is constructed based on graph G c for typo correction in Section 3.2
+p26
+aVPTC conversion is to decode the Chinese word sequence from the pinyin sequence
+p27
+aVWithout word delimiters, linguists have argued on what a Chinese word really is for a long time and that is why there is always a primary word segmentation treatment in most Chinese language processing tasks [ 40 , 13 , 41 , 39 , 42 , 43 ]
+p28
+aVDue to few works have been done on modeling Chinese text entry, we have to refer to those corresponding results on English [ 32 , 22 , 6 ] , which show that the average typo rate is about 2%
+p29
+aVFor example, if one wants to input u'\u005cu201c' \u005csong u'\u005cu4f60' u'\u005cu597d' u'\u005cu4e16' u'\u005cu754c'  (Hello world) u'\u005cu201d' , he will just type u'\u005cu201c' nihaoshijie u'\u005cu201d' instead of segmented pinyin sequence u'\u005cu201c' ni hao shi jie u'\u005cu201d'
+p30
+aVAccording to our empirical statistics, when setting threshold T = 2 , for a sentence of M characters, the joint graph will have u'\u005cud835' u'\u005cudd4d'
+p31
+aVThe idea of u'\u005cu201c' statistical input method u'\u005cu201d' was proposed by modeling PTC conversion as a hidden Markov model (HMM), and using Viterbi [ 26 ] algorithm to decode the sequence
+p32
+aVThey solved the typo correction problem by decomposing the conditional probability P ( H
+p33
+aVThe collected data consists of 775 mistyped pinyin words caused by one edit operation, and 85 caused by two edit operations
+p34
+aVNevertheless, pinyin syllable segmentation is a much easier problem compared to Chinese word segmentation
+p35
+aVHowever, every Chinese word inputted into computer or cellphone cannot be typed through one-to-one mapping of key-to-letter inputting directly, but has to go through an IME as there are thousands of Chinese characters for inputting while only 26 letter keys are available in the keyboard
+p36
+aVSyllables with Levenshtein distance under a certain threshold are considered as similar
+p37
+aVThus the conditional probability between characters does not make much sense
+p38
+aVThus there are two separated sub-tasks for Chinese spell checking
+p39
+aVThe user may fail to input the completely right pinyin simply because he/she is a dialect speaker and does not know the exact pronunciation for the expected character
+p40
+aVAlthough the model is formulated on first order HMM, i.e.,, the LM used for transition probability is a bigram one, it is easy to extend the model to take advantage of higher order n -gram LM, by tracking longer history while traversing the graph
+p41
+aVAn efficient heap data structure is required in K -shortest paths algorithm [ 7 ] for backtracking the best paths to current vertex while traversing
+p42
+aVWe therefore choose N = 10 as trade-off
+p43
+aVMerely using the above model, the typo correction result is not satisfying yet, no matter how much effort is paid
+p44
+aVHowever, real user input data can be very noisy and not very convenient to obtain
+p45
+aVThough no direct proofs can be found to indicate if Google Input Tool has an independent typo correction component, its outputs show that such a component is unlikely available
+p46
+aVIf the corresponding pinyin syllables in G c have an edge between them, the vertices in G also have an edge
+p47
+aVThus we generate corpora from \u005cmsc Dev with typo rate of 0% ( 0-P ), 2% ( 2-P ), and 5% ( 5-P ) to evaluate the system
+p48
+aVSince sunpinyin does not have typo correction module and performs much poorer than our baseline system, we do not include it in the comparison
+p49
+aVThe typo rate is set according to previous Human-Computer Interaction (HCI) studies
+p50
+aVChinese characters then form words
+p51
+aVPinyin typos have always been a serious problem for Chinese pinyin IMEs
+p52
+aVThis vocabulary u'\u005cud835' u'\u005cudcb1' also serves as the PTC dictionary
+p53
+aVSince Google Input Tool has to be accessed through a web interface and the network connection cannot be guaranteed we only take a subset of 10K sentences of \u005cmsc Test to perform the experiments, and the results are shown in Table 3
+p54
+aVThis may be a very common situation since there are about seven quite different dialects in Chinese, among which being spoken languages, six are far different from the standard modern Chinese, mandarin
+p55
+aVThe baseline system takes a pinyin input sequence, segments it into syllables, and then converts it to Chinese character sequence
+p56
+aVThus we set the threshold T for u'\u005cu2112' to 2
+p57
+aVAnother benefit provided by K -shortest paths is that it can be used for generating N -best candidates of PTC conversion, which may be helpful for further performance improvement
+p58
+aVIf the adjacent syllables can be merged into a legal syllable, the merged syllable is also added into u'\u005cud835' u'\u005cudd4d'
+p59
+aVAdjacent pinyin syllables in G c are merged into pinyin words
+p60
+aVFor example, one intends to input u'\u005cu201c' \u005csong u'\u005cu4f60' u'\u005cu597d' u'\u005cu4e16' u'\u005cu754c'  (Hello world) u'\u005cu201d' by typing u'\u005cu201c' nihaoshijie u'\u005cu201d' , but mistyped as u'\u005cu201c' m ihaoshiji w u'\u005cu201d'
+p61
+aVThe scores reported in [ 44 ] are not listed in Table 4 since the data set is different
+p62
+aVNowadays most of Chinese IMEs are pinyin based
+p63
+aVHowever their model depended on a very strong assumption that input pinyin sequence should have been segmented into pinyin words by the user
+p64
+aVModern pinyin IMEs mostly use a u'\u005cu201c' sentence-based u'\u005cu201d' decoding technique [ 4 ] to alleviate the ambiguities u'\u005cu201c' Sentence based u'\u005cu201d' means that IME generates a sequence of Chinese characters upon a sequence of pinyin inputs with respect to certain statistical criteria
+p65
+aVThe heap is implemented as a priority queue of size K sorted according to path length that should support efficient push and pop operations
+p66
+aVWith the boom of smart-phones, pinyin typos worsen due to the limited size of soft keyboard, and the lack of physical feedback on the touch screen
+p67
+aVWe choose K = 20 since there is no significant improvement when K 20
+p68
+aVFirstly we build a baseline system without typo correction which is a pipeline of pinyin syllable segmentation and PTC conversion
+p69
+aVThe vertex weight is the Levenshtein distance multiply by a normalization parameter
+p70
+aVEach pinyin syllable has a bunch of corresponding Chinese characters which share the same pronunciation represented by the syllable
+p71
+aVTo reduce the scale of graph G , we filter graph G c by searching its K -shortest paths first to get G c u'\u005cu2032' and construct G on top of G c u'\u005cu2032'
+p72
+aVFrom our statistics on \u005cmsc Train , with 2% randomly generated typos, P r ( u'\u005cu2112' ( S u'\u005cu2032' , S ) 2 ) = 99.86 %
+p73
+aVThe joint graph model aims to find the global optimal for both PTC conversion and typo correction on the entire input pinyin sequence
+p74
+aVThe scale of graph may be thus drastically reduced
+p75
+aVThe vertex weight consists of two parts
+p76
+aVTypically, an IME takes the pinyin input, segments it into syllables, looks up corresponding words in a dictionary and generates a sentence with the candidate words
+p77
+aVThis is the single source shortest path (SSSP) problem on DAG which has an efficient algorithm by preprocessing the DAG with topology sort, then traversing vertices and edges in topological order
+p78
+aVFigure 1 demonstrates the relationship of pinyin and word, from pinyin letters u'\u005cu201c' nihao u'\u005cu201d' to the word u'\u005cu201c' \u005csong u'\u005cu4f60' u'\u005cu597d'  (hello) u'\u005cu201d'
+p79
+aVAs we will propose a joint model in this paper, such an individual typing model is not necessarily built in our approach
+p80
+aV1 typo checking for user typed pinyin sequences which should be a built-in module in IME, and 2 spell checking for Chinese texts in its narrow sense, which is typically a module of word processing applications [ 36 ]
+p81
+aVThe best Chinese character sequence W * for a given pinyin syllable sequence S is the one with the highest conditional probability P ( W
+p82
+aVAccording to the results, we then choose the trigram LM using Kneser-Ney smoothing with interpolation
+p83
+aVThere are about 410 pinyin syllables used in the current pinyin system
+p84
+aVBut there are only less than 500 pinyin syllables in standard modern Chinese, compared with over 6,000 commonly used Chinese characters, which leads to serious ambiguities for pinyin-to-character mapping
+p85
+aVSo in this step we set u'\u005cu0393' = 0
+p86
+aVWritten in Chinese characters but not alphabets, spell checking for Chinese language is quite different from the same task for other languages
+p87
+aVThe average length of pinyin syllables is about 3 letters
+p88
+aVNormally, the user may immediately notice the inputting error and then make corrections, which usually means doing a bunch of extra operations like cursor movement, deletion and re-typing
+p89
+aVThe Chinese part of the corpus is segmented into words before LM training
+p90
+aVwhich is similar to the conclusion on English
+p91
+aVBut word in Chinese is a rather vague concept
+p92
+aVFibonacci heap [ 9 ] is adopted for the heap implementation since it has a push complexity of O u'\u005cu2062' ( 1 ) which is better than the O u'\u005cu2062' ( K ) for other heap structures
+p93
+aVIn the HMM for pinyin IME, observation states are pinyin syllables, hidden states are Chinese words, emission probability is P ( s i w i ) , and transition probability is P ( w i w i - 1
+p94
+aVGiven HMM decoding problem is identical to SSSP problem on DAG, we propose a joint graph model for PTC conversion with typo correction
+p95
+aVIn addition, a pinyin syllable usually maps to dozens or even hundreds of corresponding homophonic characters, which makes the conditional probability between syllables much more noisy
+p96
+aVBased upon the baseline system, we build the joint system of PTC conversion with typo correction
+p97
+aVNext in the correction step, for the segmented pinyin sequence S 1 , S 2 , u'\u005cu2026' , S M , a graph G c is constructed to perform typo correction
+p98
+aVMaximum matching word segmentation is used with a large word vocabulary u'\u005cud835' u'\u005cudcb1' extracted from web data provided by [ 28 ]
+p99
+aVMore recently, the 7th SIGHAN Workshop on Chinese Language Processing [ 37 ] held a shared task on Chinese spell checking
+p100
+aVNote the transition probability is the conditional probability between words instead of characters
+p101
+aVWhen a user types a wrong letter, IME will be very likely to fail to generate the expected Chinese character sequence
+p102
+aVThe typing model that was estimated on real user input data was for typo correction
+p103
+aVAn IME is an essential software interface that maps Chinese characters into English letter combinations
+p104
+aVFor example, the pinyin of the Chinese character u'\u005cu201c' \u005csong u'\u005cu7231' u'\u005cu201d' (love) is u'\u005cu201c' ài u'\u005cu201d'
+p105
+aVThe pinyin syllable segmentation already has very high (over 98%) accuracy with a trigram LM using improved Kneser-Ney smoothing
+p106
+aVChinese characters in a sentence may be separated by digits, punctuation and alphabets which are directly inputted without the IME
+p107
+aVAccording to [ 44 ] most mistyped pinyin words are caused by one edit operation
+p108
+aVOur results are compared to the baseline system without typo correction and Google Input Tool
+p109
+aVAn efficient IME will largely improve the user experience of Chinese information processing
+p110
+aVThe very first approach for Chinese input with typo correction was made by [ 4 ] , which was also the initial attempt of u'\u005cu201c' sentence-based u'\u005cu201d' IME
+p111
+aVThe model has two major steps segmentation and correction
+p112
+aVEarly attempts for Chinese spelling checking could date back to [ 2 ] where character tables for similar shape, pronunciation, meaning, and input-method-code characters were proposed
+p113
+aVWe follow the so-called term Max Input Unit (MIU), the longest consecutive Chinese character sequence proposed by [ 15 ]
+p114
+aVThe shortest path algorithm for typo correction and Viterbi algorithm for PTC conversion are very closely related
+p115
+aVTypo checking and correction has an important impact on IME performance
+p116
+aVP ) of Chinese character sequence H given pinyin sequence P into a language model P ( w i w i - 1 ) and a typing model P ( p i w i
+p117
+aV[ 44 ] developed an IME system with typo correction called CHIME using noisy channel error model and language-specific features
+p118
+aVThe daily life of Chinese people heavily depends on Chinese input method engine (IME), no matter whether one is composing an E-mail, writing an article, or sending a text message
+p119
+aVSpell checking or typo checking was first proposed for English [ 24 ]
+p120
+aVWe can observe that MIU-Acc slightly decreases while N goes up, but Ch-Acc largely increases
+p121
+aVFor a pinyin sequence p 1 u'\u005cu2062' p 2 u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' p L , where p i is a letter, first a directed acyclic graph (DAG) G S = ( u'\u005cud835' u'\u005cudd4d' , u'\u005cud835' u'\u005cudd3c' ) is built for pinyin segmentation step
+p122
+aVWe compare our baseline system with several practical pinyin IMEs including sunpinyin and Google Input Tools (Online version) 4 4 http://www.google.com/inputtools/try/
+p123
+aVIt is a rather long journey from the first English letter typed on the keyboard to finally a completed Chinese sentence generated by IME
+p124
+aVThe letter itself as a fallback no matter if it is a legal pinyin syllable or not
+p125
+aVVarious approaches were made for the task including language model (LM) based methods [ 3 ] , ME model [ 10 ] , CRF [ 31 , 27 ] , SMT [ 5 , 21 ] , and graph model [ 14 ] , etc
+p126
+aVHowever, existing practical IMEs only provide small patches to deal with typos such as Fuzzy Pinyin [ 33 ] and other language specific errors [ 45 ]
+p127
+aVS i , j ) that a syllable S i , j is followed by S j + 1 , k , which is give by a bi-gram language model of pinyin syllables
+p128
+aVPTC conversion has long been viewed as a decoding problem using HMM
+p129
+aV[ 44 ] performed an experiment that 2,000 sentences of 11,968 Chinese words were entered by 5 native speakers
+p130
+aVSRILM [ 25 ] is adopted for language model training and KenLM [ 12 , 11 ] for language model query
+p131
+aVThe number of N -best candidates for PTC conversion is set to 10
+p132
+aVAll possible syllables similar to original syllable in G s
+p133
+aV1 the vertex weights of syllables in G c , and 2 the emission probability
+p134
+aVConsidering our running example, the graph G c is shown in Figure 3 , and the typo correction result is u'\u005cu201c' mi hao shi jie u'\u005cu201d'
+p135
+aVThe corpus for evaluation is the one provided in [ 35 ] , which is originally extracted from the People u'\u005cu2019' s Daily corpus and labeled with pinyin
+p136
+aVWhen IME fails to correct a typo and generate the expected sentence, the user will have to take much extra effort to move the cursor back to the mistyped letter and correct it, which leads to very poor user experience [ 15 ]
+p137
+aVThe edges are from a syllable to all syllables next to it
+p138
+aVThe graph for this input is shown in Figure 2
+p139
+aVComputing the shortest path from V 0 to V E on G yields the best pinyin-to-Chinese conversion with typo correction result
+p140
+aV[ 23 ] addressed that spell checking should be done within a context, i.e.,, a sentence or a long phrase with a certain meaning, instead of only in one word
+p141
+aVA recent spell correction work is [ 20 ] , where a distributional similarity was introduced for spell correction of web queries
+p142
+aVSimilar to G s , the edges are from one syllable to all syllables next to it and edge weights are the conditional probabilities between them
+p143
+aVAdditionally, to further inspect the robustness of our model, performance with typo rate ranges from 0% to 5% is shown in Figure 18
+p144
+aVThe choice of the number of N -best candidates for PTC conversion also has a strong impact on the results
+p145
+aVIt has been strictly proven by [ 8 ] that the sequence decoding problem on HMM is formally identical to finding a shortest path on a certain graph, which can be constructed in the following manner
+p146
+aVWe simulate user typos by randomly generating errors automatically on the corpus
+p147
+aVThe shortest path, i.e.,, the best segmentation is u'\u005cu201c' mi hao shi ji w u'\u005cu201d'
+p148
+aVWith all parameters optimized, results on \u005cmsc Test using the proposed joint model are shown in Table 3 and Table 4
+p149
+aVBesides the common HMM approach for PTC conversion, there are also various methods such as support vector machine [ 16 ] , maximum entropy (ME) model [ 30 ] , conditional random field (CRF) [ 19 ] and statistical machine translation (SMT) [ 35 , 29 , 38 ] , etc
+p150
+aVComputing the shortest path from S 0 u'\u005cu2032' to S E u'\u005cu2032' on G c yields the best typo correction result
+p151
+aVThe results on \u005cmsc Dev are shown in Figure 7 in which the u'\u005cu201c' -i u'\u005cu201d' suffix indicates using interpolated model
+p152
+aVAlthough the performance decreases while typo rate goes up, it is still quite satisfying around typo rate of 2% which is assumed to be the real world situation
+p153
+aVThe vertex weight is the negative logarithm of emission probability
+p154
+aVThe selection of K also directly guarantees the running time of the joint model
+p155
+aVComputing the shortest path from S 0 to S E on G S yields the best segmentation
+p156
+aVWe will mainly consider MIU accuracy (MIU-Acc) which is the ratio of the number of completely corrected generated MIUs over the number of all MIUs, and character accuracy (Ch-Acc), but the sentence accuracy (S-Acc) will also be reported in evaluation results
+p157
+aVThe vertex set u'\u005cud835' u'\u005cudd4d' consists of the following parts
+p158
+aVThe vertex set u'\u005cud835' u'\u005cudd4d' consists of the following parts
+p159
+aVThe vertex set u'\u005cud835' u'\u005cudd4d' consists of the following parts
+p160
+aVThis assumption does not really hold in modern u'\u005cu201c' sentence-based u'\u005cu201d' IMEs
+p161
+aVThe edge weight the negative logarithm of conditional probability P ( S j + 1 , k
+p162
+aVFor an observation sequence of T time periods Y = { y 1 , y 2 , u'\u005cu2026' , y T y t u'\u005cu2208' u'\u005cud835' u'\u005cudd46' , t = 1 , u'\u005cu2026' , T } , the decoding problem is to find the best corresponding hidden state sequence X * with the highest probability, i.e
+p163
+aVThe corpus has already been split into training \u005cmsc Train , development \u005cmsc Dev and test \u005cmsc Test sets as shown in Table 1
+p164
+aVThe number of those homophones ranges from 1 to over 300
+p165
+aVIn addition, the result has been segmented so far
+p166
+aVThe results on \u005cmsc Dev are shown in Table 2
+p167
+aVThe Viterbi algorithm [ 26 ] is used for the decoding
+p168
+aVThese two terms are often confused especially in IME related works such as [ 4 ] and [ 34 ]
+p169
+aVThe parameter u'\u005cu0393' determines emission probability
+p170
+aVThe vertex set u'\u005cud835' u'\u005cudd4d' includes
+p171
+aVConsidering our running example, the graph G is shown in Figure 4
+p172
+aVWith K = 20 , on a normal PC with Intel Pentium Dual-Core E6700 CPU, the PTC conversion rate is over 2000 characters-per-minute ( cpm ), which is much faster than the normal typing rate of 200 cpm
+p173
+aVThe vertex weights w S are all set to 0
+p174
+aVResults with different K are shown in Figure 17
+p175
+aVThe shortest path P * on the graph is the path P with the least sum of weights
+p176
+aVThe joint graph is rather huge and density
+p177
+aVWe consider different LM smoothing methods including Kneser-Ney (KN), improved Kneser-Ney (IKN), and Witten-Bell (WB
+p178
+aVResults with different u'\u005cu0392' are shown in Figure 13
+p179
+aVThe edge set u'\u005cud835' u'\u005cudd3c' includes
+p180
+aVAll of the three smoothing methods for bigram and trigram LMs are examined both using back-off models and interpolated models
+p181
+aVThe edge weights are the negative logarithm of the transition probabilities
+p182
+aVFigure 8 shows the results on \u005cmsc Dev with different N s, of which the N axis is drawn in logarithmic scale
+p183
+aVFigure 5 shows the 3-shortest paths filtered graph G c u'\u005cu2032' and Figure 6 shows the corresponding G for our running example
+p184
+aVWe first set K -shortest paths filter to K = 10 and tune u'\u005cu0392'
+p185
+aVResults with different u'\u005cu0393' on \u005cmsc Dev is shown in Figure 9 , of which the u'\u005cu0393' axis is drawn in logarithmic scale u'\u005cu0393' = 0.03 is chosen at last
+p186
+aVThe shortest path P * from v 0 to v E is the one with the least sum of vertex and edge weights, i.e
+p187
+aVWe continue to follow this formalization
+p188
+aVVirtual start vertex v 0 and end vertex v E with vertex weight of 0;
+p189
+aVVirtual start vertex V 0 and end vertex V E with vertex weight of 0;
+p190
+aVVirtual start vertex S 0 u'\u005cu2032' and end vertex S E u'\u005cu2032' with vertex weights of 0;
+p191
+aVVirtual start vertex S 0 and end vertex S E ;
+p192
+aVEdges to the end vertex E ( v x T u'\u005cu2192' v E ) with vertex weights of 0;
+p193
+aVEdges from the start vertex E ( v 0 u'\u005cu2192' v x 1 ) with edge weight
+p194
+aVEdges between adjacent time periods E ( v x t - 1 u'\u005cu2192' v x t ) with edge weight
+p195
+aVThen we will construct a DAG G = ( u'\u005cud835' u'\u005cudd4d' , u'\u005cud835' u'\u005cudd3c' ) upon the HMM
+p196
+aVConsider a first order HMM with all possible observations u'\u005cud835' u'\u005cudd46' = { o 1 , o 2 , u'\u005cu2026' , o M } , hidden states u'\u005cud835' u'\u005cudd4a' = { s 1 , s 2 , u'\u005cu2026' , s N } , a special start state s 0 , emission probabilities ( u'\u005cu2130' s i , o k ) = P ( o k s i ) , transition probabilities ( u'\u005cud835' u'\u005cudcaf' s i , s j ) = P ( s j s i ) , and start probabilities ( u'\u005cud835' u'\u005cudcae' s i ) = P ( s i s 0
+p197
+aVWe will continue to use this example in the rest of this paper
+p198
+aVIt has the time complexity of O u'\u005cu2062' u'\u005cud835' u'\u005cudd4d'
+p199
+aVWe will first take an overview of the entire process
+p200
+aVwhere the similarity u'\u005cu223c' is measured in Levenshtein distance [ 18 ]
+p201
+aVNormal vertices v x t , where t = 1 , u'\u005cu2026' , T , and u'\u005cu2200' x t u'\u005cu2208' u'\u005cud835' u'\u005cudd4a'
+p202
+aVThe optimization goal of P * in Equation ( 3.3 ) is identical to that of X * in Equation ( 1
+p203
+aVThey reported a ConvER of 53.56%, which is given here for reference
+p204
+aVWith u'\u005cu0392' = 3.5 , we select K
+p205
+aVwhere u'\u005cu2200' x 1 u'\u005cu2208' u'\u005cud835' u'\u005cudd4a' ;
+p206
+aVM × 1 , 000 , 000
+p207
+aVM × 1 , 000 , and u'\u005cud835' u'\u005cudd3c'
+p208
+aVwhere t = 2 , u'\u005cu2026' , T , and u'\u005cu2200' x t , x t - 1 u'\u005cu2208' u'\u005cud835' u'\u005cudd4a'
+p209
+aVS ) that
+p210
+aV+ u'\u005cud835' u'\u005cudd3c'
+p211
+a.

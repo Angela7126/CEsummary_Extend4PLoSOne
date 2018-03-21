@@ -1,0 +1,504 @@
+(lp0
+VThis can be accomplished by composing the lattice with a desegmenting transducer that consumes morphemes and outputs desegmented words
+p1
+aVWe compose this acceptor with a desegmenting transducer, and then with an unsegmented LM acceptor, producing a fully annotated, desegmented lattice
+p2
+aVFinnish does not require a table, as all words can be desegmented with simple concatenation
+p3
+aVWork on target language morphological segmentation for SMT can be divided into three subproblems segmentation, desegmentation and integration
+p4
+aVWe approach this problem by augmenting an SMT system built over target segments with features that reflect the desegmented target words
+p5
+aVThe first feature indicates that the desegmented morphemes were translated from contiguous source words
+p6
+aVFortunately, LM annotation as well as any necessary lattice modifications can be performed simultaneously by composing the desegmented lattice with a finite state acceptor encoding the LM [ 26 ]
+p7
+aVA desegmenting transducer can be constructed by first encoding our desegmenter as a table that maps morpheme sequences to words
+p8
+aVThe lattice (Figure 1 a) can then be desegmented by composing it with the transducer ( 1 b), producing a desegmented lattice ( 1 c
+p9
+aVThe chains found by this search are desegmented and then added to the output lattice as edges
+p10
+aVInstead of producing an abstract feature layer, morphological segmentation transforms the target sentence by segmenting relevant morphemes, which are then handled as regular tokens during alignment and translation
+p11
+aVFinally, we take the closure of this transducer, so that the resulting machine can transduce any sequence of words
+p12
+aVA valid chain is complete if its edges form an entire word, and if it is part of a path through the lattice that consists only of words
+p13
+aVOur goal is to desegment the decoder u'\u005cu2019' s output lattice, and in doing so, gain access to a compact, desegmented view of a large portion of the translation search space
+p14
+aVIn this section, we describe our various strategies for desegmenting the SMT system u'\u005cu2019' s output space, along with the features that we add to take advantage of this desegmented view
+p15
+aVRegardless of whether the original desegmenter was based on concatenation, rules or table-lookup, it can be encoded as a lattice-specific table by applying it to an enumeration of all words found in the lattice
+p16
+aVAs Morfessor does not perform any orthographic normalizations, it can be desegmented with simple concatenation
+p17
+aVWe use a table-based desegmentation method for Arabic, which is based on segmenting an Arabic training corpus and memorizing the observed transformations to reverse them later
+p18
+aVIn summary, we are given a segmented lattice, which encodes the decoder u'\u005cu2019' s translation space as an acceptor over morphemes
+p19
+aVAs in Finnish, the 1-best desegmentation using Morfessor did not surpass the unsegmented baseline, producing a test BLEU of only 31.4 (not shown in Table 1
+p20
+aVNonetheless, the 1000-best and lattice desegmenters both produce significant improvements over the 1-best desegmentation baseline, with Lattice Deseg achieving a 1-point improvement in TER
+p21
+aVWhen translating from Arabic, this segmentation process is performed as input preprocessing and is otherwise transparent to the translation system
+p22
+aVFor the sake of symmetry with the unambiguous Finnish case, we augment Arabic n -best lists or lattices with only the most frequent desegmentation Y
+p23
+aVMorphological segmentation addresses this issue by splitting surface forms into meaningful morphemes, while also performing orthographic transformations to further reduce sparsity
+p24
+aVWork on integration attempts to improve SMT performance for morphologically complex target languages by going beyond simple pre- and post-processing
+p25
+aVY ) as an additional feature, but observed no improvement in translation quality
+p26
+aVMost techniques approach the problem by transforming the target language in some manner before training the translation model
+p27
+aVThe search graph of a phrase-based decoder can be interpreted as a lattice, which can be interpreted as a finite state acceptor over target strings
+p28
+aVThe one-best approach can be extended easily by desegmenting n -best lists of segmented decoder output
+p29
+aVWe also tried a similar Morfessor-based segmentation for Arabic, which has an unsegmented test set BLEU of 32.7
+p30
+aVWe demonstrate that significant improvements in translation quality can be achieved by training a linear model to re-rank this transformed translation space
+p31
+aVThe nodes at end points of these chains are added to the work list, as they lie at word boundaries by definition
+p32
+aVDoing so enables the inclusion of an unsegmented target language model, and with a small amount of bookkeeping, it also allows the inclusion of features related to the operations performed during desegmentation (see Section 3.4
+p33
+aVTo improve coverage, words are further segmented according to their longest matching suffix from the list
+p34
+aVThis is sometimes referred to as a word graph [ 32 ] , although in our case the segmented phrase table also produces tokens that correspond to morphemes
+p35
+aVThis could improve translation quality, as it brings our training scenario closer to our test scenario (test BLEU is always measured on unsegmented references
+p36
+aVMorphological complexity leads to much higher type to token ratios than English, which can create sparsity problems during translation model estimation
+p37
+aVWe provide the desegmentation score log p ( Y
+p38
+aVSince our focus here is on integrating segmentation into the decoding process, we simply adopt the segmentation strategies recommended by previous work the Penn Arabic Treebank scheme for English-Arabic [ 9 ] , and an unsupervised scheme for English-Finnish [ 7 ]
+p39
+aVIn order to maintain some control over this powerful capability, we create three binary features that indicate the contiguity of a desegmentation
+p40
+aV5 5 Sentence-initial suffix morphemes and sentence-final prefix morphemes represent a special case that we omit for the sake of brevity
+p41
+aVThe search recognizes the valid chain c to be complete by finding an edge e such that c + e forms a chain, but not a valid one
+p42
+aVThis category is challenging for the decoder because English prepositions tend to correspond to multiple possible forms when translated into Arabic
+p43
+aVTable 4 breaks down per-phrase accuracy according to four manually-assigned categories
+p44
+aVFor the desegmenting re-rankers, this means 5 runs of re-ranker tuning, each working on n -best lists or lattices produced by the same (representative) decoder weights
+p45
+aVIf a morphological feature does not manifest itself as a separate token in the source, then it may be best to leave its corresponding segment attached to the stem
+p46
+aVX ) = log u'\u005cu2061' ( count of X u'\u005cu2192' Y count of X ) as a feature, to indicate the entry u'\u005cu2019' s ambiguity in the training data
+p47
+aVOnce n -best lists have been desegmented, we can tune on unsegmented references as a side-benefit
+p48
+aVOther approaches train an SMT system to predict lemmas instead of surface forms, and then inflect the SMT output as a post-processing step [ 21 , 7 , 11 , 10 ]
+p49
+aVDesegmentation is typically performed as a post-processing step that is independent from the decoding process
+p50
+aVSuch a segmentation can be produced as a byproduct of analysis [ 24 , 2 , 9 ] , or may be produced using an unsupervised morphological segmenter such as Morfessor [ 20 , 7 ]
+p51
+aVAlternatively, one can reparameterize existing phrase tables as exponential models, so that translation probabilities account for source context and morphological features [ 16 , 30 ]
+p52
+aVA chain is valid if it emits the beginning of a word as defined by the regular expression in Equation 1
+p53
+aVLacking stems, they are left segmented
+p54
+aVEquation 1 may need to be modified for other languages or segmentation schemes, but our techniques generalize to any definition that can be written as a regular expression
+p55
+aV8 8 Development experiments on a small-data English-to-Arabic scenario indicated that the Desegmentation Score was not particularly useful, so we exclude it from the main comparison, but include it in the ablation experiments
+p56
+aVFor both segmented and unsegmented Arabic, we further normalize the script by converting different forms of Alif ¡a u'\u005cu2019' A u'\u005cu2019' a u'\u005cu2019' i ¿ and Ya ¡y _A¿ to bare Alif ¡a¿ and dotless Ya ¡_A¿
+p57
+aV1) clitical u'\u005cu2013' the two systems agree on a stem, but at least one clitic, often a prefix denoting a preposition or determiner, was dropped, added or replaced; (2) lexical u'\u005cu2013' a word was changed to a morphologically unrelated word with a similar meaning; (3) inflectional u'\u005cu2013' the words have the same stem, but different inflection due to a change in gender, number or verb tense; (4) part-of-speech u'\u005cu2013' the two systems agree on the lemma, but have selected different parts of speech
+p58
+aVFor example, if we removed the edge 2 u'\u005cu2192' 3 ( AlTfl ) from Figure 1 a, then [ 0 u'\u005cu2192' 2 ] ([ b+ lEbp ]) would cease to be a complete chain, but it would still be a valid chain
+p59
+aVWhile this division of labor is useful, the pipeline approach may prevent the desegmenter from recovering from errors made by the decoder
+p60
+aVAs we attempted to replicate the approach of Clifton and Sarkar ( 2011 ) exactly by working with their segmented data, this difference is likely due to changes in Moses since the publication of their result
+p61
+aVFor the baselines, this means 5 runs of decoder tuning
+p62
+aVAs these evaluation sets are intended for Arabic-to-English translation, we select the first English reference to use as our source text
+p63
+aVWe consider a phrase to be correct only if it can be found in the reference
+p64
+aV7 7 We also experimented on log p ( X
+p65
+aVIf this property does not hold, then nodes must be split until it does
+p66
+aVFor example, the Arabic noun ¡laldwl¿ lldwl u'\u005cu201c' to the countries u'\u005cu201d' is segmented as l+ u'\u005cu201c' to u'\u005cu201d' Aldwl u'\u005cu201c' the countries u'\u005cu201d'
+p67
+aV2011 ) , we report average scores over five random tuning replications to account for optimizer instability
+p68
+aVMIRA was selected over MERT because we have an in-house implementation that can tune on lattices very quickly
+p69
+aVWe tune on the NIST 2004 evaluation set (1353 sentences) and evaluate on NIST 2005 (1056 sentences
+p70
+aVThe second indicates that the source words contained a single discontiguity, as in a word-by-word translation of the u'\u005cu201c' with his blue car u'\u005cu201d' example from Section 2.2
+p71
+aV3 3 Throughout this paper, we use u'\u005cu201c' + u'\u005cu201d' to mark morphemes as prefixes or suffixes, as in w+ or +h
+p72
+aVThe third indicates two or more discontiguities
+p73
+aVIn Equation 1 only, we overload u'\u005cu201c' + u'\u005cu201d' as the Kleene cross
+p74
+aVX + = = X X *
+p75
+aVThis is a natural place to introduce features that describe the desegmentation process, such as scores provided by a desegmentation table, which can be incorporated into the desegmenting transducer u'\u005cu2019' s edge weights
+p76
+aVHowever, when translating into Arabic, the decoder produces segmented output, which must be desegmented to produce readable text
+p77
+aVDesegmentation is the process of converting segmented words into their original surface form
+p78
+aVThe Arabic table consists of X u'\u005cu2192' Y entries, where X is a target morpheme sequence and Y is a desegmented surface form
+p79
+aVThe path restriction on complete chains forces words to be bounded by other words in order to be complete
+p80
+aV2008 ) also tune on unsegmented references by simply desegmenting SMT output before MERT collects sufficient statistics for BLEU and translate with both segmented and unsegmented language models for English-to-Finnish translation
+p81
+aVWhen an X is missing from the table, we fall back on a set of desegmentation rules [ 9 ] and this feature is set to 0
+p82
+aVOne advantage of our approach is that it allows discontiguous source words to translate into a single target word
+p83
+aVMorphological segmentation is considered to be indispensable when translating between English and morphologically complex languages such as Arabic
+p84
+aVTo generate the desegmentation table, we analyze the segmentations from the Arabic side of the parallel training data to collect mappings from morpheme sequences to surface forms
+p85
+aVHowever, they adopt a scheme of word-boundary-aware morpheme-level phrase extraction, meaning that target phrases include only complete words, though those words are segmented into morphemes
+p86
+aVFor English-to-Arabic, 1-best desegmentation results in a 0.7 BLEU point improvement over training on unsegmented Arabic
+p87
+aVLattice desegmentation is a non-local lattice transformation
+p88
+aVWe can then transform that table into a finite state transducer with one path per table entry
+p89
+aVTable 3 compares different combinations of features using lattice desegmentation
+p90
+aVOur first baseline is Unsegmented , where we train on unsegmented target text, requiring no desegmentation step
+p91
+aVOur goal in this work is to benefit from the sparsity-reducing properties of morphological segmentation while simultaneously allowing the system to reason about the final surface forms of the target language
+p92
+aVFor Arabic, morphological segmentation is performed by MADA 3.2 [ 12 ] , using the Penn Arabic Treebank (PATB) segmentation scheme as recommended by El Kholy and Habash ( 2012
+p93
+aVWe desegment a large set of possible decoder outputs by processing n -best lists or lattices, which allows us to consider both the segmented and desegmented output before locking in the decoder u'\u005cu2019' s decision
+p94
+aVA 5-gram LM trained on unsegmented target text is used to assess the fluency of the desegmented word sequence
+p95
+aVMoving to lattice desegmentation more than doubles that improvement, resulting in a BLEU score of 34.4 and an improvement of 1.0 BLEU point over 1-best desegmentation
+p96
+aVWe now have a desegmented lattice, but it has not been annotated with an unsegmented (word-level) language model
+p97
+aVThis training set contains about 40 million Arabic tokens before segmentation, and 47 million after segmentation
+p98
+aVIn this setting, the sparsity reduction from segmentation helps word alignment and target language modeling, but it does not result in a more expressive translation model
+p99
+aVThey introduce an additional desegmentation technique that augments the table-based approach with an unsegmented language model
+p100
+aVUnlike our work, they replace the segmented language model with the unsegmented one, allowing them to tune the linear model parameters by hand
+p101
+aVThe decoder u'\u005cu2019' s log-linear model includes a standard feature set
+p102
+aVWith new features reflecting the desegmented output, we can re-tune our enhanced linear model on a development set
+p103
+aVBojar ( 2007 ) incorporates such analyses into a factored model, to either include a language model over target morphological tags, or model the generation of morphological features
+p104
+aVIt maintains a work list of nodes that lie on the boundary between words, and for each node on this list, it launches a depth first search to find all complete chains extending from it
+p105
+aVOur second baseline is 1-best Deseg , where we train on segmented target text and desegment the decoder u'\u005cu2019' s 1-best output
+p106
+aVBut it also comes at a substantial cost when target phrases include only complete words, the system can only generate word forms that were seen during training
+p107
+aVFor English-to-Finnish, the Unsup L-match segmentation with 1-best desegmentation does not improve over the unsegmented baseline
+p108
+aVThe usefulness of a target segmentation depends on its correspondence to the source language
+p109
+aVThe one-best desegmentation approach segments the target language at training time and then desegments the one-best output in post-processing
+p110
+aVFor Finnish, we adopt the Unsup L-match segmentation technique of Clifton and Sarkar ( 2011 ) , which uses Morfessor [ 8 ] to analyze the 5,000 most frequent Finnish words
+p111
+aVIn order to better understand the source of our improvements in the English-to-Arabic scenario, we conducted an extensive manual analysis of the differences between 1-best and lattice desegmentation on our test set
+p112
+aVThis property is maintained by the decoder u'\u005cu2019' s recombination rules for the segmented LM, but it is not guaranteed for the desegmented LM
+p113
+aVAlgorithm 3.3 desegments a lattice by finding all complete chains and replacing each one with a single edge
+p114
+aVThis resolves the sparsity issue, but does not allow the decoder to take into account features of the desegmented target
+p115
+aVThe transformation might take the form of a morphological analysis or a morphological segmentation
+p116
+aVMany languages have access to morphological analyzers, which annotate surface forms with their lemmas and morphological features
+p117
+aVA phrase-based decoder produces its output from left to right, with each operation appending the translation of a source phrase to a growing target hypothesis
+p118
+aVSeveral entries may share the same X , resulting in multiple desegmentation options
+p119
+aVAdding the desegmentation score to these two feature groups does not improve performance, confirming the results we observed during development
+p120
+aVJudging from the output on the NIST 2005 test set, the system uses these discontiguous desegmentations very rarely only 5% of desegmented tokens align to discontiguous source phrases
+p121
+aVIn order to annotate lattice edges with an n -gram LM, every path coming into a node must end with the same sequence of ( n - 1 ) tokens
+p122
+aVIn its most natural form, such an acceptor emits target phrases on each edge, but it can easily be transformed into a form with one edge per token, as shown in Figure 1 a
+p123
+aVInspired by the use of non-local features in forest decoding [ 14 ] , we present an algorithm to find chains of edges that correspond to desegmentable token sequences, allowing lattice desegmentation with no phrase-table restrictions
+p124
+aVThe desegmentation score would likely be useful in a scenario where we provide multiple desegmentation options to the re-ranker; for now, it indicates only the ambiguity of a fixed choice, and is likely redundant with information provided by the language model
+p125
+aVLattice desegmentation was able to boost this to 32.9, slightly above 1-best desegmentation, but well below our best MADA desegmentation result of 34.4
+p126
+aVWith lattice desegmentation, we need only to have seen AlzrqA u'\u005cu2019' u'\u005cu201c' blue u'\u005cu201d' and the three morphological pieces of bsyArth for the decoder and desegmenter to assemble the phrase
+p127
+aVFour translation model features encode phrase translation probabilities and lexical scores in both directions
+p128
+aVThe segmentation may be addressing issues with model sparsity, but it is also introducing errors that would have been impossible had words been left unsegmented
+p129
+aVThe unsegmented LM alone yields a 0.4 point improvement over the 1-best desegmentation score
+p130
+aVLattice desegmentation is significantly better ( p 0.01 ) than 1000 -best desegmentation
+p131
+aV2010 ) address this problem by forcing the decoder u'\u005cu2019' s phrase table to respect word boundaries, guaranteeing that each desegmentable token sequence is local to an edge
+p132
+aVThe desegmenting transducer for our running example is shown in Figure 1 b
+p133
+aVThis transducer must be able to consume every word in our lattice u'\u005cu2019' s output vocabulary
+p134
+aVWe use both segmented and unsegmented language models, and tune automatically to optimize BLEU
+p135
+aVThis trivially allows for an unsegmented language model and never makes desegmentation errors
+p136
+aVOflazer and Durgar El-Kahlout ( 2007 ) desegment 1000-best lists for English-to-Turkish translation to enable scoring with an unsegmented language model
+p137
+aVIn fact, even with our lattice desegmenter providing a boost, we are unable to see a significant improvement over the unsegmented model
+p138
+aVIn this section, we discuss how a lattice from a multi-stack phrase-based decoder such as Moses [ 17 ] can be desegmented to enable word-level features
+p139
+aVNote that tokens requiring no desegmentation simply emit themselves
+p140
+aVIn this work, we show that it is possible to maintain the sparsity-reducing benefit of segmentation while translating directly into unsegmented text
+p141
+aVThis algorithm can be seen as implicitly constructing a customized desegmenting transducer and composing it with the input lattice on the fly
+p142
+aVFurthermore, it becomes substantially more difficult to have non-adjacent source tokens contribute morphemes to a single target word
+p143
+aVHowever, more complex segmentations, such as the Arabic tokenization provided by MADA [ 12 ] , require further orthographic adjustments to reverse normalizations performed during segmentation
+p144
+aVThe 1000-best Deseg system desegments, augments and re-ranks the decoder u'\u005cu2019' s 1000-best list, while Lattice Deseg does the same in the lattice
+p145
+aVThat is, the morphemes forming a word might span several edges, making desegmentation non-trivial
+p146
+aVThis is done to reduce sparsity and to improve correspondence with the source language (usually English
+p147
+aVThe unsegmented approach translates without segmenting the target
+p148
+aVThe majority of differences correspond to clitics, whose correction appears to be a major source of the improvements obtained by lattice desegmentation
+p149
+aVThe analysis is then applied to the Finnish side of the parallel text, and a list of segmented suffixes is collected
+p150
+aVStarting from the system that produced 1-best Deseg, we then output either 1000-best lists or lattices to create our two experimental systems
+p151
+aVEl Kholy and Habash ( 2012 ) provide an extensive study on the influence of segmentation and desegmentation on English-to-Arabic SMT
+p152
+aV2010 ) tune on unsegmented references, 1 1 Tuning on unsegmented references does not require substantial modifications to the standard SMT pipeline
+p153
+aVThis eliminates the need to construct intermediate machines, such as the lattice-specific desegmenter in Figure 1 b, and facilitates working with edges annotated with feature vectors as opposed to single weights
+p154
+aVRe-ranking models are tuned using a batch variant of hope-fear MIRA [ 5 , 4 ] , using the n -best variant for n -best desegmentation, and the lattice variant for lattice desegmentation
+p155
+aV2008 ) present two Arabic desegmentation schemes table-based and rule-based
+p156
+aVInstead of using a tool kit such as OpenFst [ 1 ] , we implement both the desegmenting transducer and the LM acceptor programmatically
+p157
+aVNote that although this algorithm creates completely new edges, the resulting node set u'\u005cud835' u'\u005cudca9' u'\u005cu2032' will be a subset of the input node set u'\u005cud835' u'\u005cudca9'
+p158
+aVWe then sampled 650 cases where the two sides of the substitution were deemed to be related, and divided these cases into categories based on how the lattice desegmentation differs from the one-best desegmentation
+p159
+aVThese results match the established state-of-the-art on this data set, but also indicate that there is still room for improvement in identifying the best segmentation strategy for English-to-Finnish translation
+p160
+aVAn input morpheme lattice is a triple u'\u005cu27e8' n s , u'\u005cud835' u'\u005cudca9' , u'\u005cu2130' u'\u005cu27e9' , where u'\u005cud835' u'\u005cudca9' is a set of nodes, u'\u005cu2130' is a set of edges, and n s u'\u005cu2208' u'\u005cud835' u'\u005cudca9' is the start node that begins each path through the lattice
+p161
+aVwhere [prefix], [stem] and [suffix] are non-overlapping sets of morphemes, whose members are easily determined using the segmenter u'\u005cu2019' s segment boundary markers
+p162
+aVWe augment n -best lists and lattices using the features described in Section 3.4
+p163
+aVProgrammatic composition of a lattice with an n -gram LM acceptor is a well understood problem
+p164
+aVOur re-ranker has access to all of the features used by the decoder, in addition to a number of features enabled by desegmentation
+p165
+aVWe train our English-to-Arabic system using 1.49 million sentence pairs drawn from the NIST 2012 training set, excluding the UN data
+p166
+aV1000 -best desegmentation also works well, resulting in a 0.6 BLEU point improvement over 1-best
+p167
+aVWe define a word using the following regular expression
+p168
+aV2013 ) replace rule-based desegmentation with a discriminatively-trained character transducer
+p169
+aVBy inspection of Equation 1 , this can only happen when a prefix or stem follows a stem or suffix, which always marks a word boundary
+p170
+aVThe second disjunct of Equation 1 covers words that have no clear stem, such as the Arabic ¡lh¿ lh u'\u005cu201c' for him u'\u005cu201d' , segmented as l+ u'\u005cu201c' for u'\u005cu201d' +h u'\u005cu201c' him u'\u005cu201d'
+p171
+aVBoth the decoder u'\u005cu2019' s log-linear model and the re-ranking models are trained on the same development set
+p172
+aV6 6 Allowing the re-ranker to choose between multiple Y s is a natural avenue for future work
+p173
+aVNote that in the finite-state analogy, the path restriction is implicit in the composition operation
+p174
+aVA KN-smoothed 5-gram language model is trained on the target side of the parallel data with SRILM [ 29 ]
+p175
+aVWith each node corresponding to a single LM context, annotation of outgoing edges with n -gram LM scores is straightforward
+p176
+aVFollowing previous work, we will desegment 1000-best lists [ 24 ]
+p177
+aVThis enables full decoder integration, where we do n -best and lattice re-ranking
+p178
+aVThere appears to be a large advantage to using MADA u'\u005cu2019' s supervised segmentation in this scenario
+p179
+aVWe measure statistical significance using MultEval [ 6 ] , which implements a stratified approximate randomization test to account for multiple tuning replications
+p180
+aVHowever, it suffers from data sparsity and poor token-to-token correspondence with the source language
+p181
+aVThe second most common category is lexical, where the unsegmented LM has drastically altered the choice of translation
+p182
+aVPrevious work that has tuned on unsegmented references has reported mixed results [ 2 , 20 ]
+p183
+aVThe two obvious baseline approaches each decode using one view of the target language
+p184
+aVTranslation continues until each source word has been covered exactly once [ 19 ]
+p185
+aVAdding contiguity indicators on top of the unsegmented LM results in another 0.6 point improvement
+p186
+aV4 4 Or the LM composition can be done dynamically, effectively decoding the lattice with a beam or cube-pruned search [ 13 ]
+p187
+aVFinally, we include word and phrase penalties
+p188
+aVFor each case covering a single phrasal difference, we compare the phrases from each system to the reference
+p189
+aV2008 ) inflect and re-rank n -best lists in a similar manner to how we desegment and re-rank n -best lists or lattices
+p190
+aVThe complement u'\u005cud835' u'\u005cudca9' - u'\u005cud835' u'\u005cudca9' u'\u005cu2032' will consist of nodes that are word-internal in all paths through the input lattice, such as node 1 in Figure 1 a
+p191
+aVThe decoder u'\u005cu2019' s log-linear model is tuned with MERT [ 23 ]
+p192
+aVTo the best of our knowledge, we are the first group to go beyond one-best desegmentation for English-to-Arabic translation
+p193
+aVOur work is concerned primarily with the integration problem, but we will discuss each subproblem in turn
+p194
+aVAs anticipated, the tuner assigns negative weights to discontiguous cases, encouraging the re-ranker to select a safer translation path when possible
+p195
+aVIn this work, we adopt the Table+Rules approach of El Kholy and Habash ( 2012 ) for English-Arabic, while concatenation is sufficient for English-Finnish
+p196
+aVIt also includes the frequent cases involving the nominal determiner prefix Al u'\u005cu201c' the u'\u005cu201d' (left unsegmented by the PATB scheme), and the sentence-initial conjunction w+ u'\u005cu201c' and u'\u005cu201d'
+p197
+aVAn n -best list reflects a tiny portion of a decoder u'\u005cu2019' s search space, typically fixed at 1000 hypotheses
+p198
+aVLattices are pruned to a density of 50 edges per word before re-ranking
+p199
+aVFor example, when translating u'\u005cu201c' with his blue car u'\u005cu201d' into the Arabic ¡bsyArth alzrqA u'\u005cu2019' u'\u005cu2014' ¿ bsyArth AlzrqA u'\u005cu2019' , the target word bsyArth is composed of three tokens b+ u'\u005cu201c' with u'\u005cu201d' , syArp u'\u005cu201c' car u'\u005cu201d' and +h u'\u005cu201c' his u'\u005cu201d'
+p200
+aVThis feature is always 0 for English-Finnish
+p201
+aVThe decoder uses the default parameters for English-to-Arabic, except that the maximum phrase length is set to 8
+p202
+aVWe evaluate our system using BLEU [ 25 ] and TER [ 28 ]
+p203
+aVWith word-boundary-aware phrase extraction, a phrase pair containing all of u'\u005cu201c' with his blue car u'\u005cu201d' must have been seen in the parallel data to translate the phrase correctly at test time
+p204
+aVIn this scenario, there is no right desegmentation; the post-processor has been dealt a losing hand
+p205
+aVIn particular, it could address issues with translation length mismatch
+p206
+aVA number of studies have looked into what granularity of segmentation is best suited for a particular language pair [ 24 , 2 , 7 , 9 ]
+p207
+aVWe use a dynamic program to enumerate all ( n - 1 ) -word contexts leading into a node, and then split the node into multiple copies, one for each context
+p208
+aVDespite the efforts of the decoder u'\u005cu2019' s various component models, the system may produce mismatching segments, such as s+ hzymp , which pairs the future particle s+ u'\u005cu201c' will u'\u005cu201d' with a noun hzymp u'\u005cu201c' defeat u'\u005cu201d' , instead of a verb
+p209
+aVThe remaining categories show no major advantage for either system
+p210
+aVIn all scenarios, both 1000 -best Deseg and Lattice Deseg significantly outperform the 1-best Deseg baseline ( p 0.01
+p211
+aVTranslating into morphologically complex languages is a challenging and interesting task that has received much recent attention
+p212
+aVOur English-to-Finnish system is trained on the same Europarl corpus as Luong et al
+p213
+aVOf these approaches, ours is most similar to the translate-then-inflect approach, except we translate and then desegment
+p214
+aVFor many segmentations, especially unsupervised ones, this amounts to simple concatenation
+p215
+aVWe compared the output of the two systems using the Unix tool wdiff , which transforms a solution to the longest-common-subsequence problem into a sequence of multi-word insertions and deletions [ 15 ]
+p216
+aVDesegment a lattice u'\u005cu27e8' n s , u'\u005cud835' u'\u005cudca9' , u'\u005cu2130' u'\u005cu27e9' {algorithmic} \u005cSTATE \u005cCOMMENT Initialize output lattice and work list u'\u005cud835' u'\u005cudc4a' u'\u005cud835' u'\u005cudc3f' \u005cSTATE n s u'\u005cu2032' = n s , u'\u005cud835' u'\u005cudca9' u'\u005cu2032' = u'\u005cu2205' , u'\u005cu2130' u'\u005cu2032' = u'\u005cu2205' , u'\u005cud835' u'\u005cudc4a' u'\u005cud835' u'\u005cudc3f' = [ n s ] \u005cWHILE n = u'\u005cud835' u'\u005cudc4a' u'\u005cud835' u'\u005cudc3f' pop u'\u005cu2062' ( ) \u005cSTATE \u005cCOMMENT Work on each node only once \u005cSTATE if n u'\u005cu2208' u'\u005cud835' u'\u005cudca9' u'\u005cu2032' then continue \u005cSTATE u'\u005cud835' u'\u005cudca9' u'\u005cu2032' = u'\u005cud835' u'\u005cudca9' u'\u005cu2032' u'\u005cu222a' { n } \u005cSTATE \u005cCOMMENT Initialize the chain stack u'\u005cud835' u'\u005cudc9e' \u005cSTATE u'\u005cud835' u'\u005cudc9e' = u'\u005cu2205' \u005cFOR e u'\u005cu2208' n u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc62' u'\u005cud835' u'\u005cudc61' \u005cSTATE if [ e ] is valid then u'\u005cud835' u'\u005cudc9e' push u'\u005cu2062' ([ e ]) \u005cENDFOR \u005cSTATE \u005cCOMMENT Depth-first search for complete chains \u005cWHILE [ e 1 , u'\u005cu2026' , e l ] = u'\u005cud835' u'\u005cudc9e' p u'\u005cu2062' o u'\u005cu2062' p u'\u005cu2062' ( ) \u005cSTATE \u005cCOMMENT Attempt to extend chain \u005cFOR e u'\u005cu2208' e l u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc62' u'\u005cud835' u'\u005cudc61' \u005cIF [ e 1 u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' e l , e ] is valid \u005cSTATE u'\u005cud835' u'\u005cudc9e' p u'\u005cu2062' u u'\u005cu2062' s u'\u005cu2062' h u'\u005cu2062' ( [ e 1 , u'\u005cu2026' , e l , e ] ) \u005cELSE \u005cSTATE Mark [ e 1 , u'\u005cu2026' , e l ] as complete \u005cENDIF \u005cENDFOR \u005cCOMMENT Desegment complete chains \u005cIF [ e 1 , u'\u005cu2026' , e l ] is complete \u005cSTATE u'\u005cud835' u'\u005cudc4a' u'\u005cud835' u'\u005cudc3f' push ( e l u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc5c' ) \u005cSTATE u'\u005cu2130' u'\u005cu2032' = u'\u005cu2130' u'\u005cu2032' u'\u005cu222a' { deseg u'\u005cu2062' ( [ e 1 , u'\u005cu2026' , e l ] ) } \u005cENDIF \u005cENDWHILE \u005cENDWHILE \u005cRETURN u'\u005cu27e8' n s u'\u005cu2032' , u'\u005cud835' u'\u005cudca9' u'\u005cu2032' , u'\u005cu2130' u'\u005cu2032' u'\u005cu27e9'
+p217
+aVHistorically, we have not seen improvements from using different tuning sets for decoding and re-ranking
+p218
+aVDuring development, we confirmed that MERT and MIRA perform similarly, as is expected with fewer than 20 features
+p219
+aVWe denote singleton chains with [ e ] , and when unambiguous, we abbreviate longer chains with their start and end node [ e 1 u'\u005cud835' u'\u005cudc53' u'\u005cud835' u'\u005cudc5f' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc5a' u'\u005cu2192' e l u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc5c' ]
+p220
+aVFor example, l+ Aldwl must be converted to lldwl
+p221
+aVWe also use their development and test sets (2000 sentences each
+p222
+aVIn Figure 1 a, the complete chains are [ 0 u'\u005cu2192' 2 ] , [ 0 u'\u005cu2192' 4 ] , [ 0 u'\u005cu2192' 5 ] , and [ 2 u'\u005cu2192' 3 ]
+p223
+aVWe report the number of instances where each system matched the reference, as well as cases where they were both incorrect
+p224
+aVFollowing Clark et al
+p225
+aVBadr et al
+p226
+aVWe test four different systems
+p227
+aVSeven distortion features encode a standard distortion penalty as well as a bidirectional lexicalized reordering model
+p228
+aVThanks to Ann Clifton for generously providing the data and segmentation for our English-to-Finnish experiments, and to Marine Carpuat and Roland Kuhn for their helpful comments on an earlier draft
+p229
+aVLuong et al
+p230
+aVWe conducted an ablation experiment on English-to-Arabic to measure the impact of the various features described in Section 3.4
+p231
+aVTables 1 and 2 report results averaged over 5 tuning replications on English-to-Arabic and English-to-Finnish, respectively
+p232
+aVIn particular, Toutanova et al
+p233
+aVIndeed, the expanded word-level context is one of the main benefits of incorporating a word-level LM
+p234
+aVSalameh et al
+p235
+aVFor example, Badr et al
+p236
+aVLattices 2 2 Or forests for hierarchical and syntactic decoders can represent an exponential number of hypotheses in a compact structure
+p237
+aVWith this notation in place, we can define a chain c to be a sequence of edges [ e 1 u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' e l ] such that for 1 u'\u005cu2264' i l e i u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc5c' = e i + 1 u'\u005cud835' u'\u005cudc53' u'\u005cud835' u'\u005cudc5f' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc5a'
+p238
+aVThey differ in what transformations are performed and at what stage they are reversed
+p239
+aV2010 ) and Clifton and Sarkar ( 2011 ) , which has roughly one million sentence pairs
+p240
+aVLike us, Luong et al
+p241
+aVTokens are drawn from one of three non-overlapping morpho-syntactic sets u'\u005cud835' u'\u005cudc59' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc65' u'\u005cu2208' u'\u005cud835' u'\u005cudc43' u'\u005cud835' u'\u005cudc5f' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc53' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc65' u'\u005cu222a' u'\u005cud835' u'\u005cudc46' u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc5a' u'\u005cu222a' u'\u005cud835' u'\u005cudc46' u'\u005cud835' u'\u005cudc62' u'\u005cud835' u'\u005cudc53' u'\u005cud835' u'\u005cudc53' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc65' , where tokens that do not require desegmentation, such as complete words, punctuation and numbers, are considered to be in u'\u005cud835' u'\u005cudc46' u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc5a'
+p242
+aVWe align the parallel data with GIZA++ [ 22 ] and decode using Moses [ 17 ]
+p243
+aVWe considered adjacent insertion-deletion pairs to be (potentially phrasal) substitutions, and collected them into a file, omitting any unpaired insertions or deletions
+p244
+aVBefore describing the algorithm, we define some notation
+p245
+aVIt is also useful to consider the set of all outgoing edges for a node n u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc62' u'\u005cud835' u'\u005cudc61' = { e u'\u005cu2208' u'\u005cu2130' e u'\u005cud835' u'\u005cudc53' u'\u005cud835' u'\u005cudc5f' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc5a' = n }
+p246
+aVFor English-to-Finnish, we follow Clifton and Sarkar ( 2011 ) in setting the hypothesis stack size to 100, distortion limit to 6, and maximum phrase length to 20
+p247
+aVIn English-to-Finnish, although alternative integration strategies have seen some success [ 20 ] , the current state-of-the-art performs one-best-desegmentation [ 7 ]
+p248
+aVEach edge e u'\u005cu2208' u'\u005cu2130' is a 4-tuple u'\u005cu27e8' u'\u005cud835' u'\u005cudc53' u'\u005cud835' u'\u005cudc5f' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc5a' , u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc5c' , u'\u005cud835' u'\u005cudc59' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc65' , w u'\u005cu27e9' , where u'\u005cud835' u'\u005cudc53' u'\u005cud835' u'\u005cudc5f' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc5a' , u'\u005cud835' u'\u005cudc61' u'\u005cud835' u'\u005cudc5c' u'\u005cu2208' u'\u005cud835' u'\u005cudca9' are head and tail nodes, u'\u005cud835' u'\u005cudc59' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc65' is a single token accepted by this edge, and w is the (potentially vector-valued) edge weight
+p249
+aVThis research was supported by the Natural Sciences and Engineering Research Council of Canada
+p250
+aV[t]
+p251
+a.

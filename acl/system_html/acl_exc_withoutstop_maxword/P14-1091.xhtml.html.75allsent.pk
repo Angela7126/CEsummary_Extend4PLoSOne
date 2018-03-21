@@ -1,0 +1,425 @@
+(lp0
+VAlgorithm 2 shows how to generate formal triples for a span u'\u005cud835' u'\u005cudcac' based on question patterns ( u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' -based question translation
+p1
+aVLike MT, CYK parsing is used to parse each input question, and answers of the span covered by each CYK cell are considered the translations of that cell; unlike MT, which uses offline-generated translation tables to translate source phrases into target translations, a semantic parsing-based question translation method is used to translate each span into its answers on-the-fly, based on question patterns and relation expressions
+p2
+aVTable 2 shows the statistics of question patterns and relation expressions used in our KB-QA system
+p3
+aVTwo question translation methods are presented in the rest of this subsection, which are based on question patterns and relation expressions respectively
+p4
+aV2) We propose a robust method to transform single-relation questions into formal triple queries as their MRs, which trades off between transformation accuracy and recall using question patterns and relation expressions respectively
+p5
+aVWe propose a dependency tree-based method to handle such multiple-constraint questions by (i) decomposing the original question into a set of sub-questions using syntax-based patterns; and (ii) intersecting the answers of all sub-questions as the final answers of the original question
+p6
+aVAlgorithm 3 shows how to generate triples for a question u'\u005cud835' u'\u005cudcac' based on relation expressions
+p7
+aVFrom experiments (Table 3 in Section 4.3) we can see that, question pattern based question translation can achieve high end-to-end accuracy
+p8
+aV1) Question answering and semantic parsing are performed in an joint way under a unified framework; (2) A robust method is proposed to map NL questions to their formal triple queries, which trades off the mapping quality by using question patterns and relation expressions in a cascaded way; and (3) We use domain independent feature set which allowing us to use a relatively small number of question-answer pairs to tune model parameters
+p9
+aVNote, question decomposition only operates on the original question and question spans covered by complete dependency subtrees
+p10
+aV2013 ) have used a lexicon extracted from a subset of ReVerb triples [ 19 ] , which is similar to the relation expression set used in question translation
+p11
+aVThis means how to extract high-quality question patterns is worth to be studied for the question answering task
+p12
+aVKnowledge-based question answering (KB-QA) computes answers to natural language (NL) questions based on existing knowledge bases (KBs
+p13
+aVUnlike existing KB-QA systems which treat semantic parsing and answer retrieval as two cascaded tasks, this paper presents a unified framework that can integrate semantic parsing into the question answering procedure directly
+p14
+aVWe define u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' p as a relation expression set for a given KB predicate p u'\u005cu2208' u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c'
+p15
+aVSometimes, a question may provide multiple constraints to its answers movie starred by Tom Hanks in 1994 is one such question
+p16
+aVThe underlying intuition is that, dependency subtrees of u'\u005cud835' u'\u005cudcac' should be treated as units for question translation
+p17
+aV1) The quality of the relation expressions is better than the quality of the lexicon entries used in the baseline; and (2) We use the extraction-related statistics of relation expressions as features, which brings more information to measure the confidence of mapping between NL phrases and KB predicates, and makes the model to be more flexible
+p18
+aVAiming to alleviate the coverage issue occurring in u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' -based method, an alternative relation expression ( u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' ) -based method is proposed, and will be used when the u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' -based method fails
+p19
+aVBorrowing ideas from machine translation (MT), we treat the QA task as a translation procedure
+p20
+aVOur KB-QA system generates the k -best derivations for each question span, where k is set to 20
+p21
+aV1) Instead of using facts extracted using the open IE method, we leverage a large scale, high-quality knowledge base; (2) We can handle multiple-relation questions, instead of single-relation queries only, based on our translation based KB-QA framework
+p22
+aVSince each relation expression must contain at least one content word, this question cannot match any relation expression
+p23
+aVN is the number of questions in the dev set, u'\u005cud835' u'\u005cudc9c' i r u'\u005cu2062' e u'\u005cu2062' f is the correct answers as references of the i t u'\u005cu2062' h question in the dev set, u'\u005cud835' u'\u005cudc9c' i ^ is the top-1 answer candidate of the i t u'\u005cu2062' h question in the dev set based on feature weights u'\u005cu039b' 1 M , E u'\u005cu2062' r u'\u005cu2062' r u'\u005cu2062' ( u'\u005cu22c5' ) is the error function which is defined as
+p24
+aVActually, the size of our system u'\u005cu2019' s search space is much smaller than the one of the semantic parser used in the baseline.This is due to the fact that, if triple queries generated by the question translation component cannot derive any answer from KB, we will discard such triple queries directly during the QA procedure
+p25
+aVThe above operations are equivalent to answering a simplified question, which is obtained by replacing the answerable spans in the original question with their corresponding answers
+p26
+aVAs all question patterns are collected with human involvement as we discussed in Section 2.3.1, the quality is very high ( 98 u'\u005cu2062' %
+p27
+aVDerivations generated during such a translation procedure are modeled by a linear model, and minimum error rate training (MERT) [ 21 ] is used to tune feature weights based on a set of question-answer pairs
+p28
+aVFormally, given a knowledge base u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c' and an NL question u'\u005cud835' u'\u005cudcac' , our KB-QA method generates a set of formal triples-answer pairs { u'\u005cu27e8' u'\u005cud835' u'\u005cudc9f' , u'\u005cud835' u'\u005cudc9c' u'\u005cu27e9' } as derivations, which are scored and ranked by the distribution P ( u'\u005cu27e8' u'\u005cud835' u'\u005cudc9f' , u'\u005cud835' u'\u005cudc9c' u'\u005cu27e9' u'\u005cud835' u'\u005cudca6' u'\u005cu212c' , u'\u005cud835' u'\u005cudcac' ) defined as follows
+p29
+aVBesides, as a portion of entities in our KB are extracted from Wiki, we know the one-to-one correspondence between such entities and Wiki pages, and use this information in relation expression extraction for entity disambiguation
+p30
+aVSince named entity recognizers trained on Penn TreeBank usually perform poorly on web queries, We instead use a simple string-match method to detect entity mentions in the question using a cleaned entity dictionary dumped from our KB
+p31
+aVThese three scores are used as features to rank answers generated in QA procedure
+p32
+aVFor the question mentioned at the beginning, its two sub-questions generated are movie starred by Tom Hanks and movie starred in 1994 , as its dependency form matches pattern (a
+p33
+aVIf this score is larger than 0 , which means there are overlaps between u'\u005cud835' u'\u005cudcac' u'\u005cu2019' s context and u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' p , then q will be used as the triple query of u'\u005cud835' u'\u005cudcac' , and a set of formal triples will be generated based on q and u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c' (from Line 7 to Line 15
+p34
+aVIf a question matches any one of these patterns, then sub-questions are generated by collecting the paths between n 0 and each n i ( i 0 ) in the pattern, where each n denotes a complete subtree with a noun, number, or question word as its root node, the symbol * above p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' p * denotes this preposition can be skipped in matching
+p35
+aVGiven a set of question-answer pairs { u'\u005cud835' u'\u005cudcac' i , u'\u005cud835' u'\u005cudc9c' i r u'\u005cu2062' e u'\u005cu2062' f } as the development (dev) set, we use the minimum error rate training (MERT) [ 21 ] algorithm to tune the feature weights u'\u005cu039b' i M in our proposed model
+p36
+aVBut as our relation expressions are extracted by an in-house extractor, we can record their extraction-related statistics as extra information, and use them as features to measure the mapping quality
+p37
+aVBut MT in there work means to translate questions into n -best translations, which are used for finding similar sentences in the document collection that probably contain answers
+p38
+aVFirst, the input question is transformed into its meaning representation (MR) by an independent semantic parser [ 26 , 20 , 2 , 17 , 4 , 22 , 1 , 14 , 3 ] ; Then, the answers are retrieved from existing KBs using generated MRs as queries
+p39
+aVFor example, in the question who was Esther u'\u005cu2019' s husband we cannot detect Esther as an entity, as it is just part of an entity name
+p40
+aVAll the films as the answers of this question should satisfy the following two constraints
+p41
+aV2013 ) is one of the latest work which has reported QA results based on a large scale, general domain knowledge base (Freebase), we consider their evaluation result on WEBQUESTIONS as our baseline
+p42
+aVThen, we extract the shortest path between paired entities in the dependency tree of each sentence as an u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' candidate for the given predicate
+p43
+aVThe underlying intuition of using patterns is that those high-frequent questions/queries should and can be treated and solved in the QA task, by involving human effort at a relative small price but with very impressive accuracy
+p44
+aVAs dependency parsing is not perfect, we generate single triples for such questions without considering constraints as well, and add them to the search space for competition h s u'\u005cu2062' y u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' x u'\u005cu2062' _ u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' ( u'\u005cu22c5' ) is used to boost triples that are converted from sub-questions generated by question decomposition
+p45
+aVFor this example, we can give all book names where Sherlock Holmes appeared in, but we cannot rank them based on their publication date , as we cannot learn the alignment between the constraint word first occurred in the question and the predicate Book.Written_Work.Date_Of_First_Publication from training data automatically
+p46
+aVFor the following question who did Steve Spurrier play pro football for as an example, since the unigram play exists in both Film.Film.Actor and American_Football.Player.Current_Team u'\u005cu2019' s relation expression sets, we made a wrong prediction, which led to wrong answers
+p47
+aVBut as human efforts are needed in the mining procedure, this method cannot be extended to large scale very easily
+p48
+aVWe define the task of transforming question spans into formal triples as question translation u'\u005cud835' u'\u005cudc9c' denotes one final answer of u'\u005cud835' u'\u005cudcac'
+p49
+aVWe need an ad-hoc entity detection component to handle such issues, especially for a web scenario, where users often type entity names in their partial or abbreviation forms
+p50
+aVh s u'\u005cu2062' y u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' x u'\u005cu2062' _ u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' ( u'\u005cu22c5' ) , which counts the number of triples in u'\u005cud835' u'\u005cudc9f' that are converted from sub-questions generated by the question decomposition component
+p51
+aVThe intuition is that any sentence containing such entity pairs occur in an assertion is likely to express the predicate of that assertion in some way
+p52
+aV2013 ) , we use the same subset of WEBQUESTIONS (3,778 questions) as the development set (Dev) for weight tuning in MERT, and use the other part of WEBQUESTIONS (2,032 questions) as the test set (Test
+p53
+aVNote that if no predicate p or answer e o u'\u005cu2062' b u'\u005cu2062' j can be generated, { u'\u005cud835' u'\u005cudcac' , N u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' l , u'\u005cud835' u'\u005cudcac' } will be returned as a special triple, which sets e o u'\u005cu2062' b u'\u005cu2062' j to be u'\u005cud835' u'\u005cudcac' itself, and p to be N u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' l
+p54
+aVQuestion patterns are used to map NL context to KB predicates
+p55
+aVWe first show the overall evaluation results of our KB-QA system and compare them with baseline u'\u005cu2019' s results on Dev and Test
+p56
+aVBy doing so, our KB provides the same knowledge as Freebase does, which means we do not gain any extra advantage by using a larger KB
+p57
+aVThe answers of q are returned by A u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' w u'\u005cu2062' e u'\u005cu2062' r u'\u005cu2062' R u'\u005cu2062' e u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' e u'\u005cu2062' v u'\u005cu2062' e u'\u005cu2062' ( q , u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c' ) based on q and u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c' (Line 10), each of which is used to construct a formal triple and added to T for u'\u005cud835' u'\u005cudcac' (from Line 11 to Line 16
+p58
+aVAs the performance of our KB-QA system relies heavily on the k -best beam approximation, we evaluate the impact of the beam size and list the comparison results in Figure 6
+p59
+aVQuestion translation assumes each span u'\u005cud835' u'\u005cudcac' is a single-relation question (Fader et al., 2013
+p60
+aVHowever, a larger k (e.g., 200) cannot bring significant improvements comparing to a smaller one (e.g.,, 20), but using a large k has a tremendous impact on system efficiency
+p61
+aVThe purpose of question translation is to translate a span u'\u005cud835' u'\u005cudcac' to a set of formal triples T
+p62
+aVAlthough we have followed some work [ 22 , 18 ] to handle such special linguistic phenomena by defining some specific operators, it is still hard to cover all unseen cases
+p63
+aVBut by comparing the precisions of these two settings, we find u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' o u'\u005cu2062' n u'\u005cu2062' l u'\u005cu2062' y (97.5%) outperforms u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' o u'\u005cu2062' n u'\u005cu2062' l u'\u005cu2062' y (73.2%) significantly, due to its high quality
+p64
+aVOne problem of doing so is the entity detection issue
+p65
+aVIn order to figure out the impacts of question patterns and relation expressions, another experiment (Table 4) is designed to evaluate their independent influences, where u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' o u'\u005cu2062' n u'\u005cu2062' l u'\u005cu2062' y and u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' o u'\u005cu2062' n u'\u005cu2062' l u'\u005cu2062' y denote the results of KB-QA systems which only allow question patterns and relation expressions in question translation respectively
+p66
+aVSo we choose k = 20 as the optimal value in above experiments, which trades off between accuracy and efficiency
+p67
+aVMeanwhile, u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' o u'\u005cu2062' n u'\u005cu2062' l u'\u005cu2062' y perform worse ( 11.8 u'\u005cu2062' % ) than u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' o u'\u005cu2062' n u'\u005cu2062' l u'\u005cu2062' y , due to coverage issue
+p68
+aVFirst, 5W queries, which begin with What, Where, Who, When, or Which, are selected from a large scale query log of a commercial search engine; Then, a cleaned entity dictionary is used to annotate each query by replacing all entity mentions it contains with the symbol [ S u'\u005cu2062' l u'\u005cu2062' o u'\u005cu2062' t ]
+p69
+aVBut we still allow ourselves to use the static rank scores and confidence scores of entities as features, as we described in Section 2.4
+p70
+aVPoon ( 2013 ) has proposed an unsupervised method by adopting grounded-learning to leverage the database for indirect supervision
+p71
+aV2013 ) use Wiktionary and a limited manual lexicon to map POS tags to a set of predefined CCG lexical categories, which aims to reduce the need for learning lexicon from training data
+p72
+aVSince Freebase is completely contained by our KB, we disallow all entities which are not included by Freebase
+p73
+aVFor example, although the question Forrest Gump was directed by which moviemaker means the same as the question u'\u005cud835' u'\u005cudcac' in Figure 2, no question pattern can cover it
+p74
+aVAccording to the above description, our KB-QA method can be decomposed into four tasks as
+p75
+aVQuestion patterns are collected as follows
+p76
+aVSuch assumption simplifies the efforts of semantic parsing to the minimum question units, while leaving the capability of handling multiple-relation questions (Figure 1 gives one such example) to the outer CYK-parsing based translation procedure
+p77
+aVA lower disambiguation error rate results in better relation expressions
+p78
+aVFigure 1 shows an example the question director of movie starred by Tom Hanks is translated to one of its answers Robert Zemeckis by three main steps i) translate director of to director of ; (ii) translate movie starred by Tom Hanks to one of its answers Forrest Gump ; (iii) translate director of Forrest Gump to a final answer Robert Zemeckis
+p79
+aVFour syntax-based patterns (Figure 5) are used for question decomposition
+p80
+aVWe can see that as we increase k incrementally, the accuracy increase at the same time
+p81
+aVSimilar ideas are used in IBM Watson [ 13 ] as well
+p82
+aV1) search space generation for u'\u005cu210b' u'\u005cu2062' ( u'\u005cud835' u'\u005cudcac' ) ; (2) question translation for transforming question spans into their corresponding formal triples; (3) feature design for h i u'\u005cu2062' ( u'\u005cu22c5' ) ; and (4) feature weight tuning for { u'\u005cu039b' i }
+p83
+aVIt controls the granularity of the spans used in question translation
+p84
+aVThe statistics and overall quality of the relation expressions are listed in Section 4.1
+p85
+aVNote that the updated question covered by Cell[0, 6] is obtained by combining the answers to question spans covered by Cell[0, 1] and Cell[2, 6]
+p86
+aVFor example, is the director of is one relation expression string for the predicate Film.Film.Director , which means it is usually used to express this relation (predicate) in NL
+p87
+aVOur work intersects with two research directions semantic parsing and question answering
+p88
+aVRelation expressions are mined as follows
+p89
+aVBesides which, answers generated during the translation procedure help significantly with search space pruning
+p90
+aVFor the sake of convenience, we omit the I u'\u005cu2062' D information in the rest of the paper
+p91
+aVCompared to the above two MT-motivated QA work, our method uses MT methodology to translate questions to answers directly
+p92
+aVOnly high-frequent query patterns which contain one [ S u'\u005cu2062' l u'\u005cu2062' o u'\u005cu2062' t ] are maintained; Lastly, annotators try to manually label the most-frequent 50,000 query patterns with their corresponding predicates, and 4,764 question patterns with single labeled predicates are obtained
+p93
+aVBut transformation from NL questions to MRs heavily depends on dependency parsing results
+p94
+aVThe final answers can be obtained from the root cell
+p95
+aVFor each predicate, we only keep the relation expressions whose pattern scores are larger than a pre-defined threshold
+p96
+aVDifferent methods are used to map NL phrases to KB predicates
+p97
+aVh u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' c u'\u005cu2062' o u'\u005cu2062' u u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' ( u'\u005cu22c5' ) , which counts the number of triples in u'\u005cud835' u'\u005cudc9f' that are generated by u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' -based question translation method
+p98
+aVFigure 4 gives one relation expression extraction example
+p99
+aV1) We propose a translation-based KB-QA method that integrates semantic parsing and QA in one unified framework
+p100
+aVWe also sample 1,000 instances from the whole relation expression set and manually label their quality
+p101
+aVTable 1 shows the statistics of this data set
+p102
+aVWe first present our translation-based KB-QA method in Algorithm 1, which is used to generate u'\u005cu210b' u'\u005cu2062' ( u'\u005cud835' u'\u005cudcac' ) for each input NL question u'\u005cud835' u'\u005cudcac'
+p103
+aVh u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' c u'\u005cu2062' o u'\u005cu2062' u u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' ( u'\u005cu22c5' ) , which counts the number of triples in u'\u005cud835' u'\u005cudc9f' that are generated by u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' -based question translation method
+p104
+aVThe first half (from Line 1 to Line 13) generates a formal triple set T for each unary span u'\u005cud835' u'\u005cudcac' i j u'\u005cu2208' u'\u005cud835' u'\u005cudcac' , using the question translation method Q u'\u005cu2062' T u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' ( u'\u005cud835' u'\u005cudcac' i j , u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c' ) (Line 4), which takes u'\u005cud835' u'\u005cudcac' i j as the input
+p105
+aV2013 ) have not only enlarged the KB used for Freebase [ 12 ] , but also used a bigger lexicon trigger set extracted by the open IE method [ 19 ] for NL phrases to predicates linking
+p106
+aVEchihabi and Marcu ( 2003 ) have developed a noisy-channel model for QA, which explains how a sentence containing an answer to a given question can be rewritten into that question through a sequence of stochastic operations
+p107
+aVThe benefit of our method is that we don u'\u005cu2019' t need to explicitly generate complete semantic structures for input questions
+p108
+aVThe underlying idea is to use the context (predicate) information to help entity disambiguation
+p109
+aVThe answers with the highest model scores are considered the best answers for evaluation
+p110
+aVThe search space u'\u005cu210b' u'\u005cu2062' ( u'\u005cud835' u'\u005cudcac' ) for the entire question u'\u005cud835' u'\u005cudcac' is returned at last (Line 31
+p111
+aVUnlike the u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' -based method which needs a perfect match, the u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' -based method allows fuzzy matching between u'\u005cud835' u'\u005cudcac' and u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' p , and records this (Line 13) in generated triples, which is used as features later
+p112
+aVFigure 3 gives an example, where n-grams with rectangles are the ones that occur in both u'\u005cud835' u'\u005cudcac' u'\u005cu2019' s context and the relation expression set of a given predicate p = F u'\u005cu2062' i u'\u005cu2062' l u'\u005cu2062' m
+p113
+aVThe order of triples in u'\u005cud835' u'\u005cudc9f' denotes the order of translation steps from u'\u005cud835' u'\u005cudcac' to u'\u005cud835' u'\u005cudc9c'
+p114
+aVBerant et al
+p115
+aVBerant et al
+p116
+aVGiven a set of KB assertions with an identical predicate p , we first extract all sentences from English Wiki pages 4 4 http://en.wikipedia.org/wiki/Wikipedia:Database_download , each of which contains at least one pair of entities occurring in one assertion
+p117
+aV2013 ) map questions to formal (triple) queries over a large scale, open-domain database of facts extracted from a raw corpus by ReVerb [ 8 ]
+p118
+aVLast, all relation expressions extracted are filtered by heuristic rules, i.e.,, the frequency must be larger than 4, the length must be shorter than 10, and then weighted by the pattern scoring methods proposed in [ 10 , 11 ]
+p119
+aVThe second half (from Line 14 to Line 31) first updates the content of each bigger span u'\u005cud835' u'\u005cudcac' i j by concatenating the answers to its any two consecutive smaller spans covered by u'\u005cud835' u'\u005cudcac' i j (Line 18
+p120
+aVE.g., u'\u005cu27e8' director of, Null, director of u'\u005cu27e9' 0 1 , u'\u005cu27e8' Tom Hanks, Film.Actor.Film, Forrest Gump u'\u005cu27e9' 2 6 and u'\u005cu27e8' Forrest Gump, Film.Film.Director, Robert Zemeckis u'\u005cu27e9' 0 6 are three ordered formal triples corresponding to the three translation steps in Figure 1
+p121
+aVBesides, ambiguous entries contained in relation expression sets of different predicates can bring mapping errors as well
+p122
+aVFor each possible entity mention e u'\u005cud835' u'\u005cudcac' u'\u005cu2208' u'\u005cud835' u'\u005cudcac' and a KB predicate p u'\u005cu2208' u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c' that is related to a KB entity e whose name equals e u'\u005cud835' u'\u005cudcac' , S u'\u005cu2062' i u'\u005cu2062' m u'\u005cu2062' ( e u'\u005cud835' u'\u005cudcac' , u'\u005cud835' u'\u005cudcac' , u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' p ) is computed (Line 5) based on the similarity between question context and u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' p , which measures how likely u'\u005cud835' u'\u005cudcac' can be transformed into a triple query q = { e , p
+p123
+aVBesides, different users often type the questions with the same meaning in different NL expressions
+p124
+aV2013 ) to allow partial credit and score an answer using the F1 measure, comparing the predicted set of entities to the annotated set of entities
+p125
+aVEach triple t = { e s u'\u005cu2062' b u'\u005cu2062' j , p , e o u'\u005cu2062' b u'\u005cu2062' j } i j u'\u005cu2208' u'\u005cud835' u'\u005cudc9f' denotes an assertion in u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c' , where i and j denotes the beginning and end indexes of the question span from which t is transformed
+p126
+aVSince Berant et al
+p127
+aVFollowing Berant et al
+p128
+aVFor evaluation, we follow Berant et al
+p129
+aVu'\u005cu210b' u'\u005cu2062' ( u'\u005cud835' u'\u005cudcac' ) denotes the search space { u'\u005cu27e8' u'\u005cud835' u'\u005cudc9f' , u'\u005cud835' u'\u005cudc9c' u'\u005cu27e9' } u'\u005cud835' u'\u005cudc9f' is composed of a set of ordered formal triples { t 1 , u'\u005cu2026' , t n }
+p130
+aVThe training criterion is to seek the feature weights that can minimize the accumulated errors of the top-1 answer of questions in the dev set
+p131
+aVWe leave a more general pattern mining method for future work
+p132
+aVThese two resources can cover 566 head predicates in our KB
+p133
+aVTable 3 shows our KB-QA method outperforms baseline on both Dev and Test
+p134
+aVIt is easy to see that such questions cannot be translated to single triples
+p135
+aVFader et al
+p136
+aVRecent works [ 5 , 18 ] have alleviated such issues using question-answer pairs as weak supervision, but still with the shortcoming of using limited lexical triggers to link NL phrases to predicates
+p137
+aVBut it still needs human efforts to define lexical categories, which usually can not cover all the semantic phenomena
+p138
+aVu'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c' denotes a knowledge base 1 1 We use a large scale knowledge base in this paper, which contains 2.3B entities, 5.5K predicates, and 18B assertions
+p139
+aV1) starred by Tom Hanks ; and (2) released in 1994
+p140
+aVh s u'\u005cu2062' p u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' ( u'\u005cu22c5' ) , which counts the number of spans in u'\u005cud835' u'\u005cudcac' that are converted to formal triples
+p141
+aVSome previous works on semantic parsing [ 25 , 26 , 23 , 27 , 24 , 15 , 16 ] require manually annotated logical forms as supervision, and are hard to extend resulting parsers from limited domains, such as GEO, JOBS and ATIS, to open domains
+p142
+aVSometimes, we cannot give exact answers to superlative questions like what is the first book Sherlock Holmes appeared in
+p143
+aVAlthough the size of this set is limited, they can actually cover head questions/queries 6 6 Head questions/queries mean the questions/queries with high frequency and clear patterns very well
+p144
+aVKwiatkowski et al
+p145
+aVCompared to their work, our method gains an improvement in two aspects
+p146
+aVBesides, the KB used (ATIS) is limited as well
+p147
+aVComparison results are listed in Table 3
+p148
+aVThen, Q u'\u005cu2062' T u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' ( u'\u005cud835' u'\u005cudcac' i j , u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c' ) is called to generate triples for the updated span (Line 19
+p149
+aVh s u'\u005cu2062' y u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' x u'\u005cu2062' _ u'\u005cu2062' s u'\u005cu2062' u u'\u005cu2062' b u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' e u'\u005cu2062' ( u'\u005cu22c5' ) , which counts the number of spans in u'\u005cud835' u'\u005cudcac' that are (1) converted to formal triples, whose predicates are not N u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' l , and (2) covered by complete dependency subtrees at the same time
+p150
+aVEspana-Bonet and Comas ( 2012 ) have proposed an MT-based method for factoid QA
+p151
+aVObviously, current patterns used can u'\u005cu2019' t cover all cases but most-common ones
+p152
+aVWe can see that using a small k can achieve better results than baseline, where the beam size is set to be 200
+p153
+aVThe name of each entity returned equals the input entity mention e u'\u005cud835' u'\u005cudcac' and occurs in some assertions where u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' d u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e are the predicates
+p154
+aVMost previous systems tackle this task in a cascaded manner
+p155
+aVSome questions lack sufficient evidences to detect predicates where is Byron Nelson 2012 is an example
+p156
+aVOne difference between these two systems is the KB used
+p157
+aVh q u'\u005cu2062' u u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' o u'\u005cu2062' n u'\u005cu2062' _ u'\u005cu2062' w u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' d u'\u005cu2062' ( u'\u005cu22c5' ) , which counts the number of original question words occurring in u'\u005cud835' u'\u005cudc9c'
+p158
+aVu'\u005cu211b' u'\u005cu2062' u'\u005cu2130' -based Question Translation \u005cSetKwData IndexIndex T = u'\u005cu2205' u'\u005cu2004' \u005cForEach entity mention e u'\u005cud835' u'\u005cudcac' u'\u005cu2208' u'\u005cud835' u'\u005cudcac' \u005cForEach e u'\u005cu2208' u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c' s.t e n u'\u005cu2062' a u'\u005cu2062' m u'\u005cu2062' e == e u'\u005cud835' u'\u005cudcac' \u005cForEach predicate p u'\u005cu2208' u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c' related to e s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e = S u'\u005cu2062' i u'\u005cu2062' m u'\u005cu2062' ( e u'\u005cud835' u'\u005cudcac' , u'\u005cud835' u'\u005cudcac' , u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' p ) u'\u005cu2004' \u005cIf s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e 0 create a new triple query q u'\u005cu2004' q = { e , p
+p159
+aVEach triple t u'\u005cu2208' T is in the form of { e s u'\u005cu2062' b u'\u005cu2062' j , p , e o u'\u005cu2062' b u'\u005cu2062' j } , where e s u'\u005cu2062' b u'\u005cu2062' j u'\u005cu2019' s mention 3 3 For simplicity, a cleaned entity dictionary dumped from the entire u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c' is used to detect entity mentions in u'\u005cud835' u'\u005cudcac' occurs in u'\u005cud835' u'\u005cudcac' , p is a predicate that denotes the meaning expressed by the context of e s u'\u005cu2062' b u'\u005cu2062' j in u'\u005cud835' u'\u005cudcac' , e o u'\u005cu2062' b u'\u005cu2062' j is an answer to u'\u005cud835' u'\u005cudcac' retrieved from u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c' using a triple query q = { e s u'\u005cu2062' b u'\u005cu2062' j , p
+p160
+aVIn comparison, our method has further advantages
+p161
+aVA 16-machine cluster is used to host and serve the whole data that stores a set of assertions
+p162
+aVFigure 2 gives an example
+p163
+aVA question pattern u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' includes a pattern string u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' p u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' r u'\u005cu2062' n , which is composed of words and a slot symbol [ S u'\u005cu2062' l u'\u005cu2062' o u'\u005cu2062' t ] , and a KB predicate u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' d u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e , which denotes the meaning expressed by the context words in u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' p u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' r u'\u005cu2062' n
+p164
+aVu'\u005cu039b' i denotes the feature weight of h i u'\u005cu2062' ( u'\u005cu22c5' )
+p165
+aVNote that we do not re-implement the baseline system, but just list their evaluation numbers reported in the paper
+p166
+aVFor each entity mention e u'\u005cud835' u'\u005cudcac' u'\u005cu2208' u'\u005cud835' u'\u005cudcac' , we replace it with [ S u'\u005cu2062' l u'\u005cu2062' o u'\u005cu2062' t ] and obtain a pattern string u'\u005cud835' u'\u005cudcac' p u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' r u'\u005cu2062' n (Line 3
+p167
+aVContext can be either continuous or discontinues phrases
+p168
+aVEach assertion t u'\u005cu2208' u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c' is in the form of { e s u'\u005cu2062' b u'\u005cu2062' j I u'\u005cu2062' D , p , e o u'\u005cu2062' b u'\u005cu2062' j I u'\u005cu2062' D } , where p denotes a predicate, e s u'\u005cu2062' b u'\u005cu2062' j I u'\u005cu2062' D and e o u'\u005cu2062' b u'\u005cu2062' j I u'\u005cu2062' D denote the subject and object entities of t , with unique I u'\u005cu2062' D s 2 2 Each KB entity has a unique ID
+p169
+aVh i u'\u005cu2062' ( u'\u005cu22c5' ) denotes the i t u'\u005cu2062' h feature function
+p170
+aVwhere # u'\u005cu03a9' u'\u005cu2062' ( u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' ) denotes the number of times that u'\u005cu03a9' occurs in u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' e u'\u005cu2062' x u'\u005cu2062' p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' s u'\u005cu2062' i u'\u005cu2062' o u'\u005cu2062' n , and u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' w u'\u005cu2062' e u'\u005cu2062' i u'\u005cu2062' g u'\u005cu2062' h u'\u005cu2062' t is decided by the relation expression extraction component
+p171
+aVWe leave this to future work as an independent topic
+p172
+aVThe more constraints an answer satisfies, the better
+p173
+aVEach triple t u'\u005cu2208' T returned is in the form of { e s u'\u005cu2062' b u'\u005cu2062' j , p , e o u'\u005cu2062' b u'\u005cu2062' j } , where e s u'\u005cu2062' b u'\u005cu2062' j u'\u005cu2019' s mention occurs in u'\u005cud835' u'\u005cudcac' i j , p is a predicate that denotes the meaning expressed by the context of e s u'\u005cu2062' b u'\u005cu2062' j in u'\u005cud835' u'\u005cudcac' i j , e o u'\u005cu2062' b u'\u005cu2062' j is an answer of u'\u005cud835' u'\u005cudcac' i j based on e s u'\u005cu2062' b u'\u005cu2062' j , p and u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c'
+p174
+aVThis makes sure the un-answerable spans can be passed on to the higher-level operations
+p175
+aVIt penalizes those partially answered questions
+p176
+aVh t u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' p u'\u005cu2062' l u'\u005cu2062' e u'\u005cu2062' ( u'\u005cu22c5' ) , which counts the number of triples in u'\u005cud835' u'\u005cudc9f' , whose predicates are not N u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' l
+p177
+aVEach relation expression u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' u'\u005cu2208' u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' p includes an expression string u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' e u'\u005cu2062' x u'\u005cu2062' p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' s u'\u005cu2062' i u'\u005cu2062' o u'\u005cu2062' n , which must contain at least one content word, and a weight u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' w u'\u005cu2062' e u'\u005cu2062' i u'\u005cu2062' g u'\u005cu2062' h u'\u005cu2062' t , which denotes the confidence that u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' e u'\u005cu2062' x u'\u005cu2062' p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' s u'\u005cu2062' i u'\u005cu2062' o u'\u005cu2062' n can represent p u'\u005cu2019' s meaning in NL
+p178
+aVWe now introduce the feature sets { h i u'\u005cu2062' ( u'\u005cu22c5' ) } that are used in the above linear model
+p179
+aVFrom Table 4 we can see that the accuracy of u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' o u'\u005cu2062' n u'\u005cu2062' l u'\u005cu2062' y on Test ( 32.5 u'\u005cu2062' % ) is slightly better than baseline u'\u005cu2019' s result ( 31.4 u'\u005cu2062' %
+p180
+aVWe need to find an alternative way to alleviate such coverage issue
+p181
+aVThe contributions of this work are two-fold
+p182
+aVu'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' -based Question Translation \u005cSetKwData IndexIndex T = u'\u005cu2205' u'\u005cu2004' \u005cForEach entity mention e u'\u005cud835' u'\u005cudcac' u'\u005cu2208' u'\u005cud835' u'\u005cudcac' u'\u005cud835' u'\u005cudcac' p u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' r u'\u005cu2062' n = replace e u'\u005cud835' u'\u005cudcac' in u'\u005cud835' u'\u005cudcac' with [ S u'\u005cu2062' l u'\u005cu2062' o u'\u005cu2062' t ] u'\u005cu2004' \u005cForEach question pattern u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' \u005cIf u'\u005cud835' u'\u005cudcac' p u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' r u'\u005cu2062' n == u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' p u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' r u'\u005cu2062' n u'\u005cu2130' = D u'\u005cu2062' i u'\u005cu2062' s u'\u005cu2062' a u'\u005cu2062' m u'\u005cu2062' b u'\u005cu2062' i u'\u005cu2062' g u'\u005cu2062' u u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' ( e u'\u005cud835' u'\u005cudcac' , u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' d u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e ) u'\u005cu2004' \u005cForEach e u'\u005cu2208' u'\u005cu2130' create a new triple query q u'\u005cu2004' q = { e , u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' d u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e
+p183
+aVThe accuracy is around 89 u'\u005cu2062' %
+p184
+aVIf u'\u005cud835' u'\u005cudcac' p u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' r u'\u005cu2062' n can match one u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' p u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' r u'\u005cu2062' n , then we construct a triple query q (Line 9) using u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' d u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e as its predicate and one of the KB entities returned by D u'\u005cu2062' i u'\u005cu2062' s u'\u005cu2062' a u'\u005cu2062' m u'\u005cu2062' b u'\u005cu2062' i u'\u005cu2062' g u'\u005cu2062' u u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' ( e u'\u005cud835' u'\u005cudcac' , u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' d u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e ) as its subject entity (Line 6
+p185
+aVHere, the objective of D u'\u005cu2062' i u'\u005cu2062' s u'\u005cu2062' a u'\u005cu2062' m u'\u005cu2062' b u'\u005cu2062' i u'\u005cu2062' g u'\u005cu2062' u u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' ( e u'\u005cud835' u'\u005cudcac' , u'\u005cud835' u'\u005cudcac' u'\u005cu2062' u'\u005cud835' u'\u005cudcab' p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' d u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e ) is to output a set of disambiguated KB entities u'\u005cu2130' in u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c'
+p186
+aVformal triple t u'\u005cu2208' T create a new derivation d u'\u005cu2004' d u'\u005cud835' u'\u005cudc9c' = t e o u'\u005cu2062' b u'\u005cu2062' j u'\u005cu2004' d u'\u005cud835' u'\u005cudc9f' = { t } u'\u005cu2004' update the model score of d u'\u005cu2004' insert d to u'\u005cu210b' u'\u005cu2062' ( u'\u005cud835' u'\u005cudcac' i j ) u'\u005cu2004' \u005cFor l = 1 to u'\u005cud835' u'\u005cudcac'
+p187
+aVh s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' k s u'\u005cu2062' b u'\u005cu2062' j u'\u005cu2062' ( u'\u005cu22c5' ) , which sums the static rank scores of all subject entities in u'\u005cud835' u'\u005cudc9f' u'\u005cu2019' s triple set as u'\u005cu2211' t i u'\u005cu2208' u'\u005cud835' u'\u005cudc9f' t i e s u'\u005cu2062' b u'\u005cu2062' j s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' _ u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' k
+p188
+aVh s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' k o u'\u005cu2062' b u'\u005cu2062' j u'\u005cu2062' ( u'\u005cu22c5' ) , which sums the static rank scores of all object entities in u'\u005cud835' u'\u005cudc9f' u'\u005cu2019' s triple set as u'\u005cu2211' t i u'\u005cu2208' u'\u005cud835' u'\u005cudc9f' t i e o u'\u005cu2062' b u'\u005cu2062' j s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' _ u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' k
+p189
+aVh c u'\u005cu2062' o u'\u005cu2062' n u'\u005cu2062' f u'\u005cu2062' i u'\u005cu2062' d u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e o u'\u005cu2062' b u'\u005cu2062' j u'\u005cu2062' ( u'\u005cu22c5' ) , which sums the confidence scores of all object entities in u'\u005cud835' u'\u005cudc9f' u'\u005cu2019' s triple set as u'\u005cu2211' t u'\u005cu2208' u'\u005cud835' u'\u005cudc9f' t e o u'\u005cu2062' b u'\u005cu2062' j c u'\u005cu2062' o u'\u005cu2062' n u'\u005cu2062' f u'\u005cu2062' i u'\u005cu2062' d u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e
+p190
+aVwhere u'\u005cu0394' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc9c' i r u'\u005cu2062' e u'\u005cu2062' f , u'\u005cud835' u'\u005cudc9c' i ^ ) is an indicator function which equals 1 when u'\u005cud835' u'\u005cudc9c' i ^ is included in the reference set u'\u005cud835' u'\u005cudc9c' i r u'\u005cu2062' e u'\u005cu2062' f , and 0 otherwise
+p191
+aVThe objective of our KB-QA system is to seek the derivation u'\u005cu27e8' u'\u005cud835' u'\u005cudc9f' ^ , u'\u005cud835' u'\u005cudc9c' ^ u'\u005cu27e9' that maximizes the probability P ( u'\u005cu27e8' u'\u005cud835' u'\u005cudc9f' , u'\u005cud835' u'\u005cudc9c' u'\u005cu27e9' u'\u005cud835' u'\u005cudca6' u'\u005cu212c' , u'\u005cud835' u'\u005cudcac' ) described in Section 2.1 as
+p192
+aVC u'\u005cu2062' o u'\u005cu2062' u u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' ( u'\u005cu03a9' , u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' p ) denotes the weighted sum of times that u'\u005cu03a9' occurs in u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' p
+p193
+aVWe think this improvement comes from two aspects
+p194
+aVwhere n is the n-gram order which ranges from 1 to 5, u'\u005cu03a9' n is an n-gram occurring in u'\u005cud835' u'\u005cudcac' without overlapping with e u'\u005cud835' u'\u005cudcac' and containing at least one content word, P ( u'\u005cu03a9' n u'\u005cu211b' u'\u005cu2130' p ) is the posterior probability which is computed by
+p195
+aVWe describe the implementation detail of Q u'\u005cu2062' T u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' ( u'\u005cu22c5' ) in Section 2.3
+p196
+aVWe present details of these four tasks in the following subsections one-by-one
+p197
+aVh t u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' p u'\u005cu2062' l u'\u005cu2062' e w u'\u005cu2062' e u'\u005cu2062' i u'\u005cu2062' g u'\u005cu2062' h u'\u005cu2062' t u'\u005cu2062' ( u'\u005cu22c5' ) , which sums the scores of all triples { t i } in u'\u005cud835' u'\u005cudc9f' as u'\u005cu2211' t i u'\u005cu2208' u'\u005cud835' u'\u005cudc9f' t i s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e
+p198
+aVFor each assertion { e s u'\u005cu2062' b u'\u005cu2062' j , p , e o u'\u005cu2062' b u'\u005cu2062' j } stored in u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c' , e s u'\u005cu2062' b u'\u005cu2062' j s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' _ u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' k and e o u'\u005cu2062' b u'\u005cu2062' j s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' _ u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' k denote the static rank scores 5 5 The static rank score of an entity represents a general indicator of the overall quality of that entity for e s u'\u005cu2062' b u'\u005cu2062' j and e o u'\u005cu2062' b u'\u005cu2062' j respectively; e o u'\u005cu2062' b u'\u005cu2062' j c u'\u005cu2062' o u'\u005cu2062' n u'\u005cu2062' f u'\u005cu2062' i u'\u005cu2062' d u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e u'\u005cu2062' _ u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' k represents the probability p ( e o u'\u005cu2062' b u'\u005cu2062' j e s u'\u005cu2062' b u'\u005cu2062' j , p
+p199
+aV} u'\u005cu2004' { u'\u005cud835' u'\u005cudc9c' i } = A u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' w u'\u005cu2062' e u'\u005cu2062' r u'\u005cu2062' R u'\u005cu2062' e u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' e u'\u005cu2062' v u'\u005cu2062' e u'\u005cu2062' ( q , u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c' ) u'\u005cu2004' \u005cForEach u'\u005cud835' u'\u005cudc9c' u'\u005cu2208' { u'\u005cud835' u'\u005cudc9c' i } create a new formal triple t u'\u005cu2004' t = { q e s u'\u005cu2062' b u'\u005cu2062' j , q p , u'\u005cud835' u'\u005cudc9c' } u'\u005cu2004' t s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e = s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2004' insert t to T u'\u005cu2004' sort T based on the score of each t u'\u005cu2208' T u'\u005cu2004' \u005cReturn T
+p200
+aVWe think the potential reasons of this improvement include
+p201
+aV} u'\u005cu2004' { u'\u005cud835' u'\u005cudc9c' i } = A u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' w u'\u005cu2062' e u'\u005cu2062' r u'\u005cu2062' R u'\u005cu2062' e u'\u005cu2062' t u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' e u'\u005cu2062' v u'\u005cu2062' e u'\u005cu2062' ( q , u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c' ) u'\u005cu2004' \u005cForEach u'\u005cud835' u'\u005cudc9c' u'\u005cu2208' { u'\u005cud835' u'\u005cudc9c' i } create a new formal triple t u'\u005cu2004' t = { q e s u'\u005cu2062' b u'\u005cu2062' j , q p , u'\u005cud835' u'\u005cudc9c' } u'\u005cu2004' t s u'\u005cu2062' c u'\u005cu2062' o u'\u005cu2062' r u'\u005cu2062' e = 1.0 u'\u005cu2004' insert t to T
+p202
+aVExcept for Byron Nelson and 2012 , all the others are non-content words
+p203
+aV\u005cFor all i , j s.t j - i = l \u005cFor all m s.t i u'\u005cu2264' m j \u005cFor d l u'\u005cu2208' u'\u005cu210b' u'\u005cu2062' ( u'\u005cud835' u'\u005cudcac' i m ) and d r u'\u005cu2208' u'\u005cu210b' u'\u005cu2062' ( u'\u005cud835' u'\u005cudcac' m + 1 j ) u'\u005cud835' u'\u005cudcac' u u'\u005cu2062' p u'\u005cu2062' d u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e = d l u'\u005cud835' u'\u005cudc9c' + d r u'\u005cud835' u'\u005cudc9c' u'\u005cu2004' T = Q u'\u005cu2062' T u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' ( u'\u005cud835' u'\u005cudcac' u u'\u005cu2062' p u'\u005cu2062' d u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e , u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c' ) u'\u005cu2004' \u005cForEach formal triple t u'\u005cu2208' T create a new derivation d u'\u005cu2004' d u'\u005cud835' u'\u005cudc9c' = t e o u'\u005cu2062' b u'\u005cu2062' j u'\u005cu2004' d u'\u005cud835' u'\u005cudc9f' = d l u'\u005cud835' u'\u005cudc9f' u'\u005cu2062' u'\u005cu22c3' d r u'\u005cud835' u'\u005cudc9f' u'\u005cu2062' u'\u005cu22c3' { t } u'\u005cu2004' update the model score of d u'\u005cu2004' insert d to u'\u005cu210b' u'\u005cu2062' ( u'\u005cud835' u'\u005cudcac' i j ) u'\u005cu2004' \u005cReturn u'\u005cu210b' u'\u005cu2062' ( u'\u005cud835' u'\u005cudcac' )
+p204
+aVThe computation of S u'\u005cu2062' i u'\u005cu2062' m u'\u005cu2062' ( e u'\u005cud835' u'\u005cudcac' , u'\u005cud835' u'\u005cudcac' , u'\u005cu211b' u'\u005cu2062' u'\u005cu2130' p ) is defined as follows
+p205
+aVTranslation-based KB-QA \u005cSetKwData IndexIndex \u005cFor l = 1 to u'\u005cud835' u'\u005cudcac'
+p206
+aV\u005cFor all i , j s.t j - i = l u'\u005cu210b' u'\u005cu2062' ( u'\u005cud835' u'\u005cudcac' i j ) = u'\u005cu2205' u'\u005cu2004' T = Q u'\u005cu2062' T u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' ( u'\u005cud835' u'\u005cudcac' i j , u'\u005cud835' u'\u005cudca6' u'\u005cu2062' u'\u005cu212c'
+p207
+aV}
+p208
+aVT
+p209
+ag208
+aVD u'\u005cu2062' i u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' c u'\u005cu2062' t u'\u005cu2062' o u'\u005cu2062' r
+p210
+aVF u'\u005cu2062' i u'\u005cu2062' l u'\u005cu2062' m
+p211
+a.

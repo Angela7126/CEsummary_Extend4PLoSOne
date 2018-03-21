@@ -1,0 +1,172 @@
+(lp0
+VIf no verb exists, return ( [ 0 , 1 ] , [ 1 , u'\u005cu2113' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) ] )
+p1
+aVDecide on u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) u'\u005cu2208' u'\u005cud835' u'\u005cudcb0' , the undirected latent tree that u'\u005cud835' u'\u005cudc99' maps to
+p2
+aVWe can then proceed by learning how to map a POS sequence u'\u005cud835' u'\u005cudc99' to a tree t u'\u005cu2208' u'\u005cud835' u'\u005cudcaf' (through u u'\u005cu2208' u'\u005cud835' u'\u005cudcb0' ) by focusing only on examples in u'\u005cud835' u'\u005cudc9f' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' )
+p3
+aVThus, for all results, we use universal tags for our method and the original POS tags for CCM
+p4
+aVHowever, if the underlying tree structure is known, then Definition 1 can be leveraged to compute u'\u005cud835' u'\u005cudc6b' Z u'\u005cu2062' Z and u'\u005cud835' u'\u005cudc6b' Z u'\u005cu2062' W as we show below
+p5
+aVwhere path u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' ) u'\u005cu2062' ( i , j ) is the set of all the edges in the (undirected) path from i to j in the tree u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' )
+p6
+aVFor example, as we see in § 3.2 we will define the distance d u'\u005cu2062' ( i , j ) to be a function of the covariance matrix u'\u005cud835' u'\u005cudd3c' [ v i v j u'\u005cu22a4' u ( u'\u005cud835' u'\u005cudc99' ) , u'\u005cu0398' ( u'\u005cud835' u'\u005cudc99' ) ]
+p7
+aVNN, CC, and BC indicate the performance of our method for neural embeddings, CCA embeddings, and Brown clustering respectively, using the heuristic for h dir described in § 4.1
+p8
+aVAs we describe below, given the tree structure, the additive tree metric property allows us to compute u'\u005cu201c' backwards u'\u005cu201d' the distances among the latent variables as a function of the distances among the observed variables
+p9
+aVGiven the fact that the distance between a pair of nodes is a function of the random variables they represent (according to the true model), only u'\u005cud835' u'\u005cudc6b' W u'\u005cu2062' W can be empirically estimated from data
+p10
+aVWe therefore restrict the data used with CCM to sentences of length u'\u005cu2264' u'\u005cu2113' , where u'\u005cu2113' is the maximal sentence length being evaluated
+p11
+aVUnlike in phylogenetics and graphical models, where a single latent tree is constructed for all the data, in our case, each part of speech sequence is associated with its own parse tree
+p12
+aVIf all the variables were observed, then the Chow-Liu algorithm [ Chow and Liu1968 ] could be used to find the most likely tree structure u u'\u005cu2208' u'\u005cud835' u'\u005cudcb0'
+p13
+aVTherefore, the procedure to find a bracketing for a given POS tag u'\u005cud835' u'\u005cudc99' is to first estimate the distance matrix sub-block u'\u005cud835' u'\u005cudc6b' ^ W u'\u005cu2062' W from raw text data (see § 3.4 ), and then solve the optimization problem arg u'\u005cu2062' min u u'\u005cu2208' u'\u005cud835' u'\u005cudcb0' u'\u005cu2061' c ^ u'\u005cu2062' ( u ) using a variant of the Eisner-Satta algorithm where c ^ u'\u005cu2062' ( u ) is identical to c u'\u005cu2062' ( u ) in Eq
+p14
+aVIt has been shown [ Rzhetsky and Nei1993 ] that for any additive tree metric, u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) can be recovered by solving arg u'\u005cu2062' min u u'\u005cu2208' u'\u005cud835' u'\u005cudcb0' u'\u005cu2061' c u'\u005cu2062' ( u ) for c u'\u005cu2062' ( u )
+p15
+aVFirst an undirected u u'\u005cu2208' u'\u005cud835' u'\u005cudcb0' is generated (only as a function of the POS tags), and then u is mapped to a bracketing using a direction mapping h dir
+p16
+aVInstead of computing this block by computing the empirical covariance matrix for positions ( j , k ) in the data u'\u005cud835' u'\u005cudc9f' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) , the algorithm uses all of the pairs ( j u'\u005cu2032' , k u'\u005cu2032' ) from all of N training examples
+p17
+aVThis means our decoder first identifies (given a POS sequence) an undirected tree, and then orients it by applying h dir on the resulting tree (see below
+p18
+aVMoreover, we show that it is desirable to learn the u'\u005cu201c' minimal u'\u005cu201d' latent tree based on the tree metric ( u'\u005cu201c' minimum evolution u'\u005cu201d' in phylogenetics
+p19
+aVThe results in Table 1 indicate that the vanilla setting is the best for CCM
+p20
+aVAs one can see, for some restarts, CCM obtains accuracies lower than 30 u'\u005cu2062' % due to local optima
+p21
+aVThe orientation of the tree is determined by a direction mapping h dir u'\u005cu2062' ( u ) , which is fixed during learning and decoding
+p22
+aVIf Assumption 1 holds then, d spectral is an additive tree metric (Definition 1
+p23
+aVWe therefore use the full data for our method for all lengths
+p24
+aVIt marks the edge e i , j that splits the tree according to the top bracket as the u'\u005cu201c' root edge u'\u005cu201d' (marked in red in Figure 1 (center
+p25
+aVWe now address the data sparsity problem, in particular that u'\u005cud835' u'\u005cudc9f' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) can be very small, and therefore estimating d for each POS sequence separately can be problematic
+p26
+aVThus if v i and v j are both observed variables, the distance can be directly computed from the data
+p27
+aVFollowing this intuition, we propose to model the distribution over the latent bracketing states and words for each tag sequence u'\u005cud835' u'\u005cudc99' as a latent tree graphical model, which encodes conditional independences among the words given the latent states
+p28
+aV[ M ] × [ M ] u'\u005cu2192' u'\u005cu211d' is an additive tree metric [ Erdõs et al.1999 ] for the undirected tree u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' ) if it is a distance metric, 2 2 This means that it satisfies d u'\u005cu2062' ( i , j ) = 0 if and only if i = j , the triangle inequality and is also symmetric and furthermore, u'\u005cu2200' i , j u'\u005cu2208' [ M ] the following relation holds
+p29
+aVFor CCM, we found that if the full dataset (all sentence lengths) is used in training, then performance degrades when evaluating on sentences of length u'\u005cu2264' 10
+p30
+aVOur main theoretical guarantee is that Algorithm 1 will recover the correct tree u u'\u005cu2208' u'\u005cud835' u'\u005cudcb0' with high probability, if the given top bracket is correct and if we obtain enough examples ( u'\u005cud835' u'\u005cudc98' ( i ) , u'\u005cud835' u'\u005cudc99' ( i ) ) from the model in §2
+p31
+aVFor our method, test set results can be obtained by using Algorithm 3.3 (except the distances are computed using the training data
+p32
+aVIn addition, since u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) is assumed to be known from context, we denote d u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) u'\u005cu2062' ( i , j ) just by d u'\u005cu2062' ( i , j )
+p33
+aVOur method does not suffer from local optima and thus does not require careful initialization
+p34
+aVThus, the sample complexity of our approach depends on the dimensionality of the latent and observed states ( m and p ), the underlying singular values of the cross-covariance matrices ( u'\u005cu03a3' u'\u005cu2217' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) ) and the difference in the cost of the true tree compared to the cost of the incorrect trees ( u'\u005cu25b3' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' )
+p35
+aVThis undirected tree is converted into a directed tree by applying h dir
+p36
+aVLet u'\u005cu03a3' u'\u005cu2217' u'\u005cu2062' ( x ) := min j , k u'\u005cu2208' u'\u005cu2113' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc99' ) u'\u005cu2061' min u'\u005cu2061' ( u'\u005cu03a3' u'\u005cud835' u'\u005cudc99' u'\u005cu2062' ( j , k ) ( m ) )
+p37
+aVOnce the empirical estimates for the covariance matrices are obtained, a variant of the Eisner-Satta algorithm is used, as mentioned in § 3.3
+p38
+aVIn particular we leverage the concept of additive tree metrics [ Buneman1971 , Buneman1974 ] in phylogenetics and machine learning that can create a special distance metric among the observed variables as a function of the underlying spectral dependencies [ Choi et al.2011 , Song et al.2011 , Anandkumar et al.2011 , Ishteva et al.2012 ]
+p39
+aVIt then creates t from u by directing the tree outward from e i , j as shown in Figure 1 (center
+p40
+aVIntuitively, however, latent tree models encode low rank dependencies among the observed variables permitting the development of u'\u005cu201c' spectral u'\u005cu201d' methods that can lead to provably correct solutions
+p41
+aVDefine u ^ as the estimated tree for tag sequence u'\u005cud835' u'\u005cudc31' and u u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' ) as the correct tree
+p42
+aVHowever, for German and Chinese note that the u'\u005cu201c' BC-O u'\u005cu201d' performs substantially better, suggesting that if we had a better top bracket heuristic our performance would increase
+p43
+aVIf the true distance metric is known, with respect to the true distribution that generates the words in a sentence, then u can be fully recovered by optimizing the cost function c u'\u005cu2062' ( u
+p44
+aVAs we discussed in § 3.1 all elements of the distance matrix are functions of observable quantities if the underlying tree u is known
+p45
+aVThus, strong experimental results are often achieved by initialization techniques [ Klein and Manning2002 , Gimpel and Smith2012 ] , incremental dataset use [ Spitkovsky et al.2010a ] and other specialized techniques to avoid local optima such as count transforms [ Spitkovsky et al.2013 ]
+p46
+aVAdditive tree metrics can be leveraged by u'\u005cu201c' meta-algorithms u'\u005cu201d' such as neighbor-joining [ Saitou and Nei1987 ] and recursive grouping [ Choi et al.2011 ] to provide consistent learning algorithms for latent trees
+p47
+aVThis is because the computation of the other sub-blocks of the distance matrix only depend on the partitions of the nodes shown in Figure 3 into A , B , G , and H , and not on the entire tree structure
+p48
+aVHowever, if we restrict u to be in u'\u005cud835' u'\u005cudcb0' , as we do in the above, then maximizing c ^ u'\u005cu2062' ( u ) over u'\u005cud835' u'\u005cudcb0' can be solved using the bilexical parsing algorithm from Eisner and Satta1999
+p49
+aVWe could thus conclude that w 2 and w 3 should be closer in the parse tree than w 1 and w 2 , giving us the correct structure
+p50
+aVOur approach is not directly comparable to Seginer u'\u005cu2019' s because he uses punctuation, while we use POS tags
+p51
+aVThis does not happen with our algorithm, which manages to leverage lexical information whenever more data is available
+p52
+aVWe then showed that we can define a distance metric between nodes in the undirected tree, such that minimizing it leads to a recovery of u
+p53
+aVNote that the metric d we use in defining c u'\u005cu2062' ( u ) is based on the expectations from the true distribution
+p54
+aVFurthermore, Assumption 1 makes it explicit that regardless of the size of p , the relationships among the variables in the latent tree are restricted to be of rank m , and are thus low rank since p m
+p55
+aVWe also tried letting CCM choose different hyperparameters for different sentence lengths based on dev-set likelihood, but this gave worse results than holding them fixed
+p56
+aVDenote u'\u005cu03a3' u'\u005cud835' u'\u005cudc99' u'\u005cu2062' ( j , k ) ( r ) as the r t u'\u005cu2062' h singular value of u'\u005cud835' u'\u005cudeba' u'\u005cud835' u'\u005cudc99' u'\u005cu2062' ( j , k
+p57
+aVThe local syntactic context acts as an u'\u005cu201c' anchor, u'\u005cu201d' which enhances or replaces a word index in a sentence with local syntactic context
+p58
+aVwhere u'\u005cu039d' u'\u005cud835' u'\u005cudc99' u'\u005cu2062' ( u'\u005cu0393' ) , defined in the supplementary, is a function of the underlying distribution over the tag sequences u'\u005cud835' u'\u005cudc99' and the kernel bandwidth u'\u005cu0393'
+p59
+aVThe resulting t is a binary bracketing parse tree
+p60
+aVIt then follows that the other elements of the distance matrix can be computed based on Definition 1
+p61
+aVAs mentioned earlier, each w i can be an arbitrary feature vector
+p62
+aVFrom here, we use d to denote d spectral , since that is the metric we use for our learning algorithm
+p63
+aVFigure 4 shows a histogram of the performance level for sentences of length u'\u005cu2264' 10 for different random initializers
+p64
+aVGenerating a bracketing via an undirected tree enables us to build on existing methods for structure learning of latent-tree graphical models [ Choi et al.2011 , Anandkumar et al.2011 ]
+p65
+aVIf w i and z i were discrete, represented as binary vectors, the above assumption would correspond to requiring all conditional probability tables in the latent tree to have rank m
+p66
+aVUnfortunately, finding the global maximum for these objective functions is usually intractable [ Cohen and Smith2012 ] which often leads to severe local optima problems (but see Gormley and Eisner, 2013
+p67
+aVWe didn u'\u005cu2019' t have neural embeddings for German and Chinese (which worked best for English) and thus only used Brown cluster embeddings
+p68
+aVIn practice, the true distribution is unknown, and therefore we use an approximation for the distance metric d ^
+p69
+aVAs indicated in the above section, we restrict the set of undirected trees to be those such that after applying h dir the resulting t is projective i.e., there are no crossing brackets
+p70
+aVHowever, due to the presence of latent variables, structure learning of latent trees is substantially more complicated than in observed models
+p71
+aVThen using path additivity (Definition 1 ), it can be shown that for any a u'\u005cu2217' u'\u005cu2208' A u'\u005cu2217' , b u'\u005cu2217' u'\u005cu2208' B u'\u005cu2217' it holds that
+p72
+aVThis leads to a severe data sparsity problem even for moderately long sentences
+p73
+aVThe latent variables can incorporate various linguistic properties, such as head information, valence of dependency being generated, and so on
+p74
+aVGenerate a tuple u'\u005cud835' u'\u005cudc97' = ( w 1 , u'\u005cu2026' , w u'\u005cu2113' , z 1 , u'\u005cu2026' , z H ) where w i u'\u005cu2208' u'\u005cu211d' p , z j u'\u005cu2208' u'\u005cu211d' m according to Eq
+p75
+aVThis information is expected to be learned automatically from data
+p76
+aVFor CCM, we also experimented with the original parts of speech, universal tags (CCM-U), the cross-product of the original parts of speech with the Brown clusters (CCM-OB), and the cross-product of the universal tags with the Brown clusters (CCM-UB
+p77
+aVThe model assumes a factorization according to a latent-variable tree
+p78
+aVEmpirically, one can obtain a more robust empirical estimate d ^ u'\u005cu2062' ( i , j ) by averaging over all valid choices of a u'\u005cu2217' , b u'\u005cu2217' in Eq
+p79
+aVCognitively, it is more plausible to assume that children obtain only terminal strings of parse trees and not the actual parse trees
+p80
+aVLearning then reduces to finding a set of parameters that are estimated by identifying a local maximum of an objective function such as the likelihood [ Klein and Manning2002 ] or a variant of it [ Smith and Eisner2005 , Cohen and Smith2009 , Headden et al.2009 , Spitkovsky et al.2010b , Gillenwater et al.2010 , Golland et al.2012 ]
+p81
+aVThis means the unsupervised setting is a better model for studying language acquisition
+p82
+aVMost existing solutions treat the problem of unsupervised parsing by assuming a generative process over parse trees e.g., probabilistic context free grammars [ Jelinek et al.1992 ] , and the constituent context model [ Klein and Manning2002 ]
+p83
+aVThe OSCCA embeddings behaved better, so we only report its results
+p84
+aVHowever, the choice of verb ( w 1 ) is mostly independent of the determiner
+p85
+a.

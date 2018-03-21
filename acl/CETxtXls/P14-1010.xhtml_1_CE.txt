@@ -1,0 +1,466 @@
+************************************************************
+P14-1010.xhtml_1_CE.txt: Cause-Effect links
+************************************************************
+
+CASE: 0
+Stag: 1 
+	Pattern: 0 [[['lead', 'leads', 'led'], 'to']]---- [['&V-ing/&NP@C@', '(&CAN/have/has/had)'], ['&NP@R@', '(&Clause@R@)']]
+	sentTXT: Morphological complexity leads to much higher type to token ratios than English, which can create sparsity problems during translation model estimation
+	Cause: [(0, 0), (0, 1)]
+	Effect: [(0, 4), (0, 21)]
+
+CASE: 1
+Stag: 2 
+	Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+	sentTXT: Morphological segmentation addresses this issue by splitting surface forms into meaningful morphemes, while also performing orthographic transformations to further reduce sparsity
+	Cause: [(0, 6), (0, 11)]
+	Effect: [(0, 12), (0, 21)]
+
+CASE: 2
+Stag: 3 4 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: For example, the Arabic noun ¡laldwl¿ lldwl u'\u201c' to the countries u'\u201d' is segmented as l+ u'\u201c' to u'\u201d' Aldwl u'\u201c' the countries u'\u201d' When translating from Arabic, this segmentation process is performed as input preprocessing and is otherwise transparent to the translation system
+	Cause: [(0, 24), (1, 6)]
+	Effect: [(0, 0), (0, 22)]
+
+CASE: 3
+Stag: 4 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: When translating from Arabic, this segmentation process is performed as input preprocessing and is otherwise transparent to the translation system
+	Cause: [(0, 11), (0, 14)]
+	Effect: [(0, 1), (0, 9)]
+
+CASE: 4
+Stag: 4 
+	Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+	sentTXT: When translating from Arabic, this segmentation process is performed as input preprocessing and is otherwise transparent to the translation system
+	Cause: [(0, 0), (0, 2)]
+	Effect: [(0, 4), (0, 8)]
+
+CASE: 5
+Stag: 7 8 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Desegmentation is typically performed as a post-processing step that is independent from the decoding process While this division of labor is useful, the pipeline approach may prevent the desegmenter from recovering from errors made by the decoder
+	Cause: [(0, 5), (1, 19)]
+	Effect: [(0, 0), (0, 3)]
+
+CASE: 6
+Stag: 13 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: We demonstrate that significant improvements in translation quality can be achieved by training a linear model to re-rank this transformed translation space
+	Cause: [(0, 12), (0, 21)]
+	Effect: [(0, 0), (0, 10)]
+
+CASE: 7
+Stag: 15 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: Most techniques approach the problem by transforming the target language in some manner before training the translation model
+	Cause: [(0, 6), (0, 17)]
+	Effect: [(0, 0), (0, 4)]
+
+CASE: 8
+Stag: 20 21 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Other approaches train an SMT system to predict lemmas instead of surface forms, and then inflect the SMT output as a post-processing step [ 21 , 7 , 11 , 10 ] Alternatively, one can reparameterize existing phrase tables as exponential models, so that translation probabilities account for source context and morphological features [ 16 , 30 ]
+	Cause: [(0, 21), (1, 26)]
+	Effect: [(0, 0), (0, 19)]
+
+CASE: 9
+Stag: 21 
+	Pattern: 45 [['so', 'that']]---- [['&C'], ['&R']]
+	sentTXT: Alternatively, one can reparameterize existing phrase tables as exponential models, so that translation probabilities account for source context and morphological features [ 16 , 30 ]
+	Cause: [(0, 0), (0, 11)]
+	Effect: [(0, 14), (0, 27)]
+
+CASE: 10
+Stag: 25 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: Instead of producing an abstract feature layer, morphological segmentation transforms the target sentence by segmenting relevant morphemes, which are then handled as regular tokens during alignment and translation
+	Cause: [(0, 15), (0, 29)]
+	Effect: [(0, 0), (0, 13)]
+
+CASE: 11
+Stag: 27 28 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Such a segmentation can be produced as a byproduct of analysis [ 24 , 2 , 9 ] , or may be produced using an unsupervised morphological segmenter such as Morfessor [ 20 , 7 ] Work on target language morphological segmentation for SMT can be divided into three subproblems segmentation, desegmentation and integration
+	Cause: [(0, 7), (1, 18)]
+	Effect: [(0, 0), (0, 5)]
+
+CASE: 12
+Stag: 31 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: If a morphological feature does not manifest itself as a separate token in the source, then it may be best to leave its corresponding segment attached to the stem
+	Cause: [(0, 9), (0, 28)]
+	Effect: [(0, 1), (0, 7)]
+
+CASE: 13
+Stag: 33 
+	Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+	sentTXT: Since our focus here is on integrating segmentation into the decoding process, we simply adopt the segmentation strategies recommended by previous work the Penn Arabic Treebank scheme for English-Arabic [ 9 ] , and an unsupervised scheme for English-Finnish [ 7 ]
+	Cause: [(0, 1), (0, 11)]
+	Effect: [(0, 13), (0, 42)]
+
+CASE: 14
+Stag: 44 
+	Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+	sentTXT: Work on integration attempts to improve SMT performance for morphologically complex target languages by going beyond simple pre- and post-processing
+	Cause: [(0, 14), (0, 17)]
+	Effect: [(0, 18), (0, 19)]
+
+CASE: 15
+Stag: 61 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: We approach this problem by augmenting an SMT system built over target segments with features that reflect the desegmented target words
+	Cause: [(0, 5), (0, 20)]
+	Effect: [(0, 0), (0, 3)]
+
+CASE: 16
+Stag: 62 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: In this section, we describe our various strategies for desegmenting the SMT system u'\u2019' s output space, along with the features that we add to take advantage of this desegmented view
+	Cause: [(0, 10), (0, 21)]
+	Effect: [(0, 0), (0, 8)]
+
+CASE: 17
+Stag: 71 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: The one-best approach can be extended easily by desegmenting n -best lists of segmented decoder output
+	Cause: [(0, 8), (0, 9)]
+	Effect: [(0, 0), (0, 6)]
+
+CASE: 18
+Stag: 71 72 
+	Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+	sentTXT: The one-best approach can be extended easily by desegmenting n -best lists of segmented decoder output Doing so enables the inclusion of an unsegmented target language model, and with a small amount of bookkeeping, it also allows the inclusion of features related to the operations performed during desegmentation (see Section 3.4
+	Cause: [(0, 1), (1, 0)]
+	Effect: [(1, 2), (1, 37)]
+
+CASE: 19
+Stag: 75 76 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Once n -best lists have been desegmented, we can tune on unsegmented references as a side-benefit This could improve translation quality, as it brings our training scenario closer to our test scenario (test BLEU is always measured on unsegmented references
+	Cause: [(0, 16), (1, 5)]
+	Effect: [(0, 0), (0, 14)]
+
+CASE: 20
+Stag: 76 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: This could improve translation quality, as it brings our training scenario closer to our test scenario (test BLEU is always measured on unsegmented references
+	Cause: [(0, 7), (0, 25)]
+	Effect: [(0, 0), (0, 4)]
+
+CASE: 21
+Stag: 84 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: The search graph of a phrase-based decoder can be interpreted as a lattice, which can be interpreted as a finite state acceptor over target strings
+	Cause: [(0, 11), (0, 23)]
+	Effect: [(0, 0), (0, 9)]
+
+CASE: 22
+Stag: 86 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: This is sometimes referred to as a word graph [ 32 ] , although in our case the segmented phrase table also produces tokens that correspond to morphemes
+	Cause: [(0, 6), (0, 27)]
+	Effect: [(0, 0), (0, 4)]
+
+CASE: 23
+Stag: 87 
+	Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+	sentTXT: Our goal is to desegment the decoder u'\u2019' s output lattice, and in doing so, gain access to a compact, desegmented view of a large portion of the translation search space
+	Cause: [(0, 1), (0, 18)]
+	Effect: [(0, 21), (0, 37)]
+
+CASE: 24
+Stag: 88 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: This can be accomplished by composing the lattice with a desegmenting transducer that consumes morphemes and outputs desegmented words
+	Cause: [(0, 5), (0, 18)]
+	Effect: [(0, 0), (0, 3)]
+
+CASE: 25
+Stag: 92 93 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: 3 3 Throughout this paper, we use u'\u201c' + u'\u201d' to mark morphemes as prefixes or suffixes, as in w+ or +h In Equation 1 only, we overload u'\u201c' + u'\u201d' as the Kleene cross
+	Cause: [(0, 23), (1, 20)]
+	Effect: [(0, 0), (0, 21)]
+
+CASE: 26
+Stag: 93 94 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: In Equation 1 only, we overload u'\u201c' + u'\u201d' as the Kleene cross X + = = X X *
+	Cause: [(0, 19), (1, 5)]
+	Effect: [(0, 0), (0, 17)]
+
+CASE: 27
+Stag: 96 97 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Equation 1 may need to be modified for other languages or segmentation schemes, but our techniques generalize to any definition that can be written as a regular expression A desegmenting transducer can be constructed by first encoding our desegmenter as a table that maps morpheme sequences to words
+	Cause: [(0, 26), (1, 18)]
+	Effect: [(0, 14), (0, 24)]
+
+CASE: 28
+Stag: 97 98 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: A desegmenting transducer can be constructed by first encoding our desegmenter as a table that maps morpheme sequences to words Regardless of whether the original desegmenter was based on concatenation, rules or table-lookup, it can be encoded as a lattice-specific table by applying it to an enumeration of all words found in the lattice
+	Cause: [(0, 12), (1, 34)]
+	Effect: [(0, 0), (0, 10)]
+
+CASE: 29
+Stag: 98 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Regardless of whether the original desegmenter was based on concatenation, rules or table-lookup, it can be encoded as a lattice-specific table by applying it to an enumeration of all words found in the lattice
+	Cause: [(0, 20), (0, 33)]
+	Effect: [(0, 0), (0, 18)]
+
+CASE: 30
+Stag: 98 
+	Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+	sentTXT: Regardless of whether the original desegmenter was based on concatenation, rules or table-lookup, it can be encoded as a lattice-specific table by applying it to an enumeration of all words found in the lattice
+	Cause: [(0, 9), (0, 9)]
+	Effect: [(0, 11), (0, 18)]
+
+CASE: 31
+Stag: 100 
+	Pattern: 45 [['so', 'that']]---- [['&C'], ['&R']]
+	sentTXT: Finally, we take the closure of this transducer, so that the resulting machine can transduce any sequence of words
+	Cause: [(0, 0), (0, 9)]
+	Effect: [(0, 12), (0, 20)]
+
+CASE: 32
+Stag: 103 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: The lattice (Figure 1 a) can then be desegmented by composing it with the transducer ( 1 b), producing a desegmented lattice ( 1 c
+	Cause: [(0, 12), (0, 28)]
+	Effect: [(0, 0), (0, 10)]
+
+CASE: 33
+Stag: 107 
+	Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+	sentTXT: If this property does not hold, then nodes must be split until it does
+	Cause: [(0, 1), (0, 5)]
+	Effect: [(0, 7), (0, 14)]
+
+CASE: 34
+Stag: 111 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: Fortunately, LM annotation as well as any necessary lattice modifications can be performed simultaneously by composing the desegmented lattice with a finite state acceptor encoding the LM [ 26 ]
+	Cause: [(0, 16), (0, 30)]
+	Effect: [(0, 0), (0, 14)]
+
+CASE: 35
+Stag: 112 113 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: In summary, we are given a segmented lattice, which encodes the decoder u'\u2019' s translation space as an acceptor over morphemes We compose this acceptor with a desegmenting transducer, and then with an unsegmented LM acceptor, producing a fully annotated, desegmented lattice
+	Cause: [(0, 23), (1, 22)]
+	Effect: [(0, 0), (0, 21)]
+
+CASE: 36
+Stag: 129 
+	Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+	sentTXT: A chain is valid if it emits the beginning of a word as defined by the regular expression in Equation 1
+	Cause: [(0, 5), (0, 20)]
+	Effect: [(0, 0), (0, 3)]
+
+CASE: 37
+Stag: 130 
+	Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+	sentTXT: A valid chain is complete if its edges form an entire word, and if it is part of a path through the lattice that consists only of words
+	Cause: [(0, 6), (0, 24)]
+	Effect: [(0, 0), (0, 4)]
+
+CASE: 38
+Stag: 133 
+	Pattern: 2 [['for', 'the', 'sake', 'of']]---- [['&R'], ['&V-ing/&NP@C@']]
+	sentTXT: 5 5 Sentence-initial suffix morphemes and sentence-final prefix morphemes represent a special case that we omit for the sake of brevity
+	Cause: [(0, 20), (0, 20)]
+	Effect: [(0, 0), (0, 15)]
+
+CASE: 39
+Stag: 134 
+	Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+	sentTXT: Lacking stems, they are left segmented
+	Cause: [(0, 0), (0, 1)]
+	Effect: [(0, 3), (0, 6)]
+
+CASE: 40
+Stag: 135 
+	Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+	sentTXT: For example, if we removed the edge 2 u'\u2192' 3 ( AlTfl ) from Figure 1 a, then [ 0 u'\u2192' 2 ] ([ b+ lEbp ]) would cease to be a complete chain, but it would still be a valid chain
+	Cause: [(0, 4), (0, 20)]
+	Effect: [(0, 23), (0, 47)]
+
+CASE: 41
+Stag: 139 
+	Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+	sentTXT: The search recognizes the valid chain c to be complete by finding an edge e such that c + e forms a chain, but not a valid one
+	Cause: [(0, 11), (0, 13)]
+	Effect: [(0, 14), (0, 27)]
+
+CASE: 42
+Stag: 141 142 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: The chains found by this search are desegmented and then added to the output lattice as edges The nodes at end points of these chains are added to the work list, as they lie at word boundaries by definition
+	Cause: [(0, 16), (1, 14)]
+	Effect: [(0, 0), (0, 14)]
+
+CASE: 43
+Stag: 142 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: The nodes at end points of these chains are added to the work list, as they lie at word boundaries by definition
+	Cause: [(0, 16), (0, 22)]
+	Effect: [(0, 0), (0, 13)]
+
+CASE: 44
+Stag: 151 
+	Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+	sentTXT: We use a table-based desegmentation method for Arabic, which is based on segmenting an Arabic training corpus and memorizing the observed transformations to reverse them later
+	Cause: [(0, 13), (0, 26)]
+	Effect: [(0, 0), (0, 10)]
+
+CASE: 45
+Stag: 152 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Finnish does not require a table, as all words can be desegmented with simple concatenation
+	Cause: [(0, 8), (0, 15)]
+	Effect: [(0, 0), (0, 5)]
+
+CASE: 46
+Stag: 155 
+	Pattern: 2 [['for', 'the', 'sake', 'of'], [',']]---- [[], ['&V-ing/&NP@C@'], ['&R']]
+	sentTXT: For the sake of symmetry with the unambiguous Finnish case, we augment Arabic n -best lists or lattices with only the most frequent desegmentation Y
+	Cause: [(0, 4), (0, 9)]
+	Effect: [(0, 11), (0, 26)]
+
+CASE: 47
+Stag: 157 158 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We provide the desegmentation score log p ( Y X ) = log u'\u2061' ( count of X u'\u2192' Y count of X ) as a feature, to indicate the entry u'\u2019' s ambiguity in the training data
+	Cause: [(1, 24), (1, 41)]
+	Effect: [(0, 0), (1, 22)]
+
+CASE: 48
+Stag: 159 160 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: 7 7 We also experimented on log p ( X Y ) as an additional feature, but observed no improvement in translation quality
+	Cause: [(1, 3), (1, 13)]
+	Effect: [(0, 2), (1, 1)]
+
+CASE: 49
+Stag: 164 165 
+	Pattern: 0 [[['imply', 'implies', 'implied', 'indicate', 'indicates', 'indicated']]]---- [['&C', '(,/./;/--)', '&this', '(&adj)', '(&N)', '(&CAN/have/has/had)', '(&ADV)'], ['(that)', '&R@Complete@']]
+	sentTXT: In order to maintain some control over this powerful capability, we create three binary features that indicate the contiguity of a desegmentation The first feature indicates that the desegmented morphemes were translated from contiguous source words
+	Cause: [(0, 0), (0, 15)]
+	Effect: [(0, 18), (1, 12)]
+
+CASE: 50
+Stag: 166 167 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: The second indicates that the source words contained a single discontiguity, as in a word-by-word translation of the u'\u201c' with his blue car u'\u201d' example from Section 2.2 The third indicates two or more discontiguities
+	Cause: [(0, 13), (1, 5)]
+	Effect: [(0, 0), (0, 10)]
+
+CASE: 51
+Stag: 167 
+	Pattern: 0 [[['indicate', 'indicates', 'indicated', 'realize', 'realizes', 'realized', 'ensure', 'ensures', 'ensured', 'imply', 'implies', 'implied']]]---- [['&NP@C@', '(&Clause@C@)'], ['&NP@R@', '(&Clause@R@)']]
+	sentTXT: The third indicates two or more discontiguities
+	Cause: [(0, 0), (0, 1)]
+	Effect: [(0, 3), (0, 6)]
+
+CASE: 52
+Stag: 171 172 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We tune on the NIST 2004 evaluation set (1353 sentences) and evaluate on NIST 2005 (1056 sentences As these evaluation sets are intended for Arabic-to-English translation, we select the first English reference to use as our source text
+	Cause: [(1, 1), (1, 21)]
+	Effect: [(0, 0), (0, 19)]
+
+CASE: 53
+Stag: 177 
+	Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+	sentTXT: For both segmented and unsegmented Arabic, we further normalize the script by converting different forms of Alif ¡a u'\u2019' A u'\u2019' a u'\u2019' i ¿ and Ya ¡y _A¿ to bare Alif ¡a¿ and dotless Ya ¡_A¿
+	Cause: [(0, 13), (0, 45)]
+	Effect: [(0, 46), (0, 50)]
+
+CASE: 54
+Stag: 181 
+	Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+	sentTXT: To improve coverage, words are further segmented according to their longest matching suffix from the list
+	Cause: [(0, 10), (0, 16)]
+	Effect: [(0, 0), (0, 7)]
+
+CASE: 55
+Stag: 181 182 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: To improve coverage, words are further segmented according to their longest matching suffix from the list As Morfessor does not perform any orthographic normalizations, it can be desegmented with simple concatenation
+	Cause: [(1, 1), (1, 15)]
+	Effect: [(0, 0), (0, 16)]
+
+CASE: 56
+Stag: 193 
+	Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+	sentTXT: MIRA was selected over MERT because we have an in-house implementation that can tune on lattices very quickly
+	Cause: [(0, 6), (0, 17)]
+	Effect: [(0, 0), (0, 4)]
+
+CASE: 57
+Stag: 204 
+	Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+	sentTXT: 8 8 Development experiments on a small-data English-to-Arabic scenario indicated that the Desegmentation Score was not particularly useful, so we exclude it from the main comparison, but include it in the ablation experiments
+	Cause: [(0, 0), (0, 17)]
+	Effect: [(0, 20), (0, 34)]
+
+CASE: 58
+Stag: 207 208 
+	Pattern: 0 [[['imply', 'implies', 'implied', 'mean', 'means', 'indicate', 'indicates', 'indicated']]]---- [['&C', '(,/./;/--)', '&this', '(&adj)', '(&N)', '(&CAN/have/has/had)', '(&ADV)'], ['&NP@R@']]
+	sentTXT: 2011 ) , we report average scores over five random tuning replications to account for optimizer instability For the baselines, this means 5 runs of decoder tuning
+	Cause: [(0, 0), (1, 2)]
+	Effect: [(1, 6), (1, 10)]
+
+CASE: 59
+Stag: 208 209 
+	Pattern: 0 [[['imply', 'implies', 'implied', 'mean', 'means', 'indicate', 'indicates', 'indicated']]]---- [['&C', '(,/./;/--)', '&this', '(&adj)', '(&N)', '(&CAN/have/has/had)', '(&ADV)'], ['&NP@R@']]
+	sentTXT: For the baselines, this means 5 runs of decoder tuning For the desegmenting re-rankers, this means 5 runs of re-ranker tuning, each working on n -best lists or lattices produced by the same (representative) decoder weights
+	Cause: [(0, 1), (1, 3)]
+	Effect: [(1, 7), (1, 11)]
+
+CASE: 60
+Stag: 220 221 
+	Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+	sentTXT: As we attempted to replicate the approach of Clifton and Sarkar ( 2011 ) exactly by working with their segmented data, this difference is likely due to changes in Moses since the publication of their result Nonetheless, the 1000-best and lattice desegmenters both produce significant improvements over the 1-best desegmentation baseline, with Lattice Deseg achieving a 1-point improvement in TER
+	Cause: [(0, 32), (1, 24)]
+	Effect: [(0, 0), (0, 30)]
+
+CASE: 61
+Stag: 223 224 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We also tried a similar Morfessor-based segmentation for Arabic, which has an unsegmented test set BLEU of 32.7 As in Finnish, the 1-best desegmentation using Morfessor did not surpass the unsegmented baseline, producing a test BLEU of only 31.4 (not shown in Table 1
+	Cause: [(1, 1), (1, 28)]
+	Effect: [(0, 0), (0, 18)]
+
+CASE: 62
+Stag: 239 
+	Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+	sentTXT: We consider a phrase to be correct only if it can be found in the reference
+	Cause: [(0, 9), (0, 15)]
+	Effect: [(0, 0), (0, 7)]
+
+CASE: 63
+Stag: 240 
+	Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+	sentTXT: Table 4 breaks down per-phrase accuracy according to four manually-assigned categories
+	Cause: [(0, 8), (0, 10)]
+	Effect: [(0, 0), (0, 5)]
+
+CASE: 64
+Stag: 241 
+	Pattern: 0 [['due', 'to']]---- [[], ['&NP@C@', '(,)', '&R']]
+	sentTXT: 1) clitical u'\u2013' the two systems agree on a stem, but at least one clitic, often a prefix denoting a preposition or determiner, was dropped, added or replaced; (2) lexical u'\u2013' a word was changed to a morphologically unrelated word with a similar meaning; (3) inflectional u'\u2013' the words have the same stem, but different inflection due to a change in gender, number or verb tense; (4) part-of-speech u'\u2013' the two systems agree on the lemma, but have selected different parts of speech
+	Cause: [(0, 82), (0, 99)]
+	Effect: [(0, 100), (0, 115)]
+
+CASE: 65
+Stag: 245 
+	Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+	sentTXT: This category is challenging for the decoder because English prepositions tend to correspond to multiple possible forms when translated into Arabic
+	Cause: [(0, 8), (0, 20)]
+	Effect: [(0, 0), (0, 6)]
+

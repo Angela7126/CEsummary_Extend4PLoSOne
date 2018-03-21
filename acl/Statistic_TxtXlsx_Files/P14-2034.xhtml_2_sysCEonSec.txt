@@ -1,0 +1,157 @@
+Current File: P14-2034.xhtml_2 P14-2034.xhtml
+
+Section 0:  Abstract
+	SentNum: 4
+	CENum: 0
+	SentCovered: 0
+	Covered_Rate: 0.0000%
+
+Section 1:  1 Introduction
+	SentNum: 20
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 5.0000%
+
+Section 2:  2 Arabic Word Segmentation Model
+	SentNum: 30
+	CENum: 4
+	SentCovered: 5
+	Covered_Rate: 16.6667%
+
+Section 3:  3 Experiments
+	SentNum: 22
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 4.5455%
+
+Section 4:  4 Error Analysis
+	SentNum: 31
+	CENum: 8
+	SentCovered: 9
+	Covered_Rate: 29.0323%
+
+Section 5:  5 Conclusion
+	SentNum: 4
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 25.0000%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-2034.xhtml_2's CE cases
+
+Section 0:  Abstract has 0 CE cases
+Section 1:  1 Introduction has 1 CE cases
+	CASE: 1
+	Stag: 5 
+		Pattern: 0 [['due', 'to']]---- [['&R'], ['&NP@C@']]
+		sentTXT: Segmentation is a common practice in Arabic NLP due to the language u'\u2019' s morphological richness. 
+		Cause: [(0, 10), (0, 19)]
+		Effect: [(0, 0), (0, 7)]
+
+Section 2:  2 Arabic Word Segmentation Model has 4 CE cases
+	CASE: 1
+	Stag: 25 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Green and DeNero use a linear-chain model with u'\ud835' u'\udc17' as the sequence of input characters , and u'\ud835' u'\udc18' * chosen according to the decision rule. 
+		Cause: [(0, 19), (0, 42)]
+		Effect: [(0, 0), (0, 17)]
+
+	CASE: 2
+	Stag: 25 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: Green and DeNero use a linear-chain model with u'\ud835' u'\udc17' as the sequence of input characters , and u'\ud835' u'\udc18' * chosen according to the decision rule. 
+		Cause: [(0, 21), (0, 23)]
+		Effect: [(0, 0), (0, 18)]
+
+	CASE: 3
+	Stag: 27 28 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Their model classifies each y i as one of I (continuation of a segment), O (whitespace outside any segment), B (beginning of a segment), or F (pre-grouped foreign characters. Our segmenter expands this label space in order to handle two Arabic-specific orthographic rules. 
+		Cause: [(0, 7), (1, 12)]
+		Effect: [(0, 0), (0, 5)]
+
+	CASE: 4
+	Stag: 48 49 
+		Pattern: 4 [['result'], ['is']]---- [['&C', '(,/./;/--)', '&ONE', '(&adj)'], ['(of &THIS (&NP))'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: In particular, it does not depend on the existence of a dialect-specific lexicon or morphological analyzer. As a result, we expect this model to perform similarly well when applied to other Arabic dialects. 
+		Cause: [(0, 1), (1, 0)]
+		Effect: [(1, 7), (1, 17)]
+
+Section 3:  3 Experiments has 1 CE cases
+	CASE: 1
+	Stag: 64 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: F 1 scores provide a more informative assessment of performance than word-level or character-level accuracy scores, as over 80% of tokens in the development sets consist of only one segment, with an average of one segmentation every 4.7 tokens (or one every 20.4 characters. 
+		Cause: [(0, 18), (0, 45)]
+		Effect: [(0, 0), (0, 15)]
+
+Section 4:  4 Error Analysis has 8 CE cases
+	CASE: 1
+	Stag: 79 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: errors that can be fixed with a fuller analysis of just the problematic token, and therefore represent a deficiency in the feature set; and. 
+		Cause: [(0, 0), (0, 13)]
+		Effect: [(0, 17), (0, 25)]
+
+	CASE: 2
+	Stag: 79 80 
+		Pattern: 0 [[['concern', 'concerns', 'concerned', 'require', 'requires', 'required', 'request', 'requests', 'requested']]]---- [['&R', '(,/./;/--)', '&this', '(&adj)', '(&N)', '(&CAN/have/has/had)', '(&ADV)'], ['(about)', '&V-ing/&NP@C@']]
+		sentTXT: errors that can be fixed with a fuller analysis of just the problematic token, and therefore represent a deficiency in the feature set; and. errors that would require additional context or sophisticated semantic awareness to fix. 
+		Cause: [(1, 4), (1, 9)]
+		Effect: [(0, 2), (1, 0)]
+
+	CASE: 3
+	Stag: 81 
+		Pattern: 7 [['due', 'to']]---- [['&V-ing/&NP@R@', '&BE'], ['&NP@C@', '(&Clause@C@)']]
+		sentTXT: Of the 100 errors we sampled, 33 are due to typographical errors or inconsistencies in the gold data. 
+		Cause: [(0, 11), (0, 18)]
+		Effect: [(0, 7), (0, 7)]
+
+	CASE: 4
+	Stag: 82 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We classify 7 as typos and 26 as annotation inconsistencies, although the distinction between the two is murky typos are intentionally preserved in the treebank data, but segmentation of typos varies depending on how well they can be reconciled with standard Arabic orthography. 
+		Cause: [(0, 4), (0, 19)]
+		Effect: [(0, 0), (0, 2)]
+
+	CASE: 5
+	Stag: 83 
+		Pattern: 6 [[['result', 'consequence'], 'of']]---- [['&V-ing/&NP@R@', '(&Clause@R@)', '&BE', '&ONE'], ['&NP@C@', '(&Clause@C@)']]
+		sentTXT: Four of the seven typos are the result of a missing space, such as. 
+		Cause: [(0, 9), (0, 14)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 6
+	Stag: 86 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The first example is segmented in the Egyptian treebank but is left unsegmented by our system; the second is left as a single token in the treebank but is split into the above three segments by our system. 
+		Cause: [(0, 22), (0, 38)]
+		Effect: [(0, 17), (0, 20)]
+
+	CASE: 7
+	Stag: 93 94 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Two examples of these are. wafi.tarIqaT u'\u201c' and in the way u'\u201d' segmented as wa - + fi.tarIqaT (correct analysis is wa - + fi u'\u2014' + .tarIqaT f.tr u'\u2018' u'\u2018' break u'\u2019' u'\u2019' / u'\u2018' u'\u2018' breakfast u'\u2019' u'\u2019' is a common Arabic root, but the presence of q should indicate that f.tr is not the root in this case. 
+		Cause: [(1, 17), (1, 64)]
+		Effect: [(0, 0), (1, 15)]
+
+	CASE: 8
+	Stag: 95 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: walAyuhimmhum u'\u2018' u'\u2018' and it u'\u2019' s not important to them u'\u2019' u'\u2019' segmented as wa - + li u'\u2014' + u'\u2014' ayuhimm + u'\u2014' hum (correct analysis is wa - + lA + yuhimm + u'\u2014' hum. 
+		Cause: [(0, 35), (0, 74)]
+		Effect: [(0, 14), (0, 33)]
+
+Section 5:  5 Conclusion has 1 CE cases
+	CASE: 1
+	Stag: 109 
+		Pattern: 0 [['due', 'to']]---- [['&R'], ['&NP@C@']]
+		sentTXT: We evaluated our segmenter on broadcast news and Egyptian Arabic due to the current availability of annotated data in these domains. 
+		Cause: [(0, 12), (0, 20)]
+		Effect: [(0, 0), (0, 9)]
+
+#-------------------------------------------------
+

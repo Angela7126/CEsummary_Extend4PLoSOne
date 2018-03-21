@@ -1,0 +1,36 @@
+(lp0
+VThe classifier maps the L1 word or phrase in its L2 context to its L2 translation
+p1
+aVA second baseline was constructed by weighing the probabilities from the translation table directly with the L2 language model described earlier
+p2
+aVFor any given hypothesis H , results from the L1 to L2 classifier are combined with results from the L2 language model
+p3
+aVThird, we observe that adding the language model to our classifier leads to another significant gain (configuration l1r1 + LM in the results in Table 2
+p4
+aVThe baseline selects the most probable L1 fragment per L2 fragment according to the phrase-translation table
+p5
+aVIn other words, for each word type or phrase type that occurs as a fragment in the training set, and which does not map to just a single translation, a classifier is trained
+p6
+aVSeveral automated metrics exist for the evaluation of L2 system output against the L2 reference output in the test set
+p7
+aVThe main research question in this research is how to disambiguate an L1 word or phrase to its L2 translation based on an L2 context, and whether such cross-lingual contextual approaches provide added value compared to baseline models that are not context informed or compared to standard language models
+p8
+aVIf not, we check for the presence of a classifier expert for the offered L1 fragment; only then we can proceed by extracting the desired number of L2 local context words to the immediate left and right of this fragment and adding those to the feature vector
+p9
+aVThe result, independent for each set, will be a phrase-translation table ( T ) that maps phrases in L1 to L2
+p10
+aVThis combination of a classifier with context size one and trigram-based language model proves to be most effective and reaches the best results so far
+p11
+aVThe local context consists of an X number of L2 words to the left of the L1 fragment, and Y words to the right
+p12
+aVThis LM baseline allows the comparison of classification through L1 fragments in an L2 context, with a more traditional L2 context modelling (i.e., target language modelling) which is also customary in MT decoders
+p13
+aVThough the classifier generally works best in the l1r1 configuration, i.e., with context size one, the trigram-based language model allows further left-context information to be incorporated that influences the weights of the classifier output, successfully forcing the system to select alternatives
+p14
+aVGenerating test data using the same phrase-translation table as the training data would introduce a bias
+p15
+aVWhereas machine translation generally concerns the translation of whole sentences or texts from one language to the other, this study focusses on the translation of native language (henceforth L1) words and phrases, i.e., smaller fragments, in a foreign language (L2) context
+p16
+aVThe classifier will return a probability distribution of the most
+p17
+a.

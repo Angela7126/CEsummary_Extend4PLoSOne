@@ -1,0 +1,512 @@
+(lp0
+VIn this section, we compare STRUCT to a state-of-the-art NLG system, CRISP, 1 1 We were unfortunately unable to get the PCRISP system to compile, and so we could not evaluate it and evaluate three hypotheses i) STRUCT is comparable in speed and generation quality to CRISP as it generates increasingly large referring expressions, (ii) STRUCT is comparable in speed and generation quality to CRISP as the size of the grammar which they use increases, and (iii) STRUCT is capable of communicating complex propositions, including multiple concurrent goals, negated goals, and nested subclauses
+p1
+aVWe now evaluate STRUCT u'\u005cu2019' s ability to generate sentences given negated communicative goals
+p2
+aVIn the next set of experiments, we illustrate that STRUCT can solve a variety of complex communicative goals such as negated goals, conjuctions and goals requiring nested subclauses to be output
+p3
+aVIn this section, we describe our approach, called Sentence Tree Realization with UCT (STRUCT
+p4
+aVWe first evaluate STRUCT u'\u005cu2019' s ability to accomplish multiple communicative goals when generating a single sentence
+p5
+aVNext, we evaluate STRUCT u'\u005cu2019' s ability to generate sentences with nested subclauses
+p6
+aVFinally, we evaluate STRUCT u'\u005cu2019' s ability to generate sentences including conjunctions
+p7
+aVWe describe the inputs to STRUCT, followed by the underlying MDP formalism and the probabilistic planning algorithm we use to generate sentences in this MDP
+p8
+aVReferring Expressions We first evaluate CRISP and STRUCT on their ability to generate referring expressions
+p9
+aVThis demonstrates that STRUCT is balancing these negated communicative goals with its positive goals
+p10
+aVWe then provide STRUCT with multiple goals
+p11
+aVWe begin by describing experiments comparing STRUCT to CRISP
+p12
+aVFor these experiments, STRUCT was implemented in Python 2.7
+p13
+aVThe times reported are from the start of the generation process, eliminating variations due to interpreter startup, input parsing, etc
+p14
+aVNegated Goals
+p15
+aVWe next evaluate STRUCT and CRISP u'\u005cu2019' s ability to handle larger grammars
+p16
+aVSTRUCT takes three inputs in order to generate a single sentence
+p17
+aVMultiple Goals
+p18
+aVNote that, as STRUCT is an anytime algorithm, valid sentences are available very early in the generation process, despite the size of the set of adjoining trees
+p19
+aVFigure 6 (the u'\u005cu201c' Negative Goals u'\u005cu201d' curve) shows the impact of negated goals on the time to generation
+p20
+aVFor these experiments, we use the exact reward function for STRUCT
+p21
+aVSTRUCT increases in generation time both as the number of sentences increases and as the number of objects per sentences increases
+p22
+aVFor these experiments, we use the approximate reward function for STRUCT
+p23
+aVWe find that, in all cases, these otherwise useless adjectives are included in the output of our generator, indicating that STRUCT is successfully balancing multiple communicative goals
+p24
+aV[t!] STRUCT algorithm
+p25
+aVThis setting allows us to address the limitations outlined above it is naturally probabilistic, and handles probabilistic grammars; we are able to specify complex communicative goals and general criteria through a suitably-defined reward function; and, as we show in our experiments, recent developments in fast planning in large MDPs result in a generation system that can rapidly deal with very specific communicative goals
+p26
+aVSince this experiment alters the grammar size, we see the time to final generation growing linearly with grammar size
+p27
+aVGrammar Size
+p28
+aVDoing so might reduce the ability of STRUCT to produce a sentence which partially fulfills its goals
+p29
+aVThis often allows STRUCT to be resilient to large grammar sizes, as our experiments will show
+p30
+aVThis allows us to ensure successful generation in a single loop of the STRUCT algorithm
+p31
+aVAs we show in figure 6 (the u'\u005cu201c' Positive Goals u'\u005cu201d' curve) , the presence of additional satisfiable semantic goals does not substantially affect the time required for generation
+p32
+aVFigure 6 shows the score of STRUCT u'\u005cu2019' s generated output over time for two nested clauses
+p33
+aVWe then encode these adjectives into negated communicative goals, so that they will not be included in the output of the generator, despite allowing a much shorter referring expression
+p34
+aVThe increased time to generate can be traced directly to this increase in grammar size
+p35
+aVIn this paper, we study the restricted NLG problem given a grammar, lexicon, world and a communicative goal, output a valid English sentence that satisfies this goal
+p36
+aVWe now describe our approach to solving the MDP above to generate a sentence
+p37
+aVFurther, our system has several other desirable properties it is an anytime approach; with a probabilistic grammar, it can naturally be used to sample and generate multiple sentences satisfying the communicative goal; and it is robust to large grammar sizes
+p38
+aVDespite this issue, STRUCT is capable of generating these sentences
+p39
+aVSTRUCT u'\u005cu2019' s performance is less sensitive to larger grammars than this, but over the same interval where CRISP increases from 22 seconds of runtime to 27 seconds of runtime, STRUCT increases from 4 seconds to 32 seconds
+p40
+aVThis time does not change substantially with increases in grammar size
+p41
+aVIn the NLG-as-planning framework, the choice of grammar representation is crucial in treating NLG as a planning problem; the grammar provides the actions that the planner will use to generate a sentence
+p42
+aVThis also allows partial completion of communicative goals if not all goals can be achieved simultaneously in the time given
+p43
+aVBecause of the structure restriction above (substitution before adjoin), STRUCT generates a valid sentence quickly
+p44
+aVAs we can see, CRISP generates a result slightly faster than STRUCT when we are working with a single entity, but works much much slower for two entities and cannot generate results for a third entity
+p45
+aVSTRUCT uses a first-order logic-based semantic model in its communicative goal and world specification
+p46
+aVThis decision requires us to do planning deeper than one level in the MDP, which increases the number of simulations STRUCT requires in order to get the correct result
+p47
+aVAll of our experiments were run on a 4-core AMD Phenom II X4 995 processor clocked at 3.2 GHz
+p48
+aVFigure 6 shows the results of these experiments
+p49
+aVMany such NLG-as-planning systems use a pipeline architecture, working from their communicative goal through discourse planning and sentence generation
+p50
+aVThe u'\u005cu201c' STRUCT_initial u'\u005cu201d' curve shows the time taken by STRUCT to come up with the first complete sentence, which partially solves the goal and which (at least) could be output if generation was interrupted and no better alternative was found
+p51
+aVWe do this is in order to generate a complete and valid sentence quickly
+p52
+aVWhen we apply pruning, we find that STRUCT is able to ignore the effect of additional distracting words
+p53
+aVGiven sufficient depth for the search ( d = 3 was sufficient for our experiments, as our reward signal is fine-grained), STRUCT will produce two sentences joined by the conjunction u'\u005cu201c' and u'\u005cu201d'
+p54
+aVThese inputs are a grammar (including a lexicon), a communicative goal, and a world specification
+p55
+aVFollowing prior work [ 11 ] , we consider a series of sentence generation problems which require the planner to generate a sentence like u'\u005cu201c' The Adj 1 Adj 2 u'\u005cu2026' Adj k dog chased the cat u'\u005cu201d' , where the string of adjectives is a string that distinguishes one dog (whose identity is specified in the problem description) from all other entities in the world
+p56
+aVWe observe that CRISP using GraphPlan, as previously reported in [ 11 ] , handles an increase in number of unused actions very well
+p57
+aVThis enables STRUCT to perform as an anytime algorithm, which if interrupted will return the highest-value complete and valid sentence it has found
+p58
+aVWith the MDP definition above, we use our modified UCT to find a solution sentence (Algorithm 3.3
+p59
+aVAn example of such a sentence is u'\u005cu201c' The dog which ate the treat chased the cat u'\u005cu201d' This is a difficult sentence to generate for several reasons
+p60
+aVLater experiments had successful referring expression generation of lengths as high as 25
+p61
+aVAn entire initial tree can replace a leaf node in the sentence tree whose label matches the label of the root of the initial tree in a process called u'\u005cu201c' substitution u'\u005cu201d' Auxiliary trees, on the other hand, encode recursive structures of language
+p62
+aVUsing the UCT approach with a suitably defined MDP (explained above) allows us to naturally handle probabilistic grammars as well as formulate NLG as a planning problem, unifying the distinct lines of attack described in Section 2
+p63
+aVOur experiments do not show any significant impact on runtime due to the pruning procedure itself, even on large grammars
+p64
+aVAt length 15, CRISP failed to generate a referring expression; after 90 minutes the Java garbage collector terminated the process
+p65
+aVWe used a 2010 version of CRISP which uses a Java-based GraphPlan implementation
+p66
+aVAnother approach, called integrated generation , considers both sentence generation portions of the pipeline together [ 10 ]
+p67
+aVNotice that, because the exact reward function is being used, the time to generate is longer in this experiment
+p68
+aVWe formulate NLG as a planning problem on a Markov decision process (MDP) [ 15 ]
+p69
+aVNew techniques such as sparse sampling [ 7 ] and UCT [ 9 ] show how to generate near-optimal plans in large MDPs with a time complexity that is independent of the state space size
+p70
+aVIf we do not prune the grammar (as described in Section 3.1 ), STRUCT u'\u005cu2019' s performance is similar to CRISP using the FF planner [ 5 ] , also profiled in [ 11 ] , which increased from 27 ms to 4.4 seconds over the interval from j = 1 to j = 10
+p71
+aVBoth systems were given access to 8 GB of RAM
+p72
+aVWe then encode these adjectives into communicative goals, so that they will be included in the output of the generator despite not assisting in the accomplishment of disambiguation
+p73
+aVThe problem is restricted because in our work, we do not consider the issue of how to fragment a complex goal into multiple sentences (discourse planning
+p74
+aVBased on these state and action definitions, the transition function takes a mapping between a partial sentence / action pair and the partial sentences which can result from one particular PLTAG adjoin / substitution, and returns the probability of that rule in the grammar
+p75
+aVSTRUCT u'\u005cu2019' s performance improves significantly if we allow for pruning
+p76
+aVThe experiment has two parameters j , the number of adjectives in the grammar, and k , the number of adjectives necessary to distinguish the entity in question from all other entities
+p77
+aVSTRUCT (the u'\u005cu201c' STRUCT_final u'\u005cu201d' line) performs much better and is able to generate much longer referring expressions without failing
+p78
+aVTo the best of our knowledge, CRISP is not able to generate sentences of this form due to an insufficiency in the way it handles TAGs, and consequently we present our results without this baseline
+p79
+aVThey attempted to generate sentences with three entities and failed to find a result within their 4 GB memory limit
+p80
+aVWe observe that CRISP was able to achieve sub-second or similar times for all expressions of less than length 5, but its generation times increase exponentially past that point, exceeding 100 seconds for some plans at length 10
+p81
+aVNested subclauses
+p82
+aVFinally, the modified auxiliary tree is placed back in the sentence tree in the original target location
+p83
+aVWe use a modified version of UCT in order to increase its usability in the MDP we have defined
+p84
+aVIn situations where the sentence is complete (no nonterminals without children exist), we add a dummy action that the algorithm may choose to stop generation and emit the sentence
+p85
+aVAs we can see in Figures 10 , 10 , and 10 , STRUCT successfully generates results for conjunctions of up to five sentences
+p86
+aVAny combination which contains a semantic representation equivalent to the input at the conclusion of the algorithm is a valid output from a chart generation system
+p87
+aVWe report similar variations in CRISP runtime as j increases from 10 to 60 runtime increases by approximately 10% over that range
+p88
+aVThis is a case where pruning does not help us in reducing the grammar size; we cannot optimistically prune out words that we do not plan to use
+p89
+aVHowever, we differ in that our underlying formalism for NLG is a suitably defined Markov decision process (MDP
+p90
+aVSome NLG techniques use sampling strategies [ 8 ] where a set of sentences is sampled from a data structure created from an underlying grammar and ranked according to how well they meet the communicative goal
+p91
+aVIn the experiments, we illustrate the difference between the exact and approximate reward signals
+p92
+aVIn this experiment, we modify the problem from the previous section
+p93
+aVThis allows STRUCT to operate as an anytime algorithm, described further below
+p94
+aVThus we use as a reward a measure of the match between the semantic annotation of the partial tree and the communicative goal
+p95
+aVFurther, the theoretical guarantees of UCT translate into fast generation in many cases, as we demonstrate in our experiments
+p96
+aVThe immediate value of a state, intuitively, describes closeness of an arbitrary partial sentence to our communicative goal
+p97
+aVThe first, and clearest, is that there are words in the sentence which do not help to increase the score assigned to the partial sentence
+p98
+aVExperiments showed roughly constant times for generation for j = 1 through j = 5000
+p99
+aVNonetheless, given a specific world and communicative goal, only a fraction of this MDP needs to be explored, and, as we show below, a good solution can often be found quickly using a variation of the UCT algorithm [ 9 ]
+p100
+aVBefore execution begins, our grammar is pruned to remove entries which cannot possibly be used in generation for the given problem, by transitively discovering all predicates that hold about the entities mentioned in the goal in the world, and eliminating all trees not about any of these
+p101
+aVGiven such a communicative goal , most people can formulate a sentence that satisfies the goal very quickly
+p102
+aVNatural language generation (NLG) develops techniques to extend similar capabilities to automated systems
+p103
+aVThe tree policy needed by UCT for a state s is the action a in that state which maximizes
+p104
+aVWe generally use a discount factor of 1; this is because we are willing to generate lengthy sentences in order to ensure we match our goal
+p105
+aVIn these generators, the input semantic requirements and grammar are encoded in PDDL [ 4 ] , which an off-the-shelf planner such as Graphplan [ 2 ] uses to produce a list of applications of rules in the grammar
+p106
+aVThe first step finds an adjoining location by searching through our sentence to find any subtree with a root whose label matches the root node of the auxiliary tree
+p107
+aVIn the second step, the target subtree is removed from the sentence tree, and placed in the auxiliary tree as a direct replacement for the foot node
+p108
+aVOne direction can be thought of as u'\u005cu201c' overgeneration and ranking u'\u005cu201d' Here some (possibly probabilistic) structure is used to generate multiple candidate sentences, which are then ranked according to how well they satisfy the generation criteria
+p109
+aVWe show empirically that this modification has other benefits as well, such as being anytime and an ability to handle complex communicative goals beyond those that deterministic planners can handle
+p110
+aVWe compare our results to those presented in [ 11 ] for CRISP with the FF Planner
+p111
+aVIn this work, we directly address this by using a more expressive underlying formalism, a Markov decision process (MDP
+p112
+aVOur set of states, therefore, will be partial sentences which are in the language defined by our PLTAG input
+p113
+aVThis experiment involving distracting words is an example of a case where pruning will perform well
+p114
+aVNotably, we must adjoin the word u'\u005cu201c' which u'\u005cu201d' to u'\u005cu201c' the dog u'\u005cu201d' during the portion of generation where the sentence reads u'\u005cu201c' the dog chased the cat u'\u005cu201d'
+p115
+aVDetermining the optimal policy at every state in an MDP is polynomial in the size of the state-action space [ 3 ] , which is intractable in our case
+p116
+aVThe authors are grateful to Umang Banugaria for help with the STRUCT implementation
+p117
+aVWhenever we reach a terminal state, we begin again from the start state of the MDP
+p118
+aVThese sentence-sized chunks are then sent to a sentence generator , which itself is usually split into two tasks, sentence planning and surface realization [ 11 ]
+p119
+aVIn this semantic model, the communicative goal is a list of these predicates with variables used for the entity names
+p120
+aVIn our work, we also view NLG as a planning problem
+p121
+aVFurther, they can easily provide multiple similar sentences, differing in details but all satisfying the general communicative goal, with no or very little error
+p122
+aVTAGs are tree-based grammars consisting of two sets of trees, called initial trees and auxiliary or adjoining trees
+p123
+aVThis essentially treats each action decision as a bandit problem; previous work shows that this approach can efficiently select near-optimal actions at each state
+p124
+aVIn the MDP we use for NLG, we must define each element of the tuple in such a way that a plan in the MDP becomes a sentence in a natural language
+p125
+aVFor an exact reward signal, when checking this overlap, we need to substitute each combination of entities in the goal into predicates in the sentence so we can return a high value if there are any mappings which are both possible (contain no statements which are not present in the grounded world) and mostly fulfill the goal (contain most of the goal predicates
+p126
+aVThis is not a hard upper bound, but generation times begin to be impractically large at that point
+p127
+aVOur set of actions consist of all single substitutions or adjoins at a particular valid location in the tree (example shown in Figure 1
+p128
+aVRather we just need to plan in an MDP to achieve a given communicative goal
+p129
+aVWe again modify the problem used earlier by adding to our lexicon several new adjectives, each applicable only to the target of our referring expression
+p130
+aVSuch approaches naturally handle statistical grammars, but do not solve the generation problem in a goal-directed manner
+p131
+aVTree Adjoining Grammars (TAGs) are a common choice [ 10 , 1 ]
+p132
+aVIf so, we store it, and continue the generation process
+p133
+aVA grammar contains a set of PTAG trees, divided into two sets (initial and adjoining
+p134
+aVIn addition to this set of trees, the grammar contains a list of words which can be inserted into those trees, turning the PTAG into an PLTAG
+p135
+aVThese trees are used in a three-step process called u'\u005cu201c' adjoining u'\u005cu201d'
+p136
+aVThese generators generate parses for the sentence at the same time as the sentence, which keeps them from generating realizations that are grammatically incorrect, and keeps them from generating grammatical structures that cannot be realized properly
+p137
+aVOther approaches view NLG as a planning problem [ 10 ]
+p138
+aVEntities are defined as any element anchored by precisely one node in the tree which can appear in a statement representing the semantic content of the tree
+p139
+aVEach partial sentence is annotated with its semantic information, built up using the semantic annotations associated with the PLTAG trees
+p140
+aVWith Pruning
+p141
+aVA world specification is simply a list of all statements which are true in the world surrounding our generation
+p142
+aVWe find that these adjectives which should have been selected immediately are omitted from the output, and that the sentence generated is the best possible under the constraints
+p143
+aVIn that section, the referred-to dog was unique, and it was therefore possible to produce a referring expression which identified it unambiguously
+p144
+aVIn order to build a lookahead tree, we use a u'\u005cu201c' rollout policy u'\u005cu201d' This policy has two components if it encounters a state already in the tree, it follows a u'\u005cu201c' tree policy, u'\u005cu201d' discussed further below
+p145
+aVA third limitation comes from the search process without strong heuristics, most planners get bogged down when given communicative goals that require chaining together long sequences of operators [ 11 ]
+p146
+aVThis experiment is set up in the same way as the one above, with the exception of l u'\u005cu201c' distracting u'\u005cu201d' words, words which are not useful in the sentence to be generated l is defined as j - k
+p147
+aVThis includes work based on chart generation and parsing [ 17 , 6 ]
+p148
+aVThe structure allows for a more efficient and compact representation compared to lattice structures that were previously used in statistical sentence generation approaches
+p149
+aVA key limitation is the logical nature of automated planning systems, which do not handle probabilistic grammars, or force ad-hoc approaches for doing so [ 1 ]
+p150
+aVA second limitation comes from restrictions on the goal it may be difficult to ensure that some specific piece of information should not be communicated, or to specify preferences over communicative goals, or specify general conditions, like that the sentence should be readable by a sixth grader
+p151
+aVWe set j = k and show the results in Figure 2
+p152
+aVPrior work reported a difference on the order of single milliseconds moving from j = 1 to j = 10
+p153
+aVSince we are using PLTAGs in this work, this means every action adds a word to the partial sentence
+p154
+aVFinally, the decision-theoretic setting allows for a precise tradeoff between exploration of the grammar and vocabulary to find a better solution and exploitation of the current most promising (partial) solution, instead of a heuristic search through the solution space as performed by standard planning approaches
+p155
+aVThis is the approach taken in some modern generators like CRISP [ 10 ] and PCRISP [ 1 ]
+p156
+aVIn such an MDP, the agent selects actions at each state to optimize the expected infinite-horizon discounted reward
+p157
+aVA discount factor of 1 can be problematic in general since it can cause rewards to diverge, but since there are a finite number of terms in our reward function (determined by the communicative goal and the fact that because of lexicalization we do not loop), this is not a problem for us
+p158
+aVSPUD [ 18 ] , a system for NLG through microplanning, considers NLG as a problem which requires realizing a deliberative process of goal-directed activity
+p159
+aVFor instance, a communicative goal of u'\u005cu2018' red(d), dog(d) u'\u005cu2019' (in English, u'\u005cu201c' say anything about a dog which is red u'\u005cu201d' ) would match a sentence with the semantic representation u'\u005cu2018' red(subj), dog(subj), cat(obj), chased(subj, obj) u'\u005cu2019' , like u'\u005cu201c' The red dog chased the cat u'\u005cu201d' , for instance
+p160
+aVHere, the communicative goal is treated as a predicate to be satisfied, and the grammar and vocabulary are suitably encoded as logical operators
+p161
+aVHowever, this is combinatorial; also, most entities within sentences do not interact (e.g., if we say u'\u005cu201c' the white rabbit jumped on the orange carrot, u'\u005cu201d' the whiteness of the rabbit has nothing to do with the carrot), and finally, an approximate reward signal generally works well enough unless we need to emit nested subclauses
+p162
+aVWe then add to the world a number of adjectives which are common to each of these possible referents
+p163
+aVFrom each state encountered, we construct a lookahead tree and use it to estimate the utility of each action in this state
+p164
+aVWe introduce the conjunction u'\u005cu201c' and u'\u005cu201d' , which allows for the root nonterminal of a new sentence ( u'\u005cu2018' S u'\u005cu2019' ) to be adjoined to any other sentence
+p165
+aVThe foot node must be a leaf of the auxiliary tree
+p166
+aVThen automated classical planning techniques are used to derive a plan which is converted into a sentence
+p167
+aVIn this case, we require lookahead further into the tree than depth 1
+p168
+aVWe use a variation of TAGs in our work, called a lexicalized TAG (LTAG), where each tree is associated with a lexical item called an anchor
+p169
+aVFor example, assume we have a tall spotted black cat, a tall solid-colored white cat, and a short spotted brown cat, but we wanted to refer to the first one without using the word u'\u005cu201c' black u'\u005cu201d'
+p170
+aVA key source of difficulty is the nature of the grammar, which is generally large, probabilistic and ambiguous
+p171
+aVNo Pruning
+p172
+aVFortunately, human language tends toward shorter sentences than these unwieldy (but technically grammatical) sentences
+p173
+aVUsing dynamic programming, the highest ranked sentence from this structure is then output
+p174
+aVThus as an approximation, we use a reward signal where we simply count how many individual predicates overlap with the goal with some entity substitution
+p175
+aVA second line of attack formalizes NLG as an AI planning problem
+p176
+aVIn these experiments, we vary l between 0 and 50
+p177
+aVAccording to Koller u'\u005cu2019' s findings, this is because the search space grows by a factor of the universe size with the addition of another entity [ 11 ]
+p178
+aVAfter every action is selected and applied, we check to see if we are in a state in which the algorithm could terminate (i.e., the sentence has no nonterminals yet to be expanded
+p179
+aVWe want the generator to say u'\u005cu201c' the black cat sleeps u'\u005cu201d' , instead of simply u'\u005cu201c' the cat sleeps u'\u005cu201d'
+p180
+aVThe final component of the MDP is the discount factor
+p181
+aVAuxiliary trees have, at a minimum, a root node and a foot node whose labels match
+p182
+aVAgain, we follow prior work in our experiment design [ 11 ]
+p183
+aVS × A × S u'\u005cu2192' u'\u005cu211d' is a real-valued reward function that specifies the utility of performing action a in state s to reach another state
+p184
+aVIn this experiment, we remove this condition by creating a situation in which the generator will be forced to ambiguously refer to several dogs
+p185
+aVIn order to control the search space, we restrict the structure of the MDP so that while substitutions are available, only those operations are considered when determining the distribution over the next state, without any adjoins
+p186
+aVHowever, the time to perfect this solution does
+p187
+aVBelow, we first describe related work, followed by a detailed description of our approach
+p188
+aVConjunctions
+p189
+aVWe are able to accomplish this task with the same very high frequency as the CRISP comparisons, as we use the same parameters
+p190
+aVSince these adjectives do not further disambiguate their subject, our generator should not use them in its output
+p191
+aVWe then empirically evaluate our approach and a state-of-the-art baseline in several different experimental settings and demonstrate its effectiveness at solving a variety of NLG tasks
+p192
+aVSecond, UCT was originally used in an adversarial environment, and so is biased to select actions leading to the best average reward rather than the action leading to the best overall reward
+p193
+aVThis model describes named u'\u005cu201c' entities, u'\u005cu201d' representing general things in the world
+p194
+aVThough restricted, this NLG problem is still difficult
+p195
+aVTwo broad lines of approaches have been used to attack the general NLG problem
+p196
+aVOur reward function must determine this with, at a minimum, the actions corresponding to u'\u005cu201c' which u'\u005cu201d' , u'\u005cu201c' ate u'\u005cu201d' , and u'\u005cu201c' treat u'\u005cu201d'
+p197
+aVMatching entity names refer to the same entity
+p198
+aVEach word in the lexicon is annotated with its first-order logic semantics with any number of entities present in its subtree as the arguments
+p199
+aVThese trees are annotated with the entities in them
+p200
+aVIn this experiment, m u'\u005cu2062' a u'\u005cu2062' x u'\u005cu2062' D u'\u005cu2062' e u'\u005cu2062' p u'\u005cu2062' t u'\u005cu2062' h was set equal to 1, since each action taken improved the sentence in a way measurable by our reward function n u'\u005cu2062' u u'\u005cu2062' m u'\u005cu2062' T u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' s was set equal to k u'\u005cu2062' ( k + 1 ) , since this is the number of adjoining sites available in the final step of generation, times the number of potential words to adjoin
+p201
+aVAn MDP is a tuple ( S , A , T , R , u'\u005cu0393' ) where S is a set of states, A is a set of actions available to an agent, T
+p202
+aVThen, we take the best action, the system transitions to the next state and the procedure is repeated
+p203
+aVThat is, the larger the overlap between the predicates, the higher the reward
+p204
+aVThe sentence planner takes in a sentence-sized chunk of information to be conveyed and enriches it in some way
+p205
+aVOnline planning in MDPs as done by UCT follows two steps
+p206
+aVThis is due almost entirely to the required increase in the value of n u'\u005cu2062' u u'\u005cu2062' m u'\u005cu2062' T u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' s as the grammar size increases
+p207
+aVSince our target can now be referred to unambiguously using only one adjective, our generator should just select one of these new adjectives (we experimentally confirmed this
+p208
+aVThat is, it is more important in our case to try a variety of actions than to pursue a single action very deep
+p209
+aVWe note that prior work exists that uses MDPs for NLG [ 13 ]
+p210
+aVFinally, u'\u005cu0393' is a discount factor that allows planning over infinite horizons to converge
+p211
+aVFor example, assume we had two black cats, and we wanted to say that one of them was sleeping, but we wanted to emphasize that it was a black cat
+p212
+aVIf it encounters a new state, the policy reverts to a u'\u005cu201c' default u'\u005cu201d' policy that randomly samples an action
+p213
+aVThis is an elegant formalization of NLG, however, restrictions on what current planning techniques can do limit its applicability
+p214
+aVThis is then used by a surface realization module which encodes the enriched semantic representation into natural language
+p215
+aVFirst, because we receive frequent, reasonably accurate feedback, we favor breadth over depth in the tree search
+p216
+aVThese generators assign semantic meaning to each individual token, then use a set of rules to decide if two words can be combined
+p217
+aVRecent work answers this question affirmatively
+p218
+aVWe refer to this list as a lexicon
+p219
+aVBecause this is a Monte Carlo estimate, typically, we run several simultaneous trials, and we keep track of the rewards received by each choice and use this to select the best action at the root
+p220
+aVWe use the closed world assumption, that is, any statement not present in our world is false
+p221
+aVThat work differs from ours in several key respects i) it considers NLG at a coarse level, for example choosing the type of utterance (in a dialog context) and how to fill in specific slots in a template, (ii) the source of uncertainty is not language-related but comes from things like uncertainty in speech recognition, and (iii) the MDPs are solved using reinforcement learning and not planning, which is impractical in our setting
+p222
+aVIn discourse planning, information to be conveyed is selected and split into sentence-sized chunks
+p223
+aVThese entities are described using first-order logic predicates, where the name of the predicate represents a statement of truth about the given entities
+p224
+aVBut for our application, we do not need to find the optimal policy
+p225
+aVSuppose someone wants to tell their friend that they saw a dog chasing a cat
+p226
+aVWe need to know that using u'\u005cu201c' which u'\u005cu201d' will allow us to further specify which dog is chasing the cat; in order to do this we must use at least d = 3
+p227
+aVMany other systems using similar ideas exist, e.g., [ 19 , 14 ]
+p228
+aVHowever, that work does consider NLG in the context of the broader task of dialog management, which we leave for future work
+p229
+aVThere are an infinite number of these states, since TAG adjoins can be repeated indefinitely
+p230
+aVRecent approaches such as PCRISP [ 1 ] attempt to remedy this, but do so in a somewhat ad-hoc way, by transforming the probabilities into costs, because they rely on deterministic planning to actually realize the output
+p231
+aVEntities with the same name are considered to be the same entity
+p232
+aVThough the NLG-as-planning approaches are elegant and appealing, a key drawback is the difficulty of handling probabilistic grammars, which are readily handled by the overgeneration and ranking strategies
+p233
+aVOther examples of this idea are the HALogen/Nitrogen systems [ 12 ]
+p234
+aVHere Q u'\u005cu2062' ( s , a ) is the estimated value of a as observed in the tree search, computed as a sum over future rewards observed after ( s , a
+p235
+aVThus the second term is an exploration term that biases the algorithm towards visiting actions that have not been explored enough c is a constant that trades off exploration and exploitation
+p236
+aVHALogen uses a two-phase architecture where first, a u'\u005cu201c' forest u'\u005cu201d' data structure that compactly summarizes possible expressions is constructed
+p237
+aVIn all cases, any rewards received during the rollout search are backed up
+p238
+aVThis chain is sometimes referred to as the u'\u005cu201c' NLG Pipeline u'\u005cu201d' [ 16 ]
+p239
+aVS × A × S u'\u005cu2192' [ 0 , 1 ] is a possibly stochastic function defining the probability T u'\u005cu2062' ( s , a , s u'\u005cu2032' ) with which the environment transitions to s u'\u005cu2032' when the agent does a in state s
+p240
+aVIf so, we determine if this is the best possibly-terminal state we have seen so far
+p241
+aVIs it possible to do this without exploring the entire state-action space
+p242
+aVThis is not true for us, however, so we choose the latter action instead
+p243
+aVWe would have as our goal both u'\u005cu201c' sleeps(c) u'\u005cu201d' and u'\u005cu201c' black(c) u'\u005cu201d'
+p244
+aVN u'\u005cu2062' ( s ) and N u'\u005cu2062' ( s , a ) are visit counts for the state and state-action pair
+p245
+aVThis work was supported in part by NSF CNS-1035602
+p246
+aVFinally, we discuss future extensions and conclude
+p247
+aVAs can be seen, this always happens very quickly
+p248
+aVAt the low end, we can use n u'\u005cu2062' u u'\u005cu2062' m u'\u005cu2062' T u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' s = 20 , but at l = 50 , we must use n u'\u005cu2062' u u'\u005cu2062' m u'\u005cu2062' T u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' s = 160 in order to ensure perfect generation as soon as possible
+p249
+aV{algorithmic} [1] \u005cREQUIRE Number of simulations n u'\u005cu2062' u u'\u005cu2062' m u'\u005cu2062' T u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' s , Depth of lookahead m u'\u005cu2062' a u'\u005cu2062' x u'\u005cu2062' D u'\u005cu2062' e u'\u005cu2062' p u'\u005cu2062' t u'\u005cu2062' h , time limit T \u005cENSURE Generated sentence tree \u005cSTATE b u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2062' S u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e u'\u005cu2190' nil \u005cWHILE time limit not reached \u005cSTATE s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2190' empty sentence tree \u005cWHILE s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e not terminal \u005cFOR n u'\u005cu2062' u u'\u005cu2062' m u'\u005cu2062' T u'\u005cu2062' r u'\u005cu2062' i u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' s \u005cSTATE t u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2062' S u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2190' s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e \u005cSTATE c u'\u005cu2062' u u'\u005cu2062' r u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' D u'\u005cu2062' e u'\u005cu2062' p u'\u005cu2062' t u'\u005cu2062' h u'\u005cu2190' 0 \u005cIF t u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2062' S u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e has unexplored actions \u005cSTATE Apply one unexplored PLTAG production sampled from the PLTAG distribution to t u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2062' S u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e \u005cSTATE c u'\u005cu2062' u u'\u005cu2062' r u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' D u'\u005cu2062' e u'\u005cu2062' p u'\u005cu2062' t u'\u005cu2062' h ++ \u005cENDIF \u005cWHILE c u'\u005cu2062' u u'\u005cu2062' r u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' D u'\u005cu2062' e u'\u005cu2062' p u'\u005cu2062' t u'\u005cu2062' h m u'\u005cu2062' a u'\u005cu2062' x u'\u005cu2062' D u'\u005cu2062' e u'\u005cu2062' p u'\u005cu2062' t u'\u005cu2062' h \u005cSTATE Apply PLTAG production selected by tree policy (Equation 1 ) or default policy as required \u005cSTATE c u'\u005cu2062' u u'\u005cu2062' r u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' D u'\u005cu2062' e u'\u005cu2062' p u'\u005cu2062' t u'\u005cu2062' h ++ \u005cENDWHILE \u005cSTATE calculate reward for t u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2062' S u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e \u005cSTATE associate reward with first action taken \u005cENDFOR \u005cSTATE s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2190' maximum reward t u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2062' S u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e \u005cIF s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e score b u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2062' S u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e score and s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e has no nonterminal leaf nodes \u005cSTATE b u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2062' S u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e u'\u005cu2190' s u'\u005cu2062' t u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e \u005cENDIF \u005cENDWHILE \u005cENDWHILE \u005cRETURN b u'\u005cu2062' e u'\u005cu2062' s u'\u005cu2062' t u'\u005cu2062' S u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e
+p250
+aVSR was supported in part by CWRU award OSA110264
+p251
+aV[b]0.32
+p252
+aVR
+p253
+aV[b]0.32
+p254
+aV[b]0.32
+p255
+a.

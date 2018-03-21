@@ -1,0 +1,436 @@
+(lp0
+VIt shows that 1) as expected, our classifiers do worse on the harder semantic reordering prediction than syntactic reordering prediction; 2) thanks to the high accuracy obtained by the maxent classifiers, integrating either the syntactic or the semantic reordering constraints results in better reordering performance from both syntactic and semantic perspectives; 3) in terms of the mutual impact, the syntactic reordering models help improving semantic reordering more than the semantic reordering models help improving syntactic reordering; and 4) the rightmost models have a learnability advantage over the leftmost models, achieving higher accuracy across the board
+p1
+aVThe syntactic reordering model takes a CFG rule (e.g.,, VP u'\u005cu2192' VP u'\u005cu2062' PP u'\u005cu2062' PP ) and models the reordering of the constituents on the left hand side by examining their translation or visit order according to the target language
+p2
+aVOf all the semantic role pairs, 44% are in the same CFG rules, indicating that this part of semantic reordering has overlap with syntactic reordering
+p3
+aVOnce we have the (semi-)gold alignment, we compute the gold reordering types between two adjacent syntactic constituents or semantic roles
+p4
+aVAs a result, they tend to produce translations containing both syntactic and semantic reordering confusions
+p5
+aVOne is based on the leftmost aligned word (leftmost reordering model) and the other is based on the rightmost aligned word (rightmost reordering model), as follows
+p6
+aVBefore we present the algorithm integrating the reordering models, we define the following functions by assuming XP i and XP i + 1 are the constituent pair of interest in CFG rule cfg , H is the translation hypothesis and a is its word alignment
+p7
+aVTo get the two semantic reordering model feature values, we simply use Algorithm 1 and its associated functions from u'\u005cu2131' 1 to u'\u005cu2131' 5 replacing a CFG rule cfg with a PAS pas , and a constituent u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' i with a semantic role u'\u005cud835' u'\u005cudc45' i
+p8
+aVHowever, reordering, especially without any help of external knowledge, remains a great challenge because an accurate reordering is usually beyond these word level or translation phrase level reordering models u'\u005cu2019' ability
+p9
+aVTreating the two forms of reorderings in a unified way, the semantic reordering model is obtainable by regarding a PAS as a CFG rule and considering a semantic role as a constituent
+p10
+aVOur work, which shares this approach, differs from their work primarily in that our syntactic reordering models are based on the constituent level, rather than the word level
+p11
+aVThis is not surprising since the semantic reordering features are exclusively attached to predicates, and the span set of the semantic roles is a strict subset of the span set of the syntactic constituents; only 22% of syntactic constituents are semantic roles
+p12
+aVPAS) reordering in SMT, it is still an open question whether semantic structure reordering strongly overlaps with syntactic structure reordering, since the semantic structure is closely tied to syntax
+p13
+aVTable 7 shows the accuracy averaged over the four gold reordering sets (the four reference translations
+p14
+aV4 4 Note that they obtained the translation order of source word pairs by predicting the reordering of adjacent constituents, which was quite close to our work
+p15
+aVWe report the averaged performance by using the gold reordering type extracted from the four reference translations
+p16
+aVThe popular distortion or lexicalized reordering models in phrase-based SMT make good local predictions by focusing on reordering on word level, while the synchronous context free grammars in hierarchical phrase-based (HPB) translation models are capable of handling non-local reordering on the translation phrase level
+p17
+aVAlgorithm 1 therefore permits a unified treatment of syntactic and PAS-based reordering, even though it is expressed in terms of syntactic reordering here for ease of presentation
+p18
+aVif k constituents u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' m 1 u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' m k ( m 1 u'\u005cu2026' m k ) are linked to the same target word, then v m i = v m i + 1 - 1 , e.g.,, since u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' 3 and u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' 4 are both linked to e 3 , then v 3 = v 4 - 1
+p19
+aVIn order to understand how well the MR08 system respects their reordering preference, we use the gold alignment dataset LDC2006E86, in which the source sentences are from the Chinese Treebank, and thus both the gold parse trees and gold predicate-argument structures are available
+p20
+aVu'\u005cu2131' 3 u'\u005cu2062' ( H , u'\u005cu2006' a , u'\u005cu2006' u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' i , u'\u005cu2006' u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' i + 1 ) returns the leftmost and rightmost reordering types for the constituent pair u'\u005cu27e8' XP i , XP i + 1 u'\u005cu27e9' , given alignment a , according to Section 3
+p21
+aVTherefore, the PAS model has fewer opportunities to influence reordering
+p22
+aVif a constituent u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' i ( i 1 ) is unaligned, we add a link to the target word which is aligned to u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' i - 1 , e.g.,, u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' 4 will be linked to e 3 ; and
+p23
+aVGiven a hypothesis H with its alignment a , it traverses all CFG rules in the parse tree and sees if two adjacent constituents are conditioned to trigger the reordering models (lines 2-4
+p24
+aVBecause the translation of a source constituent might result in multiple discontinuous blocks, there can be several ways to describe or group the reordering patterns
+p25
+aVDue to the fact that a constituent, especially a long one, usually maps into multiple discontinuous blocks in the target language, there is more than one way to describe the monotonicity or swapping patterns; we therefore design two reordering models one is based on the leftmost aligned target word and the other based on the rightmost target word
+p26
+aVSimilarly, the sequence of rightmost reordering types RRT can be decided for a CFG rule u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' u'\u005cu2192' u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' 1 u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' n
+p27
+aVAlthough there are overlaps between translation phrases and syntactic constituents, it is reasonable to think that the two reordering approaches can work together well and even complement each other, as the linguistic patterns they capture differ substantially
+p28
+aVAccordingly, for a PAS pas u'\u005cud835' u'\u005cudc43' u'\u005cud835' u'\u005cudc34' u'\u005cud835' u'\u005cudc46' u'\u005cu2192' u'\u005cud835' u'\u005cudc45' 1 u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' u'\u005cud835' u'\u005cudc45' n , we can obtain its sequences of leftmost and rightmost reordering types by using the same way described above
+p29
+aVTherefore, we design two general constituent reordering sub-models
+p30
+aVUnlike the conventional phrase and lexical translation features, whose values are phrase pair-determined and thus can be calculated offline, the value of the reordering features can only be obtained during decoding time, and requires word alignment information as well
+p31
+aVHowever, our MR08 system outputs 46% of them in monotone and and 50% in swap reordering
+p32
+aVFor example, the first row shows that based on the gold alignment, for u'\u005cu27e8' PP,VP u'\u005cu27e9' , 16% are in monotone and 76% are in swap reordering
+p33
+aVSince the syntactic parses of the tuning and test data contain 29 types of constituent labels and 35 types of POS tags, we have 29 types of XP + features and 64 types of XP = features
+p34
+aV[ 44 ] obtained word order by using a reranking approach to reposition nodes in syntactic parse trees
+p35
+aVNote that Function u'\u005cu2131' 1 returns true if hypothesis H fully covers, or fully contains, constituent X u'\u005cu2062' P i , regardless of the reordering type of X u'\u005cu2062' P i
+p36
+aVWe first run syntactic parsing and semantic role labeling on the Chinese sentences, then train the models by using MaxEnt toolkit with L1 regularizer [ 34 ]
+p37
+aV33.4 on average) and there is still some room for improvement by building a better maximum entropy classifiers (e.g.,, 34.9 vs
+p38
+aVHence, the reordering accuracy for u'\u005cu27e8' PP,VP u'\u005cu27e9' is 54%
+p39
+aVu'\u005cu2131' 2 u'\u005cu2062' ( H , u'\u005cu2006' u'\u005cud835' u'\u005cudc50' u'\u005cud835' u'\u005cudc53' u'\u005cud835' u'\u005cudc54' , u'\u005cu2006' u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' i , u'\u005cu2006' u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' i + 1 ) returns true if the reordering of the pair u'\u005cu27e8' XP i , XP i + 1 u'\u005cu27e9' in rule cfg has not been calculated yet; otherwise returns false
+p40
+aVSome previous work pre-ordered words in the source sentences, so that the word order of source and target sentences is similar
+p41
+aVif the first constituent u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' 1 is unaligned, we add a NULL word at the beginning of the target side and link u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' 1 to the NULL word;
+p42
+aVTherefore, most features share two common components the syntactic categories of u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' i and u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' i + 1
+p43
+aVBy assuming that any two reordering types in u'\u005cud835' u'\u005cudc3f' u'\u005cud835' u'\u005cudc45' u'\u005cud835' u'\u005cudc47' = { l u'\u005cu2062' r u'\u005cu2062' t 1 , u'\u005cu2026' , l u'\u005cu2062' r u'\u005cu2062' t n - 1 } are independent of each other, we reformulate Eq
+p44
+aVAccording to the annotation principles in (Chinese) PropBank [ 28 , 42 ] , all the roles in a PAS map to a corresponding constituent in the parse tree, and these constituents (e.g.,, NPs and VBD in Figure 1 ) do not overlap with each other
+p45
+aVFor u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' i and u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' i + 1 in cfg , the features are aimed to examine which of them should be translated first
+p46
+aVNote that we refer all core arguments, adjuncts, and predicates as semantic roles; thus we say the PAS in Figure 1 has 4 roles
+p47
+aVThe syntactic reordering models outperform the semantic reordering models, and the gain achieved by the semantic reordering models is limited in the presence of the MR08 syntactic features
+p48
+aVTo show the effectiveness of our reordering models, we integrate both syntactic constituent reordering models and semantic role reordering models into a state-of-the-art HPB system [ 4 , 7 ]
+p49
+aVThe reordering type distribution on the reordering model training data in Table 3 suggests that semantic reordering is more difficult than syntactic reordering
+p50
+aVIn addition, often these translation models fail to respect linguistically-motivated syntax and semantics
+p51
+aVThe syntactic reordering models outperform the semantic reordering models on both the baseline and MR08 systems
+p52
+aVAs mentioned earlier, the linguistic reordering unit is the syntactic constituent for syntactic reordering, and the semantic role for semantic reordering
+p53
+aVFor the semantic reordering model, it takes a PAS and models its reordering on the target side
+p54
+aVThe non-syntax-based reordering approach models the reordering of translation words/phrases while the syntax-based approach models the reordering of syntactic constituents
+p55
+aVTo train the syntactic and semantic reordering models, we use a gold alignment dataset
+p56
+aVRather than introducing reordering models on either the word level or the translation phrase level, we propose a unified approach to modeling reordering on the linguistic unit level, e.g.,, syntactic constituents and semantic roles
+p57
+aVTable 1 shows the features used in syntactic leftmost and rightmost reordering models
+p58
+aVAnd we again see that the improvement achieved by semantic reordering models is limited in the presence of the syntactic reordering models
+p59
+aVFor models with syntactic reordering, we add two new features (i.e.,, one for the leftmost reordering model and the other for the rightmost reordering model) into the log-linear translation model in Eq
+p60
+aVThe trend of the results, summarized as performance gain over the baseline and MR08 systems averaged over all test sets, is presented in Table 6
+p61
+aVFor the semantic reordering models, we also add two new features into the log-linear translation model
+p62
+aVwhere u'\u005cu03a8' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc50' u'\u005cud835' u'\u005cudc53' u'\u005cud835' u'\u005cudc54' ) indicates the surrounding context of the CFG
+p63
+aVTable 8 shows the syntactic and semantic reordering feature weights
+p64
+aVIn addition, integrating both the leftmost and rightmost reordering models has limited improvement over a single reordering model
+p65
+aVTo this end, we employ the same reordering framework as syntactic constituent reordering and focus on semantic roles in a PAS
+p66
+aVFinally, we integrate both the syntactic and semantic reordering models into the final system
+p67
+aVOur syntactic constituent reordering model considers context free grammar (CFG) rules in the source language and predicts the reordering of their elements on the target side, using word alignment information
+p68
+aVWe introduce novel soft reordering constraints, using syntactic constituents or semantic roles, composed over word alignment information in translation rules used during decoding time;
+p69
+aVGe [ 11 ] presented a syntax-driven maximum entropy reordering model that predicted the source word translation order
+p70
+aVWe have presented our unified approach to incorporating syntactic and semantic soft reordering constraints in an HPB system
+p71
+aVReordering models in statistical machine translation (SMT) model the word order difference when translating from one language to another
+p72
+aVIn the soft constraint or reordering model approach, Liu and Gildea [ 23 ] modeled the reordering/deletion of source-side semantic roles in a tree-to-string translation model
+p73
+aVAlthough the HPB model is capable of handling non-local phrase reordering using synchronous context free grammars, both our syntactic leftmost reordering model and rightmost model are still able to achieve improvement over both the baseline and MR08
+p74
+aVIn order to explore the error propagation from the classifiers themselves and explore the upper bound for improvement from the reordering models, we perform an u'\u005cu201c' oracle u'\u005cu201d' study, letting the classifiers be aware of the u'\u005cu201c' gold u'\u005cu201d' reordering type between two syntactic constituents or two semantic roles, and returning a higher probability for the gold reordering type and a smaller one for the others (i.e.,, we set 0.9 for the gold reordering type, and let the other non-gold three types share 0.1
+p75
+aVGiven the two adjacent roles u'\u005cud835' u'\u005cudc45' i and u'\u005cud835' u'\u005cudc45' i + 1 in a PAS pas , Table 2 shows the features that are used in the semantic leftmost and rightmost reordering models
+p76
+aVWe also see that the number of semantic instances is about 1/3 of that of syntactic instances, but the entropy of the semantic reordering classes is higher, indicating the reordering of semantic roles is harder than that of syntactic constituents
+p77
+aVAlthough the semantic reordering model is structured in precisely the same way, we use different feature sets to predict the reordering between two semantic roles
+p78
+aVThe reordering unit falls into multiple granularities, from single words to more complex constituents and semantic roles, and often crosses translation phrases
+p79
+aVSection 4 gives our experimental results and Section 5 discusses the behavior difference between syntactic constituent reordering and semantic role reordering
+p80
+aVTable 7 also shows that our current maximum entropy classifiers have room for improvement, especially for semantic reordering
+p81
+aVIn contrast, our model is universal and can be easily adopted to model the reordering of other linguistic units (e.g.,, syntactic constituents
+p82
+aVThis suggests that our syntactic reordering features interact well with the MR08 syntactic soft constraints the XP+ and XP= features focus on a single constituent each, while our reordering features focus on a pair of constituents each
+p83
+aVTo validate this conjecture on our translation test data, we compare the reordering performance among the MR08 system, the improved systems and the maximum entropy classifiers
+p84
+aVWe provide a detailed analysis providing insight into why the semantic reordering model is significantly less effective when syntactic reordering features are also present
+p85
+aVThe semantic reordering models also achieve significant gain of 0.8 BLEU on average over the baseline system, demonstrating the effectiveness of PAS-based reordering
+p86
+aVTo our knowledge, their semantic reordering models were PAS-specific
+p87
+aVA deeper examination of the reordering model u'\u005cu2019' s training data reveals that some constituent pairs and semantic role pairs have a preference for a specific reordering type (monotone or swap
+p88
+aV33.4), suggesting that the potential improvement of semantic reordering models is much more limited
+p89
+aVWe introduce a unified framework to incorporate syntactic and semantic reordering constraints;
+p90
+aVThen the algorithm returns two log-probabilities of the syntactic reordering models
+p91
+aVOur second group of experiments is to validate the semantic reordering models
+p92
+aVReordering accuracy analysis
+p93
+aVFinally in the post-processing approach category, Wu and Fung [ 37 ] performed semantic role labeling on translation output and reordered arguments to maximize the cross-lingual match of the semantic frames between the source sentence and the target translation
+p94
+aVFigure 2 shows the modeling steps for the leftmost reordering model
+p95
+aVIt shows that the semantic feature weights decrease in the presence of the syntactic features, indicating that the decoder learns to trust semantic features less in the presence of the more accurate syntactic features
+p96
+aVHowever, our preliminary experiments showed that the reordering models trained on gold alignment yielded higher improvement
+p97
+aVThen we evaluate the automatic reordering outputs generated from both our translation systems and maximum entropy classifiers
+p98
+aVNext, we use a CFG rule to describe our syntactic reordering model
+p99
+aVWe run GIZA++ on the data combination of our translation training data and test data to get the alignment for the test data and each reference translation
+p100
+aVOur first group of experiments investigates whether the syntactic reordering models are able to improve translation quality in terms of BLEU
+p101
+aVTo this end, we respectively add our syntactic reordering models into both the baseline and MR08 systems
+p102
+aVOur basic baseline system employs 19 basic features a language model feature, 7 translation model features, word penalty, unknown word penalty, the glue rule, date, number and 6 pass-through features
+p103
+aVMoreover, we have studied the effectiveness of the semantic reordering model in different scenarios
+p104
+aVIn this paper our goal is to take advantage of syntactic and semantic parsing to improve translation quality
+p105
+aVThis is consistent with our observation that semantic reordering is harder than syntactic reordering, as seen in Tables 3 and 7
+p106
+aVBoth are close to our work; however, our model generates reordering features that are integrated into the log-linear translation model during decoding
+p107
+aVIndeed, the reordering models can also be trained on the MT training data with its automatic alignment
+p108
+aVThe leftmost reordering model takes the following form
+p109
+aVAlgorithm 1 integrates the syntactic leftmost and rightmost reordering models into a CKY-style decoder whenever a new hypothesis is generated
+p110
+aVAgain, to get the gold reordering type, we run GIZA++ to get the alignment for tuning/test source sentences and each of four reference translations
+p111
+aVTo our surprise, however, the improvement achieved by gold semantic reordering types is still small (e.g.,, 33.9 vs
+p112
+aVWe then analyze the differences between the syntactic and semantic features
+p113
+aVSection 3 describes the details of our unified reordering models
+p114
+aVOur statistics show that syntactic reordering features (either leftmost or rightmost) are called 24 times per sentence on average
+p115
+aVRecently we have also seen work on lexicalized reordering models without syntactic information in HPB [ 31 , 14 , 26 ]
+p116
+aVThe general ideas, however, are applicable to other translation models, e.g.,, phrase-based model, as well
+p117
+aVTable 4 presents examples comparing the reordering distribution between gold alignment and the output of the MR08 system
+p118
+aVThis is compared to only 9 times per sentence for semantic reordering features
+p119
+aVWe clearly see that using gold syntactic reordering types significantly improves the performance (e.g.,, 34.9 vs
+p120
+aV[ 13 ] predicted the translation order of two source words
+p121
+aVInterestingly, about 17% of the syntactic instances and 16% of the semantic instances differ in their leftmost and rightmost reordering types, indicating that the leftmost/rightmost distinction is informative
+p122
+aVMarton and Resnik [ 24 ] employed soft syntactic constraints with weighted binary features and no MaxEnt model
+p123
+aVSyntax-based reordering
+p124
+aVOn average, a sentences has 4 PASs and each PAS contains 3 semantic roles
+p125
+aVSection 2 provides an overview of HPB translation model
+p126
+aVSemantics-based reordering
+p127
+aVIn this section, we look at MR08 system and the systems improving it to explore the behavior differences between the two reordering models
+p128
+aVTwo other widely used features are a target language model feature and a target word penalty
+p129
+aVIn order to predict either the leftmost or rightmost reordering type for two adjacent constituents, we use a maximum entropy classifier to estimate the probability of the reordering type r u'\u005cu2062' t u'\u005cu2208' { M , D u'\u005cu2062' M , S , D u'\u005cu2062' S } as follows
+p130
+aVTo obtain syntactic parse trees and semantic roles on the tuning and test datasets, we first parse the source sentences with the Berkeley Parser [ 30 ] , trained on the Chinese Treebank 7.0 [ 43 ]
+p131
+aV3 3 http://www.logos.ic.i.u-tokyo.ac.jp/ u'\u005cu223c' tsuruoka/maxent/ Table 3 shows the reordering type distribution over the training data
+p132
+aVFigure 2 (a) is an example of a CFG rule in the source parse tree and its word alignment links to the target language
+p133
+aV[ 10 ] employed dependency trees to predict the translation order of a word and its head word
+p134
+aVFor each pair of constituents, it first extracts its leftmost and rightmost reordering types (line 6) and then gets their respective probabilities returned by the maximum entropy classifiers defined in Section 3.1 (lines 7-8
+p135
+aV[ 20 ] focused on finding the n -best pre-ordered source sentences by predicting the reordering of sibling constituents, while Yang et al
+p136
+aVOur stronger baseline employs, in addition, the fine-grained syntactic soft constraint features of Marton and Resnik [ 24 ] , hereafter MR08
+p137
+aVThey did not explicitly target reordering (beyond applying constraints on HPB rules
+p138
+aVWe further contrast it with a stronger baseline, already including fine-grained soft syntactic constraint features [ 24 , 3 ]
+p139
+aVLast, we also note that recent work on non-syntax-based reorderings in (flat) phrase-based models [ 2 , 9 ] can also be potentially adopted to hpb models
+p140
+aVIn this section, we test its effectiveness in Chinese-English translation
+p141
+aVFor the test set, we have four reference translations
+p142
+aVThe syntactic soft constraint features include both MR08 exact-matching and cross-boundary constraints (denoted XP = and XP +
+p143
+aVWe then pass the parses to a Chinese semantic role labeler [ 22 ] , trained on the Chinese PropBank 3.0 [ 42 ] , to annotate semantic roles for all verbal predicates (part-of-speech tag VV , VE , or VC
+p144
+aVIn the pre-ordering approach, Wu et al
+p145
+aVAnother approach in previous work added soft constraints as weighted features in the SMT decoder to reward good reorderings and penalize bad ones
+p146
+aV[ 21 ] predicted the translation order between either two arguments or an argument and its predicate
+p147
+aVPotential improvement analysis
+p148
+aVThere is no clear indication of whether the leftmost reordering model works better than the other
+p149
+aVInstead of decomposing a PAS into individual units, Zhai et al
+p150
+aVLi et al
+p151
+aVXiong et al
+p152
+aV[ 45 ] constructed a classifier for each source side PAS
+p153
+aVThe reordering rules were either manually designed [ 6 , 36 , 41 , 18 ] or automatically learned [ 39 , 12 , 35 , 15 , 19 ] , using syntactic parses
+p154
+aVTable 4 also shows that the semantic reordering between core arguments and predicates (e.g.,, u'\u005cu27e8' u'\u005cud835' u'\u005cudc43' u'\u005cud835' u'\u005cudc5f' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc51' , A1 u'\u005cu27e9' , u'\u005cu27e8' A0 , u'\u005cud835' u'\u005cudc43' u'\u005cud835' u'\u005cudc5f' u'\u005cud835' u'\u005cudc52' u'\u005cud835' u'\u005cudc51' u'\u005cu27e9' ) has a less ambiguous pattern than that between adjuncts and other roles (e.g.,, u'\u005cu27e8' LOC,Pred u'\u005cu27e9' , u'\u005cu27e8' A0,TMP u'\u005cu27e9' ), indicating the higher reordering flexibility of adjuncts
+p155
+aVFigure 1 shows an example of a PAS where the predicate (Pre) has two core arguments (A0 and A1) and one adjunct (TMP
+p156
+aVHuang et al
+p157
+aVGao et al
+p158
+aV[ 40 ] and Li et al
+p159
+aVSetiawan et al
+p160
+aVNote that constituent u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' 4 , which covers word f 8 , has no alignment
+p161
+aVThen for each u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' i , we find the leftmost target word which is aligned to a source word covered by u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' i
+p162
+aVSemantics-based reordering has also seen an increase in activity recently
+p163
+aV[ 38 ] automatically learned pre-ordering rules from PAS
+p164
+aVWhile recently there has also been some encouraging work on incorporating semantic structure (or, more specifically, predicate-argument structure
+p165
+aVThe two models collectively achieve a gain of up to 1.4 BLEU over the baseline and 1.0 BLEU over MR08 on average, which is shown in the rows of u'\u005cu201c' +syn+sem u'\u005cu201d' in Table 5
+p166
+aVTable 9 compares the performance between the non-oracle and oracle settings
+p167
+aVEach such rule is associated with a set of translation model features { u'\u005cu03a6' i } , such as phrase translation probability p ( u'\u005cu0391' u'\u005cu2223' u'\u005cu0393' ) and its inverse p ( u'\u005cu0393' u'\u005cu2223' u'\u005cu0391' ) , the lexical translation probability p l u'\u005cu2062' e u'\u005cu2062' x ( u'\u005cu0391' u'\u005cu2223' u'\u005cu0393' ) and its inverse p l u'\u005cu2062' e u'\u005cu2062' x ( u'\u005cu0393' u'\u005cu2223' u'\u005cu0391' ) , and a rule penalty that affects preference for longer or shorter derivations
+p168
+aVAlthough employing linguistically motivated labels in SCFG is capable of capturing constituent reorderings [ 5 , 25 ] , the rules are sparser than SCFG with nameless non-terminals (i.e.,, X s) and soft constraints
+p169
+aVFeature weight analysis
+p170
+aVFor every two adjacent constituents u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' i and u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' i + 1 with corresponding visit order v i and v i + 1 , their reordering could be one of the following
+p171
+aVSection 6 reviews related work and, finally Section 7 concludes the paper
+p172
+aVNote that we use the same features for both
+p173
+aVIn HPB models [ 4 ] , synchronous rules take the form X u'\u005cu2192' u'\u005cu27e8' u'\u005cu0393' , u'\u005cu0391' , u'\u005cu223c' u'\u005cu27e9' , where X is the non-terminal symbol, u'\u005cu0393' and u'\u005cu0391' are strings of lexical items and non-terminals in the source and target side, respectively, and u'\u005cu223c' indicates the one-to-one correspondence between non-terminals in u'\u005cu0393' and u'\u005cu0391'
+p174
+aVu'\u005cu2131' 4 u'\u005cu2062' ( r u'\u005cu2062' t , u'\u005cu2006' u'\u005cud835' u'\u005cudc50' u'\u005cud835' u'\u005cudc53' u'\u005cud835' u'\u005cudc54' , u'\u005cu2006' u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' i , u'\u005cu2006' u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' i + 1 ) returns the probability of leftmost reordering type r u'\u005cu2062' t for the constituent pair u'\u005cu27e8' XP i , XP i + 1 u'\u005cu27e9' in rule cfg
+p175
+aVu'\u005cu2131' 5 u'\u005cu2062' ( r u'\u005cu2062' t , u'\u005cu2006' u'\u005cud835' u'\u005cudc50' u'\u005cud835' u'\u005cudc53' u'\u005cud835' u'\u005cudc54' , u'\u005cu2006' u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' i , u'\u005cu2006' u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' i + 1 ) returns the probability of rightmost reordering type r u'\u005cu2062' t for the constituent pair u'\u005cu27e8' XP i , XP i + 1 u'\u005cu27e9' in rule cfg
+p176
+aVwhere f k are binary features, u'\u005cu0398' k are the weights of these features
+p177
+aVCoverage analysis
+p178
+aVNon-syntax-based reorderings in HPB
+p179
+aVIt contains 7,870 sentences with 191,364 Chinese words and 261,399 English words
+p180
+aVGiven a derivation d , its translation log-probability is estimated as
+p181
+aVFigure 2 (b) shows that the leftmost target words for u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' 1 , u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' 2 , and u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' 3 are e 2 , e 5 , and e 3 , respectively, while u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' 4 has no aligned target word
+p182
+aVFinally Figure 2 (d) converts the visit order V = { v 1 , u'\u005cu2026' u'\u005cu2062' v n } into a sequence of leftmost reordering types L u'\u005cu2062' R u'\u005cu2062' T = { l u'\u005cu2062' r u'\u005cu2062' t 1 , u'\u005cu2026' , l u'\u005cu2062' r u'\u005cu2062' t n - 1 }
+p183
+aVThen we get visit order V = { v i } for { u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' i } in the transformation from Figure 2 (b) to Figure 2 (c), with the following strategies for special cases
+p184
+aVUp to this point, we have generated a sequence of leftmost reordering types u'\u005cud835' u'\u005cudc3f' u'\u005cud835' u'\u005cudc45' u'\u005cud835' u'\u005cudc47' = { l u'\u005cu2062' r u'\u005cu2062' t 1 , u'\u005cu2026' , l u'\u005cu2062' r u'\u005cu2062' t n - 1 } for a given CFG rule cfg u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' u'\u005cu2192' u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' 1 u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' n
+p185
+aVFor training we use 1.6M sentence pairs of the non-UN and non-HK Hansards portions of NIST MT training corpora, segmented with the Stanford segmenter [ 33 ]
+p186
+aVResults are shown in the rows of u'\u005cu201c' + sem-reorder u'\u005cu201d' in Table 5
+p187
+aVFrom the table, we have the following two observations
+p188
+aVThe English data is lowercased, tokenized and aligned with GIZA++ [ 27 ] to obtain bidirectional alignments, which are symmetrized using the grow-diag-final-and method [ 16 ]
+p189
+aVWe use the HPB decoder cdec [ 7 ] , with Mr
+p190
+aVMost of our features f k are syntax-based
+p191
+aVHowever, the gain diminishes to 0.3 BLEU on the MR08 system
+p192
+aVThe effect is shown in the rows of u'\u005cu201c' + syn-reorder u'\u005cu201d' in Table 5
+p193
+aVWe use NIST MT 06 dataset (1664 sentence pairs) for tuning, and NIST MT 03, 05, and 08 datasets (919, 1082, and 1357 sentence pairs, respectively) for evaluation
+p194
+aVDo not confuse any parsing tag X u'\u005cu2062' P i with the nameless variables X i in Hiero or cdec rules
+p195
+aVu'\u005cu2131' 1 u'\u005cu2062' ( w 1 , u'\u005cu2006' w 2 , u'\u005cu2006' u'\u005cud835' u'\u005cudc4b' u'\u005cud835' u'\u005cudc43' returns true if constituent XP is within the span from word w 1 to w 2 ; otherwise returns false
+p196
+aV[ 32 ] modeled the orientation decisions between anchors and two neighboring multi-unit chunks which might cross phrase or rule boundaries
+p197
+aVWe train a 4-gram LM on the English side of the corpus with 600M additional words from non-NYT and non-LAT, randomly selected portions of the Gigaword v4 corpus, using modified Kneser-Ney smoothing [ 1 ]
+p198
+aVThe rest of the paper is organized as follows
+p199
+aV2 2 This dataset includes LDC2006E86, and newswire parts of LDC2012T16, LDC2012T20, LDC2012T24, and LDC2013T05
+p200
+aVThe contributions of this paper include the following
+p201
+aVMira [ 8 ] , which is a k -best variant of MIRA [ 3 ] , to tune the parameters of the system
+p202
+aVwhere u'\u005cu039b' i is the corresponding weight of feature u'\u005cu03a6' i
+p203
+aVDiscontinuous Swap (DS) if v i + 1 v i - 1
+p204
+aVDiscontinuous Monotone (DM) if v i + 1 v i + 1 ;
+p205
+aVAny opinions, findings, conclusions or recommendations expressed in this paper are those of the authors and do not necessarily reflect the view of DARPA
+p206
+aVThe authors would like to thank three anonymous reviewers for providing helpful comments, and also acknowledge Ke Wu, Vladimir Eidelman, Hua He, Doug Oard, Yuening Hu, Jordan Boyd-Graber, and Jyothi Vinjumur for useful discussions
+p207
+aVSwap (S) if v i + 1 = v i - 1 ;
+p208
+aVMonotone (M) if v i + 1 = v i + 1 ;
+p209
+aV1 1 http://www.itl.nist.gov/iad/mig//tests/mt We use BLEU [ 29 ] for both tuning and evaluation
+p210
+aVSee [ 4 ] for more details
+p211
+aVThis research was supported in part by the BOLT program of the Defense Advanced Research Projects Agency, Contract No
+p212
+aVHere we observe
+p213
+aV34.3
+p214
+aV1
+p215
+aVHR0012-12-C-0015
+p216
+aV2 into
+p217
+a.

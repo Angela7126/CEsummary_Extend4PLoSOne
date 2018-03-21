@@ -1,0 +1,194 @@
+(lp0
+VAs any local search method, iterative correction is prone to local minima, stopping before reaching the correct word
+p1
+aVWith that probability defined, our correction algorithm is the following given query q , pick c = arg max c E P ( c E q ) as a correction
+p2
+aVA common method of avoiding local minima in optimization is the simulated annealing algorithm, key ideas from which can be adapted for spelling correction task
+p3
+aVThese techniques can be combined with the proposed method by replacing posterior probability of single correction in our method with an estimate obtained via discriminative training method
+p4
+aVIn all these cases, the misspelled word contains many errors and the corresponding error model penalty cannot be compensated by the LM weight of its proper form
+p5
+aVwhere W is the set of all possible words, and P observe u'\u005cu2062' ( w ) is the probability of observing w as a query in the noisy-channel model
+p6
+aVPosterior is defined by Equation 6 for the baseline and simple iterative methods and by Equations 3 and 6 for the proposed method
+p7
+aVWe tested all three methods on the u'\u005cu201d' common u'\u005cu201d' dataset as well to evaluate if our handling of hard cases affects the performance of our approach on the common cases of spelling error
+p8
+aVEach basic correction proceeds as described in Section 2.1 a small number of hypotheses h 1 , u'\u005cu2026' , h K is generated for the query q , hypotheses are scored, and scores are recomputed into normalized posterior probabilities (see Equation 5
+p9
+aVIterative correction is hill climbing in the space of possible corrections on each iteration we make a transition to the best point in the neighbourhood, i.e., to correction, that has maximal posterior probability P ( c q
+p10
+aVFor example, vobemzin is corrected to more frequent misspelling vobenzin (instead of correct form wobenzym ) by the noisy channel, because P dist ( v o b e m z i n u'\u005cu2192' w o b e n z y m ) is too low (see Table 1
+p11
+aVSupposedly, it is because the iterative method benefits primarily from the sequential application of split/join operations altering query decomposition into words; since we are considering only one-word queries, such decomposition does not matter
+p12
+aVHowever, if our method is applied to shorter and more frequent queries (as opposed to u'\u005cu201d' hard u'\u005cu201d' dataset), it tends to suggest frequent words as false-positive corrections (for example, grid is corrected to creed u'\u005cu2013' Assassin u'\u005cu2019' s Creed is popular video game
+p13
+aVThe difference between datasets is that one of them contained only queries with low search performance for which the number of documents retrieved by the search engine was less than a fixed threshold (we will address it as the u'\u005cu201d' hard u'\u005cu201d' dataset), while the other dataset had no such restrictions (we will call it u'\u005cu201d' common u'\u005cu201d'
+p14
+aVBasic building block of every mentioned algorithm is one-step noisy-channel correction
+p15
+aVAlso note, that the method works only because multiple misspellings of the same word are presented in our model; for related research see [ 2 ]
+p16
+aVExample if we start a random walk from vobemzin and make 3 steps, we most probably will end up in the correct form wobenzym with P = 0.361
+p17
+aVFor this purpose we used a method based on the simulated annealing algorithm
+p18
+aVFinally, if posterior probability of the best hypothesis was lower than threshold u'\u005cu0391' , then the original query q was used as the spell-checker output
+p19
+aVIf hypotheses constitute a major part of the posterior probability mass, it is highly unlikely that the intended word is not among them
+p20
+aVHypotheses generator is based on A* beam search in a trie of words, and yields K hypotheses h k , for which the noisy channel scores P dist ( h k u'\u005cu2192' q 1 ) P LM ( h k ) are highest possible
+p21
+aVA standard log-linear weighing trick was applied to noisy-channel model components, see e.g., [ 9 ] u'\u005cu039b' is the parameter that controls the trade-off between precision and recall (see Section 4.2 ) by emphasizing the importance of either the high frequency of the correction or its proximity to the query
+p22
+aVAs a result, either the misspelled word itself, or the other (less complicated, more frequent) misspelling of the same word wins the likelihood race
+p23
+aVTo compensate for that, posteriors were smoothed by raising each probability to some power u'\u005cu0393' 1 and re-normalizing them afterward
+p24
+aVProbability of getting from c 0 = q to some c E = c is a sum, over all possible paths, of probabilities of getting from q to c via specific path q = c 0 u'\u005cu2192' c 1 u'\u005cu2192' u'\u005cu2026' u'\u005cu2192' c E - 1 u'\u005cu2192' c E = c
+p25
+aVIn our work, we focus on isolated word-error correction [ 7 ] , which, in a sense, is a harder task, than multi-word correction, because there is no context available for misspelled words
+p26
+aVWhile choosing arg u'\u005cu2062' max of the posterior probability is an optimal decision rule in theory, in practice it might not be optimal, due to limitations of the language and error modeling
+p27
+aVIt is motivated by the assumption, that we are more likely to successfully correct the query if we take several short steps instead of one big step [ 3 ]
+p28
+aVNext, three spelling correction methods were tested noisy channel, iterative correction and our method (stochastic iterative correction
+p29
+aVWe experimentally demonstrate that the proposed method outperforms the baseline noisy channel and iterative spellers
+p30
+aVOn the u'\u005cu201d' hard u'\u005cu201d' dataset the performance of the noisy channel and the iterative methods is inferior to our proposed method, see Figure 1
+p31
+aVNoisy channel and iterative methods u'\u005cu2019' frontiers are considerably inferior to the proposed method on u'\u005cu201d' hard u'\u005cu201d' dataset, which means that our method works better
+p32
+aVIn this paper, we improved effectiveness of the noisy channel for the correction of complex errors
+p33
+aVTo detect and correct spelling errors, the state of the art spelling correction systems use the noisy channel approach [ 6 , 8 , 1 ]
+p34
+aVTo compensate for this defect of the noisy channel, the iterative approach [ 3 ] is typically used
+p35
+aVWe were not able to reproduce superior performance of the iterative method over the noisy channel, reported by [ 3 ]
+p36
+aVThe performance comparison for the u'\u005cu201d' common u'\u005cu201d' dataset shows comparable performance for all considered methods
+p37
+aVThe results on u'\u005cu201d' common u'\u005cu201d' dataset show, that the proposed method doesn u'\u005cu2019' t work worse than baseline
+p38
+aVThe proposed method is able to successfully correct distant spelling errors with edit distance of 3 characters (see Table 7
+p39
+aVPosterior probabilities are then either used to pick the best correction (in baseline and simple iterative correction), or are accumulated to later compute the score defined by Equation 3
+p40
+aVIterative spelling correction with E iterations uses standard noisy-channel to correct the query q repeatedly E times
+p41
+aVTo turn random walk into deterministic spelling correction algorithm, we de-randomize it, using the following transformation
+p42
+aVThis section describes some common heuristic improvements, that, where possible, were applied both to the baseline methods and to the proposed algorithm
+p43
+aVOur method performs well on the common cases as well, as Figure 2 shows
+p44
+aVFirst of all, we evaluated the recall of hypotheses generator using K-best recall u'\u005cu2014' the number of correct spelling corrections for misspelled queries among K hypotheses divided by the total number of misspelled queries in the test set
+p45
+aVTo evaluate the proposed algorithm we have collected two datasets
+p46
+aVMany authors employ machine learning to build rankers that compensate for the drawbacks of the noisy channel model
+p47
+aVSuch iteration serves two purposes to show the influence of parameters on algorithm performance, and to show differences between datasets in such setup parameters are virtually tuned using u'\u005cu201d' hard u'\u005cu201d' dataset and evaluated using u'\u005cu201d' common u'\u005cu201d' dataset
+p48
+aVIterative correction then turns into a random walk we start at word c 0 = q and stop after E random steps at some word c E , which becomes our answer
+p49
+aVThe number of correct spelling corrections for misspelled words generated by the system divided by the total number of misspelled words in the test set;
+p50
+aVThe search for the best variant is repeated several times, what allows correcting rather complex errors, but does not completely solve the problem of falling into local minima
+p51
+aVDataset statistics are shown in Table 3
+p52
+aVIts models are usually trained on large corpora and provide high effectiveness in correction of typical errors (most of which consist of 1-2 wrong characters per word), but does not work well for complex (multi-character) and infrequent errors
+p53
+aVWe can see, that, given the proper tuning, our method can work better on any dataset (but it cannot achieve the best performance on both datasets at once
+p54
+aVTo overcome this issue we suggest to consider more correction hypotheses
+p55
+aVIncreased average error model score and error rate of u'\u005cu201d' common u'\u005cu201d' dataset compared to u'\u005cu201d' hard u'\u005cu201d' shows, that we have indeed managed to collect hard-to-correct queries in the u'\u005cu201d' hard u'\u005cu201d' dataset
+p56
+aVThe number of correct spelling corrections for misspelled words generated by the system divided by the total number of corrections generated by the system;
+p57
+aVNoisy channel is a probabilistic model that defines posterior probability P ( q 0 q 1 ) of q 0 being the intended word, given the observed word q 1 ; for such model, the optimal decision rule u'\u005cu039c' is the following
+p58
+aVIn baseline speller we use a substring-based error model P dist ( q 0 u'\u005cu2192' q 1 ) described in [ 1 ] , the error model training method and the hypotheses generator are similar to [ 4 ]
+p59
+aVFor evaluation of spelling correction quality, we use the following metrics
+p60
+aVA few of the most probable random walk paths are shown in Table 2
+p61
+aVUnlike in simulated annealing, we fix u'\u005cu0393' for all iterations of the algorithm
+p62
+aVNext, we optimized parameters for each method and each dataset separately to achieve the highest F 1 measure
+p63
+aVPrecision/recall tradeoff parameters u'\u005cu039b' and u'\u005cu0391' (they are applicable to each method, including baseline) were iterated by the grid ( 0.2 , 0.25 , 0.3 , u'\u005cu2026' , 1.5 ) × ( 0 , 0.025 , 0.05 , u'\u005cu2026' , 1.0 ) , and E (applicable to iterative and our method) and u'\u005cu0393' (just our method) were iterated by the grid ( 2 , 3 , 4 , 5 , 7 , 10 ) × ( 0.1 , 0.15 , u'\u005cu2026' u'\u005cu2062' 1.0 ) ; for each set of parameters, precision and recall were measured on both datasets
+p64
+aVHypotheses generator has high K-best recall (see Section 4.2 ) u'\u005cu2014' in 91.8% cases the correct hypothesis is found when K = 30 , which confirms the assumption about covering almost all posterior probability mass (see Equation 2
+p65
+aVFor building language ( P LM u'\u005cu2032' ) and error ( P dist u'\u005cu2032' ) models, we use words collected from the 6-months query log of a commercial search engine
+p66
+aVBoth datasets were randomly sampled from single-word user queries from the 1-week query log of a commercial search engine
+p67
+aVConsider we do not always transition deterministically to the next best correction, but instead transition randomly to a (potentially any ) correction with transition probability being equal to the posterior P ( c i c i - 1 ) , where c i - 1 is the correction we transition from, c i is the correction we transition to, and P ( u'\u005cu22c5' u'\u005cu22c5' ) is defined by Equation 1
+p68
+aVNext, each parameter was separately iterated (by a coarser grid); initial parameters for each method were taken from Table 4
+p69
+aVResults are shown in Table 6
+p70
+aVNote, that despite the fact that most probable path does not lead to the correct word, many other paths to wobenzym sum up to 0.361, which is greater than probability of any other word
+p71
+aVDescribed random walk defines, for each word w , a probability P ( c E = w q ) of ending up in w after starting a walk from the initial query q
+p72
+aVAlso note, that while Equation 3 uses noisy-channel posteriors, the method can use an arbitrary discriminative model, for example the one from [ 5 ] , and benefit from a more accurate posterior estimate
+p73
+aVIn a sense, u'\u005cu0393' is like temperature parameter in simulated annealing u'\u005cu2013' it controls the entropy of the walk and the final probability distribution
+p74
+aVwhere P LM is the source (language) model, and P dist is the error model
+p75
+aVIn most cases, these are cognitive errors in loan words ( folsvagen u'\u005cu2192' volkswagen ), names of drugs ( vobemzin u'\u005cu2192' wobenzym ), names of brands ( scatcher u'\u005cu2192' skechers ), scientific terms ( heksagidron u'\u005cu2192' hexahedron ) and last names ( Shwartzneger u'\u005cu2192' Schwarzenegger
+p76
+aVGiven P ( q 0 q 1 ) defined, to correct the word q 1 we could iterate through all ever-observed words, and choose the one, that maximizes the posterior probability
+p77
+aVFor experiments we used single-word queries to a commercial search engine
+p78
+aVPareto frontiers for precision and recall are shown in Figures 1 and 2
+p79
+aVA speller is an essential part of any program associated with text input and processing u'\u005cu2014' e-mail system, search engine, browser, form editor etc
+p80
+aVResulting recall with K = 30 is 91.8% on u'\u005cu201d' hard u'\u005cu201d' and 98.6% on u'\u005cu201d' common u'\u005cu201d'
+p81
+aVRecall
+p82
+aVAs can be seen in Table 5 , in order to fix that, algorithm parameters need to be tuned more towards precision
+p83
+aVFor hypotheses generator, K = 30 was fixed recall of 91.8% was considered big enough
+p84
+aVWe have also found, that resulting posterior probabilities emphasize the best hypothesis too much best hypothesis gets almost all probability mass and other hypotheses get none
+p85
+aVResults are shown in Tables 4 and 5
+p86
+aVHowever, the practical considerations demand that we do not rank the whole list of words, but instead choose between a limited number of hypotheses h 1 , u'\u005cu2026' , h K
+p87
+aVThere have been attempts [ 3 ] to apply other rules, which would overcome limitations of language and error models with compensating changes described further
+p88
+aVIn this section we propose such an adaptation
+p89
+aVPrecision
+p90
+aVGiven q 1 , generate a set of hypotheses h 1 , u'\u005cu2026' , h K , such that
+p91
+aVParameter u'\u005cu0391' controls precision/recall trade-off (as well as u'\u005cu039b' mentioned above
+p92
+aVChoose the hypothesis h k that maximizes P ( q 0 = h k q 1 )
+p93
+aVSee Tables 4 and 5 for details
+p94
+aV[ 9 , 5 ]
+p95
+aVWe annotated them with the help of professional analyst
+p96
+a.

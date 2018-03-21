@@ -1,0 +1,30 @@
+(lp0
+VWe see that the language model baseline for English u'\u005cu2192' French shows the same substantial improvement over the baseline as our English u'\u005cu2192' Spanish results
+p1
+aVThis intuitively makes sense; a context of one may seem to be better than any other when uniformly applied to all classifier experts, but it may well be that certain classifiers benefit from different feature selections
+p2
+aVIn other words, for each word type or phrase type that occurs as a fragment in the training set, and which does not map to just a single translation, a classifier is trained
+p3
+aVOur full system, including the scripts for data preparation, training, and evaluation, is implemented in Python and freely available as open-source from http://github.com/proycon/colibrita/
+p4
+aVThe main research question in this research is how to disambiguate an L1 word or phrase to its L2 translation based on an L2 context, and whether such cross-lingual contextual approaches provide added value compared to baseline models that are not context informed or compared to standard language models
+p5
+aVWhen presented with test data, in which the L1 fragment is explicitly marked, we first check whether there is ambiguity for this L1 fragment and if a direct translation is available in our simple mapping table
+p6
+aVIf output o is a subset of reference r then a score of o r is assigned for that sentence pair
+p7
+aVAn ideal test corpus would consist of L2 sentences with L1 fallback as crafted by L2 language learners with an L1 background
+p8
+aVThe baseline selects the most probable L1 fragment per L2 fragment according to the phrase-translation table
+p9
+aVThird, we observe that adding the language model to our classifier leads to another significant gain (configuration l1r1 + LM in the results in Table 2
+p10
+aVIf not, we check for the presence of a classifier expert for the offered L1 fragment; only then we can proceed by extracting the desired number of L2 local context words to the immediate left and right of this fragment and adding those to the feature vector
+p11
+aVA second baseline was constructed by weighing the probabilities from the translation table directly with the L2 language model described earlier
+p12
+aVThe language model is a trigram-based back-off language model with Kneser-Ney smoothing, computed using SRILM [] and trained on the same training data as the translation model
+p13
+aVOutput a pair ( s u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e t u'\u005cu2032' , s u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e t ) where s u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e t u'\u005cu2032' is a copy of t but with fragment f t substituted by f s , i.e., the introduction of an L1 word
+p14
+a.

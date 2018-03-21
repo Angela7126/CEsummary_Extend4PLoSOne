@@ -1,0 +1,416 @@
+Current File: P14-1105.xhtml_2 P14-1105.xhtml
+
+Section 0:  Abstract
+	SentNum: 6
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 16.6667%
+
+Section 1:  1 Introduction
+	SentNum: 16
+	CENum: 4
+	SentCovered: 4
+	Covered_Rate: 25.0000%
+
+Section 2:  2 Recursive Neural Networks
+	SentNum: 36
+	CENum: 10
+	SentCovered: 13
+	Covered_Rate: 36.1111%
+
+Section 3:  3 Datasets
+	SentNum: 67
+	CENum: 19
+	SentCovered: 19
+	Covered_Rate: 28.3582%
+
+Section 4:  4 Experiments
+	SentNum: 30
+	CENum: 6
+	SentCovered: 6
+	Covered_Rate: 20.0000%
+
+Section 5:  5 Where Compositionality Helps Detect Ideological Bias
+	SentNum: 25
+	CENum: 8
+	SentCovered: 8
+	Covered_Rate: 32.0000%
+
+Section 6:  6 Related Work
+	SentNum: 33
+	CENum: 2
+	SentCovered: 2
+	Covered_Rate: 6.0606%
+
+Section 7:  7 Conclusion
+	SentNum: 4
+	CENum: 0
+	SentCovered: 0
+	Covered_Rate: 0.0000%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-1105.xhtml_2's CE cases
+
+Section 0:  Abstract has 1 CE cases
+	CASE: 1
+	Stag: 2 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Taking inspiration from recent work in sentiment analysis that successfully models the compositional aspect of language, we apply a recursive neural network ( RNN ) framework to the task of identifying the political position evinced by a sentence. 
+		Cause: [(0, 0), (0, 15)]
+		Effect: [(0, 17), (0, 38)]
+
+Section 1:  1 Introduction has 4 CE cases
+	CASE: 1
+	Stag: 6 
+		Pattern: 47 [['so'], ['that']]---- [['&C'], ['&adj/&adv@C@'], ['&R']]
+		sentTXT: Many of the issues discussed by politicians and the media are so nuanced that even word choice entails choosing an ideological position. 
+		Cause: [(0, 0), (0, 12)]
+		Effect: [(0, 14), (0, 20)]
+
+	CASE: 2
+	Stag: 13 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: We say a sentence contains ideological bias if its author u'\u2019' s political position (here liberal or conservative , in the sense of U.S politics) is evident from the text. 
+		Cause: [(0, 8), (0, 35)]
+		Effect: [(0, 0), (0, 6)]
+
+	CASE: 3
+	Stag: 17 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: Existing approaches toward bias detection have not gone far beyond u'\u201c' bag of words u'\u201d' classifiers, thus ignoring richer linguistic context of this kind and often operating at the level of whole documents. 
+		Cause: [(0, 0), (0, 23)]
+		Effect: [(0, 26), (0, 41)]
+
+	CASE: 4
+	Stag: 20 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: This model requires richer data than currently available, so we develop a new political ideology dataset annotated at the phrase level. 
+		Cause: [(0, 0), (0, 7)]
+		Effect: [(0, 10), (0, 21)]
+
+Section 2:  2 Recursive Neural Networks has 10 CE cases
+	CASE: 1
+	Stag: 25 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: By taking into account the hierarchical nature of language, rnn s can model semantic composition , which is the principle that a phrase u'\u2019' s meaning is a combination of the meaning of the words within that phrase and the syntax that combines those words. 
+		Cause: [(0, 1), (0, 8)]
+		Effect: [(0, 9), (0, 49)]
+
+	CASE: 2
+	Stag: 27 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since most ideological bias becomes identifiable only at higher levels of sentence trees (as verified by our annotation, Figure 4 ), models relying primarily on word-level distributional statistics are not desirable for our problem. 
+		Cause: [(0, 1), (0, 18)]
+		Effect: [(0, 20), (0, 36)]
+
+	CASE: 3
+	Stag: 29 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: Based on a parse tree, these words form phrases p (Figure 2. 
+		Cause: [(0, 2), (0, 4)]
+		Effect: [(0, 6), (0, 13)]
+
+	CASE: 4
+	Stag: 30 31 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Each of these phrases also has an associated vector x p u'\u2208' u'\u211d' d of the same dimension as the word vectors. These phrase vectors should represent the meaning of the phrases composed of individual words. 
+		Cause: [(0, 27), (1, 12)]
+		Effect: [(0, 0), (0, 25)]
+
+	CASE: 5
+	Stag: 31 32 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: These phrase vectors should represent the meaning of the phrases composed of individual words. As phrases themselves merge into complete sentences, the underlying vector representation is trained to retain the sentence u'\u2019' s whole meaning. 
+		Cause: [(1, 1), (1, 25)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 6
+	Stag: 34 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: If two words w a and w b merge to form phrase p , we posit that the phrase-level vector is. 
+		Cause: [(0, 1), (0, 12)]
+		Effect: [(0, 14), (0, 20)]
+
+	CASE: 7
+	Stag: 39 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: Supervised rnn s achieve this distinction by applying a regression that takes the node u'\u2019' s vector x p as input and produces a prediction y ^ p. 
+		Cause: [(0, 7), (0, 31)]
+		Effect: [(0, 0), (0, 5)]
+
+	CASE: 8
+	Stag: 49 50 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: When initializing our model, we have two choices we can initialize all of our parameters randomly or provide the model some prior knowledge. As we see in Section 4 , these choices have a significant effect on final performance. 
+		Cause: [(1, 1), (1, 15)]
+		Effect: [(0, 1), (0, 23)]
+
+	CASE: 9
+	Stag: 55 56 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The word2vec embeddings have linear relationships (e.g.,, the closest vectors to the average of u'\u201c' green u'\u201d' and u'\u201c' energy u'\u201d' include phrases such as u'\u201c' renewable energy u'\u201d' , u'\u201c' eco-friendly u'\u201d' , and u'\u201c' efficient lightbulbs u'\u201d'. To preserve these relationships as phrases are formed in our sentences, we initialize our left and right composition matrices such that parent vector p is computed by taking the average of children a and b ( W L = W R = 0.5 u'\u2062' u'\ud835' u'\udd40' d × d. 
+		Cause: [(1, 5), (1, 58)]
+		Effect: [(0, 0), (1, 3)]
+
+	CASE: 10
+	Stag: 57 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: This initialization of the composition matrices has previously been effective for parsing [ 25 ]. 
+		Cause: [(0, 11), (0, 14)]
+		Effect: [(0, 0), (0, 9)]
+
+Section 3:  3 Datasets has 19 CE cases
+	CASE: 1
+	Stag: 62 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: In this section we describe our initial dataset (Convote) and explain the procedure we followed for creating our new dataset ( ibc. 
+		Cause: [(0, 18), (0, 23)]
+		Effect: [(0, 0), (0, 16)]
+
+	CASE: 2
+	Stag: 66 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: This is an expedient choice; in future work we plan to make use of work in political science characterizing candidates u'\u2019' ideological positions empirically based on their behavior [ 3 ]. 
+		Cause: [(0, 31), (0, 35)]
+		Effect: [(0, 0), (0, 28)]
+
+	CASE: 3
+	Stag: 70 71 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: 2 2 Many sentences in Convote are variations on u'\u201c' I think this is a good/bad bill u'\u201d' , and there is also substantial parliamentary boilerplate language. We therefore use the features in Yano et al. 
+		Cause: [(0, 1), (1, 0)]
+		Effect: [(1, 2), (1, 8)]
+
+	CASE: 4
+	Stag: 79 
+		Pattern: 45 [['so', 'that']]---- [['&C'], ['&R']]
+		sentTXT: Finally, we balance the resulting dataset so that it contains an equal number of sentences from Democrats and Republicans, leaving us with a total of 7,816 sentences. 
+		Cause: [(0, 0), (0, 6)]
+		Effect: [(0, 9), (0, 28)]
+
+	CASE: 5
+	Stag: 84 85 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: There are over a million sentences in the ibc , most of which have no noticeable political bias. Therefore we use the filtering procedure outlined in Section 3.1.1 to obtain a subset of 55,932 sentences. 
+		Cause: [(0, 0), (0, 17)]
+		Effect: [(1, 1), (1, 16)]
+
+	CASE: 6
+	Stag: 89 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because our goal is to distinguish between liberal and conservative bias, instead of the more general task of classifying sentences as u'\u201c' neutral u'\u201d' or u'\u201c' biased u'\u201d' , we filter the dataset further using dualist [ 23 ] , an active learning tool, to reduce the proportion of neutral sentences in our dataset. 
+		Cause: [(0, 1), (0, 10)]
+		Effect: [(0, 12), (0, 71)]
+
+	CASE: 7
+	Stag: 90 91 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: To train the dualist classifier, we manually assigned class labels of u'\u201c' neutral u'\u201d' or u'\u201c' biased u'\u201d' to 200 sentences, and selected typical partisan unigrams to represent the u'\u201c' biased u'\u201d' class dualist labels 11,555 sentences as politically biased, 5,434 of which come from conservative authors and 6,121 of which come from liberal authors. For purposes of annotation, we define the task of political ideology detection as identifying, if possible, the political position of a given sentence u'\u2019' s author, where position is either liberal or conservative. 
+		Cause: [(0, 64), (1, 30)]
+		Effect: [(0, 0), (0, 62)]
+
+	CASE: 8
+	Stag: 91 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: For purposes of annotation, we define the task of political ideology detection as identifying, if possible, the political position of a given sentence u'\u2019' s author, where position is either liberal or conservative. 
+		Cause: [(0, 14), (0, 35)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 9
+	Stag: 91 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: For purposes of annotation, we define the task of political ideology detection as identifying, if possible, the political position of a given sentence u'\u2019' s author, where position is either liberal or conservative. 
+		Cause: [(0, 0), (0, 0)]
+		Effect: [(0, 2), (0, 19)]
+
+	CASE: 10
+	Stag: 92 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: 5 5 This is a simplification, as the ideological hierarchy in ibc makes clear. 
+		Cause: [(0, 8), (0, 14)]
+		Effect: [(0, 2), (0, 5)]
+
+	CASE: 11
+	Stag: 95 96 
+		Pattern: 1 [['because', 'of']]---- [['&C', '(,/;/./--)', '(&ADV)'], ['(&THIS)', '&NP', '&R']]
+		sentTXT: First, we parse the filtered ibc sentences using the Stanford constituency parser [ 25 ]. Because of the expense of labeling every node in a sentence, we only label one path in each sentence. 
+		Cause: [(0, 0), (0, 15)]
+		Effect: [(1, 11), (1, 19)]
+
+	CASE: 12
+	Stag: 97 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: The process for selecting paths is as follows first, if any paths contain one of the top-ten partisan unigrams, 6 6 The words that the multinomial naïve Bayes classifier in dualist marked as highest probability given a polarity market, abortion, economy, rich, liberal, tea, economic, taxes, gun, abortion we select the longest such path; otherwise, we select the path with the most open class constituencies ( np , vp , adjp. 
+		Cause: [(0, 11), (0, 19)]
+		Effect: [(0, 21), (0, 64)]
+
+	CASE: 13
+	Stag: 97 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The process for selecting paths is as follows first, if any paths contain one of the top-ten partisan unigrams, 6 6 The words that the multinomial naïve Bayes classifier in dualist marked as highest probability given a polarity market, abortion, economy, rich, liberal, tea, economic, taxes, gun, abortion we select the longest such path; otherwise, we select the path with the most open class constituencies ( np , vp , adjp. 
+		Cause: [(0, 15), (0, 43)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 14
+	Stag: 107 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: 60% of contributors passed the initial quiz (the 40% that failed were barred from working on the task), while only 10% of workers who passed the quiz were kicked out for mislabeling subsequent gold paths. 
+		Cause: [(0, 37), (0, 40)]
+		Effect: [(0, 0), (0, 35)]
+
+	CASE: 15
+	Stag: 111 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: If you feel like the phrase indicates some position to the left or right of the political center, but you u'\u2019' re not sure which direction, please mark Not neutral, but I u'\u2019' m unsure of which direction. 
+		Cause: [(0, 1), (0, 17)]
+		Effect: [(0, 19), (0, 47)]
+
+	CASE: 16
+	Stag: 116 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since identifying political bias is a relatively difficult and subjective task, we include all sentences where at least two workers agree on a label for the root node in our final dataset, except when that label is u'\u201c' Not neutral, but I u'\u2019' m unsure of which direction u'\u201d'. 
+		Cause: [(0, 1), (0, 10)]
+		Effect: [(0, 12), (0, 63)]
+
+	CASE: 17
+	Stag: 120 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since the root of each sentence is always annotated, this strategy ensures that every node in the tree has a label. 
+		Cause: [(0, 1), (0, 8)]
+		Effect: [(0, 10), (0, 21)]
+
+	CASE: 18
+	Stag: 124 
+		Pattern: 0 [['due', 'to']]---- [[], ['&NP@C@', '(,)', '&R']]
+		sentTXT: Due to this discrepancy, the objective function in Eq. ( 6 ) was minimized by making neutral predictions for almost every node in the dataset. 
+		Cause: [(0, 2), (0, 3)]
+		Effect: [(0, 5), (0, 26)]
+
+	CASE: 19
+	Stag: 124 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: Due to this discrepancy, the objective function in Eq. ( 6 ) was minimized by making neutral predictions for almost every node in the dataset. 
+		Cause: [(0, 12), (0, 21)]
+		Effect: [(0, 0), (0, 10)]
+
+Section 4:  4 Experiments has 6 CE cases
+	CASE: 1
+	Stag: 128 
+		Pattern: 45 [['so', 'that']]---- [['&C'], ['&R']]
+		sentTXT: To account for label imbalance, we subsample the data so that there are an equal number of labels and report accuracy over this balanced dataset. 
+		Cause: [(0, 0), (0, 9)]
+		Effect: [(0, 12), (0, 25)]
+
+	CASE: 2
+	Stag: 132 133 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: However, lr 2 also includes phrase-level annotations as separate training instances. 7 7 The Convote dataset was not annotated on the phrase level, so we only provide a result for the IBC dataset. 
+		Cause: [(0, 9), (1, 12)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 3
+	Stag: 133 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: 7 7 The Convote dataset was not annotated on the phrase level, so we only provide a result for the IBC dataset. 
+		Cause: [(0, 0), (0, 11)]
+		Effect: [(0, 14), (0, 22)]
+
+	CASE: 4
+	Stag: 136 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: 8 8 We do not include phrase-level annotations in the lr 3 feature set because the pseudo-word features can only be computed from full sentence parses. 
+		Cause: [(0, 15), (0, 25)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 5
+	Stag: 141 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: We generate the final instance representation by concatenating the root vector and the average of all other vectors [ 27 ]. 
+		Cause: [(0, 7), (0, 17)]
+		Effect: [(0, 18), (0, 20)]
+
+	CASE: 6
+	Stag: 152 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: For this model, we also introduce a hyperparameter u'\u0392' that weights the error at annotated nodes ( 1 - u'\u0392' ) higher than the error at unannotated nodes ( u'\u0392' ); since we have more confidence in the annotated labels, we want them to contribute more towards the objective function. 
+		Cause: [(0, 46), (0, 53)]
+		Effect: [(0, 55), (0, 64)]
+
+Section 5:  5 Where Compositionality Helps Detect Ideological Bias has 8 CE cases
+	CASE: 1
+	Stag: 160 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: While phrase-level annotations do not improve baseline performance, the rnn model significantly benefits from these annotations because the phrases are themselves derived from nodes in the network structure. 
+		Cause: [(0, 18), (0, 28)]
+		Effect: [(0, 0), (0, 16)]
+
+	CASE: 2
+	Stag: 165 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: This result was unexpected since the Convote labels are noisier than the annotated ibc labels; however, there are three possible explanations for the discrepancy. 
+		Cause: [(0, 5), (0, 15)]
+		Effect: [(0, 18), (0, 25)]
+
+	CASE: 3
+	Stag: 166 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: First, Convote has twice as many sentences as ibc , and the extra training data might help the model more than ibc u'\u2019' s better-quality labels. 
+		Cause: [(0, 6), (0, 29)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 4
+	Stag: 167 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Second, since the sentences in Convote were originally spoken, they are almost half as short (21.3 words per sentence) as those in the ibc (42.2 words per sentence. 
+		Cause: [(0, 3), (0, 9)]
+		Effect: [(0, 11), (0, 32)]
+
+	CASE: 5
+	Stag: 168 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Finally, some information is lost at every propagation step, so rnn s are able to model the shorter sentences in Convote more effectively than the longer ibc sentences. 
+		Cause: [(0, 0), (0, 9)]
+		Effect: [(0, 12), (0, 28)]
+
+	CASE: 6
+	Stag: 168 169 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Finally, some information is lost at every propagation step, so rnn s are able to model the shorter sentences in Convote more effectively than the longer ibc sentences. As in previous work [ 27 ] , we visualize the learned vector space by listing the most probable n-grams for each political affiliation in Table 2. 
+		Cause: [(1, 1), (1, 26)]
+		Effect: [(0, 0), (0, 29)]
+
+	CASE: 7
+	Stag: 177 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In Figure 5 D, u'\u201c' be used as an instrument to achieve charitable or social ends u'\u201d' reflects a liberal ideology, which the model predicts correctly. 
+		Cause: [(0, 13), (0, 35)]
+		Effect: [(0, 1), (0, 11)]
+
+	CASE: 8
+	Stag: 179 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since many different issues are discussed in the ibc , it is likely that our dataset has too few examples of some of these issues for the model to adequately learn the appropriate ideological positions, and more training data would resolve many of these errors. 
+		Cause: [(0, 1), (0, 8)]
+		Effect: [(0, 10), (0, 45)]
+
+Section 6:  6 Related Work has 2 CE cases
+	CASE: 1
+	Stag: 183 
+		Pattern: 2 [['for', 'the', 'sake', 'of']]---- [['&R'], ['&V-ing/&NP@C@']]
+		sentTXT: Most previous work on ideology detection ignores the syntactic structure of the language in use in favor of familiar bag-of-words representations for the sake of simplicity. 
+		Cause: [(0, 25), (0, 25)]
+		Effect: [(0, 0), (0, 20)]
+
+	CASE: 2
+	Stag: 187 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: E.g., Gerrish and Blei ( 2011 ) predict the voting patterns of Congress members based on bag-of-words representations of bills and inferred political leanings of those members. 
+		Cause: [(0, 17), (0, 27)]
+		Effect: [(0, 0), (0, 14)]
+
+Section 7:  7 Conclusion has 0 CE cases
+#-------------------------------------------------
+

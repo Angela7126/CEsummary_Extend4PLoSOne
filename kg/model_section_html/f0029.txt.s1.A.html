@@ -1,0 +1,25 @@
+<html>
+<head>
+<title>f0029.txt.s1</title>
+</head>
+<body bgcolor="white">
+<a name="0">[0]</a> <a href="#0" id=0>Given several observations of the sky, called runs, astronomers often want to cross-match all the observations of each object from all runs that observed that object.</a>
+<a name="1">[1]</a> <a href="#1" id=1>Two objects are said to match if they come from different runs and if their positions differ by less than their classification distance.</a>
+<a name="2">[2]</a> <a href="#2" id=2>Picking the classification distance depends on the data and on the intended use of the cross-match.</a>
+<a name="3">[3]</a> <a href="#3" id=3>If only stationary objects are to be matched, then the classification distance can be a small multiple of the maximum of the two object's circular rms position errors.</a>
+<a name="4">[4]</a> <a href="#4" id=4>However, when comparing data from different instruments or from times with different seeing, the position uncertainty, astrometric precision, observational errors or chance overlays added uncertainty.</a>
+<a name="5">[5]</a> <a href="#5" id=5>We want a classification distance that minimizes the overall error.</a>
+<a name="6">[6]</a> <a href="#6" id=6>First, let us focus on cross-match stationary objects.</a>
+<a name="7">[7]</a> <a href="#7" id=7>Given two runs that overlap, if object O1 observed in run1 matches object O2 in run2, we call the pair an O1-rn2 hit.</a>
+<a name="8">[8]</a> <a href="#8" id=8>If there are no O1-run2 hits, we call it an O1-run2 miss.</a>
+<a name="9">[9]</a> <a href="#9" id=9>O1-run2 misses can have three generic causes (see Figure 1):</a>
+<a name="10">[10]</a> <a href="#10" id=10>Ephemeral:</a>
+<a name="11">[11]</a> <a href="#11" id=11>O1 is beyond the detection threshold or the seeing is bad in run2 or O1 may be invisible if run2 is a different kind of instrument, or O1 is a variable or transient object which varied below the detection threshold in run2, or O1 moved more than the classification distance between the two observations.</a>
+<a name="12">[12]</a> <a href="#12" id=12>Masked:</a>
+<a name="13">[13]</a> <a href="#13" id=13>O1 was fully masked by something like a meteor trail, satellite or refraction of a bright object in run 2.</a>
+<a name="14">[14]</a> <a href="#14" id=14>Edge:</a>
+<a name="15">[15]</a> <a href="#15" id=15>O1 was on the edge of the run2 footprint and so not all its pixels were observed.</a>
+<a name="16">[16]</a> <a href="#16" id=16>Our goal is to compute a table Match( run1, objectID1, run2, objectID2, hitOrMiss), where hitOrMiss takes on one of the values Hit, Ephemeral, Masked, or Edge.</a>
+<a name="17">[17]</a> <a href="#17" id=17>When the objectID1-run2 pair is a miss, then objectID2 is zero, and we need to compute whether hitOrMiss equals to Ephemeral, Masked, or Edge.</a>
+</body>
+</html>

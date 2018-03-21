@@ -1,0 +1,140 @@
+(lp0
+VA hierarchical summary that is only salient and nonredundant may still not be suitable if the sentences within a cluster summary are disconnected or if the parent sentence for a summary does not relate to the child summary
+p1
+aVNotice the contribution from a sentence depends on individual salience, coherence ( C u'\u005cu2062' C u'\u005cu2062' o u'\u005cu2062' h ) based on sentences visible on the user path down the hierarchy to this sentence, and coherence ( P u'\u005cu2062' C u'\u005cu2062' o u'\u005cu2062' h ) based on its parent sentence and its child summary
+p2
+aVMoreover, the number of sentences in a flat summary is exactly equal to the number of child clusters of the node, since the user will click a sentence to get to the child summary
+p3
+aVUsers navigate the hierarchical summary from parent sentence to child summary, so if the parent sentence bears no relation to the child summary, the user will be understandably confused
+p4
+aVA user can navigate within the hierarchical summary by clicking on an element of a parent summary to view the associated child summary
+p5
+aVThe problem of hierarchical summarization as described in Section 2 has all of the requirements of MDS, and additional complexities of inducing a hierarchical structure, processing an order of magnitude bigger input, generating a much larger output, and enforcing coherence between parent and child summaries
+p6
+aVSince most of the sentence contributions depend on the path from the root to the sentence, we build our partial summary by incrementally adding a sentence top-down in the hierarchy and from first sentence to last within a cluster summary
+p7
+aVWe then describe our methodology to implement the Summa hierarchical summarization system hierarchical clustering in Section 3 and creating summaries based on that clustering in Section 4
+p8
+aVOther research identifies the hierarchical structure of the documents and generates a summary that prioritizes more general information according to the structure [ 22 , 5 ] , or gains coverage by drawing sentences from different parts of the hierarchy [ 34 , 31 ]
+p9
+aVLastly, we require that sentences are drawn from the cluster that they represent and that the number of sentences in the summary corresponding to each non-leaf cluster c is equivalent to the number of child clusters of c
+p10
+aVFor example, the reaction sentence, u'\u005cu201c' President Clinton vowed to track down the perpetrators behind the bombs that exploded outside the embassies in Tanzania and Kenya on Friday, u'\u005cu201d' would have a higher score than the action sentence, u'\u005cu201c' Bombs exploded outside the embassies in Tanzania and Kenya on Friday u'\u005cu201d' This problem occurs because the first sentence has a higher ROUGE score (it covers more important words than the second sentence
+p11
+aVFor example, suppose the parent sentence is, u'\u005cu201c' A Swissair plane Wednesday night crashed off Nova Scotia, Canada u'\u005cu201d' A very good child sentence is, u'\u005cu201c' The airline confirmed that all passengers died u'\u005cu201d' However, based on their surface features, the sentence, u'\u005cu201c' A plane made an unscheduled landing after a Swissair plane crashed off the coast of Canada, u'\u005cu201d' appears to be a better choice
+p12
+aVBecause reading 300 articles per topic is impractical, we asked AMT workers to read a Wikipedia article on the same topic and then identify the three most important events and the five most important secondary events
+p13
+aVIn this experiment, we assess the salience of the information captured by the different systems, and the ability of Summa to organize the information so that more important information is placed at higher levels
+p14
+aVIn hierarchical summarization, however, a cluster summary may span hundreds of documents and a wide range of information
+p15
+aVSince Summa was judged to be so much superior to flat MDS systems in Section 5.1 , it is surprising that users descriptions from flat MDS were preferred nearly as often as those from Summa
+p16
+aVHaving estimated salience, redundancy, and two forms of coherence, we can now put this information together into a single objective function that measures the quality of a candidate hierarchical summary
+p17
+aVThe hierarchical summary follows the hierarchical structure of the clustering
+p18
+aVIn latter cases, the hierarchical summaries provided little advantage over the timelines because it was more difficult to arrange the sentences hierarchically
+p19
+aVWhile the facts of the sentences made sense together, the summaries sometimes did not read as if they were written by a human, but as a series of disparate sentences
+p20
+aVSince computing the best child summary is also intractable we approximate a solution by a local search algorithm over the child cluster
+p21
+aVThus, a hierarchical summary must also have intra-cluster coherence and parent-to-child coherence
+p22
+aVWhile the flat summaries were disjointed, they were good at including salient information, with the most salient tending to be near the start of the summary
+p23
+aVBecause we are interested in temporal hierarchical summarization, we hierarchically cluster all the sentences in the input documents by time
+p24
+aVSecond, each user directs his or her own experience, so a user interested in one aspect need only explore that section of the data without having to view or understand the entire summary
+p25
+aVWe use SUTime [ 6 ] to normalize temporal references, and we parse the sentences with the Stanford parser [ 13 ] and use a set of simple heuristics to determine if the timestamps in the sentence refer to the root verb
+p26
+aVOptimizing this objective function is NP-hard, so we approximate a solution by using beam search over the space of partial hierarchical summaries
+p27
+aVA hierarchical clustering is a tree in which if a cluster g p is the parent of cluster g c , then each sentence in g c is also in g p
+p28
+aVUsing the same setup as in the previous experiment, for each topic, five AMT workers spent three minutes reading through a timeline or summary and were then asked to write a description of what they had learned
+p29
+aVAre hierarchical summaries more effective than other methods for learning about complex events
+p30
+aVFor this reason, we may consider a summary acceptable even if it has limited positive evidence of coherence in the ADG, as long as there is no negative evidence in the form of negative edges
+p31
+aVWe measure salience of a summary ( S u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' ( X ) ) as the sum of the saliences of individual sentences ( u'\u005cu2211' i S u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' ( x i )
+p32
+aVEvaluating how much a user learned is inherently difficult, more so when the goal is to allow the user the freedom to explore information based on individual interest
+p33
+aVFor this reason, instead of asking a set of predefined questions, we assess the knowledge gain by following the methodology of [ 26 ] u'\u005cu2013' asking users to write a paragraph summarizing the information learned
+p34
+aVWhile recognizing primary events is relatively simple because they are repeated frequently, identification of important secondary events often requires external knowledge
+p35
+aVHowever, we do not fix the child summary at this time u'\u005cu2013' we simply use it to estimate P u'\u005cu2062' C u'\u005cu2062' o u'\u005cu2062' h when using that sentence
+p36
+aVThus, descriptions from both Summa and flat MDS generally covered the most salient information
+p37
+aVAt each level, we cluster the sentences by the method described above and choose the number of clusters k according to the gap statistic [ 30 ]
+p38
+aVThis score will essentially serve as a rough measure of coverage of the entire summary to the Wikipedia article
+p39
+aVFirst, the information presented at the start is small and grows only as the user directs it, so as not to overwhelm the user
+p40
+aVWe simplify the problem by decomposing it into two steps hierarchical clustering and summarizing over the clustering (see Figure 2 for an example
+p41
+aVWhile ROUGE serves as a rough measure of coverage, we were interested in gathering more fine-grained information on the informativeness of each system
+p42
+aVSalience is the value of each sentence to the topic from which the documents are drawn
+p43
+aVFor example, given the topic, u'\u005cu201c' 1998 embassy bombings, u'\u005cu201d' the first summary (Figure 1 ) might mention that the US retaliated by striking Afghanistan and Sudan
+p44
+aVNote that there is no good translation of ROUGE for hierarchical summarization
+p45
+aV5 5 We excluded one topic (the handover of the Lockerbie bombing suspects) because the corresponding Wikipedia article had insufficient information
+p46
+aVThe hierarchical clustering serves as input to the second step u'\u005cu2013' summarizing given the hierarchy
+p47
+aVWe treat redundancy and budget as hard constraints and coherence and salience as soft constraints
+p48
+aVWe discuss our experiments in Section 5 , related work in Section 6 , and conclusions in Section 7
+p49
+aVThus, we simply use the traditional ROUGE metric, which will not capture any of the hierarchical format
+p50
+aVWe rely on the approximate discourse graph (ADG) that was proposed in [ 8 ] as the basis for measuring coherence
+p51
+aVIn this first implementation, we have opted for temporal organization, since this is generally the most appropriate for news events
+p52
+aVThe tradeoff parameters u'\u005cu0392' and u'\u005cu0393' were set based on a development set
+p53
+aVSince we wish to partition along the temporal dimension, our problem reduces to identifying the best dates at which to split a cluster into subclusters
+p54
+aV[ 9 ] proposed a probabilistic technique for extracting a diverse set of threads from a given collection
+p55
+aVHowever, when there is little differentiation in news coverage, we prefer clusters evenly spaced across time
+p56
+aVWe first automatically assessed informativeness by calculating the ROUGE-1 scores of the output of each of the systems
+p57
+aVWe selected topics which were between five and fifteen years old so that evaluators would have relatively less pre-existing knowledge about the topic
+p58
+aVA negative edge indicates an unfulfilled discourse cue or co-reference mention
+p59
+aVEach node in the ADG is a sentence from the dataset
+p60
+aVUnfortunately, neither agglomerative nor divisive clustering is suitable, since both assume a binary split at each node [ 2 ]
+p61
+aVHaving defined the task, we now describe the methodology behind our implementation, Summa
+p62
+aVStandard checks such as approval rating, location filtering, etc were used for removing spam
+p63
+aVWe thank Hui Lin and Jeff Bilmes for providing us with their code
+p64
+aVWe identify these dates by looking for bursts of activity
+p65
+aVThe scores for each of the systems are as follows
+p66
+aVWe thus choose clusters C = { c 1 , u'\u005cu2026' , c k } as follows
+p67
+aVIf no timestamp is given, we use the article date
+p68
+aVWhile timelines can be useful for understanding events, they do not generalize to other domains
+p69
+a.

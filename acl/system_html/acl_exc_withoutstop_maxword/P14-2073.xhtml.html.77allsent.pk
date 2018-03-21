@@ -1,0 +1,252 @@
+(lp0
+VThus we perform a set of experiments in which we perform Gibbs initialization 20 times on the initialization set, setting the particle filter u'\u005cu2019' s initial model to the model out of these 20 with the highest in-sample NMI
+p1
+aVThen, for each dataset, for rejuvenation disabled, rejuvenation based on a reservoir of size 1000, and rejuvenation based on the entire history (in turn), we perform 30 runs of the particle filter from that fixed initial model
+p2
+aVAs each token of the training data is ingested by the particle filter, we decide to insert that token into the reservoir, or not, independent of the other tokens in the current document
+p3
+aVThe results, shown in Figure 3 , show that we can ameliorate the variance due to initialization by tuning the initial model to NMI or perplexity
+p4
+aVWe observed previously that variance in the Gibbs initialization of the model contributes significantly to variance of the overall algorithm, as measured by NMI
+p5
+aV2009 ) presented a method for LDA inference based on particle filters, where a sample set of models is updated online with each new token observed from a stream
+p6
+aVThus, at the end of step i of the particle filter, each of the i tokens seen so far in the training sequence has an equal probability of being in the reservoir, hence being selected for rejuvenation
+p7
+aVWe attempted to correct this by drawing the rejuvenation sequence from a reservoir, but our results indicate that the particle filter for LDA on our dataset is highly sensitive to initialization and not influenced by rejuvenation
+p8
+aVWe may not always have labeled data for initialization, so we also consider a variation in which Gibbs initialization is performed 20 times on the first 80% of the initialization sample, held-out perplexity (per word) is estimated on the remaining 20%, using a first-moment particle learning approximation [ 20 ] , and the particle filter is started from the model out of these 20 with the lowest held-out perplexity
+p9
+aVWith this in mind, we consider whether we can reduce variance in the initialization by tuning the initial model
+p10
+aVIn the experiments of Börschinger and Johnson ( 2012 ) , the particle cloud appears to be resampled once per utterance with a large rejuvenation sequence; 4 4 The ESS threshold is P ; the rejuvenation sequence is 100 or 1600 utterances, almost one sixth of the training data each particle takes many more rejuvenation MCMC steps than new state transitions and thus resembles a batch MCMC sampler
+p11
+aVPerplexity (or likelihood) is often used to estimate model performance in LDA [ 3 , 11 , 22 , 12 ] , and does not compare the inferred model against gold-standard labels, yet it appears to be a good proxy for NMI in our experiment
+p12
+aVThis algorithm thus has linear storage complexity and is not an online learning algorithm in a strict sense [ 6 ]
+p13
+aVNow each particle p is propagated forward by drawing a topic z i ( p ) from the conditional posterior distribution u'\u005cud835' u'\u005cudc0f' ( z i ( p ) u'\u005cu2223' u'\u005cud835' u'\u005cudc33' i - 1 ( p ) , u'\u005cud835' u'\u005cudc30' i ) and scaling the particle weight by u'\u005cud835' u'\u005cudc0f' ( w i u'\u005cu2223' u'\u005cud835' u'\u005cudc33' i - 1 ( p ) , u'\u005cud835' u'\u005cudc30' i - 1
+p14
+aVThe variance of the particle filter is often large, so for each experiment we perform 30 runs and plot the mean NMI inside bands spanning one sample standard deviation in either direction
+p15
+aVThey later showed that rejuvenation improved performance [ 6 ] , but this impaired cognitive plausibility by necessitating storage of all previous states and observations
+p16
+aVIf we want to fit a model to a long non-i.i.d. stream, we require an unbiased rejuvenation sequence as well as sub-linear storage complexity
+p17
+aVThe particle filter of Canini et al
+p18
+aVTo ensure constant space over an unbounded stream, we draw the rejuvenation sequence u'\u005cu211b' u'\u005cu2062' ( i ) uniformly from a reservoir
+p19
+aVThus, if initialization continues to be crucial to performance, at least we may have the flexibility of initializing without gold-standard labels
+p20
+aVDuring training we report the out-of-sample NMI, calculated by holding the word proportions u'\u005cu03a6' fixed, running five sweeps of collapsed Gibbs sampling on the test set, and computing the topic for each document as the topic assigned to the most tokens in that document
+p21
+aVThe most common example, presented in Vitter ( 1985 ) as Algorithm R, chooses k elements of a stream such that each possible subset of k elements is equiprobable
+p22
+aVThe one existing algorithm that can be directly applied under this constraint, to our knowledge, is the streaming variational Bayes framework [ 4 ] in which the posterior is recursively updated as new data arrives using a variational approximation
+p23
+aVReservoir sampling is a widely-used family of algorithms for choosing an array ( u'\u005cu201c' reservoir u'\u005cu201d' ) of k items
+p24
+aV2009 ) rejuvenates over independent draws from the history by storing all past observations and states
+p25
+aVThe particle filter studied empirically by Canini et al
+p26
+aVAfter these steps, we compute the vocabulary for each dataset as the set of all non-singleton types in the training data augmented with a special out-of-vocabulary symbol
+p27
+aVDropping the superscript ( p ) for notational convenience, the conditional posterior used in the propagation step is given by
+p28
+aVWe preprocess the data by splitting each line on non-alphabet characters, converting the resulting tokens to lower-case, and filtering out any tokens that appear in a list of common English stop words
+p29
+aVCanini et al
+p30
+aVCanini et al
+p31
+aVThe results for these experiments, depicted in Figure 2 , indicate that the size of the initialization sample improves mean NMI and reduces variance, and that the variance of the particle filter itself is dominated by the variance of the initial model
+p32
+aVTo combat this inefficiency, after every state transition we estimate the effective sample size (ESS) of the particle weights as u'\u005cu2225' u'\u005cu03a9' i u'\u005cu2225' 2 - 2 [ 14 ] and resample the particles when that estimate drops below a prespecified threshold
+p33
+aVHowever, in experiments on the dataset studied by Canini et al
+p34
+aV30 to the experiments of Canini et al
+p35
+aVWe evaluate our particle filter on three datasets studied in Canini et al
+p36
+aVLDA [ 3 ] u'\u005cu201c' explains u'\u005cu201d' the occurrence of each word by postulating that a document was generated by repeatedly
+p37
+aVSpecifically, we vary the size of the initialization sample, in documents, between zero (corresponding to no Gibbs initialization), 30, 100, and 300, and also perform a run of batch Gibbs sampling (with no particle filter
+p38
+aVThis procedure is performed independently for each run of the particle filter
+p39
+aVOur results (Figure 1 ) resemble those of Canini et al
+p40
+aVIn these experiments, the initial models are not held fixed; for each of the 30 runs for each dataset, the initial model was generated by a different Gibbs chain
+p41
+aVMotivated by a desire for cognitive plausibility, Börschinger and Johnson ( 2011 ) used a particle filter to learn Bayesian word segmentation models, following the work of Canini et al
+p42
+aVIn the current work we propose using reservoir sampling in the rejuvenation step to reduce the storage complexity of the particle filter to O u'\u005cu2062' ( 1
+p43
+aVWe have also shown that tuning the initial model using in-sample NMI or held-out perplexity can improve mean NMI and reduce variance
+p44
+aVWe run a new set of experiments in which the reservoir size is held fixed at 1000 and the size of the initialization sample is varied
+p45
+aVWe initialize the particle filter with 200 Gibbs sweeps on the first 10% of each dataset
+p46
+aVIn these experiments, the initial model was not chosen arbitrarily
+p47
+aV2009 ) , we show that rejuvenation does not benefit the particle filter u'\u005cu2019' s performance
+p48
+aVRather, performance is dominated by the effects of random initialization (a problem for which we provide a correction while abiding by the same constraints as Canini et al
+p49
+aVWe now investigate the significance of the initial model selection step used in the previous experiments
+p50
+aVAhmed et al
+p51
+aVIn general, these models should be regularly resampled and rejuvenated using Markov Chain Monte Carlo (MCMC) steps over the history in order to improve the efficiency of the particle filter [ 10 ]
+p52
+aVWe have focused on NMI as our evaluation metric for comparison with Canini et al
+p53
+aVRather, an initial model that yielded out-of-sample NMI close to the initial out-of-sample NMI scores reported in the previous study was chosen from a set of 100 candidates
+p54
+aVA particle filter approximates the posterior by a weighted sample of points, or particles, from the state space
+p55
+aV2009 ) stored the entire history, incurring linear storage complexity in the size of the stream
+p56
+aVwhere I u'\u005cud835' u'\u005cudc33' u'\u005cu2062' ( u'\u005cud835' u'\u005cudc33' u'\u005cu2032' ) is the indicator function, evaluating to 1 if u'\u005cud835' u'\u005cudc33' = u'\u005cud835' u'\u005cudc33' u'\u005cu2032' and 0 otherwise
+p57
+aVThis result re-opens the question of whether rejuvenation is of practical importance in online learning for static Bayesian models
+p58
+aVIn each case, 2000 Gibbs sweeps are performed
+p59
+aV2009 ) except we draw the rejuvenation sequence from a reservoir
+p60
+aVWe now describe the Rao-Blackwellized particle filter for LDA in detail (pseudocode is given in Algorithm 3
+p61
+aVParticle filtering for LDA
+p62
+aVTo reintroduce diversity to the particle cloud we take MCMC steps over a sequence of states from the history [ 9 , 10 ]
+p63
+aVThe rejuvenation sequence can be chosen by the practitioner
+p64
+aVAlgorithm R for reservoir sampling
+p65
+aVChoosing a long sequence (large u'\u005cu211b' u'\u005cu2062' ( i may result in a more accurate posterior approximation but also increases runtime and storage requirements
+p66
+aVFuture work should carefully note this ratio sampling history much more often than new states improves performance but contradicts the intuition behind particle filters
+p67
+aVParticle filters are a family of sequential Monte Carlo (SMC) sampling algorithms designed to estimate the posterior distribution of a system with dynamic state [ 8 ]
+p68
+aVTwo Gibbs sweeps have been shown to yield good performance in practice [ 23 ] ; we increase the number of sweeps to five after inspecting the stability on our dataset
+p69
+aVThe particle cloud is updated recursively for each new observation using importance sampling (an approach called sequential importance sampling
+p70
+aVHowever, evaluation of topic models is a subject of considerable debate [ 22 , 23 , 18 , 16 ] and it may be informative to investigate the effects of initialization and rejuvenation using other metrics such as perplexity or semantic coherence
+p71
+aVSeveral resampling strategies have been proposed [ 9 ] ; we perform multinomial resampling as in Pitt and Shephard ( 1999 ) and Ahmed et al
+p72
+aVIn our experiments resampling is done on the order of once per document, leading to less than one rejuvenation step per transition
+p73
+aVset u'\u005cu03a9' i ( p ) = 1 / P for each particle
+p74
+aVThe particle cloud now approximates the posterior up to the i -th word
+p75
+aVThe particle weights are scaled as
+p76
+aVOver time the particle weights tend to diverge
+p77
+aVWe call the indices of these states the rejuvenation sequence, denoted u'\u005cu211b' u'\u005cu2062' ( i ) [ 7 ]
+p78
+aVThe tokens in u'\u005cu211b' u'\u005cu2062' ( i ) may be chosen uniformly at random from the history or under a biased scheme that favors recent observations
+p79
+aV2009 ) apply this approach to LDA after analytically integrating out u'\u005cu03a6' and u'\u005cu0398' , obtaining a Rao-Blackwellized particle filter [ 9 ] that estimates the collapsed posterior u'\u005cud835' u'\u005cudc0f' ( u'\u005cud835' u'\u005cudc33' u'\u005cu2223' u'\u005cud835' u'\u005cudc30'
+p80
+aVHowever, a larger value of P increases the runtime and storage requirements of the algorithm
+p81
+aV2011 ) instead sampled ten documents from the most recent 1000, achieving constant storage complexity at the cost of a recency bias
+p82
+aVwhere Q is the proposal distribution for the particle state transition; in our case
+p83
+aVWe extend a popular model, latent Dirichlet allocation (LDA), to unbounded streams of documents
+p84
+aVAfter resampling we are likely to have several copies of the same particle, yielding a degenerate approximation to the posterior
+p85
+aVAt the moment token i is observed, the particles form a discrete approximation of the posterior up to the ( i - 1 ) -th word
+p86
+aVHowever, where these approaches generally assume the ability to draw independent samples from the full dataset, we consider the case when it is infeasible to access arbitrary elements from the history
+p87
+aVComputing u'\u005cu03a6' and u'\u005cu0398' exactly is generally intractable, motivating methods for approximate inference such as variational Bayesian inference [ 3 ] , expectation propagation [ 17 ] , and collapsed Gibbs sampling [ 11 ]
+p88
+aVminimizing the variance of the importance weights conditioned on u'\u005cud835' u'\u005cudc30' i and u'\u005cud835' u'\u005cudc33' i - 1 [ 9 ]
+p89
+aVThe goal is to infer u'\u005cu0398' and u'\u005cu03a6' , under the model
+p90
+aVIn this setting, the P particles are samples of the topic assignment vector u'\u005cud835' u'\u005cudc33' ( p ) , and they are propagated forward in state space one token at a time
+p91
+aVThis effects sampling k items uniformly without replacement, using runtime O u'\u005cu2062' ( n ) (constant per update) and storage O u'\u005cu2062' ( k )
+p92
+aVIn order for inference to be practical in this setting it must use constant space asymptotically and run in pseudo-linear time, perhaps O u'\u005cu2062' ( n ) or O u'\u005cu2062' ( n u'\u005cu2062' log u'\u005cu2061' n )
+p93
+aVIn general, the larger P is, the more accurately we approximate the posterior; for small P , the approximation of the tails of the posterior will be particularly poor [ 19 ]
+p94
+aVThis improvement is practically useful in the large-data setting and is also scientifically interesting in that it recovers some of the cognitive plausibility which originally motivated Börschinger and Johnson ( 2012
+p95
+aVIn addition, we remove the header of every file and filter every line that does not contain a non-trailing space (which removes embedded ASCII-encoded attachments
+p96
+aVThis motivates online learning techniques, including sampling-based methods [ 2 , 7 ] and stochastic variational inference [ 12 , 15 , 13 ]
+p97
+aV2009 ) ; we believe the discrepancies are mostly attributable to differences in preprocessing
+p98
+aVOur first set of experiments has a similar parameterization 3 3 T = 3 , u'\u005cu0391' = u'\u005cu0392' = 0.1 , P = 100 , e u'\u005cu2062' s u'\u005cu2062' s = 20 u'\u005cu211b' u'\u005cu2062' ( i
+p99
+aV1) sampling a topic z from u'\u005cu0398' ( d ) , the document-specific mixture of T topics, and (2) sampling a word w from u'\u005cu03a6' ( z ) , the probability distribution the z -th topic defines over the vocabulary
+p100
+aVFor a sequence of N words collected into documents of varying length, we denote the j -th word as w j , and the document it occurs in as d i
+p101
+aVFinally, we shuffle the order of the documents
+p102
+aV2011 ) , treating the weights as unnormalized probability masses on the particles
+p103
+aVEach of these datasets is a collection of posts under three categories from the 20 Newsgroups dataset
+p104
+aVWe use a 60% training/40% testing split of this data that is available online
+p105
+aVThe transition probability for a state j u'\u005cu2208' u'\u005cu211b' u'\u005cu2062' ( i ) is given by
+p106
+aVwhere n z i , i \u005c i ( w i ) is the number of times word w i has been assigned topic z i so far, n z i , i \u005c i ( u'\u005cu22c5' ) is the number of times any word has been assigned topic z i , n z i , i \u005c i ( d i ) is the number of times topic z i has been assigned to any word in document d i , and n u'\u005cu22c5' , i \u005c i ( d i ) is the number of words observed in document d i
+p107
+aVA limitation of these techniques is they require multiple passes over the data to obtain good samples of u'\u005cu03a6' and u'\u005cu0398'
+p108
+aVwhere subscript N \u005c j denotes counts up to token N , excluding those for token j
+p109
+aVThis requirement makes them impractical when the corpus is too large to fit directly into memory and in particular when the corpus grows without bound
+p110
+aVsample z i ( p ) w.p u'\u005cud835' u'\u005cudc0f' ( z i ( p ) u'\u005cu2223' u'\u005cud835' u'\u005cudc33' i - 1 ( p ) , u'\u005cud835' u'\u005cudc30' i
+p111
+aVinitialize weights u'\u005cu03a9' 0 ( p ) = 1 / P for p = 1 , u'\u005cu2026' , P
+p112
+aV{ misc, guns, mideast }; and sim3 comp
+p113
+aVi = 1 , u'\u005cu2026' , N \u005cFor p = 1 , u'\u005cu2026' , P set u'\u005cu03a9' i ( p ) = u'\u005cu03a9' i - 1 ( p ) u'\u005cud835' u'\u005cudc0f' ( w i u'\u005cu2223' u'\u005cud835' u'\u005cudc33' i - 1 ( p ) , u'\u005cud835' u'\u005cudc30' i - 1
+p114
+aV\u005cIf u'\u005cu2225' u'\u005cu03a9' u'\u005cu2225' 2 - 2 u'\u005cu2264' ESS \u005cFor j u'\u005cu2208' u'\u005cu211b' u'\u005cu2062' ( i ) \u005cFor p = 1 , u'\u005cu2026' , P sample z j ( p ) w.p u'\u005cud835' u'\u005cudc0f' ( z j ( p ) u'\u005cu2223' u'\u005cud835' u'\u005cudc33' i \u005c j ( p ) , u'\u005cud835' u'\u005cudc30' i
+p115
+aVInitialize k -element array R u'\u005cu2004' Stream S u'\u005cu2004' \u005cFor i = 1 , u'\u005cu2026' , k R u'\u005cu2062' [ i ] u'\u005cu2190' S u'\u005cu2062' [ i ] u'\u005cu2004' \u005cFor i = k + 1 , u'\u005cu2026' , l u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2062' g u'\u005cu2062' t u'\u005cu2062' h u'\u005cu2062' ( S ) j u'\u005cu2190' r u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' d u'\u005cu2062' o u'\u005cu2062' m u'\u005cu2062' ( 1 , i ) u'\u005cu2004' \u005cIf j u'\u005cu2264' k R u'\u005cu2062' [ j ] u'\u005cu2190' S u'\u005cu2062' [ i ]
+p116
+aV{ graphics, os.ms-windows.misc, windows.x }
+p117
+aV2009 )
+p118
+aV{ rec.sport.baseball, sci.space, alt.atheism }; rel3 talk.politics
+p119
+aV2009
+p120
+aV2009 diff3 , rel3 , and sim3
+p121
+aV[t]
+p122
+aV1 1 diff3
+p123
+aV2 2 http://qwone.com/~jason/20Newsgroups/20news-bydate.tar.gz
+p124
+aV2009
+p125
+a.

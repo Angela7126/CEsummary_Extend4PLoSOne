@@ -1,0 +1,220 @@
+Current File: P14-2028.xhtml_2 P14-2028.xhtml
+
+Section 0:  Abstract
+	SentNum: 3
+	CENum: 0
+	SentCovered: 0
+	Covered_Rate: 0.0000%
+
+Section 1:  1 Introduction
+	SentNum: 17
+	CENum: 4
+	SentCovered: 5
+	Covered_Rate: 29.4118%
+
+Section 2:  2 Baseline speller
+	SentNum: 11
+	CENum: 2
+	SentCovered: 2
+	Covered_Rate: 18.1818%
+
+Section 3:  3 Improvements for noisy channel spelling correction
+	SentNum: 33
+	CENum: 13
+	SentCovered: 17
+	Covered_Rate: 51.5152%
+
+Section 4:  4 Experiments
+	SentNum: 35
+	CENum: 5
+	SentCovered: 4
+	Covered_Rate: 11.4286%
+
+Section 5:  5 Conclusion and future work
+	SentNum: 5
+	CENum: 0
+	SentCovered: 0
+	Covered_Rate: 0.0000%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-2028.xhtml_2's CE cases
+
+Section 0:  Abstract has 0 CE cases
+Section 1:  1 Introduction has 4 CE cases
+	CASE: 1
+	Stag: 8 9 
+		Pattern: 3 [['as', 'a'], ['result']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(&ADJ)'], ['(,)', '&R']]
+		sentTXT: In all these cases, the misspelled word contains many errors and the corresponding error model penalty cannot be compensated by the LM weight of its proper form. As a result, either the misspelled word itself, or the other (less complicated, more frequent) misspelling of the same word wins the likelihood race. 
+		Cause: [(0, 0), (0, 28)]
+		Effect: [(1, 4), (1, 28)]
+
+	CASE: 2
+	Stag: 13 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: For this purpose we used a method based on the simulated annealing algorithm. 
+		Cause: [(0, 9), (0, 12)]
+		Effect: [(0, 0), (0, 6)]
+
+	CASE: 3
+	Stag: 17 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: These techniques can be combined with the proposed method by replacing posterior probability of single correction in our method with an estimate obtained via discriminative training method. 
+		Cause: [(0, 10), (0, 26)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 4
+	Stag: 18 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: In our work, we focus on isolated word-error correction [ 7 ] , which, in a sense, is a harder task, than multi-word correction, because there is no context available for misspelled words. 
+		Cause: [(0, 30), (0, 37)]
+		Effect: [(0, 0), (0, 27)]
+
+Section 2:  2 Baseline speller has 2 CE cases
+	CASE: 1
+	Stag: 26 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: If hypotheses constitute a major part of the posterior probability mass, it is highly unlikely that the intended word is not among them. 
+		Cause: [(0, 1), (0, 10)]
+		Effect: [(0, 12), (0, 23)]
+
+	CASE: 2
+	Stag: 29 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: Hypotheses generator is based on A* beam search in a trie of words, and yields K hypotheses h k , for which the noisy channel scores P dist ( h k u'\u2192' q 1 ) P LM ( h k ) are highest possible. 
+		Cause: [(0, 5), (0, 13)]
+		Effect: [(0, 15), (0, 49)]
+
+Section 3:  3 Improvements for noisy channel spelling correction has 13 CE cases
+	CASE: 1
+	Stag: 31 
+		Pattern: 0 [['due', 'to']]---- [['&R'], ['&NP@C@']]
+		sentTXT: While choosing arg u'\u2062' max of the posterior probability is an optimal decision rule in theory, in practice it might not be optimal, due to limitations of the language and error modeling. 
+		Cause: [(0, 31), (0, 37)]
+		Effect: [(0, 0), (0, 28)]
+
+	CASE: 2
+	Stag: 32 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: For example, vobemzin is corrected to more frequent misspelling vobenzin (instead of correct form wobenzym ) by the noisy channel, because P dist ( v o b e m z i n u'\u2192' w o b e n z y m ) is too low (see Table 1. 
+		Cause: [(0, 24), (0, 55)]
+		Effect: [(0, 0), (0, 21)]
+
+	CASE: 3
+	Stag: 35 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: It is motivated by the assumption, that we are more likely to successfully correct the query if we take several short steps instead of one big step [ 3 ]. 
+		Cause: [(0, 18), (0, 30)]
+		Effect: [(0, 0), (0, 16)]
+
+	CASE: 4
+	Stag: 36 37 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Iterative correction is hill climbing in the space of possible corrections on each iteration we make a transition to the best point in the neighbourhood, i.e., to correction, that has maximal posterior probability P ( c q. As any local search method, iterative correction is prone to local minima, stopping before reaching the correct word. 
+		Cause: [(1, 1), (1, 19)]
+		Effect: [(0, 0), (0, 39)]
+
+	CASE: 5
+	Stag: 38 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: A common method of avoiding local minima in optimization is the simulated annealing algorithm, key ideas from which can be adapted for spelling correction task. 
+		Cause: [(0, 23), (0, 25)]
+		Effect: [(0, 0), (0, 21)]
+
+	CASE: 6
+	Stag: 44 45 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: With that probability defined, our correction algorithm is the following given query q , pick c = arg max c E P ( c E q ) as a correction. Probability of getting from c 0 = q to some c E = c is a sum, over all possible paths, of probabilities of getting from q to c via specific path q = c 0 u'\u2192' c 1 u'\u2192' u'\u2026' u'\u2192' c E - 1 u'\u2192' c E = c. 
+		Cause: [(0, 29), (1, 34)]
+		Effect: [(0, 11), (0, 27)]
+
+	CASE: 7
+	Stag: 46 47 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: where W is the set of all possible words, and P observe u'\u2062' ( w ) is the probability of observing w as a query in the noisy-channel model. Example if we start a random walk from vobemzin and make 3 steps, we most probably will end up in the correct form wobenzym with P = 0.361. 
+		Cause: [(0, 28), (1, 28)]
+		Effect: [(0, 3), (0, 26)]
+
+	CASE: 8
+	Stag: 47 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: Example if we start a random walk from vobemzin and make 3 steps, we most probably will end up in the correct form wobenzym with P = 0.361. 
+		Cause: [(0, 2), (0, 12)]
+		Effect: [(0, 14), (0, 28)]
+
+	CASE: 9
+	Stag: 50 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: Also note, that the method works only because multiple misspellings of the same word are presented in our model; for related research see [ 2 ]. 
+		Cause: [(0, 9), (0, 27)]
+		Effect: [(0, 0), (0, 6)]
+
+	CASE: 10
+	Stag: 53 54 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Basic building block of every mentioned algorithm is one-step noisy-channel correction. Each basic correction proceeds as described in Section 2.1 a small number of hypotheses h 1 , u'\u2026' , h K is generated for the query q , hypotheses are scored, and scores are recomputed into normalized posterior probabilities (see Equation 5. 
+		Cause: [(1, 5), (1, 35)]
+		Effect: [(0, 0), (1, 3)]
+
+	CASE: 11
+	Stag: 56 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: A standard log-linear weighing trick was applied to noisy-channel model components, see e.g., [ 9 ] u'\u039b' is the parameter that controls the trade-off between precision and recall (see Section 4.2 ) by emphasizing the importance of either the high frequency of the correction or its proximity to the query. 
+		Cause: [(0, 40), (0, 56)]
+		Effect: [(0, 0), (0, 38)]
+
+	CASE: 12
+	Stag: 58 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: To compensate for that, posteriors were smoothed by raising each probability to some power u'\u0393' 1 and re-normalizing them afterward. 
+		Cause: [(0, 9), (0, 24)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 13
+	Stag: 61 62 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Finally, if posterior probability of the best hypothesis was lower than threshold u'\u0391' , then the original query q was used as the spell-checker output. Posterior is defined by Equation 6 for the baseline and simple iterative methods and by Equations 3 and 6 for the proposed method. 
+		Cause: [(0, 27), (1, 21)]
+		Effect: [(0, 0), (0, 25)]
+
+Section 4:  4 Experiments has 5 CE cases
+	CASE: 1
+	Stag: 67 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The difference between datasets is that one of them contained only queries with low search performance for which the number of documents retrieved by the search engine was less than a fixed threshold (we will address it as the u'\u201d' hard u'\u201d' dataset), while the other dataset had no such restrictions (we will call it u'\u201d' common u'\u201d'. 
+		Cause: [(0, 39), (0, 77)]
+		Effect: [(0, 0), (0, 37)]
+
+	CASE: 2
+	Stag: 82 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Supposedly, it is because the iterative method benefits primarily from the sequential application of split/join operations altering query decomposition into words; since we are considering only one-word queries, such decomposition does not matter. 
+		Cause: [(0, 24), (0, 29)]
+		Effect: [(0, 31), (0, 35)]
+
+	CASE: 3
+	Stag: 84 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: We tested all three methods on the u'\u201d' common u'\u201d' dataset as well to evaluate if our handling of hard cases affects the performance of our approach on the common cases of spelling error. 
+		Cause: [(0, 24), (0, 41)]
+		Effect: [(0, 0), (0, 22)]
+
+	CASE: 4
+	Stag: 97 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: However, if our method is applied to shorter and more frequent queries (as opposed to u'\u201d' hard u'\u201d' dataset), it tends to suggest frequent words as false-positive corrections (for example, grid is corrected to creed u'\u2013' Assassin u'\u2019' s Creed is popular video game. 
+		Cause: [(0, 15), (0, 65)]
+		Effect: [(0, 3), (0, 13)]
+
+	CASE: 5
+	Stag: 97 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: However, if our method is applied to shorter and more frequent queries (as opposed to u'\u201d' hard u'\u201d' dataset), it tends to suggest frequent words as false-positive corrections (for example, grid is corrected to creed u'\u2013' Assassin u'\u2019' s Creed is popular video game. 
+		Cause: [(0, 23), (0, 49)]
+		Effect: [(0, 0), (0, 21)]
+
+Section 5:  5 Conclusion and future work has 0 CE cases
+#-------------------------------------------------
+

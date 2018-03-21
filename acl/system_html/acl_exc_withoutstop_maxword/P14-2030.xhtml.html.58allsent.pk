@@ -1,0 +1,80 @@
+(lp0
+VUsing this smaller high-precision set of attribute terms, we collected tweets from the Twitter Firehose over the period 2011-2013
+p1
+aVFrom the remaining attribute terms, we identified users with tweets scoring 4.0 or better as positive examples of the associated roles
+p2
+aVWe identify typical attributes of a given social role by collecting terms in the Google n-gram corpus that occur frequently in a possessive construction with that role
+p3
+aVThese tweets served as representative content for that role, with any tweet matching the self-reporting patterns filtered
+p4
+aVTo identify users of a particular role, we performed a case-agnostic search of variants of a single pattern
+p5
+aVBergsma and Van Durme ( 2013 ) showed that the task of mining attributes for conceptual classes can relate straightforwardly to author attribute prediction
+p6
+aVAttribute terms shown in red were manually discarded as being inaccurate (low on the y-axis) or non-prevalent (small shape
+p7
+aVWe therefore include a role verification step in curating a collection of positively identified users
+p8
+aVFirst, we counted all terms matching a target social role u'\u005cu2019' s possessive pattern (e.g.,, doctor u'\u005cu2019' s ) in the web-scale n-gram corpus Google V2 [ 13 ] 5 5 In this corpus, follower-type roles like belieber and directioner are not at all prevalent
+p9
+aVTweets from those users were scraped via the Twitter API to construct corpora for each role
+p10
+aVFollowing suggestions by Bergsma and Van Durme, we manually filtered the ranked list
+p11
+aVIn the second study we exploit a complementary signal based on characteristic conceptual attributes of a social role, or concept class [ 20 , 1 , 17 ]
+p12
+aVIf one views a role, in their case gender, as two conceptual classes, male and female , then existing attribute extraction methods for third-person content (e.g.,, news articles) can be cheaply used to create a set of bootstrapping features for building classifiers over first-person content (e.g.,, tweets
+p13
+aVAll role-representative users were drawn from the free public 1% sample of the Twitter Firehose, over the period 2011-2013, from the subset that selected English as their native language (85,387,204 unique users
+p14
+aVEach training set had a target of 600 users (300 background, 300 self-identified); for those roles with less than 300 users self-identifying, all users were used, with an equal number background
+p15
+aVWe found that making conceptual class assignments based on a single tweet was often a subtle task
+p16
+aVThree sets of background populations were extracted based on randomly sampling users that self-reported English (post-filtered via LID
+p17
+aVExample tweets can be seen in Table 1 , examples of frequency per role in Table 2
+p18
+aVProbabilities were estimated from counts of the class-attribute pairs along with counts matching the generic possessive patterns his and her which serve as general background categories
+p19
+aVWe therefore focused on occupational and habitual roles (e.g.,, doctor, smoker
+p20
+aVAs a hint of the sort of user studies one might explore given access to social role prediction, we see in Figure 1 a correlation between self-reported role and the chance of an account still being publicly visible, with roles such as belieber and directioner on the one hand, and doctor and teacher on the other
+p21
+aVIn the first study, we seek to determine whether such a signal exists in self-identification we rely on variants of a single pattern, u'\u005cu201c' I am a u'\u005cu201d' , to bootstrap data for training balanced-class binary classifiers using unigrams observed in tweet content
+p22
+aVAttribute terms are less indicative overall than self-ID, e.g.,, the phrase I u'\u005cu2019' m a barber is a clearer signal than my scissors
+p23
+aVUsing the same collection as the previous experiment, we trained classifiers conditioned on a given attribute term
+p24
+aVIn our second study, we test whether this idea extends to our wider set of fine-grained roles
+p25
+aVWe approached this task by selecting target roles from the first experiment and ranking characteristic attributes for each using pointwise mutual information (PMI) [ 5 ]
+p26
+aVPredicting social roles such as doctor , teacher , vegetarian , christian , may open the door to large-scale passive surveys of public discourse that dwarf what has been previously available to social scientists
+p27
+aVAs compared to prior research that required actively polling users for ground truth in order to construct predictive models for demographic information [ 11 ] , we demonstrate that some users specify such properties publicly through direct natural language
+p28
+aVThese results qualitatively suggest many roles under consideration may be teased out from a background population by focussing on language that follows expected use patterns
+p29
+aV3 3 This removes users that selected English as their primary language, used a self-identification phrase, e.g., I am a belieber , but otherwise tended to communicate in non-English
+p30
+aVI am a(n) , and I u'\u005cu2019' m a(n) , where all single tokens filling the slot were taken as evidence of the author self-reporting for the given u'\u005cu201c' role u'\u005cu201d'
+p31
+aVWith the rise of social media, researchers have sought to induce models for predicting latent author attributes such as gender, age, and political preferences [ 9 , 19 , 4 , 22 , 24 ]
+p32
+aVFor example, work on tracking the spread of flu infections across Twitter [ 12 ] might be enhanced with a factor based on aggregate predictions of author occupation
+p33
+aVFor example, if we learn from news corpora that a man may have a wife , then a tweet saying u'\u005cu2026' my wife u'\u005cu2026' can be taken as potential evidence of membership in the male conceptual class
+p34
+aVAny given user taken to be representative based on a previously posted tweet may no longer be available to query on
+p35
+aVBased on this tweet, would you think this person is a Barber/Hairdresser along with four response options
+p36
+aVWhile these samples are small (and thus estimates of quality come with wide variance), it is noteworthy that a non-trivial number for each were judged as actually self-identifying
+p37
+aVBaseline accuracy in these experiments was thus 50 u'\u005cu2062' %
+p38
+aVFor example, if one sends a tweet saying my coach , then how likely is it that author is an athlete
+p39
+a.

@@ -1,0 +1,14 @@
+(lp0
+VFinally, Figure 3 shows the speed of inference, labeled precision and labeled recall of annotating hedge constituents on the test set as a function of the maximum span parameter L , versus the baseline parser
+p1
+aVFigure 2 plots the percentage of constituents from the original WSJ Penn treebank (sections 2-21) retained in the transformed version, as we vary the maximum span length parameter L
+p2
+aVSpace constraints preclude inclusion of trials with this method, but the net result is a severe degradation in accuracy (tens of points of F-measure) versus standard parsing
+p3
+aVFurther, if the binarization systematically groups the leftmost or the rightmost children under these new non-terminals (the most common strategy), then constituents with span greater than L will either begin at the first word (leftmost grouping) or end at the last word (rightmost), further constraining the number of cells in the chart requiring work
+p4
+aVWe follow the XML community in naming structures of this type hedges (not to be confused with the rhetorical device of the same name), due to the fact that they are like smaller versions of trees which occur in sequences
+p5
+aVIt is possible to parse with a standardly induced PCFG using this sort of hedge constrained parsing that only considers a subset of the chart cells, and speedups are achieved, however this is clearly non-optimal, since the model is ill-suited to combining hedges into flat structures at the root
+p6
+a.

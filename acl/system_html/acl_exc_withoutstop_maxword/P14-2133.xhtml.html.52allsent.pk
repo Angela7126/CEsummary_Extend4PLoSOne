@@ -1,0 +1,72 @@
+(lp0
+VWe began by searching over exponentially-spaced values of u'\u005cu0392' to determine an optimal setting for each training set size; as expected, for small settings of u'\u005cu0392' (corresponding to aggressive smoothing) performance decreased; as we increased the parameter, performance increased slightly before tapering off to baseline parser performance
+p1
+aVWord embeddings u'\u005cu2014' representations of lexical items as points in a real vector space u'\u005cu2014' have a long history in natural language processing, going back at least as far as work on latent semantic analysis (LSA) for information retrieval [ 4 ]
+p2
+aVWhile word embeddings can be constructed directly from surface distributional statistics, as in LSA, more sophisticated tools for unsupervised extraction of word representations have recently gained popularity [ 3 , 10 ]
+p3
+aVIntuitively, as u'\u005cu0392' grows small groups of related words will be assigned increasingly similar probabilities of being generated from the same tag (in the limit where u'\u005cu0392' = 0 , Equation 1 is a uniform distribution over the entire vocabulary
+p4
+aVTo evaluate the embedding structure hypothesis, we take the Maryland featured parser, and replace the set of lexical template features used by that parser with a set of indicator features on a discretized version of the embedding
+p5
+aVA baseline featured model ( u'\u005cu201c' ident u'\u005cu201d' ) contains only indicator features on word identity (and performs considerably worse than its generative counterpart on small data sets
+p6
+aVA parser which exploited this effect could use this to acquire a robust model of name behavior by sharing statistics from all first names together, preventing low counts from producing noisy models of names
+p7
+aVHere, the trend observed in the other two models is even more prominent u'\u005cu2014' embedding features lead to improvements over the featured baseline, but in no case outperform the standard baseline with a generative lexicon
+p8
+aVSemi-supervised and unsupervised models for a variety of core NLP tasks, including named-entity recognition [ 5 ] , part-of-speech tagging [ 13 ] , and chunking [ 15 ] have been shown to benefit from the inclusion of word embeddings as features
+p9
+aVThis paper investigates a variety of ways in which word embeddings might augment a constituency parser with a discrete state space
+p10
+aVApparent gains from the OOV and lexicon pooling models remain so small as to be statistically indistinguishable
+p11
+aVThe first block in Table 1 shows the best settings of u'\u005cu0392' for each corpus size; as can be seen, this also gives a small improvement on the 300-sentence training corpus, but no discernible once the system has access to a few thousand labeled sentences
+p12
+aVThis ensures that our model continues to include the original Berkeley parser model as a limiting case
+p13
+aVWe take the best-performing combination of all of these models (based on development experiments, a combination of the lexical pooling model with u'\u005cu0392' = 0.3 , and OOV, both using c w word embeddings), and evaluate this on the WSJ test set (Table 2
+p14
+aVIf we want to encourage similarly-embedded words to exhibit similar behavior in the generative model, we need to ensure that the are preferentially mapped onto the same latent preterminal tag
+p15
+aVIn this paper, we investigate this question empirically, by isolating three potential mechanisms for improvement from pre-trained word embeddings
+p16
+aVThe extensions we propose are certainly not the only way to target the hypotheses described above, but they have the advantage of being minimal and straightforwardly interpretable, and each can be reasonably expected to improve parser performance if its corresponding hypothesis is true
+p17
+aVAs described above, the full featured model adds indicator features on the bucketed value of each dimension of the word embedding
+p18
+aVIn the other direction, access to a syntactic parse has been shown to be useful for constructing word embeddings for phrases compositionally [ 7 , 1 ]
+p19
+aVAs can be seen, this model alone achieves small gains over the baseline for a 300-word training corpus, but these gains become statistically insignificant with more training data
+p20
+aVWord embeddings are useful for handling out-of-vocabulary words, because they automatically ensure that unknown words are treated the same way as known words with similar representations
+p21
+aVOur first task is thus to design a set of orthogonal experiments which make it possible to test each of the three hypotheses in isolation
+p22
+aVIt could be that the distinctions between lexical items that embeddings capture are already modeled by parsers in other ways and therefore provide no further benefit
+p23
+aVEach u'\u005cu0391' t , w is learned in the same way as its corresponding probability in the original parser model u'\u005cu2014' during each M step of the training procedure, u'\u005cu0391' w , t is set to the expected number of times the word w appears under the refined tag t
+p24
+aVWord embeddings are useful for handling in-vocabulary words, by making it possible to pool statistics for related words
+p25
+aVEmpirically, taking k = 20 gives adequate performance, and increasing it does not seem to alter the behavior of the parser
+p26
+aVWe use the Maryland implementation of the Berkeley parser as our baseline for the kernel-smoothed lexicon, and the Maryland featured parser as our baseline for the embedding-featured lexicon
+p27
+aVWe begin by investigating the OOV model
+p28
+aVAs u'\u005cu0392' grows large words become more independent (and in the limit where u'\u005cu0392' = u'\u005cu221e' , each summand in Equation 1 is zero except where w u'\u005cu2032' = w , and we recover the original direct-lookup model
+p29
+aVAs in the OOV model, we also need to worry about how to handle words for which we have no vector representation
+p30
+aVPer-corpus-size settings of the parameter u'\u005cu0392' are set by searching over several possible settings on the development set
+p31
+aVBut we don u'\u005cu2019' t know how prevalent or important such u'\u005cu201c' syntactic axes u'\u005cu201d' are in practice
+p32
+aVIn these cases, we simply treat the words as if their vectors were so far away from everything else they had no influence, and report their weights as p ( w t ) = u'\u005cu0391' w
+p33
+aVThis causes parsing to become unacceptably slow, so an approximation is necessary
+p34
+aVThus we have two questions
+p35
+a.

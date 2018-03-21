@@ -1,0 +1,150 @@
+(lp0
+VWe test the model by learning the markedness constraints driving Wolof vowel harmony []
+p1
+aVThe goal of the IBPOT model is to learn the markedness matrix M and weights w for both the markedness and faithfulness constraints
+p2
+aVWe propose a new approach to learn constraints with limited innate phonological knowledge by identifying sets of constraint violations that explain the observed distributional data, instead of selecting constraints from an innate set of constraint definitions
+p3
+aVThe IBPOT model defines a generative process for mappings between input and output forms based on three latent variables the constraint violation matrices F (faithfulness) and M (markedness), and the weight vector w
+p4
+aVOutputs \u005ctextipa Ete and \u005ctextipa etE violate both Harmony (weight 16) and Parse [atr] (weight 8), so their scores are 24
+p5
+aVOutput \u005ctextipa EtE violates Parse [atr], and has score 8
+p6
+aVThe Wolof constraints provide an interesting testing ground for the model, because it is a small set of constraints to be learned, but contains the Harmony constraint, which can be violated by non-adjacent segments
+p7
+aVIn the \u005ctextipa ete tableau at top left, output \u005ctextipa ete has no violations, and therefore a score of zero
+p8
+aVThe model u'\u005cu2019' s ability to infer constraint violation profiles without theoretical constraint structure provides an alternative solution to the problems of the traditionally innate and universal OT constraint set
+p9
+aVAlternately, a binary matrix can directly capture non-binary constraints; converted existing non-binary constraints into a binary OT system by representing non-binary constraints as a set of equally-weighted overlapping constraints, each accounting for one violation
+p10
+aVThus the log-probability of output \u005ctextipa EtE is 1/8 that of \u005ctextipa ete, and the log-probability of disharmonious \u005ctextipa Ete and \u005ctextipa etE are each 1/24 that of \u005ctextipa ete
+p11
+aVAs it jointly learns constraints and weights, the IBPOT model calls to mind Hayes and Wilson u'\u005cu2019' s [] joint phonotactic learner
+p12
+aVIf constraints u'\u005cu2019' weights are close together, multiple violations of lower-weighted constraints can reduce a candidate u'\u005cu2019' s probability below that of a competitor with a single high-weight violation
+p13
+aVFor instance, the strongest learned markedness constraint, shown as M1 in Figure 2 , has the same violations as the top-ranked constraint that actively distinguishes between candidates in each paradigm
+p14
+aVBecause the constraints are identified as sets of violations, this also permits constraints specific to a given language to be learned
+p15
+aVIBPOT, as proposed here, learns constraints based on binary violation profiles, defined extensionally
+p16
+aVOur approach of casting the learning problem as one of identifying violation profiles is an attempt to determine the amount that can be learned about the active constraints in a paradigm without hypothesizing intensional constraint definitions
+p17
+aVThus, while the IBPOT constraints are not identical to the phonologically standard ones, they reflect a version of the standard constraints that is consistent with the IBPOT framework
+p18
+aVIn all four paradigms, the model learns that the RTR-RTR candidate violates M2 and the ATR-ATR candidate does not; this appears to be the model u'\u005cu2019' s attempt to reinforce a pattern in the lowest-ranked faithfulness constraint ( Parse [atr]), which the ATR-ATR candidate never violates
+p19
+aVIf unfaithful vowel heights were allowed by Gen , these unfaithful candidates would incur a violation approximately as strong as * \u005ctextipa I , as neither unfaithful-height candidates nor \u005ctextipa I candidates are attested in the Wolof data
+p20
+aVTurning to the form of these constraints, Figure 2 shows violation profiles from the last iteration of a representative IBPOT run
+p21
+aVHowever, the Wolof results show that by learning violations directly, IBPOT does not encounter problems with non-adjacent constraints
+p22
+aVThis is done so that the IBPOT weights and phonological standard weights are learned by the same process and can be compared
+p23
+aVInstead, it learns that M1 has the same violations as Harmony , which is the highest-weighted constraint that distinguishes between candidates in these paradigms
+p24
+aVAs a result, learned constraints are consistent within paradigms, but across paradigms, the same constraint may serve different purposes
+p25
+aVThis limits their learner in practice by the rapid explosion in the number of constraints as the maximum constraint definition size grows
+p26
+aV6 6 Since data, matrix, and weight likelihoods all shape the learned constraints, there must be enough data for the model to avoid settling for a simple matrix that poorly explains the data
+p27
+aVAs such, it is unclear where a universal set of markedness constraints would come from
+p28
+aVWeights are always negative in OT; a constraint violation can never make a candidate more likely to win.) For a given input-candidate pair ( x , y ) , f i u'\u005cu2062' ( y , x ) is the number of violations of constraint C i by the pair
+p29
+aVDepending on the specific formulation of the constraints, the constraint identification problem may even be NP-hard []
+p30
+aVNon-binarity can be handled by using the binary matrix M to indicate whether a candidate violates a constraint, with a second distribution determining the number of violations
+p31
+aVBecause vowel heights must be faithful between input and output, the Wolof data is divided into nine separate paradigms , each containing the four candidates (ATR/RTR × ATR/RTR) for the vowel heights in the input
+p32
+aVUnder this ranking, Wolof harmony is achieved by changing a disharmonious ATR to an RTR, unless this creates an \u005ctextipa I vowel
+p33
+aVThis version allows language-particular constraints, but it comes with a computational cost, as the learner must be able to generate and evaluate possible constraints while learning the language u'\u005cu2019' s phonology
+p34
+aVWe consider this question by examining the dominant framework in modern phonology, Optimality Theory [, OT] , implemented in a log-linear framework, MaxEnt OT [] , with output forms u'\u005cu2019' probabilities based on a weighted sum of constraint violations
+p35
+aVIf the number of constraints removed is less than K * , w * is filled out with draws from the prior distribution over weights
+p36
+aVAs for M , we need a non-parametric prior, as there is no inherent limit to the number of markedness constraints a language will use
+p37
+aVAs the distance between weights in MEOT increases, the probability of a suboptimal candidate being chosen approaches zero; thus the traditional formulation is a limit case of MEOT
+p38
+aVThe candidate outputs are the four combinations of tongue-roots for the given vowel heights; the inputs and candidates are known to the learner
+p39
+aVWe generate simulated data by observing 1000 instances of the winning output for each input
+p40
+aVAs in previous MEOT work, all Wolof candidates are faithful with respect to vowel height, either because height changes are not considered by Gen , or because of a high-ranked faithfulness constraint blocking height changes
+p41
+aVIf u'\u005cud835' u'\u005cudcb4' u'\u005cu2062' ( x ) is the set of all output candidates for the input x , then the probability of y as the winning output is
+p42
+aVWe consider in each sample at most K * new constraints, with weights based on the auxiliary vector w *
+p43
+aVIdeally, this would draw new constraints from the infinite feature matrix; however, this requires marginalizing the likelihood over possible weights, and we lack an appropriate conjugate prior for doing so
+p44
+aVThis approximation retains the unbounded feature set of the IBP, as repeated sampling can add more and more constraints without limit
+p45
+aVVowel harmony in general refers to a phonological phenomenon wherein the vowels of a word share certain features in the output form even if they do not share them in the input
+p46
+aVThe violations on a given output form only affect probabilities within its paradigm
+p47
+aVOn the non-high paradigms, the meaning of M2 is unclear, as Harmony is handled by M1 and * \u005ctextipa I is unviolated
+p48
+aVThus in the high-vowel paradigms, M1 serves as * \u005ctextipa I , while in the low/mid-vowel paradigms, it serves as Harmony
+p49
+aVThis is necessary in the current model definition because the IBP produces a prior over binary matrices
+p50
+aVThe most important differences are those in the data probabilities, as the matrix and weight probabilities are reflective primarily of the choice of prior
+p51
+aVThe non-binary harmony constraint, for instance, becomes a set {*(at least one disharmony), *(at least two disharmonies), etc.}
+p52
+aVPrevious OT work has focused on identifying the appropriate formulation of Eval and the values and acquisition of H , while taking Gen and Con as given
+p53
+aVBecause M1 has a much higher weight than M2 , a violation of M2 has a negligible effect on a candidate u'\u005cu2019' s probability
+p54
+aVNon-adjacent constraints are difficult for string-based approaches because of the exponential number of possible relationships across non-adjacent segments
+p55
+aV9 9 In fact, it appears this constraint organization is favored by IBPOT as it allows for lower weights, hence the large difference in w log-probability in Table 1
+p56
+aVWe begin by resampling M j u'\u005cu2062' l for all represented constraints M u'\u005cu22c5' l , conditioned on the rest of the violations ( M - ( j u'\u005cu2062' l ) , F ) and the weights w
+p57
+aVThe results in this section are based on nine runs each of IBPOT and MEOT; ten MEOT runs were performed but one failed to converge and was removed from analysis
+p58
+aVGrey stripes are overlaid on cells whose value will have a negligible impact on the distribution due to the values of higher-ranked constraint
+p59
+aVEven well-known constraint types, such as generalized alignment, can have disputed structures []
+p60
+aVAs the ratio between scores increases, the log-probability ratios can become arbitrarily close to zero, approximating the deterministic situation of traditional OT
+p61
+aVHere, we expand the learning task by proposing an acquisition method for Con
+p62
+aVA white cell indicates no violation
+p63
+aV2.4 , we assume that F is known as part of the output of Gen []
+p64
+aVThe outputs appear for multiple inputs, as shown in Figure 1
+p65
+aV2 , if the losing candidate violates M1 , its probability changes from 10 - 12 when the preferred candidate does not violate M2 to 10 - 8 when it does
+p66
+aVAs a maximum entropy model, the probability of y given x is proportional to the exponential of the weighted sum of violations, u'\u005cu2211' i w i u'\u005cu2062' f i u'\u005cu2062' ( y , x
+p67
+aVWe use the same parameters for this baseline as for the IBPOT tests
+p68
+aVMany aspects of human cognition involve the interaction of constraints that push a decision-maker toward different options, whether in something so trivial as choosing a movie or so important as a fight-or-flight response
+p69
+aVAlthough all OT systems share the same core structure, different choices of Eval lead to different behaviors
+p70
+aVNote that M is shared across inputs, as M j u'\u005cu2062' l has the same value for all input-output pairs with output y j
+p71
+aVThese constraint-driven decisions can be modeled with a log-linear system
+p72
+aVThe lower-weighted M2 is defined noisily, as the higher-ranked M1 makes some values of M2 inconsequential
+p73
+aVAll eight differences are significant according to t -tests over the nine runs
+p74
+a.

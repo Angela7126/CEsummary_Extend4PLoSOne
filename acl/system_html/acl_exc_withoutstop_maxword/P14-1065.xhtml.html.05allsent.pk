@@ -1,0 +1,432 @@
+(lp0
+VGroup I contains our evaluation metrics, DR and DR- lex
+p1
+aVNote that the Asiya metrics are combinations of several metrics, and these combinations (which exclude DR and DR- lex ) can be also tuned; this yields sizable improvements over the untuned versions as column three in the table shows
+p2
+aVWe can see that the tuned combinations with DR- lex improve over most of the individual metrics in groups II and III
+p3
+aVFurthermore, we also present overall results for i ) the average score over all metrics, excluding DR and DR- lex , and ( ii ) the differences in the correlations for the DR/DR- lex -combined and the original metrics
+p4
+aVAdding DR and DR- lex to the combinations manages to improve over five and four of the six tuned Asiya metrics, respectively
+p5
+aVFor each metric in groups II, III and IV, we present the results for the original metric as well for the linear interpolation of that metric with DR and with DR- lex
+p6
+aVOn the contrary, DR and DR- lex significantly improve over NIST, Rouge , TER, and BLEU
+p7
+aVNote that, even though DR- lex has better individual performance than DR, it does not yield improvements when combined with most of the metrics in group IV
+p8
+aVAgain, DR- lex is better than DR; with a positive Tau of +.133, yet as an individual metric, it ranks poorly compared to other metrics in group II
+p9
+aVThe combinations with DR and DR- lex that improve over the original metrics are shown in bold , and those that degrade are in italic
+p10
+aVBelow we present the evaluation results at the system- and segment-level, using our two basic metrics on discourse trees (Section 3.1 ), which are referred to as DR and DR- lex
+p11
+aVFurthermore, when combined with individual metrics in group II, DR- lex is able to improve consistently over each one of them
+p12
+aVThis suggests that both DR and DR- lex contain information that is complementary to that of the individual metrics that we experimented with
+p13
+aVIndividually, DR- lex outperforms most of the metrics from group II, and ranks as the second best metric in that group
+p14
+aVAsiya- lex
+p15
+aVCompared to this baseline, DR improves for three of the six Asiya metrics, while DR- lex improves for four of them
+p16
+aVHowever, when linearly combined with other metrics, DR- lex outperforms 14 of the 19 metrics in Table 3
+p17
+aVHowever, over all metrics and all language pairs, DR- lex is able to obtain an average improvement in correlation of +.035, which is remarkably higher than that of DR
+p18
+aVGroup II includes the metrics that participated in the WMT12 metrics task, excluding metrics which did not have results for all language pairs
+p19
+aVAcross all metrics, DR- lex yields an average Tau improvement of +.026, i.e., from .165 to .190
+p20
+aVNote that this is true both for the individual metrics from groups II and III, as well as for the metric combinations in group IV
+p21
+aVCombinations in the last group involve several metrics that already use linguistic information at different levels and are hard to improve over; yet, adding DR does improve, which shows that it has some complementary information to offer
+p22
+aVOn average, DR improves Tau from .165 to .201, which is +.036, while DR- lex improves to .222, or +.057
+p23
+aVIn our experiments, we combine DR and DR- lex to other metrics in two different ways using uniform linear interpolation (at system- and segment-level), and using a tuned linear interpolation for the segment-level
+p24
+aVMoreover, DR yields improvements when combined with 15 of the 19 metrics; worsening only four of the metrics
+p25
+aVOverall, DR improves the average Tau from .207 to .244, which is +.037, while DR- lex improves to .267 or +.061
+p26
+aVInterestingly, the tuned combinations that include the much weaker metric DR now improve over 12 out of 13 of the individual metrics in groups II and III, and only slightly degrades the score of the 13th one ( spede07pP
+p27
+aVDue to the low score of DR as an individual metric, it fails to yield improvements when uniformly combined with other metrics
+p28
+aVWe experiment with TKs applied to two different representations of the discourse tree non-lexicalized (DR), and lexicalized (DR- lex
+p29
+aVWe speculate that this might be caused by the fact that the lexical information in DR- lex is incorporated only in the form of unigram matching at the sentence-level, while the metrics in group IV are already complex combined metrics, which take into account stronger lexical models
+p30
+aVWhat is also interesting to note is that when tuning is used, DR helps achieve sizeable improvements, even if not as strong as for DR- lex
+p31
+aVOnce again, tuning yields sizable improvements over the simple combination for the Asiya metrics (third column in Table 5
+p32
+aVThis is a uniform linear combination of 12 individual metrics
+p33
+aVAs expected, DR- lex performs better than DR since it is lexicalized (at the unigram level), and also gives partial credit to correct structures
+p34
+aVGroup IV includes the metric combinations calculated with Asiya and described in Section 4
+p35
+aVTo complement the set of individual metrics that participated at the WMT12 metrics task, we also computed the scores of other commonly-used evaluation metrics
+p36
+aVThe uniform linear combination of the previous 7 individual metrics plus the 12 from Asiya- 0809 is reported as Asiya- all in the experimental section
+p37
+aVThis suggests that DR contains information that is complementary to that used by the other metrics
+p38
+aVIn this section, we explore how discourse information can be used to improve machine translation evaluation metrics
+p39
+aVThus, we can conclude that at the system-level, adding discourse information to a metric, even using the simplest of the combination schemes, is a good idea for most of the metrics, and can help to significantly improve the correlation with human judgments
+p40
+aVWe experimented with tuning the weights of the individual metrics in the metric combinations, using the learning method described in Section 4.2
+p41
+aVThis is remarkable given that DR has a strong negative Tau as an individual metric at the sentence-level
+p42
+aVThe results are shown in Table 4
+p43
+aVThe results are shown in Table 5
+p44
+aVGroup III contains other important evaluation metrics, which were not considered in the WMT12 metrics task
+p45
+aVWe only present the average results over all four language pairs
+p46
+aVFor the experiments reported in Section 5 .4, we used pairwise rankings to discriminatively learn the weights of the linear combinations of individual metrics
+p47
+aVAs in previous sections we present the average results over all four language pairs
+p48
+aVThis is a large improvement, taking into account that the combinations are just uniform linear combinations
+p49
+aVThe individual metrics combined in Asiya- all can be naturally categorized according to the type of linguistic information they use to compute the quality scores
+p50
+aVCompared to the previous work, ( i )  we use a different discourse representation (RST), ( ii )  we compare discourse parses using all-subtree kernels [] , ( iii )  we evaluate on much larger datasets, for several language pairs and for multiple metrics, and ( iv )  we do demonstrate better correlation with human judgments
+p51
+aVAll uniform linear combinations are calculated outside Asiya
+p52
+aVAsiya [] is a suite for MT evaluation that provides a large set of metrics that use different levels of linguistic information
+p53
+aVIn this work, instead of proposing a new metric, we focus on enriching current MT evaluation metrics with discourse information
+p54
+aVIn subsection 5.4 , we present the results of tuning the linear combination in a discriminative way
+p55
+aVCombination of five metrics based on lexical similarity
+p56
+aVIn this paper, rather than proposing yet another MT evaluation metric, we show that discourse information is complementary to many existing evaluation metrics, and thus should not be ignored
+p57
+aVTable 2 shows the system-level experimental results for WMT12
+p58
+aVWe grouped them in the following four families and calculated the uniform linear combination of the metrics in each group
+p59
+aVTable 3 shows the results for WMT12 at the segment-level
+p60
+aV6 6 In Asiya the metrics from this family are referred to as u'\u005cu201c' Discourse Representation u'\u005cu201d' metrics
+p61
+aVCombination of two metrics variants based on semantic parsing
+p62
+aVWe can see that DR is already competitive by itself on average, it has a correlation of .807, very close to BLEU and TER scores (.810 and .812, respectively
+p63
+aVOverall, from the experimental results in this section, we can conclude that discourse structure is an important information source to be taken into account in the automatic evaluation of machine translation output
+p64
+aVTo do so, we contrast different MT evaluation metrics with and without discourse information
+p65
+aVAs shown in Figure 7 , DR does not include any lexical item, and therefore measures the similarity between two translations in terms of their discourse structures only
+p66
+aVSince the metrics that participated in WMT11 and WMT12 are different (and even when they have the same name, there is no guarantee that they have not changed from 2011 to 2012), we only report results for the versions of NIST, Rouge , TER, and BLEU available in Asiya , as well as for the Asiya metrics, thus ensuring that the metrics in the experiments are consistent for 2011 and 2012
+p67
+aVFrom the original ULC, we only replaced TER and Meteor individual metrics by newer versions taking into account synonymy lookup and paraphrasing
+p68
+aVThe field of automatic evaluation metrics for MT is very active, and new metrics are continuously being proposed, especially in the context of the evaluation campaigns that run as part of the Workshops on Statistical Machine Translation (WMT 2008-2012), and NIST Metrics for Machine Translation Challenge (MetricsMATR), among others
+p69
+aVFor BLEU and TER, they observed improved correlation with human judgments on the MTC4 dataset when linearly interpolating these metrics with their lexical cohesion score
+p70
+aVIn this study, we evaluate to what extent existing evaluation metrics can benefit from additional discourse information
+p71
+aVWe first design two discourse-aware similarity measures, which use DTs generated by a publicly-available discourse parser [] ; then, we show that they can help improve a number of MT evaluation metrics at the segment- and at the system-level in the context of the WMT11 and the WMT12 metrics shared tasks []
+p72
+aVOverall, we observe an average improvement of +.024, in the correlation with the human judgments
+p73
+aVWe can see that DR performs badly, with a high negative Kendall u'\u005cu2019' s Tau of -.433
+p74
+aVWe will call this combined metric Asiya- 0809 in our experiments
+p75
+aVOn the contrary, DR- lex includes the lexical items to account for lexical matching; moreover, it separates the structure (the skeleton) of the tree from its labels, i.e., the nuclearity and the relations, in order to allow the tree kernel to give partial credit to subtrees that differ in labels but match in their skeletons
+p76
+aVWe believe that the semantic and pragmatic information captured in the form of DTs ( i )  can help develop discourse-aware SMT systems that produce coherent translations, and ( ii )  can yield better MT evaluation metrics
+p77
+aVIn order to rule out the possibility that the improvement of the tuned metrics on WMT12 comes from over-fitting, and to verify that the tuned metrics do generalize when applied to other sentences, we also tested on a new test set
+p78
+aVWe measured the correlation of the metrics with the human judgments provided by the organizers
+p79
+aVWe aggregated the data for different language pairs, and produced a single set of tuning weights for all language pairs
+p80
+aVNote that improving over the last two Asiya metrics is very hard they have very high scores of .296 and .295; for comparison, the best segment-level system at WMT12 ( spede07pP ) achieved a Tau of .254
+p81
+aVThe evaluation metrics we used are described below
+p82
+aVHowever, they could not improve correlation with human judgments, as evaluated on the MetricsMATR dataset
+p83
+aVHere we suggest some simple ways to create such metrics, and we also show that they yield better correlation with human judgments
+p84
+aVIn order to make the scores of the different metrics comparable, we performed a min u'\u005cu2013' max normalization, for each metric, and for each language pair combination
+p85
+aVFor simplicity, in our tables we show results divided into evaluation groups
+p86
+aVThese high scores allowed us to develop successful discourse similarity metrics
+p87
+aVFirst, we used Asiya u'\u005cu2019' s ULC [] , which was the best performing metric at the system and the segment levels at the WMT08 and WMT09 metrics tasks
+p88
+aVIn comparison to the syntactic and semantic extensions of MT metrics, there have been very few attempts to incorporate discourse information so far
+p89
+aVThese much larger improvements highlight the importance of tuning the linear combination when working at the segment-level
+p90
+aVIn order to develop a discourse-aware evaluation metric, we first generate discourse trees for the reference and the system-translated sentences using a discourse parser, and then we measure the similarity between the two discourse trees
+p91
+aVOur experiments show that many existing metrics can benefit from additional knowledge about discourse structure
+p92
+aVFor evaluation, we follow the setup of the metrics task of WMT12 [] at the system-level, we use the official script from WMT12 to calculate the Spearman u'\u005cu2019' s correlation, where higher absolute values indicate better metrics performance; at the segment-level, we use Kendall u'\u005cu2019' s Tau for measuring correlation, where negative values are worse than positive ones
+p93
+aVWe used the publicly available scores for all metrics that participated in the WMT12 metrics task [] spede07pP , AMBER, Meteor , TerrorCat , SIMPBLEU, XEnErrCats , WordBlockEC , BlockErrCats , and posF
+p94
+aVIn Rhetorical Structure Theory, discourse analysis involves two subtasks i ) discourse segmentation , or breaking the text into a sequence of EDUs, and ( ii ) discourse parsing , or the task of linking the units (EDUs and larger discourse units) into labeled discourse trees
+p95
+aVThese metrics tasks are based on sentence-level evaluation, which arguably can limit the benefits of using global discourse properties
+p96
+aVA common argument, is that current automatic evaluation metrics such as BLEU are inadequate to capture discourse-related aspects of translation quality [ 5 ]
+p97
+aVBLEU [] , NIST [] , TER [] , Rouge -W [] , and three Meteor variants []
+p98
+aVWe used the freely available version of the Asiya toolkit 4 4 http://nlp.lsi.upc.edu/asiya/ in order to extend the set of evaluation measures contrasted in this study beyond those from the WMT12 metrics task
+p99
+aVThis made TerrorCat u'\u005cu2019' s score negative, as we present it in Table 3
+p100
+aVAsiya- sem
+p101
+aVAdditionally, DR is more likely to produce a high number of ties, which is harshly penalized by WMT12 u'\u005cu2019' s definition of Kendall u'\u005cu2019' s Tau
+p102
+aVWe argue that existing metrics that only use lexical and syntactic information cannot distinguish well between (b) and (c
+p103
+aVFor reproducibility, below we explain the individual metrics with the exact names required by the toolkit to calculate them
+p104
+aVAs an example, consider the three discourse trees (DTs) shown in Figure 4 a ) for a reference (human) translation, and ( b ) and ( c ) for translations of two different systems on the WMT12 test dataset
+p105
+aV9 9 Tuning separately for each language pair yielded slightly lower results
+p106
+aVAsiya- syn
+p107
+aVAsiya- srl
+p108
+aVThus, there is consensus that discourse-informed MT evaluation metrics are needed in order to advance research in this direction
+p109
+aVAs in the WMT12 experimental setup, we use these rankings to calculate correlation with human judgments at the sentence-level, i.e., Kendall u'\u005cu2019' s Tau; see [] for details
+p110
+aVOur working hypothesis is that the similarity between the discourse structures of an automatic and of a reference translation provides additional information that can be valuable for evaluating MT systems
+p111
+aVThe overall coverage, i.e., the number of unique sentences that were evaluated, was only a fraction of the total; the total number of judgments, along with other information of the datasets are shown in Table 1
+p112
+aVUnlike PRO, ( i )  we use human judgments , not automatic scores, and ( ii )  we train on all pairs , not on a subsample
+p113
+aVThis should not be surprising a) the discourse tree structure alone does not contain enough information for a good evaluation at the segment-level, and (b) this metric is more sensitive to the quality of the DT, which can be wrong or void
+p114
+aVRecently, proposed discriminative models for both discourse segmentation and discourse parsing at the sentence level
+p115
+aVWong and Kit ( 2012 ) recently proposed an extension of MT metrics with a measure of document-level lexical cohesion []
+p116
+aV2010 ) , which use the Discourse Representation Theory [] and tree-based discourse representation structures (DRS) produced by a semantic parser
+p117
+aVThis shows that the weights learned on WMT12 generalize well, as they are also good for WMT11
+p118
+aV5 5 A detailed description of every individual metric can be found at []
+p119
+aVIn our experiments, we used the data available for the WMT12 and the WMT11 metrics shared tasks for translations into English
+p120
+aVA number of metrics have been proposed to measure the similarity between two labeled trees, e.g.,, Tree Edit Distance [] and Tree Kernels []
+p121
+aVIn the semantic case, there are metrics that exploit the similarity over named entities and predicate-argument structures [ 3 ]
+p122
+aVBLEU, NIST, Meteor -ex, Rouge -W, and TERp-A
+p123
+aVTERp-A and Meteor -pa in Asiya u'\u005cu2019' s terminology
+p124
+aVNIST and Rouge for both system- and segment-level, and BLEU and TER at segment-level
+p125
+aVFor example, at WMT12, 12 metrics were compared [] , most of them new
+p126
+aVIn our experiments, we only consider translation into English, and use the data described in Table 1
+p127
+aVFor example, the Rhetorical Structure Theory [] , or RST, represents text by labeled hierarchical structures called Discourse Trees (DTs), which can incorporate several layers of other linguistic information, e.g.,, syntax, predicate-argument structure, etc
+p128
+aVFortunately, several sentences are long and complex enough to present rich discourse structures connecting their basic clauses
+p129
+aVFurthermore, sentence-level scoring ( i )  is compatible with most translation systems, which work on a sentence-by-sentence basis, ( ii )  could be beneficial to modern MT tuning mechanisms such as PRO [] and MIRA [] , which also work at the sentence-level, and ( iii )  could be used for re-ranking n -best lists of translation hypotheses
+p130
+aV3 3 http://www.statmt.org/wmt{11,12}/results.html This included the output from the systems that participated in the WMT12 and the WMT11 MT evaluation campaigns, both consisting of 3,003 sentences, for four different language pairs
+p131
+aVTo determine the relative weights for the tuned combinations, we followed a similar approach to the one used by PRO to tune the relative weights of the components of a log-linear SMT model [] , also using Maximum Entropy as the base learning algorithm
+p132
+aVNote, however, that the variations are very small and might not be significant
+p133
+aVTherefore, we tuned the weights on all WMT12 pairwise judgments (no cross-validation), and we evaluated on WMT11
+p134
+aVThere have been several attempts to incorporate syntactic and semantic linguistic knowledge into MT evaluation
+p135
+aVFor instance, at the syntactic level, we find metrics that measure the structural similarity between shallow syntactic sequences [ 3 ] or between constituency trees [ 7 ]
+p136
+aVThe area of discourse analysis for SMT is still nascent and, to the best of our knowledge, no previous research has attempted to use rhetorical structure for SMT or machine translation evaluation
+p137
+aVThese improvements are very close to those for the WMT12 cross-validation
+p138
+aVThus, although limited, this setting is able to demonstrate the potential of discourse-level information for MT evaluation
+p139
+aVHowever, some of the differences are very small
+p140
+aVNote that the nuclearity and relation labels in the reference translation are also realized in the system translation in (b), but not in (c), which makes (b) a better translation compared to (c), according to our hypothesis
+p141
+aVThe discourse parser uses a dynamic Conditional Random Field [] as a parsing model in order to infer the probability of all possible discourse tree constituents
+p142
+aVThey calculate the similarity between the MT output and references based on DRS subtree matching, as defined in [ 7 ] , DRS lexical overlap, and DRS morpho-syntactic overlap
+p143
+aVCombination of four metrics ba-sed on syntactic information from constituency and dependency parse trees u'\u005cu2018' CP-STM-4 u'\u005cu2019' , u'\u005cu2018' DP-HWCM_c-4 u'\u005cu2019' , u'\u005cu2018' DP-HWCM_r-4 u'\u005cu2019' , and u'\u005cu2018' DP-Or(*) u'\u005cu2019'
+p144
+aVRecently, there have been two promising research directions for improving SMT and its evaluation a )  by using more structured linguistic information, such as syntax [] , hierarchical structures [] , and semantic roles [] , and ( b )  by going beyond the sentence-level, e.g.,, translating at the document level []
+p145
+aVFor clarity, we will refer to them as semantic parsing metrics u'\u005cu2018' DR-Or(*) u'\u005cu2019' and u'\u005cu2018' DR-Orp(*) u'\u005cu2019'
+p146
+aVCombination of three metric variants based on predicate argument structures (semantic role labeling u'\u005cu2018' SR-Mr(*) u'\u005cu2019' , u'\u005cu2018' SR-Or(*) u'\u005cu2019' , and u'\u005cu2018' SR-Or u'\u005cu2019'
+p147
+aVDuring each cross-validation run, we trained our pairwise ranker using the human judgments corresponding to nine of the ten folds
+p148
+aVNote that each judgment effectively constitutes 10 pairwise system rankings
+p149
+aVDiscourse analysis seeks to uncover this coherence structure underneath the text
+p150
+aVUsing the standard set of 18 coarse-grained relations defined in [] , the parser achieved an F 1 -score of 79.8%, which is very close to the human agreement of 83%
+p151
+aVIn order to allow the tree kernel to find subtree matches at the word level, we include an additional layer of dummy leaves as was done in [] ; not shown in Figure 7 , for simplicity
+p152
+aVThe leaves of a DT correspond to contiguous atomic text spans, called Elementary Discourse Units or EDUs (three in Figure 4
+p153
+aVOne example are the semantics-aware metrics of Giménez and Màrquez ( 2009 ) and Comelles et al
+p154
+aVWe then used the remaining fold for evaluation
+p155
+aVIn the present work, we use the convolution TK defined in [] , which efficiently calculates the number of common subtrees in two trees
+p156
+aVOne way to cope with the limitations of the TK is to change the representation of the trees to a form that is suitable to capture the relevant information for our task
+p157
+aVThe organizers relied on a random selection of systems, and a large number of comparisons between pairs of them, to make comparisons across systems feasible []
+p158
+aVIn particular, we believe that good translations should tend to preserve discourse relations
+p159
+aVAdjacent spans are connected by certain coherence relations (e.g.,, Elaboration , Attribution ), forming larger discourse units, which in turn are also subject to this relation linking
+p160
+aVMeteor -ex (exact match), Meteor -st (+stemming) and Meteor -sy (+synonyms
+p161
+aVConversely, ties and incomplete discourse analysis were not a problem at the system-level, where evidence from all 3,003 test sentences is aggregated, and allows to rank systems more precisely
+p162
+aVDiscourse units linked by a relation are further distinguished based on their relative importance in the text nuclei are the core parts of the relation while satellites are supportive ones
+p163
+aVThe human-annotated data from the WMT campaigns encompasses series of rankings on the output of different MT systems for every source sentence
+p164
+aVHowever, the structures they consider are actually very different from the discourse structures exploited in this paper
+p165
+aVThus, in a coherent text, discourse units (sentences or clauses) are logically connected the meaning of a unit relates to that of the previous and the following units
+p166
+aVFor a more up-to-date description, see the User Manual from Asiya u'\u005cu2019' s website
+p167
+aVSeveral formal theories of discourse have been proposed to describe the coherence structure []
+p168
+aVLater we tuned on WMT12 and evaluated on WMT11
+p169
+aVUnlike their work, which measures lexical cohesion at the document-level, here we are concerned with coherence (rhetorical) structure , primarily at the sentence-level
+p170
+aVAnnotators rank the output of five systems according to perceived translation quality
+p171
+aVWhile in this work we focus on the latter, we think that the former is also within reach, and that SMT systems would benefit from preserving the coherence relations in the source language when generating target-language translations
+p172
+aVAlthough modern SMT systems have switched to a discriminative log-linear framework, which allows for additional sources as features, it is generally hard to incorporate dependencies beyond a small window of adjacent words, thus making it difficult to use linguistically-rich models
+p173
+aVThe judgments represent rankings of the output of five systems chosen at random, for a particular sentence, also chosen at random
+p174
+aVIn order to use the WMT12 data for training a learning-to-rank model, we transformed the five-way relative rankings into ten pairwise comparisons
+p175
+aVSecond, it was purely statistical over words or word sequences and made little to no use of linguistic information
+p176
+aVFor cross-validation in WMT12, we used ten folds of approximately equal sizes, each containing about 300 sentences we constructed the folds by putting together entire documents, thus not allowing sentences from a document to be split over two different folds
+p177
+aVNote that sentences can be made of several clauses, which in turn can be interrelated through the same logical relations
+p178
+aVModeling discourse brings together the above research directions (a) and (b), which makes it an attractive goal for MT
+p179
+aVHowever, this situation is likely to change given the most recent advances in automatic discourse analysis []
+p180
+aVThe logical relationship between sentences carries important information that allows the text to express a meaning as a whole beyond the sum of its separate parts
+p181
+aVNote that this kernel was originally designed for syntactic parsing, where the subtrees are subject to the constraint that their nodes are taken with either all or none of the children
+p182
+aVSee the discussion in Section 2
+p183
+aVIn Figure 7 we show the two representations for the subtree that spans the text u'\u005cu201c' suggest the ECB should be the lender of last resort u'\u005cu201d' , which is highlighted in Figure 4
+p184
+aVLexical cohesion is achieved using word repetitions and semantically similar words such as synonyms, hypernyms, and hyponyms
+p185
+aVThis is demonstrated by the establishment of a recent workshop dedicated to Discourse in Machine Translation [] , collocated with the 2013 annual meeting of the Association of Computational Linguistics
+p186
+aVThe segmenter uses a maximum entropy model that achieves state-of-the-art accuracy on this task, having an F 1 -score of 90.5 u'\u005cu2062' % , while human agreement is 98.3 u'\u005cu2062' %
+p187
+aV2 2 The discourse parser is freely available from http://alt.qcri.org/tools/
+p188
+aVTree kernels (TKs) provide an effective way to integrate arbitrary tree structures in kernel-based machine learning algorithms like SVMs
+p189
+aVSome recent work has looked at anaphora resolution [ 5 ] and discourse connectives [ 1 ] , to mention two examples
+p190
+aV8 8 In this work, we have not investigated the reasons behind this phenomenon
+p191
+aVFrom its foundations, Statistical Machine Translation (SMT) had two defining characteristics first, translation was modeled as a generative process at the sentence-level
+p192
+aV7 7 We have fixed a bug in the scoring tool from WMT12, which was making all scores positive
+p193
+aVOne possible reason could be the unavailability of accurate discourse parsers
+p194
+aVAddressing discourse-level phenomena in machine translation is relatively new as a research direction
+p195
+aVMore specifically, it uses the tags SPAN and EDU to build the skeleton of the tree, and considers the nuclearity and/or the relation labels as properties, added as children, of these tags
+p196
+aVAs a result, for each source sentence, only relative rankings were available
+p197
+aVHowever, so far the attempts to incorporate discourse-related knowledge in MT have been only moderately successful, at best
+p198
+aVThis constraint of the TK imposes some limitations on the type of substructures that can be compared
+p199
+aV1 1 We refer the reader to [ 6 ] for an in-depth overview of discourse-related research for MT
+p200
+aVThe inferred (posterior) probabilities are then used in a probabilistic CKY-like bottom-up parsing algorithm to find the most likely DT
+p201
+aVFirst, we did this using cross-validation to tune and test on WMT12
+p202
+aVGoing beyond the sentence-level is important since sentences rarely stand on their own in a well-written text
+p203
+aVFor example, a SPAN has two properties (its nuclearity and its relation), and an EDU has one property (its nuclearity
+p204
+aVCzech-English ( cs-en ), French-English ( fr-en ), German-English ( de-en ), and Spanish-English ( es-en ); as well as a dataset with the English references
+p205
+aVFor instance, if a judge ranked the output of systems A , B , C , D , E as A B C D E , this would entail that A B , A C , A D and A E , etc
+p206
+aVThe words of an EDU are placed under the predefined children NGRAM
+p207
+aVRather, each sentence follows smoothly from the ones before it, and leads into the ones that come afterwards
+p208
+aVWe describe these two steps below
+p209
+aV[t]0.25
+p210
+aV[t].5
+p211
+aVWMT11
+p212
+aV6
+p213
+aV8
+p214
+aV5
+p215
+a.

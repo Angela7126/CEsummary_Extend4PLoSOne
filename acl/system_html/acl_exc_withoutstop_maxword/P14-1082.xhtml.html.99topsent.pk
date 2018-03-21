@@ -1,0 +1,44 @@
+(lp0
+VWe see that the language model baseline for English u'\u005cu2192' French shows the same substantial improvement over the baseline as our English u'\u005cu2192' Spanish results
+p1
+aVThe same holds for the Chinese u'\u005cu2192' English experiment
+p2
+aVAs expected, the LM baseline substantially outperforms the context-insensitive MLF baseline
+p3
+aVThird, we observe that adding the language model to our classifier leads to another significant gain (configuration l1r1 + LM in the results in Table 2
+p4
+aVThe auto configuration improves results over the uniformly applied feature selection
+p5
+aVHowever, if we enable the language model as we do in the auto + LM configuration we do not notice an improvement over l1r1 + LM , surprisingly
+p6
+aVThis shall be further discussed in Section 6.1
+p7
+aVPer classifier expert, the best scoring configuration was selected, referred to as the auto configuration in Table 2
+p8
+aVWe therefore conducted a number of experiments with other language pairs, and present the abridged results in Table 6
+p9
+aVA second baseline was constructed by weighing the probabilities from the translation table directly with the L2 language model described earlier
+p10
+aVA context size of one prevails in the vast majority of cases, which is not surprising considering the good results we have already seen with this configuration
+p11
+aVAutomatic configuration selection was done by performing leave-one-out testing (for small number of instances) or 10-fold-cross validation (for larger number of instances, n u'\u005cu2265' 20 ) on the training data per classifier expert
+p12
+aVThe language model is a trigram-based back-off language model with Kneser-Ney smoothing, computed using SRILM [] and trained on the same training data as the translation model
+p13
+aVThe error rate metrics show improvement as well
+p14
+aVThis baseline, henceforth referred to as the u'\u005cu2019' most likely fragment u'\u005cu2019' baseline (MLF) is analogous to the u'\u005cu2019' most frequent sense u'\u005cu2019' -baseline common in evaluating WSD systems
+p15
+aVConclusions with regard to context width may have to be tempered somewhat, as the performance of the l1r1 configuration was found to not be significantly better than that of the l2r2 configuration
+p16
+aVIn order to draw accurate conclusions, experiments on a single data set and language pair are not sufficient
+p17
+aVThe baseline selects the most probable L1 fragment per L2 fragment according to the phrase-translation table
+p18
+aVWords or phrases that always map to a single translation are stored in a simple mapping table, as a classifier would have no added value in such cases
+p19
+aVThe fact that a phrase-translation table needs to be constructed for the test data is also the reason that the parallel corpus split from which the test data is derived has to be large enough, ensuring better quality
+p20
+aVIf not, we check for the presence of a classifier expert for the offered L1 fragment; only then we can proceed by extracting the desired number of L2 local
+p21
+a.

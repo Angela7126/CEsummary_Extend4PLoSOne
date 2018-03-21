@@ -1,0 +1,96 @@
+(lp0
+VThe cosine similarity between the sentence containing the NE mention in the query document and the textual description of the candidate NE in the KB (we use the first section of the Wikipedia article as the candidate entity description
+p1
+aVThe percentage of disambiguation terms found in the query document is used to boost in the initial j u'\u005cu2062' w u'\u005cu2062' S u'\u005cu2062' i u'\u005cu2062' m value, in addition to an acronym check (whether the NE textual mention could be an acronym for a specific candidate entity title
+p2
+aVOur approach first ranks all nodes in the solution graph using the Page-Rank algorithm, then re-ranks all nodes by combining the initial confidence and graph ranking scores
+p3
+aVThis function considers all terms found in the candidate entity KB entry title, but not in the textual mention as disambiguation terms
+p4
+aVThe second step is to re-rank the nodes by combining the graph rank with the initial confidence
+p5
+aVInitial confidence is used as an initial rank for the graph nodes, while entities u'\u005cu2019' coherence measures are used as link weights which play a role in distributing a node u'\u005cu2019' s rank over its outgoing nodes
+p6
+aVIn our case this is not appropriate, so the final rank for each mention is determined after graph ranking, by combining the graph rank with the initial confidence
+p7
+aVNodes are represented as ordered pairs of textual mentions and candidate entities, since the same entity may be found multiple times as a candidate for different textual mentions and each occurrence must be evaluated independently
+p8
+aVTo study graph ranking using PR, and the contributions of the initial confidence and entity coherence, experiments were carried out using PR in different modes and with different selection techniques
+p9
+aVThese approaches try to model the interdependence between the different candidate entities for different NE mentions in the query document, and reformulate the problem of NED as a global optimization problem whose aim is to find the best set of entities
+p10
+aVThe major improvement comes from re-ranking nodes by combining initial confidence with PR score
+p11
+aVSo, what is needed is a collective disambiguation approach that jointly disambiguates all NE textual mentions
+p12
+aVEL is a similar but broader task than NED because NED is concerned with disambiguating a textual NE mention where the correct entity is known to be one of the KB entries, while EL also requires systems to deal with the case where there is no entry for the NE in the reference KB
+p13
+aVIn the first experiment, referred to as P u'\u005cu2062' R I , initial confidence is used as an initial node rank for PR and edge weights are uniform, edges, as in the PR baseline, being created wherever REF or JProb are not zero
+p14
+aVLet us refer to the graph rank of a candidate as P u'\u005cu2062' R u'\u005cu2062' ( e i
+p15
+aVWe adopted a new mention-candidate similarity function, j u'\u005cu2062' w u'\u005cu2062' S u'\u005cu2062' i u'\u005cu2062' m , which uses Jaro-Winkler similarity as a first estimate of the initial confidence value for each candidate
+p16
+aVThe first step is initial graph ranking, where all nodes are ranked according to the link structure
+p17
+aVGlobal confidence is a measure of the global importance of the candidate entity
+p18
+aVWe consider several different measures for computing the initial confidence assigned to each node and several measures for determining and weighting the graph edges
+p19
+aVIn our second experiment, P u'\u005cu2062' R C , entity coherence features are tested by setting the edge weights to the coherence score and using uniform initial node weights
+p20
+aVCoherence is represented as an edge between nodes in the solution graph
+p21
+aVUses the Wikipedia documents for both entity candidates to check if either document has a link to the other
+p22
+aVThe problem is that other textual mentions in the document are also ambiguous
+p23
+aVAll nodes in the graph are ranked according to these relations using PR
+p24
+aVWhen comparing these results to the PR baseline we notice a slight positive effect when using the initial confidence as an initial rank instead of uniform ranking
+p25
+aVWe only consider NE mentions with an entry in the Wikipedia KB, ignoring the 20% of query mentions (7136) without a link to the KB, as Hoffart did
+p26
+aVThe initial confidence is not normalized across all NEs because each score is calculated independently
+p27
+aVHowever, references to entities in the real world are often ambiguous there is a many-to-many relation between NE mentions and the entities they denote in the real world
+p28
+aVThe simplest approach is to select the highest ranked entity in the list for each mention m i according to equation 5 , where R could refer to R m or R s
+p29
+aVNamed entities (NEs) have received much attention over the last two decades [ 14 ] , mostly focused on recognizing the boundaries of textual NE mentions and classifying them as, e.g.,, Person, Organization or Location
+p30
+aVThe graph nodes are formulated as a set V = { ( m i , e i , j ) u'\u005cu2223' u'\u005cu2200' e i , j u'\u005cu2208' E i , u'\u005cu2200' m i u'\u005cu2208' M }
+p31
+aVWe compared JProb and Ref edge weighting approaches, where for each approach edges were created only where the coherence score according to the approach was non-zero
+p32
+aVFreebase provides an API to get an entity u'\u005cu2019' s popularity score ( FB ), which is computed during Freebase indexing
+p33
+aVThe highest rank is not always correct, so in the third step a selection algorithm is used to choose the best candidate
+p34
+aVEntity popularity has been used successfully as a discriminative feature for NED [ 15 ]
+p35
+aVIt is not based on context, so it is always the same regardless of the query document
+p36
+aVTo compare our results with the state-of-the-art, we report Hoffart et al u'\u005cu2019' s [ 10 ] results as they re-implemented two other systems and also ran them over the AIDA dataset
+p37
+aVSo, the two combination schemes assign different ranks to the candidates and the algorithm selects the scheme which appears more discriminative
+p38
+aVHowever, we found that a dynamic choice between the re-ranking schemes, based on the difference between the top two candidates, as described in algorithm 4 and indicated by e g ,works best
+p39
+aVHoffert [ 10 ] poses the problem as one of finding a dense sub-graph, which is infeasible in a huge graph
+p40
+aVSo, an algorithm originally used to find strongly interconnected, size-limited groups in social media is adopted to prune the graph, and then a greedy algorithm is used to find the densest graph
+p41
+aVThe underlying intuition of this algorithm is that a greater difference between the top ranks reflects more confident discrimination between candidates
+p42
+aVWe used AIDA dataset 3 3 http://www.mpi-inf.mpg.de/yago-naga/aida/ , which is based on the CoNLL 2003 data for NER tagging
+p43
+aVWe used two measures for coherence, described as follows
+p44
+aVTwo combination schemes are used
+p45
+aVThis relation is directed, but we assume an inverse relation also exists; so this relation is represented as undirected
+p46
+aVAs this new formulation is NP-hard, many approximations have been proposed
+p47
+a.

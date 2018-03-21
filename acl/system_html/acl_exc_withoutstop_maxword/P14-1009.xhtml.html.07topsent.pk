@@ -1,0 +1,24 @@
+(lp0
+VFor the lf (lexical function) model, we construct functional matrix representations of adjectives, determiners and intransitive verbs
+p1
+aVIf distributional vectors encode certain aspects of word meaning, it is natural to expect that similar aspects of sentence meaning can also receive vector representations, obtained compositionally from word vectors
+p2
+aVWe call our proposal practical lexical function model, or plf
+p3
+aVTensor by vector multiplication formalizes function application and serves as the general composition method
+p4
+aVIn plf, a functional word is not represented by a single tensor of arity-dependent order, but by a vector plus an ordered set of matrices, with one matrix for each argument the function takes
+p5
+aVFor instance, symmetric operations like vector addition are insensitive to syntactic structure, therefore meaning differences encoded in word order are lost in composition pandas eat bamboo is identical to bamboo eats pandas
+p6
+aVIndeed, in order to train a transitive verb tensor (e.g.,, eat ), the method of Grefenstette et al
+p7
+aVA related approach [ 24 ] assumes richer lexical representations where each word is represented with a vector and a matrix that encodes its interaction with its syntactic sister
+p8
+aVWe conjecture that the lf 3-way tensor representation of transitive verbs leads to a stronger asymmetry between sentences with inverted arguments, and thus makes this model particularly sensitive to word order differences
+p9
+aVTraining plf (practical lexical function) proceeds similarly, but we also build preposition matrices (from u'\u005cu27e8' noun , preposition-noun u'\u005cu27e9' vector pairs), and for verbs we prepare separate subject and object matrices
+p10
+aVAfter applying the
+p11
+a.

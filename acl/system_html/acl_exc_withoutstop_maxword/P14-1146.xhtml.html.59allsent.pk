@@ -1,0 +1,164 @@
+(lp0
+VWe compare sentiment-specific word embedding (SSWE h , SSWE r , SSWE u ) with baseline embedding learning algorithms by only using word embedding as features for Twitter sentiment classification
+p1
+aVWe conduct experiments to evaluate SSWE by incorporating it into a supervised learning framework for Twitter sentiment classification
+p2
+aVWe apply sentiment-specific word embedding for Twitter sentiment classification under a supervised learning framework as in previous work [ 33 ]
+p3
+aVWe apply SSWE as features in a supervised learning framework for Twitter sentiment classification, and evaluate it on the benchmark dataset in SemEval 2013
+p4
+aVWe also directly evaluate the effectiveness of the SSWE by measuring the word similarity in the embedding space for sentiment lexicons
+p5
+aVFollowing the traditional C W model [ 9 ] , we incorporate the sentiment information into the neural network to learn sentiment-specific word embedding
+p6
+aVWhen such word embeddings are fed as features to a Twitter sentiment classifier, the discriminative ability of sentiment words are weakened thus the classification performance is affected
+p7
+aVThe quality of SSWE is also directly evaluated by measuring the word similarity in the embedding space for sentiment lexicons
+p8
+aVMany studies on Twitter sentiment classification [ 32 , 10 , 1 , 22 , 48 ] leverage massive noisy-labeled tweets selected by positive and negative emoticons as training set and build sentiment classifiers directly, which is called distant supervision [ 17 ]
+p9
+aVTable 3 shows the performance on the positive/negative classification of tweets 5 5 MVSA and ReEmb are not suitable for learning bigram and trigram embedding because their sentiment predictor functions only utilize the unigram embedding
+p10
+aVSSWE outperforms MVSA and ReEmb by exploiting more context information of words and sentiment information of sentences, respectively
+p11
+aVThe sentiment classifier is built from tweets with manually annotated sentiment polarity
+p12
+aVWe learn the sentiment-specific word embedding from tweets, leveraging massive tweets with emoticons as distant-supervised corpora without any manual annotations
+p13
+aV2011 ) introduce C W model to learn word embedding based on the syntactic contexts of words
+p14
+aVWe also compare SSWE u with the ngram feature by integrating SSWE into NRC-ngram
+p15
+aVWe tune the hyper-parameter u'\u005cu0391' of SSWE u on the development set by using unigram embedding as features
+p16
+aVAn intuitive solution to integrate the sentiment information is predicting the sentiment distribution of text based on input ngram
+p17
+aVAs a reference, we apply SSWE u on subjective classification of tweets, and obtain 72.17% in macro-F1 by using only SSWE u as feature
+p18
+aVThe concatenated features SSWE u +NRC-ngram (86.48%) outperform the original feature set of NRC (84.73%
+p19
+aVFor the task of sentiment classification, an effective feature learning method is to compose the representation of a sentence (or document) from the representations of the words or phrases it contains [ 40 , 47 ]
+p20
+aVGiven an original (or corrupted) ngram and the sentiment polarity of a sentence as the input, SSWE u predicts a two-dimensional vector for each input ngram
+p21
+aVThese automatically collected tweets contain noises so they cannot be directly used as gold training data to build sentiment classifiers, but they are effective enough to provide weakly supervised signals for training the sentiment-specific word embedding
+p22
+aVWe develop three neural networks with different strategies to integrate the sentiment information of tweets
+p23
+aVA typical case in sentiment analysis is that the composed phrase and multiword expression may have a different sentiment polarity than the individual words it contains, such as not [bad] and [great] deal of (the word in the bracket has different sentiment polarity with the ngram
+p24
+aVThe underlying reason is that when more tweets are incorporated, the word embedding is better estimated as the vocabulary size is larger and the context and sentiment information are richer
+p25
+aVIn the task of predicting positive/negative polarity of tweets, our method yields 84.89% in macro-F1 by only using SSWE as feature, which is comparable to the top-performed system based on hand-crafted features (84.70%
+p26
+aVFrom the first column of Table 3 , we can see that the performance of C W and word2vec are obviously lower than sentiment-specific word embeddings by only using unigram embedding as features
+p27
+aVInstead of hand-crafting features, we incorporate the continuous representation of words and phrases as the feature of a tweet
+p28
+aVSSWE h is trained by predicting the positive ngram as [1,0] and the negative ngram as [0,1]
+p29
+aVThe reason is that C W and word2vec do not explicitly exploit the sentiment information of the text, resulting in that the words with opposite polarity such as good and bad are mapped to close word vectors
+p30
+aVThe most serious problem is that traditional methods typically model the syntactic context of words but ignore the sentiment information of text
+p31
+aVWe only use unigram embedding in this section because these sentiment lexicons do not contain phrases
+p32
+aVAccordingly, it is a crucial step to learn the word representation (or word embedding), which is a dense, low-dimensional and real-valued vector for a word
+p33
+aVWe achieve 84.98% by using only SSWE u as features without borrowing any sentiment lexicons or hand-crafted rules
+p34
+aVThe underlying reason is that a phrase, which cannot be accurately represented by unigram embedding, is directly encoded into the ngram embedding as an idiomatic unit
+p35
+aVWe train SSWE h , SSWE r and SSWE u by taking the derivative of the loss through back-propagation with respect to the whole set of parameters [ 9 ] , and use AdaGrad [ 12 ] to update the parameters
+p36
+aVAs given in Equation 8 , u'\u005cu0391' is the weighting score of syntactic loss of SSWE u and trades-off the syntactic and sentiment losses
+p37
+aVWe therefore slide the window of ngram across a sentence, and then predict the sentiment polarity based on each ngram with a shared neural network
+p38
+aVThe results of bag-of-ngram (uni/bi/tri-gram) features are not satisfied because the one-hot word representation cannot capture the latent connections between words
+p39
+aVThus, we utilize the continuous vector of top layer to predict the sentiment distribution of text
+p40
+aVIf the sentiment polarity of a tweet is positive, the predicted positive score is expected to be larger than the predicted negative score, and the exact reverse if the tweet has negative polarity
+p41
+aVThe objective is to classify the sentiment polarity of a tweet as positive, negative or neutral
+p42
+aVRecursive Autoencoder [ 39 ] has been proven effective in many sentiment analysis tasks by learning compositionality automatically
+p43
+aVAs an unsupervised approach, C W model does not explicitly capture the sentiment information of texts
+p44
+aVWith the revival of interest in deep learning [ 2 ] , incorporating the continuous representation of a word as features has been proving effective in a variety of NLP tasks, such as parsing [ 35 ] , language modeling [ 3 , 29 ] and NER [ 43 ]
+p45
+aVSocher et al propose Recursive Neural Network (RNN) [ 38 ] , matrix-vector RNN [ 37 ] and Recursive Neural Tensor Network (RNTN) [ 40 ] to learn the compositionality of phrases of any length based on the representation of each pair of children recursively
+p46
+aVWe set the u'\u005cu0391' of SSWE u as 0.5, according to the experiments shown in Figure 2
+p47
+aVThe reason lies in that the tweets in our dataset do not have accurately parsed results or fine grained sentiment labels for phrases
+p48
+aVHowever, the one-hot word representation cannot sufficiently capture the complex linguistic characteristics of words
+p49
+aVWe learn embedding for unigrams, bigrams and trigrams separately with same neural network and same parameter setting
+p50
+aVWe encode the sentiment information into the continuous representation of words, so that it is able to separate good and bad to opposite ends of the spectrum
+p51
+aVWe re-implement this system because the codes are not publicly available 3 3 For 3-class sentiment classification in SemEval 2013, our re-implementation of NRC achieved 68.3%, 0.7% lower than NRC (69%) due to less training data
+p52
+aVSSWE u is illustrated in Figure 1 (c
+p53
+aVIn the neural network, the distributed representation of higher layer are interpreted as features describing the input
+p54
+aVThe accuracy of random result is 50% as positive and negative words are randomly occurred in the nearest neighbors of each word
+p55
+aVWe empirically set the window size as 3, the embedding length as 50, the length of hidden layer as 20 and the learning rate of AdaGrad as 0.1 for all baseline and our models
+p56
+aVAnother reason is that the RNTN model trained on movie reviews cannot be directly applied on tweets due to the differences between domains [ 8 ]
+p57
+aVWhen we have more than 10 million tweets, the performance remains stable as the contexts of words have been mostly covered
+p58
+aVThe majority of existing approaches follow Pang et al
+p59
+aVWe use the embedding of unigrams, bigrams and trigrams in the experiment
+p60
+aVThe output f c u'\u005cu2062' w is the language model score of the input, which is calculated as given in Equation 2 , where L is the lookup table of word embedding, w 1 , w 2 , b 1 , b 2 are the parameters of linear layers
+p61
+aVDistant supervision is relatively weak because the noisy-labeled tweets are treated as the gold standard, which affects the performance of classifier
+p62
+aVThe distribution of [0.7,0.3] can also be interpreted as a positive label because the positive score is larger than the negative score
+p63
+aVAs a result, words with opposite polarity, such as good and bad , are mapped into close vectors
+p64
+aVHowever, the constraint of SSWE h is too strict
+p65
+aVBased on the above observation, the hard constraints in SSWE h should be relaxed
+p66
+aVSimilarly, the distribution of [0.2,0.8] indicates negative polarity
+p67
+aVIt is therefore desirable to discover explanatory factors from the data and make the learning algorithms less dependent on extensive feature engineering [ 4 ]
+p68
+aVCompared with SSWE h , the s u'\u005cu2062' o u'\u005cu2062' f u'\u005cu2062' t u'\u005cu2062' m u'\u005cu2062' a u'\u005cu2062' x layer is removed because SSWE r does not require probabilistic interpretation
+p69
+aVWe utilize the Skip-gram model because it performs better than CBOW in our experiments
+p70
+aVWe do not compare with RNTN [ 40 ] because we cannot efficiently train the RNTN model
+p71
+aVHowever, we were unable to download all the training and development sets because some tweets were deleted or not available due to modified authorization status
+p72
+aVWe do not utilize the entire sentence as input because the length of different sentences might be variant
+p73
+aVThe original and corrupted ngrams are treated as inputs of the feed-forward neural network, respectively
+p74
+aVThe result is the concatenation of vectors derived from different convolutional layers
+p75
+aVWe explore m u'\u005cu2062' i u'\u005cu2062' n , a u'\u005cu2062' v u'\u005cu2062' e u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' g u'\u005cu2062' e and m u'\u005cu2062' a u'\u005cu2062' x convolutional layers [ 9 , 36 ] , which have been used as simple and effective methods for compositionality learning in vector-based semantics [ 28 ] , to obtain the tweet representation
+p76
+aVWe compare with C W and word2vec as they have been proved effective in many NLP tasks
+p77
+aVAssuming there are K labels, we modify the dimension of top layer in C W model as K and add a s u'\u005cu2062' o u'\u005cu2062' f u'\u005cu2062' t u'\u005cu2062' m u'\u005cu2062' a u'\u005cu2062' x layer upon the top layer
+p78
+aVwhere l u'\u005cu2062' o u'\u005cu2062' s u'\u005cu2062' s c u'\u005cu2062' w u'\u005cu2062' ( t , t r ) is the syntactic loss as given in Equation 1 , l u'\u005cu2062' o u'\u005cu2062' s u'\u005cu2062' s u u'\u005cu2062' s u'\u005cu2062' ( t , t r ) is the sentiment loss as described in Equation 9
+p79
+aVIt has the same length as the size of the vocabulary, and only one dimension is 1, with all others being 0
+p80
+aVS u'\u005cu2062' o u'\u005cu2062' f u'\u005cu2062' t u'\u005cu2062' m u'\u005cu2062' a u'\u005cu2062' x layer is suitable for this scenario because its outputs are interpreted as conditional probabilities
+p81
+a.

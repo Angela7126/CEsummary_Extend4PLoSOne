@@ -1,0 +1,304 @@
+(lp0
+VIf l candidate URIs are provided for each NE, then u'\u005cud835' u'\u005cudc9c' u'\u005cud835' u'\u005cudc9f' has ( l + 4 ) columns c u , u u'\u005cu2208' { 1 , l + 4 }
+p1
+aVA strong effort has been conducted recently by the TAC-KBP evaluation task [ 13 ] to create standardized corpus, and annotation standards based on Wikipedia for evaluation and comparison of EL systems
+p2
+aVThus, we consider an annotation object u'\u005cud835' u'\u005cudc9c' u'\u005cud835' u'\u005cudc9f' , which is an array with a row for each NE, and columns storing related knowledge
+p3
+aVFor all i u'\u005cu2208' [ [ 1 , n ] ] , k u'\u005cu2208' [ [ 1 , l ] ] , we build the set S i k , composed of the Wikipedia URIs and categories contained in the source Wikipedia document related to the URI stored in u'\u005cud835' u'\u005cudc9c' u'\u005cud835' u'\u005cudc9f' [ i ] u'\u005cu2062' [ k ] that we will refer to as URI k i to ease the reading
+p4
+aVS 1 2 is associated to the International Business Machines Corporation , and S 2 1 to the Thomas Watson, Jr page dsr_score(URI 1 1 ) sums up the number of occurrences of URI 1 1 in S j 1 for all j u'\u005cu2208' [ [ 1 , n ] ] - { 1 }
+p5
+aVTo support the correction process based on co-reference chains, the system tries to correct NE labels for all the NEs listed in the annotation object
+p6
+aVHence, the co-reference correction process will assign the right URI to the first NE ( URI 1 http://en.wikipedia.org/wiki /Paris ), which was wrongly linked to the actress Paris Hilton
+p7
+aVAfter calculation, we have mutual_relation_score(URI 1 1 ) mutual_relation_score(URI 2 1 ) The candidate URIs for [ IBM ] are re-ranked accordingly, and International Business Machines Corporation becomes its first rank candidate
+p8
+aVIn more recent approaches, it is suggested that annotation processes based on similarity distance measures can be improved by making use of other annotations present in the same document
+p9
+aVHence, in the current example, dsr_score(URI 1 1 ) is the number of occurrences of URI 1 1 in S 2 1 , namely the number of times the International Brotherhood of Magicians are cited in the Thomas Watson, Jr page
+p10
+aVSimilarly, dsr_score(URI 2 1 ) is equal to the number of times the International Business Machines Corporation is cited in the Thomas Watson, Jr page csr_score(URI 1 1 ) sums up the number of common URIs and categories between S 1 1 and S 2 1 , i.e., the number of URIs and categories appearing in both International Brotherhood of Magicians and Thomas Watson, Jr pages csr_score(URI 2 1 ) counts the number of URIs and categories appearing in both International Business Machines Corporation and Thomas Watson, Jr pages
+p11
+aVHence, systems that attempt to address the NED problem must include disambiguation resources
+p12
+aVFor all i u'\u005cu2208' [ [ 1 , n ] ] , for each set of URIs { URI i k , u'\u005cu2005' k u'\u005cu2208' [ [ 1 , l ] ] } , the re-ranking process is conducted according to the following steps
+p13
+aVWe propose a mutual disambiguation algorithm that improves the accuracy of entity links in a document by using successive corrections applied to an annotation object representing this document
+p14
+aVThe annotation object is composed of information extracted from the document along with linguistic and semantic annotations as described hereafter
+p15
+aVBut if the IBM mention co-occurs with a Thomas Watson, Jr mention in the document, there will probably be more links between the International Business Machine and Thomas Watson, Jr related Wikipedia pages than between the International Brotherhood of Magicians and Thomas Watson, Jr related Wikipedia pages
+p16
+aVSince the system focuses on NEs, rows with lexical units that do not belong to a NE SF are dropped from the annotation object, and NE SF are refined as described in [ 5 ]
+p17
+aVFor example, if a NE describes a city name like Paris , it is more probable that the correct link for this city name designates Paris (France) rather than Paris (Texas) if a neighbor entity offers candidate links semantically related to Paris (France) like the Seine river or the Champs-Elysées
+p18
+aVThe input of the MDP is an annotation object u'\u005cud835' u'\u005cudc9c' u'\u005cud835' u'\u005cudc9f' with n rows, obtained as explained in Section 3.1
+p19
+aVGiven a query that consists of a document with a specified name mention of an entity, the task is to determine the correct node in the reference KB for the entity, adding a new node for the entity if it is not already in the reference KB
+p20
+aVThey are used as matching sequences to locate corresponding candidate entries in the KB, and then to disambiguate those candidates using similarity measures
+p21
+aVThe second NE has a longer surface form than the first one, and its associated first rank URI is the most frequent
+p22
+aVFor the sake of reproducibility, we applied the KBP scoring metric ( B 3 + F ) described in [ 20 ] , and we used the KBP scorer 1 1 http://www.nist.gov/tac/2013/KBP/EntityLinking/tools.html
+p23
+aVThe NED problem is related to the Word Sense Disambiguation (WSD) problem [ 16 ] , and is often more challenging since mentions of NEs can be highly ambiguous
+p24
+aVDocuments are processed by an annotator capable of producing POS tags for each word, as well as spans, NE surface forms, NE labels and ranked candidate Wikipedia URIs for each candidate NE
+p25
+aVThe idea is to evaluate in a set of candidate links which one is the most likely to be correct by taking the other links contained in the document into account
+p26
+aVIf n NEs were annotated in u'\u005cud835' u'\u005cudc9f' , then u'\u005cud835' u'\u005cudc9c' u'\u005cud835' u'\u005cudc9f' has n rows
+p27
+aVThe three best results and the median from TAC-KBP 2012 systems are shown in the remaining columns for the sake of comparison
+p28
+aVIt uses bags of words to disambiguate semantic entities according to a cosine similarity algorithm
+p29
+aVThe ontology (like YAGO or DBPedia) provides a pre-existing set of potential relations between the entities to link (like for instance, in our previous example, Paris (France) has_river Seine ) that will be used to rank the best candidates according to their mutual presence in the document
+p30
+aVWe describe below some recent approaches proposed for solving the EL task
+p31
+aVMore recently, several systems have been launched as web services dedicated to EL tasks
+p32
+aVDealing with ambiguity is one of the key difficulties in this task, since mentions are often highly polysemous, and potentially related to many different KB entries
+p33
+aVWhen NE SF are spanned over several rows, these rows are merged into a single one
+p34
+aVLately, [ 6 , 15 , 17 ] extended this framework by using richer features for similarity comparison
+p35
+aVSuch techniques are referred to as semantic relatedness [ 19 ] , collective disambiguation [ 12 ] , or joint disambiguation [ 8 ]
+p36
+aVFor instance, names of places can be very common as is Paris, which refers to 26 different places in Wikipedia
+p37
+aVWe assumed the dsr_score was much more semantically significant than the csr_score, and translated this assumption in the weight calculation by introducing two correction parameters u'\u005cu0391' and u'\u005cu0392' used in the final scoring calculation
+p38
+aVIn MDP, for each Wikipedia URI candidate annotation, all the internal links and categories contained in the source Wikipedia document related to this URI are collected
+p39
+aVThe system makes use of all the semantic content stored in u'\u005cud835' u'\u005cudc9c' u'\u005cud835' u'\u005cudc9f' to locally improve the precision of each URI annotation in the document
+p40
+aVFor the first NE mention [ IBM ], u'\u005cud835' u'\u005cudc9c' u'\u005cud835' u'\u005cudc9f' contains two candidate URIs identifying two different resources
+p41
+aV] URI 1 2 u'\u005cu2261' Thomas Watson, Jr
+p42
+aVFor a given NE, this weight is expected to measure the mutual relations of a candidate annotation with all the other candidate annotations of NEs in the document
+p43
+aV- the csr_score for URI k i sums up the number of common URIs and categories between S i k and S j 1 for all j u'\u005cu2208' [ [ 1 , n ] ] - { i }
+p44
+aVThe Entity Linking (EL) task consists in linking name mentions of named entities (NEs) found in a document to their corresponding entities in a reference Knowledge Base (KB
+p45
+aVURI 1 http://en.wikipedia.org/wiki /Paris_Hilton NE surface form
+p46
+aVu'\u005cu2200' k u'\u005cu2208' [ [ 1 , l ] ] , calculate dsr_score(URI k i
+p47
+aVThe NE label correction process assigns the same NE label to all the NEs associated with the same first rank URI
+p48
+aVURI 1 http://en.wikipedia.org/wiki /Paris NE surface form capital of France
+p49
+aVu'\u005cu2200' k u'\u005cu2208' [ [ 1 , l ] ] , calculate csr_score(URI k i
+p50
+aVThe extraction of an accurate link is a process occurring after the URI annotation of NEs in the whole document
+p51
+aVFor all i , u'\u005cu2005' j u'\u005cu2208' [ [ 1 , n ] ] , k u'\u005cu2208' [ [ 1 , l ] ] , we want to calculate the weight of mutual relations between the candidate URI k i and all the first rank candidates URI 1 j for j u'\u005cu2260' i
+p52
+aV1) the ontology used to evaluate the relatedness of candidates is replaced by internal links and categories from the Wikipedia corpus; 2) the coherence of entities is improved prior to the calculation of semantic relatedness using a co-reference resolution algorithm, and a NE label correction method; 3) the proposed method is robust enough to improve the performance of existing entity linking annotation engines, which are capable of providing a set of ranked candidates for each annotation in a document
+p53
+aV- the dsr_score for URI k i sums up the number of occurrences of URI k i in S j 1 for all j u'\u005cu2208' [ [ 1 , n ] ] - { i }
+p54
+aVThe Mutual Disambiguation Process (MDP) relies on the graph of all the relations (internal links, categories) between Wikipedia content related to the document annotations
+p55
+aVThe use of Wikipedia for explicit disambiguation dates back to [ 2 ] who built a system that compared the context of a mention to the Wikipedia categories of an entity candidate
+p56
+aV], u'\u005cud835' u'\u005cudc9c' u'\u005cud835' u'\u005cudc9f' contains the following candidate URI, which is ranked first
+p57
+aVColumn c l + 1 stores the offset of the NEs, c l + 2 stores their surface forms, c l + 3 stores the NE labels (PER, ORG, u'\u005cu2026' ), and c l + 4 stores the (vectors of) POS tags associated with the NE surface forms u'\u005cud835' u'\u005cudc9c' u'\u005cud835' u'\u005cudc9f' contains all the available knowledge about the NEs found in u'\u005cud835' u'\u005cudc9f'
+p58
+aVThe purpose of the MDP is to capture this semantic relatedness information contained in the graph of links extracted from Wikipedia pages related to each candidate annotation
+p59
+aVURI 1 http://en.wikipedia.org/wiki /Paris NE surface form city of Paris - The [capital of France] is easy to reach by train
+p60
+aVu'\u005cu2200' k u'\u005cu2208' [ [ 1 , l ] ] , calculate mutual_relation_score(URI k i ) = u'\u005cu0391' dsr_score(URI k i )+ u'\u005cu0392' csr_score(URI k i
+p61
+aV[ IBM ] URI 1 1 u'\u005cu2261' International Brotherhood of Magicians
+p62
+aVURI 2 1 u'\u005cu2261' International Business Machines Corporation
+p63
+aVThis information will be used to calculate a weight for each of the l candidate URI annotations of each mention
+p64
+aVFirst rank candidate URIs are corrected by a process that relies on co-reference chains found in the document
+p65
+aVCandidate NE annotations for this mention can be International Business Machine or International Brotherhood of Magicians
+p66
+aVDBPedia Spotlight [ 14 ] is a system that finds mentions of DBpedia [ 1 ] resources in a textual document
+p67
+aVS 1 1 gathers URIs and categories contained in the International Brotherhood of Magicians Wikipedia page
+p68
+aVIn this paper we explore the capabilities of a disambiguation algorithm using all the available annotation layers of NEs to improve their links
+p69
+aVWe observe that the complete algorithm (co-references, named entity labels and MDP) provides the best results on PER NE links
+p70
+aVWhen a co-reference chain of NEs is detected, the system assigns the same URI to all the members of the chain
+p71
+aVThe system with the complete disambiguation module obtained the results provided in the third column
+p72
+aVSuch techniques mostly involve exploration of graphs resulting of all the candidate annotations proposed for a given document, and try to rank the best candidates for each annotation using an ontology
+p73
+aVIn this task, mentions of entities found in a document collection must be linked to entities in a reference KB, or to new named entities discovered in the collection
+p74
+aVre-order { URI i k , u'\u005cu2005' k u'\u005cu2208' [ [ 1 , l ] ] } , by decreasing order of mutual relation score
+p75
+aVFor each document u'\u005cud835' u'\u005cudc9f' , this knowledge is gathered in an array called annotation object , which has initially one row per document lexical unit
+p76
+aVThe document contains two sentences, NE mentions are in bold
+p77
+aVThis URI is selected through a decision process that gives more weight to longer surface forms and frequent URIs
+p78
+aVFor the second NE mention [ Thomas J
+p79
+aVAmong the NEs present in the document, the ones that co-refer are identified and clustered by logical rules applied to the content of the annotation object
+p80
+aVColumns c 1 to c l store Wikipedia URIs associated with NEs, ordered by decreasing values of likelihood
+p81
+aVWhile all these approaches focus on semantic relation between entities, their potential is limited by the separate mapping of candidate links for each mention
+p82
+aVTable 1 presents the results obtained by the system in three configurations
+p83
+aVLet us consider the mention IBM in a given document
+p84
+aVBefore being processed by the disambiguation module, u'\u005cud835' u'\u005cudc9c' u'\u005cud835' u'\u005cudc9f' is dynamically updated by correction processes
+p85
+aVFor all the rows in u'\u005cud835' u'\u005cudc9c' u'\u005cud835' u'\u005cudc9f' , sets of rows with identical first rank URIs are considered
+p86
+aVOnly some of these systems introduce the semantic relatedness in their methods like the AIDA [ 12 ] system
+p87
+aVResults on categories News and Web show that the best performance on the whole KBP corpus (without distinction of NE categories) is obtained with the complete algorithm
+p88
+aVIn the first column, the system is evaluated without the disambiguation module
+p89
+aVThe evaluated system makes use of the Wikimeta annotation engine
+p90
+aVFor those three categories of entities, we show that the complete system improves the performance of a simple algorithm using distance measures
+p91
+aVThen, for each set, NE labels are counted per type, and all the rows in a same set are updated with the most frequent NE label found in the set, i.e., all the NEs in this set are tagged with this label
+p92
+aVOne of the classical approach to conduct the disambiguation process in NED applications is to consider the context of the mention to be mapped, and compare this context with contextual information about the potential target entities (see for instance the KIM system [ 18 ]
+p93
+aVThis is usually done using similarity measures (such as cosine similarity, weighted Jaccard distance, KL divergence u'\u005cu2026' ) that evaluate the distance between a bag of words related to a candidate annotation, and the words surrounding the entity to annotate in the text
+p94
+aVThe proposed method is presented in Section 3 where we explain how our SemLinker system prepares documents that contain mentions to disambiguate, then we detail the disambiguation algorithm
+p95
+aVNEs are indicated in brackets, first rank URIs and surface forms are added below the content of each sentence
+p96
+aVThese NEs can be of type person (PER), organization (ORG), etc., and they are usually represented in the KB by a Uniform Resource Identifier (URI
+p97
+aVThree sentences are extracted from a document about Paris, the French capital
+p98
+aVVarious approaches have been proposed to solve the named entity disambiguation (NED) problem
+p99
+aVThis generative approach does not apply to the EL task where each entity to be linked to a semantic description has a specific word context, marker of its exact identity
+p100
+aVThe evaluation of the complete system is provided in Section 4
+p101
+aVThe maximum number of candidate URIs is l = 15
+p102
+aVThe co-reference detection is conducted using the information recorded in the annotation object
+p103
+aVWatson, Jr
+p104
+aVWatson, Jr
+p105
+aVIn the context of the Named Entity Recognition (NER) task, such resources can be generic and generative
+p106
+aVSemLinker has been evaluated on the TAC-KBP 2012 EL task [ 4 ]
+p107
+aVEntity annotation and linking in natural language text has been extensively studied in NLP research
+p108
+aVAlternative propositions were suggested in other works like [ 10 ] that considered the relatedness of common noun phrases in a mention context with Wikipedia article names
+p109
+aVThe MDP correction parameters u'\u005cu0391' and u'\u005cu0392' described in Section 3.4 have been experimentally set to u'\u005cu0391' = 10 , u'\u005cu0392' = 2
+p110
+aVOn GPE and ORG entities, the simple application of MDP without prior corrections obtains the best results
+p111
+aVA slight loss of accuracy is observed on ORG NEs when the MDP is applied with corrections
+p112
+aVThe three NEs found in these sentences compose a co-reference chain
+p113
+aVThe study showed that they perform differently on various essential aspects of EL tasks (mention detection, linking, disambiguation
+p114
+aVMost of them involve the use of surface forms extracted from Wikipedia
+p115
+aVTable 2 provides a breakdown of the queries per categories of entities, and per type of documents
+p116
+aVEntities can be of type person (PER), organization (ORG), or geopolitical entity (GPE
+p117
+aVIn the second column, we applied the MDP without correction processes
+p118
+aVThomas J
+p119
+aV[ Thomas J
+p120
+aVThe calculation combines two scores that we called direct semantic relation score (dsr_score) and common semantic relation score (csr_score
+p121
+aVThey also introduced the notion of semantic relatedness
+p122
+aVSection 2 describes related works
+p123
+aVA basic example of semantic relatedness that should be captured is explained hereafter
+p124
+aVSurface forms consist of a word or a group of words that match lexical units like Paris or New York City
+p125
+aVIn this paper, we consider the TAC-KBP framework
+p126
+aVWikimeta [ 3 ] is another system relying on DBpedia
+p127
+aVIt proposes a disambiguation method that combines popularity-based priors, similarity measures, and coherence
+p128
+aVWatson, Jr became president of the company
+p129
+aVThe document collection built for KBP 2012 contains a combination of newswire articles (News), posts to blogs and newsgroups (Web
+p130
+aVThe paper makes the following novel propositions
+p131
+aVThis suggests a wide range of potential improvements on many aspects of the EL task
+p132
+aVSome authors like Milne and Witten (2008) utilized machine learning methods rather than a similarity function to map mentions to entities
+p133
+aVA complete description of these linguistic resources can be found in [ 7 ]
+p134
+aVThe following example illustrates an application of this correction process
+p135
+aVThis research was supported as part of Dr Eric Charton u'\u005cu2019' s Mitacs Elevate Grant sponsored by 3CE
+p136
+aVThe reference knowledge base is derived from an October 2008 dump of English Wikipedia, which includes 818,741 nodes
+p137
+aVMost of them are compliant with new emergent semantic web standards like LinkedData network
+p138
+aVThis paper is organized as follows
+p139
+aVIn the following, we detail the MDP in the context of a toy example to illustrate how it works
+p140
+aVIBM has 12 research laboratories worldwide
+p141
+aVFor all i u'\u005cu2208' I
+p142
+aVParis - The [city of Paris] attracts millions of tourists
+p143
+aVFinally, we discuss the obtained results, and conclude
+p144
+aV- [Paris] is famous around the world
+p145
+aVParticipation of Dr Marie-Jean Meurs was supported by the Genozymes Project funded by Genome Canada Génome Québec
+p146
+aVThe Concordia Tsang Lab provided computing resources
+p147
+aVIt relies on the Wikipedia-derived YAGO2 [ 11 ] knowledge base
+p148
+aVThose systems have been compared with commercial ones like AlchemyAPI, Zemanta, or Open Calais in [ 9 ]
+p149
+aVScoring
+p150
+aVRe-ranking
+p151
+a.

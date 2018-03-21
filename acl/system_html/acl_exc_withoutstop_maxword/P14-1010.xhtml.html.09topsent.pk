@@ -1,0 +1,22 @@
+(lp0
+VWork on target language morphological segmentation for SMT can be divided into three subproblems segmentation, desegmentation and integration
+p1
+aVLattice desegmentation is a non-local lattice transformation
+p2
+aVWe compose this acceptor with a desegmenting transducer, and then with an unsegmented LM acceptor, producing a fully annotated, desegmented lattice
+p3
+aV2008 ) also tune on unsegmented references by simply desegmenting SMT output before MERT collects sufficient statistics for BLEU and translate with both segmented and unsegmented language models for English-to-Finnish translation
+p4
+aVThis can be accomplished by composing the lattice with a desegmenting transducer that consumes morphemes and outputs desegmented words
+p5
+aVWe approach this problem by augmenting an SMT system built over target segments with features that reflect the desegmented target words
+p6
+aVThis is a natural place to introduce features that describe the desegmentation process, such as scores provided by a desegmentation table, which can be incorporated into the desegmenting transducer u'\u005cu2019' s edge weights
+p7
+aVWe now have a desegmented lattice, but it has not been annotated with an unsegmented (word-level) language model
+p8
+aVFor English-to-Arabic, 1-best desegmentation results in a 0.7 BLEU point improvement over training on unsegmented Arabic
+p9
+aVFortunately, LM annotation as
+p10
+a.

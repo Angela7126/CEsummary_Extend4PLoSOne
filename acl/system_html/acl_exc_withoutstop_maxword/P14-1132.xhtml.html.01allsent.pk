@@ -1,0 +1,422 @@
+(lp0
+VObjects corresponding to concepts are represented in visual terms by vectors in an image-based semantic space (Section 4.2
+p1
+aV2013 ) use linear regression to transform vector-based image representations onto vectors representing the same concepts in linguistic semantic space
+p2
+aVThe process of learning to map objects to the their word label is implemented by training a projection function f proj v u'\u005cu2192' w from the visual onto the linguistic semantic space
+p3
+aVWhen the induced projection function maps an object onto the linguistic space, the derived text vector will inherit a mixture of textual features from the concepts that activated the same hidden unit as the object
+p4
+aVWe use a set of approximately 9,500 concepts, the intersection of the ESP-based visual semantic space with the linguistic space
+p5
+aVSocher et al
+p6
+aVSocher et al
+p7
+aVUnlike Socher et al
+p8
+aVConcretely, we assume that concepts, denoted for convenience by word labels, are represented in linguistic terms by vectors in a text-based distributional semantic space (see Section 4.3
+p9
+aVIn this setting, we assume that our system possesses linguistic and visual information for a set of concepts in the form of text-based representations of words and image-based vectors of the corresponding objects, used for vision-to-language-mapping training
+p10
+aVThe zero-shot framework leads us to frame fast mapping as the task of projecting visual representations of new objects onto language space for retrieving their word labels ( v u'\u005cu2192' w
+p11
+aVThis object is projected onto the linguistic space and associated with the word label of the nearest neighbor in that space ( degus in Figure 1
+p12
+aV2013 ) and the current study that adopt simple unsupervised techniques for constructing image representations, Frome et al
+p13
+aVWhereas for the latter our system assumes that all concepts have rich linguistic representations (i.e.,, representations estimated from a large corpus), in the case of the former, new concepts are assumed to be encounted in a limited linguistic context and therefore lacking rich linguistic representations
+p14
+aVFrome et al
+p15
+aVThe system is then provided with visual information for a previously unseen object, and the task is to associate it with a word by cross-modal mapping
+p16
+aVWord representations are no longer limited to their linguistic contexts but also encode visual information present in images associated with the corresponding objects
+p17
+aVMost importantly, by projecting visual representations of objects into a shared semantic space , we do not limit ourselves to establishing a link between objects and words
+p18
+aVFor a subset of concepts (e.g.,, a set of animals, a set of vehicles), we possess information related to both their linguistic and visual representations
+p19
+aVWe do not aim at enriching word representations with visual information, although this might be a side effect of our approach, but we address the issue of automatically mapping objects, as depicted in images, to the context vectors representing the corresponding words
+p20
+aVUnlike us, Socher and colleagues train an outlier detector to decide whether a test image should receive a known-word label by means of a standard supervised object classifier, or be assigned an unseen label by vision-to-language mapping
+p21
+aVAfter projecting onto the visual space, its nearest visual neighbours are the visual ones of the same-domain concepts corkscrew and kettle
+p22
+aVThe 71 seen concepts correspond to 42,600 distinct visual vectors and are used to induce the projection function
+p23
+aV5 5 We also experimented with the image- and text-based vectors of Socher et al
+p24
+aVThis mapping from visual to textual representations is arguably a more plausible task than vice versa
+p25
+aVSVD is the most widely used dimensionality reduction technique in distributional semantics [ 53 ] , and it has recently been exploited to combine visual and linguistic dimensions in the multimodal distributional semantic model of Bruni et al
+p26
+aV2013 ) learn to project unsupervised vector-based image representations onto a word-based semantic space using a neural network architecture
+p27
+aV2013 ) and Frome et al
+p28
+aVThus, this function, given a visual vector, returns its corresponding linguistic representation
+p29
+aVTable 3 presents both seen and unseen concepts corresponding to visual vectors that trigger the highest activation for a subset of hidden units
+p30
+aVThe low-level features of a specific image are then mapped to the corresponding visual words, and the image is represented by a count vector recording the number of occurrences of each visual word in it
+p31
+aVThis is achieved by means of a simple neural network trained to project image-extracted feature vectors to text-based vectors through a hidden layer that can be interpreted as a cross-modal semantic space
+p32
+aVDuring training, this cross-modal vocabulary is used to induce a projection function (Section 4.4 ), which u'\u005cu2013' intuitively u'\u005cu2013' represents a mapping between visual and linguistic dimensions
+p33
+aVFor this experiment, we use the intersection of our linguistic space with the concepts present in CIFAR-100, containing a total of 90 concepts
+p34
+aVIn both tasks, the projected vector of the unseen concept is labeled with the word associated to its cosine-based nearest neighbor vector in the corresponding semantic space
+p35
+aVWe show that the induced cross-modal semantic space is powerful enough that sensible guesses about the correct word denoting an object can be made, even when the linguistic context vector representing the word has been created from as little as 1 sentence containing it
+p36
+aVFurthermore, since not all new concepts in the linguistic environment refer to new objects (they might denote abstract concepts or out-of-scene objects), it seems more reasonable for the learner to be more alerted to linguistic cues about a recently-spotted new object than vice versa
+p37
+aVMoreover, once the learner observes a new object, she can easily construct a full visual representation for it (and the acquisition literature has shown that humans are wired for good object segmentation and recognition [ 50 ] ) u'\u005cu2013' the more challenging task is to scan the ongoing and very ambiguous linguistic communication for contexts that might be relevant and informative about the new object
+p38
+aVWe implement this second setup ( w u'\u005cu2192' v ) by training the projection function f proj w u'\u005cu2192' v which maps linguistic vectors to visual ones
+p39
+aVFirst, unlike Yu and Siskind ( 2013 ) who considered a limited lexicon of 15 items with only 4 nouns, we conduct experiments in a large search space containing a highly ambiguous set of potential target words for every object (see Section 4.1
+p40
+aVFurthermore, in many cases of miscategorization, the concepts are still semantically coherent with the induced category, confirming that the projection function is indeed capturing a latent, cross-modal semantic space
+p41
+aVWe induce a rich semantic representation of the multimodal concept, that can lead, among other things, to the discovery of important properties of an object even when we lack its linguistic label
+p42
+aVFurthermore, Socher and colleagues present a much more constrained evaluation setup, where only 10 concepts are considered, compared to our experiments with hundreds or thousands of concepts
+p43
+aVRegarding the sources of error, a qualitative analysis of predicted word labels and objects as presented in Table 6 suggests that both textual and visual representations, although capturing relevant u'\u005cu201c' topical u'\u005cu201d' or u'\u005cu201c' domain u'\u005cu201d' information, are not enough to single out the properties of the target concept
+p44
+aVFor the zero-shot task we report the accuracy of retrieving the correct label among the top k neighbors from a semantic space populated with the union of seen and unseen concepts
+p45
+aVFor ESP, given the size and amount of noise in this dataset, we build vectors for visual concepts , by normalizing and summing the BoVW vectors of all the images that have the relevant concept as a tag
+p46
+aVIn this section, we aim at simulating a fast mapping scenario in which the learner has been just exposed to a new concept, and thus has limited linguistic evidence for that concept
+p47
+aVIn our zero-shot experiments, we assume no access to an outlier detector, and thus, the search for the correct label is performed in the full concept space
+p48
+aVFirst, low-level visual features [ 52 ] are extracted from a large collection of images and clustered into a set of u'\u005cu201c' visual words u'\u005cu201d'
+p49
+aVThey feed low-level features to a deep neural network trained on a supervised object recognition task [ 29 ]
+p50
+aV7 7 We also experimented with the same objective function as Socher et al
+p51
+aVUnlike the CIFAR-100 images, which were chosen specifically for image object recognition tasks (i.e.,, each image is clearly depicting a single object in the foreground), ESP contains a random selection of images from the Web
+p52
+aVThe problem of establishing word reference has been extensively explored in computational simulations of cross-situational learning (see Fazly et al
+p53
+aVMoreover, if this is also the first linguistic encounter of that concept, then we refer to the task as fast mapping
+p54
+aVMapping words to the objects they denote is such a core function of language that humans are highly optimized for it, as shown by the so-called fast mapping phenomenon, whereby children can learn to associate a word to an object or property by a single exposure to it [ 2 , 8 , 7 , 25 ]
+p55
+aVFirst, we conduct experiments with simple image- and text-based vector representations and compare alternative methods to perform cross-modal mapping
+p56
+aVFor the SVD model, we set the number of dimensions to 300, a common choice in distributional semantics, coherent with the settings we used for the visual and linguistic spaces
+p57
+aVIn this way, we simulate the first encounter of a learner with a concept that is new in both visual and linguistic terms
+p58
+aVAt test time, the system is presented with a previously unseen object (e.g.,, wampimuk
+p59
+aVWe first test the effectiveness of our cross-modal semantic space on the so-called zero-shot learning task [ 40 ] , which has recently been explored in the machine learning community [ 18 , 49 ]
+p60
+aV2013 ) focus on zero-shot learning in the vision-language domain by exploiting a shared visual-linguistic semantic space
+p61
+aVHowever, NN , an architecture that can capture more complex, non-linear relations in features across modalities, emerges as the best performing model, confirming on a larger scale the recent findings of Socher et al
+p62
+aVAlthough our experimental setup differs from the one of Frome et al
+p63
+aVFor CIFAR-100, we extract distinct visual vectors for single images
+p64
+aVFinally, similarly to the visual semantic space, raw counts are transformed by applying LMI and then reduced to 300 dimensions with SVD
+p65
+aVVery recently, a number of papers have exploited advances in automated feature extraction form images and videos to enrich context vectors with visual information [ 5 , 16 , 34 , 42 , 44 ]
+p66
+aVWe note that previous work on zero-shot learning has used standard object recognition benchmarks
+p67
+aVThe learner is exposed to a new word in context and has to search for the right object referring to it
+p68
+aVFor tuning the number of hidden units of NN , we use the MEN-concrete dataset of Bruni et al
+p69
+aVIrrespective of their relatively high performance on various semantic tasks, it is debatable whether models that have no access to visual and perceptual information can capture the holistic, grounded knowledge that humans have about concepts
+p70
+aVTable 2 reports results obtained by averaging the performance on the 11,400 distinct vectors of the 19 unseen concepts
+p71
+aVFor each concept category, we treat all concepts but one as seen concepts (Table 1
+p72
+aVThe table further reports, for each hidden unit, the u'\u005cu201c' correct u'\u005cu201d' unseen concept for the category of the top seen concepts, together with its rank in terms of activation of the unit
+p73
+aVFor fast mapping, we report the mean rank of the correct concept among fast mapping candidates
+p74
+aVFinally, we randomly pick 70% of the concepts to induce the projection function f proj v u'\u005cu2192' w and report results on the remaining 30%
+p75
+aVOn the contrary, the first time a learner is exposed to a new object, the linguistic information available is likely also very limited
+p76
+aVWe achieve this by looking at which visual concepts result in the highest hidden unit activation
+p77
+aVFor the neural network NN , we use prior knowledge about the number of concept categories to set the number of hidden units to 20 in order to avoid tuning of this parameter
+p78
+aVThe projection function is then
+p79
+aVThis line of research has traditionally assumed artificial models of the external world, typically a set of linguistic or logical labels for objects, actions and possibly other aspects of a scene [ 46 ]
+p80
+aVNote that the search space for the correct label in this experiment is approximately 95 times larger than the one used for the experiment presented in Section 5.1
+p81
+aVOur experiments focus on the tasks of zero-shot learning (Sections 5.1 and 5.2 ) and fast mapping (Section 5.3
+p82
+aVComputational models of meaning that rely on corpus-extracted context vectors, such as LSA [ 31 ] , HAL [ 36 ] , Topic Models [ 20 ] and more recent neural-network approaches [ 11 , 38 ] have successfully tackled a number of lexical semantics tasks, where context vector similarity highly correlates with various indices of semantic relatedness [ 53 ]
+p83
+aVNot surprisingly, when projecting it onto the linguistic space, the nearest neighbours are other kitchen-related terms, i.e.,, potato and dishwasher
+p84
+aVConcretely, we implement 5 models context 1 , context 5 , context 10 , context 20 and context full , where the name of the model denotes the number of sentences used to construct the text-based representations
+p85
+aVIf we think about how linguistic reference is acquired, a scenario in which a learner first encounters a new object and then seeks its reference in the language of the surrounding environment (e.g.,, adults having a conversation, the text of a book with an illustration of an unknown object) is very natural
+p86
+aVImage-based vectors are extracted using the unsupervised bag-of-visual-words (BoVW) representational architecture [ 47 , 12 ] , that has been widely and successfully applied to computer vision tasks such as object recognition and image retrieval [ 56 ]
+p87
+aVThe derived vectors were reduced with the same SVD projection induced from the complete corpus
+p88
+aVThe analysis demonstrates that, although prior knowledge about categories was not explicitly used to train the network, the latter induced an organization of concepts into superordinate categories in which the hidden layer acts as a cross-modal concept categorization/organization system
+p89
+aVHowever, fast mapping is often described in the psychological literature as the opposite task
+p90
+aVHowever, a possibly even more serious pitfall of vector models is lack of reference natural language is, fundamentally, a means to communicate, and thus our words must be able to refer to objects, properties and events in the outside world [ 1 ]
+p91
+aVWe implement 4 alternative learning algorithms for inducing the cross-modal projection function f proj v u'\u005cu2192' w
+p92
+aVThe adaptation of NN is straightforward; the new objective function is derived as
+p93
+aVThe CIFAR-100 dataset [ 30 ] consists of 60,000 32x32 colour images (note the extremely small size) representing 100 distinct concepts, with 600 images per concept
+p94
+aVThe fast mapping setting can be seen as a special case of the zero-shot task
+p95
+aVWithout the ability to refer to the outside world, context vectors are arguably useless for practical goals such as learning to execute natural language instructions [ 3 , 10 ] , that could greatly benefit from the rich network of lexical meaning such vectors encode, in order to scale up to real-life challenges
+p96
+aVThe learner is asked to establish a link between a new object and a word for which they possess a full-fledged text-based vector extracted from a billion-word corpus
+p97
+aVIn this paper, we rely on the same image analysis techniques but instead focus on the reference problem
+p98
+aVFor the learning, we use a set of N s seen concepts for which we have both image-based visual representations u'\u005cud835' u'\u005cudc15' s u'\u005cu2208' u'\u005cu211d' N s × d v and text-based linguistic representations u'\u005cud835' u'\u005cudc16' s u'\u005cu2208' u'\u005cu211d' N s × d w
+p99
+aVAlthough the agent is equipped with a powerful context vector model, this will not suffice to successfully complete the task
+p100
+aVRecently, Yu and Siskind ( 2013 ) presented a system that induces word-object mappings from features extracted from short videos paired with sentences
+p101
+aVIn our setup, after applying CCA on the two spaces u'\u005cud835' u'\u005cudc15' s and u'\u005cud835' u'\u005cudc16' s , we obtain the two projection mappings onto the common space and thus our projection function can be derived as
+p102
+aVTable 1 lists the concepts used in our experiments organized by category
+p103
+aVIf the latter is the case, then these results could be extended to traditional distributional vectors bearing other desirable properties, such as high interpretability of dimensions
+p104
+aVConsider the very simple scenario in which visual information is being provided to an agent about the current state of the world, and the agent u'\u005cu2019' s task is to determine the truth of a statement similar to There is a dog in the room
+p105
+aVThis method is similar to the one introduced by Mikolov et al
+p106
+aVThis is operationalized by constructing the text-based vector for these concepts from a context of just a few occurrences
+p107
+aVSVD smoothing is also a way to infer values of unseen dimensions in partially incomplete matrices, a technique that has been applied to the task of inferring word tags of unannotated images [ 23 ]
+p108
+aVCloser to the spirit of our work are two very recent studies coming from the machine learning community
+p109
+aVThe model might suggest that the concepts of dog and cat are semantically related, but it has no means to determine the visual appearance of dogs, and consequently no way to verify the truth of such a simple statement
+p110
+aVThe projection function in this model can be described as
+p111
+aVThese features are clustered into vocabularies of 5,000 (ESP) and 4,096 (CIFAR-100) visual words
+p112
+aVWe implement the entire visual pipeline with VSEM, an open library for visual semantics [ 4 ]
+p113
+aVNot surprisingly, performance increases with the number of sentences that are used to construct the textual representations
+p114
+aV8 8 For this post-hoc analysis, we include a sparsity parameter in the objective function of Equation 5 in order to get more interpretable results; hidden units are therefore maximally activated by a only few concepts
+p115
+aVSIFT features are tailored to capture object parts and to be invariant to several image transformations such as rotation, illumination and scale change
+p116
+aVBy using least-squares regression, the projection function f proj v u'\u005cu2192' w can be derived as
+p117
+aVu'\u005cu201c' We found a cute, hairy wampimuk sleeping behind the tree u'\u005cu201d' Even though the previous statement is certainly the first time one hears about wampimuks , the linguistic context already creates some visual expectations
+p118
+aVCurrent vector models are purely language-internal, solipsistic models of meaning
+p119
+aVThe projection function is subject to an objective that aims at minimizing some cost function between the induced text-based representations u'\u005cud835' u'\u005cudc16' ^ s u'\u005cu2208' u'\u005cu211d' N s × d w and the gold ones u'\u005cud835' u'\u005cudc16' s
+p120
+aVOn average, an image has 14 tags and a word appears as a tag for 70 images
+p121
+aVOverall, the results suggest that cross-modal mapping could be applied in tasks where images exhibit a more complex structure, e.g.,, caption generation and event recognition
+p122
+aVFor this experiment, we focus on NN , the best performing model in the previous experiment
+p123
+aVOur first model is a very simple linear mapping between the two modalities estimated by solving a least-squares problem
+p124
+aVThus, in order to consider vision-to-language mapping under more plausible conditions, similar to the ones that children or robots in a new environment are faced with, we next simulate a scenario akin to fast mapping
+p125
+aVAs a further example, the visual vector for cooker is extracted from pictures such as the one in Figure 5
+p126
+aVOur 4 models introduced in Section 4.4 are compared to a theoretically derived baseline Chance simulating selecting a label at random
+p127
+aVTo preserve spatial information in the BoVW representation, we use the spatial pyramid technique [ 32 ] , which consists in dividing the image into several regions, computing BoVW vectors for each region and concatenating them
+p128
+aVThe resulting multimodal space has been shown to provide a good approximation to human concept similarity judgments [ 45 ]
+p129
+aV1 1 http://www.cs.cmu.edu/~biglou/resources/ The ESP image tags form a vocabulary of 20,515 unique words
+p130
+aVThis suggests a bias towards seen concepts
+p131
+aVHowever, the models induce the meaning of words entirely from their co-occurrence with other words, without links to the external world
+p132
+aVNevertheless, Yu and Siskind u'\u005cu2019' s system could in principle be used to initialize the vision-language mapping that we rely upon
+p133
+aVThen, we complement recent work [ 18 ] and show that zero-shot learning scales to a large and noisy dataset
+p134
+aVWe apply Local Mutual Information (LMI, [ 13 ] ) as weighting scheme and reduce the full co-occurrence space to 300 dimensions using the Singular Value Decomposition
+p135
+aVIn order to gain qualitative insights into the performance of the projection process of NN , we attempt to investigate the role and interpretability of the hidden layer
+p136
+aV2010 ) for a recent proposal and extended review of previous work
+p137
+aVThe last model that we introduce is a neural network with one hidden layer
+p138
+aVThe weights are estimated by minimizing the objective function
+p139
+aVWe operationalize this by considering the 34 concrete concepts introduced by Frassinelli and Keller ( 2012 ) , and deriving their text-based representations from just a few sentences randomly picked from the corpus
+p140
+aV2013 ) , however, our objective function yielded consistently better results in all experimental settings
+p141
+aVFinally, we provide preliminary evidence that cross-modal projections can be used effectively to simulate a fast mapping scenario, thus strengthening the claims of this approach as a full-fledged, fully inductive theory of meaning acquisition
+p142
+aVTo the best of our knowledge, this is the first time this task has been performed on a dataset as noisy as ESP
+p143
+aVThus, ESP constitutes a more realistic, and at the same time more challenging, simulation of how things are encountered in real life, testing the potentials of cross-modal mapping in dealing with the complex scenes that one would encounter in event recognition and caption generation tasks
+p144
+aVAs low-level features, we use Scale Invariant Feature Transform (SIFT) features [ 35 ]
+p145
+aVWe collect co-occurrences in a symmetric context window of 20 elements around a target word
+p146
+aVThis line of research tackles the grounding problem
+p147
+aVCross-modal mapping is done via NN
+p148
+aVSemantic vectors are constructed for a set of 30K target words (lemmas), namely the top 20K most frequent nouns, 5K most frequent adjectives and 5K most frequent verbs, and the same 30K lemmas are also employed as contextual elements
+p149
+aVThis suggests that the system can make reasonable inferences about object-word connections even when linguistic evidence is very scarce
+p150
+aVA natural question we aim to answer is whether the success of cross-modal mapping is due to the high-quality embeddings or to the general algorithmic design
+p151
+aVThis is the scenario of zero-shot learning
+p152
+aVIn our experiments we used cosine as similarity function, so that s u'\u005cu2062' i u'\u005cu2062' m u'\u005cu2062' ( u'\u005cud835' u'\u005cudc00' , u'\u005cud835' u'\u005cudc01' ) = A u'\u005cu2062' B u'\u005cu2225' A u'\u005cu2225' u'\u005cu2062' u'\u005cu2225' B u'\u005cu2225' , thus penalizing parameter settings leading to a low cosine between the target linguistic representations u'\u005cud835' u'\u005cudc16' s and those produced by the projection function u'\u005cud835' u'\u005cudc16' ^ s
+p153
+aVUnlike other datasets used for zero-shot learning, it covers adjectives and verbs in addition to nouns
+p154
+aVThe cosine has been widely used in the distributional semantic literature, and it has been shown to outperform Euclidean distance [ 6 ]
+p155
+aVFor constructing the text-based vectors, we follow a standard pipeline in distributional semantics [ 53 ] without tuning its parameters and collect co-occurrence statistics from the concatenation of ukWaC 4 4 http://wacky.sslmit.unibo.it and the Wikipedia, amounting to 2.7 billion tokens in total
+p156
+aV6 6 We denote the right singular vectors matrix by u'\u005cud835' u'\u005cudc19' instead of the customary u'\u005cud835' u'\u005cudc15' to avoid confusion with the visual matrix
+p157
+aV2013 ) rely on a supervised state-of-the-art method
+p158
+aVConsequently, objects do not appear in most images in their prototypical display, but rather as elements of complex scenes (see Figure 2
+p159
+aVThe induced f proj v u'\u005cu2192' w is then applied to the image-based representations u'\u005cud835' u'\u005cudc15' u u'\u005cu2208' u'\u005cu211d' N u × d v of N u unseen objects to transform them into text-based representations u'\u005cud835' u'\u005cudc16' ^ u u'\u005cu2208' u'\u005cu211d' N u × d w
+p160
+aVThis is inspired by analogous qualitative analysis conducted in Topic Models [ 20 ] , where u'\u005cu201c' topics u'\u005cu201d' are interpreted in terms of the words with the highest probability under each of them
+p161
+aVTable 7 presents the results
+p162
+aVAs an example, the textual vector of dishwasher contains kitchen-related dimensions such as u'\u005cu27e8' fridge , oven , gas , hob , u'\u005cu2026' , sink u'\u005cu27e9'
+p163
+aVNote that relevant literature [ 41 ] has emphasized the importance of learners self-generating multiple views when faced with new objects
+p164
+aVIn particular, we divide ESP images into 16 regions and the smaller CIFAR-100 images into 4
+p165
+aVOur second dataset consists of 100K images from the ESP-Game data set, labeled through a u'\u005cu201c' game with a purpose u'\u005cu201d' [ 55 ]
+p166
+aVSurprisingly, the very simple lin method outperforms both CCA and SVD
+p167
+aV2 2 For selecting the size of the vocabulary size, we relied on standard settings found in the relevant literature [ 5 , 9 ]
+p168
+aV2013 ) , but achieved better performance with the reported setup
+p169
+aVOur work complements theirs in two ways
+p170
+aVThe aforementioned task is very demanding and interesting from an engineering point of view
+p171
+aV2013 ) , thus preventing a direct comparison, the results reported in Table 5 are on a comparable scale to theirs
+p172
+aVThe latter is shown in Figure 5 , with a gas hob well in evidence
+p173
+aVThus, our multiple-image assumption should not be considered as problematic in the current setup
+p174
+aVGiven that these models are learned from naturally occurring data using simple associative techniques, various authors have advanced the claim that they might be also capturing some crucial aspects of how humans acquire and use language [ 31 , 33 ]
+p175
+aVFirst and foremost, all 4 models outperform Chance by a large margin
+p176
+aVThe vectors resulting from region concatenation have dimensionality 5000 × 16 = 80 , 000 (ESP) and 4 , 096 × 4 = 16 , 384 (CIFAR-100), respectively
+p177
+aVOne is the grounding problem [ 24 , 43 ]
+p178
+aVwhere s u'\u005cu2062' i u'\u005cu2062' m is some similarity function
+p179
+aVWampimuks probably resemble small animals (Figure 1
+p180
+aVThe contributions of this work are three-fold
+p181
+aVCCA [ 22 , 27 ] and variations thereof have been successfully used in the past for annotation of regions [ 48 ] and complete images [ 21 , 26 ]
+p182
+aVBut lack of reference is not only a theoretical weakness
+p183
+aVWe experimented with sigmoid, hyperbolic tangent and linear; hyperbolic tangent yielded the highest performance
+p184
+aVwhere u'\u005cud835' u'\u005cudeaf' v u'\u005cu2192' w consists of the model weights u'\u005cud835' u'\u005cudf3d' ( 1 ) u'\u005cu2208' u'\u005cu211d' d v × h and u'\u005cud835' u'\u005cudf3d' ( 2 ) u'\u005cu2208' u'\u005cu211d' h × d w that map the input image-based vectors u'\u005cud835' u'\u005cudc15' s first to the hidden layer and then to the output layer in order to obtain text-based vectors, i.e.,, u'\u005cud835' u'\u005cudc16' ^ s = u'\u005cu03a3' ( 2 ) u'\u005cu2062' ( u'\u005cu03a3' ( 1 ) u'\u005cu2062' ( u'\u005cud835' u'\u005cudc15' u'\u005cud835' u'\u005cudc94' u'\u005cu2062' u'\u005cud835' u'\u005cudf3d' ( 1 ) ) u'\u005cu2062' u'\u005cud835' u'\u005cudf3d' ( 2 ) ) , where u'\u005cu03a3' ( 1 ) and u'\u005cu03a3' ( 2 ) are the non-linear activation functions
+p185
+aVThis is achieved by finding a pair of matrices, in our case u'\u005cud835' u'\u005cudc02' V u'\u005cu2208' u'\u005cu211d' d v × d and u'\u005cud835' u'\u005cudc02' W u'\u005cu2208' u'\u005cu211d' d w × d , such that the correlation between the projections of the two multidimensional variables into a common, lower-rank space is maximized
+p186
+aVParameters were estimated with standard backpropagation and L-BFGS
+p187
+aVOur approach is competitive with respect to the recently proposed alternatives, while being overall simpler
+p188
+aVA squirrel , although not a u'\u005cu201c' large omnivore u'\u005cu201d' , is still an animal, while butterflies are not flowers but often feed on their nectar
+p189
+aVGiven two paired observation matrices, in our case u'\u005cud835' u'\u005cudc15' s and u'\u005cud835' u'\u005cudc16' s , CCA aims at capturing the linear relationship that exists between these variables
+p190
+aVThe dataset covers a wide range of concrete domains and is organized into 20 broader categories
+p191
+aVFurthermore, all models perform better than Chance , including those that are based on just 1 or 5 sentences
+p192
+aVWe do not attempt any parameter tuning of the pipeline
+p193
+aVThis constitutes a serious blow to claims of cognitive plausibility in at least two respects
+p194
+aVThis work was supported by ERC 2011 Starting Independent Research Grant n. 283554 (COMPOSES
+p195
+aVHowever, from a cognitive angle, it relies on strong, unrealistic assumptions
+p196
+aVwhere the input is appropriately padded with 0s ( [ u'\u005cud835' u'\u005cudc15' u u'\u005cu2062' u'\u005cud835' u'\u005cudfce' N u'\u005cu2062' u × W ] ) and we discard the visual block of the output matrix [ u'\u005cud835' u'\u005cudc15' ^ u u'\u005cu2062' u'\u005cud835' u'\u005cudc16' ^ u ]
+p197
+aVIn our setup, we can see the two different modalities as if they were different languages
+p198
+aVFurthermore, their text-based vectors encode very rich information, such as k u'\u005cu2062' i u'\u005cu2062' n u'\u005cu2062' g u'\u005cu2192' - m u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2192' + w u'\u005cu2062' o u'\u005cu2062' m u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2192' = q u'\u005cu2062' u u'\u005cu2062' e u'\u005cu2062' e u'\u005cu2062' n u'\u005cu2192' [ 39 ]
+p199
+aV2013a ) for estimating a translation matrix, only solved analytically
+p200
+aVAssuming that the concept-representing rows of u'\u005cud835' u'\u005cudc15' s and u'\u005cud835' u'\u005cudc16' s are ordered in the same way, we apply the ( k -truncated) SVD to the concatenated matrix [ u'\u005cud835' u'\u005cudc15' s u'\u005cu2062' u'\u005cud835' u'\u005cudc16' s ] , such that [ u'\u005cud835' u'\u005cudc15' ^ s u'\u005cu2062' u'\u005cud835' u'\u005cudc16' ^ u'\u005cud835' u'\u005cudc2c' ] = u'\u005cud835' u'\u005cudc14' k u'\u005cu2062' u'\u005cud835' u'\u005cudeba' k u'\u005cu2062' u'\u005cud835' u'\u005cudc19' k T is a k -rank approximation of the original matrix
+p201
+aVWe thank Adam Li u'\u005cu0160' ka for helpful discussions and the 3 anonymous reviewers for useful comments
+p202
+aV25 {subfigure} .22
+p203
+aVwhere u'\u005cud835' u'\u005cudc15' ^ s = u'\u005cu03a3' ( 2 ) u'\u005cu2062' ( u'\u005cu03a3' ( 1 ) u'\u005cu2062' ( u'\u005cud835' u'\u005cudc16' u'\u005cud835' u'\u005cudc94' u'\u005cu2062' u'\u005cud835' u'\u005cudf3d' ( 1 ) ) u'\u005cu2062' u'\u005cud835' u'\u005cudf3d' ( 2 ) ) , u'\u005cud835' u'\u005cudf3d' ( 1 ) u'\u005cu2208' u'\u005cu211d' d w × h and u'\u005cud835' u'\u005cudf3d' ( 2 ) u'\u005cu2208' u'\u005cu211d' h × d v
+p204
+aV2013 )
+p205
+aV2014
+p206
+aV25
+p207
+aV25
+p208
+aV2014
+p209
+aV3 3 http://clic.cimec.unitn.it/vsem/
+p210
+a.

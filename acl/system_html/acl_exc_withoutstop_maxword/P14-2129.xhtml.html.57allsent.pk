@@ -1,0 +1,78 @@
+(lp0
+VFinally, Figure 3 shows the speed of inference, labeled precision and labeled recall of annotating hedge constituents on the test set as a function of the maximum span parameter L , versus the baseline parser
+p1
+aVA unique property of hedge constituents compared to constituents in the original parse trees is that they are sequentially connected to the top-most node
+p2
+aVIt is possible to parse with a standardly induced PCFG using this sort of hedge constrained parsing that only considers a subset of the chart cells, and speedups are achieved, however this is clearly non-optimal, since the model is ill-suited to combining hedges into flat structures at the root of the tree
+p3
+aVWe use hedge segmentation as a finite-state pre-processing step for hedge context-free parsing
+p4
+aVFigure 2 plots the percentage of constituents from the original WSJ Penn treebank (sections 2-21) retained in the transformed version, as we vary the maximum span length parameter L
+p5
+aVAs stated earlier, our brute-force baseline approach is to parse the sentence using a full context-free grammar (CFG) and then hedge-transform the result
+p6
+aVOur task is to learn which words can begin ( B ) a hedge constituent
+p7
+aVIf we apply this transform to an entire treebank, we can use the transformed trees to induce a PCFG for parsing
+p8
+aVThe final two rows show performance with automatic segmentation, using a model that includes either unlabeled or labeled segmentation tags, as described in the last section
+p9
+aVThis property enables us to chunk the sentence into segments that correspond to complete hedges, and parse the segments independently (and simultaneously) instead of parsing the entire sentence
+p10
+aVFor example, the span of the non-root S , SBAR , ADJP , and VP nodes in Figure 1 (a) have spans between 10 and 13, hence are removed in the tree in Figure 1 (b
+p11
+aVSegmentation accuracy is reported as an F1-score of unlabeled segment bracketing
+p12
+aVThus, we train a grammar in a matched condition, which we call it a hedgebank grammar
+p13
+aVNote that segmentation time is negligible compared to the parsing time, hence is omitted in reported time
+p14
+aVIn such a way, hedges are sequentially connected to the top-most non-terminal in the tree, as demonstrated in Figure 1
+p15
+aVSince we limit the span of non-terminal labels, we can constrain the search performed by the parser, greatly reduce the CYK processing time
+p16
+aVAfter applying such a transform to a treebank, we can induce grammars and modify parsing to search as needed to recover just these constituents
+p17
+aVSpace constraints preclude inclusion of trials with this method, but the net result is a severe degradation in accuracy (tens of points of F-measure) versus standard parsing
+p18
+aVIn this paper, we propose several methods to parse hedge constituents and examine their accuracy/efficiency tradeoffs
+p19
+aVEfficiency results are reported as number of words parsed per second (w/s
+p20
+aVFurther, if the binarization systematically groups the leftmost or the rightmost children under these new non-terminals (the most common strategy), then constituents with span greater than L will either begin at the first word (leftmost grouping) or end at the last word (rightmost), further constraining the number of cells in the chart requiring work
+p21
+aVSegmentation accuracy is better for the model with labels, although overall that accuracy is rather low
+p22
+aVNote also that these latter cells (spanning L words) may be less expensive, as the set of possible non-terminals is reduced to only those introduced by binarization
+p23
+aVWe treat this as a binary classification task which decides if a word can begin a new hedge
+p24
+aVGiven a set of labeled pairs ( S , H ) where S is a sentence of n words w 1 u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' w n and H is its hedge parse tree, word w b belongs to B if there is a hedge constituent spanning w b u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' w e for some e u'\u005cu2265' b and w b belongs to B ¯ otherwise
+p25
+aVThis method should yield a ceiling on hedge-parsing accuracy, as it has access to rich contextual information (as compared to grammars trained on transformed trees
+p26
+aVEven so, locally-connected source language parse structures can inform both segmentation and translation of each segment in such a translation scenario
+p27
+aVThe results show the same patterns as on the development set
+p28
+aVKeep in mind that the number of reference constituents increases as L increases, hence both precision and recall can decrease as the parameter grows
+p29
+aVMost experiments in this paper will focus on L = 7 , which is short enough to provide a large speedup yet still cover a large fraction of constituents
+p30
+aVIt is also reminiscent of so-called Semi-Markov models [ 12 ] , which allow finite-state models to reason about segments rather than just tags by imposing segment length limits
+p31
+aVWe follow the XML community in naming structures of this type hedges (not to be confused with the rhetorical device of the same name), due to the fact that they are like smaller versions of trees which occur in sequences
+p32
+aVSimilar constraints have been used in dependency parsing [ 6 , 5 ] , where the use of hard constraints on the distance between heads and dependents is known as vine parsing
+p33
+aVModels to derive such non-hierarchical annotations are finite-state, so inference is very fast
+p34
+aVWe ran timing tests on an Intel 2.66GHz processor with 3MB of cache and 2GB of memory
+p35
+aVFor example, in incremental (simultaneous) machine translation [ 13 ] , sub-sentential segments are translated independently and sequentially, hence the fully-connected syntactic structure is not generally available
+p36
+aVWe restrict the types to the most important types u'\u005cu2013' following the 11 chunk types annotated in the CoNLL-2000 chunking task [ 11 ] u'\u005cu2013' by replacing all other types with a new type OUT
+p37
+aVThus, u'\u005cu201c' Analysts u'\u005cu201d' is labeled B G ; u'\u005cu201c' much u'\u005cu201d' , B u'\u005cud835' u'\u005cudc41' u'\u005cud835' u'\u005cudc43' ; u'\u005cu201c' will u'\u005cu201d' , B u'\u005cud835' u'\u005cudc49' u'\u005cud835' u'\u005cudc43' and so on
+p38
+a.

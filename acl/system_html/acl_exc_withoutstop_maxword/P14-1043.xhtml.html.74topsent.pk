@@ -1,0 +1,14 @@
+(lp0
+VTo construct parse forest on unlabeled data, we employ three supervised parsers based on different paradigms, including our baseline graph-based dependency parser, a transition-based dependency parser [] , and a generative constituent parser []
+p1
+aVBoth work employs two parsers to process the unlabeled data, and only select as extra training data sentences on which the 1-best parse trees of the two parsers are identical
+p2
+aVCombining the outputs of Berkeley Parser and GParser ( u'\u005cu201c' Unlabeled u'\u005cu2190' B+G u'\u005cu201d' ), we get higher oracle score (96.37% on English and 89.72% on Chinese) and higher syntactic divergence (1.085 candidate heads per word on English, and 1.188 on Chinese) than u'\u005cu201c' Unlabeled u'\u005cu2190' Z+G u'\u005cu201d' , which verifies our earlier discussion that Berkeley Parser produces more different structures than ZPar
+p3
+aVCombining the outputs of Berkeley Parser and ZPar ( u'\u005cu201c' Unlabeled u'\u005cu2190' B+Z u'\u005cu201d' ), we get the best performance on English, which is also significantly better than both co-training ( u'\u005cu201c' Unlabeled u'\u005cu2190' B u'\u005cu201d' ) and tri-training ( u'\u005cu201c' Unlabeled u'\u005cu2190' B=Z u'\u005cu201d' ) on both English and Chinese
+p4
+aVDifferent from traditional self/co/tri-training which only use 1-best parse trees on unlabeled data, our approach adopts ambiguous labelings, represented by parse forest, as gold-standard for unlabeled sentences
+p5
+aVGiven an input sentence u'\u005cud835' u'\u005cudc31' = w 0 u'\u005cu2062' w 1 u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' w n , the goal of dependency parsing is to build a dependency tree as depicted in
+p6
+a.

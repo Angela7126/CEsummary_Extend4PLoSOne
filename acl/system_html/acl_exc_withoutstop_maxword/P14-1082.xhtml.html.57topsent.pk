@@ -1,0 +1,42 @@
+(lp0
+VWe see that the language model baseline for English u'\u005cu2192' French shows the same substantial improvement over the baseline as our English u'\u005cu2192' Spanish results
+p1
+aVAs expected, the LM baseline substantially outperforms the context-insensitive MLF baseline
+p2
+aVThird, we observe that adding the language model to our classifier leads to another significant gain (configuration l1r1 + LM in the results in Table 2
+p3
+aVThe auto configuration improves results over the uniformly applied feature selection
+p4
+aVPer classifier expert, the best scoring configuration was selected, referred to as the auto configuration in Table 2
+p5
+aVWe therefore conducted a number of experiments with other language pairs, and present the abridged results in Table 6
+p6
+aVHowever, if we enable the language model as we do in the auto + LM configuration we do not notice an improvement over l1r1 + LM , surprisingly
+p7
+aVAutomatic configuration selection was done by performing leave-one-out testing (for small number of instances) or 10-fold-cross validation (for larger number of instances, n u'\u005cu2265' 20 ) on the training data per classifier expert
+p8
+aVIn order to draw accurate conclusions, experiments on a single data set and language pair are not sufficient
+p9
+aVA second baseline was constructed by weighing the probabilities from the translation table directly with the L2 language model described earlier
+p10
+aVThe language model is a trigram-based back-off language model with Kneser-Ney smoothing, computed using SRILM [] and trained on the same training data as the translation model
+p11
+aVA context size of one prevails in the vast majority of cases, which is not surprising considering the good results we have already seen with this configuration
+p12
+aVThe same holds for the Chinese u'\u005cu2192' English experiment
+p13
+aVThe error rate metrics show improvement as well
+p14
+aVThis intuitively makes sense; a context of one may seem to be better than any other when uniformly applied to all classifier experts, but it may well be that certain classifiers benefit from different feature selections
+p15
+aVThis baseline, henceforth referred to as the u'\u005cu2019' most likely fragment u'\u005cu2019' baseline (MLF) is analogous to the u'\u005cu2019' most frequent sense u'\u005cu2019' -baseline common in evaluating WSD systems
+p16
+aVIf not, we check for the presence of a classifier expert for the offered L1 fragment; only then we can proceed by extracting the desired number of L2 local context words to the immediate left and right of this fragment and adding those to the feature vector
+p17
+aVWords or phrases that always map to a single translation are stored in a simple mapping table, as a classifier would have no added value in such cases
+p18
+aVConclusions with regard to context width may have to be tempered somewhat, as the performance of the l1r1 configuration was found to not be significantly better than that of the l2r2 configuration
+p19
+aVThe main research question in this research is
+p20
+a.

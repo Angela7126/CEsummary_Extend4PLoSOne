@@ -1,0 +1,58 @@
+(lp0
+VOur composite kernel consists of a history sequence and a domain context tree kernels, both of which are composed based on similar textual units in Wikipedia articles to a given dialog context
+p1
+aVIn this work, a composite kernel is defined by combining the individual kernels including history sequence and domain context tree kernels, as well as the linear kernel between the vectors representing fundamental features extracted from the utterances themselves and the results of linguistic preprocessors
+p2
+aVBoth represent the current dialog context at a given turn with a set of relevant Wikipedia paragraphs which are selected based on the cosine similarity between the term vectors of the recently mentioned utterances and each paragraph in the Wikipedia collection as follows
+p3
+aVAfter computing this relatedness between the current dialog context and every paragraph in the Wikipedia collection, two kernel structures are constructed using the information obtained from the highly-ranked paragraphs in the Wikipedia
+p4
+aVSince this constructed tree structure represents semantic, discourse, and structural information extracted from the similar Wikipedia paragraphs to each given instance, we can explore these more enriched features to build the topic tracking model using a subset tree kernel [ 5 ] which computes the similarity between each pair of trees in the feature space as follows
+p5
+aVThen, the history sequence and tree context structures for our composite kernel were constructed based on 3,155 articles related to Singapore collected from Wikipedia database dump as of February 2013
+p6
+aVAlthough some fundamental features extracted from the utterances mentioned at a given turn or in a certain number of previous turns can be used for training the model, this information obtained solely from an ongoing dialog is not sufficient to identify not only user-initiative, but also system-initiative topic transitions
+p7
+aVFor the linear kernel baseline, we used the following features n-gram words, previous system actions, and current user acts which were manually annotated
+p8
+aVW is the size of word dictionary, and h is the number of previous turns considered as dialog history features
+p9
+aVSince our hypothesis is that the more similar the dialog histories of the two inputs are, the more similar aspects of topic transtions occur for them, we propose a sub-sequence kernel [ 11 ] to map the data into a new feature space defined based on the similarity of each pair of history sequences as follows
+p10
+aVWhen just the paragraph IDs were included as additional features, it failed to improve the performances from the baseline without any external features
+p11
+aVComposite kernels have been successfully applied to improve the performances in other NLP problems [ 17 , 16 ] by integrating multiple individual kernels, which aim to overcome the errors occurring at one level by information from other levels
+p12
+aVDialog topic tracking can be considered as a classification problem to detect topic transitions
+p13
+aVTo analyze and maintain dialog topics from a more systematic perspective in a given dialog flow, some researchers [ 12 , 8 , 1 ] have considered this dialog topic identification as a separate sub-problem of dialog management and attempted to solve it with text categorization approaches for the recognized utterances in a given turn
+p14
+aVHowever, the dialog topic at each turn can be determined not only by the user u'\u005cu2019' s intentions captured from the given utterances, but also by the system u'\u005cu2019' s decisions for dialog management purposes
+p15
+aVThe term vector for the input x , u'\u005cu03a6' u'\u005cu2062' ( x ) , is computed by accumulating the weights in the previous turns as follows
+p16
+aVSince we aim at developing the system which acts as a guide communicating with tourist users, an instance for both training and prediction of topic transition was created for each turn of tourists
+p17
+aVThe error distributions in Figure 4 indicate that these performance improvements were achieved by resolving the errors not only on user-initiative topic transitions, but also on system-initiative cases, which implies the effectiveness of the structured knowledge from Wikipedia to track the topics in mixed-initiative dialogs
+p18
+aVFinally, 8,318 instances were used for training the model
+p19
+aVMoreover, these approaches face cost problems for building a sufficient amount of resources to cover broad states of complex dialogs, because these resources should be manually prepared by human experts for each specific domain
+p20
+aVThese knowledge-based methods have an advantage of dealing with system-initiative dialogs, because dialog flows can be controlled by the system based on given resources
+p21
+aVThe most probable pair of topics at just before and after each turn is predicted by the following classifier f u'\u005cu2062' ( x t ) = ( y t - 1 , y t ) , where x t contains the input features obtained at a turn t , y t u'\u005cu2208' C , and C is a closed set of topic categories
+p22
+aVThus, the text categorization approaches can only be effective for the user-initiative cases when users tend to mention the topic-related expressions explicitly in their utterances
+p23
+aVWe trained the SVM models using SVM light 1 1 http://svmlight.joachims.org/ [ 7 ] with the following five different combinations of kernels
+p24
+aVwhere u'\u005cu0391' i = u'\u005cu2211' j = 0 h ( u'\u005cu039b' j u'\u005cu22c5' t u'\u005cu2062' f u'\u005cu2062' i u'\u005cu2062' d u'\u005cu2062' f u'\u005cu2062' ( w i , u ( t - j ) ) ) , u t is the utterance mentioned in a turn t , t u'\u005cu2062' f u'\u005cu2062' i u'\u005cu2062' d u'\u005cu2062' f u'\u005cu2062' ( w i , u t ) is the product of term frequency of a word w i in u t and inverse document frequency of w i , u'\u005cu039b' is a decay factor for giving more importance to more recent turns
+p25
+aVThis conversation is divided into three segments, since f detects three topic transitions at t 1 , t 4 and t 6
+p26
+aVIf a topic transition occurs at t , y t should be different from y t - 1
+p27
+aVK l only, K l with u'\u005cud835' u'\u005cudcab' as features, K l + K s , K l + K t , and K l + K s + K t
+p28
+a.

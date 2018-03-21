@@ -1,0 +1,250 @@
+(lp0
+VTable 2 lists the most frequent categories in the three datasets, with their percentage of the overall number of brackets (%gold), their score based just on the head identification (F-h), their score based on head identification and (left and right) span (F-s), and the attachment (att) and span-right (spanR) scores for those that match based on the head
+p1
+aV1) The high performance on the OntoNotes WSJ material is in large part due to the score on the non-recursive regexes of NP-t, VP-t, S-vp, and the auxiliaries (points 1, 2, 4, 6 in the graphs
+p2
+aVSince this affects the F-s scores for VP-t, VP-aux, and S-vp, the negative effect is large
+p3
+aVFor example, the mediocre performance of the parser on SQ-vp barely affects the score with OntoNotes, but has a larger negative effect with Answers, due to its increased frequency in the latter
+p4
+aV2) We wouldn u'\u005cu2019' t expect the test-on-training evalb score to be 100%, since it has to back off from the training data, but the results for the different categories vary widely, with e.g.,, the NP-modr F-h score much lower than other frequent regexes
+p5
+aVThe two graphs in Figure 6 show the cumulative results based on F-h and F-s, respectively
+p6
+aVWe decompose both the gold and parser output trees into derivation trees with spinal etrees, and score based on the regexes projected by each word
+p7
+aV1) For each regex match, we score whether it matches based on the span as well
+p8
+aVThe simultaneous F-h and F-s scores let us identify constructions where the parser has the head projection correct, but gets the span wrong
+p9
+aVHowever, the F-s score is for separate syntactic constructions (including also head identification), although we can also sum it over all the structures, as done later in Figure 6
+p10
+aV2) Since the derivation tree is really a dependency tree with more complex nodes [] , we can also score each regex for attachment
+p11
+aVPhrase-structure parsing is usually evaluated using evalb [] , which provides a score based on matching brackets
+p12
+aVWe show in Section 2.3 how this derivation tree representation is used to score this attachment error directly, rather than obscuring it as an NP bracket error as evalb would do
+p13
+aVThe word u'\u005cu201c' make u'\u005cu201d' has a match for the regexes VP-t, VP-aux, and S-vp, and so on
+p14
+aVWe ran the gold and parsed versions through our regex decomposition and derivation tree creation
+p15
+aVWe trained the parser on sections 2-21 of OntoNotes WSJ, and parsed the three datasets with the gold tags, since at present we wish to analyze the parser performance in isolation from Part-of-Speech tagging errors
+p16
+aVThis is the case even if the score is broken down by brackets (NP, VP, etc.), because the brackets can represent different types of structures
+p17
+aVThe regexes allow us to also provide scores based on spans of different construction types
+p18
+aVThe benefit of the approach described here is that now we can see the contribution to the evalb score of the particular types of constructions, and within those constructions, how well the parser is doing at getting the same head projection, but failing or not on the spans
+p19
+aVThere is a match for a regex if the corresponding words in gold/parser files project to that regex, a precision error if the parser file does but the gold does not, and a recall error if the gold does but the parser file does not
+p20
+aVSumming such scores over the corresponding gold/parser trees gives us F-scores for each regex
+p21
+aVTo facilitate comparison of our analysis with evalb, we used corpora versions with the same bracket deletion (empty yields and most punctuation) as evalb
+p22
+aV4 4 We do not have space here to discuss the data structure in complete detail, but multiple regex names at a node, such a VP-aux and VP-t at tree a3 in Figure 3 , indicate multiple VP nonterminals
+p23
+aVFor example, u'\u005cu201c' make u'\u005cu201d' is a match for VP-t in Figures 3 and 3 , and is also a match for the span as well, since in both derivation trees it includes the words u'\u005cu201c' make u'\u005cu2026' Florida u'\u005cu201d'
+p24
+aVIn Figure 3 , NP-t in etree #a5 is considered as having the attachment to #a3
+p25
+aVIn this case, the NP on the left is identified as the head d) VP-crd is also a regex for a recursive structure, in this case for VP coordination, picking out the leftmost conjunct as the head of the structure
+p26
+aVFor example, while u'\u005cu201c' to u'\u005cu201d' is a match for PP-t, its attachment is not, since in Figure 3 it is a child of the u'\u005cu201c' trip u'\u005cu201d' etree (#a5) and in Figure 3 it is a child of the u'\u005cu201c' make u'\u005cu201d' etree (#b3
+p27
+aVWe trained the parser on sections 2-21, and so (a) is u'\u005cu201c' test-on-train u'\u005cu201d'
+p28
+aVWe derived the regexes via an iterative process of inspection of tree decomposition on dataset (a), together with taking advantage of the treebanking experience from some of the co-authors
+p29
+aVFirst, inspired by the tradition of Tree Adjoining Grammar-based research [] , we use a decomposition of the full trees into u'\u005cu201c' elementary trees u'\u005cu201d' (henceforth u'\u005cu201c' etrees u'\u005cu201d' ), with a derivation tree that records how the etrees relate to each other, as in
+p30
+aVWhile this metric serves a valuable purpose in pushing parser research forward, it has limited utility for understanding what sorts of errors a parser is making
+p31
+aVThese are best thought of as an extension of head-finding rules, which not only find a head but simultaneously identify each parent/children relation as one of a limited number of types of structures (right-modification, etc
+p32
+aVAs this is work-in-progress, the analysis is not yet complete
+p33
+aV3 3 Some among the 49 are duplicates, used for different nonterminals, as with (a) and (b) in Figure 1
+p34
+aVDecomposing the original phrase-structure tree into the smaller components requires some method of determining the u'\u005cu201c' head u'\u005cu201d' of a nonterminal, from among its children nodes, similar to parsing work such as
+p35
+aVEach structure within a circle is one etree, and the derivation as a whole indicates how these etrees are combined
+p36
+aVAs described above, we are also interested in the type of linguistic construction represented by that one-level structure, each of which instantiates one of a few types - recursive coordination, simple head-and-sister, etc
+p37
+aVThis work is in the same basic line of research as the inter-annotator agreement analysis work in
+p38
+aVIn particular, we use the u'\u005cu201c' spinal u'\u005cu201d' structure approach of [] , where etrees are constrained to be unary-branching
+p39
+aVIn contrast to the sort of head rules in [] , these refer as little as possible to specific POS tags
+p40
+aVInstead of explicitly listing the POS tags of possible heads, the heads are in most cases determined by their location in the structure
+p41
+aVThe F-s score roughly corresponds to the evalb score
+p42
+aVCritical to this is the fact that the parser does well on determining the right edge of verbal structures, which affects the F-s score for VP-t (non-recursive), VP-aux, and S-vp
+p43
+aVWe call the match just for the head the u'\u005cu201c' F-h u'\u005cu201d' score and the match that also includes the span information the u'\u005cu201c' F-s u'\u005cu201d' score
+p44
+aVTherefore our analysis results in an attachment score for every regex
+p45
+aV10 10 The final F-s value is lower than the evalb score - e.g., 92.5 for sections 2-21 (the rightmost point in the graph for sections 2-21 in the F-s graph in Figure 6 ) compared to the 93.8 evalb score
+p46
+aVOne is that there are cases in which bracket spans match, but the head, as found by our regexes, is different in the gold and parser trees
+p47
+aVThe score is lower for Answers, as also found by
+p48
+aVAlso, the attachment score is not relevant for regexes that already express a recursive structure, such as NP-modr
+p49
+aVIn the results below in Table 2 and Figure 6 we combine the nonterminals that are not covered by one of the regexes with the simple non-recursive regex case for that nonterminal
+p50
+aV4) While the different distribution of constructions is a problem for Answers, more critical is the poor performance of the parser on determining the right edge of verbal constructions
+p51
+aVThis is only 85.4 for VP-t in Answers, compared to the OntoNotes results mentioned in (1
+p52
+aVThe attachment score does not apply to the recursive categories, as mentioned above
+p53
+aVThese show the cumulative score in order of the frequency of categories
+p54
+aVTable 1 shows the sizes of the three corpora in terms of tokens and brackets, for both the gold and parsed versions, with the evalb scores for the parsed versions
+p55
+aVWe first describe the use of the regexes in tree decomposition, and then give some examples of incorporating these regexes into the derivation trees
+p56
+aVTable 1 shows the number and percentage of brackets handled by our regexes
+p57
+aV3) The different distribution of structures in Answers hurts performance
+p58
+aVFor example, Figure 3 shows the derivation tree resulting from the decomposition of the tree in Figure 5
+p59
+aVThis is reflected in the derivation tree in Figure 3 , in which the NP-modr regex is absent, with the NP-t and PP-t etrees #b5 and #b6 both pointing to the VP-t regex in #b3
+p60
+aVThe derivation trees provide elements of a dependency analysis, which allow us to calculate scores for head identification and attachment for different projections (e.g.,, PP
+p61
+aVThe tree in Figure 5 is the parser output corresponding to the gold tree in Figure 5 , and in this case gets the PP-t attachment wrong, while everything else is the same as the gold
+p62
+aVThe spanR score for VP-t is 95.8 for Sections 2-21 and 93.7 for Section 22
+p63
+aVFor example, for sections 2-21, the score for NP-t is shown first, with 30.7% of the brackets, and then together with the VP-t category, they cover 45.2% of the brackets, etc
+p64
+aVPreliminary investigation shows that this is due in part to incorrect PP and SBAR placement (the PP-t and SBAR-s attachment scores (80.7 and 81.9) are worse for Answers compared to Section 22 (86.1 and 86.4)), and coordinated S-clauses with no conjunction
+p65
+aVIn some cases, we need to search for particular nonterminal heads, such as with the (b) regexes S-vp and SQ-vp, which identify the rightmost VP among the children of a S or SQ as the head c) NP-modr is a regex for a recursive NP with a right modifier
+p66
+aVSample regexes are shown in Figure 1
+p67
+aV9 9 The score for the left edge is almost always very high for every category, and we just list here the right edge score
+p68
+aVTogether these two aspects break down the evalb brackets into more meaningful categories, and the simultaneous head and span scoring allows us to separate these aspects in the analysis
+p69
+aVAfter describing in more detail the basic framework, we show some aspects of the resulting analysis of the performance of the Berkeley parser [] on three datasets a) OntoNotes WSJ sections 2-21 [] 1 1 We refer only to the WSJ treebank portion of OntoNotes, which is roughly a subset of the Penn Treebank [] with annotation revisions including the addition of NML nodes
+p70
+aVThe other cases is when brackets match, and may even have the same head, but their regex is different
+p71
+aVIt is this matching for span as well as head that allows us to compare our results to evalb
+p72
+aV(b) OntoNotes WSJ section 22, and (c) the u'\u005cu201c' Answers u'\u005cu201d' section of the English Web Treebank []
+p73
+aVThe high coverage (%) reinforces the point that there is a limited number of core structures in the treebank
+p74
+aVFor example, the PP-t etree #a6 points to the NP-modr regex, which consists of the NP-t together with the PP-t
+p75
+aV6 6 A regex intermediate in a etree, such as VP-t above, is considered to have a default null attachment
+p76
+aVFor example, comparing the trees in Figures 5 and 5 via their derivation trees in Figures 3 and Figures 3 , the word u'\u005cu201c' trip u'\u005cu201d' has a match for the regex NP-t, but a recall error for NP-modr
+p77
+aVThe nonterminals of the spinal etrees are the names of the regexes, with the simpler nonterminal labels trivially derivable from the regex names
+p78
+aVIn future work we will provide a full accounting of such cases, but they do not affect the main aspects of the analysis
+p79
+aVWe present the results in two ways
+p80
+aVStructures with a CONJ/CONJP/NML child do not match this rule and are handled by different regexes, which are all mutually exclusive
+p81
+aVThe gold tree is shown without the SBJ function tag
+p82
+aVThe suffix u'\u005cu201c' -t u'\u005cu201d' is for the simple non-recursive case in which the head is a terminal
+p83
+aVThese three results together show how the parser is generalizing from the training data, and what aspects of the u'\u005cu201c' domain adaptation u'\u005cu201d' problem to the web material are particularly important
+p84
+aV7 7 In future work we will compare our approach to that of , who also move beyond evalb scores in an effort to provide more meaningful error analysis
+p85
+aVThe current work scores on general categories of structures, without the reliance on sequences of individual strings
+p86
+aV8 8 We also combine a few other non-recursive regexes together with NP-t, such as the special one for possessives
+p87
+aVRegexes ADJP-t and ADVP-t in (a) identify their terminal head to be the rightmost terminal, possibly preceded by some number of terminals or nonterminals, relying on a mapping that maps all terminals (except CC, which is mapped to CONJ) to TAG and all nonterminals (except CONJP and NML) to NT
+p88
+aVOn PP attachment u'\u005cu201d' etc
+p89
+aVIn sum, there is a wealth of information from this new type of analysis that we will use in our on-going work to better understand what the parser is learning and how it works on different genres
+p90
+aVWe would also like to have answers to such questions as u'\u005cu201c' How does the parser do on non-recursive NPs, separate from NPs resulting from modification
+p91
+aVThe names of these regexes are incorporated into the etrees themselves, as labels of the nonterminals
+p92
+aVThis variance from the test-on-training dataset carries over almost exactly to Section 22
+p93
+aVSecond, we use a set of regular expressions (henceforth u'\u005cu201c' regexes u'\u005cu201d' ) that categorize the possible structures in the treebank
+p94
+aVThe regex names roughly describe their purpose - u'\u005cu201c' mod u'\u005cu201d' for right-modification, u'\u005cu201c' crd u'\u005cu201d' for coordination, etc
+p95
+aVThe crucial step is that we integrate these regexes into the spinal etrees
+p96
+aVWe address both tasks together with the regexes
+p97
+aVHere we indicate with arrows that point to the relevant regex
+p98
+aVSpace prevents full explanation, but there are two reasons for this
+p99
+aVHowever, that work did not utilize regexes, and focused on comparing sequences of identical strings
+p100
+aVThere are 49 regexes used
+p101
+aVWe highlight a few points here
+p102
+aVVP
+p103
+aVPP
+p104
+aVWe worked with the three datasets as described in the introduction
+p105
+aV^(head:VP) (VP)* CONJ VP$
+p106
+aV5 5 We leave function tags aside for future work
+p107
+aVAnswering such questions is the goal of this work, which combines two strands of research
+p108
+aVThis allows an etree to contain information such as u'\u005cu201c' this node represents right modification u'\u005cu201d'
+p109
+aV^(TAG
+p110
+aVNT
+p111
+aVNML)*(head:TAG) (NT)*$ (b)S-vp, SQ-vp
+p112
+aVThis material is based upon work supported by National Science Foundation Grant # BCS-114749 (first, fourth, and sixth authors) and by the Defense Advanced Research Projects Agency (DARPA) under Contract No
+p113
+aVNP)+$ (d)VP-crd
+p114
+aVADVP
+p115
+aVADJP
+p116
+aV2 2 We parse (c) while training on (a) to follow the procedure in
+p117
+aVThere are two modifications/extensions to these F-scores that we also use
+p118
+aVThe content does not necessarily reflect the position or the policy of the Government, and no official endorsement should be inferred
+p119
+aVHR0011-11-C-0145 (first, second, and third authors
+p120
+aV^([^ ]+)*(head:VP)$ (c)NP-modr
+p121
+aV^(head:NP)(SBAR
+p122
+aVa)ADJP-t,ADVP-t
+p123
+aVS
+p124
+a.

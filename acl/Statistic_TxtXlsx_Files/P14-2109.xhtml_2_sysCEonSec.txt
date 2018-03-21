@@ -1,0 +1,290 @@
+Current File: P14-2109.xhtml_2 P14-2109.xhtml
+
+Section 0:  Abstract
+	SentNum: 4
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 25.0000%
+
+Section 1:  1 Introduction
+	SentNum: 19
+	CENum: 8
+	SentCovered: 8
+	Covered_Rate: 42.1053%
+
+Section 2:  2 Framework for analyzing parsing performance
+	SentNum: 65
+	CENum: 18
+	SentCovered: 22
+	Covered_Rate: 33.8462%
+
+Section 3:  3 Analysis of parsing results
+	SentNum: 37
+	CENum: 9
+	SentCovered: 11
+	Covered_Rate: 29.7297%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-2109.xhtml_2's CE cases
+
+Section 0:  Abstract has 1 CE cases
+	CASE: 1
+	Stag: 0 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: This paper introduces a new technique for phrase-structure parser analysis, categorizing possible treebank structures by integrating regular expressions into derivation trees. 
+		Cause: [(0, 16), (0, 21)]
+		Effect: [(0, 0), (0, 14)]
+
+Section 1:  1 Introduction has 8 CE cases
+	CASE: 1
+	Stag: 4 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: Phrase-structure parsing is usually evaluated using evalb [] , which provides a score based on matching brackets. 
+		Cause: [(0, 16), (0, 17)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 2
+	Stag: 5 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: While this metric serves a valuable purpose in pushing parser research forward, it has limited utility for understanding what sorts of errors a parser is making. 
+		Cause: [(0, 18), (0, 26)]
+		Effect: [(0, 0), (0, 16)]
+
+	CASE: 3
+	Stag: 6 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: This is the case even if the score is broken down by brackets (NP, VP, etc.), because the brackets can represent different types of structures. 
+		Cause: [(0, 22), (0, 29)]
+		Effect: [(0, 0), (0, 19)]
+
+	CASE: 4
+	Stag: 6 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: This is the case even if the score is broken down by brackets (NP, VP, etc.), because the brackets can represent different types of structures. 
+		Cause: [(0, 6), (0, 19)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 5
+	Stag: 10 11 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: First, inspired by the tradition of Tree Adjoining Grammar-based research [] , we use a decomposition of the full trees into u'\u201c' elementary trees u'\u201d' (henceforth u'\u201c' etrees u'\u201d' ), with a derivation tree that records how the etrees relate to each other, as in. In particular, we use the u'\u201c' spinal u'\u201d' structure approach of [] , where etrees are constrained to be unary-branching. 
+		Cause: [(0, 2), (1, 23)]
+		Effect: [(0, 2), (0, 62)]
+
+	CASE: 6
+	Stag: 13 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: These are best thought of as an extension of head-finding rules, which not only find a head but simultaneously identify each parent/children relation as one of a limited number of types of structures (right-modification, etc. 
+		Cause: [(0, 6), (0, 35)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 7
+	Stag: 16 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: The regexes allow us to also provide scores based on spans of different construction types. 
+		Cause: [(0, 10), (0, 14)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 8
+	Stag: 20 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: We trained the parser on sections 2-21, and so (a) is u'\u201c' test-on-train u'\u201d'. 
+		Cause: [(0, 0), (0, 6)]
+		Effect: [(0, 10), (0, 23)]
+
+Section 2:  2 Framework for analyzing parsing performance has 18 CE cases
+	CASE: 1
+	Stag: 24 25 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Decomposing the original phrase-structure tree into the smaller components requires some method of determining the u'\u201c' head u'\u201d' of a nonterminal, from among its children nodes, similar to parsing work such as. As described above, we are also interested in the type of linguistic construction represented by that one-level structure, each of which instantiates one of a few types - recursive coordination, simple head-and-sister, etc. 
+		Cause: [(1, 1), (1, 34)]
+		Effect: [(0, 1), (0, 41)]
+
+	CASE: 2
+	Stag: 27 28 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In contrast to the sort of head rules in [] , these refer as little as possible to specific POS tags. Instead of explicitly listing the POS tags of possible heads, the heads are in most cases determined by their location in the structure. 
+		Cause: [(0, 15), (1, 22)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 3
+	Stag: 31 32 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: 3 3 Some among the 49 are duplicates, used for different nonterminals, as with (a) and (b) in Figure 1. We derived the regexes via an iterative process of inspection of tree decomposition on dataset (a), together with taking advantage of the treebanking experience from some of the co-authors. 
+		Cause: [(0, 15), (1, 31)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 4
+	Stag: 36 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In this case, the NP on the left is identified as the head d) VP-crd is also a regex for a recursive structure, in this case for VP coordination, picking out the leftmost conjunct as the head of the structure. 
+		Cause: [(0, 12), (0, 43)]
+		Effect: [(0, 0), (0, 10)]
+
+	CASE: 5
+	Stag: 42 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Each structure within a circle is one etree, and the derivation as a whole indicates how these etrees are combined. 
+		Cause: [(0, 13), (0, 20)]
+		Effect: [(0, 1), (0, 11)]
+
+	CASE: 6
+	Stag: 46 
+		Pattern: 0 [[['indicate', 'indicates', 'indicated', 'realize', 'realizes', 'realized', 'ensure', 'ensures', 'ensured', 'imply', 'implies', 'implied']]]---- [['&NP@C@', '(&Clause@C@)'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: 4 4 We do not have space here to discuss the data structure in complete detail, but multiple regex names at a node, such a VP-aux and VP-t at tree a3 in Figure 3 , indicate multiple VP nonterminals. 
+		Cause: [(0, 0), (0, 36)]
+		Effect: [(0, 38), (0, 40)]
+
+	CASE: 7
+	Stag: 64 65 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We show in Section 2.3 how this derivation tree representation is used to score this attachment error directly, rather than obscuring it as an NP bracket error as evalb would do. We decompose both the gold and parser output trees into derivation trees with spinal etrees, and score based on the regexes projected by each word. 
+		Cause: [(0, 24), (1, 24)]
+		Effect: [(0, 0), (0, 22)]
+
+	CASE: 8
+	Stag: 65 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: We decompose both the gold and parser output trees into derivation trees with spinal etrees, and score based on the regexes projected by each word. 
+		Cause: [(0, 20), (0, 25)]
+		Effect: [(0, 0), (0, 17)]
+
+	CASE: 9
+	Stag: 66 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: There is a match for a regex if the corresponding words in gold/parser files project to that regex, a precision error if the parser file does but the gold does not, and a recall error if the gold does but the parser file does not. 
+		Cause: [(0, 8), (0, 45)]
+		Effect: [(0, 0), (0, 6)]
+
+	CASE: 10
+	Stag: 66 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: There is a match for a regex if the corresponding words in gold/parser files project to that regex, a precision error if the parser file does but the gold does not, and a recall error if the gold does but the parser file does not. 
+		Cause: [(0, 15), (0, 37)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 11
+	Stag: 68 69 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: The word u'\u201c' make u'\u201d' has a match for the regexes VP-t, VP-aux, and S-vp, and so on. Summing such scores over the corresponding gold/parser trees gives us F-scores for each regex. 
+		Cause: [(0, 5), (0, 24)]
+		Effect: [(0, 28), (1, 12)]
+
+	CASE: 12
+	Stag: 71 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: 1) For each regex match, we score whether it matches based on the span as well. 
+		Cause: [(0, 14), (0, 15)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 13
+	Stag: 72 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: For example, u'\u201c' make u'\u201d' is a match for VP-t in Figures 3 and 3 , and is also a match for the span as well, since in both derivation trees it includes the words u'\u201c' make u'\u2026' Florida u'\u201d'. 
+		Cause: [(0, 37), (0, 60)]
+		Effect: [(0, 0), (0, 34)]
+
+	CASE: 14
+	Stag: 76 77 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: However, the F-s score is for separate syntactic constructions (including also head identification), although we can also sum it over all the structures, as done later in Figure 6. The simultaneous F-h and F-s scores let us identify constructions where the parser has the head projection correct, but gets the span wrong. 
+		Cause: [(0, 29), (1, 23)]
+		Effect: [(0, 0), (0, 26)]
+
+	CASE: 15
+	Stag: 78 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: 2) Since the derivation tree is really a dependency tree with more complex nodes [] , we can also score each regex for attachment. 
+		Cause: [(0, 3), (0, 16)]
+		Effect: [(0, 18), (0, 25)]
+
+	CASE: 16
+	Stag: 81 82 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In Figure 3 , NP-t in etree #a5 is considered as having the attachment to #a3. For example, while u'\u201c' to u'\u201d' is a match for PP-t, its attachment is not, since in Figure 3 it is a child of the u'\u201c' trip u'\u201d' etree (#a5) and in Figure 3 it is a child of the u'\u201c' make u'\u201d' etree (#b3. 
+		Cause: [(0, 12), (1, 72)]
+		Effect: [(0, 0), (0, 10)]
+
+	CASE: 17
+	Stag: 82 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: For example, while u'\u201c' to u'\u201d' is a match for PP-t, its attachment is not, since in Figure 3 it is a child of the u'\u201c' trip u'\u201d' etree (#a5) and in Figure 3 it is a child of the u'\u201c' make u'\u201d' etree (#b3. 
+		Cause: [(0, 27), (0, 76)]
+		Effect: [(0, 3), (0, 24)]
+
+	CASE: 18
+	Stag: 84 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: This work is in the same basic line of research as the inter-annotator agreement analysis work in. 
+		Cause: [(0, 11), (0, 16)]
+		Effect: [(0, 0), (0, 9)]
+
+Section 3:  3 Analysis of parsing results has 9 CE cases
+	CASE: 1
+	Stag: 89 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: We trained the parser on sections 2-21 of OntoNotes WSJ, and parsed the three datasets with the gold tags, since at present we wish to analyze the parser performance in isolation from Part-of-Speech tagging errors. 
+		Cause: [(0, 22), (0, 32)]
+		Effect: [(0, 0), (0, 19)]
+
+	CASE: 2
+	Stag: 92 93 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: To facilitate comparison of our analysis with evalb, we used corpora versions with the same bracket deletion (empty yields and most punctuation) as evalb. We ran the gold and parsed versions through our regex decomposition and derivation tree creation. 
+		Cause: [(0, 7), (1, 14)]
+		Effect: [(0, 0), (0, 24)]
+
+	CASE: 3
+	Stag: 99 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: Table 2 lists the most frequent categories in the three datasets, with their percentage of the overall number of brackets (%gold), their score based just on the head identification (F-h), their score based on head identification and (left and right) span (F-s), and the attachment (att) and span-right (spanR) scores for those that match based on the head. 
+		Cause: [(0, 42), (0, 53)]
+		Effect: [(0, 55), (0, 73)]
+
+	CASE: 4
+	Stag: 102 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: The two graphs in Figure 6 show the cumulative results based on F-h and F-s, respectively. 
+		Cause: [(0, 12), (0, 14)]
+		Effect: [(0, 0), (0, 9)]
+
+	CASE: 5
+	Stag: 110 111 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The benefit of the approach described here is that now we can see the contribution to the evalb score of the particular types of constructions, and within those constructions, how well the parser is doing at getting the same head projection, but failing or not on the spans. As this is work-in-progress, the analysis is not yet complete. 
+		Cause: [(1, 1), (1, 10)]
+		Effect: [(0, 0), (0, 50)]
+
+	CASE: 6
+	Stag: 113 
+		Pattern: 0 [['due', 'to']]---- [['&R'], ['&NP@C@']]
+		sentTXT: 1) The high performance on the OntoNotes WSJ material is in large part due to the score on the non-recursive regexes of NP-t, VP-t, S-vp, and the auxiliaries (points 1, 2, 4, 6 in the graphs. 
+		Cause: [(0, 16), (0, 43)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 7
+	Stag: 116 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: 2) We wouldn u'\u2019' t expect the test-on-training evalb score to be 100%, since it has to back off from the training data, but the results for the different categories vary widely, with e.g.,, the NP-modr F-h score much lower than other frequent regexes. 
+		Cause: [(0, 21), (0, 29)]
+		Effect: [(0, 31), (0, 54)]
+
+	CASE: 8
+	Stag: 119 
+		Pattern: 0 [['due', 'to']]---- [['&R'], ['&NP@C@']]
+		sentTXT: For example, the mediocre performance of the parser on SQ-vp barely affects the score with OntoNotes, but has a larger negative effect with Answers, due to its increased frequency in the latter. 
+		Cause: [(0, 29), (0, 34)]
+		Effect: [(0, 0), (0, 26)]
+
+	CASE: 9
+	Stag: 122 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since this affects the F-s scores for VP-t, VP-aux, and S-vp, the negative effect is large. 
+		Cause: [(0, 1), (0, 7)]
+		Effect: [(0, 9), (0, 18)]
+
+#-------------------------------------------------
+

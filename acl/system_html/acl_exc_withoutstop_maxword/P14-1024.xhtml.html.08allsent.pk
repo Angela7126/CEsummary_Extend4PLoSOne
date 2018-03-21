@@ -1,0 +1,526 @@
+(lp0
+VTsvetkov et al
+p1
+aVTsvetkov et al
+p2
+aVTurney et al
+p3
+aVTurney et al
+p4
+aVSimilarly to Tsvetkov et al
+p5
+aVIn the case of SVO relations, we use software and datasets from Tsvetkov et al
+p6
+aVStrzalkowski et al
+p7
+aVStrzalkowski et al
+p8
+aV2013 ) and of Turney et al
+p9
+aVWe also use the same thresholds for classifier posterior probabilities as Tsvetkov et al
+p10
+aVHovy et al
+p11
+aVOur approach is different from that of Tsvetkov et al
+p12
+aVTo divide adjectives into groups, Tsvetkov et al
+p13
+aV2013 ) in that it uses additional features (vector space word representations) and a different classification method (we use random forests while Tsvetkov et al
+p14
+aVBroadwell et al
+p15
+aVIn this section, we compare our method to state-of-the-art methods of Tsvetkov et al
+p16
+aVIn the case of AN relations, we use the dataset (denoted as an an -baseline) created by Turney et al
+p17
+aVFor the SVO task, the cross-validation accuracy is about 10% better than that of Tsvetkov et al
+p18
+aVNamely, we use a trained English model discussed in Section 5.1 to classify literal and metaphoric SVO and AN relations in English, Spanish, Farsi and Russian test sets, listed in Section 4.2
+p19
+aVTurney \u005cnormal@char~ et \u005cnormal@char~ al
+p20
+aVThis is in line with results of Hovy et al
+p21
+aVEnglish adjectives do not, as yet, have a similar high-level semantic partitioning in WordNet, thus we use a 13-class taxonomy of adjective supersenses constructed by Tsvetkov et al
+p22
+aVWe train SVO metaphor detection tools on SVO relations extracted from TroFi sentences and evaluate them on the svo -baseline dataset
+p23
+aVWe replicate the above described evaluation procedure of Turney et al
+p24
+aVIn the case of SVO relations, we incorporate supersense features for nouns and verbs; noun and adjective supersenses are used in the case of AN relations
+p25
+aV2013 ) , we use a logistic regression classifier to propagate abstractness and imageability scores from MRC ratings to all words for which we have vector space representations
+p26
+aVFor the AN task, the cross validation accuracy is better by 8% than the result of Turney et al
+p27
+aVIn a recent study, Mikolov et al
+p28
+aVEnglish, Spanish, Farsi, and Russian
+p29
+aVWe classify SVO and AN relations using a classifier trained on the All feature combination and balanced thresholds
+p30
+aVSVO metaphors
+p31
+aVDegrees of abstractness and imageability are posterior probabilities of classifier predictions
+p32
+aVThese datasets, denoted as an svo -baseline, consist of 98 English and 149 Russian sentences
+p33
+aVAbstractness and imageability
+p34
+aVMore specifically, we calculate the degree of abstractness and imageability of all English items that have a vector space representation, using vector elements as features
+p35
+aVWe train two separate classifiers for abstractness and imageability on a seed set of words from the MRC database
+p36
+aVNeuman \u005cnormal@char~ et \u005cnormal@char~ al
+p37
+aVTo train an SVO metaphor classifier, we employ the TroFi (Trope Finder) dataset
+p38
+aVFor languages other than English, feature vectors are projected to English features using translation dictionaries
+p39
+aVShutova \u005cnormal@char~ et \u005cnormal@char~ al
+p40
+aVVector space word representations
+p41
+aVAccording to Table 3 , we obtain higher performance scores for both Russian and English
+p42
+aV1) we develop a new state-of-the-art English metaphor detection system that uses conceptual semantic features, such as a degree of abstractness and semantic supersenses; 2 2 https://github.com/ytsvetko/metaphor (2) we create new metaphor-annotated corpora for Russian and English; 3 3 http://www.cs.cmu.edu/~ytsvetko/metaphor/datasets.zip (3) using a paradigm of model transfer [ 21 , 41 , 15 ] , we provide support for the hypothesis that metaphors are conceptual (rather than lexical) in nature by showing that our English-trained model can detect metaphors in Spanish, Farsi, and Russian
+p43
+aVWe define three main feature categories (1) abstractness and imageability, (2) supersenses, (3) unsupervised vector-space word representations; each category corresponds to a group of features with a common theme and representation
+p44
+aVOur task, as defined in Section 2 , is to classify SVO and AN relations as either metaphoric or literal
+p45
+aVExperiments with the pairs of features yield better results than individual features, implying that the feature categories are not redundant
+p46
+aVAbstractness and Imageability features work better for adjectives and nouns, which is in line with previous findings [ 40 , 4 ]
+p47
+aV\u005cnormal@char~ [ 24 ] describe a Concrete Category Overlap algorithm, where co-occurrence statistics and Turney u'\u005cu2019' s abstractness scores are used to determine WordNet supersenses that correspond to literal usage of a given adjective or verb
+p48
+aVTo implement this idea, they extend MRC imageability scores to all dictionary words using links among WordNet supersenses (mostly hypernym and hyponym relations
+p49
+aVNote that higher scores are obtained for the Russian test set
+p50
+aVNoun supersense features alone allows us to achieve an accuracy of 75%, i.e.,, adjective supersense features contribute 4% to adjective-noun supersense feature combination
+p51
+aVThus, we compile eight test datasets, four for SVO relations, and four for AN relations
+p52
+aVTo summarize the experimental section, our metaphor detection approach obtains state-of-the-art performance in English, is effective when applied to out-of-domain English data, and works cross-lingually
+p53
+aVThese results show superior performance over previous state-of-the-art results, confirming our hypothesis that conceptual features are effective in metaphor classification
+p54
+aVTo test this hypothesis, we use a cross-lingual model transfer approach we use bilingual dictionaries to project words from other syntactic constructions found in other languages into English and then apply the English model on the derived conceptual representations
+p55
+aVVector space word representations learned using unsupervised algorithms are often effective features in supervised learning methods [ 39 ]
+p56
+aVThe vector will consist of the concatenation of the conceptual features (which we discuss below) for all participating words, and conjunction features for word pairs
+p57
+aV2013 ) employ only English and Russian data
+p58
+aVSupersenses of adjectives
+p59
+aVExperimental results are given in Table 2 , where we also provide the number of features in each feature set
+p60
+aV12 12 For the full taxonomy see http://www.sfs.uni-tuebingen.de/lsd/adjectives.shtml For each adjective type in WordNet, they produce a vector with a classifier posterior probabilities corresponding to degrees of membership of this word in one of the 13 semantic classes, 13 13 http://www.cs.cmu.edu/~ytsvetko/adj-supersenses.tar.gz similar to the feature vectors we build for nouns and verbs
+p61
+aV2011 ) train logistic-regression employing only abstractness ratings as features
+p62
+aVPerformance of these classifiers, tested on a sampled held-out data, is 0.94 and 0.85 for the abstractness and imageability classifiers, respectively
+p63
+aVSupersenses are particularly attractive features for metaphor detection coarse sense taxonomies can be viewed as semantic concepts, and since concept mapping is a process in which metaphors are born, we expect different supersense co-occurrences in metaphoric and literal combinations
+p64
+aVIn that, for the AN Farsi task we observe high performance scores
+p65
+aVAfter filtering, there are 953 metaphorical and 656 literal SVO relations which we use as a training set
+p66
+aVFor a historic overview and a survey of common approaches to metaphor detection, we refer the reader to recent reviews by Shutova \u005cnormal@char~ et \u005cnormal@char~ al
+p67
+aVWe carry out such experiments using held-out SVO and AN en test sets, described in Section 4.2 and Table 1
+p68
+aVWe cannot compare directly our model with this work because our classifier is restricted to detection of only SVO and AN metaphors
+p69
+aVFor example, in English we classify as metaphoric dirty word and cloudy future
+p70
+aVRemaining sentences were annotated by several native speakers (five for English and six for Russian), who judged AN and SVO phrases in context
+p71
+aVSupersenses of nouns and verbs
+p72
+aVWe collect and annotate metaphoric and literal test sentences in four languages
+p73
+aVCurrent work builds on this study, and incorporates new syntactic relations as metaphor candidates, adds several new feature sets and different, more reliable datasets for evaluating results
+p74
+aVOur task in this work is to define features that distinguish between metaphoric and literal uses of two syntactic constructions subject-verb-object (SVO) and adjective-noun (AN) tuples
+p75
+aVOur random forest classifier models the probability that the input syntactic relation is metaphorical
+p76
+aVWe represent each candidate relation using the features described in Section 3.2 , and evaluate performance of the three feature categories and their combinations
+p77
+aVWe demonstrate results on two new languages, Spanish and Farsi, to emphasize the generality of the method
+p78
+aVTo make classification decisions, we use a random forest classifier [ 3 ] , an ensemble of decision tree classifiers learned from many independent subsamples of the training data
+p79
+aV2013 ) explain the algorithm only for English and say that is the same for Spanish, Farsi, and Russian
+p80
+aVSupersenses
+p81
+aVFigure 6 and Table 5 confirm, that we obtain similar, robust results on four very different languages, using the same English classifiers
+p82
+aVIn our classifier, we use the All feature combination and the balanced threshold as described in Section 5.1
+p83
+aVAbstractness and imageability were shown to be useful in detection of metaphors (it is easier to invoke mental pictures of concrete and imageable words) [ 40 , 4 ]
+p84
+aVFirst, we use a dependency parser [ 19 ] to extract subject-verb-object (SVO) relations
+p85
+aVIn the case of the AN task, a difference between the All feature combination and any other combination of features listed in Table 2 is statistically significant ( p 0.01 for both the sign and the permutation test
+p86
+aV10 10 http://ota.oucs.ox.ac.uk/headers/1054.xml It includes, among other data, 4,295 words rated by the degrees of abstractness and 1,156 words rated by the imageability
+p87
+aVEnglish ( en ) and Russian ( ru ) datasets have been compiled by our team and are publicly available
+p88
+aVIn the case of AN relations, we construct and make publicly available a training set containing 884 metaphorical AN pairs and 884 pairs with literal meaning
+p89
+aV2011 ) , who focused on classifying SVO and AN relations, respectively
+p90
+aVAccording to ROC plots in Figure 3 , all three feature sets are effective, both for SVO and for AN tasks
+p91
+aVIn the next experiment we corroborate the main hypothesis of this paper a model trained on English data can be successfully applied to other languages
+p92
+aVDegrees of membership in different supersenses are represented by feature vectors, where each element corresponds to one supersense
+p93
+aVBecause they heavily rely on WordNet and availability of imageability scores, their approach may not be applicable to low-resource languages
+p94
+aV9 9 In our experiments, random forests model slightly outperformed logistic regression and SVM classifiers
+p95
+aVThen, we filter extracted relations to eliminate parsing-related errors, and relations with verbs which are not in the TroFi verb list
+p96
+aVWordNet lacks coarse-grained semantic categories for adjectives
+p97
+aVNo English annotators of the test set, and only one Russian annotator out of 6 participated in the selection of the training samples
+p98
+aVTable 1 lists test set sizes
+p99
+aVWord pairs dirty diaper and cloudy weather have same adjectives
+p100
+aV\u005cnormal@char~ [ 28 ] proposed a bottom-up method one starts from a set of seed metaphors and seeks phrases where verbs and/or nouns belong to the same cluster as verbs or nouns in seed examples
+p101
+aVSpanish ( es ) and Farsi ( fa ) datasets are published elsewhere [ 18 ]
+p102
+aVIn this section we describe a classification model, and provide details on mono- and cross-lingual implementation of features
+p103
+aVWe can see that all types of features have good performance on their own (VSM is the strongest feature type
+p104
+aVAlthough often correlated with abstractness, imageability is not a redundant property
+p105
+aVFurthermore, we hypothesize that our coarse semantic features give us a language-invariant representation suitable for metaphor detection
+p106
+aV\u005cnormal@char~ [ 40 ] show how abstractness scores could be used to detect metaphorical AN phrases
+p107
+aV2013 ) propose a cross-lingual detection method that uses only English lexical resources and a dependency parser
+p108
+aVConsistent results with high f -scores are obtained across all four languages
+p109
+aVThis is why the AN fa dataset in Table 1 is significantly larger than SVO fa
+p110
+aV11 11 Thresholds are equal to 0.8 for abstractness and to 0.9 for imageability
+p111
+aVIn particular, many such representations are designed to capture lexical semantic properties and are quite effective features in semantic processing, including named entity recognition [ 38 ] , word sense disambiguation [ 13 ] , and lexical entailment [ 1 ]
+p112
+aVWe expect that abstractness, used in conjunction features (e.g.,, a feature denoting that the subject is abstract and the verb is concrete), is especially useful semantically, an abstract agent performing a concrete action is a strong signal of metaphorical usage
+p113
+aVFor a randomly guessing classifier, the ROC curve is a dashed diagonal line
+p114
+aVEach SVO (or AN) instance will be represented by a triple (duple) from which a feature vector will be extracted
+p115
+aVEach curve corresponds to a test set described in Table 1
+p116
+aV2013 ) , who found that it is hard to improve over the classifier that uses only VSM features
+p117
+aVWe also observe that non-metaphoric adjective noun pairs tend to have more imageable adjectives, such as literal derecho humano u'\u005cu201c' human right u'\u005cu201d'
+p118
+aVEach dataset has an equal number of metaphors and non-metaphors, i.e.,, the datasets are balanced
+p119
+aVA sentence containing a metaphoric SVO relation is my car drinks gasoline
+p120
+aVGiven an input, each tree classifier assigns a probability to each label; those probabilities are averaged to compute the probability distribution across the ensemble
+p121
+aVFor a non-English word in a source language, we first obtain all translations into English
+p122
+aVSupersenses 7 7 Supersenses are called u'\u005cu201c' lexicographer classes u'\u005cu201d' in WordNet documentation [ 8 ] , http://wordnet.princeton.edu/man/lexnames.5WN.html are coarse semantic categories originating in WordNet
+p123
+aVConceptual features pertain to concepts and ideas as opposed to individual words or phrases expressed in a particular language
+p124
+aVYet, combining all features leads to even higher accuracy during cross-validation
+p125
+aVEach sentence contains either literal or metaphorical use for one of 50 English verbs
+p126
+aVThus, vector space models can also be seen as vectors of (latent) semantic concepts, that preserve their u'\u005cu201c' meaning u'\u005cu201d' across languages
+p127
+aVIf this adjective modifies a noun with the supersense noun.feeling , we conclude that a metaphor is found
+p128
+aVThe values of the f -score are 0.76, both for SVO and AN tasks
+p129
+aVMotivated by Lakoff u'\u005cu2019' s (1980) argument that metaphors are systematic conceptual mappings, we will use coarse-grained conceptual , rather than fine-grained lexical features, in our classifier
+p130
+aV2011 ) using their model and features
+p131
+aVConsider an example related to projection of WordNet supersenses
+p132
+aVIn this section we describe a training and testing dataset as well a data collection procedure
+p133
+aVIn addition, this coarse semantic categorization is preserved in translation [ 27 ] , which makes supersense features suitable for cross-lingual approaches such as ours
+p134
+aVFrom these sentences, she removed sentences that contained more than one metaphor, and sentences with non-SVO and non-AN metaphors
+p135
+aVRelatively lower (yet reasonable) results for Farsi can be explained by a smaller size of the bilingual dictionary (thus, fewer feature projections can be obtained
+p136
+aVWe used the scikit-learn toolkit to train our classifiers [ 25 ]
+p137
+aV2013 ) reveal an interesting cross-lingual property of distributed word representations there is a strong similarity between the vector spaces across languages that can be easily captured by linear mapping
+p138
+aVIn this sense, as long as two words in two different languages refer to the same concepts, their conceptual features should be the same
+p139
+aVTheir method also employs WordNet supersenses, but it is not clear from the description whether WordNet is essential or can be replaced with some other lexical resource
+p140
+aVWe first conduct a 10-fold cross-validation experiment on the training set defined in Section 4.1
+p141
+aV17 17 http://www.cs.sfu.ca/~anoop/students/jbirke/ TroFi includes 3,737 manually annotated English sentences from the Wall Street Journal [ 2 ]
+p142
+aVThe ROC curves for SVO and AN tasks are plotted in Figure 6 and Figure 6 , respectively
+p143
+aVThe area under the ROC curve (AUC) can be interpreted as the probability that a classifier will assign a higher score to a randomly chosen positive example than to a randomly chosen negative example
+p144
+aVIn particular, this shows that proposed conceptual features can be used to detect selectional preferences violation across languages
+p145
+aVIn many sentences, all the words may be used literally u'\u005cu201d' The Fleiss u'\u005cu2019' Kappas for 5 English and 6 Russian annotators are en-an = .76, ru-an = .85, en-svo = .75, ru-svo = .78
+p146
+aVIn addition, decision-tree classifiers learn non-linear responses to inputs and often outperform logistic regression [ 26 ]
+p147
+aV14 14 http://www.cs.cmu.edu/~mfaruqui/soft.html Vector construction algorithm is a variation on traditional latent semantic analysis [ 6 ] that uses multilingual information to produce representations in which synonymous words have similar vectors
+p148
+aV4 4 Our decision to focus on SVO and AN metaphors is justified by corpus studies that estimate that verb- and adjective-based metaphors account for a substantial proportion of all metaphoric expressions, approximately 60% and 24%, respectively [ 31 , 9 ]
+p149
+aVAN metaphors
+p150
+aVExperimental results for all four languages, are given in Figure 6
+p151
+aVIt can be also seen that VSM features are very effective
+p152
+aVThis out-of-domain experiment suggests that our classifier is portable across domains and genres
+p153
+aVIn Spanish, human is more imageable than economic
+p154
+aVThen, we average all feature vectors related to these translations
+p155
+aV6 6 If word one is represented by features u'\u005cud835' u'\u005cudc2e' u'\u005cu2208' u'\u005cu211d' n and word two by features u'\u005cud835' u'\u005cudc2f' u'\u005cu2208' u'\u005cu211d' m then the conjunction feature vector is the vectorization of the outer product u'\u005cud835' u'\u005cudc2e' u'\u005cud835' u'\u005cudc2f' u'\u005cu22a4'
+p156
+aVFor example, given an adjective, we can learn that it modifies concrete nouns that usually have the supersense noun.body
+p157
+aVWe used the following procedure to compile the en and ru test sets
+p158
+aVAccording to results in Table 4 , almost all of the judge-specific f -scores are slightly higher for our system, as well as the overall average f -score
+p159
+aVDetailed results are shown in Table 5
+p160
+aVA moderator started with seed lists of 1000 most common verbs and adjectives
+p161
+aV2013 ) argue that metaphors are highly imageable words that do not belong to a discussion topic
+p162
+aV2011 ) (two baseline methods are described in Section 5.2
+p163
+aVFor example, the word head (when used as a noun) participates in 33 synsets, three of which are related to the supersense noun.body
+p164
+aVThe MRC psycholinguistic database is a large dictionary listing linguistic and psycholinguistic attributes obtained experimentally [ 43 ]
+p165
+aVWe view this result as a strong evidence of language-independent nature of our metaphor detection method
+p166
+aVLakoff and Johnson ( 1980 ) characterize metaphor as reasoning about one thing in terms of another, i.e.,, a metaphor is a type of conceptual mapping , where words or phrases are applied to objects and actions in ways that do not permit a literal interpretation
+p167
+aV2013 ) applied tree kernels to metaphor detection
+p168
+aVHowever, metaphor detection is a hard problem
+p169
+aV2011 ) manually annotated 100 pairs where an adjective was one of the following dark , deep , hard , sweet , and worm
+p170
+aVAlso note that, in our experience, most of Farsi metaphors are adjective-noun constructions
+p171
+aVThe phrase broken promise is an AN metaphor, where attributes from a concrete domain (associated with the concrete word broken ) are transferred to a more abstract domain, which is represented by the relatively abstract word promise
+p172
+aVPerformance of the method was evaluated using the 10-fold cross-validation separately for each judge
+p173
+aVIf this probability is above a threshold, the relation is classified as metaphoric, otherwise it is literal
+p174
+aVWe hypothesize that supersense features are instrumental in the correct classification of these examples noun.person,verb.motion is usually used literally, while noun.act,verb.motion is used metaphorically
+p175
+aVA lexical item can belong to several synsets, which are associated with different supersenses
+p176
+aVA bad classifier has an ROC curve that goes close to the dashed diagonal or even below it
+p177
+aVWe employ 64-dimensional vector-space word representations constructed by Faruqui and Dyer ( 2014
+p178
+aVAlthough the first experiment shows very high scores, the 10-fold cross-validation cannot fully reflect the generality of the model, because all folds are parts of the same corpus
+p179
+aVGiven the prevalence and importance of metaphoric language, effective automatic detection of metaphors would have a number of benefits, both practical and scientific
+p180
+aVIn addition, we perform an oracle experiment, to obtain actual f -score values for best thresholds
+p181
+aVStudies showed that cross-lingual evidence allows one to achieve a state-of-the-art performance in the WSD task, yet, most cross-lingual WSD methods employ parallel corpora [ 23 ]
+p182
+aV2013 ) use logistic regression
+p183
+aVA words sense disambiguation (WSD) is a related problem, where one identifies meanings of polysemous words
+p184
+aVThis is done by computing an accuracy in the 10-fold cross validation
+p185
+aV2011 ) (see Section 4.1 in the referred paper for details
+p186
+aVA Russian word u'\u005cu0413' u'\u005cu041e' u'\u005cu041b' u'\u005cu041e' u'\u005cu0412' u'\u005cu0410' is translated as head and brain
+p187
+aVTherefore, experiments on out-of-domain data are crucial
+p188
+aVThis time we used all available features
+p189
+aVPrevious work has focused on metaphor identification in English, using both extensive manually-created linguistic resources [ 20 , 10 , 16 , 40 , 4 ] and corpus-based approaches [ 2 , 30 , 24 , 29 , 12 ]
+p190
+aV2013 ) carry out experiments in a specific (government-related) domain for four languages
+p191
+aVThe test candidate sentences were selected by a person who did not participate in the selection of the training samples
+p192
+aVThen she used the SketchEngine, which provides searching capability for the TenTen Web corpus, 19 19 http://trac.sketchengine.co.uk/wiki/Corpora/enTenTen to extract sentences with words that frequently co-occurred with words from the seed lists
+p193
+aVWe build on this foundation and also extend metaphor detection into other languages in which few resources may exist
+p194
+aVSame pattern is observed in non-English datasets
+p195
+aVFor nouns and verbs there are 45 classes
+p196
+aVIn both baseline comparisons, we obtain performance at least as good as in previously published studies
+p197
+aVThe difference is that in the WSD task, we need to select an already existing sense, while for the metaphor detection, the goal is to identify cases of sense borrowing
+p198
+aVFor example, for a word calm the top-2 categories (with the first and second highest degrees of membership) are adj.behavior and adj.feeling
+p199
+aVThey were chosen empirically based on accuracy during cross-validation
+p200
+aVIndeed, diaper is a more concrete term than word and weather is more concrete than future
+p201
+aV18 18 Selection of 1000 most common verbs and adjectives achieves much broader lexical and domain coverage than what can be realistically obtained from continuous text
+p202
+aVWe binarize these posteriors into abstract-concrete (or imageable-unimageable) boolean indicators using pre-defined thresholds
+p203
+aVManual data analysis on adjective-noun pairs supports an abstractness-concreteness hypothesis formulated by several independent research studies
+p204
+aVHence, we select all the synsets of the nouns head and brain
+p205
+aVAt least one additional person carefully examined and culled the collected metaphors, by removing duplicates, weak metaphors, and metaphorical phrases (such as drowning students ) whose interpretation depends on the context
+p206
+aVVerb-based examples that are correctly classified by our model are blunder escaped notice \u005cnormal@char~ (metaphoric) and prisoner escaped jail \u005cnormal@char~ (literal
+p207
+aVThus, in addition to giving a single f -score value for balanced thresholds, we present a Receiver Operator Characteristic (ROC) curve, where we plot a fraction of true positives against the fraction of false positives for 100 threshold values in the range from zero to one
+p208
+aVRandom forest ensembles are particularly suitable for our resource-scarce scenario rather than overfitting, they produce a limiting value of the generalization error as the number of trees increases, 8 8 See Theorem 1.2 in [ 3 ] for details and no hyperparameter tuning is required
+p209
+aVThe value of the feature corresponding to this supersense is 3 / 33 u'\u005cu2248' 0.09
+p210
+aVTheir study focuses only on the verb-based metaphors
+p211
+aVAccording to Wilks [ 42 ] , this metaphor represents a violation of selectional preferences for the verb drink , which is normally associated with animate subjects (the car is inanimate and, hence, cannot drink in the literal sense of the verb
+p212
+aVFor example, to generate the feature vector for the SVO triple ( u'\u005cud835' u'\u005cudc50' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc5f' , u'\u005cud835' u'\u005cudc51' u'\u005cud835' u'\u005cudc5f' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc5b' u'\u005cud835' u'\u005cudc58' , u'\u005cud835' u'\u005cudc54' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc60' u'\u005cud835' u'\u005cudc5c' u'\u005cud835' u'\u005cudc59' u'\u005cud835' u'\u005cudc56' u'\u005cud835' u'\u005cudc5b' u'\u005cud835' u'\u005cudc52' ) , we compute all the features for the individual words car , drink , gasoline and combine them with the conjunction features for the pairs car drink and drink gasoline
+p213
+aVSpanish example of an adjective-noun metaphor is a well-known músculo económico u'\u005cu201c' economic muscle u'\u005cu201d'
+p214
+aVWe give examples of a prototypical metaphoric usage of each type
+p215
+aVEd Hovy, Vlad Niculae, Davida Fromm, Brian MacWhinney, Carlos Ramírez, and other members of the CMU METAL team
+p216
+aVHowever, (1) different application may have different requirements for recall/precision, and (2) classification results may be skewed towards having high precision and low recall (or vice versa
+p217
+aVOur test sentence domains are, therefore, diverse economic, political, sports, etc
+p218
+aVYet they are classified as literal
+p219
+aVThere is empirical evidence supporting the claim recent corpus studies have estimated that the proportion of words used metaphorically ranges from 5% to 20% [ 33 ] , and Thibodeau and Boroditsky ( 2011 ) provide evidence that a choice of metaphors affects decision making
+p220
+aVWe hypothesize that this happens due to a higher-quality translation dictionary (which allows a more accurate model transfer
+p221
+aVOn the other, metaphors can be domain- and context-dependent
+p222
+aVThe annotation instructions were general u'\u005cu201c' Please, mark in bold all words that, in your opinion, are used non-literally in the following sentences
+p223
+aVIn this experiment, we measure the f -score
+p224
+aVThe pairs were presented to five human judges who rated each pair on a scale from 1 (very literal/denotative) to 4 (very non-literal/connotative
+p225
+aVFor the final selection, we filtered out low-agreement ( .8) sentences
+p226
+aVHere we focus only on recent approaches
+p227
+aVIt was collected by two annotators using public resources (collections of metaphors on the web
+p228
+aVIn u'\u005cu201c' drinks gasoline u'\u005cu201d' , for example, mapping to supersenses would yield a pair verb.consumption, noun.substance , contrasted with verb.consumption, noun.food for u'\u005cu201c' drinks juice u'\u005cu201d'
+p229
+aVFour of these synsets are associated with the supersense noun.body
+p230
+aVThey argue that metaphors play a fundamental communicative role in verbal and written interactions, claiming that much of our everyday language is delivered in metaphorical terms
+p231
+aVThey are collected by the same human judges and belong to the same domain
+p232
+aVSecond, scientific hypotheses about metaphoric language could be tested more easily at a larger scale with automation
+p233
+aVWe are extremely grateful to Shuly Wintner for a thorough review that helped us improve this draft; we also thank people who helped in creating the datasets and/or provided valuable feedback on this work
+p234
+aVThus, we trust that annotator judgments were not biased towards the cases that the system is trained to process
+p235
+aV5 5 Looking at components of the syntactic constructions independent of their context has its limitations, as discussed above with the drowning students example; however, it simplifies the representation challenges considerably
+p236
+aVTherefore, the value of the feature noun.body is 4 / 38 u'\u005cu2248' 0.11
+p237
+aVThe vectors were trained on the news commentary corpus released by WMT-2011, 15 15 http://www.statmt.org/wmt11/ comprising 180,834 types
+p238
+aV\u005cnormal@char~ [ 32 , 30 ]
+p239
+aVWe used the Babylon dictionary, 16 16 http://www.babylon.com which is a proprietary resource, but any bilingual dictionary can in principle be used
+p240
+aV26 for nouns and 15 for verbs, for example, noun.body , noun.animal , verb.consumption , or verb.motion [ 5 ]
+p241
+aVOn one hand, there is a subjective component humans may disagree whether a particular expression is used metaphorically or not, as there is no clear-cut semantic distinction between figurative and metaphorical language [ 32 ]
+p242
+aVThere are 38 such synsets (33 for head and 5 for brain
+p243
+aV1 1 For example, drowning students could be used metaphorically to describe the situation where students are overwhelmed with work, but in the sentence a lifeguard saved drowning students , this phrase is used literally
+p244
+aVThat is, we map an abstract concept promise to a concrete domain of physical things, where things can be literally broken to pieces
+p245
+aVIn Russian, u'\u005cu0411' u'\u005cu041e' u'\u005cu041b' u'\u005cu042c' u'\u005cu041d' u'\u005cu041e' u'\u005cu0415' u'\u005cu041e' u'\u005cu0411' u'\u005cu0429' u'\u005cu0415' u'\u005cu0421' u'\u005cu0422' u'\u005cu0412' u'\u005cu041e' u'\u005cu201c' sick society u'\u005cu201d' and u'\u005cu041f' u'\u005cu0423' u'\u005cu0421' u'\u005cu0422' u'\u005cu041e' u'\u005cu0419' u'\u005cu0417' u'\u005cu0412' u'\u005cu0423' u'\u005cu041a' u'\u005cu201c' empty sound u'\u005cu201d' are classified as metaphoric, while u'\u005cu0411' u'\u005cu041e' u'\u005cu041b' u'\u005cu042c' u'\u005cu041d' u'\u005cu0410' u'\u005cu042f' u'\u005cu0411' u'\u005cu0410' u'\u005cu0411' u'\u005cu0423' u'\u005cu0428' u'\u005cu041a' u'\u005cu0410' u'\u005cu201c' sick grandmother u'\u005cu201d' and u'\u005cu041f' u'\u005cu0423' u'\u005cu0421' u'\u005cu0422' u'\u005cu0410' u'\u005cu042f' u'\u005cu0427' u'\u005cu0410' u'\u005cu0428' u'\u005cu041a' u'\u005cu0410' u'\u005cu201c' empty cup u'\u005cu201d' are classified as literal
+p246
+aVLanguage processing applications that need to understand language or preserve meaning (information extraction, machine translation, dialog systems, sentiment analysis, and text analytics, etc.) would have access to a potentially useful high-level bit of information about whether something is to be understood literally or not
+p247
+aVIt is possible to trade precision for recall by choosing a different threshold
+p248
+aV2014 ) use 13 top-level classes from the adapted taxonomy of Hundsnurscher and Splett ( 1982 ) , which is incorporated in GermaNet [ 11 ]
+p249
+aVOur work makes the following contributions
+p250
+aV20 20 Assuming that positive examples are labeled by ones, and negative examples are labeled by zeros
+p251
+aVThere are concrete things that are hard to visualize too, for example, abbey is harder to visualize than banana (B
+p252
+aV2014 ) (discussed in § 3.2
+p253
+aVThis work was supported by the U.S
+p254
+aVFor example, the top-level classes in GermaNet include adj.feeling (e.g.,, willing, pleasant, cheerful); adj.substance (e.g.,, dry, ripe, creamy); adj.spatial (e.g.,, adjacent, gigantic
+p255
+aVArmy Research Office under contract/grant number W911NF-10-1-0533
+p256
+aVWhile most abstract things are hard to visualize, some call up images, e.g.,, vengeance calls up an emotional image, torture calls up emotions and even visual images
+p257
+aVMacWhinney, personal communication
+p258
+aV2013
+p259
+aV2013
+p260
+aV2013
+p261
+aVArmy Research Laboratory and the U.S
+p262
+a.

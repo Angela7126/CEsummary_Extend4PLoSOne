@@ -1,0 +1,296 @@
+(lp0
+VThey have the densest annotation, but u'\u005cu201c' the annotator was not required to annotate all pairs of event mentions, but as many as possible u'\u005cu201d' .This paper takes a different tack to annotation by requiring annotators to label every possible pair of events/times in a given window
+p1
+aVIn contrast, we aim for a shift in the community wherein all pairs are considered candidates for temporal ordering, allowing researchers to ask questions such as how must algorithms adapt to label the complete graph of pairs, and if the more difficult and ambiguous event pairs are included, how must feature-based learners change
+p2
+aV[ 5 ] annotated u'\u005cu201c' temporal dependency structures u'\u005cu201d' , though they only focused on relations between pairs of events
+p3
+aVSince the annotators are forced to label all required edges, the decision to label an edge as vague instead of a defined temporal relation is critical
+p4
+aVWe lean toward higher annotator agreement with relations that have greater separation between their semantics 4 4 For instance, a relation like starts is a special case of includes if events are viewed as open intervals, and immediately before is a special case of before
+p5
+aVThe original annotators were instructed to label relations critical to the document u'\u005cu2019' s understanding
+p6
+aVThe stated goal of TempEval-3 [ 7 ] was to focus on relation identification instead of classification, but the training and evaluation data followed the TimeBank approach where only a subset of event pairs were labeled
+p7
+aVA consequence of focusing on all relations is a shift from the traditional temporal relation classification task, where the system is given a pair of events and asked only to label the type of temporal relation, to a temporal relation identification task, where the system must determine for itself which events in the document to pair up
+p8
+aVOur proposal thus starts with documents that have been already been annotated with events, time expressions, and document creation times (DCT
+p9
+aVSince there were only 2 annotators for most documents (and since we require the majority of annotators to agree), in general, the vague label was applied to the final graph if either annotator chose it
+p10
+aVThis event pair is assigned the relation (help is included in prevent) because the help event is not meaningful on its own
+p11
+aVThe annotator did not look at the pair of events, so a relation may or may not exist
+p12
+aVIf a document has 2 annotators, both have to agree on the relation or it is labeled vague
+p13
+aVWe describe the first annotation framework that forces annotators to annotate all pairs 1 1 As discussed below, all pairs in a given window size
+p14
+aVThe second facet is the focus of this paper when should an annotator label an ordering relation
+p15
+aVSince the annotation tool frees the annotators from the decision of when to label an edge, the focus is now what to label each edge
+p16
+aVWe adopted an 80 u'\u005cu2062' % rule that instructed annotators to choose a specific non-vague relation if they are 80% confident that it was the writer u'\u005cu2019' s intent that a reader infer that relation
+p17
+aVThese 36 documents led to an annotation of 4 times as many relations as the entire 183 document TimeBank
+p18
+aVIt provided for a common dataset of annotations between events and time expressions that allowed the community to compare approaches
+p19
+aVOne assumes the event does occur, and all other events are ordered accordingly
+p20
+aVGeneric Events finally, generic events were not skipped
+p21
+aVThe tool is unique in that it includes a transitive reasoner that infers relations based on the annotator u'\u005cu2019' s latest annotations
+p22
+aVThis paper thus proposes an annotation process that builds denser graphs with formal properties that learners can rely on, such as locally complete subgraphs
+p23
+aVThis seems appropriate since a disagreement between two annotators directly implies that the relation is vague
+p24
+aV{quoting} Police confirmed Friday that the body found along a highway in this municipality 15 miles south of San Juan belonged to Jorge Hernandez
+p25
+aVUsing the tool described above, we annotated 36 random documents with at least two annotators each to create a training set, development set, and test set
+p26
+aVLearning algorithms handle these unlabeled edges by making incorrect assumptions, or by ignoring large parts of the temporal graph
+p27
+aVThe TimeBank corpus uses 14 relations based on the Allen interval relations
+p28
+aVAs a result, several properties are ensured through this process the graph (1) is a strongly connected graph, (2) is consistent with no contradictions, and (3) has all required edges labeled
+p29
+aVTime Expressions the words now and today were given u'\u005cu201c' long now u'\u005cu201d' interpretations if the words could be replaced with nowadays and not change the meaning of their sentences
+p30
+aVThe main reason for not using a more fine-grained set is because we annotate pairs that are far more ambiguous than those considered in previous efforts
+p31
+aVThus this work is the first annotation effort that can guarantee its event/time graph to be strongly connected
+p32
+aVAll four authors annotated the same initial document, conflicts and disagreements were discussed, and guidelines were updated accordingly
+p33
+aVThis event pair is ordered (expect before cut) since the expectation occurs before the cutting (in the possible world where the cutting occurs
+p34
+aVSeveral models with rich temporal reasoners have been published, but since they require more connected graphs, improvement over pairwise classifiers have been minimal [ 4 , 10 ]
+p35
+aVThis agreement rule acts as a check to our 80% confidence rule, backing off to vague when decisions are uncertain (arguably, this is the definition of vague
+p36
+aVThe result is a sparse labeling that leaves much of the document unlabeled
+p37
+aVAs a result, many systems focused on classification, with the top system classifying pairs in only three syntactic constructions [ 2 ]
+p38
+aVThe following example sentence serves as our motivating example
+p39
+aVThis prohibits the annotator from entering edges that break transitivity
+p40
+aVIf nowadays is not suitable, then the now was included in the DCT
+p41
+aVSince its creation, other corpora and several competitions have based their tasks on the TimeBank setup
+p42
+aVWith this new process, we created a dense ordering of document events that can properly evaluate both relation identification and relation annotation
+p43
+aVFor example, in TempEval-1 and 2 [ 8 , 9 ] , systems were given event pairs in specific syntactic constructions events and times in the same noun phrase, main events in consecutive sentences, etc
+p44
+aVThe core event was treated as having occurred, whether or not the text implied that it had occurred
+p45
+aVAnnotators followed the guideline that generic events can be ordered with respect to each other, but vague with respect to nearby non-generic events
+p46
+aV{quoting} belonged before confirmed belonged before found found before confirmed belonged before Friday confirmed is included in Friday found is included in Friday 3 3 The previous sentence (not shown here) reveals that found occurred on Friday
+p47
+aVHowever, event tokens that were mentioned fewer than 20 times were excluded and only one TempEval task considered relations between events in different sentences
+p48
+aVBy far, the most significant disagreements pertained to choosing between the vague relation and a specific temporal relation
+p49
+aVThe annotator looked at the pair of events and decided that no temporal relation exists
+p50
+aVFor instance, events that describe the manner in which another event is performed are considered encompassed by the broader event
+p51
+aVSubsequent TempEval competitions [ 8 , 9 , 7 ] mostly relied on the TimeBank, but also aimed to improve coverage by annotating relations between all events and times in the same sentence
+p52
+aVSome research has explored annotation schemes that encourage annotators to connect all events to the timeline
+p53
+aVAn edge u'\u005cu2019' s final label is the relation that received a majority of annotator votes, otherwise it is marked vague
+p54
+aVNegated states like u'\u005cu201c' is not anticipating u'\u005cu201d' are interpreted as though the anticipation occurs, and surrounding events are ordered with regard to its presumed temporal span
+p55
+aVEvents that attribute a property to a person or event are interpreted to end when the entity ends
+p56
+aVAnnotators for the original TimeBank [ 6 ] only annotated relations judged to be salient by the annotator
+p57
+aV[ 3 ] annotated multi-sentence segments of text to build directed acyclic graphs, but the work didn u'\u005cu2019' t focus on events
+p58
+aVThe TempEval contests have used both a small set of relations (TempEval-1) and the larger set of 14 relations (TempEval-3
+p59
+aVAspectual Events annotated as is included in their event arguments
+p60
+aVThis is the first empirical count of how many temporal relations in news articles tend to be truly vague
+p61
+aVFor instance, TempEval [ 8 ] only labeled relations between events that syntactically dominated each other
+p62
+aVTo combat this, our annotation adopts the vague relation, introduced by TempEval 2007, and our approach forces annotators to use it
+p63
+aVWe describe a new annotation framework (and corpus) that we believe is required to fulfill the data needs of deeper temporal reasoners
+p64
+aVEvent-DCT pairs for every event in the text (DCT is the document creation time
+p65
+aVThe TempEval contests have largely followed suit and focused on specific types of event pairs
+p66
+aVDocument annotation was not random, but we mixed pairs of authors where time constraints allowed
+p67
+aVIts complete graph requires 6 edges to connect all nodes, but as already discussed, few of our current datasets contain complete graphs
+p68
+aVThe TimeBank Corpus [ 6 ] helped usher in a wave of event ordering research with data-driven algorithms
+p69
+aVA document with 3 annotators requires 2 to agree, and 4 annotators require 3 to agree
+p70
+aVThe majority of corpora and competitions for event ordering contain sparse annotations
+p71
+aVThis sentence is represented by a 4 node graph (3 events and 1 time
+p72
+aVThe vague relation makes up 46% of the relations
+p73
+aVAverage agreement was 65.1% (not far from the TimeBank u'\u005cu2019' s 71% agreement, which did not include the more difficult vague relation
+p74
+aVThis paper is the first attempt to annotate a document u'\u005cu2019' s entire temporal graph
+p75
+aVAnnotators are prompted to assign a label for each edge, and skipping edges is prohibited
+p76
+aVThe resulting event graph for a document is strongly connected, but not complete
+p77
+aVThis provided a reliable labeling of events and time expressions
+p78
+aVOur corpus is the densest annotation, and contains the largest number of temporal relations to date
+p79
+aVThis is achieved through an annotation tool that prohibits the skipping of relations
+p80
+aVThis section describes the annotation guidelines for dense annotation
+p81
+aVThe TimeBank includes a small subset of all possible relations in its documents
+p82
+aVModal and conditional events interpreted with a possible worlds analysis
+p83
+aVFor instance, u'\u005cu2018' the talk is nonsense u'\u005cu2019' evokes a nonsense event with an end point that coincides with the end of the talk
+p84
+aVWe chose a middle ground between coarse and fine-grained distinctions for annotation, settling on 6 relations before, after, includes, is included, simultaneous , and vague
+p85
+aVBy not requiring 100% confidence, we allow for alternative interpretations that conflict with the chosen edge label as long as that alternative is sufficiently unlikely
+p86
+aVWe describe the target relation set and this tool next
+p87
+aVWe built a new tool that reads TimeML formatted text, and computes the set of required edges
+p88
+aVHowever, all 6 edges have clear well-defined ordering relations
+p89
+aVNegated events and hypotheticals are treated similarly
+p90
+aVThis paper addresses one of the shortcomings of the TimeBank sparse annotation
+p91
+aVOur process requires annotators to annotate all of the above edge types
+p92
+aVA major dilemma underlying these sparse tasks is that the unlabeled event/time pairs are ambiguous
+p93
+aVWhile the ideal goal is to create a complete graph, the time it would take to hand-label n u'\u005cu2062' ( n - 1 ) / 2 edges is prohibitive
+p94
+aVWe chose a subset of TimeBank documents for our new annotation
+p95
+aVtab:relcounts shows the individual relation counts in the final corpus
+p96
+aVFor example, if event e 1 is included in t 1 , and t 1 before e 2 , the tool automatically labels e 1 before e 2
+p97
+aVThe training of temporal reasoners is hampered by this ambiguity
+p98
+aVWe approximate completeness by creating locally complete graphs over neighboring sentences
+p99
+aVDecisions between relations like before and immediately before can complicate an already difficult task
+p100
+aVImposing the above rules on annotators requires automated assistance
+p101
+aVThe transitivity inference is run after each input label, and the human annotator cannot override the inferences
+p102
+aVIn practice, annotators had different interpretations of what constitutes 80% certainty, and this generated much discussion
+p103
+aVTimeML is used for most temporal corpora, and this paper is no different
+p104
+aVThe impact of these annotation decisions (i.e.,, when to annotate a relation) can be significant
+p105
+aV1) the practical means of how to label the text, and (2) the higher-level rules about when something should be labeled
+p106
+aVFinal annotator agreement is shown in \u005cCref tab:agree
+p107
+aVTime-DCT pairs for every time expression in the text
+p108
+aVThe time u'\u005cu2019' s duration starts sometime in the past and includes the DCT
+p109
+aVThe four authors of this paper were the four annotators
+p110
+aVMajority annotator agreement
+p111
+aVThe annotation tool will be publicly available
+p112
+aVWe compare the size and density of our corpus to current corpora in \u005cCref tab:relation-ratios
+p113
+aVFrameworks for annotating text typically have two independent facets
+p114
+aVThese 3 properties are new to all current ordering corpora
+p115
+aVThis particular sentence is from the TimeBank, and 3 of the 6 edges are labeled
+p116
+aVEvent-Event, Event-Time, and Time-Time pairs between the current and next sentence
+p117
+aVIn practical terms, the resulting evaluations remained sparse
+p118
+aVThe added benefit of a corpus (or working system) that makes fine-grained distinctions is also not clear
+p119
+aVIn TimeBank, the intentional action class is used instead of the aspectual class in this case, but we still consider it covered by this guideline
+p120
+aV\u005cCref fig:dense illustrates one document before and after our new annotations
+p121
+aVWe are not the first to propose these questions, but this paper is the first to directly propose the means by which they can be addressed
+p122
+aVIn the worst case scenario, evaluation results are untrustworthy
+p123
+aVIn addition to the above, we created other guidelines to encourage consistent labelings
+p124
+aVIn this example, a learner must somehow deal with the 3 unlabeled edges
+p125
+aVEvent-Event, Event-Time, and Time-Time pairs in the same sentence
+p126
+aVEach unlabeled pair holds two possibilities
+p127
+aVWe avoid this overlap and only use includes and before
+p128
+aVOne option is to assume that they are vague or ambiguous
+p129
+aVThis is the only work that includes such a requirement
+p130
+aVFinally, this paper is not the first to look into more dense annotations
+p131
+aV{quoting} The move may [EVENT help] [EVENT prevent] Martin Ackerman from making a run at the computer-services concern
+p132
+aVPublished work has mirrored this trend, and different groups focus on different aspects of the semantics
+p133
+aVThe rest of the documents were then annotated independently
+p134
+aVWe mitigated these disagreements with the following rule
+p135
+aVIt describes the proportion of the preventing accounted for by the move
+p136
+aV\u005cCref tab:specific-agree breaks down the individual disagreements
+p137
+aVSpecifically, the following edge types are included
+p138
+aVSeveral of these are inspired by Bethard and Martin [ 1 ]
+p139
+aVKolomiyets et al
+p140
+aVBramsen et al
+p141
+aVThe 80% confidence rule
+p142
+aVThe first is often accomplished through a markup language
+p143
+aVMost relevant to this paper is
+p144
+aVConsider the following example
+p145
+aVTimeBank-Dense
+p146
+aVFor example, {quoting} They [EVENT expect] him to [EVENT cut] costs throughout the organization
+p147
+a.

@@ -1,0 +1,20 @@
+(lp0
+VWe tested our new pruning approach using an X-bar grammar as the coarse pass
+p1
+aVNow, when we use a coarse pruning pass, we are able to parse nearly 280 sentences per second, a 70% increase in parsing performance relative to Canny et al
+p2
+aVIn the coarse pass, we compute Viterbi inside and outside scores for every span
+p3
+aVAt the top level, our system first computes pruning masks with a coarse grammar
+p4
+aVFirst, we have a coarse grammar, with many fewer rules and symbols
+p5
+aVThe coarse to fine pruning approach of Petrov and Klein ( 2007 ) employs an X-bar grammar as its first pruning phase, but there is no reason why we cannot begin with a more complex grammar for our initial pass
+p6
+aVFigure 1 shows an overview of the approach we first parse densely with a coarse grammar and then parse sparsely with the fine grammar, skipping symbols that the coarse pass deemed sufficiently unlikely
+p7
+aVAs shown in Table 1 , using a 1-split grammar as a coarse pass allows us to produce over 400 sentences per second, a full 2x improvement over our original system, and 2.5x over Canny et al
+p8
+aVAnother approach would be to
+p9
+a.

@@ -1,0 +1,16 @@
+(lp0
+VWe treat NULL as a normal target word, and if a source word aligns to multiple target words, it is treated as a single concatenated token
+p1
+aVFor aligned target words, the normal affiliation heuristic can be used, since the word alignment is available within the rule
+p2
+aVFor unaligned words, the normal heuristic can also be used, except when the word is on the edge of a rule, because then the target neighbor words are not necessarily known
+p3
+aVIf t i is unaligned, we inherit its affiliation from the closest aligned word, with preference given to the right
+p4
+aVOne issue with the S2T NNJM is that the probability is computed over every target word, so it does not explicitly model NULL-aligned source words
+p5
+aVTo do this, we first say that each target word t i is affiliated with exactly one source word at index a i u'\u005cud835' u'\u005cudcae' i is then the m -word source window centered at a i
+p6
+aVHowever, note that there are only 3 possible positions for each
+p7
+a.

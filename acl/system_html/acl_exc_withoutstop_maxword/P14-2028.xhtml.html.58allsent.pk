@@ -1,0 +1,58 @@
+(lp0
+VAs any local search method, iterative correction is prone to local minima, stopping before reaching the correct word
+p1
+aVA common method of avoiding local minima in optimization is the simulated annealing algorithm, key ideas from which can be adapted for spelling correction task
+p2
+aVWe tested all three methods on the u'\u005cu201d' common u'\u005cu201d' dataset as well to evaluate if our handling of hard cases affects the performance of our approach on the common cases of spelling error
+p3
+aVPosterior is defined by Equation 6 for the baseline and simple iterative methods and by Equations 3 and 6 for the proposed method
+p4
+aVFor this purpose we used a method based on the simulated annealing algorithm
+p5
+aVThese techniques can be combined with the proposed method by replacing posterior probability of single correction in our method with an estimate obtained via discriminative training method
+p6
+aVIterative correction is hill climbing in the space of possible corrections on each iteration we make a transition to the best point in the neighbourhood, i.e., to correction, that has maximal posterior probability P ( c q
+p7
+aVThe difference between datasets is that one of them contained only queries with low search performance for which the number of documents retrieved by the search engine was less than a fixed threshold (we will address it as the u'\u005cu201d' hard u'\u005cu201d' dataset), while the other dataset had no such restrictions (we will call it u'\u005cu201d' common u'\u005cu201d'
+p8
+aVIn all these cases, the misspelled word contains many errors and the corresponding error model penalty cannot be compensated by the LM weight of its proper form
+p9
+aVBasic building block of every mentioned algorithm is one-step noisy-channel correction
+p10
+aVAlso note, that the method works only because multiple misspellings of the same word are presented in our model; for related research see [ 2 ]
+p11
+aVWith that probability defined, our correction algorithm is the following given query q , pick c = arg max c E P ( c E q ) as a correction
+p12
+aVEach basic correction proceeds as described in Section 2.1 a small number of hypotheses h 1 , u'\u005cu2026' , h K is generated for the query q , hypotheses are scored, and scores are recomputed into normalized posterior probabilities (see Equation 5
+p13
+aVHypotheses generator is based on A* beam search in a trie of words, and yields K hypotheses h k , for which the noisy channel scores P dist ( h k u'\u005cu2192' q 1 ) P LM ( h k ) are highest possible
+p14
+aVHowever, if our method is applied to shorter and more frequent queries (as opposed to u'\u005cu201d' hard u'\u005cu201d' dataset), it tends to suggest frequent words as false-positive corrections (for example, grid is corrected to creed u'\u005cu2013' Assassin u'\u005cu2019' s Creed is popular video game
+p15
+aVSupposedly, it is because the iterative method benefits primarily from the sequential application of split/join operations altering query decomposition into words; since we are considering only one-word queries, such decomposition does not matter
+p16
+aVIn our work, we focus on isolated word-error correction [ 7 ] , which, in a sense, is a harder task, than multi-word correction, because there is no context available for misspelled words
+p17
+aVExample if we start a random walk from vobemzin and make 3 steps, we most probably will end up in the correct form wobenzym with P = 0.361
+p18
+aVFor example, vobemzin is corrected to more frequent misspelling vobenzin (instead of correct form wobenzym ) by the noisy channel, because P dist ( v o b e m z i n u'\u005cu2192' w o b e n z y m ) is too low (see Table 1
+p19
+aVAs a result, either the misspelled word itself, or the other (less complicated, more frequent) misspelling of the same word wins the likelihood race
+p20
+aVA standard log-linear weighing trick was applied to noisy-channel model components, see e.g., [ 9 ] u'\u005cu039b' is the parameter that controls the trade-off between precision and recall (see Section 4.2 ) by emphasizing the importance of either the high frequency of the correction or its proximity to the query
+p21
+aVIf hypotheses constitute a major part of the posterior probability mass, it is highly unlikely that the intended word is not among them
+p22
+aVIt is motivated by the assumption, that we are more likely to successfully correct the query if we take several short steps instead of one big step [ 3 ]
+p23
+aVWhile choosing arg u'\u005cu2062' max of the posterior probability is an optimal decision rule in theory, in practice it might not be optimal, due to limitations of the language and error modeling
+p24
+aVwhere W is the set of all possible words, and P observe u'\u005cu2062' ( w ) is the probability of observing w as a query in the noisy-channel model
+p25
+aVFinally, if posterior probability of the best hypothesis was lower than threshold u'\u005cu0391' , then the original query q was used as the spell-checker output
+p26
+aVTo compensate for that, posteriors were smoothed by raising each probability to some power u'\u005cu0393' 1 and re-normalizing them afterward
+p27
+aVProbability of getting from c 0 = q to some c E = c is a sum, over all possible paths, of probabilities of getting from q to c via specific path q = c 0 u'\u005cu2192' c 1 u'\u005cu2192' u'\u005cu2026' u'\u005cu2192' c E - 1 u'\u005cu2192' c E = c
+p28
+a.

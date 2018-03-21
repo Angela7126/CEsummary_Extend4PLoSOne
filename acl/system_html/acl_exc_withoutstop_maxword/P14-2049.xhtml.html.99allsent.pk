@@ -1,0 +1,210 @@
+(lp0
+VThe symmetric dice prod system is as an excellent nearest neighbor system at high ranks but drops below the u'\u005cu0391' = .04 system at around rank 3500
+p1
+aVAll the systems show degraded nearest neighbor quality as target words grow rare, but at lower ranks, the u'\u005cu0391' = .04 nearest neighbor system fares considerably better than the symmetric u'\u005cu0391' = .50 system; the line across the bottom tracks the score of a system with randomly generated nearest neighbors
+p2
+aVFigure 2 gives the results of our nearest neighbor study on the BNC for the case of dice prod
+p3
+aVThe function dice prod is not well known in the word similarity literature, but in the data mining literature it is often just called Dice coefficient, because it generalized the set comparison function of Dice [ 5 ]
+p4
+aVObserve that cosine is a special case of dice prod dice u'\u005cu2020' was introduced in Curran [ 3 ] and was the most successful function in his evaluation
+p5
+aVThus, u'\u005cu0391' = .80 works best for high rank target words, because most nearest neighbor candidates are less frequent, and u'\u005cu0391' = .8 tips the balance toward the nontarget words
+p6
+aVThe nearest neighbor problem is a rather a natural ground in which to try out ideas on asymmetry, since the nearest neighbor relation is itself not symmetrical
+p7
+aVSince lin was introduced in Lin [ 13 ] ; several different functions have born that name
+p8
+aVSuppose we want to measure the semantic similarity of boat , rank 682 among the nouns in the BNC corpus studied below, which has 1057 nonzero dependency features based on 50 million words of data, with dinghy , rank 6200, which has only 113 nonzero features
+p9
+aVThus, all three of these functions are special cases of symmetric ratio models
+p10
+aVThis yields the three similarity functions cited above
+p11
+aVOn the other hand, when the target word is a low ranking word, a high u'\u005cu0391' weight means it never receives the highest weight, and this is disastrous, since most good candidates are higher ranking
+p12
+aVIt is natural to use the sparser representation as the focus in the comparison
+p13
+aVTo reflect natural judgments of similarity for comparisons of representations of differing sparseness, u'\u005cu0391' should be tipped toward the sparser representation
+p14
+aVIf in Tversky/Rosch terms, the more frequent word is also a more likely focus, then this is exactly the kind of situation in which asymmetric similarity judgments will arise
+p15
+aVGoldstone [ 8 ] summarizes the results succinctly u'\u005cu201c' Asymmetrical similarity occurs when an object with many features is judged as less similar to a sparser object than vice versa; for example, North Korea is judged to be more like China than China is [like] North Korea u'\u005cu201d' Thus, one source of asymmetry is the comparison of sparse and dense representations
+p16
+aVso with si set to min , Equation ( 3 ) includes Equation ( 2 ) as a special case
+p17
+aVHere, T u'\u005cu0391' , si u'\u005cu2062' ( w h , w l ) is as defined in ( 9 ), and the u'\u005cu0391' -weighted word is always the less frequent word
+p18
+aVFor example, consider comparing the 100-feature vector for dinghy to the 1000 feature vector for boat if u'\u005cu0391' is high, we give more weight to the proportion of dinghy u'\u005cu2019' s features that are shared than we give to the proportion of boat u'\u005cu2019' s features that are shared
+p19
+aVChoosing u'\u005cu0391' = .9 , weights recall toward the rarer word
+p20
+aVMotivated by the problem of measuring how well the distribution of one word w 1 captures the distribution of another w 2 , Weeds and Weir [ 21 ] also explore asymmetric models, expressing similarity calculations as weighted combinations of several variants of what they call precision and recall
+p21
+aVTversky shows that many similarity judgment tasks have an inherent asymmetry; but he also argues, following Rosch [ 17 ] , that certain kinds of stimuli are more naturally used as foci or standards than others
+p22
+aVSome of their models are also Tverskyan ratio models
+p23
+aV[ 9 ] , which also proposes an asymmetric similarity framework based on Tversky u'\u005cu2019' s insights
+p24
+aVThe graphs for the other two u'\u005cu0391' -skewed systems are nearly identical, and are not shown due to space limitations
+p25
+aVBelow, we investigate asymmetric versions of all three, which we write as T u'\u005cu0391' , si u'\u005cu2062' ( w 1 , w 2 ) , defined as
+p26
+aVThe value .97 was chosen for u'\u005cu0391' because it produced the best u'\u005cu0391' -system on the MC/RG corpus
+p27
+aVLike Weeds and Weir, her perspective was to calculate the effectiveness of using one distribution as a proxy for the other, a fundamentally asymmetric problem
+p28
+aVThus, if u'\u005cu0391' + u'\u005cu0392' = 1 , Tversky u'\u005cu2019' s ratio model becomes simply
+p29
+aVNext, since we are interested in generalizing from sets of features, to real-valued vectors of features, w 1 , w 2 , we define
+p30
+aVIf the si is min , then the two terms in the denominator are the inverses of what W W call difference-weighted precision and recall
+p31
+aVFor distributions q and r , Lee u'\u005cu2019' s u'\u005cu0391' -skew divergence takes the KL-divergence of a mixture of q and r from q , using the u'\u005cu0391' parameter to define the proportions in the mixture
+p32
+aV4 4 The approximation is based on the formula for computing Spearman u'\u005cu2019' s R with no ties
+p33
+aVWhen u'\u005cu0391' 0.5 , sim u'\u005cu2062' ( w 1 , w u'\u005cu2062' 2 ) is biased in favor of w 1 as the referent; When u'\u005cu0391' 0.5 , sim u'\u005cu2062' ( w 1 , w u'\u005cu2062' 2 ) is biased in favor of w 2
+p34
+aVIf the operation is min and w 1 u'\u005cu2062' [ f ] and w 2 u'\u005cu2062' [ f ] both contain the feature weights for f , then
+p35
+aVW W u'\u005cu2019' s additive precision/recall models appear not to be Tversky models, since they compute separate sums for precision and recall from the f u'\u005cu2208' w 1 u'\u005cu2229' w 2 , one using w 1 u'\u005cu2062' [ f ] , and one using w 2 u'\u005cu2062' [ f ]
+p36
+aVIn this generalized form, then, ( 1 ) becomes
+p37
+aVSo for T min , ( 9 ) can be rewritten
+p38
+aVCiting a number of empirical studies, Tversky [ 19 ] calls symmetry directly into question, and proposes two general models that abandon symmetry
+p39
+aVFirst, since Tversky has primarily additive f in mind, we can reformulate f u'\u005cu2062' ( A u'\u005cu2229' B ) as follows
+p40
+aVIf n is the number of items, then the improvement on that item is
+p41
+aVThe x-axis shows target word rank; the y-axis shows the average UKB similarity scores assigned to nearest neighbors every 50 ranks
+p42
+aVBelow we show that an asymmetric measure, using u'\u005cu0391' and u'\u005cu0392' biased in favor of the less frequent word, greatly improves the performance of a dependency-based vector model in capturing human similarity judgments
+p43
+aVThe target word, the word whose nearest neighbor is being found, always receives the weight 1 - u'\u005cu0391'
+p44
+aVIn all cases, the biased system improves on the performance of its symmetric counterpart; in the case of dice u'\u005cu2020' and dice prod , that improvement is enough for the biased system to outperform cosine, the best of the symmetric distributionally based systems
+p45
+aVNote that T si is just the special case of Tversky u'\u005cu2019' s ratio model ( 5 ) in which u'\u005cu0391' = 0.5 and the similarity measure is symmetric
+p46
+aVTo motivate such a measure, Tversky presents experimental data with asymmetric similarity results, including similarity comparisons of countries, line drawings of faces, and letters
+p47
+aVA key assumption of most models of similarity is that a similarity relation is symmetric
+p48
+aVThe relevance of such considerations to word similarity becomes clear when we consider that for many applications, word similarity measures need to be well-defined when comparing very frequent words with infrequent words
+p49
+aVIn the following sections we present data showing that the performance of a dependency-based similarity system in capturing human similarity judgments can be greatly improved with rank-bias and u'\u005cu0391' -skewing
+p50
+aVFor each of 3 u'\u005cu0391' -skewed similarity systems ( T u'\u005cu0391' , si ) and cosine, we found the nearest neighbor from among BNC nouns (of any rank) for the 10,000 most frequent BNC nouns using the the dependency DB created in step 2
+p51
+aVTable 1 presents the Spearman u'\u005cu2019' s correlation with human judgments for Cosine, UKB, and our 3 u'\u005cu0391' -skewed models using Malt-parser based vectors applied to the combined Miller-Charles/Rubenstein-Goodenough word sets, the Wordsim 353 word set, and the Wordsim 202 word set
+p52
+aVFor each of the 3 rank-biased similarity systems ( R u'\u005cu0391' , si ) and cosine, we computed correlations with human judgments for the pairs in 2 standard wordsets the combined Miller-Charles/Rubenstein-Goodenough word sets [ 15 , 18 ] and the Wordsim 353 word set [ 6 ] , as well as to a subset of the Wordsim set restricted to reflect semantic similarity judgments, which we will refer to as Wordsim 201
+p53
+aVThe reformulation will allow us to directly draw the connection between the ratio model and a set of similarity measures that have played key roles in the similarity literature
+p54
+aVWe then turn to the problem of finding a word u'\u005cu2019' s nearest semantic neighbors
+p55
+aVConsider four similarity functions that have played important roles in the literature on similarity
+p56
+aVLet u'\u005cu03a3' si be a shared feature sum for operation si , as defined in Equation ( 3
+p57
+aVWe show that u'\u005cu0391' -skewing can be used to improve the quality of nearest neighbors found for both high- and mid- frequency words
+p58
+aVTo evaluate of the quality of the nearest neighbors pairs found in Step 4, we scored them using the Wordnet-based Personalized Pagerank system described in Agirre [ 1 ] (UKB), a non distributional WordNet based measure, and the best system in Table 1
+p59
+aVThe one most directly related to a large body of word similarity work that followed is what he calls the ratio model , which defines sim u'\u005cu2062' ( a , b ) as
+p60
+aVWe see that the u'\u005cu0391' = .8 system is even better than the symmetric system at high ranks, but degrades much more quickly
+p61
+aVPlugging unit vectors into the u'\u005cu0391' -skewed version of dice prod still leaves us with a symmetric function ( cos ), whatever the value of u'\u005cu0391'
+p62
+aVFollowing Lee [ 11 ] , who investigates a different family of asymmetric similarity functions, we will refer to these as u'\u005cu0391' -skewed measures
+p63
+aVWe will investigate the three asymmetric functions defined above
+p64
+aVThe first of each of the column pairs is a symmetric system, and the second a rank-biased variant, based on Equation ( 10
+p65
+aVHere si is some numerical operation on real-number feature values ( si stands for shared information
+p66
+aVNote the 3 of the 5 items contributing the most improvement this system were pairs with a large difference in rank
+p67
+aVWe argue that the advantages of rank bias are tied to improved similarity estimation when comparing vectors of very different dimensionality
+p68
+aVLong before Weed and Weir, Lee [ 12 ] proposed an asymmetric similarity measure as well
+p69
+aVWe define the Tversky-normalized version of u'\u005cu03a3' si , written T si , as
+p70
+aVThe symmetry assumption is not, however, universal, and it is not essential to all applications of similarity, especially when it comes to modeling human similarity judgments
+p71
+aVHere A and B represent feature sets for the objects a and b respectively; the term in the numerator is a function of the set of shared features, a measure of similarity, and the last two terms in the denominator measure dissimilarity u'\u005cu0391' and u'\u005cu0392' are real-number weights; when u'\u005cu0391' u'\u005cu2260' u'\u005cu0392' , symmetry is abandoned
+p72
+aVIn fact, all can be defined in terms of u'\u005cu03a3' functions differing only in their si operation
+p73
+aVThis assumption is foundational for some conceptions, such as the idea of a similarity space, in which similarity is the inverse of distance; and it is deeply embedded into many of the algorithms that build on a similarity relation among objects, such as clustering algorithms
+p74
+aVTo make this concrete, let us consider a word representation in the word-as-vector paradigm [ 11 , 13 ] , using a dependency-based model
+p75
+aVBefore presenting these results, it will be helpful to slightly reformulate and slightly generalize Tversky u'\u005cu2019' s ratio model
+p76
+aVIn Table 3 , we list the pairs whose reranking on the MC/RG dataset contributed most to the improvement of the u'\u005cu0391' = .9 system over the default u'\u005cu0391' = .5 system
+p77
+aV3 3 Interestingly, Equation ( 9 ) does not yield an asymmetric version of cosine
+p78
+aVThe three distinct functions in Equation 6 have a similar form
+p79
+aVTable 2 shows very similar results using the Stanford parser, demonstrating the pattern is not limited to a single parsing model
+p80
+aVWe explain these results on the basis of the principle developed for the human correlation data
+p81
+aVWe define three SI operations u'\u005cu03a3' prod 2 2 u'\u005cu03a3' prod , of course, is dot product u'\u005cu03a3' min , and u'\u005cu03a3' avg as follows
+p82
+aVWe parsed the BNC with the Malt Dependency parser [ 16 ] and the Stanford parser [ 10 ] , creating two dependency DBs, using basically the design in Lin [ 13 ] , with features weighted by PMI [ 2 ]
+p83
+aVAt the level of the vector representations we are using, these are events of very different dimensionality; that is, there are ten times as many features in the representation of boat as there are in the representation of dinghy
+p84
+aVThe computational advantage of this reformulation is that the core similarity operation u'\u005cu03a3' u'\u005cu2062' ( w 1 , w 2 ) is done on what is generally only a small number of shared features, and the u'\u005cu03a3' u'\u005cu2062' ( w i , w i ) calculations (which we will call self-similarities), can be computed in advance
+p85
+aVWe conjecture that the reason this helps is Tversky u'\u005cu2019' s principle
+p86
+aVJimenez et al showed the continued relevance of Tversky u'\u005cu2019' s work
+p87
+aVThat is, T min is a weighted harmonic mean of precision and recall, the so-called weighted F-measure [ 14 ]
+p88
+aVFor all three systems, the improvement shown in raising u'\u005cu0391' from .5 to whatever the optimum is is monotonic
+p89
+aVThis is shown in Figure 1
+p90
+aVThe debt owed to Tversky [ 19 ] has been made clear in the introduction
+p91
+aVNote that sim u'\u005cu2062' ( w 1 , w 2 ) is symmetric if and only if u'\u005cu0391' = 0.5
+p92
+aVIn the last column an approximation of the amount of correlation improvement provided by that pair ( u'\u005cu0394'
+p93
+aVThe point is that u'\u005cu0391' -skewing always helps
+p94
+aVLess clear is the debt owed to Jimenez et al
+p95
+aV1 1 Paralleling ( 7 ) is Jaccard-family normalization u'\u005cu03a3' jacc u'\u005cu2062' ( w 1 , w 2 ) = u'\u005cu03a3' u'\u005cu2062' ( w 1 , w 2 ) u'\u005cu03a3' u'\u005cu2062' ( w 1 , w 1 ) + u'\u005cu03a3' u'\u005cu2062' ( w 2 , w 2 ) - u'\u005cu03a3' u'\u005cu2062' ( w 1 , w 2 ) It is easy to generalize the result from van Rijsbergen [ 20 ] for the original set-specific versions of Dice and Jaccard, and show that all of the Tversky family functions discussed above are monotonic in Jaccard
+p96
+aVThe version used here is the one used in Curran [ 3 ]
+p97
+aVWe also will look at a rank-biased family of measures
+p98
+aVSimilarly, u'\u005cu03a3' u'\u005cu2062' ( w 1 , w 1 ) represents the summed feature weights of w 1 , and therefore
+p99
+aVConversely, u'\u005cu0391' = .04 works better
+p100
+aV6 * [ ( baseline - gold ) 2 - ( test - gold ) 2 ] n * ( n 2 - 1
+p101
+aVThat value is probably probably an overtrained optimum
+p102
+aVThis work reported here was supported by NSF CDI grant # 1028177
+p103
+aVTo see this, we divide ( 9 ) everywhere by u'\u005cu03a3' u'\u005cu2062' ( w 1 , w 2 )
+p104
+a.

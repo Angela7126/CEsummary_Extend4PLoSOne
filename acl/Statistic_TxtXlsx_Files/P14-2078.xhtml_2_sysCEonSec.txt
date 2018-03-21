@@ -1,0 +1,311 @@
+Current File: P14-2078.xhtml_2 P14-2078.xhtml
+
+Section 0:  Abstract
+	SentNum: 4
+	CENum: 2
+	SentCovered: 2
+	Covered_Rate: 50.0000%
+
+Section 1:  1 Introduction
+	SentNum: 28
+	CENum: 11
+	SentCovered: 10
+	Covered_Rate: 35.7143%
+
+Section 2:  2 Related Work
+	SentNum: 21
+	CENum: 5
+	SentCovered: 5
+	Covered_Rate: 23.8095%
+
+Section 3:  3 Proposed Algorithm
+	SentNum: 77
+	CENum: 14
+	SentCovered: 20
+	Covered_Rate: 25.9740%
+
+Section 4:  4 Experiments and Results
+	SentNum: 22
+	CENum: 3
+	SentCovered: 3
+	Covered_Rate: 13.6364%
+
+Section 5:  5 Conclusion
+	SentNum: 6
+	CENum: 2
+	SentCovered: 3
+	Covered_Rate: 50.0000%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-2078.xhtml_2's CE cases
+
+Section 0:  Abstract has 2 CE cases
+	CASE: 1
+	Stag: 2 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: Then, the algorithm re-ranks candidate links according to mutual relations between all the named entities found in the document. 
+		Cause: [(0, 9), (0, 19)]
+		Effect: [(0, 0), (0, 6)]
+
+	CASE: 2
+	Stag: 3 
+		Pattern: 0 [['based', 'on']]---- [['&V-ing/&NP@R@', '(&Clause@R@)', '&BE', '(&ADV)'], ['&NP@C@', '(&Clause@C@)']]
+		sentTXT: The evaluation is based on experiments conducted on the test corpus of the TAC-KBP 2012 entity linking task. 
+		Cause: [(0, 5), (0, 17)]
+		Effect: [(0, 0), (0, 1)]
+
+Section 1:  1 Introduction has 11 CE cases
+	CASE: 1
+	Stag: 6 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Dealing with ambiguity is one of the key difficulties in this task, since mentions are often highly polysemous, and potentially related to many different KB entries. 
+		Cause: [(0, 14), (0, 18)]
+		Effect: [(0, 20), (0, 26)]
+
+	CASE: 2
+	Stag: 10 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: They are used as matching sequences to locate corresponding candidate entries in the KB, and then to disambiguate those candidates using similarity measures. 
+		Cause: [(0, 4), (0, 14)]
+		Effect: [(0, 0), (0, 2)]
+
+	CASE: 3
+	Stag: 11 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: The NED problem is related to the Word Sense Disambiguation (WSD) problem [ 16 ] , and is often more challenging since mentions of NEs can be highly ambiguous. 
+		Cause: [(0, 24), (0, 30)]
+		Effect: [(0, 0), (0, 22)]
+
+	CASE: 4
+	Stag: 12 13 
+		Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: For instance, names of places can be very common as is Paris, which refers to 26 different places in Wikipedia. Hence, systems that attempt to address the NED problem must include disambiguation resources. 
+		Cause: [(0, 0), (0, 21)]
+		Effect: [(1, 2), (1, 13)]
+
+	CASE: 5
+	Stag: 18 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: In more recent approaches, it is suggested that annotation processes based on similarity distance measures can be improved by making use of other annotations present in the same document. 
+		Cause: [(0, 13), (0, 29)]
+		Effect: [(0, 0), (0, 10)]
+
+	CASE: 6
+	Stag: 18 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: In more recent approaches, it is suggested that annotation processes based on similarity distance measures can be improved by making use of other annotations present in the same document. 
+		Cause: [(0, 7), (0, 16)]
+		Effect: [(0, 0), (0, 5)]
+
+	CASE: 7
+	Stag: 19 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Such techniques are referred to as semantic relatedness [ 19 ] , collective disambiguation [ 12 ] , or joint disambiguation [ 8 ]. 
+		Cause: [(0, 6), (0, 17)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 8
+	Stag: 20 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: The idea is to evaluate in a set of candidate links which one is the most likely to be correct by taking the other links contained in the document into account. 
+		Cause: [(0, 21), (0, 29)]
+		Effect: [(0, 0), (0, 19)]
+
+	CASE: 9
+	Stag: 21 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: For example, if a NE describes a city name like Paris , it is more probable that the correct link for this city name designates Paris (France) rather than Paris (Texas) if a neighbor entity offers candidate links semantically related to Paris (France) like the Seine river or the Champs-Elysées. 
+		Cause: [(0, 4), (0, 11)]
+		Effect: [(0, 13), (0, 57)]
+
+	CASE: 10
+	Stag: 21 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: For example, if a NE describes a city name like Paris , it is more probable that the correct link for this city name designates Paris (France) rather than Paris (Texas) if a neighbor entity offers candidate links semantically related to Paris (France) like the Seine river or the Champs-Elysées. 
+		Cause: [(0, 24), (0, 44)]
+		Effect: [(0, 0), (0, 22)]
+
+	CASE: 11
+	Stag: 23 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: The ontology (like YAGO or DBPedia) provides a pre-existing set of potential relations between the entities to link (like for instance, in our previous example, Paris (France) has_river Seine ) that will be used to rank the best candidates according to their mutual presence in the document. 
+		Cause: [(0, 48), (0, 53)]
+		Effect: [(0, 0), (0, 45)]
+
+Section 2:  2 Related Work has 5 CE cases
+	CASE: 1
+	Stag: 33 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: A strong effort has been conducted recently by the TAC-KBP evaluation task [ 13 ] to create standardized corpus, and annotation standards based on Wikipedia for evaluation and comparison of EL systems. 
+		Cause: [(0, 25), (0, 32)]
+		Effect: [(0, 0), (0, 22)]
+
+	CASE: 2
+	Stag: 35 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: We describe below some recent approaches proposed for solving the EL task. 
+		Cause: [(0, 8), (0, 11)]
+		Effect: [(0, 0), (0, 6)]
+
+	CASE: 3
+	Stag: 37 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: Lately, [ 6 , 15 , 17 ] extended this framework by using richer features for similarity comparison. 
+		Cause: [(0, 13), (0, 18)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 4
+	Stag: 42 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: More recently, several systems have been launched as web services dedicated to EL tasks. 
+		Cause: [(0, 9), (0, 13)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 5
+	Stag: 46 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: It uses bags of words to disambiguate semantic entities according to a cosine similarity algorithm. 
+		Cause: [(0, 11), (0, 14)]
+		Effect: [(0, 0), (0, 8)]
+
+Section 3:  3 Proposed Algorithm has 14 CE cases
+	CASE: 1
+	Stag: 53 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: We propose a mutual disambiguation algorithm that improves the accuracy of entity links in a document by using successive corrections applied to an annotation object representing this document. 
+		Cause: [(0, 17), (0, 23)]
+		Effect: [(0, 24), (0, 27)]
+
+	CASE: 2
+	Stag: 54 55 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The annotation object is composed of information extracted from the document along with linguistic and semantic annotations as described hereafter. Documents are processed by an annotator capable of producing POS tags for each word, as well as spans, NE surface forms, NE labels and ranked candidate Wikipedia URIs for each candidate NE. 
+		Cause: [(0, 18), (1, 27)]
+		Effect: [(0, 0), (0, 16)]
+
+	CASE: 3
+	Stag: 57 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since the system focuses on NEs, rows with lexical units that do not belong to a NE SF are dropped from the annotation object, and NE SF are refined as described in [ 5 ]. 
+		Cause: [(0, 1), (0, 5)]
+		Effect: [(0, 7), (0, 36)]
+
+	CASE: 4
+	Stag: 58 59 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: When NE SF are spanned over several rows, these rows are merged into a single one. Thus, we consider an annotation object u'\ud835' u'\udc9c' u'\ud835' u'\udc9f' , which is an array with a row for each NE, and columns storing related knowledge. 
+		Cause: [(0, 0), (0, 16)]
+		Effect: [(1, 1), (1, 43)]
+
+	CASE: 5
+	Stag: 60 
+		Pattern: 0 [['if'], ['then']]---- [[], ['&C', '(,)'], ['&R']]
+		sentTXT: If n NEs were annotated in u'\ud835' u'\udc9f' , then u'\ud835' u'\udc9c' u'\ud835' u'\udc9f' has n rows. 
+		Cause: [(0, 1), (0, 15)]
+		Effect: [(0, 18), (0, 40)]
+
+	CASE: 6
+	Stag: 61 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: If l candidate URIs are provided for each NE, then u'\ud835' u'\udc9c' u'\ud835' u'\udc9f' has ( l + 4 ) columns c u , u u'\u2208' { 1 , l + 4 }. 
+		Cause: [(0, 1), (0, 8)]
+		Effect: [(0, 10), (0, 43)]
+
+	CASE: 7
+	Stag: 65 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: To support the correction process based on co-reference chains, the system tries to correct NE labels for all the NEs listed in the annotation object. 
+		Cause: [(0, 7), (0, 8)]
+		Effect: [(0, 10), (0, 25)]
+
+	CASE: 8
+	Stag: 83 84 
+		Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: The second NE has a longer surface form than the first one, and its associated first rank URI is the most frequent. Hence, the co-reference correction process will assign the right URI to the first NE ( URI 1 http://en.wikipedia.org/wiki /Paris ), which was wrongly linked to the actress Paris Hilton. 
+		Cause: [(0, 0), (0, 22)]
+		Effect: [(1, 2), (1, 31)]
+
+	CASE: 9
+	Stag: 91 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: But if the IBM mention co-occurs with a Thomas Watson, Jr mention in the document, there will probably be more links between the International Business Machine and Thomas Watson, Jr related Wikipedia pages than between the International Brotherhood of Magicians and Thomas Watson, Jr related Wikipedia pages. 
+		Cause: [(0, 2), (0, 9)]
+		Effect: [(0, 11), (0, 35)]
+
+	CASE: 10
+	Stag: 96 97 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The input of the MDP is an annotation object u'\ud835' u'\udc9c' u'\ud835' u'\udc9f' with n rows, obtained as explained in Section 3.1. For all i u'\u2208' [ [ 1 , n ] ] , k u'\u2208' [ [ 1 , l ] ] , we build the set S i k , composed of the Wikipedia URIs and categories contained in the source Wikipedia document related to the URI stored in u'\ud835' u'\udc9c' u'\ud835' u'\udc9f' [ i ] u'\u2062' [ k ] that we will refer to as URI k i to ease the reading. 
+		Cause: [(0, 35), (1, 84)]
+		Effect: [(0, 0), (0, 33)]
+
+	CASE: 11
+	Stag: 103 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: We assumed the dsr_score was much more semantically significant than the csr_score, and translated this assumption in the weight calculation by introducing two correction parameters u'\u0391' and u'\u0392' used in the final scoring calculation. 
+		Cause: [(0, 22), (0, 42)]
+		Effect: [(0, 0), (0, 20)]
+
+	CASE: 12
+	Stag: 105 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: For all i u'\u2208' [ [ 1 , n ] ] , for each set of URIs { URI i k , u'\u2005' k u'\u2208' [ [ 1 , l ] ] } , the re-ranking process is conducted according to the following steps. 
+		Cause: [(0, 53), (0, 55)]
+		Effect: [(0, 0), (0, 50)]
+
+	CASE: 13
+	Stag: 126 127 
+		Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: S 1 2 is associated to the International Business Machines Corporation , and S 2 1 to the Thomas Watson, Jr page dsr_score(URI 1 1 ) sums up the number of occurrences of URI 1 1 in S j 1 for all j u'\u2208' [ [ 1 , n ] ] - { 1 }. Hence, in the current example, dsr_score(URI 1 1 ) is the number of occurrences of URI 1 1 in S 2 1 , namely the number of times the International Brotherhood of Magicians are cited in the Thomas Watson, Jr page. 
+		Cause: [(0, 0), (0, 61)]
+		Effect: [(1, 2), (1, 45)]
+
+	CASE: 14
+	Stag: 128 129 
+		Pattern: 2 [[[',', '.', ';', 'and']], ['accordingly']]---- [['&C'], ['&R']]
+		sentTXT: Similarly, dsr_score(URI 2 1 ) is equal to the number of times the International Business Machines Corporation is cited in the Thomas Watson, Jr page csr_score(URI 1 1 ) sums up the number of common URIs and categories between S 1 1 and S 2 1 , i.e., the number of URIs and categories appearing in both International Brotherhood of Magicians and Thomas Watson, Jr pages csr_score(URI 2 1 ) counts the number of URIs and categories appearing in both International Business Machines Corporation and Thomas Watson, Jr pages. After calculation, we have mutual_relation_score(URI 1 1 ) mutual_relation_score(URI 2 1 ) The candidate URIs for [ IBM ] are re-ranked accordingly, and International Business Machines Corporation becomes its first rank candidate. 
+		Cause: [(0, 1), (1, 1)]
+		Effect: [(1, 3), (1, 25)]
+
+Section 4:  4 Experiments and Results has 3 CE cases
+	CASE: 1
+	Stag: 133 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: Given a query that consists of a document with a specified name mention of an entity, the task is to determine the correct node in the reference KB for the entity, adding a new node for the entity if it is not already in the reference KB. 
+		Cause: [(0, 41), (0, 48)]
+		Effect: [(0, 0), (0, 39)]
+
+	CASE: 2
+	Stag: 138 
+		Pattern: 2 [['for', 'the', 'sake', 'of'], [',']]---- [[], ['&V-ing/&NP@C@'], ['&R']]
+		sentTXT: For the sake of reproducibility, we applied the KBP scoring metric ( B 3 + F ) described in [ 20 ] , and we used the KBP scorer 1 1 http://www.nist.gov/tac/2013/KBP/EntityLinking/tools.html. 
+		Cause: [(0, 4), (0, 4)]
+		Effect: [(0, 6), (0, 32)]
+
+	CASE: 3
+	Stag: 146 
+		Pattern: 2 [['for', 'the', 'sake', 'of']]---- [['&R'], ['&V-ing/&NP@C@']]
+		sentTXT: The three best results and the median from TAC-KBP 2012 systems are shown in the remaining columns for the sake of comparison. 
+		Cause: [(0, 21), (0, 21)]
+		Effect: [(0, 0), (0, 16)]
+
+Section 5:  5 Conclusion has 2 CE cases
+	CASE: 1
+	Stag: 152 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: The presented system provides a robust semantic disambiguation method, based on mutual relation of entities inside a document, using a standard annotation engine. 
+		Cause: [(0, 12), (0, 24)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 2
+	Stag: 155 156 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: SemLinker is fully implemented, and publicly released as an open source toolkit ( http://code.google.com/p/semlinker. It has been deployed in the TAC-KBP 2013 evaluation campaign. 
+		Cause: [(0, 9), (1, 8)]
+		Effect: [(0, 0), (0, 7)]
+
+#-------------------------------------------------
+

@@ -1,0 +1,144 @@
+(lp0
+VIn our method, the standard recursive auto-encoder (RAE) pre-trains the phrase embedding with an unsupervised algorithm by minimizing the reconstruction error [ 22 ] , while the bilingually-constrained model learns to fine-tune the phrase embedding by minimizing the semantic distance between translation equivalents and maximizing the semantic distance between non-translation pairs
+p1
+aVAssuming the phrase is a meaningful composition of its internal words, we propose Bilingually-constrained Recursive Auto-encoders (BRAE) to learn semantic phrase embeddings
+p2
+aVAs the semantic phrase embedding can fully represent the phrase, we can go a step further in the phrase-based SMT and feed the semantic phrase embeddings to DNN in order to model the whole translation process (e.g., derivation structure prediction
+p3
+aVAccordingly, we evaluate the BRAE model on two end-to-end SMT tasks (phrase table pruning and decoding with phrasal semantic similarities) which need to check whether a translation candidate and the source phrase are in the same meaning
+p4
+aVThis indicates that the proposed BRAE model is effective at learning semantic phrase embeddings
+p5
+aVAs translation equivalents share the same semantic meaning, we employ high-quality phrase translation pairs as training corpus in this work
+p6
+aVInstead, we focus on learning phrase embeddings from the view of semantic meaning, so that our phrase embedding can fully represent the phrase and best fit the phrase-based SMT
+p7
+aVTherefore, we can imagine that learning semantic phrase embedding is reasonable if we are given gold vector representations of the phrases
+p8
+aVWith the learned model, we can accurately measure the semantic similarity between a source phrase and a translation candidate
+p9
+aVIf we learn the embedding of the Chinese phrase correctly, we can regard it as the gold representation for the English phrase and use it to guide the process of learning English phrase embedding
+p10
+aVWe can make inference from this fact that if a model can learn the same embedding for any phrase pair sharing the same meaning, the learned embedding must encode the semantics of the phrases and the corresponding model is our desire
+p11
+aVIn contrast, our BRAE model learns the semantic meaning for each phrase no matter whether it is short or relatively long
+p12
+aVBesides using the semantic similarities to prune the phrase table, we also employ them as two informative features like the phrase translation probability to guide translation hypotheses selection during decoding
+p13
+aVWe know from the semi-supervised phrase embedding that the learned vector representation can be well adapted to the given label
+p14
+aVIn decoding with phrasal semantic similarities, we apply the semantic similarities of the phrase pairs as new features during decoding to guide translation candidate selection
+p15
+aVTherefore, our model can be easily adapted to learn semantic phrase embeddings using paraphrases
+p16
+aVAssuming the target phrase representation p t is available, the optimization of the source-side parameters is similar to that of semi-supervised RAE
+p17
+aVTherefore, these phrase embeddings are not suitable to fully represent the phrasal translation units in SMT due to the lack of semantic meanings of the phrase
+p18
+aVSince word embeddings for two languages are learned separately and locate in different vector space, we do not enforce the phrase embeddings in two languages to be in the same semantic vector space
+p19
+aVThe phrase translation probability is based on co-occurrence statistics and the lexical weights consider the phrase as bag-of-words
+p20
+aVIn contrast, our BRAE model focuses on compositional semantics from words to phrases
+p21
+aVBesides SMT, the semantic phrase embeddings can be used in other cross-lingual tasks, such as cross-lingual question answering, since the semantic similarity between phrases in different languages can be calculated accurately
+p22
+aVAccordingly, we propose the Bilingually-constrained Recursive Auto-encoders (BRAE), whose basic goal is to minimize the semantic distance between the phrases and their translations
+p23
+aVSecond, even though we have no correct semantic phrase representation as the gold label, the phrases sharing the same meaning provide an indirect but feasible way
+p24
+aVIn experiments, we discard the phrase pair whose similarity in two directions are smaller than a threshold 3 3 To avoid the situation that all the translation candidates for a source phrase are pruned, we always keep the first 10 best according to the semantic similarity
+p25
+aVInstead, our bilingually-constrained recursive auto-encoders not only learn the composition mechanism of generating phrases from words, but also fine tune the word embeddings during the model training stage, so that we can induce the full information of the phrases and internal words
+p26
+aVSeveral researchers extend the original RAEs to a semi-supervised setting so that the induced phrase embedding can predict a target label, such as polarity in sentiment analysis [ 23 ] , syntactic category in parsing [ 21 ] and phrase reordering pattern in SMT [ 16 ]
+p27
+aVTherefore, the semantic similarities computed using our BRAE model are complementary to the existing four translation probabilities
+p28
+aVHowever, this kind of phrase embedding is hard to capture full semantics since the context of a phrase is limited
+p29
+aVWhen the two algorithms using a similar portion of the phrase table 4 4 In the future, we will compare the performance by enforcing the two algorithms to use the same portion of phrase table (35% in BRAE and 36% in Significance), the BRAE-based algorithm outperforms the Significance algorithm on all the test sets except for MT04
+p30
+aVThe core idea behind is that a phrase and its correct translation should share the same semantic meaning
+p31
+aVThese algorithms are based on corpus statistics including co-occurrence statistics, phrase pair usage and composition information
+p32
+aVThus, they can supervise each other to learn their semantic phrase embeddings
+p33
+aVTherefore, in order to successfully apply DNN to model the whole translation process, such as modelling the decoding process, learning compact vector representations for the basic phrasal translation units is the essential and fundamental work
+p34
+aVFortunately, we know the fact that the two phrases should share the same semantic representation if they express the same meaning
+p35
+aVAs shown in Table 2, no matter what n is, the BRAE model can significantly improve the translation quality in the overall test data
+p36
+aVThe models using word embeddings as the direct inputs to DNN cannot make full use of the whole syntactic and semantic information of the phrasal translation rules
+p37
+aVBy optimizing the above objective, the phrases in the vector embedding space will be grouped according to the labels
+p38
+aVWe suppose there is a transformation between the two semantic embedding spaces
+p39
+aVThe experiments show that up to 72% of the phrase table can be discarded without significant decrease on the translation quality, and in decoding with phrasal semantic similarities up to 1.7 BLEU score improvement over the state-of-the-art baseline can be achieved
+p40
+aVIn fact, the phrases having the same meaning are translation equivalents in different languages, but are paraphrases in one language
+p41
+aVAnd then, they fine-tune the RAE according to the label of the phrase, such as the syntactic category in parsing (Socher et al., 2013a), the polarity in sentiment analysis [ 23 , 24 ] , and the reordering pattern in SMT [ 16 ]
+p42
+aVThis procedure can be performed with an co-training style algorithm so as to minimize the semantic distance between the translation equivalents 1 1 For simplicity, we do not show non-translation pairs here
+p43
+aVAccordingly, our BRAE model is trained on Chinese and English
+p44
+aVHowever, in the conventional (phrase-based) SMT, phrases are the basic translation units
+p45
+aVAs a result, the overall semantic error becomes
+p46
+aVMost of these works attempt to improve some components in SMT based on word embedding , which converts a word into a dense, low dimensional, real-valued vector representation [ 2 , 3 , 5 , 20 ]
+p47
+aVObviously, these methods of learning phrase embeddings either focus on some aspects of the phrase (e.g., reordering pattern), or impose strong assumptions (e.g., bag-of-words or indivisible n -gram
+p48
+aVTo assess how well the parent u'\u005cu2019' s vector represents its children, the standard auto-encoder reconstructs the children in a reconstruction layer
+p49
+aVFurthermore, our model is much more intuitive because it is directly based on the semantic similarity
+p50
+aVWe thus enhance the semantic error with both positive and negative examples, and the corresponding max-semantic-margin error becomes
+p51
+aVThe third method views any phrase as the meaningful composition of its internal words
+p52
+aVIn order to apply this auto-encoder to each pair of children, the representation of the parent p should have the same dimensionality as the c i u'\u005cu2019' s
+p53
+aVSuppose we are given a positive example ( s , t ) , the correct translation t can be converted into a bad translation t u'\u005cu2032' by replacing the words in t with randomly chosen target language words
+p54
+aVWe prefer to the second one since this kind of word embedding has already encoded some semantics of the words
+p55
+aVHowever, the current model cannot guarantee this since the above semantic error E s u'\u005cu2062' e u'\u005cu2062' m ( s t , u'\u005cu0398' ) only accounts for positive ones
+p56
+aVFurthermore, this method can only account for a very small part of phrases, since most of the phrases are compositional
+p57
+aVThe SMT evaluation is conducted on Chinese-to-English translation
+p58
+aVThe recursive auto-encoder is typically adopted to learn the way of composition [ 22 , 23 , 21 , 24 , 16 ]
+p59
+aVIn order to investigate the influence of the dimensionality of the embedding space, we have tried three different settings n = 50 , 100 , 200
+p60
+aVThus, the semantic distance is bidirectional the distance between p t and the transformation of p s , and that between p s and the transformation of p t
+p61
+aVUsing the above error function, we need to construct a negative example for each positive example
+p62
+aVTermination Check if the joint error reaches a local minima or the iterations reach the pre-defined number (25 is used in our experiments), we terminate the training procedure, otherwise we set p s = p s u'\u005cu2032' , p t = p t u'\u005cu2032' , and go to step 2
+p63
+aVIn parameter initialization, u'\u005cu0398' r u'\u005cu2062' e u'\u005cu2062' c and u'\u005cu0398' s u'\u005cu2062' e u'\u005cu2062' m for the source language is randomly set according to a normal distribution
+p64
+aVNIST MT04-06 and MT08 (news data) are used as the test data
+p65
+aVAssuming we are given a phrase w 1 u'\u005cu2062' w 2 u'\u005cu2062' u'\u005cu22ef' u'\u005cu2062' w m , it is first projected into a list of vectors ( x 1 , x 2 , u'\u005cu22ef' , x m ) using Eq
+p66
+aVDue to the powerful capacity of feature learning and representation, Deep (multi-layer) Neural Networks (DNN) have achieved a great success in speech and image processing [ 13 , 15 , 6 ]
+p67
+aVCase-insensitive BLEU is employed as the evaluation metric
+p68
+aVThe NIST MT03 is used as the development data
+p69
+aV2 again to compute y 2 by setting the children to be [ c 1 ; c 2 ] = [ y 1 ; x 3 ]
+p70
+aVWe thank Nan Yang for sharing the baseline code and anonymous reviewers for their valuable comments
+p71
+a.

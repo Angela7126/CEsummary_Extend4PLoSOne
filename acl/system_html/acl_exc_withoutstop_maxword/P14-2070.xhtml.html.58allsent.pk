@@ -1,0 +1,60 @@
+(lp0
+VInterestingly, this resource annotates the most frequent words in English, so, even if lexicon coverage is still far lower than SWN-prior, it grants a high coverage, with human precision, of language use
+p1
+aVThus, emotion analysis represents a natural evolution of sentiment analysis
+p2
+aVAs a final test, we evaluate our resource in the classification task
+p3
+aVTo build our emotion lexicon we harvested all the news articles from rappler.com , as of June 3rd 2013 the final dataset consists of 13.5 M words over 25.3 K documents, with an average of 530 words per document
+p4
+aV2013), we observe that even if the number of entries of our lexicon is far lower than SWN-prior approaches, the fact that we extracted and annotated words from documents grants a high coverage of language use
+p5
+aVAn excerpt of the final Matrix M W u'\u005cu2062' E is presented in Table 3 , and it can be interpreted as a list of words with scores that represent how much weight a given word has in the affective dimensions we consider
+p6
+aVConsidering the naïve approach we used, we can reasonably conclude that the quality and coverage of our resource are the reason of such results, and that adopting more complex approaches (i.e., compositionality) can possibly further improve performances in text-based emotion recognition
+p7
+aVResults indicate that the use of our resource, even if automatically acquired, is highly beneficial in affective text recognition
+p8
+aVThis calls for a role of compositionality, where the score of a sentence is computed by composing the scores of the words up in the syntactic tree
+p9
+aVFinally, this dataset was meant for unsupervised approaches (just a small trial sample was provided), so to avoid simple text categorization approaches
+p10
+aVThis method allows us to u'\u005cu2018' merge u'\u005cu2019' words with emotions by summing the products of the weight of a word with the weight of the emotions in each document
+p11
+aVWhile both texts express a negative sentiment, the latter, connected to anger, is more relevant for buzz monitoring
+p12
+aVIn this respect, compositional approaches represent a new promising trend, since all other approaches, either using semantic similarity or Bag-of-Words (BOW) based machine-learning, cannot handle, for example, cases of texts with same wording but different words order u'\u005cu201c' The dangerous killer escaped one month ago, but recently he was arrested u'\u005cu201d' ( relief , happyness ) vs u'\u005cu201c' The dangerous killer was arrested one month ago, but recently he escaped u'\u005cu201d' ( fear
+p13
+aVHeadlines typically consist of a few words and are often written with the intention to u'\u005cu2018' provoke u'\u005cu2019' emotions so to attract the readers u'\u005cu2019' attention
+p14
+aVWe do so by using a very naïve approach, similar to u'\u005cu201c' WordNetAffect presence u'\u005cu201d' discussed in [] for each headline, we simply compute a value, for any affective dimension, by averaging the corresponding affective scores u'\u005cu2013' obtained from DepecheMood - of all lemma#PoS present in the headline
+p15
+aVAs the affective dimensions present in the test set u'\u005cu2013' based on the six basic emotions model [] u'\u005cu2013' do not exactly match with the ones provided by Rappler u'\u005cu2019' s Mood Meter, we first define a mapping between the two when possible, see Table 4
+p16
+aVTo this end, we take advantage in an original way of massive crowd-sourced affective annotations associated with news articles, obtained by crawling the rappler.com social news network
+p17
+aVIn our novel approach to u'\u005cu2018' crowdsourcing u'\u005cu2019' , as compared to other NLP tasks that rely on tools like Amazon u'\u005cu2019' s Mechanical Turk [] , the subjects are aware of the u'\u005cu2018' implicit annotation task u'\u005cu2019' but they are not paid
+p18
+aVThis dataset is of interest to us since the u'\u005cu2018' compositional u'\u005cu2019' problem is less prominent given the simplified syntax of news headlines, containing, for example, fewer adverbs (like negations or intensifiers) than normal sentences []
+p19
+aVAs a next step we built a word-by-emotion matrix starting from M D u'\u005cu2062' E using an approach based on compositional semantics
+p20
+aVThere are several possible explanations, out of the scope of the present paper, for this bias i) it is due to cultural characteristics of the audience (ii) the bias is in the dataset itself, being formed mainly by u'\u005cu2018' positive u'\u005cu2019' news; (iii) it is a psychological phenomenon due to the fact that people tend to express more positive moods on social networks []
+p21
+aVThis way, hundreds of thousands votes have been collected since the launch of the service
+p22
+aVTo do so, we first lemmatized and PoS tagged all the documents (where PoS can be adj., nouns, verbs, adv.) and kept only those lemma#PoS present also in WordNet, similar to SWN-prior and WordNetAffect resources, to which we want to align
+p23
+aVFor example Mitsubishi changed the name of one of its SUVs for the Spanish market, since the original name Pajero had a very negative prior polarity, as it means u'\u005cu2018' wanker u'\u005cu2019' in Spanish []
+p24
+aVIn such cases no context is given and the brand name alone, with its perceived prior polarity, is responsible for stating the area of competition and evoking semantic associations
+p25
+aVSo, for example, awe#n has a predominant weight in inspired (0.38), comical#a has a predominant weight in amused (0.51), while kill#v has a predominant weight in afraid , angry and sad (0.23, 0.21 and 0.27 respectively
+p26
+aVFinally, we transformed M W u'\u005cu2062' E by first applying normalization column-wise (so to eliminate the over representation for happiness as discussed in Section 3 ) and then scaling the data row-wise so to sum up to one
+p27
+aVThe simple division in u'\u005cu2018' positive u'\u005cu2019' vs u'\u005cu2018' negative u'\u005cu2019' comments may not suffice, as in these examples u'\u005cu2018' I u'\u005cu2019' m so miserable, I dropped my IPhone in the water and now it u'\u005cu2019' s not working anymore u'\u005cu2019' ( sadness ) vs u'\u005cu2018' I am very upset, my new IPhone keeps not working u'\u005cu2019' ( anger
+p28
+aVWe then computed the term-by-document matrices using raw frequencies, normalized frequencies, and tf-idf ( M W u'\u005cu2062' D , f , M W u'\u005cu2062' D , n u'\u005cu2062' f and M W u'\u005cu2062' D , t u'\u005cu2062' f u'\u005cu2062' i u'\u005cu2062' d u'\u005cu2062' f respectively), so to test which of the three weights is better
+p29
+a.

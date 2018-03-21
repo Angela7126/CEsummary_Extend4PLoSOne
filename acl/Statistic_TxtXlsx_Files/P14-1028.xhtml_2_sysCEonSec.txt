@@ -1,0 +1,507 @@
+Current File: P14-1028.xhtml_2 P14-1028.xhtml
+
+Section 0:  Abstract
+	SentNum: 7
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 14.2857%
+
+Section 1:  1 Introduction
+	SentNum: 37
+	CENum: 12
+	SentCovered: 16
+	Covered_Rate: 43.2432%
+
+Section 2:  2 Conventional Neural Network
+	SentNum: 50
+	CENum: 10
+	SentCovered: 12
+	Covered_Rate: 24.0000%
+
+Section 3:  3 Max-Margin Tensor Neural Network
+	SentNum: 75
+	CENum: 20
+	SentCovered: 24
+	Covered_Rate: 32.0000%
+
+Section 4:  4 Experiment
+	SentNum: 77
+	CENum: 18
+	SentCovered: 21
+	Covered_Rate: 27.2727%
+
+Section 5:  5 Related Work
+	SentNum: 17
+	CENum: 3
+	SentCovered: 4
+	Covered_Rate: 23.5294%
+
+Section 6:  6 Conclusion
+	SentNum: 4
+	CENum: 0
+	SentCovered: 0
+	Covered_Rate: 0.0000%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-1028.xhtml_2's CE cases
+
+Section 0:  Abstract has 1 CE cases
+	CASE: 1
+	Stag: 2 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: By exploiting tag embeddings and tensor-based transformation, MMTNN has the ability to model complicated interactions between tags and context characters. 
+		Cause: [(0, 1), (0, 6)]
+		Effect: [(0, 7), (0, 20)]
+
+Section 1:  1 Introduction has 12 CE cases
+	CASE: 1
+	Stag: 7 8 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: Unlike English and other western languages, Chinese do not delimit words by white-space. Therefore, word segmentation is a preliminary and important pre-process for Chinese language processing. 
+		Cause: [(0, 0), (0, 13)]
+		Effect: [(1, 2), (1, 13)]
+
+	CASE: 2
+	Stag: 10 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: These systems are effective because researchers can incorporate a large body of handcrafted features into the models. 
+		Cause: [(0, 5), (0, 16)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 3
+	Stag: 11 
+		Pattern: 47 [['so'], ['that']]---- [['&C'], ['&adj/&adv@C@'], ['&R']]
+		sentTXT: However, the ability of these models is restricted by the design of features and the number of features could be so large that the result models are too large for practical use and prone to overfit on training corpus. 
+		Cause: [(0, 0), (0, 22)]
+		Effect: [(0, 24), (0, 39)]
+
+	CASE: 4
+	Stag: 17 18 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: [ 6 ] to Chinese word segmentation and POS tagging and proposed a perceptron-style algorithm to speed up the training process with negligible loss in performance. Workable as previous neural network models seem, a limitation of them to be pointed out is that the tag-tag interaction, tag-character interaction and character-character interaction are not well modeled. 
+		Cause: [(1, 2), (1, 30)]
+		Effect: [(0, 4), (1, 0)]
+
+	CASE: 5
+	Stag: 19 20 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In conventional feature-based linear (log-linear) models, these interactions are explicitly modeled as features. Take phrase u'\u201c' æç¯®ç(play basketball) u'\u201d' as an example, assuming we are labeling character C 0 = u'\u201c' ç¯® u'\u201d' , possible features could be. 
+		Cause: [(0, 15), (1, 38)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 6
+	Stag: 19 20 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In conventional feature-based linear (log-linear) models, these interactions are explicitly modeled as features. Take phrase u'\u201c' æç¯®ç(play basketball) u'\u201d' as an example, assuming we are labeling character C 0 = u'\u201c' ç¯® u'\u201d' , possible features could be. 
+		Cause: [(1, 17), (1, 42)]
+		Effect: [(0, 0), (1, 15)]
+
+	CASE: 7
+	Stag: 21 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: To capture more interactions, researchers have designed a large number of features based on linguistic intuition and statistical information. 
+		Cause: [(0, 15), (0, 19)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 8
+	Stag: 23 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: In order to address this problem, we propose a new model called Max-Margin Tensor Neural Network ( MMTNN ) that explicitly models the interactions between tags and context characters by exploiting tag embeddings and tensor-based transformation. 
+		Cause: [(0, 31), (0, 36)]
+		Effect: [(0, 0), (0, 29)]
+
+	CASE: 9
+	Stag: 29 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: [ 15 ] , we wonder how well our model can perform with minimal feature engineering. 
+		Cause: [(0, 0), (0, 2)]
+		Effect: [(0, 4), (0, 15)]
+
+	CASE: 10
+	Stag: 29 30 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: [ 15 ] , we wonder how well our model can perform with minimal feature engineering. Therefore, we integrate additional simple character bigram features into our model and the result shows that our model can achieve a competitive performance that other systems hardly achieve unless they use more complex task-specific features. 
+		Cause: [(0, 0), (0, 15)]
+		Effect: [(1, 2), (1, 35)]
+
+	CASE: 11
+	Stag: 34 35 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We propose a new tensor factorization approach that models each tensor slice as the product of two low-rank matrices. Not only does this approach improve the efficiency of our model but also it avoids the risk of overfitting. 
+		Cause: [(0, 13), (1, 17)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 12
+	Stag: 43 44 
+		Pattern: 7 [['for'], [['reason', 'reasons']]]---- [['&C', '(,/;/./--)', '(&AND)'], ['(&this)'], ['(,/that)', '&R']]
+		sentTXT: The conclusions are given in Section 6. The idea of distributed representation for symbolic data is one of the most important reasons why the neural network works. 
+		Cause: [(0, 1), (1, 4)]
+		Effect: [(1, 15), (1, 19)]
+
+Section 2:  2 Conventional Neural Network has 10 CE cases
+	CASE: 1
+	Stag: 49 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Each character c u'\u2208' D is represented as a real-valued vector (character embedding) E u'\u2062' m u'\u2062' b u'\u2062' e u'\u2062' d u'\u2062' ( c ) u'\u2208' u'\u211d' d where d is the dimensionality of the vector space. 
+		Cause: [(0, 12), (0, 71)]
+		Effect: [(0, 0), (0, 10)]
+
+	CASE: 2
+	Stag: 55 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: The Lookup Table layer can be seen as a simple projection layer where the character embedding for each context character is achieved by table lookup operation according to their indices. 
+		Cause: [(0, 28), (0, 29)]
+		Effect: [(0, 0), (0, 25)]
+
+	CASE: 3
+	Stag: 61 62 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We set w = 5 in all experiments. As shown in Figure 1, at position c i , 1 u'\u2264' i u'\u2264' n , the context characters are fed into the Lookup Table layer. 
+		Cause: [(1, 1), (1, 19)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 4
+	Stag: 79 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: Despite sharing commonalities mentioned above, previous work models the segmentation task differently and therefore uses different training and inference procedure. 
+		Cause: [(0, 2), (0, 12)]
+		Effect: [(0, 15), (0, 20)]
+
+	CASE: 5
+	Stag: 81 82 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: [ 15 ] modeled Chinese word segmentation as a series of classification task at each position of the sentence in which the tag score is transformed into probability using softmax function. The model is then trained in MLE-style which maximizes the log-likelihood of the tagged data. 
+		Cause: [(0, 8), (1, 13)]
+		Effect: [(0, 1), (0, 6)]
+
+	CASE: 6
+	Stag: 84 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: To model the tag dependency, previous neural network models [ 6 , 35 ] introduce a transition score A i u'\u2062' j for jumping from tag i u'\u2208' T to tag j u'\u2208' T. 
+		Cause: [(0, 28), (0, 34)]
+		Effect: [(0, 0), (0, 26)]
+
+	CASE: 7
+	Stag: 86 
+		Pattern: 0 [[['indicate', 'indicates', 'indicated', 'realize', 'realizes', 'realized', 'ensure', 'ensures', 'ensured', 'imply', 'implies', 'implied']]]---- [['&NP@C@', '(&Clause@C@)'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: where f u'\u0398' ( t i c [ i - 2 i + 2 ] ) indicates the score output for tag t i at the i -th character by the network with parameters u'\u0398' = ( M , A , W 1 , b 1 , W 2 , b 2. 
+		Cause: [(0, 2), (0, 19)]
+		Effect: [(0, 21), (0, 51)]
+
+	CASE: 8
+	Stag: 90 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: [ 15 ] , their model is a global one where the training and inference is performed at sentence-level. 
+		Cause: [(0, 0), (0, 2)]
+		Effect: [(0, 4), (0, 18)]
+
+	CASE: 9
+	Stag: 90 91 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: [ 15 ] , their model is a global one where the training and inference is performed at sentence-level. Workable as these methods seem, one of the limitations of them is that the tag-tag interaction and the neural network are modeled seperately. 
+		Cause: [(1, 2), (1, 23)]
+		Effect: [(0, 0), (1, 0)]
+
+	CASE: 10
+	Stag: 92 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: The simple tag-tag transition neglects the impact of context characters and thus limits the ability to capture flexible interactions between tags and context characters. 
+		Cause: [(0, 0), (0, 9)]
+		Effect: [(0, 12), (0, 23)]
+
+Section 3:  3 Max-Margin Tensor Neural Network has 20 CE cases
+	CASE: 1
+	Stag: 106 
+		Pattern: 45 [['so', 'that']]---- [['&C'], ['&R']]
+		sentTXT: In this way, the tag representation can be directly incorporated in the neural network so that the tag-tag interaction and tag-character interaction can be explicitly modeled in deeper layers (See Section 3.2. 
+		Cause: [(0, 0), (0, 14)]
+		Effect: [(0, 17), (0, 33)]
+
+	CASE: 2
+	Stag: 107 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: Moreover, the transition score in equation (4) is not necessary in our model, because, by incorporating tag embedding into the neural network, the effect of tag-tag interaction and tag-character interaction are covered uniformly in one same model. 
+		Cause: [(0, 18), (0, 42)]
+		Effect: [(0, 0), (0, 15)]
+
+	CASE: 3
+	Stag: 107 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: Moreover, the transition score in equation (4) is not necessary in our model, because, by incorporating tag embedding into the neural network, the effect of tag-tag interaction and tag-character interaction are covered uniformly in one same model. 
+		Cause: [(0, 2), (0, 8)]
+		Effect: [(0, 9), (0, 24)]
+
+	CASE: 4
+	Stag: 112 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: [ 35 ] , our model is also trained at sentence-level and carries out inference globally. 
+		Cause: [(0, 0), (0, 2)]
+		Effect: [(0, 4), (0, 15)]
+
+	CASE: 5
+	Stag: 114 115 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: It can be represented as a multi-dimensional array of numerical values. An advantage of the tensor is that it can explicitly model multiple interactions in data. 
+		Cause: [(0, 5), (1, 13)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 6
+	Stag: 115 116 
+		Pattern: 3 [['as', 'a'], ['result']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(&ADJ)'], ['(,)', '&R']]
+		sentTXT: An advantage of the tensor is that it can explicitly model multiple interactions in data. As a result, tensor-based model have been widely used in a variety of tasks [ 20 , 12 , 23 ]. 
+		Cause: [(0, 0), (0, 14)]
+		Effect: [(1, 4), (1, 21)]
+
+	CASE: 7
+	Stag: 118 119 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In linear models, these kinds of interactions are usually modeled as features. In conventional neural network models, however, the input embeddings only implicitly interact through the non-linear function which can hardly model the complexity of the interactions. 
+		Cause: [(0, 12), (1, 25)]
+		Effect: [(0, 0), (0, 10)]
+
+	CASE: 8
+	Stag: 125 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since vector a is the concatenation of character embeddings and the tag embedding, equation (7) can be written in the following form. 
+		Cause: [(0, 1), (0, 12)]
+		Effect: [(0, 14), (0, 23)]
+
+	CASE: 9
+	Stag: 126 127 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: where E j [ p ] is the j -th element of the p -th embedding in Lookup Table layer and V ( p , q , j , k ) [ i ] is the corresponding coefficient for E j [ p ] and E k [ q ] in V [ i ]. As we can see, in each tensor slice i , the embeddings are explicitly related in a bilinear form which captures the interactions between characters and tags. 
+		Cause: [(1, 1), (1, 27)]
+		Effect: [(0, 1), (0, 56)]
+
+	CASE: 10
+	Stag: 128 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The multiplicative operations between tag embeddings and character embeddings can somehow be seen as u'\u201c' feature combination u'\u201d' , which are hand-designed in feature-based models. 
+		Cause: [(0, 14), (0, 21)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 11
+	Stag: 130 131 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Intuitively, we can interpret each slice of the tensor as capturing a specific type of tag-character interaction and character-character interaction. Combining the tensor product with linear transformation, the tensor-based transformation in Layer 2 is defined as. 
+		Cause: [(0, 11), (1, 16)]
+		Effect: [(0, 0), (0, 9)]
+
+	CASE: 12
+	Stag: 131 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Combining the tensor product with linear transformation, the tensor-based transformation in Layer 2 is defined as. 
+		Cause: [(0, 0), (0, 6)]
+		Effect: [(0, 8), (0, 16)]
+
+	CASE: 13
+	Stag: 138 139 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: To remedy this, we propose a tensor factorization approach that factorizes each tensor slice as the product of two low-rank matrices. Formally, each tensor slice V [ i ] u'\u2208' u'\u211d' H 1 × H 1 is factorized into two low rank matrix P [ i ] u'\u2208' u'\u211d' H 1 × r and Q [ i ] u'\u2208' u'\u211d' r × H 1. 
+		Cause: [(0, 16), (1, 63)]
+		Effect: [(0, 0), (0, 14)]
+
+	CASE: 14
+	Stag: 141 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Substituting equation (9) into equation (8), we get the factorized tensor function. 
+		Cause: [(0, 0), (0, 9)]
+		Effect: [(0, 11), (0, 16)]
+
+	CASE: 15
+	Stag: 148 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: Intuitively, the Max-Margin criterion provides an alternative to probabilistic, likelihood-based estimation methods by concentrating directly on the robustness of the decision boundary of a model [ 27 ]. 
+		Cause: [(0, 15), (0, 29)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 16
+	Stag: 153 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: We first define a structured margin loss u'\u25b3' ( y i , y ^ ) for predicting a tag sequence y ^ for a given correct tag sequence y i. 
+		Cause: [(0, 20), (0, 33)]
+		Effect: [(0, 0), (0, 18)]
+
+	CASE: 17
+	Stag: 158 159 
+		Pattern: 0 [[['lead', 'leads', 'led'], 'to']]---- [['&C', '(,/./;/--)', '&this', '(&adj)', '(&N)', '(&CAN/have/has/had)', '(&ADV)'], ['&NP@R@']]
+		sentTXT: The object of Max-Margin training is that the highest scoring tag sequence is the correct one y * = y i and its score will be larger up to a margin to other possible tag sequences y ^ u'\u2208' Y u'\u2062' ( x i ). This leads to the regularized objective function for m training examples. 
+		Cause: [(0, 0), (0, 52)]
+		Effect: [(1, 3), (1, 10)]
+
+	CASE: 18
+	Stag: 160 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: By minimizing this object, the score of the correct tag sequence y i is increased and score of the highest scoring incorrect tag sequence y ^ is decreased. 
+		Cause: [(0, 1), (0, 3)]
+		Effect: [(0, 4), (0, 28)]
+
+	CASE: 19
+	Stag: 161 
+		Pattern: 0 [['due', 'to']]---- [['&R'], ['&NP@C@']]
+		sentTXT: The objective function is not differentiable due to the hinge loss. 
+		Cause: [(0, 8), (0, 10)]
+		Effect: [(0, 0), (0, 5)]
+
+	CASE: 20
+	Stag: 166 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: [ 22 ] , we use the diagonal variant of AdaGrad [ 8 ] with minibatchs to minimize the objective. 
+		Cause: [(0, 0), (0, 2)]
+		Effect: [(0, 4), (0, 19)]
+
+Section 4:  4 Experiment has 18 CE cases
+	CASE: 1
+	Stag: 173 174 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: For model selection, we use the first 90 u'\u2062' % sentences in the training data for training and the rest 10 u'\u2062' % sentences as development data. The minibatch size is set to 20. 
+		Cause: [(0, 34), (1, 5)]
+		Effect: [(0, 0), (0, 32)]
+
+	CASE: 2
+	Stag: 180 
+		Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: We hypothesize that larger factor size results in too many parameters to train and hence perform worse. 
+		Cause: [(0, 0), (0, 12)]
+		Effect: [(0, 15), (0, 16)]
+
+	CASE: 3
+	Stag: 181 182 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The final hyperparameters of our model are set as in Table 2. We first perform a close test 3 3 No other material or knowledge except the training data is allowed on the PKU dataset to show the effect of different model configurations. 
+		Cause: [(0, 9), (1, 29)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 4
+	Stag: 188 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: As we can see, by using Tag embedding, the F-score is improved by +0.6% and OOV recall is improved by +1.0%, which shows that tag embeddings succeed in modeling the tag-tag interaction and tag-character interaction. 
+		Cause: [(0, 6), (0, 8)]
+		Effect: [(0, 9), (0, 39)]
+
+	CASE: 5
+	Stag: 190 191 
+		Pattern: 4 [['result'], ['is', 'that']]---- [['&C', '(,/./;/--)', '&ONE', '(&adj)'], ['(of &THIS (&NP))'], ['&R']]
+		sentTXT: The F-score is improved by +0.6% while OOV recall is improved by +3.2%, which denotes that tensor-based transformation captures more interactional information than simple non-linear transformation. Another important result in Table 3 is that our neural network models perform much better than CRF-based model when only unigram features are used. 
+		Cause: [(0, 0), (0, 28)]
+		Effect: [(1, 8), (1, 23)]
+
+	CASE: 6
+	Stag: 199 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: In each column, we list the top 5 characters that are nearest (measured by Euclidean distance) to the corresponding character in the first row according to their embeddings. 
+		Cause: [(0, 29), (0, 30)]
+		Effect: [(0, 0), (0, 26)]
+
+	CASE: 7
+	Stag: 199 200 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In each column, we list the top 5 characters that are nearest (measured by Euclidean distance) to the corresponding character in the first row according to their embeddings. As we can see, characters in the first column are all Chinese number characters and characters in the second column and the third column are all Chinese family names and Chinese punctuations respectively. 
+		Cause: [(1, 1), (1, 24)]
+		Effect: [(0, 0), (0, 30)]
+
+	CASE: 8
+	Stag: 200 201 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: As we can see, characters in the first column are all Chinese number characters and characters in the second column and the third column are all Chinese family names and Chinese punctuations respectively. Therefore, compared with discrete feature representations, distributed representation can capture the syntactic and semantic similarity between characters. 
+		Cause: [(0, 0), (0, 33)]
+		Effect: [(1, 2), (1, 18)]
+
+	CASE: 9
+	Stag: 201 202 
+		Pattern: 3 [['as', 'a'], ['result']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(&ADJ)'], ['(,)', '&R']]
+		sentTXT: Therefore, compared with discrete feature representations, distributed representation can capture the syntactic and semantic similarity between characters. As a result, the model can still perform well even if some words do not appear in the training cases. 
+		Cause: [(0, 0), (0, 18)]
+		Effect: [(1, 4), (1, 20)]
+
+	CASE: 10
+	Stag: 205 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: [ 35 ] did not report the results on the these datasets, we re-implemented their model and tested it on the test data. 
+		Cause: [(0, 0), (0, 11)]
+		Effect: [(0, 13), (0, 23)]
+
+	CASE: 11
+	Stag: 207 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: Previous work found that the performance can be improved by pre-training the character embeddings on large unlabeled data and using the obtained embeddings to initialize the character lookup table instead of random initialization [ 15 , 35 ]. 
+		Cause: [(0, 10), (0, 37)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 12
+	Stag: 213 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: [ 1 ] which learns the embeddings based on neural language model. 
+		Cause: [(0, 9), (0, 11)]
+		Effect: [(0, 0), (0, 6)]
+
+	CASE: 13
+	Stag: 219 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: [ 16 ] proposed a faster skip-gram model word2vec 5 5 https://code.google.com/p/word2vec/â which tries to maximize classification of a word based on another word in the same sentence. 
+		Cause: [(0, 22), (0, 27)]
+		Effect: [(0, 0), (0, 19)]
+
+	CASE: 14
+	Stag: 220 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: In this paper, we use word2vec because preliminary experiments did not show differences between performances of these models but word2vec is much faster to train. 
+		Cause: [(0, 8), (0, 25)]
+		Effect: [(0, 0), (0, 6)]
+
+	CASE: 15
+	Stag: 222 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: As shown in Table 5 (last three rows), both the F-score and OOV recall of our model boost by using pre-training. 
+		Cause: [(0, 22), (0, 23)]
+		Effect: [(0, 0), (0, 20)]
+
+	CASE: 16
+	Stag: 235 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: [ 15 ] , the bigram embeddings are pre-trained on unlabeled data with character embeddings, which significantly improves the model performance. 
+		Cause: [(0, 0), (0, 2)]
+		Effect: [(0, 4), (0, 21)]
+
+	CASE: 17
+	Stag: 237 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: Further improvement could be obtained if the bigram embeddings are also pre-trained. 
+		Cause: [(0, 6), (0, 11)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 18
+	Stag: 245 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since feature engineering is not the main focus of this paper, we did not experiment with more features. 
+		Cause: [(0, 1), (0, 10)]
+		Effect: [(0, 12), (0, 18)]
+
+Section 5:  5 Related Work has 3 CE cases
+	CASE: 1
+	Stag: 250 251 
+		Pattern: 2 [[[',', '.', ';', 'and']], ['accordingly']]---- [['&C'], ['&R']]
+		sentTXT: Our study is consistent with this line of research, however, our model explicitly models the interactions between tags and context characters and accordingly captures more semantic information. Tensor-based transformation was also used in other neural network models for its ability to capture multiple interactions in data. 
+		Cause: [(0, 0), (0, 19)]
+		Effect: [(0, 21), (1, 18)]
+
+	CASE: 2
+	Stag: 254 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: However, given the small size of their tensor matrix, they do not have the problem of high time cost and overfitting problem as we faced in modeling a sequence labeling task like Chinese word segmentation. 
+		Cause: [(0, 25), (0, 36)]
+		Effect: [(0, 0), (0, 23)]
+
+	CASE: 3
+	Stag: 262 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: By introducing tensor factorization into the neural network model for sequence labeling tasks, the model training and inference are speeded up and overfitting is prevented. 
+		Cause: [(0, 1), (0, 12)]
+		Effect: [(0, 13), (0, 25)]
+
+Section 6:  6 Conclusion has 0 CE cases
+#-------------------------------------------------
+

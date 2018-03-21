@@ -1,0 +1,70 @@
+(lp0
+VIn addition, we show that type-based features, including novel distributional features based on representative verbs, accurately predict predominant aspectual class for unseen verb types
+p1
+aVUsing the Inst features alone (not shown in Table 10 ) results in a micro-average accuracy of only 58.1% these features are only useful when combined with the feature Lemma
+p2
+aVTo sum up, Inst features are essential for classifying multi-label verbs, and the LingInd features provide some useful prior
+p3
+aVIn contrast to Siegel and McKeown ( 2000 ) , we do not conduct the task of predicting aspectual class solely at the type level, as such an approach ignores the minority class of ambiguous verbs
+p4
+aVFor verbs with ambiguous aspectual class, type-based classification is not sufficient, as this approach selects a dominant sense for any given verb and then always assigns that
+p5
+aVOur work differs from prior work in that we treat the problem as a three-way classification task, predicting dynamic , stative or both as the aspectual class of a verb in context
+p6
+aVWe aim to leverage existing, possibly noisy sets of representative stative, dynamic or mixed verb types extracted from LCS (see section 3 ), making up for unseen verbs and noise by averaging over distributional similarities
+p7
+aVWhether or not performance is improved by adding LingInd/Dist features, with their bias towards one aspectual class, depends on the verb type
+p8
+aVTherefore we propose handling ambiguous verbs separately
+p9
+aVNo feature combination significantly 4 4 According to McNemar u'\u005cu2019' s test with Yates u'\u005cu2019' correction for continuity, p 0.01 outperforms the baseline of simply memorizing the most frequent class of a verb type in the respective training folds
+p10
+aVFor multi-label verbs, the feature combination Lemma+LingInd+Inst leads to significant 5 improvement of 2% gain in accuracy over the baseline; Table 9 reports detailed class statistics and reveals a gain in F-measure of 3 points over the baseline
+p11
+aVUsing an existing large distributional model [ 31 ] estimated over the set of Gigaword documents marked as stories, for each verb type, we build a syntactically informed vector representing the contexts in which the verb occurs
+p12
+aVWhile most verbs have one predominant interpretation, others are more flexible for aspectual class and can occur as either stative ( 1 ) or dynamic ( 1 ) depending on the context
+p13
+aVResults appear in Table 8
+p14
+aVUsing the LCS Database [ 11 ] , we identify sets of verb types whose senses are only stative (188 verbs, e.g., belong, cost, possess ), only dynamic (3760 verbs, e.g., alter, knock, resign ), or mixed (215 verbs, e.g., fill, stand, take ), following a procedure described by Dorr and Olsen ( 1997 )
+p15
+aVWe also include features that indicate, if there are any, the particle of the verb and its prepositional dependents
+p16
+aVWe use 6161 clauses for the classification task, omitting clauses with have or be as the main verb and those where no main verb could be identified due to parsing errors ( none
+p17
+aVAs Asp-MASC contains only few instances of each of the ambiguous verbs, we turn to the Asp-Ambig dataset
+p18
+aVFor features encoding grammatical dependents, we focus on a subset of grammatical relations
+p19
+aVThis results in 2667 instances u'\u005cu039a' is 0.6, the confusion matrix is shown in Table 3
+p20
+aV5 5 The third column also shows the outcome of using either only the Lemma, only LingInd or only Dist in LOO; all have almost the same outcome as using the majority class, numbers differ only after the decimal point
+p21
+aVTense, progressive, perfect and voice are extracted from dependency parses as described above
+p22
+aVAspectual class is well treated in the linguistic literature [ 33 , 12 , 29 , for example]
+p23
+aVFor the sentence A little girl had just finished her first week of school , the instance-based feature values would include tense past , subj noun.person , dobj noun.time or particle none
+p24
+aVSince then, it has mostly been treated as a subtask within temporal reasoning, such as in efforts related to TimeBank [ 25 ] and the TempEval challenges [ 34 , 35 , 32 ] , where top-performing systems [ 16 , 3 , 6 ] use corpus-based features, WordNet synsets, parse paths and features from typed dependencies to classify events as a joint task with determining the event u'\u005cu2019' s span
+p25
+aVOtherwise, the experimental setup is as in experiment 1
+p26
+aVThe data for our experiments uses the label dynamic or stative whenever annotators agree, and both whenever they disagree or when at least one annotator marked the clause as both , assuming that both readings are possible in such cases
+p27
+aVThe data is processed in the same way as Asp-MASC, discarding instances with parsing problems
+p28
+aVThe feature value is either the WordNet lexical filename (e.g., noun.person ) of the given relation u'\u005cu2019' s argument or its POS tag, if the former is not available
+p29
+aVWe observe higher agreement in the jokes and news subcorpora than for letters; texts in the letters subcorpora are largely argumentative and thus have a different rhetorical style than the more straightforward narratives and reports found in jokes
+p30
+aVBecause we don u'\u005cu2019' t want to model the authors u'\u005cu2019' personal view of the theory, we refrain from applying an adjudication step and model the data as is
+p31
+aV3 3 We thank the authors for providing us their code
+p32
+aVThere are also cases that allow for both readings, such as ( 1
+p33
+aVOur notion of the stative/dynamic distinction corresponds to Bach u'\u005cu2019' s [ 1 ] distinction between states and non-states; to states versus occurrences (events and processes) according to Mourelatos ( 1978 ) ; and to Vendler u'\u005cu2019' s [ 33 ] distinction between states and the other three classes (activities, achievements, accomplishments
+p34
+a.

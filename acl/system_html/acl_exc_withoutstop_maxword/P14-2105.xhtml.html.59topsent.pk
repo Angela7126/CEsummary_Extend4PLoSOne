@@ -1,0 +1,16 @@
+(lp0
+VThe CNNSM first uses a convolutional layer to project each word within a context window to a local contextual feature vector, so that semantically similar word- n -grams are projected to vectors that are close to each other in the contextual feature space
+p1
+aVGiven the letter-trigram based word representation, we represent a word- n -gram by concatenating the letter-trigram vectors of each word, e.g.,, for the t -th word- n -gram at the word- n -gram layer, we have
+p2
+aVConsider the t -th word- n -gram, the convolution matrix projects its letter-trigram representation vector l t to a contextual feature vector h t
+p3
+aVFurther, since the overall meaning of a sentence is often determined by a few key words in the sentence, CNNSM uses a max pooling layer to extract the most salient local features to form a fixed-length global feature vector
+p4
+aVOne more non-linear transformation layer is further applied on top of the global feature vector v to extract the high-level semantic representation, denoted by y
+p5
+aVWe train two CNN semantic models from sets of pattern u'\u005cu2013' relation and mention u'\u005cu2013' entity pairs, respectively
+p6
+aVSince many words do not have significant influence on the semantics of the
+p7
+a.

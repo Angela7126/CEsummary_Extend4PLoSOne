@@ -1,0 +1,18 @@
+(lp0
+VTo construct parse forest on unlabeled data, we employ three supervised parsers based on different paradigms, including our baseline graph-based dependency parser, a transition-based dependency parser [] , and a generative constituent parser []
+p1
+aVDifferent from traditional self/co/tri-training which only use 1-best parse trees on unlabeled data, our approach adopts ambiguous labelings, represented by parse forest, as gold-standard for unlabeled sentences
+p2
+aVBoth work employs two parsers to process the unlabeled data, and only select as extra training data sentences on which the 1-best parse trees of the two parsers are identical
+p3
+aVWe propose a generalized ambiguity-aware ensemble training framework for semi-supervised dependency parsing, which can make better use of unlabeled data, especially when parsers from different views produce divergent syntactic structures
+p4
+aVThe second major row shows the results when we use single 1-best parse trees on unlabeled data
+p5
+aVUsing unlabeled data with the results of Berkeley Parser ( u'\u005cu201c' Unlabeled u'\u005cu2190' B u'\u005cu201d' ) significantly improves parsing accuracy by 0.55% (93.40-92.85) on English and 1.06% (83.34-82.28) on Chinese
+p6
+aVThe reason may be that dependency parsing models are prone to amplify previous mistakes during training on self-parsed unlabeled data apply a variant of co-training to dependency parsing and report positive results on out-of-domain text combine tri-training and parser ensemble to boost parsing accuracy
+p7
+aVEvaluation on labeled data shows the oracle accuracy of parse forest is much higher than that of 1-best outputs of single parsers (see Table 3
+p8
+a.

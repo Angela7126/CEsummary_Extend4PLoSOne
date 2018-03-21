@@ -1,0 +1,386 @@
+(lp0
+VHowever, similarly to translation memories that incrementally store translated segments and evolve over time incorporating users style and terminology, all components of a CAT tool (the MT engine and the mechanisms to assign quality scores to the suggested translations) should take advantage of translators feedback
+p1
+aVQE is generally cast as a supervised machine learning task, where a model trained from a collection of ( source, target, label ) instances is used to predict labels 1 1 Possible label types include post-editing effort scores ( e.g., 1-5 Likert scores indicating the estimated percentage of MT output that has to be corrected), HTER values [ 28 ] , and post-editing time ( e.g., seconds per word for new, unseen test items [ 31 ]
+p2
+aVAmong these, the necessity to model the diversity of human quality judgements and correction strategies [ 16 , 15 ] calls for solutions that i) account for annotator-specific behaviour, thus being capable of learning from inherently noisy datasets produced by multiple annotators, and ii) self-adapt to changes in data distribution, learning from user feedback on new, unseen test items
+p3
+aVFor instance, moving from controlled lab testing scenarios to real working environments poses additional constraints in terms of adaptability of the QE models to the variable conditions of a translation job
+p4
+aVWhen operating with advanced CAT tools, translators are presented with suggestions (either matching fragments from a translation memory or automatic translations produced by an MT system) for each sentence of a source document
+p5
+aVAs regards QE models, our work represents the first investigation on incremental adaptation by exploiting users feedback to provide targeted (system, user, or project specific) quality judgements
+p6
+aVThe tool, which implements a large number of features proposed by participants in the WMT QE shared tasks, has been modified to process one sentence at a time as requested for integration in a CAT environment;
+p7
+aVFrom a practical point of view, providing the best trade off between accuracy and computational time [ 13 ] , PA represents a good solution to meet the demand of efficiency posed by the CAT framework
+p8
+aVBeing optimized to perform well on specific WMT sub-tasks and datasets, current systems reflect variations along these directions but leave important aspects of the QE problem still partially investigated or totally unexplored
+p9
+aVOn the other side, online learning techniques are designed to learn in a stepwise manner (either from scratch, or by refining an existing model) from new, unseen test instances by taking advantage of external feedback
+p10
+aVThese values confirm that batch models are heavily affected by the dissimilarity between training and test data large differences in the label distribution imply higher MAE results and vice-versa
+p11
+aVSince the quality standards of individual users may vary considerably ( e.g., according to their knowledge of the source and target languages), the estimates of a static QE model trained with data collected from a group of post-editors might not fit with the actual judgements of a new user;
+p12
+aVAfter two decades of steady progress, research in statistical machine translation (SMT) started to cross its path with translation industry with tangible mutual benefit
+p13
+aVFor instance, adaptive QE components could exploit information about the distance between automatically assigned scores and the quality standards of individual translators (inferred from the amount of their corrections) to u'\u005cu201c' profile u'\u005cu201d' their behaviour
+p14
+aVIn our experiments on adaptive QE we aim to predict the quality of the suggested translations in terms of HTER, which measures the minimum edit distance between the MT output and its manually post-edited version in the [0,1] interval
+p15
+aVThe evolution of computer-assisted translation (CAT) environments is an evidence of this trend, shown by the increasing interest towards the integration of suggestions obtained from MT engines with those derived from translation memories (TMs
+p16
+aVAmong the possible combinations of training and test data, Table 3 refers to scenarios involving the most conservative and radical post-editors in each domain (previously identified with cons and rad ) 15 15 For brevity, we omit the results for the other post-editors which, however, show similar trends with respect to the previous experiments
+p17
+aVFirst, since in this artificial scenario adaptation capabilities are not required for the QE component, batch methods operate in the ideal conditions (as training and test are independent and identically distributed
+p18
+aVThese results (MAE reductions are always statistically significant) suggest that, when dealing with datasets with very different label distributions, the evident limitations of batch methods are more easily overcome by learning from scratch from the feedback of a new post-editor
+p19
+aVThis new paradigm for QE makes it possible to i) let the QE system learn from one point at a time without complete re-training from scratch, ii) customize the predictions of an existing QE model with respect to a specific situation (post-editor or domain), or even iii) build a QE model from scratch when training data is not available
+p20
+aVThe first aspect, modelling annotators u'\u005cu2019' individual behaviour and interdependences, has been addressed by Cohn and Specia [ 8 ] , who explored multi-task Gaussian Processes as a way to jointly learn from the output of multiple annotations
+p21
+aVThis feature set, fully described in [ 6 ] , takes into account the complexity of the source sentence ( e.g., number of tokens, number of translations per source word) and the fluency of the target translation ( e.g., language model probabilities
+p22
+aVWhen this distance is minimal, batch models can be a reasonable option, but when the gap between training and test data increases, adaptive or empty models are a preferable choice to achieve good results
+p23
+aVOn one side, the QE models obtained with batch methods are learned exclusively from a predefined set of training examples under the assumption that they have similar characteristics with respect to the test data
+p24
+aVThe adaptive model is built on top of an existing model created from the training data and exploits the new test instances to refine its predictions in a stepwise manner
+p25
+aVOur results show that the sensitivity of online QE models to different distributions of training and test instances makes them more suitable than batch methods for integration in a CAT framework
+p26
+aVIn recent years, these issues motivated research on automatic QE, which addresses the problem of estimating the quality of a translated sentence given the source and without access to reference translations [ 4 , 30 , 22 ]
+p27
+aVThis can be motivated by the fact that PA relies on a simpler and less robust learning strategy that does not keep track of all the information coming from the previously processed instances, and can easily modify its weights taking into consideration the last seen point (see Section § u'\u005cu2062' 3
+p28
+aVTo measure the adaptation capability of different QE models, we experiment with a range of conditions defined by variable degrees of similarity between training and test data
+p29
+aVOn one side, SMT research brings to the industry improved output quality and a number of appealing solutions useful to increase translators u'\u005cu2019' productivity
+p30
+aVThese interconnected issues are particularly relevant in the CAT framework, where translation jobs from different domains are routed to professional translators with different idiolect, background and quality standards
+p31
+aVOn the MT system side, research on adaptive approaches tailored to interactive SMT and CAT scenarios explored the online learning protocol [ 17 ] to improve various aspects of the decoding process [ 7 , 23 , 19 , 20 , 21 , 2 ]
+p32
+aVCurrent approaches to the tasks proposed at WMT have mainly focused on three main directions, namely i) feature engineering, as in [ 12 , 10 , 11 , 26 ] , ii) model learning with a variety of classification and regression algorithms, as in [ 3 , 1 , 29 ] , and iii) feature selection as a way to overcome sparsity and overfitting issues, as in [ 29 ]
+p33
+aVTo cope with these issues and deal with the erratic conditions of real-world translation workflows, we propose an adaptive approach to QE that is sensitive and robust to differences between training and test data
+p34
+aVOn each combination of training and test sets, the batch , adaptive , and empty models are trained and evaluated in terms of global MAE scores on the test set
+p35
+aVAt each step of the process, the goal of the learner is to exploit user post-editions to reduce the difference between the predicted HTER values and the true labels for the following ( source, target ) pairs
+p36
+aVThe lower correlation observed for the adaptive models also confirms our intuitions adapting to the new test points, these models are in fact more robust to differences with the training data
+p37
+aVTo measure the adaptability of our model to a given test set we compute the Mean Absolute Error (MAE), a metric for regression problems also used in the WMT QE shared tasks
+p38
+aVAlong this direction, our main contribution is a framework in which QE models can be trained and can continuously evolve over time accounting for knowledge acquired from post editors u'\u005cu2019' work
+p39
+aVA common trait of all current approaches, in fact, is the reliance on batch learning techniques, which assume a u'\u005cu201c' static u'\u005cu201d' nature of the world where new unseen instances that will be encountered will be similar to the training data
+p40
+aV5 5 Edit distance is calculated as the number of edits (word insertions, deletions, substitutions, and shifts) divided by the number of words in the reference
+p41
+aVEvaluation is carried out by measuring the performance of the batch (learning only from the training set), the adaptive (learning from the training set and adapting to the test set), and the empty (learning from scratch from the test set) models in terms of global MAE scores on the test set
+p42
+aVOn the other side, the market needs suggest concrete problems to solve, providing real-life scenarios to develop and evaluate new ideas with rapid turnaround
+p43
+aVAs a final analysis of our results, we investigated how the performance of the different types of models ( batch , adaptive , empty ) relates to the distance between training and test sets
+p44
+aVTwo settings obtained from data collected with a CAT tool in real working conditions, in which different facets of the adaptive QE problem interact with each other
+p45
+aVFocusing on the adaptability to user and domain changes, we report the results of comparative experiments with two online algorithms and the standard batch approach
+p46
+aVSuch periodic updates, however, would not represent a viable solution in the CAT framework where post-editors u'\u005cu2019' work cannot be slowed by time-consuming procedures to re-train core system components from scratch
+p47
+aVOne artificial setting (§ 5 ) obtained from the WMT12 QE shared task data, in which training/test instances are arranged to reflect homogeneous distributions of the HTER labels
+p48
+aVThe goal of OnlineSVR is to find a way to add each new sample to one of three sets (support, empty, error) maintaining the consistency of a set of conditions known as Karush-Kuhn Tucker (KKT) conditions
+p49
+aVFor each instance i , after emitting a prediction and receiving the true label, PA computes the u'\u005cu0395' -insensitive hinge loss function
+p50
+aVThis suggests that, although PA is potentially capable of achieving higher results and better adapt to the new test points, its instability makes it less reliable for practical use
+p51
+aVFrom the application-oriented perspective that motivates our work, considering the high costs of acquiring large and representative QE training data, this is an important finding
+p52
+aVTo avoid biases in the label distribution, the WMT12 training and test data have been merged, shuffled, and eventually separated to generate three training sets of different size (200, 600, and 1500 instances), and one test set with 754 instances
+p53
+aVThe possibility to speed up the translation process and reduce its costs by post-editing good-quality MT output raises interesting research challenges
+p54
+aVThe evaluation is carried out by measuring the global error of each algorithm on test sets featuring different degrees of similarity with the data used for training
+p55
+aVEach model is also compared against a common baseline for regression tasks, which is particularly relevant in settings featuring different data distributions between training and test sets
+p56
+aVFrom a performance point of view, as an adaptation of u'\u005cu0395' -SVR which proved to be one of the top performing algorithms in the regression QE tasks at WMT, OSVR seems to be the best candidate
+p57
+aVTo experiment with adaptive QE in more realistic conditions we used a CAT tool 12 12 MateCat u'\u005cu2013' http://www.matecat.com/ to collect two datasets of ( source , target , post_edited target ) English-Italian tuples.The source sentences in the datasets come from two documents from different domains, respectively legal (L) and information technology (IT
+p58
+aVFirst, the good results achieved by the empty models (less than one MAE point separates them from the best ones built on the largest training set) suggest their high potential when training data are not available
+p59
+aVThe motivations for experiments with training and test data featuring homogeneous label distributions are twofold
+p60
+aVIn the last couple of years, research in the field received a strong boost by the shared tasks organized within the WMT workshop on SMT, 2 2 http://www.statmt.org/wmt13/ which is also the framework of our first experiment in § 5
+p61
+aVThis technique is suitable to cope with the unbalanced distribution of training instances and yields better models when heterogeneous training datasets are available
+p62
+aVTable 1 reports the results achieved by the best performing algorithm for each type of model ( batch , adaptive , empty
+p63
+aVPerform online feature extraction from a source u'\u005cu2013' target pair ( i.e., one instance at a time instead of processing an entire training set);
+p64
+aVAs shown in Table 2 , global MAE scores for the online algorithms (both adaptive and empty ) indicate their good adaptation capabilities
+p65
+aVFor each algorithm, the training sets are used for learning the QE models, optimizing parameters ( i.e., C , u'\u005cu0395' , the kernel and its parameters for SVR and OSVR; tolerance and aggressiveness for PA) through grid search in 10-fold cross-validation
+p66
+aVThe degree of similarity depends on several factors the MT engine used, the domain of the documents to be translated, and the post-editing style of individual translators
+p67
+aVDespite the substantial progress done so far in the field and in successful evaluation campaigns [ 6 , 5 ] , focusing on concrete market needs makes possible to further define the scope of research on QE
+p68
+aVThis is in line with our previous findings about batch models that, learning only from the training set, cannot leverage possible dissimilarities of the test set
+p69
+aVAlthough it makes PA faster than OSVR, this is a riskier strategy because it may lead the algorithm to change the model to adapt to outlier points
+p70
+aVThe results of previous WMT QE shared tasks have shown that these baseline features are particularly competitive in the regression task (with only few systems able to beat them at WMT12
+p71
+aVSecond, this scenario provides the fairest conditions for such comparison because, in principle, online algorithms are not favoured by the possibility to learn from the diversity of the test instances
+p72
+aVIn our experiments, the degree of similarity is measured in terms of u'\u005cu0394' HTER, which is computed as the absolute value of the difference between the average HTER of the training and test sets
+p73
+aVThis analysis confirms that, even when dealing with different domains, the similarity between the training and test data is one of the main factors that should drive the choice of the QE model
+p74
+aVIntuitively, dealing with simultaneous user and domain changes represents a more challenging problem compared to the previous setting where only post-editors changes were considered
+p75
+aVFor instance, this could be done by running periodic re-training routines once a certain amount of new labelled instances has been collected ( de facto mimicking an online process
+p76
+aVSend the true label back to the model to update its predictions for future instances
+p77
+aVOur approach is based on the online learning paradigm and exploits a key difference between such framework and the batch learning methods currently used
+p78
+aVThis is a strong evidence of the fact that, in case of domain changes, online models can still learn from new test instances even if they have a label distribution similar to the training set
+p79
+aVEach translation job has its own specificities (domain, complexity of the source text, average target quality
+p80
+aVThe HTER labels for our regression task are calculated from the post-edited version and the target sentences provided in the dataset
+p81
+aVAlthough in these cases the distance between training and test data is comparable to the experiments with similar post-editors working in the same domain ( sim1 and sim2 ), here the predictive power of the batch models seems in fact to be lower
+p82
+aVLarge values indicate a low similarity between training and test data and a more challenging scenario for the learning algorithms
+p83
+aVIn contrast with OSVR, which keeps track of the most important points seen in the past (support vectors), the update of the weights is done without considering the previously processed i-1 instances
+p84
+aVThis demonstrates that, as expected, the online algorithms do not take advantage of test data with a label distribution similar to the training set
+p85
+aVThe batch model is built by learning only from the training data and is evaluated on the test set without exploiting information from the test instances
+p86
+aVThis suggests a lower capability of PA to learn from instances similar to the training data
+p87
+aVFrom the algorithmic point of view, our results indicate that OSVR achieves the best performance for all the combinations involving user and domain changes
+p88
+aVThis contrasts with the results of most of the combinations involving only user changes with post-editors characterized by opposite behaviour (grey rows in Table 3
+p89
+aVFor the sake of clarity it is worth observing that, at least in principle, a model built in a batch fashion could also be adapted to new test data
+p90
+aVWhen the distance between training and test increases, our results confirm our previous findings about the potential of the empty models
+p91
+aVThe first scenario defines a challenging situation where two post-editors ( rad and cons ) are characterized by opposite behaviour
+p92
+aVFor each type of model ( batch , adaptive and empty ) we only show the MAE obtained by the best performing algorithm
+p93
+aVFirst, OSVR always outperforms PA for the empty models and when post-editors have similar behaviour, which are situations where the algorithm does not have to quickly adapt or react to sudden changes
+p94
+aVFor each new point, OSVR starts a cycle where the samples are moved across the three sets until the KKT conditions are verified and the new point is assigned to one of the sets
+p95
+aVAlso in this case MAE results for the adaptive and empty models are slightly worse, but not significantly, than those of the batch models and the baseline
+p96
+aVSuch intuition is confirmed by the results of the adaptive models that outperform both the baseline ( u'\u005cu039c' ) and the batch models even for low u'\u005cu0394' HTER values
+p97
+aVThis baseline ( u'\u005cu039c' henceforth) is calculated by labelling each instance of the test set with the mean HTER score of the training set
+p98
+aVSecond, PA seems to perform better for the adaptive models when the post-editors have significantly different behaviour and a quick adaptation to the incoming points is required
+p99
+aVThe empty model only learns from the test set, simulating the worst condition where training data is not available
+p100
+aVThe extracted features are sent to an online regressor, which returns a QE prediction score p u'\u005cu2062' ( x i ) in the [0,1] interval (set to 0 at the first round of the iteration);
+p101
+aVIn our experiments we evaluate two online algorithms, OnlineSVR [ 24 ] 8 8 http://www2.imperial.ac.uk/~gmontana/onlinesvr.htm and Passive-Aggressive Perceptron [ 9 ] , 9 9 https://code.google.com/p/sofia-ml/ by comparing their performance with a batch learning strategy based on the Scikit-learn implementation of Support Vector Regression (SVR
+p102
+aVAll the models outperform the baseline, even if the minimal differences confirm the competitiveness of such a simple approach
+p103
+aVPost-editions were collected from eight professional translators (four for each document) operating with the CAT tool in real working conditions
+p104
+aVThe source sentences were translated with two SMT systems built by training the Moses toolkit [ 14 ] on parallel data from the two domains (about 2M sentences for IT and 1.5M for L
+p105
+aVThe true label is sent back to the online algorithm for a stepwise model improvement
+p106
+aVThis makes them suitable for real-life scenarios where the new instances to be labelled can considerably differ from the data used to train the QE model
+p107
+aVGather user feedback for the instance ( i.e., calculating a u'\u005cu201c' true label u'\u005cu201d' based on the amount of user post-editions);
+p108
+aVAs our focus is on the algorithmic aspect, in all experiments we use the same feature set, which consists of the seventeen features proposed in [ 30 ]
+p109
+aVTo this aim, our QE models are created using a training set coming from one domain (L or IT), and then used to predict the HTER labels for the test instances coming from the other domain ( e.g., training on L, testing on IT
+p110
+aVIn the last round of experiments we evaluate the reactivity of different online models to simultaneous user and domain changes
+p111
+aVBefore being approved and published, translation suggestions may require different amounts of post-editing operations depending on their quality
+p112
+aVIn the online framework, differently from the batch mode, the learning algorithm sequentially processes an unknown sequence of instances X = x 1 , x 2 , u'\u005cu2026' , x n , returning a prediction p u'\u005cu2062' ( x i ) as output at each step
+p113
+aV4 4 This assumption holds in the WMT evaluation scenario, but it is not necessarily valid in real operating conditions
+p114
+aVWith the same amount of training data, the performance of the batch and the adaptive models (in this case always obtained with OSVR) is almost identical
+p115
+aVInterestingly, the best results are always achieved by the empty models (with MAE reductions up to 10 points when tested on rad in the L domain, and 3.2 points when tested on rad in the IT domain
+p116
+aVEach post-edition brings a wealth of dynamic knowledge about the whole translation process and the involved actors
+p117
+aVTo develop our approach, different online algorithms have been embedded in the backbone of a QE system
+p118
+aVFor OSVR the addition of new points to the support set may have a limited effect on the whole model, in particular if the number of points in the set is large
+p119
+aVFor the sake of comparison, we also report (grey rows) the results of the experiments within the same domain presented in § 6.1
+p120
+aVTo this aim, we computed the Pearson correlation between the u'\u005cu0394' HTER (column 3 in Table 3 ) and the MAE of each model (columns 5, 6 and 8), which respectively resulted in 0.9 for the batch , 0.63 for the adaptive and -0.07 for the empty model
+p121
+aVThe observed MAE reductions range in fact from 10.4 to 12.9 points for the two combinations with the highest u'\u005cu0394' HTER
+p122
+aVAlso in this case, for each model ( batch , adaptive and empty ) we only report the MAE of the best performing algorithm
+p123
+aV3 3 For a comprehensive overview of the QE approaches proposed so far we refer the reader to the WMT12 and WMT13 QE shared task reports [ 6 , 5 ]
+p124
+aVSince data from a new job may differ from those used to train the QE model, its estimates on the new instances might result to be biased or uninformative
+p125
+aVIf the point is identified as a support vector, the parameters of the model are updated
+p126
+aVThis makes them suitable for controlled evaluation scenarios where such condition holds
+p127
+aVFor each setting, we compare an adaptive and an empty model against a system trained in batch mode
+p128
+aVThe choice of the OnlineSVR and Passive-Aggressive (OSVR and PA henceforth) is motivated by different considerations
+p129
+aVThe ability of a system to self-adapt to the behaviour of specific users and domain changes is a facet of the QE problem that so far has been disregarded
+p130
+aVThis required the adaptation of its standard batch learning workflow to
+p131
+aVAs can be seen, close MAE values show a similar behaviour for the three types of models
+p132
+aVAt step i , an unlabelled ( source, target ) pair x i is sent to a feature extraction component
+p133
+aVHowever, considering the very small amount of u'\u005cu201c' uninformative u'\u005cu201d' instances to learn from (especially for the empty models), these lower results are not surprising
+p134
+aVBased on the post-edition done by the user, the true HTER label p ^ u'\u005cu2062' ( x i ) is calculated by means of the TERCpp 7 7 goo.gl/nkh2rE open source tool;
+p135
+aVThe online learning paradigm fits well with this research objective
+p136
+aVThe set of instances X is represented by ( source, target ) pairs;
+p137
+aVIn the table, results are ordered according to the u'\u005cu0394' HTER computed between the selected post-editor in the training domain ( e.g., L cons ) and the selected post-editor in the test domain ( e.g., IT rad
+p138
+aVAmong the possible combinations of training and test data from different post-editors in the same domain, Table 2 refers to two opposite scenarios
+p139
+aVThis allows OSVR to benefit from the prediction capability of u'\u005cu0395' -SVR in an online setting
+p140
+aVThis also holds when the amount of test points to learn from is limited, as in the L domain where the test set contains only 80 instances
+p141
+aVThe second scenario defines a less challenging situation where the two post-editors ( sim1 and sim2 ) are characterized by the most similar behaviour (small u'\u005cu0394' HTER
+p142
+aVSecond, our results show that OSVR is always the best performing algorithm for the adaptive and empty models
+p143
+aVAs expected, the results of the empty models are completely uncorrelated with the u'\u005cu0394' HTER since they only use the test set
+p144
+aVA closer look at the behaviour of the online algorithms in the two domains leads to other observations
+p145
+aVIn our experiments, when PA outperforms OSVR, its MAE results are significantly lower and vice-versa (respectively up to 1.5 and 1.7 MAE points
+p146
+aVOur adaptive QE infrastructure has been released as open source
+p147
+aVIn the range of possible evaluation scenarios, our experiments cover
+p148
+aVOverall, these results bring some interesting indications about the behaviour of the different online algorithms
+p149
+aVEmit a prediction for the input instance;
+p150
+aVThe notion of MT output quality is highly subjective [ 16 , 33 , 34 ]
+p151
+aVHowever, it has to be remarked that in the case of heterogeneous datasets the difference between the two algorithms is always very high
+p152
+aVPrevious works [ 25 ] demonstrated that its results can be particularly hard to beat
+p153
+aVThe L document, which was extracted from a European Parliament resolution published on the EUR-Lex platform, 13 13 http://eur-lex.europa.eu/ contains 164 sentences
+p154
+aVAs evidenced by the high u'\u005cu0394' HTER values, one of them ( rad ) is the most u'\u005cu201c' radical u'\u005cu201d' post-editor (performing more corrections) while the other ( cons ) is the most u'\u005cu201c' conservative u'\u005cu201d' one
+p155
+aVFor instance, in the empty configurations on IT data, OSVR devotes 6.0 u'\u005cu2062' m u'\u005cu2062' s per instance to update the model, while PA devotes 4.8 u'\u005cu2062' m u'\u005cu2062' s , which comes at the cost of lower performance
+p156
+aVThe true label p ^ u'\u005cu2062' ( x i ) is the actual HTER score calculated over the target and its post-edition
+p157
+aVIf its value is larger than the tolerance parameter ( u'\u005cu0395' ), the weights of the model are updated as much as the aggressiveness parameter C allows
+p158
+aVSuch variability is due to two main reasons
+p159
+aVAccording to the way they are created, the two datasets allow us to evaluate the adaptability of different QE models with respect to user changes within the same domain (§ 6.1 ), as well as user and domain changes at the same time (§ 6.2
+p160
+aVThis is evident from the significant improvements both over the baseline ( u'\u005cu039c' ) and the batch models
+p161
+aV11 11 Results marked with the u'\u005cu201c' u'\u005cu2217' u'\u005cu201d' symbol are NOT statistically significant compared to the corresponding batch model
+p162
+aVThe prediction p u'\u005cu2062' ( x i ) is the automatically estimated HTER score;
+p163
+aVThis work has been partially supported by the EC-funded project MateCat (ICT-2011.4.2-287688
+p164
+aVThis makes possible to obtain from batch models the best possible performance to compare with
+p165
+aVFor the user+domain_change experiments, training and test sets are selected from different post-editors in different domains
+p166
+aV14 14 Their complexity depends on the number of features ( f ) and the number of previously seen instances ( n
+p167
+aVFor this reason, we use the online adaptation of u'\u005cu0395' -SVR proposed by [ 18 ]
+p168
+aVLower HTER values indicate better translations
+p169
+aVThis scenario is closer to the situation described in Section § 5
+p170
+aVFor the user_change experiments, training and test sets are selected from different post-editors within the same domain
+p171
+aVIn the second ( user+domain_change , § 6.2 ), training and test data are obtained from different users and domains
+p172
+aVFor each document D (L or IT), these two scenarios are obtained by dividing D into two parts of equal size (80 instances for L and 140 for IT
+p173
+aVThe updated model is then ready to process the following instance x i + 1
+p174
+aVThe IT document, which was taken from a software user manual, contains 280 sentences
+p175
+aVFor our controlled experiments we use the WMT12 English-Spanish corpus, which consists of 2,254 source-target pairs (1,832 for training, 422 for test
+p176
+aVThis also results in a different processing time for the two algorithms
+p177
+aVThe second problem, the adaptability of QE models, has not been explored yet
+p178
+aVThe others are always statistically significant at p u'\u005cu2264' 0.005, calculated with approximate randomization [ 35 ]
+p179
+aVAmong others, these include deciding what to present as a suggestion, and how to do it in the most effective way
+p180
+aVThe same holds also for the empty models except in two cases where the u'\u005cu0394' HTER is the smallest (2.2 and 5.0
+p181
+aVIn the first ( user_change , § 6.1 ), training and test data from the same domain are obtained from different users
+p182
+aVThe result is one training set and one test set for each post-editor within the same domain
+p183
+aVFor each domain, these respectively involve the most dissimilar and the most similar post-editors according to the u'\u005cu0394' HTER
+p184
+aVTo this aim, we used an adapted version [ 27 ] of the open-source QuEst 6 6 http://www.quest.dcs.shef.ac.uk/ tool [ 32 ]
+p185
+aVDifferences between p u'\u005cu2062' ( x i ) and the true label p ^ u'\u005cu2062' ( x i ) obtained as feedback are used by the learner to refine the next prediction p u'\u005cu2062' ( x i + 1 )
+p186
+aVThe MAE is the average of the absolute errors e i f i - y i where f i is the prediction of the model and y i is the true value for the i t u'\u005cu2062' h instance
+p187
+aVAs depicted in Figure 1 , this is done as follows
+p188
+aVWhile for PA it is linear in f , i.e., O(f) , for OSVR it is quadratic in n , i.e., O(n 2 *f
+p189
+aVIn this scenario
+p190
+aVIts C++ implementation is available at http://hlt.fbk.eu/technologies/aqet
+p191
+aV10 10 http://scikit-learn.org/
+p192
+a.

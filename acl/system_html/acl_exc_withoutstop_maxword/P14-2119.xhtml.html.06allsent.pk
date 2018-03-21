@@ -1,0 +1,208 @@
+(lp0
+VSimply taking the union of the hand-labeled data and the corpus labeled by distant supervision is not effective since hand-labeled data will be swamped by a larger amount of distantly labeled data
+p1
+aVInstead we propose to perform feature selection to generalize human labeled data into training guidelines , and integrate them into latent variable model
+p2
+aV[] , we generalize the labeled data through feature selection and model this additional information directly in the latent variable approaches
+p3
+aVAn effective approach must recognize that the hand-labeled data is more reliable than the automatically labeled data and so must take precedence in cases of conflict
+p4
+aVIn contrast to simply taking the union of the hand-labeled data and the corpus labeled by distant supervision as in the previous work by Zhang et al
+p5
+aVWe extract guidelines from hand-labeled data
+p6
+aVWe experimentally tested alternative feature sets by building supervised Maximum Entropy (MaxEnt) models using the hand-labeled data (Table 3 ), and selected an effective combination of three features from the full feature set used by Surdeanu et al., []
+p7
+aVTable 2 shows some examples in the final set u'\u005cud835' u'\u005cudc06' of extracted guidelines
+p8
+aVConflicts cannot be limited to those cases where all the features in two examples are the same; this would almost never occur, because of the dozens of features used by a typical relation extractor []
+p9
+aVIn some cases the semantic types of the arguments alone narrows the possibilities to one or two relation types
+p10
+aVThus, our approach outperforms state-of-the-art model for relation extraction using much less labeled data that was used by Zhang et al., [] to outperform logistic regression baseline
+p11
+aVGiven the small amount of hand-labeled data, it is important to identify a small set of features that are general enough while being capable of predicting quite accurately the type of relation that may hold between two entities
+p12
+aVUpsampling the labeled data did not improve the performance either
+p13
+aVIn this paper, we present the first effective approach, u'\u005cud835' u'\u005cudc06' u'\u005cu2062' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddc2' u'\u005cud835' u'\u005cuddbd' u'\u005cud835' u'\u005cuddbe' u'\u005cud835' u'\u005cuddbd' u'\u005cu2062' u'\u005cud835' u'\u005cudda3' u'\u005cud835' u'\u005cuddb2' (distant supervision), to incorporate labeled data into distant supervision for extracting relations from sentences
+p14
+aVOne of most crucial problems in distant supervision is the inherent errors in the automatically generated training data []
+p15
+aVThese three features are strong indicators of the type of relation between two entities
+p16
+aVWe used KBP 2012 assessment data to generate guidelines since queries from different years do not overlap
+p17
+aVThe final set G consists of 99 guidelines (section 2.1
+p18
+aVThe sparse nature of feature space dilutes the discriminative capability of useful features
+p19
+aVIt automatically labels its own training data by heuristically aligning a knowledge base of facts with an unlabeled corpus
+p20
+aVOur goal is to jointly model human-labeled ground truth and structured data from a knowledge base in distant supervision
+p21
+aVRelation extraction is the task of tagging semantic relations between pairs of entities from free text
+p22
+aVAside from previous semi-supervised work that employs labeled and unlabeled data [, and others] , this is a learning scheme that combines unlabeled text and two training sources whose quantity and quality are radically different []
+p23
+aVWhile prior work employed tens of thousands of human labeled examples [] and only got a 6.5% increase in F-score over a logistic regression baseline, our approach uses much less labeled data (about 1/8) but achieves much higher improvement on performance over stronger baselines
+p24
+aVIt contains about 2500 labeled sentences of 41 relations, which is less than 0.09% of the size of the distantly labeled dataset of 2M sentences
+p25
+aVthe semantic types of the two arguments (e.g., person, organization, location, date, title, u'\u005cu2026'
+p26
+aVWe keep only those guidelines which make the correct prediction for a u'\u005cu2062' l u'\u005cu2062' l and at least k =3 examples in the training corpus (threshold 3 was obtained by running experiments on the development dataset
+p27
+aVThe KBP 2010 and 2011 data includes 200 query named entities with the relations they are involved in
+p28
+aVWe use the same set of features as in Surdeanu et al
+p29
+aVTraining u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cudda8' u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cuddab' on a simple fusion of distantly-labeled and human-labeled datasets does not improve the maximum F-score since this hand-labeled data is swamped by a much larger amount of distant-supervised data of much lower quality
+p30
+aVEach guideline g ={ g i i =1,2,3} consists of a pair of semantic types, a dependency path, and optionally a span word and is associated with a particular relation r u'\u005cu2062' ( g
+p31
+aVThe official KBP evaluation is performed by pooling the system responses and manually reviewing each response, producing a hand-checked assessment data
+p32
+aVWe used 40 queries as development set and the rest 160 queries (3334 entity pairs that express a relation) as the test set
+p33
+aVthe sequence of dependency relations along the path connecting the heads of the two arguments in the dependency tree
+p34
+aVRecently, distant supervision has emerged as an important technique for relation extraction and has attracted increasing attention because of its effective use of readily available databases []
+p35
+aVa word in the sentence between the two arguments
+p36
+aVTo demonstrate the effectiveness of our proposed approach, we extend u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cudda8' u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cuddab' [] , a state-of-the-art distant supervision model and show a significant improvement of 13.5% in F-score on the relation extraction benchmark TAC-KBP [] dataset
+p37
+aVWe introduce a set of latent variables u'\u005cud835' u'\u005cudc21' u'\u005cud835' u'\u005cudc22' which model human ground truth for each mention in the i th bag and take precedence over the current model assignment u'\u005cud835' u'\u005cudc33' u'\u005cud835' u'\u005cudc22'
+p38
+aVWe use the KBP [] dataset 3 3 Available from Linguistic Data Consortium (LDC) at http://projects.ldc.upenn.edu/kbp/data which is preprocessed by Surdeanu et al
+p39
+aVThus, relation r u'\u005cu2062' ( g ) is assigned to h i u'\u005cu2062' j iff there exists a unique guideline g u'\u005cu2208' u'\u005cud835' u'\u005cudc06' , such that the feature vector u'\u005cud835' u'\u005cudc31' i u'\u005cu2062' j contains all constituents of g , i.e., entity types, a dependency path and maybe a span word, if g has one
+p40
+aVG uided DS training {algorithmic} [1] \u005cState Phase 1 build set G of guidelines \u005cState Phase 2
+p41
+aVOur objective function is to maximize log-likelihood of the data
+p42
+aVThis dataset is generated by mapping Wikipedia infoboxes into a large unlabeled corpus that consists of 1.5M documents from KBP source corpus and a complete snapshot of Wikipedia
+p43
+aVHowever, the potential of these previously proposed approaches is limited by the inevitable gap between the relation-level knowledge and the instance-level extraction task
+p44
+aVSophisticated multi-instance learning algorithms [] have been proposed to address the issue by loosening the distant supervision assumption
+p45
+aVWe scored our model against all 41 relations and thus replicated the actual KBP evaluation
+p46
+aVThe input to the model consists of (1) distantly supervised data, represented as a list of n bags 1 1 A bag is a set of mentions sharing same entity pair with a vector u'\u005cud835' u'\u005cudc32' u'\u005cud835' u'\u005cudc22' of binary gold-standard labels, either P u'\u005cu2062' o u'\u005cu2062' s u'\u005cu2062' i u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' v u'\u005cu2062' e u'\u005cu2062' ( P ) or N u'\u005cu2062' e u'\u005cu2062' g u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' v u'\u005cu2062' e u'\u005cu2062' ( N ) for each relation r u'\u005cu2208' R ; (2) generalized human-labeled ground truth, represented as a set G of feature conjunctions g ={ g i i =1,2,3} associated with a unique relation r u'\u005cu2062' ( g
+p47
+aVThen final relation labels for i th entity tuple are obtained via the top-level classifiers
+p48
+aVOn top of that, researchers further improved performance by explicitly adding preprocessing steps [] or additional layers inside the model [] to reduce the effect of training noise
+p49
+aVu'\u005cud835' u'\u005cudc31' i u'\u005cu2062' j is the feature representation of the j th relation mention in the i th bag
+p50
+aVSome lexical items are clear indicators of particular relations, such as u'\u005cu201c' brother u'\u005cu201d' and u'\u005cu201c' sister u'\u005cu201d' for a sibling relationship
+p51
+aVGiven a bag of sentences, u'\u005cud835' u'\u005cudc31' u'\u005cud835' u'\u005cudc22' , which mention an i th entity pair ( e 1 , e 2 ), our goal is to correctly predict which relation is mentioned in each sentence, or N u'\u005cu2062' R if none of the relations under consideration are mentioned
+p52
+aVz i u'\u005cu2062' j u'\u005cu2208' R u'\u005cu222a' N u'\u005cu2062' R a latent variable that denotes the relation of the j th mention in the i th bag
+p53
+aVh i u'\u005cu2062' j u'\u005cu2208' R u'\u005cu222a' N u'\u005cu2062' R a latent variable that denotes the refined relation of the mention u'\u005cud835' u'\u005cudc31' i u'\u005cu2062' j
+p54
+aVThe intuition is that any sentence which mentions a pair of entities ( e 1 and e 2 ) that participate in a relation, r , is likely to express the fact r u'\u005cu2062' ( e 1 , e 2 ) and thus forms a positive training example of r
+p55
+aVWe use mention relation z i u'\u005cu2062' j inferred by the model only in case no such a guideline exists or there is more than one matching guideline
+p56
+aVThe vector u'\u005cud835' u'\u005cudc33' u'\u005cud835' u'\u005cudc22' contains the latent mention-level classifications for the i th entity pair
+p57
+aV1) u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddcd' u'\u005cud835' u'\u005cuddc2' u'\u005cud835' u'\u005cuddb1' and 2) u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cudda8' u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cuddab' are two distant supervision models that support multi-instance learning and overlapping relations; 3) u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cuddc2' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddcd' u'\u005cud835' u'\u005cuddd3' ++ is a single-instance learning algorithm for distant supervision
+p58
+aVTable 1 illustrates this problem with a toy example
+p59
+aVWe define relabeled relations h i u'\u005cu2062' j as following
+p60
+aVTo do this, we extend the MIML model [] by adding a new layer as shown in Figure 1
+p61
+aVPerformance of u'\u005cud835' u'\u005cudc06' u'\u005cu2062' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddc2' u'\u005cud835' u'\u005cuddbd' u'\u005cud835' u'\u005cuddbe' u'\u005cud835' u'\u005cuddbd' u'\u005cu2062' u'\u005cud835' u'\u005cudda3' u'\u005cud835' u'\u005cuddb2' also compares favorably with best scored hand-coded systems for a similar task such as Sun et al., [] system for KBP 2011, which reports an F-score of 25.7%
+p62
+aVu'\u005cud835' u'\u005cudc30' z is the weight vector for the multi-class relation mention-level classifier 2 2 All classifiers are implemented using L2-regularized logistic regression with Stanford CoreNLP package
+p63
+aVWe use a hard expectation maximization algorithm to train the model
+p64
+aVFigure 2 shows that our model consistently outperforms all six algorithms at almost all recall levels and improves the maximum F -score by more than 13.5 % relative to u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cudda8' u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cuddab' (from 28.35 % to 32.19 % ) as well as increases the area under precision-recall curve by more than 37% (from 11.74 to 16.1
+p65
+aVThese approaches consider all mentions of the same pair ( e 1 , e 2 ) and assume that a u'\u005cu2062' t - l u'\u005cu2062' e u'\u005cu2062' a u'\u005cu2062' s u'\u005cu2062' t - o u'\u005cu2062' n u'\u005cu2062' e mention actually expresses the relation
+p66
+aV1) u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cuddba' u'\u005cud835' u'\u005cuddd1' u'\u005cud835' u'\u005cudda4' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddcd' is a supervised maximum entropy baseline trained on a human-labeled data; 2) u'\u005cud835' u'\u005cudda3' u'\u005cud835' u'\u005cuddb2' + u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddc9' u'\u005cud835' u'\u005cuddcc' u'\u005cud835' u'\u005cuddba' u'\u005cud835' u'\u005cuddc6' u'\u005cud835' u'\u005cuddc9' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddc2' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddc0' is an upsampling experiment, where u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cudda8' u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cuddab' was trained on a mix of a distantly-labeled and human-labeled data; 3) u'\u005cud835' u'\u005cuddb2' u'\u005cud835' u'\u005cuddbe' u'\u005cud835' u'\u005cuddc6' u'\u005cud835' u'\u005cuddc2' - u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cudda8' u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cuddab' is a recent semi-supervised extension
+p67
+aVExperiments show that u'\u005cud835' u'\u005cudc06' u'\u005cu2062' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddc2' u'\u005cud835' u'\u005cuddbd' u'\u005cud835' u'\u005cuddbe' u'\u005cud835' u'\u005cuddbd' u'\u005cu2062' u'\u005cud835' u'\u005cudda3' u'\u005cud835' u'\u005cuddb2' efficiently learns new model, resulting in a drastically decreasing number of needed relabelings for further iterations (Table 4
+p68
+aVWe experimented with different upsampling ratios and report best results using ratio 1:1 in Figure 2
+p69
+aVu'\u005cud835' u'\u005cudc30' y r is the weight vector for the r th binary top-level aggregation classifier (from mention labels to bag-level prediction
+p70
+aVWe model mention-level extraction p ( z i u'\u005cu2062' j u'\u005cud835' u'\u005cudc31' i u'\u005cu2062' j ; u'\u005cud835' u'\u005cudc30' z ) , human relabeling h i u'\u005cu2062' j u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' i u'\u005cu2062' j , z i u'\u005cu2062' j ) and multi-label aggregation p ( y i r u'\u005cud835' u'\u005cudc21' i ; u'\u005cud835' u'\u005cudc30' u'\u005cud835' u'\u005cudc32'
+p71
+aVIn the M-step (lines 12-15) we optimize model parameters u'\u005cud835' u'\u005cudc30' u'\u005cud835' u'\u005cudc33' , u'\u005cud835' u'\u005cudc30' u'\u005cud835' u'\u005cudc32' , given the current assignment of mention-level labels u'\u005cud835' u'\u005cudc21' u'\u005cud835' u'\u005cudc22'
+p72
+aVEM training \u005cFor iteration = 1 , u'\u005cu2026' , T \u005cFor i = 1 , u'\u005cu2026' , n \u005cFor j = 1 , u'\u005cu2026' u'\u005cud835' u'\u005cudc31' u'\u005cud835' u'\u005cudc22'
+p73
+aVFor example, entity types such as u'\u005cud835' u'\u005cuddc9' u'\u005cud835' u'\u005cuddbe' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddcc' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddc7' and u'\u005cud835' u'\u005cuddcd' u'\u005cud835' u'\u005cuddc2' u'\u005cud835' u'\u005cuddcd' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddbe' often implies the relation u'\u005cud835' u'\u005cuddc9' u'\u005cud835' u'\u005cuddbe' u'\u005cud835' u'\u005cuddcb' u'\u005cud835' u'\u005cuddcc' u'\u005cud835' u'\u005cuddc8' u'\u005cud835' u'\u005cuddc7' u'\u005cud835' u'\u005cuddb3' u'\u005cud835' u'\u005cuddc2' u'\u005cud835' u'\u005cuddcd' u'\u005cud835' u'\u005cuddc5' u'\u005cud835' u'\u005cuddbe'
+p74
+aVOur approach is aimed at improving the mention-level classifier, while keeping the multi-instance multi-label framework to allow for joint modeling
+p75
+aVwhere u'\u005cud835' u'\u005cudc21' u'\u005cud835' u'\u005cudc22' u'\u005cu2032' contains previously inferred and maybe further relabeled mention labels for group i (steps 5-10), with the exception of component j whose label is replaced by z i u'\u005cu2062' j
+p76
+aVWe define
+p77
+aVLet i , j be the index in the bag and the mention level, respectively
+p78
+aVWe also define
+p79
+aVOur baselines
+p80
+aVBecause of the non-convexity of L u'\u005cu2062' L u'\u005cu2062' ( u'\u005cud835' u'\u005cudc30' u'\u005cud835' u'\u005cudc32' , u'\u005cud835' u'\u005cudc30' u'\u005cud835' u'\u005cudc33' ) we approximate and maximize the joint log-probability p ( u'\u005cud835' u'\u005cudc32' u'\u005cud835' u'\u005cudc22' , u'\u005cud835' u'\u005cudc21' u'\u005cud835' u'\u005cudc22' u'\u005cud835' u'\u005cudc31' u'\u005cud835' u'\u005cudc22' , u'\u005cud835' u'\u005cudc30' u'\u005cud835' u'\u005cudc32' , u'\u005cud835' u'\u005cudc30' u'\u005cud835' u'\u005cudc33' , u'\u005cud835' u'\u005cudc06' ) for each entity pair in the database
+p81
+aVAt the inference step we first classify all mentions
+p82
+aVThe difference between u'\u005cud835' u'\u005cudc06' u'\u005cu2062' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddc2' u'\u005cud835' u'\u005cuddbd' u'\u005cud835' u'\u005cuddbe' u'\u005cud835' u'\u005cuddbd' u'\u005cu2062' u'\u005cud835' u'\u005cudda3' u'\u005cud835' u'\u005cuddb2' and all other systems is significant with p -value less than 0.05 according to a paired t -test assuming a normal distribution
+p83
+aVWe implement u'\u005cud835' u'\u005cudc06' u'\u005cu2062' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddc2' u'\u005cud835' u'\u005cuddbd' u'\u005cud835' u'\u005cuddbe' u'\u005cud835' u'\u005cuddbd' u'\u005cu2062' u'\u005cud835' u'\u005cudda3' u'\u005cud835' u'\u005cuddb2' on top of the u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cudda8' u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cuddab' [] code base 5 5 Available at http://nlp.stanford.edu/software/mimlre.shtml
+p84
+aVy i r u'\u005cu2208' { P , N } r holds for the i th bag or not
+p85
+aVWe also compare u'\u005cud835' u'\u005cudc06' u'\u005cu2062' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddc2' u'\u005cud835' u'\u005cuddbd' u'\u005cud835' u'\u005cuddbe' u'\u005cud835' u'\u005cuddbd' u'\u005cu2062' u'\u005cud835' u'\u005cudda3' u'\u005cud835' u'\u005cuddb2' with three state-of-the-art models
+p86
+aV[] using the Stanford parser 4 4 http://nlp.stanford.edu/software/lex-parser.shtml []
+p87
+aVAlso, u'\u005cud835' u'\u005cudc06' u'\u005cu2062' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddc2' u'\u005cud835' u'\u005cuddbd' u'\u005cud835' u'\u005cuddbe' u'\u005cud835' u'\u005cuddbd' u'\u005cu2062' u'\u005cud835' u'\u005cudda3' u'\u005cud835' u'\u005cuddb2' improves the overall recall by more than 9% absolute (from 30.9% to 39.93%) at a comparable level of precision (24.35% for u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cudda8' u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cuddab' vs 23.64% for u'\u005cud835' u'\u005cudc06' u'\u005cu2062' u'\u005cud835' u'\u005cuddce' u'\u005cud835' u'\u005cuddc2' u'\u005cud835' u'\u005cuddbd' u'\u005cud835' u'\u005cuddbe' u'\u005cud835' u'\u005cuddbd' u'\u005cu2062' u'\u005cud835' u'\u005cudda3' u'\u005cud835' u'\u005cuddb2' ), while increases the running time of u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cudda8' u'\u005cud835' u'\u005cuddac' u'\u005cud835' u'\u005cuddab' by only 3%
+p88
+aVThe views and conclusions contained herein are those of the authors and should not be interpreted as necessarily representing the official policies or endorsements, either expressed or implied, of IARPA, AFRL, or the U.S
+p89
+aV{ g k } u'\u005cu2286' { u'\u005cud835' u'\u005cudc31' i u'\u005cu2062' j } z i u'\u005cu2062' j * , u'\u005cu2003' u'\u005cu2006' otherwise \u005cState update u'\u005cud835' u'\u005cudc21' u'\u005cud835' u'\u005cudc22' with h i u'\u005cu2062' j * \u005cEndFor \u005cEndFor \u005cState u'\u005cud835' u'\u005cudc30' u'\u005cud835' u'\u005cudc33' * = argmax u'\u005cud835' u'\u005cudc30' u'\u005cu2211' i = 1 n u'\u005cu2211' j = 1 u'\u005cud835' u'\u005cudc31' u'\u005cud835' u'\u005cudc22' log p ( h i u'\u005cu2062' j u'\u005cud835' u'\u005cudc31' i u'\u005cu2062' j , u'\u005cud835' u'\u005cudc30' ) \u005cFor r u'\u005cu2208' R \u005cState u'\u005cud835' u'\u005cudc30' u'\u005cud835' u'\u005cudc32' u'\u005cud835' u'\u005cudc2b' u'\u005cu2063' * = argmax u'\u005cud835' u'\u005cudc30' u'\u005cu2211' 1 u'\u005cu2264' i u'\u005cu2264' n u'\u005cu2062' s t u'\u005cu2003' u'\u005cu2006' r u'\u005cu2208' P i u'\u005cu222a' N i log p ( y i r u'\u005cud835' u'\u005cudc21' u'\u005cud835' u'\u005cudc22' , u'\u005cud835' u'\u005cudc30' ) \u005cEndFor \u005cEndFor \u005cState return u'\u005cud835' u'\u005cudc30' u'\u005cud835' u'\u005cudc33' , u'\u005cud835' u'\u005cudc30' u'\u005cud835' u'\u005cudc32'
+p90
+aV\u005cState z i u'\u005cu2062' j * = argmax z i u'\u005cu2062' j p ( z i u'\u005cu2062' j u'\u005cud835' u'\u005cudc31' u'\u005cud835' u'\u005cudc22' , u'\u005cud835' u'\u005cudc32' u'\u005cud835' u'\u005cudc22' , u'\u005cud835' u'\u005cudc30' u'\u005cud835' u'\u005cudc33' , u'\u005cud835' u'\u005cudc30' u'\u005cud835' u'\u005cudc32' ) \u005cState h i u'\u005cu2062' j * = { r u'\u005cu2062' ( g ) , if u'\u005cu2062' u'\u005cu2203' u'\u005cu2003' g u'\u005cu2208' u'\u005cud835' u'\u005cudc06'
+p91
+aVThe pseudocode is presented as algorithm 1
+p92
+aVThe following approximation is used for inference at step 6
+p93
+aVSupported by the Intelligence Advanced Research Projects Activity ( IARPA) via Air Force Research Laboratory (AFRL) contract number FA8650-10-C-7058
+p94
+aVGovernment
+p95
+aVGovernment is authorized to reproduce and distribute reprints for Governmental purposes notwithstanding any copyright annotation thereon
+p96
+aVwhere the last equality is due to conditional independence
+p97
+aVWe use u'\u005cud835' u'\u005cudc30' y to represent u'\u005cud835' u'\u005cudc30' y 1 , u'\u005cud835' u'\u005cudc30' y 2 , u'\u005cu2026' , u'\u005cud835' u'\u005cudc30' y
+p98
+aVR
+p99
+aV2012
+p100
+aV[h!]
+p101
+aVThe U.S
+p102
+aS''
+p103
+a.

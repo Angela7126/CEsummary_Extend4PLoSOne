@@ -1,0 +1,459 @@
+************************************************************
+P14-1077.xhtml_1_CE.txt: Cause-Effect links
+************************************************************
+
+CASE: 0
+Stag: 1 2 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: In the literature, relation extraction (RE) is usually investigated in a classification style, where relations are simply treated as isolated class labels, while their definitions or background information are sometimes ignored Take the relation Capital as an example, we can imagine that this relation will expect a country as its subject and a city as object, and in most cases, a city can be the capital of only one country
+	Cause: [(0, 23), (1, 24)]
+	Effect: [(0, 0), (0, 21)]
+
+CASE: 1
+Stag: 1 2 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: In the literature, relation extraction (RE) is usually investigated in a classification style, where relations are simply treated as isolated class labels, while their definitions or background information are sometimes ignored Take the relation Capital as an example, we can imagine that this relation will expect a country as its subject and a city as object, and in most cases, a city can be the capital of only one country
+	Cause: [(1, 5), (1, 33)]
+	Effect: [(0, 1), (1, 3)]
+
+CASE: 2
+Stag: 8 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Similarly, the cardinality requirements of arguments, e.g.,, a person can have only one birthdate and a city can only be labeled as capital of one country, should be considered as a strong indicator to eliminate wrong predictions, but has to be coded manually as well
+	Cause: [(0, 26), (0, 50)]
+	Effect: [(0, 0), (0, 24)]
+
+CASE: 3
+Stag: 8 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Similarly, the cardinality requirements of arguments, e.g.,, a person can have only one birthdate and a city can only be labeled as capital of one country, should be considered as a strong indicator to eliminate wrong predictions, but has to be coded manually as well
+	Cause: [(0, 9), (0, 16)]
+	Effect: [(0, 0), (0, 7)]
+
+CASE: 4
+Stag: 9 
+	Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: On the other hand, most previous relation extractors process each entity pair (we will use entity pair and entity tuple exchangeably in the rest of the paper) locally and individually, i.e.,, the extractor makes decisions solely based on the sentences containing the current entity pair and ignores other related pairs, therefore has difficulties to capture possible disagreements among different entity pairs
+	Cause: [(0, 0), (0, 55)]
+	Effect: [(0, 58), (0, 67)]
+
+CASE: 5
+Stag: 9 
+	Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+	sentTXT: On the other hand, most previous relation extractors process each entity pair (we will use entity pair and entity tuple exchangeably in the rest of the paper) locally and individually, i.e.,, the extractor makes decisions solely based on the sentences containing the current entity pair and ignores other related pairs, therefore has difficulties to capture possible disagreements among different entity pairs
+	Cause: [(0, 44), (0, 55)]
+	Effect: [(0, 0), (0, 41)]
+
+CASE: 6
+Stag: 10 11 
+	Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+	sentTXT: However, when looking at the output of a multi-class relation predictor globally, we can easily find possible incorrect predictions such as a university locates in two different cities, two different cities have been labeled as capital for one country, a country locates in a city and so on In this paper, we will address how to derive and exploit two categories of these clues the expected types and the cardinality requirements of a relation u'\u2019' s arguments, in the scenario of relation extraction
+	Cause: [(0, 0), (0, 48)]
+	Effect: [(0, 10), (1, 40)]
+
+CASE: 7
+Stag: 12 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: We propose to perform joint inference upon multiple local predictions by leveraging implicit clues that are encoded with relation specific requirements and can be learnt from existing knowledge bases
+	Cause: [(0, 11), (0, 28)]
+	Effect: [(0, 0), (0, 9)]
+
+CASE: 8
+Stag: 13 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Specifically, the joint inference framework operates on the output of a sentence level relation extractor as input, derives 5 types of constraints from an existing KB to implicitly capture the expected type and cardinality requirements for a relation u'\u2019' s arguments, and jointly resolve the disagreements among candidate predictions
+	Cause: [(0, 17), (0, 47)]
+	Effect: [(0, 0), (0, 15)]
+
+CASE: 9
+Stag: 14 15 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We formalize this procedure as a constrained optimization problem, which can be solved by many optimization frameworks We use integer linear programming (ILP) as the solver and evaluate our framework on English and Chinese datasets
+	Cause: [(0, 5), (1, 18)]
+	Effect: [(0, 0), (0, 3)]
+
+CASE: 10
+Stag: 20 21 
+	Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+	sentTXT: We conclude this paper in Section 5 Since traditional supervised relation extraction methods [ 12 , 20 ] require manual annotations and are often domain-specific, nowadays many efforts focus on semi-supervised or unsupervised methods [ 1 , 5 ]
+	Cause: [(1, 1), (1, 32)]
+	Effect: [(0, 0), (0, 6)]
+
+CASE: 11
+Stag: 24 
+	Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+	sentTXT: Since the automatically generated training datasets in DS often contain noises, there are also research efforts focusing on reducing the noisy labels in the training data [ 16 ]
+	Cause: [(0, 1), (0, 10)]
+	Effect: [(0, 12), (0, 29)]
+
+CASE: 12
+Stag: 36 37 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: These can be considered as the latent type information of the relations u'\u2019' arguments, which is learnt from various data sources In contrast, our approach learn implicit clues from existing KBs, and jointly optimize local predictions among different entity tuples to capture both relation argument type clues and cardinality clues
+	Cause: [(0, 5), (1, 29)]
+	Effect: [(0, 0), (0, 3)]
+
+CASE: 13
+Stag: 43 44 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Our framework takes a set of entity pairs and their supporting sentences as its input We first train a preliminary sentence level extractor which can output confidence scores for its predictions, e.g.,, a maximum entropy or logistic regression model, and use this local extractor to produce local predictions
+	Cause: [(0, 13), (1, 19)]
+	Effect: [(0, 0), (0, 11)]
+
+CASE: 14
+Stag: 47 
+	Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+	sentTXT: Since we will focus on the open domain relation extraction, we still follow the distant supervision paradigm to collect our training data guided by a KB, and train the local extractor accordingly
+	Cause: [(0, 1), (0, 9)]
+	Effect: [(0, 11), (0, 33)]
+
+CASE: 15
+Stag: 47 
+	Pattern: 2 [[[',', '.', ';', 'and']], ['accordingly']]---- [['&C'], ['&R']]
+	sentTXT: Since we will focus on the open domain relation extraction, we still follow the distant supervision paradigm to collect our training data guided by a KB, and train the local extractor accordingly
+	Cause: [(0, 0), (0, 16)]
+	Effect: [(0, 18), (0, 21)]
+
+CASE: 16
+Stag: 51 52 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Keep in mind that our local extractor is trained on noisy training data, which, we admit, is not fully reliable As we observed in a pilot experiment that there is a good chance that the predictions ranked in the second or third may still be correct, we select top three predictions as the candidate relations for each mention in order to introduce more potentially correct output
+	Cause: [(1, 1), (1, 46)]
+	Effect: [(0, 4), (0, 22)]
+
+CASE: 17
+Stag: 54 55 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: For a tuple t , we obtain its candidate relation set by combining the candidate relations of all its mentions, and represent it as R t For a candidate relation r u'\u2208' R t and a tuple t , we define M t r as all t u'\u2019' s mentions whose candidate relations contain r
+	Cause: [(0, 25), (1, 29)]
+	Effect: [(0, 0), (0, 23)]
+
+CASE: 18
+Stag: 55 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: For a candidate relation r u'\u2208' R t and a tuple t , we define M t r as all t u'\u2019' s mentions whose candidate relations contain r
+	Cause: [(0, 23), (0, 36)]
+	Effect: [(0, 0), (0, 21)]
+
+CASE: 19
+Stag: 61 62 
+	Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+	sentTXT: Generally, we expect more potentially correct relations to be put into the candidate relation set for further consideration So in addition to lexical and syntactic features, we also use n-gram features to train our preliminary relation extraction model
+	Cause: [(0, 0), (0, 18)]
+	Effect: [(1, 1), (1, 20)]
+
+CASE: 20
+Stag: 63 64 
+	Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+	sentTXT: N-gram features are considered as more ambiguous compared to traditional lexical and syntactic features, and may introduce incorrect predictions, thus improving the recall at the cost of precision The candidate relations we obtained in the previous subsection inevitably include many incorrect predictions
+	Cause: [(0, 0), (0, 19)]
+	Effect: [(0, 22), (1, 13)]
+
+CASE: 21
+Stag: 65 66 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Ideally we should discard those wrong predictions to produce more accurate results As discussed earlier, we will exploit from the knowledge base two categories of clues that implicitly capture relations u'\u2019' backgrounds their expected argument types and argument cardinalities, based on which we can discover two categories of disagreements among the candidate predictions, summarized as argument type inconsistencies and violations of arguments u'\u2019' uniqueness, which have been rarely considered before
+	Cause: [(1, 1), (1, 58)]
+	Effect: [(0, 1), (0, 11)]
+
+CASE: 22
+Stag: 71 
+	Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+	sentTXT: If the predictions among different entity tuples require the same entity to belong to different types, we call this an argument type inconsistency
+	Cause: [(0, 1), (0, 15)]
+	Effect: [(0, 17), (0, 23)]
+
+CASE: 23
+Stag: 73 
+	Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+	sentTXT: In Figure 1 , USA, New York has a candidate relation LargestCity which restricts USA to be either countries or states, while USA, Washington D.C has a prediction LocationCity which indicates a disagreement in terms of USA u'\u2019' s type because the latter prediction expects USA to be an organization located in a city
+	Cause: [(0, 48), (0, 60)]
+	Effect: [(0, 0), (0, 46)]
+
+CASE: 24
+Stag: 82 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We represent the relation pairs ( r i , r j ) that are inconsistent in terms of subjects as u'\ud835' u'\udc9e' s u'\u2062' r , the relations pairs that are inconsistent in terms of objects as u'\ud835' u'\udc9e' r u'\u2062' o , the relation pairs that are inconsistent in terms of one u'\u2019' s subject and the other one u'\u2019' s object as u'\ud835' u'\udc9e' r u'\u2062' e u'\u2062' r
+	Cause: [(0, 20), (0, 118)]
+	Effect: [(0, 0), (0, 18)]
+
+CASE: 25
+Stag: 82 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We represent the relation pairs ( r i , r j ) that are inconsistent in terms of subjects as u'\ud835' u'\udc9e' s u'\u2062' r , the relations pairs that are inconsistent in terms of objects as u'\ud835' u'\udc9e' r u'\u2062' o , the relation pairs that are inconsistent in terms of one u'\u2019' s subject and the other one u'\u2019' s object as u'\ud835' u'\udc9e' r u'\u2062' e u'\u2062' r
+	Cause: [(0, 29), (0, 94)]
+	Effect: [(0, 1), (0, 27)]
+
+CASE: 26
+Stag: 86 87 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: They implicitly consider USA as u'\u201c' country u'\u201d' and u'\u201c' organization u'\u201d' , respectively The previous categories of disagreements are all based on the implicit type information of the relations u'\u2019' arguments, Now we make use of the clues of argument cardinality requirements
+	Cause: [(0, 5), (1, 23)]
+	Effect: [(0, 0), (0, 3)]
+
+CASE: 27
+Stag: 87 
+	Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+	sentTXT: The previous categories of disagreements are all based on the implicit type information of the relations u'\u2019' arguments, Now we make use of the clues of argument cardinality requirements
+	Cause: [(0, 9), (0, 21)]
+	Effect: [(0, 23), (0, 33)]
+
+CASE: 28
+Stag: 89 
+	Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+	sentTXT: For example, in Figure 1 , given USA as the subject of the relation Capital , we can only accept one possible object, because there is great chance that a country only have one capital
+	Cause: [(0, 26), (0, 36)]
+	Effect: [(0, 0), (0, 23)]
+
+CASE: 29
+Stag: 90 
+	Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+	sentTXT: On the other hand, given Washington D.C as the object of the relation Capital , we can only accept one subject, since usually a city can only be the capital of one country or state
+	Cause: [(0, 24), (0, 36)]
+	Effect: [(0, 0), (0, 21)]
+
+CASE: 30
+Stag: 91 
+	Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+	sentTXT: If these are violating in the candidates, we could know that there may be some incorrect predictions
+	Cause: [(0, 1), (0, 6)]
+	Effect: [(0, 8), (0, 17)]
+
+CASE: 31
+Stag: 92 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We represent the relations expecting unique objects as u'\ud835' u'\udc9e' o u'\u2062' u , and the relations expecting unique subjects as u'\ud835' u'\udc9e' s u'\u2062' u
+	Cause: [(0, 8), (0, 49)]
+	Effect: [(0, 0), (0, 6)]
+
+CASE: 32
+Stag: 96 97 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Most existing knowledge bases represent their knowledge facts in the form of ( subject, relation, object ) triple, which can be seen as relational facts between entity tuples Usually the triples in a KB are carefully defined by experts
+	Cause: [(0, 26), (1, 9)]
+	Effect: [(0, 0), (0, 24)]
+
+CASE: 33
+Stag: 99 
+	Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: The clues are therefore learnt from KBs, and further refined manually if needed
+	Cause: [(0, 0), (0, 2)]
+	Effect: [(0, 4), (0, 13)]
+
+CASE: 34
+Stag: 113 114 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: This threshold is set to 0.8 in this paper As discussed above, given a set of entity pairs and their candidate relations output by a preliminary extractor, our goal is to find an optimal configuration for all those entities pairs jointly, solving the disagreements among those candidate predictions and maximizing the overall confidence of the selected predictions
+	Cause: [(1, 1), (1, 50)]
+	Effect: [(0, 0), (0, 8)]
+
+CASE: 35
+Stag: 117 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: In this paper, we propose to solve the problem by using an ILP tool, IBM ILOG Cplex 1 1 www.cplex.com
+	Cause: [(0, 11), (0, 21)]
+	Effect: [(0, 0), (0, 9)]
+
+CASE: 36
+Stag: 124 
+	Pattern: 2 [['for', 'the', 'sake', 'of'], [',']]---- [[], ['&V-ing/&NP@C@'], ['&R']]
+	sentTXT: For the sake of clarity, we describe the constraints derived from each scenario of the two categories of disagreements separately
+	Cause: [(0, 4), (0, 4)]
+	Effect: [(0, 6), (0, 20)]
+
+CASE: 37
+Stag: 131 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: The relation-entity-relation constraints ensure that if an entity works as subject and object in two tuples t i and t j respectively, their relations agree with each other
+	Cause: [(0, 10), (0, 28)]
+	Effect: [(0, 6), (0, 8)]
+
+CASE: 38
+Stag: 136 
+	Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+	sentTXT: By adopting ILP, we can combine the local information including MaxEnt confidence scores and the implicit relation backgrounds that are embedded into global consistencies of the entity tuples together
+	Cause: [(0, 1), (0, 2)]
+	Effect: [(0, 3), (0, 29)]
+
+CASE: 39
+Stag: 140 141 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: It uses Freebase as the knowledge base and New York Time corpus as the text corpus, including about 60,000 entity tuples in the training set, and about 90,000 entity tuples in the testing set We generate the second English dataset, DBpedia dataset, by mapping the triples in DBpedia [ 2 ] to the sentences in New York Time corpus
+	Cause: [(0, 4), (1, 8)]
+	Effect: [(0, 0), (0, 2)]
+
+CASE: 40
+Stag: 141 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: We generate the second English dataset, DBpedia dataset, by mapping the triples in DBpedia [ 2 ] to the sentences in New York Time corpus
+	Cause: [(0, 11), (0, 26)]
+	Effect: [(0, 0), (0, 9)]
+
+CASE: 41
+Stag: 144 145 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We collect four national economic newspapers in 2009 as our corpus 28 different relations are mapped to the corpus and this results in 60,000 entity tuples, 120,000 sentences for training and 40,000 tuples, 83,000 sentences for testing
+	Cause: [(0, 9), (1, 26)]
+	Effect: [(0, 0), (0, 7)]
+
+CASE: 42
+Stag: 149 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: The model predicts for each mention separately, and allows multi-label outputs for an entity tuple by OR-ing the outputs of its mentions
+	Cause: [(0, 17), (0, 22)]
+	Effect: [(0, 0), (0, 15)]
+
+CASE: 43
+Stag: 149 150 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: The model predicts for each mention separately, and allows multi-label outputs for an entity tuple by OR-ing the outputs of its mentions As we described in Section 3.1 , originally we select the top three predicted relations as the candidates for each mention
+	Cause: [(1, 1), (1, 20)]
+	Effect: [(0, 0), (0, 22)]
+
+CASE: 44
+Stag: 155 
+	Pattern: 45 [['so', 'that']]---- [['&C'], ['&R']]
+	sentTXT: We tune the models of MultiR and MIML-RE so that they fit our datasets
+	Cause: [(0, 0), (0, 7)]
+	Effect: [(0, 10), (0, 13)]
+
+CASE: 45
+Stag: 174 
+	Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+	sentTXT: What is worse, we cannot find any clues from the top three relations because their arguments u'\u2019' types are too general
+	Cause: [(0, 16), (0, 26)]
+	Effect: [(0, 0), (0, 14)]
+
+CASE: 46
+Stag: 176 177 
+	Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: Although we may find some clues any way, they are too few to make any improvement Hence, our framework does not perform well due to the poor performance of MaxEnt extractor and the lack of clues
+	Cause: [(0, 0), (0, 16)]
+	Effect: [(1, 2), (1, 20)]
+
+CASE: 47
+Stag: 180 
+	Pattern: 0 [[['lead', 'leads', 'led'], 'to']]---- [['&V-ing/&NP@C@', '(&CAN/have/has/had)'], ['&NP@R@', '(&Clause@R@)']]
+	sentTXT: Compared to ILP-2cand and original ILP, ILP-1cand leads to slightly lower precision but much lower recall, showing that selecting more candidates may help us collect more potentially correct predictions
+	Cause: [(0, 7), (0, 7)]
+	Effect: [(0, 10), (0, 30)]
+
+CASE: 48
+Stag: 181 
+	Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+	sentTXT: Comparing ILP-2cand and original ILP, the latter hardly makes any improvement in precision, but is slightly longer in recall, indicating using three candidates can still collect some more potentially correct predictions, although the number may be limited
+	Cause: [(0, 0), (0, 4)]
+	Effect: [(0, 6), (0, 40)]
+
+CASE: 49
+Stag: 189 
+	Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+	sentTXT: Different from [ 15 ] , we use all the entity pairs instead of the ones with more than 10 mentions
+	Cause: [(0, 0), (0, 4)]
+	Effect: [(0, 6), (0, 20)]
+
+CASE: 50
+Stag: 194 
+	Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+	sentTXT: We also investigate the impacts of the constraints used in ILP, which are derived based on the two kinds of clues and can encode relation definition information into our framework
+	Cause: [(0, 17), (0, 30)]
+	Effect: [(0, 0), (0, 14)]
+
+CASE: 51
+Stag: 196 
+	Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+	sentTXT: In the Riedel u'\u2019' s dataset we do not see any improvements since there are almost no clues
+	Cause: [(0, 17), (0, 21)]
+	Effect: [(0, 9), (0, 15)]
+
+CASE: 52
+Stag: 199 200 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We also fit MultiR u'\u2019' s mention level extractor into our framework As shown in Figure 3 , in the DBpedia dataset and the Chinese dataset, in most parts of the curve, ILP optimized MultiR outperforms original MultiR
+	Cause: [(1, 1), (1, 27)]
+	Effect: [(0, 0), (0, 15)]
+
+CASE: 53
+Stag: 201 
+	Pattern: 1 [['reason'], [['that', 'because']]]---- [['&R', '(,/./;/--)', '&ONE', '(&ADJ)'], ['(for &THIS (&NP))', '&BE'], ['&C']]
+	sentTXT: We think the reason is that our framework make use of global clues to discard the incorrect predictions
+	Cause: [(0, 6), (0, 17)]
+	Effect: [(0, 0), (0, 1)]
+
+CASE: 54
+Stag: 203 
+	Pattern: 1 [['reason'], [['that', 'because']]]---- [['&R', '(,/./;/--)', '&ONE', '(&ADJ)'], ['(for &THIS (&NP))', '&BE'], ['&C']]
+	sentTXT: We think one reason is that MultiR does not perform well in these two datasets
+	Cause: [(0, 6), (0, 14)]
+	Effect: [(0, 0), (0, 1)]
+
+CASE: 55
+Stag: 205 
+	Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+	sentTXT: As a result, we only use the top one result as the candidate since including top two predictions without thresholding the confidences performs bad, indicating that a probabilistic sentence-level extractor is more suitable for our framework
+	Cause: [(0, 15), (0, 24)]
+	Effect: [(0, 26), (0, 37)]
+
+CASE: 56
+Stag: 208 
+	Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+	sentTXT: Since there are almost no clues in the Riedel u'\u2019' s dataset, we only investigate the other two datasets
+	Cause: [(0, 1), (0, 13)]
+	Effect: [(0, 17), (0, 23)]
+
+CASE: 57
+Stag: 209 
+	Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+	sentTXT: We add clues according to their related relations u'\u2019' proportions in the local predictions
+	Cause: [(0, 5), (0, 17)]
+	Effect: [(0, 0), (0, 2)]
+
+CASE: 58
+Stag: 210 
+	Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+	sentTXT: For example, Country and birthPlace take up about 30% in the local predictions, we thus add clues that are related to these two relations, and then move on with new clues related to other relations according to those relations u'\u2019' proportions in the local predictions
+	Cause: [(0, 4), (0, 16)]
+	Effect: [(0, 18), (0, 52)]
+
+CASE: 59
+Stag: 210 
+	Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+	sentTXT: For example, Country and birthPlace take up about 30% in the local predictions, we thus add clues that are related to these two relations, and then move on with new clues related to other relations according to those relations u'\u2019' proportions in the local predictions
+	Cause: [(0, 23), (0, 34)]
+	Effect: [(0, 0), (0, 20)]
+
+CASE: 60
+Stag: 211 
+	Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+	sentTXT: As is shown in Figure 4 , in both datasets, the clues related to more local predictions will solve more inconsistencies, thus are more effective
+	Cause: [(0, 0), (0, 21)]
+	Effect: [(0, 24), (0, 26)]
+
+CASE: 61
+Stag: 212 
+	Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+	sentTXT: Adding the first two relations improves the model significantly, and as more relations are added, the performances keep increasing until approaching the still state
+	Cause: [(0, 0), (0, 15)]
+	Effect: [(0, 17), (0, 25)]
+
+CASE: 62
+Stag: 212 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Adding the first two relations improves the model significantly, and as more relations are added, the performances keep increasing until approaching the still state
+	Cause: [(0, 12), (0, 15)]
+	Effect: [(0, 1), (0, 10)]
+
+CASE: 63
+Stag: 213 
+	Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+	sentTXT: It is worth mentioning that when sufficient learnt clues are added into the model, the results are comparable to those based on the clues refined manually, as shown in Figure 5
+	Cause: [(0, 23), (0, 26)]
+	Effect: [(0, 28), (0, 32)]
+
+CASE: 64
+Stag: 213 214 
+	Pattern: 0 [[['imply', 'implies', 'implied', 'indicate', 'indicates', 'indicated']]]---- [['&C', '(,/./;/--)', '&this', '(&adj)', '(&N)', '(&CAN/have/has/had)', '(&ADV)'], ['(that)', '&R@Complete@']]
+	sentTXT: It is worth mentioning that when sufficient learnt clues are added into the model, the results are comparable to those based on the clues refined manually, as shown in Figure 5 This indicates that the clues can be collected automatically, and further used to examine whether predicted relations are consistent with the existing ones in the KB, which can be considered as a form of quality control
+	Cause: [(0, 0), (0, 32)]
+	Effect: [(1, 3), (1, 37)]
+

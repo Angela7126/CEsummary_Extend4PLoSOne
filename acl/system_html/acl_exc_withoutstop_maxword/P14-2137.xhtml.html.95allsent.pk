@@ -1,0 +1,302 @@
+(lp0
+VIn addition, the lower ranked but correct relation translations also affect entity translation
+p1
+aVTherefore, even lower-performing EF boosted the entity translations, and in effect, our approach could achieve higher F1-score in the entity translation task
+p2
+aVOut of 158 randomly chosen correct relation translation pairs we labeled, 64% has only one co-occurring entity pair, which makes EF not very effective to identify these relation translations
+p3
+aVWe can clearly see that LF�shows higher recall than EF while EF�shows higher precision
+p4
+aVWe measure precision, recall, and F1-score based on the returned translation pairs for each English entity as it is done in [ 11 ]
+p5
+aVTherefore, we leverage relation temporality , which is both orthogonal and complementary to existing efforts leveraging entity temporality [ 8 , 6 , 16 ]
+p6
+aVTo measure the effectiveness, we use a set of gold standard entity translation pairs which consist of 221 person entities and 52 organization entities
+p7
+aVThis observation also holds in the bilingual environment by exploiting seed entity translations
+p8
+aVTable 3 shows the comparisons of�LF,�EF and their hybrid�LF+EF
+p9
+aVWe compare our hybrid approach, which is denoted by LF+EF with EF [ 11 ] , a combined approach PH+SM of phonetic similarity and letter-wise semantic translation for better accuracy for organizations [ 10 ] , and the seed translations Seed that we adopt [ 17 ] with PH+SM as a base translation matrix
+p10
+aV3 3 Our results leveraging relational temporality outperforms the reported results using entity temporality on the same data set
+p11
+aVIn our experiments, we use a non-selective (hence not requiring relation translations) propagation approach [ 17 ] with [ 10 ] for a base translation matrix
+p12
+aVTheir hybrid LF+EF has both high precision and recall, thus has the highest F1-score
+p13
+aVThus, we produce the hybrid relation translation, and we empirically set u'\u005cu039b' = 0.4
+p14
+aVIn clear contrast, by discovering novel latent features based on temporal properties, we can increase the accuracy of both entity and relation translations
+p15
+aVTo address this challenge, current state-of-the-art approaches build an entity graph for each language corpus, and align the two graphs by propagating the seed translation similarities (Figure 1 ) [ 7 , 17 ]
+p16
+aVIn this section, we briefly illustrate a baseline method EF [ 11 ]
+p17
+aVAs we mentioned in the introduction, traditional approaches leverage common co-occurring entity-pairs
+p18
+aVOut of 3342 pairs, 399 are labeled as correct
+p19
+aVSpecifically, we quantify this similarity based on the number of such common entity pairs that we denote as
+p20
+aVUnfortunately, this approach suffers from sparsity of the common entity pairs due to the incomparability of the corpora and those entities that cannot be translated by T N
+p21
+aVA key contribution of this paper is using relation temporality for determining relation equivalence
+p22
+aVThus, we cannot acquire any common entity pair like (Russia, aircraft carrier) for deploy and {CJK*} UTF8zhfs在 u'\u005cu2026' 部署 (deploy at
+p23
+aVIf an entity has a peak at some period (Figure 8 ), most relations that are coupled with the entity would have a peak at the very same period (Figure 8
+p24
+aV[C3] Lastly, we have to eliminate false positives in relation temporality
+p25
+aVBased on these challenges, we identify three new features for LF
+p26
+aVFor example, arbitrary translation pair such as (Jackie Chan, {CJK*} UTF8zhfs成龙) can be obtained, if he is connected to his film u'\u005cu2018' Drunken Master u'\u005cu2019' ( {CJK*} UTF8zhfs醉拳) in both graphs
+p27
+aVAs we emphasized in Section 3.3 , we can see their complementary property
+p28
+aVTherefore, we leverage corpus latent features as an additional signal to overcome this problem
+p29
+aVTo address the first challenge, we use a finer-granularity unit for observing the temporality
+p30
+aVOn the other hand, it can be correctly translated using�EF
+p31
+aVHowever, not all NE translations are based on transliterations, but they might be based on semantics (e.g.,, u'\u005cu2018' WTO u'\u005cu2019' u'\u005cu2192' u'\u005cu2018' {CJK*} UTF8zhfs世贸组织 u'\u005cu2019' [ShiMaoZuZhi]), or even arbitrary (e.g.,, u'\u005cu2018' Jackie Chan u'\u005cu2019' u'\u005cu2192' u'\u005cu2018' {CJK*} UTF8zhfs成龙 u'\u005cu2019' [ChengLong]
+p32
+aVAs we can see from the difference in the numbers of the documents, the news corpora are not direct translations, but they have asymmetry of entities and relations
+p33
+aV[C2] Considering entity-relation coupling distribution d [ e , r , * ] alone is not sufficient due to the domination of individual temporality
+p34
+aVAs shown in Figure 5 , d [ e , r , * ] is more distinctive and hence a key clue to find semantically equivalent relations
+p35
+aVFor example, we can obtain u'\u005cu201c' Russia deployed an aircraft carrier u'\u005cu201d' , but not u'\u005cu201c' Russia deployed at ( {CJK*} UTF8zhfs在 u'\u005cu2026' 部署) an aircraft carrier u'\u005cu201d'
+p36
+aVThat is, we always {CJK*} UTF8zhfs讨论 (discuss) before we {CJK*} UTF8zhfs批准 (ratify) something and hence the temporal behavior of {CJK*} UTF8zhfs讨论 (discuss) is also very similar to that of ratify
+p37
+aVBut in this section, we only use d [ e , r , * ] for readability
+p38
+aVOur baseline implementation uses the one by [ 11 ] , and we refer the reader to the paper for formal definitions and processing steps we omitted due to the page limit
+p39
+aVNote that the absolute numbers (due to the harsh evaluation criteria) may look low
+p40
+aVThe number of English articles is 100,746, and that of Chinese articles is 88,031
+p41
+aVAdditionally, we use the following features to consider absolute frequencies f u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' q u'\u005cu2062' ( u'\u005cu22c5' ) of textual elements as well because 1) we are more confident with more evidence and 2) in the comparable corpora, the equivalent elements are likely to show similar frequencies
+p42
+aVThat is, for ( r E , r C ) , we redefine the score as T R L u'\u005cu2062' F u'\u005cu2062' ( r E , r C ) / u'\u005cu2211' i u'\u005cu2208' [ 1 , k ] T R L u'\u005cu2062' F u'\u005cu2062' ( r E , r C r u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' k i ) where r C r u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' k i is the i -th rank Chinese relation for r E by Equation 2
+p43
+aVThe temporal similarity of the couplings, where J u'\u005cu2062' S u'\u005cu2062' D u'\u005cu2062' ( P , Q ) is the Jensen-Shannon divergence of two distributions P and Q , defined as J S D ( P , Q ) = 1 2 D ( P
+p44
+aVEach relation translation method translates an English relation r E into a list of Chinese relations, and we check whether a Chinese relation r C with the highest translation score is the correct translation
+p45
+aVIn this section, we evaluate the proposed approach on the entity translation task and the relation translation task
+p46
+aVThis section considers the relation translation task
+p47
+aVThe entity translation score obtained in the previous iteration or the seed entity translation score
+p48
+aVThe existence of a common entity pair using the seed entity translations (boolean
+p49
+aVOur new hybrid approach significantly improves the relation translation (0.16 higher F1-score than EF), and in turn improves the entity translation (0.02 higher F1-score
+p50
+aVWe identify the three big challenges in exploiting the temporality in relation translations
+p51
+aVEF
+p52
+aVTo illustrate the detailed effects of the corpus latent features, Table 4 shows the ranks of correct Chinese translations for English relations by methods using selected features for the challenges
+p53
+aVWe find that LF�and�EF�are complementary
+p54
+aVFor Step 1 , an existing method for entity translation is adopted
+p55
+aVWe consider the relation translation is correct when the semantics are equivalent
+p56
+aVBruce Willis, star in, The Sixth Sense) and ( {CJK*} UTF8zhfs布鲁斯 u'\u005cu22c5' {CJK*} UTF8zhfs威利斯 (Bruce Willis), {CJK*} UTF8zhfs主演 (star in), {CJK*} UTF8zhfs第六感 (The Sixth Sense
+p57
+aVTotal 3342 English-Chinese relation translation pairs returned by our method and the baselines are randomly shown and labeled
+p58
+aVKnowing a few seed entity translations using T N , u'\u005cu2018' Bruce Willis u'\u005cu2019' u'\u005cu2192' u'\u005cu2018' {CJK*} UTF8zhfs布鲁斯 u'\u005cu22c5' {CJK*} UTF8zhfs威利斯 u'\u005cu2019' and u'\u005cu2018' The Sixth Sense u'\u005cu2019' u'\u005cu2192' u'\u005cu2018' {CJK*} UTF8zhfs第六感 u'\u005cu2019' , we can find star in and {CJK*} UTF8zhfs主演 are semantically similar
+p59
+aVTo address this, we check the common co-occurring entity pair of the relations
+p60
+aVWe observe the complementary nature of EF and LF, then propose a hybrid approach combining both features
+p61
+aVIn contrast, we propose to explore corpus l atent f eatures (LF), to complement the sparsity problem of EF
+p62
+aVThat is, we can propagate the seed translation similarity of (Drunken Master, {CJK*} UTF8zhfs醉拳) to neighbor entities u'\u005cu2018' Jackie Chan u'\u005cu2019' and u'\u005cu2018' {CJK*} UTF8zhfs成龙 u'\u005cu2019' in each graph
+p63
+aVTable 1 shows the examples of relations and their translations
+p64
+aVIn particular, we discover three new challenges on using temporality for relation understanding in comparable corpora, which we discuss in detail in Section 3.2
+p65
+aVIn this section, we present our approaches to obtain relations of equivalent semantics across languages (e.g.,, visit u'\u005cu2192' {CJK*} UTF8zhfs访问
+p66
+aVWhile Step 3 is well-defined in [ 11 ] , to propagate entity translation scores when the relation semantics of the edges are equivalent, Step 2 has been restricted to the explicit feature, i.e.,, co-occurring entities or shared context
+p67
+aVIn this paper, we illustrate such importance using named entity (NE) translation mining problem
+p68
+aVFormally, our goal is to build the relation translation score function T R u'\u005cu2062' ( r E , r C ) for English relation r E and Chinese relation r C
+p69
+aVBut the top translations are still relevant (e.g.,, fight is translated to {CJK*} UTF8zhfs驻 (deploy troops
+p70
+aVTo illustrate, two relations deploy and {CJK*} UTF8zhfs在 u'\u005cu2026' 部署 (deploy at) have similar temporal behaviors (Figure 5
+p71
+aVFor comparison, the ranks of the correct translations when using EF are shown
+p72
+aVFor example, {CJK*} UTF8zhfs去 (leave for/go to) is a correct translation of leave for, but {CJK*} UTF8zhfs离开 (leave) is not
+p73
+aVStep 2 and Step 3 reinforce each other to improve the final entity translation function
+p74
+aVLF
+p75
+aVThe focus of this paper is Step 2 , building the translation score T R ( t ) u'\u005cu2062' ( r E , r C ) of English relation r E and Chinese relation r C
+p76
+aVIn this section, we present experimental settings and results on translating entities using our proposed approaches
+p77
+aVBy aggregating coupling similarities, we measure the translation score of two relations
+p78
+aV1 1 We use both d [ e , r , * ] and d [ * , r , e ] to measure the relation translation scores and leverage the average score
+p79
+aVWe normalize the obtained function values for each English relations using the top- k Chinese translations
+p80
+aVInitialize entity translation function T N ( 0 )
+p81
+aVFor example, Figure 8 shows entity-dominating entity-relation temporality
+p82
+aVExisting work [ 14 , 12 , 11 ] uses only co-occurring entity pairs, or e xplicit f eatures (EF
+p83
+aVMore specifically, we exploit a coupling of a relation and an entity d [ e , r , * ] where e is an entity, r a relation, and * is a placeholder indicating that any noun phrase is accepted for the second argument of a statement
+p84
+aVOur approach using the entity-relation coupling similarity feature for [C1] alone often cannot find the correct translations
+p85
+aVUnderstanding relations is important in entity tasks
+p86
+aVThe corpus explicit feature EF alone cannot translate the relation win and, in turn, u'\u005cu2018' Matthew Emmons u'\u005cu2019'
+p87
+aVFor example, Figure 5 shows the relation temporal distribution d [ visit ] ( t ) against week t
+p88
+aVEntity to entity-relation distribution difference (D1) and relation to entity-relation distribution difference (D2), for English and Chinese respectively
+p89
+aVOur proposed approach LF+EF shows higher F1-score than the baselines
+p90
+aVEarly research on NE translation used phonetic similarities, for example, to mine the translation u'\u005cu2018' Mandelson u'\u005cu2019' u'\u005cu2192' u'\u005cu2018' {CJK*} UTF8zhfs曼德尔森 u'\u005cu2019' [ManDeErSen] with similar sounds [ 9 , 15 ]
+p91
+aVIn particular, our approach outperforms EF
+p92
+aVThis makes all relations that appear with this entity very similar to each other regardlessly of semantics
+p93
+aVH u'\u005cu2062' ( r E , r C for an English relation r E and a Chinese relation r C
+p94
+aVThe two approaches using temporality are orthogonal and can be aggregated, which we leave as our future directions
+p95
+aVIn contrast, Lee and Hwang () propose u'\u005cu201c' selective propagation u'\u005cu201d' for asymmetric graphs, of comparing the semantics of relations
+p96
+aVHowever, LF+EF translates him correctly into {CJK*} UTF8zhfs马修·埃蒙斯 through the relation win
+p97
+aVWe will discuss the detailed procedure of Step 2 and propose how to improve it in Section 3
+p98
+aVHowever, the first relation takes [person], but the second relation [location] for the second argument
+p99
+aVWe extract English and Chinese statements from news articles in 2008 by Xinhua news who publishes news in both English and Chinese, which were also used by Lee and Hwang
+p100
+aVIn general, LF�can translate more relations (e.g.,, support and capture
+p101
+aVT N u'\u005cu2062' ( e E , e C ) u'\u005cu2265' u'\u005cu0398' } with u'\u005cu0398' = 0.6 , a set of translation pairs obtained in the seeds or previous iteration such as (Bush, {CJK*} UTF8zhfs布什
+p102
+aVFor example, for a relation
+p103
+aVBuild relation translation function T R ( t ) using T N ( t )
+p104
+aVUnlike entities, we can easily observe the dissimilarity of the temporal distributions of semantically equivalent relations
+p105
+aVUpdate entity translation function to acquire T N ( t + 1 ) using T R ( t )
+p106
+aVSelective propagation, leveraging the statements extracted from bilingual comparable corpora, can be summarized by several steps
+p107
+aVFor relations, such as visit, that involves diverse entities, the temporal distributions are highly noisy (Figure 5
+p108
+aVWe process one iteration of the entire framework ( Step 1-3 ) for both LF+EF and EF
+p109
+aVTable 2 shows the comparison of the methods
+p110
+aVThe existing approaches are variations of using
+p111
+aVWith these features, we measure the similarity of a pair of couplings as follows
+p112
+aVWe compute the similarity of two relations r E in English and r C in Chinese using the following 2-steps
+p113
+aVStep 3 is the stage that selective propagation takes place
+p114
+aVWhen two graphs are obtained from parallel corpora, graphs are symmetric and u'\u005cu201c' blind propagation u'\u005cu201d' described above is effective
+p115
+aVFor example, u'\u005cu2018' Matthew Emmons u'\u005cu2019' is a lesser known entity, and we have only few statements mentioning him in the corpora
+p116
+aVHowever, in some cases like ratify, highly related relations may induce noise
+p117
+aVCompute the translation score T R L u'\u005cu2062' F u'\u005cu2062' ( r E , r C ) by aggregating the coupling similarities
+p118
+aVTo address this challenge, we use features to measure whether d [ e , r , * ] is too close to either of d u'\u005cu2062' [ e ] or d u'\u005cu2062' [ r ]
+p119
+aVRepeat Step 2 and Step 3
+p120
+aVNote that we omit t for readability in the following sections
+p121
+aVCompute the similarity S C u'\u005cu2062' P u'\u005cu2062' ( r E , r C , e E , e C ) of temporal distributions of entity-relation couplings for each bilingual entity pair ( e E , e C )
+p122
+aV[C1] Considering temporal distributions d u'\u005cu2062' [ r ] of relations alone is not sufficient
+p123
+aVWe empirically set k = 4
+p124
+aVBut using all features removes such noise
+p125
+aVConsidering the three challenges, we produce a list of features { f x u'\u005cu2062' ( r E , r C , e E , e C ) } to measure the coupling similarity S C u'\u005cu2062' P u'\u005cu2062' ( r E , r C , e E , e C ) as follows
+p126
+aVFor example, let us say that we have two extracted statements
+p127
+aVWe exploit the temporal distribution d u'\u005cu2062' [ x ] u'\u005cu2062' ( t ) of textual element x during t -th week in statements; we count the occurrences of the element x on a weekly basis, and normalize them to observe u'\u005cu2211' t d u'\u005cu2062' [ x ] u'\u005cu2062' ( t ) = 1
+p128
+aV[Base feature] f E u'\u005cu2062' T
+p129
+aVThis research was supported by the MSIP (The Ministry of Science, ICT and Future Planning), Korea and Microsoft Research, under IT/SW Creative research program supervised by the NIPA(National IT Industry Promotion Agency
+p130
+aVf F u'\u005cu2062' W , E , f F u'\u005cu2062' W , C u'\u005cud835' u'\u005cudcae' u'\u005cu2062' ( f u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' q u'\u005cu2062' ( e E , r E ) ) and u'\u005cud835' u'\u005cudcae' u'\u005cu2062' ( f u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' q u'\u005cu2062' ( e C , r C ) u'\u005cud835' u'\u005cudcae' u'\u005cu2062' ( x ) is a normalization function, for which we use a sigmoid function over a linear transformation of x
+p131
+aVpay an official visit to
+p132
+aVpay an official visit to
+p133
+aVpay an official visit to
+p134
+aVM ) = u'\u005cu2211' i P ( i ) log P u'\u005cu2062' ( i ) M u'\u005cu2062' ( i )
+p135
+aVwhere T = { ( e E , e C
+p136
+aVH u'\u005cu2062' ( r E , r C
+p137
+aVH u'\u005cu2062' ( r E , r C u'\u005cu2265' 1 , and f E u'\u005cu2062' X = 0 otherwise
+p138
+aVLF+EF
+p139
+aVT N u'\u005cu2062' ( e E , e C
+p140
+aVf F u'\u005cu2062' S u'\u005cu2062' 1 and f F u'\u005cu2062' S u'\u005cu2062' 2
+p141
+aV[C1] f E u'\u005cu2062' R
+p142
+aV1 - J S D ( d [ e E , r E , * ] , d [ e C , r C , * ]
+p143
+aVM ) + 1 2 D ( Q
+p144
+aVM ) , with M = 1 2 u'\u005cu2062' ( P + Q ) and D ( P
+p145
+aV[C2] f D u'\u005cu2062' 1 , E , f D u'\u005cu2062' 2 , E , f D u'\u005cu2062' 1 , C , f D u'\u005cu2062' 2 , C
+p146
+aV[C3] f E u'\u005cu2062' X
+p147
+aVThat is, f E u'\u005cu2062' X = 1 if
+p148
+aVUTF8zhfs在 u'\u005cu2026' 部署
+p149
+aVNIPA-2013-H0503-13-1009
+p150
+a.

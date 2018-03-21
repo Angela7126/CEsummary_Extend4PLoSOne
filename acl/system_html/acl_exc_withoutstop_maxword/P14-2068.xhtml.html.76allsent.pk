@@ -1,0 +1,210 @@
+(lp0
+VHaving obtained a corpus of factuality ratings, we now model the factors that drive these ratings
+p1
+aVThis enables us to build a predictive model of the factuality annotations, with the goal of determining the full set of relevant factors, including the predicate, the source, the journalist, and the content of the claim itself
+p2
+aVThe words suggest , think , and believe also purport to describe the private mental state of the source, but their framing function is the opposite of the predicates of knowledge they imply that it is important to mark the claim as the source u'\u005cu2019' s belief, and not a widely-accepted fact
+p3
+aVThis dataset was annotated by Mechanical Turk workers who gave ratings for the factuality of the scoped claims in each Twitter message
+p4
+aVWe performed another set of linear regressions, again using the mean certainty rating as the dependent variable
+p5
+aVThe cues that give the highest factuality coefficients are learn and admit , which are labeled as predicates of knowledge
+p6
+aVOur interest in this text is specifically in quoted content u'\u005cu2014' including u'\u005cu201c' indirect u'\u005cu201d' quotes, which may include paraphrased quotations, as in the examples in Figure 1
+p7
+aVAs events unfold, journalists and political commentators use quotes u'\u005cu2014' often indirect u'\u005cu2014' to convey potentially uncertain information and claims from their sources and informants, e.g
+p8
+aVIn any case, the relevance of these datasets to Twitter text is currently unproven
+p9
+aVThese cues carry a substantial amount of framing, as they purport to describe the private mental state of the source
+p10
+aVWe throw out tweets that were rated as u'\u005cu201c' not applicable u'\u005cu201d' by a majority of raters, but otherwise ignore u'\u005cu201c' not applicable u'\u005cu201d' ratings of the remaining tweets
+p11
+aVIn this case, the fact that the predicate indicates a report is not enough to determine the framing different sorts of reports carry radically different perceptions of factuality
+p12
+aVThese features are used as predictors in a series of linear ridge regressions, where the dependent variable is the mean certainty rating
+p13
+aVThe search for reliable signals of information credibility in social media has led to the construction of automatic classifiers to identify credible tweets [ 2 ]
+p14
+aVWe also allowed for u'\u005cu201c' Not Applicable u'\u005cu201d' option to capture ratings where the Turkers did not have sufficient knowledge about the statement or if the statement was not really a claim
+p15
+aVTherefore, rather than train a supervised model to detect quotations, we apply a simple dependency-based heuristic
+p16
+aVContemporary journalism is increasingly conducted through social media services like Twitter [ 9 , 6 ]
+p17
+aVThe ratings were based on a 5-point Likert scale ranging from u'\u005cu201c' [-2] Certainly False u'\u005cu201d' to u'\u005cu201c' [2] Certainly True u'\u005cu201d' and allowing for u'\u005cu201c' [0] Uncertain u'\u005cu201d'
+p18
+aVThe word admit often applies to statements that are perceived as damaging to the source, such as Bill Gates admits Control-Alt-Delete was a mistake ; since there can be no self-interest behind such statements, they may be perceived as more likely to be true
+p19
+aVWe use a combination of regular expressions and dependency rules to capture expressions of the type u'\u005cu201c' claim , according to source u'\u005cu201d' Specifically, the PCOMP path from according is searched for the pattern according to *
+p20
+aVIn this case, there was no training/test split, so confidence intervals on the resulting parameters are computed using the analytic closed form
+p21
+aVTo ensure quality control we required the Turkers to have at least 85% hit approval rating and to reside in the United States, because the Twitter messages in our dataset were related to American politics
+p22
+aVFor example, Mubarak clearly believes he has the military leadership u'\u005cu2019' s support
+p23
+aVWe are unaware of prior work comparing the contribution of linguistic and extra-linguistic predictors (e.g.,, source and journalist features) for factuality ratings
+p24
+aVWhile labeled datasets for such quotes have been created [ 12 , 13 ] , these are not freely available at present
+p25
+aVDetecting and reasoning about the certainty of propositional content has been identified as a key task for information extraction, and is now supported by the FactBank corpus of annotations for newstext [ 14 ]
+p26
+aVThis heuristic pipeline may miss many relevant tweets, but since the overall volume is high, we prioritize precision
+p27
+aVThis prior work also does not measure the impact of individual cues and cue classes on assessment of factuality
+p28
+aVBoth according and report are often used in conjunction with impersonal and institutional sources, e.g.,, Cuccinelli trails McAuliffe by 24 points , according to a new poll
+p29
+aVGiven the importance of cue words as a signal for factuality, we want to assess the factuality judgments induced by each cue
+p30
+aVSaurí and Pustejovsky ( 2012 ) propose a two-dimensional factuality annotation scheme, including polarity and certainty; they then build a classifier to predict annotations of factuality from statements in FactBank
+p31
+aVThe goal of these regressions is to determine which features are predictive of raters u'\u005cu2019' factuality judgments
+p32
+aVHowever, this prior work has not explored the linguistic basis of factuality judgments, which we show to depend on framing devices such as cue words
+p33
+aVThey also construct a statistical model to predict these ratings
+p34
+aVThis paper investigates how linguistic resources and extra-linguistic factors affect perceptions of the certainty of quoted information in Twitter
+p35
+aVSeveral of the cues with the lowest factuality coefficients are predicates of belief suggest , predict and think
+p36
+aVWe rely on FactBank to assign the cue words to classes; the only word not covered by FactBank was sense , which we placed in predicates of perception
+p37
+aVWe explore the specific linguistic feature that affect factuality judgments, and compare our findings with previously-proposed groupings of factuality-related predicates
+p38
+aVWe present a new dataset of Twitter messages that use FactBank predicates (e.g.,, claim , say , insist ) to scope the claims of named entity sources
+p39
+aV2012 ) conduct an empirical evaluation of FactBank ratings from Mechanical Turk workers, finding a high degree of disagreement between raters
+p40
+aVFirst, we attempt to determine the impact of various predictive features on rater judgments of factuality
+p41
+aVThe creation of FactBank [ 14 ] has enabled recent work on the factuality (or u'\u005cu201c' veridicality u'\u005cu201d' ) of event mentions in text
+p42
+aVHowever, we find that these extra-linguistic factors do not predict readers u'\u005cu2019' factuality judgments, suggesting that the journalist u'\u005cu2019' s own framing plays a decisive role in the credibility of the information being conveyed
+p43
+aVThe cues according , report , say , and tell are strongly predictive of certainty, but the cues claim and deny convey uncertainty
+p44
+aVRecent work in the area of computational social science focuses on understanding credibility cues on Twitter
+p45
+aVTheir work on source-introducing predicates provides part of the foundation for this research, which focuses on quoted statements in social media text de Marneffe et al
+p46
+aVWe used Amazon Mechanical Turk (AMT) to collect ratings of claims
+p47
+aVSaurí ( 2008 ) describes several classes of source-introducing predicates, which indicate how the source relates to the quoted claim
+p48
+aVCue word group as given in Table 1
+p49
+aVFor each tweet, we obtained five independent ratings from Turkers satisfying the above qualifications
+p50
+aVThese classes are summarized in Table 1 , along with frequently-occuring cues from our corpus
+p51
+aVA third group of interest are the predicates of report, which have widely-varying certainty coefficients
+p52
+aVA second question is whether proposed groupings of cue words into groups cohere with such perceptions
+p53
+aVOnly the cue word features pass this test at p .05
+p54
+aVWe performed two such regressions first using only the individual cues as predictors, and then using only the cue groups
+p55
+aVFigure 2 shows the distribution of the cues and Figure 3 shows the distribution of the cue groups
+p56
+aVSource represented by the named entity or username in the source field (see Figure 4
+p57
+aVSuccessful automation of factuality judgments could help to detect online rumors [ 15 ] , and might enable new applications, such as the computation of reliability ratings for ongoing stories
+p58
+aVCue word after stemming
+p59
+aVBut the results at hand are most compatible with the conclusion that readers base their assessments of factuality only on the framing provided by the journalist who reports the quote
+p60
+aVThe other features do not help, even in combination with the cue word
+p61
+aVInvestigating the factuality judgments formed in response to such tweets is clearly an important problem for future research, but is outside the scope of this paper
+p62
+aVWhile these findings must be interpreted with caution, they suggest that readers u'\u005cu2014' at least, Mechanical Turk workers u'\u005cu2014' use relatively little independent judgment to assess the validity of quoted text that they encounter on Twitter
+p63
+aVWithin this set, the average variance per tweet (excluding u'\u005cu201c' Not Applicable u'\u005cu201d' ratings) was 0.585
+p64
+aVFinally, we restrict consideration to tweets in which the source contains a named entity or twitter username
+p65
+aVJournalist represented by their Twitter ID
+p66
+aVThe text that matches the * is the source and the remaining text other than the source is taken as the claim
+p67
+aVFor cues that appear in multiple groups, we chose the most common group
+p68
+aVClaim represented by a bag-of-words vector from the claim field (Figure 4
+p69
+aVTable 3 reports mean average error for each feature group, as well as a baseline that simply reports the mean rating across the training set
+p70
+aVWe gathered a dataset of Twitter messages from 103 professional journalists and bloggers who work in the field of American Politics
+p71
+aVIn contrast, insist , claim , and deny imply that there is uncertainty about the quoted statement, e.g.,, Christie insists that Fort Lee Mayor was never on my radar
+p72
+aVBy manipulating several features of a tweet, Morris et al
+p73
+aVFigure 6 shows the set of instructions provided to the Turkers, and Figure 5 illustrates the annotation interface
+p74
+aVA key pragmatic goal of such messages is to convey the provenance and uncertainty of the quoted content
+p75
+aV2012 ) found that in addition to content, users often use additional markers while assessing the tweet credibility, such as the user name of the source
+p76
+aVWe focus on tweets that contain any member of a list of source-introducing predicates (we borrow the terminology of Pareti ( 2012 ) and call this the cue
+p77
+aVResults are shown in Figures 7 and 8 ; Figure 7 includes only cues which appear at least ten times, although all cues were included in the regression
+p78
+aVFor instance, consider the use of the word claims in Figure 1 , which conveys the author u'\u005cu2019' s doubt about the indirectly quoted content
+p79
+aVThe ridge regression regularization parameter was tuned via cross-validation in the training set
+p80
+aVHowever, less is known about this phenomenon in social media u'\u005cu2014' a domain whose endemic uncertainty makes proper treatment of factuality even more crucial [ 10 ]
+p81
+aVWe excluded tweets for which three or more Turkers gave a rating of u'\u005cu201c' Not Applicable, u'\u005cu201d' leaving us with a dataset of 1170 tweets
+p82
+aVSuch studies have found that users express concern over the credibility of tweets belonging to certain topics (politics, news, emergency
+p83
+aVThe resulting dataset is summarized in Table 2
+p84
+aVOur complete list u'\u005cu2014' shown in Table 1 u'\u005cu2014' was selected mainly from the examples presented by Saurí and Pustejovsky ( 2012 ) , but with reference also to Saurí u'\u005cu2019' s (2008) dissertation for cues that are common in Twitter
+p85
+aVWe consider the following features
+p86
+aVOf course, richer linguistic models, more advanced machine learning, or experiments with more carefully-selected readers might offer a different view
+p87
+aVWe used the bootstrap to obtain multiple training/test splits (70% training), which were used for significance testing
+p88
+aVWe use the CMU Twitter Part-of-Speech Tagger [ 11 ] to select only instances in the verb sense
+p89
+aVEach HIT contained a batch of ten tweets and rewarded $0.10 per hit
+p90
+aVWe run the Stanford Dependency parser to obtain labeled dependencies [ 4 ] , requiring that the cue has outgoing edges of the type NSUBJ (noun subject) and CCOMP (clausal complement
+p91
+aVTweets were gathered using Twitter u'\u005cu2019' s streaming API, extracting the complete permissible timeline up to February 23, 2014
+p92
+aVWe followed these guidelines to perform pilot experiments to test the instruction set and the quality of responses
+p93
+aVThis eliminates expressions of personal belief such as I doubt Obama will win , as well as anonymous sources such as Team sources report that Lebron has demanded a trade to New York
+p94
+aVThe subtree headed by the modifier of the CCOMP relation is considered the claim ; the subtree headed by the modifier of the NSUBJ relation is considered the source
+p95
+aVBased on the pilot study we designed Human Intelligence Tasks (HITs) to annotate 1265 claims
+p96
+aVEach accuracy was compared with the baseline using a paired z-test
+p97
+aVAMT has been widely used by the NLP community to collect data [ 18 ] , with u'\u005cu201c' best practices u'\u005cu201d' defined to help requesters best design Turk jobs [ 1 ]
+p98
+aVThe Porter Stemmer is applied to match inflections, e.g., denies / denied ; for irregular cases not handled by the Porter Stemmer (e.g.,, forget/forgot ), we include both forms
+p99
+aVSee Figure 4 for an example
+p100
+aVIn some cases, the author may also introduce their own perspective [ 8 ] through the use of framing [ 5 ]
+p101
+aVA total of 959,754 tweets were gathered, and most were written in early 2014
+p102
+aV2 2 The data is available at https://www.github.com/jacobeisenstein/twitter-certainty
+p103
+aV1 1 We used the website http://muckrack.com
+p104
+a.

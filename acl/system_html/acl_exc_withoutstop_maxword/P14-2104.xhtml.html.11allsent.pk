@@ -1,0 +1,56 @@
+(lp0
+V2 2 http://catalog.ldc.upenn.edu/LDC2006T03 Our corpus is roughly similar in size to the PKPB, and taken together, the two Korean corpora now total about half the size of the Penn English PropBank
+p1
+aVWe view our work as building on the efforts of the Penn Korean PropBank (PKPB
+p2
+aVAs we discuss in Section 5 , we utilize these same features, but also add a set of Korean-specific features to capture aspects of Korean morphology
+p3
+aVThus, the Eomi and Josa categorization plays an important role in signaling semantic roles
+p4
+aVFor the semantic role task, the input is a sentence consisting of a sequence of words x = x 1 , u'\u005cu2026' , x n and the output is a sequence of corresponding semantic tags y = y 1 , u'\u005cu2026' , y n
+p5
+aVUsing coarser suffix tags can seriously degrade SRL performance, as we show in Section 6 , where we compare the performance of our model on both the new corpus and the older PKPB
+p6
+aVWe have annotated semantic roles by following the PropBank annotation guideline [ 3 ] and by using frame files of the Penn Korean PropBank built by Palmer et al
+p7
+aVKorean SRL research has been limited to domestically published Korean research on small corpora
+p8
+aVAs our experiments below show, these features improve performance by dealing with sparsity issues
+p9
+aVAgglutinative languages such as Japanese, Korean, and Turkish are computationally difficult due to word-form sparsity, variable word order, and the challenge of using rich morphological features
+p10
+aVKorean-specific features are built upon the morphological analysis of the suffix agglutination of the current word x i
+p11
+aVBesides these morphological features, we also employ latent continuous and discrete morpheme representations induced from a larger body of unannotated Korean text
+p12
+aVAlthough these are based on the general English PropBank guidelines [ 3 ] , they also differ in that we used only 4 numbered arguments from ARG0 to ARG3 instead of 5 numbered arguments
+p13
+aVIt is set to 1 if any Josa exists, otherwise 0
+p14
+aVSRL systems in many languages have been developed as the necessary linguistic resources become available [ 18 , 20 , 5 , 12 ]
+p15
+aVThis is because PKPB POS tags might be too coarse
+p16
+aVSeven languages were the subject of the CoNLL-2009 shared task in syntactic and semantic parsing [ 11 ]
+p17
+aVAlthough both the PKPB and our corpus had improvements, the improvements were the most notable on our corpus
+p18
+aVThese features are categorized as either general features, Korean-specific features, or latent morpheme representation features
+p19
+aVWe thus consider 17 semantic roles in total
+p20
+aVTherefore, the most direct precedent to the present work is a section in Björkelund et al
+p21
+aVJosa is used to define nominal cases and modify other phrases, while Eomi is an ending of a verb or an adjective to define a tense, show an attitude, and connect or terminate a sentence
+p22
+aVThe PropBank and our corpus are not exactly compatible, because the former is built on constituency-based parse trees, whereas our corpus uses dependency parses
+p23
+aVOur experiments will show that these finer-grained tags are crucial for achieving high SRL accuracy
+p24
+aVThis result showcases the computational difficulty of dealing with morphologically rich agglutinative languages
+p25
+aVUnlike the English models, we use individual morphemes as our unit of analysis
+p26
+aVEver since Gildea and Jurafsky [ 9 ] , SRL has become an important technology used in applications requiring semantic interpretation, ranging from information extraction [ 8 ] and question answering [ 14 ] , to practical problems including textual entailment [ 4 ] and pictorial communication systems [ 10 ]
+p27
+a.

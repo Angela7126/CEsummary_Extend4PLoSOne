@@ -1,0 +1,372 @@
+(lp0
+VRecall from Section 3 that every span feature is conjoined with indicators over rules and rule parents to produce features over anchored rule productions; when we consider adding an annotation layer to the grammar, what that does is refine the rule indicators that are conjoined with every span feature
+p1
+aVHowever, negative features u'\u005cu2014' features that are not observed in any tree u'\u005cu2014' are still powerful indicators of (un)grammaticality if we have never seen a PRN that starts with u'\u005cu201c' has, u'\u005cu201d' or a span that begins with a quotation mark and ends with a close bracket, then we would like the model to be able to place negative weights on these features
+p2
+aVOur parser can be easily adapted to this task by replacing the X-bar grammar over treebank symbols with a grammar over the sentiment values to encode the output variables and then adding n-gram indicators to our feature set to capture the bulk of the lexical effects
+p3
+aVOur span features appear to work well on both head-initial and head-final languages (see Basque and Korean in the table), and the fact that our parser performs well on such morphologically-rich languages as Hungarian indicates that our suffix model is sufficient to capture most of the morphological effects relevant to parsing
+p4
+aVAdding these simple features (first word, last word, and lengths) as span features of the X-bar grammar already gives us a substantial improvement over our baseline system, improving the parser u'\u005cu2019' s performance from 73.0 F1 to 85.0 F1 (see Table 1
+p5
+aVNote that many of these features have been used before [ 28 , 10 , 23 ] ; our goal here is not to amass as many feature templates as possible, but rather to examine the extent to which a simple set of features can replace a complicated state space
+p6
+aVFigure 3 shows an example of one instance of this feature template impact is a noun that is more likely to take a PP than other nouns, and so we expect this feature to have high weight and encourage the attachment; this feature proves generally useful in resolving such cases of right-attachments to noun phrases, since the last word of the noun phrase is often the head
+p7
+aVSubsequent lines in Table 1 indicate additional surface feature templates computed over the span, which are then conjoined with the rule identity as shown in Figure 1 to give additional features
+p8
+aVThe grammar rule 2 u'\u005cu2192' 4 1 already encodes the notion of the sentiment of the right child being dominant, so when this is conjoined with our span feature on the first word ( While ), we end up with a feature that captures this effect
+p9
+aVOur parser uses a minimal PCFG backbone grammar to ensure a basic level of structural well-formedness, but relies mostly on features of surface spans to drive accuracy
+p10
+aVThe u'\u005cu201c' Replaced u'\u005cu201d' system modifies the Berkeley parser by replacing rare words with morphological descriptors of those words computed using language-specific modules, which have been hand-crafted for individual languages or are trained with additional annotation layers in the treebanks that we do not exploit
+p11
+aVThus, we use a simple feature hashing scheme where positive features are indexed individually, while negative features are bucketed together
+p12
+aVOne probable reason for this is that our parser already includes monolexical features that inspect the first and last words of each span, which captures the syntactic or the semantic head in many cases or can otherwise provide information about what the constituent u'\u005cu2019' s type may be and how it is likely to combine
+p13
+aVTheir model has high capacity to model complex interactions of words through a combinatory tensor, but it appears that our simpler, feature-driven model is just as effective at capturing the key effects of compositionality for sentiment analysis
+p14
+aVOur base model has no surface features formally, on each anchored rule r we have only an indicator of the (unanchored) rule identity, rule u'\u005cu2062' ( r
+p15
+aVThough the treebank grammar is substantially different, with the nonterminals consisting of five integers with very different semantics from syntactic nonterminals, we still find that parent annotation is effective and otherwise additional annotation layers are not useful
+p16
+aVHistorically, many annotation schemes for parsers have required language-specific engineering for example, lexicalized parsers require a set of head rules and manually-annotated grammars require detailed analysis of the treebank itself [ 16 ]
+p17
+aVTo the extent that our parser needs to make use of extra information in order to apply a rule correctly, simply inspecting the input to determine this information appears to be almost as effective as relying on information threaded through the parser
+p18
+aVThe first constituent conveys positive sentiment with never lethargic and the second conveys negative sentiment with hindered , but to determine the overall sentiment of the sentence, we need to exploit the fact that while signals a discounting of the information that follows it
+p19
+aVWhile lexical features are a powerful driver of our parser, firing features on rare words would allow it to overfit the training data quite heavily
+p20
+aVTherefore, we augment our existing model with standard sentiment analysis features that look at unigrams and bigrams in the span [ 31 ]
+p21
+aVIt is important to note that the richness of the backbone grammar is reflected in the structure of the trees T , while the features that condition directly on the input enter the equation through the anchoring span u'\u005cu2062' ( r
+p22
+aVThese closely related languages use templatic morphology, for which suffixing is not appropriate; however, using additional surface features based on the output of a morphological analyzer did not lead to increased performance
+p23
+aVThe open question is whether surface features are adequate for key effects like subcategorization, which have deep definitions but regular surface reflexes (e.g., the preposition selected by a verb will often linearly follow it
+p24
+aVDuring training there are no collisions between positive features, which generally receive positive weight, and negative features, which generally receive negative weight; only negative features can collide
+p25
+aVBecause these u'\u005cu201c' positive u'\u005cu201d' features correspond to observed constituents, they are far less numerous than the set of all possible features extracted from all spans
+p26
+aVHowever, even when language-specific unknown word handling is added to the parser, our model still outperforms the Berkeley parser overall, showing that our model generalizes even better across languages than a parser for which this is touted as a strength [ 22 ]
+p27
+aVAs illustrated in Figure 1 , the actual features of the model are obtained by conjoining surface properties with various abstractions of the rule identity
+p28
+aVOne advantage of a system that relies on surface features and a simple grammar is that it is portable not only across languages but also across tasks to an extent
+p29
+aVThe task is to predict the root sentiment label of each parse tree; however, because the data is annotated with sentiment at each span of each parse tree, we can also evaluate how well our model does at these intermediate computations
+p30
+aVWe have built up a strong set of features by this point, but have not yet answered the question of whether or not grammar annotation is useful on top of them
+p31
+aVAn anchored rule r is the conjunction of an unanchored grammar rule rule u'\u005cu2062' ( r ) and the start, stop, and split indexes where that rule is anchored, which we refer to as span u'\u005cu2062' ( r
+p32
+aVWe exploit this by adding an additional feature template similar to our span shape feature from Section 4.4 which uses the (deterministic) tag for each word as its descriptor
+p33
+aVOur goal is to use surface features to replicate the functionality of other annotations, without increasing the state space of our grammar, meaning that the rules rule u'\u005cu2062' ( r ) remain simple, as does the state space used during inference
+p34
+aVOne structural difference between sentiment analysis and syntactic parsing lies in where the relevant information is present in a span
+p35
+aVIn this work, we instead try to minimize the structural complexity of the grammar by moving as much context as possible onto local surface features
+p36
+aV2004 ) ; the current work primarily differs in shifting the work from the grammar to the surface features
+p37
+aVThis includes vertical annotation (parent, grandparent, etc.) as well as horizontal annotation (only partially Markovizing rules as opposed to using an X-bar grammar
+p38
+aVTheir approach changed the multiplicative penalty of annotation into an additive penalty, but even so their individual grammar projections are much larger than the base X-bar grammar
+p39
+aVThey annotate every constituent in a number of training trees with an integer sentiment value from 1 (very negative) to 5 (very positive), opening the door for models such as ours to learn how syntax can structurally affect sentiment
+p40
+aVTable 2 shows the performance of our feature set in grammars with several different levels of structural annotation
+p41
+aVTo that end, we avoid annotating our trees at all, opting instead to see how far simple surface features will go in achieving a high-performance parser
+p42
+aVThere are a great number of spans in a typical treebank; extracting features for every possible combination of span and rule is prohibitive
+p43
+aVFinally, our high performance on languages such as Polish and Swedish, whose training treebanks consist of 6578 and 5000 sentences, respectively, show that our feature-rich model performs robustly even on treebanks much smaller than the Penn Treebank
+p44
+aVWe therefore begin with a minimal grammar and iteratively augment it with rich input features that do not enrich the context-free backbone
+p45
+aVMoreover, the Stanford Sentiment Treebank is unique in that each constituent was annotated in isolation, meaning that context never affects sentiment and that every word always has the same tag
+p46
+aVFormally, our model is a CRF where the features factor over anchored rules of a small backbone grammar, as shown in Figure 1
+p47
+aVTable 1 shows the results of incrementally building up our feature set on the Penn Treebank development set
+p48
+aVEarly experiments indicated that using a number of negative buckets equal to the number of positive features was effective
+p49
+aVFor example, adding parent annotation can square the number of symbols, and each subsequent annotation causes a multiplicative increase in the size of the state space
+p50
+aVBecause this feature indicates capitalization, it can also capture properties of NP internal structure relevant to named entities, and its sensitivity to capitalization and punctuation makes it useful for recognizing appositive constructions
+p51
+aVBecause the X-bar grammar is so minimal, this grammar does not parse very accurately, scoring just 73 F1 on the standard English Penn Treebank task
+p52
+aVOur parser is also able to generalize well across languages with little tuning it achieves state-of-the-art results on multilingual parsing, scoring higher than the best single-parser system from the SPMRL 2013 Shared Task on a range of languages, as well as on the competition u'\u005cu2019' s average F1 metric
+p53
+aVAnother important source of features are the words at and around the split point of a binary rule application
+p54
+aVWe examine the position that grammars should not propagate any information that is available from surface strings, since a discriminative parser can access that information directly
+p55
+aVBecause heads of constituents are often at the beginning or the end of a span, these feature templates can (noisily) capture monolexical properties of heads without having to incur the inferential cost of lexicalized annotations
+p56
+aVFor example, head lexicalization [ 9 , 7 , 5 ] , structural annotation [ 15 , 16 ] , and state-splitting [ 18 , 21 ] are all designed to take coarse symbols like PP and decorate them with additional context
+p57
+aVBy annotating grammar nonterminals with their headwords, the idea is to better model phenomena that depend heavily on the semantics of the words involved, such as coordination and PP attachment
+p58
+aVPrevious work has also used surface features in their parsers, but the focus has been on machine learning methods [ 28 ] , latent annotations [ 24 , 23 ] , or implementation [ 10 ]
+p59
+aV6 6 The especially strong performance on Polish relative to other systems is partially a result of our model being able to produce unary chains of length two, which occur frequently in the Polish treebank [ 1 ]
+p60
+aVTo improve the performance of our X-bar grammar, we will add a number of surface feature templates derived only from the words in the sentence
+p61
+aVIn this work, we want to see how much of the expressive capability of annotations can be captured using surface evidence, with little or no annotation of the underlying grammar
+p62
+aVIn past work that has used tree-structured CRFs in this way, increased accuracy partially came from decorating trees T with additional annotations, giving a tree T u'\u005cu2032' over a more complex symbol set
+p63
+aVThese features can be implemented without reference to structured linguistic notions like headedness; however, we will argue that they still capture a wide range of linguistic phenomena in a data-driven way
+p64
+aVWe show that this is indeed the case on nine languages, our system is competitive with or better than the Berkeley parser, which is the best single parser 4 4 I.e. it does not use a reranking step or post-hoc combination of parser results for the majority of cases we consider
+p65
+aV2013 ) only report results on the development set for the Berkeley-Rep model; however, the task organizers also use a version of the Berkeley parser provided with parts of speech from high-quality POS taggers for each language (Berkeley-Tags
+p66
+aVOne immediate computational and statistical issue arises from the sheer number of possible surface features
+p67
+aVThe most basic, well-understood kind of annotation on top of an X-bar grammar is structural annotation, which annotates each nonterminal with properties of its environment [ 15 , 16 ]
+p68
+aV2008 ) used parent annotation, head tag annotation, and horizontal sibling annotation together in a single large grammar
+p69
+aVOne simple solution is to only extract features for rule/span pairs that are actually observed in gold annotated examples during training
+p70
+aVBecause the lexicon is especially sensitive to morphological effects, we also fire features on all prefixes and suffixes of the current word up to length 5, regardless of frequency
+p71
+aVFor each word in the span, 2 2 For longer spans, we only use words sufficiently close to the span u'\u005cu2019' s beginning and end we indicate whether that word begins with a capital letter, lowercase letter, digit, or punctuation mark
+p72
+aVThe underlying reason that such propagation is even needed is that PCFG parsers score trees based on local configurations only, and any information that is not threaded through the tree becomes inaccessible to the scoring function
+p73
+aVA given preterminal unary at position i in the sentence includes features on the words (suffixes) at position i - 1 , i , and i + 1
+p74
+aVWhile this is a powerful way of refining features, we show that common successful annotation schemes provide at best modest benefit on top of the base parser
+p75
+aVWe evaluated our model on the fine-grained sentiment analysis task presented in Socher et al
+p76
+aVTherefore, we fire features that (separately) look at the words immediately preceding and immediately following the span
+p77
+aVA key strength of a parser that does not rely heavily on an annotated grammar is that it may be more portable to other languages
+p78
+aVOf course, there is no reason why we should confine ourselves to just the words within the span words outside the span also provide a rich source of context
+p79
+aVHall and Klein ( 2012 ) employed both kinds of annotations, along with lexicalized head word annotation
+p80
+aVIn order to exploit non-independent surface features of the input, we use a discriminative formulation
+p81
+aVFor example, in English, the syntactic head of a verb phrase is typically at the beginning of the span, while the head of a simple noun phrase is the last word
+p82
+aVBecause constituents in the treebank can be quite long, we bin our length features into 8 buckets, of lengths 1, 2, 3, 4, 5, 10, 20, and u'\u005cu2265' 21 words
+p83
+aVAll of these past CRF parsers do also exploit span features, as did the structured margin parser of Taskar et al
+p84
+aVFor this experiment and all others, we include a basic set of lexicon features, i.e., features on preterminal part-of-speech tags
+p85
+aVAs far as we can tell, all past CRF parsers have used u'\u005cu201c' positive u'\u005cu201d' features only
+p86
+aVAn independent classification approach is actually very viable for part-of-speech tagging [ 29 ] , but is problematic for parsing u'\u005cu2013' if nothing else, parsing comes with a structural requirement that the output be a well-formed, nested tree
+p87
+aVOur features can also lexicalize on other discourse connectives such as but or however , which often occur at the split point between two spans
+p88
+aVThe surface features are somewhat more involved, and so we introduce them incrementally
+p89
+aVWhile approaches to sentiment analysis often simply classify the sentence monolithically, treating it as a bag of n -grams [ 19 , 20 , 31 ] , the recent dataset of Socher et al
+p90
+aVThese non-local approaches can actually go even further in enriching the grammar u'\u005cu2019' s structural complexity by coupling larger domains in various ways, though their non-locality generally complicates inference
+p91
+aVIn this section, we examine two of the most commonly used types of additional annotation, structural annotation, and lexical annotation
+p92
+aVWe evaluate on the constituency treebanks from the Statistical Parsing of Morphologically Rich Languages Shared Task [ 25 ]
+p93
+aVFor rule abstractions, we use two templates the parent of the rule and the identity of the rule
+p94
+aVFinally, control structures with infinitival complements can be captured with a rule S u'\u005cu2192' NP VP with the word u'\u005cu201c' to u'\u005cu201d' at the split point
+p95
+aVTable 5 shows that our model outperforms the model of Socher et al
+p96
+aVFor example, the first word in a constituent is a surface property, as is the word directly preceding the constituent
+p97
+aVThe problem with rich annotations is that they increase the state space of the grammar substantially
+p98
+aVSyntax is often driven by heads of constituents, which tend to be located at the beginning or the end, whereas sentiment is more likely to depend on modifiers such as adjectives, which are typically present in the middle of spans
+p99
+aVLexicalization allows us to capture bilexical relationships along dependency arcs, but it has been previously shown that these add only marginal benefit to Collins u'\u005cu2019' s model anyway [ 11 ]
+p100
+aVOn the development set, we outperform the Berkeley parser and match the performance of the Berkeley-Rep parser
+p101
+aVAs a thought experiment, consider a parser with no grammar, which functions by independently classifying each span ( i , j ) of a sentence as an NP, VP, and so on, or null if that span is a non-constituent
+p102
+aVParent annotation can capture, for instance, the difference in distribution in NPs that have S as a parent (that is, subjects) and NPs under VPs (objects
+p103
+aVRule specifies that we use only indicators on rule identity for binary production and nonterminal unaries
+p104
+aVTo that end, for the purposes of computing our features, a word is represented by its longest suffix that occurs 100 or more times in the training data (which will be the entire word, for common words
+p105
+aVMuch of the last few decades of parsing research has therefore focused on propagating contextual information from the leaves of the tree to internal nodes
+p106
+aV2013 ) u'\u005cu2014' both the published numbers and latest released version u'\u005cu2014' on the task of root classification, even though the system was not explicitly designed for this task
+p107
+aVWe add one final feature characterizing the span, which we call span shape
+p108
+aVRecall that our CRF factors over anchored rules r , where each r has identity rule u'\u005cu2062' ( r ) and anchoring span u'\u005cu2062' ( r
+p109
+aVThese annotations introduce additional context into the model, usually capturing linguistic intuition about the factors that influence grammaticality
+p110
+aVWe try to capture some of this same intuition by introducing a feature on the length of a span
+p111
+aVOn the test set, we outperform both the Berkeley parser and the Berkeley-Tags parser on seven of nine languages, losing only on Arabic and French
+p112
+aVOur parser is almost entirely unchanged from the parser that we used for syntactic analysis
+p113
+aVFollowing their experimental conditions, we filter the test set so that it only contains trees with non-neutral sentiment labels at the root
+p114
+aVWhile we do not do as well as the Berkeley parser, we will see in Section 6 that our parser does a substantially better job of generalizing to other languages
+p115
+aV5 5 Their best parser, and the best overall parser from the shared task, is a reranked product of u'\u005cu201c' Replaced u'\u005cu201d' Berkeley parsers
+p116
+aVwhere the feature domains r range over the (anchored) rules used in the tree
+p117
+aVThe X-bar grammar has only indicators of rule u'\u005cu2062' ( r ) , ignoring the anchoring
+p118
+aVThis work was partially supported by BBN under DARPA contract HR0011-12-C-0014, by a Google PhD fellowship to the first author, and an NSF fellowship to the second
+p119
+aVStructural contexts like those captured by parent annotation [ 15 ] are more subtle
+p120
+aVThroughout this and the following section, we will draw on motivating examples from the English Penn Treebank, though similar examples could be equally argued for other languages
+p121
+aVThese results suggest that the Berkeley parser may be heavily fit to English, particularly in its lexicon
+p122
+aVNaïve context-free grammars, such as those embodied by standard treebank annotations, do not parse well because their symbols have too little context to constrain their syntactic behavior
+p123
+aVBoth Berkeley-Rep and Berkeley-Tags make up for some shortcomings of the Berkeley parser u'\u005cu2019' s unknown word model, which is tuned to English
+p124
+aVHall and Klein ( 2012 ) attempted to reduce this state space by factoring these annotations into individual components
+p125
+aVIn Petrov and Klein ( 2008 ) and Petrov and Klein ( 2008 ) , these annotations were latent; they were inferred automatically during training
+p126
+aVIn the rest of the section, we describe the features of this type that we use
+p127
+aVIn Table 4 , we see that our performance is overall substantially higher than that of the Berkeley parser
+p128
+aVLet a surface property of r be an indicator function of span u'\u005cu2062' ( r ) and the sentence itself
+p129
+aVIn Section 6 and Section 7 , we use v = 1 and h = 0 ; we find that v = 1 provides a small, reliable improvement across a range of languages and tasks, whereas other annotations are less clearly beneficial
+p130
+aVAnother commonly-used kind of structural annotation is lexicalization [ 9 , 7 , 5 ]
+p131
+aVOur model is a conditional random field [ 17 ] over trees, in the same vein as Finkel et al
+p132
+aVFigure 5 shows an example that requires some analysis of sentence structure to correctly understand
+p133
+aVBefore we present our main features, we briefly discuss the issue of feature sparsity
+p134
+aVWe say that an indicator is a surface property if it can be extracted without reference to the parse tree
+p135
+aVOf course, a language that was heavily prefixing would likely require this feature to be modified
+p136
+aVFor instance, we might annotate every constituent X in the tree with its parent Y , giving a tree with symbols X u'\u005cu2062' [ ^ u'\u005cu2062' Y ]
+p137
+aV7 7 Note that the tree structure is assumed to be given; the problem is one of labeling a fixed parse backbone
+p138
+aVKlein and Manning ( 2003 ) find large gains (6% absolute improvement, 20% relative improvement) going from v = 0 , h = 0 to v = 1 , h = 1 ; however, we do not find the same level of benefit
+p139
+aVFor example, to PPs usually attach to verbs and of PPs usually attach to nouns, but a context-free PP symbol can equally well attach to either
+p140
+aVOthers, such as heaviness effects, are naturally captured using surface information
+p141
+aVFigure 4 shows how this feature is computed
+p142
+aVWe start with a simple X-bar grammar whose only symbols are NP, NP-bar, VP, and so on
+p143
+aVFinally, Table 3 shows our final evaluation on Section 23 of the Penn Treebank
+p144
+aVIn their work, they propagate real-valued vectors up a tree using neural tensor nets and see gains from their recursive approach
+p145
+aVWe start with some of the most obvious properties available to us, namely, the identity of the first and last words of a span
+p146
+aVTo optimize model parameters, we use the Adagrad algorithm of Duchi et al
+p147
+aVWe will return to the question of annotation in Section 5
+p148
+aVA VP is most frequently preceded by a subject NP, whose rightmost word is often its head
+p149
+aVOne example is sentiment analysis
+p150
+aVEmpirically, the answer seems to be yes, and our system produces strong results, e.g., up to 90.5 F1 on English parsing
+p151
+aVThere have been non-local approaches as well, such as tree-substitution parsers [ 2 , 26 ] , neural net parsers [ 13 ] , and rerankers [ 6 , 4 , 14 ]
+p152
+aV2013 ) demonstrates that sentiment analysis, which is usually approached as a flat classification task, can be viewed as tree-structured
+p153
+aVSome aspects of the parsing problem, such as the tree constraint, are clearly best captured by a PCFG
+p154
+aVBy contrast, we investigate the extent to which we need a grammar at all
+p155
+aVAs an example, consider disambiguating the POS tag of the word read in Figure 2
+p156
+aVFigure 4 shows that this is especially useful in characterizing constructions such as parentheticals and quoted expressions
+p157
+aVTable 2 shows results from lexicalizing the X-bar grammar; it provides meager improvements
+p158
+aVFor instance, VPs embedded in NPs tend to be short, usually as embedded gerund phrases
+p159
+aVFinally, because the system is, at its core, a classifier of spans, it can be used equally well for tasks that do not normally use parsing algorithms
+p160
+aVWhen applied to this task, our system generally matches their accuracy overall and is able to outperform it on the overall sentence-level subtask
+p161
+aVLikewise, our parser does not perform as well on Arabic and Hebrew
+p162
+aVWe compare to the Berkeley parser [ 22 ] as well as two variants
+p163
+aVFormally, we define the probability of a tree T conditioned on a sentence u'\u005cud835' u'\u005cudc30' as
+p164
+aV1 1 Experiments with the Brown clusters [ 3 ] provided by Turian et al
+p165
+aVWe use the v = 1 , h = 0 grammar
+p166
+aVFor example, spans that begin with the might tend to be NPs, while spans that end with of might tend to be non-constituents
+p167
+aVOther languages, like Korean or Japanese, are more consistently head final
+p168
+aVWe further gratefully acknowledge a hardware donation by NVIDIA Corporation
+p169
+aVIf it begins with punctuation, we indicate the punctuation mark explicitly
+p170
+aV2013 ) (Berkeley-Rep), which is their best single parser
+p171
+aV2013 ) imposes a layer of structure on the problem that we can exploit
+p172
+aVFirst, we use the u'\u005cu201c' Replaced u'\u005cu201d' system of Björkelund et al
+p173
+aVMoreover, lowering this threshold did not improve performance
+p174
+aVThese part-of-speech taggers often incorporate substantial knowledge of each language u'\u005cu2019' s morphology
+p175
+aVAs another example, coordination can be represented by an indicator of the conjunction, which comes immediately after the split point
+p176
+aV3 3 We use v = 0 to indicate no annotation, diverging from the notation in Klein and Manning ( 2003
+p177
+aV2013 ) and compare to their released system
+p178
+aVFor performance on other languages, see Section 6
+p179
+aVFor example, Socher et al
+p180
+aV2008 ) and Petrov and Klein ( 2008
+p181
+aVFinkel et al
+p182
+aV2010 ) in lieu of suffixes were not promising
+p183
+aVUnfortunately, Björkelund et al
+p184
+aV2010 ) with L2 regularization
+p185
+a.

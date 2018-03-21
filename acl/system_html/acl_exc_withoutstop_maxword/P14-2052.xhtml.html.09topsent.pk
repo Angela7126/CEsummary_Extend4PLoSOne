@@ -1,0 +1,24 @@
+(lp0
+VOur method jointly utilizes relations between sentences and relations between words, and extracts a rooted document subtree from a document tree whose nodes are arbitrary subtrees of the sentence tree
+p1
+aVAfter the document tree is obtained, we use a dependency parser to obtain the syntactic dependency trees of sentences
+p2
+aVIn particular, we extract a rooted document subtree from the document tree, and sentence subtrees from sentence trees in the document tree
+p3
+aVThe sentence tree is a tree that has words as nodes and head modifier relationships between words obtained by the dependency parser as edges
+p4
+aVWe converted the rhetorical relations between EDUs to the relations between sentences to build the nested tree structure
+p5
+aVAs a result, we obtain a tree that represents the parent-child relations of sentences, and we can use it as a document tree
+p6
+aVA document in RST is segmented into EDUs and adjacent EDUs are linked with rhetorical relations to build an RST-Discourse Tree (RST-DT) that has a hierarchical structure of the relations
+p7
+aVThe document tree is a tree that has sentences as nodes and head modifier relationships between sentences obtained by RST as edges
+p8
+aVFortunately we can simply convert DEP-DTs to obtain dependency trees between sentences
+p9
+aVFinally, we obtain a nested tree
+p10
+aVWe can build the nested tree by regarding each node of the document tree
+p11
+a.

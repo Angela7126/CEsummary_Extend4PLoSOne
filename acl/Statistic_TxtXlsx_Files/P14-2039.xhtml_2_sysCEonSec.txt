@@ -1,0 +1,227 @@
+Current File: P14-2039.xhtml_2 P14-2039.xhtml
+
+Section 0:  Abstract
+	SentNum: 4
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 25.0000%
+
+Section 1:  1 Introduction
+	SentNum: 25
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 4.0000%
+
+Section 2:  2 Problem Overview and Background
+	SentNum: 47
+	CENum: 14
+	SentCovered: 16
+	Covered_Rate: 34.0426%
+
+Section 3:  3 Sliding Alignment Windows
+	SentNum: 9
+	CENum: 3
+	SentCovered: 3
+	Covered_Rate: 33.3333%
+
+Section 4:  4 Experimental Results
+	SentNum: 26
+	CENum: 5
+	SentCovered: 7
+	Covered_Rate: 26.9231%
+
+Section 5:  5 Conclusion
+	SentNum: 4
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 25.0000%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-2039.xhtml_2's CE cases
+
+Section 0:  Abstract has 1 CE cases
+	CASE: 1
+	Stag: 2 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: In this paper, we extend the state of the art fixed-window alignment algorithm [] for combining the individual captions into a final output sequence. 
+		Cause: [(0, 17), (0, 25)]
+		Effect: [(0, 0), (0, 15)]
+
+Section 1:  1 Introduction has 1 CE cases
+	CASE: 1
+	Stag: 10 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The accuracy of the ASR systems can be improved using the u'\u2018' re-speaking u'\u2019' technique, which requires a person that the ASR has been trained on to repeat the words said by a speaker as he hears them. 
+		Cause: [(0, 44), (0, 46)]
+		Effect: [(0, 0), (0, 42)]
+
+Section 2:  2 Problem Overview and Background has 14 CE cases
+	CASE: 1
+	Stag: 31 32 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: For the caption alignment task, we treat each individual word as a symbol in our alphabet u'\u03a3'. The special gap symbol u'\u2018' - u'\u2019' represents a missing word and does not belong to u'\u03a3'. 
+		Cause: [(0, 12), (1, 27)]
+		Effect: [(0, 0), (0, 10)]
+
+	CASE: 2
+	Stag: 33 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: Let A = ( a i u'\u2062' j ) be a K × N f matrix, where a i u'\u2062' j u'\u2208' u'\u03a3' u'\u222a' { - } , and the i t u'\u2062' h row has exactly ( N f - N i ) gaps and is identical to S i if we ignore the gaps. 
+		Cause: [(0, 76), (0, 79)]
+		Effect: [(0, 10), (0, 74)]
+
+	CASE: 3
+	Stag: 34 35 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: Every column of A must have at least one non-gap symbol. Therefore, the j t u'\u2062' h column of A indicates an alignment state for the j t u'\u2062' h position, where the state can have one of the 2 K - 1 possible combinations. 
+		Cause: [(0, 0), (0, 10)]
+		Effect: [(1, 2), (1, 43)]
+
+	CASE: 4
+	Stag: 39 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: If a i u'\u2062' l and a j u'\u2062' l are identical, the substitution cost is zero. 
+		Cause: [(0, 1), (0, 19)]
+		Effect: [(0, 21), (0, 25)]
+
+	CASE: 5
+	Stag: 40 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: The substitution cost for two words is estimated based on the edit distance between two words. 
+		Cause: [(0, 10), (0, 15)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 6
+	Stag: 42 
+		Pattern: 0 [['based', 'on']]---- [['&V-ing/&NP@R@', '(&Clause@R@)', '&BE', '(&ADV)'], ['&NP@C@', '(&Clause@C@)']]
+		sentTXT: Our approach is based on weighted A * search for approximately solving the MSA problem []. 
+		Cause: [(0, 5), (0, 7)]
+		Effect: [(0, 0), (0, 1)]
+
+	CASE: 7
+	Stag: 52 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The A * search algorithm treats each node position n = [ n 1 , u'\u2026' , n K ] as a search state, and estimates the cost function g u'\u2062' ( n ) and the heuristic function h u'\u2062' ( n ) for each state. 
+		Cause: [(0, 25), (0, 56)]
+		Effect: [(0, 8), (0, 23)]
+
+	CASE: 8
+	Stag: 61 
+		Pattern: 0 [['if'], ['then']]---- [[], ['&C', '(,)'], ['&R']]
+		sentTXT: If the beam size is set to b seconds, then any state that aligns two words having more than b seconds time lag is ignored. 
+		Cause: [(0, 1), (0, 8)]
+		Effect: [(0, 11), (0, 25)]
+
+	CASE: 9
+	Stag: 64 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: We ignore the alignment columns where the majority vote is below a certain threshold t v (typically t v = 2 ), and thus filter out spurious errors and spelling mistakes. 
+		Cause: [(0, 0), (0, 22)]
+		Effect: [(0, 26), (0, 32)]
+
+	CASE: 10
+	Stag: 71 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: This is because the chunk boundaries are defined with respect to the timestamps associated with each word in the captions, but the timestamps can vary greatly between words that should in fact be aligned. 
+		Cause: [(0, 3), (0, 19)]
+		Effect: [(0, 21), (0, 34)]
+
+	CASE: 11
+	Stag: 72 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: After all, if the timestamps corresponded precisely to the original time at which each word was spoken, the entire alignment problem would be trivial. 
+		Cause: [(0, 4), (0, 17)]
+		Effect: [(0, 19), (0, 25)]
+
+	CASE: 12
+	Stag: 73 
+		Pattern: 0 [[['lead', 'leads', 'led'], 'to']]---- [['&V-ing/&NP@C@', '(&CAN/have/has/had)'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: The fact that the various instances of a single word in each transcription may fall on either side of a chunk boundary leads to errors where a word is either duplicated in the final output for more than one chunk, or omitted entirely. 
+		Cause: [(0, 0), (0, 21)]
+		Effect: [(0, 24), (0, 43)]
+
+	CASE: 13
+	Stag: 74 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: This problem also causes errors in ordering among the words remaining within one chunk, because there is less information available to constrain the ordering relations between transcriptions. 
+		Cause: [(0, 16), (0, 27)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 14
+	Stag: 75 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: Second, the fixed window alignment algorithm requires longer chunks ( u'\u2265' 10 seconds) to obtain reasonable accuracy, and thus introduces unsatisfactory latency. 
+		Cause: [(0, 0), (0, 22)]
+		Effect: [(0, 26), (0, 28)]
+
+Section 3:  3 Sliding Alignment Windows has 3 CE cases
+	CASE: 1
+	Stag: 76 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: In order to address the problems described above, we explore a technique based on a sliding alignment window, shown in Algorithm 3. 
+		Cause: [(0, 15), (0, 18)]
+		Effect: [(0, 20), (0, 23)]
+
+	CASE: 2
+	Stag: 79 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We use a single point in the aligned output as the starting point for the next chunk, and determine the corresponding starting position within each original transcription. 
+		Cause: [(0, 10), (0, 27)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 3
+	Stag: 81 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: The materials in the output alignment that follow this point is thrown away, and replaced with the output produced by aligning the next chunk starting from this point (line 8. 
+		Cause: [(0, 21), (0, 31)]
+		Effect: [(0, 0), (0, 19)]
+
+Section 4:  4 Experimental Results has 5 CE cases
+	CASE: 1
+	Stag: 90 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The chunk size directly determines the latency of the system to the end user, as alignment cannot begin until an entire chunk is captured. 
+		Cause: [(0, 16), (0, 25)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 2
+	Stag: 105 106 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Furthermore, we can see that for smaller values of the chunk size parameter, increasing the keep-length makes the system less accurate. As the chunk size parameter increases, the performance of sliding window systems with different values of keep-length parameter converges. 
+		Cause: [(1, 1), (1, 19)]
+		Effect: [(0, 0), (0, 22)]
+
+	CASE: 3
+	Stag: 106 107 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: As the chunk size parameter increases, the performance of sliding window systems with different values of keep-length parameter converges. Therefore, at larger chunk sizes, for which there are smaller number of boundaries, the keep-length parameter has lower impact. 
+		Cause: [(0, 0), (0, 19)]
+		Effect: [(1, 2), (1, 21)]
+
+	CASE: 4
+	Stag: 108 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Next, we show the trade-off between computation speed and accuracy in Figure 3, as we fix the heuristic weight and vary the chunk size over the range [5, 10, 15, 20, 30] seconds. 
+		Cause: [(0, 16), (0, 31)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 5
+	Stag: 109 110 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Larger chunks are more accurately aligned but require computation time that grows as N K in the chunk size N in the worst case. Furthermore, smaller weights allow faster alignment, but provide lower accuracy. 
+		Cause: [(0, 13), (1, 10)]
+		Effect: [(0, 0), (0, 11)]
+
+Section 5:  5 Conclusion has 1 CE cases
+	CASE: 1
+	Stag: 112 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: By effectively addressing the problem of alignment errors at chunk boundaries, our sliding window approach outperforms the existing fixed window based system [] in terms of word error rate, particularly when the chunk size is small, and thus achieves higher accuracy at lower latency. 
+		Cause: [(0, 0), (0, 38)]
+		Effect: [(0, 42), (0, 47)]
+
+#-------------------------------------------------
+

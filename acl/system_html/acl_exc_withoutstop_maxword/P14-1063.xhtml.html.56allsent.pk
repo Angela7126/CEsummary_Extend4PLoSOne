@@ -1,0 +1,150 @@
+(lp0
+VAs mentioned in Section 2.1 , a tensor model has many more degrees of u'\u005cu201c' design freedom u'\u005cu201d' than a vector model, which makes the problem of finding a good tensor structure a nontrivial one
+p1
+aVA linear tensor model represents both features and weights in tensor-space, hence the weight tensor can be factorized and approximated by a linear sum of rank-1 tensors
+p2
+aVMost traditional models are linear models, in the sense that both the features of the data and model parameters are represented as vectors in a vector space
+p3
+aVThe linear tensor model is illustrated in Figure 1
+p4
+aVSo what is the advantage of learning with a tensor model instead of a vector model
+p5
+aVThis also makes training the model parameters a challenging problem, since the amount of labeled training data is usually small compared to the size of feature sets the feature weights cannot be estimated reliably
+p6
+aVSpecifically, a vector space model assumes each feature weight to be a u'\u005cu201c' free u'\u005cu201d' parameter, and estimating them reliably could therefore be hard when training data are not sufficient or the feature set is huge
+p7
+aVHowever if we use a 2 nd order tensor model, organize the features into a 1000 × 1000 matrix u'\u005cud835' u'\u005cudebd' , and use just one rank-1 matrix to approximate the weight tensor, then the linear model becomes
+p8
+aVSpecifically, a vector is a 1 st order tensor, a matrix is a 2 nd order tensor, and data organized as a rectangular cuboid is a 3 rd order tensor etc
+p9
+aVThe impact of using H 1 rank-1 tensors is obvious a larger H increases the model complexity and makes the model more expressive, since we are able to approximate target weight tensor with smaller error
+p10
+aVMost of the learning algorithms for NLP problems are based on vector space models, which represent data as vectors u'\u005cu03a6' u'\u005cu2208' u'\u005cu211d' n , and try to learn feature weight vectors u'\u005cud835' u'\u005cudc98' u'\u005cu2208' u'\u005cu211d' n such that a linear model y = u'\u005cud835' u'\u005cudc98' u'\u005cu22c5' u'\u005cu03a6' is able to discriminate between, say, good and bad hypotheses
+p11
+aVObviously, the 1 st order tensor (vector) model is the most expressive, since it is structureless and any arbitrary set of numbers can always be represented exactly as a vector
+p12
+aVUsing a D th order tensor as container, we can assign each feature of the task a D -dimensional index in the tensor and represent the data as tensors
+p13
+aVThis is because the weight tensors learned by T-MIRA are highly structured, which significantly reduces model/training complexity and makes the learning process very effective in a low-resource environment, but as the amount of data increases, the more complex and expressive vector-based models adapt to the data better, whereas further improvements from the tensor model is impeded by its structural constraints, making it insensitive to the increase of training data
+p14
+aVSuch models require learning individual feature weights directly, so that the number of parameters to be estimated is identical to the size of the feature set
+p15
+aVIn general, if V features are defined for a learning problem, and we (i) organize the feature set as a tensor u'\u005cud835' u'\u005cudebd' u'\u005cu2208' u'\u005cu211d' n 1 × n 2 × u'\u005cu2026' u'\u005cu2062' n D and (ii) use H component rank-1 tensors to approximate the corresponding target weight tensor
+p16
+aVAs a way out, we first run a simple vector-model based learning algorithm (say the Perceptron) on the training data and estimate a weight vector, which serves as a u'\u005cu201c' surrogate u'\u005cu201d' weight vector
+p17
+aVTherefore we expect the tensor model to be more effective in a low-resource training environment
+p18
+aVThis of course ignores correlation between features since the original feature order in the vector could be totally meaningless, and this strategy is not expected to be a good solution for vector to tensor mapping
+p19
+aVIn general, a D th order rank-1 tensor is more expressive than a ( D + 1 ) th order rank-1 tensor, as a lower-order tensor imposes less structural constraints on the set of numbers it can express
+p20
+aVThen the total number of parameters to be learned for this tensor model is H u'\u005cu2062' u'\u005cu2211' d = 1 D n d , which is usually much smaller than V = u'\u005cu220f' d = 1 D n d for a traditional vector space model
+p21
+aVThis approximation can be treated as a form of model regularization, since the weight tensor is represented in a constrained form and made highly structured via the rank-1 tensor approximation
+p22
+aVAssuming that a D th order has equal size on each mode (we will elaborate on this point in Section 3.2 ) and the volume (number of entries) of the tensor is fixed as V , then the total number of parameters of the model is D u'\u005cu2062' V 1 D
+p23
+aVIf the corresponding target weight tensor has internal structure that makes it approximately low-rank, the learning procedure becomes more effective
+p24
+aVAccording to the strategy given in 3.2 , once the tensor order and number of features are fixed, the sizes of modes and total number of parameters to estimate are fixed as well, as shown in the tables below
+p25
+aVHowever it is hard to know the structure of target feature weights before learning, and it would be impractical to try every possible combination of mode sizes, therefore we choose the criterion of determining the mode sizes as minimization of the total number of parameters, namely we solve the problem
+p26
+aVA 2 nd order tensor has already reduced the number of parameters from the original 1.33 million to only 2310, and it does not help to further reduce the number of parameters using higher order tensors
+p27
+aVWe would like to observe from the experiments how the amount of training data as well as different settings of the tensor degrees of freedom affects the algorithm performance
+p28
+aVWhile this strategy might work well with small amount of training data, it is not guaranteed to be the best strategy in all cases, especially when more data is available we might want to increase the number of parameters, making the model more complex so that the data can be more precisely modeled
+p29
+aVAs the amount of training data increases, there is a trend that the best results come from models with more rank-1 component tensors
+p30
+aVWhen very few labeled data are available for training (compared with the number of features), T-MIRA performs much better than the vector-based models MIRA and Perceptron
+p31
+aVThe best results are consistently given by 2 nd order tensor models, and the differences between the 3 rd and 4 th order tensors are not significant
+p32
+aVOf course, as we reduce the model complexity, e.g., by choosing a smaller and smaller H , the model u'\u005cu2019' s expressive ability is weakened at the same time
+p33
+aVThe 2 nd order rank-1 tensor (rank-1 matrix) is less expressive because not every set of numbers can be organized into a rank-1 matrix
+p34
+aVAs a trade-off, the number of parameters and training complexity will be increased
+p35
+aVTherefore, as D increases from 1 to D * , we lose more and more of the expressive power of the model but reduce the number of parameters to be trained
+p36
+aVTherefore, in order for tensor u'\u005cud835' u'\u005cudcac' to represent the same set of real numbers that u'\u005cud835' u'\u005cudcab' represents, there needs to exist a vector [ s 1 d , u'\u005cu2026' , s n d d ] that can be represented by a rank-1 matrix as indicated by Equation ( 12 ), which is in general not guaranteed
+p37
+aVAs discussed in Section 3.1 , although 3 rd and 4 th order tensors have less parameters, the benefit of reduced training complexity does not compensate for the loss of expressiveness
+p38
+aVHowever as the amount of training data increases, the advantage of T-MIRA fades away, and vector-based models catch up
+p39
+aVOnce the structure of u'\u005cud835' u'\u005cudebd' is determined, the structure of u'\u005cud835' u'\u005cudc7e' is fixed as well
+p40
+aVNevertheless, with a huge number of parameters to fit a limited amount of data, they tend to over-fit and give much worse results on the held-out set than T-MIRA does
+p41
+aVData can be represented in a compact and structured way using tensors as containers
+p42
+aVWe assume H = 1 in the analysis below, noting that one can always add as many rank-1 component tensors as needed to approximate a tensor with arbitrary precision
+p43
+aVTherefore, the performance of T-MIRA is influenced significantly by the way features are mapped to the tensor
+p44
+aVHowever matrix rank minimization is in general a hard problem [ Fazel2002 ]
+p45
+aVFor D = 1 , it is obvious that if a set of real numbers { x 1 , u'\u005cu2026' , x n } can be represented by a rank-1 matrix, it can always be represented by a vector, but the reverse is not true
+p46
+aVA D th order tensor u'\u005cud835' u'\u005cudc9c' u'\u005cu2208' u'\u005cu211d' n 1 × n 2 × u'\u005cu2026' u'\u005cu2062' n D is rank-1 if it can be written as the outer product of D vectors, i.e
+p47
+aVOnce a vector has been updated, it is fixed for future updates
+p48
+aVBasically, what the algorithm does is to divide the surrogate weights into hierarchical groups such that groups on the same level are approximately proportional to each other
+p49
+aVTensor representations have been applied to computer vision problems [ Hazan et al.2005 , Shashua and Hazan2005 ] and information retrieval [ Cai et al.2006a ] a long time ago
+p50
+aVMany learning algorithms applied to NLP problems, such as the Perceptron [ Collins2002 ] , MIRA [ Crammer et al.2006 , McDonald et al.2005 , Chiang et al.2008 ] , PRO [ Hopkins and May2011 ] , RAMPION [ Gimpel and Smith2012 ] etc., are based on vector-space models
+p51
+aVMany NLP applications use models that try to incorporate a large number of linguistic features so that as much human knowledge of language can be brought to bear on the (prediction) task as possible
+p52
+aVUsing these groups as units we are able to u'\u005cu201c' fill u'\u005cu201d' the tensor in a hierarchical way
+p53
+aVTherefore, we initialize the entries of u'\u005cud835' u'\u005cudc98' h , 1 i uniformly such that the Frobenius-norm of the weight tensor u'\u005cud835' u'\u005cudc7e' is unity
+p54
+aVFrom the contrast between the largest and the 2 nd -largest singular values, it can be seen that the matrix generated by the first strategy approximates a low-rank structure much better than the second strategy
+p55
+aVTherefore, we follow an approximate algorithm given in Figure 4 , whose main idea is illustrated via an example in Figure 4
+p56
+aVThis problem setting follows the same u'\u005cu201c' passive-aggressive u'\u005cu201d' strategy as in the original MIRA
+p57
+aVFor example, if the tensor order is 2 and the volume V is 12, then we can either choose n 1 = 3 , n 2 = 4 or n 1 = 2 , n 2 = 6
+p58
+aVIn general, a D th order tensor is represented as u'\u005cud835' u'\u005cudcaf' u'\u005cu2208' u'\u005cu211d' n 1 × n 2 × u'\u005cu2026' u'\u005cu2062' n D , and an entry in u'\u005cud835' u'\u005cudcaf' is denoted by u'\u005cud835' u'\u005cudcaf' i 1 , i 2 , u'\u005cu2026' , i D
+p59
+aVUnfortunately we have no knowledge about the target weights in advance, since that is what we need to learn after all
+p60
+aVThe initial vectors u'\u005cud835' u'\u005cudc98' h , 1 i cannot be made all zero, since otherwise the l -mode product in Equation ( 9 ) would yield all zero u'\u005cu03a6' h , t d u'\u005cu2062' ( x , y ) and the model would never get a chance to be updated
+p61
+aVAs an aside, observe that MIRA consistently outperformed Perceptron, as expected
+p62
+aVTherefore we tried all combinations of the following experimental parameters
+p63
+aVSince for each n d there are only two possible values to choose, we can simply enumerate all the possible 2 D (which is usually a small number) combinations of values and pick the one that matches the conditions given above
+p64
+aVFor the problem setting given above, each of the sub-problems that need to be solved is convex, and according to [ Cai et al.2006b ] the objective function value will decrease after each individual weight update and eventually this procedure will converge
+p65
+aVThis is a convex function of D , and the minimum 2 2 The optimal integer solution can be determined simply by comparing the two function values is reached at either D u'\u005cu2217' = \u005cfloor u'\u005cu2062' ln u'\u005cu2061' V or D u'\u005cu2217' = \u005cceil u'\u005cu2062' ln u'\u005cu2061' V
+p66
+aVTo optimize the vectors u'\u005cud835' u'\u005cudc98' h d , h = 1 , u'\u005cu2026' , H , d = 1 , u'\u005cu2026' , D , we use a similar iterative strategy as proposed in [ Cai et al.2006b ]
+p67
+aVsince otherwise { x 1 , u'\u005cu2026' , x n } would be represented by a different set of factors than those given in Equation ( 11
+p68
+aVand this representation is unique for a given D (up to the ordering of u'\u005cud835' u'\u005cudc29' j and s j d in u'\u005cud835' u'\u005cudc29' j , which simply assigns { x 1 , u'\u005cu2026' , x n } with different indices in the tensor), due to the pairwise proportional constraint imposed by x i / x j , i , j = 1 , u'\u005cu2026' , n
+p69
+aVIf u'\u005cud835' u'\u005cudc7e' is further decomposed as the sum of H major component rank-1 tensors, i.e., u'\u005cud835' u'\u005cudc7e' u'\u005cu2248' u'\u005cu2211' h = 1 H u'\u005cud835' u'\u005cudc98' h 1 u'\u005cu2297' u'\u005cud835' u'\u005cudc98' h 2 u'\u005cu2297' , u'\u005cu2026' , u'\u005cu2297' u'\u005cud835' u'\u005cudc98' h D , then
+p70
+aVThen it must be the case that
+p71
+aVBasically, the idea is that instead of optimizing u'\u005cud835' u'\u005cudc98' h d all together, we optimize u'\u005cud835' u'\u005cudc98' 1 1 , u'\u005cud835' u'\u005cudc98' 1 2 , u'\u005cu2026' , u'\u005cud835' u'\u005cudc98' H D in turn
+p72
+aVOf course it is not guaranteed that V 1 D is an integer, therefore we choose n d = \u005cfloor u'\u005cu2062' V 1 D or \u005cceil u'\u005cu2062' V 1 D , d = 1 , u'\u005cu2026' , D such that u'\u005cu220f' d = 1 D n d u'\u005cu2265' V and [ u'\u005cu220f' d = 1 D n d ] - V is minimized
+p73
+aVIf x i can also be represented by u'\u005cud835' u'\u005cudcac' , then x i = u'\u005cud835' u'\u005cudcac' i 1 , u'\u005cu2026' , i D + 1 = x 1 , u'\u005cu2026' , 1 u'\u005cu2062' u'\u005cu220f' d = 1 D + 1 t i d d , where t j d has a similar definition as s j d
+p74
+a.

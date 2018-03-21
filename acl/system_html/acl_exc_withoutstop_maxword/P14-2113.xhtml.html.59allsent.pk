@@ -1,0 +1,80 @@
+(lp0
+VAs a result, we propose a sentiment analysis approach for online dispute detection that identifies the sequence of sentence-level sentiments (i.e., very negative, negative, neutral, positive, very positive) expressed during the discussion and uses them as features in a classifier that predicts the dispute / non-dispute label for the discussion as a whole
+p1
+aVFeatures described above mostly depict the global sentiment flow in the discussions
+p2
+aVAs it can be seen, sentiment features obtains the best accuracy among the four types of features
+p3
+aVWe use the 2013-03-04 Wikipedia data dump, and extract talk pages for articles that are labeled with dispute tags by checking the revision history
+p4
+aVWe choose number of turns , number of participants , average number of words in each turn as features
+p5
+aVWe thus split each discussion into three equal length stages, and create sentiment distribution and transition features for each stage
+p6
+aVDispute tags can also be added to talk pages themselves
+p7
+aVWe then have features as number/portion of sentiment transitions per type
+p8
+aVIf an article is observed to have disputes on its talk page , editors can assign dispute tags to the article to flag it for attention
+p9
+aVFor example, less positive sentiment can be observed as dispute being escalated
+p10
+aVExperimental results with various combinations of features sets are displayed in Table 5
+p11
+aV1) Baseline (Polarity a sentence is predicted as positive if it has more positive words than negative words, or negative if more negative words are observed
+p12
+aVSentiment dependency relations are the dependency relations that include a sentiment word
+p13
+aVWe evaluate the systems using standard F1 on classes of positive, negative, and neutral, where samples predicted as PP and P are positive alignment, and samples tagged as NN and N are negative alignment
+p14
+aVWe further construct a local version of them, since sentiment distribution may change as discussion proceeds
+p15
+aVGiven that traditional Conditional Random Fields (CRFs) [ 15 ] ignore the ordinal relations among sentiment labels, we choose isotonic CRFs [ 16 ] for sentence-level sentiment analysis as they can enforce monotonicity constraints on the parameters consistent with the ordinal structure and domain knowledge (e.g., word-level sentiment conveyed via a lexicon
+p16
+aVTherefore, in addition to the tags mentioned above, we also consider the u'\u005cu201c' Request for Comment u'\u005cu201d' ( rfc ) tag on talk pages
+p17
+aVWe gather connectives from the Penn Discourse TreeBank [ 17 ] and combine them with any sentiment word that precedes or follows it as new features
+p18
+aVTherefore, we encode the number of revisions that happened during the discussion as a feature
+p19
+aVAs the first work that predicts sentence-level sentiment for online discussions, we investigate isotonic Conditional Random Fields (CRFs) [ 16 ] for the sentiment-tagging task as they preserve the advantages of the popular CRF-based sequential tagging models [ 15 ] while providing an efficient mechanism for encoding domain knowledge u'\u005cu2014' in our case, a sentiment lexicon u'\u005cu2014' through isotonic constraints on model parameters
+p20
+aVIn addition, the frequency of revisions made during the discussion has been shown to be good indicator for controversial articles [ 20 ] , that are presumably prone to have disputes
+p21
+aVSecondly, some dispute discussions are harder to detect than the others due to different dialog structures
+p22
+aV2007 ) , Kraut and Resnick ( 2012 ) ), we hypothesize that effective methods for dispute detection should take into account the sentiment and opinions expressed by participants in the collaborative endeavor
+p23
+aVWe thus extract the category information of the corresponding article for each talk page
+p24
+aVVery negative (NN) and negative (N) are collected in the same way
+p25
+aVIf a sentence is only selected as positive by one annotator or obtains the label via turn-level annotation, it is positive (P
+p26
+aVArticles on specific topics, such as politics or religions, tend to arouse more disputes
+p27
+aVAccording to Wikipedia 4 4 http://en.wikipedia.org/wiki/Wikipedia:Requests_for_comment , rfc is used to request outside opinions concerning the disputes
+p28
+aVUnfortunately, sentence-level sentiment tagging for this domain is challenging in its own right due to the less formal, often ungrammatical, language and the dynamic nature of online conversations u'\u005cu201c' Really, grow up u'\u005cu201d' (segment 3) should presumably be tagged as a negative sentence as should the sarcastic sentences u'\u005cu201c' Sounds good u'\u005cu201d' (in the same turn) and u'\u005cu201c' congrats u'\u005cu201d' and u'\u005cu201c' thank you u'\u005cu201d' (in segment 2
+p29
+aVAmong all 16,501 sentences in AAWD, 1,930 and 1,102 are labeled as NN and N
+p30
+aVExisting studies of collaborative knowledge systems have shown, however, that the quality of the generated content (e.g., an encyclopedia article) is highly correlated with the effectiveness of the online collaboration [ 12 , 14 ] ; fruitful collaboration, in turn, inevitably requires dealing with the disputes and conflicts that arise [ 13 ]
+p31
+aV1) an SVM (RBF kernel) that is employed for identifying sentiment-bearing sentences [ 8 ] , and (dis)agreement detection [ 24 ] in online debates; (2) a Linear CRF for (dis)agreement identification in broadcast conversations [ 21 ]
+p32
+aVDue to the limitation of existing general-purpose lexicons, some opinionated dialog-specific terms are hard to catch
+p33
+aVOtherwise, it is neutral
+p34
+aVWikipedia, a wiki-based online encyclopedia, is arguably the best example its distributed editing environment allows readers to collaborate as content editors and has facilitated the production of over four billion articles 1 1 http://en.wikipedia.org of surprisingly high quality [ 6 ] in English alone since its debut in 2001
+p35
+aVContext information is also not considered
+p36
+aVOur lexicon is built by combining MPQA [ 22 ] , General Inquirer [ 19 ] , and SentiWordNet [ 3 ] lexicons
+p37
+aV532 and 99 of them are PP and P
+p38
+aVAs the web has grown in popularity and scope, so has the promise of collaborative information environments for the joint creation and exchange of knowledge [ 11 , 18 ]
+p39
+a.

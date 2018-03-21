@@ -1,0 +1,16 @@
+(lp0
+VWe treat NULL as a normal target word, and if a source word aligns to multiple target words, it is treated as a single concatenated token
+p1
+aVOne issue with the S2T NNJM is that the probability is computed over every target word, so it does not explicitly model NULL-aligned source words
+p2
+aVFor aligned target words, the normal affiliation heuristic can be used, since the word alignment is available within the rule
+p3
+aVTo do this, we first say that each target word t i is affiliated with exactly one source word at index a i u'\u005cud835' u'\u005cudcae' i is then the m -word source window centered at a i
+p4
+aVHowever, note that there are only 3 possible positions for each target word, and 11 for each source word
+p5
+aVWe chose these values for the hidden layer size, vocabulary size, and source window size because they seemed to work best on our data sets u'\u005cu2013' larger sizes did not improve results, while smaller sizes degraded results
+p6
+aVThe decoding cost is based on
+p7
+a.

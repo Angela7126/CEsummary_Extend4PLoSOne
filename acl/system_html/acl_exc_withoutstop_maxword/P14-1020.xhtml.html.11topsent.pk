@@ -1,0 +1,16 @@
+(lp0
+VBecause all threads execute all code paths that any thread takes, time can only be saved if an entire warp agrees to skip any particular branch
+p1
+aVFigure 1 shows an overview of the approach we first parse densely with a coarse grammar and then parse sparsely with the fine grammar, skipping symbols that the coarse pass deemed sufficiently unlikely
+p2
+aVTheir system uses a grammar based on the Berkeley parser [ 9 ] (which is particularly amenable to GPU processing), u'\u005cu201c' compiling u'\u005cu201d' the grammar into a sequence of GPU kernels that are applied densely to every item in the parse chart
+p3
+aVFor instance, in a latent variable parser, the coarse grammar would have symbols like N u'\u005cu2062' P , V u'\u005cu2062' P , etc., and the fine pass would have refined symbols N u'\u005cu2062' P 0 , N u'\u005cu2062' P 1 , V u'\u005cu2062' P 4 , and so on
+p4
+aVThe result is a parsing speed of 185.5 sentences per second, as shown in Table 1 on the row labeled u'\u005cu2018' Reimpl u'\u005cu2019' with u'\u005cu2018' Empty, Coarse u'\u005cu2019' pruning
+p5
+aVWe tested our new pruning approach using an X-bar grammar as the coarse pass
+p6
+aVThe resulting speed is 187.5
+p7
+a.

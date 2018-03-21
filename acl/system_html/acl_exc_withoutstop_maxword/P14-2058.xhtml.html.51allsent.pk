@@ -1,0 +1,78 @@
+(lp0
+VBased on the results obtained by , who showed that the keyword method results in better long-term word retention than rote memorization, we would expect the error rate reduction to be even higher in a delayed post-test
+p1
+aVInterestingly, there is a strong correlation (Pearson u'\u005cu2019' s r = 0.85 ) between the difficulty of the words in each group (measured as the error rate on rote memorization) and the positive contribution of the generated sentences to the learning process
+p2
+aV1) Keywords with a smaller orthographic/phonetic distance are preferred; 2) Keywords consisting of a single word are preferred over two words (e.g.,, for the target word lavagna , which means blackboard , lasagna takes precedence over love and onion ); 3) Keywords that do not contain stop words are preferred (e.g.,, for the target word pettine , which means comb , the keyword pair pet and inn is ranked higher than pet and in , since in is a stop word); 4) Keyword pairs obtained with orthographic similarity are preferred over those obtained with phonetic similarity, as learners might be unfamiliar with the phonetic rules of the target language
+p3
+aVThe results clearly indicate that one group (A1) by chance contained easier words to memorize as shown by the low error rate (between 3% and 4%) obtained with both methods
+p4
+aVFinally, the relative error rate reduction % e is calculated as the the ratio between the absolute error rate reduction u'\u005cu0394' u'\u005cu2062' e and the error rate of rote memorization e R , i.e
+p5
+aVIn this step, our goal was to generate, for each Italian word, sentences containing its L1 translation and the set of orthographically (or phonetically) similar keywords that we previously selected
+p6
+aVTheir results show that using KM leads to better learning of second language vocabulary for beginners
+p7
+aVWe selected up to three of the highest ranked keyword pairs for each target word, obtaining 407 keyword combinations for the initial 185 Italian words, which we used as the input for the sentence generator
+p8
+aVSimilarly, groups A2 and B1 are of average difficulty, whereas group B2 appears to be the most difficult, with an error rate higher than 22% when using only rote memorization
+p9
+aVIn [] , we proposed to automate the keyword method by retrieving sentences from the Web
+p10
+aVWe had to inspect the outputs generated for 48 target words before we were able to select 40 good examples, meaning that for 17% of the target words the sentence generator could not produce a sentence of acceptable quality
+p11
+aVIn this paper, we overcome these limitations by introducing a semi-automatic system implementing the keyword method that builds upon the keyword selection mechanism of and combines it with a state-of-the-art creative sentence generation framework []
+p12
+aVWe continued this process until we selected a sentence for 40 distinct target words, which we set as the target size of the experiment
+p13
+aVAccordingly, for each target word in random order, we sequentially scanned the outputs generated for each keyword pair
+p14
+aVAfter obtaining the sentences as explained in Section 3 , we shuffled and then divided the whole set including 40 target words together with their translation, the generated keywords and sentences into 2 batches (A, B) and further divided each batch into 2 groups consisting of 10 elements (A1, A2, B1 and B2
+p15
+aVIn fact, we can see how the relative error rate reduction % e increases from u'\u005cu223c' 17% (group A1) to almost 45% (group B2
+p16
+aV1) one or more L1 words, possibly referring to a concrete entity, are chosen based on orthographic or phonetic similarity with the target word; 2) an L1 sentence is constructed in which an association between the translation of the target word and the keyword(s) is established, so that the learner, when seeing or hearing the word, immediately recalls the keyword(s
+p17
+aVAccording to our scenario, the teacher relies on automatic techniques to generate relatively few, high quality mnemonics in English to teach Italian vocabulary
+p18
+aVWe started by compiling a collection of Italian nouns consisting of three syllables from various resources for vocabulary teaching including http://didattica.org/italiano.htm and http://ielanguages.com , and produced a list of 185 target L2 words
+p19
+aVThe absolute error rate reduction u'\u005cu0394' u'\u005cu2062' e is calculated as the absolute difference in error rate between rote and keyword-aided memorization, i.e u'\u005cu0394' e = e R - e K
+p20
+aVWe allowed the keyword generation module to consider all the entries in the CMU dictionary, and rank the keyword pairs based on the following criteria in decreasing order of precedence
+p21
+aVFor each keyword combination, starting from the top-ranked ones, we generated up to 10 sentences by allowing any known part-of-speech for the keywords
+p22
+aVWe chose these two collections since they offer a combination of catchy or simple sentences that we expect to be especially suitable for second language learning
+p23
+aVWhile we had discussed the potentiality of creative sentence generation as a useful teaching device, we had not validated our claim experimentally yet
+p24
+aVTo illustrate, for the same keywords and the target words, we would prefer the sentence u'\u005cu201c' I called him in the morning yesterday u'\u005cu201d' over u'\u005cu201c' You talk a lot in a call u'\u005cu201d'
+p25
+aVThe system relies on two corpora of automatic parses as a repository of sentence templates and lexical statistics
+p26
+aVAs a previous attempt at using NLP for education, employ a riddle generator to create a language playground for children with complex communication needs
+p27
+aVTo illustrate, for teaching the Italian word cuore which means heart in English, the learner might be asked to imagine u'\u005cu201c' a lonely heart with a hard core u'\u005cu201d'
+p28
+aVHowever, the preparation of the memorization tips for each new word is an activity that requires considerable time, linguistic competence and creativity
+p29
+aVAmong the sentences u'\u005cu201c' The girl received a call in the bathroom u'\u005cu201d' and u'\u005cu201c' Call the blond girl in case you need u'\u005cu201d' , the first one is preferred, since the keywords are closer to each other
+p30
+aVThe error rate for each memorization technique t (where t = R for u'\u005cu201c' Rote memorization u'\u005cu201d' and t = K for u'\u005cu201c' keyword-aided memorization u'\u005cu201d' ) is calculated as e t = i t c t + i t , where c t and i t are the number of correct and incorrect answers provided by the subjects, respectively
+p31
+aV4 4 We preferred to select the experiment subjects in person as opposed to crowdsourcing the evaluation to be able to verify the proficiency of the subjects in the two languages and to ensure the reliability of the outcome of the evaluation
+p32
+aVFor comparison, when we attempted to retrieve sentences from the Web as suggested in , we could collect an output for less than 10% of the input configurations
+p33
+aVUnlike in [] , where we did not enforce any constraints for selecting the keywords, in this case we applied a more sophisticated filtering and ranking strategy
+p34
+aVDue to the presence of the u'\u005cu201c' I already knew this word u'\u005cu201d' option in the learning-assessment questionnaire, the number of the actual answers provided by each subject can be slightly different, hence the difference between macro- and micro-average
+p35
+aVAs for the former, we combined two resources a corpus of 16,000 proverbs [] and a collection of 5,000 image captions 2 2 http://vision.cs.uiuc.edu/pascal-sentences/ collected by
+p36
+aVAs for the second corpus, we used LDC u'\u005cu2019' s English GigaWord 5th Edition 3 3 http://www.ldc.upenn.edu/Catalog/catalogEntry.jsp?catalogId=LDC2011T07
+p37
+aV5 5 Otherwise, they could easily filter out the wrong answers just because they were not exposed to them recently
+p38
+a.

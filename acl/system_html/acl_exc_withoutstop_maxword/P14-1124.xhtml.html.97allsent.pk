@@ -1,0 +1,358 @@
+(lp0
+VThe spoken term detection task arises as a key subtask in applying NLP applications to spoken content
+p1
+aVIn applying the burstiness quantity to term detection, we recall that the task requires us to locate a particular instance of a term, not estimate a count, hence the utility of N-gram language models predicting words in sequence
+p2
+aVWe consider term detection rather than the transcription task in considering how to exploit topic context, because in evaluating the retrieval of certain key terms we need not focus on improving the entire word sequence
+p3
+aVIf we had perfectly accurate ASR in the language of the corpus, term detection is reduced to an exact string matching task
+p4
+aVThe BABEL task is modeled on the 2006 NIST Spoken Term Detection evaluation [] but focuses on limited resource conditions
+p5
+aVIn general, we can think of using word repetitions to re-score term detection as applying a limited form of adaptive or cache language model []
+p6
+aVAlthough spoken term detection does not require the use of word-based automatic speech recognition (ASR), it is closely related
+p7
+aVIn all of these cases WER gains in the 1-2% range were observed by interpolating latent topic information with N-gram models
+p8
+aVTasks like topic identification and named-entity detection require transforming a continuous acoustic signal into a stream of discrete tokens which can then be handled by NLP and other statistical machine learning techniques
+p9
+aVIn light of this finding, we will restrict the type of context we use for term detection to the co-occurrence of the term itself elsewhere within the document
+p10
+aVSpoken term detection converts the raw acoustics into time-marked keyword occurrences, which may subsequently be fed (e.g., as a bag-of-terms) to standard NLP algorithms
+p11
+aVMost recently, looked at word bursts in the IARPA BABEL conversational corpora, and were also able to successfully improve performance by leveraging the burstiness of language
+p12
+aVIndeed there is work in the literature that shows that various topic models, latent or otherwise, can be useful for improving language model perplexity and word error rate (Khudanpur and Wu, 1999; Chen, 2009; Naptali et al., 2012
+p13
+aVTable 1 shows the results of this parameter sweep and yields us 1 to 2% absolute performance gains in a number of term detection metrics
+p14
+aVAs it turns out this u'\u005cu2018' burstiness u'\u005cu2019' of words within documents, as the term is defined by Church and Gale in their work on Poisson mixtures (1995), provides a more reliable framework for successfully exploiting document context
+p15
+aVThe strength of this phenomenon suggests it may be more viable for improving term-detection than, say, topic-sensitive language models
+p16
+aVLastly, we re-score the search output by interpolating the top term detection score for a document with subsequent hits according to Equation 6 using the u'\u005cu0391' ^ estimated for this training condition
+p17
+aVWe encounter the burstiness property of words again by looking at unigram occurrence probabilities
+p18
+aVHowever, if the goal is to help a speech retrieval system detect content-rich (and presumably infrequent) keywords, then using word co-occurrence information (i.e., topic context) does not appear to be too promising, even though intuition suggests that such information ought to be helpful
+p19
+aVGiven the rise of unsupervised latent topic modeling with Latent Dirchlet Allocation [] and similar latent variable approaches for discovering meaningful word co-occurrence patterns in large text corpora, we ought to be able to leverage these topic contexts instead of merely N-grams
+p20
+aVThe typical use of Document Frequency ( DF ) in information retrieval or text categorization is to emphasize words that occur in only a few documents and are thus more u'\u005cu201c' rich in content u'\u005cu201d'
+p21
+aVFor the Tagalog data, we let u'\u005cu0391' range from 0 (the baseline) to 0.4 and re-score each term detection score according to ( 6
+p22
+aVClose examination of DF statistics by Church and Gale in their work on Poisson Mixtures (1995) resulted in an analysis of the burstiness of content words
+p23
+aVHowever, considering this estimate in light of the two classes of words in Figure 9 , there are clearly words in Class B with high burstiness that will be ignored by trying to compensate for the high adaptation variability in the low-frequency range
+p24
+aVWe focus specifically on the so called no target audio reuse (NTAR) condition to make our method broadly applicable
+p25
+aVWe will show that by focusing on contextual information in the form of word repetition within documents, we obtain consistent improvement across five languages in the so called Base Phase of the IARPA BABEL program
+p26
+aVFigure 1 , based on the BABEL Tagalog corpus, suggests this is true only for high frequency keywords
+p27
+aVBut despite the strong evidence of the adaptation phenomenon in both high and low-frequency words (Figure 11 ), we have less confidence in the adaptation strength of any particular word
+p28
+aVThe first illustration of word burstiness can be seen by plotting observed inverse document frequency, IDF w , versus f w in the log domain (Figure 7
+p29
+aVUsing our final algorithm, we are able to boost repeated term detections and improve results in all languages and training conditions
+p30
+aVWe illustrate this variability by looking at how consistent word co-occurrences are between two separate corpora in the same language i.e.,, if we observe words that frequently co-occur with a keyword in the training corpus, do they also co-occur with the keywords in a second held-out corpus
+p31
+aVWe validate this by developing an interpolation formula to boost putative word repetitions in the search results, and then investigate a method for setting interpolation weights without manually tuning on a development set
+p32
+aVHowever, conditioning on one occurrence, most word types are more likely to occur again, due to their burstiness
+p33
+aVLooking close to the y -axis in Figure 9 , we observe a second class of exclusively low frequency words whose burstiness ranges from highly concentrated to singletons
+p34
+aVSince our corpus size is fixed, we might expect this to occur, as more word occurrences must be pigeon-holed into the same number of documents
+p35
+aVLastly, the reductions in P u'\u005cu2062' ( Miss ) suggests that we are improving the term detection metric, which is sensitive to threshold changes, by doing what we set out to do, which is to boost lower confidence repeated words and correctly asserting them as true hits
+p36
+aVLikewise, Katz attempts to capture these two classes in his G model of word frequencies (1996
+p37
+aVFor example, if we determine the context of the detection hypothesis is about computers, containing words like u'\u005cu2018' monitor, u'\u005cu2019' u'\u005cu2018' internet u'\u005cu2019' and u'\u005cu2018' mouse, u'\u005cu2019' then we would be more confident of a term such as u'\u005cu2018' keyboard u'\u005cu2019' and less confident of a term such as u'\u005cu2018' cheese board u'\u005cu2019'
+p38
+aVimplies that cost of a miss is inversely proportional to the frequency of the term in the corpus, but the cost of a false alarm is fixed
+p39
+aVThus the deviation in the Tagalog corpus is more pronounced, i.e., words are less uniformly distributed across documents
+p40
+aVNow that we have tested word repetition-based re-scoring on a small Tagalog development set we want to know if our approach, and particularly our u'\u005cu0391' ^ estimate is sufficiently robust to apply broadly
+p41
+aVTable 2 contrasts the results for using the three different interpolation heuristics on the Tagalog development queries
+p42
+aVUsing topic information will be helpful if u'\u005cu2018' monitor, u'\u005cu2019' u'\u005cu2018' keyboard u'\u005cu2019' and u'\u005cu2018' mouse u'\u005cu2019' consistently predict that u'\u005cu2018' keyboard u'\u005cu2019' is present
+p43
+aVWe then demonstrate that the method generalizes well, by applying it to the 2006 English data and the remaining four 2013 BABEL languages
+p44
+aVIf we take the Class A concentration trend as typical, we can argue that most Class B words exhibit a larger than average concentration
+p45
+aVFor the first class, burstiness increases slowly but steadily as w occurs more frequently
+p46
+aVAs with word co-occurrence, we consider if estimates of P a u'\u005cu2062' d u'\u005cu2062' a u'\u005cu2062' p u'\u005cu2062' t u'\u005cu2062' ( w ) from training data are consistent when estimated on development data
+p47
+aVA high u'\u005cu03a1' k implies that words w that co-occur frequently with k in the training data also do so in the search collection
+p48
+aVFor each keyword k , we count how often it co-occurs in the same conversation as a vocabulary word w in the ASR training data and the development data, and designate the counts T u'\u005cu2062' ( k , w ) and D u'\u005cu2062' ( k , w ) respectively
+p49
+aVWe denote this as E u'\u005cu2062' [ k ] and can interpret burstiness as the expected word count given we see w at least once
+p50
+aVMoreover, we are able to accomplish this in a wide variety of languages
+p51
+aVIn contrast, the AP English data exhibits a correlation of u'\u005cu03a1' = 0.93 []
+p52
+aVGiven the variability in estimating P a u'\u005cu2062' d u'\u005cu2062' a u'\u005cu2062' p u'\u005cu2062' t u'\u005cu2062' ( w ) , an alternative approach would be take P w ^ as an upper bound on u'\u005cu0391' , reached as the DF w increases (cf
+p53
+aVThe x -coordinate of each point in Figure 1 is the frequency of k in the training data, and the y -coordinate is the correlation coefficient u'\u005cu03a1' k between T u'\u005cu2062' ( k , w ) and D u'\u005cu2062' ( k , w
+p54
+aVFor this reason, we report both ATWV and the P u'\u005cu2062' ( Miss ) component
+p55
+aVTo further illustrate how Figure 1 was obtained, consider the high-frequency keyword bukas (count = u'\u005cud835' u'\u005cudfd6' u'\u005cud835' u'\u005cudfd5' u'\u005cud835' u'\u005cudfd7' ) and the low-frequency keyword Davao (count = u'\u005cud835' u'\u005cudfcf' u'\u005cud835' u'\u005cudfcf' ), and plot T u'\u005cu2062' ( k , u'\u005cu22c5' ) versus D u'\u005cu2062' ( k , u'\u005cu22c5' ) , as done in Figure 4
+p56
+aVThe correlation coefficients u'\u005cu03a1' u'\u005cud835' u'\u005cudc4f' u'\u005cud835' u'\u005cudc62' u'\u005cud835' u'\u005cudc58' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc60' and u'\u005cu03a1' u'\u005cud835' u'\u005cudc37' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc63' u'\u005cud835' u'\u005cudc4e' u'\u005cud835' u'\u005cudc5c' from the two plots end up as two points in Figure 1
+p57
+aVWork by and take a language model-based approach to information retrieval, and again, interpolate latent topic models with N-grams to improve retrieval performance
+p58
+aVThe primary difference between this and previous work on similar language models is the narrower focus here on the term detection task, in which we consider each search term in isolation, rather than all words in the vocabulary
+p59
+aVThe word error rate (WER) and term detection performance are clearly correlated
+p60
+aVThis is the burstiness we leverage to improve term detection
+p61
+aVIn the information retrieval community, clustering and latent topic models have yielded improvements over traditional vector space models
+p62
+aVGiven a small vocabulary of interest (1000-2000 words or multi-word terms) the aim of the term detection task is to enumerate occurrences of the keywords within a target corpus
+p63
+aVWe seek a workable definition of broad document context beyond N-gram models that will improve term detection performance on an arbitrary set of queries
+p64
+aVIn these efforts, the topic model information was helpful in boosting retrieval performance above the baseline vector space or N-gram models
+p65
+aVGiven that adaptation values are roughly an order of magnitude higher than the conditional unigram probabilities, in the next two sections we describe how we use adaptation to boost term detection scores
+p66
+aVWe evaluate term detection and word repetition-based re-scoring on the IARPA BABEL training and development corpora 1 1 Language collection releases IARPA-babel101-v0.4c, IARPA-babel104b-v0.4bY, IARPA-babel105b-v0.4, IARPA-babel106-v0.2g and IARPA-babel107b-v0.7 respectively for five languages Cantonese, Pashto, Turkish, Tagalog and Vietnamese []
+p67
+aVWe compare the unconditional unigram probability (the probability that a given word token is w ) with the conditional unigram probability, given the term has occurred once in the document
+p68
+aVIn order to improve detection performance, and restricting ourselves to an existing ASR system or systems at our disposal, we focus on leveraging broad document context around detection hypotheses
+p69
+aVWhen we observe a term detection score with high confidence, we boost the other lower-scoring terms in the same document to reflect this increased likelihood of repeated terms
+p70
+aVASR systems traditionally use N-gram language models to incorporate prior knowledge of word occurrence patterns into prediction of the next word in the token stream
+p71
+aVOur observation of the variability in co-occurrence statistics between Tagalog training and development partitions leads us to narrow the scope of document context to same word co-occurrences, i.e., word repetitions
+p72
+aVFigure 10 shows the difference between conditional and unconditional unigram probabilities
+p73
+aVGiven resource constraints, domain, channel, and vocabulary limitations, particularly for languages other than English, the errorful token stream makes term detection a non-trivial task
+p74
+aVOur analysis of word burstiness suggests that adaptation , is a reasonable candidate
+p75
+aVClearly topic or context information is relevant to a retrieval type task, but we need a stable, consistent framework in which to apply it
+p76
+aVWe compute the conditional probability for w using frequency information
+p77
+aVA similar phenomenon is observed concerning adaptive language models []
+p78
+aVWe train ASR acoustic and language models from the training corpus using the Kaldi speech recognition toolkit [] following the default BABEL training and search recipe which is described in detail by
+p79
+aVIntuition suggests that we prefer per-term interpolation weights related to the term u'\u005cu2019' s adaptation
+p80
+aVFor the Tagalog conversations, as with English newswire, we observe that the document frequency, DF w , of a word w is not a linear function of word frequency f w in the log domain, as would be expected under a naive Poisson generative assumption
+p81
+aVWe proceed in this fashion to make a case for why burstiness ought to help in the term detection task
+p82
+aVWe first estimate adaptation probabilities from the ASR training transcripts
+p83
+aVStill, intuition suggests that knowing the topic context of a detected word ought to be useful in predicting whether or not a term does belong in that context
+p84
+aVHowever to verify that this approach is worth pursuing, we sweep a range of small u'\u005cu0391' values, on the assumption that we still do want to mostly rely on the ASR confidence score for term detection
+p85
+aVIn order to arrive at our eventual solution, we take the BABEL Tagalog corpus and analyze word co-occurrence and repetition statistics in detail
+p86
+aVFigure 8 also shows the difference between and observed IDF w and Poisson estimate IDF ^ w and further illustrates the high variance in IDF w for low frequency words
+p87
+aVConfidence scores from an ASR system (which incorporate N-gram probabilities) are optimized in order to produce the most likely sequence of words rather than the accuracy of individual word detections
+p88
+aVIn this section we look at DF and burstiness statistics applying some of the analyses of to the BABEL Tagalog corpus
+p89
+aVA number of efforts have been made to augment traditional N-gram models with latent topic information (Khudanpur and Wu, 1999; Florian and Yarowsky, 1999; Liu and Liu, 2008; Hsu and Glass, 2006; Naptali et al., 2012) including some of the early work on Probabilistic Latent Semantic Analysis by
+p90
+aVUnfortunately, estimates of co-occurrence from small corpora are not very consistent, and often over- or underestimate concurrence probabilities needed for term detection
+p91
+aVThe re-scoring approach we present is closely related to adaptive or cache language models (Jelinek, 1997; Kuhn and De Mori, 1990; Kneser and Steinbiss, 1993
+p92
+aVWithout any other information, Zipf u'\u005cu2019' s law suggests that most word types do not occur in a particular document
+p93
+aVAdaptation also has the desirable property that we can estimate it for each word in the training vocabulary directly from training data and not post-hoc on a per-query basis
+p94
+aVHowever, given the preponderance of highly frequent non-content words in the computation of a corpus u'\u005cu2019' WER, it u'\u005cu2019' s not clear that a 1-2% improvement in WER would translate into an improvement in term detection
+p95
+aVThe difficulty in this approach arises from the variability in word co-occurrence statistics
+p96
+aVThe primary metric for the BABEL program, Actual Term Weighted Value (ATWV) is defined by NIST using a cost function of the false alarm probability P u'\u005cu2062' ( FA ) and P u'\u005cu2062' ( Miss ) , averaged over a set of queries []
+p97
+aVWe see that the adaptation estimates are only consistent between corpora for high-frequency words
+p98
+aVFinally we measure the adaptation of a word, which is defined by as
+p99
+aVWe will we develop a principled approach to selecting u'\u005cu0391' using the adaptation property of the corpus
+p100
+aVWe summarize our re-scoring of repeated words with the observation given a correct detection, the likelihood of additional terms in the same documents should increase
+p101
+aVThe implication of deviations from a Poisson model is that words tend to be concentrated in a small number of documents rather than occurring uniformly across the corpus
+p102
+aVHowever, in many text retrieval tasks, queries are often tens or hundreds of words in length rather than short spoken phrases
+p103
+aVWe demonstrate consistent improvements in all languages in both the Full LP (80 hours of ASR training data) and Limited LP (10 hours) settings
+p104
+aVIn either case we see evidence that both high and low frequency words tend towards repeating within a document
+p105
+aVTwo questions arise what is happening with infrequent words, and why does this matter for term detection
+p106
+aVLooking at broader document context within a more limited task might allow us to escape the limits of N-gram performance
+p107
+aVWhen we plot adaptation versus f w (Figure 11 ) we see that all high-frequency and a significant number of low-frequency terms have adaptation greater that 50%
+p108
+aVLow frequency words tend to be rich in content, and vice versa
+p109
+aVN-gram models cannot, however, capture complex linguistic or topical phenomena that occur outside the typical 3-5 word scope of the model
+p110
+aVFor the AP newswire, Church and Gale found the largest deviation between the predicted IDF w ^ and observed IDF w to occur in the middle of the frequency range
+p111
+aVFor Vietnamese, with shorter, syllable length word tokens, we observe the lowest adaptation estimates
+p112
+aVEach point in Figure 1 represents one of 355 Tagalog keywords used for system development by all BABEL participants
+p113
+aVTo this point we have assumed an implicit property of low-frequency words which Church and Gale state concisely in their 1999 study of inverse document frequency
+p114
+aVWe observe, in 648 Tagalog conversations, similar phenomena as observed by Church and Gale on 89,000 AP English newswire articles
+p115
+aVIn Figure 9 we see two classes of words emerge
+p116
+aVThis approach shows a significant improvement (0.7% absolute) over the baseline
+p117
+aVAt our disposal, we have the five BABEL languages u'\u005cu2014' Tagalog, Cantonese, Pashto, Turkish and Vietnamese u'\u005cu2014' as well as the development data from the NIST 2006 English evaluation
+p118
+aVUsing this average as a single interpolation weight for all terms gives near the best performance as we observed in our parameter sweep
+p119
+aVOne advantage of the approach proposed here, relative to their approach, is its simplicity and its not requiring an additional tuning set to estimate parameters
+p120
+aVFor each term t and document d we propose interpolating the ASR confidence score for a particular detection t d with the top scoring hit in d which we u'\u005cu2019' ll call t ^ d
+p121
+aVTo look at the data from a different perspective, we consider the random variable k , which is the number of times a word occurs in a particular document
+p122
+aVFor example, adaptation is lowest for the agglutinative Turkish language where longer word tokens should be less likely to repeat
+p123
+aVFor the BABEL languages, we observe improvements in ATWV from 0.7% to 1.3% absolute and reductions in the miss rate of 0.8% to 1.9%
+p124
+aVYet, though many language models more sophisticated than N-grams have been proposed, N-grams are empirically hard to beat in terms of WER
+p125
+aVFigure 1 suggests that ( k , w ) co-occurrences are consistent between the two corpora ( u'\u005cu03a1' k 0.8 ) for keywords occurring 100 or more times
+p126
+aVLet us label these Class A words
+p127
+aVUsing this P a u'\u005cu2062' d u'\u005cu2062' a u'\u005cu2062' p u'\u005cu2062' t u'\u005cu2062' ( w ) estimate directly actually hurts ATWV performance by 4.7% absolute on the 355 term development query set (Table 2
+p128
+aVWe will refer to these as Class B words
+p129
+aVA second perspective on word burstiness that follows from is that a Poisson assumption should lead us to predict
+p130
+aVIn Figure 9 we plot the following ratio, which define as burstiness
+p131
+aVA decrease in P u'\u005cu2062' ( Miss ) reflects the fact that we are able to boost correct detections of the repeated terms
+p132
+aVThe BABEL evaluation query sets contain roughly 2000 terms each and the 2006 English query set contains roughly 1000 terms
+p133
+aVUsing the mean u'\u005cu0391' ^ instead of individual u'\u005cu0391' w u'\u005cu2019' s provides an additional 0.5% absolute improvement, suggesting that we find additional gains boosting low-frequency words
+p134
+aVAlthough Kaldi can produce multiple types of acoustic models, for simplicity we report results using discriminatively trained Subspace Gaussian Mixture Model (SGMM) acoustic output densities, but we do find that similar results can be obtained with other acoustic model configurations
+p135
+aVwhere N is the number of documents (i.e., conversations) in the corpus
+p136
+aVObserved IDF w values again deviate significantly from their predictions ( 2 ), but all along the frequency range
+p137
+aVFor the English system, we also train a Kaldi system on the 240 hours of the Switchboard conversational English corpus
+p138
+aVFigure 12 shows the difference between P a u'\u005cu2062' d u'\u005cu2062' a u'\u005cu2062' p u'\u005cu2062' t u'\u005cu2062' ( w ) measured on the two corpora (for words occurring in both
+p139
+aVAlternatively, we take a weighted average of u'\u005cu0391' w u'\u005cu2019' s estimated on training transcripts to obtain a single u'\u005cu0391' ^ per language (cf
+p140
+aVFor each of the BABEL languages we consider both the FullLP (80 hours) and LimitedLP (10 hours) training conditions
+p141
+aVFrom these we take the weighted average as described previously to obtain a single interpolation weight u'\u005cu0391' ^ for each training condition
+p142
+aVWe see a somewhat different picture for Tagalog speech in Figure 7
+p143
+aVWe will discuss in detail in the following section related works by Church and Gale (1995, 1999, and 2000
+p144
+aVWe would discount the adaptation factor when DF w is low and we are unsure of the effect
+p145
+aVThere is a noticeable quantization effect occurring in the high IDF range, given that our N is at least a factor of 100 smaller than the number of AP articles they studied
+p146
+aVThe only test for which P u'\u005cu2062' ( Miss ) did not improve was the Vietnamese Limited LP setting, although overall ATWV did improve, reflecting a lower P u'\u005cu2062' ( FA )
+p147
+aVYet, visually, the relationship in Figure 7 is clearly not linear
+p148
+aVBut not all equally frequent words are equally meaningful
+p149
+aVThe procedure we follow for each language condition is as follows
+p150
+aVWe would prefer to use prior knowledge rather than naive tuning to select an interpolation weight u'\u005cu0391'
+p151
+aVThere is good linear correlation ( u'\u005cu03a1' = 0.73 ) between log u'\u005cu2061' f w and IDF w
+p152
+aVThe manner in which the components of ATWV are defined
+p153
+aVIn all conditions we also obtain u'\u005cu0391' estimates which correspond to our expectations for particular languages
+p154
+aVTo be precise, 26% of all tokens and 25% of low-frequency ( f w 100 ) have at least 50% adaptation
+p155
+aVTable 3 lists complete results and the associated estimates for u'\u005cu0391' ^
+p156
+aVWe then analyze the tendency towards within-document repetition
+p157
+aVWe consider several different estimates and we can show that the favorable result extends across languages
+p158
+aVWe use the same definition of IDF w as
+p159
+aVEquation 9
+p160
+aVEquation 10
+p161
+aVThis work was partially supported by the Intelligence Advanced Research Projects Activity (IARPA) via Department of Defense U.S
+p162
+aVas a function of f w
+p163
+aVArmy Research Laboratory (DoD / ARL) contract number W911NF-12-C-0015
+p164
+aVThe views and conclusions contained herein are those of the authors and should not be interpreted as necessarily representing the official policies or endorsements, either expressed or implied, of IARPA, DoD/ARL, or the U.S
+p165
+aVGovernment
+p166
+aVGovernment is authorized to reproduce and distribute reprints for Governmental purposes notwithstanding any copyright annotation thereon
+p167
+aVDisclaimer
+p168
+aVInsightful discussions with are also gratefully acknowledged
+p169
+aV[b]0.45 u'\u005cu2018'
+p170
+aV[b]0.45
+p171
+aS''
+p172
+ag172
+aVThe U.S
+p173
+aV[b]0.45
+p174
+aV[b]0.45
+p175
+ag172
+aV89,000
+p176
+aV648 vs
+p177
+a.

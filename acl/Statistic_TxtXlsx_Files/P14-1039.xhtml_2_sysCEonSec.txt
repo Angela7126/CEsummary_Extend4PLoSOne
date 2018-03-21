@@ -1,0 +1,381 @@
+Current File: P14-1039.xhtml_2 P14-1039.xhtml
+
+Section 0:  Abstract
+	SentNum: 4
+	CENum: 3
+	SentCovered: 2
+	Covered_Rate: 50.0000%
+
+Section 1:  1 Introduction
+	SentNum: 27
+	CENum: 12
+	SentCovered: 15
+	Covered_Rate: 55.5556%
+
+Section 2:  2 Background
+	SentNum: 29
+	CENum: 9
+	SentCovered: 10
+	Covered_Rate: 34.4828%
+
+Section 3:  3 Simple Reranking
+	SentNum: 20
+	CENum: 5
+	SentCovered: 6
+	Covered_Rate: 30.0000%
+
+Section 4:  4 Reranking with SVMs
+	SentNum: 23
+	CENum: 7
+	SentCovered: 7
+	Covered_Rate: 30.4348%
+
+Section 5:  5 Analysis and Discussion
+	SentNum: 21
+	CENum: 5
+	SentCovered: 6
+	Covered_Rate: 28.5714%
+
+Section 6:  6 Related Work
+	SentNum: 3
+	CENum: 1
+	SentCovered: 2
+	Covered_Rate: 66.6667%
+
+Section 7:  7 Conclusion
+	SentNum: 9
+	CENum: 3
+	SentCovered: 4
+	Covered_Rate: 44.4444%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-1039.xhtml_2's CE cases
+
+Section 0:  Abstract has 3 CE cases
+	CASE: 1
+	Stag: 1 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: Using parse accuracy in a simple reranking strategy for self-monitoring, we find that with a state-of-the-art averaged perceptron realization ranking model, BLEU scores cannot be improved with any of the well-known Treebank parsers we tested, since these parsers too often make errors that human readers would be unlikely to make. 
+		Cause: [(0, 40), (0, 53)]
+		Effect: [(0, 0), (0, 37)]
+
+	CASE: 2
+	Stag: 1 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Using parse accuracy in a simple reranking strategy for self-monitoring, we find that with a state-of-the-art averaged perceptron realization ranking model, BLEU scores cannot be improved with any of the well-known Treebank parsers we tested, since these parsers too often make errors that human readers would be unlikely to make. 
+		Cause: [(0, 0), (0, 9)]
+		Effect: [(0, 11), (0, 37)]
+
+	CASE: 3
+	Stag: 2 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: However, by using an SVM ranker to combine the realizer u'\u2019' s model score together with features from multiple parsers, including ones designed to make the ranker more robust to parsing mistakes, we show that significant increases in BLEU scores can be achieved. 
+		Cause: [(0, 3), (0, 37)]
+		Effect: [(0, 38), (0, 49)]
+
+Section 1:  1 Introduction has 12 CE cases
+	CASE: 1
+	Stag: 4 5 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Rajkumar White [ 28 , 36 ] have recently shown that some rather egregious surface realization errors u'\u2014' in the sense that the reader would likely end up with the wrong interpretation u'\u2014' can be avoided by making use of features inspired by psycholinguistics research together with an otherwise state-of-the-art averaged perceptron realization ranking model [ 35 ] , as reviewed in the next section. However, one is apt to wonder could one use a parser to check whether the intended interpretation is easy to recover, either as an alternative or to catch additional mistakes. 
+		Cause: [(0, 68), (1, 31)]
+		Effect: [(0, 1), (0, 65)]
+
+	CASE: 2
+	Stag: 5 6 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: However, one is apt to wonder could one use a parser to check whether the intended interpretation is easy to recover, either as an alternative or to catch additional mistakes. Doing so would be tantamount to self-monitoring in Levelt u'\u2019' s [ 21 ] model of language production. 
+		Cause: [(0, 1), (1, 0)]
+		Effect: [(1, 2), (1, 21)]
+
+	CASE: 3
+	Stag: 7 8 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Neumann van Noord [ 22 ] pursued the idea of self-monitoring for generation in early work with reversible grammars. As Neumann van Noord observed, a simple, brute-force way to generate unambiguous sentences is to enumerate possible realizations of an input logical form, then to parse each realization to see how many interpretations it has, keeping only those that have a single reading; they then went on to devise a more efficient method of using self-monitoring to avoid generating ambiguous sentences, targeted to the ambiguous portion of the output. 
+		Cause: [(1, 1), (1, 74)]
+		Effect: [(0, 0), (0, 18)]
+
+	CASE: 4
+	Stag: 9 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: We might question, however, whether it is really possible to avoid ambiguity entirely in the general case, since Abney [ 1 ] and others have argued that nearly every sentence is potentially ambiguous, though we (as human comprehenders) may not notice the ambiguities if they are unlikely. 
+		Cause: [(0, 21), (0, 35)]
+		Effect: [(0, 37), (0, 52)]
+
+	CASE: 5
+	Stag: 9 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: We might question, however, whether it is really possible to avoid ambiguity entirely in the general case, since Abney [ 1 ] and others have argued that nearly every sentence is potentially ambiguous, though we (as human comprehenders) may not notice the ambiguities if they are unlikely. 
+		Cause: [(0, 13), (0, 15)]
+		Effect: [(0, 1), (0, 11)]
+
+	CASE: 6
+	Stag: 13 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: In this paper, we investigate whether Neumann van Noord u'\u2019' s brute-force strategy for avoiding ambiguities in surface realization can be updated to only avoid vicious ambiguities, extending (and revising) Van Deemter u'\u2019' s general strategy to all kinds of structural ambiguity, not just the one investigated by Khan et al. 
+		Cause: [(0, 19), (0, 23)]
+		Effect: [(0, 0), (0, 17)]
+
+	CASE: 7
+	Stag: 14 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: To do so u'\u2014' in a nutshell u'\u2014' we enumerate an n -best list of realizations and rerank them if necessary to avoid vicious ambiguities, as determined by one or more automatic parsers. 
+		Cause: [(0, 0), (0, 1)]
+		Effect: [(0, 3), (0, 40)]
+
+	CASE: 8
+	Stag: 15 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: A potential obstacle, of course, is that automatic parsers may not be sufficiently representative of human readers, insofar as errors that a parser makes may not be problematic for human comprehension; moreover, parsers are rarely successful in fully recovering the intended interpretation for sentences of moderate length, even with carefully edited news text. 
+		Cause: [(0, 22), (0, 32)]
+		Effect: [(0, 0), (0, 20)]
+
+	CASE: 9
+	Stag: 15 16 
+		Pattern: 9 [['consequently']]---- [['&C', '(,/;/./--)'], ['(,)', '&R']]
+		sentTXT: A potential obstacle, of course, is that automatic parsers may not be sufficiently representative of human readers, insofar as errors that a parser makes may not be problematic for human comprehension; moreover, parsers are rarely successful in fully recovering the intended interpretation for sentences of moderate length, even with carefully edited news text. Consequently, we examine two reranking strategies, one a simple baseline approach and the other using an SVM reranker [ 17 ]. 
+		Cause: [(0, 0), (0, 58)]
+		Effect: [(1, 2), (1, 22)]
+
+	CASE: 10
+	Stag: 19 20 
+		Pattern: 4 [['result'], ['is']]---- [['&C', '(,/./;/--)', '&ONE', '(&adj)'], ['(of &THIS (&NP))'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: With this simple reranking strategy and each of three different Treebank parsers, we find that it is possible to improve BLEU scores on Penn Treebank development data with White Rajkumar u'\u2019' s [ 28 , 36 ] baseline generative model, but not with their averaged perceptron model. In inspecting the results of reranking with this strategy, we observe that while it does sometimes succeed in avoiding egregious errors involving vicious ambiguities, common parsing mistakes such as PP-attachment errors lead to unnecessarily sacrificing conciseness or fluency in order to avoid ambiguities that would be easily tolerated by human readers. 
+		Cause: [(0, 1), (1, 1)]
+		Effect: [(1, 8), (1, 52)]
+
+	CASE: 11
+	Stag: 20 21 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: In inspecting the results of reranking with this strategy, we observe that while it does sometimes succeed in avoiding egregious errors involving vicious ambiguities, common parsing mistakes such as PP-attachment errors lead to unnecessarily sacrificing conciseness or fluency in order to avoid ambiguities that would be easily tolerated by human readers. Therefore, to develop a more nuanced self-monitoring reranker that is more robust to such parsing mistakes, we trained an SVM using dependency precision and recall features for all three parses, their n -best parsing results, and per-label precision and recall for each type of dependency, together with the realizer u'\u2019' s normalized perceptron model score as a feature. 
+		Cause: [(0, 0), (0, 52)]
+		Effect: [(1, 2), (1, 67)]
+
+	CASE: 12
+	Stag: 25 26 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In Section 2 , we review the realization ranking models that serve as a starting point for the paper. In Section 3 , we report on our experiments with the simple reranking strategy, including a discussion of the ways in which this method typically fails. 
+		Cause: [(0, 13), (1, 25)]
+		Effect: [(0, 0), (0, 11)]
+
+Section 2:  2 Background has 9 CE cases
+	CASE: 1
+	Stag: 36 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: To select preferred outputs from the chart, we use White Rajkumar u'\u2019' s [ 35 , 36 ] realization ranking model, recently augmented with a large-scale 5-gram model based on the Gigaword corpus. 
+		Cause: [(0, 36), (0, 38)]
+		Effect: [(0, 0), (0, 33)]
+
+	CASE: 2
+	Stag: 38 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The model takes as its starting point two probabilistic models of syntax that have been developed for CCG parsing, Hockenmaier Steedman u'\u2019' s [ 14 ] generative model and Clark Curran u'\u2019' s [ 7 ] normal-form model. 
+		Cause: [(0, 4), (0, 45)]
+		Effect: [(0, 0), (0, 2)]
+
+	CASE: 3
+	Stag: 39 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Using the averaged perceptron algorithm [ 8 ] , White Rajkumar [ 35 ] trained a structured prediction ranking model to combine these existing syntactic models with several n -gram language models. 
+		Cause: [(0, 0), (0, 4)]
+		Effect: [(0, 5), (0, 29)]
+
+	CASE: 4
+	Stag: 42 43 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: To improve word ordering decisions, White Rajkumar [ 36 ] demonstrated that incorporating a feature into the ranker inspired by Gibson u'\u2019' s [ 12 ] dependency locality theory can deliver statistically significant improvements in automatic evaluation scores, better match the distributional characteristics of sentence orderings, and significantly reduce the number of serious ordering errors (some involving vicious ambiguities) as confirmed by a targeted human evaluation. Supporting Gibson u'\u2019' s theory, comprehension and corpus studies have found that the tendency to minimize dependency length has a strong influence on constituent ordering choices; see Temperley ( 2007 ) and Gildea and Temperley ( 2010 ) for an overview. 
+		Cause: [(0, 69), (1, 46)]
+		Effect: [(0, 0), (0, 67)]
+
+	CASE: 5
+	Stag: 43 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Supporting Gibson u'\u2019' s theory, comprehension and corpus studies have found that the tendency to minimize dependency length has a strong influence on constituent ordering choices; see Temperley ( 2007 ) and Gildea and Temperley ( 2010 ) for an overview. 
+		Cause: [(0, 0), (0, 8)]
+		Effect: [(0, 10), (0, 46)]
+
+	CASE: 6
+	Stag: 51 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: Generally, inserting a complementizer makes the onset of a complement clause more predictable, and thus less information dense, thereby avoiding a potential spike in information density that is associated with comprehension difficulty. 
+		Cause: [(0, 0), (0, 13)]
+		Effect: [(0, 17), (0, 34)]
+
+	CASE: 7
+	Stag: 52 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: Rajkumar White u'\u2019' s experiments confirmed the efficacy of the features based on Jaeger u'\u2019' s work, including information density u'\u2013' based features, in a local classification model. 
+		Cause: [(0, 17), (0, 24)]
+		Effect: [(0, 26), (0, 41)]
+
+	CASE: 8
+	Stag: 53 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: 2 2 Note that the features from the local classification model for that -complementizer choice have not yet been incorporated into OpenCCG u'\u2019' s global realization ranking model, and thus do not inform the baseline realization choices in this work. 
+		Cause: [(0, 0), (0, 32)]
+		Effect: [(0, 36), (0, 45)]
+
+	CASE: 9
+	Stag: 55 56 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: For example, in (1), the presence of that avoids a local ambiguity, helping the reader to understand that for the second month in a row modifies the reporting of the shortage; without that , it is very easy to mis-parse the sentence as having for the second month in a row modifying the saying event. He said that / u'\u2205' for the second month in a row, food processors reported a shortage of nonfat dry milk. 
+		Cause: [(0, 49), (1, 25)]
+		Effect: [(0, 23), (0, 47)]
+
+Section 3:  3 Simple Reranking has 5 CE cases
+	CASE: 1
+	Stag: 70 71 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Simple ranking with the Berkeley parser of the generative model u'\u2019' s n -best realizations raised the BLEU score from 85.55 to 86.07, well below the averaged perceptron model u'\u2019' s BLEU score of 87.93. However, as shown in Table 2 , none of the parsers yielded significant improvements on the top of the perceptron model. 
+		Cause: [(1, 3), (1, 21)]
+		Effect: [(0, 19), (1, 0)]
+
+	CASE: 2
+	Stag: 75 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: The simple ranker ends up choosing (b) as the best realization because it has the most accurate parse compared to the reference sentence, given the mistake with (c. 
+		Cause: [(0, 14), (0, 24)]
+		Effect: [(0, 26), (0, 31)]
+
+	CASE: 3
+	Stag: 77 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Here, (b) ends up getting chosen by the simple ranker as the realization with the most accurate parse given the failures in (c), where the additional technology, personnel training is mistakenly analyzed as one noun phrase, a reading unlikely to be considered by human readers. 
+		Cause: [(0, 14), (0, 33)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 4
+	Stag: 78 
+		Pattern: 0 [['according', 'to'], [',']]---- [[], ['&NP@C@'], ['&R']]
+		sentTXT: In sum, although simple ranking helps to avoid vicious ambiguity in some cases, the overall results of simple ranking are no better than the perceptron model (according to BLEU, at least), as parse failures that are not reflective of human intepretive tendencies too often lead the ranker to choose dispreferred realizations. 
+		Cause: [(0, 31), (0, 31)]
+		Effect: [(0, 33), (0, 55)]
+
+	CASE: 5
+	Stag: 78 79 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In sum, although simple ranking helps to avoid vicious ambiguity in some cases, the overall results of simple ranking are no better than the perceptron model (according to BLEU, at least), as parse failures that are not reflective of human intepretive tendencies too often lead the ranker to choose dispreferred realizations. As such, we turn now to a more nuanced model for combining the results of multiple parsers in a way that is less sensitive to such parsing mistakes, while also letting the perceptron model have a say in the final ranking. 
+		Cause: [(1, 1), (1, 42)]
+		Effect: [(0, 0), (0, 56)]
+
+Section 4:  4 Reranking with SVMs has 7 CE cases
+	CASE: 1
+	Stag: 80 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: Since different parsers make different errors, we conjectured that dependencies in the intersection of the output of multiple parsers may be more reliable and thus may more reliably reflect human comprehension preferences. 
+		Cause: [(0, 0), (0, 23)]
+		Effect: [(0, 26), (0, 32)]
+
+	CASE: 2
+	Stag: 80 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since different parsers make different errors, we conjectured that dependencies in the intersection of the output of multiple parsers may be more reliable and thus may more reliably reflect human comprehension preferences. 
+		Cause: [(0, 1), (0, 5)]
+		Effect: [(0, 7), (0, 23)]
+
+	CASE: 3
+	Stag: 81 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: Similarly, we conjectured that large differences in the realizer u'\u2019' s perceptron model score may more reliably reflect human fluency preferences than small ones, and thus we combined this score with features for parser accuracy in an SVM ranker. 
+		Cause: [(0, 0), (0, 28)]
+		Effect: [(0, 32), (0, 44)]
+
+	CASE: 4
+	Stag: 82 
+		Pattern: 45 [['so', 'that']]---- [['&C'], ['&R']]
+		sentTXT: Additionally, given that parsers may more reliably recover some kinds of dependencies than others, we included features for each dependency type, so that the SVM ranker might learn how to weight them appropriately. 
+		Cause: [(0, 0), (0, 23)]
+		Effect: [(0, 26), (0, 35)]
+
+	CASE: 5
+	Stag: 83 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: Finally, since the differences among the n -best parses reflect the least certain parsing decisions, and thus ones that may require more common sense inference that is easy for humans but not machines, we conjectured that including features from the n -best parses may help to better match human performance. 
+		Cause: [(0, 0), (0, 16)]
+		Effect: [(0, 20), (0, 54)]
+
+	CASE: 6
+	Stag: 96 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Finally, since the Berkeley parser yielded the best results on its own, we also tested models using all the feature classes but only using this parser by itself. 
+		Cause: [(0, 3), (0, 12)]
+		Effect: [(0, 14), (0, 29)]
+
+	CASE: 7
+	Stag: 102 103 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We then confirmed this result on the final test set, Section 23 of the CCGbank, as shown in Table 4 ( p 0.02 as well. In order to gain a better understanding of the successes and failures of our SVM ranker, we present here a targeted manual analysis of the development set sentences with the greatest change in BLEU scores, carried out by the second author (a native speaker. 
+		Cause: [(0, 18), (1, 35)]
+		Effect: [(0, 0), (0, 15)]
+
+Section 5:  5 Analysis and Discussion has 5 CE cases
+	CASE: 1
+	Stag: 104 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: In this analysis, we consider whether the reranked realization improves upon or detracts from realization quality u'\u2014' in terms of adequacy, fluency, both or neither u'\u2014' along with a linguistic categorization of the differences between the reranked realization and the original top-ranked realization according to the averaged perceptron model. 
+		Cause: [(0, 56), (0, 59)]
+		Effect: [(0, 0), (0, 53)]
+
+	CASE: 2
+	Stag: 111 112 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In this comparison, items where both fluency and adequacy were affected were counted as adequacy cases. The table also shows that differences in the order of VP constituents usually led to a change in adequacy or fluency, as did ordering changes within NPs, with noun-noun compounds and named entities as the most frequent subcategories of NP-ordering changes. 
+		Cause: [(0, 15), (1, 28)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 3
+	Stag: 117 118 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: With wsj_0041.18, the SVM ranker unfortunately prefers a realization where presumably seems to modify shows rather than of two politicians as in the original, which the averaged perceptron model prefers. Finally, wsj_0044.111 is an example where a subject-inversion makes no difference to adequacy or fluency. 
+		Cause: [(0, 23), (1, 15)]
+		Effect: [(0, 0), (0, 21)]
+
+	CASE: 4
+	Stag: 120 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: A limitation of the experiments reported in this paper is that OpenCCG u'\u2019' s input semantic dependency graphs are not the same as the Stanford dependencies used with the Treebank parsers, and thus we have had to rely on the gold parses in the PTB to derive gold dependencies for measuring accuracy of parser dependency recovery. 
+		Cause: [(0, 0), (0, 34)]
+		Effect: [(0, 38), (0, 60)]
+
+	CASE: 5
+	Stag: 120 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: A limitation of the experiments reported in this paper is that OpenCCG u'\u2019' s input semantic dependency graphs are not the same as the Stanford dependencies used with the Treebank parsers, and thus we have had to rely on the gold parses in the PTB to derive gold dependencies for measuring accuracy of parser dependency recovery. 
+		Cause: [(0, 17), (0, 22)]
+		Effect: [(0, 0), (0, 15)]
+
+Section 6:  6 Related Work has 1 CE cases
+	CASE: 1
+	Stag: 125 126 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: To our knowledge, however, a comprehensive investigation of avoiding vicious structural ambiguities with broad coverage statistical parsers has not been previously explored. As our SVM ranking model does not make use of CCG-specific features, we would expect our self-monitoring method to be equally applicable to realizers using other frameworks. 
+		Cause: [(1, 1), (1, 27)]
+		Effect: [(0, 0), (0, 23)]
+
+Section 7:  7 Conclusion has 3 CE cases
+	CASE: 1
+	Stag: 128 129 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Additionally, via a targeted manual analysis, we showed that the SVM reranker frequently manages to avoid egregious errors involving u'\u201c' vicious u'\u201d' ambiguities, of the kind that would mislead human readers as to the intended meaning. As noted in Reiter u'\u2019' s [ 30 ] survey, many NLG systems use surface realizers as off-the-shelf components. 
+		Cause: [(0, 43), (1, 22)]
+		Effect: [(0, 0), (0, 41)]
+
+	CASE: 2
+	Stag: 128 129 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Additionally, via a targeted manual analysis, we showed that the SVM reranker frequently manages to avoid egregious errors involving u'\u201c' vicious u'\u201d' ambiguities, of the kind that would mislead human readers as to the intended meaning. As noted in Reiter u'\u2019' s [ 30 ] survey, many NLG systems use surface realizers as off-the-shelf components. 
+		Cause: [(1, 1), (1, 21)]
+		Effect: [(0, 0), (0, 46)]
+
+	CASE: 3
+	Stag: 135 136 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In future work, we also plan to investigate ways that self-monitoring might be implemented more efficiently as a combined process, rather than running independent parsers as a post-process following realization. We thank Mark Johnson, Micha Elsner, the OSU Clippers Group and the anonymous reviewers for helpful comments and discussion. 
+		Cause: [(0, 18), (1, 10)]
+		Effect: [(0, 0), (0, 16)]
+
+#-------------------------------------------------
+

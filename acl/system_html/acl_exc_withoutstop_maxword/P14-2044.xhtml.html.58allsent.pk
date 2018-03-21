@@ -1,0 +1,84 @@
+(lp0
+VIn contrast, we use pairwise morphological similarity as a prior in a non-parametric clustering model
+p1
+aVWe can create an infinite mixture model by combining the ddCRP prior with a likelihood function defining the probability of the data given the cluster assignments
+p2
+aVThis means that the membership of a word in a cluster requires only morphological similarity to some other element in the cluster, not to the cluster centroid; which may be more appropriate for languages with multiple morphological paradigms
+p3
+aVExponentiating the prior reduces the number of induced clusters and improves results, as it can change the cluster assignment for some words where the likelihood strongly prefers one cluster but the prior clearly indicates another
+p4
+aVIn this paper we present a new approach for inducing part-of-speech (POS) classes, combining morphological and distributional information in a non-parametric Bayesian generative model based on the distance-dependent Chinese restaurant process (ddCRP; Blei and Frazier, 2011
+p5
+aVRecent work also shows that the combination of morphological and distributional information yields the best results, especially cross-linguistically [ 9 , 3 ]
+p6
+aVSince then, most systems have incorporated morphology in some way, whether as an initial step to obtain prototypes for clusters [ 1 ] , or as features in a generative model [ 14 , 8 , 21 ] , or a representation-learning algorithm [ 27 ]
+p7
+aVHowever, almost half the gold standard clusters in MTE contain just a few words and we do not expect our model to be able to learn them anyway, so the 1-1 measure is still useful for telling us how well the model learns the bigger and more distinguishable classes
+p8
+aVFor each evaluation setting we provide two sets of scores u'\u005cu2014' first are the 1-1 and V-m scores for the given model, second are the comparable scores for K-means run with the same number of clusters as induced by the non-parametric model
+p9
+aVWe use a log-linear model to capture suffix similarities between words, and learn the feature weights by iterating between sampling and weight learning
+p10
+aVMoreover, the mapping between a surface form and morphology is complex and nonlinear, so that simple metrics such as edit distance will only weakly approximate morphological similarity
+p11
+aVDistributional similarity varies smoothly with syntactic function, so that words with similar syntactic functions should have similar distributional properties
+p12
+aVWith different number of induced and gold standard clusters the 1-1 measure suffers because some induced clusters cannot be mapped to gold clusters or vice versa
+p13
+aVCombining this likelihood term with the prior, the probability of customer i following j is
+p14
+aVDue to the nonsequentiality this equivalence does not hold, but we do expect to see similar results to the IGMM
+p15
+aVSince we are using continuous-valued vectors (word embeddings) to represent the distributional characteristics of words, we use a multivariate Gaussian likelihood
+p16
+aVHere we report also type-based measures because these can reveal differences in model behavior even when token-based measures are similar
+p17
+aVDistributional information is typically represented in numerical vectors, and recent work has demonstrated the utility of continuous vector representations, or u'\u005cu201c' embeddings u'\u005cu201d' [ 16 , 15 , 13 , 24 ]
+p18
+aVBecause we do not know which suffixes are meaningful a priori , we use a maximum entropy model whose features include all suffixes up to length three that are shared by at least one pair of words
+p19
+aVBy identifying the connected components in this graph, the ddCRP equivalently defines a prior over clusterings
+p20
+aVWe set the prior scale matrix u'\u005cu039b' 0 by using the average covariance from a K-means run with K = 200
+p21
+aVBut these features are difficult to combine because of their disparate representations
+p22
+aVThough coarse-grained tags have their place [ 17 ] , in many cases the distributional and morphological distinctions between words are more closely aligned with the fine-grained tagsets, which typically distinguish between verb tenses, noun number and gender, and adjectival scale (comparative, superlative, etc.), so we feel that the evaluation against fine-grained tagset is more relevant here
+p23
+aVThe difference could be due to the non-sequentiality, or becuase the samplers are different u'\u005cu2014' IGMM enabling resampling only one item at a time, ddCRP performing blocked sampling
+p24
+aVIf c i is the index of the customer followed by customer i , then the ddCRP prior can be written
+p25
+aVFor better comparison with previous work, we also evaluate against the coarse-grained tags; however, these numbers are not strictly comparable to other scores reported on MTE because we are only able to train and evaluate on the subset of words that also have Polyglot embeddings
+p26
+aVThese results show that all non-parametric models perform better than K-means, which is a strong baseline in this task [ 8 ]
+p27
+aVWe do not apply the exponentiation parameter a when training the weights because this procedure affects the follower structure only, and we do not have to worry about the magnitude of the likelihood
+p28
+aVNon-parametric models are able to produce cluster of different sizes when the evidence indicates so, and this is clearly the case here
+p29
+aVWhen setting the average covariance as the expected value of the IW distribution the suitable scale matrix can be computed as u'\u005cu039b' 0 = E u'\u005cu2062' [ X ] u'\u005cu2062' ( u'\u005cu039d' 0 - d - 1 ) , where u'\u005cu039d' 0 is the prior degrees of freedom (which we set to d + 10) and d is the data dimensionality (64 for the Polyglot embeddings
+p30
+aVV-m can be somewhat sensitive to the number of clusters [ 19 ] but much less so than m-1 [ 7 ]
+p31
+aVIn this case, if d i u'\u005cu2062' j = 1 for all i j then the ddCRP reduces to the CRP
+p32
+aVA ddCRP is sequential if customers can only follow previous customers, i.e.,, d i u'\u005cu2062' j = u'\u005cu221e' when i j and f u'\u005cu2062' ( u'\u005cu221e' ) = 0
+p33
+aVSince we marginalize over the cluster parameters, computing P ( c i = j ) requires computing the likelihood P ( fol ( i ) , u'\u005cud835' u'\u005cudc17' j u'\u005cu0398' ) , where u'\u005cud835' u'\u005cudc17' j are the k customers already clustered with j
+p34
+aVScores for the fine-grained tags will be lower for these reasons, but we argue below that they are still informative
+p35
+aVWe interleave L-BFGS optimization within sampling, as in Monte Carlo Expectation-Maximization (Wei and Tanner, 1990
+p36
+aVSince Wikipedia and MTE are from different domains their lexicons do not fully overlap; we take the intersection of these two sets for training and evaluation
+p37
+aVwhere g s u'\u005cu2062' ( i , j ) is 1 if suffix s is shared by i th and j th words, and 0 otherwise
+p38
+aVTherefore, we can decompose P ( fol ( i ) , u'\u005cud835' u'\u005cudc17' j u'\u005cu0398' ) = P ( fol ( i u'\u005cud835' u'\u005cudc17' j , u'\u005cu0398' ) P ( u'\u005cud835' u'\u005cudc17' j u'\u005cu0398' ) and need only compute the change in likelihood due to merging in fol u'\u005cu2062' ( i
+p39
+aVwhere the hyperparameters are updated as u'\u005cu039a' n = u'\u005cu039a' 0 + n , u'\u005cu039d' n = u'\u005cu039d' 0 + n , and
+p40
+aVHowever, if we do not merge fol u'\u005cu2062' ( i ) with u'\u005cud835' u'\u005cudc17' j , then we have P ( u'\u005cud835' u'\u005cudc17' j u'\u005cu0398' ) in the overall joint probability
+p41
+a.

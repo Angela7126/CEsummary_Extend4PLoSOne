@@ -1,0 +1,18 @@
+(lp0
+VTherefore, in the fine pass, we normalize the inside scores at the leaves to sum to 1.0
+p1
+aVThus, we can use the coarse pass u'\u005cu2019' s inside and outside scores as the scaling values for the fine pass u'\u005cu2019' s scores
+p2
+aVBecause the grammar used in the coarse pass is a projection of the grammar used in the fine pass, these coarse scores correlate reasonably closely with the probabilities computed in the fine pass
+p3
+aVWe use a coarse-to-fine approach as in Petrov and Klein ( 2007 ) , but with only one coarse pass
+p4
+aVIf a span has a very high or very low score in the coarse pass, it typically has a similar score in the fine pass
+p5
+aVBecause we are summing instead of maxing scores in the fine pass, the scaling factors computed using max scores are not quite large enough, and so the rescaled inside probabilities grow too large when multiplied together
+p6
+aVThe coarse to fine pruning approach of Petrov and Klein ( 2007 ) employs an X-bar grammar as its first pruning phase, but there is no reason why we cannot begin with a more complex grammar for our initial pass
+p7
+aVFigure 1 shows
+p8
+a.

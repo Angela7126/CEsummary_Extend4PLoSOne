@@ -1,0 +1,18 @@
+(lp0
+VWith this simple reranking strategy and each of three different Treebank parsers, we find that it is possible to improve BLEU scores on Penn Treebank development data with White Rajkumar u'\u005cu2019' s [ 28 , 36 ] baseline generative model, but not with their averaged perceptron model
+p1
+aVSimilarly, we conjectured that large differences in the realizer u'\u005cu2019' s perceptron model score may more reliably reflect human fluency preferences than small ones, and thus we combined this score with features for parser accuracy in an SVM ranker
+p2
+aVRajkumar White u'\u005cu2019' s experiments confirmed the efficacy of the features based on Jaeger u'\u005cu2019' s work, including information density u'\u005cu2013' based features, in a local classification model
+p3
+aVUsing the averaged perceptron algorithm [ 8 ] , White Rajkumar [ 35 ] trained a structured prediction ranking model to combine these existing syntactic models with several n -gram language models
+p4
+aVSimple ranking with the Berkeley parser of the generative model u'\u005cu2019' s n -best realizations raised the BLEU score from 85.55 to 86.07, well below the averaged perceptron model u'\u005cu2019' s BLEU score of 87.93
+p5
+aVTherefore, to develop a more nuanced self-monitoring reranker that is more robust to such parsing mistakes, we trained an SVM using dependency precision and recall features for all three parses, their n -best parsing results, and per-label precision and recall for each type of dependency, together with the realizer u'\u005cu2019' s normalized perceptron model score as a feature
+p6
+aVTo select preferred outputs from the chart, we use White Rajkumar u'\u005cu2019' s [ 35 , 36 ] realization ranking model, recently augmented with a large-scale 5-gram model based on the Gigaword corpus
+p7
+aV2 2 Note that the features from the local classification model for that -complementizer choice have not yet been incorporated into OpenCCG u'\u005cu2019' s global realization ranking model, and thus do not inform the baseline realization
+p8
+a.

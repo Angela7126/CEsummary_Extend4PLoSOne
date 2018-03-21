@@ -1,0 +1,82 @@
+(lp0
+VWe used documents prepared by summarization tasks, NTCIR and DUC data as each task consists of series of documents with the same topic
+p1
+aVThe proposed method does not simply use MACD to find bursts, but instead determines topic words in series of documents
+p2
+aVWe reinforced words related to a topic with low frequencies by collecting documents from the corpus, and applied Latent Dirichlet Allocation (LDA) [ 4 ] to these documents in order to extract topic candidates
+p3
+aVThis paper proposes a method for detecting topic over time in series of documents
+p4
+aVTopic candidates include surplus words that are not related to the topic because the results obtained by u'\u005cu201c' LDA u'\u005cu201d' were worse than those obtained by u'\u005cu201c' LDA MACD u'\u005cu201d' , and even worse than u'\u005cu201c' Event u'\u005cu201d' in both short and long summary
+p5
+aVWe identified event words by using the traditional tf u'\u005cu2217' idf method applied to the results of named entities
+p6
+aVAfter a sufficient number of sampling iterations, the approximated posterior can be used to estimate u'\u005cu03a6' and u'\u005cu0398' by examining the counts of word assignments to topics and topic occurrences in documents
+p7
+aVWe used FormalRun as a test data, and another set consisted of 218,724 documents from 1998 to 1999 of Mainichi newspaper as a corpus used in LDA and MACD
+p8
+aVFukumoto et al also applied MACD to find topics
+p9
+aVFBFREE DryRun data is used to tuning parameters, i.e., , the number of extracted words according to the tf u'\u005cu2217' idf value, and the threshold value of KL-distance
+p10
+aVBecause w is a representative word of each document in the task
+p11
+aVBased on this assumption, we computed similarity between correct and word histograms by using KL-distance 2 2 We tested KL-distance, histogram intersection and Bhattacharyya distance to obtain similarities
+p12
+aVFor future work, we should be able to obtain further advantages in efficacy in our topic detection and summarization approach by disambiguating topic senses
+p13
+aVUnlike Dynamic Topic Models [ 3 ] , it does not assume Gaussian distribution so that it is a natural way to analyze bursts which depend on the data
+p14
+aVIt shows the relationship between two moving averages of prices modeling bursts as intervals of topic dynamics, i.e., , positive acceleration
+p15
+aVFor each lda_topic, we extracted words whose probabilities are larger than zero, and regarded these as topic candidates
+p16
+aVAn event word refers to the t u'\u005cu2062' h u'\u005cu2062' e u'\u005cu2062' m u'\u005cu2062' e of the document itself, and frequently appears in the document but not frequently appear in other documents
+p17
+aVTherefore, we first applied NE recognition to the target documents to be summarized, and then calculated tf u'\u005cu2217' idf to the results of NE recognition
+p18
+aVAs a result, we set tf u'\u005cu2217' idf and KL-distance to 100 and 0.104, respectively
+p19
+aVLDA presented by [ 4 ] models each document as a mixture of topics (we call it lda_topic to discriminate our t u'\u005cu2062' o u'\u005cu2062' p u'\u005cu2062' i u'\u005cu2062' c candidates), and generates a discrete probability distribution over words for each lda_topic
+p20
+aVWe assume that if a term w is informative for summarizing a particular documents in a collection, its burstiness approximates the burstiness of documents in the collection
+p21
+aVTherefore, we can assume that named entities(NE) are linguistic features for event detection
+p22
+aVWe reported only the result obtained by KL-distance as it was the best results among them
+p23
+aVThere are two types of correct summary according to the character length, u'\u005cu201c' long u'\u005cu201d' and u'\u005cu201c' short u'\u005cu201d' , All series of documents were tagged by CaboCha [ 14 ]
+p24
+aVz \u005c i refers to a topic set Z , not including the current assignment z i n \u005c i , j v is the count of word v in topic j that does not include the current assignment z i , and n \u005c i , j u'\u005cu22c5' indicates a summation over that dimension
+p25
+aVIf the value of D ( P u'\u005cu2223' u'\u005cu2223' Q ) is smaller than a certain threshold value, w is regarded as a topic word
+p26
+aVWe selected a certain number of sentences according to rank score into the summary
+p27
+aVTherefore the number of different clusters is 50
+p28
+aVHowever, the fact that topics are widely distributed in the stream of documents, and sometimes they frequently appear in the documents, and sometimes not often hamper such attempts
+p29
+aVFinally, we selected a certain number of sentences according to the rank score into a summary
+p30
+aVThe size that optimized the average Rouge-1(R-1) score across 30 tasks was chosen
+p31
+aVIt refers to notions of who(person), where(place), when(time) including what, why and how in a document
+p32
+aVFor example, DUC2005 consists of 50 tasks
+p33
+aVScholz et al have attempted to use different ensembles obtained by training several data streams to detect concept drift [ 22 ]
+p34
+aVThey have attempted to handle concept changes by focusing a window with documents sufficiently close to the target concept
+p35
+aVHe and Parket attempted to find bursts, periods of elevated occurrence of events as a dynamic phenomenon instead of focusing on arrival rates [ 11 ]
+p36
+aVPrior work including u'\u005cu201c' TTM u'\u005cu201d' has demonstrated the usefulness of semantic concepts for extracting salient sentences
+p37
+aVThe value of E ranges from 0 to 1, and the smaller value of E indicates better result
+p38
+aVWe estimated k u'\u005cu2032' and d u'\u005cu2032' by using Entropy measure given by
+p39
+aVTwo vertices are connected if their affinity weight is larger than 0 and we let f ( i u'\u005cu2192' i ) = 0 to avoid self transition
+p40
+a.

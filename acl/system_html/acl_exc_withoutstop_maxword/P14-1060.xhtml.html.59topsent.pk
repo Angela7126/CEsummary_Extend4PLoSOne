@@ -1,0 +1,22 @@
+(lp0
+VThis would involve initializing the weights prior to the semi-supervised procedure with the weights from the supervised learning model, so as to seed the semi-supervised approach with reasonable model, and use the partially annotated data to fine-tune the supervised model
+p1
+aVWe describe learning of the model parameters with fully annotated training data, as well as an approach for learning motif segmentation that requires only partial supervision
+p2
+aVWhile the Viterbi algorithm can be used for tagging optimal state-sequences given the weights, the structured perceptron can learn optimal model weights given gold-standard sequence labels
+p3
+aVImplicitly, the weight learning algorithm can be seen as a gradient descent procedure minimizing the difference between the scores of highest scoring (Viterbi) state sequences, and the label state sequences
+p4
+aVHence, in this case, we use a variation of the hard EM algorithm for learning
+p5
+aVSection 3 describes our methodology, which consists of a frequency-driven segmentation model to partition text into semantically meaningful recurring lineal-subunits, a representation learning framework for learning new semantic embeddings based on this segmentation, and an approach to use such embeddings in downstream applications
+p6
+aVHence, we use the Hellinger measure between neighbourhood motif distributions in learning representations
+p7
+aVGiven constituent motifs of each sentence in the data, we can now define neighbourhood distributions for unary or phrasal motifs in terms of other motifs (as envisioned in Table 1
+p8
+aVFor this task, the motif based model is expected to perform well as common metaphorical usage is generally through idiosyncratic MWEs, which the motif based models is specially geared to capture through the features of the segmentation model
+p9
+aVThis is not unexpected the supervision provided to the model is very weak due to a lack of negative examples (which leads to spurious motif taggings, leading to a low precision), as well as
+p10
+a.

@@ -1,0 +1,22 @@
+(lp0
+VWe describe learning of the model parameters with fully annotated training data, as well as an approach for learning motif segmentation that requires only partial supervision
+p1
+aVThis would involve initializing the weights prior to the semi-supervised procedure with the weights from the supervised learning model, so as to seed the semi-supervised approach with reasonable model, and use the partially annotated data to fine-tune the supervised model
+p2
+aVWe present a framework for extending distributional semantics to learn semantic representations of both words and phrases in terms of recurrent motifs, rather than arbitrary word tokens
+p3
+aVSection 3 describes our methodology, which consists of a frequency-driven segmentation model to partition text into semantically meaningful recurring lineal-subunits, a representation learning framework for learning new semantic embeddings based on this segmentation, and an approach to use such embeddings in downstream applications
+p4
+aVFor this task, the motif based distributional embeddings vastly outperform a conventional distributional model (DSM) based on token distributions, as well as additive (AVM) and multiplicative (MVM) models of vector compositionality, as proposed by Lapata et al
+p5
+aVFor this task, the motif based model is expected to perform well as common metaphorical usage is generally through idiosyncratic MWEs, which the motif based models is specially geared to capture through the features of the segmentation model
+p6
+aVGiven constituent motifs of each sentence in the data, we can now define neighbourhood distributions for unary or phrasal motifs in terms of other motifs (as envisioned in Table 1
+p7
+aVWhile the Viterbi algorithm can be used for tagging optimal state-sequences given the weights, the structured perceptron can learn optimal model weights given gold-standard sequence labels
+p8
+aVHence, we use the Hellinger measure between neighbourhood motif distributions in learning representations
+p9
+aVFor composing the motifs representations to get judgments on semantic similarity of sentences, we use
+p10
+a.

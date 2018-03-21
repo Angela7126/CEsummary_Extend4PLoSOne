@@ -1,0 +1,208 @@
+(lp0
+VFor the monolingual bigram model, the number of states in the HMM is U times more than that of the monolingual unigram model, as the states at specific position of F are not only related to the length of the current word, but also related to the length of the word before it
+p1
+aVThese variables are large in number and it is not clear how to apply VB to UWS, and as far the authors aware there is no previous work related to the application of VB to monolingual UWS
+p2
+aVThe experimental results show that the proposed UWS methods are comparable to the Stanford segmenters on the OpenMT06 corpus, while achieves a 0.96 BLEU increase on the PatentMT9 corpus
+p3
+aVThus its complexity is U 2 times the unigram model u'\u005cu2019' s complexity
+p4
+aVThe proposed method with monolingual bigram model performed poorly on the Chinese monolingual segmentation task; thus, it was not tested
+p5
+aV[] proposed a bilingual method by adding alignment into the generative model, but was only able to test it on small-scale BTEC data
+p6
+aVP ( u'\u005cu2131' k k u'\u005cu2032' u'\u005cu2131' , u'\u005cu2133' ) is the marginal probability of all the possible F u'\u005cu2208' u'\u005cu2131' that contain u'\u005cu2131' k k u'\u005cu2032' as a word, which can be calculated efficiently through dynamic programming (the process is similar to the foreward-backward algorithm in training a hidden Markov model (HMM) []
+p7
+aVThis data set mainly consists of news text 3 3 It also contains a small number of web blogs
+p8
+aVThe monolingual bigram model, however, was slower to converge, so we started it from the segmentations of the unigram model, and using 10 iterations
+p9
+aVUWS learns models by maximizing the likelihood of the unsegmented corpus, formulated as
+p10
+aV7 can be rewritten (as in IBM model 2
+p11
+aVUWS learns from unsegmented raw text, which are available in large quantities, and thus it has the potential to provide more accurate and adaptive segmentation than supervised approaches with less development effort being required
+p12
+aVTherefore, we have not explored VB methods in this paper, but we do show that our method is superior to the existing methods
+p13
+aVThis is because this corpus is out-of-domain for the supervised segmenters
+p14
+aVThe data sets of NIST Eval 2002 to 2005 were used as the development for MERT tuning []
+p15
+aVWe aware that variational bayes (VB) may be used for speeding up the training of DP-based or PYP-based bilingual UWS
+p16
+aVIn order to maintain both speed and accuracy, the following window function is adopted
+p17
+aVP ( u'\u005cu2131' k k u'\u005cu2032' u'\u005cu2131' , E , u'\u005cu212c' ) is the marginal probability of all the possible F u'\u005cu2208' u'\u005cu2131' that contain u'\u005cu2131' k k u'\u005cu2032' as a word and are aligned with E , formulated as
+p18
+aVThe set u'\u005cu2131' is chosen to represent an unsegmented foreign language sentence (a sequence of characters), because an unsegmented sentence can be seen as the set of all possible segmentations of the sentence denoted F , i.e., F u'\u005cu2208' u'\u005cu2131'
+p19
+aVNote that the comparison of speed is only for reference because the times are obtained from their respective papers
+p20
+aVwhere K is the number of characters in u'\u005cu2131' , and the k -th character is the start of the word f j , since j and J are unknown during the computation of dynamic programming u'\u005cu0394' b is the window size, u'\u005cu039b' u'\u005cu03a6' is the prior probability of an empty English word, and u'\u005cu03a3' ensures all the items sum to 1
+p21
+aVThe monolingual expectation is calculated according to Eq
+p22
+aVThe bilingual model is
+p23
+aVIt was set to 3 for the monolingual unigram model, and 2 for the bilingual unigram model, which provided slightly higher BLEU scores on the development set than the other settings
+p24
+aVThe training set consists of 1 million parallel sentences extracted from patent documents, and the development set and test set both consist of 2000 sentences
+p25
+aVThe first bilingual corpus
+p26
+aVHowever, bilingual approaches that model word probabilities suffer from computational complexity
+p27
+aVMany languages, especially Asian languages such as Chinese, Japanese and Myanmar, have no explicit word boundaries, thus word segmentation (WS), that is, segmenting the continuous texts of these languages into isolated words, is a prerequisite for many natural language processing applications including SMT
+p28
+aVTable 5 presents the run times of the proposed methods on the bilingual corpora
+p29
+aVWe removed the United Nations corpus and the traditional Chinese data sets from the constraint training resources
+p30
+aVthe first bilingual UWS method practical for large corpora;
+p31
+aVTo this end, we model bilingual UWS under a similar framework with monolingual UWS in order to improve efficiency, and replace Gibbs sampling with expectation maximization (EM) in training
+p32
+aVThe computational complexity of our method is linear in the number of iterations, the size of the corpus, and the complexity of calculating the expectations on each sentence or sentence pair
+p33
+aVCHILDES [] is the most common test corpus for UWS methods
+p34
+aVIn monolingual segmentation, the proposed methods with both unigram and bigram models were tested
+p35
+aVThe time cost of the bilingual models is about 5 times that of the monolingual model, which is consistent with the complexity analysis in Section 3
+p36
+aVThe monolingual model u'\u005cu2133' is
+p37
+aVThis section describes our unified monolingual and bilingual UWS scheme
+p38
+aVFor UWS, the hidden variables are indicators that identify substrings of sentences in the corpus as words
+p39
+aVTwo monolingual corpora and two bilingual corpora are used (Table 2
+p40
+aVWe now look in more detail at the complexity of the expectation calculation in monolingual and bilingual models
+p41
+aVThe SIGHAN-MSR corpus [] consists of manually segmented simplified Chinese news text, released in the SIGHAN bakeoff 2005 shared tasks
+p42
+aVstate-of-the-art accuracy in monolingual UWS;
+p43
+aVThis paper is dedicated to bilingual UWS on large-scale corpora to support SMT
+p44
+aVThe bilingual expectation is given by Eq
+p45
+aVFor bilingual segmentation,the size of the alignment window is set to 6 ; the probability u'\u005cu039b' u'\u005cu03a6' of foreign language words being generated by an empty English word, was set to 0.3
+p46
+aVIn practical applications, the size of the corpus is fixed, and we found empirically that the number of iterations required by the proposed method for convergence is usually small (less than five iterations
+p47
+aVThe maximum length of foreign language words is set to 4
+p48
+aVThen, the previous dynamic programming method can be extended to the bilingual expectation
+p49
+aVPatentMT9 is from the shared task of NTCIR-9 patent machine translation
+p50
+aVThe approaches of explicitly modeling the probability of words [] significantly outperformed a heuristic approach [] on the monolingual Chinese SIGHAN-MSR corpus [] , which inspired the work of this paper
+p51
+aVTable 4 presents the BLEU scores for Moses using different segmentation methods
+p52
+aV5 ; the complexity is linear in the length of sentences and the square of the predefined maximum length of words
+p53
+aVFor example, in machine translation, there are various parallel corpora such as BTEC for tourism-related dialogues [] and PatentMT in the patent domain [] 1 1 http://ntcir.nii.ac.jp/PatentMT , but researchers working on Chinese-related tasks often use the Stanford Chinese segmenter [] which is trained on a small amount of annotated news text
+p54
+aVIn this section, the proposed method is first validated on monolingual segmentation tasks, and then evaluated in the context of SMT to study whether the translation quality, measured by BLEU, can be improved
+p55
+aVFor the bilingual tasks, the publicly available system of Moses [] with default settings is employed to perform machine translation, and BLEU [] was used to evaluate the quality
+p56
+aVMonolingual and bilingual WS can be formulated as follows, respectively
+p57
+aVInspired by [] , we employ a Pitman-Yor process model to build the segmentation model u'\u005cu2133' or u'\u005cu212c'
+p58
+aVThis section uses a unigram model for description convenience, but the method can be extended to n -gram models
+p59
+aVThe training was started from assuming that there was no previous segmentations on each sentence (pair), and the number of iterations was fixed
+p60
+aVCharacter-based segmentation, LDC segmenter and Stanford Chinese segmenters were used as the baseline methods
+p61
+aVimprovement of BLEU scores compared to supervised Stanford Chinese word segmenter
+p62
+aV8 , whose complexity is the same as the monolingual case
+p63
+aVFor the PYP model, the base distribution adopts the formula in [] , and the strength parameter is set to 1.0 , and the discount is set to 1.0 × 10 - 6
+p64
+aV[] used the local best alignment to increase the speed of the Gibbs sampling in training but the impact on accuracy was not explored
+p65
+aVHowever, the complexity of calculating the transition probability, in Eqs
+p66
+aVwhere N i is the number of iterations, K is the average number of characters per sentence, and U is the predefined maximum length of words
+p67
+aVThough supervised-learning approaches which involve training segmenters on manually segmented corpora are widely used [] , yet the criteria for manually annotating words are arbitrary, and the available annotated corpora are limited in both quantity and genre variety
+p68
+aVThe parameters are tuned on held-out data sets
+p69
+aVOpenMT06 was used in the NIST open machine translation 2006 Evaluation 2 2 http://www.itl.nist.gov/iad/mig//tests/mt/2006/
+p70
+aVWe intended to test [] , but found it impracticable on large-scale corpora
+p71
+aVXu et al
+p72
+aVNguyen et al
+p73
+aVExperimental results show that they are competitive to state-of-the-art baselines in both accuracy and speed (Table LABEL:tab:mono:acc
+p74
+aVHowever, VB requires formulating the m expectations of ( m - 1 ) -dimensional marginal distributions, where m is the number of hidden variables
+p75
+aVEq
+p76
+aVThe CTB and PKU Stanford segmenter were both trained on annotated news text, which was the major domain of OpenMT06
+p77
+aVFor the alignment we employ an approximation to IBM model 2 [] described below
+p78
+aVThus its overall complexity is
+p79
+aVThus its overall complexity is
+p80
+aVWe define the conditional probability of f j given the corresponding English sentence E and the model u'\u005cu212c' as
+p81
+aVUpdate the respective model u'\u005cu2133' or u'\u005cu212c' according to these expectations (see Section 2.2
+p82
+aVFor the monolingual tasks, the F 1 score against the gold annotation is adopted to measure the accuracy
+p83
+aVEach experiment was performed three times
+p84
+aVTable 1 lists the main notation
+p85
+aVExclude the previous expected counts of the current sentence (pair) from the model, and then derive the current sentence in all possible ways, calculating the new expected counts for the words (see Section 2.1 ), that is, we calculate the expected probabilities of the u'\u005cu2131' k k u'\u005cu2032' being words given the data excluding u'\u005cu2131' , i.e., u'\u005cud835' u'\u005cudc04' u'\u005cud835' u'\u005cudd3d' / { u'\u005cu2131' } ( P ( u'\u005cu2131' k k u'\u005cu2032' u'\u005cu2131' ) ) = P ( u'\u005cu2131' k k u'\u005cu2032' u'\u005cu2131' , u'\u005cu2133' ) in a similar manner to the marginalization in the Gibbs sampling process which we are replacing;
+p86
+aVThe English sentence E is used in the generation of a segmented sentence F
+p87
+aVwhere J and I are the number of foreign and English words, respectively, and a j is the position of the English word that is aligned to f j in the alignment a
+p88
+aVwhere U is the predefined maximum length of foreign language words, P a u'\u005cu2062' ( k ) and P b u'\u005cu2062' ( k u'\u005cu2032' ) are the forward and backward probabilities, respectively
+p89
+aVThe following two operations are performed iteratively for each sentence (pair
+p90
+aVIn contrast, UWS, spurred by the findings that infants are able to use statistical cues to determine word boundaries [] , relies on statistical criteria instead of manually crafted standards
+p91
+aVOur method of learning u'\u005cu2133' and u'\u005cu212c' proceeds in a similar manner to the EM algorithm
+p92
+aVThe program is single threaded and implemented in C++
+p93
+aVThe results reported in related papers are listed for comparison
+p94
+aVIn Eqs
+p95
+aVThe contributions of this paper include
+p96
+aVwhere a is an alignment between F and E
+p97
+aVwhere f j is a foreign language word, and n u'\u005cu2062' ( f j ) is the observed counts of f j , u'\u005cu0398' is named the strength parameter, G 0 u'\u005cu2062' ( f j ) is named the base distribution of f j , and d is the discount
+p98
+aVby (Zhao and Kit, 2008
+p99
+aVby (Mochihashi et al.,2009); b
+p100
+aVby (Goldwater et al.,2009); c
+p101
+aV9 and 10 , is O u'\u005cu2062' ( u'\u005cu0394' b
+p102
+aV11 and 12
+p103
+a.

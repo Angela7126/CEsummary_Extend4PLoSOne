@@ -1,0 +1,18 @@
+(lp0
+VFormally, our model approximates the probability of target hypothesis T conditioned on source sentence S
+p1
+aVThis notion of affiliation is derived from the word alignment, but unlike word alignment, each target word must be affiliated with exactly one non-NULL source word
+p2
+aVOne issue with the S2T NNJM is that the probability is computed over every target word, so it does not explicitly model NULL-aligned source words
+p3
+aVWe treat NULL as a normal target word, and if a source word aligns to multiple target words, it is treated as a single concatenated token
+p4
+aVThe probability is computed over every source word in the input sentence
+p5
+aVSpecifically, we introduce a novel formulation for a neural network joint model (NNJM), which augments an n -gram target language model with an m -word source window
+p6
+aVWe follow the standard n -gram LM decomposition of the target, where each target word t i is conditioned on the previous n - 1 target words
+p7
+aVIn order to assign a probability to every source word during decoding,
+p8
+a.

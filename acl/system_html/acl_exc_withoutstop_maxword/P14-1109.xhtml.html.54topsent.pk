@@ -1,0 +1,14 @@
+(lp0
+VIn NLP, many of the probabilistic text models work in the discrete space [ 9 , 2 ] , but our model is different since the text features are sparse, we first perform kernel density estimates to smooth out the zeroing items, and then calculate the empirical cumulative distribution function (CDF) of the random variables
+p1
+aVAgain, the reason why we perform approximated inference is that exact inference in the high-dimensional Gaussian copula density is non-trivial, and might not have analytical solutions, but approximate inference using maximum density sampling from the Gaussian copula significantly relaxes the complexity of inference
+p2
+aVThe idea behind copula theory is that the cumulative distribution function (CDF) of a random vector can be represented in the form of uniform marginal cumulative distribution functions, and a copula that connects these marginal CDFs, which describes the correlations among the input random variables
+p3
+aVTo do this, we formulate the problem as a text regression task, and use a Gaussian copula with probability integral transform to model the uniform marginals and their dependencies
+p4
+aVFinally, we investigate the robustness of the proposed semiparametric Gaussian copula regression model by varying the amount of features in the covariate space
+p5
+aVTherefore, by modeling the correlations among marginal CDFs, the copula model has gained the insights on the dependency structures of the random variables, and thus, the performance
+p6
+a.

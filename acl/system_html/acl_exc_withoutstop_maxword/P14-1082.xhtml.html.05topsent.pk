@@ -1,0 +1,48 @@
+(lp0
+VMLF baseline
+p1
+aVMLF baseline
+p2
+aVMLF baseline
+p3
+aVMLF baseline
+p4
+aVThird, we observe that adding the language model to our classifier leads to another significant gain (configuration l1r1 + LM in the results in Table 2
+p5
+aVWe see that the language model baseline for English u'\u005cu2192' French shows the same substantial improvement over the baseline as our English u'\u005cu2192' Spanish results
+p6
+aVAs expected, the LM baseline substantially outperforms the context-insensitive MLF baseline
+p7
+aVIt adds a LM component to the MLF baseline
+p8
+aVThe language model is a trigram-based back-off language model with Kneser-Ney smoothing, computed using SRILM [] and trained on the same training data as the translation model
+p9
+aVIn other words, for each word type or phrase type that occurs as a fragment in the training set, and which does not map to just a single translation, a classifier is trained
+p10
+aVA second baseline was constructed by weighing the probabilities from the translation table directly with the L2 language model described earlier
+p11
+aVThough the classifier generally works best in the l1r1 configuration, i.e., with context size one, the trigram-based language model allows further left-context information to be incorporated that influences the weights of the classifier output, successfully forcing the system to select alternatives
+p12
+aVLikewise, Table 4 exemplifies small fragments from the l1r1 configuration compared to the same configuration enriched with a language model
+p13
+aVSecond, our classifier approach attains a substantially higher accuracy than the LM baseline
+p14
+aVTable 2 shows the results for English to Spanish in more detail and adds a comparison with the two baseline systems
+p15
+aVWhereas machine translation generally concerns the translation of whole sentences or texts from one language to the other, this study focusses on the translation of native language (henceforth L1) words and phrases, i.e., smaller fragments, in a foreign language (L2) context
+p16
+aVPer classifier expert, the best scoring configuration was selected, referred to as the auto configuration in Table 2
+p17
+aVHowever, for English u'\u005cu2192' Dutch and English u'\u005cu2192' Chinese we find that the LM baseline actually performs slightly worse than baseline
+p18
+aVThis combination of a classifier with context size one and trigram-based language model proves to be most effective and reaches the best results so far
+p19
+aVWords or phrases that always map to a single translation are stored in a simple mapping table, as a classifier would have no added value in such cases
+p20
+aVThe idea of local phrase selection with a discriminative machine learning classifier using additional local (source-language) context was introduced in parallel to Stroppa et al
+p21
+aVThe auto configuration does not uniformly apply the same feature vector setup to all classifier experts but instead seeks to find the optimal setup per classifier expert
+p22
+aVThe same significance level was found when comparing l1r1 + LM against l1r1 , auto + LM against auto , as
+p23
+a.

@@ -1,0 +1,18 @@
+(lp0
+VPairwise constraints are constraints on the counts of two labels in a citation
+p1
+aVThe algorithms we present in later sections for handling soft global constraints and for learning the penalties of these constraints can be applied to general structured linear models, not just CRFs, provided we have an available algorithm for performing MAP inference
+p2
+aVMAP inference in the model with soft constraints is performed using Soft-DD, shown in Algorithm 3
+p3
+aVSince we truncate penalties at 0, this suggests that we will learn a penalty of 0 for constraints in three categories constraints that do not hold in the ground truth, constraints that hold in the ground truth but are satisfied in practice by performing inference in the base CRF model, and constraints that are satisfied in practice as a side-effect of imposing non-zero penalties on some other constraints
+p4
+aVBIO labeling allows individual labels on tokens to label segmentation information as well as labels for the segments
+p5
+aVSoft constraints can be implemented inefficiently using hard constraints and dual decomposition u'\u005cu2014' by introducing copies of output variables and an auxiliary graphical model, as in Rush et al
+p6
+aVFor 11.99% of the examples, the Soft-DD algorithm satisfies constraints that were not satisfied during unconstrained inference, while in the remaining 11.72% Soft-DD converges with some constraints left unsatisfied, which is possible since we are imposing them as soft constraints
+p7
+aVOne consideration when
+p8
+a.

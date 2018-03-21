@@ -1,0 +1,420 @@
+(lp0
+VIn this section, we split the phrase pair embedding into two parts to model the translation confidence directly translation confidence with sparse features and translation confidence with recurrent neural network
+p1
+aVSo as to model the translation confidence for a translation phrase pair, we initialize the phrase pair embedding by leveraging the sparse features and recurrent neural network
+p2
+aVThe sparse features are phrase pairs in translation table, and recurrent neural network is utilized to learn a smoothed translation score with the source and target side information
+p3
+aVR 2 NN is a combination of recursive neural network and recurrent neural network
+p4
+aVWe use recurrent neural network to generate two smoothed translation confidence scores based on source and target word embeddings
+p5
+aVSo as to integrate such global information, and also keep the ability to generate tree structure, we combine the recurrent neural network and the recursive neural network to be a recursive recurrent neural network (R 2 NN
+p6
+aVR 2 NN is a combination of recursive neural network and recurrent neural network, which not only integrates the conventional global features as input information for each combination, but also generates the representation of the parent node for the future candidate generation
+p7
+aVWe first get two translation confidence vectors separately using sparse features and recurrent neural network, and then concatenate them to be the phrase pair embedding
+p8
+aVWe also explore phrase pair embedding method to model translation confidence directly, which is introduced in Section 5
+p9
+aVWe call it translation confidence based phrase pair embedding (TCBPPE
+p10
+aVThe sparse features can directly model the translation correspondence, and they may be more effective to rank the translation candidates, while recurrent neural network features are smoothed lexical translation confidence
+p11
+aV2013 ) propose a joint language and translation model, based on a recurrent neural network
+p12
+aVPhrase pair embedding method using translation confidence is elaborated in Section 5
+p13
+aVIn this section, we leverage DNN to model the end-to-end SMT decoding process, using a novel recursive recurrent neural network (R 2 NN), which is different from the above mentioned work applying DNN to components of conventional SMT framework
+p14
+aVWord embedding x t is integrated as new input information in recurrent neural networks for each prediction, but in recursive neural networks, no additional input information is used except the two representation vectors of the child nodes
+p15
+aVTo train the neural network, we add the confidence scores to the conventional log-linear model as features
+p16
+aVWord embedding is used as the input to learn translation confidence score, which is combined with commonly used features in the conventional log-linear model
+p17
+aV2013 ) extend the recurrent neural network language model, in order to use both the source and target side information to scoring translation candidates
+p18
+aVIn their work, the representation is optimized to learn a distortion model using recursive neural network, only based on the representation of the child nodes
+p19
+aVThe word embedding based phrase pair embedding (WEPPE) is defined as
+p20
+aVThe neural network is used to reduce the space dimension of sparse features, and the hidden layer of the network is used as the phrase pair embedding
+p21
+aVWhen we remove the recurrent input vectors, the representations of recursive network are generated with the child nodes, and it does not integrate global information, such as language model and distortion model, which are crucial to the performance of SMT
+p22
+aVWe then check whether translation candidates can be found in the translation table for each span, together with the phrase pair embedding and recurrent input vector (global features
+p23
+aVIn recursive neural networks, all the representations of nodes are generated based on their child nodes, and it is difficult to integrate additional global information, such as language model and distortion model
+p24
+aVA feature is learnt via a one-hidden-layer neural network, and the embedding of words in the phrase pairs are used as the input vector
+p25
+aVOur model generates the representation of a translation pair based on its child nodes
+p26
+aVIn order to integrate these crucial information for better translation prediction, we combine recurrent neural networks into the recursive neural networks, so that we can use global information to generate the next hidden state, and select the better translation candidate
+p27
+aVGiven the representations of the smaller phrase pairs, recursive auto-encoder can generate the representation of the parent phrase pair with a re-ordering confidence score
+p28
+aVThe recurrent neural network is trained with word aligned bilingual corpus, similar as [ 1 ]
+p29
+aVIn this section, we briefly recall the recurrent neural network and recursive neural network in Section 3.1 and 3.2, and then we elaborate our R 2 NN in detail in Section 3.3
+p30
+aVTo test the contributions of sparse features and recurrent network features, we first remove all the recurrent network features to train and test our R 2 NN model, and then remove all the sparse features to test the contribution of recurrent network features
+p31
+aVRNNLM [ 12 ] is firstly used to generate the source and target word embeddings, which are fed into a one-hidden-layer neural network to get a translation confidence score
+p32
+aVAnd also, translation task is difference from other NLP tasks, that, it is more important to model the translation confidence directly (the confidence of one target phrase as a translation of the source phrase), and our TCBPPE is designed for such purpose
+p33
+aVThe commonly used features, such as translation score, language model score and distortion score, are used as the recurrent input vector x
+p34
+aVWithout the recurrent input vectors, R 2 NN degenerates into recursive neural network (RNN
+p35
+aVIn their work, bilingual word embedding is trained to capture lexical translation information, and surrounding words are utilized to model context information
+p36
+aVThe commonly used binary recursive neural networks generate the representation of the parent node, with the representations of two child nodes as the input
+p37
+aVR 2 NN can combine the translation pairs of child nodes, and generate the translation candidates for parent nodes with their representations and plausible scores
+p38
+aV2013 ) propose an additive neural network for SMT decoding
+p39
+aV2013 ) propose an additive neural network for SMT decoding
+p40
+aVOur R 2 NN is used to model the end-to-end translation process, with recurrent global information added
+p41
+aVInstead of integrating the sparse features directly into the log-linear model, we use them as the input to learn a phrase pair embedding
+p42
+aVIn R 2 NN, new information can be used to generate the next hidden state, like recurrent neural networks, and a tree structure can be built, as recursive neural networks
+p43
+aVRecurrent neural networks are leveraged to learn language model, and they keep the history information circularly inside the network for arbitrarily long time [ 12 ]
+p44
+aVIn their work, not only the target word embedding is used as the input of the network, but also the embedding of the source word, which is aligned to the current target word
+p45
+aVSimilar with recurrent neural networks, recursive neural networks can also use unbounded history information from the sub-tree rooted at the current node
+p46
+aVRecurrent neural network is proposed to use unbounded history information, and it has recurrent connections on hidden states, so that history information can be used circularly inside the network for arbitrarily long time
+p47
+aVRecurrent neural network is usually used for sequence processing, such as language model [ 12 ]
+p48
+aVIn this section, we propose a three-step training method to train the parameters of our proposed R 2 NN, which includes unsupervised pre-training using recursive auto-encoding, supervised local training on the derivation tree of forced decoding, and supervised global training using early update training strategy
+p49
+aVTogether with other commonly used features, the translation confidence score is integrated into a conventional log-linear model
+p50
+aVHowever, some global information , which cannot be generated by the child representations, is crucial for SMT performance, such as language model score and distortion model score
+p51
+aVThe one-hot representation vector is used as the input, and a one-hidden-layer network generates a confidence score
+p52
+aVIn order to compare R 2 NN with recursive network for SMT decoding, we remove the recurrent input vector in R 2 NN to test its effect, and the results are shown in Table 3
+p53
+aVA simple approach to construct phrase pair embedding is to use the average of the embeddings of the words in the phrase pair
+p54
+aVRepresentations of phrase pairs are automatically learnt to optimize the translation performance, while features used in conventional model are hand-crafted
+p55
+aVTo generate a tree structure, recursive neural networks are introduced for natural language parsing [ 16 ]
+p56
+aVThe next question is how to initialize the phrase pair embedding in the translation table, so as to generate the leaf nodes of the derivation tree
+p57
+aVWe call them recurrent input vectors, since they are borrowed from recurrent neural networks
+p58
+aVTo generate the translation candidates in a commonly used bottom-up manner, recursive neural networks are naturally adopted to build the tree structure
+p59
+aVDNN is also introduced to Statistical Machine Translation (SMT) to learn several components or features of conventional framework, including word alignment, language modelling, translation modelling and distortion modelling
+p60
+aVOne is source to target translation confidence score and the other is target to source
+p61
+aVWord embedding can model translation relationship at word level, but it may not be powerful to model the phrase pair respondents at phrasal level, since the meaning of some phrases cannot be decomposed into the meaning of words
+p62
+aVThe language model is a 5-gram language model trained with the target sentences in the training data
+p63
+aVIt is very difficult to learn the phrase pair embedding brute-forcedly as word embedding is learnt [ 12 , 3 ] , since we may not have enough training data
+p64
+aVWord embeddings capturing lexical translation information and surrounding words modeling context information are leveraged to improve the word alignment performance
+p65
+aVWith the trained monolingual word embedding, we follow [ 20 ] to get the bilingual word embedding using the IWSLT bilingual training data
+p66
+aVOne problem is that, word embedding may not be able to model the translation relationship between source and target phrases at phrase level, since some phrases cannot be decomposed
+p67
+aV2013 ) also generate the representation of phrase pairs in a recursive way
+p68
+aVWe propose a three-step semi-supervised training approach to optimizing the parameters of R 2 NN, which includes recursive auto-encoding for unsupervised pre-training, supervised local training based on the derivation trees of forced decoding, and supervised global training using early update strategy
+p69
+aVDifferent from the work mentioned above, which applies DNN to components of conventional SMT framework, in this paper, we propose a novel R 2 NN to model the end-to-end decoding process
+p70
+aVTheir model predicts a target word, with an unbounded history of both source and target words
+p71
+aVHistory information of the derivation can be recorded in the representation of internal nodes, while conventional model cannot
+p72
+aVRecursive neural networks, which have the ability to generate a tree structured output, are applied to natural language parsing [ 16 ] , and they are extended to recursive neural tensor networks to explore the compositional aspect of semantics [ 15 ]
+p73
+aVDeep Neural Network (DNN), which essentially is a multi-layer neural network, has re-gained more and more attentions these years
+p74
+aVAs we mentioned in Section 5, constructing phrase pair embeddings from word embeddings may be not suitable
+p75
+aVThe features of the baseline are commonly used features as standard BTG decoder, such as translation probabilities, lexical weights, language model, word penalty and distortion probabilities
+p76
+aVWe compare our phrase pair embedding methods and our proposed R 2 NN with baseline system, in Table 2
+p77
+aVWe extract phrase pairs using the conventional method [ 13 ]
+p78
+aVApplying DNN to natural language processing (NLP), representation or embedding of words is usually learnt first
+p79
+aVIn this section, we conduct experiments to test our method on a Chinese-to-English translation task
+p80
+aVAll these commonly used features are used as recurrent input vector x in our R 2 NN
+p81
+aVIn this subsection, a supervised global training is proposed to tune the model according to the final translation performance of the whole source sentence
+p82
+aVUsing monolingual word embedding as the initialization, we fine tune them to get bilingual word embedding [ 20 ]
+p83
+aVForced decoding performs sentence pair segmentation using the same translation system as decoding
+p84
+aVIn their work, initial word embedding is firstly trained with a huge mono-lingual corpus, then the word embedding is adapted and fine tuned bilingually in a context-depended DNN HMM framework
+p85
+aVFrom the results, we can find that, sparse features are more effective than the recurrent network features a little bit
+p86
+aVThe main idea of auto encoding is to initialize the parameters of the neural network, by minimizing the information lost, which means, capturing as much information as possible in the hidden states from the input vector
+p87
+aV2013 ) apply DNN to SMT decoding, but not in a recursive manner
+p88
+aVTherefore, the length of the phrase pair embedding is 20 × 4 = 80
+p89
+aVInstead of updating the model using the final translation results, early update approach optimizes the model, when the oracle translation candidate is pruned from the n-best list, meaning that, the model is updated once it performs a unrecoverable mistake
+p90
+aVFrom Table 3 we can find that, the recurrent input vector is essential to SMT performance
+p91
+aVOracle translation candidates are candidates get from forced decoding
+p92
+aVDuring decoding, recurrent input vectors x for internal nodes are calculated accordingly
+p93
+aVForced decoding is utilized to get positive samples, and contrastive divergence is used for model training
+p94
+aVThe training samples for RAE are phrase pairs { s 1 , s 2 } in translation table, where s 1 and s 2 can form a continuous partial sentence pair in the training data
+p95
+aVWe first train the source and target word embeddings separately using large monolingual data, following [ 3 ]
+p96
+aVThe recurrent input vector x [ l , n ] is concatenated with parent node representation s [ l , n ] to compute the confidence score y [ l , n ]
+p97
+aVGoing beyond the previous work using boundary words for distortion modeling in BTG-based SMT decoder, Li et al
+p98
+aVThe supervised local training uses the nodes/samples in the derivation tree of forced decoding to update the model, and the trained model tends to over-fit to local decisions
+p99
+aVThe training data for monolingual word embedding is Giga-Word corpus version 3 for both Chinese and English
+p100
+aVThe difference between our model and the conventional log-linear model includes
+p101
+aVSection 2 introduces related work on applying DNN to SMT
+p102
+aVFor phrase pairs, the situation becomes even worse, especially when the limitation of word count in phrase pairs is relaxed
+p103
+aVCommonly used sequence processing methods, such as Hidden Markov Model (HMM) and n-gram language model, only use a limited history for the prediction
+p104
+aVTo improve the SMT performance directly, Auli et al
+p105
+aVFor each sentence pair in the training data, SMT decoder is applied to the source side, and any candidate which is not the partial sub-string of the target sentence is removed from the n-best list during decoding
+p106
+aVTable 1 shows the relationship between the size of training data and the number of model parameters
+p107
+aVFor distortion modeling, Li et al
+p108
+aVUnfortunately, the better word alignment result generated by this model, cannot bring significant performance improvement on a end-to-end SMT evaluation task
+p109
+aVLiu et al
+p110
+aVLiu et al
+p111
+aVLiu et al
+p112
+aVBut for source-target word pair, we may only have 7M bilingual corpus for training (taking IWSLT data set as an example), and there are 20 × (500K) 2 parameters to be tuned
+p113
+aVGiven s [ l , m ] and x [ l , m ] for matched translation candidates, conventional CKY decoding process is performed using R 2 NN
+p114
+aVWord embedding x t is integrated with previous history h t - 1 to generate the current hidden layer, which is a new history vector h t
+p115
+aVOur R 2 NN framework is introduced in detail in Section 3, followed by our three-step semi-supervised training approach in Section 4
+p116
+aVBack propagation is performed along the tree structure, and the phrase pair embeddings of the leaf nodess are updated
+p117
+aV2013 ) adapt and extend the CD-DNN-HMM [ 4 ] method to HMM-based word alignment model
+p118
+aVHere the length of the word embedding is also set to 20
+p119
+aVDue to the inexact search nature of SMT decoding, search errors may inevitably break theoretical properties, and the final translation results may be not suitable for model training
+p120
+aVWith the parent node representation s as the input vector, the decoder reconstructs the representation of two child nodes s 1 u'\u005cu2032' and s 2 u'\u005cu2032'
+p121
+aVLi et al
+p122
+aVFor word embedding, the training size is 1G bits, and we may have 500K terms
+p123
+aVAs shown in Figure 1 , the network contains three layers, an input layer, a hidden layer, and an output layer
+p124
+aVR 2 NN is not linear, while the conventional model is a linear combination
+p125
+aVAs shown in Figure 2 , s [ l , m ] and s [ m , n ] are the representations of the child nodes, and they are concatenated into one vector to be the input of the network s [ l , n ] is the generated representation of the parent node y [ l , n ] is the confidence score of how plausible the parent node should be created l , m , n are the indexes of the string
+p126
+aVFigure 4 illustrates the R 2 NN architecture for SMT decoding
+p127
+aVThere are more phrase pairs than mono-lingual words, but bilingual corpus is much more difficult to acquire, compared with monolingual corpus
+p128
+aVThe training data contains 81k sentence pairs, 655K Chinese words and 806K English words
+p129
+aVTranslation candidates generated by forced decoding [ 18 ] are used as oracle translations, which are the positive samples
+p130
+aVFor a translation candidate of the span node [ l , m ] , the black dots stand for the node representation s [ l , m ] , while the grey dots for recurrent input vector x [ l , m ]
+p131
+aVThese two confidence scores are defined as
+p132
+aVEarly update is testified to be useful for SMT training with large scale features [ 21 ]
+p133
+aVFrom the forced decoding result, we can get the ideal derivation tree in the decoder u'\u005cu2019' s search space, and extract positive/oracle translation candidates
+p134
+aVWord embedding is a dense, low dimensional, real-valued vector
+p135
+aVThe training data includes the BTEC and SLDB training data
+p136
+aVWe use negative log-likelihood to penalize all the other translation candidates except the oracle ones, so as to leverage all the translation candidates as training samples
+p137
+aVThe loss function aims to learn a model which assigns the good translation candidate (the oracle candidate) higher score than the bad ones, with a margin 1
+p138
+aVWord embedding is usually learnt from large amount of monolingual corpus at first, and then fine tuned for special distinct tasks
+p139
+aVThe two recurrent input vectors x [ l , m ] and x [ m , n ] are concatenated as the input of the network, with the original child node representations s [ l , m ] and s [ m , n ]
+p140
+aVAs shown in Figure 3 , based on the recursive network, we add three input vectors x [ l , m ] for child node [ l , m ] , x [ m , n ] for child node [ m , n ] , and x [ l , n ] for parent node [ l , n ]
+p141
+aVGiven the representations of child nodes s 1 and s 2 , the encoder generates the representation of parent node s
+p142
+aVOnly the n-best translation candidates are kept for upper combination, according to their plausible scores
+p143
+aV2013 ) use recursive auto encoders to make full use of the entire merging phrase pairs, going beyond the boundary words with a maximum entropy classifier [ 19 ]
+p144
+aVIn the next two sections, we will answer the following questions a) how to train the model, and (b) how to generate the initial representations of translation pairs
+p145
+aVYang et al
+p146
+aVYang et al
+p147
+aVTCBPPE based method drops about 3 BLEU points on both development and test data sets
+p148
+aVThe new history h t is used for the future prediction, and updated with new information from word embedding x t recurrently
+p149
+aVAuli et al
+p150
+aVSignificant testing is carried out using bootstrap re-sampling method proposed by [ 7 ] with a 95% confidence level
+p151
+aVWhen we remove it from R 2 NN, WEPPE based method drops about 10 BLEU points on development data and more than 6 BLEU points on test data
+p152
+aVActually, we can update the model from the root of the decoding tree and perform back propagation along the tree structure
+p153
+aVIn HMM, the previous state is used as the history, and for n-gram language model (for example n equals to 3), the history is the previous two words
+p154
+aVThe loss function for supervised global training is defined as follows
+p155
+aVWhen RAE training is done, only the encoding model W will be fine tuned in the future training phases
+p156
+aVWe conduct experiments on a Chinese-to-English translation task to test our proposed methods, and we get about 1.5 BLEU points improvement, compared with a state-of-the-art baseline system
+p157
+aVThere are much fewer training samples than those for supervised local training, and it is not suitable to use ranking loss for global training any longer
+p158
+aVWe introduce our conducted experiments in Section 6, and conclude our work in Section 7
+p159
+aVTo tackle the large search space due to the weak independence assumption, a lattice algorithm is proposed to re-rank the n-best translation candidates, generated by a given SMT decoder
+p160
+aVTo handle this problem, we use early update strategy for the supervised global training
+p161
+aVIn addition to the sequential structure above, tree structure is also usually constructed in various NLP tasks, such as parsing and SMT decoding
+p162
+aVwhere s [ l , n ] is the source span y o u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' c u'\u005cu2062' l u'\u005cu2062' e [ l , n ] is the plausible score of a oracle translation result y t [ l , n ] is the plausible score for the best translation candidate given the model parameters W and V
+p163
+aVThe length of the hidden layer is empirically set to 20
+p164
+aVThe input layer is a concatenation of h t - 1 and x t , where h t - 1 is a real-valued vector, which is the history information from time 0 to t - 1 x t is the embedding of the input word at time t
+p165
+aVWe only train the embedding for the top 100,000 frequent words following [ 3 ]
+p166
+aVFor the top 200,000 frequent translation pairs, each of them is a feature in itself, and a special feature is added for all the infrequent ones
+p167
+aVCollobert et al
+p168
+aVChinese training corpus contains 32M sentences and 1.1G words
+p169
+aVThe parameters are optimized with development data set using mini-batch conjugate sub-gradient method and a regularized ranking loss
+p170
+aVThe combination of reconstruction error and re-ordering error is used to be the objective function for the model training
+p171
+aVIf the span [ l , n ] is not the whole source sentence, there may be several oracle translation candidates, otherwise, there is only one, which is exactly the target sentence
+p172
+aVThe input, hidden and output layers are calculated as follows
+p173
+aVThe evaluation method is the case insensitive IBM BLEU-4 [ 14 ]
+p174
+aVOur baseline decoder is an in-house implementation of Bracketing Transduction Grammar (BTG) [ 17 ] in CKY-style decoding with a lexical reordering model trained with maximum entropy [ 19 ]
+p175
+aVDNN is also brought into the distortion modeling
+p176
+aVThe recursive auto-encoder is trained with reordering examples extracted from word-aligned bilingual sentences
+p177
+aVWe use contrastive divergence method to fine tune the parameters W and V
+p178
+aVEnglish training data contains 8M sentences and 247M terms
+p179
+aVBased on h t , we can predict the probability of the next word, which forms the output layer y t
+p180
+aV2013 ) propose to apply recursive auto-encoder to make full use of the entire merged blocks
+p181
+aVFor example, for nature language parsing, s [ l , n ] is the representation of the parent node, which could be a N u'\u005cu2062' P or V u'\u005cu2062' P node, and it is also the representation of the whole sub-tree covering from l to n
+p182
+aV2013 ) adapt and extend CD-DNN-HMM [ 4 ] to word alignment
+p183
+aVwhere u'\u005cu22c8' is a concatenation operator s and t are the source and target phrases
+p184
+aVLarge scale feature training has drawn more attentions these years [ 10 , 21 ]
+p185
+aVwhere, f a i is the corresponding target word aligned to e i , and it is similar for e a ^ j p ( e i e i - 1 , f a i , h i ) is produced by a recurrent network as shown in Figure 6
+p186
+aVwhere y o u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' c u'\u005cu2062' l u'\u005cu2062' e [ l , n ] is the model score of a oracle translation candidate for the span [ l , n ]
+p187
+aVEach dimension of the vector represents a latent aspect of the word, and captures its syntactic and semantic properties [ 2 ]
+p188
+aVThe test set is development set 9, and the development set comprises both development set 8 and the Chinese DIALOG set
+p189
+aVFor each term, we have a vector with length 20 as parameters, so there are 20 × 500K parameters totally
+p190
+aV2011 ) propose a multi-task learning framework with DNN for various NLP tasks, including part-of-speech tagging, chunking, named entity recognition, and semantic role labelling
+p191
+aVThe loss function is defined as following so as to minimize the information lost
+p192
+aVWEPPE cannot get significant improvement, while TCBPPE does, compared with the baseline result
+p193
+aVThe data is from the IWSLT 2009 dialog task
+p194
+aVWe can see that, our R 2 NN models with WEPPE and TCBPPE are both better than the baseline system
+p195
+aVWith the efficient training methods, such as [ 5 ] , DNN is widely applied to speech and image processing, and has achieved breakthrough results [ 6 , 8 , 4 ]
+p196
+aVWe adopt the Recursive Auto Encoding (RAE) [ 16 ] for our unsupervised pre-training
+p197
+aVWe call it the rule matching phase
+p198
+aVThe results are shown in Table 6.4
+p199
+aVThe loss function is the commonly used ranking loss with a margin, and it is defined as follows
+p200
+aVHere we conduct experiments to verify it
+p201
+aVTCBPPE is much better than WEPPE
+p202
+aVFor a source sentence u'\u005cu201c' laizi faguo he eluosi de u'\u005cu201d' , we first split it into phrases u'\u005cu201c' laizi u'\u005cu201d' , u'\u005cu201c' faguo he eluosi u'\u005cu201d' and u'\u005cu201c' de u'\u005cu201d'
+p203
+aVE w u'\u005cu2062' m u'\u005cu2062' s u'\u005cu2062' ( s i ) and E w u'\u005cu2062' m u'\u005cu2062' t u'\u005cu2062' ( t k ) are the monolingual word embeddings, and E w u'\u005cu2062' b u'\u005cu2062' s u'\u005cu2062' ( s i ) and E w u'\u005cu2062' b u'\u005cu2062' t u'\u005cu2062' ( t k ) are the bilingual word embeddings
+p204
+aVFor example, the meaning of u'\u005cu201d' hot dog u'\u005cu201d' is not the composition of the meanings of the words u'\u005cu201d' hot u'\u005cu201d' and u'\u005cu201d' dog u'\u005cu201d'
+p205
+aVAs shown in Figure 5 , RAE contains two parts, an encoder with parameter W , and a decoder with parameter W u'\u005cu2032'
+p206
+aVwhere u'\u005cu22c8' is a concatenation operator in Equation 1 and Equation 3 , and f is a non-linear function, here we use H u'\u005cu2062' T u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' h function, which is defined as
+p207
+aVThe rest of this paper is organized as follows
+p208
+aVwhere u'\u005cu2225' u'\u005cu22c5' u'\u005cu2225' is the Euclidean norm
+p209
+a.

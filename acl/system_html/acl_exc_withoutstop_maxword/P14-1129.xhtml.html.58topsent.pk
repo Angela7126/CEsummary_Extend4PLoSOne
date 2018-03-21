@@ -1,0 +1,16 @@
+(lp0
+VOne issue with the S2T NNJM is that the probability is computed over every target word, so it does not explicitly model NULL-aligned source words
+p1
+aVWe treat NULL as a normal target word, and if a source word aligns to multiple target words, it is treated as a single concatenated token
+p2
+aVThe decoding cost is based on a measurement of u'\u005cu223c' 1200 unique NNJM lookups per source word for our Arabic-English system
+p3
+aVIt is easy and computationally inexpensive to use this model in decoding, since only one neural network computation must be made for each source word
+p4
+aVThus, the total cost increase of using the NNJM+NNLTM features in decoding is only u'\u005cu223c' 0.01 seconds per source word
+p5
+aVWe chose these values for the hidden layer size, vocabulary size, and source window size because they seemed to work best on our data sets u'\u005cu2013' larger sizes did not improve results, while smaller sizes degraded results
+p6
+aVTo do this, we first say that each target word t i is affiliated with exactly
+p7
+a.

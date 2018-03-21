@@ -1,0 +1,136 @@
+(lp0
+VEvaluation is carried out by measuring the performance of the batch (learning only from the training set), the adaptive (learning from the training set and adapting to the test set), and the empty (learning from scratch from the test set) models in terms of global MAE scores on the test set
+p1
+aVAs a final analysis of our results, we investigated how the performance of the different types of models ( batch , adaptive , empty ) relates to the distance between training and test sets
+p2
+aVThe batch model is built by learning only from the training data and is evaluated on the test set without exploiting information from the test instances
+p3
+aVTable 1 reports the results achieved by the best performing algorithm for each type of model ( batch , adaptive , empty
+p4
+aVThis is a strong evidence of the fact that, in case of domain changes, online models can still learn from new test instances even if they have a label distribution similar to the training set
+p5
+aVThis demonstrates that, as expected, the online algorithms do not take advantage of test data with a label distribution similar to the training set
+p6
+aVAs expected, the results of the empty models are completely uncorrelated with the u'\u005cu0394' HTER since they only use the test set
+p7
+aVLarge values indicate a low similarity between training and test data and a more challenging scenario for the learning algorithms
+p8
+aVThis also holds when the amount of test points to learn from is limited, as in the L domain where the test set contains only 80 instances
+p9
+aVAs shown in Table 2 , global MAE scores for the online algorithms (both adaptive and empty ) indicate their good adaptation capabilities
+p10
+aVThis baseline ( u'\u005cu039c' henceforth) is calculated by labelling each instance of the test set with the mean HTER score of the training set
+p11
+aVFocusing on the adaptability to user and domain changes, we report the results of comparative experiments with two online algorithms and the standard batch approach
+p12
+aVThe result is one training set and one test set for each post-editor within the same domain
+p13
+aVIn the table, results are ordered according to the u'\u005cu0394' HTER computed between the selected post-editor in the training domain ( e.g., L cons ) and the selected post-editor in the test domain ( e.g., IT rad
+p14
+aVAs can be seen, close MAE values show a similar behaviour for the three types of models
+p15
+aVThese results (MAE reductions are always statistically significant) suggest that, when dealing with datasets with very different label distributions, the evident limitations of batch methods are more easily overcome by learning from scratch from the feedback of a new post-editor
+p16
+aVThe evaluation is carried out by measuring the global error of each algorithm on test sets featuring different degrees of similarity with the data used for training
+p17
+aVFor OSVR the addition of new points to the support set may have a limited effect on the whole model, in particular if the number of points in the set is large
+p18
+aVThis technique is suitable to cope with the unbalanced distribution of training instances and yields better models when heterogeneous training datasets are available
+p19
+aVFirst, since in this artificial scenario adaptation capabilities are not required for the QE component, batch methods operate in the ideal conditions (as training and test are independent and identically distributed
+p20
+aVIn our experiments, the degree of similarity is measured in terms of u'\u005cu0394' HTER, which is computed as the absolute value of the difference between the average HTER of the training and test sets
+p21
+aVOn the other side, online learning techniques are designed to learn in a stepwise manner (either from scratch, or by refining an existing model) from new, unseen test instances by taking advantage of external feedback
+p22
+aVFrom the application-oriented perspective that motivates our work, considering the high costs of acquiring large and representative QE training data, this is an important finding
+p23
+aVSecond, this scenario provides the fairest conditions for such comparison because, in principle, online algorithms are not favoured by the possibility to learn from the diversity of the test instances
+p24
+aVAll the models outperform the baseline, even if the minimal differences confirm the competitiveness of such a simple approach
+p25
+aVThis suggests that, although PA is potentially capable of achieving higher results and better adapt to the new test points, its instability makes it less reliable for practical use
+p26
+aVThe first scenario defines a challenging situation where two post-editors ( rad and cons ) are characterized by opposite behaviour
+p27
+aVOur approach is based on the online learning paradigm and exploits a key difference between such framework and the batch learning methods currently used
+p28
+aVFor the sake of clarity it is worth observing that, at least in principle, a model built in a batch fashion could also be adapted to new test data
+p29
+aVFrom a performance point of view, as an adaptation of u'\u005cu0395' -SVR which proved to be one of the top performing algorithms in the regression QE tasks at WMT, OSVR seems to be the best candidate
+p30
+aVQE is generally cast as a supervised machine learning task, where a model trained from a collection of ( source, target, label ) instances is used to predict labels 1 1 Possible label types include post-editing effort scores ( e.g., 1-5 Likert scores indicating the estimated percentage of MT output that has to be corrected), HTER values [ 28 ] , and post-editing time ( e.g., seconds per word for new, unseen test items [ 31 ]
+p31
+aVThis required the adaptation of its standard batch learning workflow to
+p32
+aVFor the sake of comparison, we also report (grey rows) the results of the experiments within the same domain presented in § 6.1
+p33
+aVAmong these, the necessity to model the diversity of human quality judgements and correction strategies [ 16 , 15 ] calls for solutions that i) account for annotator-specific behaviour, thus being capable of learning from inherently noisy datasets produced by multiple annotators, and ii) self-adapt to changes in data distribution, learning from user feedback on new, unseen test items
+p34
+aVAccording to the way they are created, the two datasets allow us to evaluate the adaptability of different QE models with respect to user changes within the same domain (§ 6.1 ), as well as user and domain changes at the same time (§ 6.2
+p35
+aVAlthough it makes PA faster than OSVR, this is a riskier strategy because it may lead the algorithm to change the model to adapt to outlier points
+p36
+aVThe goal of OnlineSVR is to find a way to add each new sample to one of three sets (support, empty, error) maintaining the consistency of a set of conditions known as Karush-Kuhn Tucker (KKT) conditions
+p37
+aVLower HTER values indicate better translations
+p38
+aVAs regards QE models, our work represents the first investigation on incremental adaptation by exploiting users feedback to provide targeted (system, user, or project specific) quality judgements
+p39
+aVIn our experiments we evaluate two online algorithms, OnlineSVR [ 24 ] 8 8 http://www2.imperial.ac.uk/~gmontana/onlinesvr.htm and Passive-Aggressive Perceptron [ 9 ] , 9 9 https://code.google.com/p/sofia-ml/ by comparing their performance with a batch learning strategy based on the Scikit-learn implementation of Support Vector Regression (SVR
+p40
+aVTo develop our approach, different online algorithms have been embedded in the backbone of a QE system
+p41
+aVAs evidenced by the high u'\u005cu0394' HTER values, one of them ( rad ) is the most u'\u005cu201c' radical u'\u005cu201d' post-editor (performing more corrections) while the other ( cons ) is the most u'\u005cu201c' conservative u'\u005cu201d' one
+p42
+aVSince data from a new job may differ from those used to train the QE model, its estimates on the new instances might result to be biased or uninformative
+p43
+aVA closer look at the behaviour of the online algorithms in the two domains leads to other observations
+p44
+aVIf the point is identified as a support vector, the parameters of the model are updated
+p45
+aVFor each new point, OSVR starts a cycle where the samples are moved across the three sets until the KKT conditions are verified and the new point is assigned to one of the sets
+p46
+aVThe source sentences were translated with two SMT systems built by training the Moses toolkit [ 14 ] on parallel data from the two domains (about 2M sentences for IT and 1.5M for L
+p47
+aVIn the online framework, differently from the batch mode, the learning algorithm sequentially processes an unknown sequence of instances X = x 1 , x 2 , u'\u005cu2026' , x n , returning a prediction p u'\u005cu2062' ( x i ) as output at each step
+p48
+aVFor each domain, these respectively involve the most dissimilar and the most similar post-editors according to the u'\u005cu0394' HTER
+p49
+aVSince the quality standards of individual users may vary considerably ( e.g., according to their knowledge of the source and target languages), the estimates of a static QE model trained with data collected from a group of post-editors might not fit with the actual judgements of a new user;
+p50
+aVThe choice of the OnlineSVR and Passive-Aggressive (OSVR and PA henceforth) is motivated by different considerations
+p51
+aVGather user feedback for the instance ( i.e., calculating a u'\u005cu201c' true label u'\u005cu201d' based on the amount of user post-editions);
+p52
+aVAs our focus is on the algorithmic aspect, in all experiments we use the same feature set, which consists of the seventeen features proposed in [ 30 ]
+p53
+aVFor this reason, we use the online adaptation of u'\u005cu0395' -SVR proposed by [ 18 ]
+p54
+aVAt each step of the process, the goal of the learner is to exploit user post-editions to reduce the difference between the predicted HTER values and the true labels for the following ( source, target ) pairs
+p55
+aVFor instance, this could be done by running periodic re-training routines once a certain amount of new labelled instances has been collected ( de facto mimicking an online process
+p56
+aVBased on the post-edition done by the user, the true HTER label p ^ u'\u005cu2062' ( x i ) is calculated by means of the TERCpp 7 7 goo.gl/nkh2rE open source tool;
+p57
+aVCurrent approaches to the tasks proposed at WMT have mainly focused on three main directions, namely i) feature engineering, as in [ 12 , 10 , 11 , 26 ] , ii) model learning with a variety of classification and regression algorithms, as in [ 3 , 1 , 29 ] , and iii) feature selection as a way to overcome sparsity and overfitting issues, as in [ 29 ]
+p58
+aVBeing optimized to perform well on specific WMT sub-tasks and datasets, current systems reflect variations along these directions but leave important aspects of the QE problem still partially investigated or totally unexplored
+p59
+aVDifferences between p u'\u005cu2062' ( x i ) and the true label p ^ u'\u005cu2062' ( x i ) obtained as feedback are used by the learner to refine the next prediction p u'\u005cu2062' ( x i + 1 )
+p60
+aVFor each document D (L or IT), these two scenarios are obtained by dividing D into two parts of equal size (80 instances for L and 140 for IT
+p61
+aVThe MAE is the average of the absolute errors e i f i - y i where f i is the prediction of the model and y i is the true value for the i t u'\u005cu2062' h instance
+p62
+aV5 5 Edit distance is calculated as the number of edits (word insertions, deletions, substitutions, and shifts) divided by the number of words in the reference
+p63
+aVIf its value is larger than the tolerance parameter ( u'\u005cu0395' ), the weights of the model are updated as much as the aggressiveness parameter C allows
+p64
+aVThe first aspect, modelling annotators u'\u005cu2019' individual behaviour and interdependences, has been addressed by Cohn and Specia [ 8 ] , who explored multi-task Gaussian Processes as a way to jointly learn from the output of multiple annotations
+p65
+aVSuch variability is due to two main reasons
+p66
+aVAs depicted in Figure 1 , this is done as follows
+p67
+a.

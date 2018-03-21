@@ -1,0 +1,20 @@
+(lp0
+VWork on target language morphological segmentation for SMT can be divided into three subproblems segmentation, desegmentation and integration
+p1
+aVWe approach this problem by augmenting an SMT system built over target segments with features that reflect the desegmented target words
+p2
+aVNonetheless, the 1000-best and lattice desegmenters both produce significant improvements over the 1-best desegmentation baseline, with Lattice Deseg achieving a 1-point improvement in TER
+p3
+aVMost techniques approach the problem by transforming the target language in some manner before training the translation model
+p4
+aVWe also tried a similar Morfessor-based segmentation for Arabic, which has an unsegmented test set BLEU of 32.7
+p5
+aVAs in Finnish, the 1-best desegmentation using Morfessor did not surpass the unsegmented baseline, producing a test BLEU of only 31.4 (not shown in Table 1
+p6
+aVIn this section, we describe our various strategies for desegmenting the SMT system u'\u005cu2019' s output space, along with the features that we add to take advantage of this desegmented view
+p7
+aVThis could improve translation quality, as it brings our training scenario closer to our test scenario (test BLEU is always measured on unsegmented references
+p8
+aVOur goal is to desegment the decoder u'\u005cu2019'
+p9
+a.

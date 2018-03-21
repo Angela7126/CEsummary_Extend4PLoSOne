@@ -1,0 +1,531 @@
+﻿The schema theory for semantic link network
+
+China Knowledge Grid Research Group, Key Lab of Intelligent Information Processing, Institute of Computing Technology, Chinese Academy of Sciences, 100190, Beijing, China
+
+School of Economics and Business Administration, Beijing Normal University, 100875, Beijing, China
+
+Hai Zhuge, Yunchuan Sun
+
+ABSTRACT
+
+The Semantic Link Network (SLN) is a loosely coupled semantic data model for managing Web resources. Its nodes can be any type of resource. Its edges can be any semantic relation. Potential semantic links can be derived out according to reasoning rules on semantic relations. This paper proposes the schema theory for the SLN, including the concepts, rule-constraint normal forms, and relevant algorithms. The theory provides the basis for normalized management of semantic link network. A case study demonstrates the proposed theory.
+
+Keywords: Data models; Normal form; Schema; Semantic link network; Semantic web
+
+1. Introduction
+
+The schema of a relational database defines the structure of the database. It defines a set of relations with attributes and the dependencies among attributes. The normalized theory of the relational schema is to ensure high consistency, low redundancy and better efficiency [1,2]. A relational data model is limited in representing rich semantic relationships between various resources and supporting reasoning on semantic relations.
+
+The Semantic Web aims at making Web resources machine-understandable by enriching semantics in resources [3]. XML (eXtensible Markup Language) is to describe the structure in Web resources for cross-platform information sharing (www.w3. org/XML). The XML schema defines a set of syntaxes and rules to express the shared vocabularies (www.w3.org/XML/Schema). It provides a means for defining the structure, content and semantics of XML documents. Based on XML, many markup languages have been proposed. RDF (Resource Description Frame-work, www.w3.org/TR/2004/REC-rdf-mt-20040210) focuses on describing the universal resources on the Web by an object-attribute-value triple. RDF Schema (RDFS, www.w3.org/TR/2004/ REC-rdf-schema-20040210) defines a set of syntaxes to store the metadata of resources with XML syntax and provides basic RDF vocabularies for structuring RDF resources. RDFS is still weak in expressing rich semantic relationships and supporting relational reasoning. OWL (Web Ontology Language) is designed to describe the semantics of the resources themselves with ontologies and semantic relationships between resources with roles (www.w3. org/2004/OWL). It can represent the meaning of terms in vocabularies explicitly and the relationships between those terms. Its logical foundation is description logics which has the decidability of ontology consistency. The Rule Markup Language (RuleML) is to express rules in XML for deduction, rewriting, and further inferential-transformational tasks (www.ruleml.org). The Semantic Web Rule Language (SWRL) is based on the combination of OWL with RuleML [4].
+
+The Semantic Link Network (SLN) is a loosely coupled semantic data model for managing Web resources with the following main features of the Web:
+
+(1) Easy to build and easy to use; and,
+
+(2) Any semantic node can semantically link to any other semantic node.
+
+A semantic link network instance is a directed graph, denoted as S(ResourceSet, LinkSet), where S is the name of the semantic link network, ResourceSet is a set of resources, and LinkSet is a set of semantic links in the form of R -α-> R', where R, R' in ResourceSet, and α is a semantic factor representing a semantic relation between R and R'. A set of reasoning rules on semantic links enables a semantic link network to derive out potential semantic links. The basic concept and model of the SLN have been introduced in [5–11]. More references are available at www.knowledgegrid.net/~h.zhuge/SLN.htm.
+
+The motivation of this paper is to construct a schema theory and a rule-constraint normalized theory for SLN construction and resource management.
+
+An SLN schema specifies resource types, semantic link types, and reasoning rules. The resources and semantic links instance are regulated by the resource types and semantic link types. The reasoning on instances is based on the reasoning rules defined by the schema. The SLN schema provides a blueprint to build SLN instances and provides a way to normalize the SLN instances. The global SLN schema reflects a consensus on the basic semantics of the domain. Users can define SLN instances by instantiating the global schema, or define a sub-schema according to the global schema first and then instantiating the sub-schemas.
+
+Fig. 1 shows the role of schema in developing semantic link networks. There are two ways to form the SLN schema:
+
+(1) defined by domain experts; and,
+
+(2) induced from existing abstract semantic link networks or from SLN instances [8]
+
+2. Schema for the semantic link network
+
+The schema of the SLN is a triple S(ResourceTypes, LinkTypes, Rules). ResourceTypes is a set of resource types denoted as {rt1, rt2, ..., rtk}, where rti is defined by its field. LinkTypes is a set of semantic link types, where each takes the form of rti  -α-> rtj, where rti, rtj in ResourceTypes, and α is a semantic relation defined by its field. The Rules is a set of reasoning rules on link types. A formal definition of semantic link network is given in [5].
+
+The possible semantic relationship types between two resources are determined by the types of the start resource and the end resource. For example, the possible types of a semantic link between a researcher and a paper are authorOf, editorOf, and readerOf, but not fatherOf. So a semantic link instance with semantic factor α from a resource R of type rti to another resource R' of type rtj can be described as R -α-> R'. For two resource types rti and rtj, we use [rti, rtj] to denote the set of all semantic link types with the start resource type rti and the end resource type rtj.
+
+For a pair of resource types, relationships between semantic link types can be classified into the following three categories.
+
+(1) Implication. A semantic link type α implies semantic link type β, denoted as α => β, between the same pair of resources as shown in Fig. 2(d).
+
+(2) Compatible. Two semantic link types α and β do not affect each other.
+
+(3) Incompatible. Two semantic link types α and β cannot co-occur between the same pair of resources.
+
+For a semantic link R −ω-> R' between two resources R and R', the reversion is a semantic link R −ω^{−1}-> R, which means that if there is a semantic relationship ω from R to R', then there is a semantic relationship ω^{−1} from R' to R [6].
+
+A reasoning rule takes the following form as shown in Fig. 2(a): R -α-> R', R' −β-> R" => R −γ-> R" denoted as α · β => γ in abbreviation. Fig. 2(b) and (c) show the following two forms of reasoning rule: R -α-> R', R −β-> R" => R' −γ-> R" is equivalent to R' −α^{−1}-> R, R −β-> R" => R' −γ-> R", i.e., α^{−1} · β => γ . R' -α-> R, R" −β-> R => R' −γ-> R" is equivalent to R' -α-> R, R −β^{−1}-> R" => R' −γ-> R", i.e., α · β^{−1} => γ .
+
+Lemma 1. The following two kinds of rules hold:
+
+(1) α · β => γ is equivalent to β^{−1} · α^{−1} => γ^{−1}, and,
+
+(2) α^{−1} · β => γ is equivalent to β^{−1} · α => γ^{−1}.
+
+Fig. 2(d) shows the following reasoning rule: R -α-> R' => R −β-> R', in simple α => β, which means that the semantic relationship α is stronger than the semantic relationship β between two resources.
+
+Proposition 1. For a rule α => β, if α in [rti, rtj], then β in [rti, rtj].
+
+Proposition 2. For a rule α · β => γ , if α in [rti, rtj], β in [rtj, rtk], then γ in [rti, rtk]
+
+3. SLN operations
+
+We first define the notion of sub-schema and reference relation between schemas. For the SLN schemas ^S(R, L, rs) and ^S'(R', L', rs'), if R' ⊆ R and L' ⊆ L, ^S' is called a sub-schema of ^S, denoted as ^S' ⊆ ^S. If two schemas ^S(R, L, rs) and ^S'(R', L', rs') share a semantic link type, for instance, rt_{i} -α-> rt_{j} in L is identical to rt_{i}' −α'-> rt_{j}' in L', a reference relation Ref (α, α') can be built from α to α', which means that for two instances S and S' under ^S and ^S' respectively, all semantic links with type of α' in S' can be used in S as semantic links with type of α.
+
+The following are operations on semantic link networks
+
+(1) Union. The union of two semantic link networks S(RS, LS) and S'(RS', LS') under the same schema ˆS is a new semantic link network S(RS U RS', LS U LS'). The union operation does not guarantee to generate a connective semantic link network. The union operation enables user or application to operate on different semantic link networks as a whole.
+
+(2) Intersection. The intersection of two semantic link networks S(RS, LS) and S'(RS', LS') under the same schema ^S is a new semantic link network S(RS ∩ RS', LS ∩ LS'). The intersection operation does not guarantee to generate a connective semantic link network. The intersection operation enables user or application to operate on the common part of different semantic link networks.
+
+(3) Selection. A selection of a semantic link network S, σ_{P}(S), is a new semantic link network satisfying condition P, a logical expression for selecting a set of resources or a set of semantic links from S. The selection operation enables a user or application to operate on the interested part of a semantic link network.
+
+(4) Projection. The projection of a semantic link network S under schema ^S(R, L, rs) on another schema ^S'(R', L', rs'), denoted as S' = Π_{^S'}(S), is a new semantic link network derived from S by removing all resources whose types are not in R' and removing all semantic links whose types are not in L'. Reasoning on S' is executed according to the rule set rs'. The projection operation enables a user or application to operate a semantic link network from different schemas, enables a semantic link network to suit different schemas for different applications, and enables reasoning on a semantic link network to be localized on a relevant schema. It is especially useful for large semantic link network.
+
+(5) Reasoning. The SLN reasoning is to derive some new semantic links from the semantic link network. An atomic reasoning in a semantic link network is an execution of a rule in rs to get a new semantic link. Reasoning is a series of atomic reasoning connected one another over the semantic link network.
+
+(6) Join. The join of two semantic link networks S(RS, LS) and S'(RS', LS') under ^S(R, L, rs) and ^S'(R', L', rs') respectively is a new semantic link network S ×_{P} S' = S_{J}(RS_{J}, LS_{J}) under a new schema ^S_{J}(R_{J}, L_{J}, rs_{J}), where P is a set of references {Ref(α1,α1'),..., Ref(αm,αm'), Ref(β1',β1),..., Ref(βn',βn)}, L_{J} = (L U L')−{α1',...,αm',β1',...,βn'}, R_{J} is the set of resources involved in L_{J}, rs_{J} is the set rs U rs' by replacing αi' (or βj') with αi (or βj) (1 ≤ i ≤ m, 1 ≤ j ≤ n), LS_{J} is the set LS U LS' by replacing αi' (or βj') with αi ( or βj ), and RS_{J} = RS U RS'. It is easy to verify that S = Π_{^S}(S_{J}) and S' = Π_{^S'}(S_{J}). The union operation is a special case of the join operation. The join operation enables a user or application to operate on relevant semantic link networks as a whole.
+
+(7) Decomposition. A decomposition of ^S(R, L, rs) is a set of subschemas ^S1(R1, L1, rs1),..., and ^Sm(Rm, Lm, rsm), if there does not exist any pair of (^Si, ^Sj) such that Si is a sub-schema of ^Sj; and R = R1 U R2 U ... U Rm, and L = L1 U L2 U ... U Lm.
+
+At the instance level, a semantic link network S under ^S has the corresponding decomposition {S1, S2,..., Sm}, where each Si is under the schema ^Si respectively. And for all i, we have Si = Π_{^Si(S)}. The decomposition operation enables a user or application to operate on a small schema to raise the efficiency when facing a large schema.
+
+(8) Query. A query on semantic link networks is a new semantic link network from a combination of some operations of union, intersection, reasoning, selection, projection, or join.
+
+Two semantic link networks S and S' are called equivalent if and only if the results from S and S' are identical for any query. Clearly, the equivalence among semantic link networks is symmetric, reflexive, and transitive [6].
+
+For a given schema, there are many kinds of decomposition, but some decompositions may not be good. For example, for a schema ^S(R, L, rs), where R = {rt1, rt2, rt3}, L includes [rt1, rt2] = {α1,α2}, [rt2, rt3] = {β1,β2} and [rt1, rt3] = {γ }, and rs = {α1 · β1 => γ }, the two sub-schemas S1(R, {α1,β2,γ },φ) and S2({rt1, rt2}, {α2,β1},φ) construct a decomposition. The decomposition is not good since it loses the reasoning rule. A decomposition of semantic link network S is called loss-less if the join of the decomposition is equivalent to S. A decomposition of a schema is called loss-less if, for any instance under the schema, the corresponding instance decomposition is loss-less
+
+Theorem 1. A decomposition {^S1, ^S2,..., ^Sm} of the schema S is lossless if
+
+(1) rs = rs1 U rs2 U ... U rsm; and,
+
+(2) for any rule r: α · β => γ in rsi, for all possible j, if γ in Lj and r ∉ rsj, there is a reference relation Ref(γ in ^Sj,γ in ^Si).
+
+Proof. We need to verify that for a semantic link network S(RS, LS) under schema ^S is equivalent to the join of the corresponding decomposition S1(RS1, LS1), S2(RS2, LS2),..., Sm(RSm, LSm) under schemas ^S1, ^S2,..., ^Sm respectively.
+
+Precondition 1 means that for each rule r : α · β => γ (or r : α => β) in rs, there is at least one i such that r is in rsi. According to the instance decomposing algorithm Si = ∏_{^Si(S)}, all semantic links with type of α,β and γ in S are included in Si. For reasoning in S, assume that rules in the sequence: (1) r1 : α1 · β1 => γ1 (or α1 => γ1), (2) r2 : α2 ·β2 => γ2 (orα2 => γ2),...,(k) rk : αk ·βk => γk (or αk => γk),...,(n)rn : αn · βn => γn (or αn => γn) are fired one after another to find the γn-type semantic link between two resources. Conveniently, we denote semantic links involved in the above reasoning process as lαi, lβi, and lγi respectively for all 1 ≤ i ≤ n. Then, the reasoning process is executed as a sequence of atomic reasoning: (1) lα1 · lβ1 => lγ1 (or lα1 => lγ1), (2) lα2 · lβ2 => lγ2 (or lα2 => lγ2),...,(k) lαk · lβk => lγk (or lαk => l γk),...,(n) lαn · lβn => lγn (or lαn => lγn) in the semantic link network S. For each semantic link l αk involved in the reasoning process as a prerequisite, lαk in LS or else the type of lαk is some l γt derived from some previous rule lαt · lβt => lγt (or lαt => lγt ) (t < k) in the above sequence.
+
+For the same reasoning, we will verify that the same process can be executed on the join of the corresponding decomposition S1, S2, ..., and Sm under schemas ^S1, ^S2, ..., and ^Sm respectively. Actually, there exists at least one i such that rk in rsi for each rule rk in the above rule sequence,αk, βk, γk in Li. Thus, Si under ^Si consists of all semantic links with types αk, βk, and γk in S.
+
+(1) If lα1, lβ1 in LSi, then the first atomic reasoning in the above sequence can be executed and the semantic link lγ1 with γ1 type can be deduced in Si.
+
+(2) Assume that the first k − 1 atomic reasoning can be executed and the semantic links l γ1, lγ2, ..., lγk−1 can be derived in some Si. If lαk, lβk in LSj for some j, then the kth atomic reasoning can be fired and the semantic link l γk with type γk can be deduced in S j. Else, if lαk 6 in LSi, then lαk is someone semantic link lγk' from the rule l α k' · lβk' => lγk' (or lαk' => lγk' ) according to rk0, where 1 < k' < k.
+
+1). If rk' in rsi, lαk (i.e., lγk' ) can be deduced in Si, then the semantic link lγk with type γk can be derived.
+
+2). If rk' 6 in rsi, there exists at least one j s.t. rk' in rsj, then we can get lγk' in Sj according to the assumption. From the precondition 2, there is a reference relation Ref (γk' in ^Si, γk' in ^Sj). Then lγk' can be duplicated into Si. The rule rk can be fired and the semantic link l αk can be deducted in Si
+
+According to the law of mathematic induction, the above show that the semantic link l αn can be derived from the reasoning on the join of the decomposition {S1, S2, ..., Sm}. 
+
+The following deduction can be derived from the theorem immediately.
+
+4. Rule-constraint normal forms for the SLN schema
+
+A reasoning rule represents the semantic relevance among semantic link types. For example, the rule editorOf => readerOf shows that an editor of a paper is certainly a reader of the paper. Similarly, α ·β => γ shows that γ is semantically relevant to α and β.
+
+Definition 1. Let ^S(R, L, rs) be an SLN schema, αi , αj, αk in L, αi is called direct semantic relative to α j (denoted as αi ⊴ αj) if there is a rule in rs with one of the following forms αj => αi, αj · αk => αi, or αk · αj => αi.
+
+If there is a sequence of semantic relative α1 ⊴ α2 ⊴ α3 ⊴ ... ⊴ αm (m is an integer), then α1 is called semantic relative to α m, denoted as α1 ≠ αm. We can construct a semantic relative net, as shown in Fig. 3, for an SLN schema by drawing an arrow from αi to α j for each semantic relative αj ⊴ αi retrieved from the rule set.
+
+Definition 2. Let ^S(R, L, rs) be an SLN schema, and M ⊆ L a set of semantic link types. The closure of M, denoted as C(M), under semantic relative is a set of semantic link types derived from the following steps.
+
+(1) Let C(M) = M.
+
+(2) Check for each semantic dependence αi ≠ αj, if αi in C(M), let C(M) = C(M) U {αj}; and, ifαj in C(M), let C(M) = C(M) U {αi}.
+
+(3) Repeat from step 2 until C(M) remains unchanging.
+
+It is easy to verify that all closures of the single semantic link types construct a classification for the semantic link types of the SLN schema, and we can decompose an SLN schema based on such a classification. Actually, each disjunction part in the semantic link relative net forms a closure.
+
+For an isolated semantic link type α, the closure includes only itself, i.e., C(α) = {α}. For a schema of semantic link network ^S(R, L, rs), there may be a cycle of semantic relatives α1 ⊴ α2 ⊴ α3 ⊴ ··· ⊴ αm ⊴ α1, α1, α2, ..., αm in L, called a semantic relative cycle. It is easily to verify the following lemma.
+
+Lemma 2. Let α1 ⊴ α2 ⊴ α3 ⊴ ... ⊴ αm ⊴ α1 be a semantic relative cycle, where αi in L (1 ≤ i ≤ m). We have:
+
+(1) C(αi) is identical to C(αj), for all 1 ≤ i, j ≤ m.
+
+(2) αi in C(αj), for any i, j, 1 ≤ i, j ≤ m.
+
+(3) For any α in L, if α ⊴ αi then α ⊴ αj, 1 ≤ i, j ≤ m.
+
+All semantic link types at one semantic relative cycle construct an equivalent class according to Lemma 2. A cycle α1 ⊴ α2 ⊴ α3 ⊴ ... ⊴ αm ⊴ α1 in the semantic link type relative net can be regarded as a unit, denoted as U(αi), where αi is any semantic link type in the cycle. Therefore, a semantic relative cycle is shrunk into a node (all out and in arrows in the cycle will be focused on the node). We can find all cycles in the net by using the classic algorithms which find the cycles in a directed map. In the following discussion, we do not mention the cycles for they are regarded as single semantic link types.
+
+The following definition normalizes the SLN schema.
+
+Definition 3. An SLN schema ^S(R, L, rs) is in Rule-Constraint Normal Form 1 (RC-NF 1), if for any semantic link type α in L, C(α) = L holds.
+
+Lemma 3. For SLN schema ^S(R, L, rs) with RC-NF1 and α1,α2 in L, then C(α1) = C(α2).
+
+Any SLN schema ^S(R, L, rs) can be decomposed into several subschemas satisfying RC-NF1 by the following algorithm.
+
+Algorithm 1. Let ^S(R, L, rs) be an SLN schema.
+
+(1) Compute the classification of the semantic link types in S according to the definition of the closure of semantic relative and the rule set rs denoted as {L1, L2,..., Lk}.
+
+(2) For each Li, 1 ≤ i ≤ k, we can get a resource type set Ri, each of which is attached with the semantic link types in Li, and a rule set rsi where each rule is only involved in semantic link types from Li. Clearly, Ri ⊆ R, Li ⊆ L, and rsi ⊆ rs. Thus, Si(Ri, Li, rsi) is a sub-schema of ^S(R, L, rs).
+
+(3) ^S(R, L, rs) is decomposed into k sub-schemas Si(Ri, Li, rsi), where 1 ≤ i ≤ k. Theorem 2. The decomposition by Algorithm 1 is loss-less.
+
+Proof. From the algorithm and the definition of closure, for each rule r : α·β => γ in rs,α,β,γ are semantic relative. There is some i such thatα,β,γ in Li for {L1, L2,..., Lk} is a classification of L. So, rs = rs1 U rs2 U ... U rsm. For any rule r : α · β => γ , there is only one i such that r in rsi and α,β,γ in Li due to the decomposition construct a classification. So, we do not need any reference relation among schemas. According to Theorem 1, the decomposition is a loss-less one.
+
+The classification of the schema of semantic link type can be easily found from the semantic relative net. Different unconnected parts determine different sub-schemas. For a RC-NF1 SLN schema, its semantic relative net is a connected graph. That means reasoning on such a semantic link network is closed. However, this does not mean that any two semantic link types are semantically related.
+
+Let ^S(R, L, rs) be an SLN schema, α in L is called a top semantic link type if there is no semantic link typeα' (≠ α) such that α ⊲ α'. α is called a bottom semantic link type if there is no semantic link type α' (≠ α) such that α' ⊲ α. Two top semantic link types or two bottom ones are not semantic relative. α is called an isolated semantic link type if there is no semantic link type α' (≠ α) such that α ⊲ α' or α' ⊲ α. An isolated semantic link type is both top and bottom. The following algorithm finds all bottom semantic link types for an SLN schema.
+
+Algorithm 2. For an SLN schema ^S(R, L, rs), find the set B of all bottom semantic link types in ^S.
+
+(1) Let B = {α αi · αj => α in rs}, where αi,αj in L;
+
+(2) Loop for each α in B. Check each rule r in rs, if α occurs in the precondition of r and does not occur in the result of r, remove α from B; else check next rule in rs.
+
+The bottom semantic link types cannot affect other link types in reasoning. We can compute all semantic link types that affect a certain semantic link type.
+
+Definition 4. Let ^S(R, L, rs) be an SLN schema, and α in L. The upclosure of α with respect to the rule set rs, denoted as Cup(α), is a set of semantic link types derived from the following steps.
+
+(1) Let Cup(α) = {α};
+
+(2) Check L, for each semantic relative αi C αj, if αi in Cup(α), let Cup(α) = Cup(α) U {αj};
+
+(3) Repeat from step 2 until Cup(α) does not change.
+
+Lemma 4. Let α1 ⊴ α2 ⊴ α3 ⊴ ... ⊴ αm ⊴ α1 be a semantic relative circle, then
+
+(1) Cup(αi) is identical to Cup(αj) for all 1 ≤ i, j ≤ m.
+
+(2) αj in Cup(αi), for any i and j, 1 ≤ i, j ≤ m.
+
+Definition 5. An SLN schema ^S(R, L, rs) is in Rule-Constraint Normal Form 2 (RC-NF2), if it satisfies (1) ^S(R, L, rs) is RC-NF1; and, (2) β C α for bottom semantic link type β in L and any other link type α.
+
+Obviously, for a RC-NF2 schema, the up closure of the bottom semantic link type β according to the rule set rs is just L, i.e., L = Cup(β).
+
+Lemma 5. For a RC-NF2 SLN schema ^S(R, L, rs), it has a unique bottom semantic link type.
+
+Proof. Assume that there are at least two different bottom semantic link types αb1 6= αb2. According to Definition 4, Cup(αb1) = Cup(αb2). So, we have αb1 in Cup(αb2),αb2 ⊴ αb1. Similarly, αb1 E αb2. It leads to a contradiction, so the lemma holds.
+
+Lemma 6. For an SLN schema ^S(R, L, rs), let ^S1(R1, L1, rs1) and ^S2(R2, L2, rs2) be two RC-NF2 sub-schemas. If α in ^S1 ∩ ^S2, Cup (1)(α) in ^S1 is identical to Cup (2)(α) in ^S2.
+
+Proof. For a semantic link type α0 in Cup (1)(α),α ⊴ α0. Let αb1 be the bottom semantic link types for ^S1 and αb2 for ^S2 according to Lemma 5. Obviously, αb1 ⊴ α and αb2 ⊴ α. Thus αb2 ⊴ α0, which means that α0 in Cup (2)(α). 
+
+Lemma 7. ^S1(R1, L1, rs1) and ^S2(R2, L2, rs2) are two RC-NF2 subschemas of ^S(R, L, rs) with bottom semantic link types αb1 and αb2 respectively. Let ⊴ = L1 ∩ L2, if ⊴ 6= φ, then there does not exist any semantic relative α ⊴ β satisfying that α in ⊴ and β 6 in E; and, for each semantic link type α in E, we have αb1 C α and αb2 C α.
+
+Proof. For α in E, and a semantic relative α ⊴ β. ⊴ = L1 ∩ L2, then α in L1. For L1 is the closure of a bottom link type according to the semantic relatives, then β in L1. Similarly, we can get β in L2. So β in E. The second part of the Lemma is trivial from the definition.
+
+Reasoning is closed in a RC-NF2 SLN schema. Different semantic link networks based on different RC-NF2 sub-schemas of the same original schema are reasoning closed and independent. And, the reasoning service is more efficient and easier to execute in a subschema than in the original one.
+
+For an application, the whole schema may include several subschemas with RC-NF2.
+
+We can decompose an RC-NF1 SLN schema into several RC-NF2 sub-schemas according to the following algorithm.
+
+Algorithm 3. Let ^S(R, L, rs) be a RC-NF1 SLN schema.
+
+(1) Find all bottom semantic link types of ^S, denoted as αb1, αb2,... , and αbm.
+
+(2) For each αbi (1 ≤ i ≤ m), compute its up-closure according to reasoning rule set rs, denoted as Cup(αbi). Then, we can get a resource type set Rbi, in which each element is involved at least one link type in Lbi, and a rule set rsbi in which each rule is involved only link types from Lbi. Clearly, Rbi ⊆ R, Lbi ⊆ L, and rsbi ⊆ rs. Thus, ^Sbi(Rbi, Lbi, rsbi) is a sub-schema of ^S(R, L, rs).
+
+(3) ^S(R, L, rs) can be decomposed into k sub-schemas ^Sbi(Rbi, Lbi, rsbi), where 1 ≤ i ≤ m.
+
+Theorem 3. The decomposition by Algorithm 3 is loss-less.
+
+Proof. For a rule r: α · β => γ in rs, suppose γ in Lbi for some i. γ ⊲ β, γ ⊲ α, so α, β in Lbi and r in rsbi. Then, rs = rs1 U rs2 U ... U rsm. Definition 5 and Algorithm 3 show that the sub-schema ^Sbi(Rbi, Lbi, rsbi) is based on the bottom link type bi. For any rule r: α · β => γ in rsbi, for some j, if γ in Lbj, then α, β in Lbj and r in rsj. There is no reference relation needed among sub-schemas. According to Theorem 1, the decomposition from Algorithm 3 is loss-less.
+
+Definition 6. Let ^S(R, L, rs) be a SLN schema, and α in L be a semantic link type. The down closure of α with respect to the rule set rs, denoted as Cdown(α), is a set of semantic link types derived from the following steps.
+
+(1) Let Cdown(α) = {α};
+
+(2) Check L, for each semantic relative αj C αi, if αi in Cdown(α), let Cdown(α) = Cdown(α) U {αj};
+
+(3) Repeat from step 2 until Cdown(α) does not change.
+
+Intuitively, the down closure of a link type α is the set of all link types which are affected by α. We can easily get the following characters.
+
+Lemma 8. For a top link type αt in the SLN schema ^S(R, L, rs), the down closure Cdown(αt) constructs a tree with root αt in the semantic link type relative net.
+
+Lemma 9. For two top link types α1 and α2 in the SLN schema ^S(R, L, rs), if Cdown(α1) ∩ Cdown(α2) 6= φ, then α1 and α2 are in the same RC-NF2 sub-schemas from Algorithm 3.
+
+In some cases, two different SC-NF2 schemas may share a common segment. Such a common segment leads to redundancy. In Fig. 4, for example, ^S1.1 and ^S1.2 share a common segment that includes two semantic link types: publishedIn and editorOf. In fact, we can deal with such a redundancy by decomposing the schemas into advanced forms and building reference relations between schemas.
+
+Definition 7. For an SLN schema ^S(R, L, rs), let ^S1(R1, L1, rs1), ^S2(R2, L2, rs2), ..., and ^Sk(Rk, Lk, rsk) be a RC-NF2 level decomposition. We call such a decomposition redundancy-free if ^Si and ^Sj do not share any semantic relative for all 1 ≤ i, j ≤ m.
+
+Algorithm 4. For an SLN schema ^S(R, L, rs), let ^S1(R1, L1, rs1) and ^S2(R2, L2, rs2) be two sub-schemas of the RC-NF2 level decomposition from Algorithm 3. If ^S1 and ^S2 share a set of semantic relatives SR, let I = L1 ∩ L2.
+
+(1) A new schema ^SI(RI, I, rsI) can be constructed according to I.
+
+(2) Decompose the schema into several sub-schemas according Algorithm 2: ^SI1, ^SI2, ..., and ^SIm.
+
+(3) Denote βIk as the bottom link type in ^SIk. Build the reference relations Ref (βIk in Sˆ1, βIk in ^SIk) and Ref (βIk in Sˆ2, βIk in ^SIk) for each k (1 ≤ k ≤ m).
+
+We can use Algorithm 4 to repeatedly deal with redundant problems of the decomposing sub-schemas from Algorithm 3 and the sub-schemas from Algorithm 4 are all in RC-NF2. However, in many cases, such a decomposition may produce some small patch sub-schemas. In fact, we can deal the redundancy by building reference relations directly between the schemas rather than creating new sub-schemas. The following algorithm is an amendment of Algorithm 3. It provides an approach to decompose an RC-NF1 schema into several redundancy-free RC-NF2 sub-schemas.
+
+Algorithm 5. Let ^S(R, L, rs) be a RC-NF1 SLN schema.
+
+(1) Let reflist = φ.
+
+(2) Find all bottom semantic link types of ^S, denoted as αb1, αb2, ..., and αbm.
+
+(3) For each αbi (1 ≤ i ≤ m), compute its up-closure according to reasoning rule set rs, denoted as Cup(αbi).
+
+(4) For each pair of (αbi, αbj), i ≠ j, let Iij = Cup(αbi) ∩ Cup(αbj), find all bottom link types of Iij, denoted as β1, β2, ..., and βk respectively. Let Lbi = Cup(αbi) and Lbj = (Cup(αbj) − Iij) U {β1, β2, ..., βk}. Let reflist = reflist U {(β1, Lbj, Lbi), (β2, Lbj, Lbi), ..., (βk, Lbj, Lbi)}.
+
+(5) We get the sub-schema ^Sbi(Rbi, Lbi, rsbi) according to Lbi, and build reference relations Ref (βt in ^Sbj, βt in ^Sbi) for each (βt, Lbj, Lbi) in reflist. Clearly, Rbi ⊆ R , Lbi ⊆ L, and rsbi ⊆ rs. ^Sbi(Rbi, Lbi, rsbi) is a sub-schema of ^S(R, L, rs).
+
+Thus, ^S(R, L, rs) is decomposed into m sub-schemas ^Sbi(Rbi, Lbi, rsbi), where 1 ≤ i ≤ m.
+
+Deduction 1. The decomposition by Algorithm 5 is loss-less.
+
+5. Schema maintenance and reasoning
+
+5.1 Schema maintenance
+
+Updating an SLN schema concerns resource types, semantic link types, and reasoning rules. The essence of semantic rule-constraint normal form is to classify the semantic link type set into different parts according to the rule set. So only the updating of the rule set can lead to different sub-schemas. The resource type set and semantic link type set for the sub-schemas will also change. Therefore, we can study the updating issues according to the variation of the rule set.
+
+The following algorithm is to modify decomposition after add ing rules to schemas.
+
+Algorithm 6 (Schema Revision after Extension). Let {^S1(R1, L1, rs1), ^S2(R2, L2, rs2), ..., ^Sn(Rn, Ln, rsn)} be the RC-NF2 schemas decomposed from SLN schema ^S(R, L, rs). A new semantic link type set {α1' , α2' , ..., αl'} and a new rule set {r1', r2', ..., rk'} are appended to the schema ^S. The extension of ^S is denoted as ^SE(RE, LE, rsE).
+
+(1) Take all new semantic link types as isolated semantic link types firstly, and then construct new sub-schemas as ^S1'(R1', L1', φ), ^S2' (R2', L2', φ), ..., ^Sl'(Rl', Ll', φ). Let ^SE = {^S1, ^S2, ..., ^Sn,^S1',^S2', ..., ^Sl'}.
+
+(2) For a rule αi1 · αi2 => αj in rsE − rs, we get semantic relatives αj ⊴ αi1 and αj ⊴ αi2. For a rule αi => αj in rsE − rs, we get a semantic relative αj ⊴ αi
+
+(3) For each semantic relative αj E αi retrieved in step 2, the list of sub-schemas in which αi involved are ^Si1, ^Si2, ..., ^Si1s, and the list of sub-schemas in which α j involved are ^Sj1, ^Sj2, ..., ^Sjt .
+
+1). Compute the up-closure Cup(αi) for αi in ^Si1, let Ljp = Ljp U Cup(αi), for all 1 ≤ p ≤ t;
+
+2). Union all resource types involved in Cup(αi) into Rjp, and union all rules involved in Cup(αi) into rsjp; and,
+
+(3) Check if ^Sjp ⊆ ^Sjq or not for each pair (p, q), 1 ≤ p ≤ s, 1 ≤ q ≤ t. If yes, remove ^Sjp from the list of SE.
+
+The following algorithm is for schema revision after deleting some rules.
+
+Algorithm 7. Let {^S1(R1, L1, rs1), ^S2(R2, L2, rs2), ..., ^Sn(Rn, Ln,rsn)} be the RC-NF2 schemas decomposed from SLN schema ^S(R, L, rs). Denote the deleted resource type set as RD, the semantic link types set as LD, and the deleted rules set rsD.
+
+(1) For each semantic sub-schema ^Si, let Ri = Ri − RD, Li = Li − LD, and rsi = rsi − D. Applying Algorithm 1 or 3 on ^Si to get a decomposition for ^Si with corresponding semantic constraint normal form. Assume that the decomposition is {^Si1(Ri1, Li1, rsi1), ^Si2(Ri2, Li2, rsi2), ..., ^Sik(Rik, Lik, rsik)}.
+
+(2) Unite all sub-schemas retrieved in step 1, denote the new set of sub-schemas as {^S1' (R1', L1', rs1'), ^S2' (R2', L2', rs0 2), ..., ^Sm' (Rm', Lm', rsm')}.
+
+(3) Check if ^Si0 ⊆ ^Sj0 or not for each pair (i, j), 1 ≤ i, j ≤ m. If yes, remove ^Si' .
+
+5.2 Reasoning algorithms
+
+Several kinds of reasoning can be carried out on a semantic link network. The basic reasoning is to obtain the potential semantic relationships between resources. The following algorithm is for deriving potential semantic links.
+
+Algorithm 8. Let R, R', and R" be resources of a semantic link network instance S of schema ^S(R, L, rs), the set of semantic links from R to R' and from R' to R" be A = {α1, α2, ..., αs} and B = {β1, β2, ..., βt} respectively, the set of known semantic links from R to R" be C', and the types of R, R', and R" are rt1, rt2, and rt3 respectively.
+
+(1) Let C = φ.
+
+(2) For each pair (αi, βj) in A × B, check rs to determine if there is a rule in form of αi · βj => γk. If yes, let C = C U γk, else skip to the next pair.
+
+(3) Let C = C ∩ [rt1, rt2].
+
+(4) C = C U C0 is the solution.
+
+The measure of A × B is a constant s × t for A ⊆ [rt1, rt2], B ⊆ [rt2, rt3]. Meanwhile, the size of rule set rs is a constant. So, the complexity of the above algorithm is O(1). For a connected path R' −α1-> R1 -α2-> ... -αn-> Rn with length n, the algorithm to compute the semantic relations between R' and Rn is to recursively use Algorithm 7. And, the complexity is O(n).
+
+Moreover, we can compute the semantic relations between any two resources. The immediate idea is to find all connected paths between them, compute the semantic relations of each connected path, and then combine all semantic relations between them. For a semantic link network with m resources and n semantic links, under the assumption of equal distribution, there are d = n/m(m−1) links between two resources on average. Therefore, from R' to Rn, the number of paths with length k is Pm k− −1 2dk. Thus, the complexity for computing the semantic relations between any two resources is O(∑^{m-1}_{k=1} kP^{k-1}_{m-2}d^k) = O(∑^{m-1}_{k=1} k(m−2)! n^{k} / ((k−1)! m^{k}(m−1)^{k})). We can see that the complexity depends on the two variables m and n, which could be large. However, it can be reduced by reducing the scale of the semantic link network. The idea of decomposing a semantic link network into RC-NF2 forms can reduce the two variables m and n prominently. And the reasoning in RC-NF2 semantic link networks is closed and independent. Moreover, we can find some better qualified methods. Indeed, the up-closure can help develop an efficient algorithm to determine semantic links between two resources. The following algorithm is for determining the existence of semantic relation R -α-> R' in a semantic link network.
+
+Moreover, we can find some better qualified methods. Indeed, the up-closure can help develop an efficient algorithm to determine semantic links between two resources. The following algorithm is for determining the existence of semantic relation R -α-> R' in a semantic link network.
+
+Algorithm 9. Let rs be the reasoning rule set of semantic link network S and the types of R and R' be rt and rt' respectively.
+
+(1) Determine if α in [rt, rt']. If no, return false; otherwise, continue the next step.
+
+(2) Compute the up-closure of α with respect to rs, denoted as Cup(α).
+
+(3) Compute the projection of S with respect to Cup(α), denoted as S0, which may be constituted by several unconnected segments or some isolated resources, where each segment is interconnected.
+
+(4) If R and R' are in two different segments, return false.
+
+(5) If R and R' are in the same segment S, return determination if R -α-> R' is true in S by using Algorithm 8.
+
+This algorithm is efficient because the up-closure for a semantic link type may be much smaller than the original link type set, and the projection may be sparse in light of semantic links. The following algorithm computes semantic links set Γ = {α R -α-> R'}.
+
+Algorithm 10. Let S be a semantic link network, and the types of R and R' be rt and rt' respectively, then any potential semantic link type between R and R' is in [rt, rt'].
+
+(1) Let Γ = φ.
+
+(2) For each semantic link type α in [rt, rt'], execute Algorithm 8 to determine if R -α-> R' or not. If yes, let Γ = Γ U {α}; else skip to the next semantic link type.
+
+(3) Return Γ .
+
+For a given resources R, the following algorithm computes the resource set A = {Ri R -α-> Ri}. The set A is to point out all resources which have an α relation with R in a semantic link network.
+
+Algorithm 11. Let S be a semantic link network, and the type of R be rt.
+
+(1) Compute the up-closure of α with respect to rs, denoted as Cup(α);
+
+(2) Compute the projection of S with respect to Cup(α), denoted as S0;
+
+(3) Denote T = {rti α in [rt, rti]} and A = {R' R' in S0, and the type of R' is in T};
+
+(4) For each resource R' in A, applying Algorithm 8 to determine if R -α-> R' or not. If no, let A = A − {R}; else skip to the next resource in A;
+
+(5) Return A.
+
+The algorithm for computing the set of resource pair {(R, R') R -α-> R'} for a given semantic link type α is similar to Algorithm 11. However, the complexity would be much higher because both the start and the end resources need to compute.
+
+6. Case study
+
+6.1 Schema example of science network
+
+We firstly construct a schema example of science network consisting of three components, and then discuss the decomposition of the schema:
+
+(1) a set of resource types {University, Department, Professor, Student, Course, Book, Project, Journal, Paper, Conference, Proceeding, Field, Publisher};
+
+(2) semantic link types between these resource types as shown in Table 1; and,
+
+(3) reasoning rules for these semantic link types as shown in Table 2. We construct the semantic link type relative net, which consists of six parts as shown in Fig. 3. Therefore, we get the following six RC-NF1 sub-schemas according to Algorithm 1.
+
+6.2 Decompose the schema into RC-NF1
+
+We construct the semantic link type relative net, which consists of six parts as shown in Fig. 3. Therefore, we get the following six RC-NF1 sub-schemas according to Algorithm 1.
+
+6.3 Decompose the schema into RC-NF2
+
+Sub-schemas ^S4, ^S5 and ^S6 satisfy RC-NF2 because each has only one rule. Sub-schema ^S3 is also in RC-NF2 for it has only one bottom link type in the set of semantic link types from Fig. 3. However, sub-schemas ^S1 and ^S2 are not in RC-NF2, so they need to be decomposed into RC-NF2 according to Algorithm 3.
+
+We first find the following three bottom semantic link types in sub-schema ^S1: engageIn, readerOf and attenantOf, and then compute the following three up-closures of them, shown in Fig. 4. L1.1 = Cup(engageIn) = {textbook, sameField, acknowledgeIn, productOf, publishedIn, subFieldOf, belongTo, authorOf, editorOf, leaderOf, takePartIn, chairOf, engageIn}, L1.2 = Cup(readerOf ) = {readerOf, editorOf, publishedIn}, and, L1.3 = Cup(attenantOf ) = {chairOf, attenantOf }.
+
+The corresponding set of involved resource types and involved rules for L1.1, L1.2 and L1.3 are listed as follows.
+
+R1.1 = {Professor, Student, Course, Book, Project, Journal, Paper, Conference, Proceeding, Field},
+
+R1.2 = {Professor, Student, Book, Journal, Paper, Proceeding}, and,
+
+R1.3 = {Professor, Student, Conference}.
+
+rs1.1 = {rule 2, rule 6, rule 8, rule 12–24, rule 32},
+
+rs1.2 = {rule 1, rule 5, rule 13}, and,
+
+rs1.3 = {rule 3}.
+
+Therefore, we get three RC-NF2 sub-schemas ^S1.1(R1.1, L1.1, rs1.1), ^S1.2(R1.2, L1.2, rs1.2), and ^S1.3(R1.3, L1.3, rs1.3) from sub-schema ^S1. For sub-schema ^S2, we get two bottom semantic link types in facultyOf and setup, and then compute the following up-closures of them, shown in Fig. 5.
+
+L2.1 = Cup(facultyOf ) = {classmateOf, partOf, teach, studyIn, supervisorOf, colleague, headOf, facultyOf },
+
+L2.2 = Cup(setup) = {setup, partOf }.
+
+The corresponding set of involved resource types and involved rules for L2.1 and L2.2 are listed as follows.
+
+R2.1 = {Professor, Student, Department, University, Course}, and
+
+R2.2 = {Department, University, Course}.
+
+rs2.1 = {rule 4, rule 7, rule 9–11, rule 26–27, rule 31, rule 33}, and
+
+rs2.2 = {rule 25}.
+
+Then, we get two RC-NF2 sub-schemas ^S2.1(R2.1, L2.1, rs2.1) and ^S2.2(R2.2, L2.2, rs2.2) from sub-schema ^S2.
+
+To sum up, we get nine RC-NF1 sub-schemas from the original schema: ^S1.1, ^S1.2, ^S1.3, ^S2.1, ^S2.2, ^S3, ^S4, ^S5, and ^S6. According to Theorems 2 and 3, the decomposition is loss-less. Clearly, the number of semantic links in a semantic link network influences the reasoning complexity. Dividing a schema into several RC-NF2 sub-schemas can significantly reduce the scale so that the query and reasoning can be executed within a small scale. The soundness and the integrity of the query and reasoning on sub-schemas and up-closure are guaranteed by previous sections.
+
+6.4 Redundancy-free decomposition
+
+In most cases, the decomposition to RC-NF2 is enough for the reason that a RC-NF2 schema is the smallest unit in the sense of reasoning closed. However, there is some redundancy problem in the above decomposition. In Fig. 4, ^S1.1 and ^S1.2 share the same semantic relative: editorOf E publishedIn. According to Algorithm 4, we get a new decomposition by replacing the sub-schema ^S1.1 and ^S1.2 with the following three schemas ^S1.10, ^S1.20 and ^S1.40 and the semantic relative net is shown in Fig. 6.
+
+Schema ^S1.10 (R1.10, L1.10, rs1.10):
+
+L1.10 = L1.1,
+
+R1.10 = R1.1, and
+
+rs1.10 = {rule 2, rule 5–6, rule 8, rule 12, rule 14–24, rule 32};
+
+Schema ^S1.20:
+
+L1.20 = L1.2,
+
+R1.20 = R1.2, and
+
+rs1.20 = {rule 1, rule 5};
+
+Schema ^S1.40:
+
+L1.40 = {publishedIn, editorOf },
+
+R1.40 = {Professor, Student, Book, Journal, Paper, Proceeding}, and
+
+rs1.40 = {rule 13}.
+
+We can also avoid the redundancy problem by modifying the schema ^S1.2 and building a conference to ^S1.1 directly rather than creating a new schema. As shown in Fig. 7, the schema ^S1.1 need not change while the schema ^S1.2 should be changed into ^S1.20 as follows.
+
+Schema ^S1.20:
+
+R1.20 = {Professor, Student, Book, Journal, Paper, Proceeding},
+
+L1.20 = {readerOf, editorOf, publishedIn} with a reference relation {ref (editorOf in ^S1.20, editorOf in ^S1.1)}, and rs1.20 ={rule 1, rule 5}.
+
+Therefore, we have two choices for redundancy-free decomposition of the original schema, and both of them are loss-less.
+
+6.5 Schema maintenance
+
+The following are two examples to show how to maintain the SLN schema while appending some rules to or removing some rules from the rule set according to Algorithms 6 and 7 respectively.
+
+Assume that two semantic link types are inserted into LinkTypes: vistingScholarOf in [Professor, Department] and vistingScholarOf in [Professor, Univesity], and two new reasoning rules are added to rs.
+
+rule 34. vistingScholarOf · partOf => vistingScholarOf
+
+rule 35. publishedIn => sameField.
+
+According to Algorithm 6, we can modify the sub-schemas as follows.
+
+(1) By vistingScholarOf · partOf => vistingScholarOf, we get that vistingScholarOf E partOf . A new sub-schema ^S2.3 should be appended, where ^S2.3 involves only one semantic relative vistingScholarOf E partOf . And its resource types, semantic link types, and the reasoning rule set are as follows.
+
+R2.3 = {Professor, Department, Univesity},
+
+L2.3 = {vistingScholarOf , partOf },
+
+rs2.3 = {rule34}.
+
+(2) By the rule publishedIn => sameField, we get sameField E publishedIn. For the two semantic link types occur in the subschema ^S1.1, we only need to modify it. And, rule 35 should be inserted into the rule set.
+
+Assume that the semantic link type engageIn is removed from linkTypes. According to Algorithm 7, we find the sub-shcema ^S1.1 which involve in engageIn. Then, we need to delete the semantic link type engageIn from the sub-schemas and the rules related with engageIn, i.e., rule 8, rule 14–18 and rule 21, from the rule set.
+
+Thus, we get a new semantic relative net as shown in Fig. 8. According the new rule set, the schema ^S1.1 can be decomposed into four sub-schemas ^S1.a, ^S1.b, ^S1.c, and ^S1.d. The corresponding resource type sets, the semantic link type sets, and the reasoning rule sets can be easily obtained. Finally, we remove the sub-schema ^S1.d for ^S1.d ⊆ ^S1.3. And the other sub-schemas such as ^S1.2, ^S1.3, ^S2.1, and ^S2.2 need not to be changed.
+
+7. Discussion
+
+As a form of knowledge representation, a traditional semantic network is a directed graph of concepts and semantic relations between concepts [12]. It does not support rule reasoning. The SLN is different from a traditional semantic network in the following aspects.
+
+(1) SLN is a semantic data model for managing various resources.
+
+(2) Nodes in semantic link network can be anything such as web pages, documents, software, images, concepts and even a semantic link network.
+
+(3) Semantic links in semantic link network represent any semantic relations, even implicit relations.
+
+(4) SLN supports rule reasoning.
+
+The schema of relational database is for defining the structure and metadata of relational tables [1,2]. It does not support complex semantics and reasoning. The traditional network database model provides a natural way to specify and manage data, but it is relatively rigid in maintaining data [13,14]. Compared with the previous database models, the SLN model not only provides a natural way for users to create their models but also offers the reasoning ability.
+
+Compared with the XML schema and the RDF schema, which mainly provide syntax for XML and RDF respectively, the SLN schema has the built-in relational reasoning ability.
+
+8. Conclusions
+
+The SLN schema regulates the semantics of semantic link networks so as to manage semantic link network instances. The proposed rule-constraint normal forms can help manage and maintain the SLN schema efficiently. Two algorithms for SLN schema extension and reduction are introduced. Reasoning algorithms for deriving more semantic relations have been proposed. The proposed SLN schema and relevant theory are important parts of the SLN model.
+
+References
+
+[1] E.F. Codd, A relational model of data for large shared data banks, Communications of the ACM 13 (6) (1970) 377–387.
+
+[2] J.D. Ullman, Principles of Database and Knowledge-Base Systems, Vol. I, Computer Science Press, 1988.
+
+[3] T. Berners-Lee, J. Hendler, O. Lassila, The semantic web, Scientific American 284 (5) (2001) 34–43.
+
+[4] I. Horrocks, P.F. Patel-Schneider, SWRL: A Semantic Web Rule Language Combining OWL and RuleML. Available at: http://www.w3.org/Submission/ SWRL/.
+
+[5] H. Zhuge, Communities and emerging semantics in semantic link network: Discovery and learning, IEEE Transactions on Knowledge and Data Engineering 21 (6) (2009) 785–799.
+
+[6] H. Zhuge, Y. Sun, et al., Algebra model and experiment for semantic link network, International Journal of High Performance Computing and Networking 3 (4) (2005) 227–238.
+
+[7] H. Zhuge, The Knowledge Grid, World Scientific, 2004.
+
+[8] H. Zhuge, Autonomous semantic link networking model for the Knowledge Grid, Concurrency and Computation: Practice and Experience 7 (19) (2007) 1065–1085.
+
+[9] H. Zhuge, et al., Modeling language and tools for the semantic link network, Concurrency and Computation: Practice and Experience 20 (7) (2008) 885–902.
+
+[10] H. Zhuge, Y. Li, Semantic profile-based document logistics for cooperative research, Future Generation Computer Systems 20 (1) (2004) 47–60.
+
+[11] H. Zhuge, Y. Sun, J. Zhang, The schema theory for semantic link network, in: Proceeding of the Fourth International Conference on Semantics, Knowledge and Grid, Beijing, China, 2008, pp. 189–196.
+
+[12] M.R. Quillian, in: M. Minsky (Ed.), Semantic Memory. Semantic Information Processing, MIT press, Cambridge, Mass, 1968.
+
+[13] C.W. Bachman, Data structure diagrams, ACM SIGMIS Database 1 (2) (1969) 4–10.
+
+[14] C.W. Bachman, The programmer as navigator, Communications of the ACM 16 (11) (1973) 653–658.

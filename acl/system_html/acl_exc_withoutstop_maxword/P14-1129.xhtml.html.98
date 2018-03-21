@@ -1,0 +1,15 @@
+<html>
+<head>
+<title>P14-1129.xhtml_1.pickle</title>
+</head>
+<body bgcolor="white">
+<a name="0">[0]</a> <a href="#0" id=0>We treat NULL as a normal target word, and if a source word aligns to multiple target words, it is treated as a single concatenated token</a>
+<a name="1">[1]</a> <a href="#1" id=1>If t i is unaligned, we inherit its affiliation from the closest aligned word, with preference given to the right</a>
+<a name="2">[2]</a> <a href="#2" id=2>For aligned target words, the normal affiliation heuristic can be used, since the word alignment is available within the rule</a>
+<a name="3">[3]</a> <a href="#3" id=3>However, note that there are only 3 possible positions for each target word, and 11 for each source word</a>
+<a name="4">[4]</a> <a href="#4" id=4>If t is on the left edge of the arc, we say it is affiliated with s i</a>
+<a name="5">[5]</a> <a href="#5" id=5>Therefore, for every word in the vocabulary, and for each position, we can pre-compute the dot product between the word embedding and the first hidden layer</a>
+<a name="6">[6]</a> <a href="#6" id=6>For unaligned words, the normal heuristic can also be used, except when the word is on the edge of a rule, because then the target neighbor words are not necessarily known</a>
+<a name="7">[7]</a> <a href="#7" id=7>Thus, the total cost increase of using the NNJM+NNLTM features</a>
+</body>
+</html>

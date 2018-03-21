@@ -1,0 +1,248 @@
+(lp0
+VOur method jointly utilizes relations between sentences and relations between words, and extracts a rooted document subtree from a document tree whose nodes are arbitrary subtrees of the sentence tree
+p1
+aVThe difference between the sentence subtree and the rooted sentence subtree methods was fairly small
+p2
+aVWe denote by r i u'\u005cu2062' j the variable that is one if word i u'\u005cu2062' j is selected as a root of an extracting sentence subtree
+p3
+aVSubtree selection selected a root in both examples that differed from the parser u'\u005cu2019' s root
+p4
+aVWe can build the nested tree by regarding each node of the document tree as a sentence tree
+p5
+aVConstraints ( 2 ) and ( 3 ) are tree constraints for a document tree and sentence trees r i u'\u005cu2062' j in Constraint ( 3 ) allows the system to extract non-rooted sentence subtrees, as we previously mentioned
+p6
+aVExtractive summarization is one well-known approach to text summarization and extractive methods represent a document (or a set of documents) as a set of some textual units (e.g.,, sentences, clauses, and words) and select their subset as a summary
+p7
+aVRooted sentence subtree only selects rooted sentence subtrees 2 2 We achieved this by making R c u'\u005cu2062' ( i ) only return the parser u'\u005cu2019' s root node in Figure 7
+p8
+aVWe compared our method ( sentence subtree ) with that of EDU selection [ 11 ]
+p9
+aVThe sentence tree is a tree that has words as nodes and head modifier relationships between words obtained by the dependency parser as edges
+p10
+aVThe [ u'\u005cu22c5' ] indicates the word that the system selected as the root of the subtree
+p11
+aVWe counted the number of sentences in the source document that each method used to generate a summary 5 5 Note that the number for the EDU method is not equal to selected textual units because a sentence in the source document may contain multiple EDUs
+p12
+aVThe document tree is a tree that has sentences as nodes and head modifier relationships between sentences obtained by RST as edges
+p13
+aVFigure 4 has two example sentences for which both methods selected a subtree as part of a summary
+p14
+aVLet us denote by w i u'\u005cu2062' j the term weight of word i u'\u005cu2062' j (word j in sentence i x i is a variable that is one if sentence i is selected as part of a summary, and z i u'\u005cu2062' j is a variable that is one if word i u'\u005cu2062' j is selected as part of a summary
+p15
+aVWe can set the candidate for the root node of the subtree by using constraint ( 7
+p16
+aVAs we can see, subtree selection only selected important subtrees that did not include the parser u'\u005cu2019' s root, e.g.,, purpose-clauses and that-clauses
+p17
+aVFirst, we represent a document as a nested tree , which is composed of two types of tree structures a document tree and a sentence tree
+p18
+aVEach root EDU in a sentence has the parent EDU in another sentence
+p19
+aVOur method generates a summary by trimming a nested tree
+p20
+aVConstraint ( 10 ) guarantees that the parser u'\u005cu2019' s root node will only be selected when the system extracts a rooted sentence subtree
+p21
+aVWe converted the rhetorical relations between EDUs to the relations between sentences to build the nested tree structure
+p22
+aVThe { u'\u005cu22c5' } indicates the parser u'\u005cu2019' s root word
+p23
+aVA fragmented summary is generated when small fragments are selected from many sentences
+p24
+aVConstraints ( 11 ) and ( 12 ) guarantee that the selected sentence subtree has at least one subject and one object if it has any
+p25
+aVAs a result, we obtain a tree that represents the parent-child relations of sentences, and we can use it as a document tree
+p26
+aVHowever, it is not trivial to apply their method to text summarization because no compression ratio is given to sentences
+p27
+aVIt simply selects full sentences from a document tree 3 3 We achieved this by setting u'\u005cu0398' to a very large number
+p28
+aVHence, the number of sentences in the source document included in the resulting summary can be an indicator to measure the fragmentation of information
+p29
+aVWhile EDUs are textual units for RST, they are too fine grained as textual units for methods of extractive summarization
+p30
+aVWe applied a multiple test by using Holm u'\u005cu2019' s method and found that our method significantly outperformed EDU selection and sentence selection
+p31
+aVConstraint ( 4 ) guarantees that words are only selected from a selected sentence
+p32
+aVConstraint ( 1 ) guarantees that the summary length will be less than or equal to limit L
+p33
+aVFinally, we formulate the problem of single document summarization as that of combinatorial optimization, which is based on the trimming of the nested tree
+p34
+aVHence, the number of sentences tends to be large
+p35
+aVConstraint ( 6 ) guarantees that there is only one root per selected sentence
+p36
+aVAccording to the objective function, the score for the resulting summary is the sum of the term weights w i u'\u005cu2062' j that are included in the summary
+p37
+aVWe could thus take into account both relations between sentences and relations between words
+p38
+aVConstraint ( 5 ) guarantees that each selected sentence subtree has at least u'\u005cu0398' words
+p39
+aVConstraint ( 9 ) prevents the system from selecting the parent node of the root node
+p40
+aVIn particular, we extract a rooted document subtree from the document tree, and sentence subtrees from sentence trees in the document tree
+p41
+aVAlthough their method generated a well-organized summary, no optimality of information coverage was guaranteed and their method could not accept large texts because of the high computational cost
+p42
+aVIt indicates that EDUs are shorter than the other textual units
+p43
+aVHence, we can determine the parent-child relations between sentences
+p44
+aVThey formulated the summarization problem as a tree knapsack problem with constraints represented by the dependency trees
+p45
+aVThis capability is very effective because we have to contain important content in summaries within given length limits, especially when the compression ratio is high (i.e.,, the method has to generate much shorter summaries than the source documents
+p46
+aVTherefore, the models have tended to select small fragments from many sentences to maximize objective functions and have led to fragmented summaries being generated
+p47
+aVMany studies that have utilized RST have simply adopted EDUs as textual units [ 14 , 6 , 11 , 12 ]
+p48
+aVThe root u'\u005cu2062' ( i ) returns the word index of the parser u'\u005cu2019' s root
+p49
+aVThis dataset was first used by Marcu et al for evaluating a text summarization system [ 15 ]
+p50
+aVWe examined two other methods, i.e.,, rooted sentence subtree and sentence selection
+p51
+aVWe can only extract important content by trimming redundant parts from sentences
+p52
+aVFunction len u'\u005cu2062' ( i ) returns the number of words in sentence i
+p53
+aVIt returned the parser u'\u005cu2019' s root node and the verb nodes in this study
+p54
+aVEach sentence has only one root EDU that is the parent of all the other EDUs in the sentence
+p55
+aVIn addition, their method required large sets of data to calculate the accurate probability
+p56
+aVConstraints ( 6 )-( 10 ) allow the model to extract subtrees that have an arbitrary root node
+p57
+aVFormulating extractive summarization as a combinational optimization problem greatly improves the quality of summarization [ 16 , 8 , 20 ]
+p58
+aVWe allowed our model to extract a subtree that did not include the root word (See the sentence with an asterisk * in Figure 1
+p59
+aVWe therefore qualitatively analyzed some actual examples that will be discussed in Section 4.2.2
+p60
+aVThe R c u'\u005cu2062' ( i ) returns a set of the nodes that are the candidates of the root nodes in sentence i
+p61
+aVWe added two types of constraints to our model to extract a grammatical sentence subtree from a dependency tree
+p62
+aVSentence selection does not trim sentence trees
+p63
+aVWe set the length constraint, L , as the number of words in each reference summary
+p64
+aVExtracting a subtree from the dependency tree of words is one approach to sentence compression [ 21 , 19 , 17 , 10 ]
+p65
+aVFunction parent u'\u005cu2062' ( i ) returns the parent of sentence i and function parent u'\u005cu2062' ( i , j ) returns the parent of word i u'\u005cu2062' j
+p66
+aVAfter the document tree is obtained, we use a dependency parser to obtain the syntactic dependency trees of sentences
+p67
+aVThis subsection compares the methods of subtree selection and rooted subtree selection
+p68
+aVWe propose a method of summarizing a single document that utilizes dependency between sentences obtained from rhetorical structures and dependency between words obtained from a dependency parser
+p69
+aVThe method of Filippova and Strube [ 9 ] allows the model to extract non-rooted subtrees in sentence compression tasks that compress a single sentence with a given compression ratio
+p70
+aVEquation ( 13 ) means that words z i u'\u005cu2062' k and z i u'\u005cu2062' l have to be selected together, i.e.,, a word whose dependency tag is PMOD or VC and its parent word, a negation and its parent word, a word whose dependency tag is SUB or OBJ and its parent verb, a comparative (JJR) or superlative (JJS) adjective and its parent word, an article (a/the) and its parent word, and the word u'\u005cu201c' to u'\u005cu201d' and its parent word
+p71
+aVThe s u'\u005cu2062' ( i , j ) returns the set of word indices that are selected together with word i u'\u005cu2062' j
+p72
+aVThe score for sentence selection is low (0.254
+p73
+aVHowever, introducing sentence compression to the system greatly improved the ROUGE score (0.354
+p74
+aVThese two are different from our method in the way that they select a sentence subtree
+p75
+aVOur model is shown in Figure 3
+p76
+aVWe also examined the ROUGE scores of two LEAD 4 4 LEAD methods simply take the first K textual units from a source document until the summary length reaches L methods with different textual units
+p77
+aVFinally, we obtain a nested tree
+p78
+aVEquation ( 14 ) means that the sequence of words has to be selected together, i.e.,, a proper noun sequence whose POS tag is PRP$, WP%, or POS and a possessive word and its parent word and the words between them
+p79
+aVThere are boxplots of the numbers of selected sentences in Figure 5
+p80
+aVRST-DT is a tree whose terminal nodes correspond to EDUs and whose nonterminal nodes indicate the relations
+p81
+aVTable 2 lists the number of words in each textual unit extracted by each method
+p82
+aVFor Constraint ( 5 ), we set u'\u005cu0398' to eight
+p83
+aVWe specifically merge EDUs that belong to the same sentence
+p84
+aVIn other words, our method relaxed fragmentation without decreasing the ROUGE score
+p85
+aVA document in RST is segmented into EDUs and adjacent EDUs are linked with rhetorical relations to build an RST-Discourse Tree (RST-DT) that has a hierarchical structure of the relations
+p86
+aVFortunately we can simply convert DEP-DTs to obtain dependency trees between sentences
+p87
+aVHowever, these studies have only extracted rooted subtrees from sentences
+p88
+aVEDUs ( LEAD EDU ) and sentences ( LEAD SNT
+p89
+aVHirao et al recently transformed RST trees into dependency trees and used them for single document summarization [ 11 ]
+p90
+aVThis meant that our method generated a summary with a significantly smaller number of sentences 6 6 We used the Wilcoxon signed-rank test ( p 0.05
+p91
+aVMost methods of summarization based on RST use EDUs as extraction textual units
+p92
+aVThere has recently been increasing attention focused on approaches that jointly optimize sentence extraction and sentence compression [ 21 , 19 , 17 , 10 , 2 , 3 ]
+p93
+aVHirao et al converted RST-DTs into dependency-based discourse trees (DEP-DTs) whose nodes corresponded to EDUs and whose edges corresponded to the head modifier relationships of EDUs
+p94
+aVThere have been some studies that have used discourse structures locally to optimize the order of selected sentences [ 18 , 5 ]
+p95
+aVIn contrast, methods of EDU selection had an average of 5.77 and a median of five sentences
+p96
+aVWe used ROUGE [ 13 ] as an evaluation criterion
+p97
+aVConstraint ( 8 ) maintains consistency between z i u'\u005cu2062' j and r i u'\u005cu2062' j
+p98
+aVThe average length of the reference summaries corresponded to approximately 10% of the length of the source document
+p99
+aVThe score is also higher than that with EDU selection, which is a state-of-the-art method
+p100
+aVOur model requires sentence-level dependency
+p101
+aVIt is important for generated summaries to have a discourse structure that is similar to that of the source document
+p102
+aVWe set the term weight, w i u'\u005cu2062' j , for our model as
+p103
+aVThe average for our method was 4.73 and its median was four sentences
+p104
+aVWe have explained our method with an example in Figure 1
+p105
+aVHowever, as these methods did not include the discourse structures of documents, the generated summaries lacked coherence
+p106
+aVFigure 2 has an example of EDUs
+p107
+aVWe built all document trees from the RST-DTs that were annotated in the corpus
+p108
+aVElementary Discourse Units (EDUs) in RST are defined as the minimal building blocks of discourse
+p109
+aVAlthough LEAD works well and often obtains high ROUGE scores for news articles, the scores for LEAD EDU and LEAD SNT were very low
+p110
+aVRhetorical Structure Theory (RST) [ 14 ] is one way of introducing the discourse structure of a document to a summarization task [ 15 , 6 , 11 ]
+p111
+aVWe have summarized the Recall-Oriented Understudy for Gisting Evaluation (ROUGE) scores for each method in Table 1
+p112
+aVwhere t u'\u005cu2062' f i u'\u005cu2062' j is the term frequency of word i u'\u005cu2062' j in a document and d u'\u005cu2062' e u'\u005cu2062' p u'\u005cu2062' t u'\u005cu2062' h u'\u005cu2062' ( i ) is the depth of sentence i within the sentence-level DEP-DT that we described in Section 3.1
+p113
+aVNone of these methods use the discourse structures of documents
+p114
+aVWe experimentally evaluated the test collection for single document summarization contained in the RST Discourse Treebank (RST-DTB) [ 4 ] distributed by the Linguistic Data Consortium (LDC) 1 1 http://www.ldc.upenn.edu/Catalog/CatalogEntry.jsp catalogId=LDC2002T07
+p115
+aVThe RST-DTB Corpus includes 385 Wall Street Journal articles with RST annotations, and 30 of these documents also have one manually prepared reference summary
+p116
+aVThe s u'\u005cu2062' u u'\u005cu2062' b u'\u005cu2062' ( i ) and o u'\u005cu2062' b u'\u005cu2062' j u'\u005cu2062' ( i ) return the word indices whose dependency tag is u'\u005cu201c' SUB u'\u005cu201d' and u'\u005cu201c' OBJ u'\u005cu201d'
+p117
+aVEDUs roughly correspond to clauses
+p118
+aVDaumé III and Marcu [ 6 ] proposed a noisy-channel model that used RST
+p119
+aVWe formulate our problem of optimization in this section as that of integer linear programming
+p120
+aVThere are 78 types of rhetorical relations between two spans, and each span has one of two aspects of a nucleus and a satellite
+p121
+aVThe nucleus is more salient to the discourse structure, while the other span, the satellite, represents supporting information
+p122
+aVSee Hirao et al for details [ 11 ]
+p123
+a.

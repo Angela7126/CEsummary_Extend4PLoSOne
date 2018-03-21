@@ -1,0 +1,470 @@
+(lp0
+VCurrent Statistical Machine Translation (SMT) approaches model the translation problem as a process of generating a derivation of atomic translation units, assuming that every unit is drawn out of the same model
+p1
+aVFirst, as the skeleton is a well-formed (but simple) sentence, all current MT approaches are applicable to the skeleton translation problem
+p2
+aVThis model makes the skeleton translation and full translation much simpler because they perform in the same way of string translation in phrase-based MT
+p3
+aVHowever, these approaches suffer from the same problem as the phrase-based counterpart and use the single global model to handle different translation units, no matter they are from the skeleton of the input tree/sentence or other not-so-important sub-structures
+p4
+aVWe chose the default feature set of the NiuTrans.Phrase engine for building the baseline, including phrase translation probabilities, lexical weights, a 5-gram language model, word and phrase bonuses, a ME-based lexicalized reordering model
+p5
+aVHowever, using different skeleton identification results for training and inference (row 3) does not show big improvements due to the data inconsistency problem
+p6
+aVAs is standard in SMT, we further assume that 1) the translation process can be decomposed into a derivation of phrase-pairs (for phrase-based models) or translation rules (for syntax-based models); 2) and a linear function g u'\u005cu2062' ( u'\u005cu22c5' ) is used to assign a model score to each derivation
+p7
+aVE.g., one may introduce syntactic features into g s u'\u005cu2062' k u'\u005cu2062' e u'\u005cu2062' l u'\u005cu2062' ( d ) due to their good ability in capturing structural information; and employ a standard phrase-based model for g f u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' l u'\u005cu2062' ( d ) in which not all segments of the sentence need to respect syntactic constraints
+p8
+aVIn contrast, we define sentence skeleton as the key segments of a sentence and develop a new MT approach based on this information
+p9
+aVThen we define skeleton-based translation as a task of searching for the best target string t ^ given the source string and its skeleton u'\u005cu03a4'
+p10
+aVA derivation d is skeleton-consistent if no phrases in d cross skeleton boundaries (e.g.,, a phrase where two of the source words are in the skeleton and one is outside
+p11
+aVObviously the skeleton used in this work can be viewed as a simplified sentence
+p12
+aVThere are some previous studies on the use of sentence skeleton or related information in MT [ Mellebeek et al.2006a , Mellebeek et al.2006b , Owczarzak et al.2006 ]
+p13
+aVFor our skeletal language model, we trained a 5-gram language model on the target-side of the bilingual data by generalizing non-skeleton segments to Xs
+p14
+aVFor comparison, we also manually annotated the MT development and test data with skeleton information according to the annotation standard provided within NEUCSS
+p15
+aVThus the problem is in principle the same as sentence simplification/compression
+p16
+aVThe simplest of these is the phrase-based approach [ Och et al.1999 , Koehn et al.2003 ] which employs a global model to process any sub-strings of the input sentence
+p17
+aVWe develop a skeleton-based model which divides translation into two sub-models a skeleton translation model (i.e.,, translating the key elements) and a full translation model (i.e.,, translating the remaining source words and generating the complete translation
+p18
+aVwhere the skeleton translation model handles the translation of the sentence skeleton, while the full translation model is the baseline model and handles the original problem of translating the whole sentence
+p19
+aVWe used the NEU Chinese sentence simplification (NEUCSS) corpus as our training data [ Zhang et al.2013 ]
+p20
+aVThese results indicate that the real improvements are due to the skeleton-based model/features used in this work, rather than the u'\u005cu201d' well-formed u'\u005cu201d' derivations
+p21
+aVThe skeleton translation model focuses on the translation of the sentence skeleton, i.e.,, the solid (red) rectangles; while the full translation model computes the model score for all those phrase-pairs, i.e.,, all solid and dashed rectangles
+p22
+aVThen, we can simply define g s u'\u005cu2062' k u'\u005cu2062' e u'\u005cu2062' l u'\u005cu2062' ( d ) and g f u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' l u'\u005cu2062' ( d ) as the model scores of d u'\u005cu03a4' and d
+p23
+aVSeen from row s-feat., this feature does not show promising improvements
+p24
+aVHere we choose a simple and straightforward method a skeleton is obtained by dropping all unimportant words in the original sentence, while preserving the grammaticality
+p25
+aVIn this work both the skeleton translation model g s u'\u005cu2062' k u'\u005cu2062' e u'\u005cu2062' l u'\u005cu2062' ( d ) and full translation model g f u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' l u'\u005cu2062' ( d ) resemble the usual forms used in phrase-based MT, i.e.,, the model score is computed by a linear combination of a group of phrase-based features and language models
+p26
+aVDue to the lack of space, we do not go deep into this problem
+p27
+aVFurther, we regarded skeleton-consistent derivations as an indicator feature and introduced it into the baseline system
+p28
+aVThe motivations of defining the problem in this way are two-fold
+p29
+aVWe used the newswire portion of the NIST MT06 evaluation data as our development set, and used the evaluation data of MT04 and MT05 as our test sets
+p30
+aVGiven a translation model m , a language model l u'\u005cu2062' m and a vector of feature weights u'\u005cud835' u'\u005cudc30' , the model score of a derivation d is computed by
+p31
+aVRow s-space of Table 1 shows the BLEU and TER results of restricting the baseline system to the space of skeleton-consistent derivations, i.e.,, we remove both the skeleton-based translation model and language model from the SBMT system
+p32
+aVBoth g s u'\u005cu2062' k u'\u005cu2062' e u'\u005cu2062' l u'\u005cu2062' ( d ) and g f u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' l u'\u005cu2062' ( d ) share the same translation model m which can easily learned from the bilingual data 1 1 In g s u'\u005cu2062' k u'\u005cu2062' e u'\u005cu2062' l u'\u005cu2062' ( d ) , we compute the reordering model score on the skeleton though it is learned from the full sentences
+p33
+aVTo compute g u'\u005cu2062' ( d ) , we use a linear combination of a skeleton translation model g s u'\u005cu2062' k u'\u005cu2062' e u'\u005cu2062' l u'\u005cu2062' ( d ) and a full translation model g f u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' l u'\u005cu2062' ( d )
+p34
+aVFor language modeling, l u'\u005cu2062' m is the standard n -gram language model adopted in the baseline system l u'\u005cu2062' m u'\u005cu03a4' is a skeletal language for estimating the well-formedness of the translation skeleton
+p35
+aVSome of them developed syntax-based models on complete syntactic trees with Treebank annotations [ Liu et al.2006 , Huang et al.2006 , Zhang et al.2008 ] , and others used source-language syntax as soft constraints [ Marton and Resnik2008 , Chiang2010 ]
+p36
+aVThe motivation here is straightforward we use an additional score g s u'\u005cu2062' k u'\u005cu2062' e u'\u005cu2062' l u'\u005cu2062' ( d ) to model the problem of skeleton translation and interpolate it with the baseline model
+p37
+aVTo investigate it, we removed the skeletal language model from our skeleton-based translation system (with automatic skeleton identification on both the development and test sets
+p38
+aVIn spite of their good ideas of using skeleton skeleton information, they did not model the skeleton-based translation problem in modern SMT pipelines
+p39
+aVIn this paper we instead explicitly model the translation problem with sentence skeleton information
+p40
+aVWe develop a skeletal language model to describe the possibility of translation skeleton and handle some of the long-distance word dependencies
+p41
+aVFor example, in confusion network-based system combination it refers to the backbone hypothesis for building confusion networks [ Rosti et al.2007 , Rosti et al.2008 ] ; Liu et al.2011 regard skeleton as a shortened sentence after removing some of the function words for better word deletion
+p42
+aV7 ), we can perform standard decoding while u'\u005cu201d' doubly weighting u'\u005cu201d' the phrases which cover a skeletal section of the sentence, and combining the two language models and the translation model in a linear fashion
+p43
+aVGiven a baseline phrase-based system, all we need is to learn the feature weights u'\u005cud835' u'\u005cudc30' and u'\u005cud835' u'\u005cudc30' u'\u005cu03a4' on the development set (with source-language skeleton annotation) and the skeletal language model l u'\u005cu2062' m u'\u005cu03a4' on the target-language side of the bilingual corpus
+p44
+aVIn this way the reordering problems in skeleton translation and full translation are distinguished and handled separately
+p45
+aVE.g., in Figure 1 , the translation skeleton is u'\u005cu2019' the cost X has been further reduced X u'\u005cu2019' , where two Xs represent non-skeleton segments in the translation
+p46
+aVHere a translation skeleton is a target string where all segments of non-skeleton translation are generalized to a symbol X
+p47
+aVFigure 1 shows the translation process and associated model scores for the example sentence
+p48
+aVWe apply the proposed model to Chinese-English phrase-based MT and demonstrate promising BLEU improvements and TER reductions on the NIST evaluation data
+p49
+aVTo learn the skeletal language model, we replace non-skeleton parts of the target sentences in the bilingual corpus to Xs using the source sentence skeletons and word alignments
+p50
+aVIn such a way of string representation, the skeletal language model can be implemented as a standard n -gram language model, that is, a string probability is calculated by a product of a sequence of n -gram probabilities (involving normal words and X
+p51
+aVOur skeleton identification system was built using the t3 toolkit 2 2 http://staffwww.dcs.shef.ac.uk/people/T.Cohn/t3/ which implements a state-of-the-art sentence simplification system
+p52
+aVObviously, from any skeleton-consistent derivation d we can extract a skeleton derivation d u'\u005cu03a4' which covers the sentence skeleton exactly
+p53
+aVFor example, an important-first strategy is generally adopted in human translation - we translate the key elements/structures (or skeleton) of the sentence first, and then translate the remaining parts
+p54
+aVRow - m u'\u005cu03a4' of Table 1 shows that the skeleton-based translation model can contribute to the overall improvement but there is no big differences between baseline and - m u'\u005cu03a4'
+p55
+aVIn both the manual and automatic identification of sentence skeleton (rows 2 and 4), there is a significant improvement on the u'\u005cu201d' All u'\u005cu201d' data set
+p56
+aVA 5-gram language model was trained on the Xinhua portion of the English Gigaword corpus in addition to the target-side of the bilingual data
+p57
+aVFor comparison, we removed the skeleton-based translation model from our system as well
+p58
+aVSeen from row - l u'\u005cu2062' m u'\u005cu03a4' of Table 1 , the removal of the skeletal language model results in a significant drop in both BLEU and TER performance
+p59
+aVWe start with an assumption that the 1-best skeleton is provided by the skeleton identification system
+p60
+aVThe skeletal language model is then trained on these generalized strings in a standard way of n -gram language modeling
+p61
+aVNote that the source-language structural information has been intensively investigated in recent studies of syntactic translation models
+p62
+aVOur work is a further step towards the use of sentence skeleton in MT
+p63
+aVNext we describe our approach to integrating skeleton information into MT models
+p64
+aVIn Section 3.1 we describe the corpus and system employed for automatic generation of sentence skeletons
+p65
+aVThe above problem can be redefined in a Viterbi fashion - we find the derivation d ^ with the highest model score given s and u'\u005cu03a4'
+p66
+aVAnother interesting question is whether the skeletal language model really contributes to the improvements
+p67
+aVThe first issue that arises is how to identify the skeleton for a given source sentence
+p68
+aVIt contains the annotation of sentence skeleton on the Chinese-language side of the Penn Parallel Chinese-English Treebank (LDC2003E07
+p69
+aVWe experimented with our approach on Chinese-English translation using the NiuTrans open-source MT toolkit [ Xiao et al.2012 ]
+p70
+aVMore importantly, we develop a complete approach to this issue and show its effectiveness in a state-of-the-art MT system
+p71
+aVIt indicates that this language model is very beneficial to our system
+p72
+aVSentence Skeleton (subscripts represent indices
+p73
+aVApart from showing the effects of the skeleton-based model, we also studied the behavior of the MT system under the different settings of search space
+p74
+aVWe trained our system using the Parts 1-8 of the NEUCSS corpus and obtained a 65.2% relational F1 score and 63.1% compression rate in held-out test (Part 10
+p75
+aVThis language model was used in both the baseline and our improved systems
+p76
+aVSee the following for an example skeleton of a Chinese sentence
+p77
+aVIn this way, all we need is to increasingly translate a sequence of source words each time until the entire sentence is covered
+p78
+aVSee Figure 1 for an example of applying the above model to phrase-based MT
+p79
+aVIn phrase-based MT, the translation problem is modeled by a derivation of phrase-pairs
+p80
+aVwhere u'\u005cud835' u'\u005cudc1f' m u'\u005cu2062' ( d ) is a vector of feature values defined on d , and u'\u005cud835' u'\u005cudc30' m is the corresponding weight vector l u'\u005cu2062' m u'\u005cu2062' ( d ) and w l u'\u005cu2062' m are the score and weight of the language model, respectively
+p81
+aVNote that this method does not require any new translation models for implementation
+p82
+aVSkeleton is a concept that has been used in several sub-areas in MT for years
+p83
+aVOur bilingual corpus consists of 2.7M sentence pairs
+p84
+aVWhile we will restrict ourself to phrase-based translation in the following description and experiments, we can choose different models/features for g s u'\u005cu2062' k u'\u005cu2062' e u'\u005cu2062' l u'\u005cu2062' ( d ) and g f u'\u005cu2062' u u'\u005cu2062' l u'\u005cu2062' l u'\u005cu2062' ( d
+p85
+aVFor example, in Figure 1 , the derivation of phrase-pairs { p 1 , p 2 , u'\u005cu2026' , p 9 } is skeleton-consistent, and the skeleton derivation is formed by { p 1 , p 4 , p 5 , p 9 }
+p86
+aVWe see, first of all, that the MT system benefits from our approach in most cases
+p87
+aVLet d s , u'\u005cu03a4' , t (or d for short) denote a translation derivation
+p88
+aVDespite good results in many tasks, such a method ignores the roles of each source word and is somewhat different from the way used by translators
+p89
+aVThis work was supported in part by the National Science Foundation of China (Grants 61272376 and 61300097), and the China Postdoctoral Science Foundation (Grant 2013M530131
+p90
+aV3 ) and ( 2 ), we have the final model used in this work
+p91
+aVAll feature weights were learned using minimum error rate training [ Och2003 ]
+p92
+aVAll these sentences were aligned in word level using the GIZA++ system and the u'\u005cu201d' grow-diag-final-and u'\u005cu201d' heuristics
+p93
+aV3 ) provides a very flexible way for model selection
+p94
+aVOriginal Sentence (subscripts represent indices
+p95
+aVAnother note on the model
+p96
+aVMany good sentence simpliciation/compression methods are available to our work
+p97
+aVWe see that the limited search space is a little harmful to the baseline system
+p98
+aVOn the other hand, it has different feature weight vectors for individual models (i.e.,, u'\u005cud835' u'\u005cudc30' and u'\u005cud835' u'\u005cudc30' u'\u005cu03a4'
+p99
+aVSecond, obtaining simplified sentences by word deletion is a well-studied issue [ Knight and Marcu2000 , Clarke and Lapata2006 , Galley and McKeown2007 , Cohn and Lapata2008 , Yamangil and Shieber2010 , Yoshikawa et al.2012 ]
+p100
+aVE.g., we can start with a full syntactic tree and transform it into a simpler form (e.g.,, removing a sub-tree
+p101
+aVIn the figure, each source phrase is translated into a target phrase, which is represented by linked rectangles
+p102
+aVSkeleton
+p103
+aVSkeleton
+p104
+aVSkeleton
+p105
+aVSkeleton
+p106
+aVTable 1 shows the case-insensitive IBM-version BLEU and TER scores of different systems
+p107
+aVIn this way, the MT output can be regarded as the target-string encoded in d ^
+p108
+aVThe cost of seawater desalination treatment has been further reduced from 5 yuan per ton
+p109
+aVThe authors would like to thank the anonymous reviewers for their pertinent and insightful comments
+p110
+aVu'\u005cud835' u'\u005cudc30' m u'\u005cu22c5' u'\u005cud835' u'\u005cudc1f' m u'\u005cu2062' ( p 1 u'\u005cu2218' p 2 u'\u005cu2218' p 3 ) + w l u'\u005cu2062' m u'\u005cu22c5' l u'\u005cu2062' m u'\u005cu2062' ( u'\u005cu201d' the cost of seawater desalination treatment u'\u005cu201d'
+p111
+aVseawater   desalination   treatment
+p112
+aVseawater   desalination   treatment
+p113
+aVseawater   desalination   treatment
+p114
+aVThis especially makes sense for some languages, such as Chinese, where complex structures are usually involved
+p115
+aVu'\u005cud835' u'\u005cudc30' m u'\u005cu22c5' u'\u005cud835' u'\u005cudc1f' m u'\u005cu2062' ( p 1 u'\u005cu2218' p 2 u'\u005cu2218' u'\u005cu2026' u'\u005cu2218' p 9 ) + w l u'\u005cu2062' m u'\u005cu22c5' l u'\u005cu2062' m u'\u005cu2062' ( u'\u005cu201d' the cost of seawater u'\u005cu2026' per ton u'\u005cu201d'
+p116
+aVseawater desalination
+p117
+aVTo implement Eq
+p118
+aVBy substituting Eq
+p119
+aVu'\u005cud835' u'\u005cudc30' m u'\u005cu22c5' u'\u005cud835' u'\u005cudc1f' m u'\u005cu2062' ( p 1 u'\u005cu2218' p 2 u'\u005cu2218' u'\u005cu2026' u'\u005cu2218' p 5 ) + w l u'\u005cu2062' m u'\u005cu22c5' l u'\u005cu2062' m u'\u005cu2062' ( u'\u005cu201d' the cost of seawater u'\u005cu2026' further reduced u'\u005cu201d'
+p120
+aVTo ease modeling, we only consider skeleton-consistent derivations in this work
+p121
+aVphrase 1
+p122
+aVEq
+p123
+aVFull
+p124
+aVFull
+p125
+aVFull
+p126
+aVFull
+p127
+aVper   ton
+p128
+aVton
+p129
+aV5   yuan
+p130
+aVyuan
+p131
+aVtreatment
+p132
+aVThe cost has been further reduced
+p133
+aVthe cost
+p134
+aVthe cost
+p135
+aVu'\u005cud835' u'\u005cudc30' m u'\u005cu22c5' u'\u005cud835' u'\u005cudc1f' m u'\u005cu2062' ( p 1 ) + w l u'\u005cu2062' m u'\u005cu22c5' l u'\u005cu2062' m u'\u005cu2062' ( u'\u005cu201d' the cost u'\u005cu201d'
+p136
+aVw l u'\u005cu2062' m u'\u005cu03a4' u'\u005cu22c5' l u'\u005cu2062' m u'\u005cu03a4' u'\u005cu2062' ( u'\u005cu201d' the cost X has been further reduced X u'\u005cu201d'
+p137
+aVu'\u005cud835' u'\u005cudc30' m u'\u005cu03a4' u'\u005cu22c5' u'\u005cud835' u'\u005cudc1f' m u'\u005cu2062' ( p 1 ) + w l u'\u005cu2062' m u'\u005cu03a4' u'\u005cu22c5' l u'\u005cu2062' m u'\u005cu03a4' u'\u005cu2062' ( u'\u005cu201d' the cost u'\u005cu201d'
+p138
+aVu'\u005cud835' u'\u005cudc30' m u'\u005cu03a4' u'\u005cu22c5' u'\u005cud835' u'\u005cudc1f' m u'\u005cu2062' ( p 1 ) + w l u'\u005cu2062' m u'\u005cu03a4' u'\u005cu22c5' l u'\u005cu2062' m u'\u005cu03a4' u'\u005cu2062' ( u'\u005cu201d' the cost X u'\u005cu201d'
+p139
+aVthe cost
+p140
+aVthe cost
+p141
+aVthe cost
+p142
+aVw l u'\u005cu2062' m u'\u005cu03a4' u'\u005cu22c5' l u'\u005cu2062' m u'\u005cu03a4' u'\u005cu2062' ( u'\u005cu201d' the cost X has been further reduced u'\u005cu201d'
+p143
+aVthe cost
+p144
+aVphrases 4 5
+p145
+aVphrases 6-9
+p146
+aVphrases 2 3
+p147
+aVg u'\u005cu2062' ( d ; u'\u005cud835' u'\u005cudc30' , m , l u'\u005cu2062' m
+p148
+aVÃ¿ ¶Ö
+p149
+aVÏÂ½µ
+p150
+aV¡£
+p151
+aV5 ) and ( 6 ), and then Eqs
+p152
+aVg u'\u005cu2062' ( d u'\u005cu03a4' ; u'\u005cud835' u'\u005cudc30' u'\u005cu03a4' , m , l u'\u005cu2062' m u'\u005cu03a4'
+p153
+aVµÄ
+p154
+aV³É±¾
+p155
+aVp 1
+p156
+aV4 ) into Eqs
+p157
+aVº£Ë®µ­»¯   ´¦Àí
+p158
+aVµÄ
+p159
+aVÏÂ½µ
+p160
+aVµÄ   »ù´¡   ÉÏ
+p161
+aVIn particular
+p162
+aVMany ways are available
+p163
+aVper
+p164
+aV½øÒ»²½
+p165
+aVof
+p166
+aV5
+p167
+aVof
+p168
+aVfrom
+p169
+aVhas been further
+p170
+aV¡£
+p171
+aVreduced
+p172
+aVhas been further
+p173
+aVreduced
+p174
+aS''
+p175
+aVÃ¿ ¶Ö
+p176
+aVº£Ë®µ­»¯   ´¦Àí
+p177
+aVÔÚ   5   Ôª
+p178
+aV³É±¾
+p179
+aVÔÚ   5   Ôª
+p180
+aVµÄ   »ù´¡   ÉÏ
+p181
+aV½øÒ»²½
+p182
+ag175
+aVµÄ   »ù´¡   ÉÏ
+p183
+aVp 1
+p184
+aVÏÂ½µ
+p185
+aVhas   been   further
+p186
+aVhas   been   further
+p187
+aVof
+p188
+aV¡£
+p189
+aVÏÂ½µ
+p190
+aV½øÒ»²½
+p191
+aVµÄ   »ù´¡   ÉÏ
+p192
+aVÔÚ   5   Ôª
+p193
+aV³É±¾
+p194
+aVµÄ
+p195
+aVº£Ë®µ­»¯   ´¦Àí
+p196
+aVÃ¿ ¶Ö
+p197
+aVreduced
+p198
+aVg u'\u005cu2062' ( d ; u'\u005cud835' u'\u005cudc30' , m , l u'\u005cu2062' m
+p199
+aVu'\u005cud835' u'\u005cudc30' m u'\u005cu03a4' u'\u005cu22c5' u'\u005cud835' u'\u005cudc1f' m u'\u005cu2062' ( p 1 u'\u005cu2218' p 4 u'\u005cu2218' p 5 ) +
+p200
+aVg u'\u005cu2062' ( d u'\u005cu03a4' ; u'\u005cud835' u'\u005cudc30' u'\u005cu03a4' , m , l u'\u005cu2062' m u'\u005cu03a4'
+p201
+aVº£Ë®µ­»¯   ´¦Àí
+p202
+aVp 5
+p203
+aVp 4
+p204
+aVp 3
+p205
+aVp 2
+p206
+aVreduced
+p207
+aVfrom
+p208
+ag175
+aVp 1
+p209
+aV¡£
+p210
+aVof
+p211
+aVp 1
+p212
+aVp 2
+p213
+aVp 3
+p214
+aV³É±¾
+p215
+aVg u'\u005cu2062' ( d u'\u005cu03a4' ; u'\u005cud835' u'\u005cudc30' u'\u005cu03a4' , m , l u'\u005cu2062' m u'\u005cu03a4'
+p216
+aVg u'\u005cu2062' ( d ; u'\u005cud835' u'\u005cudc30' , m , l u'\u005cu2062' m
+p217
+aVof
+p218
+aVµÄ
+p219
+aV½øÒ»²½
+p220
+aVg u'\u005cu2062' ( d ; u'\u005cud835' u'\u005cudc30' , m , l u'\u005cu2062' m
+p221
+aVg u'\u005cu2062' ( d u'\u005cu03a4' ; u'\u005cud835' u'\u005cudc30' u'\u005cu03a4' , m , l u'\u005cu2062' m u'\u005cu03a4'
+p222
+aVÃ¿ ¶Ö
+p223
+aVp 9
+p224
+aVp 8
+p225
+aVp 7
+p226
+aVp 6
+p227
+aVp 5
+p228
+aVp 4
+p229
+aVp 3
+p230
+aVp 2
+p231
+aVu'\u005cud835' u'\u005cudc30' m u'\u005cu03a4' u'\u005cu22c5' u'\u005cud835' u'\u005cudc1f' m u'\u005cu2062' ( p 1 u'\u005cu2218' p 4 u'\u005cu2218' p 5 u'\u005cu2218' p 9 ) +
+p232
+aVÔÚ   5   Ôª
+p233
+a.

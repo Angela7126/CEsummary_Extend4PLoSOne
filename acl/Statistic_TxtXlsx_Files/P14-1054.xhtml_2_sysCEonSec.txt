@@ -1,0 +1,535 @@
+Current File: P14-1054.xhtml_2 P14-1054.xhtml
+
+Section 0:  Abstract
+	SentNum: 9
+	CENum: 2
+	SentCovered: 3
+	Covered_Rate: 33.3333%
+
+Section 1:  1 Introduction
+	SentNum: 29
+	CENum: 6
+	SentCovered: 8
+	Covered_Rate: 27.5862%
+
+Section 2:  2 Related Work
+	SentNum: 40
+	CENum: 7
+	SentCovered: 7
+	Covered_Rate: 17.5000%
+
+Section 3:  3 Feature Construction
+	SentNum: 195
+	CENum: 44
+	SentCovered: 60
+	Covered_Rate: 30.7692%
+
+Section 4:  4 Discussion
+	SentNum: 46
+	CENum: 10
+	SentCovered: 13
+	Covered_Rate: 28.2609%
+
+Section 5:  5 Conclusion
+	SentNum: 10
+	CENum: 0
+	SentCovered: 0
+	Covered_Rate: 0.0000%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-1054.xhtml_2's CE cases
+
+Section 0:  Abstract has 2 CE cases
+	CASE: 1
+	Stag: 1 2 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: It is inattentive to structure. Therefore, segmenting and parsing Chinese are more difficult and less accurate. 
+		Cause: [(0, 0), (0, 4)]
+		Effect: [(1, 2), (1, 11)]
+
+	CASE: 2
+	Stag: 4 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The Omni-word feature uses every potential word in a sentence as lexicon feature, reducing errors caused by word segmentation. 
+		Cause: [(0, 11), (0, 19)]
+		Effect: [(0, 0), (0, 9)]
+
+Section 1:  1 Introduction has 6 CE cases
+	CASE: 1
+	Stag: 19 20 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The lack of delimiter also causes the Out-of-Vocabulary problem (OOV, also known as new word detection ) []. These problems are worsened by the fact that Chinese has a large number of characters and words. 
+		Cause: [(0, 15), (1, 15)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 2
+	Stag: 22 23 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: The errors caused by segmentation and OOV will accumulate and propagate to subsequent processing (e.g., part-of-speech (POS) tagging or parsing. Therefore, the Chinese relation extraction is more difficult. 
+		Cause: [(0, 0), (0, 23)]
+		Effect: [(1, 2), (1, 8)]
+
+	CASE: 3
+	Stag: 24 
+		Pattern: 0 [['according', 'to'], [',']]---- [[], ['&NP@C@'], ['&R']]
+		sentTXT: According to our survey, compared to the same work in English, the Chinese relation extraction researches make less significant progress. 
+		Cause: [(0, 2), (0, 3)]
+		Effect: [(0, 5), (0, 21)]
+
+	CASE: 4
+	Stag: 25 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: Based on the characteristics of Chinese, in this paper, an Omni-word feature and a soft constraint method are proposed for Chinese relation extraction. 
+		Cause: [(0, 2), (0, 5)]
+		Effect: [(0, 7), (0, 24)]
+
+	CASE: 5
+	Stag: 30 31 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Unlike the traditional segmentation based method, which is a partition of the sentence, the Omni-word feature uses every potential word in a sentence as lexicon feature. Aiming at the Chinese inattentive structure, we utilize the soft constraint to capture the local dependency in a relation instance. 
+		Cause: [(0, 26), (1, 19)]
+		Effect: [(0, 0), (0, 24)]
+
+	CASE: 6
+	Stag: 31 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Aiming at the Chinese inattentive structure, we utilize the soft constraint to capture the local dependency in a relation instance. 
+		Cause: [(0, 0), (0, 5)]
+		Effect: [(0, 7), (0, 20)]
+
+Section 2:  2 Related Work has 7 CE cases
+	CASE: 1
+	Stag: 39 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: Based on massive and heterogeneous corpora, the ORE systems deal with millions or billions of documents. 
+		Cause: [(0, 2), (0, 5)]
+		Effect: [(0, 7), (0, 16)]
+
+	CASE: 2
+	Stag: 48 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The TRE paradigm takes hand-tagged examples as input, extracting predefined relation types []. 
+		Cause: [(0, 7), (0, 13)]
+		Effect: [(0, 0), (0, 5)]
+
+	CASE: 3
+	Stag: 58 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Combining with external semantic resources, a better performance was achieved. 
+		Cause: [(0, 0), (0, 4)]
+		Effect: [(0, 6), (0, 10)]
+
+	CASE: 4
+	Stag: 72 
+		Pattern: 0 [['due', 'to']]---- [[], ['&NP@C@', '(,)', '&R']]
+		sentTXT: [] also pointed out that, due to the inaccuracy of Chinese word segmentation and parsing, the tree kernel based approach is inappropriate for Chinese relation extraction. 
+		Cause: [(0, 9), (0, 16)]
+		Effect: [(0, 18), (0, 28)]
+
+	CASE: 5
+	Stag: 73 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The reason of the tree kernel based approach not achieve the same level of accuracy as that from English may be that segmenting and parsing Chinese are more difficult and less accurate than processing English. 
+		Cause: [(0, 16), (0, 34)]
+		Effect: [(0, 0), (0, 14)]
+
+	CASE: 6
+	Stag: 75 
+		Pattern: 0 [['based', 'on']]---- [['&V-ing/&NP@R@', '(&Clause@R@)', '&BE', '(&ADV)'], ['&NP@C@', '(&Clause@C@)']]
+		sentTXT: Both approaches are based on the Chinese characteristics. 
+		Cause: [(0, 5), (0, 7)]
+		Effect: [(0, 0), (0, 1)]
+
+	CASE: 7
+	Stag: 75 76 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: Both approaches are based on the Chinese characteristics. Therefore, better performance is expected. 
+		Cause: [(0, 0), (0, 7)]
+		Effect: [(1, 2), (1, 5)]
+
+Section 3:  3 Feature Construction has 44 CE cases
+	CASE: 1
+	Stag: 80 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: The soft constraint is the method to generate the combine features 1 1 If without ambiguity, we also use the terminology of u'\u201c' soft constraint u'\u201d' denoting features generated by the employed constraint conditions. 
+		Cause: [(0, 14), (0, 42)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 2
+	Stag: 83 84 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The entity mention is annotated with its full extent and its head , referred to as the extend mention and the head mention respectively. The extent mention includes both the head and its modifiers. 
+		Cause: [(0, 16), (1, 8)]
+		Effect: [(0, 0), (0, 14)]
+
+	CASE: 3
+	Stag: 85 86 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Each relation has two entities as arguments. Arg-1 and Arg-2, referred to as E1 and E2. 
+		Cause: [(0, 6), (1, 4)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 4
+	Stag: 90 91 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Relation identification is handled as a classification problem. Entity-related information (e.g., head noun, entity type, subtype, CLASS, LDCTYPE, etc.) are supposed to be known and provided by the corpus. 
+		Cause: [(0, 5), (1, 27)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 5
+	Stag: 104 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because the entity mentions can be nested, two entity mentions may have four coarse structures u'\u201c' E1 is before E2 u'\u201d' , u'\u201c' E1 is after E2 u'\u201d' , u'\u201c' E1 nests in E2 u'\u201d' and u'\u201c' E2 nests in E1 u'\u201d' , encoded as u'\u2018' E1_B_E2 u'\u2019' , u'\u2018' E1_A_E2 u'\u2019' , u'\u2018' E1_N_E2 u'\u2019' and u'\u2018' E2_N_E1 u'\u2019'. 
+		Cause: [(0, 1), (0, 6)]
+		Effect: [(0, 8), (0, 124)]
+
+	CASE: 6
+	Stag: 104 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Because the entity mentions can be nested, two entity mentions may have four coarse structures u'\u201c' E1 is before E2 u'\u201d' , u'\u201c' E1 is after E2 u'\u201d' , u'\u201c' E1 nests in E2 u'\u201d' and u'\u201c' E2 nests in E1 u'\u201d' , encoded as u'\u2018' E1_B_E2 u'\u2019' , u'\u2018' E1_A_E2 u'\u2019' , u'\u2018' E1_N_E2 u'\u2019' and u'\u2018' E2_N_E1 u'\u2019'. 
+		Cause: [(0, 70), (0, 116)]
+		Effect: [(0, 0), (0, 68)]
+
+	CASE: 7
+	Stag: 109 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: It is encoded by combining the POS tag with the adjacent entity mention information. 
+		Cause: [(0, 4), (0, 13)]
+		Effect: [(0, 0), (0, 2)]
+
+	CASE: 8
+	Stag: 117 118 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: The word-formation of Chinese also implies that the meanings of a compound word are made up, usually, by the meanings of words that contained in it []. So, fragments of phrase are also informative. 
+		Cause: [(0, 0), (0, 29)]
+		Effect: [(1, 2), (1, 7)]
+
+	CASE: 9
+	Stag: 118 119 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: So, fragments of phrase are also informative. Because high precision can be received by using simple lexical features []. 
+		Cause: [(1, 1), (1, 12)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 10
+	Stag: 121 122 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In consideration of the Chinese characteristics, we use every potential word in a relation mention as the lexical features. {CJK} UTF8gbsn For example, relation mention u'\u2018' å°åå¤§å®æ£®æå¬å­ u'\u2019' (Taipei Daan Forest Park) has a u'\u201d' PART-WHOLE u'\u201d' relation type. 
+		Cause: [(0, 17), (1, 37)]
+		Effect: [(0, 0), (0, 15)]
+
+	CASE: 11
+	Stag: 126 127 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Most of these features are nested or overlapped mutually. So, the traditional character-based or word-based feature is only a subset of the Omni-word feature. 
+		Cause: [(0, 0), (0, 8)]
+		Effect: [(1, 2), (1, 15)]
+
+	CASE: 12
+	Stag: 129 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because the number of lexicon entry determines the dimension of the feature space, performance of Omni-word feature is influenced by the lexicon being employed. 
+		Cause: [(0, 1), (0, 12)]
+		Effect: [(0, 14), (0, 24)]
+
+	CASE: 13
+	Stag: 130 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: In this paper, we generate the lexicon by merging two lexicons. 
+		Cause: [(0, 9), (0, 11)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 14
+	Stag: 131 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: The first lexicon is obtained by segmenting every relation instance using the ICTCLAS package, collecting very word produced by ICTCLAS. 
+		Cause: [(0, 6), (0, 20)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 15
+	Stag: 131 132 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: The first lexicon is obtained by segmenting every relation instance using the ICTCLAS package, collecting very word produced by ICTCLAS. Because the ICTCLAS package was trained on annotated corpus containing many meaningful lexicon entries. 
+		Cause: [(1, 1), (1, 13)]
+		Effect: [(0, 0), (0, 20)]
+
+	CASE: 16
+	Stag: 135 136 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Despite the Omni-word can be seen as a subset of n-Gram feature. It is not the same as the n-Gram feature. 
+		Cause: [(0, 7), (1, 7)]
+		Effect: [(0, 1), (0, 5)]
+
+	CASE: 17
+	Stag: 138 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: In most of the instances, the n-Gram features have no semantic meanings attached to them, thus have varied distributions. 
+		Cause: [(0, 0), (0, 15)]
+		Effect: [(0, 18), (0, 20)]
+
+	CASE: 18
+	Stag: 141 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because Chinese has plenty of characters 5 5 Currently, at least 13000 characters are used by native Chinese people. 
+		Cause: [(0, 1), (0, 8)]
+		Effect: [(0, 10), (0, 19)]
+
+	CASE: 19
+	Stag: 145 146 
+		Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: However, even in English, u'\u201c' deeper u'\u201d' analysis (e.g., logical syntactic relations or predicate-argument structure) may suffer from a worse performance caused by inaccurate chunking or parsing. Hence, the local dependency contexts around the relation arguments are more helpful []. 
+		Cause: [(0, 0), (0, 39)]
+		Effect: [(1, 2), (1, 14)]
+
+	CASE: 20
+	Stag: 155 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: For example, Agichtein and Gravano [] generates patterns according to a confidence threshold ( u'\u03a4' t. 
+		Cause: [(0, 12), (0, 21)]
+		Effect: [(0, 0), (0, 9)]
+
+	CASE: 21
+	Stag: 160 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: Deleting of relation instances is acceptable for open relation extraction because it always deals with a big data set. 
+		Cause: [(0, 11), (0, 18)]
+		Effect: [(0, 0), (0, 9)]
+
+	CASE: 22
+	Stag: 162 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Utilizing the notion of combined feature [] , we replace the hard constraint by the soft constraint. 
+		Cause: [(0, 0), (0, 7)]
+		Effect: [(0, 9), (0, 17)]
+
+	CASE: 23
+	Stag: 164 165 
+		Pattern: 7 [['for'], [['reason', 'reasons']]]---- [['&C', '(,/;/./--)', '(&AND)'], ['(&this)'], ['(,/that)', '&R']]
+		sentTXT: No subjective or priori judgement is adopted to delete any potential determinative constraint (except for the reason of dimensionality reduction. Most of the researches make use of the combined feature, but rarely analyze the influence of the approaches we combine them. 
+		Cause: [(0, 0), (0, 14)]
+		Effect: [(0, 18), (1, 20)]
+
+	CASE: 24
+	Stag: 170 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: A feature is employed as a singleton feature when it is used without combining with any information. 
+		Cause: [(0, 5), (0, 15)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 25
+	Stag: 174 175 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In our experiment, the Head noun and POS Tag are utilized as position sensitive features, which has been introduced in Section 3.1. For example, u'\u2018' å°å_E1 u'\u2019' means that the head noun u'\u2018' å°å u'\u2019' depend on the first entity mention. 
+		Cause: [(0, 13), (1, 29)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 26
+	Stag: 177 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: Semantic pair is generated by combining two semantic units. 
+		Cause: [(0, 5), (0, 8)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 27
+	Stag: 179 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: Those are generated by combining two entity types or two entity subtypes into a semantic pair. 
+		Cause: [(0, 4), (0, 15)]
+		Effect: [(0, 0), (0, 2)]
+
+	CASE: 28
+	Stag: 183 184 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In our study, Omni-word feature is not added as u'\u201c' bag of words u'\u201d'. To use the Omni-word feature, we segment each relation mention by two entity mentions. 
+		Cause: [(0, 10), (1, 13)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 29
+	Stag: 185 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: Together with the two entity mentions, we get five parts u'\u201c' FIRST u'\u201d' , u'\u201c' MIDDLE u'\u201d' , u'\u201c' END u'\u201d' , u'\u201c' E1 u'\u201d' and u'\u201c' E2 u'\u201d' (or less, if the two entity mentions are nested. 
+		Cause: [(0, 75), (0, 80)]
+		Effect: [(0, 1), (0, 73)]
+
+	CASE: 30
+	Stag: 186 187 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Each part is taken as an independent bin. A flag is used to distinguish them. 
+		Cause: [(0, 5), (1, 5)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 31
+	Stag: 189 190 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: They will be used as three independent features. To sum up, among the five candidate feature sets, the position feature is used as a singleton feature. 
+		Cause: [(0, 5), (1, 18)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 32
+	Stag: 190 191 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: To sum up, among the five candidate feature sets, the position feature is used as a singleton feature. Both head noun and POS tag are position sensitive. 
+		Cause: [(0, 17), (1, 7)]
+		Effect: [(0, 0), (0, 15)]
+
+	CASE: 33
+	Stag: 192 193 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Entity types and subtypes are employed as semantic pair. Only Omni-word feature is bin sensitive. 
+		Cause: [(0, 7), (1, 4)]
+		Effect: [(0, 0), (0, 5)]
+
+	CASE: 34
+	Stag: 200 201 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: After deleting 5 documents containing wrong annotations 6 6 DAVYZW_{20041230.1024, 20050110.1403, 20050111.1514, 20050127.1720, 20050201.1538} we keep 9,244 relation mentions as positive instances. UTF8gbsn To get the negative instances, each document is segmented into sentences 7 7 The five punctuations are used as sentence boundaries. 
+		Cause: [(0, 28), (1, 21)]
+		Effect: [(0, 2), (0, 26)]
+
+	CASE: 35
+	Stag: 204 205 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: For each of the remained sentences, we iteratively extract every entity mention pair as the arguments of relation instances for predicting. For example, suppose a sentence has three entity mentions. 
+		Cause: [(0, 15), (1, 8)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 36
+	Stag: 207 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because the relation arguments are order sensitive, six entity mention pairs can be generated. 
+		Cause: [(0, 1), (0, 6)]
+		Effect: [(0, 8), (0, 14)]
+
+	CASE: 37
+	Stag: 209 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: After discarding the entity mention pairs that were used as positive instances, we generated 93,283 negative relation instances labelled as u'\u201c' OTHER u'\u201d'. 
+		Cause: [(0, 10), (0, 31)]
+		Effect: [(0, 2), (0, 8)]
+
+	CASE: 38
+	Stag: 213 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because we are interested in the 6 annotated major relation types and the 18 subtypes, we average the results of five runs on the 6 positive relation types (and 18 subtypes) as the final performance. 
+		Cause: [(0, 1), (0, 14)]
+		Effect: [(0, 16), (0, 37)]
+
+	CASE: 39
+	Stag: 218 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The entity type and subtype , head noun , position feature are referred to as u'\u2131' t u'\u2062' h u'\u2062' p 8 8 u'\u201c' thp u'\u201d' is an acronym of u'\u201c' t ype, h ead, p osition u'\u201d'. 
+		Cause: [(0, 15), (0, 57)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 40
+	Stag: 221 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The POS tags are referred to as u'\u2131' p u'\u2062' o u'\u2062' s. 
+		Cause: [(0, 7), (0, 20)]
+		Effect: [(0, 0), (0, 5)]
+
+	CASE: 41
+	Stag: 225 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: In Row 1, because u'\u2131' t u'\u2062' h u'\u2062' p are features directly obtained from annotated corpus, we take this performance as our referential performance. 
+		Cause: [(0, 5), (0, 28)]
+		Effect: [(0, 31), (0, 38)]
+
+	CASE: 42
+	Stag: 235 236 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: Segmentation of bins bears the sentence structure information. Therefore, the Owni-word feature with bin information can make a better use of both the syntactic information and the local dependency. 
+		Cause: [(0, 0), (0, 7)]
+		Effect: [(1, 2), (1, 21)]
+
+	CASE: 43
+	Stag: 245 
+		Pattern: 0 [['based', 'on']]---- [['&V-ing/&NP@R@', '(&Clause@R@)', '&BE', '(&ADV)'], ['&NP@C@', '(&Clause@C@)']]
+		sentTXT: [] was based on the ACE 2005 corpus with 75% data for training and 25% for testing. 
+		Cause: [(0, 5), (0, 19)]
+		Effect: [(0, 0), (0, 1)]
+
+	CASE: 44
+	Stag: 252 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: In order to give a better comparison with the state-of-the-art methods, based on our experiment settings and data, we implement the two feature based methods proposed by Che et al. 
+		Cause: [(0, 14), (0, 18)]
+		Effect: [(0, 20), (0, 31)]
+
+Section 4:  4 Discussion has 10 CE cases
+	CASE: 1
+	Stag: 276 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because features may interact mutually in an indirect way, even with the same feature set, different constraint conditions can have significant influences on the final performance. 
+		Cause: [(0, 1), (0, 8)]
+		Effect: [(0, 10), (0, 27)]
+
+	CASE: 2
+	Stag: 277 278 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In Section 3 , we introduced five candidate feature sets. Instead of using them as independent features, we combined them with additional information. 
+		Cause: [(1, 5), (1, 13)]
+		Effect: [(0, 1), (1, 3)]
+
+	CASE: 3
+	Stag: 285 286 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The first observation is that the combined features are more powerful than used as singletons. Model parameters are increased by the combined features. 
+		Cause: [(0, 14), (1, 6)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 4
+	Stag: 294 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Except in Row 8 and Row 11, when two head nouns of entity pair were combined as semantic pair and when POS tag were combined with the entity type, the performances are decreased. 
+		Cause: [(0, 18), (0, 34)]
+		Effect: [(0, 9), (0, 16)]
+
+	CASE: 5
+	Stag: 298 299 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In Row 4, 10 and 13, these features are used as singleton , the performance degrades considerably. This means that, the missing of sentence structure information on the employed features can lead to a bad performance. 
+		Cause: [(0, 13), (1, 18)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 6
+	Stag: 299 
+		Pattern: 0 [[['lead', 'leads', 'led'], 'to']]---- [['&V-ing/&NP@C@', '(&CAN/have/has/had)'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: This means that, the missing of sentence structure information on the employed features can lead to a bad performance. 
+		Cause: [(0, 4), (0, 13)]
+		Effect: [(0, 17), (0, 19)]
+
+	CASE: 7
+	Stag: 301 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Comparing the reference set (5) with the reference set (3), the Head noun and adjacent entity POS tag get a better performance when used as singletons. 
+		Cause: [(0, 0), (0, 13)]
+		Effect: [(0, 15), (0, 30)]
+
+	CASE: 8
+	Stag: 304 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In this paper, for a better demonstration of the constraint condition, we still use the Position Sensitive as the default setting to use the Head noun and the adjacent entity POS tag. 
+		Cause: [(0, 20), (0, 32)]
+		Effect: [(0, 0), (0, 18)]
+
+	CASE: 9
+	Stag: 308 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: Conventionally, if a sentence is perfectly segmented, By-Segmentation is straightforward and effective. 
+		Cause: [(0, 3), (0, 7)]
+		Effect: [(0, 9), (0, 13)]
+
+	CASE: 10
+	Stag: 314 315 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In short, from Table 4 we have seen that the entity type and subtype maximize the performance when used as semantic pair. Head noun and adjacent entity POS tag are employed to combine with positional information. 
+		Cause: [(0, 21), (1, 12)]
+		Effect: [(0, 0), (0, 19)]
+
+Section 5:  5 Conclusion has 0 CE cases
+#-------------------------------------------------
+

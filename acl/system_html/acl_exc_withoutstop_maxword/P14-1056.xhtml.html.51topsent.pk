@@ -1,0 +1,14 @@
+(lp0
+VThe algorithms we present in later sections for handling soft global constraints and for learning the penalties of these constraints can be applied to general structured linear models, not just CRFs, provided we have an available algorithm for performing MAP inference
+p1
+aVSince we truncate penalties at 0, this suggests that we will learn a penalty of 0 for constraints in three categories constraints that do not hold in the ground truth, constraints that hold in the ground truth but are satisfied in practice by performing inference in the base CRF model, and constraints that are satisfied in practice as a side-effect of imposing non-zero penalties on some other constraints
+p2
+aVSoft constraints can be implemented inefficiently using hard constraints and dual decomposition u'\u005cu2014' by introducing copies of output variables and an auxiliary graphical model, as in Rush et al
+p3
+aVOne consideration when using soft v.s hard constraints is that soft constraints present a new training problem, since we need to choose the vector c , the penalties for violating the constraints
+p4
+aVFor 11.99% of the examples, the Soft-DD algorithm satisfies constraints that were not satisfied during unconstrained inference, while in the remaining 11.72% Soft-DD converges with some constraints left unsatisfied, which is possible since we are imposing them as soft constraints
+p5
+aVHowever, there are a number of learned constraints that are often violated on the ground truth but are
+p6
+a.

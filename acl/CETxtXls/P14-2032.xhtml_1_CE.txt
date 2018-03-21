@@ -1,0 +1,158 @@
+************************************************************
+P14-2032.xhtml_1_CE.txt: Cause-Effect links
+************************************************************
+
+CASE: 0
+Stag: 0 
+	Pattern: 4 [['result'], ['is']]---- [['&C', '(,/./;/--)', '&ONE', '(&adj)'], ['(of &THIS (&NP))'], ['&NP@R@', '(&Clause@R@)']]
+	sentTXT: Chinese text is written without delimiters between words; as a result, Chinese word segmentation (CWS) is an essential foundational step for many tasks in Chinese natural language processing
+	Cause: [(0, 1), (0, 9)]
+	Effect: [(0, 20), (0, 31)]
+
+CASE: 1
+Stag: 4 
+	Pattern: 0 [[['lead', 'leads', 'led'], 'to']]---- [['&V-ing/&NP@C@', '(&CAN/have/has/had)'], ['&NP@R@', '(&Clause@R@)']]
+	sentTXT: Unknown words, also known as out-of-vocabulary ( oov ) words, lead to difficulties for word- or dictionary-based approaches
+	Cause: [(0, 6), (0, 10)]
+	Effect: [(0, 14), (0, 20)]
+
+CASE: 2
+Stag: 6 
+	Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+	sentTXT: There are two primary classes of models character-based, where the foundational units for processing are individual Chinese characters [ 23 , 19 , 24 , 20 ] , and word-based, where the units are full words based on some dictionary or training lexicon [ 1 , 25 ]
+	Cause: [(0, 40), (0, 49)]
+	Effect: [(0, 0), (0, 37)]
+
+CASE: 3
+Stag: 7 
+	Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: \newcite Sun:2010:COLING details their respective theoretical strengths character-based approaches better model the internal compositional structure of words and are therefore more effective at inducing new oov words; word-based approaches are better at reproducing the words of the training lexicon and can capture information from significantly larger contextual spans
+	Cause: [(0, 0), (0, 22)]
+	Effect: [(0, 24), (0, 51)]
+
+CASE: 4
+Stag: 9 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: In this work, we propose a simple and principled joint decoding method for combining character-based and word-based segmenters based on dual decomposition
+	Cause: [(0, 14), (0, 22)]
+	Effect: [(0, 0), (0, 12)]
+
+CASE: 5
+Stag: 15 16 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: In this section, we describe the character-based and word-based models we use as baselines, review existing approaches to combination, and describe our algorithm for joint decoding with dual decomposition In the most commonly used contemporary approach to character-based segmentation, first proposed by [ 23 ] , CWS is seen as a character sequence tagging task, where each character is tagged on whether it is at the beginning, middle, or end of a word
+	Cause: [(0, 14), (1, 27)]
+	Effect: [(0, 0), (0, 12)]
+
+CASE: 6
+Stag: 16 17 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: In the most commonly used contemporary approach to character-based segmentation, first proposed by [ 23 ] , CWS is seen as a character sequence tagging task, where each character is tagged on whether it is at the beginning, middle, or end of a word Conditional random fields (CRF) [ 11 ] have been widely adopted for this task, and give state-of-the-art results [ 19 ]
+	Cause: [(0, 22), (1, 17)]
+	Effect: [(0, 0), (0, 20)]
+
+CASE: 7
+Stag: 26 
+	Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+	sentTXT: Searching through the entire GEN u'\u2062' ( u'\ud835' u'\udc31' ) space is intractable even with a local model, so a beam-search algorithm is used
+	Cause: [(0, 0), (0, 29)]
+	Effect: [(0, 32), (0, 36)]
+
+CASE: 8
+Stag: 26 
+	Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+	sentTXT: Searching through the entire GEN u'\u2062' ( u'\ud835' u'\udc31' ) space is intractable even with a local model, so a beam-search algorithm is used
+	Cause: [(0, 0), (0, 21)]
+	Effect: [(0, 22), (0, 29)]
+
+CASE: 9
+Stag: 38 39 
+	Pattern: 1 [['because', 'of']]---- [['&C', '(,/;/./--)', '(&ADV)'], ['(&THIS)', '&NP', '&R']]
+	sentTXT: These mixing models perform well on standard datasets, but are not in wide use because of their high computational costs and difficulty of implementation Dual decomposition (DD) [ 14 ] offers an attractive framework for combining these two types of models without incurring high costs in model complexity (in contrast to [ 18 ] ) or decoding efficiency (in contrast to bagging in [ 22 , 17 ]
+	Cause: [(0, 0), (0, 14)]
+	Effect: [(1, 5), (1, 47)]
+
+CASE: 10
+Stag: 39 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: Dual decomposition (DD) [ 14 ] offers an attractive framework for combining these two types of models without incurring high costs in model complexity (in contrast to [ 18 ] ) or decoding efficiency (in contrast to bagging in [ 22 , 17 ]
+	Cause: [(0, 13), (0, 47)]
+	Effect: [(0, 0), (0, 11)]
+
+CASE: 11
+Stag: 40 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: DD has been successfully applied to similar situations for combining local with global models; for example, in dependency parsing [ 9 ] , bilingual sequence tagging [ 21 ] and word alignment [ 6 ]
+	Cause: [(0, 9), (0, 36)]
+	Effect: [(0, 0), (0, 7)]
+
+CASE: 12
+Stag: 41 
+	Pattern: 47 [['so'], ['that']]---- [['&C'], ['&adj/&adv@C@'], ['&R']]
+	sentTXT: The idea is that jointly modelling both character-sequence and word information can be computationally challenging, so instead we can try to find outputs that the two models are most likely to agree on
+	Cause: [(0, 0), (0, 17)]
+	Effect: [(0, 25), (0, 33)]
+
+CASE: 13
+Stag: 43 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: where u'\ud835' u'\udc32' u'\ud835' u'\udc50' is the output of character-based CRF, u'\ud835' u'\udc32' u'\ud835' u'\udc64' is the output of word-based perceptron, and the agreements are expressed as constraints s.t is a shorthand for u'\u201c' such that u'\u201d'
+	Cause: [(0, 61), (0, 78)]
+	Effect: [(0, 2), (0, 59)]
+
+CASE: 14
+Stag: 48 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: We can then form the dual of this problem by taking the min outside of the max , which is an upper bound on the original problem
+	Cause: [(0, 10), (0, 26)]
+	Effect: [(0, 0), (0, 8)]
+
+CASE: 15
+Stag: 54 
+	Pattern: 0 [['if'], ['then']]---- [[], ['&C', '(,)'], ['&R']]
+	sentTXT: In each iteration, if the best segmentations provided by the two models do not agree, then the two models will receive penalties for the decisions they made that differ from the other
+	Cause: [(0, 5), (0, 15)]
+	Effect: [(0, 18), (0, 33)]
+
+CASE: 16
+Stag: 55 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: This penalty exchange is similar to message passing, and as the penalty accumulates over iterations, the two models are pushed towards agreeing with each other
+	Cause: [(0, 11), (0, 26)]
+	Effect: [(0, 0), (0, 9)]
+
+CASE: 17
+Stag: 58 59 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We adopt a learning rate update rule from \newcite Koo:2010:EMNLP where u'\u0391' t is defined as 1 N , where N is the number of times we observed a consecutive dual value increase from iteration 1 to t We conduct experiments on the SIGHAN 2003 [ 16 ] and 2005 [ 7 ] bake-off datasets to evaluate the effectiveness of the proposed dual decomposition algorithm
+	Cause: [(0, 24), (1, 25)]
+	Effect: [(0, 4), (0, 22)]
+
+CASE: 18
+Stag: 60 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We use the publicly available Stanford CRF segmenter [ 19 ] 2 2 http://nlp.stanford.edu/software/segmenter.shtml as our character-based baseline model, and reproduce the perceptron-based segmenter from \newcite Zhang:2007:ACL as our word-based baseline model
+	Cause: [(0, 15), (0, 32)]
+	Effect: [(0, 0), (0, 13)]
+
+CASE: 19
+Stag: 67 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We also report out-of-vocabulary recall (R oov ) as an estimation of the model u'\u2019' s generalizability to previously unseen words
+	Cause: [(0, 10), (0, 25)]
+	Effect: [(0, 0), (0, 8)]
+
+CASE: 20
+Stag: 83 
+	Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+	sentTXT: A powerful feature of the dual decomposition approach is that it can generate correct segmentation decisions in cases where a voting or product-of-experts model could not, since joint decoding allows the sharing of information at decoding time
+	Cause: [(0, 28), (0, 36)]
+	Effect: [(0, 0), (0, 25)]
+
+CASE: 21
+Stag: 90 
+	Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+	sentTXT: Finally, since dual decomposition is a method of joint decoding, it is still liable to reproduce errors made by the constituent systems
+	Cause: [(0, 3), (0, 10)]
+	Effect: [(0, 12), (0, 23)]
+

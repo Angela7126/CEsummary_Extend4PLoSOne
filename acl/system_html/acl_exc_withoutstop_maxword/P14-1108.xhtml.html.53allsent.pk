@@ -1,0 +1,116 @@
+(lp0
+VAs the size of the training data set becomes smaller (even smaller than the evaluation data), the GLM achieves a reduction of perplexity of up to 25.7 u'\u005cu2062' % compared to language models with modified Kneser-Ney smoothing on the same data set
+p1
+aVModified Kneser-Ney implements smoothing by interpolating between higher and lower order n -gram language models
+p2
+aVWe learnt the generalized language models on the same split of the training corpus as the standard language model using modified Kneser-Ney smoothing and we also used the same set of test sequences for a direct comparison
+p3
+aVWe provide a framework for using modified Kneser-Ney smoothing in combination with a systematic exploration of lower order models based on skip n -grams
+p4
+aVHowever, to best of our knowledge, language models making use of skip n -grams models have never been investigated to their full extent and over different levels of lower order models
+p5
+aVThe motivation for using lower order models is that shorter contexts may be observed more often and, thus, suffer less from data sparsity
+p6
+aVHowever, with their restriction on a subsequence of words, skip n -grams are also used as a technique to overcome data sparsity []
+p7
+aVWe have stopped at the 0.008 u'\u005cu2062' % / 99.992 u'\u005cu2062' % split as the training data set in this case consisted of less words than our 100k test sequences which we still randomly sampled from the test data of each split
+p8
+aVSo, using a far smaller set of training data we can build a smaller model which still demonstrates a competitive performance
+p9
+aVAmong other techniques, skip n -grams have also been considered as an approach to overcome problems of data sparsity []
+p10
+aVWe see that the GLM performs particularly well on small training data
+p11
+aVWe present a large scale empirical analysis of our generalized language models on eight data sets spanning four different languages, namely, a wikipedia-based text corpus and the JRC-Acquis corpus of legislative texts
+p12
+aVwhere c u'\u005cu2062' ( w i - n + 1 i ) provides the frequency count that sequence w i - n + 1 i occurs in training data, D is a discount value (which depends on the frequency of the sequence) and u'\u005cu0393' h u'\u005cu2062' i u'\u005cu2062' g u'\u005cu2062' h depends on D and is the interpolation factor to mix in the lower order distribution 1 1 The factors u'\u005cu0393' and D are quite technical and lengthy
+p13
+aVLanguage Models are a probabilistic approach for predicting the occurrence of a sequence of words
+p14
+aVOur approach differs as we consider all possible combinations of gaps in a local context and interpolate the higher order model with all possible lower order models derived from adding gaps in all different ways
+p15
+aVAs it is possible to better leverage the information in smaller and sparse data sets, we can build smaller models of competitive performance
+p16
+aVAs we can see, the GLM clearly outperforms the baseline for all model lengths and data sets
+p17
+aVWe will review modified Kneser-Ney smoothing in Section 2.1 in more detail as we reuse some ideas to define our generalized language model
+p18
+aVThus, our skip n -grams correspond to n -grams of which we only use k words, after having applied the skip operators u'\u005cu2202' i 1 u'\u005cu2061' u'\u005cu2026' u'\u005cu2062' u'\u005cu2202' i n - k
+p19
+aVIt also confirms that our motivation to produce lower order n -grams by omitting not only the first word of the local context but systematically all words has been fruitful
+p20
+aVBeyond the general improvements there is an additional path for benefitting from generalized language models
+p21
+aVHowever, a single rare word towards the end of the local context will always cause the context to be observed rarely in the training data and hence will lead to an unreliable estimation
+p22
+aVThus, the idea motivating our approach is to involve several lower order models which systematically leave out one position in the context (one may think of replacing the affected word in the context with a wildcard) instead of shortening the sequence only by one word at the beginning
+p23
+aVWe show how our novel approach can indeed easily be interpreted as a generalized version of the current state-of-the-art language models
+p24
+aVWe can thus formulate the interpolation step of modified Kneser-Ney smoothing using our notation as P ^ MKN ( w i w i - n + 2 i - 1 ) = P ^ MKN ( w i u'\u005cu2202' 1 w i - n + 1 i - 1 )
+p25
+aVThis feature of the GLM is of particular value, as data sparsity becomes a more and more immanent problem for higher values of n
+p26
+aVAs lowest order model we use u'\u005cu2014' just as done for traditional modified Kneser-Ney [] u'\u005cu2014' a unigram model interpolated with a uniform distribution for unseen words
+p27
+aVOne word that appears at the end of a local context w i - n + 1 i - 1 and for which only a poor approximation exists may adversely affect the conditional probabilities in language models of all lengths u'\u005cu2014' leading to severe errors even for smoothed language models
+p28
+aVThe data sets cover different domains and languages
+p29
+aVSince we got the same results for small n and small data sets we believe that our implementation is correct
+p30
+aV2 2 http://west.uni-koblenz.de/Research 3 3 https://github.com/renepickhardt/generalized-language-modeling-toolkit 4 4 http://glm.rene-pickhardt.de We compared the probabilities of our language model implementation (which is a subset of the generalized language model) using KN as well as MKN smoothing with the Kyoto Language Model Toolkit 5 5 http://www.phontron.com/kylm/
+p31
+aVThe discounting values D 1 , D 2 , and D 3 + are defined as []
+p32
+aVLower perplexity values indicate better results
+p33
+aVThus, the 80 u'\u005cu2062' % split for training consists of 1.3 bn words
+p34
+aVWe have iteratively created smaller training sets by decreasing the split factor by an order of magnitude
+p35
+aVAs general domain data set we used the full collection of articles from Wikipedia ( wiki ) in the corresponding languages
+p36
+aVThe value of the weights would have to be chosen according to the probability or counts of the respective skip n -grams
+p37
+aVTherefore, by making a Markov assumption the true probability of a word sequence is only approximated by restricting conditional probabilities to depend only on a local context w i - n + 1 i - 1 of n - 1 preceding words rather than the full sequence w 1 i - 1
+p38
+aVThe probability P u'\u005cu2062' ( w 1 l ) of this sequence can be broken down into a product of conditional probabilities
+p39
+aVWe briefly recall modified Kneser-Ney Smoothing as presented in []
+p40
+aVThe conclusion was that using skip n -grams is often more effective for increasing the number of observations than increasing the corpus size
+p41
+aVwhere the continuation counts are defined as N 1 + ( u'\u005cu2219' w i - n + 1 i )
+p42
+aV{ w i - n c ( w i - n i ) 0 } i.e., the number of different words which precede the sequence w i - n + 1 i
+p43
+aVIn particular the equation u'\u005cu2202' 1 u'\u005cu2061' w i - n + 1 i = w i - n + 2 i holds where the right hand side is the subsequence of w i - n + 1 i omitting the first word
+p44
+aVBecause of combinatorial explosion and data sparsity, it is very difficult to reliably estimate the probabilities that are conditioned on a longer subsequence
+p45
+aVIntroducing the possibility of gaps between the words in an n -gram allows for capturing word relations beyond the level of n consecutive words without an exponential increase in the parameter space
+p46
+aVWe filtered the word tokens by removing all character sequences which did not contain any letter, digit or common punctuation marks
+p47
+aVBecause of Zipfian word distributions, most words occur very rarely and hence their true probability of occurrence may be estimated only very poorly
+p48
+aVThis GLM model has a size of 9.5 GB and contains only 427 Mio entries
+p49
+aVIn this table we also present the relative reduction of perplexity in comparison to the baseline
+p50
+aVThe discount value D u'\u005cu2062' ( c ) used in formula ( 2.1 ) is defined as []
+p51
+aVThe wikipedia corpus consists of 1.7 bn words
+p52
+aVWe also note that GLMs seem to work better on broad domain text rather than special purpose text as the reduction on the wiki corpora is constantly higher than the reduction of perplexity on the JRC corpora
+p53
+aVSo we created 8 u'\u005cu2062' % / 92 u'\u005cu2062' % and 0.8 u'\u005cu2062' % / 99.2 u'\u005cu2062' % split, and so on
+p54
+aVRegarding the continuation counts we define
+p55
+aVAs they do not play a significant role for understanding our novel approach we refer to Appendix A for details
+p56
+aVAs languages we considered English ( en ), German ( de ), French ( fr ), and Italian ( it
+p57
+a.

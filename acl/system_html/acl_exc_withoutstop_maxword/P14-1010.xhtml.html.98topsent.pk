@@ -1,0 +1,22 @@
+(lp0
+VFinally, we take the closure of this transducer, so that the resulting machine can transduce any sequence of words
+p1
+aVWe compose this acceptor with a desegmenting transducer, and then with an unsegmented LM acceptor, producing a fully annotated, desegmented lattice
+p2
+aVThis can be accomplished by composing the lattice with a desegmenting transducer that consumes morphemes and outputs desegmented words
+p3
+aVFortunately, LM annotation as well as any necessary lattice modifications can be performed simultaneously by composing the desegmented lattice with a finite state acceptor encoding the LM [ 26 ]
+p4
+aVAs Morfessor does not perform any orthographic normalizations, it can be desegmented with simple concatenation
+p5
+aVThe lattice (Figure 1 a) can then be desegmented by composing it with the transducer ( 1 b), producing a desegmented lattice ( 1 c
+p6
+aVTable 4 breaks down per-phrase accuracy according to four manually-assigned categories
+p7
+aVThe first feature indicates that the desegmented morphemes were translated from contiguous source words
+p8
+aVA valid chain is complete if its edges form an entire word, and if it is part of a path through the lattice that consists only of words
+p9
+aVWe approach this problem by augmenting an SMT
+p10
+a.

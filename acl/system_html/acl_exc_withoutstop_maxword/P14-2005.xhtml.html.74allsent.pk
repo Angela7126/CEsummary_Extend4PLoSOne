@@ -1,0 +1,291 @@
+(lp0
+VIn particular, MUC measures the degree of agreement between key coreference links (i.e.,, links among mentions within entities) and response coreference links, while non-coreference links (i.e.,, links formed by mentions from different entities) are not explicitly taken into account
+p1
+aVFor instance, if the key entities are { a,b,c } { d,e }; and the response entities are { b,c } { e,f,g }, then the key coreference link (a,b) is not seen on the response side; similarly, it is possible that a response link does not appear on the key side either c,f) and (f,g) are not in the key in the above example
+p2
+aVFor example, R c is the ratio of the number of correct coreference links over the number of key coreference links; P c is the ratio of the number of correct coreference links over the number of response coreference links, and so on
+p3
+aVHowever, when response mentions are not identical to key mentions, a key coreference link may not appear in either C r or N r , so Equations ( 2 ) to ( 7 ) cannot be applied directly to systems with imperfect mentions
+p4
+aVTo account for missing or spurious links, we observe that x u'\u005cu2219' C k u'\u005cu2216' T r are key coreference links missing in the response; x u'\u005cu2219' N k u'\u005cu2216' T r are key non-coreference links missing in the response; x u'\u005cu2219' C r u'\u005cu2216' T k are response coreference links missing in the key; x u'\u005cu2219' N r u'\u005cu2216' T k are response non-coreference links missing in the key, and we propose to extend the coreference F-measure and non-coreference F-measure as follows
+p5
+aVIt is easy to see that the gold mention assumption u'\u005cu2014' same set of response mentions as the set of key mentions u'\u005cu2014' can be equivalently stated as T k = T r (this does not necessarily mean that C k = C r or N k = N r
+p6
+aVLet C k u'\u005cu2062' ( i ) and C r u'\u005cu2062' ( j ) be the set of coreference links formed by mentions in k i and r j
+p7
+aVB-cubed and CEAF treat entities as sets of mentions and measure the agreement between key (or gold standard) entities and response (or system-generated) entities, while MUC and BLANC-gold are link-based
+p8
+aVHowever, the CoNLL data sets come from OntoNotes [ 2 ] , where singleton entities are not annotated, and BLANC has a wider dynamic range on data sets with singletons [ 7 ]
+p9
+aVThe BLANC-gold metric was developed with the assumption that response mentions and key mentions are identical
+p10
+aVIt calculates recall, precision and F-measure separately on coreference and non-coreference links in the usual way, and defines the overall recall, precision and F-measure as the mean of the respective measures for coreference and non-coreference links
+p11
+aVWhen T k = T r , Rand Index can be applied directly since coreference resolution reduces to a clustering problem where mentions are partitioned into clusters (entities
+p12
+aVWe observe that the definition of the proposed BLANC, Equ. ( 9 )-( 14 ) subsume the BLANC-gold ( 2 ) to ( 7 ) due to the following proposition
+p13
+aVUnder the assumption that the key and response mention sets are identical (which implies that T k = T r ), Equations ( 2 ) to ( 7 ) make sense
+p14
+aVIn practice, though, the simple-minded adoption of Rand Index is not satisfactory since the number of non-coreference links often overwhelms that of coreference links [ 7 ] , or
+p15
+aVBLANC-gold solves this problem by averaging the F-measure computed over coreference links and the F-measure over non-coreference links
+p16
+aVThis leads to a phenomenon where coreference systems outputting large entities are scored more favorably than those outputting small entities [ 3 ]
+p17
+aVIn reality, however, mentions need to be detected from natural language text and the result is, more often than not, imperfect some key mentions may be missing in the response, and some response mentions may be spurious u'\u005cu2014' so-called u'\u005cu201c' twinless u'\u005cu201d' mentions by Stoyanov et al
+p18
+aVSince there is no coreference link, BLANC reduces to the non-coreference F-measure F n
+p19
+aVSince there is no non-coreference link, BLANC reduces to the coreference F-measure F c
+p20
+aVThis can happen when all key (or response) mentions are in one cluster or are all singletons the former case will lead to N k = u'\u005cu2205' (or N r = u'\u005cu2205' ); the latter will lead to C k = u'\u005cu2205' (or C r = u'\u005cu2205'
+p21
+aVUsing the notations in Section 2 , the recall, precision, and F-measure on coreference links are
+p22
+aVIn fact, the proposed BLANC metric subsumes the original one in that its value is identical to the original one when response mentions are identical to key mentions
+p23
+aVRand Index is defined as the ratio between the number of correct within-cluster links plus the number of correct cross-cluster links, and the total number of links
+p24
+aVSo the correlations will likely be lower on data sets with singleton entities
+p25
+aVSince C k = { ( a u'\u005cu2062' b ) , ( b u'\u005cu2062' c ) , ( c u'\u005cu2062' a ) } , and C r = { ( b u'\u005cu2062' c ) } , we have C k u'\u005cu2229' C r = { ( b u'\u005cu2062' c ) } , and R c = 1 3 , P c = 1 , So BLANC = F c = 2 4 = 1 2
+p26
+aVIn Eqn. ( 2 ) - ( 3 ) and Eqn. ( 5 ) - ( 6 ), denominators are written as a sum of disjoint subsets so they can be related to the contingency table in [ 7 ]
+p27
+aVIndeed, since C k is a union of three disjoint subsets
+p28
+aVSo BLANC = F n = 1 3
+p29
+aVSo the final definition of BLANC can be succinctly stated as
+p30
+aVThis is boundary case (3 there are no non-coreference links
+p31
+aVWe prove the first one (the other proofs are similar and elided due to space limitations
+p32
+aVAs can be seen, a link is an undirected edge between two mentions, and it can be equivalently represented by a pair of mentions
+p33
+aVK where k i is the i t u'\u005cu2062' h key entity; accordingly, R = { r j } j = 1
+p34
+aVSo we only need to augment the BLANC definition for the following cases
+p35
+aVWe have updated the publicly available CoNLL coreference scorer 1 1 http://code.google.com/p/reference-coreference-scorers with the proposed BLANC, and used it to compute the proposed BLANC scores for all the CoNLL 2011 [ 5 ] and 2012 [ 4 ] participants in the official track, where participants had to automatically predict the mentions
+p36
+aV1) If C k = C r = u'\u005cu2205' and N k = N r = u'\u005cu2205' , then BLANC = I ( M k = M r ) , where I u'\u005cu2062' ( u'\u005cu22c5' ) is an indicator function whose value is 1 if its argument is true, and 0 otherwise
+p37
+aVWe use key to refer to gold standard mentions or entities, and response to refer to system mentions or entities
+p38
+aVSince N k = { ( a u'\u005cu2062' b ) , ( b u'\u005cu2062' c ) , ( c u'\u005cu2062' a ) } , N r = { ( a u'\u005cu2062' b ) , ( b u'\u005cu2062' d ) , ( a u'\u005cu2062' d ) } , we have N k u'\u005cu2229' N r = { ( a u'\u005cu2062' b ) } , and R n = 1 3 , P n = 1 3
+p39
+aVLet N k u'\u005cu2062' ( i , j ) ( i u'\u005cu2260' j ) be key non-coreference links formed between mentions in k i and those in k j , and let N r u'\u005cu2062' ( i , j ) ( i u'\u005cu2260' j ) be response non-coreference links formed between mentions in r i and those in r j , respectively
+p40
+aVTherefore, C k u'\u005cu2229' C r = { ( b u'\u005cu2062' c ) } , N k u'\u005cu2229' N r = { ( b u'\u005cu2062' d ) , ( c u'\u005cu2062' d ) } , and R c = 1 3 , P c = 1 2 , F c = 2 5 ; R n = 2 3 , P n = 2 4 , F n = 4 7
+p41
+aVWe write l 1 = l 2 if two links are equal
+p42
+aVTherefore, the identical-mention-set assumption limits BLANC-gold u'\u005cu2019' s applicability when gold mentions are not available, or when one wants to have a single score measuring both the quality of mention detection and coreference resolution
+p43
+aVObviously, C k = { ( a u'\u005cu2062' b ) , ( b u'\u005cu2062' c ) , ( a u'\u005cu2062' c ) } ; N k = { ( a u'\u005cu2062' d ) , ( b u'\u005cu2062' d ) , ( c u'\u005cu2062' d ) } ; C r = { ( b u'\u005cu2062' c ) , ( d u'\u005cu2062' e ) } ; N r = { ( b u'\u005cu2062' d ) , ( b u'\u005cu2062' e ) , ( c u'\u005cu2062' d ) , ( c u'\u005cu2062' e ) }
+p44
+aVIf T k = T r , then B u'\u005cu2062' L u'\u005cu2062' A u'\u005cu2062' N u'\u005cu2062' C = B u'\u005cu2062' L u'\u005cu2062' A u'\u005cu2062' N u'\u005cu2062' C ( g )
+p45
+aVWe say that a key link l 1 u'\u005cu2208' T k equals a response link l 2 u'\u005cu2208' T r if and only if the pair of mentions from which the links are formed are identical
+p46
+aVUnder the assumption that T k = T r , it is clear that C k = ( C k u'\u005cu2229' C r ) u'\u005cu222a' ( C k u'\u005cu2229' N r ) , C r = ( C k u'\u005cu2229' C r ) u'\u005cu222a' ( N k u'\u005cu2229' C r ) , and so on
+p47
+aVThis is the case where the key and response side has only entities consisting of singleton mentions
+p48
+aVFigure 1 shows how the proposed BLANC measure works when compared with existing metrics such as MUC, B-cubed and CEAF, using the BLANC and F1 scores
+p49
+aVWe use T k = C k u'\u005cu222a' N k and T r = C r u'\u005cu222a' N r to denote the total set of key links and total set of response links, respectively
+p50
+aVSuperscript g in these equations highlights the fact that they are meant for coreference systems with gold mentions
+p51
+aVBLANC [ 7 ] , on the other hand, considers both coreference links and non-coreference links
+p52
+aVThe proposed BLANC is highly positively correlated with the other measures along R, P and F1 (Table 3 ), showing that BLANC is able to capture most entity-based similarities measured by B-cubed and CEAF
+p53
+aVThe proposed BLANC is applied to the CoNLL 2011 and 2012 shared task participants, and the scores and its correlations with existing metrics are shown in Section 5
+p54
+aVThis establishes that R c = R c ( g )
+p55
+aVUnification for other component recalls and precisions can be done similarly
+p56
+aVClearly, C k and N k form a partition of T k since C k u'\u005cu2229' N k = u'\u005cu2205' , T k = C k u'\u005cu222a' N k
+p57
+aVA critically important problem is how to measure the quality of a coreference resolution system
+p58
+aVThis is the case where all mentions in the key and response are in one entity
+p59
+aVCoreference resolution aims at identifying natural language expressions (or mentions) that refer to the same entity
+p60
+aVThe goal of this paper is to extend the BLANC-gold metric to imperfect response mentions
+p61
+aVKey entities are { a } u'\u005cu2062' { b } u'\u005cu2062' { c } ; response entities are { a } u'\u005cu2062' { b } u'\u005cu2062' { d }
+p62
+aVKey entities are { a u'\u005cu2062' b u'\u005cu2062' c } and { d } ; response entities are { b u'\u005cu2062' c } and { d u'\u005cu2062' e }
+p63
+aVNote that when an entity consists of a single mention, its coreference link set is empty
+p64
+aVEqn. ( 8 ) indicates that BLANC-gold assigns equal weight to F c ( g ) , the F-measure from coreference links, and F n ( g ) , the F-measure from non-coreference links
+p65
+aVThis is boundary case (2 there are no coreference links
+p66
+aVM k and M r are the key and response mention set
+p67
+aVRand Index, if used without modification, would not be sensitive to changes of coreference links
+p68
+aVIn all the examples below, each lower-case letter represents a mention; mentions in an entity are closed in {}; two letters in () represent a link
+p69
+aVWe then present the original BLANC-gold in Section 3 using the set notation defined in Section 2
+p70
+aVR is the set of response entities, and r j is the j t u'\u005cu2062' h response entity
+p71
+aVNote that the non-coreference link set is empty when all mentions are in the same entity
+p72
+aVWe first briefly review the original definition of BLANC, and rewrite its definition using set notation
+p73
+aVKey entity is { a } ; response entity is { b }
+p74
+aVKey entity is { a u'\u005cu2062' b u'\u005cu2062' c } ; response entity is { b u'\u005cu2062' c }
+p75
+aVThe proposed BLANC continues to be the arithmetic average of F c and F n
+p76
+aVIt entails partitioning (often imperfect) mentions into equivalence classes
+p77
+aV0 , F n in ( 18 ) is well-defined
+p78
+aVWe assume that mentions in { k i } and { r j } are unique; in other words, there is no duplicate mention
+p79
+aVWe then argue that the gold-mention assumption in Recasens and Hovy ( 2011 ) can be lifted without changing the original definition
+p80
+aVThe collection of key entities is denoted by K = { k i } i = 1
+p81
+aVMany evaluation metrics have been proposed in the past two decades, including the MUC measure [ 9 ] , B-cubed [ 1 ] , CEAF [ 3 ] and, more recently, BLANC-gold [ 7 ]
+p82
+aVCoreference recall, precision and F-measure are changed to
+p83
+aVWe walk through a few examples and show how BLANC is calculated in detail
+p84
+aVThis work was partially supported by grants R01LM10090 from the National Library of Medicine
+p85
+aVBLANC-gold is adapted from Rand Index [ 6 ] , a metric for clustering objects
+p86
+aVCare has to be taken when counts of the BLANC definition are 0
+p87
+aVWe use the same letter and subscription without the index in parentheses to denote the union of sets, e.g
+p88
+aVWe would like to thank the three anonymous reviewers for their invaluable suggestions for improving the paper
+p89
+aVC r should the original Rand Index be used
+p90
+aVWe introduce the notions used in this paper in Section 2
+p91
+aVThis paves the way to generalize it to imperfect system mentions, which is presented in Section 4
+p92
+aVFinally, BLANC = 17 35
+p93
+aVBLANC = 0
+p94
+aV0 , then BLANC = F c
+p95
+aV0 , then BLANC = F n
+p96
+aVWe also use u'\u005cu22c5' to denote the size of a set
+p97
+aVFinally, the BLANC-gold metric is the arithmetic average of F c ( g ) and F n ( g )
+p98
+aVSimilarly, the recall, precision, and F-measure on non-coreference links are computed as
+p99
+aVThis can happen when a document has no more than one mention and there is no link
+p100
+aVThis avoids the problem that
+p101
+aVTo facilitate the presentation, we define the notations used in the paper
+p102
+aVTables 1 and 2 report the updated results
+p103
+aVThis is boundary case (1
+p104
+aVLikewise, C r and N r form a partition of T r
+p105
+aV2012 ) for easy comparison
+p106
+aVThe rest of the paper is organized as follows
+p107
+aV2011 ) and Pradhan et al
+p108
+aV2 2 The order is kept the same as in Pradhan et al
+p109
+aVWe only need to show that R c = R c ( g ) , P c = P c ( g ) , R n = R n ( g ) , and P n = P n ( g
+p110
+aVNon-coreference recall, precision and F-measure are changed to
+p111
+aVC r
+p112
+aVProof
+p113
+aV2009
+p114
+aVExample 3
+p115
+aVN k u'\u005cu226b'
+p116
+aVN r u'\u005cu226b'
+p117
+aVExample 2
+p118
+aVC k and
+p119
+aVExample 4
+p120
+aV+
+p121
+aVExample 1
+p122
+aVC k
+p123
+aVC r
+p124
+aV0 , F c in ( 18 ) is well-defined; as long as
+p125
+aVN k
+p126
+ag121
+aVN r
+p127
+aVObserve that as long as
+p128
+aVC K
+p129
+aV2) If C k = C r = u'\u005cu2205' and
+p130
+aVN r u'\u005cu226b'
+p131
+ag121
+aVN r
+p132
+aVC k u'\u005cu2229' C r
+p133
+aVC k = ( C k u'\u005cu2229' C r ) u'\u005cu222a' ( C k u'\u005cu2229' N r ) u'\u005cu222a' ( C k u'\u005cu2216' T r ) , R c ( g ) and R c can be unified as
+p134
+aV3) If N k = N r = u'\u005cu2205' and
+p135
+aVC k
+p136
+ag121
+aVC r
+p137
+aVN k u'\u005cu226b'
+p138
+aVC k and
+p139
+aV0
+p140
+aVC k u'\u005cu2229' T r
+p141
+aVSince T k = T r and C k u'\u005cu2282' T k , we have C k u'\u005cu2282' T r ; thus C k u'\u005cu2216' T r = u'\u005cu2205' , and
+p142
+aVN k
+p143
+a.

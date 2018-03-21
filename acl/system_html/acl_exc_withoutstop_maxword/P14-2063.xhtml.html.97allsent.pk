@@ -1,0 +1,236 @@
+(lp0
+VBoiy and Moens ( 2009 ) conduct machine learning sentiment analysis using multilingual web texts
+p1
+aVMachine learning approaches to sentiment analysis are attractive, because of the promise of reduced manual processing
+p2
+aVLiu ( 2010 ) introduces an efficient method, at the state of the art, for doing sentiment analysis and subjectivity in English
+p3
+aV2010 ) perform sentiment analysis according to cross-domain contextualization and Pak and Paroubek ( 2010 ) focus on Twitter, doing research on colloquial format of English
+p4
+aVWe collected all available published sentiment lexicons from non-English languages to serve as standard for our evaluation, including Arabic, Italian, German and Chinese
+p5
+aVAs our candidate entities for analysis, we use the Wikipedia pages of 2,000 most significant people as measured in the recent book Who u'\u005cu2019' s Bigger
+p6
+aVCoupled with English sentiment lexicons provides in total seven different test cases to experiment against, specifically
+p7
+aV2011 ) present a more sophisticated model by considering patterns, including negation and repetition using adjusted weights
+p8
+aVWe consider evaluating our lexicons on the consistency of Wikipedia pages about a particular individual person among various languages
+p9
+aVPerformance is not good on Japanese because of mismatching between our dictionary and the test data
+p10
+aVThe sentiment polarity of a page is simply computed by subtracting the number of negative words from that of positive words, divided by the sum of both
+p11
+aVWe seek to identify as many semantic links across languages as possible to connect our network, and so integrated several resources
+p12
+aVThough not always true, words with same spelling usually have similar meanings so this can improve the coverage of semantic links
+p13
+aVLinks do not always agree in a bidirectional manner, particularly for multi-sense words, thus all links in our network are unidirectional
+p14
+aVSentiment propagation starts from English sentiment lexicons
+p15
+aVDeep learning approaches draft off of distributed word embedding which offer concise features reflecting the semantics of the underlying vocabulary
+p16
+aVZou et al
+p17
+aVTurian et al
+p18
+aVSocher et al
+p19
+aVTaboada et al
+p20
+aVGodbole et al
+p21
+aVJijkoun et al
+p22
+aVLi et al
+p23
+aVGindl et al
+p24
+aV2007 ) build up an English lexicon-based sentiment analysis system to evaluate the general reputation of entities
+p25
+aVAbbasi et al
+p26
+aVMihalcea et al
+p27
+aVBanea et al
+p28
+aV2012 ) demonstrates a powerful approach to English sentiment using word embedding, which can easily be extended to other languages by training on appropriate text corpora
+p29
+aVSentiment analysis is an important area of NLP with a large and growing literature
+p30
+aV2013 ) combine machine translation and word representation to generate bilingual language resources
+p31
+aV2010 ) create powerful word embedding by training on real and corrupted phrases, optimizing for the replaceability of words
+p32
+aVNew Sentiment Analysis Resources u'\u005cu2013' We have generated sentiment lexicons for 136 major languages via graph propagation which are now publicly available 1 1 https://sites.google.com/site/datascienceslab/projects/
+p33
+aVEnglish
+p34
+aV2010 ) focus on generating topic specific sentiment lexicons
+p35
+aVExcellent surveys of the field include [ 18 , 21 ] , establishing that rich online resources have greatly expanded opportunities for opinion mining and sentiment analysis
+p36
+aVThe ready availability of machine translation to and from English has prompted efforts to employ translation for sentiment analysis [ 6 ]
+p37
+aVDenecke ( 2008 ) performs multilingual sentiment analysis using SentiWordNet
+p38
+aVExtrinsic Evaluation u'\u005cu2013' We elucidate the sentiment consistency of entities reported in different language editions of Wikipedia using our propagated lexicons
+p39
+aVBoth models achieve similar accuracy while slightly more words in graph propagation can be verified via published lexicons
+p40
+aV2008 ) demonstrate that machine translation can perform quite well when extending the subjectivity analysis to multi-lingual environment, which makes it inspiring to replicate their work on lexicon-based sentiment analysis
+p41
+aVLiu u'\u005cu2019' s lexicons contain 2006 positive words and 4783 negative words
+p42
+aVIndeed, our literature search identified only 12 publicly available sentiment lexicons for only 5 non-English languages (Chinese mandarin, German, Arabic, Japanese and Italian
+p43
+aVGînsc u'\u005cu0102' et al
+p44
+aVSentiment analysis of English texts has become a large and active research area, with many commercial applications, but the barrier of language limits the ability to assess the sentiment of most of the world u'\u005cu2019' s population
+p45
+aVFor the task of deciding sentiment polarity of words, only antonym links are negative
+p46
+aV2011 ) work on better sentiment analysis system in Romanian
+p47
+aVWork has been done to generalize sentiment analysis to other languages
+p48
+aVWe conducted a grid search on the weight of each type of links to maximize the best overall accuracy on our test data of published non-English sentiment lexicons
+p49
+aVWe present the accuracy and coverage achieved by two propagation model in Table 1
+p50
+aVTransliteration provides 22.1% of the total links in our experiment
+p51
+aVFinally, in Section 6 we present our extrinsic evaluation of sentiment consistency in Wikipedia prior to our conclusions
+p52
+aVSection 4 discusses graph propagation methods to identify sentiment polarity across languages
+p53
+aVIn particular we ask for translations of each word in our English vocabulary to 57 languages with available translators as well as going from each known vocabulary word in other languages to English
+p54
+aVTransliteration Links u'\u005cu2013' Natural flow brings words across languages with little morphological change
+p55
+aVLarge-Scale Language Knowledge Graph Analysis u'\u005cu2013' We have created a massive comprehensive knowledge graph of 7 million vocabulary words from 136 languages with over 131 million semantic inter-language links, which proves valuable when doing alignment between definitions in different languages
+p56
+aVIn total, machine translation provides 53.2% of the total links and establishes connections between 3.5 million vertices
+p57
+aVAlthough several well-regarded sentiment lexicons are available in English [ 9 , 17 ] , the same is not true for most of the world u'\u005cu2019' s languages
+p58
+aV2010 ) extract sentiment with global and local topic dependency
+p59
+aVOf these, 1422 positive words and 2956 negative words (roughly 64.5%) appear among the 100,000 English vertices in our graph
+p60
+aVBy contrast, 48 languages had lexicons with over 2,000 words, another 16 with between 1,000 and 2,000 clearly large enough to perform a meaningful analysis
+p61
+aVThrough semantic links in our knowledge graph, words are able to extend their sentiment polarities to adjacent neighbors
+p62
+aVResearchers have investigated topic or domain dependent approaches to identify opinions
+p63
+aVIndeed, our lexicons have polarity agreement of 95.7% with these published lexicons, plus an overall coverage of 45.2%
+p64
+aVIn particular, we collect total of 7,741,544 high-frequency words from 136 languages to serve as vertices in our graph
+p65
+aVWordNet u'\u005cu2013' Finally, we gather synonyms and antonyms of English words from WordNet, which prove particularly useful in propagating sentiment across languages
+p66
+aVWe use the Spearman correlation coefficient to measure the consistence of sentiment distribution across all entities with pages in a particular language pair
+p67
+aVMachine Translation - We script the Google translation API to get even more semantic links
+p68
+aVDrawing a candidate lexicon from Wikipedia has some downsides (e.g., limited use of informal words), but is representative and convenient over a large number of languages
+p69
+aVThe differing ratio of positive and negative polarity terms in Table 2 means that sentiment cannot be directly compared across languages
+p70
+aVIn particular, only 20 languages yielded lexicons of less than 100 words
+p71
+aVTable 2 reveals that very sparse sentiment lexicons resulted for a small but notable fraction of the languages we analyzed
+p72
+aVWe report results from using Liu u'\u005cu2019' s lexicons [ 17 ] as seed words
+p73
+aVIn this paper, we strive to produce a comprehensive set of sentiment lexicons for the worlds u'\u005cu2019' major languages
+p74
+aVFinally, Table 3 illustrates sentiment consistency over all 136 languages (represented by blue tick marks), with the first 10 languages in Figure 2 granted labels
+p75
+aVIn this section we will describe how we leverage off a variety of NLP resources to construct the semantic connection graph we will use to propagate sentiment lexicons
+p76
+aVTo avoid potential overfitting problems, grid search starts from SentiWordNet English lexicons [ 9 ] instead of Liu u'\u005cu2019' s
+p77
+aVWe validate our own work through other publicly available, human annotated sentiment lexicons
+p78
+aVIn total we collect over 100,000 pairs of synonyms and antonyms and created 5.0% of the total links
+p79
+aVFigure 2 shows the results for 30 languages with largest propagated sentiment lexicon size
+p80
+aV2008 ) extract specific language features of Arabic which requires language-specific knowledge
+p81
+aVFigure 1 illustrates how we encode links from different resources in an integer edge value
+p82
+aVThe Polyglot project [ 3 ] identified the 100,000 most frequently used words in each language u'\u005cu2019' s Wikipedia
+p83
+aVEdges having multiple positive links will be credited the highest weight among all these links
+p84
+aVArabic
+p85
+aVIn particular, we pick 30 languages and compute sentiment scores for 2,000 distinct historical figures
+p86
+aVGerman
+p87
+aVItalian
+p88
+aVAn edge gains zero weight if both negative and positive links exist
+p89
+aVOur knowledge network is comprised of links from a heterogeneous collection of sources, of different coverage and reliability
+p90
+aVWiktionary provides about 19.7% of the total links covering 382,754 vertices in our graph
+p91
+aV2007 ) learn multilingual subjectivity via cross-lingual projections
+p92
+aVAll pairs of language exhibit positive correlation (and hence generally stable and consistent sentiment), with an average correlation of 0.28
+p93
+aVWiktionary u'\u005cu2013' This growing resource has entries for 171 languages, edited by people with sufficient background knowledge
+p94
+aVNo doubt we missed some, but it is clear that these resources are not widely available for most important languages
+p95
+aVThe primary difference between is that label propagation takes multiple paths between two vertices into consideration, while graph propagation utilizes only the best path between word pairs
+p96
+aVEach language pair exhibits a Spearman sentiment correlation of at least 0.14, with an average correlation of 0.28 over all pairs
+p97
+aVJapanese
+p98
+aVFor more consistent evaluation we compute the z-score of each entity against the distribution of all its language u'\u005cu2019' s entities
+p99
+aVClosely related language pairs (i.e., Russian and Ukrainian) share many characters/words in common
+p100
+aVRespected artists like Steven Spielberg and Leonardo da Vinci show as consistently positive sentiment as notorious figures like Osama bin Laden and Adolf Hitler are negative
+p101
+aVIn Section 3 , we describe our resource processing and design decisions
+p102
+aVWe experimented with both graph propagation algorithm [ 28 ] and label propagation algorithm [ 29 , 22 ]
+p103
+aVThis research was partially supported by NSF Grants DBI-1060572 and IIS-1017181, and a Google Faculty Research Award
+p104
+aVWe review related work in Section 2
+p105
+aVSection 5 evaluates our results against each available human-annotated lexicon
+p106
+aVWithout exception, they all have very small available definitions in Wikitionary
+p107
+aVThe rest of this paper is organized as follows
+p108
+aVWe make the following contributions
+p109
+aV[ 23 ]
+p110
+aV[ 9 ]
+p111
+aV[ 5 ]
+p112
+aV[ 24 ]
+p113
+aV[ 13 ]
+p114
+aVChinese-1 , Chinese-2
+p115
+aV[ 15 ]
+p116
+aV[ 2 ]
+p117
+a.

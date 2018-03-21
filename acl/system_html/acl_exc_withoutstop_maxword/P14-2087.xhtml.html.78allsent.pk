@@ -1,0 +1,200 @@
+(lp0
+VWordNet senses are often used in Senseval and SemEval tasks, and hence senses (or synsets, and possibly their corresponding word forms) that are semantic related to the inventory senses under WordNet relations are easily obtainable and have been exploited by many existing studies
+p1
+aVThe input of the proposed NBM is bags of words, and thus it is straightforward to incorporate various forms of lexical knowledge (LK) for word senses by concatenating a tokenized knowledge source to the existing knowledge representation u'\u005cud835' u'\u005cudc1f' , while the similarity measure remains unchanged
+p2
+aVThese systems compared favourably to existing methods in WSD performance, although by using sense frequency information, they are essentially supervised methods
+p3
+aVDistributional methods have been used in many WSD systems in quite different flavours than the current study proposed a Lesk variant where each gloss word is weighted by its idf score in relation to all glosses, and gloss-context association was incremented by these weights rather than binary, overlap counts used distributional thesauri as a knowledge base to increase overlaps, which were, again, assessed by string matching
+p4
+aVKnown as the Lesk algorithm, this simple and intuitive method has since been extensively cited and extended in the word sense disambiguation (WSD) community
+p5
+aVTo address this limitation, a Naive Bayes model (NBM) is proposed in this study as a novel, probabilistic treatment of overlap in gloss-based WSD
+p6
+aVModel performance is evaluated in terms of WSD accuracy using Equation ( 2 ) as the scoring function
+p7
+aVThe result is a u'\u005cu201c' softer u'\u005cu201d' proxy of association than the binary view of overlaps in existing Lesk variants
+p8
+aVWe further hypothesize that, beyond sheer numbers, synonyms and hyponyms offer stronger semantic specification that helps distinguish the senses of a given ambiguous word, and thus are more effective knowledge sources for WSD
+p9
+aVWSD is thus formulated as identifying the sense s * in the sense inventory u'\u005cud835' u'\u005cudcae' of w s.t
+p10
+aVA major difference, however, is that instead of using hard, overlap counts between the two sets of words from the gloss and the context, this probabilistic treatment can implicitly model the distributional similarity among the elements e i and f j (and consequently between the sets u'\u005cud835' u'\u005cudc1e' and u'\u005cud835' u'\u005cudc1f' ) over a wider range of contexts
+p11
+aVConsequently, p ( u'\u005cud835' u'\u005cudc1f' u'\u005cud835' u'\u005cudc1e' ) is essentially measuring the association between context words of w and definition texts of s , i.e.,, the gloss-context association in the simplified Lesk algorithm
+p12
+aVSpecifically in WSD, a source corpus is defined as the source of the majority of the WSD instances in a given dataset, and a baseline corpus of a smaller size and less resemblance to the instances is used for all datasets
+p13
+aVBy using only glosses, the proposed model already shows statistically significant improvement over the basic Lesk algorithm (92.4% and 140.5% relative improvement in Senseval-2 coarse- and fine-grained tracks, respectively
+p14
+aVHyponyms, on the other hand, help specify their corresponding senses with information that is possibly missing from the often overly brief glosses the many technical terms as hyponyms in Table 1 u'\u005cu2014' though rare u'\u005cu2014' are likely to occur in the (possibly domain-specific) contexts that are highly typical of the corresponding senses
+p15
+aVTo the best of our knowledge, NBMs have been employed exclusively as classifiers in WSD u'\u005cu2014' that is, in contrast to their use as a similarity measure in this study used NB classifier resembling an information retrieval system a WSD instance is regarded as a document d , and candidate senses are scored in terms of u'\u005cu201c' relevance u'\u005cu201d' to d
+p16
+aVThe foregoing discussion offers a second motivation for applying Bayes u'\u005cu2019' s rule on the second expression in Equation ( 1 it is easier to estimate p ( e i f j ) than p ( f j e i ) , since the vocabulary for the lexical knowledge features ( f j ) is usually more limited than that of the contexts ( e i ) and hence estimation of the former suffices on a smaller amount of data than that of the latter
+p17
+aVBreaking away from string matching, measured overlap as similarity between gloss- and context-vectors, which were aggregated word vectors encoding second order co-occurrence information in glosses
+p18
+aVBecause it is a rare event for the NBM to produce identical scores, 4 4 This has never occurred in the hundreds of thousands of runs in our development process the model always proposes a unique answer and accuracy is thus equivalent to F-score commonly used in existing reports
+p19
+aVSpecifically, highly similar, fine-grained sense candidates apparently share more hypernyms in the fine-grained case than in the coarse-grained case; adding to the generality of hypernyms (both semantic and distributional), we postulate that their probability in the NBM is uniformly inflated among many sense candidates, and hence they decrease in distinguishability
+p20
+aVAmong the popular explanations is a key limitation of the algorithm, that u'\u005cu201c' Lesk u'\u005cu2019' s approach is very sensitive to the exact wording of definitions, so the absence of a certain word can radically change the results u'\u005cu201d' ()
+p21
+aVFor the fine-grained track, it achieves 2nd place after that of , which used a decision list () on manually selected corpora evidence for each inventory sense, and thus is not subject to loss of distinguishability in the glosses as Lesk variants are
+p22
+aV5 5 We also compared the two Lesk baselines (with and without usage examples) on the development data but did not observe significant differences as reported by
+p23
+aVIn the extraordinarily rich literature on WSD, we focus our review on those closest to the topic of Lesk and NBM
+p24
+aVIn the second expression, Bayes u'\u005cu2019' s rule is applied not only to take advantage of the conditional independence among e i u'\u005cu2019' s, but also to facilitate probability estimation, since p ( { e i } f j ) is easier to estimate in the context of WSD, where sample spaces of u'\u005cud835' u'\u005cudc1e' and u'\u005cud835' u'\u005cudc1f' become asymmetric (Section 3.2
+p25
+aV8 8 We excluded the results of UNED () in Senseval-2 because, by using sense frequency information that is only obtainable from sense-annotated corpora, it is essentially a supervised system
+p26
+aVWe also observe that some semantically related words appear under rare senses (e.g.,, still as an alcohol-manufacturing plant, and annual as a one-year-life-cycle plant; omitted from Table 1
+p27
+aVTo evaluate model response to probability estimation of different quality (Section 3.4 ), source corpora are chosen as the majority value of the doc-source attribute of instances in each dataset, namely, the British National Corpus for Senseval-2 (94%) and the Wall Street Journal for SemEval-2007 (86%
+p28
+aVAccuracy is defined as the number of correct responses over the number of instances
+p29
+aVAs pointed out by , however, u'\u005cu201c' not all of these relations are equally helpful u'\u005cu201d' Relation pairs involving hyponyms were shown to result in better F-measure when used in gloss overlaps
+p30
+aVWhat type of knowledge to include is eventually a decision made by the user based on the application and LK availability
+p31
+aVThe comparison is unavailable in SemEval2007 since we have not found existing experiments with this exact configuration
+p32
+aVIn one of their simplest forms, e i u'\u005cu2019' s correspond to co-occurring words in the instance of w , and f j u'\u005cu2019' s consist of the gloss words of sense s
+p33
+aVThe MIT-JWI library () is used for accessing WordNet
+p34
+aVBasic pre-processing is performed on the contexts and the glosses, including lower-casing, stopword removal, lemmatization on both datasets, and tokenization on the Senseval-2 instances
+p35
+aVMore recently, proposed a tree-matching algorithm that measured gloss-context overlap as the weighted sum of dependency-induced lexical distance constructed a sentential similarity measure () using lexical similarity measures () , and overlap was measured by the cosine of their respective sentential vectors
+p36
+aVOverlap was assessed by string matching, with the number of matching words squared so as to assign higher scores to multi-word overlaps
+p37
+aVwhere c u'\u005cu2062' ( x ) is the count of word x , c u'\u005cu2062' ( u'\u005cu22c5' ) is the corpus size, c u'\u005cu2062' ( x , y ) is the joint count of x and y , and u'\u005cud835' u'\u005cudc2f' is the dimension of vector u'\u005cud835' u'\u005cudc2f'
+p38
+aV1 1 Think of the notations u'\u005cud835' u'\u005cudc1e' and u'\u005cud835' u'\u005cudc1f' mnemonically as exemplars and features , respectively
+p39
+aVTo avoid underflow, Equation ( 1 ) is estimated as the following log probability
+p40
+aVTraining sections are used as development data and test sections held out for final testing
+p41
+aVTo study the effect of different types of LK in WSD (Section 3.3 ), for each inventory sense, we choose synonyms ( syn ), hypernyms ( hpr ), and hyponyms ( hpo ) as extended LK in addition to its gloss
+p42
+aVAn extension by differentiated context word senses and extended shorter glosses with related glosses in WordNet measured overlap by concept similarity () between each inventory sense and the context words
+p43
+aVAmong Lesk variants, extended the gloss of both inventory senses and the context words to include words in their related synsets in WordNet
+p44
+aVOverall, all three sources of LK may complement each other in WSD tasks, with hyponyms particularly promising in both quantity and quality compared to hypernyms and synonyms
+p45
+aVThe WSD model is evaluated with gloss-only ( glo ), individual extended LK sources, and the combination of all four sources ( all
+p46
+aVThe availability of LK largely depends on the sense inventory used in a WSD task
+p47
+aVWhen evaluated on a WSD benchmark () , the algorithm compared favourably to Lesk variants (as expected for a supervised method proposed an ensemble model with multiple NB classifiers differing by context window size trained an unsupervised NB classifier using the EM algorithm and empirically demonstrated the benefits of WordNet-assisted () feature selection over local syntactic features
+p48
+aVTo disambiguate a homonymous word in a given context, proposed a method that measured the degree of overlap between the glosses of the target and context words
+p49
+aVPrevious hypotheses (Section 3.3 ) are empirically confirmed that WSD performance benefits most from hyponyms and least from hypernyms
+p50
+aVEach inventory sense is represented by a set of LK tokens (e.g.,, definition texts, synonyms, etc.) from their corresponding WordNet synset (or in the coarse-grained case, a concatenation of tokens from all synsets in a sense group
+p51
+aVIn contrast to string matching, the probabilistic nature of our model offers a u'\u005cu201c' softer u'\u005cu201d' measurement of gloss-context association, resulting in a novel approach to unsupervised WSD with state-of-the-art performance in more than one WSD benchmark (Section 4
+p52
+aVSelected hypernyms, hyponyms, and synonyms pertaining to its two senses factory and life form are listed in Table 1
+p53
+aVThe assumption is that a source corpus offers better estimates for the model than the baseline corpus, and difference in model performance is expected when using probability estimation of different quality
+p54
+aVMoreover, comparison between coarse- and fine-grained tracks reveals interesting properties of different LK sources
+p55
+aVIn particular, we opt for the u'\u005cu201c' simplified Lesk u'\u005cu201d' () , where inventory senses are assessed by gloss-context overlap rather than gloss-gloss overlap
+p56
+aVAlthough conceptually helpful for humans in coarse-grained WSD, this generality is likely to inflate the hypernyms u'\u005cu2019' probabilistic estimation
+p57
+aVThis particular variant prevents proliferation of gloss comparison on larger contexts () and is shown to outperform the original Lesk algorithm ()
+p58
+aVAcross all experiments, higher WSD accuracy is consistently witnessed using the source corpus; differences are statistically highly significant except for hpo (which is significant with p 0.01
+p59
+aVSenses were scored by the sum of overlaps across all relation pairs, and the effect of individual relation pairs was evaluated in a later work
+p60
+aVWhen including all four LK sources, our model outperforms the state-of-the-art systems with statistical significance in both coarse-grained tasks
+p61
+aVThese patterns on the LK types are consistent in all three experiments
+p62
+aVIn WSD in particular, the estimation concerns the marginal and conditional probabilities of and between word tokens
+p63
+aVNonetheless, its performance in several WSD benchmarks is less than satisfactory
+p64
+aVParticularly for the NBM, the co-occurrence is likely to result in stronger gloss-definition associations when similar contexts appear in a WSD instance
+p65
+aVThe results are listed in Table 2 together with existing results (1st and 2nd correspond to the results of the top two unsupervised methods in each dataset
+p66
+aVSynonyms might help with regard to semantic specification, though their limited quantity also limits their benefits
+p67
+aVNonetheless, we do investigate how model performance responds to estimation quality
+p68
+aVIn conclusion, the majority of Lesk variants focused on extending the gloss to increase the chance of overlapping, while the proposed NBM aims to make better use of the limited lexical knowledge available
+p69
+aVUsage examples in glosses (included by the library by default) are removed in our experiments
+p70
+aV9 9 Comparisons are made against the simplified Lesk algorithm () without usage examples
+p71
+aVThis is a general phenomenon in gloss-based WSD and is beyond the scope of the current discussion
+p72
+aVVarious aspects of the model discussed in Section 3 are evaluated in the English lexical sample tasks from Senseval-2 () and SemEval-2007
+p73
+aVThe authors attributed the phenomenon to the the multitude of hyponyms compared to other relations
+p74
+aVCompounding this problem is the fact that many Lesk variants limited the concept of overlap to the literal interpretation of string matching (with their own variants such as length-sensitive matching () , etc.), and it was not until recently that overlap started to take on other forms such as tree-matching () and vector space models
+p75
+aVHypernyms can be overly general terms (e.g.,, being
+p76
+aVIn the context of WSD, u'\u005cud835' u'\u005cudc1e' can be regarded as an instance of a polysemous word w , while u'\u005cud835' u'\u005cudc1f' represents certain lexical knowledge about the sense s of w manifested by u'\u005cud835' u'\u005cudc1e'
+p77
+aVMultiword expressions (MWEs) in the Senseval-2 sense inventory are not explicitly marked in the contexts
+p78
+aV3 3 Note that LK expansion is a feature of our model rather than a requirement
+p79
+aVWithout digressing to the details of MWE detection u'\u005cu2014' and meanwhile, to ensure fair comparison with existing systems u'\u005cu2014' we implement two variants of the prediction module, one completely ignorant of MWE and defaulting to INCORRECT for all MWE-related answers, while the other assuming perfect MWE detection and performing regular disambiguation algorithm on the MWE-related senses ( not defaulting to CORRECT
+p80
+aVA related approach () also used Wikipedia-induced concepts to encoded sentential vectors
+p81
+aVGloss overlaps from their earlier work actually out-performed all five similarity-based methods
+p82
+aVMany options are available to this end in statistical machine learning (MLE, MAP, etc.), information theory () , as well as the rich body of research in lexical semantic similarity
+p83
+aVTake the word plant for example
+p84
+aVBinomial test is used for significance testing, and with one exception explicitly noted in Section 4.3 , all differences presented are statistically highly significant ( p 0.001
+p85
+aVThe Brown Corpus is shared by both datasets as the baseline corpus
+p86
+aV2 2 We do, however, refer curious readers to the work of for a novel treatment of a similar problem
+p87
+aVIdentical procedures are applied to all corpora used for probability estimation
+p88
+aVHere we choose maximum likelihood u'\u005cu2014' not only for its simplicity, but also to demonstrate model strength with a relatively crude probability estimation
+p89
+aVSeveral of the top-ranking systems implemented their own MWE detection algorithms
+p90
+aVAll results reported for Senseval-2 below are harmonic means of the two outcomes
+p91
+aVUnder the assumption of conditional independence among the events in each set, a Naive Bayes treatment of the measure can be formulated as
+p92
+aVFigure 1 shows the comparison on the SemEval-2007 dataset
+p93
+aVFormally, given two sets u'\u005cud835' u'\u005cudc1e' = { e i } and u'\u005cud835' u'\u005cudc1f' = { f j } each consisting of multiple random events, the proposed model measures the probabilistic association p ( u'\u005cud835' u'\u005cudc1f' u'\u005cud835' u'\u005cudc1e' ) between u'\u005cud835' u'\u005cudc1e' and u'\u005cud835' u'\u005cudc1f'
+p94
+aVThis study is funded by the Natural Sciences and Engineering Research Council of Canada
+p95
+aVA most open-ended question is how to estimate the probabilities in Equation ( 1
+p96
+aV6 6 The SemEval-2007 instances are already tokenized
+p97
+aVStanford CoreNLP 7 7 http://nlp.stanford.edu/software/corenlp.shtml is used for lemmatization and tokenization
+p98
+aVWe thank Afsaneh Fazly, Navdeep Jaitly, and Varada Kolhatkar for the many inspiring discussions, as well as the anonymous reviewers for their constructive advice
+p99
+a.

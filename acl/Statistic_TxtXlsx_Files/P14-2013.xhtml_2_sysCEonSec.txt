@@ -1,0 +1,374 @@
+Current File: P14-2013.xhtml_2 P14-2013.xhtml
+
+Section 0:  Abstract
+	SentNum: 7
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 14.2857%
+
+Section 1:  1 Introduction
+	SentNum: 20
+	CENum: 5
+	SentCovered: 6
+	Covered_Rate: 30.0000%
+
+Section 2:  2 Related Work
+	SentNum: 26
+	CENum: 5
+	SentCovered: 5
+	Covered_Rate: 19.2308%
+
+Section 3:  3 Solution Graph
+	SentNum: 41
+	CENum: 12
+	SentCovered: 15
+	Covered_Rate: 36.5854%
+
+Section 4:  4 Disambiguation
+	SentNum: 21
+	CENum: 12
+	SentCovered: 12
+	Covered_Rate: 57.1429%
+
+Section 5:  5 Experiments and Results
+	SentNum: 32
+	CENum: 8
+	SentCovered: 9
+	Covered_Rate: 28.1250%
+
+Section 6:  6 Conclusion
+	SentNum: 3
+	CENum: 2
+	SentCovered: 2
+	Covered_Rate: 66.6667%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-2013.xhtml_2's CE cases
+
+Section 0:  Abstract has 1 CE cases
+	CASE: 1
+	Stag: 2 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: All possible NE candidates are represented as nodes in the graph and associations between different candidates are represented by edges between the nodes. 
+		Cause: [(0, 7), (0, 22)]
+		Effect: [(0, 0), (0, 5)]
+
+Section 1:  1 Introduction has 5 CE cases
+	CASE: 1
+	Stag: 7 8 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Named entities (NEs) have received much attention over the last two decades [ 14 ] , mostly focused on recognizing the boundaries of textual NE mentions and classifying them as, e.g.,, Person, Organization or Location. However, references to entities in the real world are often ambiguous there is a many-to-many relation between NE mentions and the entities they denote in the real world. 
+		Cause: [(0, 32), (1, 27)]
+		Effect: [(0, 0), (0, 30)]
+
+	CASE: 2
+	Stag: 14 15 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: The problem is that other textual mentions in the document are also ambiguous. So, what is needed is a collective disambiguation approach that jointly disambiguates all NE textual mentions. 
+		Cause: [(0, 0), (0, 12)]
+		Effect: [(1, 2), (1, 16)]
+
+	CASE: 3
+	Stag: 20 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: Our approach first ranks all nodes in the solution graph using the Page-Rank algorithm, then re-ranks all nodes by combining the initial confidence and graph ranking scores. 
+		Cause: [(0, 20), (0, 23)]
+		Effect: [(0, 24), (0, 27)]
+
+	CASE: 4
+	Stag: 21 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: We consider several different measures for computing the initial confidence assigned to each node and several measures for determining and weighting the graph edges. 
+		Cause: [(0, 6), (0, 23)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 5
+	Stag: 21 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: We consider several different measures for computing the initial confidence assigned to each node and several measures for determining and weighting the graph edges. 
+		Cause: [(0, 12), (0, 17)]
+		Effect: [(0, 0), (0, 10)]
+
+Section 2:  2 Related Work has 5 CE cases
+	CASE: 1
+	Stag: 28 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: EL is a similar but broader task than NED because NED is concerned with disambiguating a textual NE mention where the correct entity is known to be one of the KB entries, while EL also requires systems to deal with the case where there is no entry for the NE in the reference KB. 
+		Cause: [(0, 10), (0, 31)]
+		Effect: [(0, 33), (0, 54)]
+
+	CASE: 2
+	Stag: 38 39 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: These approaches try to model the interdependence between the different candidate entities for different NE mentions in the query document, and reformulate the problem of NED as a global optimization problem whose aim is to find the best set of entities. As this new formulation is NP-hard, many approximations have been proposed. 
+		Cause: [(0, 28), (1, 4)]
+		Effect: [(0, 0), (0, 26)]
+
+	CASE: 3
+	Stag: 38 39 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: These approaches try to model the interdependence between the different candidate entities for different NE mentions in the query document, and reformulate the problem of NED as a global optimization problem whose aim is to find the best set of entities. As this new formulation is NP-hard, many approximations have been proposed. 
+		Cause: [(1, 1), (1, 11)]
+		Effect: [(0, 0), (0, 41)]
+
+	CASE: 4
+	Stag: 48 49 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Hoffert [ 10 ] poses the problem as one of finding a dense sub-graph, which is infeasible in a huge graph. So, an algorithm originally used to find strongly interconnected, size-limited groups in social media is adopted to prune the graph, and then a greedy algorithm is used to find the densest graph. 
+		Cause: [(0, 8), (1, 20)]
+		Effect: [(0, 0), (0, 6)]
+
+	CASE: 5
+	Stag: 48 49 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Hoffert [ 10 ] poses the problem as one of finding a dense sub-graph, which is infeasible in a huge graph. So, an algorithm originally used to find strongly interconnected, size-limited groups in social media is adopted to prune the graph, and then a greedy algorithm is used to find the densest graph. 
+		Cause: [(0, 0), (0, 21)]
+		Effect: [(1, 2), (1, 34)]
+
+Section 3:  3 Solution Graph has 12 CE cases
+	CASE: 1
+	Stag: 61 62 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The graph nodes are formulated as a set V = { ( m i , e i , j ) u'\u2223' u'\u2200' e i , j u'\u2208' E i , u'\u2200' m i u'\u2208' M }. Nodes are represented as ordered pairs of textual mentions and candidate entities, since the same entity may be found multiple times as a candidate for different textual mentions and each occurrence must be evaluated independently. 
+		Cause: [(0, 6), (1, 12)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 2
+	Stag: 62 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: Nodes are represented as ordered pairs of textual mentions and candidate entities, since the same entity may be found multiple times as a candidate for different textual mentions and each occurrence must be evaluated independently. 
+		Cause: [(0, 14), (0, 20)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 3
+	Stag: 75 76 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We adopted a new mention-candidate similarity function, j u'\u2062' w u'\u2062' S u'\u2062' i u'\u2062' m , which uses Jaro-Winkler similarity as a first estimate of the initial confidence value for each candidate. This function considers all terms found in the candidate entity KB entry title, but not in the textual mention as disambiguation terms. 
+		Cause: [(0, 39), (1, 21)]
+		Effect: [(0, 0), (0, 37)]
+
+	CASE: 4
+	Stag: 76 77 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: This function considers all terms found in the candidate entity KB entry title, but not in the textual mention as disambiguation terms. The percentage of disambiguation terms found in the query document is used to boost in the initial j u'\u2062' w u'\u2062' S u'\u2062' i u'\u2062' m value, in addition to an acronym check (whether the NE textual mention could be an acronym for a specific candidate entity title. 
+		Cause: [(0, 21), (1, 64)]
+		Effect: [(0, 0), (0, 19)]
+
+	CASE: 5
+	Stag: 79 80 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The cosine similarity between the sentence containing the NE mention in the query document and the textual description of the candidate NE in the KB (we use the first section of the Wikipedia article as the candidate entity description. Global confidence is a measure of the global importance of the candidate entity. 
+		Cause: [(0, 36), (1, 11)]
+		Effect: [(0, 8), (0, 34)]
+
+	CASE: 6
+	Stag: 81 82 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Entity popularity has been used successfully as a discriminative feature for NED [ 15 ]. Freebase provides an API to get an entity u'\u2019' s popularity score ( FB ), which is computed during Freebase indexing. 
+		Cause: [(0, 7), (1, 24)]
+		Effect: [(0, 0), (0, 5)]
+
+	CASE: 7
+	Stag: 84 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: The initial confidence is not normalized across all NEs because each score is calculated independently. 
+		Cause: [(0, 10), (0, 14)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 8
+	Stag: 87 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: It is not based on context, so it is always the same regardless of the query document. 
+		Cause: [(0, 0), (0, 5)]
+		Effect: [(0, 8), (0, 17)]
+
+	CASE: 9
+	Stag: 87 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: It is not based on context, so it is always the same regardless of the query document. 
+		Cause: [(0, 5), (0, 5)]
+		Effect: [(0, 0), (0, 2)]
+
+	CASE: 10
+	Stag: 88 89 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Coherence is represented as an edge between nodes in the solution graph. We used two measures for coherence, described as follows. 
+		Cause: [(0, 4), (1, 8)]
+		Effect: [(0, 0), (0, 2)]
+
+	CASE: 11
+	Stag: 90 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: Uses the Wikipedia documents for both entity candidates to check if either document has a link to the other. 
+		Cause: [(0, 11), (0, 18)]
+		Effect: [(0, 1), (0, 9)]
+
+	CASE: 12
+	Stag: 91 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: This relation is directed, but we assume an inverse relation also exists; so this relation is represented as undirected. 
+		Cause: [(0, 0), (0, 12)]
+		Effect: [(0, 15), (0, 20)]
+
+Section 4:  4 Disambiguation has 12 CE cases
+	CASE: 1
+	Stag: 98 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: The first step is initial graph ranking, where all nodes are ranked according to the link structure. 
+		Cause: [(0, 15), (0, 17)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 2
+	Stag: 99 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: The second step is to re-rank the nodes by combining the graph rank with the initial confidence. 
+		Cause: [(0, 9), (0, 16)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 3
+	Stag: 100 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: The highest rank is not always correct, so in the third step a selection algorithm is used to choose the best candidate. 
+		Cause: [(0, 0), (0, 6)]
+		Effect: [(0, 9), (0, 22)]
+
+	CASE: 4
+	Stag: 103 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: All nodes in the graph are ranked according to these relations using PR. 
+		Cause: [(0, 9), (0, 12)]
+		Effect: [(0, 0), (0, 6)]
+
+	CASE: 5
+	Stag: 104 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Initial confidence is used as an initial rank for the graph nodes, while entities u'\u2019' coherence measures are used as link weights which play a role in distributing a node u'\u2019' s rank over its outgoing nodes. 
+		Cause: [(0, 5), (0, 44)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 6
+	Stag: 104 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Initial confidence is used as an initial rank for the graph nodes, while entities u'\u2019' coherence measures are used as link weights which play a role in distributing a node u'\u2019' s rank over its outgoing nodes. 
+		Cause: [(0, 20), (0, 37)]
+		Effect: [(0, 0), (0, 18)]
+
+	CASE: 7
+	Stag: 107 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: In our case this is not appropriate, so the final rank for each mention is determined after graph ranking, by combining the graph rank with the initial confidence. 
+		Cause: [(0, 0), (0, 6)]
+		Effect: [(0, 9), (0, 29)]
+
+	CASE: 8
+	Stag: 107 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: In our case this is not appropriate, so the final rank for each mention is determined after graph ranking, by combining the graph rank with the initial confidence. 
+		Cause: [(0, 13), (0, 20)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 9
+	Stag: 108 109 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Let us refer to the graph rank of a candidate as P u'\u2062' R u'\u2062' ( e i. Two combination schemes are used. 
+		Cause: [(0, 11), (1, 3)]
+		Effect: [(0, 1), (0, 9)]
+
+	CASE: 10
+	Stag: 110 
+		Pattern: 0 [['according', 'to'], [',']]---- [[], ['&NP@C@'], ['&R']]
+		sentTXT: The simplest approach is to select the highest ranked entity in the list for each mention m i according to equation 5 , where R could refer to R m or R s. 
+		Cause: [(0, 20), (0, 21)]
+		Effect: [(0, 23), (0, 31)]
+
+	CASE: 11
+	Stag: 111 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: However, we found that a dynamic choice between the re-ranking schemes, based on the difference between the top two candidates, as described in algorithm 4 and indicated by e g ,works best. 
+		Cause: [(0, 15), (0, 21)]
+		Effect: [(0, 23), (0, 35)]
+
+	CASE: 12
+	Stag: 112 113 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: The underlying intuition of this algorithm is that a greater difference between the top ranks reflects more confident discrimination between candidates. So, the two combination schemes assign different ranks to the candidates and the algorithm selects the scheme which appears more discriminative. 
+		Cause: [(0, 0), (0, 20)]
+		Effect: [(1, 2), (1, 21)]
+
+Section 5:  5 Experiments and Results has 8 CE cases
+	CASE: 1
+	Stag: 115 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: We used AIDA dataset 3 3 http://www.mpi-inf.mpg.de/yago-naga/aida/ , which is based on the CoNLL 2003 data for NER tagging. 
+		Cause: [(0, 12), (0, 18)]
+		Effect: [(0, 0), (0, 9)]
+
+	CASE: 2
+	Stag: 118 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We only consider NE mentions with an entry in the Wikipedia KB, ignoring the 20% of query mentions (7136) without a link to the KB, as Hoffart did. 
+		Cause: [(0, 31), (0, 32)]
+		Effect: [(0, 0), (0, 28)]
+
+	CASE: 3
+	Stag: 127 128 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: To study graph ranking using PR, and the contributions of the initial confidence and entity coherence, experiments were carried out using PR in different modes and with different selection techniques. In the first experiment, referred to as P u'\u2062' R I , initial confidence is used as an initial node rank for PR and edge weights are uniform, edges, as in the PR baseline, being created wherever REF or JProb are not zero. 
+		Cause: [(1, 8), (1, 33)]
+		Effect: [(0, 0), (1, 6)]
+
+	CASE: 4
+	Stag: 130 131 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: When comparing these results to the PR baseline we notice a slight positive effect when using the initial confidence as an initial rank instead of uniform ranking. The major improvement comes from re-ranking nodes by combining initial confidence with PR score. 
+		Cause: [(0, 20), (1, 12)]
+		Effect: [(0, 4), (0, 18)]
+
+	CASE: 5
+	Stag: 131 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: The major improvement comes from re-ranking nodes by combining initial confidence with PR score. 
+		Cause: [(0, 8), (0, 13)]
+		Effect: [(0, 0), (0, 6)]
+
+	CASE: 6
+	Stag: 132 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: In our second experiment, P u'\u2062' R C , entity coherence features are tested by setting the edge weights to the coherence score and using uniform initial node weights. 
+		Cause: [(0, 20), (0, 33)]
+		Effect: [(0, 0), (0, 18)]
+
+	CASE: 7
+	Stag: 133 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: We compared JProb and Ref edge weighting approaches, where for each approach edges were created only where the coherence score according to the approach was non-zero. 
+		Cause: [(0, 23), (0, 24)]
+		Effect: [(0, 0), (0, 20)]
+
+	CASE: 8
+	Stag: 141 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: To compare our results with the state-of-the-art, we report Hoffart et al u'\u2019' s [ 10 ] results as they re-implemented two other systems and also ran them over the AIDA dataset. 
+		Cause: [(0, 24), (0, 36)]
+		Effect: [(0, 0), (0, 22)]
+
+Section 6:  6 Conclusion has 2 CE cases
+	CASE: 1
+	Stag: 147 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Our results show that Page-Rank in conjunction with re-ranking by initial confidence score can be used as an effective approach to collectively disambiguate named entity textual mentions in a document. 
+		Cause: [(0, 17), (0, 29)]
+		Effect: [(0, 0), (0, 15)]
+
+	CASE: 2
+	Stag: 149 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: In future work we plan to explore enriching the edges between nodes by incorporating semantic relations extracted from an ontology. 
+		Cause: [(0, 13), (0, 19)]
+		Effect: [(0, 0), (0, 11)]
+
+#-------------------------------------------------
+

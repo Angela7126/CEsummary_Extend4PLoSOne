@@ -1,0 +1,26 @@
+(lp0
+VAs a by-product of our approach, we also propose an extractive summarization model based on phrasal queries to select the summary-worthy sentences in the conversation based on query terms and signature terms [ 17 ]
+p1
+aVTo estimate the utterance score, we view both the query terms and the signature terms as the terms that should appear in a human query-based summary
+p2
+aVIn this way, the title of each summary can be counted as a phrasal query and the corresponding summary is considered as the query-based abstract of the associated chat log including only the information most relevant to the title
+p3
+aV2) We propose a novel ranking strategy to select the best path in the constructed word graph by taking the query content, overall information content and grammaticality (i.e.,, fluency) of the sentence into consideration
+p4
+aVThis means our systems can effectively aggregate the extracted sentences and generate abstract sentences based on the query content
+p5
+aV1) Cosine-1st we rank the utterances in the chat log based on the cosine similarity between the utterance and query
+p6
+aVExample 1 shows two queries and their associated human written summaries based on a single chat log
+p7
+aV2) Cosine-all we rank the utterances in the chat log based on the cosine similarity between the utterance and query and then select the utterances with a cosine similarity greater than 0 ;
+p8
+aVIn order to rank the graph paths, we select all the paths that contain at least one verb and rerank them using our proposed ranking function to find the best path as the summary of the original sentences in each cluster
+p9
+aVIn other words, using our extractive model described in section 2.1, as a stand alone system, is an effective query-based extractive summarization model
+p10
+aVAbstractive summary sentences can be created by aggregating and merging multiple sentences into an abstract sentence
+p11
+aVMoreover, we compare our abstractive system with the first part of
+p12
+a.

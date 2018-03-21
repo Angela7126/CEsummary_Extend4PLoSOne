@@ -1,0 +1,26 @@
+(lp0
+VWe describe learning of the model parameters with fully annotated training data, as well as an approach for learning motif segmentation that requires only partial supervision
+p1
+aVSupervised learning
+p2
+aVWe briefly discuss data-driven learning of weights for features that define the motif affinity scores and penalties
+p3
+aVThis would involve initializing the weights prior to the semi-supervised procedure with the weights from the supervised learning model, so as to seed the semi-supervised approach with reasonable model, and use the partially annotated data to fine-tune the supervised model
+p4
+aVIn this section, we describe the principal features used in the segmentation model
+p5
+aVSection 3 describes our methodology, which consists of a frequency-driven segmentation model to partition text into semantically meaningful recurring lineal-subunits, a representation learning framework for learning new semantic embeddings based on this segmentation, and an approach to use such embeddings in downstream applications
+p6
+aVHowever, the supervised learning model with subsequent annealing outperforms the supervised model in terms of both precision and recall; showing the utility of the semi-supervised method when seeded with a good initial model, and the additive value of partially labeled data
+p7
+aVWe present a framework for extending distributional semantics to learn semantic representations of both words and phrases in terms of recurrent motifs, rather than arbitrary word tokens
+p8
+aVIn this section, we define our frequency-driven framework for distributional semantics in detail
+p9
+aVWhile the Viterbi algorithm can be used for tagging optimal state-sequences given the weights, the structured perceptron can learn optimal model weights given gold-standard sequence labels
+p10
+aVThe model accounts for possible segmentations of a sentence into potential motifs, and prefers recurrent and cohesive motifs through features that capture frequency-based and statistical features, as well as linguistic idiosyncracies
+p11
+aVWe first quantitatively and qualitatively analyze the performance of the segmentation model, and then evaluate
+p12
+a.

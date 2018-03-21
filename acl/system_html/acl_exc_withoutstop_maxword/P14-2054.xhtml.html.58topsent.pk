@@ -1,0 +1,16 @@
+(lp0
+VThere are two rules for merging spans one merges two complete spans into an incomplete span, the other merges an incomplete span and a complete span into a large complete span
+p1
+aVA span is a subtree over a number of consecutive words, with the leftmost or the rightmost word as its root
+p2
+aVWe can reversely get the the compressed parse tree by removing all virtual arcs from the full parse tree
+p3
+aVOur method extends Eisner u'\u005cu2019' s cubic time parsing algorithm by adding signatures to each span, which indicate the number of deleted words and the rightmost kept word within the span, resulting in O u'\u005cu2062' ( n 6 ) time complexity and O u'\u005cu2062' ( n 4 ) space complexity
+p4
+aVIf the right span is left-headed, there are two cases its leftmost word is kept, or no word in the span is kept
+p5
+aVThe two complete spans must be single words, as the length of the virtual arc is 1
+p6
+aVThen we augment these parse trees by adding virtual arcs and get the full parse trees of
+p7
+a.

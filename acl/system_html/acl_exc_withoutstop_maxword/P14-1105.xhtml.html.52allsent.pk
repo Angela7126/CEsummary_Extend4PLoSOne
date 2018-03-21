@@ -1,0 +1,108 @@
+(lp0
+VThe process for selecting paths is as follows first, if any paths contain one of the top-ten partisan unigrams, 6 6 The words that the multinomial naïve Bayes classifier in dualist marked as highest probability given a polarity market, abortion, economy, rich, liberal, tea, economic, taxes, gun, abortion we select the longest such path; otherwise, we select the path with the most open class constituencies ( np , vp , adjp
+p1
+aVThis is an expedient choice; in future work we plan to make use of work in political science characterizing candidates u'\u005cu2019' ideological positions empirically based on their behavior [ 3 ]
+p2
+aVSince most ideological bias becomes identifiable only at higher levels of sentence trees (as verified by our annotation, Figure 4 ), models relying primarily on word-level distributional statistics are not desirable for our problem
+p3
+aVBecause our goal is to distinguish between liberal and conservative bias, instead of the more general task of classifying sentences as u'\u005cu201c' neutral u'\u005cu201d' or u'\u005cu201c' biased u'\u005cu201d' , we filter the dataset further using dualist [ 23 ] , an active learning tool, to reduce the proportion of neutral sentences in our dataset
+p4
+aVWe also want to thank Justin Gross for providing the ibc and Asad Sayeed for help with the Crowdflower task design, as well as Richard Socher and Karl Moritz Hermann for assisting us with our model implementations
+p5
+aVTo train the dualist classifier, we manually assigned class labels of u'\u005cu201c' neutral u'\u005cu201d' or u'\u005cu201c' biased u'\u005cu201d' to 200 sentences, and selected typical partisan unigrams to represent the u'\u005cu201c' biased u'\u005cu201d' class dualist labels 11,555 sentences as politically biased, 5,434 of which come from conservative authors and 6,121 of which come from liberal authors
+p6
+aVE.g., Gerrish and Blei ( 2011 ) predict the voting patterns of Congress members based on bag-of-words representations of bills and inferred political leanings of those members
+p7
+aVMost previous work on ideology detection ignores the syntactic structure of the language in use in favor of familiar bag-of-words representations for the sake of simplicity
+p8
+aVBy taking into account the hierarchical nature of language, rnn s can model semantic composition , which is the principle that a phrase u'\u005cu2019' s meaning is a combination of the meaning of the words within that phrase and the syntax that combines those words
+p9
+aVTo account for label imbalance, we subsample the data so that there are an equal number of labels and report accuracy over this balanced dataset
+p10
+aVSince identifying political bias is a relatively difficult and subjective task, we include all sentences where at least two workers agree on a label for the root node in our final dataset, except when that label is u'\u005cu201c' Not neutral, but I u'\u005cu2019' m unsure of which direction u'\u005cu201d'
+p11
+aVFinally, some information is lost at every propagation step, so rnn s are able to model the shorter sentences in Convote more effectively than the longer ibc sentences
+p12
+aVExisting approaches toward bias detection have not gone far beyond u'\u005cu201c' bag of words u'\u005cu201d' classifiers, thus ignoring richer linguistic context of this kind and often operating at the level of whole documents
+p13
+aV60% of contributors passed the initial quiz (the 40% that failed were barred from working on the task), while only 10% of workers who passed the quiz were kicked out for mislabeling subsequent gold paths
+p14
+aVMany of the issues discussed by politicians and the media are so nuanced that even word choice entails choosing an ideological position
+p15
+aVWhile phrase-level annotations do not improve baseline performance, the rnn model significantly benefits from these annotations because the phrases are themselves derived from nodes in the network structure
+p16
+aVIn Figure 5 D, u'\u005cu201c' be used as an instrument to achieve charitable or social ends u'\u005cu201d' reflects a liberal ideology, which the model predicts correctly
+p17
+aVFor purposes of annotation, we define the task of political ideology detection as identifying, if possible, the political position of a given sentence u'\u005cu2019' s author, where position is either liberal or conservative
+p18
+aVDue to this discrepancy, the objective function in Eq. ( 6 ) was minimized by making neutral predictions for almost every node in the dataset
+p19
+aVFinally, we balance the resulting dataset so that it contains an equal number of sentences from Democrats and Republicans, leaving us with a total of 7,816 sentences
+p20
+aVAs in previous work [ 27 ] , we visualize the learned vector space by listing the most probable n-grams for each political affiliation in Table 2
+p21
+aVAs phrases themselves merge into complete sentences, the underlying vector representation is trained to retain the sentence u'\u005cu2019' s whole meaning
+p22
+aVSupervised rnn s achieve this distinction by applying a regression that takes the node u'\u005cu2019' s vector x p as input and produces a prediction y ^ p
+p23
+aVWe generate the final instance representation by concatenating the root vector and the average of all other vectors [ 27 ]
+p24
+aVTo preserve these relationships as phrases are formed in our sentences, we initialize our left and right composition matrices such that parent vector p is computed by taking the average of children a and b ( W L = W R = 0.5 u'\u005cu2062' u'\u005cud835' u'\u005cudd40' d × d
+p25
+aVThis model requires richer data than currently available, so we develop a new political ideology dataset annotated at the phrase level
+p26
+aVThese phrase vectors should represent the meaning of the phrases composed of individual words
+p27
+aVFor this model, we also introduce a hyperparameter u'\u005cu0392' that weights the error at annotated nodes ( 1 - u'\u005cu0392' ) higher than the error at unannotated nodes ( u'\u005cu0392' ); since we have more confidence in the annotated labels, we want them to contribute more towards the objective function
+p28
+aVWe say a sentence contains ideological bias if its author u'\u005cu2019' s political position (here liberal or conservative , in the sense of U.S politics) is evident from the text
+p29
+aVIn this section we describe our initial dataset (Convote) and explain the procedure we followed for creating our new dataset ( ibc
+p30
+aVSince many different issues are discussed in the ibc , it is likely that our dataset has too few examples of some of these issues for the model to adequately learn the appropriate ideological positions, and more training data would resolve many of these errors
+p31
+aVWhen initializing our model, we have two choices we can initialize all of our parameters randomly or provide the model some prior knowledge
+p32
+aVBased on a parse tree, these words form phrases p (Figure 2
+p33
+aVThis result was unexpected since the Convote labels are noisier than the annotated ibc labels; however, there are three possible explanations for the discrepancy
+p34
+aVFirst, we parse the filtered ibc sentences using the Stanford constituency parser [ 25 ]
+p35
+aVThe word2vec embeddings have linear relationships (e.g.,, the closest vectors to the average of u'\u005cu201c' green u'\u005cu201d' and u'\u005cu201c' energy u'\u005cu201d' include phrases such as u'\u005cu201c' renewable energy u'\u005cu201d' , u'\u005cu201c' eco-friendly u'\u005cu201d' , and u'\u005cu201c' efficient lightbulbs u'\u005cu201d'
+p36
+aVSince the root of each sentence is always annotated, this strategy ensures that every node in the tree has a label
+p37
+aV8 8 We do not include phrase-level annotations in the lr 3 feature set because the pseudo-word features can only be computed from full sentence parses
+p38
+aVThis initialization of the composition matrices has previously been effective for parsing [ 25 ]
+p39
+aVTherefore we use the filtering procedure outlined in Section 3.1.1 to obtain a subset of 55,932 sentences
+p40
+aVHowever, lr 2 also includes phrase-level annotations as separate training instances
+p41
+aVAs we see in Section 4 , these choices have a significant effect on final performance
+p42
+aVSecond, since the sentences in Convote were originally spoken, they are almost half as short (21.3 words per sentence) as those in the ibc (42.2 words per sentence
+p43
+aV5 5 This is a simplification, as the ideological hierarchy in ibc makes clear
+p44
+aV7 7 The Convote dataset was not annotated on the phrase level, so we only provide a result for the IBC dataset
+p45
+aVBecause of the expense of labeling every node in a sentence, we only label one path in each sentence
+p46
+aV2 2 Many sentences in Convote are variations on u'\u005cu201c' I think this is a good/bad bill u'\u005cu201d' , and there is also substantial parliamentary boilerplate language
+p47
+aVFirst, Convote has twice as many sentences as ibc , and the extra training data might help the model more than ibc u'\u005cu2019' s better-quality labels
+p48
+aVIf you feel like the phrase indicates some position to the left or right of the political center, but you u'\u005cu2019' re not sure which direction, please mark Not neutral, but I u'\u005cu2019' m unsure of which direction
+p49
+aVThere are over a million sentences in the ibc , most of which have no noticeable political bias
+p50
+aVIf two words w a and w b merge to form phrase p , we posit that the phrase-level vector is
+p51
+aVWe therefore use the features in Yano et al
+p52
+aVEach of these phrases also has an associated vector x p u'\u005cu2208' u'\u005cu211d' d of the same dimension as the word vectors
+p53
+a.

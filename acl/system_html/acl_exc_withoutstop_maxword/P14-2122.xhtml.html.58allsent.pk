@@ -1,0 +1,48 @@
+(lp0
+VThe proposed method with monolingual bigram model performed poorly on the Chinese monolingual segmentation task; thus, it was not tested
+p1
+aVThese variables are large in number and it is not clear how to apply VB to UWS, and as far the authors aware there is no previous work related to the application of VB to monolingual UWS
+p2
+aVThe experimental results show that the proposed UWS methods are comparable to the Stanford segmenters on the OpenMT06 corpus, while achieves a 0.96 BLEU increase on the PatentMT9 corpus
+p3
+aVThus its complexity is U 2 times the unigram model u'\u005cu2019' s complexity
+p4
+aVThe monolingual bigram model, however, was slower to converge, so we started it from the segmentations of the unigram model, and using 10 iterations
+p5
+aV[] proposed a bilingual method by adding alignment into the generative model, but was only able to test it on small-scale BTEC data
+p6
+aVThe monolingual expectation is calculated according to Eq
+p7
+aVFor the monolingual bigram model, the number of states in the HMM is U times more than that of the monolingual unigram model, as the states at specific position of F are not only related to the length of the current word, but also related to the length of the word before it
+p8
+aVWe aware that variational bayes (VB) may be used for speeding up the training of DP-based or PYP-based bilingual UWS
+p9
+aVUWS learns models by maximizing the likelihood of the unsegmented corpus, formulated as
+p10
+aVTherefore, we have not explored VB methods in this paper, but we do show that our method is superior to the existing methods
+p11
+aVThis data set mainly consists of news text 3 3 It also contains a small number of web blogs
+p12
+aVUWS learns from unsegmented raw text, which are available in large quantities, and thus it has the potential to provide more accurate and adaptive segmentation than supervised approaches with less development effort being required
+p13
+aVThis is because this corpus is out-of-domain for the supervised segmenters
+p14
+aVThe data sets of NIST Eval 2002 to 2005 were used as the development for MERT tuning []
+p15
+aVThe set u'\u005cu2131' is chosen to represent an unsegmented foreign language sentence (a sequence of characters), because an unsegmented sentence can be seen as the set of all possible segmentations of the sentence denoted F , i.e., F u'\u005cu2208' u'\u005cu2131'
+p16
+aV7 can be rewritten (as in IBM model 2
+p17
+aVMany languages, especially Asian languages such as Chinese, Japanese and Myanmar, have no explicit word boundaries, thus word segmentation (WS), that is, segmenting the continuous texts of these languages into isolated words, is a prerequisite for many natural language processing applications including SMT
+p18
+aVP ( u'\u005cu2131' k k u'\u005cu2032' u'\u005cu2131' , u'\u005cu2133' ) is the marginal probability of all the possible F u'\u005cu2208' u'\u005cu2131' that contain u'\u005cu2131' k k u'\u005cu2032' as a word, which can be calculated efficiently through dynamic programming (the process is similar to the foreward-backward algorithm in training a hidden Markov model (HMM) []
+p19
+aVNote that the comparison of speed is only for reference because the times are obtained from their respective papers
+p20
+aVwhere K is the number of characters in u'\u005cu2131' , and the k -th character is the start of the word f j , since j and J are unknown during the computation of dynamic programming u'\u005cu0394' b is the window size, u'\u005cu039b' u'\u005cu03a6' is the prior probability of an empty English word, and u'\u005cu03a3' ensures all the items sum to 1
+p21
+aVIn order to maintain both speed and accuracy, the following window function is adopted
+p22
+aVP ( u'\u005cu2131' k k u'\u005cu2032' u'\u005cu2131' , E , u'\u005cu212c' ) is the marginal probability of all the possible F u'\u005cu2208' u'\u005cu2131' that contain u'\u005cu2131' k k u'\u005cu2032' as a word and are aligned with E , formulated as
+p23
+a.

@@ -1,0 +1,20 @@
+(lp0
+VWe extend RNTN to directly consider the sentiment information of arguments
+p1
+aVBy examining sentiment compositions of negators and arguments, we model the quantitative behavior of negators in changing sentiment
+p2
+aVFigure 1 shows the distribution of the effect of negators on sentiment without considering further semantics of the arguments
+p3
+aVNote that the two neural network based models incorporate the syntax and semantics by representing each node with a vector
+p4
+aVEach node of the parse tree is a fixed-length vector that encodes compositional semantics and syntax, which can be used to predict the sentiment of this node
+p5
+aVA recursive neural tensor network (RNTN) is a specific form of feed-forward neural network based on syntactic (phrasal-structure) parse tree to conduct compositional sentiment analysis
+p6
+aVIn the backpropogation process of the training, each node (except the root node) in the tree carries two kinds of errors the local softmax error and the error passing down from its parent node
+p7
+aVNote that depending on different purposes, p 1 s u'\u005cu2062' e u'\u005cu2062' n can take the value of the automatically predicted sentiment distribution obtained in forward propagation, the gold sentiment annotation of node p 1 , or even other normalized prior sentiment value or confidence score from external sources (e.g.,, sentiment lexicons or external training data
+p8
+aVThe incoming
+p9
+a.

@@ -1,0 +1,198 @@
+(lp0
+VOur objective is to make the feature representation sufficiently compact that the mapping between source and target feature spaces could be reliably estimated from a limited amount of parallel data, while preserving, insofar as possible, the information relevant for classification
+p1
+aVFor example, a certain preposition attached to a token in the source language might map into a morphological tag in the target language, which would be hard to handle for traditional direct model transfer other than using some kind of refinement procedure involving parallel data
+p2
+aVInstead of designing this representation manually, however, we create compact monolingual feature representations for source and target languages separately and automatically estimate the mapping between the two from parallel data
+p3
+aVWe did not tune the size of the word representation to our task, as this would not be appropriate in a cross-lingual transfer setup, but we observe that the classifier is relatively robust to their dimension when evaluated on source language u'\u005cu2013' in our experiments the performance of the monolingual classifier does not improve significantly if the dimension is increased past 300 and decreases only by a small margin (less than one absolute point) if it is reduced to 100
+p4
+aVEstimating the mapping directly from raw categorical features ( u'\u005cu03a9' 0 ) is both computationally expensive and likely inaccurate u'\u005cu2013' using one-hot encoding the feature vectors in our experiments would have tens of thousands of components
+p5
+aVThe rather inferior performance of direct transfer baseline on English-French may be partially attributed to the fact that it cannot rely on dependency relation features, as the corpora we consider make use of different dependency relation inventories
+p6
+aVSuch methods have been successfully applied to a variety of tasks, including POS tagging [] , syntactic parsing [] , semantic role labeling [] and others
+p7
+aVA more common approach would be to project the whole structure from the source language, but in our case this may give unfair advantage to feature representation projection, which relies on target-side argument identification
+p8
+aVIn general, however, retaining only relevant aspects of intermediate monolingual representations would simplify the estimation of mapping between them and make FRP more robust
+p9
+aVThe authors would like to acknowledge the support of MMCI Cluster of Excellence and Saarbrücken Graduate School of Computer Science and thank the anonymous reviewers for their suggestions
+p10
+aVWe also believe that FRP may profit from using other sources of information about the correspondence between source and target feature representations, such as dictionary entries, and thus have an edge over annotation projection in those cases where the amount of parallel data available is limited
+p11
+aVIt is also somewhat similar in spirit to , where a small number of word translation pairs are used to estimate a mapping between distributed representations of words in two different languages and build a word translation model
+p12
+aVCross-lingual model transfer approaches are concerned with creating statistical models for various tasks for languages poor in annotated resources, utilising resources or models available for these tasks in other languages
+p13
+aVThis task consists in identifying predicates and their arguments in sentences and assigning each argument a semantic role with respect to its predicate (see figure 1
+p14
+aVInstead, it operates on translation pairs, usually on sentence level, applying the available source-side model to the source sentence and transferring the resulting annotations through the word alignment links to the target one
+p15
+aVTo go further, one can, for example, apply dimensionality reduction techniques to obtain a more compact representation of u'\u005cu03a9' 1 by eliminating redundancy or define auxiliary tasks and produce a vector representation useful for those tasks
+p16
+aVReplacing language-specific dependency annotations with the universal ones [] may help somewhat, but we would still expect the methods directly relying on parallel data to achieve better results given a sufficiently large parallel corpus
+p17
+aVIn our setting, each instance includes the word type and part-of-speech and morphological tags (if any) of argument token, its parent and corresponding predicate token, as well as their dependency relations to their respective parents
+p18
+aVOverall, we observe that the proposed method with u'\u005cu03a9' 1 representation demonstrates performance competitive to direct transfer and annotation projection baselines
+p19
+aVThe transfer itself also introduces errors due to translation shifts [] and word alignment errors, which may lead to inaccurate predictions
+p20
+aVFor source language, this is relatively straightforward, as the intermediate representation can be directly tuned for the problem in question using labeled training data
+p21
+aVDirect model transfer attempts to find a shared feature representation for samples from the two languages, usually generalizing and abstracting away from language-specific representations
+p22
+aVThe shared feature representation for direct transfer is derived from u'\u005cu03a9' 0 by replacing language-specific part-of-speech tags with universal ones [] and adding cross-lingual word clusters [] to word types
+p23
+aVNote that predicate and argument identification in both languages is performed using monolingual classifiers and only aligned pairs are used in projection
+p24
+aVFor the sake of simplicity we cast it as a multiclass classification problem, ignoring the interaction between different arguments in a predicate
+p25
+aVPotential sources of such information include dictionary entries or information about the mapping between certain elements of syntactic structure, for example a known part-of-speech tag mapping
+p26
+aVNote that only a single word u'\u005cu2013' the syntactic head of the argument phrase u'\u005cu2013' is marked as an argument in this case, as opposed to constituent- or span-based SRL []
+p27
+aVThe approach proposed here, which we will refer to as feature representation projection ( FRP ), constitutes an alternative to direct model transfer and annotation projection and can be seen as a compromise between the two
+p28
+aVThe quality of predictions on source sentences depends heavily on the quality of parallel data and the domain it belongs to (or, rather, the similarity between this domain and that of the corpus the source-language model was trained on
+p29
+aVThe available parallel data itself may also be used more comprehensively u'\u005cu2013' aligned arguments of aligned predicates, for example, constitute only a small part of it, while the mapping of vector representations of individual tokens is likely to be the same for all aligned words
+p30
+aVThe shared feature representation depends on the task in question, but most often each aspect of the original feature representation is handled separately
+p31
+aVWe evaluate feature representation projection on the task of dependency-based semantic role labeling (SRL) []
+p32
+aVThe source-side instances from a parallel corpus are labeled using a classifier trained on source-language training data and transferred to the target side
+p33
+aVAlthough some of the features u'\u005cu2013' namely, gloss translations and cross-lingual clusters u'\u005cu2013' used in direct transfer are, in fact, derived from parallel data, we consider the effect of this on the performance of direct transfer to be indirect and outside the scope of this work
+p34
+aVWe denote the two baselines AP (annotation projection) and DT (direct transfer
+p35
+aVApart from the work on direct/projected transfer and annotation projection mentioned above, the proposed method can be seen as a more explicit kind of domain adaptation, similar to or
+p36
+aVOnce this is achieved, instances from both languages can be mapped into this space and a model trained on the source-language data directly applied to the target language
+p37
+aVThese issues are generally handled using heuristics [] and filtering, for example based on alignment coverage []
+p38
+aVThe number of parallel instances in these experiments is shown on a logarithmic scale, the values considered are 2, 5, 10, 20 and 50 thousand pairs
+p39
+aVIn the second, we use CoNLL 2009 shared task [] corpus for English and the manually corrected dataset from for French
+p40
+aVCompared to annotation projection, our approach may be expected to be less sensitive to parallel data quality, since we do not have to commit to a particular prediction on a given instance from parallel data
+p41
+aVThe classification error of FRP and the baselines given varying amount of parallel data is reported in figures 2 , 3 and 4
+p42
+aVIf parallel data is available, it can be further used to enforce model agreement on this data to adjust for discrepancies between the two languages, for example by means of projected transfer []
+p43
+aVDatasets for other languages are sufficiently large, so we take 30 thousand samples for testing and use the rest as training data
+p44
+aVTo start with, we replace word types with corresponding neural language model representations estimated using the skip-gram model []
+p45
+aVOne of the strong points of direct model transfer is that it naturally fits the multi-source transfer setting
+p46
+aVThis corresponds to M s and M t above and reduces the dimension of the feature space, making direct estimation of the mapping practical
+p47
+aVWe focus on the assignment of semantic roles to identified arguments
+p48
+aVHowever, cross-lingual transfer methods are often applied in cases where parallel resources are scarce or of poor quality and must be used with care
+p49
+aVThat includes approaches such as direct model transfer [] and annotation projection []
+p50
+aVPlease note that we report only a single value for direct transfer, since this approach does not explicitly rely on parallel data
+p51
+aVWe use the same type of log-linear classifiers in the model itself and the two baselines to avoid any discrepancy due to learning procedure
+p52
+aVAs mentioned above we compare the performance of this approach to that of direct transfer and annotation projection
+p53
+aVIt should be noted, however, that the dimension that is optimal in this sense is not necessarily the best choice for FRP , especially if the amount of available parallel data is limited
+p54
+aVSince the size of the latter dataset is relatively small u'\u005cu2013' one thousand sentences u'\u005cu2013' we reserve the whole dataset for testing and only evaluate transfer from English to French, but not the other way around
+p55
+aVWe also use this framework to estimate the linear mapping M t u'\u005cu2062' s between source and target feature spaces in FRP
+p56
+aVThe validation set in each experiment is withheld from the corresponding training corpus and contains 10 thousand samples
+p57
+aVAlso, should one like to apply constraints on the set of semantic roles in a given predicate, or, for example, use a reranker [] , this can be done using a factorized model obtained by cross-lingual transfer
+p58
+aVIn source language, one can even directly tune an intermediate representation for the target problem
+p59
+aVThe annotation projection baseline implementation is straightforward
+p60
+aVThis paper reports work in progress and there is a number of directions we would like to pursue further
+p61
+aVThe amount of parallel data available for many language pairs is growing steadily
+p62
+aVThe representation we used in the initial evaluation does not discriminate between aspects that are relevant for the assignment of semantic roles and those that are not
+p63
+aVIn the authors consider embeddings of up to 800 dimensions, but we would not expect to benefit as much from larger vectors since we are using a much smaller corpus to train them
+p64
+aVNote also that any such refinement procedure applicable to direct transfer would likely work for FRP as well
+p65
+aVThe word types themselves are left as they are in the source language and replaced with their gloss translations in the target one []
+p66
+aVIn such situations an ability to use alternative sources of information may be crucial
+p67
+aVIt is well known that such interaction plays an important part in SRL [] , but it is not well understood which kinds of interactions are preserved across languages and which are not
+p68
+aVFor target language, however, we assume that no labeled data is available and auxiliary tasks have to be used to achieve this
+p69
+aVBoth monolingual data and that from the parallel corpus are included in the training
+p70
+aVIn the first case, the data is converted from Prague Czech-English Dependency Treebank 2.0 [] using the script from
+p71
+aVUnfortunately, the design of such representations and corresponding conversion procedures is by no means trivial
+p72
+aVWord types, for example, may be replaced by cross-lingual word clusters [] or cross-lingual distributed word representations []
+p73
+aVIn English-Czech and Czech-English we also use the dependency relation information, since the annotations are partly compatible
+p74
+aVIt is similar to direct transfer in that we also use a shared feature representation
+p75
+aVIt remains to be seen which one would produce the best results and how multi-source feature representation projection would compare to, for example, multi-source projected transfer []
+p76
+aVThere is a number of ways to make this representation more compact
+p77
+aVThe resulting annotations are then used to train a target-side classifier for evaluation
+p78
+aVThen a classification model M y is trained on the source training data
+p79
+aVBoth baselines are using the same set of features as the proposed model, as described earlier
+p80
+aVThe training set for each language is fixed
+p81
+aVThis allows us to make use of language-specific annotations and account for the interplay between different types of information
+p82
+aVAnnotation projection, on the other hand, does not require any changes to the feature representation
+p83
+aVSince we are using a relatively small set of features to start with, this does not present much of a problem
+p84
+aVParallel data for both language pairs is derived from Europarl [] , which we pre-process using mate-tools []
+p85
+aVThese classifiers are implemented using Pylearn2 [] , based on Theano []
+p86
+aVand the labels are assigned to the target samples x t u'\u005cu2208' D E t using a composition of the models
+p87
+aVPart-of-speech tags, which are often language-specific, can be converted into universal part-of-speech tags [] and morpho-syntactic information can also be represented in a unified way []
+p88
+aVWe design a pair of intermediate compact monolingual feature representations u'\u005cu03a9' 1 s and u'\u005cu03a9' 1 t and models M s and M t to map source and target samples x s and x t from their original representations, u'\u005cu03a9' 0 s and u'\u005cu03a9' 0 t , to the new ones
+p89
+aVThere are several possible ways of adapting FRP to such a setting
+p90
+aVWe use the parallel instances in the new feature representation
+p91
+aVWe use two language pairs for evaluation
+p92
+aVto determine the mapping M t u'\u005cu2062' s (usually, linear) between the two spaces
+p93
+aVThe 250-dimensional word representations for u'\u005cu03a9' 1 are obtained using Word2vec tool
+p94
+aVWe consider a pair of languages ( L s , L t ) and assume that an annotated training set D T s = { ( x s , y s ) } is available in the source language as well as a parallel corpus of instance pairs D s u'\u005cu2062' t = { ( x s , x t ) } and a target dataset D E t = { x t } that needs to be labeled
+p95
+aVThis representation is further denoted u'\u005cu03a9' 0
+p96
+aVWe will refer to this representation as u'\u005cu03a9' 1
+p97
+aVEnglish-Czech and English-French
+p98
+a.

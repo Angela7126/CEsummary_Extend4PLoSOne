@@ -1,0 +1,20 @@
+(lp0
+VDifferent from traditional self/co/tri-training which only use 1-best parse trees on unlabeled data, our approach adopts ambiguous labelings, represented by parse forest, as gold-standard for unlabeled sentences
+p1
+aVWe divide the unlabeled data into three sets according to the divergence of the 1-best outputs of Berkeley Parser and ZPar
+p2
+aVTo construct parse forest on unlabeled data, we employ three supervised parsers based on different paradigms, including our baseline graph-based dependency parser, a transition-based dependency parser [] , and a generative constituent parser []
+p3
+aVBoth work employs two parsers to process the unlabeled data, and only select as extra training data sentences on which the 1-best parse trees of the two parsers are identical
+p4
+aVCombining the outputs of Berkeley Parser and GParser ( u'\u005cu201c' Unlabeled u'\u005cu2190' B+G u'\u005cu201d' ), we get higher oracle score (96.37% on English and 89.72% on Chinese) and higher syntactic divergence (1.085 candidate heads per word on English, and 1.188 on Chinese) than u'\u005cu201c' Unlabeled u'\u005cu2190' Z+G u'\u005cu201d' , which verifies our earlier discussion that Berkeley Parser produces more different structures than ZPar
+p5
+aV16K for Chinese), it is likely that the unlabeled data may overwhelm the labeled data during SGD training
+p6
+aVEspecially, the unlabeled data with highly divergent structures leads to slightly higher improvement
+p7
+aVUsing three supervised parsers, we have many options to construct parse forest on unlabeled data
+p8
+aVTherefore, exploiting such unlabeled data may introduce more discriminative syntactic knowledge, largely compensating labeled training data
+p9
+a.

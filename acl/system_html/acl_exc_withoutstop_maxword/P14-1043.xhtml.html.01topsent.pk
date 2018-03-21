@@ -1,0 +1,20 @@
+(lp0
+VTo construct parse forest on unlabeled data, we employ three supervised parsers based on different paradigms, including our baseline graph-based dependency parser, a transition-based dependency parser [] , and a generative constituent parser []
+p1
+aVDifferent from traditional self/co/tri-training which only use 1-best parse trees on unlabeled data, our approach adopts ambiguous labelings, represented by parse forest, as gold-standard for unlabeled sentences
+p2
+aVBoth work employs two parsers to process the unlabeled data, and only select as extra training data sentences on which the 1-best parse trees of the two parsers are identical
+p3
+aVThe second major row shows the results when we use single 1-best parse trees on unlabeled data
+p4
+aVWe propose a generalized ambiguity-aware ensemble training framework for semi-supervised dependency parsing, which can make better use of unlabeled data, especially when parsers from different views produce divergent syntactic structures
+p5
+aVThe first three experiments combine 1-best outputs of two parsers to compose parse forest on unlabeled data u'\u005cu201c' Unlabeled u'\u005cu2190' B+(Z u'\u005cu2229' G) u'\u005cu201d' means that the parse forest is initialized with the Berkeley parse and augmented with the intersection of dependencies of the 1-best outputs of ZPar and GParser
+p6
+aVResults show all the three sets of unlabeled data can help the parser
+p7
+aVEvaluation on labeled data shows the oracle accuracy of parse forest is much higher than that of 1-best outputs of single parsers (see Table 3
+p8
+aVWe divide the unlabeled data into three sets according to the
+p9
+a.

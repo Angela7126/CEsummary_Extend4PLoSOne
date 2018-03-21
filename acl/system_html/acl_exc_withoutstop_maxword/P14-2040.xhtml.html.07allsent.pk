@@ -1,0 +1,284 @@
+(lp0
+VMRW is applied to the result of topic candidates detection by LDA and (iv) Topic Detection by LDA and MACD ( LDA MACD
+p1
+aVThe method applies the MRW model to the result of event detection, (iii) Topic Detection by LDA ( LDA
+p2
+aVMRW is applied to the result of topic detection by LDA and MACD only, i.e., , the method does not include event detection
+p3
+aVThe method applies the MRW model only to the sentences consisted of noun words, (ii) Event detection ( Event
+p4
+aVFor the results of LDA, we applied Moving Average Convergence Divergence (MACD) to find topic words while He et al applied it to find bursts
+p5
+aVWe applied it to extract topic words in series of documents
+p6
+aVWe reinforced words related to a topic with low frequencies by collecting documents from the corpus, and applied Latent Dirichlet Allocation (LDA) [ 4 ] to these documents in order to extract topic candidates
+p7
+aVWe applied the results of topic detection to extractive multi-document summarization task, and examined how the results of topic detection affect the overall performance of the salient sentence selection
+p8
+aVWe used person name, organization and location for event detection, and noun words including named entities for topic detection
+p9
+aVIn contrast, we applied it to the topic candidates obtained by LDA
+p10
+aVWe applied LDA to the set consisting of all documents in the summarization tasks and documents from the corpus
+p11
+aVWe examined our method by extrinsic evaluation, i.e., , we applied the results of topic detection to extractive multi-document summarization
+p12
+aVWe identified event words by using the traditional tf u'\u005cu2217' idf method applied to the results of named entities
+p13
+aVThis shows that integration of LDA and MACD is effective for topic detection
+p14
+aVThe proposed method does not simply use MACD to find bursts, but instead determines topic words in series of documents
+p15
+aVWe assume that a salient sentence includes words related to the target topic, and an event of each documents
+p16
+aVWe used person name, organization, place and proper name extracted from NE recognition [ 14 ] for event detection, and noun words including named entities for topic detection
+p17
+aVEach sentence in documents is represented using a vector of frequency weighted words that can be event or topic words
+p18
+aVEach sentence in the documents is represented using a vector of frequency weighted words that can be event or topic words
+p19
+aVWe used documents prepared by summarization tasks, NTCIR and DUC data as each task consists of series of documents with the same topic
+p20
+aVFukumoto et al also applied MACD to find topics
+p21
+aVThe baselines are (i) MRW model ( MRW
+p22
+aVTopic candidates include surplus words that are not related to the topic because the results obtained by u'\u005cu201c' LDA u'\u005cu201d' were worse than those obtained by u'\u005cu201c' LDA MACD u'\u005cu201d' , and even worse than u'\u005cu201c' Event u'\u005cu201d' in both short and long summary
+p23
+aVThe procedure for topic detection with MACD is illustrated in Figure 2
+p24
+aVThis paper proposes a method for detecting topic over time in series of documents
+p25
+aVLet A be a series of documents and w be one of the topic candidates obtained by LDA
+p26
+aVWe recall that our hypothesis about key sentences in multiple documents is that they include topic and event words
+p27
+aVWe note that the result obtained by LDA can be regarded as the two types of clustering result shown in Figure 1 i) each cluster corresponds to each lda_topic (topic id0, topic id1 u'\u005cu22ef' in Figure 1 ), and each element of the clusters is the document in the summarization tasks (task1, task2, u'\u005cu22ef' in Figure 1 ) or from the corpus (doc in Figure 1 ), and (ii) each cluster corresponds to the summarization task and each element of the clusters is the document in the summarization tasks or the document from the corpus assigned topic id
+p28
+aVAs the volume of online documents has drastically increased, the analysis of topic bursts, topic drift or detection of topic is a practical problem attracting more and more attention [ 1 , 23 , 2 , 13 , 15 , 9 ]
+p29
+aVWe used FormalRun as a test data, and another set consisted of 218,724 documents from 1998 to 1999 of Mainichi newspaper as a corpus used in LDA and MACD
+p30
+aVHowever, they applied it only to the words with high frequencies in the documents [ 10 ]
+p31
+aVThe method used Kleinberg u'\u005cu2019' s burst detection algorithm, co-occurrences of words, and graph layout technique
+p32
+aVWe set A to the documents from the summarization task
+p33
+aVFor future work, we should be able to obtain further advantages in efficacy in our topic detection and summarization approach by disambiguating topic senses
+p34
+aVWe extracted words whose tf u'\u005cu2217' idf values are larger than a certain threshold value, and regarded these as event words
+p35
+aVLike much previous work on extractive summarization [ 7 , 18 , 25 ] , we used Markov Random Walk (MRW) model to compute the rank scores for the sentences
+p36
+aVTherefore, we can assume that named entities(NE) are linguistic features for event detection
+p37
+aVAQUAINT corpus 6 6 http://catalog.ldc.upenn.edu/LDC2002T31 which consists of 1,033,461 documents are used as a corpus in LDA and MACD
+p38
+aVTable 1 shows that our approach, u'\u005cu201c' Event Topic u'\u005cu201d' outperforms other baselines, regardless of the summary type (long/short
+p39
+aVTherefore, we first applied NE recognition to the target documents to be summarized, and then calculated tf u'\u005cu2217' idf to the results of NE recognition
+p40
+aVIt shows the relationship between two moving averages of prices modeling bursts as intervals of topic dynamics, i.e., , positive acceleration
+p41
+aVFigure 3 illustrates entropy value against the number of topics k u'\u005cu2032' and documents d u'\u005cu2032' using 30 tasks of FormalRun data
+p42
+aVWe used Markov Random Walk (MRW) to compute the rank scores for the sentences [ 20 ]
+p43
+aVW refers to a set of documents, and T denotes the total number of unique topics
+p44
+aVFBFREE DryRun data is used to tuning parameters, i.e., , the number of extracted words according to the tf u'\u005cu2217' idf value, and the threshold value of KL-distance
+p45
+aVThe data used in the NTCIR-3 multi-document summarization task is selected from 1998 to 1999 of Mainichi Japanese Newspaper documents
+p46
+aVFor each lda_topic, we extracted words whose probabilities are larger than zero, and regarded these as topic candidates
+p47
+aV6 ) shows a difference between the MACD and its moving average
+p48
+aVMACD histogram defined by Eq
+p49
+aVThe MACD is a technique to analyze stock market trends [ 19 ]
+p50
+aVFrom the result shown in Figure 3 , the minimum entropy value was 0.025 and the number of topics and documents were 400 and 300, respectively
+p51
+aVThe summarization results are shown in Table 1
+p52
+aVEach data consists of 30 tasks
+p53
+aVAfter a sufficient number of sampling iterations, the approximated posterior can be used to estimate u'\u005cu03a6' and u'\u005cu0398' by examining the counts of word assignments to topics and topic occurrences in documents
+p54
+aVWe can see from Figure 3 that the value of entropy depends on the number of documents rather than the number of topics
+p55
+aVMane et al proposed a method to generate maps that support the identification of major research topics and trends [ 17 ]
+p56
+aVMACD histogram shows a difference between the MACD and its moving average 1 1 In the experiment, we set n 1 , n 2 , and n 3 to 4, 8 and 5, respectively [ 11 ]
+p57
+aVFor each topic k = 1, u'\u005cu22ef' , K , generate u'\u005cu03a6' k , multinomial distribution of words specific to the topic k from a Dirichlet distribution with parameter u'\u005cu0392' ;
+p58
+aVHowever, the method is a semi-supervised technique that needs a tagged training data
+p59
+aVEach plot shows that at least one of the documents for each summarization task is included in the cluster
+p60
+aVUnlike Dynamic Topic Models [ 3 ] , it does not assume Gaussian distribution so that it is a natural way to analyze bursts which depend on the data
+p61
+aVWe selected a certain number of sentences according to rank score into the summary
+p62
+aVWe used two tasks, Japanese and English summarization tasks, NTCIR-3 3 3 http://research.nii.ac.jp/ntcir/ SUMM Japanese and DUC 4 4 http://duc.nist.gov/pubs.html English data
+p63
+aVFinally, we selected a certain number of sentences according to the rank score into a summary
+p64
+aVAn event word is something that occurs at a specific place and time associated with some specific actions [ 2 , 1 ]
+p65
+aVWe used DUC2005 consisted of 50 tasks for training, and 50 tasks of DUC2006 data for testing in order to estimate parameters
+p66
+aV45 tasks from DUC2007 were used to evaluate the performance of the method
+p67
+aVThe minimum entropy value was 0.050 and the number of topics and documents were 500 and 600, respectively
+p68
+aVHere, an event is something that occurs at a specific place and time associated with some specific actions [ 1 ]
+p69
+aVThe gold standard data provided to human judges consists of FBFREE DryRun and FormalRun
+p70
+aVAs a result, we set tf u'\u005cu2217' idf and KL-distance to 100 and 0.104, respectively
+p71
+aVCreate term-based MACD histogram where X-axis refers to T , and Y-axis denotes bursts of word w in A
+p72
+aVLDA presented by [ 4 ] models each document as a mixture of topics (we call it lda_topic to discriminate our t u'\u005cu2062' o u'\u005cu2062' p u'\u005cu2062' i u'\u005cu2062' c candidates), and generates a discrete probability distribution over words for each lda_topic
+p73
+aVScholz et al have attempted to use different ensembles obtained by training several data streams to detect concept drift [ 22 ]
+p74
+aVThe sampling probability for topic z i in document d is given by
+p75
+aVMACD of a variable x t is defined by the difference of n 1 -day and n 2 -day moving averages, MACD( n 1 , n 2 ) = EMA( n 1 ) - EMA( n 2
+p76
+aVThe approximated probability of topic k in the document d , u'\u005cu0398' d k ^ , and the assignments word w to topic k , u'\u005cu03a6' k w ^ are given by
+p77
+aVGiven a set of documents to be summarized, G = ( S , E ) is a graph reflecting the relationships between two sentences
+p78
+aVHowever, the fact that topics are widely distributed in the stream of documents, and sometimes they frequently appear in the documents, and sometimes not often hamper such attempts
+p79
+aVThey have attempted to handle concept changes by focusing a window with documents sufficiently close to the target concept
+p80
+aVWe reported only the result obtained by KL-distance as it was the best results among them
+p81
+aVAn event word refers to the t u'\u005cu2062' h u'\u005cu2062' e u'\u005cu2062' m u'\u005cu2062' e of the document itself, and frequently appears in the document but not frequently appear in other documents
+p82
+aVCreate document-based MACD histogram where X-axis refers to T , i.e., , a period of time (numbered from day 1 to 365
+p83
+aVThere are two types of correct summary according to the character length, u'\u005cu201c' long u'\u005cu201d' and u'\u005cu201c' short u'\u005cu201d' , All series of documents were tagged by CaboCha [ 14 ]
+p84
+aVLike much previous work on LDA, we used Gibbs sampling to estimate u'\u005cu03a6' and u'\u005cu0398'
+p85
+aVHere, EMA( n i ) refers to n i -day Exponential Moving Average (EMA
+p86
+aVN denotes the total number of elements and N j shows the total number of elements assigned to the cluster C j
+p87
+aVWhether or not a word w is a topic word is judged as follows
+p88
+aVHe and Parket attempted to find bursts, periods of elevated occurrence of events as a dynamic phenomenon instead of focusing on arrival rates [ 11 ]
+p89
+aVThe size that optimized the average Rouge-1(R-1) score across 30 tasks was chosen
+p90
+aVWe set tf u'\u005cu2217' idf and KL-distance to 80 and 0.9
+p91
+aVAll documents were tagged by Tree Tagger [ 21 ] and Stanford Named Entity Tagger 5 5 http://nlp.stanford.edu/software/CRF-NER.shtml [ 8 ]
+p92
+aVz \u005c i refers to a topic set Z , not including the current assignment z i n \u005c i , j v is the count of word v in topic j that does not include the current assignment z i , and n \u005c i , j u'\u005cu22c5' indicates a summation over that dimension
+p93
+aVHowever the ensemble method itself remains a problem that how to manage several classifiers effectively
+p94
+aVWe assume that if a term w is informative for summarizing a particular documents in a collection, its burstiness approximates the burstiness of documents in the collection
+p95
+aVl refers to the number of clusters
+p96
+aVThe generative process for LDA can be described as follows
+p97
+aVLet k u'\u005cu2032' be the number of lda_topics and d u'\u005cu2032' be the number of topmost d u'\u005cu2032' documents assigned to each lda_topic
+p98
+aVTable 2 also shows the performance of other research sites reported by [ 5 ]
+p99
+aVFor example, DUC2005 consists of 50 tasks
+p100
+aVPrior work including u'\u005cu201c' TTM u'\u005cu201d' has demonstrated the usefulness of semantic concepts for extracting salient sentences
+p101
+aVIf the value of D ( P u'\u005cu2223' u'\u005cu2223' Q ) is smaller than a certain threshold value, w is regarded as a topic word
+p102
+aVGenerate a topic z d u'\u005cu2062' n of the n t u'\u005cu2062' h word in the document d from the multinomial distribution u'\u005cu0398' d
+p103
+aVWe can see from Table 2 that Rouge-1 obtained by our approach was also the best compared to the baselines
+p104
+aVTable 2 shows Rouge-1 against unigrams
+p105
+aVWe estimated the number of k u'\u005cu2032' and d u'\u005cu2032' in LDA, i.e., , we searched k u'\u005cu2032' and d u'\u005cu2032' in steps of 100 from 200 to 900
+p106
+aVFor each document d = 1, u'\u005cu22ef' , D , generate u'\u005cu0398' d , multinomial distribution of topics specific to the document d from a Dirichlet distribution with parameter u'\u005cu0391' ;
+p107
+aVHereafter, referred to as bursts histogram
+p108
+aVOur approach achieves performance approaching the top-performing unsupervised method, u'\u005cu201c' TTM u'\u005cu201d' [ 6 ] , and is competitive to u'\u005cu201c' PYTHY u'\u005cu201d' [ 24 ] and u'\u005cu201c' hPAM u'\u005cu201d' [ 16 ]
+p109
+aVBecause w is a representative word of each document in the task
+p110
+aVFor a variable x = x u'\u005cu2062' ( t ) which has a corresponding discrete time series x = { x t u'\u005cu2223' t = 0,1, u'\u005cu22ef' }, the n -day EMA is defined by Eq
+p111
+aVLet P and Q be a normalized distance of correct histogram, and bursts histogram, respectively
+p112
+aVWe need to estimate the appropriate number of lda_topic
+p113
+aVTherefore the number of different clusters is 50
+p114
+aVThe earliest known approach is the work of Klinkenberg and Joachims [ 12 ]
+p115
+aVWe call the former lda_topic cluster and the latter task cluster
+p116
+aVEach document in A is sorted in chronological order
+p117
+aVThe final transition matrix is given by formula ( 8 ), and each score of the sentence is obtained by the principal eigenvector of the matrix M
+p118
+aVS is a set of vertices, and each vertex s i in S is a sentence
+p119
+aVThe affinity weight is computed using cosine measure between the two sentences, s i and s j
+p120
+aVIt refers to notions of who(person), where(place), when(time) including what, why and how in a document
+p121
+aVThe value of E ranges from 0 to 1, and the smaller value of E indicates better result
+p122
+aVHereafter, referred to as correct histogram
+p123
+aVBased on this assumption, we computed similarity between correct and word histograms by using KL-distance 2 2 We tested KL-distance, histogram intersection and Bhattacharyya distance to obtain similarities
+p124
+aVY-axis is the document count in A per day
+p125
+aVE is a set of edges, and each edge e i u'\u005cu2062' j in E is associated with an affinity weight f ( i u'\u005cu2192' j ) between sentences s i and s j ( i u'\u005cu2260' j
+p126
+aVGenerate a word w d u'\u005cu2062' n , the word associated with the n t u'\u005cu2062' h word in document d from multinomial u'\u005cu03a6' z u'\u005cu2062' d u'\u005cu2062' n
+p127
+aVKL-distance is defined by D ( P u'\u005cu2223' u'\u005cu2223' Q ) = u'\u005cu2211' i = 1 P u'\u005cu2062' ( x i ) u'\u005cu2062' log u'\u005cu2061' P u'\u005cu2062' ( x i ) Q u'\u005cu2062' ( x i ) where x i refers bursts in time i
+p128
+aVTo make U a stochastic matrix, the rows with all zero elements are replaced by a smoothing vector with all elements set to 1 u'\u005cu2223' S u'\u005cu2223'
+p129
+aVLet E t u'\u005cu2062' o u'\u005cu2062' p u'\u005cu2062' i u'\u005cu2062' c and E t u'\u005cu2062' a u'\u005cu2062' s u'\u005cu2062' k are entropy value of lda_topic cluster and task cluster, respectively
+p130
+aVP u'\u005cu2062' ( A i , C j ) is a probability that the elements of the cluster C j assigned to the correct class A i
+p131
+aVFor each word n = 1, u'\u005cu22ef' , N d in document d ;
+p132
+aVWe estimated k u'\u005cu2032' and d u'\u005cu2032' by using Entropy measure given by
+p133
+aVThe transition probability from s i to s j is then defined as follows
+p134
+aVWe used them in the experiment
+p135
+aVTwo vertices are connected if their affinity weight is larger than 0 and we let f ( i u'\u005cu2192' i ) = 0 to avoid self transition
+p136
+aVThe top site was u'\u005cu201c' HybHSum u'\u005cu201d' by [ 5 ]
+p137
+aVu'\u005cu0391' refers to a smoothing factor and it is often taken to be 2 ( n + 1
+p138
+aVWe chose the parameters k u'\u005cu2032' and d u'\u005cu2032' whose value of the summation of E t u'\u005cu2062' o u'\u005cu2062' p u'\u005cu2062' i u'\u005cu2062' c and E t u'\u005cu2062' a u'\u005cu2062' s u'\u005cu2062' k is smallest
+p139
+aVWe used the row-normalized matrix U i u'\u005cu2062' j = ( U i u'\u005cu2062' j ) u'\u005cu2223' S u'\u005cu2223' × u'\u005cu2223' S u'\u005cu2223' to describe G with each entry corresponding to the transition probability, where U i u'\u005cu2062' j = p ( i u'\u005cu2192' j
+p140
+aV5
+p141
+a.

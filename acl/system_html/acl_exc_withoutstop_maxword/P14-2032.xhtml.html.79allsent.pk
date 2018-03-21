@@ -1,0 +1,184 @@
+(lp0
+VIn this section, we describe the character-based and word-based models we use as baselines, review existing approaches to combination, and describe our algorithm for joint decoding with dual decomposition
+p1
+aVDual decomposition (DD) [ 14 ] offers an attractive framework for combining these two types of models without incurring high costs in model complexity (in contrast to [ 18 ] ) or decoding efficiency (in contrast to bagging in [ 22 , 17 ]
+p2
+aVIn this work, we propose a simple and principled joint decoding method for combining character-based and word-based segmenters based on dual decomposition
+p3
+aVIn the most commonly used contemporary approach to character-based segmentation, first proposed by [ 23 ] , CWS is seen as a character sequence tagging task, where each character is tagged on whether it is at the beginning, middle, or end of a word
+p4
+aVDD has been successfully applied to similar situations for combining local with global models; for example, in dependency parsing [ 9 ] , bilingual sequence tagging [ 21 ] and word alignment [ 6 ]
+p5
+aVThis penalty exchange is similar to message passing, and as the penalty accumulates over iterations, the two models are pushed towards agreeing with each other
+p6
+aVA powerful feature of the dual decomposition approach is that it can generate correct segmentation decisions in cases where a voting or product-of-experts model could not, since joint decoding allows the sharing of information at decoding time
+p7
+aVThere are two primary classes of models character-based, where the foundational units for processing are individual Chinese characters [ 23 , 19 , 24 , 20 ] , and word-based, where the units are full words based on some dictionary or training lexicon [ 1 , 25 ]
+p8
+aV\u005cnewcite Sun:2010:COLING details their respective theoretical strengths character-based approaches better model the internal compositional structure of words and are therefore more effective at inducing new oov words; word-based approaches are better at reproducing the words of the training lexicon and can capture information from significantly larger contextual spans
+p9
+aVFinally, since dual decomposition is a method of joint decoding, it is still liable to reproduce errors made by the constituent systems
+p10
+aVWe conduct experiments on the SIGHAN 2003 [ 16 ] and 2005 [ 7 ] bake-off datasets to evaluate the effectiveness of the proposed dual decomposition algorithm
+p11
+aVIn each iteration, if the best segmentations provided by the two models do not agree, then the two models will receive penalties for the decisions they made that differ from the other
+p12
+aVThe idea is that jointly modelling both character-sequence and word information can be computationally challenging, so instead we can try to find outputs that the two models are most likely to agree on
+p13
+aVWe use the publicly available Stanford CRF segmenter [ 19 ] 2 2 http://nlp.stanford.edu/software/segmenter.shtml as our character-based baseline model, and reproduce the perceptron-based segmenter from \u005cnewcite Zhang:2007:ACL as our word-based baseline model
+p14
+aVWe adopt a learning rate update rule from \u005cnewcite Koo:2010:EMNLP where u'\u005cu0391' t is defined as 1 N , where N is the number of times we observed a consecutive dual value increase from iteration 1 to t
+p15
+aVThese mixing models perform well on standard datasets, but are not in wide use because of their high computational costs and difficulty of implementation
+p16
+aVWe can then form the dual of this problem by taking the min outside of the max , which is an upper bound on the original problem
+p17
+aVwhere u'\u005cud835' u'\u005cudc32' u'\u005cud835' u'\u005cudc50' is the output of character-based CRF, u'\u005cud835' u'\u005cudc32' u'\u005cud835' u'\u005cudc64' is the output of word-based perceptron, and the agreements are expressed as constraints s.t is a shorthand for u'\u005cu201c' such that u'\u005cu201d'
+p18
+aVConditional random fields (CRF) [ 11 ] have been widely adopted for this task, and give state-of-the-art results [ 19 ]
+p19
+aVWe also report out-of-vocabulary recall (R oov ) as an estimation of the model u'\u005cu2019' s generalizability to previously unseen words
+p20
+aVSearching through the entire GEN u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' ) space is intractable even with a local model, so a beam-search algorithm is used
+p21
+aVUnknown words, also known as out-of-vocabulary ( oov ) words, lead to difficulties for word- or dictionary-based approaches
+p22
+aVWe also give an updated Viterbi decoding algorithm for CRF and a modified beam-search algorithm for perceptron in Algorithm 2.2
+p23
+aVThis method is called dual decomposition (DD) [ 14 ]
+p24
+aVSimilar to previous work [ 13 ] , we solve this DD problem by iteratively updating the sub-gradient as depicted in Algorithm 2.2
+p25
+aV[!ht] Dual decomposition inference algorithm, and modified Viterbi and beam-search algorithms
+p26
+aVChinese text is written without delimiters between words; as a result, Chinese word segmentation (CWS) is an essential foundational step for many tasks in Chinese natural language processing
+p27
+aVFormally, the objective of DD is
+p28
+aVWe can rewrite the original objective with the Lagrangian relaxation as
+p29
+aVSolving this constrained optimization problem directly is difficult
+p30
+aVWord-based models search through lists of word candidates using scoring functions that directly assign scores to each
+p31
+aVMore recently, \u005cnewcite Zhang:2007:ACL reported success using a linear model trained with the average perceptron algorithm [ 5 ]
+p32
+aV1 1 See \u005cnewcite Rush:2012:JAIR for a full introduction to DD
+p33
+aV4 ), each of which is local with respect to the set of Lagrangian multipliers
+p34
+aVEarly word-based segmentation work employed simple heuristics like dictionary-lookup maximum matching [ 4 ]
+p35
+aVOn the SIGHAN 2005 test set, in over 99.1% of cases the DD algorithm converged within 100 iterations, which gives an optimality guarantee
+p36
+aVOur dual decomposition method outperforms both the word-based and character-based baselines consistently across all four subsets in both F 1 and oov recall (R oov
+p37
+aVThe optimized hyper-parameters used are u'\u005cu2113' 2 regularization parameter u'\u005cu039b' in CRF is set to 3 ; the perceptron is trained for 10 iterations with beam size 200; dual decomposition is run to max iteration of 100 ( T in Algo
+p38
+aVHowever, the Markov assumption in CRF limits the context of such features; it is difficult to capture long-range word features in this model
+p39
+aVDD 享受 / 一点 / 点心 / ， We found more than 400 such surprisingly accurate instances in our dual decomposition output
+p40
+aVT is the maximum number of iterations before early stopping, and u'\u005cu0391' t is the learning rate at time t
+p41
+aVwhere u'\u005cud835' u'\u005cudc14' is the set of Lagrangian multipliers that consists of a multiplier u i at each word position i
+p42
+aVThe search algorithm consumes one character input token at a time, and iterates through the existing beams to score two new alternative hypotheses by either appending the new character to the last word in the beam, or starting a new word at the current position
+p43
+aVThe dual form can then be decomposed into two sub-components (the two max problems in Eq
+p44
+aVThe DD algorithm is also more consistent, which would likely lead to improvements in applications such as machine translation [ 3 ]
+p45
+aVInstead, we take the Lagrangian relaxation of this term as
+p46
+aVIn a first-order linear-chain CRF model, the conditional probability of a label sequence u'\u005cud835' u'\u005cudc32' given a word sequence u'\u005cud835' u'\u005cudc31' is defined as
+p47
+aVIn the following example, both baseline models miss the contextually clear use of the word 点心 ( u'\u005cu201c' sweets / snack food u'\u005cu201d' ) and instead attach 点 to the prior word to produce the otherwise common compound 一点点 ( u'\u005cu201c' a little bit u'\u005cu201d' ); dual decomposition allows the model to generate the correct segmentation
+p48
+aVPrior work has shown performance gains from combining these two types of models to exploit their respective strengths, but such approaches are often complex to implement and computationally expensive
+p49
+aVIn 77.4% of the cases, DD converged in the first iteration
+p50
+aVIn many cases the relative confidence of each model means that dual decomposition is capable of using information from both sources to generate a series of correct segmentations better than either baseline model alone
+p51
+aVThe example below shows a difficult-to-segment proper name comprised of common characters, which results in undersegmentation by the character-based CRF and oversegmentation by the word-based perceptron, but our method achieves the correct middle ground
+p52
+aVExperimental results on standard SIGHAN 2003 and 2005 bake-off evaluations show that our model outperforms the character and word baselines by a significant margin
+p53
+aVOn the whole, dual decomposition produces state-of-the-art segmentations that are more accurate, more consistent, and more successful at inducing oov words than the baseline systems that it combines
+p54
+aVPerhaps most importantly, this work presents a much more practical and usable form of classifier combination in the CWS context than existing methods offer
+p55
+aVVarious mixing approaches have been proposed to combine the above two approaches [ 22 , 12 , 18 , 17 , 20 ]
+p56
+aVThe improvement over our word- and character-based baselines is also seen in our results on the earlier SIGHAN 2003 dataset
+p57
+aVIt is easy to implement and does not require retraining of existing character- and word-based segmenters
+p58
+aVOf particular note is DD u'\u005cu2019' s is much more robust in R oov , where the two baselines swing a lot
+p59
+aVFormally, given input u'\u005cud835' u'\u005cudc31' , their model seeks a segmentation F u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' ) such that
+p60
+aVThese types of features capture the compositional properties of characters and are likely to generalize well to unknown words
+p61
+aVOur method demonstrates a robustness across domains and segmentation standards regardless of which baseline model was stronger
+p62
+aVThe number of iterations to convergence histogram is plotted in Figure 1
+p63
+aVTable 2 puts our method in the context of earlier systems for CWS
+p64
+aVOur method achieves the best reported score on 6 out of 7 datasets
+p65
+aVf u'\u005cu2062' ( x , y t , y t - 1 ) are feature functions that typically include surrounding character n-gram and morphological suffix/prefix features
+p66
+aVState-of-the-art performance in CWS is high, with F-scores in the upper 90s
+p67
+aVBeyond standard precision (P), recall (R) and F 1 scores, we also evaluate segmentation consistency as proposed by [ 3 ] , who have shown that increased segmentation consistency is correlated with better machine translation performance
+p68
+aVIn particular, out approach improves oov recall rates and segmentation consistency, and gives the best reported results to date on 6 out of 7 datasets
+p69
+aVWe adopted the development setting from [ 25 ] , and used CTB sections 1-270 for training and sections 400-931 for development in hyper-parameter setting; for all results given in tables, the models are trained and evaluated on the standard train/test split for the given dataset
+p70
+aVAs demonstrated by [ 15 , 2 , 3 , 10 ] , the quality and consistency of segmentation has important downstream impacts on system performance in machine translation, POS tagging and parsing
+p71
+aVThis method has strong optimality guarantees and works very well empirically
+p72
+aV{algorithmic} \u005cSTATE u'\u005cu2200' i u'\u005cu2208' { 1 u'\u005cu2062' to u'\u005cu2062' u'\u005cud835' u'\u005cudc31'
+p73
+aV\u005cSTATE u'\u005cu2200' k u'\u005cu2208' { 0 , 1 }
+p74
+aVCRF 享受 / 一点点 / 心 / ，
+p75
+aVTable 1 shows our empirical results on SIGHAN 2005 dataset
+p76
+aV} \u005cSTATE u'\u005cu2200' k u'\u005cu2208' { 0 , 1 } u i u'\u005cu2062' ( k ) = u i u'\u005cu2062' ( k ) + u'\u005cu0391' t u'\u005cu2062' ( 2 u'\u005cu2062' k - 1 ) u'\u005cu2062' ( y i w u'\u005cu2063' * - y i c u'\u005cu2063' * ) \u005cENDFOR \u005cENDFOR \u005cRETURN ( u'\u005cud835' u'\u005cudc32' u'\u005cud835' u'\u005cudc1c' u'\u005cu2063' * , u'\u005cud835' u'\u005cudc32' u'\u005cud835' u'\u005cudc30' u'\u005cu2063' * ) \u005cSTATE Viterbi
+p77
+aV\u005cFOR item v = { w 0 , u'\u005cu22ef' , w j } in beam u'\u005cu2062' ( i ) \u005cSTATE append x i to w j , score u'\u005cu2062' ( v ) = + u i u'\u005cu2062' ( 0 ) \u005cSTATE v = { w 0 , u'\u005cu22ef' , w j , x i } , score u'\u005cu2062' ( v ) = + u i u'\u005cu2062' ( 1 ) \u005cENDFOR \u005cENDFOR
+p78
+aVV i ( k ) = argmax u'\u005cud835' u'\u005cudc24' u'\u005cu2032' P i ( k k u'\u005cu2032' ) V i - 1 k u'\u005cu2032' + u i ( k ) \u005cENDFOR \u005cSTATE Beam-Search
+p79
+aVThe consistency measure calculates the entropy of segmentation variations u'\u005cu2014' the lower the score the better
+p80
+aVThis is an important property for downstream applications such as entity recognition
+p81
+aVGloss Enjoy / a bit of / snack food / , u'\u005cu2026'
+p82
+aV\u005cSTATE V 1 u'\u005cu2062' ( 1 ) = 1 , V 1 u'\u005cu2062' ( 0 ) = 0 \u005cFOR i = 2 u'\u005cu2062' to u'\u005cu2062' u'\u005cud835' u'\u005cudc31'
+p83
+aVAmbiguity can cause errors when the appropriate segmentation is determined contextually, such as 才能 ( u'\u005cu201c' talent u'\u005cu201d' ) and 才 / 能 ( u'\u005cu201c' just able u'\u005cu201d' ) [ 8 ]
+p84
+aVStill, challenges remain
+p85
+aV} u'\u005cu2200' k u'\u005cu2208' { 0 , 1 } u i u'\u005cu2062' ( k ) = 0 \u005cFOR t u'\u005cu2190' 1 to T \u005cSTATE u'\u005cud835' u'\u005cudc32' u'\u005cud835' u'\u005cudc1c' u'\u005cu2063' * = argmax u'\u005cud835' u'\u005cudc32' P ( u'\u005cud835' u'\u005cudc32' u'\u005cud835' u'\u005cudc50' u'\u005cud835' u'\u005cudc31' ) + u'\u005cu2211' i u'\u005cu2208' u'\u005cud835' u'\u005cudc31' u i ( y i u'\u005cud835' u'\u005cudc50' ) \u005cSTATE u'\u005cud835' u'\u005cudc32' u'\u005cud835' u'\u005cudc30' u'\u005cu2063' * = argmax u'\u005cud835' u'\u005cudc32' u'\u005cu2208' GEN u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' ) F ( u'\u005cud835' u'\u005cudc32' u'\u005cud835' u'\u005cudc64' u'\u005cud835' u'\u005cudc31' ) - u'\u005cu2211' j u'\u005cu2208' u'\u005cud835' u'\u005cudc31' u j ( y j u'\u005cud835' u'\u005cudc64' ) \u005cIF u'\u005cud835' u'\u005cudc32' u'\u005cud835' u'\u005cudc1c' u'\u005cu2063' * = u'\u005cud835' u'\u005cudc32' u'\u005cud835' u'\u005cudc30' u'\u005cu2063' * \u005cRETURN ( u'\u005cud835' u'\u005cudc32' u'\u005cud835' u'\u005cudc50' u'\u005cu2063' * , u'\u005cud835' u'\u005cudc32' u'\u005cud835' u'\u005cudc64' u'\u005cu2063' * ) \u005cENDIF \u005cFORALL i u'\u005cu2208' { 1 u'\u005cu2062' to u'\u005cu2062' u'\u005cud835' u'\u005cudc31'
+p86
+aV2.2 ) with step size 0.1 ( u'\u005cu0391' t in Algo
+p87
+aVGold 享受 / 一点 / 点心 / ，
+p88
+aVPCPT 享受 / 一点点 / 心 / ，
+p89
+aV\u005cFOR i = 1 u'\u005cu2062' to u'\u005cu2062' u'\u005cud835' u'\u005cudc31'
+p90
+aV2.2
+p91
+a.

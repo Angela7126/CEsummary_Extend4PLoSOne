@@ -1,0 +1,124 @@
+(lp0
+VWe then apply the resulting regression function to each word co-occurrence count as a pre-processing step of the standard approach
+p1
+aVThe main work in bilingual lexicon extraction from comparable corpora is based on lexical context analysis and relies on the simple observation that a word and its translation tend to appear in the same lexical contexts
+p2
+aVIn another way, Rubino and Linarès (2011) improve the context words based on the hypothesis that a word and its candidate translations share thematic similarities
+p3
+aVIn order to make co-occurrence counts more discriminant and in the same way as Hazem and Morin [ 15 ] , one strategy consists in addressing this problem through regression given training corpora of small and large size (abundant in the general domain), we predict word co-occurrence counts in order to make them more reliable
+p4
+aVSince the context vectors are computed from each part of the comparable corpus rather than through the parts of the comparable corpora, the standard approach is relatively insensitive to differences in corpus sizes
+p5
+aVFor instance, the historical context-based projection method [ 11 , 28 ] , known as the standard approach , dedicated to this task seems implicitly to lead to work with balanced comparable corpora in the same way as for parallel corpora (i.e., each part of the corpus is composed of the same amount of data
+p6
+aVWe use regression analysis to describe the relationship between word co-occurrence counts in a large corpus (the response variable) and word co-occurrence counts in a small corpus (the predictor variable
+p7
+aVAs we can not claim that the prediction of word co-occurrence counts is a linear problem, we consider in addition to the simple linear regression model ( L u'\u005cu2062' i u'\u005cu2062' n ), a generalized linear model which is the logistic regression model ( L u'\u005cu2062' o u'\u005cu2062' g u'\u005cu2062' i u'\u005cu2062' t ) and non linear regression models such as polynomial regression model ( P u'\u005cu2062' o u'\u005cu2062' l u'\u005cu2062' y n ) of order n
+p8
+aVThis consists in assigning to each observed co-occurrence count of a small comparable corpora, a new value learned beforehand from a large training corpus
+p9
+aVIn specialized domains, the comparable corpora are traditionally of small size (around 1 million words) in comparison with comparable corpus-based general language (up to 100 million words
+p10
+aVWe chose the balanced corpora where the standard approach has shown the best results in the previous experiment, namely [ breast cancer corpus 12 ] and [ diabetes corpus 7 ]
+p11
+aVMoreover, this assumption is prejudicial for specialized comparable corpora, especially when involving the English language for which many documents are available due the prevailing position of this language as a standard for international scientific publications
+p12
+aVIf the bilingual dictionary provides several translations for an element, we consider all of them but weight the different translations according to their frequency in the target language
+p13
+aVWithin this context, our main contribution consists in a re-reading of the standard approach putting emphasis on the unfounded assumption of the balance of the specialized comparable corpora
+p14
+aVThe bilingual lexicon extraction task from bilingual corpora was initially addressed by using parallel corpora (i.e., a corpus that contains source texts and their translation
+p15
+aVThen, the translation is obtained by comparing the source context vector to each translation candidate vector after having translated each element of the source vector with a general dictionary
+p16
+aVWe then present an extension of this approach based on regression models
+p17
+aVWe can see that the best results are obtained by the S u'\u005cu2062' o u'\u005cu2062' u u'\u005cu2062' r u'\u005cu2062' c u'\u005cu2062' e p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' d approach for both comparable corpora
+p18
+aVSince comparable corpora are usually small in specialized domains (see Table 2 ), the discriminative power of context vectors (i.e., the observations of word co-occurrences) is reduced
+p19
+aVAs a result, 65 French documents were extracted (about 257,000 words
+p20
+aVThe only precaution for using the standard approach with unbalanced corpora is to normalize the association measure (for instance, this can be done by dividing each entry of a given context vector by the sum of its association scores
+p21
+aVWe first performed an experiment using each comparable corpus independently of the others (we refer to these corpora as balanced corpora
+p22
+aVAs a preliminary remark, we can notice that the results differ noticeably according to the comparable corpus used individually (MAP variation between 21.0% and 29.6% for the breast cancer corpora and between 10.5% and 16.5% for the diabetes corpora
+p23
+aVWe then conducted a second experiment where we varied the size of the English part of the comparable corpus, from 530,000 to 7.4 million words for the breast cancer corpus in 530,000 words steps, and from 250,000 to 3.5 million words for the diabetes corpus in 250,000 words steps (we refer to these corpora as unbalanced corpora
+p24
+aVThe comparability measure [ 19 ] is based on the expectation of finding the translation for each word in the corpus and gives a good idea about how two corpora are comparable
+p25
+aVThe bilingual lexicon extraction task from comparable corpora inherits this filiation
+p26
+aVThis suggests that both linear and polynomial regressions are suitable as a pre-processing step of the standard approach, while the logistic regression seems to be inappropriate according to the results shown in Table 6
+p27
+aVWe can also note that the MAP of all the unbalanced comparable corpora is always higher than any individual comparable corpus
+p28
+aVOverall, starting with a MAP of 26.1% as provided by the balanced [ breast cancer corpus 1 ] , we are able to increase it to 42.3% with the unbalanced [ breast cancer corpus 12 ] (the variation observed for some unbalanced corpora such as [ diabetes corpus 12, 13 and 14 ] can be explained by the fact that adding more data in the source language increases the error rate of the translation phase of the standard approach, which leads to the introduction of additional noise in the translated context vectors
+p29
+aVAs regards the problem of words ambiguities, Bouamor et al. (2013) carried out word sense disambiguation process only in the target language whereas Gaussier et al. (2004) solve the problem through the source and target languages by using approaches based on CCA (Canonical Correlation Analysis) and multilingual PLSA (Probabilistic Latent Semantic Analysis
+p30
+aVThe results of the experiments conducted on the diabetes corpus are shown in Figure 1
+p31
+aVHowever, despite good results in the compilation of bilingual lexicons, parallel corpora are scarce resources, especially for technical domains and for language pairs not involving English
+p32
+aVWe can notice that except for the L u'\u005cu2062' o u'\u005cu2062' g u'\u005cu2062' i u'\u005cu2062' t model, all the regression models outperform the baseline ( N u'\u005cu2062' o p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' d u'\u005cu2062' i u'\u005cu2062' c u'\u005cu2062' t u'\u005cu2062' i u'\u005cu2062' o u'\u005cu2062' n
+p33
+aVAs for the previous experiment, we can see that the U u'\u005cu2062' n u'\u005cu2062' b u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e u'\u005cu2062' d approach significantly outperforms the B u'\u005cu2062' a u'\u005cu2062' l u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' c u'\u005cu2062' e u'\u005cu2062' d approach
+p34
+aVFor instance, Prochasson and Fung (2011) showed that the standard approach is not relevant for infrequent words (since the context vectors are very unrepresentative i.e., poor in information
+p35
+aVThis may be due to the regression parameters that have been learned from a training corpus of the general domain
+p36
+aVConsequently, the observations of word co-occurrences which is the basis of the standard approach are unreliable
+p37
+aVAs a result, 2,339 English documents were extracted (about 3,5 million words
+p38
+aVThe standard approach is used by most researchers so far [ 28 , 12 , 25 , 29 , 3 , 7 , 13 , 22 , 18 , 26 , 2 , among others] with the implicit hypothesis that comparable corpora are balanced
+p39
+aVIt is not surprising that predicting the target side only leads to lower results, since it is well known that a better characterization of a word to translate (given from the source side) leads to better results
+p40
+aVThe rank of candidate translations can be improved by integrating different heuristics
+p41
+aVWe contrast the prediction models presented in Section 2.2 to findout which is the most appropriate model to use as a pre-processing step of the standard approach
+p42
+aVIf prediction can not replace a large amount of data, it aims at increasing co-occurrence counts as if large amounts of data were at our disposal
+p43
+aVFor instance, the column 3 indicates the MAP obtained by using a comparable corpus that is composed i) only of [ breast cancer corpus 3 ] (MAP of 21.0%), and ii) of [ breast cancer corpus 1, 2 and 3 ] (MAP of 34.7%
+p44
+aVIsmail and Manandhar (2010) also suggest that context vectors should be based on the most important contextually relevant words (in-domain terms), and thus propose a method for filtering the noise of the context vectors
+p45
+aV21) observe, a specialized comparable corpus is built as balanced by analogy with a parallel corpus u'\u005cu201c' Therefore, in relation to parallel corpora, it is more likely for comparable corpora to be designed as general balanced corpora u'\u005cu201d'
+p46
+aVProchasson et al. (2009) enhance the representativeness of the context vector by strengthening the context words that happen to be transliterated words and scientific compound words in the target language
+p47
+aVLaroche and Langlais (2010) suggest a heuristic based on the graphic similarity between source and target terms
+p48
+aVThat said, the other regression models have shown the same behavior as L u'\u005cu2062' i u'\u005cu2062' n
+p49
+aVFor instance, Chiao and Zweigenbaum (2002) introduce a heuristic based on word distribution symmetry
+p50
+aVAccording to Fung and Cheung (2004) , who range bilingual corpora from parallel corpora to quasi-comparable corpora going through comparable corpora, there is a continuum from parallel to comparable corpora (i.e., a kind of filiation
+p51
+aVFor these reasons, research in bilingual lexicon extraction has focused on another kind of bilingual corpora comprised of texts sharing common features such as domain, genre, sampling period, etc. without having a source text/target text relationship [ 21 ]
+p52
+aVOur work differs from Hazem and Morin [ 15 ] in two ways
+p53
+aVAs a result of filtering, 169 French/English single words were extracted for the breast cancer corpus and 244 French/English single words were extracted for the diabetes corpus
+p54
+aVAs most regression models have already been described in great detail [ 5 , 1 ] , the derivation of most models is only briefly introduced in this work
+p55
+aVKoehn and Knight (2002) automatically induce the initial seed bilingual dictionary by using identical spelling features such as cognates and similar contexts
+p56
+aVWe only kept the free fulltext available documents
+p57
+aVAfter a manual selection, we only kept the documents which were relative to the medical domain
+p58
+aVAlso, as we can see, the results obtained with the linear and polynomial regressions are very close
+p59
+aVIn order to emphasize significant words in the context vector and to reduce word-frequency effects, the context vectors are normalized according to an association measure
+p60
+aVThe implementation of the standard approach can be carried out by applying the following three steps [ 29 , 3 , 7 , 22 , 18 , among others]
+p61
+a.

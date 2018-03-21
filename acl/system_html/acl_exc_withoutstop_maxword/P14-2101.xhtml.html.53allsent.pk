@@ -1,0 +1,100 @@
+(lp0
+VThese TT set corresponds to the top x terms ranked based on the probability of the word given the topic ( p ( w k ) ) from the topic model
+p1
+aV\u005cENSURE Gold standard topic label for each of the LDA topics for TW
+p2
+aVwhere the top 10 words ranked by P ( w i t j ) for this topic are listed
+p3
+aVWe compared the results of the summarisation techniques with the top terms ( TT ) of a topic as our baseline
+p4
+aVWe can see in all four categories that the SB and TFIDF approaches provide a better summarisation coverage as the length of the topic label increases
+p5
+aVWe compare different summarisation algorithms based on their ability to provide a good label to a given topic
+p6
+aV[ 14 ] generated label candidates for a topic based on top-ranking topic terms and titles of Wikipedia articles
+p7
+aVFigure 1 presents the ROUGE-1 performance of the summarisation approaches as the length x of the generated topic label increases
+p8
+aVWe propose to generate topic label candidates by summarising topic relevant documents
+p9
+aV\u005cSTATE Extract the headlines of news articles from u'\u005cud835' u'\u005cudc9e' N u'\u005cu2062' W j and select the top x most frequent words as the gold standard label for topic t i in the TW set \u005cENDFOR
+p10
+aVBased on the observation that a short summary of a collection of documents can serve as a label characterising the collection, we propose to generate topic label candidates based on the summarisation of a topic u'\u005cu2019' s relevant documents
+p11
+aV[ 15 ] proposed to label topics by selecting top- n terms to label the overall topic based on different ranking mechanisms including pointwise mutual information and conditional probabilities
+p12
+aVThe most generic approach to automatic labelling has been to use as primitive labels the top- n words in a topic distribution learned by a topic model such as LDA [ 9 , 2 ]
+p13
+aVWe propose to approach the topic labelling problem as a multi-document summarisation task
+p14
+aVTherefore, following a similarity alignment approach we performed the steps oulined in Algorithm 3.2 for generating the GS topic labels of a topic in TW
+p15
+aVTherefore given a topic k , a set of C documents related to this topic can be obtained via equation 1
+p16
+aVThe generated label was used as the gold standard label for the corresponding Twitter topic t i in the topic pair
+p17
+aVTherefore the task is to find the top- n terms which are more representative of the given topic
+p18
+aVOur original interest in labelling topics stems from work in topic model based event extraction from social media, in particular from tweets [ 32 , 6 ]
+p19
+aVHowever previous work has shown that top terms are not enough for interpreting the coherent meaning of a topic [ 22 ]
+p20
+aVIn particular we investigate the use of lexical features by comparing three different well-known multi-document summarisation algorithms against the top- n topic terms baseline
+p21
+aVThe following describes our proposed framework to characterise documents relevant to a topic
+p22
+aVThis task can be illustrated by considering the following topic derived from social media related to Education
+p23
+aVIn particular, the prominent topic of a document d can be found by
+p24
+aVThis is an attractive property for automatically generating topic labels for tweets where their event-related content might not have a counter part on existing external sources
+p25
+aVThis task has been approached by investigating methodologies for identifying meaningful topics through semantic coherence [ 1 , 24 , 27 ] and for characterising the semantic content of a topic through automatic labelling techniques [ 12 , 14 , 22 ]
+p26
+aVHowever as we described in the introduction we want to avoid relaying on external sources for the derivation of topic labels
+p27
+aVTopics are interpreted using the top N terms ranked based on the marginal probability p ( w i t j )
+p28
+aVWe can also notice that the GS labels generated from Newswire media presented in Table 2 appear on their own, to be good labels for the TW topics
+p29
+aVIt is similar to SB , however rather than computing the initial word probabilities based on word frequencies it weights terms based on TFIDF
+p30
+aVAs opposed to previous approaches, the research presented in this paper addresses the labelling of topics exposing event-related content that might not have a counter part on existing external sources
+p31
+aVMore recent approaches have explored the use of external sources (e.g., Wikipedia, WordNet) for supporting the automatic labelling of topics by deriving candidate labels by means of lexical [ 14 , 21 , 22 ] or graph-based [ 12 ] algorithms applied on these sources
+p32
+aVIn this case the document frequency is computed as the number of times a word appears in a micropost from the collection u'\u005cud835' u'\u005cudc9e'
+p33
+aVSince previous research has shown that headlines are good indicators of the main focus of a text, both in structure and content, and that they can act as a human produced abstract [ 26 ] , we used headlines as the GS labels of NW
+p34
+aVThe News Corpus ( NW ) was collected during the same period of time as the TW corpus
+p35
+aVOnce a final score is calculated for each vertex of the graph, TextRank sorts the terms in a reverse order and provided the top T vertices in the ranking
+p36
+aVThe final score of a word is therefore not only dependent on the terms immediately connected to it but also on how these terms connect to others
+p37
+aVThis is a relevance based ranking algorithm [ 4 ] , which avoids redundancy in the documents used for generating a summary
+p38
+aVIt then weights each sentence in the text (in our case a micropost) by computing the average probability of the words in the sentence
+p39
+aVThe same preprocessing steps were performed on NW
+p40
+aVIn particular, in both the Education and Law Crime categories, both SB and TFIDF outperforms TT and TR by a large margin
+p41
+aVIn nature micropost content is sparse and present ill-formed words
+p42
+aVMoreover, the use of Twitter as the u'\u005cu201c' what u'\u005cu2019' s-happening-right now u'\u005cu201d' tool, introduces new event-dependent relations between words which might not have a counter part in existing knowledge sources (e.g., Wikipedia
+p43
+aVThey then built a Support Vector Regression (SVR) model for ranking the label candidates
+p44
+aVThis is due to both the corpus size, the diversity of event-related topics and the limited availability of domain experts
+p45
+aVThe relevance of a vertex (term) to the graph is computed based on global information recursively drawn from the whole graph
+p46
+aVNW consists of a collection of news articles crawled from traditional news media (BBC, CNN, and New York Times) comprising over 77,000 articles which include supplemental metadata (e.g., headline, author, publishing date
+p47
+aVHowever performing human evaluations of Social Media test sets comprising thousands of inputs become a difficult task
+p48
+aVThese steps can be outlined as follows
+p49
+a.

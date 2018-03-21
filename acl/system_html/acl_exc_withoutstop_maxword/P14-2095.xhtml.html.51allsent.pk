@@ -1,0 +1,56 @@
+(lp0
+VThe approach proposed here, which we will refer to as feature representation projection ( FRP ), constitutes an alternative to direct model transfer and annotation projection and can be seen as a compromise between the two
+p1
+aVOur objective is to make the feature representation sufficiently compact that the mapping between source and target feature spaces could be reliably estimated from a limited amount of parallel data, while preserving, insofar as possible, the information relevant for classification
+p2
+aVThe shared feature representation for direct transfer is derived from u'\u005cu03a9' 0 by replacing language-specific part-of-speech tags with universal ones [] and adding cross-lingual word clusters [] to word types
+p3
+aVFor source language, this is relatively straightforward, as the intermediate representation can be directly tuned for the problem in question using labeled training data
+p4
+aVWe also believe that FRP may profit from using other sources of information about the correspondence between source and target feature representations, such as dictionary entries, and thus have an edge over annotation projection in those cases where the amount of parallel data available is limited
+p5
+aVOnce this is achieved, instances from both languages can be mapped into this space and a model trained on the source-language data directly applied to the target language
+p6
+aVIf parallel data is available, it can be further used to enforce model agreement on this data to adjust for discrepancies between the two languages, for example by means of projected transfer []
+p7
+aVIt is also somewhat similar in spirit to , where a small number of word translation pairs are used to estimate a mapping between distributed representations of words in two different languages and build a word translation model
+p8
+aVPlease note that we report only a single value for direct transfer, since this approach does not explicitly rely on parallel data
+p9
+aVCompared to annotation projection, our approach may be expected to be less sensitive to parallel data quality, since we do not have to commit to a particular prediction on a given instance from parallel data
+p10
+aVThe word types themselves are left as they are in the source language and replaced with their gloss translations in the target one []
+p11
+aVWe did not tune the size of the word representation to our task, as this would not be appropriate in a cross-lingual transfer setup, but we observe that the classifier is relatively robust to their dimension when evaluated on source language u'\u005cu2013' in our experiments the performance of the monolingual classifier does not improve significantly if the dimension is increased past 300 and decreases only by a small margin (less than one absolute point) if it is reduced to 100
+p12
+aVDatasets for other languages are sufficiently large, so we take 30 thousand samples for testing and use the rest as training data
+p13
+aVApart from the work on direct/projected transfer and annotation projection mentioned above, the proposed method can be seen as a more explicit kind of domain adaptation, similar to or
+p14
+aVThe transfer itself also introduces errors due to translation shifts [] and word alignment errors, which may lead to inaccurate predictions
+p15
+aVIt should be noted, however, that the dimension that is optimal in this sense is not necessarily the best choice for FRP , especially if the amount of available parallel data is limited
+p16
+aVEstimating the mapping directly from raw categorical features ( u'\u005cu03a9' 0 ) is both computationally expensive and likely inaccurate u'\u005cu2013' using one-hot encoding the feature vectors in our experiments would have tens of thousands of components
+p17
+aVTo go further, one can, for example, apply dimensionality reduction techniques to obtain a more compact representation of u'\u005cu03a9' 1 by eliminating redundancy or define auxiliary tasks and produce a vector representation useful for those tasks
+p18
+aVSince the size of the latter dataset is relatively small u'\u005cu2013' one thousand sentences u'\u005cu2013' we reserve the whole dataset for testing and only evaluate transfer from English to French, but not the other way around
+p19
+aVBoth baselines are using the same set of features as the proposed model, as described earlier
+p20
+aVIn English-Czech and Czech-English we also use the dependency relation information, since the annotations are partly compatible
+p21
+aVWe will refer to this representation as u'\u005cu03a9' 1
+p22
+aVThese issues are generally handled using heuristics [] and filtering, for example based on alignment coverage []
+p23
+aVSince we are using a relatively small set of features to start with, this does not present much of a problem
+p24
+aVIn the authors consider embeddings of up to 800 dimensions, but we would not expect to benefit as much from larger vectors since we are using a much smaller corpus to train them
+p25
+aVFor the sake of simplicity we cast it as a multiclass classification problem, ignoring the interaction between different arguments in a predicate
+p26
+aVThese classifiers are implemented using Pylearn2 [] , based on Theano []
+p27
+a.

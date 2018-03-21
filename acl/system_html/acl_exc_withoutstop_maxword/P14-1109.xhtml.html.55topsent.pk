@@ -1,0 +1,18 @@
+(lp0
+VFinally, we investigate the robustness of the proposed semiparametric Gaussian copula regression model by varying the amount of features in the covariate space
+p1
+aVTo do this, we formulate the problem as a text regression task, and use a Gaussian copula with probability integral transform to model the uniform marginals and their dependencies
+p2
+aVBoth linear and non-linear SVM models do not have any advantages over the proposed approach
+p3
+aVWe use the Statistical Toolbox u'\u005cu2019' s linear regression implementation in Matlab, and LibSVM [ 6 ] for training and testing the SVM models
+p4
+aVIn NLP, many of the probabilistic text models work in the discrete space [ 9 , 2 ] , but our model is different since the text features are sparse, we first perform kernel density estimates to smooth out the zeroing items, and then calculate the empirical cumulative distribution function (CDF) of the random variables
+p5
+aVBy applying the Probability Integral Transform to raw features in the copula model, we essentially avoid comparing apples and oranges in the feature space, which is a common problem in bag-of-features models in NLP
+p6
+aVNote that since the kernel density estimation in the proposed copula model is nonparametric, and we only need to learn the u'\u005cu03a3' in the Gaussian copula, there is no hyperparameters that need to be tuned
+p7
+aVLast but not least, by using a
+p8
+a.

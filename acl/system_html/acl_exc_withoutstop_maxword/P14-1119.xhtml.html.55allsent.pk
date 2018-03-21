@@ -1,0 +1,190 @@
+(lp0
+VAn evaluation error occurs when a system outputs a candidate that is semantically equivalent to a gold keyphrase, but is considered erroneous by a scoring program because of its failure to recognize that the predicted phrase and the corresponding gold keyphrase are semantically equivalent
+p1
+aVHence, an evaluation error occurs if a system predicts Olympic games but not Olympics as a keyphrase and the scoring program fails to identify them as semantically equivalent
+p2
+aVIn the Ben Johnson example, many keyphrase extractors fail to identify 100-meter dash and gold medal as keyphrases, resulting in infrequency errors
+p3
+aV100-meter dash is mapped to the topic Sprint of type Sports in the Sports domain, whereas gold medal is mapped to a topic with the same name of type Olympic medal in the Olympics domain
+p4
+aVNoting that candidate keyphrases that are not semantically related to the predicted keyphrases are unlikely to be keyphrases in technical reports, Turney employs coherence features to identify such candidate keyphrases
+p5
+aVOvergeneration errors occur when a system correctly predicts a candidate as a keyphrase because it contains a word that appears frequently in the associated document, but at the same time erroneously outputs other candidates as keyphrases because they contain the same word
+p6
+aVLMA scores a candidate keyphrase based on two features, namely, phraseness (i.e.,, the extent to which a word sequence can be treated as a phrase) and informativeness (i.e.,, the extent to which a word sequence captures the central idea of the document it appears in
+p7
+aVThis feature is designed based on the assumption that a phrase frequently tagged as a keyphrase is more likely to be a keyphrase in an unseen document
+p8
+aVInformally, a candidate is important if it is related to (1) a large number of candidates and (2) candidates that are important
+p9
+aVInformativeness is computed as the loss that results because of the assumption that the candidate is sampled from the background LM rather than the foreground LM
+p10
+aVThe first one, tf*idf [ 45 ] , is computed based on candidate frequency in the given text and inverse document frequency (i.e.,, number of other documents where the candidate appears
+p11
+aVThe third one, supervised keyphraseness , encodes the number of times a phrase appears as a keyphrase in the training set
+p12
+aVLike TPR, CommunityCluster gives more weight to more important topics, but unlike TPR, it extracts all candidate keyphrases from an important topic, assuming that a candidate that receives little focus in the text should still be extracted as a keyphrase as long as it is related to an important topic
+p13
+aVIn our example, Olympics and Olympic games refer to the same concept, so a system that predicts both of them as keyphrases commits a redundancy error
+p14
+aVConsequently, many systems not only correctly predict Olympics as a keyphrase, but also erroneously predict Olympic movement as a keyphrase, yielding overgeneration errors
+p15
+aVPhraseness, defined using the foreground LM, is calculated as the loss of information incurred as a result of assuming a unigram LM (i.e.,, conditional independence among the words of the phrase) instead of an n-gram LM (i.e.,, the phrase is drawn from an n-gram LM
+p16
+aVIn other words, an evaluation error is not an error made by a keyphrase extractor, but an error due to the naivety of a scoring program
+p17
+aVInfrequency errors occur when a system fails to identify a keyphrase owing to its infrequent presence in the associated document [ 31 ]
+p18
+aVHence, before a system outputs a set of candidates as keyphrases, it can use Freebase to determine whether any of them is mapped to the same Freebase topic
+p19
+aVRedundancy errors are a type of precision error contributing to 8 u'\u005cu2013' 12% of the overall error
+p20
+aVThe top-ranked candidates from the graph are then selected as keyphrases for the input document
+p21
+aVThe second one, the distance of a phrase, is defined as the number of words preceding its first occurrence normalized by the number of words in the document
+p22
+aVZha ( 2002 ) proposes the first graph-based approach for simultaneous summarization and keyphrase extraction, motivated by a key observation a sentence is important if it contains important words, and important words appear in important sentences
+p23
+aVWhile the use of language models to identify phrases cannot be considered a major strength of this approach (because heuristics can identify phrases fairly reliably), the use of a background corpus to identify candidates that are unique to the foreground u'\u005cu2019' s domain is a unique aspect of this approach
+p24
+aVReferring back to our running example, both Olympics and Olympic games are mapped to a Freebase topic called Olympic games
+p25
+aVWikipedia-based keyphraseness is computed as a candidate u'\u005cu2019' s document frequency multiplied by the ratio of the number of Wikipedia articles where the candidate appears as a link to the number of articles where it appears [ 37 ]
+p26
+aVIntuitively, a phrase that has high scores for phraseness and informativeness is likely to be a keyphrase
+p27
+aVBased on this information, a keyphrase extractor can determine that the two candidates are aliases and should output only one of them, thus preventing a redundancy error
+p28
+aVNevertheless, some researchers may argue that a system should not be penalized for redundancy errors because the extracted candidates are in fact keyphrases
+p29
+aVBy running TextRank once for each topic, TPR ensures that the extracted keyphrases cover the main topics of the document
+p30
+aVSemantic relatedness is encoded in the coherence features as two candidate keyphrases u'\u005cu2019' pointwise mutual information, which Turney computes by using the Web as a corpus
+p31
+aVExternal resource-based features are computed based on information gathered from resources other than the training documents, such as lexical knowledge bases (e.g.,, Wikipedia) or the Web, with the goal of improving keyphrase extraction performance by exploiting external knowledge
+p32
+aVThe absence of such a mapping in the Olympics domain could be used by a keyphrase extractor as a supporting evidence against predicting Olympic movement as a keyphrase
+p33
+aVSo it is difficult to predict 100-meter dash and gold medal as keyphrases they are more than 10 tokens away from frequent words such as Johnson and Olympics
+p34
+aVThe underlying hypothesis is that each of these clusters corresponds to a topic covered in the document, and selecting the candidates close to the centroid of each cluster as keyphrases ensures that the resulting set of keyphrases covers all the topics of the document
+p35
+aVNote that if we can identify semantically equivalent candidates, then we can reduce redundancy errors
+p36
+aV2009 ) propose a ranking approach to keyphrase extraction, where the goal is to learn a ranker to rank two candidate keyphrases
+p37
+aVRecall that for many systems, it is not easy to reject a non-keyphrase containing a word with a high term frequency many unsupervised systems score a candidate by summing the score of each of its component words, and many supervised systems use unigrams as features to represent a candidate
+p38
+aVThe final score of a candidate is computed as the sum of its scores for each of the topics, weighted by the probability of that topic in that document
+p39
+aVStatistical features are computed based on statistical information gathered from the training documents
+p40
+aVHandling infrequency errors is a challenge because state-of-the-art keyphrase extractors rarely predict candidates that appear only once or twice in a document
+p41
+aVConsequently, we can relate 100-meter dash to Ben Johnson via the Sports domain (i.e.,, they belong to different types under the same domain
+p42
+aVUnlike supervised keyphraseness, Wikipedia-based keyphraseness can be computed without using documents annotated with keyphrases and can work even if there is a mismatch between the training domain and the test domain
+p43
+aV1) extracting a list of words/phrases that serve as candidate keyphrases using some heuristics (Section 3.1 ); and (2) determining which of these candidate keyphrases are correct keyphrases using supervised (Section 3.2 ) or unsupervised (Section 3.3 ) approaches
+p44
+aVCandidates are ranked according to the sum of these two feature values
+p45
+aVAll four systems have managed to identify Ben Johnson as a keyphrase due to its significant presence
+p46
+aVSince keyphrases represent a dense summary of a document, researchers hypothesized that text summarization and keyphrase extraction can potentially benefit from each other if these tasks are performed simultaneously
+p47
+aV2006 ) employ a feature that encodes whether a candidate keyphrase appears in the query log of a search engine, exploiting the observation that a candidate is potentially important if it was used as a search query
+p48
+aVIn other words, if we could relate an infrequent keyphrase to other candidates in the text, we could boost its importance
+p49
+aVThis feature is motivated by the observation that a candidate is likely to be a keyphrase if it occurs frequently as a link in Wikipedia
+p50
+aVFirst, we discuss how redundancy errors could be addressed by using the background knowledge extracted from external databases
+p51
+aVMany existing approaches have a separate, heuristic module for extracting candidate keyphrases prior to keyphrase ranking/extraction
+p52
+aVA keyphrase extraction system typically operates in two steps
+p53
+aVHence, we can boost the importance of 100-meter dash and gold medal if we can relate them to Ben Johnson
+p54
+aVOnce the graphs are constructed for an input document, an iterative reinforcement algorithm is applied to assign scores to each sentence and word
+p55
+aVAutomatic keyphrase extraction concerns u'\u005cu201c' the automatic selection of important and topical phrases from the body of a document u'\u005cu201d' [ 50 ]
+p56
+aVTo be more concrete, consider the news article on athlete Ben Johnson in Figure 1, where the keyphrases are boldfaced
+p57
+aVFinally, as mentioned before, evaluation errors should not be considered errors made by a system
+p58
+aVIn contrast, a scientific paper typically has at least 10 keyphrases and hundreds of candidate keyphrases, yielding a much bigger search space [ 16 ]
+p59
+aVA phrase is more likely to be a keyphrase if it appears in the abstract or introduction of a paper or in the metadata section of a web page
+p60
+aVNext, we discuss how infrequency errors could be addressed using background knowledge
+p61
+aVThis pairwise ranking approach therefore introduces competition between candidate keyphrases, and has been shown to significantly outperform KEA [ 56 , 12 ] , a popular supervised baseline that adopts the traditional supervised classification approach [ 46 , 23 ]
+p62
+aVWhile empirical results show that KeyCluster performs better than both TextRank and Hulth u'\u005cu2019' s [ 20 ] supervised system, KeyCluster has a potential drawback by extracting keyphrases from each topic cluster, it essentially gives each topic equal importance
+p63
+aVThe basic idea behind a graph-based approach is to build a graph from the input document and rank its nodes according to their importance using a graph-based ranking method (e.g.,, Brin and Page ( 1998 )
+p64
+aV2 2 A tf*idf-based baseline, where candidate keyphrases are ranked and selected according to tf*idf, has been widely used by both supervised and unsupervised approaches [ 63 , 9 , 44 , 13 ]
+p65
+aVTextRank [ 38 ] is one of the most well-known graph-based approaches to keyphrase extraction
+p66
+aVAs we can see, the word Olympic(s) has a significant presence in the document
+p67
+aVHowever, for a long document, the resulting list of candidates can be long
+p68
+aV4 4 Note that it may be difficult to employ our recommendations to address infrequency errors in informal text with uncorrelated topics because the keyphrases it contains may not be related to each other (see Section 2
+p69
+aVRecasting keyphrase extraction as a classification problem has its weaknesses, however
+p70
+aVOwing to its importance, automatic keyphrase extraction has received a lot of attention
+p71
+aVNote that a binary classifier classifies each candidate keyphrase independently of the others, and consequently it does not allow us to determine which candidates are better than the others [ 21 , 55 ]
+p72
+aVConceivably, exact match is an overly strict condition, considering a predicted keyphrase incorrect even if it is a variant of a gold keyphrase
+p73
+aVFor this reason, structural information is likely to facilitate keyphrase extraction from scientific papers and technical reports because of their standard format (i.e.,, standard sections such as abstract, introduction, conclusion, etc
+p74
+aVIn this section, we describe metrics for evaluating keyphrase extraction systems as well as state-of-the-art results on commonly-used datasets
+p75
+aVTo do so, note that Freebase maps a candidate to one or more pre-defined topics, each of which is associated with one or more types
+p76
+aVThe presence of uncorrelated topics implies that it may no longer be possible to exploit relatedness and therefore increases the difficulty of keyphrase extraction
+p77
+aVWe believe that this idea deserves further investigation, as it would allow us to discover a keyphrase that is unique to the foreground u'\u005cu2019' s domain but may have a low tf*idf value
+p78
+aVFor example, a candidate keyphrase has been encoded as (1) a PoS tag sequence , which denotes the sequence of part-of-speech tag(s) assigned to its word(s); and (2) a suffix sequence , which is the sequence of morphological suffixes of its words [ 58 , 42 , 26 ]
+p79
+aVHence, unlike KeyCluster, candidates belonging to a less probable topic are given less importance
+p80
+aVConsequently, it is harder to extract keyphrases from scientific papers, technical reports, and meeting transcripts than abstracts, emails, and news articles
+p81
+aVFor this reason, researchers have experimented with two types of automatic evaluation metrics
+p82
+aVIn contrast, the lack of structural consistency in other types of structured documents (e.g.,, web pages, which can be blogs, forums, or reviews) may render structural information less useful
+p83
+aVFor each node, each of its edges is treated as a u'\u005cu201c' vote u'\u005cu201d' from the other node connected by the edge
+p84
+aVThe reason is simple in a conversation, the topics (i.e.,, its talking points) change as the interaction moves forward in time, and so do the keyphrases associated with a topic
+p85
+aVFirst, an ad-hoc window size cannot capture related candidates that are not inside the window
+p86
+aVFor instance, given the gold keyphrase u'\u005cu201c' neural network u'\u005cu201d' , exact match will consider a predicted phrase incorrect even if it is an expanded version of the gold keyphrase ( u'\u005cu201c' artificial neural network u'\u005cu201d' ) or one of its morphological ( u'\u005cu201c' neural networks u'\u005cu201d' ) or lexical ( u'\u005cu201c' neural net u'\u005cu201d' ) variants
+p87
+aVConsequently, different pruning heuristics have been designed to prune candidates that are unlikely to be keyphrases [ 17 , 29 , 10 , 59 , 40 ]
+p88
+aVCommunityCluster yields much better recall (without losing precision) than extractors such as tf*idf, TextRank, and the Yahoo term extractor
+p89
+aVThe motivation behind the design of R p is simple a system will achieve a perfect R p value if it ranks all the keyphrases above the non-keyphrases
+p90
+aV2007 ) extend Zha u'\u005cu2019' s work by adding two assumptions
+p91
+aVGiven that two systems A and B have the same number of correct predictions, binary preference measure (Bpref) and mean reciprocal rank (MRR) [ 32 ] will award more credit to A than to B if the ranks of the correct predictions in A u'\u005cu2019' s output are higher than those in B u'\u005cu2019' s output
+p92
+aVHuman evaluation has been suggested as a possibility [ 36 ] , but it is time-consuming and expensive
+p93
+aVDifferent learning algorithms have been used to train this classifier, including naïve Bayes [ 12 , 56 ] , decision trees [ 49 , 50 ] , bagging [ 20 ] , boosting [ 18 ] , maximum entropy [ 58 , 26 ] , multi-layer perceptron [ 35 ] , and support vector machines [ 22 , 35 ]
+p94
+a.

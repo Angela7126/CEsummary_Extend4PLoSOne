@@ -1,0 +1,450 @@
+(lp0
+VTo obtain feature values of the first type, we take the RI similarities between the whole essay and each set of prompt adherence keywords from the prompt u'\u005cu2019' s components
+p1
+aVFinally, while features 4 (prompt adherence keywords) and 7 (predicted thesis clarity errors) may by themselves provide useful information to our system, in the presence of the other feature types they tend to be the least important to performance as they are often the first feature types removed
+p2
+aVWe cast the problem of predicting an essay u'\u005cu2019' s prompt adherence score as 13 regression problems, one for each prompt
+p3
+aVThese topics should not diminish the essay u'\u005cu2019' s prompt adherence score because they are at least related to prompt concepts
+p4
+aVFeatures 2 (n-grams), 3 (thesis clarity keywords), and 6 (manually annotated LDA topics) tend to be the most important feature types, as they tend to be the last feature types removed in the ablation subtables
+p5
+aVOur RI feature set necessarily excludes those features from Higgins et al. that are not easily translatable to our problem since we are concerned with an entire essay u'\u005cu2019' s adherence to its prompt rather than with each of its sentences u'\u005cu2019' relatedness to the prompt
+p6
+aVEach essay is represented as an instance whose label is the essay u'\u005cu2019' s true score (one of the values shown in Table 3 ) with up to seven types of features including baseline (Section 4.2) and six other feature types proposed by us (Section 4.3
+p7
+aVFor instance, an essay that has a Relevance to Prompt error or an Incomplete Prompt Response error should intuitively receive a low prompt adherence score
+p8
+aVSince the feature type whose removal yields the best system is always the rightmost entry in a line, the order of column headings indicates the relative importance of the feature types, with the leftmost feature types being most important to performance and the rightmost feature types being least important in the presence of the other feature types
+p9
+aVIn this section, we describe in detail our system for predicting essays u'\u005cu2019' prompt adherence scores
+p10
+aVFor this reason, we introduce features based on these errors to our feature set for prompt adherence scoring 3 3 See our website at http://www.hlt.utdallas.edu/~persingq/ICLE/ for the complete list of error annotations
+p11
+aVSo to see how our system performs by the S u'\u005cu2062' 1 metric if we remove only predicted thesis clarity error features, we would look at the first row of results of Table d (a) under the column headed by the number 7 since predicted thesis clarity errors are the seventh feature type introduced in Section 4
+p12
+aVWhile each of the essays in our data set was previously annotated with these thesis clarity errors, in a realistic setting a prompt adherence scoring system will not have access to these manual error labels
+p13
+aVSince Table 4 shows that when our system includes this feature type (along with all the other feature types), it obtains an S u'\u005cu2062' 1 score of .488, this feature type u'\u005cu2019' s removal costs our system .014 S u'\u005cu2062' 1 points, and thus its inclusion has a beneficial effect on the S u'\u005cu2062' 1 score
+p14
+aVFrom row 1 of Table d (a), we can see that removing feature 4 yields a system with the best S u'\u005cu2062' 1 score in the presence of the other feature types in this row
+p15
+aVFor example, while we identified feature 3 (thesis clarity keywords) as one of the most important feature types generally due to its tendency to have a large beneficial impact on performance, when we are measuring performance using S u'\u005cu2062' 3 , it is the least useful feature type
+p16
+aVIn order to construct manually annotated LDA topic features, we first build 13 topic models, one for each prompt, just as described in the section on LDA topic features
+p17
+aVSince the latter topic is discussed so much in the essay and does not appear to have much to do with the military prompt, this essay should probably get a bad prompt adherence score
+p18
+aVSince error prediction and prompt adherence scoring are related problems, the features we associate with this instance are features 1 - 6 which we have described earlier in this section
+p19
+aVAnd since removing feature 6 harms performance least in the presence of row 2 u'\u005cu2019' s other feature types, we permanently remove both 4 and 6 from our feature set when we generate the third row of results
+p20
+aVThe next five features are similar to the last, with one feature taking on the sum of the contributions to an essay of topics annotated with the number 0, another feature taking on the sum of the contributions to an essay of topics annotated with the number 1, and so on up to 4
+p21
+aVIt should not, however, have a very high prompt adherence score, as the prompt asked the student to discuss whether television is like religion in a particular way, so religion should be at least briefly addressed for an essay to be awarded a high prompt adherence score
+p22
+aVThe top line of each subtable shows what our system u'\u005cu2019' s score would be if we removed just one of the feature types from our system
+p23
+aVThe thesis clarity keyword features described above were intended for the task of determining how clear an essay u'\u005cu2019' s thesis is, but since our goal is instead to determine how well an essay adheres to its prompt, it makes sense to adapt keyword features to our task rather than to adopt keyword features exactly as they have been used before
+p24
+aVWe expect that features based on RI will be useful for prompt adherence scoring because they may help us find text related to the prompt even if some of its concepts have have been rephrased (e.g.,, an essay may talk about u'\u005cu201c' jail u'\u005cu201d' rather than u'\u005cu201c' prison u'\u005cu201d' , which is mentioned in one of the prompts), and because they have already proven useful for the related task of determining which sentences in an essay are related to the prompt [ 7 ]
+p25
+aVHence, it is important to know how performance is measured when building a system for scoring prompt adherence
+p26
+aVFor the sake of our experiments, whenever annotators disagree on an essay u'\u005cu2019' s prompt adherence score, we assign the essay the average of all annotations rounded to the nearest half point
+p27
+aVEach feature u'\u005cu2019' s value is obtained by using the topic model to tell us how much of the essay was spent discussing the feature u'\u005cu2019' s corresponding topic
+p28
+aVAdditionally, our prompt adherence keyword sets do not adopt the notions of primary and secondary groups of keywords for each prompt component, instead collecting all the keywords for a component into one set because u'\u005cu201c' secondary u'\u005cu201d' keywords tend to be things that are important when we are concerned with what a student is saying about the topic rather than just how clearly she said it
+p29
+aVA weakness of the LDA topics feature type is that it may result in a regressor that has trouble distinguishing between an infrequent topic that is adherent to the prompt and one that just represents an irrelevant digression
+p30
+aVRegarding task formulation, while Higgins et al. focus on classifying each sentence as having either good or bad adherence to the prompt, we focus on assigning a prompt adherence score to the entire essay , allowing the score to range from one to four points at half-point increments
+p31
+aVFeature 3 is not the only feature type whose removal sometimes has a beneficial impact on performance
+p32
+aVFor this reason, we permanently remove feature 4 from the system before we generate the results on line 2
+p33
+aVThis being the case, it is interesting to note that while the relative importance of different feature types does not remain exactly the same if we measure performance in different ways, we can see that some feature types tend to be more important than others in a majority of the four scoring metrics
+p34
+aVThis results in what we can think of as a soft clustering of words into 1,000 sets for each prompt, where each set of words represents one of the topics LDA identified being discussed in the essays for that prompt
+p35
+aVWe do this by generating one feature encoding the entire essay u'\u005cu2019' s similarity to the prompt, another encoding the essay u'\u005cu2019' s highest individual sentence u'\u005cu2019' s similarity to the prompt, a third encoding the highest entire essay similarity to one of the prompt sentences, another encoding the highest individual sentence similarity to an individual prompt sentence, and finally one encoding the entire essay u'\u005cu2019' s similarity to a manually rewritten version of the prompt that excludes extraneous material (such as u'\u005cu201c' In his novel Animal Farm, George Orwell wrote, u'\u005cu201d' which is introductory material from the third prompt in Table 1
+p36
+aVThe first five features encode the sum of the contributions to an essay of topics annotated with a number u'\u005cu2265' 1 , the sum of the contributions to an essay of topics annotated with a number u'\u005cu2265' 2 , and so on up to 5
+p37
+aVwhere A j , E j , and E j u'\u005cu2032' are the annotator assigned, system predicted, and rounded system predicted scores 4 4 Since our regressor assigns each essay a real value rather than an actual valid score, it would be difficult to obtain a reasonable S u'\u005cu2062' 1 score without rounding the system estimated score to one of the possible values
+p38
+aVThe greatest of the fractions generated in this way is encoded as a feature because if it has a low value, that indicates the essay u'\u005cu2019' s thesis may not be very relevant to the prompt
+p39
+aVAs our first novel feature, we use the 10,000 most important lemmatized unigram, bigram, and trigram features that occur in the essay
+p40
+aVOur goal in this paper is to develop a computational model for scoring an essay along an under-investigated dimension u'\u005cu2014' prompt adherence
+p41
+aVFor example, words and phrases like u'\u005cu201c' university degree u'\u005cu201d' , u'\u005cu201c' student u'\u005cu201d' , and u'\u005cu201c' real world u'\u005cu201d' are relevant to the first prompt in Table 1 , so it is more likely that an essay adheres to the prompt if they appear in the essay
+p42
+aVOur baseline system for score prediction employs various features based on Random Indexing
+p43
+aVWhile n-gram features do not have exactly the same problem, they would still only notice that these example words are related to the prompt if multiple essays use the same words to discuss these concepts
+p44
+aVFor instance, one thesis clarity keyword feature is computed as follows
+p45
+aVN-grams can be useful for prompt adherence scoring because they can capture useful words and phrases related to a prompt
+p46
+aVFor example, by the time feature 1 gets permanently removed in Table d (c), its removal harms performance by .002 S u'\u005cu2062' 3 points
+p47
+aVAs we can see in Table d (b), the removal of features 4, 5, and 7 improves our system u'\u005cu2019' s S u'\u005cu2062' 2 score by .001 points
+p48
+aVRather than requesting models of 1,000 topics, however, we request models of only 100 topics 2 2 We use 100 topics for each prompt in the manually annotated version of LDA features rather than the 1,000 topics we use in the regular version of LDA features because 1,300 topics are not too costly to annotate, but manually annotating 13,000 topics would take too much time
+p49
+aVIf he was alive at the end of the 20th century, he would replace religion with television u'\u005cu201d' Since the question suggests that students discuss whether television is analogous to religion in this way, our set of prompt adherence keywords for this prompt contains the word u'\u005cu201c' religion u'\u005cu201d' while the previously discussed keyword sets do not
+p50
+aVFor each essay, we therefore attempt to adapt the RI features used by Higgins et al
+p51
+aVHence, a system that predicts the right score only 25% of the time would receive an S u'\u005cu2062' 1 score of 0.75
+p52
+aVThen the most important (primary) and second most important (secondary) words were selected from each prompt component, where a word was considered u'\u005cu201c' important u'\u005cu201d' if it would be a good word for a student to use when stating her thesis about the prompt
+p53
+aVWe do not include a feature for topics annotated with the number 5 because it would always have the same value as the feature for topics u'\u005cu2265' 5
+p54
+aVThis means that 25% of the time, when our system with parameters tuned for optimizing S u'\u005cu2062' 3 is presented with a test essay having a gold standard score of 2.0, it predicts that the essay has a score less than or equal to 3.06
+p55
+aVThese results mean that the greatest improvements our system makes are that it ensures that our score predictions are not too often very far away from an essay u'\u005cu2019' s actual score, as making such predictions would tend to drive up S u'\u005cu2062' 3 , yielding a relative error reduction in S u'\u005cu2062' 3 of 15.8%, and it also ensures a better correlation between predicted and actual scores, thus yielding the 16.6% improvement in P u'\u005cu2062' C
+p56
+aVThe simplest metric, S u'\u005cu2062' 1 , measures the frequency at which a system predicts the wrong score out of the seven possible scores
+p57
+aVTo more closely examine the behavior of our system, in Table 6 we chart the distributions of scores it predicts for essays having each gold standard score
+p58
+aVFortunately, this effect does not occur in any other cases than the two listed above, as most feature types usually have a beneficial or at least neutral impact on our system u'\u005cu2019' s performance
+p59
+aVThough feature 3 is an extreme example, all feature types fluctuate in importance, as we see when we compare their orders of removal among the four ablation subtables
+p60
+aVFor example, consider the prompt u'\u005cu201c' All armies should consist entirely of professional soldiers there is no value in a system of military service u'\u005cu201d' An essay containing words like u'\u005cu201c' peace u'\u005cu201d' , u'\u005cu201c' patriotism u'\u005cu201d' , or u'\u005cu201c' training u'\u005cu201d' are probably not digressions from the prompt, and therefore should not be penalized for discussing these topics
+p61
+aVFor this reason, we construct a new list of keywords for each prompt component, though since prompt adherence is more concerned with what the student says about the topics than it is with whether or not what she says about them is stated clearly, our keyword lists look a little different than the ones discussed above
+p62
+aVThis results in one to three features since a prompt has one to three components
+p63
+aVThe keyword features were formed by first examining the 13 essay prompts, splitting each into its component pieces
+p64
+aVWe can see this is the case by noting that they are not all the least important feature types in their respective subtables as indicated by column order
+p65
+aVHowever, this is not case with Pearson u'\u005cu2019' s correlation coefficient, as the P u'\u005cu2062' C value for essays from all 13 prompts cannot be simplified as a weighted sum of the P u'\u005cu2062' C values obtained on each individual prompt
+p66
+aVSince the essays vary greatly in length, we normalize each essay u'\u005cu2019' s set of n-gram features to unit length
+p67
+aVThis is because a thesis like u'\u005cu201c' Television is bad u'\u005cu201d' can be stated very clearly without making any reference to religion at all, and so an essay with a thesis like this can potentially have a very high thesis clarity score
+p68
+aVFeatures like these should give the regressor a better idea how much of an essay is composed of prompt-related arguments and discussion and how much of it is irrelevant to the prompt, even if some of the topics occurring in it are too infrequent to judge just from training data
+p69
+aVFeatures are then computed based on these keywords
+p70
+aVThus, we can see what happens when we remove both feature 4 and feature 5 by looking at the second entry in row 2
+p71
+aVSince RI does not provide a straightforward way to measure similarity between groups of words such as sentences or essays, we use Higgins and Burstein u'\u005cu2019' s [ 8 ] method to generate these features
+p72
+aVFor other scoring metrics, we only round the predictions to 1.0 or 4.0 if they fall outside the 1.0 - 4.0 range respectively for essay j , and N is the number of essays
+p73
+aVNext, we introduce six types of novel features
+p74
+aVFrom this table, we see that our system has a strong bias toward predicting more frequent scores as there are no numbers less than 3.0 in the table, and about 93.7% of all essays have gold standard scores of 3.0 or above
+p75
+aVIf a training essay is written in response to p , it will be used to generate a training instance whose label is 1 if e was annotated for it or 0 otherwise
+p76
+aVFor this reason, we introduce Latent Dirichlet Allocation (LDA) [ 2 ] features
+p77
+aV7 7 These numbers are calculated B - O B - P where B is the baseline system u'\u005cu2019' s score, O is our system u'\u005cu2019' s score, and P is a perfect score
+p78
+aVSo since the lemmatized version of the third component of the second prompt in Table 1 is u'\u005cu201c' it should rehabilitate they u'\u005cu201d' , u'\u005cu201c' rehabilitate u'\u005cu201d' was selected as a primary keyword and u'\u005cu201c' society u'\u005cu201d' as a secondary keyword
+p79
+aVAs we will see below, S u'\u005cu2062' 1 , S u'\u005cu2062' 2 , and S u'\u005cu2062' 3 are error metrics, so lower scores imply better performance
+p80
+aVWe use as our corpus the 4.5 million word International Corpus of Learner English (ICLE) [ 5 ] , which consists of more than 6000 essays written by university undergraduates from 16 countries and 16 native languages who are learners of English as a Foreign Language
+p81
+aVSo for example, the five most important words in the most frequently discussed topic for the military prompt we mentioned above are u'\u005cu201c' man u'\u005cu201d' , u'\u005cu201c' military u'\u005cu201d' , u'\u005cu201c' service u'\u005cu201d' , u'\u005cu201c' pay u'\u005cu201d' , and u'\u005cu201c' war u'\u005cu201d'
+p82
+aVNote that each of the c i values can be tuned independently because a c i value that is optimal for predicting scores for p i essays with respect to any of the error performance measures is necessarily also the optimal c i when measuring that error on essays from all prompts
+p83
+aVAnother interesting point to note about this table is that the difference in error weighting between the S u'\u005cu2062' 2 and S u'\u005cu2062' 3 scoring metrics appears to be having its desired effect, as every entry in the S u'\u005cu2062' 3 subtable is less than its corresponding entry in the S u'\u005cu2062' 2 subtable due to the greater penalty the S u'\u005cu2062' 3 metric imposes for predictions that are very far away from the gold standard scores
+p84
+aVAs a result, we first need to predict which of these errors is present in each essay
+p85
+aVWe form two types of features from prompt adherence keywords
+p86
+aVAs an example of what is meant by a u'\u005cu201c' component piece u'\u005cu201d' , consider the first prompt in Table 1
+p87
+aVThis metric reflects the idea that a system that predicts scores close to the annotator-assigned scores should be preferred over a system whose predictions are further off, even if both systems estimate the correct score at the same frequency
+p88
+aVAs mentioned earlier, for each prompt p i , we train a linear regressor r i using LIBSVM with regularization parameter c i
+p89
+aVThis results in one to three features, as some prompts have one component while others have up to three
+p90
+aVAs an example of how to read this table, consider the number 3.06 appearing in row 2.0 in the .25 column of the S u'\u005cu2062' 3 region
+p91
+aVFor that reason, we round the estimated score to the nearest of the seven scores the human annotators were permitted to assign (1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0) only when calculating S u'\u005cu2062' 1
+p92
+aVSince progress in prompt adherence modeling is hindered in part by the lack of a publicly annotated corpus, we believe that our data set will be a valuable resource to the NLP community
+p93
+aVThis is because an infrequent topic may not appear in the training set often enough for the regressor to make this judgment
+p94
+aVA major weakness of many existing scoring engines such as the Intelligent Essay Assessor u'\u005cu2122' [ 13 ] is that they adopt a holistic scoring scheme, which summarizes the quality of an essay with a single score and thus provides very limited feedback to the writer
+p95
+aVIn this section, we evaluate our system for prompt adherence scoring
+p96
+aVFor each component, we count the number of prompt adherence keywords the essay contains
+p97
+aVOn the other hand, we employ a large variety of features, including lexical and knowledge-based features that encode how well the concepts in an essay match those in the prompt, LDA-based features that provide semantic generalizations of lexical features, and u'\u005cu201c' error type u'\u005cu201d' features that encode different types of errors the writer made that are related to prompt adherence
+p98
+aVOur next set of features consists of the keyword features we introduced in our previous work on essay thesis clarity scoring [ 19 ]
+p99
+aVIn order to obtain an optimal result as measured by P u'\u005cu2062' C , we jointly tune the c i parameters to optimize the P u'\u005cu2062' C value achieved by our system on the same held-out validation data
+p100
+aV91% of the ICLE texts are argumentative
+p101
+aVAn essay with a high prompt adherence score consistently remains on the topic introduced by the prompt and is free of irrelevant digressions
+p102
+aVTo gain insight into how much impact each of the feature types has on our system, we perform feature ablation experiments in which we remove the feature types from our system one-by-one
+p103
+aV2004 ) to our problem of prompt adherence scoring
+p104
+aVTable 3 shows the number of essays that receive each of the seven scores for prompt adherence
+p105
+aVAs far as the approach is concerned, Higgins et al. adopt a knowledge-lean approach to the task, where almost all of the features they employ are computed based on a word-based semantic similarity measure known as Random Indexing [ 10 ]
+p106
+aVWe introduce the manually annotated LDA topics feature type to address this problem
+p107
+aVIf he was alive at the end of the 20th century, he would replace religion with television, u'\u005cu201d' students sometimes write essays about all the evils of television, forgetting that their essay is only supposed to be about whether it is u'\u005cu201c' the opium of the masses u'\u005cu201d'
+p108
+aVWe select a subset consisting of 830 argumentative essays from the ICLE to annotate for training and testing of our essay prompt adherence scoring system
+p109
+aVHowever, an exact solution to this optimization problem is computationally expensive, as there are too many ( 7 13 ) possible combinations of c values to exhaustively search
+p110
+aVFive-fold cross-validation results on prompt adherence score prediction are shown in Table 4
+p111
+aVPrompt adherence refers to how related an essay u'\u005cu2019' s content is to the prompt for which it was written
+p112
+aVTo compute another of the thesis clarity keyword features, the numbers of combined primary and secondary keywords the essay contains from each component of its prompt are counted
+p113
+aVThen, when training our regressor for prompt adherence scoring, we add the following features to our instances
+p114
+aVFirst, we develop a scoring model for the prompt adherence dimension on student essays using a feature-rich approach
+p115
+aVFrom these features, our regressor should be able to learn which topics are important to a good prompt adherent essay
+p116
+aVIn our previous work on essay thesis clarity scoring [ 19 ] , we identified five classes of errors that detract from the clarity of an essay u'\u005cu2019' s thesis
+p117
+aVWhile there is a tendency for some feature types to always be important (or unimportant) regardless of which scoring metric is used to measure performance, the relative importance of different feature types does not always remain consistent if we measure performance in different ways
+p118
+aVWe divide this number by the number of prompt adherence keywords we identified from the component
+p119
+aVEssay grading software that provides feedback along multiple dimensions of essay quality such as E- rater /Criterion [ 1 ] has also begun to emerge
+p120
+aVThis contrasts with previous work on prompt adherence essay scoring, where the corpus is annotated with a binary decision (i.e.,, good or bad ) (e.g.,, Higgins et al
+p121
+aVThe results from our system, which uses all seven feature types described in Section 4, are shown in row 2 of the table
+p122
+aVIn contrast, P u'\u005cu2062' C is a correlation metric, so higher correlation implies better performance
+p123
+aVConsequently, we find a local maximum by employing the simulated annealing algorithm [ 11 ] , altering one c i value at a time to optimize P u'\u005cu2062' C while holding the remaining parameters fixed
+p124
+aVWe ask human annotators to score each of the 830 argumentative essays along the prompt adherence dimension
+p125
+aVWe hypothesize that these errors, though originally intended for thesis clarity scoring, could be useful for prompt adherence scoring as well
+p126
+aVWe iteratively remove the feature type that yields a system with the best performance in this way until we get to the last line, where only one feature type is used to generate each result
+p127
+aVTo our knowledge, little work has been done on scoring the prompt adherence of student essays since Higgins et al
+p128
+aVIn order to construct our LDA features, we first collect all essays written in response to each prompt into its own set
+p129
+aVWhile both types of features measure how much each prompt component was discussed in an essay, they differ in how they encode the information
+p130
+aVBut the various measures of keyword similarities described above will at best not notice that anything related to the prompt is being discussed, and at worst, this might have effects like lowering some of the RI similarity scores, thereby probably lowering the prompt adherence score the regressor assigns to the essay
+p131
+aVA positive (negative) P u'\u005cu2062' C implies that the two sets of predictions are positively (negatively) correlated
+p132
+aVA problem with the features we have introduced up to this point is that they have trouble identifying topics that are not mentioned in the prompt, but are nevertheless related to the prompt
+p133
+aVBelow we give an overview of these keyword features and motivate why they are potentially useful for prompt adherence scoring
+p134
+aVUsing a different regressor for each prompt captures the fact that it may be easier for an essay to adhere to some prompts than to others, and common problems students have writing essays for one prompt may not apply to essays written in response to another prompt
+p135
+aVThe RI similarity measure is first taken between the essay and each group of the prompt u'\u005cu2019' s primary keywords
+p136
+aVThough annotators exactly agree on the prompt adherence score of an essay only 38% of the time, the scores they apply fall within 0.5 points in 66% of essays and within 1.0 point in 89% of essays
+p137
+aVFor those feature types whose effect on performance is neutral in the first lines of ablation results (feature 4 in S u'\u005cu2062' 1 , features 3, 5, and 7 in S u'\u005cu2062' 2 , and features 1, 4, 5, and 7 in S u'\u005cu2062' 3 ), it is important to note that their neutrality does not mean that they are unimportant
+p138
+aVOn the first line, this table shows that our baseline system, which recall uses only various RI features, predicts the wrong score 51.7% of the time
+p139
+aVThe number here tells us that our system u'\u005cu2019' s S u'\u005cu2062' 1 score without this feature type is .502
+p140
+aVNevertheless, our system does not rely entirely on bias, as evidenced by the fact that each column in the table has a tendency for its scores to ascend as the gold standard score increases, implying that our system has some success at predicting lower scores for essays with lower gold standard prompt adherence scores
+p141
+aVWe construct 1,000 features from this topic model, one for each topic
+p142
+aVUsing regression captures the fact that some pairs of scores are more similar than others (e.g.,, an essay with a prompt adherence score of 3.5 is more similar to an essay with a score of 4.0 than it is to one with a score of 1.0
+p143
+aVUsing these annotations alongside the topic distribution for each essay that the topic models provide us, we construct ten features
+p144
+aVAnnotators evaluated how well each essay adheres to its prompt using a numerical score from one to four at half-point increments (see Table 2 for a description of each score
+p145
+aVNote that this feature type exploits unlabeled data it includes all essays in the ICLE responding to our prompts, not just those in our smaller annotated 830 essay dataset
+p146
+aVThese examples illustrate that under some scoring metrics, the inclusion of some feature types is actively harmful to performance
+p147
+aVRelevance to Prompt
+p148
+aVIt merely means that they do not improve performance in the presence of other feature types
+p149
+aVRecent work addresses this problem by scoring a particular dimension of essay quality such as coherence [ 16 ] , technical errors, organization [ 18 ] , and thesis clarity [ 19 ]
+p150
+aVSecond, in order to stimulate further research on this task, we make our data set consisting of prompt adherence annotations of 830 essays publicly available
+p151
+aVIf this feature has a low value, that suggests that the student ignored the prompt component from which the value came when writing the essay
+p152
+aVWe obtain feature values of the second type as follows
+p153
+aVIncomplete Prompt Response
+p154
+aVThe S u'\u005cu2062' 2 metric measures the average distance between a system u'\u005cu2019' s score and the actual score
+p155
+aVFeatures 1 (RI) and 5 (LDA topics) are of middling importance, with neither ever being removed first or last, and each tending to have a moderate effect on performance
+p156
+aVThis results in five additional features, one for each error
+p157
+aVWe then go through all 13 lists of 100 topics as represented by their top ten words, manually annotating each topic with a number from 0 to 5 representing how likely it is that the topic is adherent to the prompt
+p158
+aV1 1 Space limitations preclude a complete listing of the thesis clarity keyword features
+p159
+aVWe add a binary feature indicating the presence or absence of each error
+p160
+aVOr in the case of test essays, the feature takes on a real value from 0 to 1 indicating how likely the classifier thought it was that the essay had each of the errors
+p161
+aVResults of the ablation experiments when performed using the four scoring metrics are shown in Table d
+p162
+aVHence, our annotation scheme not only provides a finer-grained distinction of prompt adherence (which can be important in practice), but also makes the prediction task more challenging
+p163
+aVWe then use the MALLET [ 15 ] implementation of LDA to build a topic model of 1,000 topics around each of these sets of essays
+p164
+aVFor example, in essays written in response to the prompt u'\u005cu201c' Marx once said that religion was the opium of the masses
+p165
+aVAutomated essay scoring, the task of employing computer technology to evaluate and score written text, is one of the most important educational applications of natural language processing (NLP) (see Shermis and Burstein ( 2003 ) and Shermis et al
+p166
+aVWe also use the MALLET-generated topic model to tell us how much of each essay is spent discussing each of the 1,000 topics
+p167
+aVA topic labeled 5 is very likely to be related to the prompt, where a topic labeled 0 appears totally unrelated
+p168
+aVThe S u'\u005cu2062' 3 metric measures the average square of the distance between a system u'\u005cu2019' s score predictions and the annotator-assigned scores
+p169
+aVThe test instances are created in the same way as the training instances
+p170
+aVA classification system, by contrast, may sometimes believe that the scores 1.0 and 4.0 are most likely for a particular essay, even though these scores are at opposite ends of the score range
+p171
+aVWe determine the u'\u005cu201c' most important u'\u005cu201d' n-gram features using information gain computed over the training data [ 23 ]
+p172
+aVFifteen native languages are represented in the set of annotated essays
+p173
+aVInstances are presented to classifier for prompt p for error e in the following way
+p174
+aVFor an example, we earlier alluded to the problem of students merely discussing all the evils of television for the prompt u'\u005cu201c' Marx once said that religion was the opium of the masses
+p175
+aVTable 1 shows three of the 13 topics selected for annotation
+p176
+aVThe same effect occurs in Table d (c) when we remove features 4, 7, and 3
+p177
+aVTo do this, we train five maximum entropy classifiers for each prompt, one for each of the five thesis clarity errors, using MALLET u'\u005cu2019' s [ 15 ] implementation of maximum entropy classification
+p178
+aVThe feature then gets assigned the lowest of these values
+p179
+aVWhile our system yields improvements by all four measures, its improvement over the baseline S u'\u005cu2062' 1 score is not significant
+p180
+aVOur annotators were selected from over 30 applicants who were familiarized with the scoring rubric and given sample essays to score
+p181
+aVThe thesis leaves some part of a multi-part prompt unaddressed
+p182
+aVAfter creating training instances for prompt p i , we train a linear regressor, r i , with regularization parameter c i for scoring test essays written in response to p i using the linear SVM regressor implemented in the LIBSVM software package [ 3 ]
+p183
+aVIn particular, it is not clear which dimension of an essay (e.g.,, style, coherence, relevance) a score should be attributed to
+p184
+aVOur regressors may assign an essay any score in the range of 1.0 - 4.0
+p185
+aVIts predictions are off by an average of .368 points, and the average squared distance between its predicted score and the actual score is .234
+p186
+aVThe last metric, P u'\u005cu2062' C , computes Pearson u'\u005cu2019' s correlation coefficient between a system u'\u005cu2019' s predicted scores and the annotator-assigned scores
+p187
+aVThe classifier is then used to generate probabilities telling us how likely it is that each test essay has error e
+p188
+aVThe apparent thesis u'\u005cu2019' s weak relation to the prompt causes confusion
+p189
+aVThese numbers are then divided by the total count of primary and secondary features in their respective components
+p190
+aVIn addition, its predicted scores and the actual scores have a Pearson correlation coefficient of 0.233
+p191
+aVAnalysis reveals that the Pearson u'\u005cu2019' s correlation coefficient computed over these doubly annotated essays is 0.243
+p192
+aVIt also gives more modest improvements in how frequently exactly the right score is predicted ( S u'\u005cu2062' 1 ) and is better at predicting scores closer to the actual scores ( S u'\u005cu2062' 2
+p193
+aVThe model might tell us, for example, that a particular essay written on the military prompt spends 35% of the time discussing the u'\u005cu201c' man u'\u005cu201d' , u'\u005cu201c' military u'\u005cu201d' , u'\u005cu201c' service u'\u005cu201d' , u'\u005cu201c' pay u'\u005cu201d' , and u'\u005cu201c' war u'\u005cu201d' topic and 65% of the time discussing a topic whose most important words are u'\u005cu201c' fully u'\u005cu201d' , u'\u005cu201c' count u'\u005cu201d' , u'\u005cu201c' ordinary u'\u005cu201d' , u'\u005cu201c' czech u'\u005cu201d' , and u'\u005cu201c' day u'\u005cu201d'
+p194
+aVFurthermore, its removal increases the S u'\u005cu2062' 3 score by a small amount, meaning that its inclusion actually makes our system perform worse with respect to S u'\u005cu2062' 3
+p195
+aVNevertheless, there are major differences between Higgins et al u'\u005cu2019' s work and our work with respect to both the way the task is formulated and the approach
+p196
+aVAfter training the classifiers, we use them to classify the test set essays
+p197
+aVTo ensure consistency in annotation, we randomly select 707 essays to have graded by multiple annotators
+p198
+aVThe thesis leaves out an important detail needed to understand the writer u'\u005cu2019' s point
+p199
+aVStudents are less likely to make an analogous mistake when writing for the prompt u'\u005cu201c' Crime does not pay u'\u005cu201d'
+p200
+aVPerfect scores for error measures and P u'\u005cu2062' C are 0 and 1 respectively
+p201
+aVRandom Indexing (RI) is u'\u005cu201c' an efficient, scalable and incremental alternative u'\u005cu201d' [ 20 ] to Latent Semantic Indexing [ 4 , 12 ] which allows us to automatically generate a semantic similarity measure between any two words
+p202
+aVThe intuition behind this system is that not only should we prefer a system whose predictions are close to the annotator scores, but we should also prefer one whose predictions are not too frequently very far away from the annotator scores
+p203
+aVThe six who were most consistent with the expected scores were given additional essays to annotate
+p204
+aVThe thesis describes a position on the topic without making it clear that this is the position the writer supports
+p205
+aVAll SVM-specific learning parameters are set to their default values except c i , which we tune to maximize performance on held-out validation data
+p206
+aVWe train our RI model on over 30 million words of the English Gigaword corpus [ 17 ] using the S-Space package [ 9 ]
+p207
+aVTo optimize our system u'\u005cu2019' s performance on the three error measures described previously, we use held-out validation data to independently tune each of the c i values 5 5 For parameter tuning, we employ the following values c i may be assigned any of the values 10 0 10 1 , 10 2 , 10 3 , 10 4 , 10 5 , or 10 6
+p208
+aVIn each experiment, we use 3 5 of our labeled essays for model training, another 1 5 for parameter tuning, and the final 1 5 for testing
+p209
+aVThe thesis is phrased oddly, making it hard to understand the writer u'\u005cu2019' s point
+p210
+aVAll the results we report are obtained via five-fold cross-validation experiments
+p211
+aVThe components of this prompt would be u'\u005cu201c' Most university degrees are theoretical u'\u005cu201d' , u'\u005cu201c' Most university degrees do not prepare students for the real world u'\u005cu201d' , and u'\u005cu201c' Most university degrees are of very little value u'\u005cu201d'
+p212
+aV[ 7 , 6 ] , Louis and Higgins ( 2010 )
+p213
+aVThese three scores are given by
+p214
+aV2010 ) for an overview of the state of the art in this task
+p215
+aVSee our website at http://www.hlt.utdallas.edu/~persingq/ICLE/ for the complete list
+p216
+aVOur system obtains S u'\u005cu2062' 1 , S u'\u005cu2062' 2 , S u'\u005cu2062' 3 , and P u'\u005cu2062' C scores of .488, .348, .197, and .360 respectively, yielding a significant improvement over the baseline with respect to S u'\u005cu2062' 2 , S u'\u005cu2062' 3 , and P u'\u005cu2062' C with p 0.05, p 0.01, and p 0.06 respectively 6 6 All significance tests are paired t -tests
+p217
+aVWe employ four evaluation metrics
+p218
+aVIn sum, our contributions in this paper are two-fold
+p219
+aVWriter Position
+p220
+aVMissing Details
+p221
+aVConfusing Phrasing
+p222
+aVP u'\u005cu2062' C ranges from - 1 to 1
+p223
+aV2004
+p224
+a.

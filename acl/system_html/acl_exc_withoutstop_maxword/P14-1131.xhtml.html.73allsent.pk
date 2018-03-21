@@ -1,0 +1,611 @@
+(lp0
+VThe cosine of two PPR vectors can be used as a similarity measure for the corresponding nodes [ 12 , 1 ]
+p1
+aVLater on, we will give a matrix formulation to compare CoSimRank with SimRank
+p2
+aVOur key observation is that to compute the similarity of two nodes, we need not consider all other nodes in the graph as SimRank does; instead, CoSimRank starts random walks from the two nodes and computes their similarity at each time step
+p3
+aVCoSimRank can be used to compute many variations of basic node similarity u'\u005cu2013' including similarity for graphs with weighted and typed edges and similarity for sets of nodes
+p4
+aVWe propose CoSimRank as an efficient algorithm for computing the similarity of nodes in a graph
+p5
+aVUnfortunately, SimRank has time complexity u'\u005cud835' u'\u005cudcaa' u'\u005cu2062' ( n 3 ) (where n is the number of nodes in the graph) and therefore does not scale to the large graphs that are typical of NLP
+p6
+aVThe extension of CoSimRank to similarity across graphs is important for the application of bilingual lexicon extraction given a set of correspondences between nodes in two graphs A and B (corresponding to two different languages), a pair of nodes ( a u'\u005cu2208' A , b u'\u005cu2208' B ) is a good candidate for a translation pair if their node similarity is high
+p7
+aVIn summary, CoSimRank and SimRank have similar space and time complexities for computing all n 2 similarities
+p8
+aVIf d k , then the time complexity of CoSimRank is u'\u005cud835' u'\u005cudcaa' u'\u005cu2062' ( k 2 u'\u005cu2062' n
+p9
+aVThe novelty is that we compute similarity for vectors that are induced using a new algorithm, so that the similarity measurement is much more efficient when an application only needs a fraction of all u'\u005cud835' u'\u005cudcaa' u'\u005cu2062' ( n 2 ) pairwise similarities
+p10
+aVSpace complexity for computing k 2 similarities is u'\u005cud835' u'\u005cudcaa' u'\u005cu2062' ( k u'\u005cu2062' n ) since we need only store k vectors, not the complete similarity matrix
+p11
+aVSimRank is at a disadvantage because it computes all similarities in the graph regardless of the size of the test set; it is particularly inefficient on synonym extraction because the English graph contains a large number of edges (see Table 1
+p12
+aVLike CoSimRank, PPR+cos is efficient when computing single node pair similarities; we therefore use it as one of our baselines below
+p13
+aVWe will see in Section 5 that this formulation is the basis for a very efficient version of CoSimRank
+p14
+aVApart from SimRank, extensions of PageRank are the main methods for computing the similarity of nodes in graphs in NLP (e.g.,, Hughes and Ramage ( 2007 ) , Agirre et al
+p15
+aVWe will show now that the basic CoSimRank algorithm can be extended in a number of ways and is thus a flexible tool for different NLP applications
+p16
+aVLet p u'\u005cu2062' ( i ) be the PPR vector of node i
+p17
+aVCoSimRank is better than PPR+cos on both evaluations, but as this test set is very small, the results are not significant
+p18
+aVFor the more typical case that we only want to compute a fraction of all similarities, we have recast the global SimRank formulation as a local CoSimRank formulation
+p19
+aVIf we only compute a single similarity, then the complexity is u'\u005cud835' u'\u005cudcaa' u'\u005cu2062' ( d u'\u005cu2062' n
+p20
+aVIf the matrix formulation cannot be used because the u'\u005cud835' u'\u005cudcaa' u'\u005cu2062' ( n 2 ) similarity matrix is too big for available memory, then we can compute all similarities in batches u'\u005cu2013' and if desired in parallel u'\u005cu2013' whose size is chosen such that the vectors of each batch still fit in memory
+p21
+aVPPR+cos performed best except for a new similarity measure based on commute time
+p22
+aVWhereas SimRank sets each of these entries back to one at each iteration, CoSimRank adds one
+p23
+aV2006 ) introduce a similarity measure that is also based on the idea that nodes are similar when their neighbors are, but that is designed for bipartite graphs
+p24
+aVThus, when computing the two similarity measures iteratively, the diagonal element ( i , i ) will be set to 1 by both methods for those initial iterations for which this entry is 0 for c u'\u005cu2062' A u'\u005cu2062' S ( k - 1 ) u'\u005cu2062' A T (i.e.,, before applying either max or add
+p25
+aVThus, we have reduced SimRank u'\u005cu2019' s cubic time complexity to a quadratic time complexity for CoSimRank or u'\u005cu2013' assuming that the average degree d does not depend on n u'\u005cu2013' SimRank u'\u005cu2019' s quadratic time complexity to linear time complexity for the case of computing few similarities
+p26
+aVFor lexicon extraction, we use the same parameters as in the synonym extraction task for all four similarity measures
+p27
+aVOur motivation for this application is that two words that are synonyms of each other should have similar lexical neighbors and that two words that are translations of each other should have neighbors that correspond to each other; thus, in each case the nodes should be similar in the graph-theoretic sense and CoSimRank should be able to identify this similarity
+p28
+aV8 ) have time complexity u'\u005cud835' u'\u005cudcaa' u'\u005cu2062' ( n 3 ) or u'\u005cu2013' if we want to take the higher efficiency of computation for sparse graphs into account u'\u005cu2013' u'\u005cud835' u'\u005cudcaa' u'\u005cu2062' ( d u'\u005cu2062' n 2 ) where n is the number of nodes and d the average degree
+p29
+aVThis is also true for CoSimRank, but it seems that CoSimRank is more stable because we compare more than one vector
+p30
+aVSince the original version of SimRank [ 15 ] has complexity u'\u005cud835' u'\u005cudcaa' u'\u005cu2062' ( n 4 ) , many extensions have been proposed to speed up its calculation
+p31
+aVWe formalize this by defining CoSimRank s u'\u005cu2062' ( i , j ) as follows
+p32
+aVOne reason CoSimRank is efficient is that we need only compute a few iterations of the random walk
+p33
+aVWe first first give an intuitive introduction of CoSimRank as a Personalized PageRank (PPR) derivative
+p34
+aVHaveliwala ( 2002 ) introduced Personalized PageRank u'\u005cu2013' or topic-sensitive PageRank u'\u005cu2013' based on the idea that the uniform damping vector p ( 0 ) can be replaced by a personalized vector, which depends on node i
+p35
+aV4 4 We achieved better results for CoSimRank by optimizing the damping factor, but in this paper, we only present results for a fixed damping factor of 0.8
+p36
+aVSimRank is based on the simple intuition that nodes in a graph should be considered as similar to the extent that their neighbors are similar
+p37
+aVThe algorithm we propose below is an order of magnitude faster in such applications because it is based on a local formulation of the similarity measure
+p38
+aVAs a result, the computational time was approximately 30 minutes per test word, so this method is even slower than SimRank for our application
+p39
+aVThis measure s u'\u005cu2062' ( i , j ) looks at the probability that a random walker is on a certain edge after an unlimited number of steps
+p40
+aVWe do not compare against this new measure as it uses the graph Laplacian and so cannot be computed for a single node pair
+p41
+aVLooking at Table 1 , we see that there is only one edge type connecting adjectives
+p42
+aVWe remove a search keyword from the seed dictionary before calculating similarities for it, something that the architecture of CoSimRank makes easy because we can use a different seed dictionary S ( 0 ) for every keyword
+p43
+aVHence our algorithm will incorrectly translate it back to golf
+p44
+aVIf all three of them agreed on one word as being a synonym in at least one meaning, we added this as a correct answer to the test set
+p45
+aVSo we are doomed to fail if the original English word is a less common translation of an ambiguous German word
+p46
+aVA similar approach for word embeddings was published by Mikolov et al
+p47
+aVWe are not including this method in our experiments, but we will give the equation here, as traditional document similarity measures (e.g.,, cosine similarity) perform poorly on this task although there also are known alternatives with good results [ 30 ]
+p48
+aVWe can prevent this type of spurious similarity by taking into account the path the random surfer took to get to a particular node
+p49
+aVWe tried a number of different ways of modifying it for weighted graphs i) running the random walks with the weighted adjacency matrix as Markov matrix, (ii) storing the weight (product of each edge weight) of a random walk and using it as a factor if two walks meet and (iii) a combination of both
+p50
+aVAs the PPR vectors have only positive values, we can easily see in Eq
+p51
+aVWe use a seed dictionary of 12,630 word pairs to establish node-node correspondences between the two graphs
+p52
+aVThis gold standard lists a single word as the correct synonym even if there are several equally acceptable near-synonyms (see Table 3 for examples
+p53
+aVWe use TS68 , a test set of 68 synonym pairs published by Minkov and Cohen ( 2012 ) for evaluation
+p54
+aVThis effect is only visible on the larger test set (lexicon extraction) because the general computation overhead is about the same on a smaller test set
+p55
+aVAs we can see in Table 7 , we also face the problems discussed by Laws et al
+p56
+aVThese algorithms are often based on PageRank [ 2 ] and other centrality measures (e.g.,, [ 7 ]
+p57
+aVThis offers large savings in computation time if we only need the similarities of a small subset of all n 2 node similarities
+p58
+aVMost of the 226 missing word pairs are adverbs, prepositions and plural forms that are not covered by our graphs due to the construction algorithm we use lemmatization, restriction to adjectives, nouns and verbs etc
+p59
+aVThus, CoSimRank has the added advantage of being a flexible tool for different types of applications
+p60
+aVMRR is equivalent to MAP as reported by Minkov and Cohen ( 2012 ) when there is only one correct answer.) Their best number (0.59) is better than our one-synonym result; however, they performed manual postprocessing of results u'\u005cu2013' e.g.,, discarding words that are morphologically or semantically related to other words in the list u'\u005cu2013' so our fully automatic results cannot be directly compared
+p61
+aVHere we address inducing a bilingual lexicon from a seed set based on grammatical relations found by a parser
+p62
+aVSo law and dress are similar because of the node tailor
+p63
+aVHowever, the PPR vector of law will also have a non-zero weight for tailor
+p64
+aVHughes and Ramage ( 2007 ) find that PPR+cos has high correlation with human similarity judgments on WordNet-based graphs
+p65
+aVAs a result, time and space complexities are much improved
+p66
+aVFor example, the English word gulf was translated by Google to Golf , but the most common sense of Golf is the sport
+p67
+aVIf an upper bound of 1 is desired for s u'\u005cu2062' ( i , j ) (instead of 1 / ( 1 - c ) ), then we can use s u'\u005cu2032'
+p68
+aVThe results on TS774 can be considered conservative since only one translation is accepted as being correct
+p69
+aVBy providing some useful extensions, we demonstrate the great flexibility of CoSimRank (Section 5
+p70
+aVWe use their Multi-Edge Extraction (MEE) algorithm as one of our baselines below
+p71
+aV2010 the algorithm sometimes picks cohyponyms (which can still be seen as reasonable) and antonyms (which are clear errors
+p72
+aVThe actual wall clock time was significantly lower as we used up to 64 CPUs
+p73
+aVThe use of weighted edges was first proposed in the PageRank patent
+p74
+aVA similar graph of dependency structures was built by Minkov and Cohen ( 2008
+p75
+aVConsequently, we compare against the two main methods for this task in NLP
+p76
+aVIt is not obvious how to design a lower-complexity version of SimRank for this case
+p77
+aVSince our vectors are probability vectors, we have
+p78
+aVWe therefore do not review graph-based methods that make extensive use of supervised learning (e.g.,, de Melo and Weikum ( 2012 )
+p79
+aVFor CoSimRank, we compute the k PPR vectors in u'\u005cud835' u'\u005cudcaa' u'\u005cu2062' ( k u'\u005cu2062' d u'\u005cu2062' n ) (Eq
+p80
+aVWe can interpret S ( 0 ) as a change of basis
+p81
+aVThis is potentially problematic as the example in Figure 1 shows
+p82
+aVAdditionally, TS774 was created by translating English words into German (using Google translate
+p83
+aVIn Section 4 , we compare CoSimRank and SimRank
+p84
+aVThe cosine of two vectors u and v is computed by dividing the inner product u'\u005cu27e8' u , v u'\u005cu27e9' by the lengths of the vectors
+p85
+aVNote that the personalization vector p ( 0 ) was eliminated, but is still present as the starting vector of the iteration
+p86
+aVWe also know from elementary functional analysis that the 1-norm is the biggest of all p-norms and so one has u'\u005cu2225' p ( k ) u'\u005cu2225' u'\u005cu2264' 1
+p87
+aVIt is straightforward and easy to implement by replacing the row normalized adjacency matrix A with an arbitrary stochastic matrix P
+p88
+aVCoSimRank can either be interpreted as an efficient version of SimRank or as a version of Personalized PageRank for similarity measurement
+p89
+aVIn summary, modifications proposed for SimRank (weighted and typed edges, similarity across graphs) as well as modifications proposed for PageRank (sets of nodes) can also be applied to CoSimRank
+p90
+aVWe will refer to this measure as PPR+cos
+p91
+aVThis paper introduces CoSimRank, 1 1 Code available at code.google.com/p/cistern a new graph-theoretic algorithm for computing node similarity that combines features of SimRank and PageRank
+p92
+aVCoSimRank can also be used to compute the similarity s u'\u005cu2062' ( V , W ) of two sets V and W of nodes, e.g.,, short text snippets
+p93
+aVBoth CoSimRank methods outperform SimRank significantly (see Table 4
+p94
+aV7 ) and CoSimRank (Eq
+p95
+aVFor CoSimRank, we need only compute five iterations to reach convergence, but we have to compute a vector similarity in each iteration
+p96
+aVCompared to SimRank, CoSimRank is more than 40 times faster on synonym extraction and six times faster on lexicon extraction
+p97
+aVCoSimRank and SimRank have the same P@1 and P@10 accuracy (although they differed on some decisions
+p98
+aVThis makes CoSimRank a very flexible similarity measure
+p99
+aVThe sum of all similarities is the value of CoSimRank, i.e.,, the final similarity
+p100
+aVPPR+cos u'\u005cu2019' s performance at 14.8 u'\u005cu2062' % correct translations is much lower than SimRank and CoSimRank
+p101
+aV2 ) and compute the k 2 similarities in u'\u005cud835' u'\u005cudcaa' u'\u005cu2062' ( k 2 u'\u005cu2062' n ) (Eq
+p102
+aVThe matrix formulation of CoSimRank is
+p103
+aVThe counteracting effects of fewer iterations and more vector similarity computations can give either CoSimRank or PPR+cos an advantage, as is the case for synonym extraction and lexicon extraction, respectively
+p104
+aVThe analog of CoSimRank (Eq
+p105
+aVThese approaches use at least one of cosine similarity, PageRank and SimRank
+p106
+aV7 and 8 , we see that SimRank and CoSimRank are very similar except that they initialize the similarities on the diagonal differently
+p107
+aVWe compare CoSimRank with their results in our experiments (see Section 6
+p108
+aVWe will now prove by induction that the matrix formulation of CoSimRank (Eq
+p109
+aVWe use the basic version of CoSimRank (Eq
+p110
+aVwhere p ( k ) u'\u005cu2062' ( i ) is the PPR vector of node i from Eq
+p111
+aVWe can use this edge weighted PageRank for CoSimRank
+p112
+aVIn contrast, the complexity of SimRank is the same as in the all-similarities case u'\u005cud835' u'\u005cudcaa' u'\u005cu2062' ( d u'\u005cu2062' n 2
+p113
+aVApart from SimRank, many other similarity measures have been proposed
+p114
+aVAnother important similarity measure is cosine similarity of Personalized PageRank (PPR) vectors
+p115
+aVWe often want to compute the similarity of nodes in two different graphs with a known node-node correspondence; this is the scenario we are faced with in the lexicon extraction task (see Section 6
+p116
+aVand thus very similar to SimRank (Eq
+p117
+aVIn an experimental evaluation, we show that CoSimRank is more efficient and more accurate than both SimRank and PageRank-based algorithms
+p118
+aVWe evaluate CoSimRank for the tasks of synonym extraction and bilingual lexicon extraction
+p119
+aVOur work is unsupervised
+p120
+aV2 2 A reviewer suggests that CoSimRank is an efficient version of SimRank in a way analogous to SALSA u'\u005cu2019' s [ 19 ] relationship to HITS [ 16 ] in that different aspects of similarity are decoupled
+p121
+aVThe matrix formulas of both SimRank (Eq
+p122
+aVWhen the computation has converged, the similarity of two nodes is given by the cosine similarity of the Personalized PageRank vectors
+p123
+aVWe perform an experimental evaluation of CoSimRank in Section 6
+p124
+aVThe accuracies P@1 and P@10 were worse in all experiments than those of CoSimRank
+p125
+aVThe disadvantage of this similarity measure is significant and even more visible on bilingual lexicon extraction than on synonym extraction (see Table 2
+p126
+aVTo compute the similarity of two vectors u and v we use the inner product u'\u005cu27e8' u'\u005cu22c5' , u'\u005cu22c5' u'\u005cu27e9' in Eq
+p127
+aVSection 3 introduces CoSimRank
+p128
+aVWe add a damping factor c , so that early meetings are more valuable than later meetings
+p129
+aVCompared to PPR+cos, CoSimRank is roughly four times faster on synonym extraction and has comparable performance on lexicon extraction
+p130
+aVWe will now present an equivalent method for CoSimRank
+p131
+aV4 that the CoSimRank of one node pair is monotonically non-decreasing
+p132
+aVFor this we will compute a similarity matrix for each edge type u'\u005cu03a4' and merge them into one matrix for the next iteration
+p133
+aVThese two cases u'\u005cu2013' computing a few similarities and computing many similarities u'\u005cu2013' correspond to two different representations we can compute CoSimRank on a vector representation, which is fast for only a few similarities, and a matrix representation, which can take advantage of fast matrix multiplication algorithms
+p134
+aVSpace complexity is u'\u005cud835' u'\u005cudcaa' u'\u005cu2062' ( n 2 ) for both algorithms
+p135
+aVTo be able to directly compare to prior work in our experiments, we also present a method to integrate a set of typed edges u'\u005cud835' u'\u005cudcaf' in the CoSimRank calculation
+p136
+aVThey applied different similarity measures, e.g.,, cosine of dependency vectors or a new algorithm called path-constrained graph walk, on synonym extraction [ 26 ]
+p137
+aVTable 5 compares the run time performance of CoSimRank with the baselines
+p138
+aVA matrix representation of SimRank called SimFusion [ 33 ] improves the computational complexity from u'\u005cud835' u'\u005cudcaa' u'\u005cu2062' ( n 4 ) to u'\u005cud835' u'\u005cudcaa' u'\u005cu2062' ( n 3
+p139
+aVAs the seed dictionary contains 12,630 word pairs, this means that only every fourth entry of the PPR vector (the German graph has 47,439 nodes) is used for similarity calculation
+p140
+aVRecall that CoSimRank uses the simple inner product u'\u005cu27e8' u'\u005cu22c5' , u'\u005cu22c5' u'\u005cu27e9' to compare vectors
+p141
+aVAn alternative for tasks involving similarity is SimRank [ 15 ]
+p142
+aVwhere A u'\u005cu03a4' is the row-normalized adjacency matrix for edge type u'\u005cu03a4' (see edge types in Table 1
+p143
+aVHowever, all of these methods have to run SimRank on the entire graph and are not efficient enough for very large graphs
+p144
+aVCoSimRank u'\u005cu2019' s MRR scores of 0.37 (one-synonym) and 0.59 (extended) are the same or better than all baselines (see Table 2
+p145
+aVWith A being the normalized adjacency matrix we can write SimRank in matrix formulation
+p146
+aVLater on, the following iterative computation of CoSimRank will prove useful
+p147
+aVTo simulate the behavior of SimRank we will simplify this equation and set the damping factor d = 1
+p148
+aVTable 3 shows a sample of synonyms proposed by CoSimRank
+p149
+aVThe difference between CoSimRank with and without typed edges is not significant
+p150
+aVGenerally, these methods compute the Personalized PageRank for each node (see Eq
+p151
+aVLexRank [ 7 ] is similar to PPR+cos in that it combines PageRank and cosine; it initializes the sentence similarity matrix of a document using cosine and then applies PageRank to compute lexical centrality
+p152
+aVWe usually set p ( 0 ) u'\u005cu2062' ( i ) = e i , with e i being a vector of the standard basis, i.e.,, the i th entry is 1 and all other entries are 0
+p153
+aVIn most cases, we only want to compute k 2 similarities for k nodes
+p154
+aVA variant of SimRank for this task was presented by Dorow et al
+p155
+aVTo calculate PPR+cos, we computed 20 iterations with a decay factor of 0.8 and used the cosine similarity with the 2-norm in the denominator to compare two vectors
+p156
+aVWithout expensive normalization, we can give a simple matrix formalization of CoSimRank and compute it efficiently using fast matrix multiplication algorithms
+p157
+aVSimRank and extensions of PageRank
+p158
+aVWe compare the PPR vectors at each time step k
+p159
+aVWe compute 20 iterations of PPR+cos to reach convergence and then calculate a single cosine similarity
+p160
+aVWe will test the first three extensions experimentally in the next section and leave similarity of node sets for future work
+p161
+aVA non-iterative computation for SimRank was introduced by Li et al
+p162
+aVWe are interested in applications that only need a fraction of all u'\u005cud835' u'\u005cudcaa' u'\u005cu2062' ( n 2 ) pairwise similarities
+p163
+aVTable 6 shows that CoSimRank is slightly, but not significantly worse than WINTIAN on P@1 (43.0 vs 43.8), but significantly better on P@10 (73.6 vs 55.4
+p164
+aV2008 ) compared PPR+cos to other graph based similarity measures like shortest-path and bounded-length random walks
+p165
+aVThis is similar to cosine similarity except that the 1-norm is used instead of the 2-norm
+p166
+aV2 2 significantly worse than CoSimRank ( u'\u005cu0391' = 0.05 , one-tailed Z-Test
+p167
+aVWe compute PPR vectors p u'\u005cu2208' u'\u005cu211d'
+p168
+aVThe PPR vector of node i is given by
+p169
+aVIn this method only the entries corresponding to the compared nodes are used for a similarity score
+p170
+aVCoSimRank should generally be three times faster than typed CoSimRank since the typed version has to repeat the computation for each of the three types
+p171
+aV2010 ) extend SimRank to edge weights, edge labels and multiple graphs
+p172
+aVThis observation was also made for SimRank on a smaller graph and test set [ 17 ]
+p173
+aVComplexity of computing all n 2 similarities
+p174
+aVSome other applications of SimRank or other graph based similarity measures in NLP include work on document similarity [ 21 ] , the transfer of sentiment information between languages [ 31 ] and named entity disambiguation [ 9 ]
+p175
+aVTable 1 gives examples and number of nodes and edges
+p176
+aV2 we get u'\u005cu2225' p ( k ) u'\u005cu2225' 1 = 1 , where u'\u005cu2225' u'\u005cu22c5' u'\u005cu2225' 1 is the 1-norm
+p177
+aVWe also compare against the MEE (Multi-Edge Extraction) variant of SimRank [ 6 ] , which handles labeled edges more efficiently than SimRank
+p178
+aVWe use the English and German graphs published by Laws et al
+p179
+aV4 ) for synonym extraction and the two-graph version (Eq
+p180
+aV4 to compute s u'\u005cu2062' ( V , W )
+p181
+aVComplexity of computing k 2 u'\u005cu226a' n 2 similarities
+p182
+aV2010 ) also reduce complexity to u'\u005cud835' u'\u005cudcaa' u'\u005cu2062' ( n 3 ) by selecting essential node pairs and using partial sums
+p183
+aVHoang and Kan ( 2010 ) use SimRank for related work summarization
+p184
+aV2009 ) and Laws et al
+p185
+aVIn addition to faster versions of SimRank, there has also been work on extensions of SimRank
+p186
+aVContrary to our intuition, the edge-typed variant of CoSimRank did not perform significantly better than the non-edge-typed version
+p187
+aVEntry i of the converged PPR vector represents the probability that the random surfer is on node i after an unlimited number of steps
+p188
+aVIt follows that CoSimRank grows more slowly than a geometric series and converges if c
+p189
+aVWe are now testing the reverse direction
+p190
+aVHowever, most graphs in NLP are not bipartite and Jeh and Widom ( 2002 ) also proposed a SimRank variant for bipartite graphs
+p191
+aV3 3 This type of similarity measure has also been used and investigated by Ó Séaghdha and Copestake ( 2008 ) , Cha ( 2007 ) , Jebara et al
+p192
+aVThe reason could be that CoSimRank is a more effective algorithm than WINTIAN; but the different initializations (seed set vs interwiki links) or the different linguistic representations (grammatical relations vs bag-of-words) could also be responsible
+p193
+aVSimRank is computed iteratively
+p194
+aVWe evaluate lexicon extraction on TS1000, a test set of 1000 items, [ 17 ] each consisting of an English word and its German translations
+p195
+aVFor a set V , the initial PPR vector is given by
+p196
+aVThe PPR vector after k iterations is given by p ( k )
+p197
+aVThey also give a useful overview of SimRank, SimFusion and the Monte Carlo methods of Fogaras and Rácz ( 2005
+p198
+aVThe damping factor d u'\u005cu2208' ( 0 , 1 ) ensures that the computation converges
+p199
+aVThe reason might be that we are not comparing the whole PPR vector anymore, but only entries which occur in the seed dictionary (see Eq
+p200
+aVThis method is also used by Chang et al
+p201
+aVSynonym extraction is run on the English graph
+p202
+aVThree native English speakers were asked to mark synonyms, that were proposed by a baseline or by CoSimRank, i.e., ranked in the top 10
+p203
+aVDorow et al
+p204
+aVSection 2 discusses related work
+p205
+aV9 ) for lexicon extraction, both with weighted edges
+p206
+aVAgirre et al
+p207
+aVInterestingly, a simpler method performed best when comparing with human similarity judgments
+p208
+aVRao et al
+p209
+aVMuthukrishnan et al
+p210
+aVLizorkin et al
+p211
+aVRapp et al
+p212
+aVLeicht et al
+p213
+aVFrom Eq
+p214
+aVWe will not use Eq
+p215
+aVThe original SimRank equation can be written as follows [ 15 ]
+p216
+aVThey call S ( 0 ) the translation matrix
+p217
+aVHowever, in an evaluation of this algorithm we found that it does not give competitive results (see Section 6
+p218
+aV1
+p219
+ag219
+aVWe denote the number of nodes in the two graphs U and V by
+p220
+aVTo visualize this formula, one can imagine a random surfer starting at node i and following one of the links with probability d or jumping back to the starting node i with probability ( 1 - d
+p221
+aVDespite this superficial relatedness, applications like lexicon extraction that look for similar entities and applications that look for central entities are quite different
+p222
+aVThe random surfer only has a real choice between different edge types when she is on a noun node
+p223
+aV2010 ) combine link based similarity and content based similarity for document clustering and classification
+p224
+aVThis formula is identical to the random surfer model where two surfers only meet iff they are on the same node and used the same edge type to get there
+p225
+aVWe call this the u'\u005cu201c' extended u'\u005cu201d' evaluation (see Table 2
+p226
+aVwhere N u'\u005cu2062' ( i ) denotes the nodes connected to i
+p227
+aV4 ) for two graphs is then
+p228
+aVA more strict claim would be to use the same edge type at any time of their journey
+p229
+aV5.3 , in which the edge type of each step is important
+p230
+aVThe methods diverge when the entry is u'\u005cu2260' 0 for the first time
+p231
+aV2 after k iterations
+p232
+aVThe PPR vectors of suit and dress will have some weight on tailor , which is good
+p233
+aV2013 ) for semantic relatedness
+p234
+aVWe then reuse Eq
+p235
+aVIt contains 1000 English words and a single correct German translation for each
+p236
+aVCombined with the fact that only the last edge type is important this has absolutely no effect for a random surfer meeting at adjectives or verbs
+p237
+aVFor the other three methods, we also used a decay factor of 0.8 and computed 5 iterations
+p238
+aVTwo possible solutions would be (i) to use more fine-grained edge types, (ii) to apply Eq
+p239
+aVOur evaluation measures are proportion of words correctly translated by word in the top position (P@1), proportion of words correctly translated by a word in one of the top 10 positions (P@10) and Mean Reciprocal Rank (MRR
+p240
+aVWe implemented this method for our experiments and call it PPR+cos
+p241
+aVIn Section 6 , we will show that this is also true in practice
+p242
+aVLet S ( 0 ) u'\u005cu2208' u'\u005cu211d'
+p243
+aVThis is often true of this type of algorithm; cf
+p244
+aVSection 7 summarizes the paper
+p245
+aVThis complexity can be exploited even for the all similarities application
+p246
+aV2013
+p247
+aVThe matrix formulation (cf. Eq
+p248
+aVWe also experimented with the method of Fogaras and Rácz ( 2005
+p249
+aVwhere A is the stochastic matrix of the Markov chain, i.e.,, the row normalized adjacency matrix
+p250
+aVThe base case S ( 1 ) = S u'\u005cu2032' u'\u005cu2063' ( 1 ) is trivial
+p251
+aV2009 ) and other papers discussed in related work
+p252
+aVWe evaluate on a subset we call TS774 that consists of the 774 test word pairs that are in the intersection of words covered by the WINTIAN Wikipedia data [ 29 ] and words covered by our data
+p253
+aV2012 ) kindly provided their test set to us
+p254
+aV2010 ) , including edge weighting and normalization
+p255
+aVNodes are nouns, adjectives and verbs occurring in Wikipedia
+p256
+aVMinkov and Cohen ( 2012 ) tested cosine and random-walk measures on grammatical relationships (similar to our setup) as well as on cooccurrence statistics
+p257
+aVThis is especially useful for dynamic graphs
+p258
+aVWe will re-add a damping factor later in the calculation
+p259
+aV2009 ) use PPR+cos for WordNet and for cross-lingual studies
+p260
+aVwhere A and B are row-normalized adjacency matrices
+p261
+aVA Monte Carlo algorithm, which is scalable to the whole web, was suggested by Fogaras and Rácz ( 2005
+p262
+aV6 ) is equivalent to
+p263
+aVFor the dot product of two vectors, the Cauchy-Schwarz inequality gives the upper bound
+p264
+aVThese two approaches have different strengths and weaknesses; e.g.,, the interwiki-link-based approach does not require a seed set, but it can only be applied to comparable corpora that consist of corresponding u'\u005cu2013' although not necessarily u'\u005cu201c' parallel u'\u005cu201d' u'\u005cu2013' documents
+p265
+aV5.3 due to its space complexity
+p266
+aV6 ) is
+p267
+aVAn alternative approach is to induce a bilingual lexicon from Wikipedia u'\u005cu2019' s interwiki links [ 29 ]
+p268
+aVU and q u'\u005cu2208' u'\u005cu211d'
+p269
+aVDespite these differences it is still interesting to compare the two algorithms
+p270
+aVV for each graph
+p271
+aVWe call this the one-synonym evaluation
+p272
+aVIn contrast, TS1000 accepts more than one correct translation
+p273
+aV4 for two reasons
+p274
+aVThe calculated time is the sum of the time spent in user mode and the time spent in kernel mode
+p275
+aVWe needed about 10,000 random walks in all three conditions
+p276
+aVThe MRR scores for these methods range from 0.29 to 0.59
+p277
+aV2009
+p278
+aVGraph-theoretic algorithms have been successfully applied to many problems in NLP [ 23 ]
+p279
+aV7
+p280
+aVThis work was supported by DFG (SCHU 2246/2-2
+p281
+aVThe same is true for verbs
+p282
+aV2010
+p283
+aV2004 ) (probability product kernel) and [ 13 ] (Fisher kernel) among others
+p284
+aVThere are three types of edges, corresponding to three types of syntactic configurations extracted from the parsed Wikipedias adjective-noun, verb-object and noun-noun coordination
+p285
+aVIn reality other translations might also be acceptable (e.g.,, both street and road for Straße
+p286
+aVHowever, this will increase the memory needed for calculation
+p287
+aVfor the 1-norm
+p288
+aVwhere the maximum of two matrices refers to the element-wise maximum
+p289
+aV5
+p290
+aVInductive step
+p291
+aVV be the known node-node correspondences
+p292
+aVThis paper is structured as follows
+p293
+aVWe ran all experiments on a 64-bit Linux machine with 64 Intel Xenon X7560 2.27Ghz CPUs and 1TB RAM
+p294
+aVwhere u'\u005cu2225' x u'\u005cu2225' is the norm of x
+p295
+aV9
+p296
+aVThey also experimented with Euclidean distance and KL-divergence
+p297
+aVComparing Eqs
+p298
+aVU and
+p299
+aVV respectively
+p300
+aVThis is undesirable
+p301
+aVU
+p302
+aV[ 32 ]
+p303
+aV×
+p304
+a.

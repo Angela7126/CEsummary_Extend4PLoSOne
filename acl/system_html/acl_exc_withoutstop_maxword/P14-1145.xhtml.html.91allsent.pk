@@ -1,0 +1,506 @@
+(lp0
+VThus, we first find the overlap between each graph and a sentiment lexicon
+p1
+aVNote that the overlap size may be smaller than the lexicon size , as some sentiment words may be missing from our graphs
+p2
+aVAs such, precision is defined as ( correct / overlap ), and recall as ( correct / lexicon size
+p3
+aV2005a ) ) show low agreement rate with human, which is somewhat as expected human judges in this study are labeling for subtle connotation, not for more explicit sentiment
+p4
+aVOur belief propagation based connotation sentiment inference algorithm has one user-specified parameter u'\u005cu0395' (see Table 1
+p5
+aVFinally, to show the utility of the resulting lexicon in the context of a concrete sentiment analysis task, we perform lexicon-based sentiment analysis
+p6
+aVTherefore in this work, we employ a computationally tractable (in fact linearly scalable with network size) approximate inference algorithm called Loopy Belief Propagation (LBP) [ 37 ] , which we extend to handle typed graphs like our connotation graph
+p7
+aVThe sentiment lexicons we use as gold standard are small, compared to the size (i.e.,, number of words) our graphs contain
+p8
+aVConnotationWordNet is expected to be the superset of a sentiment lexicon, as it is highly likely for any word with positive/negative sentiment to carry connotation of the same polarity
+p9
+aVAnother contribution of our work is the introduction of loopy belief propagation (loopy-BP) as a lexicon induction algorithm
+p10
+aVNote that the connotation inference algorithm, as given in Algorithm 3.2 , remains exactly the same for all the graphs described above
+p11
+aVWe formulate the task of learning sense- and word-level connotation lexicon as a graph-based classification task [ 26 ]
+p12
+aVThus, we use two conventional sentiment lexicons, General Inquirer ( GenInq ) [ 27 ] and MPQA [ 36 ] , as surrogates to measure the performance of our inference algorithm
+p13
+aVThe connotation graph, called G Word+Sense , is a heterogeneous graph with multiple types of nodes and edges
+p14
+aVA notable goodness of our induction algorithm is that the outcome of the algorithm can be interpreted as an intensity of the corresponding connotation
+p15
+aVNote that due to this parameter learning, we are able to report better performance for the connotation lexicon of [ 10 ] than what the authors have reported in their paper (labeled with *) in Table 5
+p16
+aVThreshold values (ranging from 0.5 to 3.0) indicate the minimum differences in scales for any pair of words, for the pair to be included in the test set
+p17
+aVBecause different human judges have different notion of scales however, subtle differences are more likely to be noisy
+p18
+aV2013 ) share this spirit by targeting more subtle, nuanced sentiment even from those words that would be considered as objective in early studies of sentiment analysis
+p19
+aVTherefore, we experiment with varying degrees of differences in their scales, as shown in Figure 3
+p20
+aVA key difference of our method from earlier models is that we use clique potentials that differ for edge types, since the connotation graph is heterogeneous
+p21
+aVThis flexibility is one of the key advantages of our algorithm as new types of nodes and edges can be added to the graph seamlessly
+p22
+aVAs shown in Table 2 (top), we first observe that including the synonym and antonym relations in the graph, as with G Word and G Word+Sense , improve the performance significantly, almost by an order of magnitude, over graphs G Word w/ Pred-Arg and G Word w/ Overlay that do not contain those relation types
+p23
+aVAs a starting point, we study a more feasible task of learning the polarity of connotation
+p24
+aVWe first evaluate the word-level assignment of connotation, as shown in Table 3
+p25
+aVAt a high-level, both approaches share the general idea of propagating confidence or belief over the graph connectivity
+p26
+aVSince we collect human labels based on scales , we already have this information at hand
+p27
+aVIn general, exact inference is known to be NP-hard and there is no known algorithm which can be theoretically shown to solve the inference problem for general MRFs
+p28
+aVUnderstanding the rich and complex layers of connotation remains to be a challenging task
+p29
+aVThen, we calculate the number of correct label assignments
+p30
+aVBecause sense-level polarity assignment is a harder (more subtle) task, the performance of all lexicons decreased to some degree in comparison to that of word-level evaluations
+p31
+aVOur work introduces the use of loopy belief propagation over pairwise-MRF as an alternative solution to these tasks
+p32
+aVAs expected, we observe that the performance improves as we increase the threshold (as pairs get better separated
+p33
+aVLoopy-BP in our study achieves statistically significantly better performance over the constraint optimization approaches previously explored
+p34
+aVFinally, we note that using the unweighted versions of the graphs provide relatively more robust performance, potentially due to noise in the relative edge weights
+p35
+aVThe prior beliefs u'\u005cu03a8' i of nodes can be suitably initialized if there is any prior knowledge for their connotation sentiment (e.g.,, enjoy is positive, suffer is negative
+p36
+aVHaving introduced our graph-based classification task and objective formulation, we define our problem more formally
+p37
+aVThe edges can also be weighted based on the distributional similarities of the word pairs
+p38
+aVIn pairwise MRFs, the joint probability of the graph can be written as a product of pairwise factors, parameterized over the edges
+p39
+aVLast but not least, by using probabilistic representation of pairwise-MRF in conjunction with Loopy-BP as inference, the resulting solution has the natural interpretation as the intensity of connotation
+p40
+aVOpinionFinder u'\u005cu2019' s low agreement rate was mainly due to the low hit rate of the words (successful look-up rate, 33.43%
+p41
+aVNote that there is a difference in how humans judge the orientation and the degree of connotation for a given word out of context, and how the use of such words in context can be perceived as good/bad news
+p42
+aVThe G Word+Sense w/ SynSim graphs use an additional compatibility matrix for the synset similarity edges of type t 5 , which is the same as the one used for t 1 , i.e.,, similar synsets are likely to have the same connotation label
+p43
+aVIn addition, Figure 4 shows that the performance does not change much based on the size of training data used for parameter tuning ( N = { 5 , 10 , 15 , 20 }
+p44
+aVWe labeled a word as negative if its intensity score is less than 0 and positive otherwise
+p45
+aVThese factors are referred to as clique potentials in general MRFs, which are essentially functions that collectively determine the graph u'\u005cu2019' s joint probability
+p46
+aVWe experiment with SemEval dataset [ 28 ] that includes the human labeled dataset for predicting whether a news headline is a good news or a bad news , which we expect to have a correlation with the use of connotative words that we focus on in this paper
+p47
+aVTo weigh the edges, we use the cosine similarity between the gloss vectors of the synsets based on the TF-IDF values of the words the glosses contain
+p48
+aVBut are these values meaningful
+p49
+aVWe observe that connecting the synset nodes by their gloss-similarity (at least in the ways we tried) does not yield better performance than on our original G Word+Sense graph
+p50
+aVEnd-users of such a lexicon may not wish to deal with Word Sense Disambiguation (WSD), which is known to be often too noisy to be incorporated into the pipeline with respect to other NLP tasks
+p51
+aVFinally, F1-score is their harmonic mean and reflects the overall accuracy
+p52
+aVNext we analyze the performance when the new edges between synsets are introduced, as given in Table 2 (bottom
+p53
+aVThe key difference, however, is that in our MRF representation, we can explicitly model various types of word-word, sense-sense and word-sense relations as edge potentials
+p54
+aV2013 ) ), could be a source of noise, as one needs to assume that the semantic relation between a pair of synsets transfers over the pair of words corresponding to that pair of synsets
+p55
+aVHowever, as for the second sense, for which u'\u005cu201c' burst u'\u005cu201d' and u'\u005cu201c' bristle u'\u005cu201d' can be used interchangeably with respect to this particular sense, 1 1 Hence a sense in WordNet is defined by synset (= synonym set) , which is the set of words sharing the same sense the general overtone is slightly more negative with a touch of unpleasantness, or at least not as positive as that of the first sense
+p56
+aVIn particular, we can naturally encode relations that encourage the same assignment (e.g.,, synonym) as well as the opposite assignment (e.g.,, antonym) of the polarity labels
+p57
+aVIn our collective classification formulation, each node in V is represented as a random variable that takes a value from an appropriate class label domain; in our case, u'\u005cu2112' = { + , - } for positive and negative connotation
+p58
+aVThe only difference is the set of parameters used; while G Word w/ Pred-Arg and G Word w/ Overlay contain one and two edge types, respectively and only use compatibilities ( t 1 ) and ( t 2 ) , G Word uses all four as given in Table 1
+p59
+aVOur inference algorithm is based on iterative message passing and the core of it can be concisely expressed as the following two equations
+p60
+aV7 7 Because senses in WordNet can be tricky to understand, care should be taken in designing the task so that the Turkers will focus only on the corresponding sense of a word
+p61
+aVAs an incentive, each Turker was rewarded $0.07 per hit which consists of 10 words to label
+p62
+aVThe edges between the predicates and the arguments can be weighted by their Point-wise Mutual Information (PMI) 5 5 PMI scores are widely used in previous studies to measure association between words (e.g.,, [ 7 ] , [ 31 ] , [ 19 ] based on the Google Web 1T corpus
+p63
+aVAs shown in Figure 1 , it contains two types of nodes; (i) lemmas (i.e.,, words, 115K) and (ii) synsets (63K), and four types of edges; ( t 1 ) predicate-argument (179K), ( t 2 ) argument-argument (144K), ( t 3 ) argument-synset (126K), and ( t 4 ) synset-synset (3.4K) edges
+p64
+aVTo study the sensitivity of its performance to the choice of u'\u005cu0395' , we reran our experiments for u'\u005cu0395' = { 0.02 , 0.04 , u'\u005cu2026' , 0.24 } 6 6 Note that for u'\u005cu0395' 0.25 , compatibilities of u'\u005cu03a8' t 2 in Table 1 are reversed, hence the maximum of 0.24 and report the accuracy results on our G Word+Sense in Figure 2 for the two lexicons
+p65
+aV2011 ) , depict the selectional preference of connotative predicates (i.e.,, the polarity of a predicate indicates the polarity of its arguments) and encode their co-occurrence relations based on the Google Web 1T corpus
+p66
+aVThis suggests that glossary similarity would be a more robust means to correlate nodes; we leave it as future work to explore this direction for predicate-argument and argument-argument relations
+p67
+aVThe argument-argument edges are based on the distributional similarities among the arguments
+p68
+aVThe ratio of such cases are accounted as Undecided in Table 4
+p69
+aVSuch cases seems to be due to the limited score patterns of SentiWordNet
+p70
+aVMRFs are a class of probabilistic graphical models that are suited for solving inference problems in networked data
+p71
+aVEncouraged by these recent successes, in this study, we investigate if we can attain similar gains if we model the connotative polarity of senses separately
+p72
+aVTherefore, we provided the part of speech tag, the WordNet gloss of the selected sense, and a few examples as given in WordNet
+p73
+aVFor word-level labels we apply similar procedure as above
+p74
+aVSpecifically, let G = ( V , E ) denote a network of random variables, where V consists of the unobserved variables u'\u005cud835' u'\u005cudcb4' that need to be assigned values from label set u'\u005cu2112'
+p75
+aVIn particular, we conjecture that humans may have a bias toward the use of positive words, which in turn requires calibration from the readers u'\u005cu2019' minds [ 22 ]
+p76
+aVThus running time grows linearly with the number of edges and is scalable to large datasets
+p77
+aVThis is a (bipartite) subgraph of G Word+Sense , which only includes the connotative predicates and their arguments
+p78
+aVEspecially if we look up the WordNet entry for u'\u005cu201c' bristle u'\u005cu201d' , there are noticeably more negatively connotative words involved in its gloss and examples
+p79
+aVAs a result, researchers often would need to aggregate labels across different senses to derive the word-level label
+p80
+aVSince OpinionFinder and Feng2013 do not provide the polarity scores at the sense-level, we excluded them from this evaluation
+p81
+aVIn case there is no prior knowledge available, each node is initialized equally likely to have any of the possible labels, i.e.,, 1 u'\u005cu2112' as in Algorithm 3.2 (line 9
+p82
+aVAt every iteration, each node computes its belief based on messages received from its neighbors, and uses the compatibility mapping to transform its belief into messages for its neighbors
+p83
+aV4 4 a u'\u005cu2062' r u'\u005cu2062' g u'\u005cu2062' - u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' g edges are based on co-occurrence (see Section 2 ), which does not carry as strong indication of the same connotation as e.g.,, synonymy
+p84
+aVWe tune this parameter u'\u005cu039b' 8 8 What is reported is based on u'\u005cu039b' u'\u005cu2208' { 20 , 40 , 60 , 80 }
+p85
+aVOn the other hand, s u'\u005cu2062' y u'\u005cu2062' n u'\u005cu2062' - u'\u005cu2062' s u'\u005cu2062' y u'\u005cu2062' n edges connect nodes that are antonyms of each other, and thus the compatibilities capture the reverse relationship among their labels
+p86
+aVA message m i u'\u005cu2192' j is sent from node i to node j and captures the belief of i about j , which is the probability distribution over the labels of j ; i.e., what i u'\u005cu201c' thinks u'\u005cu201d' j u'\u005cu2019' s label is, given the current label of i and the type of the edge that connects i and j
+p87
+aVAs such, it contains only type t 1 edges
+p88
+aVIn addition, it runs much faster and it is considerably easier to implement
+p89
+aVWe construct several data sets by applying different thresholds on scores
+p90
+aVThe brute force approach through enumeration of all possible assignments is exponential and thus intractable
+p91
+aVThe compatibility potentials can be thought of as matrices, with entries u'\u005cu03a8' i u'\u005cu2062' j t u'\u005cu2062' ( y i , y j ) that give the likelihood of a node having label y i , given that it has a neighbor with label y j to which it is connected through a type t edge
+p92
+aVWith this in mind, we tune the appropriate calibration from a small training data, by using 1 fold from N fold cross validation, and using the remaining N - 1 folds as testing
+p93
+aVThus, we enforce less homophily for nodes connected through edges of a u'\u005cu2062' r u'\u005cu2062' g u'\u005cu2062' - u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' g type
+p94
+aVAt convergence, we calculate the marginal probabilities, that is of assigning Y i with label y i , by computing the final beliefs b i u'\u005cu2062' ( y i ) (lines 15-17
+p95
+aVTherefore, in this work, we present the first unified approach that learns both sense- and word-level connotations simultaneously
+p96
+aVIt then proceeds by making each Y i u'\u005cu2208' u'\u005cud835' u'\u005cudcb4' communicate messages with their neighbors in an iterative fashion until the messages stabilize (lines 10-14), i.e., convergence is reached
+p97
+aVIn addition, argument pairs ( a 1 , a 2 ) are connected if they occurred together in the u'\u005cu201c' a 1 and a 2 u'\u005cu201d' or u'\u005cu201c' a 2 and a 1 u'\u005cu201d' coordination [ 11 , 24 ]
+p98
+aVOften, l is quite small (in our case, l = 2 ) and r u'\u005cu226a' m
+p99
+aVAlthough such aggregation is not entirely unreasonable, it does not seem to be the most optimal and principled way of integrating available resources
+p100
+aVSeveral previous approaches explored the use of graph propagation for sentiment lexicon induction [ 32 ] and connotation lexicon induction [ 10 ]
+p101
+aVWe formulate the lexicon induction problem as collective inference over pairwise-Markov Random Fields (pairwise-MRF) and derive a loopy belief propagation algorithm for inference
+p102
+aVa connotation graph G = ( V , E ) of words and synsets connected with typed edges
+p103
+aVFor comparison, we also test the connotation lexicon from [ 10 ] and the combined sentiment lexicon GenInq + MPQA
+p104
+aVA connotation lexicon, as introduced first by Feng et al
+p105
+aVIn this section, we first compare the performance of our connotation graph G Word+Sense to graphs that do not include synset nodes but only words
+p106
+aVWe introduce ConnotationWordNet , a connotation lexicon over the network of words in conjunction with senses , as defined in WordNet
+p107
+aVIn what follows, we will first describe the network of words and senses (Section 2 ), then introduce the representation of the network structure as pairwise Markov Random Fields, and a loopy belief propagation algorithm as collective inference (Section 3
+p108
+aVAlthough we focus on learning connotative polarity of words and senses in this paper, the same approach would be applicable to constructing a sentiment lexicon as well
+p109
+aVWe expect that edges between words and senses will encourage senses that belong to the same word to receive the same connotation label
+p110
+aVThere have been a number of previous studies that aim to construct a word-level sentiment lexicon [ 34 , 25 ] and a sense-level sentiment lexicon [ 8 ]
+p111
+aVSentiWordNet [ 8 ] was the very first lexicon developed for sense-level labels of sentiment polarity
+p112
+aVSentiment lexicons such as SentiWordNet ( Baccianella et al
+p113
+aVConnotationWordNet , the final outcome of our study, is a new lexical resource that has connotation labels over both words and senses following the structure of WordNet
+p114
+aVFor each word, we asked 5 Turkers to rate and we took the average of the 5 ratings as the connotative intensity score of the word
+p115
+aVFinally, the synset-synset edges depict the antonym relations between synset pairs
+p116
+aVIn general, our graph construction is similar to that of Feng et al
+p117
+aVThe construction of the connotation graph, denoted by G Word+Sense , which includes words and synsets, has been described in Section 2
+p118
+aVNote that unlike the connotation graph G Word+Sense , it does not contain any synset nodes
+p119
+aVIn addition, the seed words with known connotation labels originally consist of 20 positive and 20 negative predicates
+p120
+aVThe third graph is a super-graph of G Word w/ Overlay , with additional edges, where argument pairs in synonym and antonym relation are connected to each other
+p121
+aVE is the number of edges in the connotation graph, l u'\u005cu2112' the classes, and r , the iterations until convergence
+p122
+aVWe selected 350 polysemous words and one of their senses, and each Turker was asked to rate the connotative polarity of a given word (or of a given sense), from -5 to 5, 0 being the neutral
+p123
+aVConversely, we expect that these edges will also encourage words that belong to the same sense (i.e.,, synset definition) to receive the same connotation label
+p124
+aVWe formulate a pair-wise ranking task as a binary decision task as follows given a pair of words, we ask which one is more positive (or more negative) than the other
+p125
+aVAnother benefit of our approach is that for various WordNet relations (e.g.,, antonym relations), which are defined over synsets (not over words), we can add edges directly between corresponding synsets, rather than projecting (i.e.,, approximating) those relations over words
+p126
+aVRecent studies have shown that it is fruitful to tease out subjectivity and objectivity corresponding to different senses of the same word, in order to improve computational approaches to sentiment analysis (e.g., Pestian et al
+p127
+aVDifferent from earlier, the weighted versions of the similarity based graphs provide better performance than their unweighted counterparts
+p128
+aVThere have been recent studies that address word sense disambiguation issues for sentiment analysis
+p129
+aVWe simply learn the mixture coefficient u'\u005cu039b' to scale the contribution of positive and negative connotation values
+p130
+aVAn MRF consists of an undirected graph where each node can be in any of a finite number of states (i.e.,, class labels
+p131
+aVFurther study on the incorrect cases reveals that SentiWordNet has many pair of words with the same polarity score (23.34%
+p132
+aVThis shows that including the synset nodes explicitly in the graph structure is beneficial
+p133
+aVWe also extended the seed set with the sentiment lexicon words and denote these runs with e- for u'\u005cu2018' e xtended u'\u005cu2019'
+p134
+aVWe collect two separate sets of labels a set of labels at the word-level, and another set at the sense-level
+p135
+aVThe key aspect of our approach is that we exploit the innate bipartite graph structure between words and senses encoded in WordNet
+p136
+aVThe predicate-argument edges, first introduced by Feng et al
+p137
+aVWithin range [0.5, 1.5] (249 pairs examined), the accuracies are as high as 68.27%, which shows that even the subtle differences of the connotative intensities are relatively well reflected in the new lexicons
+p138
+aVNote that integration of the latter is not straightforward in the graph propagation framework
+p139
+aVMost notably, we model both words and synsets explicitly, and exploit the membership relations between words and senses
+p140
+aVThis is a super-graph of our original G Word+Sense graph; that is, it has all the predicate, arguments, and synset nodes, as well as the four types of edges between them
+p141
+aV2009 ) report a successful empirical result where WSD helps improving sentiment analysis, while Wiebe and Mihalcea ( 2006 ) study the distinction between objectivity and subjectivity in each different sense of a word, and their empirical effects in the context of sentiment analysis
+p142
+aVThis word sense issue has been a universal challenge for a range of Natural Language Processing applications, including sentiment analysis
+p143
+aVHowever, for polysemous words, which correspond to most frequently used words, it would be an overly crude assumption that the same connotative polarity should be assigned for all senses of a given word
+p144
+aVThe agreement between the new lexicon and human judges varies between 84% and 86.98%
+p145
+aVFinding the best assignments to unobserved variables in our objective function is the inference problem
+p146
+aVIn this section, we present the result of human evaluation we executed using Amazon Mechanical Turk (AMT
+p147
+aVTable 5 shows the results for N = 15 , where the new lexicon consistently outperforms other competitive lexicons
+p148
+aVThen we analyze the performance when the additional synset similarity edges are added
+p149
+aVIn addition, previous studies (for both sentiment and connotation lexicons) aimed to produce only either of the two aspects of the polarity word-level or sense-level, while we address both
+p150
+aVIn addition, we add edges of a fifth type t 5 between the synset nodes to capture their similarity
+p151
+aVWe first describe the labeling process of sense-level connotation
+p152
+aVThis way, end-users will have access to more accurate sense-level connotation labels if needed, while also having access to more general word-level connotation labels
+p153
+aVcompatibility of two nodes with a given pair of labels being connected to each other;
+p154
+aVIn recent years, there has been a growing research interest in investigating more fine-grained aspects of lexical sentiment beyond positive and negative sentiment
+p155
+aVAlthough our approach seems conceptually natural, previous approaches, to our best knowledge, have not directly exploited these relations between words and senses for the purpose of deriving lexical knowledge over words and senses collectively
+p156
+aVThe second graph is also a proper subgraph of G Word+Sense , which includes the predicates and all the argument words
+p157
+aVOur work, and some recent work by Feng et al
+p158
+aVThe results for pair-wise intensity evaluation (threshold=2.0, 1,208 pairs) are given in Table 4
+p159
+aVDespite that intensity is generally a harder property to measure (than the coarser binary categorization of polarities), our connotation lexicons perform surprisingly well, reaching up to 74.83% accuracy
+p160
+aVConnotation graph G = ( V , E ) , prior potentials u'\u005cu03a8' s for seed words s u'\u005cu2208' S , and compatibility potentials u'\u005cu03a8' i u'\u005cu2062' j t u'\u005cu2004' Output
+p161
+aVThe argument-synset edges capture the synonymy between argument nodes through the corresponding synsets
+p162
+aVThis graph contains both type t 1 and t 2 edges
+p163
+aVLet u'\u005cu03a8' denote a set of clique potentials that consists of two types of factors
+p164
+aVA sample instantiation of the compatibilities is shown in Table 1
+p165
+aVFor the first sense, which is the most commonly used sense for u'\u005cu201c' abound u'\u005cu201d' , the general overtone of the connotation would seem positive
+p166
+aVFeng2013 is the lexicon presented in [ 10 ] and it showed a relatively higher 72.13% hit rate
+p167
+aV2 2 This assumption yields a pairwise Markov Random Field (MRF); a special case of general MRFs [ 37 ]
+p168
+aVWe briefly describe these graphs below, and compare performance on all the graphs in the proceeding
+p169
+aVIn this classification task, we denote by u'\u005cud835' u'\u005cudcb4' the nodes the labels of which need to be assigned, and let y i refer to Y i u'\u005cu2019' s label
+p170
+aV2011 ) , aims to encompass subtle shades of sentiment a word may conjure, even for seemingly objective words such as u'\u005cu201c' sculpture u'\u005cu201d' , u'\u005cu201c' Ph.D u'\u005cu201d' , u'\u005cu201c' rosettes u'\u005cu201d'
+p171
+aVBeliefs refer to marginal probability distributions of nodes over labels; for example b i u'\u005cu2062' ( y i ) denotes the belief of node i having label y i u'\u005cu0391' and u'\u005cu0392' are the normalization constants, which respectively ensure that each message and each set of marginal probabilities sum to 1
+p172
+aVThe state of a node is assumed to be dependent on each of its neighbors and independent of other nodes in the graph
+p173
+aVWe propose to use an objective formulation that utilizes pairwise Markov Random Fields (MRFs) [ 14 ] , which we adapt to our problem setting
+p174
+aVTo further sparsify the graph we discard edges with p 0.6
+p175
+aVNote that belief propagation was run until 95% and 99% of the nodes were converged in their beliefs
+p176
+aVIt first initializes all messages to 1 and prior s to unbiased (i.e.,, equal) probabilities for all nodes except the seed nodes for which the sentiment is known (lines 3-9
+p177
+aVPredicate words are connected to their arguments as before
+p178
+aVWe can further rank the network objects by the probability of their connotation polarity
+p179
+aVWhat is more, it gives us a means to obtain connotation labels for the synsets themselves, which we use in the evaluations in the next sections
+p180
+aVWe answer this question in this section
+p181
+aV2011 ) study various moods, e.g.,, u'\u005cu201c' tension u'\u005cu201d' , u'\u005cu201c' depression u'\u005cu201d' , beyond simple dichotomy of positive and negative sentiment
+p182
+aV2011 ) and Feng et al
+p183
+aVAs such, this graph contains all edge types t 1 through t 4
+p184
+aVIn addition to this graph, we tried several other graph constructions, the first three of which have previously been used in [ 10 ]
+p185
+aVFor non-polysemous words, which constitute a significant portion of English vocabulary, learning the general connotation at the word-level (rather than at the sense-level ) would be a natural operational choice
+p186
+aV2010 ) ) and OpinionFinder ( Wilson et al
+p187
+aVOur goal is then to infer the maximum likelihood assignment of states (i.e.,, labels) to unobserved variables (i.e.,, nodes) that will maximize Equation ( 1
+p188
+aVBut none of these approaches considered to induce the polarity labels at both the word-level and sense-level
+p189
+aVRather, the words that are synonyms or antonyms of each other are directly linked in the graph
+p190
+aVFor example, Mohammad and Turney ( 2010 ) study the affects words can evoke in people u'\u005cu2019' s minds, while Bollen et al
+p191
+aVWe then present comprehensive evaluation (Section 4 5 6 ), followed by related work (Section 7 ) and conclusion (Section 8
+p192
+aVThe weighted version contains p values as edge weights
+p193
+aVThe pseudo-code of our method is given in Algorithm 3.2
+p194
+aVFurthermore, we notice that the performances on the G Word+Sense graph are better than those on the word-only graphs
+p195
+aVTo define similarity, we use the glossary definitions of the synsets and derive three different scores
+p196
+aVMost demanding component of Algorithm 3.2 is the iterative message passing over the edges (lines 10-14), with time complexity O u'\u005cu2062' ( m u'\u005cu2062' l 2 u'\u005cu2062' r ) , where m
+p197
+aVNote that the latter, which has been employed by several previous studies (e.g.,, Kamps et al
+p198
+aVFor polysemous words, this assumption may be overly strong
+p199
+aVMore detailed parameter search does not change the results much for other lexicons we compare against as well
+p200
+aV[!ht] \u005cDontPrintSemicolon \u005cSetAlgorithmName AlgorithmprocedureList of procedures Connotation Inference \u005cSetAlgoNlRelativeSize -5 Input
+p201
+aVThe lexicon is publicly available at http://www.cs.sunysb.edu/~junkang/connotation_wordnet
+p202
+aVGiven an assignment u'\u005cud835' u'\u005cudc32' to all the unobserved variables u'\u005cud835' u'\u005cudcb4' and u'\u005cud835' u'\u005cudc31' to observed ones u'\u005cud835' u'\u005cudcb3' (variables with known labels, if any), our objective function is associated with the following joint probability distribution
+p203
+aVTo completely define our algorithm, we need to instantiate the potentials u'\u005cu03a8' , in particular the priors and the compatibilities, which we discuss next
+p204
+aVMore formally, we denote the connotation graph G Word+Sense by G = ( V , E ) , in which a total of n word and synset nodes V = { v 1 , u'\u005cu2026' , v n } are connected with typed edges e u'\u005cu2062' ( v i , v j , t ) u'\u005cu2208' E , where edge types t u'\u005cu2208' { p r e d - a u'\u005cu2062' r u'\u005cu2062' g , a u'\u005cu2062' r u'\u005cu2062' g - a u'\u005cu2062' r u'\u005cu2062' g , s u'\u005cu2062' y u'\u005cu2062' n - a u'\u005cu2062' r u'\u005cu2062' g , s u'\u005cu2062' y u'\u005cu2062' n - s y n } depict the four edge types as described in Section 2
+p205
+aVOur work shares the high-level spirit of accessing the sense-level polarity, while also deriving the word-level polarity
+p206
+aV3 3 Although convergence is not theoretically guaranteed, in practice LBP converges to beliefs within a small threshold of change (e.g.,, 10 - 6 ) fairly quickly with accurate results [ 20 , 16 , 2 ]
+p207
+aVWe next define our objective function
+p208
+aVThe key idea is that after enough iterations of message passes between the nodes, the u'\u005cu201c' conversations u'\u005cu201d' are likely to come to a consensus, which determines the marginal probabilities of all the unknown variables
+p209
+aVWe use these maximum likelihood probabilities for label assignment; for each node i , we assign the label u'\u005cu2112' i u'\u005cu2190' max y i u'\u005cu2061' b i u'\u005cu2062' ( y i )
+p210
+aV2011 ) , Kaji and Kitsuregawa ( 2007 ) , Feng et al
+p211
+aVFirst, we briefly describe our performance measures
+p212
+aVThis contrasts to approaches that seek discrete solutions such as Integer Linear Programming [ 21 ]
+p213
+aVprior knowledge (i.e.,, probabilities) of (some or all) nodes belonging to each class
+p214
+aVIn recent years, Akkaya et al
+p215
+aVThe good/bad news are annotated with scores (ranging from -100 to 87
+p216
+aVFor example, with the threshold set to 60, we discard the instances whose scores lie between -60 and 60
+p217
+aVClassify the nodes Y i u'\u005cu2208' u'\u005cud835' u'\u005cudcb4' , into one of two classes; u'\u005cu2112' = { + , - } , such that the class assignments y i maximize our objective in Equation ( 1
+p218
+aV2012 ) , Mihalcea et al
+p219
+aVThe results indicate that the performances remain quite stable across a wide range of the parameter choice
+p220
+aVWe discard edges with count less than 3
+p221
+aV2012 ) Balahur et al
+p222
+aV2004 ) , Takamura et al
+p223
+aVWe also examined the agreement rates on the sense-level
+p224
+aVAs such, our method is flexible to integrate available side information
+p225
+aVThat is, although one can use this sense in both positive and negative contexts, this sense of u'\u005cu201c' abound u'\u005cu201d' seems to collocate more often with items that are good to be abundant (e.g.,, u'\u005cu201c' resources u'\u005cu201d' ), than unfortunate items being abundant (e.g.,, u'\u005cu201c' complaints u'\u005cu201d'
+p226
+aV2013 ) , but there are a few important differences
+p227
+aVThis is exactly because the compatibility of class labels of two adjacent nodes depends on the type of the edge connecting them e.g.,, + u'\u005cu2192' s u'\u005cu2062' y u'\u005cu2062' n u'\u005cu2062' - u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' g + is highly compatible, whereas + u'\u005cu2192' s u'\u005cu2062' y u'\u005cu2062' n u'\u005cu2062' - u'\u005cu2062' s u'\u005cu2062' y u'\u005cu2062' n + is unlikely; as s u'\u005cu2062' y u'\u005cu2062' n - a u'\u005cu2062' r u'\u005cu2062' g edges capture synonymy; i.e.,, words-sense memberships, while s u'\u005cu2062' y u'\u005cu2062' n - s u'\u005cu2062' y u'\u005cu2062' n edges depict antonym relations
+p228
+aVFor example, consider u'\u005cu201c' abound u'\u005cu201d' , for which lexicographers of WordNet prescribe two different senses
+p229
+aV2005 ) , Andreevskaia and Bergler ( 2006 ) , Su and Markert ( 2009 ) , Lu et al
+p230
+aVThat is, we might need to tone down the level of positiveness in order to correctly measure the actual intended positiveness of the message
+p231
+aVWe normalize the count s by the length of the gloss (the avg of two lengths), that is, p = count / avg(len_gloss( s 1 ), len_gloss( s 2 )) and discard edges with p 0.5
+p232
+aVThere is one potential practical issue we would like to point out in building a sense-level lexical resource, however
+p233
+aVNotice that the potentials for p u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' d u'\u005cu2062' - u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' g , a u'\u005cu2062' r u'\u005cu2062' g u'\u005cu2062' - u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' g , and s u'\u005cu2062' y u'\u005cu2062' n u'\u005cu2062' - u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2062' g capture homophily, i.e.,, nodes with the same label are likely to connect to each other through these types of edges
+p234
+aVEach score utilizes the count ( s 1 , s 2 ) of overlapping nouns, verbs, and adjectives/adverbs among the glosses of the two synsets s 1 and s 2
+p235
+aVConnotation label probabilities for each node i u'\u005cu2208' V \u005c P u'\u005cu2004' \u005cForEach (// initialize msg.s ) e u'\u005cu2062' ( Y i , Y j , t ) u'\u005cu2208' E \u005cForEach y j u'\u005cu2208' u'\u005cu2112' m i u'\u005cu2192' j u'\u005cu2062' ( y j ) u'\u005cu2190' 1 u'\u005cu2004' \u005cForEach (// initialize priors ) i u'\u005cu2208' V \u005cForEach y j u'\u005cu2208' u'\u005cu2112' \u005clIf i u'\u005cu2208' S u'\u005cu03a6' i u'\u005cu2062' ( y j ) u'\u005cu2190' u'\u005cu03a8' i u'\u005cu2062' ( y j ) \u005clElse u'\u005cu03a6' i u'\u005cu2062' ( y j ) u'\u005cu2190' 1 / u'\u005cu2112'
+p236
+aVwhere Z u'\u005cu2062' ( u'\u005cud835' u'\u005cudc31' ) is the normalization function
+p237
+aVA neighborhood function u'\u005cud835' u'\u005cudca9' , where u'\u005cud835' u'\u005cudca9' v = { u u'\u005cu2005' e u'\u005cu2062' ( u , v ) u'\u005cu2208' E } u'\u005cu2286' V , describes the underlying network structure
+p238
+aV\u005cRepeat ( // iterative message passing ) all messages stop changing \u005cForEach e u'\u005cu2062' ( Y i , Y j , t ) u'\u005cu2208' E , Y j u'\u005cu2208' u'\u005cud835' u'\u005cudcb4' V \u005c S \u005cForEach y j u'\u005cu2208' u'\u005cu2112' Use Equation ( 3.2 ) u'\u005cu2004' \u005cForEach (// compute final beliefs ) Y i u'\u005cu2208' u'\u005cud835' u'\u005cudcb4' V \u005c S \u005cForEach y i u'\u005cu2208' u'\u005cu2112' Use Equation ( 3
+p239
+aVThe weighted version has the count s normalized between 0 and 1
+p240
+aVv) abound, burst, bristle be in a state of movement or action) u'\u005cu201c' The room abounded with screaming children u'\u005cu201d' ; u'\u005cu201c' The garden bristled with toddlers u'\u005cu201d'
+p241
+aVFor each Y i u'\u005cu2208' u'\u005cud835' u'\u005cudcb4' , u'\u005cu03a8' i u'\u005cu2208' u'\u005cu03a8' is a prior mapping u'\u005cu03a8' i u'\u005cu2112' u'\u005cu2192' u'\u005cu211d' u'\u005cu2265' 0 , where u'\u005cu211d' u'\u005cu2265' 0 denotes non-negative real numbers
+p242
+aVv) abound be abundant of plentiful; exist in large quantities
+p243
+aVW911NF-14-1-0029, Stony Brook University Office of Vice President for Research, and gifts from Northrop Grumman Aerospace Systems and Google
+p244
+aVFor each e u'\u005cu2062' ( Y i , Y j , t ) u'\u005cu2208' E , u'\u005cu03a8' i u'\u005cu2062' j t u'\u005cu2208' u'\u005cu03a8' is a compatibility mapping u'\u005cu03a8' i u'\u005cu2062' j t u'\u005cu2112' × u'\u005cu2112' u'\u005cu2192' u'\u005cu211d' u'\u005cu2265' 0
+p245
+aVThis research was supported by the Army Research Office under Contract No
+p246
+aVWe thank reviewers for many insightful comments and suggestions
+p247
+aVG Word+Sense w/ SynSim1
+p248
+aVG Word+Sense w/ SynSim3
+p249
+aVGiven
+p250
+aV2014 )
+p251
+aVG Word+Sense w/ SynSim2
+p252
+a.

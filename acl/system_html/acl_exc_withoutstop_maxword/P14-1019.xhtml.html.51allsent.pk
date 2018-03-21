@@ -1,0 +1,148 @@
+(lp0
+VBecause the number of alternatives is small, the scoring function could in principle involve arbitrary (global) features of parse trees
+p1
+aVJoint Parsing and POS Correction Table 3 shows the results of joint parsing and POS correction on the CATiB dataset, for our model and state-of-the-art systems
+p2
+aVHowever, for the joint parsing and POS correction on the CATiB dataset we do not use the Random Walk method because the first-order features in normal parsing are no longer first-order when POS tags are also variables
+p3
+aVReranking can be combined with an arbitrary scoring function, and thus can easily incorporate global features over the entire parse tree
+p4
+aVBecause the inference procedure is so simple, it is important that the parameters of the scoring function are chosen in a manner that facilitates how we climb the scoring function in small steps
+p5
+aVThe reranker uses the same features as our model, along with the tree scores obtained from the MST parser (which is a standard practice in reranking
+p6
+aVIn this paper, we demonstrate how to adapt the method for parsing with rich scoring functions
+p7
+aVDependency parsing is commonly cast as a maximization problem over a parameterized scoring function
+p8
+aVComparison with Reranking As column 6 of Table 2 shows, our model outperforms the reranker by 1.3% 5 5 Note that the comparison is conservative because we can also add MST scores as features in our model as in reranker
+p9
+aVWe generate the POS candidate list for each word based on the confusion matrix on the training set
+p10
+aVWhen proposing a small move, i.e.,, sampling a head of the word, we can also jointly sample its POS tag from a set of alternatives provided by the tagger
+p11
+aVThis suggests that our learning and inference procedures are as effective as the dual decomposition method in the Turbo parser
+p12
+aVThey first appeared in the context of reranking [ 6 ] , where a simple parser is used to generate a candidate list which is then reranked according to the scoring function
+p13
+aVThe reranker operates over the top-50 list obtained from the MST parser 4 4 The MST parser is trained in projective mode for reranking because generating top-k list from second-order non-projective model is intractable
+p14
+aVBecause the steps are small, the complexity of the scoring function has limited impact on the computational cost of the procedure
+p15
+aVNext, we add global features that are not used by the Turbo parser
+p16
+aVDecoding Speed Our sampling-based parser is an anytime algorithm, and therefore its running time can be traded for performance
+p17
+aVImpact of Sampling Methods We compare two sampling methods introduced in Section 3.2 with respect to their decoding efficiency
+p18
+aVSpecifically, we measure the score of the retrieved trees in testing as a function of the decoding speed, measured by the number of tokens per second
+p19
+aVAs a result, the selected tag is influenced by a broad syntactic context above and beyond the initial tagging model and is directly optimized to improve parsing performance
+p20
+aVAs column 7 shows, this increase in the list size does not change the relative performance of the reranker and our model
+p21
+aVBecause the CoNLL datasets do not have a standard development set, we randomly select a held out of 200 sentences from the training set
+p22
+aVWe find a high scoring tree through sampling, and (later) learn the parameters u'\u005cu0398' so as to further guide this process
+p23
+aVTherefore, we add different features to capture POS tag and span length consistency in a coordinate structure
+p24
+aVMuch of the recent work on parsing has been focused on improving methods for solving the combinatorial maximization inference problems
+p25
+aVIn this view, the use of more expressive scoring functions leads to more challenging combinatorial problems of finding the maximizing parse
+p26
+aVFor each word w , we first prune out its POS candidates by using the vocabulary from the training set
+p27
+aVInstead we use it as the proposal function and sample a subset of the dependencies from the first-order distribution of our model, while fixing the others
+p28
+aVSince our features do not by design correspond to a first-order parser, we cannot use the Wilson algorithm as it is
+p29
+aVAs the upper part of the table shows, the parser with corrected tags reaches 88.38% compared to the accuracy of 88.46% on the gold tags
+p30
+aVOur sampler generates a sequence of dependency structures so as to approximate independent samples from
+p31
+aVWe also define features based on consecutive sibling, grandparent, arbitrary sibling, head bigram, grand-sibling and tri-siblings, which are also used in the Turbo parser [ 16 ]
+p32
+aVOur combination outperforms the state-of-the-art parsers and remains comparable even if we adopt their scoring functions
+p33
+aVOn the CATiB dataset, we restrict the sample trees to always be projective as described in Section 3.2.1
+p34
+aVWe repeatedly generate parses based on the current parameters u'\u005cu0398' t for each sentence x ( i ) , and use successive samples to enforce constraints in Equation 4 and Equation 5 one at a time
+p35
+aVWe split the sentence based on the ending punctuation, predict the parse tree for each segment and group the roots of resulting trees into a single node
+p36
+aVIf the walk hits the current tree, the walk path is added to form a new tree with more nodes
+p37
+aVWhile in general this is increasingly difficult with more heads, it is indeed tractable if the model corresponds to a first-order parser
+p38
+aVOur method provides a more effective mechanism for handling global features than reranking, outperforming it by 1.3%
+p39
+aVIn our case, we choose a word j randomly, and then sample its head h j according to p with the constraint that we obtain a valid tree (when projective trees are sought, this constraint is also incorporated
+p40
+aVwhere y corresponds to a tree with a spcified root and w i u'\u005cu2062' j is the exponential of the first-order score y is always a valid parse tree if we allow multiple children of the root and do not impose projective constraint
+p41
+aV6 6 We ran this experiment on 5 languages with small datasets due to the scalability issues associated with reranking top-500 list
+p42
+aVMoreover, alternatives that are far from the gold parse should score even lower
+p43
+aVIn SampleRank, the parameters are adjusted so as to guide the sequence of candidates closer to the target structure along the search path
+p44
+aVThe algorithm in Wilson ( 1996 ) iterates over all the nodes, and for each node performs a random walk according to the weights w i u'\u005cu2062' j until the walk creates a loop or hits a tree
+p45
+aVHowever, we are free to add higher order features because we do not rely on dynamic programming decoding
+p46
+aVThis is feasible if we restrict the proposed moves to only small changes in the current tree
+p47
+aVThis approach was suggested in the SampleRank framework [ 32 ] for training structured prediction models
+p48
+aVAssuming that the predicted tag for w is t p , we further remove those tags t if their counts are smaller than some threshold c u'\u005cu2062' ( t , t p ) u'\u005cu0391' u'\u005cu22c5' c u'\u005cu2062' ( t p , t p ) 2 2 In our work we choose u'\u005cu0391' = 0.003 , which gives a 98.9% oracle POS tagging accuracy on the CATiB development set
+p49
+aVA training set of size N is given as a set of pairs u'\u005cud835' u'\u005cudc9f' = { ( x ( i ) , y ( i ) ) } i = 1 N where y ( i ) is the ground truth parse for sentence x ( i )
+p50
+aVWe select these two languages as they correspond to two extremes in sentence length
+p51
+aVTherefore, the first-order distribution is not well-defined and we only employ Gibbs sampling for simplicity
+p52
+aVWe report UAS excluding punctuation on CoNLL datasets, following Martins et al
+p53
+aVGenerally, this feature can be defined based on an instance of grandparent structure
+p54
+aVFor this choice of q , the probability of accepting the new tree ( u'\u005cu0391' in Figure 1 ) is identically one
+p55
+aVWe handle long sentences during testing by applying a simple split-merge strategy
+p56
+aVHowever, we do not impose this constraint for the CoNLL datasets
+p57
+aVFor instance, Nakagawa ( 2007 ) deals with tractability issues by using sampling to approximate marginals
+p58
+aVThe target distribution p folds into the procedure by defining the probability that we will accept the proposed move
+p59
+aVThus, we can complement the constraints in Equation 4 with additional pairwise constraints [ 32 ]
+p60
+aVEvaluation Measures Following standard practice, we use Unlabeled Attachment Score (UAS) as the evaluation metric in all our experiments
+p61
+aVWe then train the reranker by running 10 epochs of cost-augmented MIRA
+p62
+aVSimilarly, parsers based on dual decomposition [ 17 , 14 ] assume that s u'\u005cu2062' ( x , y ) decomposes into a sum of terms where each term can be maximized over y efficiently
+p63
+aVNote that blocked Gibbs sampling would be exponential in K , and is thus very slow already at K = 4
+p64
+aVNon-projective Arcs A flag indicating if a dependency is projective or not (i.e., if it spans a word that does not descend from its head) [ 17 ]
+p65
+aVSpecifically, if the current parameters are u'\u005cu0398' t , and we enforce constraint Equation 5 for a particular pair y , y u'\u005cu2032' , then we will find u'\u005cu0398' t + 1 that minimizes
+p66
+aVThe temperature parameter T controls how concentrated the samples are around the maximum of s u'\u005cu2062' ( x , y ) (e.g.,, see Geman and Geman ( 1984 )
+p67
+aVIndeed, state-of-the-art results have been obtained by adapting powerful tools from optimization [ 16 , 17 , 27 ]
+p68
+aVAs a result, we require that
+p69
+aVFor instance, in cats and dogs , the conjuncts are both short noun phrases
+p70
+aVThus new moves are always accepted
+p71
+aVWe don u'\u005cu2019' t prune anything if w is unseen
+p72
+aVWe cannot necessarily assume that s u'\u005cu2062' ( x , y ) is greater than s u'\u005cu2062' ( x , y u'\u005cu2032' ) without additional encouragement
+p73
+a.

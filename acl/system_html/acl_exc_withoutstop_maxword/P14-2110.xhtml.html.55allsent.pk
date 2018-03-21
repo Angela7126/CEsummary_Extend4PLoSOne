@@ -1,0 +1,58 @@
+(lp0
+VWe learn from code-switched social media by extending the polylingual topic model framework to infer the language of each token and then automatically processing the learned topics to identify aligned topics
+p1
+aVWe create alignments by classifying each LDA topic by language using the KL-divergence between the topic u'\u005cu2019' s words distribution and a word distribution for the English/foreign language inferred from the monolingual documents
+p2
+aVTo train a polylingual topic model on social media, we make two modifications to the model of add a token specific language variable, and a process for identifying aligned topics
+p3
+aVPolylingual topic models enable cross language analysis by grouping documents by topic regardless of language
+p4
+aVIn this case, a polylingual topic model, which necessarily infers a topic-specific word distribution for each topic in each language, would learn two unrelated word distributions in two languages for a single topic
+p5
+aVLanguage is assigned to a topic by taking the minimum KL
+p6
+aVOur solution is to automatically identify aligned polylingual topics after learning by examining a topic u'\u005cu2019' s distribution across code-switched documents
+p7
+aVSince csLDA duplicates topic distributions ( u'\u005cud835' u'\u005cudcaf' × u'\u005cu2112' ) we used twice as many topics for LDA
+p8
+aVTopic models [] have become standard tools for analyzing document collections, and topic analyses are quite common for social media []
+p9
+aVWhile our goal is to learn polylingual topics, we cannot compare to previous polylingual models since they require comparable data, which we lack
+p10
+aVFor Weibo data, this was not effective since the vocabularies of each language are highly unbalanced
+p11
+aVTherefore, naively using the produced topics as u'\u005cu201c' aligned u'\u005cu201d' across languages is ill-advised
+p12
+aVTopics appearing in at least one code-switched document with probability greater than a threshold p are selected as candidates for true cross-language topics
+p13
+aVWe use a block Gibbs sampler to jointly sample topic and language variables for each token
+p14
+aVFor Spanish, we removed workers who disagreed with the majority more than 50% of the time (83 deletions), leaving 6.5 annotations for each alignment (85.47% inter-annotator agreement.) For Chinese, since quality of general Chinese turkers is low [] we invited specific workers and obtained 9.3 annotations per alignment (78.72% inter-annotator agreement.) For Olympics, LDA alignments matched the judgements 25% of the time, while csLDA matched 50% of the time
+p15
+aVIf a topic never occurs in a code-switched document, then there can be no evidence to support alignment across languages
+p16
+aVWe begin by measuring how often each topic occurs in code-switched documents
+p17
+aVThe first two goals are achieved by incorporating new hidden variables in the traditional polylingual topic model
+p18
+aVWe experimented with different numbers of topics ( u'\u005cud835' u'\u005cudcaf'
+p19
+aVThis system provides the top three possible languages for a given document with confidence scores; we identify a tweet as code-switched if two predicted languages each have confidence greater than 33%
+p20
+aVWe then sampled an additional 2475 code-switched messages, 4221 English and 4211 Chinese messages as test data
+p21
+aVIn the model presentation we will refer to both as u'\u005cu201c' documents u'\u005cu201d'
+p22
+aVWe collected tweets from July 27, 2012 to August 12, 2012, and identified 302,775 tweets about the Olympics based on related hashtags and keywords (e.g., olympics, #london2012, etc.) We identified code-switched tweets using the Chromium Language Detector 2 2 https://code.google.com/p/chromium-compact-language-detector/
+p23
+aVTo summarize, based on the model of we will learn
+p24
+aVWe used two datasets a Sina Weibo Chinese-English corpus [] and a Spanish-English Twitter corpus
+p25
+aVTaking u'\u005cu0391' as an example, one step of the Newton-Raphson update is
+p26
+aVWe optimize the hyperparameters u'\u005cu0391' , u'\u005cu0392' , u'\u005cu0393' and u'\u005cu0394' by interleaving sampling iterations with a Newton-Raphson update to obtain the MLE estimate for the hyperparameters
+p27
+aVAs is customary, we collapse out u'\u005cu03a6' , u'\u005cu0398' and u'\u005cu03a8'
+p28
+a.

@@ -1,0 +1,308 @@
+(lp0
+VAs mentioned earlier, the PPCMBE u'\u005cu2019' s relatively large POS tag set aims to maximize annotation consistency across the entire time period covered by the historical corpora, beginning with Middle English
+p1
+aVThe major difference in the clausal structure as compared to the PTB is the absence of a VP level 6 6 This is due to the changing headedness of VP in the overall series of English historical corpora yielding flatter trees than in the PTB
+p2
+aVFor example u'\u005cu201c' gentlemen u'\u005cu201d' and its orthographic variant u'\u005cu201c' gen u'\u005cu2019' l u'\u005cu2019' men u'\u005cu201d' are tagged with the complex tag ADJ+NS (adjective and plural noun) on the grounds that in earlier time periods, the lexical item is spelled and tagged as two orthographic words ( u'\u005cu201c' gentle u'\u005cu201d' /ADJ and u'\u005cu201c' men u'\u005cu201d' /NS
+p3
+aVDue to the historical nature of the PPCMBE, it shares some of the characteristics of treebanks based on modern unedited text [] , such as spelling variation
+p4
+aVWe present the first parsing results for the Penn Parsed Corpus of Modern British English (PPCMBE) [] , showing that it can be parsed at a few points lower in F-score than the Penn Treebank (PTB) []
+p5
+aVWe carry out a similar transformation to add VP nodes to the IPs in the Reduced + NPs version, making them more like the clausal structures in the PTB
+p6
+aVWe discuss some of the differences in annotation style and source material that make a direct comparison problematic
+p7
+aVSome first steps at analysis of the parsing results indicate aspects of the annotation style that are difficult for the parser, and also show that the parser is creating structures that are not present in the training material
+p8
+aVThe more complex tag set is mainly due to the desire to tag orthographic variants consistently throughout the series of historical corpora
+p9
+aVIn a conjoined NP, if part of a first conjunct potentially scopes over two or more conjuncts (shared pre-modifiers), the first conjunct has no phrasal node in the PPCMBE, and the label of the subsequent conjuncts becomes NX instead of NP, as shown in ( 2 a) in Figure 2
+p10
+aVWe retrained the parser, directing it to retain the INF function tag that appears in infinitival clauses as in ( 6
+p11
+aVOur goal was to determine whether the parsing results fell in the same general range as for the PTB by roughly compensating for the difference in annotation style
+p12
+aVIt might be thought that the parser is having trouble with the flat-IP annotation style, but the parser posits incorrect structures that are not attested in the gold even in the Reduced + NPs + VPs version of the corpus
+p13
+aVTo evaluate the effect of the difference in annotation guidelines on the parsing score, we added PTB-style NP brackets to the reduced corpus described in Section 3.1
+p14
+aVAs a final note, the PPCMBE consists of unedited data spanning more than 200 years, while the PTB is edited newswire, and so to some extent there would almost certainly be some difference in score
+p15
+aVIn the corresponding parser output ( 6 b), the parser misses the reduced relative RRC, turning u'\u005cu201c' acting u'\u005cu201d' into the rightmost verb in the IP
+p16
+aVSome annotation errors in the currently available version have been corrected, but the differences are relatively minor consists of 101 files, but we leave aside 7 files that consist of legal material with very different properties than the rest of the corpus
+p17
+aVThe size of the PPCMBE is roughly the same as the WSJ section of the PTB, and its annotation style is similar to that of the PTB, but with differences, particularly with regard to coordination and NP structure
+p18
+aVThere is also much additional material annotated in this style, increasing the importance of analyzing parser performance on this annotation style
+p19
+aV1 1 The other treebanks in the series cover Early Modern English [] (1.8 million words), Middle Eng-lish [] (1.2 million words), and Early English Correspondence [] (2.2 million words
+p20
+aVThe score for all sentences increases from 83.7 for the Release corpus (row 1) to 84.7 for the Reduced corpus (row 2), reflecting the POS tag simplifications in the Reduced corpus
+p21
+aVThe parser is creating some odd structures that violate basic well-formedness conditions of clauses
+p22
+aVWe would like to thank Ann Bies, Justin Mott, and Mark Liberman for helpful discussions
+p23
+aVTable 3 shows the average sentence length and percentage of sentences of length = 40 in the PPCMBE and PTB
+p24
+aV1 , there are also historical corpora of Old English [] , Icelandic [] , French [] , and Portuguese [] , totaling 4.5 million words
+p25
+aVWhile only 81 of the 248 tags are u'\u005cu201c' simple u'\u005cu201d' (i.e.,, not associated with lexical merging or splitting), they cover the vast majority of the words in the corpus, as summarized in Table 1
+p26
+aVThe score for sentences of length = 40 (a larger percentage of the PPCMBE than the PTB) is 2.4 higher than the score for all sentences, with both the gold and parser tags (row 5
+p27
+aVWe are not proposing that the current version be replaced by the Reduced + NPs + VPs version, on the grounds that the latter gets the highest score
+p28
+aVWe are currently developing techniques to better understand the types of errors is making, which have already led to interesting results
+p29
+aVPreliminary analysis shows that the CONJP structures are also difficult for the parser
+p30
+aVTree ( 6 a) shows a fragment of a gold tree from the corpus, with the VPs appropriately inserted
+p31
+aVWe expect some variance to occur, and in future work will average results over several runs of the training/Dev cycle, following
+p32
+aVIn sum, the parser results show that the PPCMBE can be parsed at a level approaching that of the PTB
+p33
+aVThe complex tags are simplified in a fully deterministic way, based on the trees and the tags
+p34
+aVThe PPCMBE is a phrase-structure corpus, and so we parse with the Berkeley parser [] and score using the standard evalb program []
+p35
+aVIt covers the years 1700-1914 and is the most modern in the series of treebanks created for historical research
+p36
+aVThe parser is creating an IP with two main verbs - an ungrammatical structure that is not attested in the gold
+p37
+aVIt is worth emphasizing that the brackets added in Sections 3.2 and 3.3 add no information, since they are added automatically
+p38
+aVWe evaluated the Test section on the Reduced corpus (row 3), with a result 0.8 higher than the Dev (85.5 in row 3 compared to 84.7 in row 2
+p39
+aVClausal complements and modifiers are also both treated as sisters to the noun in the PPCMBE
+p40
+aVCases where the CONJP is missing an overt coordinating cord (such as u'\u005cu201c' and u'\u005cu201d' ), are particularly difficult, not surprisingly
+p41
+aVThe results with the parser choosing its own POS tags naturally go down, with the Test section suffering more
+p42
+aVThe validation section consists of the four files beginning with u'\u005cu201c' a u'\u005cu201d' or u'\u005cu201c' v u'\u005cu201d' (spanning the years 1711-1860), the development section consists of the four files beginning with u'\u005cu201c' l u'\u005cu201d' (1753-1866), the test section consists of the five files beginning with u'\u005cu201c' f u'\u005cu201d' (1749-1900), and the training section consists of the remaining 81 files (1712-1913
+p43
+aVThe PPCMBE sentences are a bit longer on average, and fewer are of length = 40
+p44
+aVThe score goes up by a further 2.0 to 86.7 (row 2 to 4) for the Reduced + NPs corpus and up again by 0.4 to 87.1 (row 5) for the Reduced + NPs + VPs corpus, showing the effects of the extra NP and VP brackets
+p45
+aVOf these 81 tags, some are more specialized than in the PTB, accounting for the increased number of tags compared to the PTB
+p46
+aVHowever, the PPCMBE annotates both types of dependents as sisters of the noun, while the PTB adjoins both types
+p47
+aVIn general, the PPCMBE is affected by the lack of gold tags more than the PTB
+p48
+aVWe hypothesized that this is due to confusion with infinitival clauses, which can have an unary-branching IP over a VP, as in the gold tree ( 6
+p49
+aVThis work was supported by National Science Foundation Grant # BCS-114749
+p50
+aVThey are added only to roughly compensate for the difference in annotation styles between the PPCMBE and the PTB
+p51
+aV8 8 We modified the evalb parameter file to exclude punctuation in PPCMBE, just as for PTB
+p52
+aVHowever, the match is close enough that we will report the parsing results for sentences of length = 40 and all sentences, as with the PTB
+p53
+aVSince the Berkeley parser is capable of doing its own POS tagging, we ran it using the gold tags or supplying its own tags
+p54
+aV\u005cqsetw 0.2cm [ a Hare ].NP ].CONJP ].NP (b) \u005cTree [ [ a Ham ].NP
+p55
+aVNeither the PPCMBE nor the PTB distinguish between PP complements and modifiers of nouns
+p56
+aVThese can appear as intermediate conjuncts in a string of conjuncts, with the structure (CONJP word
+p57
+aVA coordinating conjunction and conjunct form a CONJP, as shown in ( 1 a) in Figure 1
+p58
+aVWe call the version of the corpus with the reduced tag set the u'\u005cu201c' Reduced u'\u005cu201d' version
+p59
+aVWe refer to the pre-release version of the corpus described in Section 2 as the u'\u005cu201c' Release u'\u005cu201d' version, and experiment with three other corpus versions
+p60
+aVAs mentioned above, the syntactic annotation guidelines do not differ radically from those of the PTB
+p61
+aVWe used the Train and Val sections for training, with the parser using the Val section for fine-tuning parameters []
+p62
+aVFor instance in ( 3 a) in Figure 3 , the modifier PP is a sister to the noun in the PPCMBE, while in ( 3 b), the complement PP is adjoined in the PTB
+p63
+aVREL for relative clause and THT u'\u005cu201c' that u'\u005cu201d' complement
+p64
+aVThe PPCMBE is a million-word treebank created for researching changes in English syntax
+p65
+aVAs discussed in Section 2.2.2 , noun modifiers are sisters to the noun, instead of being adjoined, as in the PTB
+p66
+aV\u005cqsetw 0.5cm ].VP (b) \u005cTree [ would [ be [ [ teaching [ the doctrine ].NP
+p67
+aV5 5 Similar coordination structures exist for categories other than NP, although NP is by far the most common
+p68
+aV\u005cqsetw 0.3cm ].IP \u005cex (a) \u005cTree [ would [ be [ teaching [ the doctrine ].NP
+p69
+aV2 2 report some results on POS tagging using their own mapping to different tags, but no parsing results
+p70
+aVHowever, ( 3 b) remains as it is, because the following CP in that case is a complement, as indicated by the THT function tag
+p71
+aVThe P tag is split, so that it is either left as P, if a preposition, or changed to CONJS, if a subordinating conjunction
+p72
+aVThe data split sizes used here for the PPCMBE closely approximate that used for the PTB, as described in
+p73
+aVThis added 169,877 VP nodes to the corpus (there are 131,671 IP nodes, some of which contain more than one auxiliary verb
+p74
+aVWe split the data into four sections, as shown in Table 2
+p75
+aVThe PPCMBE uses a part-of-speech (POS) tag set containing 248 POS tags, in contrast to the 45 tags used by the PTB
+p76
+aVIn the PTB, the distinction would be encoded structurally; the relative clause would be adjoined, whereas the u'\u005cu201c' that u'\u005cu201d' complement would not
+p77
+aVSince we are concerned here with parsing just the PPCMBE, we simplified the tag set
+p78
+aVIn this case, though, the complement/modifier distinction is encoded by a function tag
+p79
+aVSince these are structures that are different than the PTB 9 9 The CONJP nonterminal in the PTB serves a different purpose than in the PPCMBE and is much more limited we were particularly interested in them
+p80
+aVConsider first the results for the Dev section with the parser using the gold tags
+p81
+aV\u005cqsetw 0.3cm [ or [ fathers ].NX ].CONJP
+p82
+aV\u005cqsetw 1.0cm ].NP (b) \u005cTree [ [ a teacher ].NP
+p83
+aVTable 4 shows the results for both modes
+p84
+aVThe PPCMBE 4 4 We are working with a pre-release copy of the next revision of the official version
+p85
+aVTree ( 6 a) in Figure 6 is a tree from from the u'\u005cu201c' Reduced u'\u005cu201d' corpus, in which the verb u'\u005cu201c' formed u'\u005cu201d' projects to IP, with two auxiliary verbs ( u'\u005cu201c' had u'\u005cu201d' and u'\u005cu201c' been u'\u005cu201d'
+p86
+aVFor example, in ( 3 a) and ( 3 b), the status of the CPs as modifier and complement is indicated by their function tags
+p87
+aVThe results in Table 4 show that this is the case
+p88
+aVThis is a significant transformation of the corpus, adding 43,884 NPs to the already-existing 291,422
+p89
+aV\u005cqsetw 0.5cm ].VP \u005cex \u005cTree [ It [ is [ [ to [ be [ observed ].VP ].VP ].VP ].IP-INF ].VP ].IP
+p90
+aVThe POS tags for u'\u005cu201c' be u'\u005cu201d' (BE) and u'\u005cu201c' teaching u'\u005cu201c' (VAG) do not appear in this configuration at all in the training material
+p91
+aVThe parser output ( 6 b) has an extra IP above u'\u005cu201c' teaching u'\u005cu201d'
+p92
+aVFor example, the POS tag for u'\u005cu201c' gentleman u'\u005cu201d' , originally ADJ+N is changed to N
+p93
+aVThe remaining 94 files contain 1,018,736 tokens (words
+p94
+aVThe results are based on a single run for each corpus/section
+p95
+aVIn future work, we will do a more proper cross-validation evaluation
+p96
+aV\u005cqsetw 0.5cm [ a Hare ].NP ].NP
+p97
+aVWe do not yet know why the overall score went down, but what u'\u005cu2019' s surprising is one would have thought that IP-INF is recoverable from the absence of a tensed verb
+p98
+aVOverall, the evalb score went down slightly, but it did fix cases such as ( 6 b
+p99
+aVa) \u005cTree [ [ a Ham ].NP
+p100
+aVThe reduced tag set contains 76 tags
+p101
+aV\u005cqsetw 1.0cm ].PP ].IP
+p102
+aV\u005cqsetw 0.3cm back ].NP
+p103
+aVThere are some important differences, however, which we highlight in the following three subsections
+p104
+aVHowever, except for , we have found no discussion of this corpus in the literature
+p105
+aV\u005cqsetw 1.8cm \u005cqroof of chemistry.PP ].NP \u005cex (a) \u005cTree [ The Spiders \u005cqroof which have u'\u005cu2026' CP-REL
+p106
+aV7 7 Sections 2-21 for Training Section 1 for Val, 22 for Dev and 23 for Test
+p107
+aVThe shared pre-modifier structure described in ( 2 a) is also difficult for the parser
+p108
+aV\u005cqsetw 1.5cm [ now ].ADVP acting
+p109
+aV\u005cqsetw 0.2cm Spiders ].NP \u005cqroof which have u'\u005cu2026' CP-REL
+p110
+aV[ [ The poor fellow ].NP-SBJ
+p111
+aVAs a result, there are fewer NP brackets in the PPCMBE than there would be if the PTB-style were followed
+p112
+aVFor instance, for historical consistency, words like u'\u005cu201c' one u'\u005cu201d' and u'\u005cu201c' else u'\u005cu201d' each have their own tag
+p113
+aV\u005cqsetw 1cm \u005cqroof of this Spider.PP ].NP (b) \u005cTree [ [ The
+p114
+aV\u005cqsetw 0.5cm back \u005cqroof of this Spider.PP
+p115
+aV3 3 Aside from the corpora listed in fn
+p116
+aV\u005cqsetw 1.0cm [ with [ three Arrows ].NP
+p117
+aVThe corresponding PTB annotation is flat, as in ( 2 b
+p118
+aVa) \u005cTree [ \u005cqroof the earth u'\u005cu2019' s crust.NP-SBJ
+p119
+aV\u005cqsetw 0.4cm ].IP-SUB (b) \u005cTree [ \u005cqroof the earth u'\u005cu2019' s crust.NP
+p120
+aV1 b) shows the corresponding annotation in the PTB
+p121
+aV\u005cqsetw 0.1cm conviction
+p122
+aV\u005cqsetw 0.1cm husbands
+p123
+aV\u005cqsetw 0.1cm husbands
+p124
+aV\u005cqsetw 1.2cm ].NP (b) \u005cTree [ a
+p125
+aV\u005cqsetw 0.4cm ].VP
+p126
+aV\u005cqsetw 0.4cm ].VP
+p127
+aV\u005cqsetw 0.4cm ].VP
+p128
+aV\u005cqsetw 0.4cm ].IP
+p129
+aV\u005cqsetw 0.1cm ].PP
+p130
+aV\u005cqsetw 0.3cm ].PP
+p131
+aV\u005cqsetw 0.5cm ].VP
+p132
+aVFor this first work, we used a split that was roughly the same as far as time-spans across the four sections
+p133
+aVIn general, the parser seems to be getting confused as to when such an IP should appear
+p134
+aV\u005cqsetw 0.4cm ].NP
+p135
+aVAn example clause is shown in ( 4 ) in Figure 4
+p136
+aV\u005cqsetw 0.4cm [ by [ causes [ [ now ].ADVP-TMP acting ].RRC
+p137
+aV\u005cqsetw 2.0cm ].NP (b) \u005cTree [ their
+p138
+aV\u005cqsetw 0.5cm or fathers
+p139
+aV\u005cqsetw 0.1cm ].NP
+p140
+aV\u005cqsetw 1.0cm was shot
+p141
+aVFor example, ( 3 a) in Figure 3 is transformed into ( 5 a) in Figure 5 , and likewise ( 3 a) is transformed into ( 5 b
+p142
+aV\u005cqsetw 1.2cm ].NP
+p143
+aV\u005cqsetw 1.8cm ].NP
+p144
+aV\u005cqsetw 0.2cm had been formed
+p145
+aV\u005cqsetw 0.2cm had been formed
+p146
+aV\u005cqsetw 0.3cm [ by [ causes ].NP
+p147
+aV\u005cqsetw 2.5cm \u005cqroof that u'\u005cu2026' CP-THT
+p148
+aV\u005cqsetw 0.4cm and
+p149
+aV[1] \u005cex (a) \u005cTree [ The
+p150
+aV[11] \u005cex (a) \u005cTree [ [ The
+p151
+aV[1] \u005cex (a) \u005cTree [ their
+p152
+aV\u005cqsetw 1.7cm [ and
+p153
+a.

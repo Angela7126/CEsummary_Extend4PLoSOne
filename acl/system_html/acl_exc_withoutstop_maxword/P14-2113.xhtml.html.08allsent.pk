@@ -1,0 +1,294 @@
+(lp0
+VSentiment Features
+p1
+aVSentiment Features
+p2
+aVAAWD consists of 221 English Wikipedia discussions with positive and negative alignment annotations
+p3
+aVAs a result, we propose a sentiment analysis approach for online dispute detection that identifies the sequence of sentence-level sentiments (i.e., very negative, negative, neutral, positive, very positive) expressed during the discussion and uses them as features in a classifier that predicts the dispute / non-dispute label for the discussion as a whole
+p4
+aVDiscussion Features
+p5
+aVAnnotators either label each sentence as positive, negative or neutral, or label the full turn
+p6
+aVThe labels in u'\u005cud835' u'\u005cudcaa' represent very negative (NN), negative (N), neutral (O), positive (P), and very positive (PP), respectively
+p7
+aVWe evaluate the systems using standard F1 on classes of positive, negative, and neutral, where samples predicted as PP and P are positive alignment, and samples tagged as NN and N are negative alignment
+p8
+aVWe train the sentiment classifier using the Authority and Alignment in Wikipedia Discussions (AAWD) corpus [ 1 ] on a 5-point scale (i.e., NN, N, O, P, PP
+p9
+aVGiven that consistent negative sentiment flow usually indicates an ongoing dispute, we first extract features from sentiment distribution in the form of number/probability of sentiment per type
+p10
+aVSentences annotated as being a positive alignment by at least two annotators are treated as very positive (PP
+p11
+aV1) Baseline (Polarity a sentence is predicted as positive if it has more positive words than negative words, or negative if more negative words are observed
+p12
+aVWe train our sentiment tagging model on the full AAWD dataset, and run it on the Wikipedia dispute corpus
+p13
+aVThis set of features encode the sentiment distribution and transition in the discussion
+p14
+aVWe construct the first dispute detection corpus to date; it consists of dispute and non-dispute discussions from Wikipedia Talk pages
+p15
+aVTable 3 describes the main results on the AAWD dataset our isotonic CRF based system significantly outperforms the alternatives for positive and negative alignment detection (paired- t test, p 0.05
+p16
+aVVery negative (NN) and negative (N) are collected in the same way
+p17
+aVTopic Features
+p18
+aVIf a sentence is only selected as positive by one annotator or obtains the label via turn-level annotation, it is positive (P
+p19
+aVDiscourse Features
+p20
+aVA combination of topic, discussion, and sentiment features achieves the best performance on recall, F1, and accuracy
+p21
+aVWe use the features in Table 2 for sentiment prediction
+p22
+aVAs it can be seen, sentiment features obtains the best accuracy among the four types of features
+p23
+aVFeatures described above mostly depict the global sentiment flow in the discussions
+p24
+aVFor example, less positive sentiment can be observed as dispute being escalated
+p25
+aVWe choose number of turns , number of participants , average number of words in each turn as features
+p26
+aVWe evaluate our dispute detection approach using a newly created corpus of discussions from Wikipedia Talk pages (3609 disputes, 3609 non-disputes
+p27
+aVThe plots reveal persistent negative sentiment in unresolved disputes (top
+p28
+aV3609 discussions are collected with dispute tags found in the revision history
+p29
+aVLexical Features
+p30
+aVWe visualize the sentiment flow of two disputed discussions in Figure 2
+p31
+aVWe are also interested in understanding whether, and which, linguistic features of the discussion are important for dispute detection
+p32
+aVAn SVM classifier [ 10 ] is trained using features of the sentiment words and minimum/maximum/average of the distances
+p33
+aVWe further transform the labels into the five sentiment labels
+p34
+aVSentiment Flow Visualization
+p35
+aVFirstly, sentiment prediction errors get propagated into dispute detection
+p36
+aVFor instances that have only a turn-level label, we assume all sentences have the same label as the turn
+p37
+aVWe thus split each discussion into three equal length stages, and create sentiment distribution and transition features for each stage
+p38
+aVThis section describes our sentence-level sentiment tagger, from which we construct features for dispute detection (Section 4
+p39
+aVWe first collect unigram and bigram features for each discussion
+p40
+aVIn this work, we investigate the heretofore novel task of dispute detection in online discussions
+p41
+aVSyntactic/Semantic Features
+p42
+aVWe then have features as number/portion of sentiment transitions per type
+p43
+aVGet Discussions with Disputes
+p44
+aVConsider a discussion comprised of sequential turns; each turn consists of a sequence of sentences
+p45
+aVIn contrast, we investigate methods for the automatic detection, i.e., prediction, of discussions involving disputes
+p46
+aVThe sequence of almost exclusively negative statements provides evidence of a dispute in this portion of the discussion
+p47
+aVNote that dispute tags only appear in a small number of articles and talk pages
+p48
+aVWe use the 2013-03-04 Wikipedia data dump, and extract talk pages for articles that are labeled with dispute tags by checking the revision history
+p49
+aVSentiment dependency relations are the dependency relations that include a sentiment word
+p50
+aVConcretely, we take a lexicon u'\u005cu2133' = u'\u005cu2133' p u'\u005cu222a' u'\u005cu2133' n , where u'\u005cu2133' p and u'\u005cu2133' n are two sets of features (usually words) identified as strongly associated with positive and negative sentiment
+p51
+aVPrevious research on sentiment prediction for online discussions, however, focuses on turn-level predictions [ 7 , 24 ]
+p52
+aVThe average turn numbers for dispute and non-dispute discussions are 45.03 and 22.95, respectively
+p53
+aVGiven that traditional Conditional Random Fields (CRFs) [ 15 ] ignore the ordinal relations among sentiment labels, we choose isotonic CRFs [ 16 ] for sentence-level sentiment analysis as they can enforce monotonicity constraints on the parameters consistent with the ordinal structure and domain knowledge (e.g., word-level sentiment conveyed via a lexicon
+p54
+aVAmong all 16,501 sentences in AAWD, 1,930 and 1,102 are labeled as NN and N
+p55
+aV1) labels are randomly assigned; (2) all discussions have disputes
+p56
+aVWe model dispute detection as a standard binary classification task, and investigate four major types of features as described below
+p57
+aVControversy , Request for Comment (RFC) , and Resolved based on the tags found in discussions (see Table 1
+p58
+aVGet Discussions without Disputes
+p59
+aVWe further construct a local version of them, since sentiment distribution may change as discussion proceeds
+p60
+aVWe find that classifiers that employ the learned sentiment features outperform others that do not
+p61
+aVWe further classify dispute discussions into three subcategories
+p62
+aV2007 ) , Kraut and Resnick ( 2012 ) ), we hypothesize that effective methods for dispute detection should take into account the sentiment and opinions expressed by participants in the collaborative endeavor
+p63
+aVAs the first work that predicts sentence-level sentiment for online discussions, we investigate isotonic Conditional Random Fields (CRFs) [ 16 ] for the sentiment-tagging task as they preserve the advantages of the popular CRF-based sequential tagging models [ 15 ] while providing an efficient mechanism for encoding domain knowledge u'\u005cu2014' in our case, a sentiment lexicon u'\u005cu2014' through isotonic constraints on model parameters
+p64
+aVFor example, u'\u005cu201c' I told you over and over again u'\u005cu2026' u'\u005cu201d' strongly suggests a negative sentiment, but no single word shows negative connotation
+p65
+aVExperimental results with various combinations of features sets are displayed in Table 5
+p66
+aVLikewise, we collect non-dispute discussions from pages that are never tagged with disputes
+p67
+aVWe gather connectives from the Penn Discourse TreeBank [ 17 ] and combine them with any sentiment word that precedes or follows it as new features
+p68
+aVTherefore, we encode the number of revisions that happened during the discussion as a feature
+p69
+aVPrevious work in this general area has analyzed dispute-laden content to discover features correlated with conflicts and disputes [ 13 ]
+p70
+aVThe other 12,648 are considered neutral
+p71
+aVWe further utilize unigrams and bigrams of the category as topic features
+p72
+aVDataset
+p73
+aVThis type of feature aims to capture the structure of the discussion
+p74
+aVIf an article is observed to have disputes on its talk page , editors can assign dispute tags to the article to flag it for attention
+p75
+aVResearch focused primarily on cues derived from the edit history of the jointly created content (e.g., the number of revisions, their temporal density [ 13 , 23 ] ) and relied on small numbers of manually selected discussions known to involve disputes
+p76
+aVDispute tags can also be added to talk pages themselves
+p77
+aVTo evaluate the performance of the sentiment tagger, we compare to two baselines
+p78
+aVThere may exist other discussions with disputes
+p79
+aV3609 discussions are randomly selected with this criterion
+p80
+aVGet Talk Pages of Disputed Articles
+p81
+aVThe best model achieves a very promising F1 score of 0.78 and an accuracy of 0.80 on the Wikipedia dispute corpus
+p82
+aVWe extract the initial unigram, bigram, and trigram of each utterance as discourse features [ 9 ]
+p83
+aVWe also compare with two state-of-the-art methods that are used in sentiment prediction for conversations
+p84
+aVOur model takes as input the sentences u'\u005cud835' u'\u005cudc31' = { x 1 , u'\u005cu22ef' , x n } from a single turn, and outputs the corresponding sequence of sentiment labels u'\u005cud835' u'\u005cudc32' = { y 1 , u'\u005cu22ef' , y n } , where y i u'\u005cu2208' u'\u005cud835' u'\u005cudcaa' , u'\u005cud835' u'\u005cudcaa' = { NN , N , O , P , PP }
+p85
+aVEach sentiment word is associated with the closest second person pronoun, and a surface distance is computed
+p86
+aVOtherwise, it is neutral
+p87
+aVWe normalize the features by standardization and conduct a 5-fold cross-validation
+p88
+aVSecondly, some dispute discussions are harder to detect than the others due to different dialog structures
+p89
+aVSentiment analysis has been utilized as a key enabling technique in a number of conversation-based applications
+p90
+aVUnfortunately, sentence-level sentiment tagging for this domain is challenging in its own right due to the less formal, often ungrammatical, language and the dynamic nature of online conversations u'\u005cu201c' Really, grow up u'\u005cu201d' (segment 3) should presumably be tagged as a negative sentence as should the sarcastic sentences u'\u005cu201c' Sounds good u'\u005cu201d' (in the same turn) and u'\u005cu201c' congrats u'\u005cu201d' and u'\u005cu201c' thank you u'\u005cu201d' (in segment 2
+p91
+aVIn this research, we are interested in talk pages whose corresponding articles are labeled with the following tags disputed , totallydisputed , disputed-section , totallydisputed-section , pov
+p92
+aVAll others are neutral (O
+p93
+aVIn addition, the frequency of revisions made during the discussion has been shown to be good indicator for controversial articles [ 20 ] , that are presumably prone to have disputes
+p94
+aVWe also estimate the sentiment transition probability P ( S t u'\u005cu2192' S t + 1 ) from our predictions, where S t and S t + 1 are sentiment labels for the current sentence and the next
+p95
+aVPrevious work mainly studies the attitudes in spoken meetings [ 5 , 7 ] or broadcast conversations [ 21 ] using variants of Conditional Random Fields [ 15 ] and predicts sentiment at the turn-level, while our predictions are made for each sentence
+p96
+aVIntuitively, the more turns or the more participants a discussion has, the more likely there is a dispute
+p97
+aVTo the best of our knowledge, this represents the first computational approach to automatically identify online disputes on a dataset of scale
+p98
+aVWe expect that these, and other, examples will be difficult for the sentence-level classifier unless the discourse context of each sentence is considered
+p99
+aV532 and 99 of them are PP and P
+p100
+aVWikipedia articles are edited by different editors
+p101
+aVThis results in 19,071 talk pages
+p102
+aVThe numbers of discussions for the three types are 42, 3484, and 105, respectively
+p103
+aVFor the resolved dispute (bottom), participants show gratitude when the problem is settled
+p104
+aVWe consider non-dispute discussions with at least 3 distinct speakers and 10 turns
+p105
+aVTherefore, in addition to the tags mentioned above, we also consider the u'\u005cu201c' Request for Comment u'\u005cu201d' ( rfc ) tag on talk pages
+p106
+aVFor instance, the recalls for dispute discussions of u'\u005cu201c' controversy u'\u005cu201d' , u'\u005cu201c' RFC u'\u005cu201d' , and u'\u005cu201c' resolved u'\u005cu201d' are 0.78, 0.79, and 0.86 respectively
+p107
+aVThe tags indicate that an article is disputed, or the neutrality of the article is disputed ( pov
+p108
+aVSpecifically, the accuracy is significantly higher than all the other systems (paired- t test, p 0.05
+p109
+aVAccording to Wikipedia 4 4 http://en.wikipedia.org/wiki/Wikipedia:Requests_for_comment , rfc is used to request outside opinions concerning the disputes
+p110
+aVConsider, for example, the snippet in Figure 1 from the Wikipedia Talk page for the article on Philadelphia; it discusses the choice of a picture for the article u'\u005cu2019' s u'\u005cu201c' infobox u'\u005cu201d'
+p111
+aVExisting studies of collaborative knowledge systems have shown, however, that the quality of the generated content (e.g., an encyclopedia article) is highly correlated with the effectiveness of the online collaboration [ 12 , 14 ] ; fruitful collaboration, in turn, inevitably requires dealing with the disputes and conflicts that arise [ 13 ]
+p112
+aVWe replace those words with their polarity equivalents
+p113
+aVWe thus extract the category information of the corresponding article for each talk page
+p114
+aVWords with contradictory sentiments are removed
+p115
+aV2010 ) , which identifies sentences containing u'\u005cu201c' attitudes u'\u005cu201d' (e.g., opinions), but does not distinguish them w.r.t. sentiment
+p116
+aVMain results for different classifiers are displayed in Table 4
+p117
+aVAll learning based methods outperform the two baselines, and among them, SVM with the RBF kernel achieves the best F1 score and accuracy (0.78 and 0.80
+p118
+aV1) an SVM (RBF kernel) that is employed for identifying sentiment-bearing sentences [ 8 ] , and (dis)agreement detection [ 24 ] in online debates; (2) a Linear CRF for (dis)agreement identification in broadcast conversations [ 21 ]
+p119
+aVArticles on specific topics, such as politics or religions, tend to arouse more disputes
+p120
+aVWikipedia, a wiki-based online encyclopedia, is arguably the best example its distributed editing environment allows readers to collaborate as content editors and has facilitated the production of over four billion articles 1 1 http://en.wikipedia.org of surprisingly high quality [ 6 ] in English alone since its debut in 2001
+p121
+aV3 3 The talk page associated with each article records conversations among editors about the article content and allows editors to discuss the writing process, e.g., planning and organizing the content
+p122
+aVWe have two versions of dependency relation features, the original form and a form that generalizes a word to its POS tag, e.g.,  u'\u005cu201c' nsubj(wrong, you) u'\u005cu201d' is generalized to u'\u005cu201c' nsubj( ADJ , you) u'\u005cu201d' and u'\u005cu201c' nsubj(wrong, PRP ) u'\u005cu201d'
+p123
+aVWe intend to design models that are able to capture dialog structures in the future work
+p124
+aVMeanwhile, participants tend to produce longer utterances when they make arguments
+p125
+aVResults and Error Analysis
+p126
+aVContext information is also not considered
+p127
+aVFor example, when u'\u005cu201c' totally agree u'\u005cu201d' is observed in training, parameter u'\u005cu039c' u'\u005cu27e8' PP , totally u'\u005cu2062' agree u'\u005cu27e9' is likely to increase
+p128
+aVDrawing inspiration from studies of human mediation of online conflicts (e.g., Billings and Watts ( 2010 ) , Kittur et al
+p129
+aVAssume u'\u005cu039c' u'\u005cu27e8' u'\u005cu03a3' , w u'\u005cu27e9' encodes the weight between label u'\u005cu03a3' and feature w , for each feature w u'\u005cu2208' u'\u005cu2133' p ; then the isotonic CRF enforces u'\u005cu03a3' u'\u005cu2264' u'\u005cu03a3' u'\u005cu2032' u'\u005cu21d2' u'\u005cu039c' u'\u005cu27e8' u'\u005cu03a3' , w u'\u005cu27e9' u'\u005cu2264' u'\u005cu039c' u'\u005cu27e8' u'\u005cu03a3' u'\u005cu2032' , w u'\u005cu27e9'
+p130
+aVConstructing a lexicon tuned for conversational text may improve the performance
+p131
+aVUnfortunately, human monitoring of the often massive social media and collaboration sites to detect, much less mediate, disputes is not feasible
+p132
+aVAfter a closer look at the results, we find two main reasons for incorrect predictions
+p133
+aV2) Baseline (Distance) is extended from [ 8 ]
+p134
+aVWe experiment with logistic regression, SVM with linear and RBF kernels, which are effective methods in multiple text categorization tasks [ 10 , 25 ]
+p135
+aVStep 1
+p136
+aVSimilar constraints are defined on u'\u005cu2133' n
+p137
+aVStep 2
+p138
+aVTwo baselines are listed
+p139
+aVStep 3
+p140
+aV2 2 A notable exception is Hassan et al
+p141
+aVOur lexicon is built by combining MPQA [ 22 ] , General Inquirer [ 19 ] , and SentiWordNet [ 3 ] lexicons
+p142
+aVAs the web has grown in popularity and scope, so has the promise of collaborative information environments for the joint creation and exchange of knowledge [ 11 , 18 ]
+p143
+aVDue to the limitation of existing general-purpose lexicons, some opinionated dialog-specific terms are hard to catch
+p144
+aVFor example, relation u'\u005cu201c' nsubj(wrong, you) u'\u005cu201d' becomes u'\u005cu201c' nsubj( SentiWord n u'\u005cu2062' e u'\u005cu2062' g , you) u'\u005cu201d'
+p145
+aVEvaluation
+p146
+a.

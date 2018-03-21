@@ -1,0 +1,234 @@
+(lp0
+VThe entire corpus, including these entities, is generated according to standard topic model assumptions; we first generate a topic distribution for a document, then sample topics and words for the document [ ]
+p1
+aVThe tuned model then produced a mention clustering on the full political blog corpus
+p2
+aVLike the output of our model, the output of their hierarchical clustering baseline is a mention clustering, and therefore must be mapped to a table of canonical entity names to compare to the reference table
+p3
+aVSimilarly, learn a mention similarity model based on labeled data
+p4
+aVIf the extracted mention was incorrect or referred to a non-person, it was removed
+p5
+aVPreprocessed as described in , the data consists of 10647 entity mentions
+p6
+aVThe baseline system took the first mention from each (gold) within-document coreference chain as the canonical mention, ignoring other mentions in the chain; we follow the same procedure in our experiments
+p7
+aVWe refine that idea by saying that the current topic, language, and document influence the choice of which previous mention to copy, similar to the distance-dependent CRP [ ]
+p8
+aV2 2 Unlike the ddCRP, our generative story is careful to prohibit derivational cycles each mention is copied from a previous mention in the latent ordering
+p9
+aVLike and we use topics as the contexts, but learn mention topics jointly with other model parameters
+p10
+aVOur model is an evolutionary generative process based on the name variation model of , which stipulates that names are often copied from previously generated names, perhaps with mutation (spelling edits
+p11
+aVTo select a parent for a mention x of type t = x e t , a simple model (as mentioned above) would be a CRP each previous mention of the same type is selected with probability proportional to 1, and u'\u005cu2662' is selected with probability proportional to u'\u005cu0391' t 0
+p12
+aVTo apply our model to the CDCR task, we observe that the probability that two name mentions are coreferent is the probability that they arose from a common ancestor in the phylogeny
+p13
+aVIf it was mostly correct, but omitted/excluded a token, the annotator corrected it
+p14
+aVFor our model, we tune only the fixed weight of the root feature, which determines the precision/recall trade-off (larger values of this feature result in more attachments to u'\u005cu2662' and hence more entities
+p15
+aVThis binary feature has a high weight if authors mainly choose mentions from the same topic
+p16
+aVAnother option is to train a model like stochastic edit distance from known pairs of similar names [] , but this requires supervised data in the test domain
+p17
+aVTheir inference procedure only clustered types (distinct names) rather than tokens (mentions in context), and relied on expensive matrix inversions for learning
+p18
+aVName similarity is also an important component of within -document coreference resolution, and efforts in that area bear resemblance to our approach describe an u'\u005cu201c' entity-centered u'\u005cu201d' model where a distance-dependent Chinese restaurant process is used to pick previous coreferent mentions within a document
+p19
+aVThis process treats all topics as exchangeable, including those associated with named entities
+p20
+aVTo mitigate this unrealistic assumption, we allow any ordering u'\u005cud835' u'\u005cudc99' of the observed mentions, not respecting document timestamps or forcing the mentions from a given document to be generated as a contiguous subsequence of u'\u005cud835' u'\u005cudc99'
+p21
+aVThus, for fixed values of the non-mention tokens and their topics, the probability of generating the mention sequence u'\u005cud835' u'\u005cudc99' is proportional to the product of the probabilities of the choices in step 3 at the positions d u'\u005cu2062' k where mentions were generated
+p22
+aVWhile our model is capable of generating each name independently, a phylogeny will generally achieve higher probability if it explains similar names as being similar by mutation (rather than by coincidence
+p23
+aVTheir method uses Jaro-Winkler string similarity to match names, then clusters mentions with matching names (for disambiguation) by comparing their unigram context distributions using the Jenson-Shannon metric
+p24
+aVFor the political blog dataset, the reference does not consist of entity annotations, and so we follow the evaluation procedure of
+p25
+aVThus, our sampled phylogenies tend to make similar names coreferent u'\u005cu2014' especially long or unusual names that would be expensive to generate repeatedly, and especially in contexts that are topically similar and therefore have a higher prior probability of coreference
+p26
+aVGiven the topics u'\u005cud835' u'\u005cudc9b' , the ordering u'\u005cud835' u'\u005cudc8a' , and the observed names, we choose an x p value according to its posterior probability
+p27
+aVWe found that multiple samples tend to give different phylogenies (so the sampler is mobile), but essentially the same clustering into entities (which is why consensus clustering did not improve much over simply using the last sample
+p28
+aVIf all previous mentions were equally likely, this would be a Chinese Restaurant Process (CRP) in which frequently mentioned entities are more likely to be mentioned again ( u'\u005cu201c' the rich get richer u'\u005cu201d'
+p29
+aVHowever, the true tree must include many names that fall outside our small observed corpora, so our model would be a more appropriate fit for a far larger corpus
+p30
+aVAlso unlike the ddCRP, we permit asymmetric u'\u005cu201c' distances u'\u005cu201d' if a certain topic or language likes to copy mentions from another, the compliment is not necessarily returned
+p31
+aVUsing the Twitter 1% streaming API, we collected all tweets during the 2013 Grammy music awards ceremony, which occurred on Feb 10, 2013 between 8pm eastern (1:00am GMT) and 11:30pm (4:30 GMT
+p32
+aVA larger choice of u'\u005cu0391' t results in smaller entity clusters, because it prefers to create new entities of type t rather than copying old ones
+p33
+aVWe assume that each document has a (single) known \u005ctodo [author=mark,color=RoyalBlue,fancyline,size=,]We got dinged in the last submission for trying to generalize the model to language without any data to back it up
+p34
+aVThe topics of context words are assumed exchangeable, and so we resample them using Gibbs sampling [ ]
+p35
+aVThe possible parents p u'\u005cu2032' range over u'\u005cu2662' and the mentions that precede x according to the ordering u'\u005cud835' u'\u005cudc8a' s , while the features u'\u005cud835' u'\u005cudc87' and distribution Pr u'\u005cu03a6' depend on the topics u'\u005cud835' u'\u005cudc9b' s
+p36
+aVLet x denote a mention with parent p = x p
+p37
+aVThis will help distinguish multiple John Smith entities if they tend to appear in different contexts
+p38
+aVWe leave other hyperparameters fixed
+p39
+aVOne could also make more specific versions of any feature by conjoining it with the entity type t
+p40
+aVWe modify this story by re-weighting u'\u005cu2662' and previous mentions according to their relative suitability as the parent of x
+p41
+aVWe provide details about this procedure in Appendix A .) 7 7 The full version of this paper is available at http://cs.jhu.edu/~noa/publications/phylo-acl-14.pdf However, such orderings are not in fact equiprobable given the other variables u'\u005cu2014' some orderings better explain why that phylogeny was chosen in the first place, according to our competitive parent selection model (§ 4.1
+p42
+aVMost approaches since then are based on the intuitions that coreferent names tend to have u'\u005cu201c' similar u'\u005cu201d' spellings and tend to appear in u'\u005cu201c' similar u'\u005cu201d' contexts
+p43
+aVwhere x p ranges over u'\u005cu2662' and all previous mentions of the same type as x , that is, mentions p such that p i x i and p e t = x e t
+p44
+aVEvaluating the likelihood and its partial derivatives with respect to the parameters of the model requires marginalizing over our latent variables
+p45
+aVHence we allowed u'\u005cu0393' 0 and tuned it on development data
+p46
+aVWith the pragmatic model (section 4.2 ), the parent choices are no longer independent; then the samples of u'\u005cud835' u'\u005cudc91' should be corrected by IMH as usual
+p47
+aVThat edge explains a mention x as a mutation of some parent p in the context of a particular sample ( u'\u005cud835' u'\u005cudc91' s , u'\u005cud835' u'\u005cudc8a' s , u'\u005cud835' u'\u005cudc9b' s
+p48
+aVAlternatively, the model may manufacture a name for a new person, though the name itself may not be new
+p49
+aVEven the best model of name similarity is not enough by itself, since two names that are similar u'\u005cu2014' even identical u'\u005cu2014' do not necessarily corefer
+p50
+aVFrom a single phylogeny u'\u005cud835' u'\u005cudc91' , we deterministically obtain a clustering u'\u005cud835' u'\u005cudc86' by removing the root u'\u005cu2662'
+p51
+aVNote that in the base case where x is a leaf (so M = 0 ), this procedure terminates immediately, having printed the empty ordering
+p52
+aVThis probability is expensive to evaluate because changing x z will change the probability of many edges in the current phylogeny u'\u005cud835' u'\u005cudc91'
+p53
+aVMost summands in Z u'\u005cu2062' ( x ) were already included in Z u'\u005cu2062' ( x u'\u005cu2032' ) , where x u'\u005cu2032' is the latest previous mention having the same attributes as x (e.g.,, same topic
+p54
+aVSince the ordering u'\u005cud835' u'\u005cudc8a' prevents cycles, the resulting phylogeny u'\u005cud835' u'\u005cudc91' is indeed a tree
+p55
+aVThus each mention x has latent position x i (e.g.,, x 729 i = 729
+p56
+aVThe CMU political blogs dataset consists of 3000 documents about U.S politics [ ]
+p57
+aVThe other results we report do not use pragmatics at all, since we found that it gave only a slight improvement on Twitter
+p58
+aVOur model gives a distribution over phylogenies u'\u005cud835' u'\u005cudc91' (given observations u'\u005cud835' u'\u005cudc99' and learned parameters u'\u005cu03a6' ) u'\u005cu2014' and thus gives a posterior distribution over clusterings u'\u005cud835' u'\u005cudc86' , which can be used to answer various queries
+p59
+aVWe take this to be the probability that a reader who knows our sub-models would guess some parent having the correct entity (or u'\u005cu2662' if x is a first mention u'\u005cu2211' p u'\u005cu2032' p u'\u005cu2032' e = x e w u'\u005cu2062' ( p u'\u005cu2032' , x ) / u'\u005cu2211' p u'\u005cu2032' w u'\u005cu2062' ( p u'\u005cu2032' , x
+p60
+aVOur model generates an ordered sequence u'\u005cud835' u'\u005cudc99' although we do not observe its order
+p61
+aVMore generally, the probability ( 2 ) may also be conditioned on other variables such as on the languages p u'\u005cu2113' and x u'\u005cu2113' u'\u005cu2014' this leaves room for a transliteration model when x u'\u005cu2113' u'\u005cu2260' p u'\u005cu2113' u'\u005cu2014' and on the entity type x t
+p62
+aVBut in fact, if CIA has already been frequently used to refer to the Central Intelligence Agency, then an author is unlikely to use it for a different entity
+p63
+aVThe current phylogeny u'\u005cud835' u'\u005cudc91' already defines a partial order on u'\u005cud835' u'\u005cudc99' , since each parent must precede its children
+p64
+aVOn development data, modeling pragmatics as in § 4.2 gave large improvements for organizations (8 points in F-measure), \u005ctodo [author=jason,color=RedOrange,fancyline,size=,]but maybe just for org correcting the tendency to assume that short names like CIA were coincidental homonyms
+p65
+aVRather than fixing its parameters before we begin CDCR, we learn them (without supervision) as part of CDCR, by training from samples of reconstructed phylogenies
+p66
+aVThus, we sample u'\u005cud835' u'\u005cudc8a' or u'\u005cud835' u'\u005cudc9b' from a simpler proposal distribution, but correct the discrepancy using the Independent Metropolis-Hastings (IMH) strategy with an appropriate probability, reject the proposed new value and instead use another copy of the current value [ ]
+p67
+aV\u005ctodo [author=noa,color=SeaGreen,fancyline,size=,]I have features on u'\u005cu2662' here since e.g., position in document may be predictive of if a new entity is being started
+p68
+aVAs the mapping from clusters to a table is not fully detailed in , we used a simple heuristic the most frequent name in each cluster is taken as the canonical name, augmented by any titles from a predefined list appearing in any other name in the cluster
+p69
+aVWe use the same model, taking u'\u005cu2662' n to be the empty string (but with # u'\u005cu2662' rather than # as the end-of-string symbol
+p70
+aVEquation ( 1 ) puts x is in competition with other parents, so every mention y that follows x must recompute how happy it is with its current parent y p
+p71
+aVWe sample from Q using standard methods, \u005ctodo [author=jason,color=RedOrange,fancyline,size=,]can we cite a section of Koller Friedman similar to sampling from a linear-chain CRF by running the backward algorithm followed by forward sampling
+p72
+aVAs this marginalization is intractable, we resort to Monte Carlo EM procedure [ ] which iterates the following two steps
+p73
+aVThe weight w ( x p , x ) is defined as in section 5.3 u'\u005cu2014' except that since we do not yet have an ordering u'\u005cud835' u'\u005cudc8a' , we do not restrict the possible values of x p to mentions p with p i x p i
+p74
+aVThis yields a feature-based unigram language model (whose character probabilities may differ from usual insertion probabilities because they see # u'\u005cu2662' as the lookahead character
+p75
+aV\u005ctodo [author=jason,color=RedOrange,fancyline,size=,]nick, a LaTeXnote you can use inline lists with itemize* if you want to compactify like this (we u'\u005cu2019' re already using enumitem package) (1) We fix topics u'\u005cud835' u'\u005cudc9b' 0 via collapsed Gibbs sampling [ ]
+p76
+aVThis is why our phylogeny is a tree , and why our sampler is more complex
+p77
+aVCross-document coreference resolution (CDCR) was first introduced by
+p78
+aVwhere the true positives (TP), true negatives (TN), false positives (FP), and false negatives (FN) use the clustering u'\u005cud835' u'\u005cudc86' to evaluate how well u'\u005cud835' u'\u005cudc86' u'\u005cu2032' classifies the ( N 2 ) mention pairs as coreferent or not
+p79
+aVThough not state-of-the-art, this result is close to the score of the u'\u005cu201c' EEA u'\u005cu201d' system of , as reported in Figure 2 of , \u005ctodo [author=jason,color=RedOrange,fancyline,size=,]so we lose slightly to EEA but EEA loses big to Yogotama which is specifically designed for the task of canonicalization
+p80
+aVSo we design a Monte Carlo sampler to reconstruct likely phylogenies
+p81
+aVAs detailed below, a proposal can be sampled from Q u'\u005cu2062' ( u'\u005cud835' u'\u005cudc9b' ) in time O u'\u005cu2062' u'\u005cud835' u'\u005cudc9b' u'\u005cu2062' K 2 ) where K is the number of topics, because the only interactions among topics are along the edges of the tree u'\u005cud835' u'\u005cudc91'
+p82
+aV\u005ctodo [author=jason,color=RedOrange,fancyline,size=,]Well, maybe they u'\u005cu2019' re exchangeable if you u'\u005cu2019' re ignoring the names at this step and just treating the types as words
+p83
+aVOutput the current sample s t = ( u'\u005cud835' u'\u005cudc91' , u'\u005cud835' u'\u005cudc8a' , u'\u005cud835' u'\u005cudc9b' )
+p84
+aVThe edit model thinks that Pr u'\u005cud835' u'\u005cudf3d' ( u'\u005cud835' u'\u005cudda2' u'\u005cud835' u'\u005cudda8' u'\u005cud835' u'\u005cudda0' u'\u005cu2223' u'\u005cu2662' ) is relatively high (because CIA is a short string) and so is Pr u'\u005cud835' u'\u005cudf3d' ( u'\u005cud835' u'\u005cudda2' u'\u005cud835' u'\u005cudda8' u'\u005cud835' u'\u005cudda0' u'\u005cu2223' Chuck u'\u005cu2019' s Ice Art
+p85
+aVWhile Pr ( u'\u005cud835' u'\u005cudc91' , u'\u005cud835' u'\u005cudc8a' , u'\u005cud835' u'\u005cudc9b' ^ , u'\u005cud835' u'\u005cudc99' u'\u005cu2223' u'\u005cud835' u'\u005cudf3d' , u'\u005cu03a6' ) might seem slow to compute because it contains many factors ( 1 ) with different denominators Z u'\u005cu2062' ( x ) , one can share work by visiting the mentions x in their order u'\u005cud835' u'\u005cudc8a'
+p86
+aV\u005ctodo [author=jason,color=RedOrange,fancyline,size= ,]summarize results and add John Smith here if you do it in the conclusions
+p87
+aVNotice that the tokens w d u'\u005cu2062' k in document d are exchangeable by collapsing out u'\u005cud835' u'\u005cudf4d' d , we can regard them as having been generated from a CRP
+p88
+aVFor instance, we see several instances of variation due to transliteration that were all correctly grouped together, such as Megawati Soekarnoputri and Megawati Sukarnoputri
+p89
+aVThe distributions used to choose these are unimportant because these variables are always observed
+p90
+aVWe use the same baselines as in § 8.1
+p91
+aVIn practice, we again estimate the expectation by sampling u'\u005cud835' u'\u005cudc86' values
+p92
+aVRandom restarts of EM might create more variety by choosing different locally optimal parameter settings
+p93
+aVLarger corpora also offer stronger signals that might enable our Monte Carlo methods to mix faster and detect regularities more accurately
+p94
+aVVariation poses a serious challenge for determining who or what a name refers to
+p95
+aVAs explained above, the s i u'\u005cu2062' j are coreference probabilities s i u'\u005cu2062' j that can be estimated from a sample of clusterings u'\u005cud835' u'\u005cudc86'
+p96
+aVI simplified it from u'\u005cu03a4' u'\u005cu2062' u'\u005cud835' u'\u005cudc8e' here and in the main document
+p97
+aVThe initial sampler state ( u'\u005cud835' u'\u005cudc9b' 0 , u'\u005cud835' u'\u005cudc91' 0 , u'\u005cud835' u'\u005cudc8a' 0 ) is obtained as follows
+p98
+aVIt is difficult to draw exact samples at steps 1 and 2
+p99
+aVMore similar clusterings achieve larger R , with R u'\u005cu2062' ( u'\u005cud835' u'\u005cudc86' u'\u005cu2032' , u'\u005cud835' u'\u005cudc86' ) = 1 iff u'\u005cud835' u'\u005cudc86' u'\u005cu2032' = u'\u005cud835' u'\u005cudc86'
+p100
+aV\u005ctodo [author=jason,color=RedOrange,fancyline,size=,]As you see, I already amplified the footnote to give our defense of this
+p101
+aVAlso, should u'\u005cu03a3' t be described as a (diagonal) matrix where u'\u005cu0395' is a fixed scaling term and u'\u005cu03a3' t is an adaptive learning rate given by AdaGrad [ ]
+p102
+aVAs in , its name x n is a stochastic transduction of its parent u'\u005cu2019' s name p n
+p103
+aV\u005ctodo [author=jason,color=RedOrange,fancyline,size=,]if we restore u'\u005cu0391' then it should be mentioned here
+p104
+aV\u005ctodo [author=jason,color=RedOrange,fancyline,size=,]Nick, I assume you use this trick
+p105
+aVwhere u'\u005cu223c' denotes coreference according to u'\u005cud835' u'\u005cudc86' u'\u005cu2032'
+p106
+aVIn fact, we no longer have any u'\u005cu0391' parameter
+p107
+aVWhile u'\u005cud835' u'\u005cudc8a' and u'\u005cud835' u'\u005cudc9b' are not necessary for creating coref clusters, they are needed to produce u'\u005cud835' u'\u005cudc91'
+p108
+aV\u005ctodo [author=jason,color=RedOrange,fancyline,size=,]If we u'\u005cu2019' re using [ ] , then don u'\u005cu2019' t we have to say how u'\u005cud835' u'\u005cudc8e' is sampled
+p109
+aV\u005ctodo [author=jason,color=RedOrange,fancyline,size=,]Ok, but then the factors of u'\u005cu0391' t n u'\u005cu2062' ( x ) + u'\u005cu0391' t should no longer be used, so I deleted them and simplified
+p110
+aVThe normalizing constant Z ( x ) = def u'\u005cu2211' p exp ( u'\u005cu03a6' u'\u005cu22c5' u'\u005cud835' u'\u005cudc1f' ( x p , x ) ) is chosen so that the probabilities sum to 1
+p111
+aVImprove u'\u005cud835' u'\u005cudf3d' and u'\u005cu03a6' to increase 8 8 We actually do MAP-EM, which augments ( 7 ) by adding the log-likelihoods of u'\u005cu0398' and u'\u005cu03a6' under a Gaussian prior
+p112
+aVSo now u'\u005cud835' u'\u005cudc8e' is unnormalized
+p113
+aVIt is not necessary to locally maximize u'\u005cu2112' at each M-step, merely to improve it if it is not already at a local maximum [ ]
+p114
+aV[author=jason,color=RedOrange,fancyline,size=,]cut out a speedup here for space
+p115
+aVAre you
+p116
+a.

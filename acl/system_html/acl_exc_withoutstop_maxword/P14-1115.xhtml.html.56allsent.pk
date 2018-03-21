@@ -1,0 +1,130 @@
+(lp0
+VTo estimate the utterance score, we view both the query terms and the signature terms as the terms that should appear in a human query-based summary
+p1
+aVAs a by-product of our approach, we also propose an extractive summarization model based on phrasal queries to select the summary-worthy sentences in the conversation based on query terms and signature terms [ 17 ]
+p2
+aVThis means our systems can effectively aggregate the extracted sentences and generate abstract sentences based on the query content
+p3
+aVAbstractive summary sentences can be created by aggregating and merging multiple sentences into an abstract sentence
+p4
+aVIn order to select and extract the informative summary-worthy utterances, based on the phrasal query and the original text, we consider two criteria i) utterances should carry the essence of the original text; and ii) utterances should be relevant to the query
+p5
+aVIn this section, we show the evaluation results of our proposed framework and its comparison to the baselines and a state-of-the-art query-focused extractive summarization system
+p6
+aVIn this work, we use log-likelihood ratio to extract the signature terms from chat logs, since log-likelihood ratio leads to better results [ 12 ]
+p7
+aVMoreover, we compare our abstractive system with the first part of our framework (utterance extraction in Figure 1), which can be presented as an extractive query-based summarization system (our extractive system
+p8
+aVIn this way, the title of each summary can be counted as a phrasal query and the corresponding summary is considered as the query-based abstract of the associated chat log including only the information most relevant to the title
+p9
+aV2) We propose a novel ranking strategy to select the best path in the constructed word graph by taking the query content, overall information content and grammaticality (i.e.,, fluency) of the sentence into consideration
+p10
+aV1) Cosine-1st we rank the utterances in the chat log based on the cosine similarity between the utterance and query
+p11
+aVIn other words, using our extractive model described in section 2.1, as a stand alone system, is an effective query-based extractive summarization model
+p12
+aVMoreover, this step, stand alone, corresponds to an extractive summarization system
+p13
+aVIn our pipeline we aim at higher recall, since we later filter sentences and aggregate them to generate new abstract sentences
+p14
+aVFor meeting dataset, the percentage of completely grammatical sentences drops dramatically
+p15
+aV2) Cosine-all we rank the utterances in the chat log based on the cosine similarity between the utterance and query and then select the utterances with a cosine similarity greater than 0 ;
+p16
+aVTo achieve this, the most relevant (summary-worthy) utterances that we select are the ones that maximize the coverage of such terms
+p17
+aVThe purpose of such a model is three-fold i) to cover the content of query information optimally; ii) to generate a more readable and grammatical sentence; and iii) to favor strong connections between the concepts
+p18
+aVWe are aiming at generating an informative abstractive sentence for each cluster based on a user query
+p19
+aVBy identifying the semantic relations between the sentences, we can discover what information in one sentence is semantically equivalent, novel, or more/less informative with respect to the content of the other sentences
+p20
+aVThis task can be considered as content selection
+p21
+aVWe estimate the percentage of the retrieved utterances based on the development set
+p22
+aVThe LexRank baseline improves the results of the TextRank system by increasing the precision and balancing the precision and recall scores for ROUGE-1 score
+p23
+aVWe also show the results of the version we use in our pipeline (our pipeline extractive system
+p24
+aVTo address such limitations, we propose a fully automatic unsupervised abstract generation framework based on phrasal queries for multimodal conversation summarization
+p25
+aVWe set the k parameter in our clustering phase to 10 based on the average number of sentences in the human written summaries
+p26
+aVIn order to rank the graph paths, we select all the paths that contain at least one verb and rerank them using our proposed ranking function to find the best path as the summary of the original sentences in each cluster
+p27
+aVNote that we limit our synsets to the nouns since verb synonyms do not prove to be effective in query expansion [ 13 ]
+p28
+aV3) TextRank a widely used graph-based ranking model for single-document sentence extraction that works by building a graph of all sentences in a document and use similarity as edges to compute the salience of sentences in the graph [ 22 ] ;
+p29
+aVIn order to adapt this corpus to our framework, we followed the same query generation process as for the meeting dataset
+p30
+aVExtractive our full query-based abstractive summariztion system show statistically significant improvements over baselines and other pure extractive summarization systems for ROUGE-1 4 4 The statistical significance tests was calculated by approximate randomization, as described in [ 31 ]
+p31
+aVExample 1 shows two queries and their associated human written summaries based on a single chat log
+p32
+aVThis confirms the validity of the results we obtained by conducting automatic evaluation over the chat dataset
+p33
+aVTo address these issues, in this work, we tackle the task of conversation summarization based on phrasal queries
+p34
+aV1) To the best of our knowledge, our framework is the first abstractive system that generates summaries based on users’ phrasal queries, instead of well-formed questions
+p35
+aVThe purpose of this function is two-fold i) to generate a grammatical sentence by favoring the links between nodes (words) which appear often; and ii) to generate an informative sentence by increasing the weight of edges connecting salient nodes
+p36
+aVSince there is no human-written query-based summary for AMI corpus, we randomly select 10 meetings and evaluate our system manually
+p37
+aVTherefore, we can use the human-written query-based abstract as gold standards and evaluate our system automatically
+p38
+aVFinally, we randomly select 10 emails threads and evaluate the results manually
+p39
+aVWe define a phrasal query as a concatenation of two or more keywords, which is a more realistic representation of a user u'\u005cu2019' s information needs
+p40
+aVWe use the extracted key-phrases as queries to generate query-based abstracts
+p41
+aVWe believe that this is due to the robustness of the LexRank method in dealing with noisy texts (chat conversations) [ 6 ]
+p42
+aVOne of the challenges of this work is to find suitable conversational datasets that can be used for evaluating our query-based summarization system
+p43
+aVWe use six randomly selected query-logs from our chat dataset (about 10% of the dataset) for tuning the coefficient parameters
+p44
+aVTherefore, the final ranking score of path P is calculated over the normalized scores as
+p45
+aVAlso notice that the lexical similarity between sentences in one cluster facilitates both the construction of the word graph and finding the best path in the word graph, as described next
+p46
+aVThen, we select the first uttrance as the summary;
+p47
+aVThis is due to the nature of spoken conversations which is more error prone and ungrammatical
+p48
+aVIn order to construct a word graph, we adopt the method recently proposed by [ 19 , 7 ] with some optimizations
+p49
+aVWe use the K-mean clustering algorithm by cosine similarity as a distance function between sentence vectors composed of tf.idf scores
+p50
+aV3) Although most of the current summarization approaches use supervised algorithms as a part of their system (e.g.,, [ 30 ] ), our method can be totally unsupervised and does not depend on human annotation
+p51
+aVThis can be due to word merging and word replacement choices in the word graph construction, which sometimes change or remove a word in a bigram and consequently may decrease the bigram overlap score
+p52
+aVIn this case the lexical choice for the node is selected based on the tf.idf score of each node;
+p53
+aVThen, we asked annotators to give one of three possible ratings for each sentence based on grammaticality perfect (2 pts), only one mistake (1 pt) and not acceptable (0 pts), ignoring capitalization or punctuation
+p54
+aVThis is expected since dealing with spoken conversations is more challenging than written ones
+p55
+aVSimilar to earlier work [ 3 , 1 ] , we set this problem as a variant of the Textual Entailment (TE) recognition task [ 5 ]
+p56
+aVThe Document Understanding Conference (DUC) 1 1 http://www-nlpir.nist.gov/projects/duc/index.html has launched query-focused multidocument summarization as its main task since 2004, by focusing on complex queries with very specific answers
+p57
+aVNote that each sentence was evaluated individually, so the human judges were not affected by intra-sentential problems posed by coreference and topic shifts
+p58
+aVHowever, often a good summary cannot be generic and should be a brief and well-organized paragraph that answer a user u'\u005cu2019' s information need
+p59
+aVAutomatic summarization has been proposed in the past as a way to address this problem (e.g.,, [ 25 ]
+p60
+aVUsing entailment in this phase is motivated by taking advantage of semantic relations instead of pure statistical methods (e.g.,, Maximal Marginal Relevance) and shown to be more effective [ 19 ]
+p61
+aVEven though some works try to address the problem of summarizing multiparty written conversions (e.g.,, [ 20 , 29 , 23 , 32 , 9 ] ), they do so in a generic way (not query-based) and focus on only one conversational domain (e.g.,, meetings
+p62
+aVThis is because traditional NLP approaches developed for formal texts often are not satisfactory when dealing with multiparty written conversations, which are typically in a casual style and do not display a clear syntactic structure with proper grammar and spelling
+p63
+aVFor example, u'\u005cu201c' How were the bombings of the US embassies in Kenya and Tanzania conducted
+p64
+a.

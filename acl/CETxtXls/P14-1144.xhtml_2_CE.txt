@@ -1,0 +1,746 @@
+************************************************************
+P14-1144.xhtml_2_CE.txt: Cause-Effect links
+************************************************************
+
+CASE: 0
+Stag: 6 
+	Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+	sentTXT: A major weakness of many existing scoring engines such as the Intelligent Essay Assessor u ' \ u2122 ' -LSB- 13 -RSB- is that they adopt a holistic scoring scheme , which summarizes the quality of an essay with a single score and thus provides very limited feedback to the writer
+	Cause: A major weakness of many existing scoring engines such as the Intelligent Essay Assessor u ' \ u2122 ' -LSB- 13 -RSB- is that they adopt a holistic scoring scheme , which summarizes the quality of an essay with a single score
+	Effect: provides very limited feedback to the writer
+
+CASE: 1
+Stag: 9 
+	Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+	sentTXT: Essay grading software that provides feedback along multiple dimensions of essay quality such as E - rater / Criterion -LSB- 1 -RSB- has also begun to emerge
+	Cause: Essay grading software that provides feedback along multiple dimensions of essay quality such as E - rater / Criterion
+	Effect: -LSB- 1 -RSB- has also begun to emerge
+
+CASE: 2
+Stag: 10 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: Our goal in this paper is to develop a computational model for scoring an essay along an under-investigated dimension u ' \ u2014 ' prompt adherence
+	Cause: scoring an essay along an under-investigated dimension u ' \ u2014 ' prompt adherence
+	Effect: Our goal in this paper is to develop a computational model
+
+CASE: 3
+Stag: 16 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Regarding task formulation , while Higgins et al. focus on classifying each sentence as having either good or bad adherence to the prompt , we focus on assigning a prompt adherence score to the entire essay , allowing the score to range from one to four points at half-point increments
+	Cause: having either good or bad adherence to the prompt , we focus on assigning a prompt adherence score to the entire essay , allowing the score to range from one to four points at half-point increments
+	Effect: Higgins et al. focus on classifying each sentence
+
+CASE: 4
+Stag: 16 
+	Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+	sentTXT: having either good or bad adherence to the prompt , we focus on assigning a prompt adherence score to the entire essay , allowing the score to range from one to four points at half-point increments
+	Cause: having either good or bad adherence to the prompt
+	Effect: we focus on assigning a prompt adherence score to the entire essay , allowing the score to range from one to four points at half-point increments
+
+CASE: 5
+Stag: 17 
+	Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+	sentTXT: As far as the approach is concerned , Higgins et al. adopt a knowledge-lean approach to the task , where almost all of the features they employ are computed based on a word-based semantic similarity measure known as Random Indexing -LSB- 10 -RSB-
+	Cause: a word-based semantic similarity measure known as Random Indexing -LSB- 10 -RSB-
+	Effect: As far as the approach is concerned , Higgins et al. adopt a knowledge-lean approach to the task , where almost all of the features they employ are computed
+
+CASE: 6
+Stag: 22 
+	Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+	sentTXT: Since progress in prompt adherence modeling is hindered in part by the lack of a publicly annotated corpus , we believe that our data set will be a valuable resource to the NLP community
+	Cause: progress in prompt adherence modeling is hindered in part by the lack of a publicly annotated corpus
+	Effect: we believe that our data set will be a valuable resource to the NLP community
+
+CASE: 7
+Stag: 23 24 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We use as our corpus the 4.5 million word International Corpus of Learner English -LRB- ICLE -RRB- -LSB- 5 -RSB- , which consists of more than 6000 essays written by university undergraduates from 16 countries and 16 native languages who are learners of English as a Foreign Language 91 % of the ICLE texts are argumentative
+	Cause: our corpus the 4.5 million word International Corpus of Learner English -LRB- ICLE -RRB- -LSB- 5 -RSB- , which consists of more than 6000 essays written by university undergraduates from 16 countries and 16 native languages who are learners of English as a Foreign Language 91 % of the ICLE texts are
+	Effect: We use
+
+CASE: 8
+Stag: 38 
+	Pattern: 2 [['for', 'the', 'sake', 'of'], [',']]---- [[], ['&V-ing/&NP@C@'], ['&R']]
+	sentTXT: For the sake of our experiments , whenever annotators disagree on an essay u ' \ u2019 ' s prompt adherence score , we assign the essay the average of all annotations rounded to the nearest half point
+	Cause: our experiments
+	Effect: whenever annotators disagree on an essay u ' \ u2019 ' s prompt adherence score , we assign the essay the average of all annotations rounded to the nearest half point
+
+CASE: 9
+Stag: 40 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: In this section , we describe in detail our system for predicting essays u ' \ u2019 ' prompt adherence scores
+	Cause: predicting essays u ' \ u2019 ' prompt adherence scores
+	Effect: In this section , we describe in detail our system
+
+CASE: 10
+Stag: 41 42 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We cast the problem of predicting an essay u ' \ u2019 ' s prompt adherence score as 13 regression problems , one for each prompt Each essay is represented as an instance whose label is the essay u ' \ u2019 ' s true score -LRB- one of the values shown in Table 3 -RRB- with up to seven types of features including baseline -LRB- Section 4.2 -RRB- and six other feature types proposed by us -LRB- Section 4.3
+	Cause: 13 regression problems , one for each prompt Each essay is represented as an instance whose label is the essay u ' \ u2019 ' s true score -LRB- one of the values shown in Table 3 -RRB- with up to seven types of features including baseline -LRB- Section 4.2 -RRB- and six other feature types proposed by us -LRB- Section
+	Effect: We cast the problem of predicting an essay u ' \ u2019 ' s prompt adherence score
+
+CASE: 11
+Stag: 42 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Each essay is represented as an instance whose label is the essay u ' \ u2019 ' s true score -LRB- one of the values shown in Table 3 -RRB- with up to seven types of features including baseline -LRB- Section 4.2 -RRB- and six other feature types proposed by us -LRB- Section 4.3
+	Cause: an instance whose label is the essay u ' \ u2019 ' s true score -LRB- one of the values shown in Table 3 -RRB- with up to seven types of features including baseline -LRB- Section 4.2 -RRB- and six other feature types proposed by us -LRB- Section
+	Effect: Each essay is represented
+
+CASE: 12
+Stag: 48 
+	Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+	sentTXT: If he was alive at the end of the 20th century , he would replace religion with television , u ' \ u201d ' students sometimes write essays about all the evils of television , forgetting that their essay is only supposed to be about whether it is u ' \ u201c ' the opium of the masses u ' \ u201d '
+	Cause: he was alive at the end of the 20th century
+	Effect: he would replace religion with television , u ' \ u201d ' students sometimes write essays about all the evils of television , forgetting that their essay is only supposed to be about whether it is u ' \ u201c ' the opium of the masses u ' \ u201d '
+
+CASE: 13
+Stag: 53 54 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: The test instances are created in the same way as the training instances Our baseline system for score prediction employs various features based on Random Indexing
+	Cause: the training instances Our baseline system for score prediction employs various features based on Random
+	Effect: The test instances are created in the same way
+
+CASE: 14
+Stag: 54 
+	Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+	sentTXT: Our baseline system for score prediction employs various features based on Random Indexing
+	Cause: Random Indexing
+	Effect: Our baseline system for score prediction employs various features
+
+CASE: 15
+Stag: 57 
+	Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+	sentTXT: We expect that features based on RI will be useful for prompt adherence scoring because they may help us find text related to the prompt even if some of its concepts have have been rephrased -LRB- e.g. , , an essay may talk about u ' \ u201c ' jail u ' \ u201d ' rather than u ' \ u201c ' prison u ' \ u201d ' , which is mentioned in one of the prompts -RRB- , and because they have already proven useful for the related task of determining which sentences in an essay are related to the prompt -LSB- 7 -RSB-
+	Cause: they may help us find text related to the prompt even if some of its concepts have have been rephrased -LRB- e.g.
+	Effect: , an essay may talk about u ' \ u201c ' jail u ' \ u201d ' rather than u ' \ u201c ' prison u ' \ u201d ' , which is mentioned in one of the prompts -RRB- , and because they have already proven useful for the related task of determining which sentences in an essay are related to the prompt -LSB- 7
+
+CASE: 16
+Stag: 57 
+	Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+	sentTXT: they may help us find text related to the prompt even if some of its concepts have have been rephrased -LRB- e.g.
+	Cause: some of its concepts have have been rephrased
+	Effect: they may help us find text related to the prompt even
+
+CASE: 17
+Stag: 57 
+	Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+	sentTXT: , an essay may talk about u ' \ u201c ' jail u ' \ u201d ' rather than u ' \ u201c ' prison u ' \ u201d ' , which is mentioned in one of the prompts -RRB- , and because they have already proven useful for the related task of determining which sentences in an essay are related to the prompt -LSB- 7
+	Cause: they have already proven useful for the related task of determining which sentences in an essay are related to the prompt -LSB- 7
+	Effect: an essay may talk about u ' \ u201c ' jail u ' \ u201d ' rather than u ' \ u201c ' prison u ' \ u201d ' , which is mentioned in one of the prompts -RRB- , and
+
+CASE: 18
+Stag: 57 58 
+	Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: We expect that features based on RI will be useful for prompt adherence scoring because they may help us find text related to the prompt even if some of its concepts have have been rephrased -LRB- e.g. , , an essay may talk about u ' \ u201c ' jail u ' \ u201d ' rather than u ' \ u201c ' prison u ' \ u201d ' , which is mentioned in one of the prompts -RRB- , and because they have already proven useful for the related task of determining which sentences in an essay are related to the prompt -LSB- 7 -RSB- For each essay , we therefore attempt to adapt the RI features used by Higgins et al
+	Cause: expect that features based on RI will be useful for prompt adherence scoring because they may help us find text related to the prompt even if some of its concepts have have been rephrased -LRB- e.g. , , an essay may talk about u ' \ u201c ' jail u ' \ u201d ' rather than u ' \ u201c ' prison u ' \ u201d ' , which is mentioned in one of the prompts -RRB- , and because they have already proven useful for the related task of determining which sentences in an essay are related to the prompt -LSB- 7 -RSB- For each essay , we
+	Effect: attempt to adapt the RI features used by Higgins et al
+
+CASE: 19
+Stag: 60 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: We do this by generating one feature encoding the entire essay u ' \ u2019 ' s similarity to the prompt , another encoding the essay u ' \ u2019 ' s highest individual sentence u ' \ u2019 ' s similarity to the prompt , a third encoding the highest entire essay similarity to one of the prompt sentences , another encoding the highest individual sentence similarity to an individual prompt sentence , and finally one encoding the entire essay u ' \ u2019 ' s similarity to a manually rewritten version of the prompt that excludes extraneous material -LRB- such as u ' \ u201c ' In his novel Animal Farm , George Orwell wrote , u ' \ u201d ' which is introductory material from the third prompt in Table 1
+	Cause: generating one feature encoding the entire essay u ' \ u2019 ' s similarity to the prompt , another encoding the essay u ' \ u2019 ' s highest individual sentence u ' \ u2019 ' s similarity to the prompt , a third encoding the highest entire essay similarity to one of the prompt sentences , another encoding the highest individual sentence similarity to an individual prompt sentence , and finally one encoding the entire essay u ' \ u2019 ' s similarity to a manually rewritten version of the prompt that excludes extraneous material -LRB- such as u ' \ u201c ' In his novel Animal Farm , George Orwell wrote , u ' \ u201d ' which is introductory material from the third prompt in Table 1
+	Effect: We do this
+
+CASE: 20
+Stag: 61 
+	Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+	sentTXT: Our RI feature set necessarily excludes those features from Higgins et al. that are not easily translatable to our problem since we are concerned with an entire essay u ' \ u2019 ' s adherence to its prompt rather than with each of its sentences u ' \ u2019 ' relatedness to the prompt
+	Cause: we are concerned with an entire essay u ' \ u2019 ' s adherence to its prompt rather than with each of its sentences u ' \ u2019 ' relatedness to the prompt
+	Effect: Our RI feature set necessarily excludes those features from Higgins et al. that are not easily translatable to our problem
+
+CASE: 21
+Stag: 62 
+	Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+	sentTXT: Since RI does not provide a straightforward way to measure similarity between groups of words such as sentences or essays , we use Higgins and Burstein u ' \ u2019 ' s -LSB- 8 -RSB- method to generate these features
+	Cause: RI does not provide a straightforward way to measure similarity between groups of words such as sentences or essays
+	Effect: we use Higgins and Burstein u ' \ u2019 ' s -LSB- 8 -RSB- method to generate these features
+
+CASE: 22
+Stag: 63 64 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Next , we introduce six types of novel features As our first novel feature , we use the 10,000 most important lemmatized unigram , bigram , and trigram features that occur in the essay
+	Cause: our first novel feature , we use the 10,000 most important lemmatized unigram , bigram , and trigram features that occur in the essay
+	Effect: Next , we introduce six types of novel features
+
+CASE: 23
+Stag: 65 
+	Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+	sentTXT: N-grams can be useful for prompt adherence scoring because they can capture useful words and phrases related to a prompt
+	Cause: they can capture useful words and phrases related to a prompt
+	Effect: N-grams can be useful for prompt adherence scoring
+
+CASE: 24
+Stag: 66 
+	Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+	sentTXT: For example , words and phrases like u ' \ u201c ' university degree u ' \ u201d ' , u ' \ u201c ' student u ' \ u201d ' , and u ' \ u201c ' real world u ' \ u201d ' are relevant to the first prompt in Table 1 , so it is more likely that an essay adheres to the prompt if they appear in the essay
+	Cause: For example , words and phrases like u ' \ u201c ' university degree u ' \ u201d ' , u ' \ u201c ' student u ' \ u201d ' , and u ' \ u201c ' real world u ' \ u201d ' are relevant to the first prompt in Table 1
+	Effect: it is more likely that an essay adheres to the prompt if they appear in the essay
+
+CASE: 25
+Stag: 66 
+	Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+	sentTXT: it is more likely that an essay adheres to the prompt if they appear in the essay
+	Cause: they appear in the essay
+	Effect: it is more likely that an essay adheres to the prompt
+
+CASE: 26
+Stag: 68 
+	Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+	sentTXT: Since the essays vary greatly in length , we normalize each essay u ' \ u2019 ' s set of n-gram features to unit length
+	Cause: the essays vary greatly in length
+	Effect: we normalize each essay u ' \ u2019 ' s set of n-gram features to unit length
+
+CASE: 27
+Stag: 71 72 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: The keyword features were formed by first examining the 13 essay prompts , splitting each into its component pieces As an example of what is meant by a u ' \ u201c ' component piece u ' \ u201d ' , consider the first prompt in Table 1
+	Cause: an example of what is meant by a u ' \ u201c ' component piece u ' \ u201d ' , consider the first prompt in Table 1
+	Effect: The keyword features were formed by first examining the 13 essay prompts , splitting each into its component pieces
+
+CASE: 28
+Stag: 74 
+	Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+	sentTXT: Then the most important -LRB- primary -RRB- and second most important -LRB- secondary -RRB- words were selected from each prompt component , where a word was considered u ' \ u201c ' important u ' \ u201d ' if it would be a good word for a student to use when stating her thesis about the prompt
+	Cause: it would be a good word for a student to use when stating her thesis about the prompt
+	Effect: Then the most important -LRB- primary -RRB- and second most important -LRB- secondary -RRB- words were selected from each prompt component , where a word was considered u ' \ u201c ' important u ' \ u201d '
+
+CASE: 29
+Stag: 75 
+	Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+	sentTXT: So since the lemmatized version of the third component of the second prompt in Table 1 is u ' \ u201c ' it should rehabilitate they u ' \ u201d ' , u ' \ u201c ' rehabilitate u ' \ u201d ' was selected as a primary keyword and u ' \ u201c ' society u ' \ u201d ' as a secondary keyword
+	Cause: the lemmatized version of the third component of the second prompt in Table 1 is u ' \ u201c ' it should rehabilitate they u ' \ u201d '
+	Effect: u ' \ u201c ' rehabilitate u ' \ u201d ' was selected as a primary keyword and u ' \ u201c ' society u ' \ u201d ' as a secondary keyword
+
+CASE: 30
+Stag: 76 77 
+	Pattern: 0 [['based', 'on']]---- [['&C', '(,/;/./--)', '(&AND)', '(&ADV)'], ['&this', '&NP', '(,)', '&R']]
+	sentTXT: Features are then computed based on these keywords For instance , one thesis clarity keyword feature is computed as follows
+	Cause: Features are then computed
+	Effect: one thesis clarity keyword feature is computed as follows
+
+CASE: 31
+Stag: 83 
+	Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+	sentTXT: The greatest of the fractions generated in this way is encoded as a feature because if it has a low value , that indicates the essay u ' \ u2019 ' s thesis may not be very relevant to the prompt
+	Cause: if it has a low value
+	Effect: that indicates the essay u ' \ u2019 ' s thesis may not be very relevant to the prompt
+
+CASE: 32
+Stag: 86 
+	Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+	sentTXT: The thesis clarity keyword features described above were intended for the task of determining how clear an essay u ' \ u2019 ' s thesis is , but since our goal is instead to determine how well an essay adheres to its prompt , it makes sense to adapt keyword features to our task rather than to adopt keyword features exactly as they have been used before
+	Cause: our goal is instead to determine how well an essay adheres to its prompt
+	Effect: it makes sense to adapt keyword features to our task rather than to adopt keyword features exactly as they have been used before
+
+CASE: 33
+Stag: 86 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: it makes sense to adapt keyword features to our task rather than to adopt keyword features exactly as they have been used before
+	Cause: they have been used before
+	Effect: it makes sense to adapt keyword features to our task rather than to adopt keyword features exactly
+
+CASE: 34
+Stag: 87 
+	Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+	sentTXT: For this reason , we construct a new list of keywords for each prompt component , though since prompt adherence is more concerned with what the student says about the topics than it is with whether or not what she says about them is stated clearly , our keyword lists look a little different than the ones discussed above
+	Cause: prompt adherence is more concerned with what the student says about the topics than it is with whether or not what she says about them is stated clearly
+	Effect: our keyword lists look a little different than the ones discussed above
+
+CASE: 35
+Stag: 89 
+	Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+	sentTXT: If he was alive at the end of the 20th century , he would replace religion with television u ' \ u201d ' Since the question suggests that students discuss whether television is analogous to religion in this way , our set of prompt adherence keywords for this prompt contains the word u ' \ u201c ' religion u ' \ u201d ' while the previously discussed keyword sets do not
+	Cause: the question suggests that students discuss whether television is analogous to religion in this way
+	Effect: our set of prompt adherence keywords for this prompt contains the word u ' \ u201c ' religion u ' \ u201d ' while the previously discussed keyword sets do not
+
+CASE: 36
+Stag: 90 
+	Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+	sentTXT: This is because a thesis like u ' \ u201c ' Television is bad u ' \ u201d ' can be stated very clearly without making any reference to religion at all , and so an essay with a thesis like this can potentially have a very high thesis clarity score
+	Cause: This is because a thesis like u ' \ u201c ' Television is bad u ' \ u201d ' can be stated very clearly without making any reference to religion at all
+	Effect: an essay with a thesis like this can potentially have a very high thesis clarity score
+
+CASE: 37
+Stag: 90 
+	Pattern: 1 [['because']]---- [['&V-ing/&NP@R@', '(&Clause@R@)', '&BE', '(&ADV)'], ['&C']]
+	sentTXT: This is because a thesis like u ' \ u201c ' Television is bad u ' \ u201d ' can be stated very clearly without making any reference to religion at all
+	Cause: a thesis like u ' \ u201c ' Television is bad u ' \ u201d ' can be stated very clearly without making any reference to religion at all
+	Effect: This
+
+CASE: 38
+Stag: 91 
+	Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+	sentTXT: It should not , however , have a very high prompt adherence score , as the prompt asked the student to discuss whether television is like religion in a particular way , so religion should be at least briefly addressed for an essay to be awarded a high prompt adherence score
+	Cause: It should not , however , have a very high prompt adherence score , as the prompt asked the student to discuss whether television is like religion in a particular way
+	Effect: religion should be at least briefly addressed for an essay to be awarded a high prompt adherence score
+
+CASE: 39
+Stag: 91 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: It should not , however , have a very high prompt adherence score , as the prompt asked the student to discuss whether television is like religion in a particular way
+	Cause: the prompt asked the student to discuss whether television is like religion in a particular way
+	Effect: It should not , however , have a very high prompt adherence score
+
+CASE: 40
+Stag: 92 
+	Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+	sentTXT: Additionally , our prompt adherence keyword sets do not adopt the notions of primary and secondary groups of keywords for each prompt component , instead collecting all the keywords for a component into one set because u ' \ u201c ' secondary u ' \ u201d ' keywords tend to be things that are important when we are concerned with what a student is saying about the topic rather than just how clearly she said it
+	Cause: u ' \ u201c ' secondary u ' \ u201d ' keywords tend to be things that are important when we are concerned with what a student is saying about the topic rather than just how clearly she said
+	Effect: Additionally , our prompt adherence keyword sets do not adopt the notions of primary and secondary groups of keywords for each prompt component , instead collecting all the keywords for a component into one set
+
+CASE: 41
+Stag: 95 96 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: To obtain feature values of the first type , we take the RI similarities between the whole essay and each set of prompt adherence keywords from the prompt u ' \ u2019 ' s components This results in one to three features , as some prompts have one component while others have up to three
+	Cause: some prompts have one component while others have up to three
+	Effect: obtain feature values of the first type , we take the RI similarities between the whole essay and each set of prompt adherence keywords from the prompt u ' \ u2019 ' s components This results in one to three features
+
+CASE: 42
+Stag: 100 
+	Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+	sentTXT: This results in one to three features since a prompt has one to three components
+	Cause: a prompt has one to three components
+	Effect: This results in one to three features
+
+CASE: 43
+Stag: 102 
+	Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+	sentTXT: These topics should not diminish the essay u ' \ u2019 ' s prompt adherence score because they are at least related to prompt concepts
+	Cause: they are at least related to prompt concepts
+	Effect: These topics should not diminish the essay u ' \ u2019 ' s prompt adherence score
+
+CASE: 44
+Stag: 103 
+	Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: For example , consider the prompt u ' \ u201c ' All armies should consist entirely of professional soldiers there is no value in a system of military service u ' \ u201d ' An essay containing words like u ' \ u201c ' peace u ' \ u201d ' , u ' \ u201c ' patriotism u ' \ u201d ' , or u ' \ u201c ' training u ' \ u201d ' are probably not digressions from the prompt , and therefore should not be penalized for discussing these topics
+	Cause: For example , consider the prompt u ' \ u201c ' All armies should consist entirely of professional soldiers there is no value in a system of military service u ' \ u201d ' An essay containing words like u ' \ u201c ' peace u ' \ u201d ' , u ' \ u201c ' patriotism u ' \ u201d ' , or u ' \ u201c ' training u ' \ u201d ' are probably not digressions from the prompt
+	Effect: should not be penalized for discussing these topics
+
+CASE: 45
+Stag: 103 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: should not be penalized for discussing these topics
+	Cause: discussing these topics
+	Effect: should not be penalized
+
+CASE: 46
+Stag: 105 
+	Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+	sentTXT: While n-gram features do not have exactly the same problem , they would still only notice that these example words are related to the prompt if multiple essays use the same words to discuss these concepts
+	Cause: multiple essays use the same words to discuss these concepts
+	Effect: While n-gram features do not have exactly the same problem , they would still only notice that these example words are related to the prompt
+
+CASE: 47
+Stag: 105 106 
+	Pattern: 7 [['for'], [['reason', 'reasons']]]---- [['&C', '(,/;/./--)', '(&AND)'], ['(&this)'], ['(,/that)', '&R']]
+	sentTXT: While n-gram features do not have exactly the same problem , they would still only notice that these example words are related to the prompt if multiple essays use the same words to discuss these concepts For this reason , we introduce Latent Dirichlet Allocation -LRB- LDA -RRB- -LSB- 2 -RSB- features
+	Cause: While n-gram features do not have exactly the same problem , they would still only notice that these example words are related to the prompt if multiple essays use the same words to discuss these concepts
+	Effect: we introduce Latent Dirichlet Allocation -LRB- LDA -RRB- -LSB- 2 -RSB- features
+
+CASE: 48
+Stag: 110 111 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: This results in what we can think of as a soft clustering of words into 1,000 sets for each prompt , where each set of words represents one of the topics LDA identified being discussed in the essays for that prompt So for example , the five most important words in the most frequently discussed topic for the military prompt we mentioned above are u ' \ u201c ' man u ' \ u201d ' , u ' \ u201c ' military u ' \ u201d ' , u ' \ u201c ' service u ' \ u201d ' , u ' \ u201c ' pay u ' \ u201d ' , and u ' \ u201c ' war u ' \ u201d '
+	Cause: a soft clustering of words into 1,000 sets for each prompt , where each set of words represents one of the topics LDA identified being discussed in the essays for that prompt So for example , the five most important words in the most frequently discussed topic for the military prompt we mentioned above are u ' \ u201c ' man u ' \ u201d ' , u ' \ u201c ' military u ' \ u201d ' , u ' \ u201c ' service u ' \ u201d ' , u ' \ u201c ' pay u ' \ u201d ' , and u ' \ u201c ' war u ' \ u201d
+	Effect: we can think of
+
+CASE: 49
+Stag: 110 111 
+	Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+	sentTXT: This results in what we can think of as a soft clustering of words into 1,000 sets for each prompt , where each set of words represents one of the topics LDA identified being discussed in the essays for that prompt So for example , the five most important words in the most frequently discussed topic for the military prompt we mentioned above are u ' \ u201c ' man u ' \ u201d ' , u ' \ u201c ' military u ' \ u201d ' , u ' \ u201c ' service u ' \ u201d ' , u ' \ u201c ' pay u ' \ u201d ' , and u ' \ u201c ' war u ' \ u201d '
+	Cause: can think of as a soft clustering of words into 1,000 sets for each prompt , where each set of words represents one of the topics LDA identified being discussed in the essays for that prompt
+	Effect: for example , the five most important words in the most frequently discussed topic for the military prompt we mentioned above are u ' \ u201c ' man u ' \ u201d ' , u ' \ u201c ' military u ' \ u201d ' , u ' \ u201c ' service u ' \ u201d ' , u ' \ u201c ' pay u ' \ u201d ' , and u ' \ u201c ' war u ' \ u201d '
+
+CASE: 50
+Stag: 114 
+	Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+	sentTXT: Since the latter topic is discussed so much in the essay and does not appear to have much to do with the military prompt , this essay should probably get a bad prompt adherence score
+	Cause: the latter topic is discussed so much in the essay and does not appear to have much to do with the military prompt
+	Effect: this essay should probably get a bad prompt adherence score
+
+CASE: 51
+Stag: 114 
+	Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+	sentTXT: the latter topic is discussed so much in the essay and does not appear to have much to do with the military prompt
+	Cause: the latter topic is discussed
+	Effect: much in the essay and does not appear to have much to do with the military prompt
+
+CASE: 52
+Stag: 116 
+	Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+	sentTXT: Each feature u ' \ u2019 ' s value is obtained by using the topic model to tell us how much of the essay was spent discussing the feature u ' \ u2019 ' s corresponding topic
+	Cause: using the topic model to tell us how much of the essay was spent discussing the feature u ' \ u2019 ' s corresponding topic
+	Effect: Each feature u ' \ u2019 ' s value is obtained
+
+CASE: 53
+Stag: 118 119 
+	Pattern: 8 [['because']]---- [['&R', '(,/./;/--)', '(&AND)', '&THIS', '&BE', '(&ADV)'], ['&C']]
+	sentTXT: A weakness of the LDA topics feature type is that it may result in a regressor that has trouble distinguishing between an infrequent topic that is adherent to the prompt and one that just represents an irrelevant digression This is because an infrequent topic may not appear in the training set often enough for the regressor to make this judgment
+	Cause: an infrequent topic may not appear in the training set often enough for the regressor to make this judgment
+	Effect: A weakness of the LDA topics feature type is that it may result in a regressor that has trouble distinguishing between an infrequent topic that is adherent to the prompt and one that just represents an irrelevant digression
+
+CASE: 54
+Stag: 121 122 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: In order to construct manually annotated LDA topic features , we first build 13 topic models , one for each prompt , just as described in the section on LDA topic features Rather than requesting models of 1,000 topics , however , we request models of only 100 topics 2 2 We use 100 topics for each prompt in the manually annotated version of LDA features rather than the 1,000 topics we use in the regular version of LDA features because 1,300 topics are not too costly to annotate , but manually annotating 13,000 topics would take too much time
+	Cause: described in the section on LDA topic features Rather than requesting models of 1,000 topics , however , we request models of only 100 topics 2 2 We use 100 topics for each prompt in the manually annotated version of LDA features rather than the 1,000 topics we use in the regular version of LDA features because 1,300 topics are not too costly to annotate , but manually annotating 13,000 topics would take too much time
+	Effect: to construct manually annotated LDA topic features , we first build 13 topic models , one for each prompt , just
+
+CASE: 55
+Stag: 122 
+	Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+	sentTXT: Rather than requesting models of 1,000 topics , however , we request models of only 100 topics 2 2 We use 100 topics for each prompt in the manually annotated version of LDA features rather than the 1,000 topics we use in the regular version of LDA features because 1,300 topics are not too costly to annotate , but manually annotating 13,000 topics would take too much time
+	Cause: 1,300 topics are not too costly to annotate
+	Effect: but manually annotating 13,000 topics would take too much
+
+CASE: 56
+Stag: 126 127 
+	Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+	sentTXT: The first five features encode the sum of the contributions to an essay of topics annotated with a number u ' \ u2265 ' 1 , the sum of the contributions to an essay of topics annotated with a number u ' \ u2265 ' 2 , and so on up to 5 The next five features are similar to the last , with one feature taking on the sum of the contributions to an essay of topics annotated with the number 0 , another feature taking on the sum of the contributions to an essay of topics annotated with the number 1 , and so on up to 4
+	Cause: The first five features encode the sum of the contributions to an essay of topics annotated with a number u ' \ u2265 ' 1 , the sum of the contributions to an essay of topics annotated with a number u ' \ u2265 ' 2
+	Effect: on up to 5 The next five features are similar to the last , with one feature taking on the sum of the contributions to an essay of topics annotated with the number 0 , another feature taking on the sum of the contributions to an essay of topics annotated with the number 1 , and so on up to
+
+CASE: 57
+Stag: 127 128 
+	Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+	sentTXT: The next five features are similar to the last , with one feature taking on the sum of the contributions to an essay of topics annotated with the number 0 , another feature taking on the sum of the contributions to an essay of topics annotated with the number 1 , and so on up to 4 We do not include a feature for topics annotated with the number 5 because it would always have the same value as the feature for topics u ' \ u2265 ' 5
+	Cause: The next five features are similar to the last , with one feature taking on the sum of the contributions to an essay of topics annotated with the number 0 , another feature taking on the sum of the contributions to an essay of topics annotated with the number 1
+	Effect: on up to 4 We do not include a feature for topics annotated with the number 5 because it would always have the same value as the feature for topics u ' \ u2265 '
+
+CASE: 58
+Stag: 128 
+	Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+	sentTXT: We do not include a feature for topics annotated with the number 5 because it would always have the same value as the feature for topics u ' \ u2265 ' 5
+	Cause: it would always have the same value as the feature for topics u ' \ u2265 ' 5
+	Effect: We do not include a feature for topics annotated with the number 5
+
+CASE: 59
+Stag: 129 
+	Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+	sentTXT: Features like these should give the regressor a better idea how much of an essay is composed of prompt-related arguments and discussion and how much of it is irrelevant to the prompt , even if some of the topics occurring in it are too infrequent to judge just from training data
+	Cause: some of the topics occurring in it are too infrequent to judge just from training data
+	Effect: these should give the regressor a better idea how much of an essay is composed of prompt-related arguments and discussion and how much of it is irrelevant to the prompt , even
+
+CASE: 60
+Stag: 142 143 
+	Pattern: 7 [['for'], [['reason', 'reasons']]]---- [['&C', '(,/;/./--)', '(&AND)'], ['(&this)'], ['(,/that)', '&R']]
+	sentTXT: For instance , an essay that has a Relevance to Prompt error or an Incomplete Prompt Response error should intuitively receive a low prompt adherence score For this reason , we introduce features based on these errors to our feature set for prompt adherence scoring 3 3 See our website at http://www.hlt.utdallas.edu/~persingq/ICLE/ for the complete list of error annotations
+	Cause: For instance , an essay that has a Relevance to Prompt error or an Incomplete Prompt Response error should intuitively receive a low prompt adherence score
+	Effect: we introduce features based on these errors to our feature set for prompt adherence scoring 3 3 See our website at http://www.hlt.utdallas.edu/~persingq/ICLE/ for the complete list of error annotations
+
+CASE: 61
+Stag: 144 145 
+	Pattern: 3 [['as', 'a'], ['result']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(&ADJ)'], ['(,)', '&R']]
+	sentTXT: While each of the essays in our data set was previously annotated with these thesis clarity errors , in a realistic setting a prompt adherence scoring system will not have access to these manual error labels As a result , we first need to predict which of these errors is present in each essay
+	Cause: While each of the essays in our data set was previously annotated with these thesis clarity errors , in a realistic setting a prompt adherence scoring system will not have access to these manual error labels
+	Effect: we first need to predict which of these errors is present in each essay
+
+CASE: 62
+Stag: 148 
+	Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+	sentTXT: If a training essay is written in response to p , it will be used to generate a training instance whose label is 1 if e was annotated for it or 0 otherwise
+	Cause: a training essay is written in response to p
+	Effect: it will be used to generate a training instance whose label is 1 if e was annotated for it or 0 otherwise
+
+CASE: 63
+Stag: 149 
+	Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+	sentTXT: Since error prediction and prompt adherence scoring are related problems , the features we associate with this instance are features 1 - 6 which we have described earlier in this section
+	Cause: error prediction and prompt adherence scoring are related problems
+	Effect: the features we associate with this instance are features 1 - 6 which we have described earlier in this
+
+CASE: 64
+Stag: 159 
+	Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+	sentTXT: As we will see below , S u ' \ u2062 ' 1 , S u ' \ u2062 ' 2 , and S u ' \ u2062 ' 3 are error metrics , so lower scores imply better performance
+	Cause: will see below , S u ' \ u2062 ' 1 , S u ' \ u2062 ' 2 , and S u ' \ u2062 ' 3 are error metrics
+	Effect: lower scores imply better performance
+
+CASE: 65
+Stag: 159 
+	Pattern: 0 [[['indicate', 'indicates', 'indicated', 'realize', 'realizes', 'realized', 'ensure', 'ensures', 'ensured', 'imply', 'implies', 'implied']]]---- [['&NP@C@', '(&Clause@C@)'], ['&NP@R@', '(&Clause@R@)']]
+	sentTXT: lower scores imply better performance
+	Cause: scores
+	Effect: better performance
+
+CASE: 66
+Stag: 160 
+	Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+	sentTXT: In contrast , P u ' \ u2062 ' C is a correlation metric , so higher correlation implies better performance
+	Cause: In contrast , P u ' \ u2062 ' C is a correlation metric
+	Effect: higher correlation implies better performance
+
+CASE: 67
+Stag: 160 
+	Pattern: 0 [[['indicate', 'indicates', 'indicated', 'realize', 'realizes', 'realized', 'ensure', 'ensures', 'ensured', 'imply', 'implies', 'implied']]]---- [['&NP@C@', '(&Clause@C@)'], ['&NP@R@', '(&Clause@R@)']]
+	sentTXT: higher correlation implies better performance
+	Cause: higher correlation
+	Effect: better performance
+
+CASE: 68
+Stag: 161 162 
+	Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: The simplest metric , S u ' \ u2062 ' 1 , measures the frequency at which a system predicts the wrong score out of the seven possible scores Hence , a system that predicts the right score only 25 % of the time would receive an S u ' \ u2062 ' 1 score of 0.75
+	Cause: The simplest metric , S u ' \ u2062 ' 1 , measures the frequency at which a system predicts the wrong score out of the seven possible scores
+	Effect: a system that predicts the right score only 25 % of the time would receive an S u ' \ u2062 ' 1 score of 0.75
+
+CASE: 69
+Stag: 164 
+	Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+	sentTXT: This metric reflects the idea that a system that predicts scores close to the annotator-assigned scores should be preferred over a system whose predictions are further off , even if both systems estimate the correct score at the same frequency
+	Cause: both systems estimate the correct score at the same frequency
+	Effect: This metric reflects the idea that a system that predicts scores close to the annotator-assigned scores should be preferred over a system whose predictions are further off , even
+
+CASE: 70
+Stag: 168 
+	Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+	sentTXT: where A j , E j , and E j u ' \ u2032 ' are the annotator assigned , system predicted , and rounded system predicted scores 4 4 Since our regressor assigns each essay a real value rather than an actual valid score , it would be difficult to obtain a reasonable S u ' \ u2062 ' 1 score without rounding the system estimated score to one of the possible values
+	Cause: our regressor assigns each essay a real value rather than an actual valid score
+	Effect: it would be difficult to obtain a reasonable
+
+CASE: 71
+Stag: 168 169 
+	Pattern: 7 [['for'], [['reason', 'reasons']]]---- [['&C', '(,/;/./--)', '(&AND)'], ['(&this)'], ['(,/that)', '&R']]
+	sentTXT: where A j , E j , and E j u ' \ u2032 ' are the annotator assigned , system predicted , and rounded system predicted scores 4 4 Since our regressor assigns each essay a real value rather than an actual valid score , it would be difficult to obtain a reasonable S u ' \ u2062 ' 1 score without rounding the system estimated score to one of the possible values For that reason , we round the estimated score to the nearest of the seven scores the human annotators were permitted to assign -LRB- 1.0 , 1.5 , 2.0 , 2.5 , 3.0 , 3.5 , 4.0 -RRB- only when calculating S u ' \ u2062 ' 1
+	Cause: where A j , E j , and E j u ' \ u2032 ' are the annotator assigned , system predicted , and rounded system predicted scores 4 4 Since our regressor assigns each essay a real value rather than an actual valid score , it would be difficult to obtain a reasonable S u ' \ u2062 ' 1 score without rounding the system estimated score to one of the possible values
+	Effect: we round the estimated score to the nearest of the seven scores the human annotators were permitted to assign -LRB- 1.0 , 1.5 , 2.0 , 2.5 , 3.0 , 3.5 , 4.0 -RRB- only when calculating S u ' \ u2062 ' 1
+
+CASE: 72
+Stag: 170 
+	Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+	sentTXT: For other scoring metrics , we only round the predictions to 1.0 or 4.0 if they fall outside the 1.0 - 4.0 range respectively for essay j , and N is the number of essays
+	Cause: they fall outside the 1.0 - 4.0 range
+	Effect: For other scoring metrics , we only round the predictions to 1.0 or 4.0
+
+CASE: 73
+Stag: 173 174 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: A positive -LRB- negative -RRB- P u ' \ u2062 ' C implies that the two sets of predictions are positively -LRB- negatively -RRB- correlated As mentioned earlier , for each prompt p i , we train a linear regressor r i using LIBSVM with regularization parameter c i
+	Cause: mentioned earlier , for each prompt p i , we train a linear regressor r i using LIBSVM with regularization parameter c i
+	Effect: A positive -LRB- negative -RRB- P u ' \ u2062 ' C implies that the two sets of predictions are positively -LRB- negatively -RRB- correlated
+
+CASE: 74
+Stag: 176 
+	Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+	sentTXT: Note that each of the c i values can be tuned independently because a c i value that is optimal for predicting scores for p i essays with respect to any of the error performance measures is necessarily also the optimal c i when measuring that error on essays from all prompts
+	Cause: a c i value that is optimal for predicting scores for p i essays with respect to any of the error performance measures is necessarily also the optimal c i when measuring that error on essays from all
+	Effect: Note that each of the c i values can be tuned independently
+
+CASE: 75
+Stag: 177 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: However , this is not case with Pearson u ' \ u2019 ' s correlation coefficient , as the P u ' \ u2062 ' C value for essays from all 13 prompts can not be simplified as a weighted sum of the P u ' \ u2062 ' C values obtained on each individual prompt
+	Cause: the P u ' \ u2062 ' C value for essays from all 13 prompts can not be simplified as a weighted sum of the P u ' \ u2062 ' C values obtained on each individual prompt
+	Effect: However , this is not case with Pearson u ' \ u2019 ' s correlation coefficient
+
+CASE: 76
+Stag: 177 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: the P u ' \ u2062 ' C value for essays from all 13 prompts can not be simplified as a weighted sum of the P u ' \ u2062 ' C values obtained on each individual prompt
+	Cause: a weighted sum of the P u ' \ u2062 ' C values obtained on each individual
+	Effect: the P u ' \ u2062 ' C value for essays from all 13 prompts can not be simplified
+
+CASE: 77
+Stag: 177 178 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: However , this is not case with Pearson u ' \ u2019 ' s correlation coefficient , as the P u ' \ u2062 ' C value for essays from all 13 prompts can not be simplified as a weighted sum of the P u ' \ u2062 ' C values obtained on each individual prompt In order to obtain an optimal result as measured by P u ' \ u2062 ' C , we jointly tune the c i parameters to optimize the P u ' \ u2062 ' C value achieved by our system on the same held-out validation data
+	Cause: measured by P u ' \ u2062 ' C , we jointly tune the c i parameters to optimize the P u ' \ u2062 ' C value achieved by our system on the same held-out validation data
+	Effect: However , this is not case with Pearson u ' \ u2019 ' s correlation coefficient , as the P u ' \ u2062 ' C value for essays from all 13 prompts can not be simplified as a weighted sum of the P u ' \ u2062 ' C values obtained on each individual prompt In order to obtain an optimal result
+
+CASE: 78
+Stag: 179 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: However , an exact solution to this optimization problem is computationally expensive , as there are too many -LRB- 7 13 -RRB- possible combinations of c values to exhaustively search
+	Cause: there are too many -LRB- 7 13 -RRB- possible combinations of c values to exhaustively search
+	Effect: However , an exact solution to this optimization problem is computationally expensive
+
+CASE: 79
+Stag: 179 180 
+	Pattern: 9 [['consequently']]---- [['&C', '(,/;/./--)'], ['(,)', '&R']]
+	sentTXT: However , an exact solution to this optimization problem is computationally expensive , as there are too many -LRB- 7 13 -RRB- possible combinations of c values to exhaustively search Consequently , we find a local maximum by employing the simulated annealing algorithm -LSB- 11 -RSB- , altering one c i value at a time to optimize P u ' \ u2062 ' C while holding the remaining parameters fixed
+	Cause: However , an exact solution to this optimization problem is computationally expensive , as there are too many -LRB- 7 13 -RRB- possible combinations of c values to exhaustively search
+	Effect: we find a local maximum by employing the simulated annealing algorithm -LSB- 11 -RSB- , altering one c i value at a time to optimize P u ' \ u2062 ' C while holding the remaining parameters fixed
+
+CASE: 80
+Stag: 188 189 
+	Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+	sentTXT: These results mean that the greatest improvements our system makes are that it ensures that our score predictions are not too often very far away from an essay u ' \ u2019 ' s actual score , as making such predictions would tend to drive up S u ' \ u2062 ' 3 , yielding a relative error reduction in S u ' \ u2062 ' 3 of 15.8 % , and it also ensures a better correlation between predicted and actual scores , thus yielding the 16.6 % improvement in P u ' \ u2062 ' C 7 7 These numbers are calculated B - O B - P where B is the baseline system u ' \ u2019 ' s score , O is our system u ' \ u2019 ' s score , and P is a perfect score
+	Cause: These results mean that the greatest improvements our system makes are that it ensures that our score predictions are not too often very far away from an essay u ' \ u2019 ' s actual score , as making such predictions would tend to drive up S u ' \ u2062 ' 3 , yielding a relative error reduction in S u ' \ u2062 ' 3 of 15.8 % , and it also ensures a better correlation between predicted and actual scores
+	Effect: yielding the 16.6 % improvement in P u ' \ u2062 ' C 7 7 These numbers are calculated B - O B - P where B is the baseline system u ' \ u2019 ' s score , O is our system u ' \ u2019 ' s score , and P is a perfect score
+
+CASE: 81
+Stag: 194 
+	Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+	sentTXT: The top line of each subtable shows what our system u ' \ u2019 ' s score would be if we removed just one of the feature types from our system
+	Cause: we removed just one of the feature types from our system
+	Effect: The top line of each subtable shows what our system u ' \ u2019 ' s score would be
+
+CASE: 82
+Stag: 195 
+	Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+	sentTXT: So to see how our system performs by the S u ' \ u2062 ' 1 metric if we remove only predicted thesis clarity error features , we would look at the first row of results of Table d -LRB- a -RRB- under the column headed by the number 7 since predicted thesis clarity errors are the seventh feature type introduced in Section 4
+	Cause: predicted thesis clarity errors are the seventh feature type introduced in Section 4
+	Effect: u ' \ u2062 ' 1 metric if we remove only predicted thesis clarity error features , we would look at the first row of results of Table d -LRB- a -RRB- under the column headed by the number 7
+
+CASE: 83
+Stag: 195 
+	Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+	sentTXT: u ' \ u2062 ' 1 metric if we remove only predicted thesis clarity error features , we would look at the first row of results of Table d -LRB- a -RRB- under the column headed by the number 7
+	Cause: we remove only predicted
+	Effect: we would look at the first row of results of Table d -LRB- a -RRB- under the column headed by the number 7
+
+CASE: 84
+Stag: 197 
+	Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+	sentTXT: Since Table 4 shows that when our system includes this feature type -LRB- along with all the other feature types -RRB- , it obtains an S u ' \ u2062 ' 1 score of .488 , this feature type u ' \ u2019 ' s removal costs our system .014 S u ' \ u2062 ' 1 points , and thus its inclusion has a beneficial effect on the S u ' \ u2062 ' 1 score
+	Cause: Since Table 4 shows that when our system includes this feature type -LRB- along with all the other feature types -RRB- , it obtains an S u ' \ u2062 ' 1 score of .488 , this feature type u ' \ u2019 ' s removal costs our system .014 S u ' \ u2062 ' 1 points
+	Effect: its inclusion has a beneficial effect on the S u ' \ u2062 '
+
+CASE: 85
+Stag: 197 
+	Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+	sentTXT: Since Table 4 shows that when our system includes this feature type -LRB- along with all the other feature types -RRB- , it obtains an S u ' \ u2062 ' 1 score of .488 , this feature type u ' \ u2019 ' s removal costs our system .014 S u ' \ u2062 ' 1 points
+	Cause: Table 4 shows that when our system includes this feature type -LRB- along with all the other feature types -RRB-
+	Effect: it obtains an
+
+CASE: 86
+Stag: 198 199 
+	Pattern: 7 [['for'], [['reason', 'reasons']]]---- [['&C', '(,/;/./--)', '(&AND)'], ['(&this)'], ['(,/that)', '&R']]
+	sentTXT: From row 1 of Table d -LRB- a -RRB- , we can see that removing feature 4 yields a system with the best S u ' \ u2062 ' 1 score in the presence of the other feature types in this row For this reason , we permanently remove feature 4 from the system before we generate the results on line 2
+	Cause: From row 1 of Table d -LRB- a -RRB- , we can see that removing feature 4 yields a system with the best S u ' \ u2062 ' 1 score in the presence of the other feature types in this row
+	Effect: we permanently remove feature 4 from the system before we generate the results on line 2
+
+CASE: 87
+Stag: 199 200 
+	Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+	sentTXT: For this reason , we permanently remove feature 4 from the system before we generate the results on line 2 Thus , we can see what happens when we remove both feature 4 and feature 5 by looking at the second entry in row 2
+	Cause: For this reason , we permanently remove feature 4 from the system before we generate the results on line 2
+	Effect: , we can see what happens when we remove both feature 4 and feature 5 by looking at the second entry in row 2
+
+CASE: 88
+Stag: 201 
+	Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+	sentTXT: And since removing feature 6 harms performance least in the presence of row 2 u ' \ u2019 ' s other feature types , we permanently remove both 4 and 6 from our feature set when we generate the third row of results
+	Cause: removing feature 6 harms performance least in the presence of row 2 u ' \ u2019 ' s other feature
+	Effect: we permanently remove both 4 and 6 from our feature set when we generate the third row of results
+
+CASE: 89
+Stag: 203 
+	Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+	sentTXT: Since the feature type whose removal yields the best system is always the rightmost entry in a line , the order of column headings indicates the relative importance of the feature types , with the leftmost feature types being most important to performance and the rightmost feature types being least important in the presence of the other feature types
+	Cause: the feature type whose removal yields the best system is always the rightmost entry in a line
+	Effect: the order of column headings indicates the relative importance of the feature types , with the leftmost feature types being most important to performance and the rightmost feature types being least important in the presence of the other feature types
+
+CASE: 90
+Stag: 203 
+	Pattern: 0 [[['indicate', 'indicates', 'indicated', 'realize', 'realizes', 'realized', 'ensure', 'ensures', 'ensured', 'imply', 'implies', 'implied']]]---- [['&NP@C@', '(&Clause@C@)'], ['&NP@R@', '(&Clause@R@)']]
+	sentTXT: the order of column headings indicates the relative importance of the feature types , with the leftmost feature types being most important to performance and the rightmost feature types being least important in the presence of the other feature types
+	Cause: the order of column headings
+	Effect: the relative importance of the feature types , with the leftmost feature types being most important to performance and the rightmost feature types being least important in the presence of the other feature types
+
+CASE: 91
+Stag: 204 
+	Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+	sentTXT: This being the case , it is interesting to note that while the relative importance of different feature types does not remain exactly the same if we measure performance in different ways , we can see that some feature types tend to be more important than others in a majority of the four scoring metrics
+	Cause: we measure performance in different ways , we can see that some feature types tend to be more important than others in a majority of the four scoring metrics
+	Effect: This being the case , it is interesting to note that while the relative importance of different feature types does not remain exactly the same
+
+CASE: 92
+Stag: 205 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Features 2 -LRB- n-grams -RRB- , 3 -LRB- thesis clarity keywords -RRB- , and 6 -LRB- manually annotated LDA topics -RRB- tend to be the most important feature types , as they tend to be the last feature types removed in the ablation subtables
+	Cause: they tend to be the last feature types removed in the ablation subtables
+	Effect: Features 2 -LRB- n-grams -RRB- , 3 -LRB- thesis clarity keywords -RRB- , and 6 -LRB- manually annotated LDA topics -RRB- tend to be the most important feature types
+
+CASE: 93
+Stag: 207 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Finally , while features 4 -LRB- prompt adherence keywords -RRB- and 7 -LRB- predicted thesis clarity errors -RRB- may by themselves provide useful information to our system , in the presence of the other feature types they tend to be the least important to performance as they are often the first feature types removed
+	Cause: they are often the first feature types removed
+	Effect: features 4 -LRB- prompt adherence keywords -RRB- and 7 -LRB- predicted thesis clarity errors -RRB- may by themselves provide useful information to our system , in the presence of the other feature types they tend to be the least important to performance
+
+CASE: 94
+Stag: 209 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: For example , while we identified feature 3 -LRB- thesis clarity keywords -RRB- as one of the most important feature types generally due to its tendency to have a large beneficial impact on performance , when we are measuring performance using S u ' \ u2062 ' 3 , it is the least useful feature type
+	Cause: one of the most important feature types generally due to its tendency to have a large beneficial impact on performance , when we are measuring performance using S u ' \ u2062 ' 3 , it is the least useful feature type
+	Effect: we identified feature 3 -LRB- thesis clarity keywords -RRB-
+
+CASE: 95
+Stag: 209 
+	Pattern: 0 [['due', 'to']]---- [[], ['&NP@C@', '(,)', '&R']]
+	sentTXT: one of the most important feature types generally due to its tendency to have a large beneficial impact on performance , when we are measuring performance using S u ' \ u2062 ' 3 , it is the least useful feature type
+	Cause: its tendency to have a large beneficial impact on performance , when we are measuring performance using S u ' \ u2062 ' 3
+	Effect: it is the least useful feature type
+
+CASE: 96
+Stag: 211 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Though feature 3 is an extreme example , all feature types fluctuate in importance , as we see when we compare their orders of removal among the four ablation subtables
+	Cause: we see when we compare their orders of removal among the four ablation subtables
+	Effect: Though feature 3 is an extreme example , all feature types fluctuate in importance
+
+CASE: 97
+Stag: 211 212 
+	Pattern: 7 [['hence']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+	sentTXT: Though feature 3 is an extreme example , all feature types fluctuate in importance , as we see when we compare their orders of removal among the four ablation subtables Hence , it is important to know how performance is measured when building a system for scoring prompt adherence
+	Cause: Though feature 3 is an extreme example , all feature types fluctuate in importance , as we see when we compare their orders of removal among the four ablation subtables
+	Effect: it is important to know how performance is measured when building a system for scoring prompt adherence
+
+CASE: 98
+Stag: 213 214 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Feature 3 is not the only feature type whose removal sometimes has a beneficial impact on performance As we can see in Table d -LRB- b -RRB- , the removal of features 4 , 5 , and 7 improves our system u ' \ u2019 ' s S u ' \ u2062 ' 2 score by .001 points
+	Cause: we can see in Table d -LRB- b -RRB- , the removal of features 4 , 5 , and 7 improves our system u ' \ u2019 ' s S u ' \ u2062 ' 2 score by .001 points
+	Effect: Feature 3 is not the only feature type whose removal sometimes has a beneficial impact on performance
+
+CASE: 99
+Stag: 217 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Fortunately , this effect does not occur in any other cases than the two listed above , as most feature types usually have a beneficial or at least neutral impact on our system u ' \ u2019 ' s performance
+	Cause: most feature types usually have a beneficial or at least neutral impact on our system u ' \ u2019 ' s performance
+	Effect: Fortunately , this effect does not occur in any other cases than the two listed above
+
+CASE: 100
+Stag: 220 221 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: We can see this is the case by noting that they are not all the least important feature types in their respective subtables as indicated by column order For example , by the time feature 1 gets permanently removed in Table d -LRB- c -RRB- , its removal harms performance by .002 S u ' \ u2062 ' 3 points
+	Cause: indicated by column order For example , by the time feature 1 gets permanently removed in Table d -LRB- c -RRB- , its removal harms performance by .002 S u ' \ u2062 '
+	Effect: We can see this is the case by noting that they are not all the least important feature types in their respective subtables
+
+CASE: 101
+Stag: 222 223 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: To more closely examine the behavior of our system , in Table 6 we chart the distributions of scores it predicts for essays having each gold standard score As an example of how to read this table , consider the number 3.06 appearing in row 2.0 in the .25 column of the S u ' \ u2062 ' 3 region
+	Cause: an example of how to read this table , consider the number 3.06 appearing in row 2.0 in the .25 column of the S u ' \ u2062 ' 3
+	Effect: we chart the distributions of scores it predicts for essays having each gold standard score
+
+CASE: 102
+Stag: 224 
+	Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+	sentTXT: This means that 25 % of the time , when our system with parameters tuned for optimizing S u ' \ u2062 ' 3 is presented with a test essay having a gold standard score of 2.0 , it predicts that the essay has a score less than or equal to 3.06
+	Cause: optimizing S u ' \ u2062 ' 3
+	Effect: This means that 25 % of the time , when our system with parameters tuned
+
+CASE: 103
+Stag: 225 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: From this table , we see that our system has a strong bias toward predicting more frequent scores as there are no numbers less than 3.0 in the table , and about 93.7 % of all essays have gold standard scores of 3.0 or above
+	Cause: there are no numbers less than 3.0 in the table , and about 93.7 % of all essays have gold standard scores of 3.0 or
+	Effect: From this table , we see that our system has a strong bias toward predicting more frequent scores
+
+CASE: 104
+Stag: 227 
+	Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+	sentTXT: Another interesting point to note about this table is that the difference in error weighting between the S u ' \ u2062 ' 2 and S u ' \ u2062 ' 3 scoring metrics appears to be having its desired effect , as every entry in the S u ' \ u2062 ' 3 subtable is less than its corresponding entry in the S u ' \ u2062 ' 2 subtable due to the greater penalty the S u ' \ u2062 ' 3 metric imposes for predictions that are very far away from the gold standard scores
+	Cause: every entry in the S u ' \ u2062 ' 3 subtable is less than its corresponding entry in the S u ' \ u2062 ' 2 subtable due to the greater penalty the S u ' \ u2062 ' 3 metric imposes for predictions that are very far away from the gold standard scores
+	Effect: Another interesting point to note about this table is that the difference in error weighting between the S u ' \ u2062 ' 2 and S u ' \ u2062 ' 3 scoring metrics appears to be having its desired effect
+
+CASE: 105
+Stag: 227 
+	Pattern: 0 [['due', 'to']]---- [[], ['&NP@C@', '(,)', '&R']]
+	sentTXT: every entry in the S u ' \ u2062 ' 3 subtable is less than its corresponding entry in the S u ' \ u2062 ' 2 subtable due to the greater penalty the S u ' \ u2062 ' 3 metric imposes for predictions that are very far away from the gold standard scores
+	Cause: the greater penalty the S u ' \ u2062 ' 3 metric imposes for predictions
+	Effect: that are very far away from the gold standard scores
+

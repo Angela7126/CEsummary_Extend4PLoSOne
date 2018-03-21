@@ -1,0 +1,26 @@
+(lp0
+VEach edge e i u'\u005cu2062' j u'\u005cu2208' E represents a connection between v i and v j , e i u'\u005cu2062' j = ( v i , v j ) and defines different social circles between Twitter users e.g.,, follower ( f ) , friend ( b ) , user mention ( m ) , hashtag ( h ) , reply ( y ) and retweet ( w
+p1
+aVHowever, most Twitter users are less prolific than those examined in these works, and thus do not produce the thousands of tweets required to obtain their levels of accuracy e.g.,, the median number of tweets produced by a random Twitter user per day is 10
+p2
+aVOur goal is to classify users of interest using evidence (e.g.,, communications) from their local neighborhood u'\u005cu2211' n f u'\u005cu2192' t u'\u005cu2062' [ N r u'\u005cu2062' ( v i ) ] u'\u005cu2261' f u'\u005cu2192' u'\u005cu2062' ( N r ) as Democratic or Republican
+p3
+aVFinally, similarly to the results for the user model given in Figure 3 , increasing the number of tweets per neighbor from 5 to 200 leads to a significant gain in performance for all neighborhood types
+p4
+aVBaseline User Model As input we are given a set of vertices representing users of interest v i u'\u005cu2208' V along with feature vectors f u'\u005cu2192' u'\u005cu2062' ( v i ) derived from content authored by the user of interest
+p5
+aVThe proposed baseline model follows the same trends as the existing state-of-the-art approaches for user attribute classification in social media as described in Section 8
+p6
+aVWe show that three of six social circles u'\u005cu2013' friend, retweet and user-mention yield better accuracy compared to the user model for all graphs when t u'\u005cu2265' 250
+p7
+aVThe average probability estimates p u'\u005cu039c' ( R u'\u005cu2223' T ) are reported for every 5 tweets in a stream T = ( t 1 , u'\u005cu2026' u'\u005cu2062' t k ) as u'\u005cu2211' P n ( R u'\u005cu2223' t k ) n , where n is the total number of users with the same attribute R or D
+p8
+aVFor each such user we collect recent tweets and randomly sample their immediate k = 10 neighbors from follower, friend, user mention, reply, retweet and hashtag social circles
+p9
+aVThe model dynamically updates posterior probability estimates p ( a ( v i ) = R t k ) for a given user v i as an additional evidence t k is acquired, as defined in a general form below for any latent attribute a u'\u005cu2062' ( v i ) u'\u005cu2208' A given the tweets T of user v i
+p10
+aVThe existing batch models for predicting latent user attributes rely on thousands of tweets per author [ 31 , 7 , 27 , 5 , 42 , 21 ]
+p11
+aVSharing restrictions and rate
+p12
+a.

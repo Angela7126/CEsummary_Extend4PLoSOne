@@ -1,0 +1,18 @@
+(lp0
+VIn this approach, a topic model on a given set of unlabeled training documents is constructed using LDA, then an annotator assigns a class label to some topics based on their most probable words
+p1
+aVAs in ClassifyLDA, we ask an annotator to assign class labels to a set of topics inferred on the unlabeled training documents
+p2
+aV[] used LDA topics as features in text classification, but they use labeled documents while learning a classifier sLDA [] , DiscLDA [] and MedLDA [] are few extensions of LDA which model both class labels and words in the documents
+p3
+aVWe then infer a set of topics on the sprinkled training documents
+p4
+aVIf the annotator is unable to label a topic then we randomly select a class label from the set of all class labels
+p5
+aVThe basic idea involves encoding of class labels as artificial words which are u'\u005cu201c' sprinkled u'\u005cu201d' (appended) to training documents
+p6
+aVAs the most probable words of topics are representative of the dataset, there is no need for the annotator to search for the right set of features for each class
+p7
+aVAs LDA uses higher order word associations [] while discovering topics, we hypothesize that sprinkling will
+p8
+a.

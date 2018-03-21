@@ -1,0 +1,26 @@
+(lp0
+VWe investigate the performance of the method we propose in comparison to previous approaches for automatic detection of cognate pairs based on orthographic similarity
+p1
+aVWe propose a method for automatic detection of cognate pairs using orthographic alignment
+p2
+aVWe employ several orthographic metrics widely used in this research area the edit distance [ 22 ] , the longest common subsequence ratio [ 24 ] and the XDice metric [ 3 ] 4 4 We use normalized similarity metrics
+p3
+aVIn addition, we use SpSim [ 11 ] , which outperformed the longest common subsequence ratio and a similarity measure based on the edit distance in previous experiments
+p4
+aVFirst, we compute the pairwise distances between pairs of words for each orthographic metric individually, as a single feature 5 5 SpSim cannot be computed directly, as the other metrics, so we introduce an additional step in which we use 1/3 of the training set (only cognates are needed) to learn orthographic changes
+p5
+aVIn order to detect the best threshold for discriminating between cognates and non-cognates, we run a decision stump classifier (provided by Weka) on the training set for each pair of languages and for each metric
+p6
+aVThese results support the relevance of accounting for orthographic cues in cognate identification
+p7
+aVFor measuring phonetic and orthographic proximity of cognate candidates, string similarity metrics can be applied, using the phonetic or orthographic word forms as input
+p8
+aVIn order to maintain a stratified dataset, we discard an equal number of non-cognates in the training set and then we compute the distances for the rest of the training set and for the test set
+p9
+aVFor each pair of languages we determine a number of non-cognate pairs equal to the number of cognate pairs
+p10
+aVIn this paper, we propose a method for automatically determining pairs of cognates across languages
+p11
+aV2013 ) proposed a method for
+p12
+a.

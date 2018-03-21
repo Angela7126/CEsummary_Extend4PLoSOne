@@ -1,0 +1,70 @@
+(lp0
+VNote that while we report agreement between the crowdsourced annotations and the crowdsourced annotations, our main evaluations are based on models learned from expert vs. crowdsourced annotations and downstream applications thereof (chunking and NER
+p1
+aVWe use the models to annotate the training data portion of each task with POS tags, and use them as features in a chunking and NER model
+p2
+aVWe also show that these annotations lead to better POS tagging models than previous models learned from crowdsourced lexica []
+p3
+aVSince the only difference between models are the respective POS features, the results suggest that at least for some tasks, POS taggers learned from crowdsourced annotations may be as good as those learned from expert annotations
+p4
+aVIn chunking, we see that using the crowdsourced annotations leads to worse performance than using the professional annotations
+p5
+aVFor both tasks, we train a CRF model on the respective (POS-augmented) training set, and evaluate it on several held-out test sets
+p6
+aVNote also how the Wiktionary constraints lead to improvements in downstream performance
+p7
+aVSince we aggregate annotations independently (unlike Viterbi decoding), we basically use Wiktionary as a pre-filtering step, such that MV and MACE only operate on the reduced annotations
+p8
+aV\u005cshortcite Li:ea:12 in including Wiktionary information as type constraints into our decoding if a word is found in Wiktionary, we disregard all annotations that are not licensed by the dictionary entry
+p9
+aVIf the word is not found in Wiktionary, or if none of its annotations is licensed by Wiktionary, we keep the original annotations
+p10
+aVMACE leads to higher agreement with expert annotations under both conditions (79.89 and 80.75
+p11
+aVUnfortunately, we could not run those models on our data due to label incompatibility and the fact that we typically do not have complete sequences annotated by the same annotators
+p12
+aVIt is therefore common to aggregate over multiple annotations for the same item to get more robust annotations
+p13
+aVDisagreement among annotators is therefore potentially higher, and the task of annotating structured data thus harder
+p14
+aVIf the correct label is not among the annotations, we are unable to recover the correct answer
+p15
+aVExpensive professional annotation may be prohibitive for keeping NLP models up-to-date with linguistic and topical changes on Twitter
+p16
+aVUsually, we don u'\u005cu2019' t want to match a gold standard, but we rather want to create new annotated training data
+p17
+aVIf we pre-filter the data using Wiktionary, the agreement becomes 80.58%
+p18
+aVBoth schemes cannot recover the correct answer for the 1497 cases where none of the crowdsourced labels matched the gold label, i.e., y u'\u005cu2209' u'\u005cud835' u'\u005cudc19' i
+p19
+aVThe latter do not model annotator reliability but rather model label priors by integrating them into the CRF objective, and re-estimating them during learning
+p20
+aVWe thus report on oracle score, i.e.,, the best label sequence that could possibly be found, which is correct except for the missing tokens
+p21
+aVNote that in MV we trust all annotators to the same degree
+p22
+aVThis was the case for 1497 instances in our data (cf the token u'\u005cu201c' u'\u005cu201d' in the example
+p23
+aVWe refer to this as Majority voting (MV
+p24
+aVMACE treats annotator competence and the correct answer as hidden variables and estimates their parameters via EM []
+p25
+aVAnnotators mostly decided to label these tokens as punctuation
+p26
+aVCrowdsourcing services such as Amazon u'\u005cu2019' s Mechanical Turk has since been successfully used for various annotation tasks in NLP []
+p27
+aVHowever, named entities typically use only few labels (LOC, ORG, and PER), and the data contains mostly non-entities, so the complexity is manageable
+p28
+aVThe small difference indicates that annotators are consistent and largely reliable, thus confirming the Bronze-level qualification we required
+p29
+aVWe use MACE 4 4 http://www.isi.edu/publications/licensed-sw/mace/ [] as our second scheme to learn both the most likely answer and a competence estimate for each of the annotators
+p30
+aVSince this is a stochastic process, we average results over 100 runs
+p31
+aVOnly a few recent studies have investigated crowdsourcing sequential tasks; specifically, named entity recognition []
+p32
+aVThey also predominantly labeled your , my and this as PRON (for the former two), and a variety of labels for the latter, when the gold label is DET
+p33
+aVThis is highly effective, as it eliminates some sources of possible disagreement
+p34
+a.

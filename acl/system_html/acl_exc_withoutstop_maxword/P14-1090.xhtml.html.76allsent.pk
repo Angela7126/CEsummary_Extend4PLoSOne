@@ -1,0 +1,536 @@
+(lp0
+VUnfortunately Freebase does not contain an exact relation called brother , but instead sibling
+p1
+aVThus for the Freebase graph, we use relations (with directions) and properties as features for each node
+p2
+aVThese properties, along with the sibling relationship to the topic node, are important cues for answering the question
+p3
+aVWe define answer node as the node that is the answer and answer relation as the relation from the answer node to its direct parent
+p4
+aVWe combine question features and Freebase features (per node) by doing a pairwise concatenation
+p5
+aVThus assuming there is an alignment model that is able to tell how likely one relation maps to the original question, we add extra alignment-based features for the incoming and outgoing relation of each node
+p6
+aVGiven a topic, we selectively roll out the Freebase graph by choosing those nodes within a few hops of relationship to the topic node , and form a topic graph
+p7
+aVWe treat QA on Freebase as a binary classification task for each node in the topic graph, we extract features and judge whether it is the answer node
+p8
+aVFurthermore, the reason that we have kept some lexical features, such as brother , is that we hope to learn from training a high correlation between brother and some Freebase relations and properties (such as sibling and male ) if we do not possess an external resource to help us identify such a correlation
+p9
+aVif a node was tagged with a question feature, then replace this node with its question feature, e.g.,, what u'\u005cu2192' qword=what;
+p10
+aVW eb Q uestions not only has answers annotated, but also which Freebase topic nodes the answers come from
+p11
+aVFor example, for the question who cheated on celebrity A , answers can be retrieved via the Freebase relation celebrity.infidelity.participant , but the connection between the phrase cheated on and the formal KB relation is not explicit
+p12
+aV1) u'\u005cu201c' basic u'\u005cu201d' features include feature productions read off from the feature graph (Figure 1 ); 2) u'\u005cu201c' + word overlap u'\u005cu201d' adds additional features on whether sub-relations have overlap with the question; and 3) u'\u005cu201c' + CluewebMapping u'\u005cu201d' adds the ranking of relation prediction given the question according to CluewebMapping
+p13
+aVAs a simple baseline, u'\u005cu201c' word overlap u'\u005cu201d' counts the overlap between relations and the question
+p14
+aVIf you asked someone what is the name of justin bieber brother , 3 3 All examples used in this paper come from the training data crawled from Google Suggest
+p15
+aVFor instance, for common celebrity gossip questions like who cheated on celebrity A , it is hard for a system to find the Freebase relation celebrity.infidelity.participant as the target relation if it had not observed this pattern in training
+p16
+aVThus for the question, who is the father of King George VI , we ask two questions does the mapping, 1 coverage) contain the answer relation people.person.parents
+p17
+aVThen features are extracted in the following form with s the source and t the target node, for every edge e u'\u005cu2062' ( s , t ) in the graph, extract s , t , s u'\u005cu2223' t and s u'\u005cu2062' u'\u005cu2223' e u'\u005cu2223' u'\u005cu2062' t as features
+p18
+aVFor the edge, prep_of(qfocus=name, brother) , this would mean the following features qfocus=name , brother , qfocus=name u'\u005cu2223' brother , and qfocus=name u'\u005cu2223' prep_of u'\u005cu2223' brother
+p19
+aVThen we computed how much and how well the answer relation was triggered by ReverbMapping and CluewebMapping
+p20
+aVGiven that turkers annotated answers based on the topic page via a browser, this supports the assumption that the same answer would be located in the topic graph, which is then passed to the QA engine for feature extraction and classification
+p21
+aVThese percentage numbers are good clue for feature design for instance, we may be confident in a relation if it is ranked top 5 or 10 by CluewebMapping
+p22
+aVThus further inference (i.e.,, brother u'\u005cu2194' male sibling) has to be made
+p23
+aVThis simple example points out that every part of the question could change what the question inquires eventually
+p24
+aVBoth ClueWeb and its Freebase annotation has a bias
+p25
+aVWe split each html document by sentences [ 21 ] using NLTK [ 3 ] and extracted those with at least two Freebase entities which has at least one direct established relation according to Freebase
+p26
+aVThus we evaluated the ranking of retrieval with the gold standard annotation on train-all , shown in Table 3
+p27
+aVTable 3 ), thus we also tested on the top 10 results returned by the Search API
+p28
+aV2013 ) originally used it they employed a discriminative log-linear model to judge relations and that might yield better performance
+p29
+aVFor the film.film.directed_by relation, some important stop words that could indicate this relation, such as by and with , rank directly after director and direct
+p30
+aVSince the relations on one side of these pairs are not natural sentences, we ran the most simple IBM alignment Model 1 [ 5 ] to estimate the translation probability with GIZA++ [ 30 ]
+p31
+aVFor instance, for the film.actor.film relation (mapping from film names to actor names), the top words given by P ~ ( w u'\u005cu2223' R ) are won , star , among , show
+p32
+aVWith the recent growth in KBs such as DBPedia [ 1 ] , Freebase [ 4 ] and Yago2 [ 18 ] , it has become more practical to consider answering questions across wider domains, with commercial systems including Google Now , based on Google u'\u005cu2019' s Knowledge Graph , and Facebook Graph Search , based on social network connections
+p33
+aV2013 ) ) if a predicted answer list does not have a perfect match with all gold answers, as a lot of questions in W eb Q uestions contain more than one answer
+p34
+aVThe extraction formed two parallel corpora, one with u'\u005cu201c' relation - sentence u'\u005cu201d' pairs (for estimating P ~ ( w u'\u005cu2223' R ) and P ~ u'\u005cu2062' ( R ) ) and the other with u'\u005cu201c' subrelations - sentence u'\u005cu201d' pairs (for P ~ ( w u'\u005cu2223' r ) and P ~ u'\u005cu2062' ( r )
+p35
+aVFor example, the person.parents relationship helps answering questions about parenthood
+p36
+aVThus we took out the word overlapping and CluewebMapping based features, and the new F 1 on test was 36.9 u'\u005cu2062' %
+p37
+aVAs a fair comparison, ranking of CluewebMapping under uniform distribution is also included in Table 2 (a
+p38
+aVspecial case) if a qtopic node was tagged as a named entity, then replace this node with its its named entity form, e.g.,, bieber u'\u005cu2192' qtopic=person;
+p39
+aVThus we were firstly interested in the coverage of mined relation mappings
+p40
+aVBy counting how many times each relation R was annotated, we can estimate P ~ u'\u005cu2062' ( R ) and P ~ u'\u005cu2062' ( r
+p41
+aVResearchers in semantic parsing have recently explored QA over Freebase as a way of moving beyond closed domains such as GeoQuery [ 35 ]
+p42
+aV2013 ) , who collected thousands of commonly asked questions by crawling the Google Suggest service
+p43
+aVThe L1 regularization encourages sparse features by driving feature weights towards zero, which was ideal for the over-generated feature space
+p44
+aVWe computed standard MAP (Mean Average Precision) and MRR (Mean Reciprocal Rank), shown in Table 2 (a
+p45
+aVReverbMapping does the same, except that we took a uniform distribution on P ~ ( w u'\u005cu2223' R ) and P ~ u'\u005cu2062' ( R ) since the contributed dataset did not include co-occurrence counts to estimate these probabilities
+p46
+aVWe evaluated on the training set in two aspects coverage and prediction performance
+p47
+aVDue to the bias and incompleteness of any data source, we approximate the true probability of P with P ~ under our specific model
+p48
+aVWhile making semantic parsing more robust is a laudable goal, here we provide a more rigorous IE baseline against which those efforts should be compared we show that u'\u005cu201c' traditional u'\u005cu201d' IE methodology can significantly outperform prior state-of-the-art as reported in the semantic parsing literature, with a relative gain of  34% F 1 as compared to Berant et al
+p49
+aVWe took this as a u'\u005cu201c' good enough u'\u005cu201d' IR front-end and used it on test
+p50
+aVThe API returns almost identical information as displayed via a web browser to a user viewing this topic
+p51
+aVTreating the aligned pairs as observation , the co-occurrence matrix between aligning relations and words was computed
+p52
+aVWe will view a KB as an interlinked collection of u'\u005cu201c' topics u'\u005cu201d'
+p53
+aVThey are lowercased and some contain typos and gave them access to Freebase, that person might first determine that the question is about Justin Bieber (or his brother), go to Justin Bieber u'\u005cu2019' s Freebase page, and search for his brother u'\u005cu2019' s name
+p54
+aVOur work pushes the data challenge to the limit by mining directly from ClueWeb , a 5TB collection of web data
+p55
+aVOne challenge for natural language querying against a KB is the relative informality of queries as compared to the grammar of a KB
+p56
+aVFor instance, both people.person.parents and fictional_universe.fictional_character.parents indicate the parent relationship but the latter is much less commonly annotated
+p57
+aVWith regards to the question, we know we are looking for the name of a person based on the following
+p58
+aV2013 ) also used ClueWeb indirectly through ReVerb
+p59
+aVWe call this a question feature graph , with every node and relation a potential feature for this question
+p60
+aV[A view of Freebase graph on the Justin Bieber topic with nodes in solid boxes and properties in dashed boxes
+p61
+aVFor each question, we extracted all relations in its corresponding topic graph, and ranked each relation with whether it is the answer relation
+p62
+aVquestion topic ( qtopic
+p63
+aVThe Information Extraction (IE) community approaches QA differently first performing relatively coarse information retrieval as a way to triage the set of possible answer candidates, and only then attempting to perform deeper analysis
+p64
+aVWith an Information Retrieval (IR) front-end, we need to locate the exact Freebase topic node a question is about
+p65
+aVIn this section we describe a u'\u005cu201c' translation u'\u005cu201d' table between Freebase relations and NL words was built
+p66
+aVThe hatching node, Jaxon Bieber , is the answer
+p67
+aVThe topic of the question helps us find relevant Freebase pages
+p68
+aVSome of the mapping can be simply detected as paraphrasing or lexical overlap
+p69
+aV2 precision) predict the answer relation from the question
+p70
+aV[Dependence parse with annotated question features in dashed boxes (left) and converted feature graph (right) with only relevant and general information about the original question kept
+p71
+aVFreebase uses a dummy parent node for a list of nodes with the same relation.]
+p72
+aVWe aim to maximally automate the answer extraction process, by massively combining discriminative features for both the question and the topic graph
+p73
+aVThen the question features (§ 4.1 ) and node features (§ 4.2 ) were combined (§ 4.3 ) for each node
+p74
+aVThus we need to count for each word w in Q
+p75
+aVOur model is inspired by an intuition on how everyday people search for answers
+p76
+aVAdditionally, we have analyzed how Freebase relations map back to the question
+p77
+aVWe simply apply a named entity recognizer to find the question topic
+p78
+aV[Ranking on answer relations
+p79
+aVOnce a topic is obtained we query the Freebase Topic API [ 14 ] to retrieve all relevant information, resulting in a topic graph
+p80
+aVFor instance, without the properties type:person and gender:male , we would not have known the node Jaxon Bieber represents a male person
+p81
+aVthe dependency relation nn(brother, bieber) and the facts that, (i) Bieber is a person and (ii) a person u'\u005cu2019' s brother should also be a person, indicate that the name is about a person
+p82
+aVPerformance is thus bounded by the accuracy of the original semantic parsing, and the well-formedness of resultant database queries
+p83
+aVThey connect the nodes with the question and describe some unique characteristics
+p84
+aVTo keep things simple, we did not perform answer voting, but simply extracted answers from the first (ranked by the Search API) topic node with predicted answer(s) found
+p85
+aVBesides incoming and/or outgoing relationships, nodes also have properties a string that describes the attribute of a node, for instance, node type, gender or height (for a person
+p86
+aVWhen given a question about one or several topics, we can select a u'\u005cu201c' view u'\u005cu201d' of the KB concerning only involved topics, then inspect every related node within a few hops of relations to the topic node in order to extract the answer
+p87
+aVBoth relationship and property of a node are important to identifying the answer
+p88
+aVIn the following we describe how we represent this process
+p89
+aVAll questions were annotated with answers from Freebase
+p90
+aVthe dependency relation prep_of(name, brother) indicates that the name is about a brother (but we do not know whether it is a person name yet);
+p91
+aVOne major difference between relations and properties is that both arguments of a relation are nodes, while only one argument of a property is a node, the other a string
+p92
+aVIn a more realistic scenario, we had already evaluated that the Freebase Search API returned the correct topic node 95 u'\u005cu2062' % of the time in its top 10 results (c.f
+p93
+aVThese systems were limited to closed-domains due to a lack of knowledge resources, computing power, and ability to robustly understand natural language
+p94
+aVWe call such a view a topic graph and assume answers can be found within the graph
+p95
+aVThe combination between questions and Freebase nodes captures some real gist of QA pattern typing, shown in Table 6 with sampled features and weights
+p96
+aVIn this way we hope to capture the association between question patterns and answer nodes
+p97
+aVAlso, we did an ablation test on dev about how additional features on the mapping between Freebase relations and the original questions help, with three feature settings
+p98
+aVQuestion verbs are also good hints of answer types
+p99
+aVthe dependency relation nsubj(what, name) and prep_of(name, brother) indicates that the question seeks the information of a name; 4 4 We use the Stanford collapsed dependency form
+p100
+aVTable 1 shows the coverage of CluewebMapping, which covers 93.0 u'\u005cu2062' % of all answer relations
+p101
+aVThe idea is very similar they intersected Freebase relations with predicates in (arg1, predicate, arg2) triples extracted from ReVerb to learn the mapping between Freebase relations and triple predicates
+p102
+aVTable 4 shows that the additional CluewebMapping features improved overall F 1 by 5 u'\u005cu2062' % , a 13 u'\u005cu2062' % relative improvement a remarkable gain given that the model already learned a strong correlation between question types and answer types (explained more in discussion and Table 6 later
+p103
+aVThe learning problem is challenging for about 3000 questions in train , there are 3 million nodes ( 1000 nodes per topic graph), and 7 million feature types
+p104
+aVCluewebMapping successfully ranked 19 u'\u005cu2062' % of answer relations as top 1
+p105
+aVWe describe such an alignment model in § 5
+p106
+aVFor instance, for the previous example question, we want to rank the relation people.person.parents as number 1
+p107
+aV2013 ) applied pattern matching and relation intersection between Freebase relations and predicate-argument triples from the ReVerb OpenIE system [ 10 ]
+p108
+aVNote that there can be more than one topic in the question
+p109
+aVAll questions contain at least one answer from Freebase
+p110
+aVThe objective is to find the most likely relation a question prompts
+p111
+aVWe propose instead to learn discriminative features from the data with shallow question analysis
+p112
+aVTable 5 gives the final F 1 on test u'\u005cu201c' Gold Retrieval u'\u005cu201d' always ranked the correct topic node top 1, a perfect IR front-end assumption
+p113
+aVOur system learned, for instance, when the question asks for geographic adjacency information ( qverb=border ), the correct answer relation to look for is location.adjoins
+p114
+aVFor instance, in a loglinear model setting, we expect to learn a high feature weight for features like
+p115
+aVMore recent research started to minimize this direct supervision by using latent meaning representations [ 2 , 24 ] or distant supervision [ 23 ]
+p116
+aVFor this purpose we used the Freebase Search API [ 13 ] .All named entities 8 8 When no named entities are detected, we fall back to noun phrases in a question were sent to this API, which returned a ranked list of relevant topics
+p117
+aVArguments of relations are usually interconnected, e.g.,, London can be the place_of_birth for Justin Bieber , or capital_of the UK
+p118
+aVquestion focus ( qfocus ), a cue of expected answer types, such as name/money/time
+p119
+aVTable 2 (b) further shows the percentage of answer relations with respect to their ranking
+p120
+aVquestion verb ( qverb ), such as is/play/take , extracted from the main verb of the question
+p121
+aVHowever, most Freebase relations are framed in a way that is not commonly addressed in natural language questions
+p122
+aV[Percentage of answer relations w.r.t ranking number (header w.o word overlap; R.M
+p123
+aVThen we convert the dependency parse into a more generic question graph, in the following steps
+p124
+aVAs a comparison, we used a dataset of relation mapping contributed by Berant et al
+p125
+aVNote that the median rank from CluewebMapping is only 12, indicating that half of all answer relations are ranked in the top 12
+p126
+aVIn contrast, ReverbMapping covers 89.7 u'\u005cu2062' % of the answer relations
+p127
+aVThe last row shows ranking of CluewebMapping under uniform distribution (assuming counting on words and relations is not known).] Median Rank MAP MRR word overlap 471 0.0380 0.0590 ReverbMapping 60 0.0691 0.0829 CluewebMapping 12 0.2074 0.2900 with uniform dist
+p128
+aV2013 ) learned question paraphrases from aligning multiple questions with the same answers generated by WikiAnswers
+p129
+aVFinally the ranking (e.g.,, top 1/2/5/10/100 and beyond) of each relation is used as features instead of a pure probability
+p130
+aVGiven these two resources, for each binary Freebase relation, we can find a collection of sentences each of which contains both of its arguments, then simply learn how words in these sentences are associated with this relation, i.e.,, P ~ ( w u'\u005cu2223' R ) and P ~ ( w u'\u005cu2223' r
+p131
+aVFor instance, for the question who is the father of King George VI , the most likely relation we look for is people.person.parents
+p132
+aVEvery question was processed by the Stanford CoreNLP suite with the caseless model
+p133
+aVMore interestingly, for the question who is the father of the Periodic Table , the actual relation that encodes its original meaning is law.invention.inventor , rather than people.person.parents
+p134
+aVWe instead attack the problem of QA from a KB from an IE perspective we learn directly the pattern of QA pairs, represented by the dependency parse of questions and the Freebase structure of answer candidates, without the use of intermediate, general purpose meaning representations
+p135
+aVIt contains 5810 questions crawled from the Google Suggest service, with answers annotated on Amazon Mechanical Turk
+p136
+aVHere we instead directly mine relation mappings from ClueWeb and show that both direct relation mapping precision and indirect QA F 1 improve by a large margin
+p137
+aVThe converted graph is shown in Figure 1 (a), right side
+p138
+aVOne question of interest is whether our system, aided by the massive web data, can be fairly compared to the semantic parsing approaches (note that Berant et al
+p139
+aVFor instance, the sub-relations of people.person.parents are people , person , and parents
+p140
+aVquestion word ( qword ), such as what/who/how many
+p141
+aVWe keep our analysis simple and do not use a question classifier, but simply extract the noun dependent of qword as qfocus
+p142
+aVAfter training, we had around 30 thousand features with non-zero weights, a 200 fold reduction from the original features
+p143
+aVIt contains 3778 training and 2032 test questions collected from the Google Suggest service
+p144
+aVFACC1, the Freebase Annotation of the ClueWeb Corpus version 1 [ 15 ] , contains index and offset of Freebase entities within the English portion of ClueWeb
+p145
+aVTo alleviate this problem, the best attempt so far is to map from ReVerb [ 10 ] predicate-argument triples to Freebase relation triples [ 6 , 2 ]
+p146
+aVTo put it more formally, given a question Q of a word vector u'\u005cud835' u'\u005cudc30' , we want to find out the relation R that maximizes the probability P ( R u'\u005cu2223' Q )
+p147
+aVThe other question of interest is that whether our system has acquired some level of u'\u005cu201c' machine intelligence u'\u005cu201d' how much does it know what the question inquires
+p148
+aVSpecifically, for each relation r u'\u005cu2062' e u'\u005cu2062' l in a topic graph, we compute P ( r e l u'\u005cu2223' q u e s t i o n ) to rank the relations
+p149
+aVWe show with examples why these features make sense later in § 6 Table 6
+p150
+aVCluewebMapping ranks each relation by P ~ ( R u'\u005cu2223' Q
+p151
+aVFor example, we learn that given a question concerning money , such as what money is used in ukraine , the expected answer type is likely currency
+p152
+aVWe next formally evaluate how the learned mapping help predict relations from words
+p153
+aVWith a high performance learner we have found that a system with millions of features can be trained within hours, leading to intuitive, human interpretable features
+p154
+aVArguments of properties are attributes that are only u'\u005cu201c' attached u'\u005cu201d' to certain nodes and have no outgoing edges
+p155
+aVThis combination greatly enlarges the total number of features, but owing to progress in large-scale machine learning such feature spaces are less of a concern than they once were (concrete numbers in § 6 Model Tuning
+p156
+aVNote the scale difference although ReVerb was also extracted from ClueWeb09, there were only 15 million triples to intersect with the relations, while we had 1.2 billion alignment pairs
+p157
+aVThe model challenge involves finding the best meaning representation for the question, converting it into a query and executing the query on the KB
+p158
+aVAmong them, we were able to learn the rule mapping using more than 10 thousand relation-sentence pairs for each of the 89.5 u'\u005cu2062' % of all answer relations
+p159
+aVWe also evaluated how well the search API served the IR purpose
+p160
+aVdrop any leaf node that is a determiner, preposition or punctuation
+p161
+aVTo conclude, we found that CluewebMapping provides satisfying coverage on the 3778 training questions only 7 u'\u005cu2062' % were missing, despite the biased nature of web data
+p162
+aVWe call this dataset ReverbMapping and ours CluewebMapping
+p163
+aVThe top 2 results of the Search API contain gold standard topics for more than 90 u'\u005cu2062' % of the questions and the top 10 results contain more than 95 u'\u005cu2062' %
+p164
+aVOne other reason that we estimated P ~ ( w u'\u005cu2223' r ) and P ~ u'\u005cu2062' ( r ) for sub-relations is that Freebase relations share some common structures in between them
+p165
+aVThe data challenge is more formally framed as ontology or (textual) schema matching [ 17 , 33 , 9 ] matching structure of two ontologies/databases or (in extension) mapping between KB relations and NL text
+p166
+aVQA from a KB faces two prominent challenges model and data
+p167
+aVThis motivates the design of dependency-based features
+p168
+aVNext we evaluated the prediction performance, using the evaluation metrics of information retrieval
+p169
+aVWe show one example in Figure 1 (a), left side
+p170
+aVThere were 10,484 relations and sub-relations in all, and we kept the top 20,000 words
+p171
+aVTable 4
+p172
+aVThe evaluation dataset, W eb Q uestions , was also contributed by Berant et al
+p173
+aVNote that the left is a real but incorrect parse.]
+p174
+aVQuestion answering (QA) from a knowledge base (KB) has a long history within natural language processing, going back to the 1960s and 1970s, with systems such as Baseball [ 16 ] and Lunar [ 38 ]
+p175
+aVAlso, CluewebMapping gives reasonably good precision on its prediction, despite the noisy nature of web data
+p176
+aVIn answering our example query a person might take into consideration multiple constraints
+p177
+aVThe system of comparison is that of Berant et al
+p178
+aVNote that our dev set is different from that of Berant et al
+p179
+aVWe report the final test result under this down-sampled training
+p180
+aVWe re-used W eb Q uestions , a dataset collected by Berant et al
+p181
+aVSome questions have more than one answer, such as what to see near sedona arizona
+p182
+aVFinally, to estimate the prior and conditional probability, we need a massive data collection
+p183
+aVFinally, we tested our system, jacana-freebase , 2 2 https://code.google.com/p/jacana on a realistic dataset generously contributed by Berant et al
+p184
+aVThe AI community has tended to approach this problem with a focus on first understanding the intent of the question, via shallow or deep forms of semantic parsing (c.f
+p185
+aVThe final system captures intuitive patterns of QA pairs automatically
+p186
+aVBest result on CluewebMapping was under the grow-diag-final-and heuristics (row 3) when symmetrizing alignment from both directions
+p187
+aVFor the simplicity of computation, we assume conditional independence between words and apply Naive Bayes
+p188
+aVDetailed comparison with the output from Berant et al
+p189
+aVNote that to boost precision, ReVerb has already pruned down less frequent or credible triples, yielding not as much coverage as its text source, ClueWeb
+p190
+aVFinally, the ratio of positive vs negative examples affect final F 1 the more positive examples, the lower the precision and the higher the recall
+p191
+aVwhere P ~ u'\u005cu2062' ( R ) is the prior probability of a relation R and P ~ ( w u'\u005cu2223' R ) is the conditional probability of word w given R
+p192
+aVFigure 1 (b) shows an example
+p193
+aVNote that the backoff model would have a much smaller value than the original, due to double multiplication u'\u005cu220f' r u'\u005cu220f' w
+p194
+aVThe following linguistic information is of interest
+p195
+aVMost of these work executed SPARQL queries on interlinked data represented by RDF (Resource Description Framework) triples, or simply performed triple matching
+p196
+aVWe evaluate the final F 1 in this section
+p197
+aVIt is possible that we do not observe a certain relation R when computing the above equation
+p198
+aVResults are reported in terms of macro F 1 with partial credit (following Berant et al
+p199
+aV7 7 The way we used ReverbMapping was not how Berant et al
+p200
+aVTraining usually took around 4 hours
+p201
+aVFor instance, play is likely to be followed by an instrument, a movie or a sports team
+p202
+aV2013 ) , but the final result on test is directly comparable
+p203
+aVKwiatkowski et al
+p204
+aVOut of all 500 million English documents, 340 million were automatically annotated with at least one entity, with an average of 15 entity mentions per document
+p205
+aVIn terms of the latter, Cai and Yates ( 2013 ) and Berant et al
+p206
+aVFader et al
+p207
+aVWe use a list of 9 common qwords
+p208
+aVWe experimented with various discriminative learners on dev , including logistic regression, perceptron and SVM, and found L1 regularized logistic regression to give the best result
+p209
+aVTo symmetrize the alignment, common MT heuristics intersection , union , grow-diag-final , and grow-diag-final-and [ 22 ] were separately applied and evaluated later
+p210
+aVHand-checking the learned probabilities shows both success, failure and some bias
+p211
+aVWe discuss it below through feature and error analysis
+p212
+aVIn this case we back off to the u'\u005cu201c' sub-relations u'\u005cu201d' a relation R is a concatenation of a series of sub-relations R = u'\u005cud835' u'\u005cudc2b' = r 1 r 2 r 3 u'\u005cu2026'
+p213
+aVWe ran 5 iterations of EM on each one and finally aligned the 1.2 billion pairs from both directions
+p214
+aVReverbMapping; C.M
+p215
+aVAgain, we assume conditional independence between sub-relations and apply Naive Bayes
+p216
+aVWe employed a high-performance machine learning tool, Classias [ 31 ]
+p217
+aVTypically questions are converted into some meaning representation (e.g.,, the lambda calculus), then mapped to database queries
+p218
+aVThe learning task can be framed in the following short steps
+p219
+aVWe hope that the shared sub-relation, parents , can help better estimate for the less annotated
+p220
+aVand a very low weight for
+p221
+aVUnder the original setting, this ratio was about 1
+p222
+aVMost work approaches this via the bridge of various intermediate representations, including combinatory categorial grammar (Zettlemoyer and Collins, 2005, 2007, 2009; Kwiatkowski et al., 2010, 2011, 2013), synchronous context-free grammars [ 37 ] , dependency trees [ 27 , 2 ] , string kernels [ 20 , 7 ] , and tree transducers [ 19 ]
+p223
+aVWe move on to fully evaluate the final QA F 1
+p224
+aVHowever, due to significant popular interest in certain news categories, and the resultant catering by websites to those information desires, then for example we also learned a heavily correlated connection between Jennifer Aniston and celebrity.infidelity.victim , and between some other you-know-who names and celebrity.infidelity.participant
+p225
+aV2013 ) expanded their CCG lexicon with Wiktionary word tags towards more domain independence
+p226
+aVThe tricky part was to align these 1.2 billion pairs
+p227
+aVEach corpus has 1.2 billion pairs
+p228
+aVThis dataset has been split by 65 u'\u005cu2062' % / 35 u'\u005cu2062' % into train-all and test
+p229
+aVTo optimize for F 1 , we down-sampled the negative examples to 20 u'\u005cu2062' % , i.e.,, a new ratio of 1
+p230
+aVFinally, the KB community has developed other means for QA without semantic parsing [ 29 , 12 , 36 , 39 , 34 ]
+p231
+aVWe further randomly divided train-all by 80 u'\u005cu2062' % / 20 u'\u005cu2062' % to a smaller train and development set dev
+p232
+aVThe final F 1 of 42.0 u'\u005cu2062' % gives a relative improvement over previous best result [ 2 ] of 31.4 u'\u005cu2062' % by one third
+p233
+aVThe ClueWeb09 6 6 http://lemurproject.org/clueweb09/ dataset is a collection of 1 billion webpages (5TB compressed in raw html ) in 10 languages by Carnegie Mellon University in 2009
+p234
+aVTo speed up, the 1.2 billion pairs were split into 100 even chunks
+p235
+aVThis boosted the final F 1 on dev to 48 u'\u005cu2062' %
+p236
+aV1 1 As an example, 50 u'\u005cu2062' % of errors of the CCG-backed [ 24 ] system were contributed by parsing or structural matching failure
+p237
+aVThe key factor to their success is to have a huge text source
+p238
+aVThe precision and recall of annotation were estimated at 80 - 85 u'\u005cu2062' % and 70 - 85 u'\u005cu2062' % [ 32 ]
+p239
+aVOur method achieves state-of-the-art performance with F 1 at 42.0 u'\u005cu2062' % , a 34 u'\u005cu2062' % relative increase from the previous F 1 of 31.4 u'\u005cu2062' %
+p240
+aVHeuristics and manual templates were also commonly used [ 8 ]
+p241
+aVWe formalize this approach in § 4
+p242
+aV2013 ) and Lin and Etzioni ( 2012
+p243
+aVThis produced precision around 60 u'\u005cu2062' % and recall around 35 u'\u005cu2062' % (c.f
+p244
+aVThese works successfully showed their effectiveness in QA, despite the fact that most of them require hand-labeled logic annotations
+p245
+aV2013 ) is a work in progress and will be presented in a follow-up report
+p246
+aVDetails in § 5
+p247
+aVIn practice the precision/recall balance can be adjusted by the positive/negative ratio
+p248
+aVIn practice we normalize it by the sub-relations size to keep it at the same scale with P ~ ( R u'\u005cu2223' Q )
+p249
+aVFrom the co-occurrence matrix we computed P ~ ( w u'\u005cu2223' R ) , P ~ u'\u005cu2062' ( R ) , P ~ ( w u'\u005cu2223' r ) and P ~ u'\u005cu2062' ( r )
+p250
+aVA sample of these includes person.place_of_birth , location.containedby , country.currency_used , regular_tv_appearance.actor , etc
+p251
+aV§ 3 for a discussion
+p252
+aVCluewebMapping.] u'\u005cud835' u'\u005cudfcf' u'\u005cu2264' u'\u005cud835' u'\u005cudfd3' u'\u005cu2264' u'\u005cud835' u'\u005cudfcf' u'\u005cud835' u'\u005cudfce' u'\u005cu2264' u'\u005cud835' u'\u005cudfd3' u'\u005cud835' u'\u005cudfce' u'\u005cu2264' u'\u005cud835' u'\u005cudfcf' u'\u005cud835' u'\u005cudfce' u'\u005cud835' u'\u005cudfce' u'\u005cud835' u'\u005cudfcf' u'\u005cud835' u'\u005cudfce' u'\u005cud835' u'\u005cudfce' w o
+p253
+aV2013
+p254
+aV2013 )
+p255
+aV2013 )
+p256
+aV19.0 19.9 8.9 22.3 7.5 22.4
+p257
+aV2.6 9.1 8.6 26.0 13.0 40.7 C.M
+p258
+aVqfocus=money node_type=currency
+p259
+aV275
+p260
+aS''
+p261
+aV61 0.0544 0.0561
+p262
+aV2013
+p263
+aV55
+p264
+aVqfocus=money node_type=person
+p265
+aV3.5 4.7 2.5 3.9 4.1 81.3 R.M
+p266
+aV5 5 who, when, what, where, how, which, why, whom, whose
+p267
+a.

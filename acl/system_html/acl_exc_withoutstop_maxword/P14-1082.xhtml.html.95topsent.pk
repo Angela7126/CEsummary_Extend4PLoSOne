@@ -1,0 +1,40 @@
+(lp0
+VIn other words, for each word type or phrase type that occurs as a fragment in the training set, and which does not map to just a single translation, a classifier is trained
+p1
+aVWords or phrases that always map to a single translation are stored in a simple mapping table, as a classifier would have no added value in such cases
+p2
+aVPer classifier expert, the best scoring configuration was selected, referred to as the auto configuration in Table 2
+p3
+aVNumerous classifiers are trained and each is an expert in translating a single word or phrase
+p4
+aVThe word accuracy for the entire set is then computed by taking the sum of the word accuracies per sentence pair, divided by the total number of sentence pairs
+p5
+aVThird, we observe that adding the language model to our classifier leads to another significant gain (configuration l1r1 + LM in the results in Table 2
+p6
+aVThis measure may be too strict, so we add a more flexible word accuracy measure which takes into account partial matches at the word level
+p7
+aVThe language model is a trigram-based back-off language model with Kneser-Ney smoothing, computed using SRILM [] and trained on the same training data as the translation model
+p8
+aVAutomatic configuration selection was done by performing leave-one-out testing (for small number of instances) or 10-fold-cross validation (for larger number of instances, n u'\u005cu2265' 20 ) on the training data per classifier expert
+p9
+aVIn order to draw accurate conclusions, experiments on a single data set and language pair are not sufficient
+p10
+aVThe auto configuration improves results over the uniformly applied feature selection
+p11
+aVWe first measure absolute accuracy by simply counting all output fragments that exactly match the reference fragments, as a fraction of the total amount of fragments
+p12
+aVAmong the classifier experts are only words and phrases that are ambiguous and may thus map to multiple translations
+p13
+aVWe therefore conducted a number of experiments with other language pairs, and present the abridged results in Table 6
+p14
+aVA second baseline was constructed by weighing the probabilities from the translation table directly with the L2 language model described earlier
+p15
+aVThis ensures complete independence of training and test data
+p16
+aVWhen presented with test data, in which the L1 fragment is explicitly marked, we first check whether there is ambiguity for this L1 fragment and if a direct translation is available in our simple mapping table
+p17
+aVThe fact that a phrase-translation table needs to be constructed for the test data is also the reason that the parallel corpus split from which the test data is derived has to be large enough, ensuring better quality
+p18
+aVIf not, we check for the presence of a classifier expert for the offered L1 fragment; only then we can proceed by extracting the desired number of L2 local
+p19
+a.

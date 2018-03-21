@@ -1,0 +1,297 @@
+Current File: P14-2128.xhtml_2 P14-2128.xhtml
+
+Section 0:  Abstract
+	SentNum: 5
+	CENum: 3
+	SentCovered: 2
+	Covered_Rate: 40.0000%
+
+Section 1:  1 Introduction
+	SentNum: 23
+	CENum: 4
+	SentCovered: 6
+	Covered_Rate: 26.0870%
+
+Section 2:  2 Influence of Punctuations on Parsing
+	SentNum: 33
+	CENum: 15
+	SentCovered: 13
+	Covered_Rate: 39.3939%
+
+Section 3:  3 Punctuation as Properties
+	SentNum: 38
+	CENum: 8
+	SentCovered: 8
+	Covered_Rate: 21.0526%
+
+Section 4:  4 Results
+	SentNum: 21
+	CENum: 3
+	SentCovered: 4
+	Covered_Rate: 19.0476%
+
+Section 5:  5 Conclusion and Related Work
+	SentNum: 6
+	CENum: 1
+	SentCovered: 2
+	Covered_Rate: 33.3333%
+
+Section 6:  Acknowledgements
+	SentNum: 2
+	CENum: 0
+	SentCovered: 0
+	Covered_Rate: 0.0000%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-2128.xhtml_2's CE cases
+
+Section 0:  Abstract has 3 CE cases
+	CASE: 1
+	Stag: 1 
+		Pattern: 0 [[['lead', 'leads', 'led'], 'to']]---- [['&V-ing/&NP@C@', '(&CAN/have/has/had)'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: Punctuation parsing errors lead to low parsing accuracy on words. 
+		Cause: [(0, 0), (0, 2)]
+		Effect: [(0, 5), (0, 9)]
+
+	CASE: 2
+	Stag: 3 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Rather than assigning lexical heads to punctuations, we treat punctuations as properties of their neighbouring words, used as features to guide the parser to build the dependency graph. 
+		Cause: [(0, 12), (0, 28)]
+		Effect: [(0, 0), (0, 10)]
+
+	CASE: 3
+	Stag: 3 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Rather than assigning lexical heads to punctuations, we treat punctuations as properties of their neighbouring words, used as features to guide the parser to build the dependency graph. 
+		Cause: [(0, 8), (0, 13)]
+		Effect: [(0, 0), (0, 6)]
+
+Section 1:  1 Introduction has 4 CE cases
+	CASE: 1
+	Stag: 9 10 
+		Pattern: 9 [['consequently']]---- [['&C', '(,/;/./--)'], ['(,)', '&R']]
+		sentTXT: First, the lexical heads of punctuations are not as well defined as those of words. Consequently, punctuations are not as consistently annotated in treebanks as words, making it harder to parse punctuations. 
+		Cause: [(0, 0), (0, 15)]
+		Effect: [(1, 2), (1, 18)]
+
+	CASE: 2
+	Stag: 13 14 
+		Pattern: 1 [['reason'], [['that', 'because']]]---- [['&R', '(,/./;/--)', '&ONE', '(&ADJ)'], ['(for &THIS (&NP))', '&BE'], ['&C']]
+		sentTXT: Moreover, experimental results showed that parsing accuracy of content words drops on sentences which contain higher ratios of punctuations. One reason for this result is that projective dependency parsers satisfy the u'\u201c' no crossing links u'\u201d' constraint, and errors in punctuations may prevent correct word-word dependencies from being created (see section 2. 
+		Cause: [(1, 7), (1, 42)]
+		Effect: [(0, 0), (0, 19)]
+
+	CASE: 3
+	Stag: 20 
+		Pattern: 0 [['due', 'to']]---- [['&R'], ['&NP@C@']]
+		sentTXT: The fact that most previous work evaluates parsing accuracies without taking punctuations into account is also largely due to this reason. 
+		Cause: [(0, 19), (0, 20)]
+		Effect: [(0, 0), (0, 16)]
+
+	CASE: 4
+	Stag: 26 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Although the improvement becomes smaller as the beam width grows larger, we still achieved 93.06 u'\u2062' % UAS with a beam of width 64, which is the best result for transition-based parsers reported so far. 
+		Cause: [(0, 6), (0, 39)]
+		Effect: [(0, 1), (0, 4)]
+
+Section 2:  2 Influence of Punctuations on Parsing has 15 CE cases
+	CASE: 1
+	Stag: 29 30 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We use the Wall Street Journal portion of the Penn Treebank with the standard splits sections 02-21 are used as the training set; section 22 and section 23 are used as the development and test set, respectively. Penn2Malt is used to convert bracketed structures into dependencies. 
+		Cause: [(0, 20), (1, 7)]
+		Effect: [(0, 0), (0, 18)]
+
+	CASE: 2
+	Stag: 41 42 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We can see that although all the parsers achieve above 90 u'\u2062' % UAS on words, the UAS on punctuations are mostly below 85 u'\u2062' %. As for learning, we calculate the percentage of parameter updates that are caused by associating punctuations with incorrect heads during training of the easy-first parser 3 3 For the greedy easy-first parser, whether a parameter update is caused by punctuation error can be determined with no ambiguity. 
+		Cause: [(1, 1), (1, 36)]
+		Effect: [(0, 0), (0, 34)]
+
+	CASE: 3
+	Stag: 42 43 
+		Pattern: 4 [['result'], ['is', 'that']]---- [['&C', '(,/./;/--)', '&ONE', '(&adj)'], ['(of &THIS (&NP))'], ['&R']]
+		sentTXT: As for learning, we calculate the percentage of parameter updates that are caused by associating punctuations with incorrect heads during training of the easy-first parser 3 3 For the greedy easy-first parser, whether a parameter update is caused by punctuation error can be determined with no ambiguity. The result is that more than 31 u'\u2062' % of the parameter updates are caused due to punctuations, though punctuations account for only 11.6 u'\u2062' % of the total tokens in the training set. 
+		Cause: [(0, 0), (0, 48)]
+		Effect: [(1, 4), (1, 28)]
+
+	CASE: 4
+	Stag: 44 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: The fact that parsers achieve low accuracies on punctuations is to some degree expected, because the head of a punctuation mark is linguistically less well-defined. 
+		Cause: [(0, 16), (0, 25)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 5
+	Stag: 48 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since long sentences are inherently more difficult to parse, to make a fair comparison, we further divide the development set according to sentence lengths as shown in the first row 4 4 1694 out of 1700 sentences on the development set with length no larger than 60 tokens. 
+		Cause: [(0, 1), (0, 8)]
+		Effect: [(0, 10), (0, 49)]
+
+	CASE: 6
+	Stag: 48 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: Since long sentences are inherently more difficult to parse, to make a fair comparison, we further divide the development set according to sentence lengths as shown in the first row 4 4 1694 out of 1700 sentences on the development set with length no larger than 60 tokens. 
+		Cause: [(0, 14), (0, 16)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 7
+	Stag: 50 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: Note that this negative effect on parsing accuracy might be overlooked since most previous work evaluates parsing accuracy without taking punctuations into account. 
+		Cause: [(0, 12), (0, 22)]
+		Effect: [(0, 0), (0, 10)]
+
+	CASE: 8
+	Stag: 51 
+		Pattern: 0 [[['lead', 'leads', 'led'], 'to']]---- [['&C', '(,/./;/--)', '&this', '(&adj)', '(&N)', '(&CAN/have/has/had)', '(&ADV)'], ['&NP@R@']]
+		sentTXT: By inspecting the parser outputs, we found that error propagation caused by assigning incorrect head to punctuations is one of the main reason that leads to this result. 
+		Cause: [(0, 0), (0, 23)]
+		Effect: [(0, 27), (0, 28)]
+
+	CASE: 9
+	Stag: 51 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: By inspecting the parser outputs, we found that error propagation caused by assigning incorrect head to punctuations is one of the main reason that leads to this result. 
+		Cause: [(0, 1), (0, 4)]
+		Effect: [(0, 5), (0, 23)]
+
+	CASE: 10
+	Stag: 51 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: By inspecting the parser outputs, we found that error propagation caused by assigning incorrect head to punctuations is one of the main reason that leads to this result. 
+		Cause: [(0, 8), (0, 12)]
+		Effect: [(0, 13), (0, 18)]
+
+	CASE: 11
+	Stag: 52 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: Take the sentence shown in Figure 1 (a) for example, the word Mechanisms is a modifier of entitled according to the gold reference. 
+		Cause: [(0, 23), (0, 25)]
+		Effect: [(0, 0), (0, 20)]
+
+	CASE: 12
+	Stag: 53 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: However, if the quotation mark, u'\u201c' , is incorrectly recognized as a modifier of was , due to the u'\u201c' no crossing links u'\u201d' constraint, the arc between Mechanisms and entitled can never be created. 
+		Cause: [(0, 17), (0, 49)]
+		Effect: [(0, 3), (0, 15)]
+
+	CASE: 13
+	Stag: 53 
+		Pattern: 0 [['due', 'to']]---- [[], ['&NP@C@', '(,)', '&R']]
+		sentTXT: However, if the quotation mark, u'\u201c' , is incorrectly recognized as a modifier of was , due to the u'\u201c' no crossing links u'\u201d' constraint, the arc between Mechanisms and entitled can never be created. 
+		Cause: [(0, 7), (0, 16)]
+		Effect: [(0, 17), (0, 32)]
+
+	CASE: 14
+	Stag: 56 
+		Pattern: 2 [[[',', '.', ';', 'and']], ['accordingly']]---- [['&C'], ['&R']]
+		sentTXT: In this experiment, we first remove all punctuations from the original data and then modify the dependency arcs accordingly in order to maintain word-word dependencies in the original data. 
+		Cause: [(0, 0), (0, 12)]
+		Effect: [(0, 14), (0, 18)]
+
+	CASE: 15
+	Stag: 60 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: The result indicates that by removing punctuations, we lose some information that is important for dependency parsing. 
+		Cause: [(0, 5), (0, 6)]
+		Effect: [(0, 7), (0, 17)]
+
+Section 3:  3 Punctuation as Properties has 8 CE cases
+	CASE: 1
+	Stag: 62 63 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Such properties are used as additional features to guide the parser to construct the dependency graph. Our method distinguishes paired punctuations from other punctuations. 
+		Cause: [(0, 5), (1, 4)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 2
+	Stag: 68 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: To utilize such boundary information, we further classify paired punctuations into two categories those that serve as the beginning of the boundary, whose POS tags are either -LRB- or u'\u201c' , denoted by Bpunc ; and those that serve as the end of the boundary, denoted by Epunc. 
+		Cause: [(0, 18), (0, 54)]
+		Effect: [(0, 2), (0, 16)]
+
+	CASE: 3
+	Stag: 72 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: In such cases, we simply remove these punctuations since the existence of paired punctuations already indicates that there should be a boundary. 
+		Cause: [(0, 10), (0, 22)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 4
+	Stag: 83 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In the example, when Congrees u'\u2019' s is identified as a modifier of Buccaneers, the u'\u201d' flag of Buccaneers is turned off. 
+		Cause: [(0, 15), (0, 31)]
+		Effect: [(0, 5), (0, 13)]
+
+	CASE: 5
+	Stag: 84 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: However, we do not assign a Paired property to Buccaneers since its ( flag is still on. 
+		Cause: [(0, 12), (0, 16)]
+		Effect: [(0, 0), (0, 10)]
+
+	CASE: 6
+	Stag: 92 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: The only special case is that if w h already contains a Bpunc property, then our method simply ignores the non-paired property since we maintain the boundary information with the highest priority. 
+		Cause: [(0, 24), (0, 32)]
+		Effect: [(0, 0), (0, 22)]
+
+	CASE: 7
+	Stag: 92 
+		Pattern: 0 [['if'], ['then']]---- [[], ['&C', '(,)'], ['&R']]
+		sentTXT: The only special case is that if w h already contains a Bpunc property, then our method simply ignores the non-paired property since we maintain the boundary information with the highest priority. 
+		Cause: [(0, 7), (0, 13)]
+		Effect: [(0, 16), (0, 22)]
+
+	CASE: 8
+	Stag: 97 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: For example, the distance features in line 5 of Table 3 is used to capture the pattern that if a word w with comma property is the left modifier of a noun or a verb, the distance between w and its lexical head is often larger than 1. 
+		Cause: [(0, 20), (0, 35)]
+		Effect: [(0, 37), (0, 49)]
+
+Section 4:  4 Results has 3 CE cases
+	CASE: 1
+	Stag: 107 108 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Our method is able to capture that the root, w h , of the sub-tree within the paired-punctuation, such as u'\u201c' Mechanisms u'\u201d' in Figure 1, generally serves as a modifier of the words outside, while the baseline parser occasionally make w h as the head of the sentence. As we increase the beam width, the improvement of our method over the baseline becomes smaller. 
+		Cause: [(1, 1), (1, 16)]
+		Effect: [(0, 0), (0, 60)]
+
+	CASE: 2
+	Stag: 109 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: This is as expected, since beam search also has the effect of reducing error propagation [ 15 ] , thereby alleviating the errors caused by punctuations. 
+		Cause: [(0, 6), (0, 18)]
+		Effect: [(0, 20), (0, 26)]
+
+	CASE: 3
+	Stag: 115 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: However, the exact type of errors that are corrected by using non-paired punctuations is more difficult to summarize. 
+		Cause: [(0, 11), (0, 13)]
+		Effect: [(0, 14), (0, 18)]
+
+Section 5:  5 Conclusion and Related Work has 1 CE cases
+	CASE: 1
+	Stag: 120 121 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In this work, we proposed to treat punctuations as properties of context words for dependency parsing. Experiments with an arc-standard parser showed that our method effectively improves parsing performance and we achieved the best accuracy for single-model transition-based parser. 
+		Cause: [(0, 10), (1, 21)]
+		Effect: [(0, 0), (0, 8)]
+
+Section 6:  Acknowledgements has 0 CE cases
+#-------------------------------------------------
+

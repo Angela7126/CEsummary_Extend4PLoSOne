@@ -1,0 +1,80 @@
+(lp0
+VThe filtering approach described thus far improves multi-modal representations because image dispersion provides a means to distinguish concrete concepts from more abstract concepts
+p1
+aVThe Turney et al algorithm quantifies the concreteness of concepts that lack such a rating based on their proximity to rated concepts in a semantic vector space
+p2
+aVTo evaluate the effectiveness of image dispersion as a proxy for concreteness we evaluated our algorithm on a binary classification task based on the set of 100 concrete and 100 abstract concepts A u'\u005cu222a' C introduced in Section 2
+p3
+aVWe use Google Images as our image source, and extract the first n image results for each concept word
+p4
+aVWe apply image dispersion-based filtering as follows if both concepts in an evaluation pair have an image dispersion below a given threshold, both the linguistic and the visual representations are included
+p5
+aVOn this more diverse sample, which reflects the range of concepts typically found in linguistic corpora, image dispersion is a particularly useful diagnostic for identifying the very abstract or very concrete concepts
+p6
+aVSince research has demonstrated the applicability of concreteness to a range of other NLP tasks [ 28 , 16 ] , it is important to examine the connection between image dispersion and concreteness in more detail
+p7
+aVThe importance of the visual modality is significantly greater when evaluating on pairs for which both concepts are classified as concrete than on pairs of two abstract concepts
+p8
+aVFormally, we propose a measure, image dispersion d of a concept word w , defined as the average pairwise cosine distance between all the image representations { w 1 u'\u005cu2192' u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' w n u'\u005cu2192' } in the set of images for that concept
+p9
+aVAs Table 1 illustrates, the concepts with the lowest dispersion in this sample are, without exception, highly concrete, and the concepts of highest dispersion are clearly very abstract
+p10
+aVWe apply Pyramid Histogram Of visual Words (PHOW) descriptors, which are particularly well-suited for object categorization, a key component of image similarity and thus dispersion [ 5 ]
+p11
+aVMulti-modal models in which perceptual input is filtered according to our algorithm learn higher-quality semantic representations than previous approaches, resulting in a significant performance improvement of up to 17% in capturing the semantic similarity of concepts
+p12
+aVWe compare dispersion filtered representations with linguistic, perceptual and standard multi-modal representations (concatenated linguistic and perceptual representations
+p13
+aVBy applying a logistic regression with noun concreteness as the predictor variable, Turney et al achieved a classification accuracy of 79% on this task
+p14
+aVThe USF evaluation set is particularly appropriate in the present context because concepts in the dataset are also rated for conceptual concreteness by at least 10 human annotators
+p15
+aVFinally, we explored whether image dispersion can be applied to specific NLP tasks as an effective proxy for concreteness
+p16
+aVBy exploiting this connection, the method approximates the concreteness of concepts, and provides a basis to filter the corresponding perceptual information
+p17
+aVImage dispersion is also an effective predictor of concreteness on samples for which the abstract/concrete distinction is less clear
+p18
+aVSince perceptual data sources typically contain information about both abstract and concrete concepts, such information is included for both concept types
+p19
+aVThis model learns high quality lexical semantic representations based on the distributional properties of words in text, and has been shown to outperform simple distributional models on applications such as semantic composition and analogical mapping [ 19 ]
+p20
+aVWe evaluate models by measuring the Spearman correlation of model output with two well-known gold-standards reflecting semantic proximity u'\u005cu2013' a standard measure for evaluating the quality of representations (see e.g., Agirre et al
+p21
+aVAs Figure 3 shows, dispersion-filtered multi-modal representations significantly outperform standard multi-modal representations on both evaluation datasets
+p22
+aVAccording to the Dual Coding Theory, however, concrete concepts are precisely those with a salient perceptual representation
+p23
+aV2011 ) present an approach based on the position of word senses corresponding to each concept in the WordNet ontology [ 10 ]
+p24
+aVPrevious NLP-related work uses SIFT [ 11 , 6 ] or SURF [ 22 ] descriptors for identifying points of interest in an image, quantified by 128-dimensional local descriptors
+p25
+aVFor both datasets, we set the threshold as the median image dispersion, although performance could in principle be improved by adjusting this parameter
+p26
+aVThey are also more scalable since high-quality tagged images are freely available in several web-scale image datasets
+p27
+aVKwong ( 2008 ) proposes a method based on the presence of hard-coded phrasal features in dictionary entries corresponding to each concept
+p28
+aVSimilarity between concept pairs is calculated using cosine similarity
+p29
+aV2011 ) showed that concreteness is applicable to the classification of adjective-noun modification as either literal or non-literal
+p30
+aVIn light of these considerations, we propose a novel algorithm for approximating conceptual concreteness
+p31
+aVIt is therefore more scalable, and instantly applicable to a wide range of languages
+p32
+aVThe potential effect of this design decision on performance is significant because the vast majority of meaning-bearing words in everyday language correspond to abstract concepts
+p33
+aVAs illustrated in Figure 4 , our binary classification conforms to this characterization
+p34
+aVPHOW is roughly equivalent to running SIFT on a dense grid of locations at a fixed scale and orientation and at multiple scales (see Fig 2), but is both more efficient and more accurate than regular (dense) SIFT approaches [ 5 ]
+p35
+aVAs a complementary gold-standard, we use the University of South Florida Norms (USF) [ 20 ]
+p36
+aVWordSim has been used as a benchmark for distributional semantic models in numerous studies (see e.g., [ 15 , 6 ]
+p37
+aVBased on the correlation comparison method of Steiger ( 1980 ) , both represent significant improvements (WordSim353, t = 2.42 , p 0.05 ; USF, t = 1.86 , p 0.1
+p38
+aVWe use an average pairwise distance-based metric because this emphasizes the total variation more than e.g., the mean distance from the centroid
+p39
+a.

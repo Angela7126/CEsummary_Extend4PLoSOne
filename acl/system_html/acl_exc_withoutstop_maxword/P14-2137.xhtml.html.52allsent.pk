@@ -1,0 +1,90 @@
+(lp0
+VTo address this challenge, current state-of-the-art approaches build an entity graph for each language corpus, and align the two graphs by propagating the seed translation similarities (Figure 1 ) [ 7 , 17 ]
+p1
+aVIn clear contrast, by discovering novel latent features based on temporal properties, we can increase the accuracy of both entity and relation translations
+p2
+aVOur baseline implementation uses the one by [ 11 ] , and we refer the reader to the paper for formal definitions and processing steps we omitted due to the page limit
+p3
+aVWe compare our hybrid approach, which is denoted by LF+EF with EF [ 11 ] , a combined approach PH+SM of phonetic similarity and letter-wise semantic translation for better accuracy for organizations [ 10 ] , and the seed translations Seed that we adopt [ 17 ] with PH+SM as a base translation matrix
+p4
+aVTo measure the effectiveness, we use a set of gold standard entity translation pairs which consist of 221 person entities and 52 organization entities
+p5
+aVOut of 158 randomly chosen correct relation translation pairs we labeled, 64% has only one co-occurring entity pair, which makes EF not very effective to identify these relation translations
+p6
+aVIn addition, the lower ranked but correct relation translations also affect entity translation
+p7
+aVUnfortunately, this approach suffers from sparsity of the common entity pairs due to the incomparability of the corpora and those entities that cannot be translated by T N
+p8
+aVSpecifically, we quantify this similarity based on the number of such common entity pairs that we denote as
+p9
+aVFor example, arbitrary translation pair such as (Jackie Chan, {CJK*} UTF8zhfs成龙) can be obtained, if he is connected to his film u'\u005cu2018' Drunken Master u'\u005cu2019' ( {CJK*} UTF8zhfs醉拳) in both graphs
+p10
+aVThis observation also holds in the bilingual environment by exploiting seed entity translations
+p11
+aVTherefore, we leverage corpus latent features as an additional signal to overcome this problem
+p12
+aVNote that the absolute numbers (due to the harsh evaluation criteria) may look low
+p13
+aV3 3 Our results leveraging relational temporality outperforms the reported results using entity temporality on the same data set
+p14
+aVA key contribution of this paper is using relation temporality for determining relation equivalence
+p15
+aVThus, we cannot acquire any common entity pair like (Russia, aircraft carrier) for deploy and {CJK*} UTF8zhfs在 u'\u005cu2026' 部署 (deploy at
+p16
+aVAs shown in Figure 5 , d [ e , r , * ] is more distinctive and hence a key clue to find semantically equivalent relations
+p17
+aVAdditionally, we use the following features to consider absolute frequencies f u'\u005cu2062' r u'\u005cu2062' e u'\u005cu2062' q u'\u005cu2062' ( u'\u005cu22c5' ) of textual elements as well because 1) we are more confident with more evidence and 2) in the comparable corpora, the equivalent elements are likely to show similar frequencies
+p18
+aVTherefore, even lower-performing EF boosted the entity translations, and in effect, our approach could achieve higher F1-score in the entity translation task
+p19
+aVAs we can see from the difference in the numbers of the documents, the news corpora are not direct translations, but they have asymmetry of entities and relations
+p20
+aVTherefore, we leverage relation temporality , which is both orthogonal and complementary to existing efforts leveraging entity temporality [ 8 , 6 , 16 ]
+p21
+aVIn this section, we briefly illustrate a baseline method EF [ 11 ]
+p22
+aVWe measure precision, recall, and F1-score based on the returned translation pairs for each English entity as it is done in [ 11 ]
+p23
+aV[C3] Lastly, we have to eliminate false positives in relation temporality
+p24
+aVAs we mentioned in the introduction, traditional approaches leverage common co-occurring entity-pairs
+p25
+aVIn our experiments, we use a non-selective (hence not requiring relation translations) propagation approach [ 17 ] with [ 10 ] for a base translation matrix
+p26
+aVTable 3 shows the comparisons of�LF,�EF and their hybrid�LF+EF
+p27
+aVWe can clearly see that LF�shows higher recall than EF while EF�shows higher precision
+p28
+aV[C2] Considering entity-relation coupling distribution d [ e , r , * ] alone is not sufficient due to the domination of individual temporality
+p29
+aVHowever, not all NE translations are based on transliterations, but they might be based on semantics (e.g.,, u'\u005cu2018' WTO u'\u005cu2019' u'\u005cu2192' u'\u005cu2018' {CJK*} UTF8zhfs世贸组织 u'\u005cu2019' [ShiMaoZuZhi]), or even arbitrary (e.g.,, u'\u005cu2018' Jackie Chan u'\u005cu2019' u'\u005cu2192' u'\u005cu2018' {CJK*} UTF8zhfs成龙 u'\u005cu2019' [ChengLong]
+p30
+aVFor example, we can obtain u'\u005cu201c' Russia deployed an aircraft carrier u'\u005cu201d' , but not u'\u005cu201c' Russia deployed at ( {CJK*} UTF8zhfs在 u'\u005cu2026' 部署) an aircraft carrier u'\u005cu201d'
+p31
+aVThus, we produce the hybrid relation translation, and we empirically set u'\u005cu039b' = 0.4
+p32
+aVTo address the first challenge, we use a finer-granularity unit for observing the temporality
+p33
+aVBased on these challenges, we identify three new features for LF
+p34
+aVThat is, we always {CJK*} UTF8zhfs讨论 (discuss) before we {CJK*} UTF8zhfs批准 (ratify) something and hence the temporal behavior of {CJK*} UTF8zhfs讨论 (discuss) is also very similar to that of ratify
+p35
+aVIf an entity has a peak at some period (Figure 8 ), most relations that are coupled with the entity would have a peak at the very same period (Figure 8
+p36
+aVTheir hybrid LF+EF has both high precision and recall, thus has the highest F1-score
+p37
+aVOn the other hand, it can be correctly translated using�EF
+p38
+aVThe number of English articles is 100,746, and that of Chinese articles is 88,031
+p39
+aVAs we emphasized in Section 3.3 , we can see their complementary property
+p40
+aVOut of 3342 pairs, 399 are labeled as correct
+p41
+aVThe temporal similarity of the couplings, where J u'\u005cu2062' S u'\u005cu2062' D u'\u005cu2062' ( P , Q ) is the Jensen-Shannon divergence of two distributions P and Q , defined as J S D ( P , Q ) = 1 2 D ( P
+p42
+aVBut in this section, we only use d [ e , r , * ] for readability
+p43
+aVThat is, for ( r E , r C ) , we redefine the score as T R L u'\u005cu2062' F u'\u005cu2062' ( r E , r C ) / u'\u005cu2211' i u'\u005cu2208' [ 1 , k ] T R L u'\u005cu2062' F u'\u005cu2062' ( r E , r C r u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' k i ) where r C r u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' k i is the i -th rank Chinese relation for r E by Equation 2
+p44
+a.

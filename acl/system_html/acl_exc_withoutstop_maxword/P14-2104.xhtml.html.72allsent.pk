@@ -1,0 +1,254 @@
+(lp0
+VEver since Gildea and Jurafsky [ 9 ] , SRL has become an important technology used in applications requiring semantic interpretation, ranging from information extraction [ 8 ] and question answering [ 14 ] , to practical problems including textual entailment [ 4 ] and pictorial communication systems [ 10 ]
+p1
+aVThese 14 classes are adverbial, determinative, coordinate, exclamatory, future tense, honorific, imperative, interrogative, modesty, nominal, normal, past tense, petitionary, and subordinate
+p2
+aVTo alleviate the sparsity, a lingering problem in NLP, we employ three kinds of latent morpheme representations induced from a larger body of unsupervised text data
+p3
+aVAgglutinative languages such as Japanese, Korean, and Turkish are computationally difficult due to word-form sparsity, variable word order, and the challenge of using rich morphological features
+p4
+aVTwo factors proved crucial in the performance of our SRL system i) The analysis of fine-grained morphological tags specific to Korean, and (ii) the use of latent stem and morpheme representations to deal with sparsity
+p5
+aVThey use an L 2 -regularized linear logistic regression model cascaded through these three stages, achieving F1-score of 80.80% on average for 7 languages (Catalan, Chinese, Czech, English, German, Japanese and Spanish
+p6
+aVBesides these morphological features, we also employ latent continuous and discrete morpheme representations induced from a larger body of unannotated Korean text
+p7
+aVThese feature functions include transition features that identify the tag bigram ( y i - 1 , y i ) , and emission features that combine the current semantic tag ( y i ) with instantiated feature templates extracted from the sentence x and its underlying morphological and dependency analysis
+p8
+aVSuch features have been useful in a variety of English NLP models, including chunking, named entity recognition [ 19 ] , and spoken language understanding [ 1 ]
+p9
+aVThis research was supported by the Basic Science Research Program of the Korean National Research Foundation (NRF), and funded by the Korean Ministry of Education, Science and Technology (2010-0010612
+p10
+aVThe Domain of this corpus covers typical news articles such as health, entertainment, technology, politics, world and others
+p11
+aVWe ran Kokoma Korean morpheme analyzer 4 4 http://kkma.snu.ac.kr/ on each sentence of the Donga corpus to divide words into morphemes to build latent morpheme representations
+p12
+aVThese classes are adverbial, auxiliary, complemental, connective, determinative, objective, subjective, and vocative
+p13
+aVJosa is used to define nominal cases and modify other phrases, while Eomi is an ending of a verb or an adjective to define a tense, show an attitude, and connect or terminate a sentence
+p14
+aVThis result showcases the computational difficulty of dealing with morphologically rich agglutinative languages
+p15
+aVThe one exception is adverbial Josa, making the attached phrase an adverb that modifies a verb predicate
+p16
+aVFigure 1 displays a English/Korean sentence pair, highlighting the SOV word order of Korean as well as its rich morphological structure
+p17
+aVSemantic Role Labeling (SRL) is the task of automatically annotating the predicate-argument structure in a sentence with semantic roles
+p18
+aVWe annotated predicate-argument structure of verbs in a corpus from the Electronics and Telecommunications Research Institute of Korea (ETRI
+p19
+aVBesides the contribution of this model and SRL system, we also report on the creation and availability of a new semantically annotated Korean corpus, covering over 8,000 sentences
+p20
+aVOne advantage of our corpus is that it is built on top of the ETRI Korean corpus, which uses a richer Korean morphological tagging scheme than the Penn Korean Treebank
+p21
+aVThey build a classifier consisting of 3 stages predicate disambiguation, argument identification, and argument classification
+p22
+aVThese are (i) linear continuous representation through Canonical Correlation Analysis [ 7 ] , (ii) non-linear continuous representation through Deep learning [ 6 ] , and (iii) discrete representation through Brown Clustering [ 17 ]
+p23
+aVThus, the Eomi and Josa categorization plays an important role in signaling semantic roles
+p24
+aVUsing coarser suffix tags can seriously degrade SRL performance, as we show in Section 6 , where we compare the performance of our model on both the new corpus and the older PKPB
+p25
+aVConsidering the functions of Josa and Eomi, we expect that numbered roles are relevant to Josa while modifier roles are more closely related to Eomi
+p26
+aVSecondly, no Korean PropBanking guidelines have previously been published, leading to uncertainty in the initial stages of annotation
+p27
+aVFirst, the existing Korean frame files from the Penn Korean PropBank include 2,749 verbs, covering only 13.87% of all the verbs in the ETRI corpus
+p28
+aVThe highest performance was achieved for the analytic language group (82.12%), while the agglutinative language, Japanese, yielded the lowest performance (76.30%
+p29
+aVWe have annotated semantic roles by following the PropBank annotation guideline [ 3 ] and by using frame files of the Penn Korean PropBank built by Palmer et al
+p30
+aVWe view our work as building on the efforts of the Penn Korean PropBank (PKPB
+p31
+aVKorean SRL research has been limited to domestically published Korean research on small corpora
+p32
+aVPOS_Lv1 the first level (coarse classification) of a POS tag such as noun, verb, adjective, or adverb
+p33
+aVKorean suffixes are traditionally classified into two groups called Josa and Eomi
+p34
+aVAt first, each annotator assigns semantic roles independently and then they discuss to reduce disagreement of their annotation results
+p35
+aVFor instance, the first word Poleun at the Figure 1 consists of a stem Pol plus Josa eun
+p36
+aVAs we discuss in Section 5 , we utilize these same features, but also add a set of Korean-specific features to capture aspects of Korean morphology
+p37
+aV2 2 http://catalog.ldc.upenn.edu/LDC2006T03 Our corpus is roughly similar in size to the PKPB, and taken together, the two Korean corpora now total about half the size of the Penn English PropBank
+p38
+aVThe above features are also applied to some dependency children, parents, and siblings of arguments as shown in Table 2
+p39
+aVFor latent morpheme representations, we used the Donga news article corpus
+p40
+aVAs our experiments below show, these features improve performance by dealing with sparsity issues
+p41
+aVUnlike the English models, we use individual morphemes as our unit of analysis
+p42
+aVTable 1 shows the semantic roles considered in our annotated corpus
+p43
+aVThe lowest reported performance is for Japanese, the only agglutinative language in their data set, achieving F1-score of 76.30%
+p44
+aVEach word consists of a stem and some number of suffix morphemes, and the semantic tags are drawn from the set { none , arg u'\u005cu2062' 0 , u'\u005cu2026' , argm-tmp }
+p45
+aVAfter 4 months of this process, the disagreement rate fell to 4% through the process of building annotation rules for Korean
+p46
+aVThese languages can be categorized into three broad morphological types fusional (4), analytic (2), and one agglutinative language
+p47
+aVThese uncertainties were gradually resolved through the iterative process of resolving inter-annotator disagreements
+p48
+aVOur experiments will show that these finer-grained tags are crucial for achieving high SRL accuracy
+p49
+aVThese features increased greatly performance improvements (3rd column in Table 3
+p50
+aVIn this paper, we describe a Korean SRL system which achieves 81% labeled semantic F1-score
+p51
+aVWe used this corpus to develop, train, and test our Korean SRL model
+p52
+aVThis scenario is to reveal the effects of the different latent morpheme representations (4-6th columns in Table 3
+p53
+aVThe underlying ETRI syntactically-annotated corpus contains the dependency tree structure of sentences with morpho-syntactic tags
+p54
+aVThe results gave evidences that all representations increased the performance
+p55
+aVKorean-specific features are built upon the morphological analysis of the suffix agglutination of the current word x i
+p56
+aV1 1 http://voice.etri.re.kr/db/db_pop.asp?code=88 Our corpus was developed over two years using a specialized annotation tool [ 16 ] , resulting in more than 8,000 semantically annotated sentences
+p57
+aVWe used 100 iteration of averaged perceptron algorithm to train the CRF
+p58
+aVThese three representations are from CCA, deep learning, and Brown clustering
+p59
+aVWe randomly divided our data into 90% training and 10% test sets for all scenarios
+p60
+aVFor example, the PCA tag in PKPB used for a case suffix covers four different functioning tags used in our corpus
+p61
+aVWe first tested on general features in previous work (2nd column in Table 3
+p62
+aVSeven languages were the subject of the CoNLL-2009 shared task in syntactic and semantic parsing [ 11 ]
+p63
+aVThe other roles are called modifier roles that play more of an adjunct role
+p64
+aVWe thank Na-Rae Han and Asli Celikyilmaz for helpful discussion and feedback
+p65
+aVThe four classes are closing, connection, prefinal, and transmutation
+p66
+aVCase the case type such as SBJ, OBJ, or COMP
+p67
+aVWe incorporated both of these elements in a CRF [ 13 ] role labeling model
+p68
+aVFour of them are numbered roles, describing the essential arguments of a predicate
+p69
+aVAlthough these are based on the general English PropBank guidelines [ 3 ] , they also differ in that we used only 4 numbered arguments from ARG0 to ARG3 instead of 5 numbered arguments
+p70
+aVThese features are categorized as either general features, Korean-specific features, or latent morpheme representation features
+p71
+aVThe first two representations are 50 dimensional continuous vectors for each morpheme, and the latter is a set of 256 clusters over morphemes
+p72
+aVThe PropBank and our corpus are not exactly compatible, because the former is built on constituency-based parse trees, whereas our corpus uses dependency parses
+p73
+aVFor all feature templates, u'\u005cu201c' A- u'\u005cu201d' or u'\u005cu201c' P- u'\u005cu201d' are used respectively to signify that the feature corresponds to the argument in question ( x i ), or rather is derived from the verbal predicate that the argument depends on
+p74
+aVIn the next section, we describe the process of corpus creation in more detail
+p75
+aVMore importantly, the tagsets of these corpora are not fully compatible
+p76
+aVWe categorized our experiments by the scenarios below, and all results are summarized in Table 3
+p77
+aVAll annotations were performed by two people working in a team
+p78
+aVWe then added the Korean-specific morphological features to signify its appropriateness in this scenario
+p79
+aVThe function Z is the normalizing function, which ensures that p ( y x ) is a valid probability distribution
+p80
+aVTherefore, the most direct precedent to the present work is a section in Björkelund et al
+p81
+aVWe augmented our model with all kinds of features (the last column in Table 3
+p82
+aVWe detail the feature templates used for our experiments in Table 2
+p83
+aVPOS_Lv2 the second level (fine classification) of a POS tag
+p84
+aVThe EomiClass_Lv1 and Lv2 are combined to display the characteristic of Eomi such as u'\u005cu2018' Nominal Transmutation Eomi u'\u005cu2019' , but not all combinations are possible
+p85
+aVAt most five morphemes are combined to consist of one Josa in our data set
+p86
+aVFor the semantic role task, the input is a sentence consisting of a sequence of words x = x 1 , u'\u005cu2026' , x n and the output is a sequence of corresponding semantic tags y = y 1 , u'\u005cu2026' , y n
+p87
+aVWe use and modify 18 features used for Japanese from the prior work of Björkelund et al
+p88
+aVWe encountered two major difficulties during annotation
+p89
+aVAnother linguistic classification of Eomi with a total of 4 classes
+p90
+aV[ 2 ] , excluding SENSE, POSITION, and re-ranker features
+p91
+aVA-EomiClass_Lv1 the linguistic classification of Eomi with a total of 14 classes
+p92
+aVA-JosaExist an indicator feature checking any Josa whether or not exists in an argument
+p93
+aVIf POS_Lv1 is noun , either a proper noun, common noun, or other kinds of nouns is the POS_Lv2
+p94
+aVA-JosaLength the number of morphemes consisting of Josa
+p95
+aVA-JosaClass the linguistic classification of Josa with a total of 8 classes
+p96
+aVWe model the conditional probability p ( y x ) using a CRF model
+p97
+aV[ 2 ] report an average labeled semantic F1-score of 80.80% across these languages
+p98
+aVEach morpheme composing the Josa
+p99
+aVThe PKPB uses much coarser morpho-syntactic tags than the ETRI corpus
+p100
+aVSRL systems in many languages have been developed as the necessary linguistic resources become available [ 18 , 20 , 5 , 12 ]
+p101
+aVInitially, the disagreement rate between two annotators was about 14%
+p102
+aVAlthough both the PKPB and our corpus had improvements, the improvements were the most notable on our corpus
+p103
+aVAs far as we know, this is the highest accuracy obtained for Korean, as well as any agglutinative language
+p104
+aVThe F1-score results were investigated for each scenario
+p105
+aVIt includes 101,602 multiple-clause sentences with 21.66 words on average
+p106
+aV3 3 http://www.donga.com The Donga corpus contains 366,636 sentences with 25.09 words on average
+p107
+aVThis is because PKPB POS tags might be too coarse
+p108
+aVAs much as possible, annotations followed the PropBank guidelines for English [ 3 ]
+p109
+aVStem a stem without any attachment
+p110
+aVWe have 11 different kinds of features for the Josa (5) and Eomi (6
+p111
+aV[ 2 ] on Japanese SRL
+p112
+aVWe thus consider 17 semantic roles in total
+p113
+aVWe achieved 75.17%, 80.33%, and 78.61% on the PKPB, our corpus, and the combined one, respectively
+p114
+aVWe achieved 64.83% and 66.88% on the PKPB and our corpus
+p115
+aVIt is set to 1 if any Josa exists, otherwise 0
+p116
+aVWe achieved our best F1-score of 81.07% over all scenarios on our corpus
+p117
+aVWhen the both corpora were combined, we had 64.86%
+p118
+aVWe highlight several below
+p119
+aVBjörkelund et al
+p120
+aVThe Josa itself
+p121
+aVwhere f m u'\u005cu2062' ( y i - 1 , y i , x , i ) are the feature functions
+p122
+aVA-EomiClass_Lv2
+p123
+aVA-JosaMorphemes
+p124
+aV[ 15 ]
+p125
+aVA-JosaIdentity
+p126
+a.

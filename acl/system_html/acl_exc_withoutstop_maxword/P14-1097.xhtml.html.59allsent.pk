@@ -1,0 +1,160 @@
+(lp0
+VOur method consists of two clustering steps verb-specific semantic frames are first induced by clustering verb uses in a corpus and then verb classes are induced by clustering these frames
+p1
+aVThen, we induce verb classes by clustering these verb-specific semantic frames across verbs
+p2
+aVBased on the best results in the above evaluations, we induced semantic frames using slot-word pair features, and then induced verb classes using slot-only features
+p3
+aVWe evaluate the single-class output for each verb based on the predominant gold-standard classes, which are defined for each verb in the test set of Korhonen et al
+p4
+aVWe first evaluate our induced verb classes on the test set created by Korhonen et al
+p5
+aVWe induce verb-specific semantic frames from verb uses based on the method of Kawahara et al
+p6
+aVTo output a single class for each verb by using our proposed method, we skip the induction of verb-specific semantic frames and instead create a single frame for each verb by merging all predicate-argument structures of the verb
+p7
+aVinduce verb classes by clustering the induced semantic frames across verbs as shown in the upper part of Figure 1
+p8
+aVAs we did with the multi-class evaluations, we adopt modified purity (mPU), inverse purity (iPU) and their harmonic mean (F 1 ) as the metrics for the evaluation with predominant classes
+p9
+aVWe can use exactly the same clustering method as described in Section 3.2.3 by using semantic frames for multiple verbs as an input instead of initial frames for a single verb
+p10
+aVapply clustering to the initial frames based on the Chinese Restaurant Process [ 1 ] to produce verb-specific semantic frames
+p11
+aV2006 ) ) model to jointly learn argument structures (subcategorization frames) and verb classes by using syntactic features
+p12
+aVTo do that, we induce verb-specific semantic frames by clustering verb uses
+p13
+aV2003 ) evaluated hard clusterings based on a gold standard with multiple classes per verb
+p14
+aVIn this paper, we propose an unsupervised method for inducing verb classes that is aware of verb polysemy
+p15
+aV2003 ) , using the gold standard with multiple classes, which we also use for our multi-class evaluations
+p16
+aVFrom the result, we can see that the induced verb classes based on slot-only features did not achieve a higher F 1 than those based on slot-word pair features in many cases
+p17
+aVIn this paper, we propose a two-step approach for inducing semantic frames and verb classes
+p18
+aVAfter performing soft clustering, they noted that most verbs fell into a single class, and they decided to assign a single class to each verb by hardening the clustering
+p19
+aV2008 ) also applied probabilistic soft clustering to verbs by incorporating subcategorization frames and selectional preferences based on WordNet
+p20
+aV9 9 Since FrameNet frames are not assigned to all verbs of SemLink, the number of verbs is different from the evaluations against VerbNet classes
+p21
+aVIn particular, they tried to consider verb polysemy by using the IB method, which is a soft clustering method [ 43 ]
+p22
+aVThese two levels of evaluations are performed by considering the work of Reichart et al
+p23
+aVThe clusterings with the NN and IB methods are obtained by using the VALEX subcategorization lexicon
+p24
+aVSince we focus on the handling of verb polysemy, predominant class induction for each verb is not our main objective
+p25
+aVinduce verb-specific semantic frames by clustering predicate-argument structures for each verb extracted from automatic parses as shown in the lower part of Figure 1 , and
+p26
+aVWhen we evaluate against the multiple classes in the gold standard, we do normalize the inverse purity
+p27
+aVThe results of the IB baseline and our methods are obtained by averaging five runs
+p28
+aVFirst, we make multiple data points for each verb to deal with verb polysemy (cf polysemy-aware previous studies still represented a verb as one data point [ 14 , 23 ]
+p29
+aVWe can see that u'\u005cu201c' web/SW-S u'\u005cu201d' achieved the best performance and obtained a higher F 1 than the baselines by more than nine points u'\u005cu201c' Web/SW-S u'\u005cu201d' uses the combination of slot-word pair features for clustering verb-specific frames and slot-only features for clustering across verbs
+p30
+aVThis result is consistent with expectations, given a gold standard based on Levin u'\u005cu2019' s verb classes, which are organized according to the syntactic behavior of verbs
+p31
+aV2009 ) proposed a Dirichlet process mixture model (DPMM; Neal ( 2000 ) ) to cluster verbs based on subcategorization frame distributions
+p32
+aVInterestingly, this result indicates that slot distributions are more effective than lexical information in slot-word pairs for inducing verb classes similar to the gold standard
+p33
+aV2003 ) , prepositional phrases (pp) are parameterized for two frequent subcategorization frames (NP and NP_PP), and the unfiltered raw frequencies of subcategorization frames are used as features to represent a verb
+p34
+aVBy taking this step-wise approach, we can not only induce verb classes with frequency information from a massive amount of verb uses in a scalable manner, but also deal with verb polysemy
+p35
+aVWe regard each output cluster as a semantic frame, by merging the initial frames in a cluster into a semantic frame
+p36
+aVWe regard each output cluster as a verb class this time
+p37
+aVLapata and Brew ( 2004 ) and Li and Brew ( 2007 ) proposed probabilistic models for calculating prior probabilities of verb classes for a verb
+p38
+aVNote that our results of the NN and IB methods are different from those reported in their paper since the data source is different
+p39
+aVAs our baselines, we adopt two previously proposed methods
+p40
+aVIt is not necessary to normalize these metrics when we treat verbs as monosemous, and evaluate against the predominant sense
+p41
+aV2012 ) extended the model of Titov and Klementiev ( 2012 ) , which is an unsupervised model for inducing semantic roles, to jointly induce semantic roles and frames across verbs using the Chinese Restaurant Process [ 1 ]
+p42
+aVThe original method in Kawahara et al
+p43
+aVHowever, since these measures are only applicable to a hard clustering, it is necessary to extend them to be applicable to a soft clustering, because in our task a verb can belong to multiple clusters or classes
+p44
+aVThe results of these methods are obtained by averaging five runs
+p45
+aVVerb classes are one such lexical resource
+p46
+aVAlthough Bayesian approaches are a possible solution to simultaneously induce frames and verb classes from a corpus as used in previous studies, it has prohibitive computational cost
+p47
+aV2003 ) (Table 1 of their paper) which was created by considering verb polysemy on the basis of Levin u'\u005cu2019' s classes and the LCS database [ 6 ]
+p48
+aVWe speculate that slot distributions are not so different among verbs when all uses of a verb are merged into one frame, and thus their discrimination power is lower than that in the intermediate construction of semantic frames
+p49
+aVThese models are approximated to condition not on verbs but on subcategorization frames
+p50
+aVSince they focused on the incorporation of selectional preferences, they did not evaluate verb classes but evaluated only selectional preferences using a language model-based measure
+p51
+aVFor the features, w , in equation ( 2 ), we try the two representations again slot-only features and slot-word pair features
+p52
+aVmerge the predicate-argument structures that have presumably the same meaning based on the assumption of one sense per collocation [ 46 ] to get a set of initial frames, and
+p53
+aVHe used a model based on latent Dirichlet allocation (LDA; Blei et al
+p54
+aVThis is because an initial frame has the same structure as a semantic frame, which is produced by merging initial frames
+p55
+aVHowever, the verb itself is still represented as a single data point
+p56
+aVIt is necessary to specify the number of clusters, k , for the IB method beforehand, and we adopt 35 and 42 clusters according to their reported high accuracies
+p57
+aVFor instance, u'\u005cu201c' Class 2 u'\u005cu201d' consists of the semantic frames u'\u005cu201c' need:2 u'\u005cu201d' and u'\u005cu201c' say:2 u'\u005cu201d' These frames were merged due to the high syntactic similarity of constituting slot distributions, which are comprised of a subject and a sentential complement
+p58
+aVIt is not necessary to normalize these metrics because the clustering of these instances is hard
+p59
+aVAs usual, the following normalized inverse purity (niPU) is used to measure the recall of a clustering
+p60
+aVParisien and Stevenson ( 2011 ) extended their model by adding semantic features
+p61
+aVThe other representation using the slot-word pairs means that semantic similarity based on word overlap is naturally considered by looking at lexical information
+p62
+aVIn addition, to penalize clusters that consist of only one verb, such singleton clusters in K are considered as errors, as is usual with modified purity
+p63
+aVFinally, we use the harmonic mean (F 1 ) of nmPU and niPU as a single measure of clustering quality
+p64
+aVTo prepare a web corpus, we extracted sentences from crawled web pages that are judged to be written in English based on the encoding information
+p65
+aVHe applied this method to the BNC and acquired 1,200 frames and 400 roles [ 21 ]
+p66
+aVAn excerpt from this data is shown in Table 1
+p67
+aVThis monosemous assumption, however, is not realistic because many frequent verbs actually have multiple senses
+p68
+aVBoth of these are represented as a probabilistic distribution of words across verbs
+p69
+aVThe normalized modified purity (nmPU) can then be written as follows
+p70
+aVCapturing the sense of a verb is essential for natural language processing (NLP), and thus lexical resources for verbs play an important role in NLP
+p71
+aVAs mentioned in Li and Brew ( 2007 ) , it is desirable to extend the model to depend on verbs to further improve accuracy
+p72
+aVWe select an argument in the following order by considering the degree of effect on the verb sense
+p73
+aVThis model is based on the Expectation-Maximization algorithm and the Minimum Description Length principle
+p74
+aV3 3 If a predicate-argument structure has multiple prepositional phrases, one of them is randomly selected
+p75
+aV2014 ) defined w as pairs of slots and words, e.g.,, u'\u005cu201c' nsubj:child u'\u005cu201d' and u'\u005cu201c' dobj:bird, u'\u005cu201d' but does not consider slot-only features, e.g.,, u'\u005cu201c' nsubj u'\u005cu201d' and u'\u005cu201c' dobj, u'\u005cu201d' which ignore lexical information
+p76
+aVP ( f i c j ) is defined based on the Dirichlet-Multinomial distribution as follows
+p77
+aVK i denotes the number of positive components in K i , and c i u'\u005cu2062' v denotes the v -th component of K i u'\u005cu0394' K i u'\u005cu2062' ( K i u'\u005cu2229' G j ) means the total mass of the set of verbs in K i u'\u005cu2229' G j , given by summing up the values in K i
+p78
+aVK i u'\u005cu2229' G j because all the values of c i u'\u005cu2062' v are equal to 1
+p79
+a.

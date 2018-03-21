@@ -1,0 +1,507 @@
+Current File: P14-1085.xhtml_2 P14-1085.xhtml
+
+Section 0:  Abstract
+	SentNum: 5
+	CENum: 0
+	SentCovered: 0
+	Covered_Rate: 0.0000%
+
+Section 1:  1 Introduction
+	SentNum: 26
+	CENum: 3
+	SentCovered: 4
+	Covered_Rate: 15.3846%
+
+Section 2:  2 Hierarchical Summarization
+	SentNum: 16
+	CENum: 3
+	SentCovered: 2
+	Covered_Rate: 12.5000%
+
+Section 3:  3 Hierarchical Clustering
+	SentNum: 44
+	CENum: 15
+	SentCovered: 17
+	Covered_Rate: 38.6364%
+
+Section 4:  4 Summarizing within the Hierarchy
+	SentNum: 47
+	CENum: 18
+	SentCovered: 20
+	Covered_Rate: 42.5532%
+
+Section 5:  5 Experiments
+	SentNum: 95
+	CENum: 20
+	SentCovered: 23
+	Covered_Rate: 24.2105%
+
+Section 6:  6 Related Work
+	SentNum: 36
+	CENum: 3
+	SentCovered: 3
+	Covered_Rate: 8.3333%
+
+Section 7:  7 Conclusions
+	SentNum: 7
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 14.2857%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-1085.xhtml_2's CE cases
+
+Section 0:  Abstract has 0 CE cases
+Section 1:  1 Introduction has 3 CE cases
+	CASE: 1
+	Stag: 14 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: A user can navigate within the hierarchical summary by clicking on an element of a parent summary to view the associated child summary. 
+		Cause: [(0, 9), (0, 22)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 2
+	Stag: 15 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: For example, given the topic, u'\u201c' 1998 embassy bombings, u'\u201d' the first summary (Figure 1 ) might mention that the US retaliated by striking Afghanistan and Sudan. 
+		Cause: [(0, 35), (0, 38)]
+		Effect: [(0, 1), (0, 33)]
+
+	CASE: 3
+	Stag: 29 30 
+		Pattern: 0 [['based', 'on']]---- [['&C', '(,/;/./--)', '(&AND)', '(&ADV)'], ['&this', '&NP', '(,)', '&R']]
+		sentTXT: We then describe our methodology to implement the Summa hierarchical summarization system hierarchical clustering in Section 3 and creating summaries based on that clustering in Section 4. We discuss our experiments in Section 5 , related work in Section 6 , and conclusions in Section 7. 
+		Cause: [(0, 0), (0, 19)]
+		Effect: [(1, 0), (1, 18)]
+
+Section 2:  2 Hierarchical Summarization has 3 CE cases
+	CASE: 1
+	Stag: 41 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: First, the information presented at the start is small and grows only as the user directs it, so as not to overwhelm the user. 
+		Cause: [(0, 0), (0, 17)]
+		Effect: [(0, 20), (0, 25)]
+
+	CASE: 2
+	Stag: 41 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: First, the information presented at the start is small and grows only as the user directs it, so as not to overwhelm the user. 
+		Cause: [(0, 14), (0, 17)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 3
+	Stag: 42 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Second, each user directs his or her own experience, so a user interested in one aspect need only explore that section of the data without having to view or understand the entire summary. 
+		Cause: [(0, 0), (0, 9)]
+		Effect: [(0, 12), (0, 34)]
+
+Section 3:  3 Hierarchical Clustering has 15 CE cases
+	CASE: 1
+	Stag: 47 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Having defined the task, we now describe the methodology behind our implementation, Summa. 
+		Cause: [(0, 0), (0, 3)]
+		Effect: [(0, 5), (0, 14)]
+
+	CASE: 2
+	Stag: 49 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: In this first implementation, we have opted for temporal organization, since this is generally the most appropriate for news events. 
+		Cause: [(0, 13), (0, 21)]
+		Effect: [(0, 0), (0, 10)]
+
+	CASE: 3
+	Stag: 49 50 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In this first implementation, we have opted for temporal organization, since this is generally the most appropriate for news events. The problem of hierarchical summarization as described in Section 2 has all of the requirements of MDS, and additional complexities of inducing a hierarchical structure, processing an order of magnitude bigger input, generating a much larger output, and enforcing coherence between parent and child summaries. 
+		Cause: [(1, 6), (1, 17)]
+		Effect: [(0, 3), (1, 4)]
+
+	CASE: 4
+	Stag: 51 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: We simplify the problem by decomposing it into two steps hierarchical clustering and summarizing over the clustering (see Figure 2 for an example. 
+		Cause: [(0, 5), (0, 23)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 5
+	Stag: 52 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: A hierarchical clustering is a tree in which if a cluster g p is the parent of cluster g c , then each sentence in g c is also in g p. 
+		Cause: [(0, 9), (0, 19)]
+		Effect: [(0, 21), (0, 31)]
+
+	CASE: 6
+	Stag: 54 55 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The hierarchical clustering serves as input to the second step u'\u2013' summarizing given the hierarchy. The hierarchical summary follows the hierarchical structure of the clustering. 
+		Cause: [(0, 5), (1, 8)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 7
+	Stag: 57 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: Moreover, the number of sentences in a flat summary is exactly equal to the number of child clusters of the node, since the user will click a sentence to get to the child summary. 
+		Cause: [(0, 24), (0, 35)]
+		Effect: [(0, 0), (0, 21)]
+
+	CASE: 8
+	Stag: 59 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because we are interested in temporal hierarchical summarization, we hierarchically cluster all the sentences in the input documents by time. 
+		Cause: [(0, 1), (0, 7)]
+		Effect: [(0, 9), (0, 20)]
+
+	CASE: 9
+	Stag: 60 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: Unfortunately, neither agglomerative nor divisive clustering is suitable, since both assume a binary split at each node [ 2 ]. 
+		Cause: [(0, 11), (0, 21)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 10
+	Stag: 64 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: We use SUTime [ 6 ] to normalize temporal references, and we parse the sentences with the Stanford parser [ 13 ] and use a set of simple heuristics to determine if the timestamps in the sentence refer to the root verb. 
+		Cause: [(0, 33), (0, 42)]
+		Effect: [(0, 12), (0, 31)]
+
+	CASE: 11
+	Stag: 65 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: If no timestamp is given, we use the article date. 
+		Cause: [(0, 1), (0, 4)]
+		Effect: [(0, 6), (0, 10)]
+
+	CASE: 12
+	Stag: 67 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since we wish to partition along the temporal dimension, our problem reduces to identifying the best dates at which to split a cluster into subclusters. 
+		Cause: [(0, 1), (0, 8)]
+		Effect: [(0, 10), (0, 16)]
+
+	CASE: 13
+	Stag: 68 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: We identify these dates by looking for bursts of activity. 
+		Cause: [(0, 5), (0, 9)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 14
+	Stag: 74 75 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: However, when there is little differentiation in news coverage, we prefer clusters evenly spaced across time. We thus choose clusters C = { c 1 , u'\u2026' , c k } as follows. 
+		Cause: [(0, 1), (1, 0)]
+		Effect: [(1, 2), (1, 20)]
+
+	CASE: 15
+	Stag: 86 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: At each level, we cluster the sentences by the method described above and choose the number of clusters k according to the gap statistic [ 30 ]. 
+		Cause: [(0, 22), (0, 27)]
+		Effect: [(0, 0), (0, 19)]
+
+Section 4:  4 Summarizing within the Hierarchy has 18 CE cases
+	CASE: 1
+	Stag: 95 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: A hierarchical summary that is only salient and nonredundant may still not be suitable if the sentences within a cluster summary are disconnected or if the parent sentence for a summary does not relate to the child summary. 
+		Cause: [(0, 15), (0, 37)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 2
+	Stag: 95 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: A hierarchical summary that is only salient and nonredundant may still not be suitable if the sentences within a cluster summary are disconnected or if the parent sentence for a summary does not relate to the child summary. 
+		Cause: [(0, 10), (0, 22)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 3
+	Stag: 95 96 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: A hierarchical summary that is only salient and nonredundant may still not be suitable if the sentences within a cluster summary are disconnected or if the parent sentence for a summary does not relate to the child summary. Thus, a hierarchical summary must also have intra-cluster coherence and parent-to-child coherence. 
+		Cause: [(0, 0), (0, 37)]
+		Effect: [(1, 1), (1, 12)]
+
+	CASE: 4
+	Stag: 97 98 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Salience is the value of each sentence to the topic from which the documents are drawn. We measure salience of a summary ( S u'\u2062' a u'\u2062' l u'\u2062' ( X ) ) as the sum of the saliences of individual sentences ( u'\u2211' i S u'\u2062' a u'\u2062' l u'\u2062' ( x i ). 
+		Cause: [(1, 30), (1, 60)]
+		Effect: [(0, 13), (1, 28)]
+
+	CASE: 5
+	Stag: 102 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: For example, the reaction sentence, u'\u201c' President Clinton vowed to track down the perpetrators behind the bombs that exploded outside the embassies in Tanzania and Kenya on Friday, u'\u201d' would have a higher score than the action sentence, u'\u201c' Bombs exploded outside the embassies in Tanzania and Kenya on Friday u'\u201d' This problem occurs because the first sentence has a higher ROUGE score (it covers more important words than the second sentence. 
+		Cause: [(0, 75), (0, 92)]
+		Effect: [(0, 0), (0, 73)]
+
+	CASE: 6
+	Stag: 107 108 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We rely on the approximate discourse graph (ADG) that was proposed in [ 8 ] as the basis for measuring coherence. Each node in the ADG is a sentence from the dataset. 
+		Cause: [(0, 18), (1, 9)]
+		Effect: [(0, 0), (0, 16)]
+
+	CASE: 7
+	Stag: 110 
+		Pattern: 0 [[['indicate', 'indicates', 'indicated', 'realize', 'realizes', 'realized', 'ensure', 'ensures', 'ensured', 'imply', 'implies', 'implied']]]---- [['&NP@C@', '(&Clause@C@)'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: A negative edge indicates an unfulfilled discourse cue or co-reference mention. 
+		Cause: [(0, 0), (0, 2)]
+		Effect: [(0, 4), (0, 10)]
+
+	CASE: 8
+	Stag: 112 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Users navigate the hierarchical summary from parent sentence to child summary, so if the parent sentence bears no relation to the child summary, the user will be understandably confused. 
+		Cause: [(0, 0), (0, 10)]
+		Effect: [(0, 13), (0, 30)]
+
+	CASE: 9
+	Stag: 112 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: Users navigate the hierarchical summary from parent sentence to child summary, so if the parent sentence bears no relation to the child summary, the user will be understandably confused. 
+		Cause: [(0, 1), (0, 10)]
+		Effect: [(0, 12), (0, 17)]
+
+	CASE: 10
+	Stag: 118 119 
+		Pattern: 7 [['for'], [['reason', 'reasons']]]---- [['&C', '(,/;/./--)', '(&AND)'], ['(&this)'], ['(,/that)', '&R']]
+		sentTXT: In hierarchical summarization, however, a cluster summary may span hundreds of documents and a wide range of information. For this reason, we may consider a summary acceptable even if it has limited positive evidence of coherence in the ADG, as long as there is no negative evidence in the form of negative edges. 
+		Cause: [(0, 0), (0, 19)]
+		Effect: [(1, 4), (1, 36)]
+
+	CASE: 11
+	Stag: 123 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Having estimated salience, redundancy, and two forms of coherence, we can now put this information together into a single objective function that measures the quality of a candidate hierarchical summary. 
+		Cause: [(0, 0), (0, 10)]
+		Effect: [(0, 12), (0, 32)]
+
+	CASE: 12
+	Stag: 126 127 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We treat redundancy and budget as hard constraints and coherence and salience as soft constraints. Lastly, we require that sentences are drawn from the cluster that they represent and that the number of sentences in the summary corresponding to each non-leaf cluster c is equivalent to the number of child clusters of c. 
+		Cause: [(0, 6), (1, 37)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 13
+	Stag: 129 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: The tradeoff parameters u'\u0392' and u'\u0393' were set based on a development set. 
+		Cause: [(0, 18), (0, 20)]
+		Effect: [(0, 0), (0, 15)]
+
+	CASE: 14
+	Stag: 130 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Optimizing this objective function is NP-hard, so we approximate a solution by using beam search over the space of partial hierarchical summaries. 
+		Cause: [(0, 0), (0, 5)]
+		Effect: [(0, 8), (0, 11)]
+
+	CASE: 15
+	Stag: 131 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: Notice the contribution from a sentence depends on individual salience, coherence ( C u'\u2062' C u'\u2062' o u'\u2062' h ) based on sentences visible on the user path down the hierarchy to this sentence, and coherence ( P u'\u2062' C u'\u2062' o u'\u2062' h ) based on its parent sentence and its child summary. 
+		Cause: [(0, 35), (0, 35)]
+		Effect: [(0, 48), (0, 78)]
+
+	CASE: 16
+	Stag: 131 
+		Pattern: 0 [['based', 'on']]---- [['&R', '(,)', '(&ADV)'], ['&V-ing/&NP@C@', '(&Clause@C@)']]
+		sentTXT: Notice the contribution from a sentence depends on individual salience, coherence ( C u'\u2062' C u'\u2062' o u'\u2062' h ) based on sentences visible on the user path down the hierarchy to this sentence, and coherence ( P u'\u2062' C u'\u2062' o u'\u2062' h ) based on its parent sentence and its child summary. 
+		Cause: [(0, 25), (0, 27)]
+		Effect: [(0, 4), (0, 22)]
+
+	CASE: 17
+	Stag: 132 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since most of the sentence contributions depend on the path from the root to the sentence, we build our partial summary by incrementally adding a sentence top-down in the hierarchy and from first sentence to last within a cluster summary. 
+		Cause: [(0, 1), (0, 15)]
+		Effect: [(0, 17), (0, 40)]
+
+	CASE: 18
+	Stag: 134 135 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: However, we do not fix the child summary at this time u'\u2013' we simply use it to estimate P u'\u2062' C u'\u2062' o u'\u2062' h when using that sentence. Since computing the best child summary is also intractable we approximate a solution by a local search algorithm over the child cluster. 
+		Cause: [(1, 1), (1, 21)]
+		Effect: [(0, 17), (0, 45)]
+
+Section 5:  5 Experiments has 20 CE cases
+	CASE: 1
+	Stag: 142 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: Are hierarchical summaries more effective than other methods for learning about complex events. 
+		Cause: [(0, 9), (0, 12)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 2
+	Stag: 157 
+		Pattern: 45 [['so', 'that']]---- [['&C'], ['&R']]
+		sentTXT: We selected topics which were between five and fifteen years old so that evaluators would have relatively less pre-existing knowledge about the topic. 
+		Cause: [(0, 0), (0, 10)]
+		Effect: [(0, 13), (0, 22)]
+
+	CASE: 3
+	Stag: 172 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Evaluating how much a user learned is inherently difficult, more so when the goal is to allow the user the freedom to explore information based on individual interest. 
+		Cause: [(0, 0), (0, 10)]
+		Effect: [(0, 12), (0, 27)]
+
+	CASE: 4
+	Stag: 172 173 
+		Pattern: 7 [['for'], [['reason', 'reasons']]]---- [['&C', '(,/;/./--)', '(&AND)'], ['(&this)'], ['(,/that)', '&R']]
+		sentTXT: Evaluating how much a user learned is inherently difficult, more so when the goal is to allow the user the freedom to explore information based on individual interest. For this reason, instead of asking a set of predefined questions, we assess the knowledge gain by following the methodology of [ 26 ] u'\u2013' asking users to write a paragraph summarizing the information learned. 
+		Cause: [(0, 0), (0, 28)]
+		Effect: [(1, 4), (1, 40)]
+
+	CASE: 5
+	Stag: 174 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Using the same setup as in the previous experiment, for each topic, five AMT workers spent three minutes reading through a timeline or summary and were then asked to write a description of what they had learned. 
+		Cause: [(0, 0), (0, 12)]
+		Effect: [(0, 14), (0, 38)]
+
+	CASE: 6
+	Stag: 184 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: Standard checks such as approval rating, location filtering, etc were used for removing spam. 
+		Cause: [(0, 14), (0, 15)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 7
+	Stag: 184 185 
+		Pattern: 4 [['result'], ['is']]---- [['&C', '(,/./;/--)', '&ONE', '(&adj)'], ['(of &THIS (&NP))'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: Standard checks such as approval rating, location filtering, etc were used for removing spam. The results of this experiment are as follows. 
+		Cause: [(0, 0), (0, 15)]
+		Effect: [(1, 4), (1, 7)]
+
+	CASE: 8
+	Stag: 189 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: In latter cases, the hierarchical summaries provided little advantage over the timelines because it was more difficult to arrange the sentences hierarchically. 
+		Cause: [(0, 14), (0, 22)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 9
+	Stag: 190 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since Summa was judged to be so much superior to flat MDS systems in Section 5.1 , it is surprising that users descriptions from flat MDS were preferred nearly as often as those from Summa. 
+		Cause: [(0, 1), (0, 15)]
+		Effect: [(0, 17), (0, 34)]
+
+	CASE: 10
+	Stag: 191 192 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: While the flat summaries were disjointed, they were good at including salient information, with the most salient tending to be near the start of the summary. Thus, descriptions from both Summa and flat MDS generally covered the most salient information. 
+		Cause: [(0, 0), (0, 27)]
+		Effect: [(1, 1), (1, 14)]
+
+	CASE: 11
+	Stag: 193 
+		Pattern: 45 [['so', 'that']]---- [['&C'], ['&R']]
+		sentTXT: In this experiment, we assess the salience of the information captured by the different systems, and the ability of Summa to organize the information so that more important information is placed at higher levels. 
+		Cause: [(0, 0), (0, 25)]
+		Effect: [(0, 28), (0, 35)]
+
+	CASE: 12
+	Stag: 195 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: We first automatically assessed informativeness by calculating the ROUGE-1 scores of the output of each of the systems. 
+		Cause: [(0, 6), (0, 17)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 13
+	Stag: 197 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: 5 5 We excluded one topic (the handover of the Lockerbie bombing suspects) because the corresponding Wikipedia article had insufficient information. 
+		Cause: [(0, 16), (0, 22)]
+		Effect: [(0, 0), (0, 14)]
+
+	CASE: 14
+	Stag: 198 199 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: Note that there is no good translation of ROUGE for hierarchical summarization. Thus, we simply use the traditional ROUGE metric, which will not capture any of the hierarchical format. 
+		Cause: [(0, 0), (0, 11)]
+		Effect: [(1, 1), (1, 18)]
+
+	CASE: 15
+	Stag: 200 201 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: This score will essentially serve as a rough measure of coverage of the entire summary to the Wikipedia article. The scores for each of the systems are as follows. 
+		Cause: [(0, 6), (1, 8)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 16
+	Stag: 205 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: While ROUGE serves as a rough measure of coverage, we were interested in gathering more fine-grained information on the informativeness of each system. 
+		Cause: [(0, 4), (0, 23)]
+		Effect: [(0, 1), (0, 2)]
+
+	CASE: 17
+	Stag: 208 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: Because reading 300 articles per topic is impractical, we asked AMT workers to read a Wikipedia article on the same topic and then identify the three most important events and the five most important secondary events. 
+		Cause: [(0, 1), (0, 7)]
+		Effect: [(0, 9), (0, 36)]
+
+	CASE: 18
+	Stag: 218 
+		Pattern: 18 [['because'], [',']]---- [[], ['&C'], ['&R']]
+		sentTXT: While recognizing primary events is relatively simple because they are repeated frequently, identification of important secondary events often requires external knowledge. 
+		Cause: [(0, 8), (0, 11)]
+		Effect: [(0, 13), (0, 21)]
+
+	CASE: 19
+	Stag: 225 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: While the facts of the sentences made sense together, the summaries sometimes did not read as if they were written by a human, but as a series of disparate sentences. 
+		Cause: [(0, 18), (0, 31)]
+		Effect: [(0, 0), (0, 16)]
+
+	CASE: 20
+	Stag: 231 
+		Pattern: 0 [['based', 'on'], [',']]---- [[], ['&V-ing/&NP@C@', '(&Clause@C@)'], ['&R']]
+		sentTXT: For example, suppose the parent sentence is, u'\u201c' A Swissair plane Wednesday night crashed off Nova Scotia, Canada u'\u201d' A very good child sentence is, u'\u201c' The airline confirmed that all passengers died u'\u201d' However, based on their surface features, the sentence, u'\u201c' A plane made an unscheduled landing after a Swissair plane crashed off the coast of Canada, u'\u201d' appears to be a better choice. 
+		Cause: [(0, 58), (0, 60)]
+		Effect: [(0, 62), (0, 97)]
+
+Section 6:  6 Related Work has 3 CE cases
+	CASE: 1
+	Stag: 253 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: While timelines can be useful for understanding events, they do not generalize to other domains. 
+		Cause: [(0, 6), (0, 7)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 2
+	Stag: 261 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: [ 9 ] proposed a probabilistic technique for extracting a diverse set of threads from a given collection. 
+		Cause: [(0, 8), (0, 17)]
+		Effect: [(0, 0), (0, 6)]
+
+	CASE: 3
+	Stag: 268 
+		Pattern: 0 [['according', 'to']]---- [['&R', '(,)'], ['&NP@C@']]
+		sentTXT: Other research identifies the hierarchical structure of the documents and generates a summary that prioritizes more general information according to the structure [ 22 , 5 ] , or gains coverage by drawing sentences from different parts of the hierarchy [ 34 , 31 ]. 
+		Cause: [(0, 20), (0, 44)]
+		Effect: [(0, 0), (0, 17)]
+
+Section 7:  7 Conclusions has 1 CE cases
+	CASE: 1
+	Stag: 271 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: When compared to timelines, users learned more with Summa in twice as many cases, and Summa was preferred more than three times as often. 
+		Cause: [(0, 13), (0, 24)]
+		Effect: [(0, 1), (0, 11)]
+
+#-------------------------------------------------
+

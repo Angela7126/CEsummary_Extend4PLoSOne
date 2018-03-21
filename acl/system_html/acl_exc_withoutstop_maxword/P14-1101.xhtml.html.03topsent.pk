@@ -1,0 +1,28 @@
+(lp0
+VBoth the LD and TLD models are computational-level models of phonetic (specifically, vowel) categorization where phones (vowels) are presented to the model in the context of words
+p1
+aVIn the LD model, vowel phones appear within words drawn from the lexicon
+p2
+aVIf a word token is assigned to a lexeme, x i = u'\u005cu2113' , the vowels within the word are assigned to that lexeme u'\u005cu2019' s vowel categories, w i u'\u005cu2062' j = v u'\u005cu2113' u'\u005cu2062' j = c
+p3
+aVThe above model generates a category assignment c i u'\u005cu2062' j for each vowel token w i u'\u005cu2062' j
+p4
+aVGiven the data, the model must assign each vowel token to a vowel category, w i u'\u005cu2062' j = c
+p5
+aVWe use Gibbs sampling to infer three sets of variables in the TLD model assignments to vowel categories in the lexemes, assignments of tokens to topics, and assignments of tokens to tables (from which the assignment to lexemes can be read off
+p6
+aVThe formant values for w h u'\u005cu2062' i u'\u005cu2062' j are drawn in the same way as in the LD model, given the lexeme assignment at x h u'\u005cu2062' i
+p7
+aVIn the TLD model, tokens appear within situations, each of which has a distribution over topics u'\u005cu0398' h
+p8
+aV11 ) implemented the Lexical-Distributional (LD) model, which jointly learns a set of phonetic vowel categories and a set of word-forms containing those categories
+p9
+aVBoth the LD and the TLD models do this using intermediate lexemes, u'\u005cu2113' , which contain vowel category assignments, v u'\u005cu2113' u'\u005cu2062' j = c , as well as a frame f u'\u005cu2113'
+p10
+aVThis is the baseline IGMM model, which clusters vowel tokens using bottom-up distributional information only; the LD model adds top-down information by assigning categories in the lexicon, rather than on the token level
+p11
+aVFigure 4 shows example vowel categories inferred by the TLD model, including two supervowels
+p12
+aVFurthermore, TLD consistently outperforms the LD model, finding better phonetic categories, both for vowels generated from the combined categories
+p13
+a.

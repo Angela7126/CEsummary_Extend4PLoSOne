@@ -1,0 +1,286 @@
+(lp0
+VFor pairs that have both English and Chinese articles, the Chinese article title is regarded as the translation of the English one
+p1
+aVIn query translation, we translate the title of every English article into Chinese and then use these translated titles as queries to retrieve articles from the Chinese encyclopedia
+p2
+aVThe title of each English article is translated into Chinese and represented as a vector
+p3
+aVNext, we check if there is a Chinese article in Baidu Baike with exactly the same title as the one in Chinese Wikipedia
+p4
+aVFor example, for the English article u'\u005cu201c' Jensen Ackles u'\u005cu201d' , our approach generates a link to the Chinese article u'\u005cu201c' Jensen u'\u005cu201d' in Baidu Baike
+p5
+aVBecause of the large difference in title lengths, the value of the title similarity feature between the English article u'\u005cu201c' Nero u'\u005cu201d' and the corresponding Chinese article is low
+p6
+aVAfter extracting the hypernym of the English article, the hypernym is translated into Chinese
+p7
+aVThen, for each English article and Chinese candidate pair in testing, the LDA model provides the distribution of the latent topics
+p8
+aVWe regard the appearance of the English title in the first sentence of a Baidu Baike article as a binary feature
+p9
+aVBecause title similarity of the articles is a widely used method, we choose English and Chinese title similarity as the baseline
+p10
+aVIn order to evaluate the performance of cross-language article linking between English Wikiepdia and Chinese Baidu Baike, we compile an English-Chinese evaluation dataset from Wikipedia and Baidu Baike online encyclopedias
+p11
+aVFor example, for the English article u'\u005cu201c' Nero u'\u005cu201d' , our approach ranks the Chinese candidate u'\u005cu201c' 尼禄王 u'\u005cu201d' ( u'\u005cu201c' King Nero u'\u005cu201d' ) as number one, instead of the correct answer u'\u005cu201c' 尼禄·克劳狄乌斯·德鲁苏斯·日耳曼尼库斯 u'\u005cu201d' (the number two candidate
+p12
+aVThese results show that our method is very effective in linking articles in English Wikipedia to those in Baidu Baike
+p13
+aVIn this paper, we propose a method comprising title and hypernym translation and mixed-language topic model methods to select and link related articles between the English Wikipedia and Baidu Baike online encyclopedias
+p14
+aVThe term u'\u005cu201c' novel u'\u005cu201d' is the extracted hypernym of the English article u'\u005cu201c' The Hunger Games u'\u005cu201d'
+p15
+aVIn a Baidu Baike article, the first sentence may contain a parenthetical translation of the main title
+p16
+aVIf so, the corresponding English Wikipedia article and the Baidu Baike article are paired in the gold standard
+p17
+aVN is the number of English query; r i , j is j -th correct Chinese article for i -th English query; c i , k is k -th candiate the system output for i -th English query
+p18
+aVThe first sentence of an encyclopedia article usually contains the title of the article
+p19
+aVFor example, the English article u'\u005cu201c' Raccoon u'\u005cu201d' is linked to the Baidu article u'\u005cu201c' 狸 u'\u005cu201d' (raccoon dog), though the correct one is “浣熊” (raccoon
+p20
+aVIn the title similarity method, every Chinese article title is represented as a vector, and each distinct character in all these titles is a dimension of all vectors
+p21
+aVTo demonstrate this idea, let us take the English article u'\u005cu201c' The Hunger Games u'\u005cu201d' for example
+p22
+aVIn order to generate the gold standard evaluation sets of correct English and Chinese article pairs, we automatically collect English-Chinese inter-language links from Wikipedia
+p23
+aVIn this study, we only carry out title hypernym extraction on the first sentences of English articles due to the looser syntactic structure of Chinese
+p24
+aVFor each English article queries, ten output Baidu Baike candidates are generated in a ranked list
+p25
+aVFor example, the first sentence of the Chinese article on San Francisco is u'\u005cu201c' 旧金山（San Francisco），又译‘圣弗朗西斯科’、‘三藩市’。 u'\u005cu201d'
+p26
+aVIn our title matching method, we formulate candidate selection as an English-Chinese cross-language information retrieval (CLIR) problem [ 8 ] , in which every English article’s title is treated as a query and all the articles in the Chinese encyclopedia are treated as the documents
+p27
+aVFor each encyclopedia K , a collection of human-written articles, can be defined as K = { a i } i = 1 n , where a i is an article in K and n is the size of K
+p28
+aVTo train the LDA model, the pair English and Chinese articles are concatenated into a single document
+p29
+aVTitle translation is an effective and widely used method of creating cross-language links between encyclopedia articles
+p30
+aVFirst, our spider crawls the entire contents of English Wikipedia and Chinese Baidu Baike
+p31
+aVOur approach to cross-language article linking comprises two stages candidate selection, which produces a list of candidate articles, and candidate ranking, which ranks that list
+p32
+aVHowever, there is another Baidu article u'\u005cu201c' 詹森·阿克斯 u'\u005cu201d' ( u'\u005cu201c' Jensen Ackles u'\u005cu201d'
+p33
+aVThe title of the correct Chinese article is the full name of the Roman Emperor Nero (Nero Claudius Drusus Germanicus
+p34
+aVIf the English title appears in the first sentence, the value of this feature is 1; otherwise, the value is 0
+p35
+aVFor example, the first sentence of the u'\u005cu201c' iPad u'\u005cu201d' article in the English Wikipedia begins, u'\u005cu201c' iPad is a line of tablet computers designed and marketed by Apple Inc u'\u005cu2026' u'\u005cu201d' In this sentence, the term u'\u005cu201c' tablet computers u'\u005cu201d' is the hypernym of iPad
+p36
+aVIn the results, we can observe that mix-language topic model, hypernym, and English title occurence features all noticeably improve the performance
+p37
+aVGiven two encyclopedia K 1 and K 2 , cross-language article linking is the task of finding the corresponding equivalent article a j from encyclopedia K 2 for each article a i from encyclopedia K 1
+p38
+aVEnglish and Chinese terms are all regarded as terms of the same language and the LDA topic model, namely mixed-language topic model, generates both English and Chinese terms for each latent topic
+p39
+aVSince alternative encyclopedias like Baidu Baike are larger (by article count) and growing faster than the Chinese Wikipedia, it is worth-while to investigate creating cross-language links among different online encyclopedias
+p40
+aVWe separate all words in the translated and original English article titles with the u'\u005cu201c' OR u'\u005cu201d' operator before submission to the search engine
+p41
+aVArticle linking can then be defined as follows
+p42
+aVCross-language article linking between different encyclopedias can be formulated as follows
+p43
+aVThe total number of Chinese articles is about one-quarter of English ones, and only 2.3% of English articles have inter-language links to their Chinese versions
+p44
+aVIn document translation, we translate the contents of the entire Chinese encyclopedia into English and then search them using the original English titles
+p45
+aVEach article x i in KB K 1 can be represented by a feature vector u'\u005cud835' u'\u005cudc31' i = ( f 1 u'\u005cu2062' ( x i ) , f 2 u'\u005cu2062' ( x i ) , u'\u005cu2026' , f n u'\u005cu2062' ( x i )
+p46
+aVAlso, we have u'\u005cud835' u'\u005cudc32' j = ( f 1 u'\u005cu2062' ( y j ) , f 2 u'\u005cu2062' ( y j ) , u'\u005cu2026' , f n u'\u005cu2062' ( y j ) ) for a candidate article y j in KB K 2
+p47
+aVIt may also contain a hypernym that defines the category of the article
+p48
+aVwhere h is the hypernym, t u'\u005cu2062' r u'\u005cu2062' a u'\u005cu2062' n u'\u005cu2062' s u'\u005cu2062' l u'\u005cu2062' a u'\u005cu2062' t u'\u005cu2062' e u'\u005cu2062' d u'\u005cu2062' ( h ) is the Chinese translation of the term h
+p49
+aVIf the candidate selection method can actually select the correct Chinese candidate, the recall will be high
+p50
+aVIn China, for example Baidu Baike and Hudong are the largest encyclopedia sites, containing more than 6.2 and 7 million Chinese articles respectively
+p51
+aVTo avoid this problem, we first replace all instances of an article u'\u005cu2019' s title in the first sentence with pronouns
+p52
+aVThen, cosine similarity between this vector and the vector of each Chinese title is measured as title similarity
+p53
+aVWe use the results of title matching and title similarity from the candidate selection stage as two features for the candidate ranking stage
+p54
+aVThe entropy of the estimated topic distribution of a related article is expected to be lower than that of an unrelated article
+p55
+aVTo evaluate the performance of our method on linking different types of encyclopedia articles, we compile a set containing the most popular articles
+p56
+aVFor a linked English-Chinese article pair, the distribution of words used in each usually shows some convergence
+p57
+aV[ 6 ] Thus, the distribution of terms is good measurement of article similarity
+p58
+aVSuch length differences may cause the SVM model to rank the correct answer lower when the difference of other features are not so significant because the contents of the Chinese candidates are similar
+p59
+aVWe select the top 500 English-Chinese article pairs with the highest page view counts in Baidu Baike
+p60
+aVIf two articles do not describe the same topic, the distribution of terms is often scattered
+p61
+aVTable 1 shows the statistics of inter-language link pages in the English and Chinese editions in February 2014
+p62
+aV* 1 MTM mix-language topic model * 2 HT hypernym translation * 3 ETO
+p63
+aVThen, individual feature functions F k u'\u005cu2062' ( x i , y j ) are based on the feature properties of both article a i and a j
+p64
+aVThe first kind of error is due to large literal differences between the English and Chinese titles
+p65
+aVThe similarity values generated by title matching and title similarity are used directly as real value features in the SVM model
+p66
+aVSince the two encyclopedias u'\u005cu2019' article formats differ, we copy the information in each article (title, content, category, etc.) into a standardized XML structure
+p67
+aVEquivalent articles are articles that describe the same topic in different languages
+p68
+aV[ 11 , 1 ] However, title translation alone is not always sufficient
+p69
+aVTherefore, articles containing the same hypernym are likely to belong to the same category
+p70
+aVWikipedia has many language versions, and articles in one language contain hyperlinks to corresponding pages in other languages
+p71
+aVThe second error type is caused by articles that have duplicates in Baidu Baike
+p72
+aVThese extracted hypernyms can be treated as article categories
+p73
+aVOther methods must be used along with title translation to create a more robust linking tool
+p74
+aVThe first sentence of this article is u'\u005cu201c' The Hunger Games is a 2008 young adult novel by American writer Suzanne Collins u'\u005cu201d' Since article titles may be named entities or compound nouns, the dependency parser may mislabel them and thus output an incorrect parse tree
+p75
+aVThus, we can extract the hypernym u'\u005cu201c' novel u'\u005cu201d' from the previous example
+p76
+aVSeveral works have focused on creating cross-language links between Wikipedia language versions [ 7 , 9 ] or finding a cross-language link for each entity mention in a Wikipedia article, namely Cross-Language Link Discovery (CLLD) [ 10 , 5 ]
+p77
+aVThe top predicted corresponding article y j in the knowledge base K 2 for an input article x i in K 1 should receive a higher score than any other entity in K 2 , a m u'\u005cu2208' K 2 , m u'\u005cu2260' j
+p78
+aVThe value of this feature in the SVM model is calculated as follows
+p79
+aVTo extract possible candidates, two similarity calculation methods are carried out title matching and title similarity
+p80
+aVAlthough our method can effectively generate cross-language links with high accuracy, some correct candidates are not ranked number one
+p81
+aVEnglish title occurrence u'\u005cu2020' This config outperforms the best config in last level with statistically significant difference
+p82
+aVBecause the number of all possible words is too large, we adopt a topic model to gather the words into some latent topics
+p83
+aVThe two semantically corresponding articles often have many related terms, which results in clusters of specific words
+p84
+aVwhere T is the number of latent topics, u'\u005cu0398' d u'\u005cu2062' j is the topic distribution of a given topic j
+p85
+aVBecause our approach uses an SVM model, the data set should be split into training and test sets
+p86
+aVIn some cases, for example, the titles of corresponding articles in different languages do not even match
+p87
+aVThe reason is that Google Translate provides the translation u'\u005cu201c' 狸 u'\u005cu201d' instead of u'\u005cu201c' 浣熊 u'\u005cu201d'
+p88
+aVOur SVM model u'\u005cu2019' s features are described below
+p89
+aVRecall is used to measure the performance of the candidate selection method
+p90
+aVTo measure the quality of cross-language entity linking, we use the following three metrics
+p91
+aVTable 2 shows the final results of different feature combinations
+p92
+aVThese two articles both describe the actor Jensen Ackles
+p93
+aVIn order to show the benefits of each feature used in the SVM model, we conduct a experiment to test the performance of different feature combinations
+p94
+aVFor example, the previous sentence is rewritten as u'\u005cu201c' It is a 2008 young adult novel by American writer Suzanne Collins u'\u005cu201d' Then, the dependency parser generates the following parse tree
+p95
+aV[ 4 ] If any pattern matches the structure of the dependency parse tree, the hypernym can be extracted
+p96
+aVTo avoid brute-force comparison, we first select plausible candidate articles on which to focus our efforts
+p97
+aVRecall is the fraction of the retrieved articles that are relevant to the given query
+p98
+aVA u'\u005cu2062' C u'\u005cu2062' C = 1 means that all top candidates are correctly linked (i.e.,�they match one of the references), and A u'\u005cu2062' C u'\u005cu2062' C = 0 means that none of the top candidates is correct
+p99
+aVWe also compile a suitable dataset from the above two encyclopedias to evaluate the linking accuracy of our method
+p100
+aVWe can calculate the entropy of the distribution as a value for SVM
+p101
+aVThe second stage of our approach is to score each viable candidate using a supervised learning method, and then sort all candidates in order of score from high to low as final output
+p102
+aVHowever, when linking between different online encyclopedia platforms this is more difficult as many of these structural features are different or not shared
+p103
+aVNext, we can use entropy to measure the distribution of topics
+p104
+aVThis set represents the articles people in China are most interested in
+p105
+aVEach topic is represented by a distribution of words, and each word has a probability score used to measure its contribution to the topic
+p106
+aVThe overall results of our method achieves 80.95% in MRR and 87.46% in recall
+p107
+aVAn MRR closer to 1 implies that the correct answer usually appears close to the top of the n-best lists
+p108
+aVSince knowledge bases (KB) may contain millions of articles, comparison between all possible pairs in two knowledge bases is time-consuming and sometimes impractical
+p109
+aVIn this case, our approach still generates a correct link, although it is not the one in the gold standard
+p110
+aVLDA can be seen as a typical probabilistic approach to latent topic computation
+p111
+aVIn this pattern, the rightmost leaf is the hypernym target
+p112
+aVThen, another feature is added to each configuration until all the features have been added
+p113
+aVTraditional MRR measures any correct answer produced by the system from among the candidates
+p114
+aVThese works were able to exploit the link structure and metadata common to all Wikipedia language versions
+p115
+aVFor this feature, we use the Latent Dirichlet Allocation (LDA) [ 3 ]
+p116
+aVCombining two of these three feature has more improvement and the combination of all the features achieves the best
+p117
+aVThe false positive u'\u005cu201c' 尼禄王 u'\u005cu201d' is a historical novel about the life of the Emperor Nero
+p118
+aVThe third error type is translation errors
+p119
+aVNext, we apply our predefined syntactic patterns to extract the hypernym
+p120
+aVTo date, little research has been done into linking between encyclopedias on different platforms
+p121
+aVWe employ the two main CLIR methods query translation and document translation
+p122
+aVThe final evaluation results are calculated as the mean of the average of these 30 evaluation sets
+p123
+aVHowever, there are alternatives to Wikipedia for some languages
+p124
+aVWe use the support vector machine (SVM) approach to determine the probability of each pair ( u'\u005cud835' u'\u005cudc31' i , u'\u005cud835' u'\u005cudc32' j ) being equivalent
+p125
+aVFigure 1 shows the top- k ACC from the top 1 to 5
+p126
+aVOnline encyclopedias are among the most frequently used Internet services today u'\u005cu2020' u'\u005cu2020' * corresponding author One of the largest and best known online encyclopedias is Wikipedia
+p127
+aVHowever, the coverage of different language ver-sions of Wikipedia is very inconsistent
+p128
+aVFor all E-C and C-E translation tasks, we use Google Translate
+p129
+aVACC measures the correctness of the first candidate in the candidate list
+p130
+aVThe top 100 results for the query-translation and the top 100 results for document-translation steps are unionized
+p131
+aVFor the query- and document-translation steps, we use the Lucene search engine with similarity scores calculated by the Okapi BM25 ranking function [ 2 ]
+p132
+aVAfter examining the results, we can divide errors into several categories
+p133
+aV1/MRR approximates the average rank of the correct transliteration
+p134
+aVThen, we manually designed seven patterns to extract hypernyms from the parse tree structures
+p135
+aVThe entropy is defined as follows
+p136
+aVSimilarly, in Korea, Naver Knowledge Encyclopedia has a large presence
+p137
+aVThe resulting list contains our title-matching candidates
+p138
+aVTo generate dependency parse trees for the sentences, we adopt the Stanford Dependency Parser
+p139
+aVFor statistical generality, each data set is randomly split 4:1 (training:test) 30 times
+p140
+aVIn the above example, the following pattern is matched
+p141
+aVTo define the metrics, we use following notations
+p142
+a.

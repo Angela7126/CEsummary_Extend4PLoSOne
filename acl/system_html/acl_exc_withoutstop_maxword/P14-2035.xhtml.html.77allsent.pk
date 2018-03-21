@@ -1,0 +1,266 @@
+(lp0
+VFor each verb phrase, we create a composite vector by matrix-multiplying the verb matrix with the vector of the specific object
+p1
+aVThe union of all object sets is used for training a single unambiguous tensor for the verb
+p2
+aVIn order to create a matrix for, say, the intransitive verb u'\u005cu2018' play u'\u005cu2019' , we first collect all instances of the verb occurring with some subject in the training corpus, and then we create non-compositional holistic vectors for these elementary sentences following exactly the same methodology as if they were words
+p3
+aVThe next step is to classify every noun that has been used as an object with that verb to the most probable verb sense, and then use these sets of nouns as before for training tensors for the various verb senses
+p4
+aVFor the ambiguous regression model, the composition is done by matrix-multiplying the ambiguous verb matrix (learned by the union of all object sets) with the vector of the noun
+p5
+aVWe apply linear regression in order to train verb matrices using jointly the object sets for both meanings of each verb, as well as separately u'\u005cu2014' so in this latter case we get two matrices for each verb, one for each sense
+p6
+aVBeing equipped with a number of sense clusters created as above for every verb, the classification of each object to a relevant sense is based on the cosine distance of the object vector from the centroids of the clusters
+p7
+aVFor the disambiguated version, we first detect the most probable sense of the verb given the noun, again by comparing the vector of the noun with the centroids of the verb clusters; then, we matrix-multiply the corresponding unambiguous tensor created exclusively from objects that have been classified as closer to this specific sense of the verb with the noun
+p8
+aVFor example, u'\u005cu2018' attention u'\u005cu2019' was a valid object for the attract sense of verb u'\u005cu2018' draw u'\u005cu2019' , since it is unrelated to the sketch sense of that verb
+p9
+aVThe premise of a model like this is that the multiplication of the verb matrix with the vector of a new subject will produce a result that approximates the distributional behaviour of all these elementary two-word exemplars used in training
+p10
+aVWe now have a dataset with instances of the form u'\u005cu27e8' s u'\u005cu2062' u u'\u005cu2062' b u'\u005cu2062' j i u'\u005cu2192' , s u'\u005cu2062' u u'\u005cu2062' b u'\u005cu2062' j i u'\u005cu2062' p u'\u005cu2062' l u'\u005cu2062' a u'\u005cu2062' y u'\u005cu2192' u'\u005cu27e9' (e.g., the vector of u'\u005cu2018' kids u'\u005cu2019' paired with the holistic vector of u'\u005cu2018' kids play u'\u005cu2019' , and so on), that can be used to train a linear regression model in order to produce an appropriate matrix for verb u'\u005cu2018' play u'\u005cu2019'
+p11
+aVWhat makes the models of the above work u'\u005cu2018' partial u'\u005cu2019' is that the authors used simplified versions of the linear maps, projected onto spaces of order lower than that required by the theoretical framework
+p12
+aVFirst of all, the regression model is based on the assumption that the holistic vectors of the exemplar verb phrases follow an ideal distributional behaviour that the model aims to approximate as close as possible
+p13
+aVThe verb phrases of our dataset are based on the 5 ambiguous verbs of Table 1
+p14
+aVAs usual, data points are presented to learning algorithm in random order
+p15
+aVFor every occurrence of the verb, we create a vector representing the surrounding context by averaging the vectors of every other word in the same sentence
+p16
+aVIn the next section we will see how to apply linear regression in order to create full tensors for verbs and use them for a compositional model that avoids these pitfalls
+p17
+aVThe same concept applies for functions of higher order, such as a transitive verb (a function of two arguments, so a tensor of order 3
+p18
+aVInstead of using subject-verb constructs as above we concentrate on elementary verb phrases of the form verb-object (e.g., u'\u005cu2018' play football u'\u005cu2019' , u'\u005cu2018' admit student u'\u005cu2019' ), since in general objects comprise stronger contexts for disambiguating the usage of a verb
+p19
+aVWe also test a number of baselines the u'\u005cu2018' verbs-only u'\u005cu2019' model is a non-compositional baseline where only the two verbs are compared; u'\u005cu2018' additive u'\u005cu2019' and u'\u005cu2018' multiplicative u'\u005cu2019' compose the word vectors of each phrase by applying simple element-wise operations
+p20
+aVThis is done by comparing each holistic vector with all the composite ones, and then evaluating the rank of the correct composite vector within the list of results
+p21
+aVHere, the model does not fully exploit the space provided by the theoretical framework (i.e., an order-3 tensor), which has two disadvantages firstly, we lose space that could hold valuable information about the verb in this case and relational words in general; secondly, the generally non-commutative tensor contraction operation is now partly relying on element-wise multiplication, which is commutative, thus forgets (part of the) order of composition
+p22
+aVWe create such a model by using linear regression, and we explain how an explicit disambiguation step can be introduced to this model prior to composition
+p23
+aVWe present examples and experiments based on this method, constructing ambiguous and disambiguated tensors of order 2 (that is, matrices) for verbs taking one argument
+p24
+aVCompositional distributional models of meaning vary in sophistication, from simple element-wise operations between vectors such as addition and multiplication [] to deep learning techniques based on neural networks []
+p25
+aVThis is very important, since a regression model can only perform as well as its training dataset allows it; and in our case this is achieved to a very satisfactory level
+p26
+aVWe then proceed by comparing the composite vectors produced by this approach with those produced by the model alone in a number of experiments
+p27
+aVA potential explanation then for the effectiveness of the proposed prior disambiguation method can be sought on the limitations imposed by the compositional models under test
+p28
+aVOn the other hand, u'\u005cu2018' car u'\u005cu2019' is not an appropriate object for either sense of u'\u005cu2018' draw u'\u005cu2019' , since it could actually appear under both of them in different contexts
+p29
+aVThe clustering algorithm uses Ward u'\u005cu2019' s method as inter-cluster measure, and Pearson correlation for measuring the distance of vectors within a cluster
+p30
+aVSince HAC returns a dendrogram embedding all possible groupings, we measure the quality of each partitioning by using the variance ratio criterion [] and we select the partitioning that achieves the best score (so the number of senses varies from verb to verb
+p31
+aVSince every map of this sort can be represented by a matrix living in the tensor product space N u'\u005cu2297' N , we now see that the meaning of a phrase such as u'\u005cu2018' red car u'\u005cu2019' is given by r u'\u005cu2062' e u'\u005cu2062' d ¯ × c u'\u005cu2062' a u'\u005cu2062' r u'\u005cu2192' , where r u'\u005cu2062' e u'\u005cu2062' d ¯ is an adjective matrix and × indicates matrix multiplication
+p32
+aVAs an example, in the verb u'\u005cu2018' play u'\u005cu2019' we impose the two distinct meanings of using a musical instrument and participating in a sport; so the first set of objects contains nouns such as u'\u005cu2018' oboe u'\u005cu2019' , u'\u005cu2018' piano u'\u005cu2019' , u'\u005cu2018' guitar u'\u005cu2019' , and so on, while in the second set we see nouns such as u'\u005cu2018' football u'\u005cu2019' , u'\u005cu2019' baseball u'\u005cu201d' etc
+p33
+aVOur basic vector space is trained from the ukWaC corpus [] , originally using as a basis the 2,000 content words with the highest frequency (but excluding a list of stop words as well as the 50 most frequent content words since they exhibit low information content
+p34
+aVThen, each object in the list was manually annotated as exclusively belonging to one of the two senses; so, an object could be selected only if it was related to a single sense, but not both
+p35
+aVHence, given a sentence w 1 u'\u005cu2062' w 2 u'\u005cu2062' u'\u005cu2026' u'\u005cu2062' w n , a compositional distributional model provides a function f such that
+p36
+aVN u'\u005cu2192' N (where N is our basic vector space for nouns), which takes as input a noun and returns a modified version of it
+p37
+aVThe goal is to create composite vectors for a number of elementary verb phrases of the form verb-object with and without an explicit disambiguation step, and evaluate which model approximates better the holistic vectors of these verb phrases
+p38
+aVFor these cases, matrix multiplication generalizes to the more generic notion of tensor contraction
+p39
+aVAfter all, the idea of having disambiguation emerge as a direct consequence of the compositional process, without the introduction of any explicit step, seems more natural and closer to the way the human mind resolves lexical ambiguities
+p40
+aVAs a result, a certain amount of transformational power was traded off for efficiency
+p41
+aVIn order to create the vector space of the holistic verb phrase vectors, we first collected all instances where a verb participating in the experiments appeared at least 100 times in a verb-object relationship with some noun in the corpus
+p42
+aVThe provision of compositionality in distributional models of meaning, where a word is represented as a vector of co-occurrence counts with every other word in the vocabulary, offers a solution to the fact that no text corpus, regardless of its size, is capable of providing reliable co-occurrence statistics for anything but very short text constituents
+p43
+aVBy composing the vectors for the words within a sentence, we are still able to create a vectorial representation for that sentence that is very useful in a variety of natural language processing tasks, such as paraphrase detection, sentiment analysis or machine translation
+p44
+aVThe results of Table 3 confirm this using just the holistic vectors of the corresponding verb phrases (no composition is involved here) returns the best correlation with human annotations (0.403), providing a proof that the holistic vectors of the verb phrases are indeed reliable representations of each verb phrase u'\u005cu2019' s meaning
+p45
+aVThen we use 4-fold cross validation to evaluate which version of composite vectors (the one created by the ambiguous tensors or the one created by the unambiguous ones) approximates better the holistic vectors of the verb phrases in our test set
+p46
+aVThe data points of the training set are presented in the learning algorithm in random order
+p47
+aVEvery sense with less than 3 training exemplars is merged to the dominant sense of the verb
+p48
+aVEach verb has been combined with two different sets of nouns that appear in a verb-object relationship with that verb in the corpus (a total of 343 verb phrases
+p49
+aVThe verbs of Table 1 were the ones with the highest numbers of exemplars per sense, creating a dataset of significant size for the intended task (each holistic vector is compared with 343 composite vectors
+p50
+aVIn order to get a proper mixing of objects from both senses of a verb in training and testing sets, we set the cross-validation process as follows
+p51
+aVFor every pair of verb phrases, we construct composite vectors and then we evaluate their cosine similarity
+p52
+aVIn this section we briefly outline how the process of creating tensors for distinct senses of a verb can be automated, and we test this idea on a generic verb phrase similarity task
+p53
+aVAs context of a verb phrase we considered any content word that falls into a 5-word window from either side of the verb or the object
+p54
+aVThe nouns of each set have been manually selected in order to explicitly represent a different meaning of the verb
+p55
+aVThe dataset consists of 72 verb phrases, paired in three different ways to form groups of various degrees of phrase similarity u'\u005cu2014' a total of 108 verb phrase pairs
+p56
+aVFor each verb we use simple linear regression with gradient descent directly applied on matrices u'\u005cud835' u'\u005cudc17' and u'\u005cud835' u'\u005cudc18' , where the rows of u'\u005cud835' u'\u005cudc17' correspond to vectors of the nouns that appear as objects for the given verb and the rows of u'\u005cud835' u'\u005cudc18' to the holistic vectors of the corresponding verb phrases
+p57
+aVFor the 68 verbs participating in our experiments, this procedure resulted in 22k verb phrases, a vector space that again was projected into 300 dimensions using SVD
+p58
+aVThe results are presented in Table 3 , where again the version with the prior disambiguation step shows performance superior to that of the ambiguous version
+p59
+aVNo objects in our test set are used for training
+p60
+aVThe results are presented in Table 2 , reflecting a clear superiority ( p 0.001 for average cosine similarity) of the prior disambiguation method for every verb and every metric
+p61
+aVFinally, a third way to evaluate the efficiency of each model is to simply calculate the average cosine similarity between every holistic vector and its corresponding composite vector
+p62
+aVFor each one of these verbs, a list was constructed with all the nouns that appear at least 50 times under a verb-object relationship in the corpus with the specific verb
+p63
+aVRecent experimental evidence [] suggests that for a number of compositional models the introduction of a disambiguation step prior to the actual compositional process results in better composite representations
+p64
+aVThe matrix u'\u005cud835' u'\u005cudc16' is used as the tensor for the specific verb
+p65
+aVIn a tensor-based model, relational words such as verbs and adjectives are represented by multi-linear maps; composition takes place as the application of those maps on vectors representing the arguments (usually nouns
+p66
+aVNext, a linguist (native speaker of English) annotated the semantic difference between the definitions of each verb in a scale from 1 (similar) to 5 (distinct
+p67
+aVWe test this system on a verb phase similarity task introduced in []
+p68
+aVThe goal is to assess the similarity between pairs of short verb phrases (verb-object constructs) and evaluate the results against human annotations
+p69
+aVThe first one, accuracy, is the strictest, and evaluates in how many cases the composite vector of a verb phrase is the closest one (the first one in the result list) to the corresponding holistic vector
+p70
+aVFirst, we use unsupervised learning in order to detect the latent senses of each verb in the corpus, following a procedure first described by Schütze []
+p71
+aVIn order to reduce the time of regression training, our vector space was normalized and projected onto a 300-dimensional space using singular value decomposition (SVD
+p72
+aVwhere m is the number of objects and rank i refers to the rank of the correct composite vector for the i th object
+p73
+aVNext, observe that the prior disambiguation model approximates this behaviour very closely (0.399) on unseen data, with a difference not statistically significant
+p74
+aVIn Section 6 we used a controlled procedure to collect genuinely ambiguous verbs and we trained our models from manually annotated data
+p75
+aVIn our first experiment we test the effectiveness of a prior disambiguation step for a tensor-based model in a u'\u005cu201c' sandbox u'\u005cu201d' using supervised learning
+p76
+aVFirst, all verb entries with more than one definition in the Oxford Junior Dictionary [] were collected into a list
+p77
+aVThen, we apply hierarchical agglomerative clustering (HAC) in order to cluster these context vectors, hoping that different groups of contexts will correspond to the different senses under which the word has been used in the corpus
+p78
+aV[] who create order-3 tensors for transitive verbs using similar means
+p79
+aVIf, for example, instead of using an order-3 tensor for a transitive verb, one uses some of the matrix instantiations of Kartsaklis and Sadrzadeh, Eq
+p80
+aVThe essence of any tensor-based compositional model is the way we choose to create our sentence-producing maps, i.e., the verbs
+p81
+aVOnly verbs with definitions exhibiting completely distinct meanings (marked with 5) were kept for the next step
+p82
+aVWe created vectors for all content words with at least 100 occurrences in the corpus
+p83
+aVUnder this setting relational words such as verbs and adjectives are represented by multi-linear maps (tensors of various orders) acting on a number of arguments
+p84
+aVIn principle, our method is directly applicable to tensors of higher order, following a multi-step process similar to that of Grefenstette et al
+p85
+aV[] , where the authors show that the introduction of an explicit disambiguation step prior to simple element-wise composition is beneficial for noun-noun compounds
+p86
+aVFor each fold then, our training set is comprised by 3 4 of set #1 plus 3 4 of set #2, while the test set consists of the remaining 1 4 of set #1 plus 1 4 of set #2
+p87
+aVwhere the purpose of function u'\u005cu03a6' is to return a disambiguated version of each word vector given the rest of the context (e.g., all the other words in the sentence
+p88
+aVThe results show a clear superiority of the priorly disambiguated models following Eq
+p89
+aVAn interesting question that has attracted the attention of researchers lately refers to the way in which these models affect ambiguous words; in other words, given a sentence such as u'\u005cu201c' a man was waiting by the bank u'\u005cu201d' , we are interested to know to what extent a composite vector can appropriately reflect the intended use of word u'\u005cu2018' bank u'\u005cu2019' in that context, and how such a vector would differ, for example, from the vector of the sentence u'\u005cu201c' a fisherman was waiting by the bank u'\u005cu201d'
+p90
+aVThe composition operation, whatever that could be, is then applied on these unambiguous representations of the words, instead of the original distributional vectors
+p91
+aVwhere w i u'\u005cu2192' is the distributional vector of the i th word in the sentence and s u'\u005cu2192' the resulting composite sentential vector
+p92
+aVUntil now this idea has been verified on relatively simple compositional functions, usually involving some form of element-wise operation between the word vectors, such as addition or multiplication
+p93
+aVThe purpose of this paper is to investigate the hypothesis whether prior disambiguation is important in a pure tensor-based compositional model, where no simplifying assumptions have been made
+p94
+aV[] , where again all u'\u005cu201c' unambiguous u'\u005cu201d' models present superior performance compared to their u'\u005cu201c' ambiguous u'\u005cu201d' versions
+p95
+aVThe idea of separating disambiguation from composition first appears in a work of Reddy et al
+p96
+aVWe first split both sets of objects in 4 parts
+p97
+aV1 1 In general, our approach is quite close to the multi-prototype models of Reisinger and Mooney []
+p98
+aVIn this paper we adopt a method proposed by Baroni and Zamparelli [] for building adjective matrices, which can be generally applied to any relational word
+p99
+aV2 on partial tensor-based compositional models
+p100
+aVFinally, in [] these experiments were extended to include tensor-based models following the categorical framework of Coecke et al
+p101
+aVTensor-based models , formalized by Coecke et al
+p102
+aVwhere m is the number of training examples and u'\u005cu039b' a regularization parameter
+p103
+aVA concise introduction to compositional distributional models can be found in []
+p104
+aV[] reports very similar findings for verb-object structures, again on additive and multiplicative models
+p105
+aVSubsequent work by Kartsaklis et al
+p106
+aVThe meaning of a sentence such as u'\u005cu2018' kids play games u'\u005cu2019' is computed as
+p107
+aVAn exception to this is the work of Kartsaklis and Sadrzadeh [] , who apply Eq
+p108
+aV2 , confirming previous research and suggesting that the reasons behind the success of this approach are more fundamental than the form of the compositional function
+p109
+aVThere are two interesting observations that can be made on the basis of Table 3
+p110
+aVThis initial semantic space achieved a score of 0.77 Spearman u'\u005cu2019' s u'\u005cu03a1' (and 0.71 Pearson u'\u005cu2019' s r ) on the well-known benchmark dataset of Rubenstein and Goodenough []
+p111
+aVIn more detail, the creation of the dataset was done in the following way
+p112
+aVAs context we considered a 5-word window from either side of the target word, while as our weighting scheme we used local mutual information (i.e., point-wise mutual information multiplied by raw counts
+p113
+aVAn adjective for example is a linear map f
+p114
+aVThe performance of the reduced space on the R G dataset was again very satisfying, specifically 0.73 Spearman u'\u005cu2019' s u'\u005cu03a1' and 0.72 Pearson u'\u005cu2019' s r
+p115
+aV[] , comprise a third class of models lying somewhere in between these two extremes
+p116
+aVIn other words, the suggestion is that Eq
+p117
+aVThe experiment has the following form
+p118
+aVHowever, in this last work one of the dimensions of the tensors was kept empty (filled in with zeros
+p119
+aVwhere p u'\u005cu2062' l u'\u005cu2062' a u'\u005cu2062' y ¯ here is an order-3 tensor (a u'\u005cu201c' cube u'\u005cu201d' ) and × now represents tensor contraction
+p120
+aVThis simplified the calculations but also weakened the effectiveness of the multi-linear maps
+p121
+aVwhere symbol u'\u005cu2299' denotes element-wise multiplication and p u'\u005cu2062' l u'\u005cu2062' a u'\u005cu2062' y ¯ is a matrix
+p122
+aVA more relaxed and perhaps more representative method is to calculate the mean reciprocal rank (MRR), which is given by
+p123
+aVKartsaklis and M
+p124
+aVWe proceed as follows
+p125
+aVSadrzadeh
+p126
+aVOur objective function then becomes
+p127
+aVWe measure approximation in three different metrics
+p128
+aV3 is reduced to one of the following forms
+p129
+aV1 should be replaced by
+p130
+aVSupport by EPSRC grant EP/F042728/1 is gratefully acknowledged by D
+p131
+aVWe would like to thank the three anonymous reviewers for their fruitful comments
+p132
+a.

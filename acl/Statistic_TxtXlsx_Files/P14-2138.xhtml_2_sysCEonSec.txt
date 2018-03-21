@@ -1,0 +1,255 @@
+Current File: P14-2138.xhtml_2 P14-2138.xhtml
+
+Section 0:  Abstract
+	SentNum: 4
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 25.0000%
+
+Section 1:  1 Introduction
+	SentNum: 20
+	CENum: 4
+	SentCovered: 5
+	Covered_Rate: 25.0000%
+
+Section 2:  2 Method
+	SentNum: 26
+	CENum: 9
+	SentCovered: 9
+	Covered_Rate: 34.6154%
+
+Section 3:  3 Experiments
+	SentNum: 56
+	CENum: 14
+	SentCovered: 14
+	Covered_Rate: 25.0000%
+
+Section 4:  4 Conclusion
+	SentNum: 9
+	CENum: 2
+	SentCovered: 2
+	Covered_Rate: 22.2222%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-2138.xhtml_2's CE cases
+
+Section 0:  Abstract has 1 CE cases
+	CASE: 1
+	Stag: 0 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: The relative frequencies of character bigrams appear to contain much information for predicting the first language (L1) of the writer of a text in another language (L2. 
+		Cause: [(0, 12), (0, 29)]
+		Effect: [(0, 0), (0, 10)]
+
+Section 1:  1 Introduction has 4 CE cases
+	CASE: 1
+	Stag: 11 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In particular, word n -gram features appear to be particularly effective, as they were used by the most competitive teams, including the one that achieved the highest overall accuracy [ 13 ]. 
+		Cause: [(0, 15), (0, 35)]
+		Effect: [(0, 6), (0, 12)]
+
+	CASE: 2
+	Stag: 14 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: There is no doubt that the toponymic terms are useful for increasing the NLI accuracy; however, from the psycho-linguistic perspective, we are more interested in what characteristics of L1 show up in L2 texts. 
+		Cause: [(0, 11), (0, 14)]
+		Effect: [(0, 0), (0, 9)]
+
+	CASE: 3
+	Stag: 17 18 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The authors propose the following hypothesis to explain this finding u'\u201c' the choice of words [emphasis added] people make when writing in a second language is strongly influenced by the phonology of their native language u'\u201d'. As the orthography of alphabetic languages is at least partially representative of the underlying phonology, character bigrams may capture these phonological preferences. 
+		Cause: [(1, 1), (1, 22)]
+		Effect: [(0, 0), (0, 45)]
+
+	CASE: 4
+	Stag: 23 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: We conclude that character bigrams are effective in determining L1 of the author because they reflect differences in L2 word usage that are unrelated to the phonology of L1. 
+		Cause: [(0, 14), (0, 28)]
+		Effect: [(0, 0), (0, 12)]
+
+Section 2:  2 Method has 9 CE cases
+	CASE: 1
+	Stag: 28 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: The classifier computes a weight for each feature coupled with each L1 language by attempting to maximize the overall accuracy on the training set. 
+		Cause: [(0, 14), (0, 23)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 2
+	Stag: 29 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: For example, if we train the classifier using words as features, with values representing their frequency relative to the length of the document, the features corresponding to the word China might receive the following weights. 
+		Cause: [(0, 11), (0, 37)]
+		Effect: [(0, 4), (0, 9)]
+
+	CASE: 3
+	Stag: 29 30 
+		Pattern: 0 [[['imply', 'implies', 'implied', 'indicate', 'indicates', 'indicated']]]---- [['&C', '(,/./;/--)', '&this', '(&adj)', '(&N)', '(&CAN/have/has/had)', '(&ADV)'], ['(that)', '&R@Complete@']]
+		sentTXT: For example, if we train the classifier using words as features, with values representing their frequency relative to the length of the document, the features corresponding to the word China might receive the following weights. These weights indicate that the word provides strong positive evidence for Chinese as L1, as opposed to the other four languages. 
+		Cause: [(0, 0), (0, 37)]
+		Effect: [(1, 4), (1, 21)]
+
+	CASE: 4
+	Stag: 31 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: We propose to quantify the importance of each word by converting its SVM feature weights into a single score using the following formula. 
+		Cause: [(0, 10), (0, 22)]
+		Effect: [(0, 0), (0, 8)]
+
+	CASE: 5
+	Stag: 34 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: We use the Euclidean norm rather than the sum of raw weights because we are interested in the discriminative power of the words. 
+		Cause: [(0, 13), (0, 22)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 6
+	Stag: 35 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: We normalize the word scores by dividing them by the score of the 200th word. 
+		Cause: [(0, 6), (0, 14)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 7
+	Stag: 35 36 
+		Pattern: 9 [['consequently']]---- [['&C', '(,/;/./--)'], ['(,)', '&R']]
+		sentTXT: We normalize the word scores by dividing them by the score of the 200th word. Consequently, only the top 200 words have scores greater than or equal to 1.0. 
+		Cause: [(0, 0), (0, 14)]
+		Effect: [(1, 2), (1, 14)]
+
+	CASE: 8
+	Stag: 43 44 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: For example, the bigram an occurs in words like Japan , German , and Italian , but also by itself as a determiner, as an adjectival suffix, and as part of the conjunction and. Therefore, we calculate the importance score for each character bigram by multiplying the scores of each word in which the bigram occurs. 
+		Cause: [(0, 22), (1, 21)]
+		Effect: [(0, 1), (0, 20)]
+
+	CASE: 9
+	Stag: 43 44 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: For example, the bigram an occurs in words like Japan , German , and Italian , but also by itself as a determiner, as an adjectival suffix, and as part of the conjunction and. Therefore, we calculate the importance score for each character bigram by multiplying the scores of each word in which the bigram occurs. 
+		Cause: [(0, 0), (0, 35)]
+		Effect: [(1, 2), (1, 22)]
+
+Section 3:  3 Experiments has 14 CE cases
+	CASE: 1
+	Stag: 52 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: We follow the setup of Tsur and Rappoport ( 2007 ) by extracting two sets, denoted I1 and I2 (Table 1 ), from the International Corpus of Learner English (ICLE), Version 2 [ 10 ]. 
+		Cause: [(0, 12), (0, 14)]
+		Effect: [(0, 15), (0, 40)]
+
+	CASE: 2
+	Stag: 65 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: We replicate the experiments of Tsur and Rappoport ( 2007 ) by limiting the features to the 200 most frequent character bigrams. 
+		Cause: [(0, 12), (0, 21)]
+		Effect: [(0, 0), (0, 10)]
+
+	CASE: 3
+	Stag: 67 
+		Pattern: 2 [['for', 'the', 'sake', 'of']]---- [['&R'], ['&V-ing/&NP@C@']]
+		sentTXT: However, we limit the set of features to the 200 most frequent bigrams for the sake of consistency with previous work. 
+		Cause: [(0, 18), (0, 21)]
+		Effect: [(0, 0), (0, 13)]
+
+	CASE: 4
+	Stag: 69 70 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We use these feature vectors as input to the SVM-Multiclass classifier [ 14 ]. The results are shown in the Baseline column of Table 2. 
+		Cause: [(0, 6), (1, 9)]
+		Effect: [(0, 0), (0, 4)]
+
+	CASE: 5
+	Stag: 72 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Using Algorithm 2 , we identify the 100 most discriminative words, and remove them from the training data. 
+		Cause: [(0, 0), (0, 2)]
+		Effect: [(0, 4), (0, 18)]
+
+	CASE: 6
+	Stag: 76 77 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We see a statistically significant drop in the accuracy of the classifier with respect to the baseline in all sets except T3. The words that are identified as the most discriminative include function words, punctuation, very common content words, and the toponymic terms. 
+		Cause: [(1, 6), (1, 23)]
+		Effect: [(0, 0), (1, 4)]
+
+	CASE: 7
+	Stag: 85 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Using Algorithm 2 , we identify the top 20 character bigrams, and replace them with randomly selected bigrams. 
+		Cause: [(0, 0), (0, 2)]
+		Effect: [(0, 4), (0, 18)]
+
+	CASE: 8
+	Stag: 85 86 
+		Pattern: 4 [['result'], ['is']]---- [['&C', '(,/./;/--)', '&ONE', '(&adj)'], ['(of &THIS (&NP))'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: Using Algorithm 2 , we identify the top 20 character bigrams, and replace them with randomly selected bigrams. The results of this experiment are reported in the Indicative Bigrams column of Table 2. 
+		Cause: [(0, 0), (0, 18)]
+		Effect: [(1, 4), (1, 14)]
+
+	CASE: 9
+	Stag: 95 
+		Pattern: 0 [[['indicate', 'indicates', 'indicated', 'realize', 'realizes', 'realized', 'ensure', 'ensures', 'ensured', 'imply', 'implies', 'implied']]]---- [['&NP@C@', '(&Clause@C@)'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: The remaining bigrams indicate function words, toponymic terms like Germany , and frequent content words like take and new. 
+		Cause: [(0, 0), (0, 2)]
+		Effect: [(0, 4), (0, 19)]
+
+	CASE: 10
+	Stag: 99 
+		Pattern: 0 [['due', 'to']]---- [['&R'], ['&NP@C@']]
+		sentTXT: However, the fact that the two bigrams are also on the list for the I2 set, which does not include these languages, suggests that their importance is mostly due to the function words. 
+		Cause: [(0, 33), (0, 35)]
+		Effect: [(0, 0), (0, 30)]
+
+	CASE: 11
+	Stag: 101 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: If the hypothesis of Tsur and Rappoport ( 2007 ) was true, this should not be the case, as the phonology of L1 would influence the choice of words across the lexicon. 
+		Cause: [(0, 21), (0, 33)]
+		Effect: [(0, 0), (0, 18)]
+
+	CASE: 12
+	Stag: 101 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: If the hypothesis of Tsur and Rappoport ( 2007 ) was true, this should not be the case, as the phonology of L1 would influence the choice of words across the lexicon. 
+		Cause: [(0, 1), (0, 11)]
+		Effect: [(0, 13), (0, 18)]
+
+	CASE: 13
+	Stag: 104 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: If the hypothesis was true, this should not be the case, as the diverse L1 phonologies would induce different sets of bigrams. 
+		Cause: [(0, 14), (0, 23)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 14
+	Stag: 104 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: If the hypothesis was true, this should not be the case, as the diverse L1 phonologies would induce different sets of bigrams. 
+		Cause: [(0, 1), (0, 4)]
+		Effect: [(0, 6), (0, 11)]
+
+Section 4:  4 Conclusion has 2 CE cases
+	CASE: 1
+	Stag: 109 
+		Pattern: 7 [['due', 'to']]---- [['&V-ing/&NP@R@', '&BE'], ['&NP@C@', '(&Clause@C@)']]
+		sentTXT: Our explanation concurs with the findings of Daland ( 2013 ) that unigram frequency differences in certain types of phonological segments between child-directed and adult-directed speech are due to a small number of word types, such as you , what , and want , rather than to any general phonological preferences. 
+		Cause: [(0, 29), (0, 51)]
+		Effect: [(0, 12), (0, 25)]
+
+	CASE: 2
+	Stag: 113 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: We conclude by noting that our experimental results do not imply that the phonology of L1 has absolutely no influence on L2 writing. 
+		Cause: [(0, 3), (0, 22)]
+		Effect: [(0, 0), (0, 1)]
+
+#-------------------------------------------------
+

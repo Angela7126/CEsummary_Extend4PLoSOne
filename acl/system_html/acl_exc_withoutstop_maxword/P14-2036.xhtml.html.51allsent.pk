@@ -1,0 +1,108 @@
+(lp0
+VWith the above two distributions, we then add a number of words from news as additional information to microblogs by evaluating the relatedness of between each word and microblog, since words not appearing in the microblog may still be highly relevant
+p1
+aVThe word distribution of every microblog is based on topic analysis and its accuracy relies heavily on the accuracy of topic inference in step (b
+p2
+aVWe first infer the topic distribution of each microblog based on the topic-word distribution of news corpus obtained by the LDA estimation
+p3
+aVThe experiment corresponding to Figure 2 is to discover how the classification accuracy changes when we fix the number of added words ( L = 300 ) and change the number of topics ( K ) in our method
+p4
+aVBased on the idea of exploiting external knowledge, many methods are proposed to improve the representation of short texts for classification and clustering
+p5
+aVAs we can see, based on topic analysis, our model shows strong ability of mining relevant words
+p6
+aVHaving known the top L relevant words according to the result of sorting, we redefine the u'\u005cu201c' term frequency u'\u005cu201d' of every word after adding these L words to microblog d j m as additional content
+p7
+aVThe TFIDF vector of a microblog with additional words is called enhanced vector
+p8
+aVBecause of the assumption that microblogs share the same topics with external corpus, the u'\u005cu201c' topic distribution u'\u005cu201d' here refers to a distribution over all topics on E u'\u005cu2062' K
+p9
+aVWe reach the best result when number of added words is 300
+p10
+aVOne reason for the decreasing is that u'\u005cu201c' noisy words u'\u005cu201d' have a increasing negative impact on the accuracy as the proportion of u'\u005cu201c' noisy words u'\u005cu201d' grows with the number of added words
+p11
+aVWe enrich the content of microblogs by inferring the association between microblogs and external words in a probabilistic perspective
+p12
+aVThe revised term frequency plays the same role as TF in common text representation vector, so we calculate the TFIDF of the added words as
+p13
+aVThus, external knowledge, such as news, provides rich supplementary information for analysing and mining microblogs
+p14
+aVCompared with the original LDA optimization problem (1), the topic inference problem for microblog (2) follows the idea of document generation process, but replaces topics to be estimated with known topics from other corpus
+p15
+aVSo far, we can add these L words and their revised term frequency as additional information to microblog d j m
+p16
+aVOur task is to enrich each microblog with additional information so as to improve microblog u'\u005cu2019' s representation
+p17
+aVIn other words, though some words may not actually appears in a microblog, there is still a probability that it is highly relevant to the microblog
+p18
+aVAs a result, parameters to be inferred are only the topic distribution of every microblog
+p19
+aVAs for microblog, we crawl a number of microblogs from Sina Weibo u'\u005cu2020' u'\u005cu2020' Sina Weibo http://www.weibo.com/ , and ask unbiased assessors to manually classify them into 9 categories following the column setting of Sina News
+p20
+aVAfter preprocessing, these news documents are used as external knowledge
+p21
+aVIn the other case, relevant words are among the most frequently used words in news and have close semantic relations with the microblogs in certain aspects
+p22
+aVAs a new form of short text, microblog has some unique features like informal spelling and emerging words, and many microblogs are strongly related to up-to-date topics as well
+p23
+aVThe experiment corrsponding to Figure 3 is to discover whether our redefining u'\u005cu201c' term frequency u'\u005cu201d' as revised term frequency in step (c) of Section 3.3 will affect the classification accuracy and how
+p24
+aVPhan et al.2008 present a framework including an approach for short text topic inference and adds abstract words as extra feature
+p25
+aVBased on the results of step (a) (b), we calculate the word distributions of microblogs as follows
+p26
+aVAs we can see, the accuracy does not grow monotonously as the number of topics increases
+p27
+aVMeanwhile, external knowledge has been found helpful [ Hu et al.2009 ] in tackling the data scarcity problem by enriching short texts with informative context
+p28
+aVFinally, we get 1671 classified microblogs as our microblog dataset
+p29
+aVTreating microblogs as standard texts and directly classifying them cannot achieve the goal of effective classification because of sparseness problem
+p30
+aVOn one hand, without redefinition, the accuracy remains in a stable high level and tends to decrease as we add more words
+p31
+aVOn the other hand, news on the Internet is of information abundance and many microblogs are news-related
+p32
+aVNowadays, most of the work on short text focuses on microblog
+p33
+aVBy studying some cases, we find out that if we add too many words, the proportion of u'\u005cu201c' noisy words u'\u005cu201d' will increase
+p34
+aVHu et al.2009 present a framework to improve the performance of short text clustering by mining informative context with the integration of Wikipedia and WordNet
+p35
+aVWe do topic analysis for E u'\u005cu2062' K using LDA estimation [ Blei et al.2003 ] in this section and we choose LDA as the topic analysis model because of its broadly proved effectivity and ease of understanding
+p36
+aVOther cases show that the model can be further improved by removing the noisy and meaningless ones among added words
+p37
+aVIntuitively, this probability indicates the strength of association between a word and a microblog
+p38
+aVPrevious researches [ Phan et al.2008 , Guo and Diab2012 ] show that while traditional methods are not so powerful due to the data sparseness problem, some semantic analysis based approaches are proposed and proved effective, and various topic models are among the most frequently used techniques in this area
+p39
+aVGuo and Diab2012 modify classic topic models and proposes a matrix-factorization based model for sentence similarity calculation tasks
+p40
+aVBanerjee et al.2007 use the title and the description of news article as two separate query strings to select related concepts as additional feature
+p41
+aVThe size of each category is shown in Table 1
+p42
+aVAs the Equation ( 5 ) shows, the revised term frequency of every word is proportional to probability P ( w i d j m ) rather than a constant
+p43
+aVNote that I u'\u005cu2062' D u'\u005cu2062' F u'\u005cu2062' ( w ) is changed as arrival of new words for each microblog
+p44
+aVIn this formulation, X i u'\u005cu2062' j represents the term frequency of word w i in document d j
+p45
+aVEstimating parameters for LDA by directly and exactly maximizing the likelihood of the corpus in (1) is intractable, so we use Gibbs Sampling for estimation
+p46
+aVThe optimization problem is formulated as maximizing the log likelihood on the corpus
+p47
+aVEvery day, a great quantity of microblogs more than we can read is pushed to us, and finding what we are interested in becomes rather difficult, so the ability of choosing what kind of microblogs to read is urgently demanded by common user
+p48
+aVOther related countries and events are also selected by our model as they often appear together in news
+p49
+aVThey share up-to-date topics and sometimes quote each other
+p50
+aVIt is noteworthy that since the word distribution of every topic P ( w i e z k e ) is known, Formula ( 2 ) can be further solved by separating it into M m subproblems
+p51
+aVwhere R u'\u005cu2062' T u'\u005cu2062' F u'\u005cu2062' ( u'\u005cu22c5' ) is the revised term frequency
+p52
+aVIn the first case, we successfully find the country name according to its leader u'\u005cu2019' s name and limited information in the sentence
+p53
+a.

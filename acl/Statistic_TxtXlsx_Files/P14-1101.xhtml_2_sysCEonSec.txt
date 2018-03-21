@@ -1,0 +1,535 @@
+Current File: P14-1101.xhtml_2 P14-1101.xhtml
+
+Section 0:  Abstract
+	SentNum: 5
+	CENum: 2
+	SentCovered: 2
+	Covered_Rate: 40.0000%
+
+Section 1:  1 Introduction
+	SentNum: 21
+	CENum: 8
+	SentCovered: 10
+	Covered_Rate: 47.6190%
+
+Section 2:  2 Background and overview of models
+	SentNum: 51
+	CENum: 21
+	SentCovered: 24
+	Covered_Rate: 47.0588%
+
+Section 3:  3 Lexical-Distributional Model
+	SentNum: 20
+	CENum: 6
+	SentCovered: 9
+	Covered_Rate: 45.0000%
+
+Section 4:  4 Topic-Lexical-Distributional Model
+	SentNum: 37
+	CENum: 6
+	SentCovered: 8
+	Covered_Rate: 21.6216%
+
+Section 5:  5 Inference: Gibbs Sampling
+	SentNum: 26
+	CENum: 1
+	SentCovered: 1
+	Covered_Rate: 3.8462%
+
+Section 6:  6 Experiments
+	SentNum: 62
+	CENum: 20
+	SentCovered: 21
+	Covered_Rate: 33.8710%
+
+Section 7:  7 Conclusion
+	SentNum: 15
+	CENum: 3
+	SentCovered: 3
+	Covered_Rate: 20.0000%
+
+#-------------------------------------------------
+
+####################### CE links on each Section #########################
+
+P14-1101.xhtml_2's CE cases
+
+Section 0:  Abstract has 2 CE cases
+	CASE: 1
+	Stag: 1 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Semantics could potentially be useful, since words with different meanings have distinct phonetics, but it is unclear how many word meanings are known to infants learning phonetic categories. 
+		Cause: [(0, 7), (0, 13)]
+		Effect: [(0, 15), (0, 29)]
+
+	CASE: 2
+	Stag: 2 
+		Pattern: 0 [[['lead', 'leads', 'led'], 'to']]---- [['&V-ing/&NP@C@', '(&CAN/have/has/had)'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: We show that attending to a weaker source of semantics, in the form of a distribution over topics in the current context, can lead to improvements in phonetic category learning. 
+		Cause: [(0, 12), (0, 22)]
+		Effect: [(0, 27), (0, 31)]
+
+Section 1:  1 Introduction has 8 CE cases
+	CASE: 1
+	Stag: 6 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: In theory, semantic information could offer a valuable cue for phoneme induction 1 1 The models in this paper do not distinguish between phonetic and phonemic categories, since they do not capture phonological processes (and there are also none present in our synthetic data. 
+		Cause: [(0, 30), (0, 40)]
+		Effect: [(0, 0), (0, 27)]
+
+	CASE: 2
+	Stag: 6 7 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: In theory, semantic information could offer a valuable cue for phoneme induction 1 1 The models in this paper do not distinguish between phonetic and phonemic categories, since they do not capture phonological processes (and there are also none present in our synthetic data. We thus use the terms interchangeably by helping infants distinguish between minimal pairs, as linguists do ( 48. 
+		Cause: [(0, 1), (1, 0)]
+		Effect: [(1, 2), (1, 18)]
+
+	CASE: 3
+	Stag: 8 
+		Pattern: 0 [['due', 'to']]---- [[], ['&NP@C@', '(,)', '&R']]
+		sentTXT: However, due to a widespread assumption that infants do not know the meanings of many words at the age when they are learning phonetic categories (see 42 for a review), most recent models of early phonetic category acquisition have explored the phonetic learning problem in the absence of semantic information ( 8 ; 9 ; 11 ; 26 ; 50 ). 
+		Cause: [(0, 4), (0, 23)]
+		Effect: [(0, 24), (0, 64)]
+
+	CASE: 4
+	Stag: 11 12 
+		Pattern: 0 [[['imply', 'implies', 'implied', 'indicate', 'indicates', 'indicated']]]---- [['&C', '(,/./;/--)', '&this', '(&adj)', '(&N)', '(&CAN/have/has/had)', '(&ADV)'], ['(that)', '&R@Complete@']]
+		sentTXT: The extent of infants u'\u2019' semantic knowledge is not yet known, but existing evidence shows that six-month-olds can associate some words with their referents ( 4 ; 46 ; 47 ) , leverage non-acoustic contexts such as objects or articulations to distinguish similar sounds ( 44 ; 52 ) , and map meaning (in the form of objects or images) to new word-forms in some laboratory settings ( 15 ; 16 ; 39. These findings indicate that young infants are sensitive to co-occurrences between linguistic stimuli and at least some aspects of the world. 
+		Cause: [(0, 0), (0, 79)]
+		Effect: [(1, 4), (1, 20)]
+
+	CASE: 5
+	Stag: 13 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: In this paper we explore the potential contribution of semantic information to phonetic learning by formalizing a model in which learners attend to the word-level context in which phones appear (as in the lexical-phonetic learning model of 11 ) and also to the situations in which word-forms are used. 
+		Cause: [(0, 15), (0, 39)]
+		Effect: [(0, 40), (0, 48)]
+
+	CASE: 6
+	Stag: 20 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: Even in the absence of word-meaning mappings, situational information is potentially useful because similar-sounding words uttered in similar situations are more likely to be tokens of the same lexeme (containing the same phones) than similar-sounding words uttered in different situations. 
+		Cause: [(0, 14), (0, 42)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 7
+	Stag: 23 24 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: 11 ) , we show a clear improvement over previous models in both phonetic and lexical (word-form) categorization when situational context is used as an additional source of information. This improvement is especially noticeable when the word-level context is providing less information, arguably the more realistic setting. 
+		Cause: [(0, 26), (1, 17)]
+		Effect: [(0, 0), (0, 24)]
+
+	CASE: 8
+	Stag: 25 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: These results demonstrate that relying on situational co-occurrence can improve phonetic learning, even if learners do not yet know the meanings of individual words. 
+		Cause: [(0, 15), (0, 24)]
+		Effect: [(0, 0), (0, 13)]
+
+Section 2:  2 Background and overview of models has 21 CE cases
+	CASE: 1
+	Stag: 26 27 
+		Pattern: 0 [[['concern', 'concerns', 'concerned', 'require', 'requires', 'required', 'request', 'requests', 'requested']]]---- [['&R', '(,/./;/--)', '&this', '(&adj)', '(&N)', '(&CAN/have/has/had)', '(&ADV)'], ['(about)', '&V-ing/&NP@C@']]
+		sentTXT: Infants attend to distributional characteristics of their input ( 24 ; 23 ) , leading to the hypothesis that phonetic categories could be acquired on the basis of bottom-up distributional learning alone ( 8 ; 50 ; 26. However, this would require sound categories to be well separated, which often is not the case u'\u2014' for example, see Figure 1 , which shows the English vowel space that is the focus of this paper. 
+		Cause: [(1, 5), (1, 6)]
+		Effect: [(0, 1), (1, 0)]
+
+	CASE: 2
+	Stag: 28 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: Recent work has investigated whether infants could overcome such distributional ambiguity by incorporating top-down information, in particular, the fact that phones appear within words. 
+		Cause: [(0, 12), (0, 14)]
+		Effect: [(0, 15), (0, 24)]
+
+	CASE: 3
+	Stag: 30 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: This u'\u201c' protolexicon u'\u201d' can help differentiate phonetic categories by adding word contexts in which certain sound categories appear ( 42 ; 12. 
+		Cause: [(0, 18), (0, 30)]
+		Effect: [(0, 0), (0, 16)]
+
+	CASE: 4
+	Stag: 47 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: If a word token is assigned to a lexeme, x i = u'\u2113' , the vowels within the word are assigned to that lexeme u'\u2019' s vowel categories, w i u'\u2062' j = v u'\u2113' u'\u2062' j = c. 
+		Cause: [(0, 1), (0, 8)]
+		Effect: [(0, 10), (0, 60)]
+
+	CASE: 5
+	Stag: 50 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: Lexical information helps with phonetic categorization because it can disambiguate highly overlapping categories, such as the ae and eh categories in Figure 1. 
+		Cause: [(0, 7), (0, 23)]
+		Effect: [(0, 0), (0, 5)]
+
+	CASE: 6
+	Stag: 51 52 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: A purely distributional learner who observes a cluster of data points in the ae - eh region is likely to assume all these points belong to a single category because the distributions of the categories are so similar. However, a learner who attends to lexical context will notice a difference contexts that only occur with ae will be observed in one part of the ae - eh region, while contexts that only occur with eh will be observed in a different (though partially overlapping) space. 
+		Cause: [(0, 0), (0, 35)]
+		Effect: [(0, 37), (1, 49)]
+
+	CASE: 7
+	Stag: 55 56 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: When two word tokens contain the same consonant frame but different vowels (i.e.,, minimal pairs), the model is more likely to categorize those two vowels together. Thus, the model has trouble distinguishing minimal pairs. 
+		Cause: [(0, 0), (0, 30)]
+		Effect: [(1, 1), (1, 8)]
+
+	CASE: 8
+	Stag: 58 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We hypothesize that if a learner is able to associate words with the contexts of their use (as children likely are), this could provide a weak source of information for disambiguating minimal pairs even without knowing their exact meanings. 
+		Cause: [(0, 19), (0, 41)]
+		Effect: [(0, 0), (0, 17)]
+
+	CASE: 9
+	Stag: 58 
+		Pattern: 25 [['for']]---- [['&R'], ['&V-ing@C@']]
+		sentTXT: We hypothesize that if a learner is able to associate words with the contexts of their use (as children likely are), this could provide a weak source of information for disambiguating minimal pairs even without knowing their exact meanings. 
+		Cause: [(0, 14), (0, 22)]
+		Effect: [(0, 0), (0, 12)]
+
+	CASE: 10
+	Stag: 58 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: We hypothesize that if a learner is able to associate words with the contexts of their use (as children likely are), this could provide a weak source of information for disambiguating minimal pairs even without knowing their exact meanings. 
+		Cause: [(0, 4), (0, 17)]
+		Effect: [(0, 0), (0, 2)]
+
+	CASE: 11
+	Stag: 59 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: That is, if the learner hears k V 1 t and k V 2 t in different situational contexts, they are likely to be different lexical items (and V 1 and V 2 different phones), despite the lexical similarity between them. 
+		Cause: [(0, 4), (0, 19)]
+		Effect: [(0, 21), (0, 39)]
+
+	CASE: 12
+	Stag: 60 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: To demonstrate the benefit of situational information, we develop the Topic-Lexical-Distributional (TLD) model, which extends the LD model by assuming that words appear in situations analogous to documents in a topic model. 
+		Cause: [(0, 23), (0, 35)]
+		Effect: [(0, 0), (0, 21)]
+
+	CASE: 13
+	Stag: 61 62 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: Each situation h is associated with a mixture of topics u'\u0398' h , which is assumed to be observed. Thus, for the i th token in situation h , denoted x h u'\u2062' i , the observed data will be its frame f h u'\u2062' i , vowels u'\ud835' u'\udc98' h u'\u2062' i , and topic vector u'\u0398' h. 
+		Cause: [(0, 0), (0, 22)]
+		Effect: [(1, 1), (1, 64)]
+
+	CASE: 14
+	Stag: 66 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We assume further that as the child learns the language, she will begin to associate specific words with each topic as well. 
+		Cause: [(0, 5), (0, 22)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 15
+	Stag: 66 67 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: We assume further that as the child learns the language, she will begin to associate specific words with each topic as well. Thus, in the TLD model, the words used in a situation are topic-dependent, implying meaning, but without pinpointing specific referents. 
+		Cause: [(0, 0), (0, 22)]
+		Effect: [(1, 1), (1, 23)]
+
+	CASE: 16
+	Stag: 69 70 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: The occurrence of similar-sounding words in different situations with mostly non-overlapping topics will provide evidence that those words belong to different topics and that they are therefore different lexemes. Conversely, potential minimal pairs that occur in situations with similar topic distributions are more likely to belong to the same topic and thus the same lexeme. 
+		Cause: [(0, 0), (0, 25)]
+		Effect: [(0, 27), (1, 25)]
+
+	CASE: 17
+	Stag: 70 71 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: Conversely, potential minimal pairs that occur in situations with similar topic distributions are more likely to belong to the same topic and thus the same lexeme. Although we assume that children infer topic distributions from the non-linguistic environment, we will use transcripts from childes to create the word/phone learning input for our model. 
+		Cause: [(0, 0), (0, 21)]
+		Effect: [(0, 24), (1, 26)]
+
+	CASE: 18
+	Stag: 73 74 
+		Pattern: 62 [['therefore']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(,)', '&R']]
+		sentTXT: 37 ) found that topics learned from similar transcript data using a topic model were strongly correlated with immediate activities and contexts. We therefore obtain the topic distributions used as input to the TLD model by training an LDA topic model ( 5 ) on a superset of the child-directed transcript data we use for lexical-phonetic learning, dividing the transcripts into small sections (the u'\u2018' documents u'\u2019' in LDA) that serve as our distinct situations u'\ud835' u'\udc89'. 
+		Cause: [(0, 0), (1, 0)]
+		Effect: [(1, 2), (1, 73)]
+
+	CASE: 19
+	Stag: 74 75 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We therefore obtain the topic distributions used as input to the TLD model by training an LDA topic model ( 5 ) on a superset of the child-directed transcript data we use for lexical-phonetic learning, dividing the transcripts into small sections (the u'\u2018' documents u'\u2019' in LDA) that serve as our distinct situations u'\ud835' u'\udc89'. As noted above, the learned document-topic distributions u'\ud835' u'\udf3d' are treated as observed variables in the TLD model to represent the situational context. 
+		Cause: [(1, 1), (1, 27)]
+		Effect: [(0, 0), (0, 73)]
+
+	CASE: 20
+	Stag: 76 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: The topic-word distributions learned by LDA are discarded, since these are based on the (correct and unambiguous) words in the transcript, whereas the TLD model is presented with phonetically ambiguous versions of these word tokens and must learn to disambiguate them and associate them with topics. 
+		Cause: [(0, 10), (0, 23)]
+		Effect: [(0, 25), (0, 49)]
+
+	CASE: 21
+	Stag: 76 
+		Pattern: 0 [['based', 'on']]---- [['&V-ing/&NP@R@', '(&Clause@R@)', '&BE', '(&ADV)'], ['&NP@C@', '(&Clause@C@)']]
+		sentTXT: The topic-word distributions learned by LDA are discarded, since these are based on the (correct and unambiguous) words in the transcript, whereas the TLD model is presented with phonetically ambiguous versions of these word tokens and must learn to disambiguate them and associate them with topics. 
+		Cause: [(0, 4), (0, 13)]
+		Effect: [(0, 0), (0, 0)]
+
+Section 3:  3 Lexical-Distributional Model has 6 CE cases
+	CASE: 1
+	Stag: 79 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: A DP is parametrized as D u'\u2062' P u'\u2062' ( u'\u0391' , H ) , where u'\u0391' is a real-valued hyperparameter and H is a base distribution. 
+		Cause: [(0, 5), (0, 41)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 2
+	Stag: 80 81 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: H may be continuous, as when it generates phonetic categories in formant space, or discrete, as when it generates lexemes as a list of phonetic categories. A draw from a DP, G u'\u223c' D u'\u2062' P u'\u2062' ( u'\u0391' , H ) , returns a distribution over a set of draws from H , i.e.,, a discrete distribution over a set of categories or lexemes generated by H. 
+		Cause: [(0, 6), (1, 59)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 3
+	Stag: 83 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: If H is infinite, the support of the DP is likewise infinite. 
+		Cause: [(0, 1), (0, 3)]
+		Effect: [(0, 5), (0, 12)]
+
+	CASE: 4
+	Stag: 86 87 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The Infinite Gaussian Mixture Model (IGMM) ( 35 ) includes a DP prior, as described above, in which the base distribution H C generates multivariate Gaussians drawn from a Normal Inverse-Wishart prior. 5 5 This compound distribution is equivalent to u'\u03a3' c u'\u223c' u'\ud835' u'\udc3c' u'\ud835' u'\udc4a' ( u'\u03a3' 0 , u'\u039d' 0 ) , u'\u039c' c u'\u03a3' c u'\u223c' N ( u'\u039c' 0 , u'\u03a3' c u'\u039d' 0 ) Each observation, a formant vector w i u'\u2062' j , is drawn from the Gaussian corresponding to its category assignment c i u'\u2062' j. 
+		Cause: [(0, 17), (1, 88)]
+		Effect: [(0, 0), (0, 14)]
+
+	CASE: 5
+	Stag: 89 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: This is the baseline IGMM model, which clusters vowel tokens using bottom-up distributional information only; the LD model adds top-down information by assigning categories in the lexicon, rather than on the token level. 
+		Cause: [(0, 24), (0, 28)]
+		Effect: [(0, 17), (0, 22)]
+
+	CASE: 6
+	Stag: 91 92 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Each such lexeme is represented as a frame plus a list of vowel categories u'\ud835' u'\udc97' u'\u2113'. Lexeme assignments for each token are drawn from a DP with a lexicon-generating base distribution H L. 
+		Cause: [(0, 6), (1, 14)]
+		Effect: [(0, 0), (0, 4)]
+
+Section 4:  4 Topic-Lexical-Distributional Model has 6 CE cases
+	CASE: 1
+	Stag: 97 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: The TLD model retains the IGMM vowel phone component, but extends the lexicon of the LD model by adding topic-specific lexicons, which capture the notion that lexeme probabilities are topic-dependent. 
+		Cause: [(0, 19), (0, 31)]
+		Effect: [(0, 0), (0, 17)]
+
+	CASE: 2
+	Stag: 99 100 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In the HDP lexicon, a top-level global lexicon is generated as in the LD model. Topic-specific lexicons are then drawn from the global lexicon, containing a subset of the global lexicon (but since the size of the global lexicon is unbounded, so are the topic-specific lexicons. 
+		Cause: [(0, 12), (1, 30)]
+		Effect: [(0, 0), (0, 10)]
+
+	CASE: 3
+	Stag: 100 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Topic-specific lexicons are then drawn from the global lexicon, containing a subset of the global lexicon (but since the size of the global lexicon is unbounded, so are the topic-specific lexicons. 
+		Cause: [(0, 20), (0, 26)]
+		Effect: [(0, 29), (0, 33)]
+
+	CASE: 4
+	Stag: 103 104 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: More formally, the global lexicon is generated as a top-level DP. G L u'\u223c' D u'\u2062' P u'\u2062' ( u'\u0391' l , H L ) (see Section 3.2 ; remember H L includes draws from the IGMM over vowel categories. 
+		Cause: [(0, 9), (1, 44)]
+		Effect: [(0, 0), (0, 7)]
+
+	CASE: 5
+	Stag: 105 106 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: G L is in turn used as the base distribution in the topic-level DPs, G k u'\u223c' D u'\u2062' P u'\u2062' ( u'\u0391' k , G L. In the Chinese Restaurant Franchise metaphor often used to describe HDPs, G L is a global menu of dishes (lexemes. 
+		Cause: [(0, 7), (1, 20)]
+		Effect: [(0, 0), (0, 5)]
+
+	CASE: 6
+	Stag: 108 
+		Pattern: 0 [['if']]---- [['&R@Complete@'], ['&C@Complete@']]
+		sentTXT: Inference (Section 5 ) is defined in terms of tables rather than lexemes; if multiple tables draw the same dish from G L , tokens at these tables share a lexeme. 
+		Cause: [(0, 16), (0, 30)]
+		Effect: [(0, 0), (0, 14)]
+
+Section 5:  5 Inference: Gibbs Sampling has 1 CE cases
+	CASE: 1
+	Stag: 142 
+		Pattern: 0 [[['by', 'through']]]---- [['&R@Complete@'], ['&V-ing@C@']]
+		sentTXT: The likelihood of the vowels is calculated by marginalizing over all possible means and variances of the Gaussian category parameters, given the NIW prior. 
+		Cause: [(0, 8), (0, 24)]
+		Effect: [(0, 0), (0, 6)]
+
+Section 6:  6 Experiments has 20 CE cases
+	CASE: 1
+	Stag: 161 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: This corpus consists of transcripts of speech directed at infants between the ages of 9 and 15 months, captured in a naturalistic setting as parent and child went about their day. 
+		Cause: [(0, 25), (0, 31)]
+		Effect: [(0, 0), (0, 23)]
+
+	CASE: 2
+	Stag: 162 
+		Pattern: 0 [[['indicate', 'indicates', 'indicated', 'realize', 'realizes', 'realized', 'ensure', 'ensures', 'ensured', 'imply', 'implies', 'implied']]]---- [['&NP@C@', '(&Clause@C@)'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: This ensures variability of situations. 
+		Cause: [(0, 0), (0, 0)]
+		Effect: [(0, 2), (0, 4)]
+
+	CASE: 3
+	Stag: 164 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: We restrict the corpus to content words by retaining only words tagged as adj, n, part and v (adjectives, nouns, particles, and verbs. 
+		Cause: [(0, 13), (0, 26)]
+		Effect: [(0, 0), (0, 11)]
+
+	CASE: 4
+	Stag: 168 169 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: The transcripts do not include phonetic information, so, following Feldman et al. 11 ) , we synthesize the formant values using data from Hillenbrand et al. 
+		Cause: [(0, 0), (0, 6)]
+		Effect: [(0, 10), (1, 12)]
+
+	CASE: 5
+	Stag: 175 
+		Pattern: 0 [[['if', 'once']], [',']]---- [[], ['&C@Complete@'], ['&R@Complete@']]
+		sentTXT: If there are multiple possible pronunciations, the first one is used. 
+		Cause: [(0, 1), (0, 5)]
+		Effect: [(0, 7), (0, 11)]
+
+	CASE: 6
+	Stag: 179 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: Distinguishing all consonant categories assumes perfect learning of consonants prior to vowel categorization and is thus somewhat unrealistic ( 29 ) , but provides an upper limit on the information that word-contexts can give. 
+		Cause: [(0, 0), (0, 14)]
+		Effect: [(0, 16), (0, 33)]
+
+	CASE: 7
+	Stag: 185 
+		Pattern: 30 []---- [['&V-ing@C@', '(,)', '&R@Complete@']]
+		sentTXT: Decreasing the number of consonants increases the ambiguity in the corpus bat not only shares a frame ( b_t ) with boat and bite , but also, in the C15 dataset, with put , pad and bad ( b/p_d/t ), and in the C6 dataset, with dog and kite , among many others ( STOP_STOP. 
+		Cause: [(0, 0), (0, 4)]
+		Effect: [(0, 5), (0, 27)]
+
+	CASE: 8
+	Stag: 190 
+		Pattern: 35 [['thus']]---- [['&C', '(,/;/./--)', '(&AND)'], ['&R']]
+		sentTXT: Each transcript in the Brent corpus captures about 75 minutes of parent-child interaction, and thus multiple situations will be included in each file. 
+		Cause: [(0, 0), (0, 12)]
+		Effect: [(0, 16), (0, 23)]
+
+	CASE: 9
+	Stag: 191 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: The transcripts do not delimit situations, so we do this somewhat arbitrarily by splitting each transcript after 50 CDS utterances, resulting in 203 situations for the Brent C1 dataset. 
+		Cause: [(0, 0), (0, 5)]
+		Effect: [(0, 8), (0, 30)]
+
+	CASE: 10
+	Stag: 191 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: The transcripts do not delimit situations, so we do this somewhat arbitrarily by splitting each transcript after 50 CDS utterances, resulting in 203 situations for the Brent C1 dataset. 
+		Cause: [(0, 6), (0, 12)]
+		Effect: [(0, 13), (0, 22)]
+
+	CASE: 11
+	Stag: 198 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: We evaluate against adult categories, i.e.,, the u'\u2018' gold-standard u'\u2019' , since all learners of a language eventually converge on similar categories. 
+		Cause: [(0, 23), (0, 32)]
+		Effect: [(0, 0), (0, 20)]
+
+	CASE: 12
+	Stag: 199 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since our model is not a model of the learning process, we do not compare the infant learning process to the learning algorithm.) We evaluate both the inferred phonetic categories and words using the clustering evaluation measure V-Measure (VM; 36. 
+		Cause: [(0, 1), (0, 10)]
+		Effect: [(0, 12), (0, 44)]
+
+	CASE: 13
+	Stag: 203 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: Words are evaluated against gold orthography, so homophones, e.g., hole and whole , are distinct gold words. 
+		Cause: [(0, 0), (0, 5)]
+		Effect: [(0, 8), (0, 19)]
+
+	CASE: 14
+	Stag: 204 
+		Pattern: 23 [['since']]---- [['&R@NCTime@', '(,)'], ['&C@NCTime@']]
+		sentTXT: We compare all three models u'\u2014' TLD, LD, and IGMM u'\u2014' on the vowel categorization task, and TLD and LD on the lexical categorization task (since IGMM does not infer a lexicon. 
+		Cause: [(0, 38), (0, 43)]
+		Effect: [(0, 0), (0, 36)]
+
+	CASE: 15
+	Stag: 215 216 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: The TLD supervowels are used much less frequently than the supervowels found by the LD model, containing, on average, only two-thirds as many tokens. Figure 5 shows that TLD also outperforms LD on the lexeme/word categorization task. 
+		Cause: [(0, 25), (1, 11)]
+		Effect: [(0, 0), (0, 23)]
+
+	CASE: 16
+	Stag: 216 217 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: Figure 5 shows that TLD also outperforms LD on the lexeme/word categorization task. Again performance decreases as the consonant categories become coarser, but the additional semantic information in the TLD model compensates for the lack of consonant information. 
+		Cause: [(1, 4), (1, 10)]
+		Effect: [(0, 0), (1, 2)]
+
+	CASE: 17
+	Stag: 218 219 
+		Pattern: 26 [['as']]---- [['&R@Complete@', '(,)', '(-such/-same/-seem/-regard/-regards/-regarded/-view/-views/-viewed/-denote/-denoted/-denotes)'], ['(-if/-follow/-follows/-&adv)', '&C@Complete@']]
+		sentTXT: In the individual components of VM, TLD and LD have similar VC ( u'\u201c' recall u'\u201d' ), but TLD has higher VH ( u'\u201c' precision u'\u201d' ), demonstrating that the semantic information given by the topics can separate potentially ambiguous words, as hypothesized. Overall, the contextual semantic information added in the TLD model leads to both better phonetic categorization and to a better protolexicon, especially when the input is noisier, using degraded consonants. 
+		Cause: [(0, 62), (1, 31)]
+		Effect: [(0, 14), (0, 59)]
+
+	CASE: 18
+	Stag: 219 
+		Pattern: 0 [[['lead', 'leads', 'led'], 'to']]---- [['&V-ing/&NP@C@', '(&CAN/have/has/had)'], ['&NP@R@', '(&Clause@R@)']]
+		sentTXT: Overall, the contextual semantic information added in the TLD model leads to both better phonetic categorization and to a better protolexicon, especially when the input is noisier, using degraded consonants. 
+		Cause: [(0, 2), (0, 10)]
+		Effect: [(0, 13), (0, 32)]
+
+	CASE: 19
+	Stag: 220 
+		Pattern: 15 [['since'], [',']]---- [[], ['&C@NCTime@'], ['&R@NCTime@']]
+		sentTXT: Since infants are not likely to have perfect knowledge of phonetic categories at this stage, semantic information is a potentially rich source of information that could be drawn upon to offset noise from other domains. 
+		Cause: [(0, 1), (0, 13)]
+		Effect: [(0, 16), (0, 35)]
+
+	CASE: 20
+	Stag: 221 
+		Pattern: 265 [['so']]---- [['&C', '(,/;/./--)', '(&AND)'], ['(-far)', '(,)', '&R']]
+		sentTXT: The form of the semantic information added in the TLD model is itself quite weak, so the improvements shown here are in line with what infant learners could achieve. 
+		Cause: [(0, 0), (0, 14)]
+		Effect: [(0, 17), (0, 29)]
+
+Section 7:  7 Conclusion has 3 CE cases
+	CASE: 1
+	Stag: 233 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: Regardless of the specific way in which infants encode semantic information, our method of adding this information by using LDA topics from transcript data was shown to be effective. 
+		Cause: [(0, 19), (0, 24)]
+		Effect: [(0, 25), (0, 29)]
+
+	CASE: 2
+	Stag: 234 
+		Pattern: 407 [['because']]---- [['&R', '(,)', '(&ADV)'], ['&C']]
+		sentTXT: This method is practical because it can approximate semantic information without relying on extensive manual annotation. 
+		Cause: [(0, 5), (0, 15)]
+		Effect: [(0, 0), (0, 3)]
+
+	CASE: 3
+	Stag: 235 
+		Pattern: 0 [[['by', 'through']]]---- [[], ['&V-ing@C@', '&R']]
+		sentTXT: The LD model extended the phonetic categorization task by adding word contexts; the TLD model presented here goes even further, adding larger situational contexts. 
+		Cause: [(0, 9), (0, 11)]
+		Effect: [(0, 12), (0, 25)]
+
+#-------------------------------------------------
+

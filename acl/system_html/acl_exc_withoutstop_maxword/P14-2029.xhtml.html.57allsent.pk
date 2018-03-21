@@ -1,0 +1,50 @@
+(lp0
+VTherefore, we used the same learning algorithms as for our system (i.e.,, ridge regression for the ordinal task and logistic regression for the binary task
+p1
+aVFor the ordinal task, we report Pearson u'\u005cu2019' s r between the averaged human judgments and each system
+p2
+aVTo train our system on binarized data, we replaced the u'\u005cu2113' 2 -regularized linear regression model with an u'\u005cu2113' 2 -regularized logistic regression and used Kendall u'\u005cu2019' s u'\u005cu03a4' rank correlation between the predicted probabilities of the positive class and the binary gold standard labels as the grid search metric (§ 3.1 ) instead of Pearson u'\u005cu2019' s r
+p3
+aVSo that predictions better match the distribution of labels in the training data, the system rescales its predictions
+p4
+aVWe created a dataset consisting of 3,129 sentences randomly selected from essays written by non-native speakers of English as part of a test of English language proficiency
+p5
+aV4 4 Regression models typically produce conservative predictions with lower variance than the original training data
+p6
+aVTo create further baselines for comparison, we selected the following features that represent ways one might approximate grammaticality if a comprehensive model was unavailable whether the link parser can fully parse the sentence ( complete_link ), the Gigaword language model score ( gigaword_avglogprob ), and the number of misspelled tokens ( num_misspelled
+p7
+aVWe also trained and evaluated on binarized versions of the ordinal GUG labels a sentence was labeled 1 if the average judgment was at least 3.5 (i.e.,, would round to 4), and 0 otherwise
+p8
+aVIt is very different from our system since it relies on partial tree-substitution grammar derivations as features
+p9
+aVWe develop a state-of-the-art approach for predicting the grammaticality of sentences on an ordinal scale, adapting various techniques from the previous work described above
+p10
+aVWe oversampled lower-scoring essays to increase the chances of finding ungrammatical sentences
+p11
+aVWith this unique data set, which we will release to the research community, it is now possible to conduct realistic evaluations for predicting sentence-level grammaticality
+p12
+aVSince the predictions from the binary and ordinal systems are on different scales, we include the nonparametric statistic Kendall u'\u005cu2019' s u'\u005cu03a4' as a secondary evaluation metric for both tasks
+p13
+aVFor our experiments (§ 4 ), we randomly split the data into training (50%), development (25%), and testing (25%) sets
+p14
+aVIn preliminary experiments, averaging the six judgments (1 expert, 5 crowdsourced) for each item led to higher human-machine agreement
+p15
+aVAdditionally, its classifier implementation does not output scores or probabilities
+p16
+aVFor all experiments reported later, we used this average of six judgments as our gold standard
+p17
+aV10 10 The complete list of relevant statistics used as features is trees, unify_cost_succ, unify_cost_fail, unifications_succ, unifications_fail, subsumptions_succ, subsumptions_fail, words, words_pruned, aedges, pedges, upedges, raedges, rpedges, medges
+p18
+aVa binary feature that captures whether the top node of the tree is sentential or not (i.e., the assumption is that if the top node is non-sentential, then the sentence is a fragment
+p19
+aVGiven a sentence with with n word tokens, the model filters out tokens containing nonalphabetic characters and then computes the number of misspelled words n m u'\u005cu2062' i u'\u005cu2062' s u'\u005cu2062' s (later referred to as num_misspelled ), the proportion of misspelled words n m u'\u005cu2062' i u'\u005cu2062' s u'\u005cu2062' s n , and log u'\u005cu2061' ( n m u'\u005cu2062' i u'\u005cu2062' s u'\u005cu2062' s + 1 ) as features
+p20
+aVThese sentences, such as Example ( 5 ), appear in our corpus due to the nature of timed tests
+p21
+aVDue to these errors, the sentence may have multiple plausible interpretations, as in Example ( 3
+p22
+aVThe sentence contains so many errors that it would be difficult to correct, as in Example ( 4
+p23
+aVThe phrase u'\u005cu201c' do not everything u'\u005cu201d' makes the sentence practically incomprehensible since the subject of u'\u005cu201c' do u'\u005cu201d' is not clear
+p24
+a.

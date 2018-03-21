@@ -1,0 +1,72 @@
+(lp0
+VWe hypothesized that this is due to confusion with infinitival clauses, which can have an unary-branching IP over a VP, as in the gold tree ( 6
+p1
+aVThe major difference in the clausal structure as compared to the PTB is the absence of a VP level 6 6 This is due to the changing headedness of VP in the overall series of English historical corpora yielding flatter trees than in the PTB
+p2
+aVFor instance in ( 3 a) in Figure 3 , the modifier PP is a sister to the noun in the PPCMBE, while in ( 3 b), the complement PP is adjoined in the PTB
+p3
+aVAs a result, there are fewer NP brackets in the PPCMBE than there would be if the PTB-style were followed
+p4
+aVClausal complements and modifiers are also both treated as sisters to the noun in the PPCMBE
+p5
+aVPreliminary analysis shows that the CONJP structures are also difficult for the parser
+p6
+aVHowever, the PPCMBE annotates both types of dependents as sisters of the noun, while the PTB adjoins both types
+p7
+aVAs discussed in Section 2.2.2 , noun modifiers are sisters to the noun, instead of being adjoined, as in the PTB
+p8
+aVWe refer to the pre-release version of the corpus described in Section 2 as the u'\u005cu201c' Release u'\u005cu201d' version, and experiment with three other corpus versions
+p9
+aVSince these are structures that are different than the PTB 9 9 The CONJP nonterminal in the PTB serves a different purpose than in the PPCMBE and is much more limited we were particularly interested in them
+p10
+aVThese can appear as intermediate conjuncts in a string of conjuncts, with the structure (CONJP word
+p11
+aVIn this case, though, the complement/modifier distinction is encoded by a function tag
+p12
+aVFor example, in ( 3 a) and ( 3 b), the status of the CPs as modifier and complement is indicated by their function tags
+p13
+aVOf these 81 tags, some are more specialized than in the PTB, accounting for the increased number of tags compared to the PTB
+p14
+aVThe validation section consists of the four files beginning with u'\u005cu201c' a u'\u005cu201d' or u'\u005cu201c' v u'\u005cu201d' (spanning the years 1711-1860), the development section consists of the four files beginning with u'\u005cu201c' l u'\u005cu201d' (1753-1866), the test section consists of the five files beginning with u'\u005cu201c' f u'\u005cu201d' (1749-1900), and the training section consists of the remaining 81 files (1712-1913
+p15
+aVHowever, ( 3 b) remains as it is, because the following CP in that case is a complement, as indicated by the THT function tag
+p16
+aVSome first steps at analysis of the parsing results indicate aspects of the annotation style that are difficult for the parser, and also show that the parser is creating structures that are not present in the training material
+p17
+aVWe are not proposing that the current version be replaced by the Reduced + NPs + VPs version, on the grounds that the latter gets the highest score
+p18
+aVThe PPCMBE is a phrase-structure corpus, and so we parse with the Berkeley parser [] and score using the standard evalb program []
+p19
+aV8 8 We modified the evalb parameter file to exclude punctuation in PPCMBE, just as for PTB
+p20
+aVAs a final note, the PPCMBE consists of unedited data spanning more than 200 years, while the PTB is edited newswire, and so to some extent there would almost certainly be some difference in score
+p21
+aVThe more complex tag set is mainly due to the desire to tag orthographic variants consistently throughout the series of historical corpora
+p22
+aVHowever, the match is close enough that we will report the parsing results for sentences of length = 40 and all sentences, as with the PTB
+p23
+aVSince we are concerned here with parsing just the PPCMBE, we simplified the tag set
+p24
+aVThe shared pre-modifier structure described in ( 2 a) is also difficult for the parser
+p25
+aVSince the Berkeley parser is capable of doing its own POS tagging, we ran it using the gold tags or supplying its own tags
+p26
+aVWhile only 81 of the 248 tags are u'\u005cu201c' simple u'\u005cu201d' (i.e.,, not associated with lexical merging or splitting), they cover the vast majority of the words in the corpus, as summarized in Table 1
+p27
+aVWe split the data into four sections, as shown in Table 2
+p28
+aVThe PPCMBE is a million-word treebank created for researching changes in English syntax
+p29
+aVDue to the historical nature of the PPCMBE, it shares some of the characteristics of treebanks based on modern unedited text [] , such as spelling variation
+p30
+aVThe complex tags are simplified in a fully deterministic way, based on the trees and the tags
+p31
+aVFor example u'\u005cu201c' gentlemen u'\u005cu201d' and its orthographic variant u'\u005cu201c' gen u'\u005cu2019' l u'\u005cu2019' men u'\u005cu201d' are tagged with the complex tag ADJ+NS (adjective and plural noun) on the grounds that in earlier time periods, the lexical item is spelled and tagged as two orthographic words ( u'\u005cu201c' gentle u'\u005cu201d' /ADJ and u'\u005cu201c' men u'\u005cu201d' /NS
+p32
+aVThe P tag is split, so that it is either left as P, if a preposition, or changed to CONJS, if a subordinating conjunction
+p33
+aVIt is worth emphasizing that the brackets added in Sections 3.2 and 3.3 add no information, since they are added automatically
+p34
+aVThe results are based on a single run for each corpus/section
+p35
+a.

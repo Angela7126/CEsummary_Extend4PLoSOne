@@ -1,0 +1,18 @@
+(lp0
+VOne issue with the S2T NNJM is that the probability is computed over every target word, so it does not explicitly model NULL-aligned source words
+p1
+aVIn order to assign a probability to every source word during decoding, we also train a neural network lexical translation model (NNLMT
+p2
+aVSpecifically, we introduce a novel formulation for a neural network joint model (NNJM), which augments an n -gram target language model with an m -word source window
+p3
+aVIt is easy and computationally inexpensive to use this model in decoding, since only one neural network computation must be made for each source word
+p4
+aVThe decoding cost is based on a measurement of u'\u005cu223c' 1200 unique NNJM lookups per source word for our Arabic-English system
+p5
+aVIn rescoring, we also use a T2S NNLTM model computed over every target word
+p6
+aVHowever, note that there are only 3 possible positions for each target word, and 11 for each source word
+p7
+aVThe input vector is a 14-word context vector (3 target words, 11 source words), where each word
+p8
+a.

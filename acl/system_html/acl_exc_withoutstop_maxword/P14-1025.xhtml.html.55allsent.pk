@@ -1,0 +1,158 @@
+(lp0
+VIn summary, we have proposed a topic modelling-based method for estimating word sense distributions, based on Hierarchical Dirichlet Processes and the earlier work of on word sense induction, in probabilistically mapping the automatically-learned topics to senses in a sense inventory
+p1
+aVWe further propose a method for applying our sense distribution acquisition system to the task of finding unattested senses u'\u005cu2014' i.e.,, senses that are in the sense inventory but not attested in a given corpus
+p2
+aVWe evaluated the ability of the method to learn predominant senses and induce word sense distributions, based on a broad range of datasets and two separate sense inventories
+p3
+aVThe authors evaluated their method in terms of wsd accuracy over a given corpus, based on assigning all instances of a target word with the predominant sense learned from that corpus
+p4
+aVSuch an approach requires knowledge of predominant senses; however, word sense distributions u'\u005cu2014' and predominant senses too u'\u005cu2014' vary from corpus to corpus
+p5
+aVThe predominant sense and distribution across senses for each target lemma was obtained by aggregating over the sense annotations
+p6
+aVBecause of domain differences and the skewed nature of word sense distributions, it is often the case that some senses in a sense inventory will not be attested in a given corpus
+p7
+aVTo learn the predominant sense, we compute the prevalence score of each sense and take the sense with the highest prevalence score as the predominant sense
+p8
+aVWord sense distributions tend to be Zipfian, and as such, a simple but surprisingly high-accuracy back-off heuristic for word sense disambiguation ( wsd ) is to tag each instance of a given word with its predominant sense []
+p9
+aVThe word senses are ranked based on these similarity scores, and the most frequent sense is selected for the corpus that the distributional similarity thesaurus was trained over
+p10
+aVOne extremely useful piece of information is the word sense prior or expected word sense frequency distribution
+p11
+aV1) the well-documented difficulties of sense tagging with fine-grained \u005csmaller WordNet senses [] ; (2) the regular update cycle of \u005csmaller Macmillan (meaning it contains many recently-emerged senses); and (3) the finding in a preliminary sense-tagging task that it better captured Twitter usages than \u005csmaller WordNet (and also \u005csmaller OntoNotes
+p12
+aVFor each dataset, we use HDP to induce topics for each target lemma, compute the similarity between the topics and the \u005csmaller WordNet senses (Equation ( 1 )), and rank the senses based on the prevalence scores (Equation ( 2
+p13
+aVThere has been a considerable amount of research on representing word senses and disambiguating usages of words in context ( wsd ) as, in order to produce computational systems that understand and produce natural language, it is essential to have a means of representing and disambiguating word sense wsd algorithms require word sense information to disambiguate token instances of a given ambiguous word, e.g., in the form of sense definitions [] , semantic relationships [ 17 ] or annotated data [ 20 ]
+p14
+aVIn doing so, we established that our method is comparable to the approach of at predominant sense learning, and superior at inducing word sense distributions
+p15
+aVIn each case, the sense distribution is based on allocating all probability mass for a given word to the single sense identified by the respective method
+p16
+aVGiven that both systems compute a continuous-valued prevalence score for each sense of a target lemma, a distribution of senses can be obtained by normalising the prevalence scores across all senses
+p17
+aVWe first notice that, despite the coarser-grained senses of \u005csmaller Macmillan as compared to \u005csmaller WordNet , the upper bound wsd accuracy using \u005csmaller Macmillan is comparable to that of the \u005csmaller WordNet -based datasets over the balanced BNC, and quite a bit lower than that of the two domain corpora of
+p18
+aVTopic models have been used for wsd in a number of studies [ 1 , 13 , 19 , 3 , 11 ] , but our work extends significantly on this earlier work in focusing on the acquisition of prior word sense distributions (and predominant senses
+p19
+aVNote that we do not consider high-frequency senses with frequency higher than 0.6, as it is rare for a medium- to high-frequency word to take on a novel sense which is then the predominant sense in a given corpus
+p20
+aVIn addition to the wsd accuracy based on the predominant sense inferred from a particular corpus, we additionally compute
+p21
+aVTherefore, methods for automatically learning predominant senses and sense distributions for specific corpora are required [ 12 ]
+p22
+aVWe also present the results for a) a supervised baseline ( u'\u005cu201c' FS corpus u'\u005cu201d' ), based on the most frequent sense in the corpus; and (b) an unsupervised baseline ( u'\u005cu201c' FS dict u'\u005cu201d' ), based on the first-listed sense in \u005csmaller Macmillan
+p23
+aVPart of the reason for this improvement is simply that the average polysemy in \u005csmaller Macmillan (5.6 senses per target lemma) is slightly less than in \u005csmaller WordNet (6.7 senses per target lemma), 13 13 Note that the set of lemmas differs between the respective datasets, so this isn u'\u005cu2019' t an accurate reflection of the relative granularity of the two dictionaries making the task slightly easier in the \u005csmaller Macmillan case
+p24
+aVIn the next section, we demonstrate the robustness of the method in experimenting with two new datasets, based on Twitter and a web corpus, and the \u005csmaller Macmillan English Dictionary
+p25
+aVThat we use the frequency rather than the probability of the topic here is deliberate, as topics with a higher raw number of occurrences (whether as a low-probability topic for a high-frequency word, or a high-probability topic for a low-frequency word) are indicative of a novel word sense
+p26
+aVIn contrast to these studies, we propose a model for comparing a corpus with a sense inventory
+p27
+aVDue to the expense of hand tagging, and sense distributions being sensitive to domain and genre, there has been some work on trying to estimate sense frequency information automatically [ 5 , 16 , 6 ]
+p28
+aVWe design our topic u'\u005cu2013' sense alignment methodology with portability in mind u'\u005cu2014' it should be applicable to any sense inventory
+p29
+aVTo compute the similarity between a sense and a topic, we first convert the words in the gloss/definition into a multinomial distribution over words, based on simple maximum likelihood estimation
+p30
+aVThey then predict the most likely sense for each word in the document based on the topic distribution and the words in context ( u'\u005cu201c' corroborators u'\u005cu201d' ), each of which, in turn, depends on the document u'\u005cu2019' s topic distribution
+p31
+aVAs such, our alignment methodology assumes only that we have access to a conventional sense gloss or definition for each sense, and does not rely on ontological/structural knowledge (e.g., the \u005csmaller WordNet hierarchy
+p32
+aVIn our second set of experiments, we move to a new dataset [ 9 ] based on text from ukWaC [ 8 ] and Twitter, and annotated using the \u005csmaller Macmillan English Dictionary 10 10 http://www.macmillandictionary.com/ (henceforth u'\u005cu201c' \u005csmaller Macmillan u'\u005cu201d'
+p33
+aVIn terms of the original research which gave rise to the sense-tagged dataset, \u005csmaller Macmillan was chosen over \u005csmaller WordNet for reasons including
+p34
+aVIn other words, we are assuming knowledge of which words have novel sense, and the task is to identify specifically what the novel sense is, as represented by novel usages
+p35
+aVThe prevalence score for a sense is computed by summing the product of its similarity scores with each topic (i.e., sim u'\u005cu2062' ( s i , t j ) ) and the prior probability of the topic in question (based on maximum likelihood estimation
+p36
+aVTo apply our method to the two datasets, we use HDP-WSIto train a model for each target noun, based on the combined set of usages of that lemma in each of the two background corpora, namely the original Twitter crawl that gave rise to the Twitter dataset, and all of ukWaC
+p37
+aVNote also that not all target lemmas will have a novel sense through synthesis, as they may have no senses that fall within the indicated bounds of relative occurrence (e.g., if 60 u'\u005cu2062' % of usages are a single sense
+p38
+aVAmazon Mechanical Turk (AMT) was then used to 5-way sense-tag each usage relative to \u005csmaller Macmillan , including allowing the annotators the option to label a usage as u'\u005cu201c' Other u'\u005cu201d' in instances where the usage was not captured by any of the \u005csmaller Macmillan senses
+p39
+aVBased on this intuition, we introduce topic-to-sense affinity to estimate the similarity of a topic to the set of senses, as follows
+p40
+aVIn contrast to , the use of topic models makes this possible, using topics as a proxy for sense []
+p41
+aVAs in Section 4 , we evaluate in terms of wsd accuracy (Table 4 ) and JS divergence over the gold-standard sense distribution (Table 5
+p42
+aV100 usages of each target noun were sampled from each of Twitter (from a crawl over the time period Jan 3 u'\u005cu2013' Feb 28, 2013 using the Twitter Streaming API) and ukWaC, after language identification using langid.py [ ] and POS tagging (based on the CMU ARK Twitter POS tagger v2.0 [] for Twitter, and the POS tags provided with the corpus for ukWaC
+p43
+aVFollowing , we assign one topic to each usage by selecting the topic that has the highest cumulative probability density, based on the topic allocations of all words in the context window for that usage
+p44
+aVFor each domain, annotators were asked to sense-annotate a random selection of sentences for each of 40 target nouns, based on \u005csmaller WordNet v1.7
+p45
+aVFor each of our three datasets (with low-, medium- and high-frequency novel senses, respectively), we compute the novelty of the target lemmas and the p -value of a one-tailed Wilcoxon rank sum test to test if the two groups of lemmas (i.e., lemmas with a novel sense vs. lemmas without a novel sense) are statistically different
+p46
+aVEarlier work on identifying novel senses focused on individual tokens [ 7 ] , whereas our approach goes further in identifying groups of tokens exhibiting the same novel sense
+p47
+aVThis is important because word sense distributions are typically skewed [] , and systems do far better when they take bias into account []
+p48
+aVSince the results do not improve on McCarthy et al. as regards sense distribution acquisition irrespective of context, we will compare our model with that proposed by McCarthy et al
+p49
+aVIntuitively, an unused sense should have low similarity with the HDP induced topics
+p50
+aV1) Acc ub , the upper bound for the first sense-based wsd accuracy (using the gold standard predominant sense for disambiguation); 7 7 The upper bound for a wsd approach which tags all token occurrences of a given word with the same sense, as a first step towards context-sensitive unsupervised wsd and (2) ERR , the error rate reduction between the accuracy for a given system ( Acc ) and the upper bound ( Acc ub ), calculated as follows
+p51
+aVAs such, we introduce sense-to-topic affinity, a measure that estimates how likely a sense is not attested in the corpus
+p52
+aVThis is unsurprising given that high-frequency senses have a higher probability of generating related topics (sense-related words are observed more frequently in the corpus), and as such are more easily identifiable
+p53
+aVAlso, while we have annotations of u'\u005cu201c' Other u'\u005cu201d' usages in Twitter and ukWaC , there is no real expectation that all such usages will correspond to the same sense in practice, they are attributable to a myriad of effects such as incorporation in a non-compositional multiword expression, and errors in POS tagging (i.e., the usage not being nominal
+p54
+aVWe treat the task of identification of unused senses as a binary classification problem, where the goal is to find a sense-to-topic affinity threshold below which a sense will be considered to be unused
+p55
+aVWe refer to these two datasets as ukWaC and Twitter henceforth
+p56
+aVWe then calculate the Jensen u'\u005cu2013' Shannon divergence between the multinomial distribution (over words) of the gloss and that of the topic, and convert the divergence value into a similarity score by subtracting it from 1
+p57
+aVThe work of Boyd-Graber and Blei ( 2007 ) is highly related in that it extends the method of to provide a generative model which assumes the words in a given document are generated according to the topic distribution appropriate for that document
+p58
+aVWe pool together all the senses and run 10-fold cross validation to learn the threshold for identifying unused senses, 14 14 We used a fixed step and increment at steps of 0.001, up to the max value of st-affinity when optimising the threshold evaluated using sense-level precision ( P ), recall ( R ) and F-score ( F ) at detecting unattested senses
+p59
+aVAs such, we can u'\u005cu2019' t use the u'\u005cu201c' Other u'\u005cu201d' annotations to evaluate novel sense identification
+p60
+aVNote that there is still much room for improvement with both systems, as we see in the gap between the upper bound (based on perfect determination of the first sense) and the respective system accuracies
+p61
+aVUsing this approach, they get comparable results to McCarthy et al. when context is ignored (i.e., using a model with one topic), and at most a 1% improvement on SemCor when they use more topics in order to take context into account
+p62
+aVInstead, we are seeking to identify clusters of usages which are instances of a novel sense, e.g., for presentation to a lexicographer as part of a dictionary update process []
+p63
+aVThat is, for each usage, we want to classify whether it is an instance of a given novel sense
+p64
+aVWe found encouraging results for the task, as detailed in Table 6
+p65
+aVFor the remainder of the paper, we denote their system as MKWC
+p66
+aVUsing topic-to-sense affinity as the sole feature, we pool together all instances and optimise the affinity feature to classify instances that have novel senses
+p67
+aVResults are presented in Table 8
+p68
+aVFor the threshold, the average value with standard deviation is 0.092 ± 0.044 over ukWaC and 0.125 ± 0.052 over Twitter , indicating relative stability in the value of the threshold both internally within a dataset, and also across datasets
+p69
+aVOur methodology is based on the WSI system described in , 1 1 Based on the implementation available at https://github.com/jhlau/hdp-wsi which has been shown [] to achieve state-of-the-art results over the WSI tasks from SemEval-2007 [] , SemEval-2010 [] and SemEval-2013 []
+p70
+aVwhere, once again, sim u'\u005cu2062' ( s i , t j ) is defined as in Equation ( 1 ), and T and S represent the number of topics and senses, respectively
+p71
+aVTo compare our system (HDP-WSI) with MKWC, we apply it to the three datasets of
+p72
+aVLooking at the results in Table 2 , we see little difference in the results for the two methods, with MKWCperforming better over two of the datasets ( BNC and SPORTS ) and HDP-WSIperforming better over the third ( FINANCE ), but all differences are small
+p73
+aVFuture work could pursue a more sophisticated methodology, using non-linear combinations of sim u'\u005cu2062' ( s i , t j ) for computing the affinity measures or multiple features in a supervised context
+p74
+aVDue to the computational overhead associated with these features, and the fact that the empirical impact of the features was found to be marginal, we make no use of parser-based features in this paper
+p75
+aVEvaluation is done by computing the mean precision, recall and F-score across 10 separate runs; results are summarised in Table 7
+p76
+aVBased on the McNemar u'\u005cu2019' s Test with Yates correction for continuity, MKWCis significantly better over BNC and HDP-WSIis significantly better over FINANCE ( p 0.0001 in both cases), but the difference over SPORTS is not statistically significance ( p 0.1
+p77
+aVThis research was supported in part by funding from the Australian Research Council
+p78
+a.
